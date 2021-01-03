@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CUpgrade id="ArmorUpgrade" parent="Research">
+        <Icon value="Assets\Textures\btn-upgrade-zerg-groundcarapace-level3.dds"/>
+        <EffectArray Reference="Unit,HeroHydralisk,LifeArmor" Value="0.8"/>
+        <EffectArray Reference="Unit,HeroRoach,LifeArmor" Value="1"/>
+        <EffectArray Reference="Unit,CyberneticLurkerBurrowed,LifeArmor" Value="1"/>
+        <EffectArray Reference="Unit,CyberneticLurker,LifeArmor" Value="1"/>
+        <EffectArray Reference="Unit,CyberneticLurkerBurrowed,LifeArmorLevel" Value="1"/>
+        <EffectArray Reference="Unit,CyberneticLurker,LifeArmorLevel" Value="1"/>
+        <EffectArray Reference="Unit,Ravager2,LifeArmor" Value="1.3"/>
+        <EffectArray Reference="Behavior,HardenedShell,DamageResponse.ClampMaximum" Value="1.3"/>
+        <EffectArray Reference="Behavior,HardenedShell,DamageResponse.Minimum" Value="1.3"/>
+        <EffectArray Reference="Unit,Runling,LifeArmorLevel" Value="1"/>
+        <EffectArray Reference="Unit,Runling,LifeArmor" Value="0.75"/>
+        <EffectArray Reference="Unit,SwarmQueen2,LifeArmor" Value="0.9"/>
+        <EffectArray Reference="Unit,Bowler,LifeArmor" Value="0.9"/>
+        <EditorCategories value="UpgradeType:ArmorBonus,Race:Zerg"/>
+        <AffectedUnitArray value="HeroRoach"/>
+        <AffectedUnitArray value="HeroHydralisk"/>
+        <AffectedUnitArray value="Ravager2"/>
+        <AffectedUnitArray value="SwarmQueen2"/>
+        <AffectedUnitArray value="Bowler"/>
+        <AffectedUnitArray value="LurkerBurrowed"/>
+        <AffectedUnitArray value="Lurker"/>
+        <AffectedUnitArray value="Runling"/>
+        <MaxLevel value="100"/>
+        <Race value="Zerg"/>
+    </CUpgrade>
+    <CUpgrade id="AtkSpdUpgrade" parent="Research">
+        <Icon value="Assets\Textures\btn-upgrade-zerg-hotsgroovedspines.dds"/>
+        <Race value="Zerg"/>
+        <EffectArray Operation="Multiply" Reference="Weapon,HeroRoachRanged,Period" Value="0.900000"/>
+        <EffectArray Operation="Multiply" Reference="Weapon,HeroHydraliskRanged,Period" Value="0.900000"/>
+        <EffectArray Operation="Multiply" Reference="Weapon,CyberneticLurkerWeapon,Period" Value="0.900000"/>
+        <EffectArray Operation="Multiply" Reference="Weapon,RavagerWeapon2,Period" Value="0.900000"/>
+        <EffectArray Operation="Multiply" Reference="Weapon,Laser,Period" Value="0.900000"/>
+        <EffectArray Operation="Multiply" Reference="Weapon,Claws2,Period" Value="0.900000"/>
+        <EffectArray Operation="Multiply" Reference="Weapon,AcidSpines2,Period" Value="0.900000"/>
+        <EffectArray Reference="Abil,UpgradeResearch,InfoArray[Research5].Resource[Vespene]" Value="1"/>
+        <EffectArray Operation="Multiply" Reference="Weapon,Laser2,Period" Value="0.900000"/>
+        <EffectArray Operation="Multiply" Reference="Weapon,BanelingBowling,Period" Value="0.900000"/>
+        <EffectArray Reference="Unit,BanelingWeaponUnit,Speed" Value="0.250000"/>
+        <EffectArray Operation="Multiply" Reference="Weapon,BowlerAntiAirWeapon,Period" Value="0.900000"/>
+        <EditorCategories value="Race:Zerg,UpgradeType:AttackBonus"/>
+        <AffectedUnitArray value="HeroRoach"/>
+        <AffectedUnitArray value="HeroHydralisk"/>
+        <AffectedUnitArray value="Ravager2"/>
+        <AffectedUnitArray value="SwarmQueen2"/>
+        <AffectedUnitArray value="Bowler"/>
+        <AffectedUnitArray value="CyberneticLurker"/>
+        <AffectedUnitArray value="CyberneticLurkerBurrowed"/>
+        <AffectedUnitArray value="Runling"/>
+        <MaxLevel value="100"/>
+    </CUpgrade>
+    <CUpgrade id="BossAbilityDifficultyRequirement">
+        <MaxLevel value="100"/>
+    </CUpgrade>
+    <CUpgrade id="CyberneticLurkerAddCharge">
+        <EffectArray Reference="Abil,BaseOverlordTrainCybernetics,InfoArray[Train1].Charge.CountMax" Value="1"/>
+        <EffectArray Reference="Abil,BaseOverlordTrainCybernetics,InfoArray[Train1].Charge.CountStart" Value="1"/>
+        <MaxLevel value="100"/>
+    </CUpgrade>
+    <CUpgrade id="CyberneticLurkerChargeRestoreUnlock"/>
+    <CUpgrade id="CyberneticRunlingChargeRestoreUnlock">
+        <LeaderAlias value="CyberneticLurkerChargeRestoreUnlock"/>
+    </CUpgrade>
+    <CUpgrade id="CyberneticRunlingAddCharge">
+        <EffectArray Reference="Abil,BaseOverlordTrainCybernetics,InfoArray[Train2].Charge.CountMax" Value="1"/>
+        <EffectArray Reference="Abil,BaseOverlordTrainCybernetics,InfoArray[Train2].Charge.CountStart" Value="1"/>
+        <MaxLevel value="100"/>
+    </CUpgrade>
+    <CUpgrade id="UnlockDmgArmorCount">
+        <MaxLevel value="100"/>
+    </CUpgrade>
+    <CUpgrade id="UnlockCybernetics">
+        <MaxLevel value="10"/>
+    </CUpgrade>
+    <CUpgrade id="UnlockHeroBowlerKillStreak"/>
+    <CUpgrade id="UnlockHeroHydraCorrosive"/>
+    <CUpgrade id="RegenerationUpgrade" parent="Research">
+        <Icon value="Assets\Textures\btn-upgrade-zerg-tissueassimilation.dds"/>
+        <Race value="Zerg"/>
+        <EffectArray Operation="Multiply" Reference="Unit,HeroHydralisk,LifeRegenRate" Value="1.101500"/>
+        <EffectArray Operation="Multiply" Reference="Unit,HeroHydralisk,EnergyRegenRate" Value="1.101500"/>
+        <EffectArray Operation="Multiply" Reference="Unit,HeroRoach,LifeRegenRate" Value="1.101500"/>
+        <EffectArray Operation="Multiply" Reference="Unit,HeroRoach,EnergyRegenRate" Value="1.101500"/>
+        <EffectArray Operation="Multiply" Reference="Unit,CyberneticLurkerBurrowed,LifeRegenRate" Value="1.101500"/>
+        <EffectArray Operation="Multiply" Reference="Unit,CyberneticLurker,LifeRegenRate" Value="1.101500"/>
+        <EffectArray Operation="Multiply" Reference="Unit,Ravager2,LifeRegenRate" Value="1.101500"/>
+        <EffectArray Operation="Multiply" Reference="Unit,Ravager2,EnergyRegenRate" Value="1.101500"/>
+        <EffectArray Operation="Multiply" Reference="Unit,SwarmQueen2,EnergyRegenRate" Value="1.101500"/>
+        <EffectArray Operation="Multiply" Reference="Unit,SwarmQueen2,LifeRegenRate" Value="1.101500"/>
+        <EffectArray Reference="Abil,UpgradeResearch,InfoArray[Research4].Resource[Vespene]" Value="1"/>
+        <EffectArray Operation="Multiply" Reference="Unit,Runling,LifeRegenRate" Value="1.101500"/>
+        <EffectArray Operation="Multiply" Reference="Unit,Bowler,EnergyRegenRate" Value="1.101500"/>
+        <EffectArray Operation="Multiply" Reference="Unit,Bowler,LifeRegenRate" Value="1.101500"/>
+        <EffectArray Operation="Multiply" Reference="Behavior,SpitterCreepBonusRegen,Modification.VitalRegenArray[Energy]" Value="1.101500"/>
+        <EffectArray Operation="Multiply" Reference="Behavior,SpitterCreepBonusRegen,Modification.VitalRegenArray[Life]" Value="1.101500"/>
+        <EffectArray Operation="Multiply" Reference="Behavior,BowlerCreepBonusRegen,Modification.VitalRegenArray[Energy]" Value="1.101500"/>
+        <EffectArray Operation="Multiply" Reference="Behavior,BowlerCreepBonusRegen,Modification.VitalRegenArray[Life]" Value="1.101500"/>
+        <EffectArray Operation="Multiply" Reference="Behavior,HardskinCreepBonusRegen,Modification.VitalRegenArray[Energy]" Value="1.101500"/>
+        <EffectArray Operation="Multiply" Reference="Behavior,HardskinCreepBonusRegen,Modification.VitalRegenArray[Life]" Value="1.101500"/>
+        <EffectArray Operation="Multiply" Reference="Behavior,StingerCreepBonusRegen,Modification.VitalRegenArray[Energy]" Value="1.101500"/>
+        <EffectArray Operation="Multiply" Reference="Behavior,StingerCreepBonusRegen,Modification.VitalRegenArray[Life]" Value="1.101500"/>
+        <EffectArray Operation="Multiply" Reference="Behavior,SwarmMotherCreepBonusRegen,Modification.VitalRegenArray[Energy]" Value="1.101500"/>
+        <EffectArray Operation="Multiply" Reference="Behavior,SwarmMotherCreepBonusRegen,Modification.VitalRegenArray[Life]" Value="1.101500"/>
+        <EffectArray Operation="Multiply" Reference="Behavior,LurkerCreepBonusRegen,Modification.VitalRegenArray[Life]" Value="1.101500"/>
+        <EffectArray Operation="Multiply" Reference="Behavior,RunlingCreepBonusRegen,Modification.VitalRegenArray[Life]" Value="1.101500"/>
+        <EditorCategories value="UpgradeType:ArmorBonus,Race:Zerg"/>
+        <AffectedUnitArray value="HeroRoach"/>
+        <AffectedUnitArray value="HeroHydralisk"/>
+        <AffectedUnitArray value="Ravager2"/>
+        <AffectedUnitArray value="SwarmQueen2"/>
+        <AffectedUnitArray value="Bowler"/>
+        <AffectedUnitArray value="CyberneticLurkerBurrowed"/>
+        <AffectedUnitArray value="CyberneticLurker"/>
+        <AffectedUnitArray value="Runling"/>
+        <MaxLevel value="100"/>
+        <LeaderAlias value="ArmorUpgrade"/>
+    </CUpgrade>
+    <CUpgrade id="DmgUpgrade" parent="Research">
+        <Icon value="Assets\Textures\btn-upgrade-zerg-missileattacks-level3.dds"/>
+        <Race value="Zerg"/>
+        <EffectArray Reference="Effect,HeroRoachRangedDmg,Amount" Value="1"/>
+        <EffectArray Reference="Effect,HeroHydraRangedDmg,Amount" Value="1.2"/>
+        <EffectArray Reference="Effect,CyberneticLurkerWeaponDamage,Amount" Value="1.25"/>
+        <EffectArray Reference="Weapon,CyberneticLurkerWeapon,Level" Value="1"/>
+        <EffectArray Reference="Effect,RavagerWeaponDmg,Amount" Value="0.8"/>
+        <EffectArray Reference="Weapon,Claws2,Level" Value="1"/>
+        <EffectArray Reference="Weapon,Laser,Level" Value="1"/>
+        <EffectArray Reference="Effect,RunlingRangedDmg,Amount" Value="1"/>
+        <EffectArray Reference="Effect,RunlingMeleeDmg,Amount" Value="1"/>
+        <EffectArray Reference="Effect,WeaponAttackDamage,Amount" Value="0.9"/>
+        <EffectArray Reference="Effect,BanelingMissileExplodeDmg,Amount" Value="1.05"/>
+        <EffectArray Reference="Accumulator,RoachWeaponDmg,Amount" Value="1"/>
+        <EditorCategories value="Race:Zerg,UpgradeType:AttackBonus"/>
+        <AffectedUnitArray value="HeroRoach"/>
+        <AffectedUnitArray value="HeroHydralisk"/>
+        <AffectedUnitArray value="Ravager2"/>
+        <AffectedUnitArray value="SwarmQueen2"/>
+        <AffectedUnitArray value="Bowler"/>
+        <AffectedUnitArray value="CyberneticLurker"/>
+        <AffectedUnitArray value="CyberneticLurkerBurrowed"/>
+        <AffectedUnitArray value="Runling"/>
+        <MaxLevel value="100"/>
+    </CUpgrade>
+    <CUpgrade id="SplashRangeUpgrade" parent="Research">
+        <Icon value="Assets\Textures\btn-upgrade-zagara-scourgesplashdamage.dds"/>
+        <Race value="Zerg"/>
+        <EffectArray Reference="Effect,HeroHydraRangedDmg,AreaArray[0].Radius" Value="0.05"/>
+        <EffectArray Reference="Effect,HeroRoachRangedDmg,AreaArray[0].Radius" Value="0.1"/>
+        <EffectArray Reference="Effect,CyberneticLurkerWeaponSearch,AreaArray[0].Radius" Value="0.011"/>
+        <EffectArray Reference="Effect,RavagerWeaponDmg,AreaArray[0].Radius" Value="0.05"/>
+        <EffectArray Reference="Effect,WeaponAttackDamage,AreaArray[0].Radius" Value="0.1"/>
+        <EffectArray Reference="Effect,BanelingMissileExplodeSearch,AreaArray[0].Radius" Value="0.12"/>
+        <EffectArray Reference="Effect,BanelingMissileCollectibleDmg,AreaArray[0].Radius" Value="0.12"/>
+        <EditorCategories value="Race:Zerg,UpgradeType:AttackBonus"/>
+        <AffectedUnitArray value="HeroRoach"/>
+        <AffectedUnitArray value="HeroHydralisk"/>
+        <AffectedUnitArray value="Ravager2"/>
+        <AffectedUnitArray value="SwarmQueen2"/>
+        <AffectedUnitArray value="Bowler"/>
+        <AffectedUnitArray value="LurkerBurrowed"/>
+        <AffectedUnitArray value="Lurker"/>
+        <AffectedUnitArray value="Runling"/>
+        <MaxLevel value="100"/>
+        <LeaderAlias value="DmgUpgrade"/>
+    </CUpgrade>
+    <CUpgrade id="UnlockHeroRavagerDecoy"/>
+    <CUpgrade id="UnlockHeroRavagerHardened"/>
+    <CUpgrade id="UnlockHeroRoachCharge"/>
+    <CUpgrade id="CreepTunnel@Unlock"/>
+    <CUpgrade id="UnlockHeroSwarmQueenEnergyTransfer"/>
+    <CUpgrade id="UnlockHeroSwarmQueenFrenzy"/>
+    <CUpgrade id="UnlockHeroBowlerBanemine"/>
+    <CUpgrade id="UnlockHeroHydraFocus"/>
+    <CUpgrade id="testupgrade">
+        <MaxLevel value="100"/>
+    </CUpgrade>
+</Catalog>

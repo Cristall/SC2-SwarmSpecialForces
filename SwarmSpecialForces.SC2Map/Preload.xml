@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Preload>
+<Asset path="assets\icons\btn-unit-malash.dds" Type="Image"/>
+<Asset path="assets\textures\btn-unit-protoss-sentry-purifier.dds" Type="Image"/>
+<Asset path="assets\textures\btn-unit-collection-hellion-covertops.dds" Type="Image"/>
+<Asset path="assets\textures\btn-progression-zerg-dehaka-15-genemutation.dds" Type="Image"/>
+<Asset path="assets\textures\btn-unit-zerg-zergling.dds" Type="Image"/>
+<Asset path="assets\textures\btn-unit-collection-thor-covertops.dds" Type="Image"/>
+<Asset path="assets\textures\btn-ability-zeratul-darkarchon-maelstrom.dds" Type="Image"/>
+<Asset path="assets\icons\btn-unit-zerg-broodling.dds" Type="Image"/>
+<Asset path="assets\textures\btn-upgrade-zerg-meleeattacks-level2.dds" Type="Image"/>
+<Asset path="assets\textures\btn-unit-collection-vikingassault-junker.dds" Type="Image"/>
+<Asset path="assets\textures\btn-unit-protoss-zeratuldisruptor.dds" Type="Image"/>
+<Asset path="assets\textures\btn-building-zerg-lair.dds" Type="Image"/>
+<Asset path="assets\textures\btn-unit-zerg-ultralisk-remastered.dds" Type="Image"/>
+<Asset path="assets\textures\btn-unit-collection-noxious-hydralisk.dds" Type="Image"/>
+<Asset path="assets\textures\btn-unit-zerg-mutalisk-broodlord.dds" Type="Image"/>
+<Asset path="assets\textures\btn-ability-kerrigan-revive.dds" Type="Image"/>
+<Asset path="assets\textures\btn-unit-collection-marine-covertops.dds" Type="Image"/>
+<Asset path="assets\textures\btn-unit-zerg-broodqueen.dds" Type="Image"/>
+<Asset path="assets\textures\btn-unit-zerg-larvalqueen.dds" Type="Image"/>
+<Asset path="assets\textures\btn-unit-collection-hellbat-junker.dds" Type="Image"/>
+<Asset path="assets\textures\btn-unit-collection-hellion-junker.dds" Type="Image"/>
+<Asset path="assets\textures\btn-unit-collection-reaper-junker.dds" Type="Image"/>
+<Asset path="assets\textures\btn-unit-collection-marauder-covertops.dds" Type="Image"/>
+<Asset path="assets\textures\btn-unit-protoss-immortal-ihanrii.dds" Type="Image"/>
+<Asset path="assets\textures\btn-unit-protoss-archon-ihanrii.dds" Type="Image"/>
+<Asset path="assets\textures\btn-unit-protoss-adept-taldarim.dds" Type="Image"/>
+<Asset path="assets\textures\btn-upgrade-zerg-meleeattacks-level0.dds" Type="Image"/>
+<Asset path="assets\textures\btn-unit-protoss-alarak-taldarim-colossus.dds" Type="Image"/>
+<Asset path="assets\textures\btn-unit-roach-collectionskin-deluxe.dds" Type="Image"/>
+<Asset path="assets\textures\btn-unit-collection-vikingassault-covertops.dds" Type="Image"/>
+<Asset path="assets\textures\btn-ability-zerg-towering.dds" Type="Image"/>
+<Asset path="assets\textures\btn-unit-zerg-lurker-rcz.dds" Type="Image"/>
+<Asset path="assets\textures\btn-unit-zerg-roachlings.dds" Type="Image"/>
+<Asset path="assets\textures\btn-unit-collection-ghost-covertops.dds" Type="Image"/>
+<Asset path="assets\textures\btn-unit-collection-bone-ravager.dds" Type="Image"/>
+<Asset path="assets\textures\btn-unit-collection-tank-junker.dds" Type="Image"/>
+<Asset path="assets\textures\btn-upgrade-zerg-meleeattacks-level1.dds" Type="Image"/>
+<Asset path="assets\textures\btn-unit-collection-marine-junker.dds" Type="Image"/>
+<Asset path="assets\textures\btn-unit-protoss-alarak-taldarim-darktemplar.dds" Type="Image"/>
+<Asset path="assets\textures\btn-unit-protoss-observer-surveillance.dds" Type="Image"/>
+<Asset path="assets\textures\btn-unit-protoss-zealot-aiur.dds" Type="Image"/>
+<Asset path="assets\textures\btn-unit-protoss-stalker-purifier.dds" Type="Image"/>
+<Asset path="assets\textures\btn-unit-zerg-roach_collection.dds" Type="Image"/>
+<Asset path="assets\textures\btn-research-zerg-planetaryfortress.dds" Type="Image"/>
+<Asset path="assets\textures\btn-unit-zerg-feederling.dds" Type="Image"/>
+<Asset path="assets\textures\btn-unit-protoss-dragoon-purifier.dds" Type="Image"/>
+<Asset path="assets\textures\btn-upgrade-zerg-meleeattacks-level3.dds" Type="Image"/>
+<Asset path="assets\textures\btn-ability-protoss-oracle-stasiscalibration.dds" Type="Image"/>
+<Asset path="assets\textures\btn-unit-protoss-alarak-taldarim-mothership.dds" Type="Image"/>
+<Asset path="assets\textures\btn-unit-zerg-locust.dds" Type="Image"/>
+<Asset path="assets\icons\btn-unit-protoss-blizzcon17-probe-recolor.dds" Type="Image"/>
+<Asset path="assets\icons\btn-unit-jinara.dds" Type="Image"/>
+<Asset path="assets\textures\btn-building-zerg-hatchery.dds" Type="Image"/>
+<Asset path="assets\textures\btn-unit-collection-marauder-junker.dds" Type="Image"/>
+<Asset path="assets\textures\btn-unit-collection-drone-remastered.dds" Type="Image"/>
+<Asset path="assets\textures\btn-unit-collection-siegetank-covertops.dds" Type="Image"/>
+<Asset path="assets\textures\btn-unit-protoss-zealot-ihanrii.dds" Type="Image"/>
+<Asset path="assets\textures\btn-tips-hacking.dds" Type="Image"/>
+<Asset path="assets\textures\btn-unit-zerg-zergling-rcz.dds" Type="Image"/>
+<Asset path="assets\textures\ui_ingame_help_techtree_questionmark.dds" Type="Image"/>
+<Actor id="SYSTEM_ActorConfig"/>
+<Actor id="AiurTree_Ex2" Variations="0,2,5"/>
+<Actor id="AiurTree_Grouped" Variations="2,4"/>
+<Actor id="Aiur_CityBuilding_Floating_Temple_Abandoned" Variations="2"/>
+<Actor id="Aiur_CliffRocks_Islands" Variations="0"/>
+<Actor id="Aiur_Cliff_Waterfall" Variations="0,1"/>
+<Actor id="Aiur_Stone_Temple"/>
+<Actor id="Aiur_Stone_Temple_Doodads" Variations="5"/>
+<Actor id="Aiur_Stone_Temple_Rubble" Variations="0"/>
+<Actor id="Aiur_Stone_Temple_Shrine" Variations="1"/>
+<Actor id="Aiur_Stone_Temple_Shrine_Destroyed" Variations="2"/>
+<Actor id="Aiur_Temple_Bigwalls" Variations="9"/>
+<Actor id="Aiur_Temple_BrickGroup" Variations="1,2,7"/>
+<Actor id="Aiur_Temple_Bricks" Variations="0"/>
+<Actor id="Aiur_Temple_CliffDoodads" Variations="4"/>
+<Actor id="Aiur_Temple_CliffDoodads_Destructible" Variations="0"/>
+<Actor id="Aiur_Temple_Pillars" Variations="0"/>
+<Actor id="Aiur_Temple_Pillars_Broken" Variations="5"/>
+<Actor id="Aiur_Temple_StoneAltar"/>
+<Actor id="Aiur_Tree_Large" Variations="0,1"/>
+<Actor id="Aiur_Trees_Giant" Variations="2"/>
+<Actor id="Aiur_Trees_Log" Variations="2"/>
+<Actor id="Aiur_Trees_Log_Small" Variations="0,1,2,3"/>
+<Actor id="Aiur_Trees_Regular" Variations="0,1,2,3,4,5,7,8,9,10,11,12,13,14,15"/>
+<Actor id="Aiur_Trees_Regular_Grouped" Variations="0,1,2,3,4,5"/>
+<Actor id="Aiur_Trees_Tall" Variations="2,5,10"/>
+<Actor id="BrokenRocks" Variations="4"/>
+<Actor id="CliffZerusRockShort" Variations="0,2,3"/>
+<Actor id="CliffZerusRockTall" Variations="0,1,2"/>
+<Actor id="Elsecaro_Large_Rock" Variations="1,6"/>
+<Actor id="Elsecaro_Large_Rock_NoShadow" Variations="1,4,5"/>
+<Actor id="Elsecaro_Medium_Rock_Group" Variations="2,6"/>
+<Actor id="Elsecaro_Small_Rock_Group" Variations="0,1,2"/>
+<Actor id="IceProtossReliquary"/>
+<Actor id="IceProtossSanctum"/>
+<Actor id="JarbanMinor_Small_Rock" Variations="0,1,4,5"/>
+<Actor id="JarbanMinor_Small_Rock_Group" Variations="1,2"/>
+<Actor id="JarbanMinor_TreeStump"/>
+<Actor id="ProtossBaseArch" Variations="1"/>
+<Actor id="ProtossWarpInPadFlat"/>
+<Actor id="Protoss_Base_Console_Small" Variations="2"/>
+<Actor id="Protoss_Base_Screens" Variations="3"/>
+<Actor id="PurificationDesert_Small_Rock_Group" Variations="0,2,3"/>
+<Actor id="Purifier_Trees_Giant" Variations="0"/>
+<Actor id="Purifier_Trees_Regular" Variations="11"/>
+<Actor id="Purifier_Trees_Tall" Variations="10"/>
+<Actor id="Rock_Cliff" Variations="4"/>
+<Actor id="Rock_Cliff_Chunks" Variations="3"/>
+<Actor id="Slayn_Temple_Pillars" Variations="1"/>
+<Actor id="Slayn_Temple_Pillars_Broken" Variations="3"/>
+<Actor id="SnowRefinery_Rock" Variations="0,1,2"/>
+<Actor id="Void_CliffRocks_Edge" Variations="3"/>
+<Actor id="Void_CliffRocks_Mass_A" Variations="2,3"/>
+<Actor id="Void_CliffRocks_Rubble" Variations="1"/>
+<Actor id="XelNaga_Cavern_Rock_Cliffs" Variations="0,1"/>
+<Actor id="XelNaga_Cavern_Rock_Cliffs_Chunks" Variations="0,1,2,3"/>
+<Actor id="ZerusLargeTree" Variations="0,1"/>
+<Actor id="ZerusRockCliffShort" Variations="3"/>
+<Actor id="ZerusTree" Variations="0"/>
+<Actor id="AiurTree" Variations="1"/>
+<Actor id="AiurTempleBuildings" Variations="1"/>
+<Actor id="BelShirTree" Variations="0,2,3"/>
+<Actor id="DecalProtoss" Variations="0"/>
+<Actor id="RockTower" Variations="0,1,2"/>
+<Actor id="RockVolcanicGiant" Variations="4,5"/>
+<Actor id="RockGiant" Variations="1,3,4,6,7,10,13,15"/>
+<Actor id="ShakurasArchonStatue" Variations="1,3,4"/>
+<Actor id="TempleArch" Variations="1"/>
+<Actor id="TempleBricksLarge" Variations="2"/>
+<Actor id="TempleBridgeBroken"/>
+<Actor id="TempleColumnWalls" Variations="1"/>
+<Actor id="TempleStoneInlay"/>
+<Actor id="TempleWallCorner" Variations="1"/>
+<Actor id="BelShirFlowers" Variations="0,1,2,3,4,5,6,8,9"/>
+<Actor id="StructureMadnessCrystalThrone"/>
+<Actor id="SeekerMissileTimer"/>
+<Behavior id="HandsOfSilence"/>
+<Behavior id="Illusion@Tracker"/>
+<Behavior id="Spawning"/>
+<Behavior id="AttackWaypoint0"/>
+<Behavior id="BaseHiveLevel2"/>
+<Behavior id="BaseHiveLevel3"/>
+<Behavior id="HandOfLightning"/>
+<Behavior id="MadnessEnrage"/>
+<Behavior id="TerranPartTransitionBurrow"/>
+<Behavior id="TerranPartTransitionFly"/>
+<Behavior id="FlyBackHomeAffectedUnitBuff"/>
+<Behavior id="Taunted"/>
+<Behavior id="TerranPartTransitionBuff"/>
+<Behavior id="TutorialNotPaused"/>
+<Behavior id="InvulnerableOverSpawnLimit"/>
+<Effect id="KillTargetDeathNormal"/>
+<Effect id="TrackerAddProbe"/>
+<Effect id="TrackerAddCombatUnit"/>
+<Light id="Zerus"/>
+<Light id="Part2"/>
+<Terrain id="Zerus"/>
+<Unit id="Barracks"/>
+<Unit id="EngineeringBay"/>
+<Unit id="Bunker"/>
+<Unit id="GhostAcademy"/>
+<Unit id="Factory"/>
+<Unit id="Starport"/>
+<Unit id="Armory"/>
+<Unit id="FusionCore"/>
+<Unit id="AutoTurret"/>
+<Unit id="Thor"/>
+<Unit id="PlanetaryFortress"/>
+<Unit id="OrbitalCommand"/>
+<Unit id="Scientist"/>
+<Unit id="ExtendingBridgeNEWide12"/>
+<Unit id="ExtendingBridgeNEShort10"/>
+<Unit id="ZerglingCarbot"/>
+<Unit id="HERCCompound"/>
+<Unit id="PylonPurifier"/>
+<Unit id="Runling"/>
+<Unit id="ExtendingBridgeNWShort12"/>
+<Unit id="ProtossDoorN"/>
+<Unit id="SupplyDepot2"/>
+<Unit id="SupplyDepot22"/>
+<Unit id="VoidMine"/>
+<Unit id="Atlantis"/>
+<Unit id="ObeliskStandard"/>
+<Unit id="Barracks2"/>
+<Unit id="Factory2"/>
+<Unit id="OrbitalCommand2"/>
+<Unit id="Starport2"/>
+<Unit id="Larva2"/>
+<Unit id="ProbeTalon"/>
+<Unit id="ZealotTalon"/>
+<Unit id="SentryTalon"/>
+<Unit id="ImmortalTalon"/>
+<Unit id="StalkerTalon"/>
+<Unit id="InterceptorTalon"/>
+<Unit id="IndistructibleRocks"/>
+<Unit id="ObserverMinimapHint"/>
+<Unit id="Armory2"/>
+<Unit id="AutoTurret2"/>
+<Unit id="MadnessSpawnerDefensive"/>
+<Unit id="HeroDummyPrespawn"/>
+<Unit id="MadnessSpawnerDefensive2"/>
+<Unit id="MadnessSpawnerOffensive2"/>
+<Unit id="MadnessSpawnerSupport"/>
+<Unit id="MadnessSpawnerOffensive"/>
+<Unit id="MadnessVoidContainment"/>
+<Unit id="PylonColossus"/>
+<Unit id="ObserverStandard"/>
+<Unit id="TagTeamHandler"/>
+<Unit id="MonolithNerazim"/>
+<Unit id="CyberneticsCoreAncient"/>
+<Unit id="DarkShrineTaldarim"/>
+<Unit id="DarkShrineAncient"/>
+<Unit id="FleetBeaconTaldarim"/>
+<Unit id="BaseOverlord"/>
+<Unit id="Bunker2"/>
+<Unit id="EngineeringBay2"/>
+<Unit id="ForgePurifier"/>
+<Unit id="ForgeTaldarim"/>
+<Unit id="FusionCore2"/>
+<Unit id="GatewayAncient"/>
+<Unit id="GatewayTaldarim"/>
+<Unit id="GatewayPurifier"/>
+<Unit id="GeneratorStandard"/>
+<Unit id="GeneratorTaldarim"/>
+<Unit id="GhostAcademy2"/>
+<Unit id="HERCCompound2"/>
+<Unit id="HellionTank2"/>
+<Unit id="HeroDummyHiveDead"/>
+<Unit id="HeroHydralisk"/>
+<Unit id="HeroRoach"/>
+<Unit id="Hive2"/>
+<Unit id="Bowler"/>
+<Unit id="MonolithStandard"/>
+<Unit id="MonolithAncient"/>
+<Unit id="NexusStandard"/>
+<Unit id="NexusPurifier"/>
+<Unit id="NexusNerazim"/>
+<Unit id="CyberneticsCoreStandard"/>
+<Unit id="Madness"/>
+<Unit id="PylonStandard"/>
+<Unit id="NexusTaldarim"/>
+<Unit id="NexusAncient"/>
+<Unit id="GatewayStandard"/>
+<Unit id="PhotonCannonStandard"/>
+<Unit id="PhotonCannonPurifier"/>
+<Unit id="PhotonCannonTaldarim"/>
+<Unit id="PhotonCannonAncient"/>
+<Unit id="PylonAncient"/>
+<Unit id="PylonNerazim"/>
+<Unit id="TemplarArchiveAncient"/>
+<Unit id="MadnessCannon"/>
+<Unit id="MadnessHealer"/>
+<Unit id="VoidContainmentAncient"/>
+<Unit id="TemplarArchiveStandard"/>
+<Unit id="RoboticsBayTaldarim"/>
+<Unit id="RoboticsBayAncient"/>
+<Unit id="RoboticsBayPurifier"/>
+<Unit id="PylonTaldarim"/>
+<Unit id="PylonJudicator"/>
+<Unit id="RoboticsFacilityAncient"/>
+<Unit id="RoboticsFacilityPurifier"/>
+<Unit id="VoidContainmentStandard"/>
+<Unit id="Marine22"/>
+<Unit id="VoidContainmentNerazim"/>
+<Unit id="VoidContainmentTaldarim"/>
+<Unit id="SiegeTankSieged2"/>
+<Unit id="SiegeTankSieged22"/>
+<Unit id="SwarmQueen2"/>
+<Unit id="Marine2"/>
+<Unit id="Ravager2"/>
+<Unit id="TwilightCouncilTaldarim"/>
+<Unit id="TwilightCouncilPurifier"/>
+<Unit id="TransportPrism"/>
+<Unit id="WidowMine2"/>
+<Unit id="WidowMine22"/>
+</Preload>

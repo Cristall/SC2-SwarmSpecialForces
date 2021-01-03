@@ -1,0 +1,1186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CWeaponLegacy id="AdeptTaldarimWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-groundweaponslevel0.dds"/>
+        <DisplayEffect value="AdeptTaldarimWeaponDmg"/>
+        <TargetFilters value="Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Period value="0.8"/>
+        <Effect value="AdeptTaldarimWeaponLaunchMissile"/>
+        <MinScanRange value="6"/>
+        <Range value="4"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="AdeptAncientWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-groundweaponslevel0.dds"/>
+        <DisplayEffect value="AdeptAncientWeaponDmg"/>
+        <TargetFilters value="Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Period value="0.8"/>
+        <Effect value="AdeptAncientWeaponLaunchMissile"/>
+        <MinScanRange value="6"/>
+        <Range value="4"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="AdeptShadowWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-groundweaponslevel0.dds"/>
+        <DisplayEffect value="AdeptShadowWeaponDmg"/>
+        <TargetFilters value="Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <MinScanRange value="6"/>
+        <Period value="0.8"/>
+        <Effect value="AdeptShadowWeaponLaunchMissile"/>
+        <Range value="4"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="AdeptTalonWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-groundweaponslevel0.dds"/>
+        <DisplayEffect value="AdeptTalonWeaponDmg"/>
+        <TargetFilters value="Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="0.3"/>
+        <Period value="1.5"/>
+        <Effect value="AdeptTalonWeaponDmg"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="Illusion@AtlantisCoreIllusionWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-airweaponslevel0.dds"/>
+        <DisplayEffect value="AtlantisCoreWeaponDmg"/>
+        <TargetFilters value="Ground,Visible;Worker,Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Period value="1.25"/>
+        <Effect value="Illusion@AtlantisCoreIllusionWeaponLaunchMissile2"/>
+        <AllowedMovement value="Slowing"/>
+        <Range value="6"/>
+        <Name value="Weapon/Name/AtlantisCoreWeapon"/>
+        <DisplayName value="Weapon/Name/AtlantisCoreWeapon"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="BomberWeapon">
+        <EditorCategories value=""/>
+        <Icon value="Assets\Textures\btn-karax-upgrade-purifierbeam.dds"/>
+        <DisplayEffect value="BomberBeamDmg"/>
+        <Range value="1.25"/>
+        <Effect value=""/>
+        <Period value="0.125"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="HighTemplarCrystalwingTalonWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-groundweaponslevel0.dds"/>
+        <DisplayEffect value="HighTemplarCrystalwingTalonWeaponDmg"/>
+        <TargetFilters value="Ground,Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="7"/>
+        <Period value="1.754"/>
+        <Effect value="HighTemplarCrystalwingTalonWeaponLaunchMissile"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="HighTemplarTalonWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-groundweaponslevel0.dds"/>
+        <DisplayEffect value="HighTemplarTalonWeaponDmg"/>
+        <TargetFilters value="Ground,Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="7"/>
+        <Period value="1.754"/>
+        <Effect value="HighTemplarTalonWeaponLaunchMissile"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="InterceptorTalonWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-groundweaponslevel0.dds"/>
+        <DisplayEffect value="InterceptorTalonWeaponDmg"/>
+        <TargetFilters value="Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <MinScanRange value="6"/>
+        <Range value="4"/>
+        <Period value="0.8"/>
+        <Effect value="InterceptorTalonWeaponDmg"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="ArchonAncientWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-groundweaponslevel0.dds"/>
+        <DisplayEffect value="ArchonAncientWeaponDmg"/>
+        <TargetFilters value="Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="2.5"/>
+        <TeleportResetRange value="0"/>
+        <Period value="1.5"/>
+        <Effect value="ArchonAncientWeaponDmg"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="AutoTurret2">
+        <EditorCategories value="Race:Terran"/>
+        <Icon value="Assets\Textures\btn-upgrade-terran-hisecautotracking.dds"/>
+        <TargetFilters value="Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="6"/>
+        <Period value="0.8"/>
+        <DisplayEffect value="AutoTurretDmg"/>
+        <Effect value="AutoTurretDmg"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="BeamDroneWeapon">
+        <EditorCategories value=""/>
+        <Options index="OnlyFireWhileInAttackOrder" value="0"/>
+        <Options index="OnlyFireAtAttackOrderTarget" value="0"/>
+        <Options index="DisplayCooldown" value="1"/>
+        <DisplayEffect value="BeamDroneWeaponDmg"/>
+        <TargetFilters value="Visible;Self,Player,Ally,Neutral,Worker,Missile,Item,Stasis,Dead,Hidden,Invulnerable,Summoned"/>
+        <Range value="8"/>
+        <RangeSlop value="3"/>
+        <Arc value="360"/>
+        <Period value="0.75"/>
+        <DamagePoint value="0.5"/>
+        <Backswing value="0"/>
+        <Effect value="BeamDroneWeaponChanneledPersistent"/>
+        <LegacyOptions index="KeepChanneling" value="1"/>
+        <ReloadDuration value="0.5"/>
+        <AllowedMovement value="Moving"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="BombardmentDummyWeapon">
+        <EditorCategories value=""/>
+        <Options index="Disabled" value="1"/>
+        <Options index="Hidden" value="1"/>
+        <DisplayEffect value=""/>
+        <TargetFilters value="Visible,Invulnerable;Ally,Neutral,Enemy"/>
+        <Range value="10"/>
+        <Period value="0.25"/>
+        <Effect value=""/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="BowlerAntiAirWeapon">
+        <EditorCategories value="Race:Zerg"/>
+        <Options index="Hidden" value="1"/>
+        <Icon value="Assets\Textures\btn-unit-zerg-baneling.dds"/>
+        <DisplayEffect value="BanelingMissileExplodeDmg"/>
+        <TargetFilters value="Air,Visible;Player,Ally,Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Period value="2"/>
+        <DamagePoint value="0.0625"/>
+        <Backswing value="0.4375"/>
+        <Effect value="BowlerAntiAirWeaponMissile"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="Claws2">
+        <EditorCategories value="Race:Zerg"/>
+        <Options index="Melee" value="1"/>
+        <Icon value="Assets\Textures\btn-upgrade-zerg-meleeattacks-level0.dds"/>
+        <DisplayEffect value="RunlingMeleeDmg"/>
+        <TargetFilters value="Ground,Visible;Player,Ally,Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="0.1"/>
+        <Period value="0.8"/>
+        <Effect value="RunlingMeleeDmg"/>
+        <MinScanRange value="2"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="ColossusPurifierWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-groundweaponslevel0.dds"/>
+        <DisplayEffect value="ColossusPurifierWeaponDmg"/>
+        <TargetFilters value="Ground,Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <AcquirePrioritization value="ByDistanceFromTarget"/>
+        <Range value="5.5"/>
+        <RangeSlop value="0"/>
+        <Arc value="90"/>
+        <Period value="1.5"/>
+        <DamagePoint value="0.0832"/>
+        <Effect value="ColossusPurifierWeaponSet"/>
+        <LegacyOptions index="KeepChanneling" value="1"/>
+        <DisplayAttackCount value="2"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="ColossusTaldarimWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-groundweaponslevel0.dds"/>
+        <DisplayEffect value="ColossusTaldarimWeaponDmg"/>
+        <TargetFilters value="Ground,Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <AcquirePrioritization value="ByDistanceFromTarget"/>
+        <Range value="5.5"/>
+        <RangeSlop value="0"/>
+        <Arc value="90"/>
+        <Period value="1.5"/>
+        <DamagePoint value="0.0832"/>
+        <Effect value="ColossusTaldarimWeaponSet"/>
+        <LegacyOptions index="KeepChanneling" value="1"/>
+        <DisplayAttackCount value="2"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="CrucioShockCannon2" parent="CrucioShockCannon">
+        <Name value="Weapon/Name/CrucioShockCannon2"/>
+        <Tip value="Weapon/Tip/CrucioShockCannon2"/>
+        <DisplayEffect value="CrucioShockCannonBlast2"/>
+        <Range value="7"/>
+        <Effect value="CrucioShockCannonBlast2"/>
+        <MinimumRange value="1"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="CrucioShockCannon22" parent="CrucioShockCannon">
+        <Name value="Weapon/Name/CrucioShockCannon22"/>
+        <Tip value="Weapon/Tip/CrucioShockCannon22"/>
+        <DisplayEffect value="CrucioShockCannonBlast22"/>
+        <Range value="7"/>
+        <Effect value="CrucioShockCannonBlast22"/>
+        <MinimumRange value="1"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="CycloneWeapon">
+        <EditorCategories value="Race:Terran"/>
+        <Icon value="Assets\Textures\btn-upgrade-terran-vehicleweaponslevel0.dds"/>
+        <DisplayEffect value="CycloneWeaponDmg"/>
+        <TargetFilters value="Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <MinScanRange value="3"/>
+        <Marker Link="Weapon/TyphoonMissilePod"/>
+        <Cost>
+            <Cooldown Link="Weapon/TyphoonMissilePod"/>
+        </Cost>
+        <Period value="1.3"/>
+        <Effect value="CycloneWeaponSwitch"/>
+        <Range value="4"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="CycloneWeapon2">
+        <EditorCategories value="Race:Terran"/>
+        <Icon value="Assets\Textures\btn-upgrade-terran-vehicleweaponslevel0.dds"/>
+        <DisplayEffect value="CycloneWeaponDmg2"/>
+        <TargetFilters value="Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <MinScanRange value="3"/>
+        <Range value="4"/>
+        <Marker Link="Weapon/TyphoonMissilePod"/>
+        <Cost>
+            <Cooldown Link="Weapon/TyphoonMissilePod"/>
+        </Cost>
+        <Period value="1.3"/>
+        <Effect value="CycloneWeaponSwitch2"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="DarkTemplarAncientWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Options index="Melee" value="1"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-groundweaponslevel0.dds"/>
+        <DisplayEffect value="DarkTemplarAncientWeaponDmg"/>
+        <TargetFilters value="Ground,Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="0.1"/>
+        <Period value="0.9"/>
+        <DamagePoint value="0.361"/>
+        <Backswing value="1.333"/>
+        <Effect value="DarkTemplarAncientWeaponDmg"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="ColossusAncientWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-groundweaponslevel0.dds"/>
+        <DisplayEffect value="ColossusAncientWeaponDmg"/>
+        <TargetFilters value="Ground,Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <AcquirePrioritization value="ByDistanceFromTarget"/>
+        <Range value="5.5"/>
+        <RangeSlop value="0"/>
+        <Arc value="90"/>
+        <Period value="1.5"/>
+        <DamagePoint value="0.0832"/>
+        <Effect value="ColossusAncientWeaponSet"/>
+        <LegacyOptions index="KeepChanneling" value="1"/>
+        <DisplayAttackCount value="2"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="DisruptorAncientWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-fenix-disruptorpurificationecho.dds"/>
+        <DisplayEffect value="DisruptorAncientWeaponDmg"/>
+        <TargetFilters value="Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Arc value="360"/>
+        <ArcSlop value="360"/>
+        <Period value="1.5"/>
+        <DamagePoint value="0.75"/>
+        <Effect value="DisruptorAncientWeaponSearch"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="DisruptorStandardWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-fenix-disruptorpurificationecho.dds"/>
+        <DisplayEffect value="DisruptorStandardWeaponDmg"/>
+        <TargetFilters value="Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Arc value="360"/>
+        <ArcSlop value="360"/>
+        <Period value="1.5"/>
+        <DamagePoint value="0.75"/>
+        <Effect value="DisruptorStandardWeaponSearch"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="DragoonStandardWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-groundweaponslevel0.dds"/>
+        <DisplayEffect value="DragoonStandardWeaponDmg"/>
+        <TargetFilters value="Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="5.5"/>
+        <Period value="1"/>
+        <Effect value="DragoonStandardWeaponLaunchMissile"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="DragoonPurifierWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-groundweaponslevel0.dds"/>
+        <DisplayEffect value="DragoonPurifierWeaponDmg"/>
+        <TargetFilters value="Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="5.5"/>
+        <Period value="1"/>
+        <Effect value="DragoonPurifierWeaponLaunchMissile"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="HeroRavagerDecoyDummy">
+        <EditorCategories value=""/>
+        <Range value="3.5"/>
+        <Arc value="360"/>
+        <Period value="3"/>
+        <Effect value="HeroRavagerDecoyDummyDmg"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="ImmortalTalonWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-groundweaponslevel0.dds"/>
+        <DisplayEffect value="ImmortalTalonWeaponDmg"/>
+        <TargetFilters value="Ground,Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="2.5"/>
+        <Period value="1.5"/>
+        <Effect value="ImmortalTalonWeaponDmg"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="LightningElementalWeapon">
+        <EditorCategories value=""/>
+        <Icon value="Assets\Textures\btn-ability-protoss-purify.dds"/>
+        <DisplayEffect value="LightningElementalWeaponDmg"/>
+        <Range value="3"/>
+        <Effect value="LightningElementalWeaponSet"/>
+        <Period value="2"/>
+        <TargetFilters value="Visible;Worker,Invulnerable"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="CyberneticLurkerWeapon">
+        <EditorCategories value="Race:Zerg"/>
+        <Icon value="Assets\Textures\btn-upgrade-zerg-missileattacks-level0.dds"/>
+        <DisplayEffect value="CyberneticLurkerWeaponDamage"/>
+        <TargetFilters value="Ground,Visible;Player,Ally,Neutral,Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="6"/>
+        <Period value="2"/>
+        <DamagePoint value="0"/>
+        <Effect value="CyberneticLurkerWeaponPersistent"/>
+        <LegacyOptions index="KeepChanneling" value="1"/>
+        <ReloadDuration value="0.0625"/>
+        <RandomDelayMin value="0"/>
+        <RandomDelayMax value="0"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="PhotonCannonTalonWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-building-protoss-photoncannon.dds"/>
+        <DisplayEffect value="PhotonCannonTalonWeaponDmg"/>
+        <TargetFilters value="Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="6"/>
+        <RangeSlop value="0"/>
+        <Period value="1.4"/>
+        <Effect value="PhotonCannonTalonWeaponLaunchMissile"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="SentryTalonWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-groundweaponslevel0.dds"/>
+        <DisplayEffect value="SentryTalonWeaponDmg"/>
+        <TargetFilters value="Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="6"/>
+        <TeleportResetRange value="0"/>
+        <Period value="1"/>
+        <Effect value="SentryTalonWeaponMissile"/>
+        <LegacyOptions index="CanRetargetWhileChanneling" value="1"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="StalkerTalonWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-groundweaponslevel0.dds"/>
+        <DisplayEffect value="StalkerTalonWeaponDmg"/>
+        <TargetFilters value="Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="4"/>
+        <Period value="1.2"/>
+        <Effect value="StalkerTalonWeaponDmg"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="ThunderElementalWeapon">
+        <EditorCategories value=""/>
+        <Icon value="Assets\Textures\btn-ability-stetmann-banelingmanashield.dds"/>
+        <DisplayEffect value="ThunderElementalWeaponDmg"/>
+        <Range value="3"/>
+        <Period value="2"/>
+        <Effect value="ThunderElementalWeaponSet"/>
+        <TargetFilters value="Visible;Worker,Invulnerable"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="TagTeamWeapon">
+        <EditorCategories value=""/>
+        <DisplayEffect value="TagTeamWeaponDmg"/>
+        <Effect value="TagTeamWeaponLaunchMissile"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-alarak-ascendant&apos;spsiorbtravelsfurther.dds"/>
+        <TargetFilters value="Ground,Visible;Worker,Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="6.5"/>
+        <Period value="1.5"/>
+        <MinScanRange value="11"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="ImmortalAncientWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-groundweaponslevel0.dds"/>
+        <DisplayEffect value="ImmortalAncientWeaponDmg"/>
+        <TargetFilters value="Ground,Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="2.5"/>
+        <Period value="1.5"/>
+        <Effect value="ImmortalAncientWeaponDmg"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="ImmortalPurifierWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-groundweaponslevel0.dds"/>
+        <DisplayEffect value="ImmortalPurifierWeaponDmg"/>
+        <TargetFilters value="Ground,Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="2.5"/>
+        <Period value="1.5"/>
+        <Effect value="ImmortalPurifierWeaponDmg"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="MonolithAncientWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Options index="ContinuousScan" value="1"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-groundweaponslevel0.dds"/>
+        <DisplayEffect value="MonolithAncientWeaponDmg"/>
+        <TargetFilters value="Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="9"/>
+        <Arc value="360"/>
+        <Period value="3"/>
+        <Effect value="MonolithAncientWeaponDmg"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="MonolithNerazimWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Options index="ContinuousScan" value="1"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-groundweaponslevel0.dds"/>
+        <DisplayEffect value="MonolithNerazimWeaponDmg"/>
+        <TargetFilters value="Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="9"/>
+        <Arc value="360"/>
+        <Period value="3"/>
+        <Effect value="MonolithNerazimWeaponDmg"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="MonolithStandardWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Options index="ContinuousScan" value="1"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-groundweaponslevel0.dds"/>
+        <DisplayEffect value="MonolithStandardWeaponDmg"/>
+        <TargetFilters value="Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="9"/>
+        <Arc value="360"/>
+        <Period value="3"/>
+        <Effect value="MonolithStandardWeaponDmg"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="MadnessWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-groundweaponslevel0.dds"/>
+        <DisplayEffect value="MadnessWeaponDmg"/>
+        <TargetFilters value="Ground,Visible;Worker,Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="6"/>
+        <Period value="1.75"/>
+        <Effect value="MadnessWeaponDmg"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="AtlantisWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-airweaponslevel0.dds"/>
+        <DisplayEffect value="AtlantisWeaponDmg"/>
+        <DisplayAttackCount value="4"/>
+        <TargetFilters value="Visible;Worker,Missile,Item,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="7"/>
+        <TeleportResetRange value="0"/>
+        <Arc value="360"/>
+        <Period value="2"/>
+        <DamagePoint value="0"/>
+        <Effect value="AtlantisWeaponInitialSet"/>
+        <AllowedMovement value="Slowing"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="TransportEscortWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-ability-protoss-oraclepulsarcannonon.dds"/>
+        <DisplayEffect value="TransportEscortWeaponDmg"/>
+        <TargetFilters value="Ground,Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <TeleportResetRange value="0"/>
+        <Period value="1.5"/>
+        <Effect value="TransportEscortWeaponDelay"/>
+        <LegacyOptions index="CanRetargetWhileChanneling" value="1"/>
+        <LegacyOptions index="NoDeceleration" value="1"/>
+        <AllowedMovement value="Slowing"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="PhotonCannonAncientWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-building-protoss-photoncannon.dds"/>
+        <DisplayEffect value="PhotonCannonAncientWeaponDmg"/>
+        <TargetFilters value="Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="6"/>
+        <RangeSlop value="0"/>
+        <Period value="1.4"/>
+        <Effect value="PhotonCannonAncientWeaponLaunchMissile"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="PhotonCannonPurifierWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-building-protoss-photoncannon.dds"/>
+        <DisplayEffect value="PhotonCannonPurifierWeaponDmg"/>
+        <TargetFilters value="Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="6"/>
+        <RangeSlop value="0"/>
+        <Period value="1.4"/>
+        <Effect value="PhotonCannonPurifierWeaponLaunchMissile"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="PhotonCannonStandardWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-building-protoss-photoncannon.dds"/>
+        <DisplayEffect value="PhotonCannonStandardWeaponDmg"/>
+        <TargetFilters value="Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="6"/>
+        <RangeSlop value="0"/>
+        <Period value="1.4"/>
+        <Effect value="PhotonCannonStandardWeaponLaunchMissile"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="PhotonCannonTaldarimWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-building-protoss-photoncannon.dds"/>
+        <DisplayEffect value="PhotonCannonTaldarimWeaponDmg"/>
+        <TargetFilters value="Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="6"/>
+        <RangeSlop value="0"/>
+        <Period value="1.4"/>
+        <Effect value="PhotonCannonTaldarimWeaponLaunchMissile"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="PylonPurifierWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-structureovercharge.dds"/>
+        <DisplayEffect value="PylonPurifierWeaponDmg"/>
+        <TargetFilters value="Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="7"/>
+        <Period value="0.7"/>
+        <Effect value="PylonPurifierWeaponLaunchMissile"/>
+        <Arc value="360"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="PylonStandardWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-structureovercharge.dds"/>
+        <DisplayEffect value="PylonStandardWeaponDmg"/>
+        <TargetFilters value="Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="7"/>
+        <Period value="0.7"/>
+        <Effect value="PylonStandardWeaponLaunchMissile"/>
+        <Arc value="360"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="PylonNerazimWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-structureovercharge.dds"/>
+        <DisplayEffect value="PylonNerazimWeaponDmg"/>
+        <TargetFilters value="Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="7"/>
+        <Period value="0.7"/>
+        <Effect value="PylonNerazimWeaponLaunchMissile"/>
+        <Arc value="360"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="PylonJudicatorWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-structureovercharge.dds"/>
+        <DisplayEffect value="PylonJudicatorWeaponDmg"/>
+        <TargetFilters value="Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="7"/>
+        <Period value="0.7"/>
+        <Effect value="PylonJudicatorWeaponLaunchMissile"/>
+        <Arc value="360"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="PylonTaldarimWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-structureovercharge.dds"/>
+        <DisplayEffect value="PylonTaldarimWeaponDmg"/>
+        <TargetFilters value="Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="7"/>
+        <Period value="0.7"/>
+        <Effect value="PylonTaldarimWeaponLaunchMissile"/>
+        <Arc value="360"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="PylonAncientWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-structureovercharge.dds"/>
+        <DisplayEffect value="PylonAncientWeaponDmg"/>
+        <TargetFilters value="Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="7"/>
+        <Period value="0.7"/>
+        <Effect value="PylonAncientWeaponLaunchMissile"/>
+        <Arc value="360"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="ReaverStandardWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Options index="LinkedCooldown" value="0"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-groundweaponslevel0.dds"/>
+        <DisplayEffect value="ReaverStandardWeaponDmg"/>
+        <TargetFilters value="Ground,Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="9"/>
+        <Arc value="4.9987"/>
+        <Period value="2"/>
+        <DamagePoint value="0"/>
+        <Backswing value="2"/>
+        <Effect value="ReaverStandardWeaponLaunchMissile"/>
+        <AllowedMovement value="Slowing"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="AtlantisCoreWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-airweaponslevel0.dds"/>
+        <DisplayEffect value="AtlantisCoreWeaponDmg"/>
+        <TargetFilters value="Ground,Visible;Worker,Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Period value="1.25"/>
+        <Effect value="AtlantisCoreWeaponLaunchMissile"/>
+        <AllowedMovement value="Slowing"/>
+        <Range value="6"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="VoidContainmentNerazimWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-progression-stetmann-02-energyconfiguration.dds"/>
+        <DisplayEffect value="VoidContainmentNerazimWeaponDmg"/>
+        <TargetFilters value="Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="6"/>
+        <Arc value="360"/>
+        <Period value="1"/>
+        <Effect value="VoidContainmentNerazimWeaponLaunchMissile"/>
+        <LegacyOptions index="KeepChanneling" value="1"/>
+        <Tip value="Weapon/Tip/VoidContainmentWeapon"/>
+        <Name value="Weapon/Name/VoidContainmentWeapon"/>
+        <DisplayName value="Weapon/Name/VoidContainmentWeapon"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="TransportPrismFakeWeapon">
+        <EditorCategories value=""/>
+        <Options index="Hidden" value="1"/>
+        <Range value="6"/>
+        <Arc value="360"/>
+        <Period value="3"/>
+        <Effect value=""/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="VoidContainmentAncientWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-progression-stetmann-02-energyconfiguration.dds"/>
+        <DisplayEffect value="VoidContainmentAncientWeaponDmg"/>
+        <TargetFilters value="Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="6"/>
+        <Arc value="360"/>
+        <Period value="1"/>
+        <Effect value="VoidContainmentAncientWeaponLaunchMissile"/>
+        <LegacyOptions index="KeepChanneling" value="1"/>
+        <Tip value="Weapon/Tip/VoidContainmentWeapon"/>
+        <Name value="Weapon/Name/VoidContainmentWeapon"/>
+        <DisplayName value="Weapon/Name/VoidContainmentWeapon"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="VoidContainmentTaldarimWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-progression-stetmann-02-energyconfiguration.dds"/>
+        <DisplayEffect value="VoidContainmentTaldarimWeaponDmg"/>
+        <TargetFilters value="Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="6"/>
+        <Arc value="360"/>
+        <Period value="1"/>
+        <Effect value="VoidContainmentTaldarimWeaponLaunchMissile"/>
+        <LegacyOptions index="KeepChanneling" value="1"/>
+        <Tip value="Weapon/Tip/VoidContainmentWeapon"/>
+        <Name value="Weapon/Name/VoidContainmentWeapon"/>
+        <DisplayName value="Weapon/Name/VoidContainmentWeapon"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="VoidContainmentStandardWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-progression-stetmann-02-energyconfiguration.dds"/>
+        <DisplayEffect value="VoidContainmentStandardWeaponDmg"/>
+        <TargetFilters value="Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="6"/>
+        <Arc value="360"/>
+        <Period value="1"/>
+        <Effect value="VoidContainmentStandardWeaponLaunchMissile"/>
+        <LegacyOptions index="KeepChanneling" value="1"/>
+        <Tip value="Weapon/Tip/VoidContainmentWeapon"/>
+        <Name value="Weapon/Name/VoidContainmentWeapon"/>
+        <DisplayName value="Weapon/Name/VoidContainmentWeapon"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="VoidContainmentTalonWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-progression-stetmann-02-energyconfiguration.dds"/>
+        <DisplayEffect value="VoidContainmentTalonWeaponDmg"/>
+        <TargetFilters value="Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="6"/>
+        <Arc value="360"/>
+        <Period value="1"/>
+        <Effect value="VoidContainmentTalonWeaponLaunchMissile"/>
+        <LegacyOptions index="KeepChanneling" value="1"/>
+        <Tip value="Weapon/Tip/VoidContainmentWeapon"/>
+        <Name value="Weapon/Name/VoidContainmentWeapon"/>
+        <DisplayName value="Weapon/Name/VoidContainmentWeapon"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="VoidMineWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-ability-protoss-blackhole-redcolor.dds"/>
+        <DisplayEffect value="VoidMineWeaponDmg"/>
+        <TargetFilters value="Ground,Visible;Worker,Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="2"/>
+        <Arc value="360"/>
+        <Period value="0.25"/>
+        <DamagePoint value="0.25"/>
+        <Effect value="VoidMineWeaponPersistent"/>
+        <LegacyOptions index="KeepChanneling" value="1"/>
+        <RangeSlop value="0.25"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="ZealotAncientWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Options index="Melee" value="1"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-groundweaponslevel0.dds"/>
+        <DisplayEffect value="ZealotAncientWeaponDmg"/>
+        <DisplayAttackCount value="2"/>
+        <TargetFilters value="Ground,Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="0.1"/>
+        <Period value="0.75"/>
+        <DamagePoint value="0"/>
+        <Effect value="ZealotAncientWeaponPersistent"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="StalkerPurifierWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-groundweaponslevel0.dds"/>
+        <DisplayEffect value="StalkerPurifierWeaponDmg"/>
+        <TargetFilters value="Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="4"/>
+        <Period value="1.2"/>
+        <Effect value="StalkerPurifierWeaponLaunchMissile"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="SentryPurifierWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-groundweaponslevel0.dds"/>
+        <DisplayEffect value="SentryPurifierWeaponDmg"/>
+        <TargetFilters value="Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="6"/>
+        <TeleportResetRange value="0"/>
+        <Period value="1"/>
+        <Effect value="SentryPurifierWeaponPersistent"/>
+        <LegacyOptions index="CanRetargetWhileChanneling" value="1"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="GhostWeapon">
+        <EditorCategories value="Race:Terran"/>
+        <Icon value="Assets\Textures\btn-upgrade-terran-infantryweaponslevel0.dds"/>
+        <DisplayEffect value="GhostWeaponDmg"/>
+        <TargetFilters value="Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="3"/>
+        <Marker Link="Weapon/C10CanisterRifle"/>
+        <Cost>
+            <Cooldown Link="Weapon/C10CanisterRifle"/>
+        </Cost>
+        <Period value="2"/>
+        <DamagePoint value="0.083"/>
+        <Backswing value="1.167"/>
+        <Effect value="GhostWeaponDmg"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="GhostWeapon2">
+        <EditorCategories value="Race:Terran"/>
+        <Icon value="Assets\Textures\btn-upgrade-terran-infantryweaponslevel0.dds"/>
+        <DisplayEffect value="GhostWeaponDmg2"/>
+        <TargetFilters value="Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="3"/>
+        <Marker Link="Weapon/C10CanisterRifle"/>
+        <Cost>
+            <Cooldown Link="Weapon/C10CanisterRifle"/>
+        </Cost>
+        <Period value="2"/>
+        <DamagePoint value="0.083"/>
+        <Backswing value="1.167"/>
+        <Effect value="GhostWeaponDmg2"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="BanelingBowling">
+        <EditorCategories value="Race:Zerg"/>
+        <Icon value="Assets\Textures\btn-unit-zerg-baneling.dds"/>
+        <DisplayEffect value="BanelingMissileExplodeDmg"/>
+        <TargetFilters value="Ground,Visible;Player,Ally,Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Period value="2"/>
+        <DamagePoint value="0.0625"/>
+        <Effect value="BanelingMissileOffset1"/>
+        <AllowedMovement value="Slowing"/>
+        <Backswing value="0.4375"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="HellbatWeapon">
+        <EditorCategories value="Race:Terran"/>
+        <Icon value="Assets\Textures\btn-upgrade-terran-vehicleweaponslevel0.dds"/>
+        <DisplayEffect value="HellbatWeaponDmg"/>
+        <TargetFilters value="Ground,Visible;Worker,Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="6"/>
+        <Period value="1.5"/>
+        <Effect value="HellbatWeaponSet"/>
+        <DamagePoint value="0.04"/>
+        <MinScanRange value="7"/>
+        <Backswing value="0.1"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="HellionWeapon">
+        <EditorCategories value="Race:Terran"/>
+        <Icon value="Assets\Textures\btn-upgrade-terran-vehicleweaponslevel0.dds"/>
+        <DisplayEffect value="HellionWeaponDmg"/>
+        <TargetFilters value="Ground,Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="3"/>
+        <Marker Link="Weapon/InfernalFlameThrower">
+            <MatchFlags index="Id" value="1"/>
+        </Marker>
+        <Cost>
+            <Cooldown Link="Weapon/InfernalFlameThrower"/>
+        </Cost>
+        <Period value="1.75"/>
+        <DamagePoint value="0.25"/>
+        <Backswing value="0.75"/>
+        <Effect value="HellionWeaponCreatePersistent"/>
+        <LegacyOptions index="LockTurretWhileFiring" value="1"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="HellionWeapon2">
+        <EditorCategories value="Race:Terran"/>
+        <Icon value="Assets\Textures\btn-upgrade-terran-vehicleweaponslevel0.dds"/>
+        <DisplayEffect value="HellionWeaponDmg2"/>
+        <TargetFilters value="Ground,Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="3"/>
+        <Marker Link="Weapon/InfernalFlameThrower">
+            <MatchFlags index="Id" value="1"/>
+        </Marker>
+        <Cost>
+            <Cooldown Link="Weapon/InfernalFlameThrower"/>
+        </Cost>
+        <Period value="1.75"/>
+        <DamagePoint value="0.25"/>
+        <Backswing value="0.75"/>
+        <Effect value="HellionWeaponCreatePersistent2"/>
+        <LegacyOptions index="LockTurretWhileFiring" value="1"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="HeroHydraliskRanged">
+        <EditorCategories value="Race:Zerg"/>
+        <Icon value="Assets\Textures\btn-upgrade-zerg-missileattacks-level0.dds"/>
+        <DisplayEffect value="HeroHydraRangedDmg"/>
+        <TargetFilters value="Visible;Ally,Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Period value="2"/>
+        <Effect value="HeroHydraWeaponLaunchSet"/>
+        <Range value="6"/>
+        <MinScanRange value="7"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="HeroRoachRanged">
+        <EditorCategories value="Race:Zerg"/>
+        <Icon value="Assets\Textures\btn-upgrade-zerg-missileattacks-level0.dds"/>
+        <DisplayEffect value="HeroRoachRangedDmg"/>
+        <TargetFilters value="Visible;Ally,Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Marker Link="Weapon/AcidSaliva"/>
+        <Cost>
+            <Cooldown Link="Weapon/AcidSaliva"/>
+        </Cost>
+        <Period value="2"/>
+        <Effect value="HeroRoachRangedMissle"/>
+        <MinScanRange value="6"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="Laser">
+        <EditorCategories value=""/>
+        <Options index="OnlyFireWhileInAttackOrder" value="0"/>
+        <Options index="OnlyFireAtAttackOrderTarget" value="0"/>
+        <Icon value="Assets\Textures\btn-upgrade-swann-improvedburstlaser.dds"/>
+        <DisplayEffect value="RunlingRangedDmg"/>
+        <TargetFilters value="Visible;Self,Player,Ally,Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="4"/>
+        <MinimumRange value="0.1"/>
+        <Arc value="99.9975"/>
+        <Period value="0.8"/>
+        <DamagePoint value="0.125"/>
+        <Backswing value="0"/>
+        <Effect value="RunlingWeaponRangeLaunchMissile"/>
+        <AllowedMovement value="Moving"/>
+        <ArcSlop value="19.995"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="Laser2">
+        <EditorCategories value=""/>
+        <Options index="Hidden" value="1"/>
+        <Options index="OnlyFireWhileInAttackOrder" value="0"/>
+        <Options index="OnlyFireAtAttackOrderTarget" value="0"/>
+        <Icon value="Assets\Textures\btn-upgrade-swann-improvedburstlaser.dds"/>
+        <DisplayEffect value="RunlingRangedDmg"/>
+        <TargetFilters value="Visible;Self,Player,Ally,Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="4"/>
+        <MinimumRange value="0.1"/>
+        <Arc value="99.9975"/>
+        <ArcSlop value="19.995"/>
+        <Period value="0.8"/>
+        <DamagePoint value="0.125"/>
+        <Backswing value="0"/>
+        <Effect value="RunlingWeaponRangeLaunchMissile2"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="MarauderWeapon">
+        <EditorCategories value="Race:Terran"/>
+        <Icon value="Assets\Textures\btn-upgrade-terran-infantryweaponslevel0.dds"/>
+        <DisplayEffect value="MarauderWeaponDmg"/>
+        <TargetFilters value="Ground,Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="3"/>
+        <Marker Link="Weapon/PunisherGrenades"/>
+        <Cost>
+            <Cooldown Link="Weapon/PunisherGrenades"/>
+        </Cost>
+        <Period value="1.5"/>
+        <DamagePoint value="0"/>
+        <Backswing value="0"/>
+        <Effect value="MarauderWeaponLaunchMissle"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="MarauderWeapon2">
+        <EditorCategories value="Race:Terran"/>
+        <Icon value="Assets\Textures\btn-upgrade-terran-infantryweaponslevel0.dds"/>
+        <DisplayEffect value="MarauderWeaponDmg2"/>
+        <TargetFilters value="Ground,Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="3"/>
+        <Marker Link="Weapon/PunisherGrenades"/>
+        <Cost>
+            <Cooldown Link="Weapon/PunisherGrenades"/>
+        </Cost>
+        <Period value="1.5"/>
+        <DamagePoint value="0"/>
+        <Backswing value="0"/>
+        <Effect value="MarauderWeaponLaunchMissle2"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="MarineWeapon">
+        <EditorCategories value="Race:Terran"/>
+        <Icon value="Assets\Textures\btn-upgrade-terran-infantryweaponslevel0.dds"/>
+        <DisplayEffect value="MarineWeaponDmg"/>
+        <TargetFilters value="Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Marker Link="Weapon/GuassRifle"/>
+        <Cost>
+            <Cooldown Link="Weapon/GuassRifle"/>
+        </Cost>
+        <Period value="0.5"/>
+        <DamagePoint value="0.05"/>
+        <Backswing value="0.75"/>
+        <Effect value="MarineWeaponDmg"/>
+        <Range value="2"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="MarineWeapon2">
+        <EditorCategories value="Race:Terran"/>
+        <Icon value="Assets\Textures\btn-upgrade-terran-infantryweaponslevel0.dds"/>
+        <DisplayEffect value="MarineWeaponDmg2"/>
+        <TargetFilters value="Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="2"/>
+        <Marker Link="Weapon/GuassRifle"/>
+        <Cost>
+            <Cooldown Link="Weapon/GuassRifle"/>
+        </Cost>
+        <Period value="0.5"/>
+        <DamagePoint value="0.05"/>
+        <Backswing value="0.75"/>
+        <Effect value="MarineWeaponDmg2"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="ArchonPurifierWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-groundweaponslevel0.dds"/>
+        <DisplayEffect value="ArchonPurifierWeaponDmg"/>
+        <TargetFilters value="Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="2.5"/>
+        <TeleportResetRange value="0"/>
+        <Period value="1.5"/>
+        <Effect value="ArchonPurifierWeaponDmg"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="RoboticClaws">
+        <EditorCategories value="Race:Terran"/>
+        <Options index="Melee" value="1"/>
+        <Icon value="Assets\Textures\BTN-Upgrade-Terran-VehicleWeaponsLevel0.dds"/>
+        <DisplayEffect value="GuardianPantherWeaponMainDmg"/>
+        <TargetFilters value="Ground,Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="0.1"/>
+        <Period value="1.5"/>
+        <DamagePoint value="0.15"/>
+        <Effect value="GuardianPantherWeaponSet"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="RavagerWeapon2">
+        <EditorCategories value="Race:Zerg"/>
+        <Icon value="Assets\Textures\btn-upgrade-zerg-missileattacks-level0.dds"/>
+        <DisplayEffect value="RavagerWeaponDmg"/>
+        <TargetFilters value="Visible;Ally,Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="3.5"/>
+        <Period value="2"/>
+        <DamagePoint value="0.2"/>
+        <Effect value="RavagerWeaponLaunchMissile"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="ReaperWeapon">
+        <EditorCategories value="Race:Terran"/>
+        <Icon value="Assets\Textures\btn-upgrade-terran-infantryweaponslevel0.dds"/>
+        <DisplayEffect value="ReaperWeaponDmg"/>
+        <DisplayAttackCount value="2"/>
+        <TargetFilters value="Ground,Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Marker Link="Weapon/P38ScytheGuassPistol"/>
+        <Cost>
+            <Cooldown Link="Weapon/P38ScytheGuassPistol"/>
+        </Cost>
+        <Period value="1.1"/>
+        <DamagePoint value="0"/>
+        <Backswing value="0.75"/>
+        <Effect value="ReaperWeaponCreatePersistent"/>
+        <Range value="2"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="AcidSpines2">
+        <EditorCategories value="Race:Zerg"/>
+        <Icon value="Assets\Textures\btn-upgrade-zerg-missileattacks-level0.dds"/>
+        <DisplayEffect value="WeaponAttackDamage"/>
+        <TargetFilters value="Visible;Ally,Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Period value="2"/>
+        <Effect value="WeaponAttackLaunchMissile"/>
+        <MinScanRange value="6"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="ReaperWeapon2">
+        <EditorCategories value="Race:Terran"/>
+        <Icon value="Assets\Textures\btn-upgrade-terran-infantryweaponslevel0.dds"/>
+        <DisplayEffect value="ReaperWeaponDmg2"/>
+        <DisplayAttackCount value="2"/>
+        <TargetFilters value="Ground,Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="2"/>
+        <Marker Link="Weapon/P38ScytheGuassPistol"/>
+        <Cost>
+            <Cooldown Link="Weapon/P38ScytheGuassPistol"/>
+        </Cost>
+        <Period value="1.1"/>
+        <DamagePoint value="0"/>
+        <Backswing value="0.75"/>
+        <Effect value="ReaperWeaponCreatePersistent2"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="SentryNerazimWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-groundweaponslevel0.dds"/>
+        <DisplayEffect value="SentryNerazimWeaponDmg"/>
+        <TargetFilters value="Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="6"/>
+        <TeleportResetRange value="0"/>
+        <Period value="1"/>
+        <Effect value="SentryNerazimWeaponPersistent"/>
+        <LegacyOptions index="CanRetargetWhileChanneling" value="1"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="StalkerTaldarimWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-groundweaponslevel0.dds"/>
+        <DisplayEffect value="StalkerTaldarimWeaponDmg"/>
+        <TargetFilters value="Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="4"/>
+        <Period value="1.2"/>
+        <Effect value="StalkerTaldarimWeaponLaunchMissile"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="TankWeapon">
+        <EditorCategories value="Race:Terran"/>
+        <Icon value="Assets\Textures\btn-upgrade-terran-vehicleweaponslevel0.dds"/>
+        <DisplayEffect value="TankWeaponDmg"/>
+        <TargetFilters value="Ground,Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="2"/>
+        <Marker Link="Weapon/90mmCannons"/>
+        <Cost>
+            <Cooldown Link="Weapon/90mmCannons"/>
+        </Cost>
+        <Period value="1.6"/>
+        <Effect value="TankWeaponDmg"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="TankWeapon2">
+        <EditorCategories value="Race:Terran"/>
+        <Icon value="Assets\Textures\btn-upgrade-terran-vehicleweaponslevel0.dds"/>
+        <DisplayEffect value="TankWeaponDmg2"/>
+        <TargetFilters value="Ground,Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="2"/>
+        <Marker Link="Weapon/90mmCannons"/>
+        <Cost>
+            <Cooldown Link="Weapon/90mmCannons"/>
+        </Cost>
+        <Period value="1.6"/>
+        <Effect value="TankWeaponDmg2"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="ThorsHammer">
+        <Range value="6"/>
+        <DamagePoint value="0.5"/>
+        <TargetFilters value="Ground,Visible;Worker,Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <MinScanRange value="6.5"/>
+        <RangeSlop value="2.5"/>
+        <Period value="2"/>
+        <Backswing value="0.1"/>
+        <AcquirePrioritization value="ByDistance"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="TwinIbiksCannon">
+        <TargetFilters value="Ground,Visible;Self,Worker,Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <MinScanRange value="6.5"/>
+        <RangeSlop value="2"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="VikingWeapon">
+        <EditorCategories value="Race:Terran"/>
+        <Icon value="Assets\Textures\btn-upgrade-terran-shipweaponslevel0.dds"/>
+        <DisplayEffect value="VikingWeaponDmg"/>
+        <TargetFilters value="Ground,Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Arc value="5.625"/>
+        <Marker Link="Weapon/TwinGatlingCannon"/>
+        <Cost>
+            <Cooldown Link="Weapon/TwinGatlingCannon"/>
+        </Cost>
+        <Period value="0.75"/>
+        <Effect value="VikingWeaponDmg"/>
+        <MinScanRange value="2"/>
+        <Range value="3"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="VikingWeapon2">
+        <EditorCategories value="Race:Terran"/>
+        <Icon value="Assets\Textures\btn-upgrade-terran-shipweaponslevel0.dds"/>
+        <DisplayEffect value="VikingWeaponDmg2"/>
+        <TargetFilters value="Ground,Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <MinScanRange value="2"/>
+        <Range value="3"/>
+        <Arc value="5.625"/>
+        <Marker Link="Weapon/TwinGatlingCannon"/>
+        <Cost>
+            <Cooldown Link="Weapon/TwinGatlingCannon"/>
+        </Cost>
+        <Period value="0.75"/>
+        <Effect value="VikingWeaponDmg2"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="DarkTemplarTaldarimWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Options index="Melee" value="1"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-groundweaponslevel0.dds"/>
+        <DisplayEffect value="DarkTemplarTaldarimWeaponDmg"/>
+        <TargetFilters value="Ground,Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="0.1"/>
+        <Period value="0.9"/>
+        <DamagePoint value="0.361"/>
+        <Backswing value="1.333"/>
+        <Effect value="DarkTemplarTaldarimWeaponDmg"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="WidowMineWeapon">
+        <EditorCategories value="Race:Terran"/>
+        <Options index="Melee" value="1"/>
+        <Icon value="Assets\Textures\btn-unit-collection-widowmine-junker.dds"/>
+        <DisplayEffect value="WidowMineSuicideDmg"/>
+        <TargetFilters value="Ground,Visible;Structure,Worker,Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="0.1"/>
+        <Marker Link="Weapon/VultureSpiderMines"/>
+        <Cost>
+            <Cooldown Link="Weapon/VultureSpiderMines"/>
+        </Cost>
+        <Period value="0.4"/>
+        <Effect value="WidowMineWeaponSuicideSet"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="WidowMineWeapon2">
+        <EditorCategories value="Race:Terran"/>
+        <Options index="Melee" value="1"/>
+        <Icon value="Assets\Textures\btn-unit-collection-widowmine-covertops.dds"/>
+        <DisplayEffect value="WidowMineSuicideDmg2"/>
+        <TargetFilters value="Ground,Visible;Structure,Worker,Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="0.1"/>
+        <Period value="0.4"/>
+        <Effect value="WidowMineWeaponSuicideSet2"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="ZealotStandardWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Options index="Melee" value="1"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-groundweaponslevel0.dds"/>
+        <DisplayEffect value="ZealotStandardWeaponDmg"/>
+        <DisplayAttackCount value="2"/>
+        <TargetFilters value="Ground,Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="0.1"/>
+        <Period value="0.75"/>
+        <DamagePoint value="0"/>
+        <Effect value="ZealotStandardWeaponPersistent"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="ZealotTalonWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Options index="Melee" value="1"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-groundweaponslevel0.dds"/>
+        <DisplayEffect value="ZealotTalonWeaponDmg"/>
+        <DisplayAttackCount value="2"/>
+        <TargetFilters value="Ground,Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="0.1"/>
+        <Period value="0.75"/>
+        <DamagePoint value="0"/>
+        <Effect value="ZealotTalonWeaponPersistent"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="ZealotTaldarimWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Options index="Melee" value="1"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-groundweaponslevel0.dds"/>
+        <DisplayEffect value="ZealotTaldarimWeaponDmg"/>
+        <DisplayAttackCount value="2"/>
+        <TargetFilters value="Ground,Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="0.1"/>
+        <Period value="0.75"/>
+        <DamagePoint value="0"/>
+        <Effect value="ZealotTaldarimWeaponPersistent"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="ZealotPurifierWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Options index="Melee" value="1"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-groundweaponslevel0.dds"/>
+        <DisplayEffect value="ZealotPurifierWeaponDmg"/>
+        <DisplayAttackCount value="2"/>
+        <TargetFilters value="Ground,Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="0.1"/>
+        <Period value="0.75"/>
+        <DamagePoint value="0"/>
+        <Effect value="ZealotPurifierWeaponPersistent"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="ZealotNerazimWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Options index="Melee" value="1"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-groundweaponslevel0.dds"/>
+        <DisplayEffect value="ZealotNerazimWeaponDmg"/>
+        <DisplayAttackCount value="2"/>
+        <TargetFilters value="Ground,Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="0.1"/>
+        <Period value="0.75"/>
+        <DamagePoint value="0"/>
+        <Effect value="ZealotNerazimWeaponPersistent"/>
+    </CWeaponLegacy>
+</Catalog>
