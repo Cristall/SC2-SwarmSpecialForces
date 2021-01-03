@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CRequirementConst id="25">
+        <Value value="25"/>
+    </CRequirementConst>
+    <CRequirementConst id="30">
+        <Value value="30"/>
+    </CRequirementConst>
+    <CRequirementAnd id="AndEq1987477214CountBehaviorBaseOverlordDmgSlowCompleteOnlyAtUnit0Eq2561050864CountUnitHeroDummyHiveDeadCompleteOnly0">
+        <Tooltip value="RequirementNode/Tooltip/##id##"/>
+        <OperandArray value="Eq1987477214CountBehaviorBaseOverlordDmgSlowCompleteOnlyAtUnit0"/>
+        <OperandArray value="Eq2561050864CountUnitHeroDummyHiveDeadCompleteOnly0"/>
+    </CRequirementAnd>
+    <CRequirementAnd id="AndEq281638821CountUpgradeArmorUpgradeQueuedOnly0Eq4037611437CountBehaviorTutorialNotPausedCompleteOnlyAtUnit0">
+        <OperandArray value="Eq281638821CountUpgradeArmorUpgradeQueuedOnly0"/>
+        <OperandArray value="Eq4037611437CountBehaviorTutorialNotPausedCompleteOnlyAtUnit0"/>
+    </CRequirementAnd>
+    <CRequirementAnd id="AndEq281638821CountUpgradeAtkSpdUpgradeQueuedOnly0Eq4037611437CountBehaviorTutorialNotPausedCompleteOnlyAtUnit0">
+        <OperandArray value="Eq281638821CountUpgradeAtkSpdUpgradeQueuedOnly0"/>
+        <OperandArray value="Eq4037611437CountBehaviorTutorialNotPausedCompleteOnlyAtUnit0"/>
+    </CRequirementAnd>
+    <CRequirementAnd id="AndEq281638821CountUpgradeDmgUpgradeQueuedOnly0Eq4037611437CountBehaviorTutorialNotPausedCompleteOnlyAtUnit0">
+        <OperandArray value="Eq281638821CountUpgradeDmgUpgradeQueuedOnly0"/>
+        <OperandArray value="Eq4037611437CountBehaviorTutorialNotPausedCompleteOnlyAtUnit0"/>
+    </CRequirementAnd>
+    <CRequirementAnd id="AndEq281638821CountUpgradeRegenerationUpgradeQueuedOnly0Eq4037611437CountBehaviorTutorialNotPausedCompleteOnlyAtUnit0">
+        <OperandArray value="Eq281638821CountUpgradeRegenerationUpgradeQueuedOnly0"/>
+        <OperandArray value="Eq4037611437CountBehaviorTutorialNotPausedCompleteOnlyAtUnit0"/>
+    </CRequirementAnd>
+    <CRequirementAnd id="AndEq281638821CountUpgradeSplashRangeUpgradeQueuedOnly0Eq4037611437CountBehaviorTutorialNotPausedCompleteOnlyAtUnit0">
+        <OperandArray value="Eq281638821CountUpgradeSplashRangeUpgradeQueuedOnly0"/>
+        <OperandArray value="Eq4037611437CountBehaviorTutorialNotPausedCompleteOnlyAtUnit0"/>
+    </CRequirementAnd>
+    <CRequirementCountBehavior id="CountBehaviorBaseOverlordDmgSlowCompleteOnlyAtUnit">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="BaseOverlordDmgSlow" State="CompleteOnlyAtUnit"/>
+    </CRequirementCountBehavior>
+    <CRequirementCountBehavior id="CountBehaviorEnergyTransferChannelCompleteOnlyAtUnit">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="EnergyTransferChannel" State="CompleteOnlyAtUnit"/>
+    </CRequirementCountBehavior>
+    <CRequirementCountBehavior id="CountBehaviorTerranPartTransitionBuffCompleteOnlyAtUnit">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="TerranPartTransitionBuff" State="CompleteOnlyAtUnit"/>
+    </CRequirementCountBehavior>
+    <CRequirementCountBehavior id="CountBehaviorTutorialNotPausedCompleteOnlyAtUnit">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="TutorialNotPaused" State="CompleteOnlyAtUnit"/>
+    </CRequirementCountBehavior>
+    <CRequirementCountUnit id="CountUnitHeroDummyHiveDeadCompleteOnly">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="HeroDummyHiveDead" State="CompleteOnly"/>
+    </CRequirementCountUnit>
+    <CRequirementCountUpgrade id="CountUpgradeArmorUpgradeCompleteOnly">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="ArmorUpgrade" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeArmorUpgradeQueuedOnly">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="ArmorUpgrade"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeAtkSpdUpgradeCompleteOnly">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="AtkSpdUpgrade" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeAtkSpdUpgradeQueuedOnly">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="AtkSpdUpgrade"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeBossAbilityDifficultyRequirementCompleteOnly">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="BossAbilityDifficultyRequirement" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeCreepTunnel@UnlockCompleteOnly">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="CreepTunnel@Unlock" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeCyberneticLurkerChargeRestoreUnlockCompleteOnly">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="CyberneticLurkerChargeRestoreUnlock" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeCyberneticRunlingChargeRestoreUnlockCompleteOnly">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="CyberneticRunlingChargeRestoreUnlock" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeDmgUpgradeCompleteOnly">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="DmgUpgrade" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeDmgUpgradeQueuedOnly">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="DmgUpgrade"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeRegenerationUpgradeCompleteOnly">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="RegenerationUpgrade" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeRegenerationUpgradeQueuedOnly">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="RegenerationUpgrade"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeSplashRangeUpgradeCompleteOnly">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="SplashRangeUpgrade" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeSplashRangeUpgradeQueuedOnly">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="SplashRangeUpgrade"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeUnlockCyberneticsCompleteOnly">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="UnlockCybernetics" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeUnlockDmgArmorCountCompleteOnly">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="UnlockDmgArmorCount" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeUnlockHeroBowlerBanemineCompleteOnly">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="UnlockHeroBowlerBanemine" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeUnlockHeroBowlerKillStreakCompleteOnly">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="UnlockHeroBowlerKillStreak" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeUnlockHeroHydraCorrosiveCompleteOnly">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="UnlockHeroHydraCorrosive" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeUnlockHeroHydraFocusCompleteOnly">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="UnlockHeroHydraFocus" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeUnlockHeroRavagerDecoyCompleteOnly">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="UnlockHeroRavagerDecoy" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeUnlockHeroRavagerHardenedCompleteOnly">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="UnlockHeroRavagerHardened" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeUnlockHeroRoachChargeCompleteOnly">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="UnlockHeroRoachCharge" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeUnlockHeroSwarmQueenEnergyTransferCompleteOnly">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="UnlockHeroSwarmQueenEnergyTransfer" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeUnlockHeroSwarmQueenFrenzyCompleteOnly">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="UnlockHeroSwarmQueenFrenzy" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementEq id="Eq1136276364CountUpgradeUnlockHeroHydraFocusCompleteOnly1">
+        <OperandArray index="0" value="CountUpgradeUnlockHeroHydraFocusCompleteOnly"/>
+        <OperandArray index="1" value="1"/>
+    </CRequirementEq>
+    <CRequirementEq id="Eq1174723477CountUpgradeUnlockHeroRavagerDecoyCompleteOnly1">
+        <OperandArray index="0" value="CountUpgradeUnlockHeroRavagerDecoyCompleteOnly"/>
+        <OperandArray index="1" value="1"/>
+    </CRequirementEq>
+    <CRequirementEq id="Eq1851146600CountBehaviorBaseOverlordDmgSlowCompleteOnlyAtUnit0">
+        <OperandArray index="0" value="CountBehaviorBaseOverlordDmgSlowCompleteOnlyAtUnit"/>
+        <OperandArray index="1" value="0"/>
+    </CRequirementEq>
+    <CRequirementEq id="Eq1987477214CountBehaviorBaseOverlordDmgSlowCompleteOnlyAtUnit0">
+        <OperandArray index="0" value="CountBehaviorBaseOverlordDmgSlowCompleteOnlyAtUnit"/>
+        <OperandArray index="1" value="0"/>
+    </CRequirementEq>
+    <CRequirementEq id="Eq2070656153CountUpgradeUnlockHeroSwarmQueenEnergyTransferCompleteOnly1">
+        <OperandArray index="0" value="CountUpgradeUnlockHeroSwarmQueenEnergyTransferCompleteOnly"/>
+        <OperandArray index="1" value="1"/>
+    </CRequirementEq>
+    <CRequirementEq id="Eq2514512276CountUpgradeUnlockHeroRoachChargeCompleteOnly1">
+        <OperandArray index="0" value="CountUpgradeUnlockHeroRoachChargeCompleteOnly"/>
+        <OperandArray index="1" value="1"/>
+    </CRequirementEq>
+    <CRequirementEq id="Eq2561050864CountUnitHeroDummyHiveDeadCompleteOnly0">
+        <OperandArray index="0" value="CountUnitHeroDummyHiveDeadCompleteOnly"/>
+        <OperandArray index="1" value="0"/>
+    </CRequirementEq>
+    <CRequirementEq id="Eq2574667276CountUpgradeUnlockHeroBowlerBanemineCompleteOnly1">
+        <OperandArray index="0" value="CountUpgradeUnlockHeroBowlerBanemineCompleteOnly"/>
+        <OperandArray index="1" value="1"/>
+    </CRequirementEq>
+    <CRequirementEq id="Eq2604696456CountUpgradeUnlockHeroHydraCorrosiveCompleteOnly1">
+        <OperandArray index="0" value="CountUpgradeUnlockHeroHydraCorrosiveCompleteOnly"/>
+        <OperandArray index="1" value="1"/>
+    </CRequirementEq>
+    <CRequirementEq id="Eq281638821CountUpgradeArmorUpgradeQueuedOnly0">
+        <OperandArray index="0" value="CountUpgradeArmorUpgradeQueuedOnly"/>
+        <OperandArray index="1" value="0"/>
+    </CRequirementEq>
+    <CRequirementEq id="Eq281638821CountUpgradeAtkSpdUpgradeQueuedOnly0">
+        <OperandArray index="0" value="CountUpgradeAtkSpdUpgradeQueuedOnly"/>
+        <OperandArray index="1" value="0"/>
+    </CRequirementEq>
+    <CRequirementEq id="Eq281638821CountUpgradeDmgUpgradeQueuedOnly0">
+        <OperandArray index="0" value="CountUpgradeDmgUpgradeQueuedOnly"/>
+        <OperandArray index="1" value="0"/>
+    </CRequirementEq>
+    <CRequirementEq id="Eq281638821CountUpgradeRegenerationUpgradeQueuedOnly0">
+        <OperandArray index="0" value="CountUpgradeRegenerationUpgradeQueuedOnly"/>
+        <OperandArray index="1" value="0"/>
+    </CRequirementEq>
+    <CRequirementEq id="Eq281638821CountUpgradeSplashRangeUpgradeQueuedOnly0">
+        <OperandArray index="0" value="CountUpgradeSplashRangeUpgradeQueuedOnly"/>
+        <OperandArray index="1" value="0"/>
+    </CRequirementEq>
+    <CRequirementEq id="Eq3844913310CountUpgradeUnlockHeroBowlerKillStreakCompleteOnly1">
+        <OperandArray index="0" value="CountUpgradeUnlockHeroBowlerKillStreakCompleteOnly"/>
+        <OperandArray index="1" value="1"/>
+    </CRequirementEq>
+    <CRequirementEq id="Eq4037611437CountBehaviorTutorialNotPausedCompleteOnlyAtUnit0">
+        <OperandArray index="0" value="CountBehaviorTutorialNotPausedCompleteOnlyAtUnit"/>
+        <OperandArray index="1" value="0"/>
+    </CRequirementEq>
+    <CRequirementEq id="EqCountBehaviorEnergyTransferChannelCompleteOnlyAtUnit0">
+        <OperandArray index="0" value="CountBehaviorEnergyTransferChannelCompleteOnlyAtUnit"/>
+        <OperandArray index="1" value="0"/>
+    </CRequirementEq>
+    <CRequirementEq id="EqCountBehaviorEnergyTransferChannelCompleteOnlyAtUnit1">
+        <OperandArray index="0" value="CountBehaviorEnergyTransferChannelCompleteOnlyAtUnit"/>
+        <OperandArray index="1" value="1"/>
+    </CRequirementEq>
+    <CRequirementEq id="EqCountUpgradeCyberneticLurkerChargeRestoreUnlockCompleteOnly1">
+        <OperandArray index="0" value="CountUpgradeCyberneticLurkerChargeRestoreUnlockCompleteOnly"/>
+        <OperandArray index="1" value="1"/>
+    </CRequirementEq>
+    <CRequirementEq id="EqCountUpgradeCyberneticRunlingChargeRestoreUnlockCompleteOnly1">
+        <OperandArray index="0" value="CountUpgradeCyberneticRunlingChargeRestoreUnlockCompleteOnly"/>
+        <OperandArray index="1" value="1"/>
+    </CRequirementEq>
+    <CRequirementGT id="GTCountBehaviorTerranPartTransitionBuffCompleteOnlyAtUnit0">
+        <OperandArray index="0" value="CountBehaviorTerranPartTransitionBuffCompleteOnlyAtUnit"/>
+        <OperandArray index="1" value="0"/>
+    </CRequirementGT>
+    <CRequirementGTE id="GTE1136276364CountUpgradeCreepTunnel@UnlockCompleteOnly1">
+        <OperandArray index="0" value="CountUpgradeCreepTunnel@UnlockCompleteOnly"/>
+        <OperandArray index="1" value="1"/>
+    </CRequirementGTE>
+    <CRequirementGTE id="GTE1567160127CountUpgradeUnlockHeroRavagerHardenedCompleteOnly1">
+        <OperandArray index="0" value="CountUpgradeUnlockHeroRavagerHardenedCompleteOnly"/>
+        <OperandArray index="1" value="1"/>
+    </CRequirementGTE>
+    <CRequirementGTE id="GTE3401556857CountUpgradeUnlockHeroSwarmQueenFrenzyCompleteOnly1">
+        <OperandArray index="0" value="CountUpgradeUnlockHeroSwarmQueenFrenzyCompleteOnly"/>
+        <OperandArray index="1" value="1"/>
+    </CRequirementGTE>
+    <CRequirementGTE id="GTE4159062706CountUpgradeUnlockCyberneticsCompleteOnly2">
+        <OperandArray index="0" value="CountUpgradeUnlockCyberneticsCompleteOnly"/>
+        <OperandArray index="1" value="2"/>
+    </CRequirementGTE>
+    <CRequirementGTE id="GTECountUpgradeBossAbilityDifficultyRequirementCompleteOnly0">
+        <OperandArray index="0" value="CountUpgradeBossAbilityDifficultyRequirementCompleteOnly"/>
+        <OperandArray index="1" value="0"/>
+    </CRequirementGTE>
+    <CRequirementGTE id="GTECountUpgradeBossAbilityDifficultyRequirementCompleteOnly1">
+        <OperandArray index="0" value="CountUpgradeBossAbilityDifficultyRequirementCompleteOnly"/>
+        <OperandArray index="1" value="1"/>
+    </CRequirementGTE>
+    <CRequirementGTE id="GTECountUpgradeBossAbilityDifficultyRequirementCompleteOnly2">
+        <OperandArray index="0" value="CountUpgradeBossAbilityDifficultyRequirementCompleteOnly"/>
+        <OperandArray index="1" value="2"/>
+    </CRequirementGTE>
+    <CRequirementGTE id="GTECountUpgradeBossAbilityDifficultyRequirementCompleteOnly3">
+        <OperandArray index="0" value="CountUpgradeBossAbilityDifficultyRequirementCompleteOnly"/>
+        <OperandArray index="1" value="3"/>
+    </CRequirementGTE>
+    <CRequirementGTE id="GTECountUpgradeBossAbilityDifficultyRequirementCompleteOnly4">
+        <OperandArray index="0" value="CountUpgradeBossAbilityDifficultyRequirementCompleteOnly"/>
+        <OperandArray index="1" value="4"/>
+    </CRequirementGTE>
+    <CRequirementGTE id="GTECountUpgradeBossAbilityDifficultyRequirementCompleteOnly5">
+        <OperandArray index="0" value="CountUpgradeBossAbilityDifficultyRequirementCompleteOnly"/>
+        <OperandArray index="1" value="5"/>
+    </CRequirementGTE>
+    <CRequirementGTE id="GTECountUpgradeUnlockCyberneticsCompleteOnly1">
+        <OperandArray index="0" value="CountUpgradeUnlockCyberneticsCompleteOnly"/>
+        <OperandArray index="1" value="1"/>
+    </CRequirementGTE>
+    <CRequirementLT id="LTCountUpgradeArmorUpgradeCompleteOnlyCountUpgradeUnlockDmgArmorCountCompleteOnly">
+        <OperandArray index="0" value="CountUpgradeArmorUpgradeCompleteOnly"/>
+        <OperandArray index="1" value="CountUpgradeUnlockDmgArmorCountCompleteOnly"/>
+    </CRequirementLT>
+    <CRequirementLT id="LTCountUpgradeAtkSpdUpgradeCompleteOnly10">
+        <OperandArray index="0" value="CountUpgradeAtkSpdUpgradeCompleteOnly"/>
+        <OperandArray index="1" value="10"/>
+    </CRequirementLT>
+    <CRequirementLT id="LTCountUpgradeDmgUpgradeCompleteOnlyCountUpgradeUnlockDmgArmorCountCompleteOnly">
+        <OperandArray index="0" value="CountUpgradeDmgUpgradeCompleteOnly"/>
+        <OperandArray index="1" value="CountUpgradeUnlockDmgArmorCountCompleteOnly"/>
+    </CRequirementLT>
+    <CRequirementLT id="LTCountUpgradeRegenerationUpgradeCompleteOnly10">
+        <OperandArray index="0" value="CountUpgradeRegenerationUpgradeCompleteOnly"/>
+        <OperandArray index="1" value="10"/>
+    </CRequirementLT>
+    <CRequirementLT id="LTCountUpgradeSplashRangeUpgradeCompleteOnly10">
+        <OperandArray index="0" value="CountUpgradeSplashRangeUpgradeCompleteOnly"/>
+        <OperandArray index="1" value="10"/>
+    </CRequirementLT>
+    <CRequirementCountUpgrade id="UpgradeLurker2CompleteOnly">
+        <Count Link="LurkerWeaponPersistent"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="UpgradeLurker2QueuedOrBetter">
+        <Count Link="LurkerWeaponPersistent"/>
+    </CRequirementCountUpgrade>
+</Catalog>
