@@ -1,0 +1,2166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CBehaviorBuff default="1" id="TimedLifeDisplayed">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DisplayDuration index="Self" value="1"/>
+        <DisplayDuration index="Ally" value="1"/>
+        <DisplayDuration index="Neutral" value="1"/>
+        <DisplayDuration index="Enemy" value="1"/>
+        <Duration value="5"/>
+        <ExpireEffect value="Suicide"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff default="1" id="TimedLifeHidden">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="5"/>
+        <ExpireEffect value="Suicide"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="AcidPitDebuff">
+        <Alignment value="Negative"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="0.3"/>
+        <Modification LifeArmorMultiplier="0.9"/>
+        <InfoIcon value="Assets\Textures\btn-ability-zerg-dehaka-ravasaur-dissolvingacid.dds"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="BeamDroneDelayDeath" parent="TimedLifeHidden">
+        <Duration value="1"/>
+        <Modification>
+            <StateFlags index="Stun" value="1"/>
+            <StateFlags index="SuppressAttack" value="1"/>
+            <StateFlags index="SuppressCombat" value="1"/>
+            <WeaponDisableArray value="BeamDroneWeapon"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorUnitTracker id="BeamDroneDummyTracker">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+    </CBehaviorUnitTracker>
+    <CBehaviorUnitTracker id="BomberTracker">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+    </CBehaviorUnitTracker>
+    <CBehaviorBuff id="ChargePushed">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="0.1875"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="DefensiveRoar@Caster">
+        <InfoIcon value="Assets\Textures\btn-ability-zerg-dehaka-superroar.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="15"/>
+        <Modification>
+            <LifeArmorBonus value="15"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="DefensiveRoar@Other">
+        <InfoIcon value="Assets\Textures\btn-ability-zerg-dehaka-superroar.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DisableValidatorArray value="DefensiveRoar@CasterBuffNotActive"/>
+        <BuffFlags index="UpdateDurationWhileDisabled" value="1"/>
+        <Duration value="15"/>
+        <Modification>
+            <LifeArmorBonus value="10"/>
+        </Modification>
+        <Name value="Behavior/Name/DefensiveRoar@Caster"/>
+        <Tooltip value="Behavior/Tooltip/DefensiveRoar@Caster"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="DifficultyCustom">
+        <InfoIcon value="Assets\Textures\btn-ability-terran-deactivatemine.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DisableValidatorArray value="DifficultyValidatorCustomDiff"/>
+        <Modification>
+            <MoveSpeedMultiplier value="1.75"/>
+            <AttackSpeedMultiplier value="2"/>
+            <LifeArmorMultiplier value="1.5"/>
+            <ShieldArmorBonus value="15"/>
+            <ShieldArmorMultiplier value="1.5"/>
+            <DamageDealtScaled index="Spell" value="13"/>
+            <DamageDealtScaled index="Melee" value="13"/>
+            <DamageDealtScaled index="Ranged" value="13"/>
+            <DamageDealtScaled index="Splash" value="13"/>
+            <DamageDealtScaled index="NoProc" value="13"/>
+            <DamageDealtFraction index="Spell" value="2"/>
+            <DamageDealtFraction index="Melee" value="2"/>
+            <DamageDealtFraction index="Ranged" value="2"/>
+            <DamageDealtFraction index="Splash" value="2"/>
+            <DamageDealtFraction index="NoProc" value="2"/>
+            <LifeArmorBonus value="15"/>
+            <VitalMaxFractionArray index="Life" value="4"/>
+            <VitalMaxFractionArray index="Shields" value="4"/>
+            <VitalMaxFractionArray index="Energy" value="4"/>
+            <VitalRegenArray index="Life" value="2"/>
+            <VitalRegenArray index="Shields" value="2"/>
+            <VitalRegenArray index="Energy" value="2"/>
+            <VitalRegenMultiplier index="Life" value="1"/>
+            <VitalRegenMultiplier index="Shields" value="1"/>
+            <VitalRegenMultiplier index="Energy" value="1"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="DifficultyCustom2">
+        <InfoIcon value="Assets\Textures\btn-ability-terran-deactivatemine.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DisableValidatorArray value="DifficultyValidatorCustomDiff"/>
+        <Modification>
+            <LifeArmorBonus value="20"/>
+            <VitalRegenArray index="Life" value="7"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="GlueStream@Buff">
+        <InfoIcon value="Assets\Textures\btn-ability-zerg-acidspores.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="15"/>
+        <Modification MoveSpeedMultiplier="1.2"/>
+        <DisableValidatorArray value="GlueStream@CasterBuffNotActive"/>
+        <BuffFlags index="UpdateDurationWhileDisabled" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="GlueStream@BuffCaster">
+        <Name value="Behavior/Name/GlueStream@Buff"/>
+        <Tooltip value="Behavior/Tooltip/GlueStream@Buff"/>
+        <InfoIcon value="Assets\Textures\btn-ability-zerg-acidspores.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="15"/>
+        <Modification MoveSpeedMultiplier="1.3"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="GlueStream@Debuff">
+        <InfoIcon value="Assets\Textures\btn-ability-zerg-acidspores.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="15"/>
+        <Name value="Behavior/Name/GlueStream@Buff"/>
+        <Modification MoveSpeedMultiplier="0.8"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="RunlingCreepBonusRegen">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DisableValidatorArray value="OnCreep"/>
+        <Modification>
+            <VitalRegenArray index="Life" value="0.5"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="SpitterCreepBonusRegen">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DisableValidatorArray value="OnCreep"/>
+        <Modification>
+            <VitalRegenArray index="Life" value="1"/>
+            <VitalRegenArray index="Energy" value="0.5"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="CreepTunnel@TunnelingCloak">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="5"/>
+        <Modification>
+            <StateFlags index="Bury" value="1"/>
+            <StateFlags index="Cloak" value="1"/>
+            <StateFlags index="SuppressCollision" value="1"/>
+            <StateFlags index="Uncommandable" value="1"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="CyberneticLurkerDeath">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DamageResponse Fatal="1" Handled="CyberneticLurkerDeathChargeUp">
+            <Chance value="1"/>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="CyberneticRunlingDeath">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DamageResponse Fatal="1" Handled="CyberneticRunlingDeathChargeUp">
+            <Chance value="1"/>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorUnitTracker id="HandlerLightningTracker">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+    </CBehaviorUnitTracker>
+    <CBehaviorUnitTracker id="HandlerThunderTracker">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+    </CBehaviorUnitTracker>
+    <CBehaviorBuff id="InstantExpire" parent="TimedLifeHidden">
+        <Duration value="0.0625"/>
+    </CBehaviorBuff>
+    <CBehaviorVeterancy id="LevelsTest">
+        <Alignment value="Positive"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <XPFraction index="Kills" value="0"/>
+        <VeterancyLevelArray>
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="RavangerStats" Points="1"/>
+                <AttributeChangeArray Attribute="SwarmQueenStats" Points="1"/>
+                <AttributeChangeArray Attribute="BowlerStats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="175">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="RavangerStats" Points="1"/>
+                <AttributeChangeArray Attribute="SwarmQueenStats" Points="1"/>
+                <AttributeChangeArray Attribute="BowlerStats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <Levels value="50"/>
+        <MinVeterancyXPLevelFactor value="4"/>
+        <MinVeterancyXPPreviousValueFactor value="1"/>
+        <MinVeterancyXPBonusPerLevel value="8"/>
+    </CBehaviorVeterancy>
+    <CBehaviorUnitTracker id="PortalDummyTracker">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorUnitTracker>
+    <CBehaviorBuff id="SentryAuraInitial">
+        <BehaviorFlags index="Permanent" value="1"/>
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="HardskinCreepBonusRegen">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DisableValidatorArray value="OnCreep"/>
+        <Modification>
+            <VitalRegenArray index="Life" value="2"/>
+            <VitalRegenArray index="Energy" value="0.5"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="BowlerCreepBonusRegen">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DisableValidatorArray value="OnCreep"/>
+        <Modification>
+            <VitalRegenArray index="Life" value="1"/>
+            <VitalRegenArray index="Energy" value="0.5"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="StingerCreepBonusRegen">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DisableValidatorArray value="OnCreep"/>
+        <Modification>
+            <VitalRegenArray index="Life" value="1"/>
+            <VitalRegenArray index="Energy" value="0.5"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="SwarmMotherCreepBonusRegen">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DisableValidatorArray value="OnCreep"/>
+        <Modification>
+            <VitalRegenArray index="Life" value="1"/>
+            <VitalRegenArray index="Energy" value="1"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="LurkerCreepBonusRegen">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DisableValidatorArray value="OnCreep"/>
+        <Modification>
+            <VitalRegenArray index="Life" value="0.5"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="Tackle@CasterBuff">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="1"/>
+        <Period value="0.0625"/>
+        <Modification MoveSpeedMaximum="8" MoveSpeedMinimum="8">
+            <StateFlags index="SuppressCollision" value="1"/>
+            <StateFlags index="Uncommandable" value="1"/>
+            <WeaponDisableArray value="HeroRoachRanged"/>
+        </Modification>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="Tackle@FriendlyTackle">
+        <Alignment value="Positive"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="10"/>
+        <InfoIcon value="Assets\Textures\btn-upgrade-zerg-tunnelingclaws.dds"/>
+        <DisableValidatorArray value="Tackle@CasterBuffNotActive"/>
+        <BuffFlags index="UpdateDurationWhileDisabled" value="1"/>
+        <Modification>
+            <DamageDealtScaled index="Ranged" value="10"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="Tackle@FriendlyTackleCaster">
+        <Name value="Behavior/Name/Tackle@FriendlyTackle"/>
+        <Tooltip value="Behavior/Tooltip/Tackle@FriendlyTackle"/>
+        <Alignment value="Positive"/>
+        <InfoIcon value="Assets\Textures\btn-upgrade-zerg-tunnelingclaws.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="11"/>
+        <Modification>
+            <DamageDealtScaled index="Ranged" value="20"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="Tackle@KnockbackMinimumSpeed">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="0.1875"/>
+        <Modification Height="0.075" MoveSpeedMinimum="10"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorUnitTracker id="TrackerActiveSpawner">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorUnitTracker>
+    <CBehaviorUnitTracker id="TrackerMadness">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorUnitTracker>
+    <CBehaviorUnitTracker id="TrackerProbe">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorUnitTracker>
+    <CBehaviorBuff id="AlreadyCasting">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <TimeScaleSource Value="Caster"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="AlreadyCastingNoWeapons">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification MoveSpeedMaximum="0">
+            <WeaponDisableArray value="HellbatWeapon"/>
+            <WeaponDisableArray value="ThorsHammer"/>
+            <WeaponDisableArray value="TwinIbiksCannon"/>
+            <WeaponDisableArray value="TagTeamWeapon"/>
+            <WeaponDisableArray value="MadnessWeapon"/>
+            <WeaponDisableArray value="AtlantisWeapon"/>
+            <WeaponDisableArray value="AtlantisCoreWeapon"/>
+        </Modification>
+        <TimeScaleSource Value="Caster"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="AngelwingChargeBuff">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification MoveSpeedMaximum="7" MoveSpeedMinimum="7">
+            <StateFlags index="SuppressCollision" value="1"/>
+            <StateFlags index="Uncommandable" value="1"/>
+            <StateFlags index="Unstoppable" value="1"/>
+        </Modification>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="BomberBeam">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Period value="0.125"/>
+        <PeriodicEffect value="BomberBeamSearch"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorWander id="BomberWander">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Leash value="1"/>
+        <Range value="8"/>
+        <Delay value="1"/>
+    </CBehaviorWander>
+    <CBehaviorBuff id="HandsOfSilence">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification>
+            <DamageDealtScaled index="Melee" value="15"/>
+            <DamageDealtScaled index="Ranged" value="15"/>
+            <DamageDealtScaled index="Splash" value="15"/>
+        </Modification>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="Illusion@BossIllusionHandler">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <MaxStackCount value="10"/>
+        <FinalEffect value="Illusion@CleanupSet"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="Illusion@Spawning">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="1"/>
+        <Modification>
+            <StateFlags index="Invulnerable" value="1"/>
+            <StateFlags index="Stun" value="1"/>
+            <StateFlags index="SuppressAttack" value="1"/>
+            <StateFlags index="SuppressCombat" value="1"/>
+            <StateFlags index="NoDraw" value="1"/>
+        </Modification>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="Illusion@IllusionDmgHandler">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DisplayDuration index="Self" value="1"/>
+        <Duration value="20"/>
+        <FinalEffect value="Illusion@BossIllusionHandlerRemove"/>
+        <ExpireEffect value="Suicide"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorUnitTracker id="Illusion@Tracker">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <UnitTrackerFlags index="SnapUnitToCircumference" value="1"/>
+        <WhichLocation Value="CasterPoint"/>
+        <SnapRange value="3"/>
+        <SnapCount value="4"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorUnitTracker>
+    <CBehaviorBuff id="LaserLanceFire">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="1"/>
+        <PeriodicEffect value="LaserLancePeriodicDmg"/>
+        <Period value="0.25"/>
+        <InfoIcon value="Assets\Textures\btn-ability-protoss-firebeam.dds"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="Phase2">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <InfoFlags index="Hidden" value="1"/>
+        <Modification TimeScale="1.15"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="PortalCasterStationary">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification MoveSpeedMaximum="0"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="PortalModels">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="16.5"/>
+        <InitialEffect value="PortalStartStartHeight"/>
+        <FinalEffect value="PortalStartEndHeight"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="PortalStartDummyHeightStart">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="0.0625"/>
+        <Modification Height="10">
+            <HeightTime index="Stop" value="1"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="PortalStartDummyHeightEnd">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="1"/>
+        <FinalEffect value="Suicide"/>
+        <Modification Height="10">
+            <HeightTime index="Start" value="1"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="Spawning">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="2"/>
+        <Modification>
+            <StateFlags index="Invulnerable" value="1"/>
+            <StateFlags index="Stun" value="1"/>
+            <StateFlags index="Uncommandable" value="1"/>
+            <StateFlags index="Untargetable" value="1"/>
+            <WeaponDisableArray value="MadnessWeapon"/>
+            <WeaponDisableArray value="AtlantisWeapon"/>
+            <WeaponDisableArray value="AtlantisCoreWeapon"/>
+            <WeaponDisableArray value="TagTeamWeapon"/>
+        </Modification>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="AttackWaypoint0">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="BaseHiveLevel1">
+        <InfoIcon value="Assets\Textures\btn-building-zerg-hatchery.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="BaseHiveLevel2">
+        <InfoIcon value="Assets\Textures\btn-building-zerg-lair.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="BaseHiveLevel3">
+        <InfoIcon value="Assets\Textures\btn-building-zerg-hive.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="BeamDroneBossDeathResponse">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <InfoFlags index="Hidden" value="1"/>
+        <DamageResponse Fatal="1" Handled="BeamDroneBossDeathResponseDroneKill">
+            <Chance value="1"/>
+        </DamageResponse>
+        <Duration value="26"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="BeamDroneMovementRestriction">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DisableValidatorArray value="BeamDroneAllowMovement"/>
+        <Modification MoveSpeedMaximum="0"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="BeamDroneWeaponFollowUnitIdentifier">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="BombardmentFortressBuff">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="3"/>
+        <Modification>
+            <StateFlags index="Uncommandable" value="1"/>
+            <WeaponEnableArray value="BombardmentDummyWeapon"/>
+        </Modification>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="CoronaWaves">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="25"/>
+        <Period value="0.5"/>
+        <PeriodicEffect value="CoronaWavesPeriodicSearch"/>
+        <InfoIcon value="Assets\Textures\btn-ability-stetmann-infestorbuildinginfestation.dds"/>
+        <Alignment value="Negative"/>
+        <RemoveValidatorArray value="CasterNotDead"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="EnemyPSpawner">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="EnergyTransferChannel">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification MoveSpeedMultiplier="0.75" AttackSpeedMultiplier="0.5"/>
+        <Alignment value="Positive"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="FinalWillProbeExplodeDelay">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="3"/>
+        <FinalEffect value="Suicide"/>
+        <ExpireEffect value="FinalWillProbeExplode"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="FocusBuffStack">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <MaxStackCount value="20"/>
+        <Modification>
+            <AdditiveAttackSpeedFactor value="0.025"/>
+        </Modification>
+        <InfoFlags index="Hidden" value="1"/>
+        <BuffFlags index="RefreshStack" value="1"/>
+        <Duration value="30"/>
+        <Alignment value="Positive"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="FocusTarget">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <MaxStackCount value="20"/>
+        <MaxStackCountPerCaster value="1"/>
+        <InfoFlags index="Hidden" value="1"/>
+        <Duration value="30"/>
+        <Alignment value="Negative"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="FocusToggle">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <RemoveValidatorArray value="hasEnergy"/>
+        <RemoveValidatorArray value="CanSpendEnergy"/>
+        <RemoveValidatorArray value="NotSilenced"/>
+        <FinalEffect value="FocusRemoveSet"/>
+        <Modification>
+            <VitalRegenArray index="Energy" value="-7"/>
+        </Modification>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="HandOfLightning">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification>
+            <DamageDealtScaled index="Melee" value="25"/>
+            <DamageDealtScaled index="Ranged" value="25"/>
+            <DamageDealtScaled index="Splash" value="25"/>
+        </Modification>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="KillStreakBuffStack">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <MaxStackCount value="10"/>
+        <TimeScaleSource Value="Caster"/>
+        <Duration value="30"/>
+        <Modification>
+            <DamageDealtFraction index="Spell" value="0.025"/>
+            <DamageDealtFraction index="Melee" value="0.05"/>
+            <DamageDealtFraction index="Ranged" value="0.05"/>
+            <DamageDealtFraction index="Splash" value="0.05"/>
+        </Modification>
+        <InfoFlags index="Hidden" value="1"/>
+        <Alignment value="Positive"/>
+        <StackAlias value="KillStreakBuffStack"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="KillStreakHandler">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Requirements value="HeroBowlerKillStreakReq"/>
+        <DamageResponse Handled="KillStreakTargetDelay" Location="Attacker" TargetFilters="-;Player,Ally,Neutral">
+            <Chance value="1"/>
+        </DamageResponse>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="MadnessEnrage">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="15"/>
+        <Modification AttackSpeedMultiplier="1.15">
+            <DamageDealtScaled index="Spell" value="5"/>
+            <DamageDealtScaled index="Melee" value="5"/>
+            <DamageDealtScaled index="Ranged" value="5"/>
+            <DamageDealtScaled index="Splash" value="5"/>
+        </Modification>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="FinalWill">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification>
+            <DeathResponse Chance="1" Effect="FinalWillSet"/>
+        </Modification>
+        <InfoFlags index="Hidden" value="1"/>
+        <DisableValidatorArray value="DifficultyValidatorBrutal2"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="MadnessStructureOff">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification>
+            <StateFlags index="Invulnerable" value="1"/>
+            <StateFlags index="Untargetable" value="1"/>
+            <AbilClassDisableArray index="CAbilAttack" value="1"/>
+            <AbilClassDisableArray index="CAbilBehavior" value="1"/>
+            <AbilClassDisableArray index="CAbilEffectInstant" value="1"/>
+            <AbilClassDisableArray index="CAbilEffectTarget" value="1"/>
+        </Modification>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="MadnessStructureOn">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DamageResponse Fatal="1" Handled="MadnessStructureTurnOffSet" ModifyFraction="0">
+            <Chance value="1"/>
+        </DamageResponse>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorWander id="MadnessUnitsWander">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Range value="4"/>
+        <Delay value="3"/>
+    </CBehaviorWander>
+    <CBehaviorBuff id="MassHealBuff">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="5"/>
+        <Period value="0.25"/>
+        <PeriodicEffect value="MassHealSmallHeal"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="Phase2Handler">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DamageResponse Handled="Phase2Set">
+            <Chance value="1"/>
+        </DamageResponse>
+        <InfoFlags index="Hidden" value="1"/>
+        <DisableValidatorArray value="DifficultyValidatorNormal2"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="RotatingWallsFortressDeathHandler">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="22"/>
+        <DamageResponse Fatal="1" Handled="RotatingWallsFortressDeathHandlerSet">
+            <Chance value="1"/>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="Shocked">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Period value="1"/>
+        <PeriodicEffect value="ShockedShockSet"/>
+        <Alignment value="Negative"/>
+        <InfoIcon value="Assets\Textures\btn-upgrade-stetmann-ultraliskburrowchargestun.dds"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="ShockedStun">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="0.5"/>
+        <Modification>
+            <StateFlags index="Stun" value="1"/>
+            <StateFlags index="Uncommandable" value="1"/>
+        </Modification>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="Silenced">
+        <Alignment value="Negative"/>
+        <InfoIcon value="Assets\Textures\btn-progression-stetmann-15-supergarytransform.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification>
+            <AbilClassDisableArray index="CAbilBehavior" value="1"/>
+            <AbilClassDisableArray index="CAbilEffectInstant" value="1"/>
+            <AbilClassDisableArray index="CAbilEffectTarget" value="1"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="SpawnOrbOnDeath">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <FinalEffect value="SpawnPsiOrb"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="SpawnerWarpInTimedLife" parent="TimedLifeDisplayed">
+        <Duration value="42"/>
+        <KillCredit Value="Caster"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="StasisBubbleStasis">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="0.4"/>
+        <Modification>
+            <StateFlags index="Stasis" value="1"/>
+            <StateFlags index="Stun" value="1"/>
+            <StateFlags index="SuppressAttack" value="1"/>
+            <StateFlags index="SuppressLifeRegen" value="1"/>
+            <StateFlags index="SuppressShieldsRegen" value="1"/>
+            <StateFlags index="SuppressEnergyRegen" value="1"/>
+            <StateFlags index="Uncommandable" value="1"/>
+        </Modification>
+        <Alignment value="Negative"/>
+        <InfoIcon value="Assets\Textures\btn-ability-protoss-stasisfield.dds"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="StasisBubbleTimedLife" parent="TimedLifeDisplayed">
+        <Duration value="30"/>
+        <Period value="0.25"/>
+        <PeriodicEffect value="StasisBubblePeriodicSearch"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="StructureTurnOnOverboost">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <MaxStackCount value="5"/>
+        <Modification TimeScale="1.25"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="TagTeamHandlerLightningDead">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="TagTeamHandlerThunderDead">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="TagTeamHandlerLightningExhausted">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="TagTeamHandlerThunderExhausted">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="TerranPartTransitionBurrow">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="3.5"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="TerranPartTransitionFly">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="3"/>
+        <Modification Height="30">
+            <StateFlags index="Invulnerable" value="1"/>
+            <StateFlags index="Uncommandable" value="1"/>
+            <StateFlags index="Untargetable" value="1"/>
+            <HeightTime index="Start" value="3"/>
+            <HeightTime index="Stop" value="3"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="FlyBackHomeEndBuff">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="4"/>
+        <Modification>
+            <StateFlags index="Invulnerable" value="1"/>
+            <StateFlags index="Uncommandable" value="1"/>
+            <StateFlags index="Untargetable" value="1"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="FlyBackHomeAffectedUnitBuff">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="13"/>
+        <Modification>
+            <StateFlags index="Invulnerable" value="1"/>
+            <StateFlags index="Stun" value="1"/>
+            <StateFlags index="Uncommandable" value="1"/>
+            <StateFlags index="Untargetable" value="1"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="BarrageHammerBuff">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="7"/>
+        <Period value="0.125"/>
+        <FinalEffect value="BarrageIssueStop"/>
+        <Modification MoveSpeedMaximum="0">
+            <StateFlags index="Uncommandable" value="1"/>
+            <WeaponDisableArray value="ThorsHammer"/>
+        </Modification>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="BaseAura">
+        <EditorCategories value="Race:Zerg,AbilityorEffectType:Units"/>
+        <Duration value="0.6"/>
+        <Modification>
+            <LifeArmorBonus value="5"/>
+            <VitalRegenArray index="Life" value="2"/>
+        </Modification>
+        <Alignment value="Positive"/>
+        <InfoIcon value="Assets\Textures\btn-building-zerg-hatchery.dds"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="BaseAura2">
+        <Alignment value="Negative"/>
+        <EditorCategories value="Race:Zerg,AbilityorEffectType:Units"/>
+        <Duration value="0.6"/>
+        <Modification MoveSpeedMultiplier="0.75" AttackSpeedMultiplier="0.68">
+            <DamageDealtFraction index="Spell" value="-0.25"/>
+            <DamageDealtFraction index="Melee" value="-0.25"/>
+            <DamageDealtFraction index="Ranged" value="-0.25"/>
+            <DamageDealtFraction index="Splash" value="-0.25"/>
+            <DamageDealtFraction index="NoProc" value="-0.25"/>
+        </Modification>
+        <InfoIcon value="Assets\Textures\btn-building-zerg-hatchery.dds"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="BaseBuffInitial">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Period value="0.5"/>
+        <InitialEffect value="BaseAuraSearch"/>
+        <PeriodicEffect value="BaseAuraSearch"/>
+    </CBehaviorBuff>
+    <CBehaviorCreepSource id="BaseOverlordCreepGen">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Structures"/>
+        <Period value="10"/>
+        <Start value="CreepGen7"/>
+        <Birth value="CreepGen7"/>
+        <Grown value="CreepGen7"/>
+    </CBehaviorCreepSource>
+    <CBehaviorBuff id="BaseOverlordDmgReact">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="Race:Zerg,AbilityorEffectType:Units"/>
+        <DamageResponse>
+            <Handled value="BaseOverlordDmgSet"/>
+            <Minimum value="0"/>
+            <ModifyFraction value="0"/>
+            <DamageValue value="Original"/>
+            <Chance value="1"/>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="BaseOverlordDmgSlow">
+        <Alignment value="Negative"/>
+        <EditorCategories value="Race:Zerg,AbilityorEffectType:Units"/>
+        <Duration value="1.5"/>
+        <Modification>
+            <MoveSpeedMaximum value="0.0234"/>
+            <MoveSpeedMinimum value="0.0234"/>
+            <AccelerationMultiplier value="0.01"/>
+            <DecelerationMultiplier value="1000"/>
+        </Modification>
+        <InfoIcon value="Assets\Textures\btn-upgrade-protoss-alarak-stunnonheroicenemies.dds"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="BaseOverlordDmgInvulnerable">
+        <Cost>
+            <Charge Link="Behavior/BaseOverlordDmgSlow"/>
+            <Cooldown Link="Behavior/BaseOverlordDmgSlow"/>
+        </Cost>
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="Race:Zerg,AbilityorEffectType:Units"/>
+        <Duration value="1.35"/>
+        <Modification AttackTargetPriority="-1">
+            <StateFlags index="Invulnerable" value="1"/>
+            <VitalRegenArray index="Life" value="50"/>
+        </Modification>
+        <InfoIcon value="Assets\Textures\btn-upgrade-protoss-alarak-stunnonheroicenemies.dds"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="BunkerWeaponRangeBonus">
+        <Modification WeaponRange="4"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="ChargePushBuff">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="3"/>
+        <Period value="0.0625"/>
+        <PeriodicEffect value="ChargeSearchSet"/>
+        <Modification MoveSpeedMultiplier="1.5">
+            <StateFlags index="SuppressCollision" value="1"/>
+            <StateFlags index="Uncommandable" value="1"/>
+        </Modification>
+        <Alignment value="Positive"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="ChargeArmorBuff">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="3"/>
+        <Modification LifeArmorMultiplier="1.5">
+            <LifeArmorBonus value="15"/>
+        </Modification>
+        <InfoIcon value="Assets\Textures\btn-upgrade-zerg-adaptivecarapace.dds"/>
+        <Alignment value="Positive"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="ChargeForceBuff">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="0.125"/>
+        <Modification MoveSpeedMinimum="4"/>
+        <Alignment value="Negative"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="DifficultyEasy">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification AttackSpeedMultiplier="0.8" LifeArmorMultiplier="0.8" ShieldArmorMultiplier="0.8">
+            <DamageDealtFraction index="Spell" value="-0.3"/>
+            <DamageDealtFraction index="Melee" value="-0.3"/>
+            <DamageDealtFraction index="Ranged" value="-0.3"/>
+            <DamageDealtFraction index="Splash" value="-0.3"/>
+            <DamageDealtFraction index="NoProc" value="-0.3"/>
+            <VitalMaxFractionArray index="Life" value="-0.3"/>
+            <VitalMaxFractionArray index="Shields" value="-0.3"/>
+        </Modification>
+        <InfoIcon value="Assets\Textures\btn-ability-terran-deactivatemine.dds"/>
+        <DisableValidatorArray value="DifficultyValidatorEasy"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="DifficultyEasy2">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DisableValidatorArray value="DifficultyValidatorEasy"/>
+        <Modification>
+            <LifeArmorBonus value="3"/>
+            <VitalRegenArray index="Life" value="2"/>
+        </Modification>
+        <InfoIcon value="Assets\Textures\btn-ability-terran-deactivatemine.dds"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="DifficultyNormal2">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DisableValidatorArray value="DifficultyValidatorNormal"/>
+        <Modification>
+            <LifeArmorBonus value="5"/>
+            <VitalRegenArray index="Life" value="3"/>
+        </Modification>
+        <InfoIcon value="Assets\Textures\btn-ability-terran-deactivatemine.dds"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="DifficultyNormal">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <InfoIcon value="Assets\Textures\btn-ability-terran-deactivatemine.dds"/>
+        <DisableValidatorArray value="DifficultyValidatorNormal"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="DifficultyHard">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification MoveSpeedMultiplier="1.1" AttackSpeedMultiplier="1.15">
+            <DamageDealtFraction index="Spell" value="0.25"/>
+            <DamageDealtFraction index="Melee" value="0.25"/>
+            <DamageDealtFraction index="Ranged" value="0.25"/>
+            <DamageDealtFraction index="Splash" value="0.25"/>
+            <DamageDealtFraction index="NoProc" value="0.25"/>
+            <VitalMaxFractionArray index="Life" value="0.25"/>
+            <VitalMaxFractionArray index="Shields" value="0.25"/>
+            <VitalMaxFractionArray index="Energy" value="0.25"/>
+        </Modification>
+        <InfoIcon value="Assets\Textures\btn-ability-terran-deactivatemine.dds"/>
+        <DisableValidatorArray value="DifficultyValidatorHard"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="DifficultyBrutal">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification>
+            <MoveSpeedMultiplier value="1.25"/>
+            <AttackSpeedMultiplier value="1.3"/>
+            <LifeArmorMultiplier value="1.2"/>
+            <ShieldArmorBonus value="5"/>
+            <ShieldArmorMultiplier value="1.2"/>
+            <DamageDealtScaled index="Spell" value="5"/>
+            <DamageDealtScaled index="Melee" value="5"/>
+            <DamageDealtScaled index="Ranged" value="5"/>
+            <DamageDealtScaled index="Splash" value="5"/>
+            <DamageDealtScaled index="NoProc" value="5"/>
+            <DamageDealtFraction index="Spell" value="0.75"/>
+            <DamageDealtFraction index="Melee" value="0.75"/>
+            <DamageDealtFraction index="Ranged" value="0.75"/>
+            <DamageDealtFraction index="Splash" value="0.75"/>
+            <DamageDealtFraction index="NoProc" value="0.75"/>
+            <LifeArmorBonus value="5"/>
+            <VitalMaxFractionArray index="Life" value="1"/>
+            <VitalMaxFractionArray index="Shields" value="1"/>
+            <VitalMaxFractionArray index="Energy" value="1"/>
+        </Modification>
+        <InfoIcon value="Assets\Textures\btn-ability-terran-deactivatemine.dds"/>
+        <DisableValidatorArray value="DifficultyValidatorBrutal"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="DifficultyInsane">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification>
+            <MoveSpeedMultiplier value="1.5"/>
+            <AttackSpeedMultiplier value="1.5"/>
+            <LifeArmorMultiplier value="1.25"/>
+            <ShieldArmorBonus value="7"/>
+            <ShieldArmorMultiplier value="1.25"/>
+            <DamageDealtScaled index="Spell" value="10"/>
+            <DamageDealtScaled index="Melee" value="10"/>
+            <DamageDealtScaled index="Ranged" value="10"/>
+            <DamageDealtScaled index="Splash" value="10"/>
+            <DamageDealtScaled index="NoProc" value="10"/>
+            <DamageDealtFraction index="Spell" value="1.25"/>
+            <DamageDealtFraction index="Melee" value="1.25"/>
+            <DamageDealtFraction index="Ranged" value="1.25"/>
+            <DamageDealtFraction index="Splash" value="1.25"/>
+            <DamageDealtFraction index="NoProc" value="1.25"/>
+            <LifeArmorBonus value="7"/>
+            <VitalMaxFractionArray index="Life" value="1.25"/>
+            <VitalMaxFractionArray index="Shields" value="1.25"/>
+            <VitalMaxFractionArray index="Energy" value="1.25"/>
+            <VitalRegenArray index="Life" value="0.5"/>
+            <VitalRegenArray index="Shields" value="0.5"/>
+            <VitalRegenArray index="Energy" value="0.5"/>
+            <VitalRegenMultiplier index="Life" value="0.5"/>
+            <VitalRegenMultiplier index="Shields" value="0.5"/>
+            <VitalRegenMultiplier index="Energy" value="0.5"/>
+        </Modification>
+        <InfoIcon value="Assets\Textures\btn-ability-terran-deactivatemine.dds"/>
+        <DisableValidatorArray value="DifficultyValidatorInsane"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="DifficultyHardcore">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification>
+            <MoveSpeedMultiplier value="1.75"/>
+            <AttackSpeedMultiplier value="2"/>
+            <LifeArmorMultiplier value="1.5"/>
+            <ShieldArmorBonus value="15"/>
+            <ShieldArmorMultiplier value="1.5"/>
+            <DamageDealtScaled index="Spell" value="13"/>
+            <DamageDealtScaled index="Melee" value="13"/>
+            <DamageDealtScaled index="Ranged" value="13"/>
+            <DamageDealtScaled index="Splash" value="13"/>
+            <DamageDealtScaled index="NoProc" value="13"/>
+            <DamageDealtFraction index="Spell" value="2"/>
+            <DamageDealtFraction index="Melee" value="2"/>
+            <DamageDealtFraction index="Ranged" value="2"/>
+            <DamageDealtFraction index="Splash" value="2"/>
+            <DamageDealtFraction index="NoProc" value="2"/>
+            <LifeArmorBonus value="15"/>
+            <VitalMaxFractionArray index="Life" value="4"/>
+            <VitalMaxFractionArray index="Shields" value="4"/>
+            <VitalMaxFractionArray index="Energy" value="4"/>
+            <VitalRegenArray index="Life" value="2"/>
+            <VitalRegenArray index="Shields" value="2"/>
+            <VitalRegenArray index="Energy" value="2"/>
+            <VitalRegenMultiplier index="Life" value="1"/>
+            <VitalRegenMultiplier index="Shields" value="1"/>
+            <VitalRegenMultiplier index="Energy" value="1"/>
+        </Modification>
+        <InfoIcon value="Assets\Textures\btn-ability-terran-deactivatemine.dds"/>
+        <DisableValidatorArray value="DifficultyValidatorHardcore"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="DifficultyHard2">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DisableValidatorArray value="DifficultyValidatorHard"/>
+        <Modification>
+            <LifeArmorBonus value="8"/>
+            <VitalRegenArray index="Life" value="4"/>
+        </Modification>
+        <InfoIcon value="Assets\Textures\btn-ability-terran-deactivatemine.dds"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="DifficultyBrutal2">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DisableValidatorArray value="DifficultyValidatorBrutal"/>
+        <Modification>
+            <LifeArmorBonus value="11"/>
+            <VitalRegenArray index="Life" value="5"/>
+        </Modification>
+        <InfoIcon value="Assets\Textures\btn-ability-terran-deactivatemine.dds"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="DifficultyInsane2">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DisableValidatorArray value="DifficultyValidatorInsane"/>
+        <Modification>
+            <LifeArmorBonus value="14"/>
+            <VitalRegenArray index="Life" value="6"/>
+        </Modification>
+        <InfoIcon value="Assets\Textures\btn-ability-terran-deactivatemine.dds"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="DifficultyHardcore2">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DisableValidatorArray value="DifficultyValidatorHardcore"/>
+        <Modification>
+            <LifeArmorBonus value="20"/>
+            <VitalRegenArray index="Life" value="7"/>
+        </Modification>
+        <InfoIcon value="Assets\Textures\btn-ability-terran-deactivatemine.dds"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="FlyBackHomeCastBuff">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="3"/>
+        <DamageResponse Handled="FlyBackHomeInterruptSet" Priority="10">
+            <Chance value="1"/>
+        </DamageResponse>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="FocusedFlameFlamerBuff">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="3"/>
+        <Modification>
+            <StateFlags index="Uncommandable" value="1"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="Frienzied">
+        <Alignment value="Positive"/>
+        <InfoIcon value="Assets\Textures\btn-upgrade-zerg-frenzy.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="10"/>
+        <Modification MoveSpeedMultiplier="1.5" AttackSpeedMultiplier="1.25"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="GlueSprayDebuff">
+        <InfoIcon value="Assets\Textures\btn-ability-zerg-contaminate-color.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="20"/>
+        <Modification MoveSpeedMultiplier="0.7"/>
+        <Alignment value="Negative"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="GlueSprayDebuffBoss">
+        <InfoIcon value="Assets\Textures\btn-ability-zerg-contaminate-color.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="10"/>
+        <Modification MoveSpeedMultiplier="0.85"/>
+        <Alignment value="Negative"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="GlueSprayBuff">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="20"/>
+        <Modification MoveSpeedMultiplier="1.15"/>
+        <InfoIcon value="Assets\Textures\btn-ability-zerg-contaminate-color.dds"/>
+        <Alignment value="Positive"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="HardenedShell">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="15"/>
+        <DamageResponse ClampMaximum="25" Minimum="25">
+            <Kind index="Spell" value="0"/>
+            <Chance value="1"/>
+            <Cost>
+                <Charge Link="Behavior/HardenedShield"/>
+                <Cooldown Link="Behavior/HardenedShield"/>
+            </Cost>
+        </DamageResponse>
+        <InfoIcon value="Assets\Textures\btn-upgrade-zerg-organiccarapace.dds"/>
+        <Alignment value="Positive"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="HealHoT">
+        <Alignment value="Positive"/>
+        <InfoIcon value="Assets\Textures\btn-ability-zerg-dehaka-healingaura.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <BuffFlags index="Extend" value="1"/>
+        <Duration value="20"/>
+        <Period value="1"/>
+        <PeriodCount value="20"/>
+        <PeriodicEffect value="HealSmall"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="HellbatReadyBeh">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="Race:Terran,AbilityorEffectType:Units"/>
+        <Duration value="4"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="HeroBowlerTimedLife">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="4"/>
+        <Period value="0.0625"/>
+        <PeriodicEffect value="BanelingMissileScanSet"/>
+        <FinalEffect value="BanelingMissileSuicideSet"/>
+    </CBehaviorBuff>
+    <CBehaviorAttribute id="HeroRoachAttribute">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification MoveSpeedBonus="0.0781" AttackSpeedMultiplier="1.01">
+            <DamageDealtUnscaled index="Ranged" value="1"/>
+            <VitalMaxArray index="Life" value="25"/>
+            <VitalMaxArray index="Energy" value="5"/>
+        </Modification>
+    </CBehaviorAttribute>
+    <CBehaviorAttribute id="HeroHydraAttribute">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification MoveSpeedBonus="0.0781" AttackSpeedMultiplier="1.01">
+            <DamageDealtUnscaled index="Ranged" value="1.2"/>
+            <VitalMaxArray index="Life" value="20"/>
+            <VitalMaxArray index="Energy" value="5"/>
+        </Modification>
+    </CBehaviorAttribute>
+    <CBehaviorWander id="CollectibleWander">
+        <EditorCategories value="Race:Zerg,AbilityorEffectType:Units"/>
+        <Leash value="1"/>
+        <Range value="1"/>
+        <Delay value="2"/>
+    </CBehaviorWander>
+    <CBehaviorBuff id="FlyBackHomeBuff">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="9"/>
+        <Modification Height="40">
+            <StateFlags index="Invulnerable" value="1"/>
+            <StateFlags index="Uncommandable" value="1"/>
+            <StateFlags index="Untargetable" value="1"/>
+            <HeightTime index="Start" value="4"/>
+            <HeightTime index="Stop" value="4"/>
+        </Modification>
+        <FinalEffect value="FlyBackHomeApplyEndBuff"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="ObserverInvisible">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification>
+            <StateFlags index="Cloak" value="1"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="ObserverStationaryHeight">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification Height="3" MoveSpeedMaximum="0.004">
+            <HeightTime index="Start" value="3"/>
+            <HeightTime index="Stop" value="3"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="PsiOrbCollectingCountdown">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DisplayDuration index="Self" value="1"/>
+        <DisplayDuration index="Ally" value="1"/>
+        <DisplayDuration index="Neutral" value="1"/>
+        <DisplayDuration index="Enemy" value="1"/>
+        <RemoveValidatorArray value="SourceCasterInRange2"/>
+        <MaxStackCount value="3"/>
+        <MaxStackCountPerCaster value="1"/>
+        <Duration value="10"/>
+        <ExpireEffect value="PsiOrbCollectingIssueTriggerHandle"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="RequestRepairDropBuff">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="2.75"/>
+        <FinalEffect value="RequestRepairDropSet"/>
+        <Modification>
+            <StateFlags index="Invulnerable" value="1"/>
+            <StateFlags index="Stun" value="1"/>
+            <StateFlags index="NoDraw" value="1"/>
+            <StateFlags index="Uncommandable" value="1"/>
+            <StateFlags index="Unselectable" value="1"/>
+            <StateFlags index="Untargetable" value="1"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="RocketLaunchHammerBuff">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification>
+            <StateFlags index="Uncommandable" value="1"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="RotatingWallsRotationPositive">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="5"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="RotatingWallsRotationNegative">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="5"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="RotatingWallsTowerBuff">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="22"/>
+        <FinalEffect value="RotatingWallsTowerKillDelay"/>
+        <Modification Height="3">
+            <HeightTime index="Start" value="1"/>
+            <HeightTime index="Stop" value="1"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="SeaOfFlamesDroneTimedLife">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="4"/>
+        <FinalEffect value="Suicide"/>
+        <Modification Height="4">
+            <HeightTime index="Start" value="0.5"/>
+            <HeightTime index="Stop" value="10"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="SpawnerBlackOps">
+        <Cost>
+            <Charge Link="Behavior/SpawnerJunker"/>
+            <Cooldown Link="Behavior/SpawnerJunker"/>
+        </Cost>
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DamageResponse>
+            <Cost>
+                <Charge Link="Behavior/SpawnerJunker"/>
+                <Cooldown Link="Behavior/SpawnerJunker"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="Taunted">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <InfoIcon value="Assets\Textures\btn-ability-terran-domination.dds"/>
+        <Alignment value="Negative"/>
+        <Duration value="30"/>
+    </CBehaviorBuff>
+    <CBehaviorAttribute id="SwarmQueenStats">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification MoveSpeedBonus="0.0781" AttackSpeedMultiplier="1.01">
+            <DamageDealtUnscaled index="Ranged" value="0.9"/>
+            <VitalMaxArray index="Life" value="25"/>
+            <VitalMaxArray index="Energy" value="5"/>
+        </Modification>
+    </CBehaviorAttribute>
+    <CBehaviorAttribute id="BowlerStats">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification MoveSpeedBonus="0.0781" AttackSpeedMultiplier="1.01">
+            <DamageDealtUnscaled index="Ranged" value="1.05"/>
+            <VitalMaxArray index="Life" value="25"/>
+            <VitalMaxArray index="Energy" value="5"/>
+        </Modification>
+    </CBehaviorAttribute>
+    <CBehaviorBuff id="TerranPartTransitionBuff">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="TickTockAura">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Period value="0.5"/>
+        <PeriodicEffect value="TickTockAuraSearch"/>
+        <InfoFlags index="Hidden" value="1"/>
+        <DisableValidatorArray value="BossAbilityRequirementLvl2"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="TickTockBuff">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <BuffFlags index="RefreshStack" value="1"/>
+        <MaxStackCount value="8"/>
+        <Duration value="20"/>
+        <Modification AttackSpeedMultiplier="1.01" ShieldArmorBonus="1">
+            <DamageDealtScaled index="Melee" value="1"/>
+            <DamageDealtScaled index="Ranged" value="1"/>
+            <DamageDealtScaled index="Splash" value="1"/>
+            <DamageDealtFraction index="Melee" value="0.01"/>
+            <DamageDealtFraction index="Ranged" value="0.01"/>
+            <DamageDealtFraction index="Splash" value="0.01"/>
+            <LifeArmorBonus value="1"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="TornadoThrown">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="1.75"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorUnitTracker id="TrackerCombatUnits">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorUnitTracker>
+    <CBehaviorBuff id="Turbocharged">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <MaxStackCount value="5"/>
+        <Duration value="90"/>
+        <Modification>
+            <AttackSpeedMultiplier value="1.05"/>
+            <LifeArmorMultiplier value="1.03"/>
+            <ShieldArmorBonus value="5"/>
+            <ShieldArmorMultiplier value="1.03"/>
+            <DamageDealtScaled index="Spell" value="3"/>
+            <DamageDealtScaled index="Melee" value="3"/>
+            <DamageDealtScaled index="Ranged" value="3"/>
+            <DamageDealtScaled index="Splash" value="3"/>
+            <DamageDealtFraction index="Spell" value="0.05"/>
+            <DamageDealtFraction index="Melee" value="0.05"/>
+            <DamageDealtFraction index="Ranged" value="0.05"/>
+            <DamageDealtFraction index="Splash" value="0.05"/>
+            <LifeArmorBonus value="5"/>
+            <VitalMaxArray index="Life" value="25"/>
+            <VitalMaxArray index="Shields" value="25"/>
+            <VitalMaxFractionArray index="Life" value="0.05"/>
+            <VitalMaxFractionArray index="Shields" value="0.05"/>
+        </Modification>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="TutorialNotPaused">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+    </CBehaviorBuff>
+    <CBehaviorAttribute id="Unknown3Stats">
+        <Cost>
+            <Charge Link="Behavior/HeroRoachAttribute"/>
+            <Cooldown Link="Behavior/HeroRoachAttribute"/>
+        </Cost>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification>
+            <MoveSpeedBonus value="0.1015"/>
+            <AccelerationBonus value="0.125"/>
+            <DecelerationBonus value="0.125"/>
+            <AttackSpeedMultiplier value="1.01"/>
+            <DamageDealtUnscaled index="Ranged" value="1"/>
+            <VitalMaxArray index="Life" value="25"/>
+            <VitalMaxArray index="Energy" value="5"/>
+        </Modification>
+    </CBehaviorAttribute>
+    <CBehaviorAttribute id="Unknown4Stats">
+        <Cost>
+            <Charge Link="Behavior/HeroRoachAttribute"/>
+            <Cooldown Link="Behavior/HeroRoachAttribute"/>
+        </Cost>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification>
+            <MoveSpeedBonus value="0.1015"/>
+            <AccelerationBonus value="0.125"/>
+            <DecelerationBonus value="0.125"/>
+            <AttackSpeedMultiplier value="1.01"/>
+            <DamageDealtUnscaled index="Ranged" value="1"/>
+            <VitalMaxArray index="Life" value="25"/>
+            <VitalMaxArray index="Energy" value="5"/>
+        </Modification>
+    </CBehaviorAttribute>
+    <CBehaviorAttribute id="Unknown5Stats">
+        <Cost>
+            <Charge Link="Behavior/HeroRoachAttribute"/>
+            <Cooldown Link="Behavior/HeroRoachAttribute"/>
+        </Cost>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification>
+            <MoveSpeedBonus value="0.1015"/>
+            <AccelerationBonus value="0.125"/>
+            <DecelerationBonus value="0.125"/>
+            <AttackSpeedMultiplier value="1.01"/>
+            <DamageDealtUnscaled index="Ranged" value="1"/>
+            <VitalMaxArray index="Life" value="25"/>
+            <VitalMaxArray index="Energy" value="5"/>
+        </Modification>
+    </CBehaviorAttribute>
+    <CBehaviorAttribute id="RavangerStats">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification MoveSpeedBonus="0.0507" AttackSpeedMultiplier="1.01">
+            <DamageDealtUnscaled index="Ranged" value="0.8"/>
+            <VitalMaxArray index="Life" value="40"/>
+            <VitalMaxArray index="Energy" value="5"/>
+        </Modification>
+    </CBehaviorAttribute>
+    <CBehaviorBuff id="LarvaSpawnOnDeath">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <FinalEffect value="LarvaSpawnEssence"/>
+    </CBehaviorBuff>
+    <CBehaviorVeterancy id="Levels">
+        <Alignment value="Positive"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <XPFraction index="Kills" value="0"/>
+        <VeterancyLevelArray>
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="RavangerStats" Points="1"/>
+                <AttributeChangeArray Attribute="SwarmQueenStats" Points="1"/>
+                <AttributeChangeArray Attribute="BowlerStats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="175">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="RavangerStats" Points="1"/>
+                <AttributeChangeArray Attribute="SwarmQueenStats" Points="1"/>
+                <AttributeChangeArray Attribute="BowlerStats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="187">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="RavangerStats" Points="1"/>
+                <AttributeChangeArray Attribute="SwarmQueenStats" Points="1"/>
+                <AttributeChangeArray Attribute="BowlerStats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="203">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="RavangerStats" Points="1"/>
+                <AttributeChangeArray Attribute="SwarmQueenStats" Points="1"/>
+                <AttributeChangeArray Attribute="BowlerStats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="223">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="RavangerStats" Points="1"/>
+                <AttributeChangeArray Attribute="SwarmQueenStats" Points="1"/>
+                <AttributeChangeArray Attribute="BowlerStats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="247">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="RavangerStats" Points="1"/>
+                <AttributeChangeArray Attribute="SwarmQueenStats" Points="1"/>
+                <AttributeChangeArray Attribute="BowlerStats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="275">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="RavangerStats" Points="1"/>
+                <AttributeChangeArray Attribute="SwarmQueenStats" Points="1"/>
+                <AttributeChangeArray Attribute="BowlerStats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="307">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="RavangerStats" Points="1"/>
+                <AttributeChangeArray Attribute="SwarmQueenStats" Points="1"/>
+                <AttributeChangeArray Attribute="BowlerStats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="343">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="RavangerStats" Points="1"/>
+                <AttributeChangeArray Attribute="SwarmQueenStats" Points="1"/>
+                <AttributeChangeArray Attribute="BowlerStats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="383">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="RavangerStats" Points="1"/>
+                <AttributeChangeArray Attribute="SwarmQueenStats" Points="1"/>
+                <AttributeChangeArray Attribute="BowlerStats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="427">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="RavangerStats" Points="1"/>
+                <AttributeChangeArray Attribute="SwarmQueenStats" Points="1"/>
+                <AttributeChangeArray Attribute="BowlerStats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="475">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="RavangerStats" Points="1"/>
+                <AttributeChangeArray Attribute="SwarmQueenStats" Points="1"/>
+                <AttributeChangeArray Attribute="BowlerStats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="527">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="RavangerStats" Points="1"/>
+                <AttributeChangeArray Attribute="SwarmQueenStats" Points="1"/>
+                <AttributeChangeArray Attribute="BowlerStats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="583">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="RavangerStats" Points="1"/>
+                <AttributeChangeArray Attribute="SwarmQueenStats" Points="1"/>
+                <AttributeChangeArray Attribute="BowlerStats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="643">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="RavangerStats" Points="1"/>
+                <AttributeChangeArray Attribute="SwarmQueenStats" Points="1"/>
+                <AttributeChangeArray Attribute="BowlerStats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="707">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="RavangerStats" Points="1"/>
+                <AttributeChangeArray Attribute="SwarmQueenStats" Points="1"/>
+                <AttributeChangeArray Attribute="BowlerStats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="775">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="RavangerStats" Points="1"/>
+                <AttributeChangeArray Attribute="SwarmQueenStats" Points="1"/>
+                <AttributeChangeArray Attribute="BowlerStats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="847">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="RavangerStats" Points="1"/>
+                <AttributeChangeArray Attribute="SwarmQueenStats" Points="1"/>
+                <AttributeChangeArray Attribute="BowlerStats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="923">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="RavangerStats" Points="1"/>
+                <AttributeChangeArray Attribute="SwarmQueenStats" Points="1"/>
+                <AttributeChangeArray Attribute="BowlerStats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="1003">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="RavangerStats" Points="1"/>
+                <AttributeChangeArray Attribute="SwarmQueenStats" Points="1"/>
+                <AttributeChangeArray Attribute="BowlerStats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="1087">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="RavangerStats" Points="1"/>
+                <AttributeChangeArray Attribute="SwarmQueenStats" Points="1"/>
+                <AttributeChangeArray Attribute="BowlerStats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="1175">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="RavangerStats" Points="1"/>
+                <AttributeChangeArray Attribute="SwarmQueenStats" Points="1"/>
+                <AttributeChangeArray Attribute="BowlerStats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="1267">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="RavangerStats" Points="1"/>
+                <AttributeChangeArray Attribute="SwarmQueenStats" Points="1"/>
+                <AttributeChangeArray Attribute="BowlerStats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="1363">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="RavangerStats" Points="1"/>
+                <AttributeChangeArray Attribute="SwarmQueenStats" Points="1"/>
+                <AttributeChangeArray Attribute="BowlerStats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="1463">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="RavangerStats" Points="1"/>
+                <AttributeChangeArray Attribute="SwarmQueenStats" Points="1"/>
+                <AttributeChangeArray Attribute="BowlerStats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="1567">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="RavangerStats" Points="1"/>
+                <AttributeChangeArray Attribute="SwarmQueenStats" Points="1"/>
+                <AttributeChangeArray Attribute="BowlerStats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="1675">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="RavangerStats" Points="1"/>
+                <AttributeChangeArray Attribute="SwarmQueenStats" Points="1"/>
+                <AttributeChangeArray Attribute="BowlerStats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="1787">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="RavangerStats" Points="1"/>
+                <AttributeChangeArray Attribute="SwarmQueenStats" Points="1"/>
+                <AttributeChangeArray Attribute="BowlerStats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="1903">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="RavangerStats" Points="1"/>
+                <AttributeChangeArray Attribute="SwarmQueenStats" Points="1"/>
+                <AttributeChangeArray Attribute="BowlerStats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="2023">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="RavangerStats" Points="1"/>
+                <AttributeChangeArray Attribute="SwarmQueenStats" Points="1"/>
+                <AttributeChangeArray Attribute="BowlerStats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="2147">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="RavangerStats" Points="1"/>
+                <AttributeChangeArray Attribute="SwarmQueenStats" Points="1"/>
+                <AttributeChangeArray Attribute="BowlerStats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="2275">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="RavangerStats" Points="1"/>
+                <AttributeChangeArray Attribute="SwarmQueenStats" Points="1"/>
+                <AttributeChangeArray Attribute="BowlerStats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="2407">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="RavangerStats" Points="1"/>
+                <AttributeChangeArray Attribute="SwarmQueenStats" Points="1"/>
+                <AttributeChangeArray Attribute="BowlerStats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="2543">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="RavangerStats" Points="1"/>
+                <AttributeChangeArray Attribute="SwarmQueenStats" Points="1"/>
+                <AttributeChangeArray Attribute="BowlerStats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="2683">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="RavangerStats" Points="1"/>
+                <AttributeChangeArray Attribute="SwarmQueenStats" Points="1"/>
+                <AttributeChangeArray Attribute="BowlerStats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="2827">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="RavangerStats" Points="1"/>
+                <AttributeChangeArray Attribute="SwarmQueenStats" Points="1"/>
+                <AttributeChangeArray Attribute="BowlerStats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="2975">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="RavangerStats" Points="1"/>
+                <AttributeChangeArray Attribute="SwarmQueenStats" Points="1"/>
+                <AttributeChangeArray Attribute="BowlerStats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="3127">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="RavangerStats" Points="1"/>
+                <AttributeChangeArray Attribute="SwarmQueenStats" Points="1"/>
+                <AttributeChangeArray Attribute="BowlerStats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="3283">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="RavangerStats" Points="1"/>
+                <AttributeChangeArray Attribute="SwarmQueenStats" Points="1"/>
+                <AttributeChangeArray Attribute="BowlerStats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="3443">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="RavangerStats" Points="1"/>
+                <AttributeChangeArray Attribute="SwarmQueenStats" Points="1"/>
+                <AttributeChangeArray Attribute="BowlerStats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="3607">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="RavangerStats" Points="1"/>
+                <AttributeChangeArray Attribute="SwarmQueenStats" Points="1"/>
+                <AttributeChangeArray Attribute="BowlerStats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="3775">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="RavangerStats" Points="1"/>
+                <AttributeChangeArray Attribute="SwarmQueenStats" Points="1"/>
+                <AttributeChangeArray Attribute="BowlerStats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="3947">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="RavangerStats" Points="1"/>
+                <AttributeChangeArray Attribute="SwarmQueenStats" Points="1"/>
+                <AttributeChangeArray Attribute="BowlerStats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="4123">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="RavangerStats" Points="1"/>
+                <AttributeChangeArray Attribute="SwarmQueenStats" Points="1"/>
+                <AttributeChangeArray Attribute="BowlerStats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="4303">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="RavangerStats" Points="1"/>
+                <AttributeChangeArray Attribute="SwarmQueenStats" Points="1"/>
+                <AttributeChangeArray Attribute="BowlerStats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="4487">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="RavangerStats" Points="1"/>
+                <AttributeChangeArray Attribute="SwarmQueenStats" Points="1"/>
+                <AttributeChangeArray Attribute="BowlerStats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="4675">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="RavangerStats" Points="1"/>
+                <AttributeChangeArray Attribute="SwarmQueenStats" Points="1"/>
+                <AttributeChangeArray Attribute="BowlerStats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="4867">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="RavangerStats" Points="1"/>
+                <AttributeChangeArray Attribute="SwarmQueenStats" Points="1"/>
+                <AttributeChangeArray Attribute="BowlerStats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="5063">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="RavangerStats" Points="1"/>
+                <AttributeChangeArray Attribute="SwarmQueenStats" Points="1"/>
+                <AttributeChangeArray Attribute="BowlerStats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="5263">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="RavangerStats" Points="1"/>
+                <AttributeChangeArray Attribute="SwarmQueenStats" Points="1"/>
+                <AttributeChangeArray Attribute="BowlerStats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+    </CBehaviorVeterancy>
+    <CBehaviorBuff id="CloakNotOnCreep">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DisableValidatorArray value="NotOnCreep"/>
+        <Modification>
+            <StateFlags index="Cloak" value="1"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="PoisonDebuff">
+        <Alignment value="Negative"/>
+        <InfoIcon value="Assets\Textures\btn-ability-zerg-poisonnova.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <MaxStackCount value="8"/>
+        <Duration value="3"/>
+        <Period value="0.0625"/>
+        <PeriodicEffect value="HeroHydraPoisonDmg"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="ScientistStunned">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <RemoveValidatorArray value="NotFullLife"/>
+        <Modification>
+            <SightMaximum value="0"/>
+            <MoveSpeedMaximum value="0"/>
+            <MoveSpeedMultiplier value="0.01"/>
+            <AccelerationMultiplier value="0.01"/>
+            <VitalRegenArray index="Life" value="2"/>
+        </Modification>
+        <InfoIcon value="Assets\Textures\btn-upgrade-protoss-alarak-stunnonheroicenemies.dds"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="ScientistResponse">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DamageResponse Fatal="1" Handled="ScientistsResponseSet" ModifyFraction="0">
+            <Chance value="1"/>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="Slow2" parent="Slow">
+        <Name value="Behavior/Name/Slow2"/>
+        <Tooltip value="Behavior/Tooltip/Slow2"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="SpawnerJunker">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="CloakLurker">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DisableValidatorArray value="HiveAlive"/>
+        <Modification>
+            <StateFlags index="Bury" value="1"/>
+            <StateFlags index="Cloak" value="1"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="InvulnerableOverSpawnLimit">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="21"/>
+        <Modification>
+            <StateFlags index="Invulnerable" value="1"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="Untauntable">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="VoidContainmentWeaponDebuff">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="0.5"/>
+        <Modification>
+            <VitalRegenArray index="Energy" value="-50"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="VoidMineWeaponDebuff">
+        <Alignment value="Negative"/>
+        <InfoIcon value="Assets\Textures\btn-ability-protoss-blackhole-redcolor.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="0.5"/>
+        <Modification MoveSpeedMaximum="0" AttackSpeedMultiplier="0.7"/>
+        <InfoFlags index="Hidden" value="1"/>
+        <TimeScaleSource Value="Caster"/>
+    </CBehaviorBuff>
+    <CBehaviorCreepSource id="CreepGen4x4BaseRadius10">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="Race:Zerg,AbilityorEffectType:Structures"/>
+        <Period value="10"/>
+        <Build value="CreepCircle4x4BaseRadius10"/>
+        <Start value="CreepCircle4x4BaseRadius10"/>
+        <Birth value="CreepCircle4x4BaseRadius10"/>
+        <Grown value="CreepCircle4x4BaseRadius10"/>
+    </CBehaviorCreepSource>
+    <CBehaviorBuff id="VoidSummonPrecursorBuff">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification MoveSpeedMaximum="0">
+            <StateFlags index="Stun" value="1"/>
+            <StateFlags index="SuppressAttack" value="1"/>
+            <StateFlags index="SuppressCombat" value="1"/>
+        </Modification>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="ZapTrapDummyTimedLife">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="15"/>
+        <Period value="1"/>
+        <PeriodicEffect value="ZapTrapPeriodicSearch"/>
+        <FinalEffect value="Suicide"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="AdeptShadowTimedLife" parent="TimedLifeDisplayed">
+        <Duration value="15"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="BanemineTimedLife" parent="TimedLifeDisplayed">
+        <Duration value="120"/>
+        <FinalEffect value="BanemineExplosionSet"/>
+        <ExpireEffect value=""/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="BeamDroneTimedLife" parent="TimedLifeDisplayed">
+        <Duration value="25"/>
+        <Modification Height="4">
+            <HeightTime index="Start" value="0.5"/>
+            <HeightTime index="Stop" value="100"/>
+        </Modification>
+        <ExpireEffect value="BeamDroneDelayDeath"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="DecoyTimedLife" parent="TimedLifeDisplayed">
+        <Duration value="30"/>
+        <Modification>
+            <DamageTakenFraction index="Spell" value="2"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="LightningElementalsTimedLife" parent="TimedLifeDisplayed">
+        <Duration value="40"/>
+        <KillCredit Value="Caster"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="BarrageDummyUnitTimedLife" parent="TimedLifeHidden"/>
+    <CBehaviorBuff id="BombardmentTargetDummyTimedLife" parent="TimedLifeHidden">
+        <Duration value="3"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="FocusedFlameDummyTimedLife" parent="TimedLifeHidden"/>
+    <CBehaviorBuff id="ThunderElementalsTimedLife" parent="TimedLifeDisplayed">
+        <Duration value="25"/>
+        <KillCredit Value="Caster"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="ReaperExplosivesTimedLife" parent="TimedLifeHidden">
+        <Duration value="2"/>
+        <ExpireEffect value="ReaperExplosivesExplodeSet"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="RequestRepairMuleTimedLife" parent="TimedLifeDisplayed">
+        <Duration value="30"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="SeekerMissileTimedLife" parent="TimedLifeHidden">
+        <Duration value="7"/>
+    </CBehaviorBuff>
+</Catalog>
