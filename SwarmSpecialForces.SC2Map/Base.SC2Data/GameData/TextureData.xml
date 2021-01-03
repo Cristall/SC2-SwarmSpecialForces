@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CTexture id="MainDiffuseInvisible">
+        <File value="Assets\Transparent.dds"/>
+        <Slot value="main.diffuse"/>
+    </CTexture>
+    <CTexture id="MainEmissiveInvisible">
+        <File value="Assets\Transparent.dds"/>
+        <Slot value="main.emissive"/>
+    </CTexture>
+    <CTexture id="MainSpecularInvisible">
+        <File value="Assets\Transparent.dds"/>
+        <Slot value="main.specular"/>
+    </CTexture>
+    <CTexture id="MothershipCoreBodyDiffuse">
+        <File value="Assets\Textures\mothershipcore_taldarim_collection_diff.dds"/>
+        <Slot value="body.diffuse"/>
+    </CTexture>
+    <CTexture id="MothershipCoreBodySpecular">
+        <File value="Assets\Textures\mothershipcore_taldarim_collection_spec.dds"/>
+        <Slot value="body.specular"/>
+    </CTexture>
+    <CTexture id="MothershipCoreMainNormal">
+        <File value="Assets\Textures\mothership_taldarim_collection_norm.dds"/>
+        <Slot value="main.normal"/>
+    </CTexture>
+    <CTexture id="MothershipCoreMainDiffuse">
+        <File value="Assets\Textures\mothership_taldarim_collection_diff.dds"/>
+        <Slot value="main.diffuse"/>
+    </CTexture>
+    <CTexture id="MothershipCoreMainSpecular">
+        <File value="Assets\Textures\mothership_taldarim_collection_spec.dds"/>
+        <Slot value="main.specular"/>
+    </CTexture>
+    <CTexture id="MothershipCoreMainEmissive">
+        <File value="Assets\Textures\mothership_taldarim_collection_emiss.dds"/>
+        <Slot value="main.emissive"/>
+    </CTexture>
+    <CTexture id="RocketLaunchExplode_Diffuse">
+        <File value="Assets\Transparent.dds"/>
+        <Slot value="main.diffuse"/>
+    </CTexture>
+    <CTexture id="RocketLaunchExplode_Normal">
+        <File value="Assets\Transparent.dds"/>
+        <Slot value="main.normal"/>
+    </CTexture>
+    <CTexture id="StormCloudMainEmissive">
+        <File value="Assets\Textures\goosplat_1_grey.dds"/>
+        <Slot value="main.emissive"/>
+    </CTexture>
+    <CTexture id="TagTeamAttackAnimColor">
+        <File value="Assets\Textures\fireanim_x4_blend_red.dds"/>
+        <Slot value="main.diffuse"/>
+    </CTexture>
+</Catalog>
