@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CRequirement id="AtkSpdUpgradeHideRequirement">
+        <EditorCategories value="TechType:Upgrade"/>
+        <NodeArray index="Use" Link="AndEq281638821CountUpgradeAtkSpdUpgradeQueuedOnly0Eq4037611437CountBehaviorTutorialNotPausedCompleteOnlyAtUnit0"/>
+        <NodeArray index="Show" Link="LTCountUpgradeAtkSpdUpgradeCompleteOnly10"/>
+    </CRequirement>
+    <CRequirement id="BossAbilityRequirementLvl0">
+        <NodeArray index="Use" Link="GTECountUpgradeBossAbilityDifficultyRequirementCompleteOnly0"/>
+    </CRequirement>
+    <CRequirement id="BossAbilityRequirementLvl02">
+        <NodeArray index="Use" Link="GTECountUpgradeBossAbilityDifficultyRequirementCompleteOnly1"/>
+    </CRequirement>
+    <CRequirement id="BossAbilityRequirementLvl03">
+        <NodeArray index="Use" Link="GTECountUpgradeBossAbilityDifficultyRequirementCompleteOnly2"/>
+    </CRequirement>
+    <CRequirement id="BossAbilityRequirementLvl04">
+        <NodeArray index="Use" Link="GTECountUpgradeBossAbilityDifficultyRequirementCompleteOnly3"/>
+    </CRequirement>
+    <CRequirement id="BossAbilityRequirementLvl05">
+        <NodeArray index="Use" Link="GTECountUpgradeBossAbilityDifficultyRequirementCompleteOnly4"/>
+    </CRequirement>
+    <CRequirement id="BossAbilityRequirementLvl06">
+        <NodeArray index="Use" Link="GTECountUpgradeBossAbilityDifficultyRequirementCompleteOnly5"/>
+    </CRequirement>
+    <CRequirement id="CyberneticLurkerChargeRestore">
+        <NodeArray index="Show" Link="EqCountUpgradeCyberneticLurkerChargeRestoreUnlockCompleteOnly1"/>
+    </CRequirement>
+    <CRequirement id="CyberneticRunlingChargeRestore">
+        <NodeArray index="Show" Link="EqCountUpgradeCyberneticRunlingChargeRestoreUnlockCompleteOnly1"/>
+    </CRequirement>
+    <CRequirement id="EnergyTransferChannel">
+        <NodeArray index="Show" Link="EqCountBehaviorEnergyTransferChannelCompleteOnlyAtUnit1"/>
+    </CRequirement>
+    <CRequirement id="HeroBowlerBanemineReq">
+        <NodeArray index="Use" Link="Eq2574667276CountUpgradeUnlockHeroBowlerBanemineCompleteOnly1"/>
+    </CRequirement>
+    <CRequirement id="HeroBowlerKillStreakReq">
+        <NodeArray index="Use" Link="Eq3844913310CountUpgradeUnlockHeroBowlerKillStreakCompleteOnly1"/>
+    </CRequirement>
+    <CRequirement id="HeroHydraFocusReq">
+        <NodeArray index="Use" Link="Eq1136276364CountUpgradeUnlockHeroHydraFocusCompleteOnly1"/>
+    </CRequirement>
+    <CRequirement id="HeroRavagerDecoyReq">
+        <NodeArray index="Use" Link="Eq1174723477CountUpgradeUnlockHeroRavagerDecoyCompleteOnly1"/>
+    </CRequirement>
+    <CRequirement id="HeroRoachChargeReq">
+        <NodeArray index="Use" Link="Eq2514512276CountUpgradeUnlockHeroRoachChargeCompleteOnly1"/>
+    </CRequirement>
+    <CRequirement id="CreepTunnel@Req">
+        <NodeArray index="Use" Link="GTE1136276364CountUpgradeCreepTunnel@UnlockCompleteOnly1"/>
+    </CRequirement>
+    <CRequirement id="HiveAlive">
+        <NodeArray index="Use" Link="Eq2561050864CountUnitHeroDummyHiveDeadCompleteOnly0"/>
+    </CRequirement>
+    <CRequirement id="HardenedShellRequirement">
+        <NodeArray index="Use" Link="GTE1567160127CountUpgradeUnlockHeroRavagerHardenedCompleteOnly1"/>
+    </CRequirement>
+    <CRequirement id="FrenzyRequirement">
+        <NodeArray index="Use" Link="GTE3401556857CountUpgradeUnlockHeroSwarmQueenFrenzyCompleteOnly1"/>
+    </CRequirement>
+    <CRequirement id="HeroHydraCorrosiveReq">
+        <NodeArray index="Use" Link="Eq2604696456CountUpgradeUnlockHeroHydraCorrosiveCompleteOnly1"/>
+    </CRequirement>
+    <CRequirement id="LurkerUnlocked">
+        <NodeArray index="Show" Link="GTECountUpgradeUnlockCyberneticsCompleteOnly1"/>
+    </CRequirement>
+    <CRequirement id="CyberneticsUnlocked">
+        <NodeArray index="Show" Link="GTECountUpgradeUnlockCyberneticsCompleteOnly1"/>
+    </CRequirement>
+    <CRequirement id="DmgUpgradeHideRequirement">
+        <EditorCategories value="TechType:Upgrade"/>
+        <NodeArray index="Use" Link="AndEq281638821CountUpgradeDmgUpgradeQueuedOnly0Eq4037611437CountBehaviorTutorialNotPausedCompleteOnlyAtUnit0"/>
+        <NodeArray index="Show" Link="LTCountUpgradeDmgUpgradeCompleteOnlyCountUpgradeUnlockDmgArmorCountCompleteOnly"/>
+    </CRequirement>
+    <CRequirement id="ArmorUpgradeHideRequirement">
+        <EditorCategories value="TechType:Upgrade"/>
+        <NodeArray index="Use" Link="AndEq281638821CountUpgradeArmorUpgradeQueuedOnly0Eq4037611437CountBehaviorTutorialNotPausedCompleteOnlyAtUnit0"/>
+        <NodeArray index="Show" Link="LTCountUpgradeArmorUpgradeCompleteOnlyCountUpgradeUnlockDmgArmorCountCompleteOnly"/>
+    </CRequirement>
+    <CRequirement id="CyberneticRunlingUnlocked">
+        <NodeArray index="Show" Link="GTE4159062706CountUpgradeUnlockCyberneticsCompleteOnly2"/>
+    </CRequirement>
+    <CRequirement id="OverlordFlyBackHome">
+        <NodeArray index="Use" Link="AndEq1987477214CountBehaviorBaseOverlordDmgSlowCompleteOnlyAtUnit0Eq2561050864CountUnitHeroDummyHiveDeadCompleteOnly0"/>
+    </CRequirement>
+    <CRequirement id="OverlordNotStunned">
+        <NodeArray index="Use" Link="Eq1851146600CountBehaviorBaseOverlordDmgSlowCompleteOnlyAtUnit0"/>
+    </CRequirement>
+    <CRequirement id="RegenerationUpgradeHideRequirement">
+        <EditorCategories value="TechType:Upgrade"/>
+        <NodeArray index="Use" Link="AndEq281638821CountUpgradeRegenerationUpgradeQueuedOnly0Eq4037611437CountBehaviorTutorialNotPausedCompleteOnlyAtUnit0"/>
+        <NodeArray index="Show" Link="LTCountUpgradeRegenerationUpgradeCompleteOnly10"/>
+    </CRequirement>
+    <CRequirement id="SplashRangeUpgradeHideRequirement">
+        <EditorCategories value="TechType:Upgrade"/>
+        <NodeArray index="Use" Link="AndEq281638821CountUpgradeSplashRangeUpgradeQueuedOnly0Eq4037611437CountBehaviorTutorialNotPausedCompleteOnlyAtUnit0"/>
+        <NodeArray index="Show" Link="LTCountUpgradeSplashRangeUpgradeCompleteOnly10"/>
+    </CRequirement>
+    <CRequirement id="TerranPartTransition">
+        <NodeArray index="Use" Link="Eq1987477214CountBehaviorBaseOverlordDmgSlowCompleteOnlyAtUnit0"/>
+        <NodeArray index="Show" Link="GTCountBehaviorTerranPartTransitionBuffCompleteOnlyAtUnit0"/>
+    </CRequirement>
+    <CRequirement id="HeroSwarmQueenEnergyTransferReq">
+        <NodeArray index="Use" Link="Eq2070656153CountUpgradeUnlockHeroSwarmQueenEnergyTransferCompleteOnly1"/>
+        <NodeArray index="Show" Link="EqCountBehaviorEnergyTransferChannelCompleteOnlyAtUnit0"/>
+    </CRequirement>
+    <CRequirement id="TutorialNotPaused">
+        <NodeArray index="Use" Link="Eq4037611437CountBehaviorTutorialNotPausedCompleteOnlyAtUnit0"/>
+    </CRequirement>
+</Catalog>
