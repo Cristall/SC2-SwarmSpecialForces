@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CGame id="Dflt">
+        <CreepDecayLimit value="0"/>
+        <CreepDecayTime value="500"/>
+        <AcquireLeashRadius value="10"/>
+        <!-- Test Builds -->
+        <!-- <AIBuilds index="213" Enabled="0"/>
+             <AIBuilds index="214" Enabled="0"/>
+             <AIBuilds index="215" Enabled="1"/> -->
+    </CGame>
+</Catalog>
