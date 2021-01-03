@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<BankList>
+    <Bank Name="SwarmSpecialForces" Player="1"/>
+    <Bank Name="SwarmSpecialForcesBackup" Player="2"/>
+    <Bank Name="SwarmSpecialForces" Player="4"/>
+    <Bank Name="SwarmSpecialForcesBackup" Player="5"/>
+    <Bank Name="SwarmSpecialForcesBackup" Player="6"/>
+    <Bank Name="SwarmSpecialForces" Player="5"/>
+    <Bank Name="SwarmSpecialForcesBackup" Player="3"/>
+    <Bank Name="SwarmSpecialForces" Player="6"/>
+    <Bank Name="SwarmSpecialForcesTransfer" Player="1"/>
+    <Bank Name="SwarmSpecialForcesBackup" Player="4"/>
+    <Bank Name="SwarmSpecialForcesBackup" Player="1"/>
+    <Bank Name="SwarmSpecialForces" Player="2"/>
+    <Bank Name="SwarmSpecialForces" Player="3"/>
+</BankList>
