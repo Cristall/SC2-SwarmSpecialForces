@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CKineticRotate id="BarrageRotate">
+        <Cycles value="1"/>
+        <Duration value="5"/>
+        <Yaw value="360"/>
+    </CKineticRotate>
+    <CKineticRotate id="BarrageRotate2">
+        <Cycles value="1"/>
+        <Duration value="5"/>
+        <Yaw value="-360"/>
+    </CKineticRotate>
+    <CKineticFollow id="Follow"/>
+    <CKineticRotate id="RotatingWallsRotationNegative">
+        <ValidatorArray value="RotatingWallsRotationIndexNegative"/>
+        <Cycles value="1"/>
+        <Duration value="10"/>
+        <Yaw value="-170.9912"/>
+    </CKineticRotate>
+    <CKineticRotate id="RotatingWallsRotationPositive">
+        <Cycles value="1"/>
+        <Duration value="10"/>
+        <Yaw value="171.991"/>
+        <ValidatorArray value="RotatingWallsRotationIndexPositive"/>
+    </CKineticRotate>
+    <CKineticSet id="RotatingWallsRotationSet">
+        <Cycles value="1"/>
+        <Duration value="10"/>
+        <KineticArray value="RotatingWallsRotationPositive"/>
+        <KineticArray value="RotatingWallsRotationNegative"/>
+    </CKineticSet>
+</Catalog>
