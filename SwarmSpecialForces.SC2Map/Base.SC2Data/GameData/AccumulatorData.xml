@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CAccumulatorConstant id="AtlantisCoreWeaponDmg">
+        <Amount value="80"/>
+    </CAccumulatorConstant>
+    <CAccumulatorConstant id="Const0"/>
+    <CAccumulatorConstant id="CreepTunnel@DmgMultiplier">
+        <ApplicationRule value="Multiply"/>
+        <Amount value="1.2"/>
+    </CAccumulatorConstant>
+    <CAccumulatorConstant id="CreepTunnel@FlatDmgBonus">
+        <Amount value="10"/>
+    </CAccumulatorConstant>
+    <CAccumulatorArithmetic id="CreepTunnel@Multiply">
+        <Parameters value="0">
+            <AccumulatorArray value="RoachWeaponDmg"/>
+            <AccumulatorArray value="RoachLevel"/>
+        </Parameters>
+        <Parameters value="1">
+            <AccumulatorArray value="CreepTunnel@DmgMultiplier"/>
+        </Parameters>
+        <Operation value="Multiply"/>
+    </CAccumulatorArithmetic>
+    <CAccumulatorConstant id="Illusion@IllusionDmgModifier">
+        <ApplicationRule value="Multiply"/>
+        <Amount value="0.75"/>
+    </CAccumulatorConstant>
+    <CAccumulatorSwitch id="Phase2">
+        <CaseArray Validator="AtlantisCore" Accumulator="Phase2Amount"/>
+        <CaseDefault value="Const0"/>
+    </CAccumulatorSwitch>
+    <CAccumulatorSwitch id="Phase2Small">
+        <CaseArray Validator="AtlantisCore" Accumulator="Phase2SmallAmount"/>
+        <CaseDefault value="Const0"/>
+    </CAccumulatorSwitch>
+    <CAccumulatorConstant id="Phase2Amount">
+        <Amount value="50"/>
+    </CAccumulatorConstant>
+    <CAccumulatorConstant id="Phase2SmallAmount">
+        <Amount value="5"/>
+    </CAccumulatorConstant>
+    <CAccumulatorVeterancyLevel id="RoachLevel">
+        <Amount value="0"/>
+        <PreviousValueFactor value="1"/>
+        <BonusPerLevel value="1"/>
+    </CAccumulatorVeterancyLevel>
+    <CAccumulatorConstant id="RoachWeaponDmg">
+        <Amount value="16"/>
+    </CAccumulatorConstant>
+</Catalog>
