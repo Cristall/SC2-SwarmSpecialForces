@@ -3114,14 +3114,15 @@ void gf_Reward_Spellpower_UpdateEffects (int lp_playerID) {
 
     // Implementation
     libNtve_gf_CatalogFieldValueModifyBasedOnDefaultValue(c_gameCatalogEffect, "HeroSpellpowerDummy", "Amount", lp_playerID, gv_playerStats[lp_playerID].lv_spellPowerPercent, c_upgradeOperationSet);
-    libNtve_gf_CatalogFieldValueModifyBasedOnDefaultValue(c_gameCatalogBehavior, "GlueSprayBuff", "Modification.MoveSpeedMultiplier", lp_playerID, Pow(libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogBehavior, "GlueSprayBuff", "Modification.MoveSpeedMultiplier", c_playerAny), lv_multiplier), c_upgradeOperationSet);
-    libNtve_gf_CatalogFieldValueModifyBasedOnDefaultValue(c_gameCatalogBehavior, "GlueSprayDebuff", "Modification.MoveSpeedMultiplier", lp_playerID, Pow(libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogBehavior, "GlueSprayDebuff", "Modification.MoveSpeedMultiplier", c_playerAny), lv_multiplier), c_upgradeOperationSet);
-    libNtve_gf_CatalogFieldValueModifyBasedOnDefaultValue(c_gameCatalogBehavior, "GlueSprayDebuffBoss", "Modification.MoveSpeedMultiplier", lp_playerID, Pow(libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogBehavior, "GlueSprayDebuffBoss", "Modification.MoveSpeedMultiplier", c_playerAny), lv_multiplier), c_upgradeOperationSet);
-    libNtve_gf_CatalogFieldValueModifyBasedOnDefaultValue(c_gameCatalogEffect, "ChargeDmg", "Amount", lp_playerID, lv_multiplier, c_upgradeOperationMultiply);
-    libNtve_gf_CatalogFieldValueModifyBasedOnDefaultValue(c_gameCatalogBehavior, "ChargeArmorBuff", "Modification.LifeArmorBonus", lp_playerID, lv_multiplier, c_upgradeOperationMultiply);
-    libNtve_gf_CatalogFieldValueModifyBasedOnDefaultValue(c_gameCatalogBehavior, "ChargeArmorBuff", "Modification.LifeArmorMultiplier", lp_playerID, Pow(libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogBehavior, "ChargeArmorBuff", "Modification.LifeArmorMultiplier", c_playerAny), lv_multiplier), c_upgradeOperationSet);
-    libNtve_gf_CatalogReferenceModifyBasedOnDefaultValue("Accumulator,CreepTunnel@DmgMultiplier,Amount", lp_playerID, Pow(libNtve_gf_CatalogReferenceGetAsReal("Accumulator,CreepTunnel@DmgMultiplier,Amount", c_playerAny), lv_multiplier), c_upgradeOperationSet);
-    libNtve_gf_CatalogReferenceModifyBasedOnDefaultValue("Accumulator,CreepTunnel@FlatDmgBonus,Amount", lp_playerID, lv_multiplier, c_upgradeOperationMultiply);
+    libNtve_gf_CatalogFieldValueModifyBasedOnDefaultValue(c_gameCatalogBehavior, "GlueStream@BuffCaster", "Modification.MoveSpeedMultiplier", lp_playerID, Pow(libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogBehavior, "GlueStream@BuffCaster", "Modification.MoveSpeedMultiplier", c_playerAny), lv_multiplier), c_upgradeOperationSet);
+    libNtve_gf_CatalogFieldValueModifyBasedOnDefaultValue(c_gameCatalogBehavior, "GlueStream@Debuff", "Modification.MoveSpeedMultiplier", lp_playerID, Pow(libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogBehavior, "GlueStream@Debuff", "Modification.MoveSpeedMultiplier", c_playerAny), lv_multiplier), c_upgradeOperationSet);
+    libNtve_gf_CatalogFieldValueModifyBasedOnDefaultValue(c_gameCatalogBehavior, "GlueStream@Buff", "Modification.MoveSpeedMultiplier", lp_playerID, Pow(libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogBehavior, "GlueStream@Buff", "Modification.MoveSpeedMultiplier", c_playerAny), lv_multiplier), c_upgradeOperationSet);
+    libNtve_gf_CatalogFieldValueModifyBasedOnDefaultValue(c_gameCatalogEffect, "GlueStream@Dmg", "Amount", lp_playerID, lv_multiplier, c_upgradeOperationMultiply);
+    libNtve_gf_CatalogFieldValueModifyBasedOnDefaultValue(c_gameCatalogBehavior, "DefensiveRoar@Caster", "Modification.LifeArmorBonus", lp_playerID, Pow(libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogBehavior, "DefensiveRoar@Caster", "Modification.LifeArmorBonus", c_playerAny), lv_multiplier), c_upgradeOperationSet);
+    libNtve_gf_CatalogFieldValueModifyBasedOnDefaultValue(c_gameCatalogBehavior, "DefensiveRoar@Other", "Modification.LifeArmorBonus", lp_playerID, Pow(libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogBehavior, "DefensiveRoar@Other", "Modification.LifeArmorBonus", c_playerAny), lv_multiplier), c_upgradeOperationSet);
+    libNtve_gf_CatalogFieldValueModifyBasedOnDefaultValue(c_gameCatalogBehavior, "Tackle@FriendlyTackleCaster", "Modification.DamageDealtScaled[" + IntToString(2) + "]", lp_playerID, Pow(libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogBehavior, "Tackle@FriendlyTackleCaster", "Modification.DamageDealtScaled[" + IntToString(2) + "]", c_playerAny), lv_multiplier), c_upgradeOperationSet);
+    libNtve_gf_CatalogFieldValueModifyBasedOnDefaultValue(c_gameCatalogBehavior, "Tackle@FriendlyTackle", "Modification.DamageDealtScaled[" + IntToString(2) + "]", lp_playerID, Pow(libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogBehavior, "Tackle@FriendlyTackle", "Modification.DamageDealtScaled[" + IntToString(2) + "]", c_playerAny), lv_multiplier), c_upgradeOperationSet);
+    libNtve_gf_CatalogFieldValueModifyBasedOnDefaultValue(c_gameCatalogEffect, "Tackle@Dmg", "Amount", lp_playerID, lv_multiplier, c_upgradeOperationMultiply);
     libNtve_gf_CatalogFieldValueModifyBasedOnDefaultValue(c_gameCatalogEffect, "AcidPitDmg", "Amount", lp_playerID, lv_multiplier, c_upgradeOperationMultiply);
     libNtve_gf_CatalogFieldValueModifyBasedOnDefaultValue(c_gameCatalogEffect, "HeroHydraPoisonDmg", "Amount", lp_playerID, lv_multiplier, c_upgradeOperationMultiply);
     libNtve_gf_CatalogFieldValueModifyBasedOnDefaultValue(c_gameCatalogBehavior, "FocusBuffStack", "Modification.AdditiveAttackSpeedFactor", lp_playerID, lv_multiplier, c_upgradeOperationMultiply);
@@ -7716,7 +7717,7 @@ void gf_AcvEssences_UI (int lp_playerID) {
         lv_tooltip = (lv_tooltip + gf_UI_Newline());
         libNtve_gf_SetDialogItemImage(DialogControlLastCreated(), "Assets\\Textures\\btn-progression-zerg-dehaka-15-genemutation.dds", PlayerGroupAll());
         lv_score += 2.0;
-        lv_tooltip = (lv_tooltip + gf_UI_AbilUnlock(TextWithColor(StringExternal("Button/Name/Charge2"), Color(100.00, 50.20, 0.00)), StringExternal("Unit/Name/HeroRoach")));
+        lv_tooltip = (lv_tooltip + gf_UI_AbilUnlock(TextWithColor(StringExternal("Button/Name/GlueStream"), Color(100.00, 50.20, 0.00)), StringExternal("Unit/Name/HeroRoach")));
         if ((gv_playerStats[lp_playerID].lv_essencesLevels >= 2)) {
             lv_score += 3.0;
             lv_tooltip = (lv_tooltip + gf_UI_AbilUnlock(TextWithColor(StringExternal("Button/Name/BanemineButton"), Color(100.00, 50.20, 0.00)), StringExternal("Unit/Name/Bowler")));
@@ -7860,7 +7861,7 @@ void gf_AcvPsiOrbs_UI (int lp_playerID) {
         lv_tooltip = (lv_tooltip + gf_UI_Newline());
         lv_score += 2.0;
         libNtve_gf_SetDialogItemImage(DialogControlLastCreated(), "Assets\\Textures\\btn-ability-protoss-oracle-stasiscalibration.dds", PlayerGroupAll());
-        lv_tooltip = (lv_tooltip + gf_UI_AbilUnlock(TextWithColor(StringExternal("Button/Name/CreepTunnel"), Color(100.00, 50.20, 0.00)), StringExternal("Unit/Name/HeroRoach")));
+        lv_tooltip = (lv_tooltip + gf_UI_AbilUnlock(TextWithColor(StringExternal("Button/Name/Tackle"), Color(100.00, 50.20, 0.00)), StringExternal("Unit/Name/HeroRoach")));
         if ((gv_playerStats[lp_playerID].lv_psiOrbsLevel >= 2)) {
             lv_score += 3.0;
             lv_tooltip = (lv_tooltip + gf_UI_AbilUnlock(TextWithColor(StringExternal("Button/Name/KillStreak"), Color(100.00, 50.20, 0.00)), StringExternal("Unit/Name/Bowler")));

@@ -39,9 +39,30 @@
         <DataRecord Entry="Model,DefensiveRoar@Buff"/>
         <DataRecord Entry="Model,DefensiveRoar@Cast"/>
         <DataRecord Entry="Validator,DefensiveRoar@CasterBuffNotActive"/>
+        <DataRecord Entry="Validator,DefensiveRoar@FriendlyBuffNotActive"/>
     </CDataCollectionAbil>
     <CDataCollectionAbil id="GlueStream">
         <EditorCategories value=""/>
+        <DataRecord Entry="Abil,GlueStream"/>
+        <DataRecord Entry="Actor,GlueStream@Buff"/>
+        <DataRecord Entry="Actor,GlueStream@Guide"/>
+        <DataRecord Entry="Actor,GlueStream@Stream"/>
+        <DataRecord Entry="Behavior,GlueStream@Buff"/>
+        <DataRecord Entry="Behavior,GlueStream@BuffCaster"/>
+        <DataRecord Entry="Behavior,GlueStream@Debuff"/>
+        <DataRecord Entry="Button,GlueStream"/>
+        <DataRecord Entry="Effect,GlueStream@InitialPersistent"/>
+        <DataRecord Entry="Effect,GlueStream@ApplyEnemy"/>
+        <DataRecord Entry="Effect,GlueStream@ApplyFriendly"/>
+        <DataRecord Entry="Effect,GlueStream@ApplyCaster"/>
+        <DataRecord Entry="Effect,GlueStream@ApplySet"/>
+        <DataRecord Entry="Effect,GlueStream@Dmg"/>
+        <DataRecord Entry="Effect,GlueStream@ExplosionDummy"/>
+        <DataRecord Entry="Effect,GlueStream@Search"/>
+        <DataRecord Entry="Model,GlueStream@Buff"/>
+        <DataRecord Entry="Model,GlueStream@Stream"/>
+        <DataRecord Entry="Validator,GlueStream@CasterBuffNotActive"/>
+        <DataRecord Entry="Validator,GlueStream@FriendlyBuffNotActive"/>
     </CDataCollectionAbil>
     <CDataCollectionAbil id="HandsOfSilence">
         <EditorCategories value=""/>
@@ -114,5 +135,20 @@
         <DataRecord Entry="Effect,Tackle@Knockback"/>
         <DataRecord Entry="Effect,Tackle@KnockbackRekursion"/>
         <DataRecord Entry="Effect,Tackle@KnockbackSet"/>
+        <DataRecord Entry="Actor,Tackle@Buffed"/>
+        <DataRecord Entry="Actor,Tackle@Caster"/>
+        <DataRecord Entry="Actor,Tackle@Guide"/>
+        <DataRecord Entry="Behavior,Tackle@FriendlyTackleCaster"/>
+        <DataRecord Entry="Behavior,Tackle@KnockbackMinimumSpeed"/>
+        <DataRecord Entry="Button,Tackle"/>
+        <DataRecord Entry="Effect,Tackle@CasterSelfBuff"/>
+        <DataRecord Entry="Effect,Tackle@Endpoint"/>
+        <DataRecord Entry="Effect,Tackle@Persistent"/>
+        <DataRecord Entry="Effect,Tackle@KnockbackMinimumSpeed"/>
+        <DataRecord Entry="Model,Tackle@Buffed"/>
+        <DataRecord Entry="Model,Tackle@Caster"/>
+        <DataRecord Entry="Validator,Tackle@CasterBuffNotActive"/>
+        <DataRecord Entry="Validator,Tackle@NoKnockback"/>
+        <DataRecord Entry="Validator,Tackle@FriendlyBuffNotActive"/>
     </CDataCollectionAbil>
 </Catalog>
