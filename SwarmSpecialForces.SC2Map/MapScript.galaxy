@@ -10456,25 +10456,15 @@ void gf_HeroSelect_CustomDiff_NewHostAfterLeave (int lp_newhost) {
         gv_heroSelection.lv_player_IsReady[lp_newhost] = false;
         gv_heroSelection.lv_ready_Counter -= 1;
         DialogControlSetVisible(gv_heroSelection.lv_ready_Button, PlayerGroupSingle(lp_newhost), true);
-        if (gf_HeroSelect_CustomDiff_AllInputsValid()) {
-            DialogControlSetEnabled(gv_heroSelection.lv_ready_Button, PlayerGroupSingle(lp_newhost), true);
-            DialogControlSetEnabled(gv_heroSelection.lv_customDiffCustomPresetInputEditBox, PlayerGroupSingle(lp_newhost), true);
-            libNtve_gf_SetDialogItemEditorValue(gv_heroSelection.lv_customDiffCustomPresetInputEditBox, "", PlayerGroupSingle(lp_newhost));
-            libNtve_gf_SetDialogItemEditorValue(gv_heroSelection.lv_customDiffCustomPresetInputEditBox, lv_inputeditboxstring, PlayerGroupSingle(lp_newhost));
-        }
-        else {
-            DialogControlSetEnabled(gv_heroSelection.lv_ready_Button, PlayerGroupSingle(lp_newhost), false);
-        }
+        DialogControlSetEnabled(gv_heroSelection.lv_ready_Button, PlayerGroupSingle(lp_newhost), false);
     }
-    else {
-        DialogControlSetEnabled(gv_heroSelection.lv_customDiffCustomPresetInputEditBox, PlayerGroupSingle(lp_newhost), true);
-        libNtve_gf_SetDialogItemEditorValue(gv_heroSelection.lv_customDiffCustomPresetInputEditBox, "", PlayerGroupSingle(lp_newhost));
-        libNtve_gf_SetDialogItemEditorValue(gv_heroSelection.lv_customDiffCustomPresetInputEditBox, lv_inputeditboxstring, PlayerGroupSingle(lp_newhost));
-    }
+
     gv_heroSelection.lv_customDiffHost = lp_newhost;
     PlayerGroupRemove(gv_heroSelection.lv_customDiffNotHostPlayerGroup, gv_heroSelection.lv_customDiffHost);
     DialogControlHookup(gv_heroSelection.lv_mainFrame, c_triggerControlTypePanel, "GameModeCustom");
     DialogControlSetAnimationState(DialogControlLastCreated(), PlayerGroupSingle(gv_heroSelection.lv_customDiffHost), "Host", "True");
+    libNtve_gf_SetDialogItemEditorValue(gv_heroSelection.lv_customDiffCustomPresetInputEditBox, "", PlayerGroupSingle(lp_newhost));
+    libNtve_gf_SetDialogItemEditorValue(gv_heroSelection.lv_customDiffCustomPresetInputEditBox, lv_inputeditboxstring, PlayerGroupSingle(lp_newhost));
 }
 
 void gf_HeroSelect_CustomDiff_CustomPreset_CreateInput (int lp_player) {
@@ -16104,7 +16094,6 @@ bool gt_HeroSelect_ReadyButtonHandler_Func (bool testConds, bool runActions) {
         DialogControlHookup(gv_heroSelection.lv_mainFrame, c_triggerControlTypePanel, "GameModeCustom");
         DialogControlSetAnimationState(DialogControlLastCreated(), PlayerGroupSingle(gv_heroSelection.lv_customDiffHost), "Host", "False");
         DialogControlSetEnabled(gv_heroSelection.lv_customDiffCustomPresetInputLoadButton, PlayerGroupSingle(gv_heroSelection.lv_customDiffHost), false);
-        DialogControlSetEnabled(gv_heroSelection.lv_customDiffCustomPresetInputEditBox, PlayerGroupSingle(gv_heroSelection.lv_customDiffHost), false);
         gv_heroSelection.lv_customDiffHost = 0;
     }
 

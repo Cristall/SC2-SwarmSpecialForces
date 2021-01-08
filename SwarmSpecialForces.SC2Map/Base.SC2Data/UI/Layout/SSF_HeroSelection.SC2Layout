@@ -510,6 +510,7 @@
                         <Action type="SetProperty" frame="$this/DiffPreset5" Enabled="True"/>
 
                         <Action type="SetProperty" frame="$this/CustomPreset/LoadInputButton" Tooltip="@Trig/HeroSelection/CustomDiff/CustomPreset/LoadButtonTooltip"/>
+                        <Action type="SetProperty" frame="$this/CustomPreset/Input" Enabled="True"/>
                     </State>
                     <State name="False"></State>
                 </StateGroup>
@@ -529,7 +530,6 @@
                         <Width val="200"/>
 
                         <Enabled val="False"/>
-                        <Text val="0"/>
                     </Frame>
                     
                     <Frame type="Button" name="CreateInputButton" template="SSF_Menu/ButtonTemplate">
