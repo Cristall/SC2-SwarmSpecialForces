@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <Desc>
-	<!-- Thanks to Skunk for the loading screen layout that I used as a reference -->
+	<!-- Thanks to Skunk for the loading screen layout that I used as a base -->
 	<!-- Constants -->
 	<!-- Note: &lt;n/&gt; causes a new line in text. -->
 	<!-- &lt;c val=&quot;800080&quot;&gt; color start, &lt;c/&gt; color end -->
 	
 	<Constant name="MapName" val="&lt;c val=&quot;FF0000&quot;&gt;Swarm Special Forces&lt;c/&gt;"/>
 	<Constant name="BackgroundImg" val="Assets/Textures/ui_hots_loading_missionselect_zzerus02.dds"/>
+	
+	
+
+	<Constant name="CopyButtonPopupBackgroundImage" val="Assets/Textures/ui_unitbuttons_frame_zerg.dds"/>
+	<!--<Constant name="CopyButtonPopupBackgroundImage" val="Assets/Textures/ui_leaderpanel_buttonup_zerg.dds"/>-->
+	<!--<Constant name="CopyButtonPopupBackgroundImage" val="Assets/Textures/ui_replay_frame_mapcontainer_zerg.dds"/>-->
+	<!--<Constant name="CopyButtonPopupBackgroundImage" val="Assets/Textures/ui_unitbuttons_frame_zerg.dds"/>-->
  
 	<Constant name="MapNameStyle" val="BoardWarAppraiseBig3"/>
 	<Constant name="TextStyle" val="First_Blood"/>
@@ -22,87 +29,46 @@
 	<!-- Local Templates -->
 	<Frame type="Frame" name="CopyButtonTemplate">
 		<Width val="500"/>
-		<Height val="152"/>
+		<Height val="180"/>
 
-		<Frame type="CopyClipboardButton" name="ClipBoardBtn">
+		<Frame type="CopyClipboardButton" name="ClipBoardBtn" template="StandardTemplates/StandardButtonTemplate">
 			<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
 			<Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
 			<Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
 			
 			<ClipboardText val="#CopyLink"/>
-			<DisplayType val="ImageLayer"/>
 			<ClickSound val="@UI_ActionButtonSelect"/>
 			<HoverSound val="@UI_HoverTick"/>
-			<Width val="288"/>
-			<Height val="76"/>
+			<Width val="270"/>
+			<Height val="70"/>
 
 			<Frame type="Image" name="NormalImage">
-				<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
-				<Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
-				<Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
-				<Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
-				<StateCount val="1"/>
-				<LayerCount val="4"/>
-				<Texture val="@UI/Glues_Battlenet_StandardButton_Normal" layer="0"/>
-				<Texture val="@UI/Glues_Battlenet_StandardButton_Down" layer="1"/>
-				<Texture val="@UI/Glues_Battlenet_StandardButton_Selected" layer="2"/>
-				<Texture val="@UI/Glues_Battlenet_StandardButton_Disabled" layer="3"/>
-				<TextureType val="EndCap" layer="0"/>
-				<TextureType val="EndCap" layer="1"/>
-				<TextureType val="EndCap" layer="2"/>
-				<TextureType val="EndCap" layer="3"/>
-				<Tiled val="true"/>
-				<DesaturateOnDisable val="false"/>
+				<Texture val="@UI/StandardGlueButtonNormal_Zerg"/>
+				<TextureType val="Border"/>
+				<Tiled val="false"/>
+				<StateCount val="2"/>
 			</Frame>
-
+	
 			<Frame type="Image" name="HoverImage">
-				<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
-				<Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
-				<Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
-				<Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
-				<StateCount val="1"/>
-				<LayerCount val="4"/>
-				<Texture val="@UI/Glues_Battlenet_StandardButton_Hover" layer="0"/>
-				<Texture val="@UI/Glues_Battlenet_StandardButton_Down" layer="1"/>
-				<Texture val="@UI/Glues_Battlenet_StandardButton_Selected" layer="2"/>
-				<Texture val="@UI/Glues_Battlenet_StandardButton_Disabled" layer="3"/>
-				<TextureType val="EndCap" layer="0"/>
-				<TextureType val="EndCap" layer="1"/>
-				<TextureType val="EndCap" layer="2"/>
-				<TextureType val="EndCap" layer="3"/>
-				<Tiled val="true"/>
-				<DesaturateOnDisable val="false"/>
-			</Frame>
-
-			<Frame type="Label" name="Label">
-				<Anchor side="Top" relative="$parent" pos="Min" offset="3"/>
-				<Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
-				<Anchor side="Left" relative="$parent" pos="Min" offset="20"/>
-				<Anchor side="Right" relative="$parent" pos="Max" offset="-20"/>
-				<Style val="BattlenetStandardButton"/>
-				<Text val="#CopyText"/>
-			</Frame>
-
-			<Frame type="Frame" name="HitTestFrame">
-				<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
-				<Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
-				<Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
-				<Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
-			</Frame>			
+				<Texture val="@UI/StandardGlueButtonHover_Zerg"/>
+				<TextureType val="Border"/>
+				<Tiled val="false"/>
+				<StateCount val="2"/>
+			</Frame>	
 		</Frame>	
 
 		<Frame type="Frame" name="Popup">
-			<Anchor side="Top" relative="$parent/ClipBoardBtn" pos="Max" offset="2"/>
+			<Anchor side="Top" relative="$parent/ClipBoardBtn" pos="Max" offset="9"/>
 			<Anchor side="Left" relative="$parent/ClipBoardBtn" pos="Min" offset="0"/>
 			<Anchor side="Right" relative="$parent/ClipBoardBtn" pos="Max" offset="0"/>
-			<Width val="288"/>
-			<Height val="76"/>
+			<Width val="270"/>
+			<Height val="80"/>
 			<Alpha val="0"/>	
 			
 			<Frame type="Image" name="GameplayBackground">
 				<Anchor relative="$parent"/>
 				<TextureType val="Nineslice"/>
-				<Texture val="@UI/SC2_UI_Coop_Loading_GameplayBg"/>
+				<Texture val="#CopyButtonPopupBackgroundImage"/>
 			</Frame>
 			
 			<Frame type="Label" name="Header">
@@ -176,7 +142,7 @@
 		
 		<!-- hint text -->
 		<Frame type="Label" name="HintText">
-			<Anchor side="Top" relative="$parent/BodyText" pos="Max" offset="20"/>
+			<Anchor side="Top" relative="$parent/BodyText" pos="Max" offset="30"/>
 			<Anchor side="Left" relative="$parent/BodyText" pos="Min" offset="0"/>
 			<Width val="#TextWidth"/>
 			
@@ -186,7 +152,7 @@
 		
 		<!-- this is the actual copy-to-clipboard button -->
 		<Frame type="Frame" name="CopyDiscord" template="SSF_LoadingScreen/CopyButtonTemplate">
-			<Anchor side="Top" relative="$parent/HintText" pos="Max" offset="5"/>
+			<Anchor side="Top" relative="$parent/HintText" pos="Max" offset="15"/>
 			<Anchor side="Left" relative="$parent/HintText" pos="Min" offset="0"/>
 			<Anchor side="Right" relative="$parent/HintText" pos="Max" offset="0"/>
 

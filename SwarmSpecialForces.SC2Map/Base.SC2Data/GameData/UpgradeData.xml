@@ -151,7 +151,7 @@
         <EffectArray Reference="Effect,HeroHydraRangedDmg,AreaArray[0].Radius" Value="0.05"/>
         <EffectArray Reference="Effect,HeroRoachRangedDmg,AreaArray[0].Radius" Value="0.1"/>
         <EffectArray Reference="Effect,CyberneticLurkerWeaponSearch,AreaArray[0].Radius" Value="0.011"/>
-        <EffectArray Reference="Effect,RavagerWeaponDmg,AreaArray[0].Radius" Value="0.05"/>
+        <EffectArray Reference="Effect,RavagerWeaponDmg,AreaArray[0].Radius" Value="0.077"/>
         <EffectArray Reference="Effect,WeaponAttackDamage,AreaArray[0].Radius" Value="0.1"/>
         <EffectArray Reference="Effect,BanelingMissileExplodeSearch,AreaArray[0].Radius" Value="0.12"/>
         <EffectArray Reference="Effect,BanelingMissileCollectibleDmg,AreaArray[0].Radius" Value="0.12"/>

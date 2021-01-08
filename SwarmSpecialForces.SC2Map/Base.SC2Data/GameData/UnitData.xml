@@ -4883,9 +4883,6 @@
         <AbilArray Link="stop"/>
         <AbilArray Link="attack"/>
         <AbilArray Link="move"/>
-        <AbilArray Link="GlueSpray"/>
-        <AbilArray Link="Charge2"/>
-        <AbilArray Link="CreepTunnel"/>
         <AbilArray Link="DefensiveRoar"/>
         <AbilArray Link="GlueStream"/>
         <AbilArray Link="Tackle"/>

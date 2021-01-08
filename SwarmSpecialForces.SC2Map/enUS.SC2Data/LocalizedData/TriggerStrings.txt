@@ -1838,6 +1838,7 @@ Variable/Name/9A7BC197=unit type id
 Variable/Name/9AB5DDE6=updateAcvUnlocks
 Variable/Name/9AE338E2=TagTeam - Lightning
 Variable/Name/9AEFD237=tmpInt2
+Variable/Name/9B068E5B=not new players
 Variable/Name/9B07B766=speed
 Variable/Name/9B41C986=Timer
 Variable/Name/9B6233A4=textTag

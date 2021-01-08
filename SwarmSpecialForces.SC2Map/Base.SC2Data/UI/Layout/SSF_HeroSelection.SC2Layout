@@ -219,7 +219,9 @@
             <Anchor side="Bottom" relative="$parent" pos="Max" offset="-5"/>
             <Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
             <Height val="#GameModeCustomSettingAcceptIconSize"/>
+            <Tooltip val="@Trig/HeroSelection/CustomDiff/InputRejected"/>
             
+            <AcceptsMouse val="True"/>
             <Texture val="#GameModeCustomSettingRejectedValueIcon"/>
         </Frame>
         <StateGroup name="ValidInput">
@@ -227,9 +229,11 @@
             <State name="False">
                 <When type="AnimationState" frame="$this/Input" operator="Equal" ValidInput="False"/>
                 <Action type="SetProperty" frame="$this/ValueAccepted" Texture="#GameModeCustomSettingRejectedValueIcon"/>
+                <Action type="SetProperty" frame="$this/ValueAccepted" Tooltip="@Trig/HeroSelection/CustomDiff/InputRejected"/>
             </State>
             <State name="True">
                 <Action type="SetProperty" frame="$this/ValueAccepted" Texture="#GameModeCustomSettingAcceptedValueIcon"/>
+                <Action type="SetProperty" frame="$this/ValueAccepted" Tooltip="@Trig/HeroSelection/CustomDiff/InputAccepted"/>
             </State>
         </StateGroup>
 

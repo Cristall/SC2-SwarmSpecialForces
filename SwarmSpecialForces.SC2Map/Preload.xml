@@ -55,9 +55,9 @@
 <Asset path="assets\textures\btn-building-zerg-hatchery.dds" Type="Image"/>
 <Asset path="assets\textures\btn-unit-collection-marauder-junker.dds" Type="Image"/>
 <Asset path="assets\textures\btn-unit-collection-drone-remastered.dds" Type="Image"/>
+<Asset path="assets\textures\btn-tips-hacking.dds" Type="Image"/>
 <Asset path="assets\textures\btn-unit-collection-siegetank-covertops.dds" Type="Image"/>
 <Asset path="assets\textures\btn-unit-protoss-zealot-ihanrii.dds" Type="Image"/>
-<Asset path="assets\textures\btn-tips-hacking.dds" Type="Image"/>
 <Asset path="assets\textures\btn-unit-zerg-zergling-rcz.dds" Type="Image"/>
 <Asset path="assets\textures\ui_ingame_help_techtree_questionmark.dds" Type="Image"/>
 <Actor id="SYSTEM_ActorConfig"/>
@@ -172,7 +172,6 @@
 <Unit id="Scientist"/>
 <Unit id="ExtendingBridgeNEWide12"/>
 <Unit id="ExtendingBridgeNEShort10"/>
-<Unit id="ZerglingCarbot"/>
 <Unit id="HERCCompound"/>
 <Unit id="PylonPurifier"/>
 <Unit id="Runling"/>

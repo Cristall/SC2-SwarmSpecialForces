@@ -6138,7 +6138,7 @@
         <EditorCategories value="Race:Zerg"/>
         <KindSplash value="Ranged"/>
         <Amount value="14"/>
-        <AreaArray Radius="0.375" Fraction="1"/>
+        <AreaArray Radius="0.43" Fraction="1"/>
         <ExcludeArray Value="Target"/>
         <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Dead,Hidden,Invulnerable"/>
     </CEffectDamage>

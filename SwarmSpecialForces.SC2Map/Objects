@@ -1584,7 +1584,6 @@
     <ObjectUnit Id="907994300" Position="162.3176,36.5183,0" Rotation="5.738" Scale="1,1,1" UnitType="SiegeTankSieged22" Player="14"/>
     <ObjectUnit Id="1518687036" Position="57,238,0" Scale="1,1,1" UnitType="DarkShrineTaldarim" Player="14"/>
     <ObjectUnit Id="1507063732" Position="18.2546,19.97,0" Rotation="4.1018" Scale="1,1,1" UnitType="SiegeTankSieged2" Player="14"/>
-    <ObjectUnit Id="1114411989" Position="202.433,167.0332,0" Rotation="3.1315" Scale="1,1,1" UnitType="ZerglingCarbot" Player="14"/>
     <ObjectUnit Id="1861460068" Position="131.5,212.5,0" Rotation="5.4975" Scale="1,1,1" UnitType="GatewayAncient" Player="14"/>
     <ObjectUnit Id="2039840615" Position="133,98,0" Rotation="5.162" Scale="1,1,1" UnitType="AutoTurret2" Player="14"/>
     <ObjectUnit Id="318333928" Position="111,93,0" Rotation="4.4064" Scale="1,1,1" UnitType="AutoTurret2" Player="14"/>
@@ -1608,7 +1607,6 @@
     <ObjectUnit Id="457498685" Position="39.5,137.5,0" Rotation="5.4975" Scale="1,1,1" UnitType="RoboticsFacilityAncient" Player="14">
         <Flag Index="ForcePlacement" Value="1"/>
     </ObjectUnit>
-    <ObjectUnit Id="1506665568" Position="201.6486,168.9992,0" Rotation="5.0905" Scale="1,1,1" UnitType="ZerglingCarbot" Player="14"/>
     <ObjectUnit Id="1397585136" Position="145.5,53.5,0" Rotation="5.4975" Scale="1,1,1" UnitType="Factory2" Player="14"/>
     <ObjectUnit Id="1488864314" Position="95,168,0" Rotation="2.8435" Scale="1,1,1" UnitType="PhotonCannonPurifier" Player="14"/>
     <ObjectUnit Id="1304558791" Position="116.5,157.5,0" Rotation="5.4975" Scale="1,1,1" UnitType="NexusAncient" Player="14"/>
@@ -1624,7 +1622,6 @@
     <ObjectUnit Id="1440242340" Position="95.5,35.5,0" Rotation="5.4975" Scale="1,1,1" UnitType="HERCCompound2" Player="14"/>
     <ObjectUnit Id="422618631" Position="10.5,203.5,0" Rotation="5.4975" Scale="1,1,1" UnitType="RoboticsFacilityAncient" Player="14"/>
     <ObjectUnit Id="139592264" Position="89,195,0" Rotation="1.2014" Scale="1,1,1" UnitType="PhotonCannonTaldarim" Player="14"/>
-    <ObjectUnit Id="273804001" Position="201.4616,169.1787,0" Rotation="5.224" Scale="1,1,1" UnitType="ZerglingCarbot" Player="14"/>
     <ObjectUnit Id="470828106" Position="151,31,0" Rotation="3.6115" Scale="1,1,1" UnitType="AutoTurret2" Player="14"/>
     <ObjectUnit Id="1313773216" Position="167.905,61.3217,0" Rotation="3.1833" Scale="1,1,1" UnitType="SiegeTankSieged22" Player="14"/>
     <ObjectUnit Id="1816309722" Position="132.5,92.5,0" Rotation="1.9492" Scale="1,1,1" UnitType="Bunker2" Player="14"/>
@@ -1656,7 +1653,6 @@
         <Flag Index="ForcePlacement" Value="1"/>
     </ObjectUnit>
     <ObjectUnit Id="862181346" Position="63,143,0" Rotation="4.3972" Scale="1,1,1" UnitType="PhotonCannonAncient" Player="14"/>
-    <ObjectUnit Id="767630963" Position="202.4675,165.367,0" Rotation="0.091" Scale="1,1,1" UnitType="ZerglingCarbot" Player="14"/>
     <ObjectUnit Id="150333150" Position="21,194,0" Rotation="0.7851" Scale="1,1,1" UnitType="VoidContainmentAncient" Player="14"/>
     <ObjectUnit Id="603598349" Position="79.5,220.5,0" Rotation="5.4975" Scale="1,1,1" UnitType="GatewayTaldarim" Player="14"/>
     <ObjectUnit Id="395093547" Position="31,171,0" Rotation="2.8435" Scale="1,1,1" UnitType="PhotonCannonPurifier" Player="14"/>
@@ -1714,7 +1710,6 @@
     <ObjectUnit Id="1559017427" Position="27,195,0" Rotation="1.2014" Scale="1,1,1" UnitType="PhotonCannonTaldarim" Player="14"/>
     <ObjectUnit Id="1775572588" Position="28.5,243.5,0" Rotation="5.4975" Scale="1,1,1" UnitType="GatewayAncient" Player="14"/>
     <ObjectUnit Id="1014796284" Position="73.5,243.5,0" Rotation="0.7851" Scale="1,1,1" UnitType="TemplarArchiveAncient" Player="14"/>
-    <ObjectUnit Id="698517992" Position="183.1423,166.7797,0" Rotation="1.838" Scale="1,1,1" UnitType="ZerglingCarbot" Player="1"/>
     <ObjectUnit Id="1976009600" Position="49,189,0" Rotation="4.397" Scale="1,1,1" UnitType="PhotonCannonAncient" Player="14"/>
     <ObjectUnit Id="1625410466" Position="28.5,53.5,0" Rotation="1.6215" Scale="1,1,1" UnitType="Bunker" Player="14"/>
     <ObjectUnit Id="1488864233" Position="168,69,0" Rotation="5.4975" Scale="1,1,1" UnitType="SupplyDepot22" Player="14"/>
@@ -1744,17 +1739,13 @@
     <ObjectUnit Id="289726782" Position="47,63,0" Rotation="3.413" Scale="1,1,1" UnitType="AutoTurret" Player="14"/>
     <ObjectUnit Id="1502463278" Position="116.5,114.5,0" Rotation="1.8696" Scale="1,1,1" UnitType="Bunker2" Player="14"/>
     <ObjectUnit Id="806766847" Position="134,142,0" Rotation="4.3972" Scale="1,1,1" UnitType="PhotonCannonAncient" Player="14"/>
-    <ObjectUnit Id="1469906826" Position="201.7502,164.849,0" Rotation="0.3781" Scale="1,1,1" UnitType="ZerglingCarbot" Player="14"/>
-    <ObjectUnit Id="1761547338" Position="201.5881,167.3083,0" Rotation="0.715" Scale="1,1,1" UnitType="ZerglingCarbot" Player="14"/>
     <ObjectUnit Id="1982855881" Position="163.5,236.5,0" Rotation="5.4975" Scale="1,1,1" UnitType="GatewayTaldarim" Player="14"/>
-    <ObjectUnit Id="850792271" Position="200.7348,169.0446,0" Rotation="2.0771" Scale="1,1,1" UnitType="ZerglingCarbot" Player="14"/>
     <ObjectUnit Id="1870253704" Position="44.5,115.5,0" Rotation="5.4975" Scale="1,1,1" UnitType="Barracks" Player="14"/>
     <ObjectUnit Id="657755643" Position="68,23,0" Rotation="4.0153" Scale="1,1,1" UnitType="AutoTurret" Player="14"/>
     <ObjectUnit Id="52615290" Position="162,96,0" Rotation="5.488" Scale="1,1,1" UnitType="AutoTurret2" Player="14"/>
     <ObjectUnit Id="547582026" Position="127,215,0" Rotation="5.4975" Scale="1,1,1" UnitType="PylonNerazim" Player="14"/>
     <ObjectUnit Id="736107078" Position="32.5,89.5,0" Rotation="3.112" Scale="1,1,1" UnitType="Bunker" Player="14"/>
     <ObjectUnit Id="714363349" Position="114.5,90.5,0" Rotation="2.2502" Scale="1,1,1" UnitType="Bunker2" Player="14"/>
-    <ObjectUnit Id="1331981733" Position="202.459,167.6267,0" Rotation="0.4584" Scale="1,1,1" UnitType="ZerglingCarbot" Player="14"/>
     <ObjectUnit Id="1704717785" Position="107.5,61.5,0" Rotation="5.4975" Scale="1,1,1" UnitType="Factory" Player="14"/>
     <ObjectUnit Id="816645956" Position="131,110,0" Rotation="2.2514" Scale="1,1,1" UnitType="AutoTurret2" Player="14"/>
     <ObjectUnit Id="1643504530" Position="149.5,23.5,0" Scale="1,1,1" UnitType="Armory2" Player="14"/>
@@ -1828,7 +1819,6 @@
     <ObjectUnit Id="1846394806" Position="80.0925,72.0344,0" Rotation="1.7944" Scale="1,1,1" UnitType="SiegeTankSieged22" Player="14"/>
     <ObjectUnit Id="114294013" Position="92.8835,13.4201,0" Rotation="3.6965" Scale="1,1,1" UnitType="SiegeTankSieged22" Player="14"/>
     <ObjectUnit Id="1306563484" Position="85,80,0" Rotation="2.4372" Scale="1,1,1" UnitType="AutoTurret" Player="14"/>
-    <ObjectUnit Id="855995282" Position="202.471,166.2375,0" Rotation="0.8254" Scale="1,1,1" UnitType="ZerglingCarbot" Player="14"/>
     <ObjectUnit Id="1957113691" Position="24,197,0" Rotation="5.4975" Scale="1,1,1" UnitType="PylonAncient" Player="14"/>
     <ObjectUnit Id="521319611" Position="14,90,0" Rotation="3.9445" Scale="1,1,1" UnitType="AutoTurret" Player="14"/>
     <ObjectUnit Id="2007416693" Position="19,144,0" Rotation="4.3972" Scale="1,1,1" UnitType="PhotonCannonAncient" Player="14"/>
@@ -1901,7 +1891,6 @@
     <ObjectUnit Id="327599242" Position="101.7727,71.8007,0" Rotation="5.7248" Scale="1,1,1" UnitType="SiegeTankSieged22" Player="14"/>
     <ObjectUnit Id="498274304" Position="68,139,0" Rotation="4.3972" Scale="1,1,1" UnitType="PhotonCannonAncient" Player="14"/>
     <ObjectUnit Id="1719133489" Position="118,148,0" Rotation="2.8435" Scale="1,1,1" UnitType="PhotonCannonPurifier" Player="14"/>
-    <ObjectUnit Id="1683768762" Position="202.4448,168.9992,0" Rotation="2.1901" Scale="1,1,1" UnitType="ZerglingCarbot" Player="14"/>
     <ObjectUnit Id="346768647" Position="109,231,0" Rotation="1.5327" Scale="1,1,1" UnitType="MonolithNerazim" Player="14"/>
     <ObjectUnit Id="1872215706" Position="12,82,0" Rotation="1.212" Scale="1,1,1" UnitType="AutoTurret" Player="14">
         <Flag Index="ForcePlacement" Value="1"/>
@@ -1937,7 +1926,6 @@
     <ObjectUnit Id="197128115" Position="31.1108,42.9165,0" Rotation="3.2102" Scale="1,1,1" UnitType="SiegeTankSieged2" Player="14"/>
     <ObjectUnit Id="256172886" Position="136,236,0" Rotation="5.4975" Scale="1,1,1" UnitType="PylonTaldarim" Player="14"/>
     <ObjectUnit Id="512055411" Position="133.5,103.5,0" Rotation="5.4975" Scale="1,1,1" UnitType="Barracks2" Player="14"/>
-    <ObjectUnit Id="504079340" Position="194.0502,158.9738,0" Rotation="0.8332" Scale="1,1,1" UnitType="HeroRoach" Player="1"/>
     <ObjectUnit Id="1074414398" Position="37,234,0" Scale="1,1,1" UnitType="DarkShrineAncient" Player="14"/>
     <ObjectUnit Id="440466605" Position="25,164,0" Rotation="0.7851" Scale="1,1,1" UnitType="MadnessHealer" Player="14"/>
     <ObjectUnit Id="1488641855" Position="168,76,0" Rotation="4.422" Scale="1,1,1" UnitType="AutoTurret2" Player="14"/>
@@ -1951,11 +1939,9 @@
     <ObjectUnit Id="809015794" Position="89.9052,67.4025,0" Rotation="1.6223" Scale="1,1,1" UnitType="SiegeTankSieged2" Player="14"/>
     <ObjectUnit Id="1141316195" Position="32,35,0" Rotation="4.224" Scale="1,1,1" UnitType="AutoTurret" Player="14"/>
     <ObjectUnit Id="152011500" Position="37,205,0" Rotation="1.2014" Scale="1,1,1" UnitType="PhotonCannonTaldarim" Player="14"/>
-    <ObjectUnit Id="491410926" Position="201.5432,165.0617,0" Rotation="5.913" Scale="1,1,1" UnitType="ZerglingCarbot" Player="14"/>
     <ObjectUnit Id="1969831387" Position="150,109,0" Rotation="0.293" Scale="1,1,1" UnitType="AutoTurret2" Player="14"/>
     <ObjectUnit Id="296499104" Position="156,226,0" Rotation="5.4975" Scale="1,1,1" UnitType="PylonNerazim" Player="14"/>
     <ObjectUnit Id="1501203889" Position="66,188,0" Rotation="1.4301" Scale="1,1,1" UnitType="PhotonCannonStandard" Player="14"/>
-    <ObjectUnit Id="580511861" Position="200.5126,166.2375,0" Rotation="5.7775" Scale="1,1,1" UnitType="ZerglingCarbot" Player="14"/>
     <ObjectUnit Id="1278296926" Position="151.5,186.5,0" Rotation="5.4975" Scale="1,1,1" UnitType="NexusStandard" Player="14">
         <Flag Index="ForcePlacement" Value="1"/>
     </ObjectUnit>
@@ -1974,7 +1960,6 @@
     <ObjectUnit Id="35380839" Position="52,239,0" Rotation="1.2016" Scale="1,1,1" UnitType="PhotonCannonTaldarim" Player="14"/>
     <ObjectUnit Id="1732054130" Position="26.5,70.5,0" Rotation="5.4975" Scale="1,1,1" UnitType="HERCCompound" Player="14"/>
     <ObjectUnit Id="1438581901" Position="24.5,87.5,0" Rotation="4.4316" Scale="1,1,1" UnitType="Bunker" Player="14"/>
-    <ObjectUnit Id="1321729" Position="200.689,168.718,0" Rotation="1.6044" Scale="1,1,1" UnitType="ZerglingCarbot" Player="14"/>
     <ObjectUnit Id="1446468825" Position="89.5,78.5,0" Rotation="5.4975" Scale="1,1,1" UnitType="Barracks" Player="14"/>
     <ObjectUnit Id="1371542016" Position="48.5,240.5,0" Rotation="0.7851" Scale="1,1,1" UnitType="TemplarArchiveStandard" Player="14"/>
     <ObjectUnit Id="1049306578" Position="49,14,0" Rotation="3.3745" Scale="1,1,1" UnitType="AutoTurret" Player="14"/>
@@ -2003,10 +1988,8 @@
     <ObjectUnit Id="262921570" Position="90.5,168.5,0" Rotation="5.4975" Scale="1,1,1" UnitType="TwilightCouncilPurifier" Player="14"/>
     <ObjectUnit Id="1899877049" Position="62.5,98.5,0" Rotation="2.135" Scale="1,1,1" UnitType="Bunker" Player="14"/>
     <ObjectUnit Id="1529031860" Position="59,234,0" Rotation="1.4304" Scale="1,1,1" UnitType="PhotonCannonStandard" Player="14"/>
-    <ObjectUnit Id="752618746" Position="202.45,168.2614,0" Rotation="4.9804" Scale="1,1,1" UnitType="ZerglingCarbot" Player="14"/>
     <ObjectUnit Id="1613224264" Position="110,160,0" Rotation="4.3972" Scale="1,1,1" UnitType="PhotonCannonAncient" Player="14"/>
     <ObjectUnit Id="2038601052" Position="44.5,169.5,0" Rotation="5.4975" Scale="1,1,1" UnitType="ForgePurifier" Player="14"/>
-    <ObjectUnit Id="560246951" Position="201.1933,169.1787,0" Rotation="0.5788" Scale="1,1,1" UnitType="ZerglingCarbot" Player="14"/>
     <ObjectUnit Id="1964140827" Position="167,22,0" Rotation="4.3395" Scale="1,1,1" UnitType="AutoTurret2" Player="14"/>
     <ObjectUnit Id="989565025" Position="120,117,0" Rotation="0.2416" Scale="1,1,1" UnitType="AutoTurret2" Player="14"/>
     <ObjectUnit Id="1911213164" Position="112,141,0" Rotation="5.4975" Scale="1,1,1" UnitType="PylonAncient" Player="14"/>
@@ -2020,19 +2003,14 @@
     <ObjectUnit Id="588655437" Position="28,16,0" Rotation="5.8684" Scale="1,1,1" UnitType="AutoTurret" Player="14"/>
     <ObjectUnit Id="198212554" Position="26,51,0" Rotation="4.449" Scale="1,1,1" UnitType="AutoTurret" Player="14"/>
     <ObjectUnit Id="1672020160" Position="87,142,0" Rotation="4.3972" Scale="1,1,1" UnitType="PhotonCannonAncient" Player="14"/>
-    <ObjectUnit Id="1801826098" Position="202.4011,164.677,0" Rotation="5.0646" Scale="1,1,1" UnitType="ZerglingCarbot" Player="14"/>
     <ObjectUnit Id="128403047" Position="160.5,51.5,0" Rotation="0.5185" Scale="1,1,1" UnitType="Bunker2" Player="14"/>
-    <ObjectUnit Id="610271406" Position="190.6125,154.8837,0" Rotation="0.8332" Scale="1,1,1" UnitType="HeroRoach" Player="1"/>
-    <ObjectUnit Id="993053858" Position="201.525,166.769,0" Rotation="2.309" Scale="1,1,1" UnitType="ZerglingCarbot" Player="14"/>
     <ObjectUnit Id="1557144523" Position="85,224,0" Rotation="5.4975" Scale="1,1,1" UnitType="PylonNerazim" Player="14"/>
     <ObjectUnit Id="309487814" Position="102.5,50.5,0" Rotation="5.4028" Scale="1,1,1" UnitType="Bunker" Player="14"/>
     <ObjectUnit Id="1053912276" Position="102,218,0" Rotation="1.2016" Scale="1,1,1" UnitType="PhotonCannonTaldarim" Player="14"/>
     <ObjectUnit Id="2036144110" Position="162,195,0" Rotation="5.4975" Scale="1,1,1" UnitType="PylonNerazim" Player="14"/>
-    <ObjectUnit Id="268751731" Position="200.4438,165.3095,0" Rotation="3.961" Scale="1,1,1" UnitType="ZerglingCarbot" Player="14"/>
     <ObjectUnit Id="467899988" Position="80,101,0" Rotation="5.6718" Scale="1,1,1" UnitType="AutoTurret" Player="14"/>
     <ObjectUnit Id="930147868" Position="28,209,0" Rotation="5.4975" Scale="1,1,1" UnitType="PylonTaldarim" Player="14"/>
     <ObjectUnit Id="251795573" Position="121,166,0" Rotation="4.3972" Scale="1,1,1" UnitType="PhotonCannonAncient" Player="14"/>
-    <ObjectUnit Id="763077547" Position="189.0363,160.3505,0" Rotation="0.8334" Scale="1,1,1" UnitType="HeroRoach" Player="1"/>
     <ObjectUnit Id="1919293900" Position="63,84,0" Rotation="0.7238" Scale="1,1,1" UnitType="AutoTurret" Player="14"/>
     <ObjectUnit Id="1019574743" Position="128.0078,67.0695,0" Rotation="5.177" Scale="1,1,1" UnitType="SiegeTankSieged22" Player="14"/>
     <ObjectUnit Id="1153683429" Position="47,91,0" Rotation="0.0603" Scale="1,1,1" UnitType="AutoTurret" Player="14"/>
@@ -2065,7 +2043,6 @@
     <ObjectUnit Id="1792540241" Position="71,227,0" Scale="1,1,1" UnitType="DarkShrineTaldarim" Player="14"/>
     <ObjectUnit Id="616060840" Position="155,198,0" Rotation="1.4304" Scale="1,1,1" UnitType="PhotonCannonStandard" Player="14"/>
     <ObjectUnit Id="512695991" Position="65.5,26.5,0" Rotation="2.2133" Scale="1,1,1" UnitType="Bunker" Player="14"/>
-    <ObjectUnit Id="2084413814" Position="200.6643,170.169,0" Rotation="2.8591" Scale="1,1,1" UnitType="ZerglingCarbot" Player="14"/>
     <ObjectUnit Id="1342287620" Position="118.5,171.5,0" Rotation="5.4975" Scale="1,1,1" UnitType="GatewayStandard" Player="14"/>
     <ObjectUnit Id="1626463167" Position="96,219,0" Rotation="5.4975" Scale="1,1,1" UnitType="ObeliskStandard" Player="14"/>
     <ObjectUnit Id="1433611103" Position="164,189,0" Rotation="1.2016" Scale="1,1,1" UnitType="PhotonCannonTaldarim" Player="14"/>
@@ -2121,7 +2098,6 @@
     <ObjectUnit Id="1881848917" Position="84,230,0" Rotation="1.2016" Scale="1,1,1" UnitType="PhotonCannonTaldarim" Player="14"/>
     <ObjectUnit Id="1459544858" Position="153.5,19.5,0" Rotation="0.8962" Scale="1,1,1" UnitType="Bunker2" Player="14"/>
     <ObjectUnit Id="491618066" Position="79.5,200.5,0" Rotation="5.4975" Scale="1,1,1" UnitType="RoboticsFacilityAncient" Player="14"/>
-    <ObjectUnit Id="959763892" Position="200.6713,168.078,0" Rotation="3.724" Scale="1,1,1" UnitType="ZerglingCarbot" Player="14"/>
     <ObjectUnit Id="1574271933" Position="137,227,0" Scale="1,1,1" UnitType="DarkShrineAncient" Player="14">
         <Flag Index="ForcePlacement" Value="1"/>
     </ObjectUnit>
@@ -2188,7 +2164,6 @@
     <ObjectUnit Id="221841446" Position="7.5,168.5,0" Rotation="0.7851" Scale="1,1,1" UnitType="MadnessSpawnerDefensive" Player="14"/>
     <ObjectUnit Id="1451778420" Position="152,225,0" Rotation="1.2016" Scale="1,1,1" UnitType="PhotonCannonTaldarim" Player="14"/>
     <ObjectUnit Id="1494345060" Position="131,146,0" Rotation="2.8435" Scale="1,1,1" UnitType="PhotonCannonPurifier" Player="14"/>
-    <ObjectUnit Id="1986094232" Position="201.4875,165.7092,0" Rotation="5.6052" Scale="1,1,1" UnitType="ZerglingCarbot" Player="14"/>
     <ObjectUnit Id="1865484176" Position="39.5,122.5,0" Rotation="5.4975" Scale="1,1,1" UnitType="HERCCompound" Player="14"/>
     <ObjectUnit Id="2074179998" Position="50.7624,8.9104,0" Rotation="0.4567" Scale="1,1,1" UnitType="SiegeTankSieged2" Player="14"/>
     <ObjectUnit Id="930414518" Position="100,18,0" Rotation="3.0207" Scale="1,1,1" UnitType="AutoTurret2" Player="14"/>
@@ -2234,16 +2209,13 @@
     <ObjectUnit Id="172153766" Position="109,37,0" Rotation="4.948" Scale="1,1,1" UnitType="AutoTurret2" Player="14"/>
     <ObjectUnit Id="1814717637" Position="15.5,58.5,0" Rotation="2.2094" Scale="1,1,1" UnitType="Bunker" Player="14"/>
     <ObjectUnit Id="78245612" Position="49.5,67.5,0" Rotation="2.2346" Scale="1,1,1" UnitType="Bunker" Player="14"/>
-    <ObjectUnit Id="2069628076" Position="202.485,169.9291,0" Rotation="1.1875" Scale="1,1,1" UnitType="ZerglingCarbot" Player="14"/>
     <ObjectUnit Id="1245132083" Position="87.5,208.5,0" Rotation="0.7851" Scale="1,1,1" UnitType="TemplarArchiveStandard" Player="14"/>
     <ObjectUnit Id="398256999" Position="37,142,0" Rotation="5.4975" Scale="1,1,1" UnitType="VoidContainmentStandard" Player="14"/>
     <ObjectUnit Id="1678553708" Position="91.5,22.5,0" Rotation="5.4975" Scale="1,1,1" UnitType="FusionCore2" Player="14"/>
-    <ObjectUnit Id="954651513" Position="202.5412,170.3562,0" Rotation="0.2482" Scale="1,1,1" UnitType="ZerglingCarbot" Player="14"/>
     <ObjectUnit Id="1442984001" Position="115,108,0" Rotation="3.7597" Scale="1,1,1" UnitType="AutoTurret2" Player="14"/>
     <ObjectUnit Id="1050138909" Position="45,160,0" Rotation="5.4975" Scale="1,1,1" UnitType="PylonStandard" Player="14"/>
     <ObjectUnit Id="697329473" Position="114.5,39.5,0" Rotation="5.4975" Scale="1,1,1" UnitType="Factory2" Player="14"/>
     <ObjectUnit Id="1169646302" Position="68,154,0" Rotation="5.4975" Scale="1,1,1" UnitType="PylonStandard" Player="14"/>
-    <ObjectUnit Id="1801564251" Position="202.8671,168.1076,0" Rotation="0.274" Scale="1,1,1" UnitType="ZerglingCarbot" Player="14"/>
     <ObjectUnit Id="1058165735" Position="29,176,0" Rotation="5.4975" Scale="1,1,1" UnitType="PylonNerazim" Player="14"/>
     <ObjectUnit Id="543893437" Position="103,224,0" Rotation="1.4306" Scale="1,1,1" UnitType="PhotonCannonStandard" Player="14"/>
     <ObjectUnit Id="1762095558" Position="15,104,0" Rotation="0.206" Scale="1,1,1" UnitType="AutoTurret" Player="14"/>
@@ -2321,7 +2293,6 @@
     <ObjectUnit Id="982473861" Position="89,188,0" Rotation="1.2014" Scale="1,1,1" UnitType="PhotonCannonTaldarim" Player="14"/>
     <ObjectUnit Id="484868214" Position="138,50,0" Rotation="5.2268" Scale="1,1,1" UnitType="AutoTurret2" Player="14"/>
     <ObjectUnit Id="494825103" Position="157,236,0" Rotation="1.2016" Scale="1,1,1" UnitType="PhotonCannonTaldarim" Player="14"/>
-    <ObjectUnit Id="1800873342" Position="201.6894,168.078,0" Rotation="6.0537" Scale="1,1,1" UnitType="ZerglingCarbot" Player="14"/>
     <ObjectUnit Id="342060680" Position="134,161,0" Rotation="2.8435" Scale="1,1,1" UnitType="PhotonCannonPurifier" Player="14"/>
     <ObjectUnit Id="1167641812" Position="71.5,100.5,0" Rotation="4.0732" Scale="1,1,1" UnitType="Bunker" Player="14"/>
     <ObjectUnit Id="1796403754" Position="58,243,0" Rotation="5.4975" Scale="1,1,1" UnitType="PylonJudicator" Player="14"/>

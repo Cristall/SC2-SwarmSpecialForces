@@ -77,6 +77,7 @@
             <Value>1.5</Value>
             <Value>1.6</Value>
             <Value>1.8</Value>
+            <Value>1.9</Value>
         </Version>
         <Date>
             <Value>8/24/2020</Value>
@@ -87,6 +88,7 @@
             <Value>10/10/2020</Value>
             <Value>10/17/2020</Value>
             <Value>10/20/2020</Value>
+            <Value>1/7/2021</Value>
         </Date>
         <Notes>
             <Value>12</Value>
@@ -97,6 +99,7 @@
             <Value>52,53,54,55,56,57,58</Value>
             <Value>59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77</Value>
             <Value>78,79,80,81,82,83</Value>
+            <Value>84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105</Value>
         </Notes>
     </PatchNote>
 </DocInfo>
