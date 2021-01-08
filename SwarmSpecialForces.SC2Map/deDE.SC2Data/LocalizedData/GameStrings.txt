@@ -607,10 +607,15 @@ Trig/HeroSelection/Dialog/DiffButton/NormalTooltip=Immernoch schwer zu verlieren
 Trig/HeroSelection/Dialog/NoHeroSelected=Noch keinen ausgewählt
 Trig/HeroSelection/Dialog/ReadyButton=<c val="FFFF00">Bereit!</c>
 Trig/HeroSelection/Dialog/SelectHeroLabel=Wähle einen Helden:
-
+Trig/HeroSelection/CustomDiff/CustomPreset/CreateButton=Erstellen
+Trig/HeroSelection/CustomDiff/CustomPreset/CreateButtonTooltip=Erstellt eine Zeichenfolge die alle Eingaben speichert.
+Trig/HeroSelection/CustomDiff/CustomPreset/LoadButton=Laden
+Trig/HeroSelection/CustomDiff/CustomPreset/LoadButtonTooltip=lädt alle Werte von der eingegebenen Zeichenfolge.
+Trig/HeroSelection/CustomDiff/CustomPreset/LoadButtonTooltipNotHost=Nur der Host kann Eingaben ändern.
+Trig/HeroSelection/CustomDiff/CustomPreset/CopyClipboardButton=Kopieren
+Trig/HeroSelection/CustomDiff/CustomPreset/CopyClipboardButtonTooltip=Kopiert die erstellte Zeichenfolge in die Zwischenablage.
 Trig/HeroSelection/CustomDiff/InputAccepted=Gültige Eingabe.
 Trig/HeroSelection/CustomDiff/InputRejected=Ungültige Eingabe.
-
 Trig/HeroSelection/CustomDiff/ApproximatedDiff=Punkte und Sammelobjekte basieren auf: 
 Trig/HeroSelection/CustomDiff/ApproximatedDiffNone=Keine annäherende Schwierigkeit gefunden. Punkte, Siege und Sammlerstücke werden nicht belohnt.
 Trig/HeroSelection/CustomDiff/ArmorFlat=Rüstung (Basis)

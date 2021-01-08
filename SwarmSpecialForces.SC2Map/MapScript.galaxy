@@ -81,7 +81,6 @@ struct gs_HeroSelect_HeroInfo {
 struct gs_HeroSelection {
     int lv_mainFrame;
     int[gv_maxAmountPlayers + 1] lv_playerShowcase;
-    int lv_dialog;
     int[gv_maxAmountPlayers + 1] lv_player_Hero_Selected;
     int[gv_maxAmountPlayers + 1] lv_player_Difficulty_Selected;
     bool[gv_maxAmountPlayers + 1] lv_player_IsReady;
@@ -99,7 +98,12 @@ struct gs_HeroSelection {
     int[gv_maxCustomDiffSettings + 1] lv_customDiffLabels;
     bool[gv_maxCustomDiffSettings + 1] lv_customDiffValidInput;
     int lv_customDiffHost;
+    playergroup lv_customDiffNotHostPlayerGroup;
     int[gv_maxAmountDifficulties + 1] lv_customDiffPresetButtons;
+    int lv_customDiffCustomPresetInputEditBox;
+    int lv_customDiffCustomPresetInputCreateButton;
+    int lv_customDiffCustomPresetInputCopyClipboardButton;
+    int lv_customDiffCustomPresetInputLoadButton;
 };
 
 struct gs_HeroSelect_CustomDiff_DiffPreset {
@@ -411,7 +415,6 @@ void InitGlobals () {
     for (init_i1 = 0; init_i1 <= gv_maxAmountPlayers; init_i1 += 1) {
         gv_heroSelection.lv_playerShowcase[init_i1] = c_invalidDialogControlId;
     }
-    gv_heroSelection.lv_dialog = c_invalidDialogId;
     for (init_i1 = 0; init_i1 <= gv_maxAmountPlayers; init_i1 += 1) {
         gv_heroSelection.lv_player_Difficulty_Selected[init_i1] = -1;
     }
@@ -435,9 +438,14 @@ void InitGlobals () {
     for (init_i1 = 0; init_i1 <= gv_maxCustomDiffSettings; init_i1 += 1) {
         gv_heroSelection.lv_customDiffValidInput[init_i1] = true;
     }
+    gv_heroSelection.lv_customDiffNotHostPlayerGroup = PlayerGroupEmpty();
     for (init_i1 = 0; init_i1 <= gv_maxAmountDifficulties; init_i1 += 1) {
         gv_heroSelection.lv_customDiffPresetButtons[init_i1] = c_invalidDialogControlId;
     }
+    gv_heroSelection.lv_customDiffCustomPresetInputEditBox = c_invalidDialogControlId;
+    gv_heroSelection.lv_customDiffCustomPresetInputCreateButton = c_invalidDialogControlId;
+    gv_heroSelection.lv_customDiffCustomPresetInputCopyClipboardButton = c_invalidDialogControlId;
+    gv_heroSelection.lv_customDiffCustomPresetInputLoadButton = c_invalidDialogControlId;
     gv_customDefeatDialogVariables.lv_dialog = c_invalidDialogId;
     gv_customDefeatDialogVariables.lv_spectateButton = c_invalidDialogControlId;
     gv_customDefeatDialogVariables.lv_leaveButton = c_invalidDialogControlId;
@@ -805,11 +813,14 @@ bool gf_isNumber (string lp_string);
 int gf_HeroSelect_CustomDiff_GetEditboxID (int lp_dialogItem);
 bool gf_HeroSelect_CustomDiff_AllInputsValid ();
 int gf_HeroSelect_CustomDiff_GetDiffPresetID (int lp_dialogItem);
+void gf_HeroSelect_CustomDiff_DiffPresetSet (structref<gs_HeroSelect_CustomDiff_DiffPreset> lp_preset);
 int gf_HeroSelect_CustomDiff_DirectRewardDiff ();
 void gf_HeroSelect_CustomDiff_HighlightRewardDiff (int lp_diff);
 void gf_HeroSelect_CustomDiff_DiffPresetReturn (structref<gs_HeroSelect_CustomDiff_DiffPreset> lp_return, int lp_diff);
 void gf_HeroSelect_CustomDiff_SetOptions ();
 void gf_HeroSelect_CustomDiff_NewHostAfterLeave (int lp_newhost);
+void gf_HeroSelect_CustomDiff_CustomPreset_CreateInput (int lp_player);
+bool gf_HeroSelect_CustomDiff_CustomPreset_LoadInputandCheck (structref<gs_HeroSelect_CustomDiff_DiffPreset> lp_preset);
 void gf_Init_CustomDefeatDialog ();
 void gf_Init_Tutorialminiintroduction ();
 void gf_InitAskTutorial ();
@@ -931,6 +942,9 @@ trigger gt_HeroSelect_AutoSelection_ButtonHandler;
 trigger gt_HeroSelect_Timer;
 trigger gt_HeroSelect_CustomDiff_EditboxEdits;
 trigger gt_HeroSelect_CustomDiff_DiffPresetHandler;
+trigger gt_HeroSelect_CustomDiff_CustomPreset_CreateButton;
+trigger gt_HeroSelect_CustomDiff_CustomPreset_InputChanged;
+trigger gt_HeroSelect_CustomDiff_CustomPreset_LoadButton;
 trigger gt_CustomDefeatDialog_SpectateButton;
 trigger gt_CustomDefeatDialog_LeaveButton;
 trigger gt_Tutorial_CloseButtonHandlerminiintoduction;
@@ -9447,7 +9461,6 @@ void gf_HeroSelect_Finish () {
     // Variable Initialization
 
     // Implementation
-    GameSetMissionTimePaused(false);
     gf_HeroSelect_Finish_Triggers_Deactivate();
     lv_tmpPlayer = 1;
     for ( ; ( (autoD713CB99_ai >= 0 && lv_tmpPlayer <= autoD713CB99_ae) || (autoD713CB99_ai < 0 && lv_tmpPlayer >= autoD713CB99_ae) ) ; lv_tmpPlayer += autoD713CB99_ai ) {
@@ -9555,6 +9568,7 @@ void gf_HeroSelect_Finish () {
     BoardSetAnchor(gv_leaderboard.lv_leaderboard, c_anchorTopRight, 0, 0);
     DialogControlSetVisible(gv_heroSelection.lv_mainFrame, PlayerGroupAll(), false);
     DialogControlSetVisible(gv_sSF_CustomUI.lv_mainFrame, PlayerGroupAll(), true);
+    GameSetMissionTimePaused(false);
     TimerStart(gv_spawnTimer, 20.0, true, c_timeGame);
     TimerStart(gv_idleTimer, 60.0, true, c_timeGame);
     gf_HeroSelect_Finish_Triggers_Activate();
@@ -9571,6 +9585,11 @@ void gf_HeroSelect_Finish_Triggers_Deactivate () {
     TriggerEnable(gt_HeroSelect_HeroButtonHandler, false);
     TriggerEnable(gt_HeroSelect_DiffButtonHandler, false);
     TriggerEnable(gt_HeroSelect_AutoSelection_ButtonHandler, false);
+    TriggerEnable(gt_HeroSelect_CustomDiff_CustomPreset_CreateButton, false);
+    TriggerEnable(gt_HeroSelect_CustomDiff_CustomPreset_InputChanged, false);
+    TriggerEnable(gt_HeroSelect_CustomDiff_CustomPreset_LoadButton, false);
+    TriggerEnable(gt_HeroSelect_CustomDiff_DiffPresetHandler, false);
+    TriggerEnable(gt_HeroSelect_CustomDiff_EditboxEdits, false);
 }
 
 void gf_HeroSelect_Finish_Triggers_Activate () {
@@ -9643,8 +9662,6 @@ void gf_Init_HeroSelection () {
     int auto58140AE2_var;
     int autoC7DB7F99_ae;
     int autoC7DB7F99_var;
-    const int autoE168A439_ae = gv_maxCustomDiffSettings;
-    int autoE168A439_var;
 
     // Variable Initialization
     lv_currentframe = c_invalidDialogControlId;
@@ -9733,7 +9750,12 @@ void gf_Init_HeroSelection () {
         TriggerEnable(gt_HeroSelect_DiffButtonHandler, false);
         TriggerEnable(gt_HeroSelect_CustomDiff_DiffPresetHandler, true);
         TriggerEnable(gt_HeroSelect_CustomDiff_EditboxEdits, true);
+        TriggerEnable(gt_HeroSelect_CustomDiff_CustomPreset_LoadButton, true);
+        TriggerEnable(gt_HeroSelect_CustomDiff_CustomPreset_InputChanged, true);
+        TriggerEnable(gt_HeroSelect_CustomDiff_CustomPreset_CreateButton, true);
         gv_heroSelection.lv_customDiffHost = PlayerGroupPlayer(gv_playerGroup, 1);
+        gv_heroSelection.lv_customDiffNotHostPlayerGroup = PlayerGroupCopy(gv_playerGroup);
+        PlayerGroupRemove(gv_heroSelection.lv_customDiffNotHostPlayerGroup, gv_heroSelection.lv_customDiffHost);
         DialogControlHookup(gv_heroSelection.lv_mainFrame, c_triggerControlTypePanel, "GameModeCustom");
         DialogControlSetVisible(DialogControlLastCreated(), PlayerGroupAll(), true);
         DialogControlSetAnimationState(DialogControlLastCreated(), PlayerGroupSingle(gv_heroSelection.lv_customDiffHost), "Host", "True");
@@ -9781,6 +9803,15 @@ void gf_Init_HeroSelection () {
             gv_heroSelection.lv_customDiffEditboxes[auto58140AE2_var] = DialogControlLastCreated();
             libNtve_gf_SetDialogItemEditorValue(DialogControlLastCreated(), "0", PlayerGroupAll());
         }
+        DialogControlHookup(gv_heroSelection.lv_mainFrame, c_triggerControlTypeEditBox, "GameModeCustom/CustomPreset/Input");
+        gv_heroSelection.lv_customDiffCustomPresetInputEditBox = DialogControlLastCreated();
+        DialogControlSetEnabled(DialogControlLastCreated(), PlayerGroupSingle(gv_heroSelection.lv_customDiffHost), true);
+        DialogControlHookup(gv_heroSelection.lv_mainFrame, c_triggerControlTypeButton, "GameModeCustom/CustomPreset/CreateInputButton");
+        gv_heroSelection.lv_customDiffCustomPresetInputCreateButton = DialogControlLastCreated();
+        DialogControlHookup(gv_heroSelection.lv_mainFrame, c_triggerControlTypeButton, "GameModeCustom/CustomPreset/CopyInputButton");
+        gv_heroSelection.lv_customDiffCustomPresetInputCopyClipboardButton = DialogControlLastCreated();
+        DialogControlHookup(gv_heroSelection.lv_mainFrame, c_triggerControlTypeButton, "GameModeCustom/CustomPreset/LoadInputButton");
+        gv_heroSelection.lv_customDiffCustomPresetInputLoadButton = DialogControlLastCreated();
 
         autoC7DB7F99_ae = (gv_maxAmountDifficulties - 1);
         autoC7DB7F99_var = 0;
@@ -9790,10 +9821,7 @@ void gf_Init_HeroSelection () {
         }
 
         gf_HeroSelect_CustomDiff_DiffPresetReturn(lv_settings, 0);
-        autoE168A439_var = 0;
-        for ( ; autoE168A439_var <= autoE168A439_ae; autoE168A439_var += 1 ) {
-            libNtve_gf_SetDialogItemEditorValue(gv_heroSelection.lv_customDiffEditboxes[autoE168A439_var], FixedToString(lv_settings.lv_values[autoE168A439_var], c_fixedPrecisionAny), PlayerGroupAll());
-        }
+        gf_HeroSelect_CustomDiff_DiffPresetSet(lv_settings);
     }
 
 }
@@ -10003,6 +10031,18 @@ int gf_HeroSelect_CustomDiff_GetDiffPresetID (int lp_dialogItem) {
 
     }
     return -1;
+}
+
+void gf_HeroSelect_CustomDiff_DiffPresetSet (structref<gs_HeroSelect_CustomDiff_DiffPreset> lp_preset) {
+    // Automatic Variable Declarations
+    const int autoA77CBEAA_ae = gv_maxCustomDiffSettings;
+    int autoA77CBEAA_var;
+
+    // Implementation
+    autoA77CBEAA_var = 0;
+    for ( ; autoA77CBEAA_var <= autoA77CBEAA_ae; autoA77CBEAA_var += 1 ) {
+        libNtve_gf_SetDialogItemEditorValue(gv_heroSelection.lv_customDiffEditboxes[autoA77CBEAA_var], FixedToString(lp_preset.lv_values[autoA77CBEAA_var], c_fixedPrecisionAny), PlayerGroupAll());
+    }
 }
 
 int gf_HeroSelect_CustomDiff_DirectRewardDiff () {
@@ -10403,30 +10443,99 @@ void gf_HeroSelect_CustomDiff_SetOptions () {
 }
 
 void gf_HeroSelect_CustomDiff_NewHostAfterLeave (int lp_newhost) {
+    // Variable Declarations
+    string lv_inputeditboxstring;
+
     // Automatic Variable Declarations
-    const int auto2BABF359_ae = gv_maxCustomDiffSettings;
-    int auto2BABF359_var;
+    // Variable Initialization
+    lv_inputeditboxstring = "";
 
     // Implementation
+    lv_inputeditboxstring = libNtve_gf_DialogItemEditValue(gv_heroSelection.lv_customDiffCustomPresetInputEditBox, lp_newhost);
     if ((gv_heroSelection.lv_player_IsReady[lp_newhost] == true)) {
         gv_heroSelection.lv_player_IsReady[lp_newhost] = false;
         gv_heroSelection.lv_ready_Counter -= 1;
         DialogControlSetVisible(gv_heroSelection.lv_ready_Button, PlayerGroupSingle(lp_newhost), true);
         if (gf_HeroSelect_CustomDiff_AllInputsValid()) {
             DialogControlSetEnabled(gv_heroSelection.lv_ready_Button, PlayerGroupSingle(lp_newhost), true);
+            DialogControlSetEnabled(gv_heroSelection.lv_customDiffCustomPresetInputEditBox, PlayerGroupSingle(lp_newhost), true);
+            libNtve_gf_SetDialogItemEditorValue(gv_heroSelection.lv_customDiffCustomPresetInputEditBox, "", PlayerGroupSingle(lp_newhost));
+            libNtve_gf_SetDialogItemEditorValue(gv_heroSelection.lv_customDiffCustomPresetInputEditBox, lv_inputeditboxstring, PlayerGroupSingle(lp_newhost));
         }
         else {
             DialogControlSetEnabled(gv_heroSelection.lv_ready_Button, PlayerGroupSingle(lp_newhost), false);
         }
     }
-
-    auto2BABF359_var = 0;
-    for ( ; auto2BABF359_var <= auto2BABF359_ae; auto2BABF359_var += 1 ) {
-        libNtve_gf_SetDialogItemEditorValue(gv_heroSelection.lv_customDiffEditboxes[auto2BABF359_var], libNtve_gf_DialogItemEditValue(gv_heroSelection.lv_customDiffEditboxes[auto2BABF359_var], gv_heroSelection.lv_customDiffHost), PlayerGroupSingle(lp_newhost));
+    else {
+        DialogControlSetEnabled(gv_heroSelection.lv_customDiffCustomPresetInputEditBox, PlayerGroupSingle(lp_newhost), true);
+        libNtve_gf_SetDialogItemEditorValue(gv_heroSelection.lv_customDiffCustomPresetInputEditBox, "", PlayerGroupSingle(lp_newhost));
+        libNtve_gf_SetDialogItemEditorValue(gv_heroSelection.lv_customDiffCustomPresetInputEditBox, lv_inputeditboxstring, PlayerGroupSingle(lp_newhost));
     }
     gv_heroSelection.lv_customDiffHost = lp_newhost;
+    PlayerGroupRemove(gv_heroSelection.lv_customDiffNotHostPlayerGroup, gv_heroSelection.lv_customDiffHost);
     DialogControlHookup(gv_heroSelection.lv_mainFrame, c_triggerControlTypePanel, "GameModeCustom");
     DialogControlSetAnimationState(DialogControlLastCreated(), PlayerGroupSingle(gv_heroSelection.lv_customDiffHost), "Host", "True");
+}
+
+void gf_HeroSelect_CustomDiff_CustomPreset_CreateInput (int lp_player) {
+    // Variable Declarations
+    string lv_string;
+
+    // Automatic Variable Declarations
+    const int autoD21D130A_ae = gv_maxCustomDiffSettings;
+    int autoD21D130A_var;
+
+    // Variable Initialization
+    lv_string = "";
+
+    // Implementation
+    autoD21D130A_var = 0;
+    for ( ; autoD21D130A_var <= autoD21D130A_ae; autoD21D130A_var += 1 ) {
+        lv_string = (lv_string + " " + libNtve_gf_DialogItemEditValue(gv_heroSelection.lv_customDiffEditboxes[autoD21D130A_var], gv_heroSelection.lv_customDiffHost));
+    }
+    libNtve_gf_SetDialogItemEditorValue(gv_heroSelection.lv_customDiffCustomPresetInputEditBox, lv_string, PlayerGroupSingle(lp_player));
+    DialogControlSetEnabled(gv_heroSelection.lv_customDiffCustomPresetInputCopyClipboardButton, PlayerGroupSingle(lp_player), true);
+}
+
+bool gf_HeroSelect_CustomDiff_CustomPreset_LoadInputandCheck (structref<gs_HeroSelect_CustomDiff_DiffPreset> lp_preset) {
+    // Variable Declarations
+    string lv_string;
+    int lv_tmpInt;
+    string lv_tmpString;
+    bool lv_endFlag;
+
+    // Automatic Variable Declarations
+    const int auto63818F2B_ae = gv_maxCustomDiffSettings;
+    const int auto63818F2B_ai = 1;
+
+    // Variable Initialization
+    lv_string = libNtve_gf_DialogItemEditValue(gv_heroSelection.lv_customDiffCustomPresetInputEditBox, gv_heroSelection.lv_customDiffHost);
+    lv_tmpString = "";
+    lv_endFlag = true;
+
+    // Implementation
+    lv_tmpInt = 0;
+    for ( ; ( (auto63818F2B_ai >= 0 && lv_tmpInt <= auto63818F2B_ae) || (auto63818F2B_ai < 0 && lv_tmpInt >= auto63818F2B_ae) ) ; lv_tmpInt += auto63818F2B_ai ) {
+        lv_tmpString = StringWord(lv_string, (lv_tmpInt + 1));
+        if (gf_isNumber(lv_tmpString)) {
+            lp_preset.lv_values[lv_tmpInt] = StringToFixed(lv_tmpString);
+        }
+        else {
+            lp_preset.lv_values[lv_tmpInt] = 0.0;
+            lv_endFlag = false;
+        }
+    }
+    lv_tmpString = StringWord(lv_string, (lv_tmpInt + 1));
+    if ((lv_tmpString != "")) {
+        lv_endFlag = false;
+    }
+
+    if ((lv_endFlag == true)) {
+        return true;
+    }
+    else {
+        return false;
+    }
 }
 
 void gf_Init_CustomDefeatDialog () {
@@ -12142,7 +12251,9 @@ void gf_RemoveActivePlayer (int lp_playerID) {
 
                 }
             }
-
+            else {
+                PlayerGroupRemove(gv_heroSelection.lv_customDiffNotHostPlayerGroup, lp_playerID);
+            }
         }
     }
 
@@ -15782,6 +15893,11 @@ bool gt_MapInitialization_Func (bool testConds, bool runActions) {
     }
     else {
     }
+    if ((GameIsTestMap(false) == true)) {
+        gv_gameMode = "CustomDiff";
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, StringToText(gv_gameMode));
+    }
+
     GameSetMissionTimePaused(true);
     libLbty_gf_EnableDisablePingPanel(true, PlayerGroupAll());
     gf_Init_HeroList();
@@ -15987,6 +16103,9 @@ bool gt_HeroSelect_ReadyButtonHandler_Func (bool testConds, bool runActions) {
     if ((EventPlayer() == gv_heroSelection.lv_customDiffHost)) {
         DialogControlHookup(gv_heroSelection.lv_mainFrame, c_triggerControlTypePanel, "GameModeCustom");
         DialogControlSetAnimationState(DialogControlLastCreated(), PlayerGroupSingle(gv_heroSelection.lv_customDiffHost), "Host", "False");
+        DialogControlSetEnabled(gv_heroSelection.lv_customDiffCustomPresetInputLoadButton, PlayerGroupSingle(gv_heroSelection.lv_customDiffHost), false);
+        DialogControlSetEnabled(gv_heroSelection.lv_customDiffCustomPresetInputEditBox, PlayerGroupSingle(gv_heroSelection.lv_customDiffHost), false);
+        gv_heroSelection.lv_customDiffHost = 0;
     }
 
     return true;
@@ -16160,7 +16279,7 @@ bool gt_HeroSelect_CustomDiff_EditboxEdits_Func (bool testConds, bool runActions
         return true;
     }
 
-    libNtve_gf_SetDialogItemText(gv_heroSelection.lv_customDiffLabels[lv_editboxID], StringToText(lv_input), PlayerGroupAll());
+    libNtve_gf_SetDialogItemEditorValue(gv_heroSelection.lv_customDiffEditboxes[lv_editboxID], lv_input, gv_heroSelection.lv_customDiffNotHostPlayerGroup);
     if (gf_isNumber(lv_input)) {
         lv_value = StringToFixed(lv_input);
         if ((!((lv_editboxID == 0) || (lv_editboxID == 4) || (lv_editboxID == 6) || (lv_editboxID == 13) || (lv_editboxID == 14) || (lv_editboxID == 15) || (lv_editboxID == 16) || (lv_editboxID == 17)))) {
@@ -16205,10 +16324,12 @@ bool gt_HeroSelect_CustomDiff_EditboxEdits_Func (bool testConds, bool runActions
     DialogControlSetAnimationState(EventDialogControl(), PlayerGroupAll(), "ValidInput", libNtve_gf_ConvertBooleanToString(gv_heroSelection.lv_customDiffValidInput[lv_editboxID]));
     if (gf_HeroSelect_CustomDiff_AllInputsValid()) {
         DialogControlSetEnabled(gv_heroSelection.lv_ready_Button, PlayerGroupSingle(gv_heroSelection.lv_customDiffHost), true);
+        DialogControlSetEnabled(gv_heroSelection.lv_customDiffCustomPresetInputCreateButton, gv_playerGroup, true);
         gf_HeroSelect_CustomDiff_HighlightRewardDiff(gf_HeroSelect_CustomDiff_DirectRewardDiff());
     }
     else {
         DialogControlSetEnabled(gv_heroSelection.lv_ready_Button, PlayerGroupSingle(gv_heroSelection.lv_customDiffHost), false);
+        DialogControlSetEnabled(gv_heroSelection.lv_customDiffCustomPresetInputCreateButton, gv_playerGroup, false);
         gf_HeroSelect_CustomDiff_HighlightRewardDiff(-2);
     }
     return true;
@@ -16230,9 +16351,6 @@ bool gt_HeroSelect_CustomDiff_DiffPresetHandler_Func (bool testConds, bool runAc
     gs_HeroSelect_CustomDiff_DiffPreset lv_settings;
 
     // Automatic Variable Declarations
-    const int auto6CA06B6E_ae = gv_maxCustomDiffSettings;
-    int auto6CA06B6E_var;
-
     // Variable Initialization
     lv_difficulty = gf_HeroSelect_CustomDiff_GetDiffPresetID(EventDialogControl());
 
@@ -16249,10 +16367,7 @@ bool gt_HeroSelect_CustomDiff_DiffPresetHandler_Func (bool testConds, bool runAc
     }
 
     gf_HeroSelect_CustomDiff_DiffPresetReturn(lv_settings, lv_difficulty);
-    auto6CA06B6E_var = 0;
-    for ( ; auto6CA06B6E_var <= auto6CA06B6E_ae; auto6CA06B6E_var += 1 ) {
-        libNtve_gf_SetDialogItemEditorValue(gv_heroSelection.lv_customDiffEditboxes[auto6CA06B6E_var], FixedToString(lv_settings.lv_values[auto6CA06B6E_var], c_fixedPrecisionAny), PlayerGroupAll());
-    }
+    gf_HeroSelect_CustomDiff_DiffPresetSet(lv_settings);
     return true;
 }
 
@@ -16261,6 +16376,116 @@ void gt_HeroSelect_CustomDiff_DiffPresetHandler_Init () {
     gt_HeroSelect_CustomDiff_DiffPresetHandler = TriggerCreate("gt_HeroSelect_CustomDiff_DiffPresetHandler_Func");
     TriggerEnable(gt_HeroSelect_CustomDiff_DiffPresetHandler, false);
     TriggerAddEventDialogControl(gt_HeroSelect_CustomDiff_DiffPresetHandler, c_playerAny, c_invalidDialogControlId, c_triggerControlEventTypeClick);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: HeroSelect_CustomDiff_CustomPreset_CreateButton
+//--------------------------------------------------------------------------------------------------
+bool gt_HeroSelect_CustomDiff_CustomPreset_CreateButton_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((EventDialogControl() == gv_heroSelection.lv_customDiffCustomPresetInputCreateButton))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    gf_HeroSelect_CustomDiff_CustomPreset_CreateInput(EventPlayer());
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void gt_HeroSelect_CustomDiff_CustomPreset_CreateButton_Init () {
+    gt_HeroSelect_CustomDiff_CustomPreset_CreateButton = TriggerCreate("gt_HeroSelect_CustomDiff_CustomPreset_CreateButton_Func");
+    TriggerEnable(gt_HeroSelect_CustomDiff_CustomPreset_CreateButton, false);
+    TriggerAddEventDialogControl(gt_HeroSelect_CustomDiff_CustomPreset_CreateButton, c_playerAny, c_invalidDialogControlId, c_triggerControlEventTypeClick);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: HeroSelect_CustomDiff_CustomPreset_Input Changed
+//--------------------------------------------------------------------------------------------------
+bool gt_HeroSelect_CustomDiff_CustomPreset_InputChanged_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    gs_HeroSelect_CustomDiff_DiffPreset lv_preset;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!((EventDialogControl() == gv_heroSelection.lv_customDiffCustomPresetInputEditBox))) {
+            return false;
+        }
+
+        if (!((EventPlayer() == gv_heroSelection.lv_customDiffHost))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if (gf_HeroSelect_CustomDiff_CustomPreset_LoadInputandCheck(lv_preset)) {
+        DialogControlSetEnabled(gv_heroSelection.lv_customDiffCustomPresetInputLoadButton, PlayerGroupSingle(gv_heroSelection.lv_customDiffHost), true);
+        DialogControlSetEnabled(gv_heroSelection.lv_customDiffCustomPresetInputCopyClipboardButton, PlayerGroupSingle(gv_heroSelection.lv_customDiffHost), true);
+    }
+    else {
+        DialogControlSetEnabled(gv_heroSelection.lv_customDiffCustomPresetInputLoadButton, PlayerGroupSingle(gv_heroSelection.lv_customDiffHost), false);
+        DialogControlSetEnabled(gv_heroSelection.lv_customDiffCustomPresetInputCopyClipboardButton, PlayerGroupSingle(gv_heroSelection.lv_customDiffHost), false);
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void gt_HeroSelect_CustomDiff_CustomPreset_InputChanged_Init () {
+    gt_HeroSelect_CustomDiff_CustomPreset_InputChanged = TriggerCreate("gt_HeroSelect_CustomDiff_CustomPreset_InputChanged_Func");
+    TriggerEnable(gt_HeroSelect_CustomDiff_CustomPreset_InputChanged, false);
+    TriggerAddEventDialogControl(gt_HeroSelect_CustomDiff_CustomPreset_InputChanged, c_playerAny, c_invalidDialogControlId, c_triggerControlEventTypeTextChanged);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: HeroSelect_CustomDiff_CustomPreset_LoadButton
+//--------------------------------------------------------------------------------------------------
+bool gt_HeroSelect_CustomDiff_CustomPreset_LoadButton_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    gs_HeroSelect_CustomDiff_DiffPreset lv_settings;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!((EventDialogControl() == gv_heroSelection.lv_customDiffCustomPresetInputLoadButton))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if (gf_HeroSelect_CustomDiff_CustomPreset_LoadInputandCheck(lv_settings)) {
+        gf_HeroSelect_CustomDiff_DiffPresetSet(lv_settings);
+    }
+    else {
+        UIDisplayMessage(PlayerGroupSingle(gv_heroSelection.lv_customDiffHost), c_messageAreaSubtitle, StringToText("Error! Input string is not valid."));
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void gt_HeroSelect_CustomDiff_CustomPreset_LoadButton_Init () {
+    gt_HeroSelect_CustomDiff_CustomPreset_LoadButton = TriggerCreate("gt_HeroSelect_CustomDiff_CustomPreset_LoadButton_Func");
+    TriggerEnable(gt_HeroSelect_CustomDiff_CustomPreset_LoadButton, false);
+    TriggerAddEventDialogControl(gt_HeroSelect_CustomDiff_CustomPreset_LoadButton, c_playerAny, c_invalidDialogControlId, c_triggerControlEventTypeClick);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -19734,6 +19959,9 @@ void InitTriggers () {
     gt_HeroSelect_Timer_Init();
     gt_HeroSelect_CustomDiff_EditboxEdits_Init();
     gt_HeroSelect_CustomDiff_DiffPresetHandler_Init();
+    gt_HeroSelect_CustomDiff_CustomPreset_CreateButton_Init();
+    gt_HeroSelect_CustomDiff_CustomPreset_InputChanged_Init();
+    gt_HeroSelect_CustomDiff_CustomPreset_LoadButton_Init();
     gt_CustomDefeatDialog_SpectateButton_Init();
     gt_CustomDefeatDialog_LeaveButton_Init();
     gt_Tutorial_CloseButtonHandlerminiintoduction_Init();

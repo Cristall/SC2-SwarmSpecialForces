@@ -195,7 +195,7 @@
             <Anchor side="Left" relative="$parent/Input" pos="Min" offset="11"/>
             <Anchor side="Right" relative="$parent/Input" pos="Max" offset="-11"/>
             <Style val="aaDialogItemStyleLeftMiddle"/>
-            <Text val="0"/>
+            <Text val="{$parent/Input/@Text}"/>
             <StateGroup name="Shown">
                 <DefaultState val="True"/>
                 <State name="False">
@@ -508,9 +508,90 @@
                         <Action type="SetProperty" frame="$this/DiffPreset3" Enabled="True"/>
                         <Action type="SetProperty" frame="$this/DiffPreset4" Enabled="True"/>
                         <Action type="SetProperty" frame="$this/DiffPreset5" Enabled="True"/>
+
+                        <Action type="SetProperty" frame="$this/CustomPreset/LoadInputButton" Tooltip="@Trig/HeroSelection/CustomDiff/CustomPreset/LoadButtonTooltip"/>
                     </State>
                     <State name="False"></State>
                 </StateGroup>
+
+
+
+                <Frame type="Frame" name="CustomPreset">
+                    <Anchor side="Top" relative="$parent/DiffPreset5" pos="Min" offset="0"/>
+                    <Anchor side="Left" relative="$parent/DiffPreset5" pos="Max" offset="55"/>
+                    <Anchor side="Bottom" relative="$parent/DiffPreset5" pos="Max" offset="0"/>
+                    <Anchor side="Right" relative="$parent/$parent/ReadyButton" pos="Min" offset="-50"/>
+
+                    <Frame type="EditBox" name="Input" template="TriggerDialogFrame/TriggerControlEditBoxTemplate">
+                        <Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+                        <Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+                        <Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
+                        <Width val="200"/>
+
+                        <Enabled val="False"/>
+                        <Text val="0"/>
+                    </Frame>
+                    
+                    <Frame type="Button" name="CreateInputButton" template="SSF_Menu/ButtonTemplate">
+                        <Anchor side="Left" relative="$parent/Input" pos="Max" offset="20"/>
+                        <Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
+                        <Width val="110"/>
+                        <Height val="50"/>
+
+                        <Text val="@Trig/HeroSelection/CustomDiff/CustomPreset/CreateButton"/>
+                        <Tooltip val="@Trig/HeroSelection/CustomDiff/CustomPreset/CreateButtonTooltip"/>
+                    </Frame>
+
+
+                    <Frame type="CopyClipboardButton" name="CopyInputButton" template="SSF_Menu/ButtonTemplate">
+                        <Anchor side="Left" relative="$parent/CreateInputButton" pos="Max" offset="20"/>
+                        <Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
+                        <Width val="110"/>
+                        <Height val="50"/>
+
+                        <Enabled val="False"/>
+                        <ClipboardText val="{$parent/Input/@Text}"/>
+                        <Text val="@Trig/HeroSelection/CustomDiff/CustomPreset/CopyClipboardButton"/>
+                        <Tooltip val="@Trig/HeroSelection/CustomDiff/CustomPreset/CopyClipboardButtonTooltip"/>
+
+                        <Animation name="Color">
+                            <Event event="OnClick" action="Restart,Play" frame="$this"/>
+                            <Controller type="Color" end="Reset">
+                                <Key type="Curve" time="0" value="255,255,255" in="Fast"/>
+                                <Key type="Curve" time="0.1" value="0,255,0" in="Slow"/>
+                                <Key type="Curve" time="3.5" value="0,255,0" in="Slow"/>				
+                            </Controller>
+                        </Animation>
+                    </Frame>
+
+                    <Frame type="Button" name="LoadInputButton" template="SSF_Menu/ButtonTemplate">
+                        <Anchor side="Left" relative="$parent/CopyInputButton" pos="Max" offset="20"/>
+                        <Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
+                        <Width val="110"/>
+                        <Height val="50"/>
+
+                        <Enabled val="False"/>
+                        <Text val="@Trig/HeroSelection/CustomDiff/CustomPreset/LoadButton"/>
+                        <Tooltip val="@Trig/HeroSelection/CustomDiff/CustomPreset/LoadButtonTooltipNotHost"/>
+                    </Frame>
+
+
+
+
+                </Frame>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                 
                 <Frame type="Frame" name="AnchorCol1">
