@@ -94,8 +94,8 @@
     </CModel>
     <CModel id="GlueStream@Stream">
         <Model value="Assets\Effects\Zerg\Infested_Diamondback_Slime\Infested_Diamondback_Slime.m3"/>
-        <ScaleMax value="2.000000,1.250000,1.500000"/>
-        <ScaleMin value="2.000000,1.250000,1.500000"/>
+        <ScaleMax value="2.000000,0.625000,1.500000"/>
+        <ScaleMin value="2.000000,0.625000,1.500000"/>
     </CModel>
     <CModel id="HandOfLightning">
         <Model value="Assets\Effects\Protoss\PsiStormImpact\PsiStormImpact.m3"/>

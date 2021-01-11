@@ -4005,6 +4005,7 @@ Validator/Name/TargetIsEnemyAndNotHeroic=Target Is Enemy And Not Heroic
 Validator/Name/TargetIsEnemyAndVulnerable=Target Is Enemy And Vulnerable
 Validator/Name/TargetLE8Range=Target LE 8 Range
 Validator/Name/TargetNotAcrossCliff2=Target Not Across Cliff Copy
+Validator/Name/TargetNotWorker=Target Not Worker
 Validator/Name/TargetPointHasBuriedSpot=Target Point Has Buried Spot
 Validator/Name/TargetUnitToSourceUnitLE7=Target Unit To Source Unit LE 7
 Validator/Name/ThunderNotDead=Thunder Not Dead

@@ -226,6 +226,8 @@
     </CEffectApplyBehavior>
     <CEffectApplyBehavior id="GlueStream@ApplyFriendly">
         <ValidatorArray index="0" value="TargetIsAllyorPlayer"/>
+        <ValidatorArray value="TargetNotWorker"/>
+        <ValidatorArray value="NotStructureTarget"/>
         <EditorCategories value=""/>
         <Behavior value="GlueStream@Buff"/>
     </CEffectApplyBehavior>
@@ -237,15 +239,12 @@
     <CEffectSet id="GlueStream@ApplySet">
         <ValidatorArray value="noMarkers"/>
         <EditorCategories value=""/>
-        <Marker Link="Effect/GlueStream@InitialPersistent">
-            <MatchFlags index="Link" value="1"/>
-        </Marker>
         <EffectArray value="GlueStream@ApplyEnemy"/>
         <EffectArray value="GlueStream@Dmg"/>
         <EffectArray value="GlueStream@ApplyFriendly"/>
     </CEffectSet>
     <CEffectDamage id="GlueStream@Dmg">
-        <ValidatorArray value="EnemyTarget"/>
+        <ValidatorArray value="TargetIsEnemy"/>
         <EditorCategories value=""/>
         <Amount value="35"/>
     </CEffectDamage>
@@ -280,7 +279,6 @@
         <LaunchLocation Value="SourcePoint"/>
         <SearchFilters value="-;Self,Neutral,Worker,RawResource,HarvestableResource,Missile,Item,Dead,Hidden"/>
         <AreaArray RectangleWidth="2" RectangleHeight="1" Effect="GlueStream@ApplySet"/>
-        <DebugTrace value="1"/>
     </CEffectEnumArea>
     <CEffectSet id="HandlerLightningCrossedBeams">
         <EditorCategories value=""/>
@@ -450,7 +448,7 @@
         <EditorCategories value=""/>
         <Key value="JumpingBanling"/>
         <SourceKey value="JumpingBanling"/>
-        <SourceFailBackValue value="19"/>
+        <SourceFailBackValue value="20"/>
         <Operation value="Subtract"/>
         <ValidateMax value="999"/>
         <EffectSuccess value="JumpingBanelingSearchBounce"/>
@@ -573,6 +571,11 @@
         <EffectArray value="Tackle@Dmg"/>
         <EffectArray value="Tackle@KnockbackController"/>
     </CEffectSet>
+    <CEffectCancelOrder id="Tackle@CancelMove">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <AbilCmd value="move,Move"/>
+    </CEffectCancelOrder>
     <CEffectApplyBehavior id="Tackle@CasterBuff">
         <EditorCategories value=""/>
         <WhichUnit Value="Caster"/>
@@ -586,10 +589,7 @@
         <ValidatorArray value="TargetIsEnemy"/>
         <ValidatorArray value="noMarkers"/>
         <EditorCategories value=""/>
-        <Marker Link="Effect/Tackle@Persistent">
-            <MatchFlags index="Id" value="1"/>
-        </Marker>
-        <Amount value="50"/>
+        <Amount value="55"/>
     </CEffectDamage>
     <CEffectCreatePersistent id="Tackle@Endpoint">
         <EditorCategories value=""/>
@@ -600,6 +600,8 @@
     </CEffectCreatePersistent>
     <CEffectApplyBehavior id="Tackle@FriendlyTackle">
         <ValidatorArray index="0" value="TargetIsAllyorPlayer"/>
+        <ValidatorArray value="TargetNotWorker"/>
+        <ValidatorArray value="NotStructureTarget"/>
         <EditorCategories value=""/>
     </CEffectApplyBehavior>
     <CEffectSet id="Tackle@InitialSet">
@@ -627,6 +629,7 @@
     <CEffectCreatePersistent id="Tackle@KnockbackController">
         <ValidatorArray value="TargetIsEnemyAndNotHeroic"/>
         <ValidatorArray value="Tackle@NoKnockback"/>
+        <ValidatorArray value="NotStructureTarget"/>
         <EditorCategories value=""/>
         <WhichLocation Value="TargetUnit"/>
         <InitialEffect value="Tackle@KnockbackMinimumSpeed"/>
@@ -659,6 +662,9 @@
         <PeriodCount value="16"/>
         <PeriodicEffectArray value="Tackle@Search"/>
         <PeriodicPeriodArray value="0.0625"/>
+        <Marker>
+            <MatchFlags index="Id" value="1"/>
+        </Marker>
     </CEffectCreatePersistent>
     <CEffectEnumArea id="Tackle@Search">
         <EditorCategories value=""/>
@@ -4718,7 +4724,7 @@
     </CEffectEnumArea>
     <CEffectDamage id="JumpingBanelingDmg">
         <EditorCategories value=""/>
-        <Amount value="15"/>
+        <Amount value="20"/>
         <ResponseFlags index="Acquire" value="1"/>
         <ResponseFlags index="Flee" value="1"/>
         <Flags index="Notification" value="1"/>

@@ -223,6 +223,9 @@
     <CValidatorUnitFilters id="TargetIsEnemyAndVulnerable">
         <Filters value="-;Player,Ally,Neutral,Invulnerable"/>
     </CValidatorUnitFilters>
+    <CValidatorUnitFilters id="TargetNotWorker">
+        <Filters value="-;Worker"/>
+    </CValidatorUnitFilters>
     <CValidatorUnitFilters id="TornadoKnockbackTargetNotDead">
         <ResultFailed value="CantTargetDeadUnits"/>
         <WhichUnit Effect="TornadoImpactPrecursor"/>

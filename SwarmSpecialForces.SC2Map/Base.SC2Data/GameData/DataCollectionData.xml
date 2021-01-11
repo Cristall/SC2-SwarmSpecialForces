@@ -150,5 +150,6 @@
         <DataRecord Entry="Validator,Tackle@CasterBuffNotActive"/>
         <DataRecord Entry="Validator,Tackle@NoKnockback"/>
         <DataRecord Entry="Validator,Tackle@FriendlyBuffNotActive"/>
+        <DataRecord Entry="Effect,Tackle@CancelMove"/>
     </CDataCollectionAbil>
 </Catalog>

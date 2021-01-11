@@ -354,7 +354,7 @@
         <Cost>
             <Vital index="Energy" value="25"/>
             <Charge Link="Abil/GlueStream"/>
-            <Cooldown Link="Abil/HeroRoachSharedCooldown" Location="Unit" TimeUse="20"/>
+            <Cooldown Link="Abil/HeroRoachSharedCooldown" Location="Unit" TimeUse="15"/>
         </Cost>
     </CAbilEffectInstant>
     <CAbilEffectTarget id="DummyDirectionPointer">
@@ -502,7 +502,7 @@
         <Flags index="RangeUseCasterRadius" value="0"/>
         <Cost>
             <Vital index="Energy" value="25"/>
-            <Cooldown Link="Abil/HeroRoachSharedCooldown" Location="Unit" TimeUse="20"/>
+            <Cooldown Link="Abil/HeroRoachSharedCooldown" Location="Unit" TimeUse="15"/>
         </Cost>
     </CAbilEffectTarget>
     <CAbilEffectInstant id="HandOfLightning">
@@ -889,8 +889,9 @@
         <Cost>
             <Vital index="Energy" value="25"/>
             <Charge Link="Abil/GlueStream"/>
-            <Cooldown Link="Abil/HeroRoachSharedCooldown" Location="Unit" TimeUse="20"/>
+            <Cooldown Link="Abil/HeroRoachSharedCooldown" Location="Unit" TimeUse="15"/>
         </Cost>
+        <Flags index="RangeUsePathing" value="1"/>
     </CAbilEffectTarget>
     <CAbilEffectInstant id="ThunderElementals">
         <EditorCategories value="AbilityorEffectType:Units"/>

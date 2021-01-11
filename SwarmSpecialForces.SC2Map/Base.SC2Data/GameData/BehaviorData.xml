@@ -50,6 +50,7 @@
         <Modification>
             <LifeArmorBonus value="15"/>
         </Modification>
+        <Alignment value="Positive"/>
     </CBehaviorBuff>
     <CBehaviorBuff id="DefensiveRoar@Other">
         <InfoIcon value="Assets\Textures\btn-ability-zerg-dehaka-superroar.dds"/>
@@ -62,6 +63,7 @@
         </Modification>
         <Name value="Behavior/Name/DefensiveRoar@Caster"/>
         <Tooltip value="Behavior/Tooltip/DefensiveRoar@Caster"/>
+        <Alignment value="Positive"/>
     </CBehaviorBuff>
     <CBehaviorBuff id="DifficultyCustom">
         <InfoIcon value="Assets\Textures\btn-ability-terran-deactivatemine.dds"/>
@@ -111,6 +113,7 @@
         <Modification MoveSpeedMultiplier="1.2"/>
         <DisableValidatorArray value="GlueStream@CasterBuffNotActive"/>
         <BuffFlags index="UpdateDurationWhileDisabled" value="1"/>
+        <Alignment value="Positive"/>
     </CBehaviorBuff>
     <CBehaviorBuff id="GlueStream@BuffCaster">
         <Name value="Behavior/Name/GlueStream@Buff"/>
@@ -119,6 +122,7 @@
         <EditorCategories value="AbilityorEffectType:Units"/>
         <Duration value="15"/>
         <Modification MoveSpeedMultiplier="1.3"/>
+        <Alignment value="Positive"/>
     </CBehaviorBuff>
     <CBehaviorBuff id="GlueStream@Debuff">
         <InfoIcon value="Assets\Textures\btn-ability-zerg-acidspores.dds"/>
@@ -126,6 +130,7 @@
         <Duration value="15"/>
         <Name value="Behavior/Name/GlueStream@Buff"/>
         <Modification MoveSpeedMultiplier="0.8"/>
+        <Alignment value="Negative"/>
     </CBehaviorBuff>
     <CBehaviorBuff id="RunlingCreepBonusRegen">
         <InfoFlags index="Hidden" value="1"/>
@@ -274,6 +279,7 @@
             <WeaponDisableArray value="HeroRoachRanged"/>
         </Modification>
         <InfoFlags index="Hidden" value="1"/>
+        <FinalEffect value="Tackle@CancelMove"/>
     </CBehaviorBuff>
     <CBehaviorBuff id="Tackle@FriendlyTackle">
         <Alignment value="Positive"/>
@@ -300,7 +306,7 @@
     <CBehaviorBuff id="Tackle@KnockbackMinimumSpeed">
         <EditorCategories value="AbilityorEffectType:Units"/>
         <Duration value="0.1875"/>
-        <Modification Height="0.075" MoveSpeedMinimum="10"/>
+        <Modification MoveSpeedMinimum="10"/>
         <InfoFlags index="Hidden" value="1"/>
     </CBehaviorBuff>
     <CBehaviorUnitTracker id="TrackerActiveSpawner">
@@ -512,7 +518,7 @@
     </CBehaviorBuff>
     <CBehaviorBuff id="EnergyTransferChannel">
         <EditorCategories value="AbilityorEffectType:Units"/>
-        <Modification MoveSpeedMultiplier="0.75" AttackSpeedMultiplier="0.5"/>
+        <Modification UnifiedMoveSpeedFactor="-0.25" AttackSpeedMultiplier="0.5"/>
         <Alignment value="Positive"/>
         <InfoFlags index="Hidden" value="1"/>
     </CBehaviorBuff>
@@ -1279,7 +1285,7 @@
         <EditorCategories value="AbilityorEffectType:Units"/>
         <Modification MoveSpeedBonus="0.0781" AttackSpeedMultiplier="1.01">
             <DamageDealtUnscaled index="Ranged" value="1.05"/>
-            <VitalMaxArray index="Life" value="25"/>
+            <VitalMaxArray index="Life" value="22"/>
             <VitalMaxArray index="Energy" value="5"/>
         </Modification>
     </CBehaviorAttribute>
