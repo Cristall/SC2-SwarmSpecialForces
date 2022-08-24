@@ -53,6 +53,12 @@
                 <Width val="#ButtonWidth"/>
 
                 <Text val="@Trig/CustomDefeat/Leave"/>
+                <Animation name="Hide">
+                    <Event event="OnClick" action="Reset,Play" frame="$this"/>
+                    <Controller type="Property" end="Pause" frame="$parent" property="Visible">
+                        <Key type="Property" time="0.0" value="False"/>
+                    </Controller>
+                </Animation>
             </Frame>
             
             <Frame type="Button" name="SpectateButton" template="SSF_Templates/ButtonTemplate">
@@ -63,6 +69,12 @@
                 <Width val="#ButtonWidth"/>
 
                 <Text val="@Trig/CustomDefeat/Spectate"/>
+                <Animation name="Hide">
+                    <Event event="OnClick" action="Reset,Play" frame="$this"/>
+                    <Controller type="Property" end="Pause" frame="$parent" property="Visible">
+                        <Key type="Property" time="0.0" value="False"/>
+                    </Controller>
+                </Animation>
             </Frame>
         </Frame>
     </Frame>
