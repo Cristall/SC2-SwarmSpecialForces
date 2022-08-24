@@ -209,7 +209,7 @@
             <Button DefaultButtonFace="CreateRunling" Requirements="CyberneticRunlingUnlocked"/>
             <Unit value="Runling"/>
         </InfoArray>
-        <InfoArray index="Train3">
+        <InfoArray index="Train3" Time="1">
             <Charge>
                 <CountMax value="6"/>
                 <CountStart value="1"/>
