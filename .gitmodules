@@ -1,0 +1,4 @@
+[submodule "Tools/SC2UserDataConverter"]
+	path = Tools/SC2UserDataConverter
+	url = https://github.com/Cristall/SC2UserDataConverter.git
+	branch = main
