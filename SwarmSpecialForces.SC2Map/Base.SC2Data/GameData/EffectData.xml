@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CEffectTeleport id="ClearOrderQueue">
+        <EditorCategories value=""/>
+        <MinDistance value="0"/>
+        <PlacementAround Value="TargetUnit"/>
+        <SourceLocation Value="TargetUnit"/>
+        <TargetLocation Value="TargetUnit"/>
+    </CEffectTeleport>
+    <CEffectIssueOrder id="DummyDirectionPointerPermanent">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Abil value="DummyDirectionPointerPermanent"/>
+        <Player Value="Caster"/>
+        <Target Value="TargetUnit"/>
+    </CEffectIssueOrder>
+    <CEffectSet id="EmptySet">
+        <EditorCategories value=""/>
+    </CEffectSet>
+    <CEffectDamage id="KillRemoveSource">
+        <ImpactLocation Value="SourceUnit"/>
+        <Visibility value="Hidden"/>
+        <Flags index="Kill" value="1"/>
+        <Flags index="NoKillCredit" value="1"/>
+        <Death value="Remove"/>
+    </CEffectDamage>
+    <CEffectCreatePersistent id="TESTimpactlocation">
+        <EditorCategories value=""/>
+        <PeriodCount value="1"/>
+        <PeriodicPeriodArray value="1"/>
+    </CEffectCreatePersistent>
+    <CEffectCreatePersistent id="testexplosion">
+        <EditorCategories value=""/>
+    </CEffectCreatePersistent>
+</Catalog>

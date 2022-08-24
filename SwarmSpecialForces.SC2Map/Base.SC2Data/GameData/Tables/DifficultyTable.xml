@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CUser id="DifficultyTable">
+        <Fields Id="Points" Type="Int" EditorColumn="2"/>
+        <Fields Id="SpawnMult" Type="Fixed"/>
+        <Fields Id="ExpMult" Type="Fixed"/>
+        <Fields Id="BiomassMult" Type="Fixed"/>
+        <Fields Id="ScientistsAmount" Type="Int"/>
+        <Fields Id="EssenceAmount" Type="Int"/>
+        <Fields Id="PsiOrbSpawn" Type="Int"/>
+        <Fields Id="UpgradeCountFactor" Type="Fixed"/>
+        <Instances Id="[Default]"/>
+        <Instances Id="0">
+            <Int Int="1">
+                <Field Id="Points"/>
+            </Int>
+            <Fixed Fixed="0.6">
+                <Field Id="SpawnMult"/>
+            </Fixed>
+            <Fixed Fixed="2">
+                <Field Id="ExpMult"/>
+            </Fixed>
+            <Fixed Fixed="2.5">
+                <Field Id="BiomassMult"/>
+            </Fixed>
+            <Int Int="1">
+                <Field Id="ScientistsAmount"/>
+            </Int>
+            <Fixed Fixed="1">
+                <Field Id="UpgradeCountFactor"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="1">
+            <Int Int="1">
+                <Field Id="Points"/>
+            </Int>
+            <Fixed Fixed="0.8">
+                <Field Id="SpawnMult"/>
+            </Fixed>
+            <Fixed Fixed="1.8">
+                <Field Id="ExpMult"/>
+            </Fixed>
+            <Fixed Fixed="2">
+                <Field Id="BiomassMult"/>
+            </Fixed>
+            <Int Int="1">
+                <Field Id="ScientistsAmount"/>
+            </Int>
+            <Int Int="1">
+                <Field Id="EssenceAmount"/>
+            </Int>
+            <Fixed Fixed="1">
+                <Field Id="UpgradeCountFactor"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="2">
+            <Int Int="2">
+                <Field Id="Points"/>
+            </Int>
+            <Fixed Fixed="1">
+                <Field Id="SpawnMult"/>
+            </Fixed>
+            <Fixed Fixed="1.65">
+                <Field Id="ExpMult"/>
+            </Fixed>
+            <Fixed Fixed="1.75">
+                <Field Id="BiomassMult"/>
+            </Fixed>
+            <Int Int="1">
+                <Field Id="ScientistsAmount"/>
+            </Int>
+            <Int Int="1">
+                <Field Id="EssenceAmount"/>
+            </Int>
+            <Int Int="1">
+                <Field Id="PsiOrbSpawn"/>
+            </Int>
+            <Fixed Fixed="1">
+                <Field Id="UpgradeCountFactor"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="3">
+            <Int Int="3">
+                <Field Id="Points"/>
+            </Int>
+            <Fixed Fixed="1.25">
+                <Field Id="SpawnMult"/>
+            </Fixed>
+            <Fixed Fixed="1.5">
+                <Field Id="ExpMult"/>
+            </Fixed>
+            <Fixed Fixed="1.5">
+                <Field Id="BiomassMult"/>
+            </Fixed>
+            <Int Int="1">
+                <Field Id="ScientistsAmount"/>
+            </Int>
+            <Int Int="2">
+                <Field Id="EssenceAmount"/>
+            </Int>
+            <Int Int="1">
+                <Field Id="PsiOrbSpawn"/>
+            </Int>
+            <Fixed Fixed="1">
+                <Field Id="UpgradeCountFactor"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="4">
+            <Int Int="5">
+                <Field Id="Points"/>
+            </Int>
+            <Fixed Fixed="1.5">
+                <Field Id="SpawnMult"/>
+            </Fixed>
+            <Fixed Fixed="1.35">
+                <Field Id="ExpMult"/>
+            </Fixed>
+            <Fixed Fixed="1.35">
+                <Field Id="BiomassMult"/>
+            </Fixed>
+            <Int Int="2">
+                <Field Id="ScientistsAmount"/>
+            </Int>
+            <Int Int="3">
+                <Field Id="EssenceAmount"/>
+            </Int>
+            <Int Int="1">
+                <Field Id="PsiOrbSpawn"/>
+            </Int>
+            <Fixed Fixed="1">
+                <Field Id="UpgradeCountFactor"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="5">
+            <Int Int="8">
+                <Field Id="Points"/>
+            </Int>
+            <Fixed Fixed="1.75">
+                <Field Id="SpawnMult"/>
+            </Fixed>
+            <Fixed Fixed="1.25">
+                <Field Id="ExpMult"/>
+            </Fixed>
+            <Fixed Fixed="1.25">
+                <Field Id="BiomassMult"/>
+            </Fixed>
+            <Int Int="2">
+                <Field Id="ScientistsAmount"/>
+            </Int>
+            <Int Int="5">
+                <Field Id="EssenceAmount"/>
+            </Int>
+            <Int Int="1">
+                <Field Id="PsiOrbSpawn"/>
+            </Int>
+            <Fixed Fixed="1">
+                <Field Id="UpgradeCountFactor"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="Custom"/>
+    </CUser>
+</Catalog>

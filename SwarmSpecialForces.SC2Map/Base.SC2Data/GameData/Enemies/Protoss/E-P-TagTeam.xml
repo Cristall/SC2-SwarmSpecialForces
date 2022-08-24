@@ -1,0 +1,2475 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CEffectDamage id="CoronaWavesApplyDummy">
+        <EditorCategories value=""/>
+        <Minimum value="0"/>
+        <Maximum value="0"/>
+    </CEffectDamage>
+    <CEffectSet id="CoronaWavesApplySet">
+        <EditorCategories value=""/>
+        <EffectArray value="CoronaWavesApply"/>
+        <EffectArray value="CoronaWavesApplyDummy"/>
+    </CEffectSet>
+    <CEffectCreatePersistent id="CoronaWavesDelay">
+        <EditorCategories value=""/>
+        <WhichLocation Value="CasterUnit"/>
+        <InitialDelay value="2.15"/>
+        <InitialEffect value="CoronaWavesSearch"/>
+    </CEffectCreatePersistent>
+    <CEffectSet id="HandlerLightningCrossedBeams">
+        <EditorCategories value=""/>
+        <EffectArray value="TagTeamHandlerLightningCastSet"/>
+        <EffectArray value="HandlerLightningCrossedBeamsGet"/>
+    </CEffectSet>
+    <CEffectEnumTrackedUnits id="HandlerLightningElementalsGet">
+        <EditorCategories value=""/>
+        <BehaviorLink value="HandlerLightningTracker"/>
+        <Effect value="HandlerLightningElementalsIssue"/>
+    </CEffectEnumTrackedUnits>
+    <CEffectIssueOrder id="HandlerLightningElementalsIssue">
+        <EditorCategories value=""/>
+        <Abil value="LightningElementals"/>
+    </CEffectIssueOrder>
+    <CEffectSet id="HandlerLightningElementals">
+        <EditorCategories value=""/>
+        <EffectArray value="TagTeamHandlerLightningCastSet"/>
+        <EffectArray value="HandlerLightningElementalsGet"/>
+    </CEffectSet>
+    <CEffectEnumTrackedUnits id="HandlerLightningHandsOfLightningGet">
+        <EditorCategories value=""/>
+        <BehaviorLink value="HandlerLightningTracker"/>
+        <Effect value="HandlerLightningHandsOfLightningIssue"/>
+    </CEffectEnumTrackedUnits>
+    <CEffectIssueOrder id="HandlerLightningHandsOfLightningIssue">
+        <EditorCategories value=""/>
+        <Abil value="HandOfLightning"/>
+    </CEffectIssueOrder>
+    <CEffectSet id="HandlerLightningHandsOfLightning">
+        <EditorCategories value=""/>
+        <EffectArray value="TagTeamHandlerLightningCastSet"/>
+        <EffectArray value="HandlerLightningHandsOfLightningGet"/>
+    </CEffectSet>
+    <CEffectEnumTrackedUnits id="HandlerLightningPureEnergyGet">
+        <EditorCategories value=""/>
+        <BehaviorLink value="HandlerLightningTracker"/>
+        <Effect value="HandlerLightningPureEnergyIssue"/>
+    </CEffectEnumTrackedUnits>
+    <CEffectIssueOrder id="HandlerLightningPureEnergyIssue">
+        <EditorCategories value=""/>
+        <Abil value="PureEnergy"/>
+    </CEffectIssueOrder>
+    <CEffectSet id="HandlerLightningPureEnergy">
+        <EditorCategories value=""/>
+        <EffectArray value="TagTeamHandlerLightningCastSet"/>
+        <EffectArray value="HandlerLightningPureEnergyGet"/>
+    </CEffectSet>
+    <CEffectEnumTrackedUnits id="HandlerLightningZapTrapGet">
+        <EditorCategories value=""/>
+        <BehaviorLink value="HandlerLightningTracker"/>
+        <Effect value="HandlerLightningZapTrapIssue"/>
+    </CEffectEnumTrackedUnits>
+    <CEffectIssueOrder id="HandlerLightningZapTrapIssue">
+        <EditorCategories value=""/>
+        <Abil value="ZapTrap"/>
+        <Target Effect="HandlerLightningZapTrap" Value="TargetUnitOrPoint"/>
+    </CEffectIssueOrder>
+    <CEffectSet id="HandlerLightningZapTrap">
+        <EditorCategories value=""/>
+        <EffectArray value="TagTeamHandlerLightningCastSet"/>
+        <EffectArray value="HandlerLightningZapTrapGet"/>
+    </CEffectSet>
+    <CEffectEnumTrackedUnits id="HandlerThunderTornadoGet">
+        <EditorCategories value=""/>
+        <BehaviorLink value="HandlerThunderTracker"/>
+        <Effect value="HandlerThunderTornadoIssue"/>
+    </CEffectEnumTrackedUnits>
+    <CEffectIssueOrder id="HandlerThunderTornadoIssue">
+        <EditorCategories value=""/>
+        <Abil value="Tornado"/>
+        <Target Effect="HandlerThunderTornado" Value="TargetUnitOrPoint"/>
+    </CEffectIssueOrder>
+    <CEffectSet id="HandlerThunderTornado">
+        <EditorCategories value=""/>
+        <EffectArray value="TagTeamHandlerThunderCastSet"/>
+        <EffectArray value="HandlerThunderTornadoGet"/>
+    </CEffectSet>
+    <CEffectEnumTrackedUnits id="HandlerThunderCoronaWavesGet">
+        <EditorCategories value=""/>
+        <BehaviorLink value="HandlerThunderTracker"/>
+        <Effect value="HandlerThunderCoronaWavesIssue"/>
+    </CEffectEnumTrackedUnits>
+    <CEffectIssueOrder id="HandlerThunderCoronaWavesIssue">
+        <EditorCategories value=""/>
+        <Abil value="CoronaWaves"/>
+    </CEffectIssueOrder>
+    <CEffectSet id="HandlerThunderCoronaWaves">
+        <EditorCategories value=""/>
+        <EffectArray value="TagTeamHandlerThunderCastSet"/>
+        <EffectArray value="HandlerThunderCoronaWavesGet"/>
+    </CEffectSet>
+    <CEffectEnumTrackedUnits id="HandlerThunderElementalsGet">
+        <EditorCategories value=""/>
+        <BehaviorLink value="HandlerThunderTracker"/>
+        <Effect value="HandlerThunderElementalsIssue"/>
+    </CEffectEnumTrackedUnits>
+    <CEffectIssueOrder id="HandlerThunderElementalsIssue">
+        <EditorCategories value=""/>
+        <Abil value="ThunderElementals"/>
+    </CEffectIssueOrder>
+    <CEffectSet id="HandlerThunderElementals">
+        <EditorCategories value=""/>
+        <EffectArray value="TagTeamHandlerThunderCastSet"/>
+        <EffectArray value="HandlerThunderElementalsGet"/>
+    </CEffectSet>
+    <CEffectEnumTrackedUnits id="HandlerThunderHandsOfSilenceGet">
+        <EditorCategories value=""/>
+        <BehaviorLink value="HandlerThunderTracker"/>
+        <Effect value="HandlerThunderHandsOfSilenceIssue"/>
+    </CEffectEnumTrackedUnits>
+    <CEffectIssueOrder id="HandlerThunderHandsOfSilenceIssue">
+        <EditorCategories value=""/>
+        <Abil value="HandsOfSilence"/>
+    </CEffectIssueOrder>
+    <CEffectSet id="HandlerThunderHandsOfSilence">
+        <EditorCategories value=""/>
+        <EffectArray value="TagTeamHandlerThunderCastSet"/>
+        <EffectArray value="HandlerThunderHandsOfSilenceGet"/>
+    </CEffectSet>
+    <CEffectEnumTrackedUnits id="HandlerThunderShoutGet">
+        <EditorCategories value=""/>
+        <BehaviorLink value="HandlerThunderTracker"/>
+        <Effect value="HandlerThunderShoutIssue"/>
+    </CEffectEnumTrackedUnits>
+    <CEffectIssueOrder id="HandlerThunderShoutIssue">
+        <EditorCategories value=""/>
+        <Abil value="Shout"/>
+    </CEffectIssueOrder>
+    <CEffectSet id="HandlerThunderShout">
+        <EditorCategories value=""/>
+        <EffectArray value="TagTeamHandlerThunderCastSet"/>
+        <EffectArray value="HandlerThunderShoutGet"/>
+    </CEffectSet>
+    <CEffectIssueOrder id="HandlerLightningCrossedBeamsIssue">
+        <EditorCategories value=""/>
+        <Abil value="CrossedBeamsStart"/>
+        <Target Effect="HandlerLightningCrossedBeams" Value="TargetUnitOrPoint"/>
+    </CEffectIssueOrder>
+    <CEffectEnumTrackedUnits id="HandlerLightningGet">
+        <EditorCategories value=""/>
+        <BehaviorLink value="HandlerLightningTracker"/>
+    </CEffectEnumTrackedUnits>
+    <CEffectEnumTrackedUnits id="HandlerLightningCrossedBeamsGet">
+        <EditorCategories value=""/>
+        <BehaviorLink value="HandlerLightningTracker"/>
+        <Effect value="HandlerLightningCrossedBeamsIssue"/>
+    </CEffectEnumTrackedUnits>
+    <CEffectEnumTrackedUnits id="HandlerThunderGet">
+        <EditorCategories value=""/>
+        <BehaviorLink value="HandlerThunderTracker"/>
+    </CEffectEnumTrackedUnits>
+    <CEffectAddTrackedUnit id="HandlerLightningTrackerAdd">
+        <EditorCategories value=""/>
+        <BehaviorLink value="HandlerLightningTracker"/>
+        <TrackedUnit Value="Target"/>
+    </CEffectAddTrackedUnit>
+    <CEffectAddTrackedUnit id="HandlerThunderTrackerAdd">
+        <EditorCategories value=""/>
+        <BehaviorLink value="HandlerThunderTracker"/>
+        <TrackedUnit Value="Target"/>
+    </CEffectAddTrackedUnit>
+    <CEffectCreateUnit id="TornadoImpactPrecursor">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetPoint"/>
+        <CreateFlags index="Precursor" value="1"/>
+        <SpawnEffect value="TornadoImpactLaunch"/>
+        <SpawnUnit value="Precursor"/>
+    </CEffectCreateUnit>
+    <CEffectCreatePersistent id="TornadoImpactThrowLocation">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetUnit"/>
+        <OffsetVectorStartLocation Effect="TornadoPersistent" Value="TargetPoint"/>
+        <OffsetVectorEndLocation Value="TargetUnit"/>
+        <InitialEffect value="TornadoImpactPrecursor"/>
+        <InitialOffset value="0,-5,0"/>
+    </CEffectCreatePersistent>
+    <CEffectCreatePersistent id="TornadoInitialDelay">
+        <EditorCategories value=""/>
+        <InitialDelay value="0.35"/>
+        <InitialEffect value="TornadoPersistent"/>
+    </CEffectCreatePersistent>
+    <CEffectApplyBehavior id="HandsOfSilence@AlreadyCastingNoWeapons2">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Behavior value="AlreadyCastingNoWeapons"/>
+        <Flags index="UseDuration" value="1"/>
+        <Duration value="1.45"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="HandsOfSilence@Apply">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Behavior value="HandsOfSilence"/>
+    </CEffectApplyBehavior>
+    <CEffectSet id="HandsOfSilence@InitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="HandsOfSilence@AlreadyCastingNoWeapons2"/>
+        <EffectArray value="HandsOfSilence@Apply"/>
+        <TargetLocationType value="Point"/>
+    </CEffectSet>
+    <CEffectApplyBehavior id="CoronaWavesAlreadyCastingNoWeapons">
+        <EditorCategories value=""/>
+        <Behavior value="AlreadyCastingNoWeapons"/>
+        <Flags index="UseDuration" value="1"/>
+        <Duration value="3.25"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="CoronaWavesApply">
+        <EditorCategories value=""/>
+        <Behavior value="CoronaWaves"/>
+    </CEffectApplyBehavior>
+    <CEffectSet id="CoronaWavesInitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="CoronaWavesAlreadyCastingNoWeapons"/>
+        <EffectArray value="CoronaWavesDelay"/>
+        <TargetLocationType value="Point"/>
+    </CEffectSet>
+    <CEffectDamage id="CoronaWavesPeriodicDmg">
+        <EditorCategories value=""/>
+        <ResponseFlags index="Acquire" value="1"/>
+        <ResponseFlags index="Flee" value="1"/>
+        <ImpactLocation Value="TargetUnit"/>
+        <Flags index="Notification" value="1"/>
+        <Amount value="800"/>
+    </CEffectDamage>
+    <CEffectCreatePersistent id="CoronaWavesPeriodicPersistent">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetUnit"/>
+        <OffsetVectorEndLocation Value="TargetUnit"/>
+        <PeriodCount value="1"/>
+        <PeriodicEffectArray value="CoronaWavesPeriodicDmg"/>
+        <PeriodicPeriodArray value="0"/>
+    </CEffectCreatePersistent>
+    <CEffectEnumArea id="CoronaWavesPeriodicSearch">
+        <EditorCategories value=""/>
+        <ImpactLocation Value="TargetUnit"/>
+        <ExcludeArray Value="Source"/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Item,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="3" Effect="CoronaWavesPeriodicDmg"/>
+        <SearchFlags index="ExtendByUnitRadius" value="1"/>
+    </CEffectEnumArea>
+    <CEffectEnumArea id="CoronaWavesSearch">
+        <EditorCategories value=""/>
+        <LaunchLocation Value="CasterUnit"/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Item,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="6" Effect="CoronaWavesApplySet"/>
+        <SearchFlags index="ExtendByUnitRadius" value="1"/>
+    </CEffectEnumArea>
+    <CEffectDamage id="CrossedBeamsTargetBeamDmg">
+        <ValidatorArray value="TargetBehindTargetOuter"/>
+        <ValidatorArray value="TargetInFrontofCaster"/>
+        <EditorCategories value=""/>
+        <Amount value="800"/>
+    </CEffectDamage>
+    <CEffectCreatePersistent id="CrossedBeamsTargetBeamPersistent">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetUnit"/>
+        <PeriodCount value="61"/>
+        <PeriodicValidator value="CasterNotDead"/>
+        <PeriodicEffectArray value="CrossedBeamsTargetBeamSet"/>
+        <PeriodicPeriodArray value="0.1"/>
+        <InitialDelay value="0.6"/>
+    </CEffectCreatePersistent>
+    <CEffectEnumArea id="CrossedBeamsTargetBeamSearch">
+        <EditorCategories value=""/>
+        <LaunchLocation Effect="CrossedBeamsTargetInitialDelay" Value="TargetOuterUnit"/>
+        <ImpactLocation Value="TargetPoint"/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Item,Dead,Hidden,Invulnerable"/>
+        <AreaArray RectangleWidth="1.25" RectangleHeight="30" Effect="CrossedBeamsTargetBeamDmg"/>
+    </CEffectEnumArea>
+    <CEffectCreatePersistent id="CrossedBeamsTargetBeamSearchImpactPoint">
+        <EditorCategories value=""/>
+        <WhichLocation Effect="CrossedBeamsTargetInitialDelay" Value="TargetUnit"/>
+        <OffsetVectorStartLocation Value="CasterUnit"/>
+        <OffsetVectorEndLocation Effect="CrossedBeamsTargetInitialDelay" Value="TargetUnit"/>
+        <InitialEffect value="CrossedBeamsTargetBeamSearch"/>
+    </CEffectCreatePersistent>
+    <CEffectCreatePersistent id="CrossedBeamsTargetBeamSearchOffsets">
+        <EditorCategories value=""/>
+        <WhichLocation Value="CasterUnit"/>
+        <OffsetVectorStartLocation Value="CasterUnit"/>
+        <OffsetVectorEndLocation Value="TargetUnitOrPoint"/>
+        <PeriodCount value="2"/>
+        <PeriodicEffectArray value="CrossedBeamsTargetBeamSearch"/>
+        <PeriodicOffsetArray value="1,0,0"/>
+        <PeriodicOffsetArray value="-1,0,0"/>
+        <PeriodicPeriodArray value="0"/>
+    </CEffectCreatePersistent>
+    <CEffectSet id="CrossedBeamsTargetBeamSet">
+        <EditorCategories value=""/>
+        <EffectArray value="CrossedBeamsTargetFacingDummyTeleport"/>
+        <EffectArray value="CrossedBeamsTargetFacingDummyFacingOffset"/>
+        <EffectArray value="CrossedBeamsTargetBeamSearchOffsets"/>
+    </CEffectSet>
+    <CEffectSet id="CrossedBeamsTargetCleanupDummy">
+        <EditorCategories value=""/>
+        <EffectArray value="CrossedBeamsTargetExplodeKillFollowDummy"/>
+        <EffectArray value="CrossedBeamsTargetExplodeKillFacingDummy"/>
+    </CEffectSet>
+    <CEffectDamage id="CrossedBeamsTargetExplodeDmg">
+        <EditorCategories value=""/>
+        <ResponseFlags index="Acquire" value="1"/>
+        <ResponseFlags index="Flee" value="1"/>
+        <Flags index="Notification" value="1"/>
+        <Amount value="2500"/>
+    </CEffectDamage>
+    <CEffectDamage id="CrossedBeamsTargetExplodeKillFacingDummy">
+        <EditorCategories value=""/>
+        <ImpactLocation Effect="CrossedBeamsTargetInitialDelay" Value="TargetUnit"/>
+        <Flags index="Kill" value="1"/>
+        <Flags index="NoKillCredit" value="1"/>
+    </CEffectDamage>
+    <CEffectDamage id="CrossedBeamsTargetExplodeKillFollowDummy">
+        <EditorCategories value=""/>
+        <ImpactLocation Effect="CrossedBeamsTargetFacingDummyCreate" Value="TargetUnit"/>
+        <Flags index="Kill" value="1"/>
+        <Flags index="NoKillCredit" value="1"/>
+    </CEffectDamage>
+    <CEffectEnumArea id="CrossedBeamsTargetExplodeSearch">
+        <EditorCategories value=""/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Item,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="2.5" Effect="CrossedBeamsTargetExplodeDmg"/>
+    </CEffectEnumArea>
+    <CEffectSet id="CrossedBeamsTargetExplodeSet">
+        <EditorCategories value=""/>
+        <EffectArray value="CrossedBeamsTargetExplodeSearch"/>
+    </CEffectSet>
+    <CEffectCreateUnit id="CrossedBeamsTargetFacingDummyCreate">
+        <EditorCategories value=""/>
+        <SpawnEffect value="CrossedBeamsTargetInitialDelay"/>
+        <SpawnUnit value="CrossedBeamsDummy"/>
+    </CEffectCreateUnit>
+    <CEffectModifyUnit id="CrossedBeamsTargetFacingDummyFacing">
+        <EditorCategories value=""/>
+        <ImpactUnit Effect="CrossedBeamsTargetInitialDelay"/>
+        <FacingLocation Value="TargetPoint"/>
+        <FacingType value="LookAt"/>
+    </CEffectModifyUnit>
+    <CEffectCreatePersistent id="CrossedBeamsTargetFacingDummyFacingOffset">
+        <EditorCategories value=""/>
+        <WhichLocation Effect="CrossedBeamsTargetInitialDelay" Value="TargetUnit"/>
+        <OffsetVectorStartLocation Value="CasterUnit"/>
+        <OffsetVectorEndLocation Effect="CrossedBeamsTargetInitialDelay" Value="TargetUnit"/>
+        <InitialEffect value="CrossedBeamsTargetFacingDummyFacing"/>
+        <InitialOffset value="0,-2,0"/>
+    </CEffectCreatePersistent>
+    <CEffectTeleport id="CrossedBeamsTargetFacingDummyTeleport">
+        <EditorCategories value=""/>
+        <MinDistance value="0"/>
+        <SourceLocation Value="TargetUnit"/>
+        <TargetLocation Effect="CrossedBeamsTargetFacingDummyCreate" Value="TargetUnit"/>
+    </CEffectTeleport>
+    <CEffectDamage id="CrossedBeamsTargetImpactDmg">
+        <EditorCategories value=""/>
+        <ResponseFlags index="Acquire" value="1"/>
+        <ResponseFlags index="Flee" value="1"/>
+        <Flags index="Notification" value="1"/>
+        <Amount value="1500"/>
+    </CEffectDamage>
+    <CEffectCreatePersistent id="CrossedBeamsTargetImpactPersistent">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetUnit"/>
+        <ExpireEffect value="CrossedBeamsTargetExplodeSet"/>
+        <FinalEffect value="CrossedBeamsTargetCleanupDummy"/>
+        <PeriodCount value="20"/>
+        <PeriodicValidator value="CasterNotDead"/>
+        <PeriodicEffectArray value="CrossedBeamsTargetImpactSearch"/>
+        <PeriodicPeriodArray value="0.25"/>
+        <Flags index="Channeled" value="1"/>
+        <InitialDelay value="1"/>
+    </CEffectCreatePersistent>
+    <CEffectEnumArea id="CrossedBeamsTargetImpactSearch">
+        <EditorCategories value=""/>
+        <ImpactLocation Effect="CrossedBeamsTargetFacingDummyCreate" Value="TargetUnit"/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Item,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="1.33" Effect="CrossedBeamsTargetImpactDmg"/>
+    </CEffectEnumArea>
+    <CEffectCreatePersistent id="CrossedBeamsTargetInitialDelay">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetUnit"/>
+        <OffsetVectorEndLocation Value="TargetUnit"/>
+        <InitialDelay value="0.7"/>
+        <InitialEffect value="CrossedBeamsTargetBeamPersistent"/>
+        <FinalEffect value="CrossedBeamsTargetImpactPersistent"/>
+    </CEffectCreatePersistent>
+    <CEffectApplyBehavior id="CrossedBeamsAlreadyCastingNoWeapons">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Behavior value="AlreadyCastingNoWeapons"/>
+        <Flags index="UseDuration" value="1"/>
+        <Duration value="6.8"/>
+    </CEffectApplyBehavior>
+    <CEffectIssueOrder id="CrossedBeamsCastAtTarget">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Abil value="CrossedBeamsTarget"/>
+        <CmdFlags index="Preempt" value="1"/>
+        <Player Value="Caster"/>
+        <Target Value="TargetUnit"/>
+    </CEffectIssueOrder>
+    <CEffectCreateUnit id="CrossedBeamsCreateDummy">
+        <EditorCategories value=""/>
+        <CreateFlags index="Birth" value="0"/>
+        <CreateFlags index="DropOff" value="0"/>
+        <CreateFlags index="OffsetByRadius" value="0"/>
+        <CreateFlags index="Placement" value="0"/>
+        <CreateFlags index="PlacementIgnoreBlockers" value="1"/>
+        <CreateFlags index="PlacementIgnoreCliffTest" value="1"/>
+        <CreateFlags index="ProvideFood" value="0"/>
+        <CreateFlags index="TechComplete" value="0"/>
+        <CreateFlags index="UseFood" value="0"/>
+        <CreateFlags index="NormalizeSpawnOffset" value="0"/>
+        <SpawnEffect value="CrossedBeamsDummySet"/>
+        <SpawnUnit value="CrossedBeamsDummy"/>
+    </CEffectCreateUnit>
+    <CEffectSet id="CrossedBeamsInitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="CrossedBeamsAlreadyCastingNoWeapons"/>
+        <EffectArray value="CrossedBeamsCreateDummy"/>
+    </CEffectSet>
+    <CEffectCreatePersistent id="CrossedBeamsDummyFollowPersistent">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetUnit"/>
+        <OffsetVectorEndLocation Value="TargetUnit"/>
+        <Flags index="PersistUntilDestroyed" value="1"/>
+        <InitialEffect value="CrossedBeamsDummyIssueFollow"/>
+        <PeriodCount value="64"/>
+        <PeriodicValidator value="TargetNotDead"/>
+        <PeriodicEffectArray value="CrossedBeamsDummyIssueFollow"/>
+        <PeriodicPeriodArray value="0.05"/>
+    </CEffectCreatePersistent>
+    <CEffectIssueOrder id="CrossedBeamsDummyIssueFollow">
+        <EditorCategories value=""/>
+        <Abil value="move"/>
+        <CmdFlags index="Preempt" value="1"/>
+        <Target Effect="CrossedBeamsInitialSet" Value="TargetUnit"/>
+    </CEffectIssueOrder>
+    <CEffectSet id="CrossedBeamsDummySet">
+        <EditorCategories value=""/>
+        <EffectArray value="CrossedBeamsCastAtTarget"/>
+        <EffectArray value="CrossedBeamsDummyFollowPersistent"/>
+    </CEffectSet>
+    <CEffectApplyBehavior id="HandOfLightningAlreadyCastingNoWeapons">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Behavior value="AlreadyCastingNoWeapons"/>
+        <Flags index="UseDuration" value="1"/>
+        <Duration value="1.5"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="HandOfLightningApply">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Behavior value="HandOfLightning"/>
+    </CEffectApplyBehavior>
+    <CEffectSet id="HandOfLightningInitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="HandOfLightningAlreadyCastingNoWeapons"/>
+        <EffectArray value="HandOfLightningApply"/>
+        <TargetLocationType value="Point"/>
+    </CEffectSet>
+    <CEffectApplyBehavior id="LightningDeadApply">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Behavior value="TagTeamHandlerLightningDead"/>
+    </CEffectApplyBehavior>
+    <CEffectDamage id="LightningElementalWeaponDmg" parent="DU_WEAP">
+        <EditorCategories value=""/>
+        <Amount value="800"/>
+    </CEffectDamage>
+    <CEffectApplyBehavior id="TagTeamWeaponHandsOfSilenceSilenced">
+        <ValidatorArray index="0" value="HandsOfSilence@On"/>
+        <EditorCategories value=""/>
+        <Behavior value="Silenced"/>
+        <Flags index="UseDuration" value="1"/>
+        <Duration value="2.5"/>
+    </CEffectApplyBehavior>
+    <CEffectDamage id="ThunderElementalWeaponDmg" parent="DU_WEAP">
+        <EditorCategories value=""/>
+        <Amount value="800"/>
+    </CEffectDamage>
+    <CEffectSet id="LightningElementalWeaponSet">
+        <EditorCategories value=""/>
+        <EffectArray value="LightningElementalWeaponDmg"/>
+        <EffectArray value="LightningElementalWeaponShocked"/>
+    </CEffectSet>
+    <CEffectLaunchMissile id="ThunderElementalWeaponLaunchMissile">
+        <EditorCategories value=""/>
+    </CEffectLaunchMissile>
+    <CEffectSet id="ThunderElementalWeaponSet">
+        <EditorCategories value=""/>
+        <EffectArray value="ThunderElementalWeaponDmg"/>
+        <EffectArray value="ThunderElementalWeaponSilence"/>
+    </CEffectSet>
+    <CEffectApplyBehavior id="LightningElementalWeaponShocked">
+        <EditorCategories value=""/>
+        <Behavior value="Shocked"/>
+        <Flags index="UseDuration" value="1"/>
+        <Duration value="1.5"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="ThunderElementalWeaponSilence">
+        <EditorCategories value=""/>
+        <Behavior value="Silenced"/>
+        <Flags index="UseDuration" value="1"/>
+        <Duration value="2.15"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="LightningElementalsApplyTimedLife">
+        <EditorCategories value=""/>
+        <Behavior value="LightningElementalsTimedLife"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="ThunderElementalsApplyTimedLife">
+        <EditorCategories value=""/>
+        <Behavior value="ThunderElementalsTimedLife"/>
+    </CEffectApplyBehavior>
+    <CEffectSet id="LightningElementalsCreateSet">
+        <EditorCategories value=""/>
+        <EffectArray value="LightningElementalsDelay"/>
+    </CEffectSet>
+    <CEffectSet id="LightningElementalsCreateSet2">
+        <EditorCategories value=""/>
+        <EffectArray value="ThunderElementalsDelay"/>
+    </CEffectSet>
+    <CEffectCreateUnit id="LightningElementalsCreateUnit">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetPoint"/>
+        <CreateFlags index="SetFacing" value="1"/>
+        <SpawnEffect value="LightningElementalsCreateSet"/>
+        <SpawnUnit value="LightningElemental"/>
+    </CEffectCreateUnit>
+    <CEffectCreateUnit id="ThunderElementalsCreateUnit">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetPoint"/>
+        <CreateFlags index="SetFacing" value="1"/>
+        <SpawnEffect value="LightningElementalsCreateSet2"/>
+        <SpawnUnit value="ThunderElemental"/>
+    </CEffectCreateUnit>
+    <CEffectCreatePersistent id="LightningElementalsDelay">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetUnit"/>
+        <InitialEffect value="MakePrecursor"/>
+        <ExpireEffect value="RemovePrecursor"/>
+        <PeriodCount value="1"/>
+        <PeriodicEffectArray value="LightningElementalsApplyTimedLife"/>
+        <PeriodicPeriodArray value="0.7"/>
+    </CEffectCreatePersistent>
+    <CEffectCreatePersistent id="ThunderElementalsDelay">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetUnit"/>
+        <InitialEffect value="MakePrecursor"/>
+        <ExpireEffect value="RemovePrecursor"/>
+        <PeriodCount value="1"/>
+        <PeriodicEffectArray value="ThunderElementalsApplyTimedLife"/>
+        <PeriodicPeriodArray value="0.7"/>
+    </CEffectCreatePersistent>
+    <CEffectSet id="LightningElementalsInitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="LightningElementalsAlreadyCastingNoWeapons"/>
+        <EffectArray value="LightningElementalsSpawnOffset"/>
+        <TargetLocationType value="Point"/>
+    </CEffectSet>
+    <CEffectSet id="ThunderElementalsInitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="ThunderElementalsAlreadyCastingNoWeapons"/>
+        <EffectArray value="ThunderElementalsSpawnOffset"/>
+        <TargetLocationType value="Point"/>
+    </CEffectSet>
+    <CEffectCreatePersistent id="LightningElementalsSpawnOffset">
+        <EditorCategories value=""/>
+        <PeriodCount value="3"/>
+        <PeriodicEffectArray value="LightningElementalsCreateUnit"/>
+        <PeriodicOffsetArray value="0,-4,0"/>
+        <PeriodicOffsetArray value="2,-2,0"/>
+        <PeriodicOffsetArray value="-2,-2,0"/>
+        <PeriodicPeriodArray value="0"/>
+    </CEffectCreatePersistent>
+    <CEffectCreatePersistent id="ThunderElementalsSpawnOffset">
+        <EditorCategories value=""/>
+        <PeriodCount value="3"/>
+        <PeriodicEffectArray value="ThunderElementalsCreateUnit"/>
+        <PeriodicOffsetArray value="0,-4,0"/>
+        <PeriodicOffsetArray value="2,-2,0"/>
+        <PeriodicOffsetArray value="-2,-2,0"/>
+        <PeriodicPeriodArray value="0"/>
+    </CEffectCreatePersistent>
+    <CEffectApplyBehavior id="PureEnergyAlreadyCastingNoWeapons">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Behavior value="AlreadyCastingNoWeapons"/>
+        <Flags index="UseDuration" value="1"/>
+        <Duration value="7.15"/>
+    </CEffectApplyBehavior>
+    <CEffectCreatePersistent id="PureEnergyExplosionDelay">
+        <EditorCategories value=""/>
+        <InitialDelay value="0.5"/>
+        <InitialEffect value="PureEnergyExplosionSearch"/>
+    </CEffectCreatePersistent>
+    <CEffectDamage id="PureEnergyPeriodicDmg">
+        <EditorCategories value=""/>
+        <Amount value="900"/>
+    </CEffectDamage>
+    <CEffectCreateHealer id="PureEnergyPeriodicEnergyHeal">
+        <EditorCategories value=""/>
+        <LaunchUnit Value="Target"/>
+        <Flags index="Channeled" value="0"/>
+        <PeriodCount value="8"/>
+        <DrainVitalCostFactor value="2"/>
+        <RechargeVital value="Energy"/>
+        <RechargeVitalRate value="40"/>
+    </CEffectCreateHealer>
+    <CEffectDamage id="PureEnergyExplosionDmg">
+        <EditorCategories value=""/>
+        <ResponseFlags index="Acquire" value="1"/>
+        <ResponseFlags index="Flee" value="1"/>
+        <Flags index="Notification" value="1"/>
+        <Amount value="2500"/>
+        <VitalFractionCurrent index="Energy" value="0.25"/>
+    </CEffectDamage>
+    <CEffectModifyUnit id="PureEnergyExplosionEnergyDrain">
+        <EditorCategories value=""/>
+        <VitalArray index="Energy">
+            <ChangeFraction value="-1"/>
+        </VitalArray>
+    </CEffectModifyUnit>
+    <CEffectEnumArea id="PureEnergyExplosionSearch">
+        <EditorCategories value=""/>
+        <LaunchLocation Value="CasterUnit"/>
+        <ImpactLocation Value="CasterUnit"/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Item,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="6" Effect="PureEnergyExplosionSet"/>
+        <SearchFlags index="ExtendByUnitRadius" value="1"/>
+    </CEffectEnumArea>
+    <CEffectSet id="PureEnergyExplosionSet">
+        <EditorCategories value=""/>
+        <EffectArray value="PureEnergyExplosionDmg"/>
+        <EffectArray value="PureEnergyExplosionEnergyDrain"/>
+    </CEffectSet>
+    <CEffectSet id="PureEnergyInitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="PureEnergyAlreadyCastingNoWeapons"/>
+        <EffectArray value="PureEnergyPersistent"/>
+        <TargetLocationType value="Point"/>
+    </CEffectSet>
+    <CEffectSet id="PureEnergyPeriodicSet">
+        <EditorCategories value=""/>
+        <EffectArray value="PureEnergyPeriodicDmg"/>
+        <EffectArray value="PureEnergyPeriodicEnergyHeal"/>
+    </CEffectSet>
+    <CEffectCreatePersistent id="PureEnergyPersistent">
+        <EditorCategories value=""/>
+        <WhichLocation Value="CasterPoint"/>
+        <OffsetVectorStartLocation Value="CasterPoint"/>
+        <OffsetVectorEndLocation Value="CasterPoint"/>
+        <Flags index="Channeled" value="1"/>
+        <InitialDelay value="0.35"/>
+        <FinalEffect value="PureEnergyExplosionDelay"/>
+        <PeriodCount value="10"/>
+        <PeriodicEffectArray value="PureEnergySearch1"/>
+        <PeriodicEffectArray value="PureEnergySearch1p5"/>
+        <PeriodicEffectArray value="PureEnergySearch2"/>
+        <PeriodicEffectArray value="PureEnergySearch2p5"/>
+        <PeriodicEffectArray value="PureEnergySearch3"/>
+        <PeriodicEffectArray value="PureEnergySearch3p5"/>
+        <PeriodicEffectArray value="PureEnergySearch4"/>
+        <PeriodicEffectArray value="PureEnergySearch4p5"/>
+        <PeriodicEffectArray value="PureEnergySearch5"/>
+        <PeriodicEffectArray value="PureEnergySearch5p5"/>
+        <PeriodicEffectArray value="PureEnergySearch6"/>
+        <PeriodicEffectArray value="PureEnergySearch6p5"/>
+        <PeriodicPeriodArray value="0.6"/>
+        <PeriodicValidator value="CasterNotDead"/>
+    </CEffectCreatePersistent>
+    <CEffectEnumArea id="PureEnergySearch1">
+        <EditorCategories value=""/>
+        <LaunchLocation Value="CasterUnit"/>
+        <ImpactLocation Value="CasterUnit"/>
+        <AreaArray Radius="1" Effect="PureEnergyPeriodicSet"/>
+        <SearchFlags index="ExtendByUnitRadius" value="1"/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Item,Dead,Hidden"/>
+    </CEffectEnumArea>
+    <CEffectEnumArea id="PureEnergySearch1p5">
+        <EditorCategories value=""/>
+        <Marker Link="Effect/PureEnergySearch1"/>
+        <LaunchLocation Value="CasterUnit"/>
+        <ImpactLocation Value="CasterUnit"/>
+        <AreaArray Radius="1.5" Effect="PureEnergyPeriodicSet"/>
+        <SearchFlags index="ExtendByUnitRadius" value="1"/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Item,Dead,Hidden"/>
+    </CEffectEnumArea>
+    <CEffectEnumArea id="PureEnergySearch2p5">
+        <EditorCategories value=""/>
+        <Marker Link="Effect/PureEnergySearch1"/>
+        <LaunchLocation Value="CasterUnit"/>
+        <ImpactLocation Value="CasterUnit"/>
+        <AreaArray Radius="2.5" Effect="PureEnergyPeriodicSet"/>
+        <SearchFlags index="ExtendByUnitRadius" value="1"/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Item,Dead,Hidden"/>
+    </CEffectEnumArea>
+    <CEffectEnumArea id="PureEnergySearch3p5">
+        <EditorCategories value=""/>
+        <Marker Link="Effect/PureEnergySearch1"/>
+        <LaunchLocation Value="CasterUnit"/>
+        <ImpactLocation Value="CasterUnit"/>
+        <AreaArray Radius="3.5" Effect="PureEnergyPeriodicSet"/>
+        <SearchFlags index="ExtendByUnitRadius" value="1"/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Item,Dead,Hidden"/>
+    </CEffectEnumArea>
+    <CEffectEnumArea id="PureEnergySearch4p5">
+        <EditorCategories value=""/>
+        <Marker Link="Effect/PureEnergySearch1"/>
+        <LaunchLocation Value="CasterUnit"/>
+        <ImpactLocation Value="CasterUnit"/>
+        <AreaArray Radius="4.5" Effect="PureEnergyPeriodicSet"/>
+        <SearchFlags index="ExtendByUnitRadius" value="1"/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Item,Dead,Hidden"/>
+    </CEffectEnumArea>
+    <CEffectEnumArea id="PureEnergySearch5p5">
+        <EditorCategories value=""/>
+        <Marker Link="Effect/PureEnergySearch1"/>
+        <LaunchLocation Value="CasterUnit"/>
+        <ImpactLocation Value="CasterUnit"/>
+        <AreaArray Radius="5.5" Effect="PureEnergyPeriodicSet"/>
+        <SearchFlags index="ExtendByUnitRadius" value="1"/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Item,Dead,Hidden"/>
+    </CEffectEnumArea>
+    <CEffectEnumArea id="PureEnergySearch6p5">
+        <EditorCategories value=""/>
+        <Marker Link="Effect/PureEnergySearch1"/>
+        <LaunchLocation Value="CasterUnit"/>
+        <ImpactLocation Value="CasterUnit"/>
+        <AreaArray Radius="6.5" Effect="PureEnergyPeriodicSet"/>
+        <SearchFlags index="ExtendByUnitRadius" value="1"/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Item,Dead,Hidden"/>
+    </CEffectEnumArea>
+    <CEffectEnumArea id="PureEnergySearch2">
+        <EditorCategories value=""/>
+        <Marker Link="Effect/PureEnergySearch1"/>
+        <LaunchLocation Value="CasterUnit"/>
+        <ImpactLocation Value="CasterUnit"/>
+        <AreaArray Radius="2" Effect="PureEnergyPeriodicSet"/>
+        <SearchFlags index="ExtendByUnitRadius" value="1"/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Item,Dead,Hidden"/>
+    </CEffectEnumArea>
+    <CEffectEnumArea id="PureEnergySearch3">
+        <EditorCategories value=""/>
+        <Marker Link="Effect/PureEnergySearch1"/>
+        <LaunchLocation Value="CasterUnit"/>
+        <ImpactLocation Value="CasterUnit"/>
+        <AreaArray Radius="3" Effect="PureEnergyPeriodicSet"/>
+        <SearchFlags index="ExtendByUnitRadius" value="1"/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Item,Dead,Hidden"/>
+    </CEffectEnumArea>
+    <CEffectEnumArea id="PureEnergySearch4">
+        <EditorCategories value=""/>
+        <Marker Link="Effect/PureEnergySearch1"/>
+        <LaunchLocation Value="CasterUnit"/>
+        <ImpactLocation Value="CasterUnit"/>
+        <AreaArray Radius="4" Effect="PureEnergyPeriodicSet"/>
+        <SearchFlags index="ExtendByUnitRadius" value="1"/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Item,Dead,Hidden"/>
+    </CEffectEnumArea>
+    <CEffectEnumArea id="PureEnergySearch5">
+        <EditorCategories value=""/>
+        <Marker Link="Effect/PureEnergySearch1"/>
+        <LaunchLocation Value="CasterUnit"/>
+        <ImpactLocation Value="CasterUnit"/>
+        <AreaArray Radius="5" Effect="PureEnergyPeriodicSet"/>
+        <SearchFlags index="ExtendByUnitRadius" value="1"/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Item,Dead,Hidden"/>
+    </CEffectEnumArea>
+    <CEffectEnumArea id="PureEnergySearch6">
+        <EditorCategories value=""/>
+        <Marker Link="Effect/PureEnergySearch1"/>
+        <LaunchLocation Value="CasterUnit"/>
+        <ImpactLocation Value="CasterUnit"/>
+        <AreaArray Radius="6" Effect="PureEnergyPeriodicSet"/>
+        <SearchFlags index="ExtendByUnitRadius" value="1"/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Item,Dead,Hidden"/>
+    </CEffectEnumArea>
+    <CEffectDamage id="ShockedDmg">
+        <EditorCategories value=""/>
+        <ImpactLocation Value="SourceUnit"/>
+        <Amount value="250"/>
+    </CEffectDamage>
+    <CEffectSet id="ShockedShockSet">
+        <EditorCategories value=""/>
+        <Chance value="0.5"/>
+        <EffectArray value="ShockedStun"/>
+        <EffectArray value="ShockedDmg"/>
+        <EffectArray value="ShockedStop"/>
+    </CEffectSet>
+    <CEffectCancelOrder id="ShockedStop">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Source"/>
+        <Count value="32"/>
+    </CEffectCancelOrder>
+    <CEffectApplyBehavior id="ShockedStun">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Source"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="ShoutAlreadyCastingNoWeapons">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Behavior value="AlreadyCastingNoWeapons"/>
+        <Flags index="UseDuration" value="1"/>
+        <Duration value="2.5"/>
+    </CEffectApplyBehavior>
+    <CEffectDamage id="ShoutImpactDmg">
+        <EditorCategories value=""/>
+        <Amount value="2500"/>
+    </CEffectDamage>
+    <CEffectLaunchMissile id="ShoutImpactKnockback">
+        <EditorCategories value=""/>
+        <LaunchLocation Effect="ShoutImpactKnockbackOffset" Value="TargetUnit"/>
+        <FinishEffect value="ShoutImpactKnockbackPrecursorKill"/>
+        <Flags index="2D" value="1"/>
+        <AmmoUnit value=""/>
+        <Movers Link="ShoutKnockback" IfRangeLTE="500"/>
+        <DeathType value="Unknown"/>
+    </CEffectLaunchMissile>
+    <CEffectCreatePersistent id="ShoutImpactKnockbackOffset">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetUnit"/>
+        <OffsetVectorStartLocation Value="CasterUnit"/>
+        <OffsetVectorEndLocation Value="TargetUnit"/>
+        <InitialEffect value="ShoutImpactKnockbackPrecursor"/>
+        <InitialOffset value="0,-2,0"/>
+        <ValidatorArray value="TargetNotDead"/>
+    </CEffectCreatePersistent>
+    <CEffectDamage id="ShoutImpactKnockbackPrecursorKill">
+        <EditorCategories value=""/>
+        <ImpactLocation Effect="ShoutImpactKnockback" Value="TargetUnit"/>
+        <Flags index="Kill" value="1"/>
+        <Flags index="NoKillCredit" value="1"/>
+    </CEffectDamage>
+    <CEffectSet id="ShoutImpactSet">
+        <ValidatorArray value="noMarkers"/>
+        <EditorCategories value=""/>
+        <EffectArray value="ShoutImpactSilence"/>
+        <EffectArray value="ShoutImpactDmg"/>
+        <EffectArray value="ShoutImpactKnockbackOffset"/>
+    </CEffectSet>
+    <CEffectApplyBehavior id="ShoutImpactSilence">
+        <EditorCategories value=""/>
+        <Behavior value="Silenced"/>
+        <Flags index="UseDuration" value="1"/>
+        <Duration value="6.4287"/>
+    </CEffectApplyBehavior>
+    <CEffectSet id="ShoutInitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="ShoutAlreadyCastingNoWeapons"/>
+        <EffectArray value="ShoutSearchPersistent"/>
+        <TargetLocationType value="Point"/>
+    </CEffectSet>
+    <CEffectCreateUnit id="ShoutImpactKnockbackPrecursor">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetPoint"/>
+        <CreateFlags index="Precursor" value="1"/>
+        <SpawnEffect value="ShoutImpactKnockback"/>
+        <SpawnUnit value="Precursor"/>
+    </CEffectCreateUnit>
+    <CEffectCreatePersistent id="ShoutSearchPersistent">
+        <EditorCategories value=""/>
+        <Marker Duration="2" Link="Effect/ShoutSearch">
+            <MatchFlags index="Link" value="1"/>
+        </Marker>
+        <WhichLocation Value="CasterUnit"/>
+        <InitialDelay value="0.8928"/>
+        <PeriodCount value="6"/>
+        <PeriodicEffectArray value="ShoutSearchRange1"/>
+        <PeriodicEffectArray value="ShoutSearchRange2"/>
+        <PeriodicEffectArray value="ShoutSearchRange3"/>
+        <PeriodicEffectArray value="ShoutSearchRange4"/>
+        <PeriodicEffectArray value="ShoutSearchRange5"/>
+        <PeriodicEffectArray value="ShoutSearchRange6"/>
+        <PeriodicPeriodArray value="0.0893"/>
+        <PeriodicValidator value="CasterNotDead"/>
+    </CEffectCreatePersistent>
+    <CEffectEnumArea id="ShoutSearchRange2">
+        <EditorCategories value=""/>
+        <Marker Duration="2" Link="Effect/ShoutSearch">
+            <MatchFlags index="Link" value="1"/>
+        </Marker>
+        <ImpactLocation Value="CasterUnit"/>
+        <ExcludeArray/>
+        <SearchFilters value="-;Player,Ally,Neutral,Missile,Item,Buried,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="2" Effect="ShoutImpactSet"/>
+        <SearchFlags index="ExtendByUnitRadius" value="1"/>
+    </CEffectEnumArea>
+    <CEffectEnumArea id="ShoutSearchRange3">
+        <EditorCategories value=""/>
+        <Marker Duration="2" Link="Effect/ShoutSearch">
+            <MatchFlags index="Link" value="1"/>
+        </Marker>
+        <ImpactLocation Value="CasterUnit"/>
+        <ExcludeArray/>
+        <SearchFilters value="-;Player,Ally,Neutral,Missile,Item,Buried,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="3" Effect="ShoutImpactSet"/>
+        <SearchFlags index="ExtendByUnitRadius" value="1"/>
+    </CEffectEnumArea>
+    <CEffectEnumArea id="ShoutSearchRange5">
+        <EditorCategories value=""/>
+        <Marker Duration="2" Link="Effect/ShoutSearch">
+            <MatchFlags index="Link" value="1"/>
+        </Marker>
+        <ImpactLocation Value="CasterUnit"/>
+        <ExcludeArray/>
+        <SearchFilters value="-;Player,Ally,Neutral,Missile,Item,Buried,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="5" Effect="ShoutImpactSet"/>
+        <SearchFlags index="ExtendByUnitRadius" value="1"/>
+    </CEffectEnumArea>
+    <CEffectEnumArea id="ShoutSearchRange1">
+        <EditorCategories value=""/>
+        <Marker Duration="2" Link="Effect/ShoutSearch">
+            <MatchFlags index="Link" value="1"/>
+        </Marker>
+        <ImpactLocation Value="CasterUnit"/>
+        <ExcludeArray/>
+        <SearchFilters value="-;Player,Ally,Neutral,Missile,Item,Buried,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="1" Effect="ShoutImpactSet"/>
+        <SearchFlags index="ExtendByUnitRadius" value="1"/>
+    </CEffectEnumArea>
+    <CEffectEnumArea id="ShoutSearchRange4">
+        <EditorCategories value=""/>
+        <Marker Duration="2" Link="Effect/ShoutSearch">
+            <MatchFlags index="Link" value="1"/>
+        </Marker>
+        <ImpactLocation Value="CasterUnit"/>
+        <ExcludeArray/>
+        <SearchFilters value="-;Player,Ally,Neutral,Missile,Item,Buried,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="4" Effect="ShoutImpactSet"/>
+        <SearchFlags index="ExtendByUnitRadius" value="1"/>
+    </CEffectEnumArea>
+    <CEffectEnumArea id="ShoutSearchRange6">
+        <EditorCategories value=""/>
+        <Marker Duration="2" Link="Effect/ShoutSearch">
+            <MatchFlags index="Link" value="1"/>
+        </Marker>
+        <ImpactLocation Value="CasterUnit"/>
+        <ExcludeArray/>
+        <SearchFilters value="-;Player,Ally,Neutral,Missile,Item,Buried,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="6" Effect="ShoutImpactSet"/>
+        <SearchFlags index="ExtendByUnitRadius" value="1"/>
+    </CEffectEnumArea>
+    <CEffectApplyBehavior id="StormAlreadyCastingNoWeapons">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Behavior value="AlreadyCastingNoWeapons"/>
+        <Flags index="UseDuration" value="1"/>
+        <Duration value="5"/>
+    </CEffectApplyBehavior>
+    <CEffectEnumArea id="StormDmgSearch">
+        <EditorCategories value=""/>
+        <ImpactLocation Value="TargetPoint"/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Item,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="0.25" Effect="StormDmg"/>
+    </CEffectEnumArea>
+    <CEffectSet id="StormInitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="StormAlreadyCastingNoWeapons"/>
+        <EffectArray value="StormPersistent1"/>
+        <TargetLocationType value="Point"/>
+    </CEffectSet>
+    <CEffectCreatePersistent id="StormLightningDelay">
+        <EditorCategories value=""/>
+    </CEffectCreatePersistent>
+    <CEffectCreatePersistent id="StormPersistent1">
+        <EditorCategories value=""/>
+        <WhichLocation Value="CasterUnit"/>
+        <OffsetVectorStartLocation Value="CasterUnit"/>
+        <OffsetVectorEndLocation Value="CasterUnit"/>
+        <Flags index="RandomOffset" value="1"/>
+        <InitialDelay value="0.7143"/>
+        <PeriodCount value="12"/>
+        <PeriodicValidator value="CasterNotDead"/>
+        <PeriodicEffectArray value="StormPersistent2"/>
+        <PeriodicOffsetArray value="-1,0,0"/>
+        <PeriodicOffsetArray value="1,0,0"/>
+        <PeriodicOffsetArray value="0,-1,0"/>
+        <PeriodicOffsetArray value="0,1,0"/>
+        <PeriodicOffsetArray value="-1,-1,0"/>
+        <PeriodicOffsetArray value="-1,1,0"/>
+        <PeriodicOffsetArray value="1,-1,0"/>
+        <PeriodicOffsetArray value="1,1,0"/>
+        <PeriodicPeriodArray value="0.3571"/>
+        <PeriodicPeriodArray value="0.0893"/>
+        <PeriodicPeriodArray value="0.8037"/>
+        <PeriodicPeriodArray value="0"/>
+        <PeriodicPeriodArray value="0.3571"/>
+        <PeriodicPeriodArray value="0.3571"/>
+        <PeriodicPeriodArray value="0.1787"/>
+        <PeriodicPeriodArray value="0.7143"/>
+        <OffsetRandMode value="RandomNoRepeat"/>
+        <PeriodRandMode value="RandomNoRepeat"/>
+    </CEffectCreatePersistent>
+    <CEffectCreatePersistent id="StormPersistent2">
+        <EditorCategories value=""/>
+        <WhichLocation Value="CasterUnit"/>
+        <OffsetVectorStartLocation Value="CasterUnit"/>
+        <PeriodicOffsetArray value="0,-1.5,0"/>
+        <PeriodicOffsetArray value="0,-2,0"/>
+        <PeriodicOffsetArray value="0,-2.5,0"/>
+        <PeriodicOffsetArray value="0,-3,0"/>
+        <PeriodicOffsetArray value="0,-3.5,0"/>
+        <PeriodicOffsetArray value="0,-4,0"/>
+        <PeriodicOffsetArray value="0,-4.5,0"/>
+        <PeriodicOffsetArray value="0,-5,0"/>
+        <PeriodicOffsetArray value="0,-5.5,0"/>
+        <PeriodicOffsetArray value="0,-6,0"/>
+        <PeriodicOffsetArray value="0,-6.5,0"/>
+        <PeriodicOffsetArray value="0,-7,0"/>
+        <PeriodicOffsetArray value="0.574,-1.386,0"/>
+        <PeriodicOffsetArray value="0.7653,-1.848,0"/>
+        <PeriodicOffsetArray value="0.647,-2.415,0"/>
+        <PeriodicOffsetArray value="1.25,-2.165,0"/>
+        <PeriodicOffsetArray value="0.7766,-2.898,0"/>
+        <PeriodicOffsetArray value="1.5,-2.598,0"/>
+        <PeriodicOffsetArray value="0.6828,-3.433,0"/>
+        <PeriodicOffsetArray value="1.339,-3.234,0"/>
+        <PeriodicOffsetArray value="1.944,-2.91,0"/>
+        <PeriodicOffsetArray value="2.222,-3.326,0"/>
+        <PeriodicOffsetArray value="1.531,-3.696,0"/>
+        <PeriodicOffsetArray value="0.7805,-3.923,0"/>
+        <PeriodicOffsetArray value="0.704,-4.445,0"/>
+        <PeriodicOffsetArray value="1.391,-4.28,0"/>
+        <PeriodicOffsetArray value="2.043,-4.01,0"/>
+        <PeriodicOffsetArray value="2.645,-3.641,0"/>
+        <PeriodicOffsetArray value="2.939,-4.045,0"/>
+        <PeriodicOffsetArray value="2.27,-4.455,0"/>
+        <PeriodicOffsetArray value="1.545,-4.755,0"/>
+        <PeriodicOffsetArray value="0.7822,-4.938,0"/>
+        <PeriodicOffsetArray value="0.718,-5.453,0"/>
+        <PeriodicOffsetArray value="1.424,-5.313,0"/>
+        <PeriodicOffsetArray value="2.105,-5.081,0"/>
+        <PeriodicOffsetArray value="2.75,-4.763,0"/>
+        <PeriodicOffsetArray value="3.348,-4.363,0"/>
+        <PeriodicOffsetArray value="3.653,-4.76,0"/>
+        <PeriodicOffsetArray value="3,-5.196,0"/>
+        <PeriodicOffsetArray value="2.296,-5.543,0"/>
+        <PeriodicOffsetArray value="1.553,-5.796,0"/>
+        <PeriodicOffsetArray value="0.7832,-5.949,0"/>
+        <PeriodicOffsetArray value="0.7277,-6.459,0"/>
+        <PeriodicOffsetArray value="1.446,-6.337,0"/>
+        <PeriodicOffsetArray value="2.147,-6.135,0"/>
+        <PeriodicOffsetArray value="2.82,-5.856,0"/>
+        <PeriodicOffsetArray value="3.458,-5.504,0"/>
+        <PeriodicOffsetArray value="4.053,-5.082,0"/>
+        <PeriodicOffsetArray value="4.364,-5.473,0"/>
+        <PeriodicOffsetArray value="3.724,-5.927,0"/>
+        <PeriodicOffsetArray value="3.037,-6.307,0"/>
+        <PeriodicOffsetArray value="2.312,-6.607,0"/>
+        <PeriodicOffsetArray value="1.558,-6.824,0"/>
+        <PeriodicOffsetArray value="0.7836,-6.956,0"/>
+        <Flags index="RandomOffset" value="1"/>
+        <Flags index="RandomPeriod" value="1"/>
+        <PeriodCount value="4"/>
+        <PeriodicEffectArray value="StormDmgSearch"/>
+        <PeriodicPeriodArray value="1.7856"/>
+    </CEffectCreatePersistent>
+    <CEffectApplyBehavior id="TagTeamWeaponHandOfLightningShocked">
+        <ValidatorArray index="0" value="HandOfLightningOn"/>
+        <EditorCategories value=""/>
+        <Behavior value="Shocked"/>
+        <Flags index="UseDuration" value="1"/>
+        <Duration value="3"/>
+    </CEffectApplyBehavior>
+    <CEffectSet id="TagTeamWeaponImpactSet">
+        <EditorCategories value=""/>
+        <EffectArray value="TagTeamWeaponDmg"/>
+        <EffectArray value="TagTeamWeaponHandOfLightningShocked"/>
+        <EffectArray value="TagTeamWeaponHandsOfSilenceSilenced"/>
+    </CEffectSet>
+    <CEffectApplyBehavior id="ThunderDeadApply">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Behavior value="TagTeamHandlerThunderDead"/>
+    </CEffectApplyBehavior>
+    <CEffectSet id="TagTeamHandlerLightningCastSet">
+        <EditorCategories value=""/>
+        <EffectArray value="TagTeamHandlerLightningExhausted"/>
+        <EffectArray value="TagTeamHandlerThunderExhausted"/>
+        <EffectArray value="TagTeamHandlerLightningExhaustedByThunder"/>
+    </CEffectSet>
+    <CEffectSet id="TagTeamHandlerBothCastSet">
+        <EditorCategories value=""/>
+        <EffectArray value="TagTeamHandlerLightningExhaustedLong"/>
+        <EffectArray value="TagTeamHandlerThunderExhaustedLong"/>
+    </CEffectSet>
+    <CEffectApplyBehavior id="TagTeamHandlerLightningExhaustedLong">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Behavior value="TagTeamHandlerLightningExhausted"/>
+        <Flags index="UseDuration" value="1"/>
+        <Duration value="15"/>
+    </CEffectApplyBehavior>
+    <CEffectSet id="TagTeamHandlerThunderCastSet">
+        <EditorCategories value=""/>
+        <EffectArray value="TagTeamHandlerLightningExhausted"/>
+        <EffectArray value="TagTeamHandlerThunderExhausted"/>
+        <EffectArray value="TagTeamHandlerThunderExhaustedByLightning"/>
+    </CEffectSet>
+    <CEffectApplyBehavior id="TagTeamHandlerLightningExhausted">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Flags index="UseDuration" value="1"/>
+        <Duration value="7.15"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="TagTeamHandlerLightningExhaustedByThunder">
+        <ValidatorArray index="0" value="TagTeamHandlerFindThunder"/>
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Behavior value="TagTeamHandlerLightningExhausted"/>
+        <Flags index="UseDuration" value="1"/>
+        <Duration value="15"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="TagTeamHandlerThunderExhausted">
+        <WhichUnit Value="Caster"/>
+        <Flags index="UseDuration" value="1"/>
+        <Duration value="7.1428"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="TagTeamHandlerThunderExhaustedLong">
+        <WhichUnit Value="Caster"/>
+        <Behavior value="TagTeamHandlerThunderExhausted"/>
+        <Flags index="UseDuration" value="1"/>
+        <Duration value="14.2856"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="TagTeamHandlerThunderExhaustedByLightning">
+        <ValidatorArray index="0" value="TagTeamHandlerFindLightning"/>
+        <WhichUnit Value="Caster"/>
+        <Behavior value="TagTeamHandlerThunderExhausted"/>
+        <Flags index="UseDuration" value="1"/>
+        <Duration value="14.2856"/>
+    </CEffectApplyBehavior>
+    <CEffectDamage id="TagTeamWeaponDmg" parent="DU_WEAP">
+        <EditorCategories value="Race:Protoss"/>
+        <Kind value="Ranged"/>
+        <Amount value="1650"/>
+        <Death value="Blast"/>
+        <AttributeFactor index="Armored" value="0.25"/>
+    </CEffectDamage>
+    <CEffectLaunchMissile id="TagTeamWeaponLaunchMissile">
+        <EditorCategories value="Race:Protoss"/>
+        <ImpactEffect value="TagTeamWeaponImpactSet"/>
+        <AmmoUnit value="TagTeamWeaponMissile"/>
+        <Movers Link="HighTemplarWeapon"/>
+    </CEffectLaunchMissile>
+    <CEffectApplyBehavior id="TornadoAlreadyCastingNoWeapons" parent="AlreadyCastingNoWeapons">
+        <Duration value="5.7143"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="TornadoImpactApplySilence">
+        <EditorCategories value=""/>
+        <Behavior value="Silenced"/>
+        <Flags index="UseDuration" value="1"/>
+        <Duration value="5"/>
+    </CEffectApplyBehavior>
+    <CEffectDamage id="TornadoImpactDmg">
+        <EditorCategories value=""/>
+        <Amount value="2500"/>
+    </CEffectDamage>
+    <CEffectLaunchMissile id="TornadoImpactLaunch">
+        <EditorCategories value=""/>
+        <LaunchLocation Effect="TornadoImpactThrowLocation" Value="TargetUnit"/>
+        <ImpactEffect value="KillRemove"/>
+        <Flags index="2D" value="1"/>
+        <AmmoUnit value=""/>
+        <Movers Link="TornadoMover" IfRangeLTE="500"/>
+        <DeathType value="Unknown"/>
+        <ValidatorArray index="0" value="TornadoKnockbackTargetNotDead"/>
+    </CEffectLaunchMissile>
+    <CEffectEnumArea id="TornadoImpactSearch">
+        <EditorCategories value=""/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Hover,Missile,Item,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="2" Effect="TornadoImpactSet"/>
+    </CEffectEnumArea>
+    <CEffectCreatePersistent id="TornadoPullTeleportController">
+        <ValidatorArray value="TornadoNotThrown"/>
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetUnit"/>
+        <OffsetVectorStartLocation Effect="TornadoPersistent" Value="TargetPoint"/>
+        <OffsetVectorEndLocation Value="TargetUnit"/>
+        <PeriodCount value="4"/>
+        <PeriodicEffectArray value="TornadoPullTeleportOffset"/>
+        <PeriodicPeriodArray value="0.0625"/>
+    </CEffectCreatePersistent>
+    <CEffectSet id="TornadoImpactSet">
+        <EditorCategories value=""/>
+        <EffectArray value="TornadoImpactDmg"/>
+        <EffectArray value="TornadoImpactApplySilence"/>
+        <EffectArray value="TornadoImpactThrowLocation"/>
+        <EffectArray value="TornadoImpactThrown"/>
+        <ValidatorArray value="TornadoNotThrown"/>
+    </CEffectSet>
+    <CEffectSet id="TornadoInitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="TornadoAlreadyCastingNoWeapons"/>
+        <EffectArray value="TornadoInitialDelay"/>
+        <TargetLocationType value="Point"/>
+    </CEffectSet>
+    <CEffectCreatePersistent id="TornadoPersistent">
+        <EditorCategories value=""/>
+        <InitialDelay value="0.55"/>
+        <PeriodCount value="24"/>
+        <PeriodicEffectArray value="TornadoSearchSet"/>
+        <PeriodicPeriodArray value="0.2"/>
+        <PeriodicValidator value="CasterNotDead"/>
+    </CEffectCreatePersistent>
+    <CEffectEnumArea id="TornadoPullSearch">
+        <EditorCategories value=""/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Item,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="10" Effect="TornadoPullTeleportController"/>
+    </CEffectEnumArea>
+    <CEffectTeleport id="TornadoPullTeleport">
+        <EditorCategories value=""/>
+        <WhichUnit Effect="TornadoPullTeleportOffset"/>
+        <ClearQueuedOrders value="0"/>
+        <MinDistance value="0"/>
+        <SourceLocation Effect="TornadoPullTeleportOffset" Value="TargetUnit"/>
+        <TargetLocation Value="TargetPoint"/>
+    </CEffectTeleport>
+    <CEffectSet id="TornadoSearchSet">
+        <EditorCategories value=""/>
+        <EffectArray value="TornadoPullSearch"/>
+        <EffectArray value="TornadoImpactSearch"/>
+    </CEffectSet>
+    <CEffectCreatePersistent id="TornadoPullTeleportOffset">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetUnit"/>
+        <OffsetVectorStartLocation Effect="TornadoPersistent" Value="TargetPoint"/>
+        <OffsetVectorEndLocation Value="TargetUnit"/>
+        <InitialEffect value="TornadoPullTeleport"/>
+        <InitialOffset value="0,0.18,0"/>
+    </CEffectCreatePersistent>
+    <CEffectApplyBehavior id="TornadoImpactThrown">
+        <EditorCategories value=""/>
+        <Behavior value="TornadoThrown"/>
+    </CEffectApplyBehavior>
+    <CEffectDamage id="StormDmg">
+        <EditorCategories value=""/>
+        <ResponseFlags index="Acquire" value="1"/>
+        <ResponseFlags index="Flee" value="1"/>
+        <Flags index="Notification" value="1"/>
+        <Amount value="100"/>
+    </CEffectDamage>
+    <CEffectApplyBehavior id="ZapTrapAlreadyCastingNoWeapons">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Behavior value="AlreadyCastingNoWeapons"/>
+        <Flags index="UseDuration" value="1"/>
+        <Duration value="3.5"/>
+    </CEffectApplyBehavior>
+    <CEffectCreateUnit id="ZapTrapCreateDummyUnit">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetPoint"/>
+        <SpawnEffect value="ZapTrapLaunchMissile"/>
+        <SpawnUnit value="ZapTrapDummyUnit"/>
+        <CreateFlags index="Birth" value="0"/>
+        <CreateFlags index="DropOff" value="0"/>
+        <CreateFlags index="OffsetByRadius" value="0"/>
+        <CreateFlags index="NormalizeSpawnOffset" value="0"/>
+    </CEffectCreateUnit>
+    <CEffectDamage id="ZapTrapDmg">
+        <EditorCategories value=""/>
+        <ResponseFlags index="Acquire" value="1"/>
+        <ResponseFlags index="Flee" value="1"/>
+        <ImpactLocation Value="TargetUnit"/>
+        <Flags index="Notification" value="1"/>
+        <Amount value="1200"/>
+    </CEffectDamage>
+    <CEffectCreatePersistent id="ZapTrapInitialDelay">
+        <EditorCategories value=""/>
+        <InitialDelay value="0.175"/>
+        <InitialEffect value="ZapTrapCreateDummyUnit"/>
+    </CEffectCreatePersistent>
+    <CEffectSet id="ZapTrapInitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="ZapTrapAlreadyCastingNoWeapons"/>
+        <EffectArray value="ZapTrapInitialDelay"/>
+        <TargetLocationType value="Point"/>
+    </CEffectSet>
+    <CEffectLaunchMissile id="ZapTrapLaunchMissile">
+        <EditorCategories value=""/>
+        <ImpactEffect value="ZapTrapTimedLifeApply"/>
+        <AmmoUnit value="ZapTrapMissile"/>
+    </CEffectLaunchMissile>
+    <CEffectEnumArea id="ZapTrapPeriodicSearch">
+        <EditorCategories value=""/>
+        <ImpactLocation Value="TargetPoint"/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Item,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="3.25" Effect="ZapTrapPeriodicSet"/>
+    </CEffectEnumArea>
+    <CEffectSet id="ZapTrapPeriodicSet">
+        <EditorCategories value=""/>
+        <EffectArray value="ZapTrapShockApply"/>
+        <EffectArray value="ZapTrapDmg"/>
+    </CEffectSet>
+    <CEffectApplyBehavior id="ZapTrapShockApply">
+        <EditorCategories value=""/>
+        <Behavior value="Shocked"/>
+        <Flags index="UseDuration" value="1"/>
+        <Duration value="5.75"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="ZapTrapTimedLifeApply">
+        <EditorCategories value=""/>
+        <Behavior value="ZapTrapDummyTimedLife"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="LightningElementalsAlreadyCastingNoWeapons" parent="AlreadyCastingNoWeapons"/>
+    <CEffectApplyBehavior id="ThunderElementalsAlreadyCastingNoWeapons" parent="AlreadyCastingNoWeapons"/>
+    <CAbilEffectInstant id="CoronaWaves">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="CoronaWavesInitialSet"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="CoronaWaves"/>
+    </CAbilEffectInstant>
+    <CAbilEffectTarget id="CrossedBeamsTarget">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="CrossedBeamsTargetFacingDummyCreate"/>
+        <Range value="20"/>
+        <CastOutroTime value="6.5"/>
+        <RangeSlop value="50"/>
+    </CAbilEffectTarget>
+    <CAbilEffectTarget id="CrossedBeamsStart">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="CrossedBeamsInitialSet"/>
+        <Range value="7"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="CrossedBeams"/>
+    </CAbilEffectTarget>
+    <CAbilEffectInstant id="HandOfLightning">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="HandOfLightningInitialSet"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="HandOfLightning"/>
+    </CAbilEffectInstant>
+    <CAbilEffectTarget id="HandlerLightningCrossedBeams">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Flags index="AutoCast" value="1"/>
+        <Flags index="AutoCastOn" value="1"/>
+        <Range value="13"/>
+        <Arc value="360"/>
+        <AutoCastFilters value="Visible;Self,Player,Ally,Neutral,Worker,Missile,Item,Stasis,Dead,Hidden,Invulnerable,Summoned"/>
+        <AutoCastRange value="13"/>
+        <AutoCastValidatorArray value="LightningNotExhausted"/>
+        <AutoCastValidatorArray value="LightningNotDead"/>
+        <AutoCastValidatorArray value="BossAbilityRequirementLvl4"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="CrossedBeams"/>
+        <Cost>
+            <Cooldown TimeStart="10" TimeUse="60"/>
+        </Cost>
+    </CAbilEffectTarget>
+    <CAbilEffectInstant id="HandlerLightningElementals">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Flags index="AutoCast" value="1"/>
+        <Flags index="AutoCastOn" value="1"/>
+        <AutoCastFilters value="Visible;Self,Player,Ally,Neutral,Worker,Missile,Item,Stasis,Dead,Hidden,Invulnerable,Summoned"/>
+        <AutoCastRange value="13"/>
+        <AutoCastValidatorArray value="LightningNotExhausted"/>
+        <AutoCastValidatorArray value="LightningNotDead"/>
+        <AutoCastValidatorArray value="EnemyWithin8"/>
+        <AutoCastValidatorArray value="BossAbilityRequirementLvl1"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="LightningElementals"/>
+        <Cost>
+            <Cooldown TimeStart="7" TimeUse="60"/>
+        </Cost>
+    </CAbilEffectInstant>
+    <CAbilEffectInstant id="HandlerLightningHandsOfLightning">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <AutoCastFilters value="Visible;Self,Player,Ally,Neutral,Worker,Missile,Item,Stasis,Dead,Hidden,Invulnerable,Summoned"/>
+        <AutoCastRange value="13"/>
+        <AutoCastValidatorArray value="LightningNotExhausted"/>
+        <AutoCastValidatorArray value="LightningNotDead"/>
+        <AutoCastValidatorArray value="EnemyWithin8"/>
+        <AutoCastValidatorArray value="BossAbilityRequirementLvl3"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="HandOfLightning"/>
+        <Cost>
+            <Cooldown TimeStart="6" TimeUse="45"/>
+        </Cost>
+    </CAbilEffectInstant>
+    <CAbilEffectInstant id="HandlerLightningPureEnergy">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Flags index="AutoCast" value="1"/>
+        <Flags index="AutoCastOn" value="1"/>
+        <AutoCastFilters value="Visible;Self,Player,Ally,Neutral,Worker,Missile,Item,Stasis,Dead,Hidden,Invulnerable,Summoned"/>
+        <AutoCastRange value="13"/>
+        <AutoCastValidatorArray value="LightningNotExhausted"/>
+        <AutoCastValidatorArray value="LightningNotDead"/>
+        <AutoCastValidatorArray value="EnemyWithin8"/>
+        <AutoCastValidatorArray value="BossAbilityRequirementLvl3"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="PureEnergy"/>
+        <Cost>
+            <Cooldown TimeStart="2" TimeUse="60"/>
+        </Cost>
+    </CAbilEffectInstant>
+    <CAbilEffectTarget id="HandlerLightningZapTrap">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Flags index="AutoCast" value="1"/>
+        <Flags index="AutoCastOn" value="1"/>
+        <Range value="13"/>
+        <Arc value="360"/>
+        <AutoCastFilters value="Visible;Self,Player,Ally,Neutral,Worker,Missile,Item,Stasis,Dead,Hidden,Invulnerable,Summoned"/>
+        <AutoCastRange value="13"/>
+        <AutoCastValidatorArray value="LightningNotExhausted"/>
+        <AutoCastValidatorArray value="LightningNotDead"/>
+        <AutoCastValidatorArray value="BossAbilityRequirementLvl2"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="ZapTrap"/>
+        <Cost>
+            <Cooldown TimeStart="5" TimeUse="45"/>
+        </Cost>
+    </CAbilEffectTarget>
+    <CAbilEffectInstant id="HandlerThunderCoronaWaves">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Flags index="AutoCast" value="1"/>
+        <Flags index="AutoCastOn" value="1"/>
+        <AutoCastFilters value="Visible;Self,Player,Ally,Neutral,Worker,Missile,Item,Stasis,Dead,Hidden,Invulnerable,Summoned"/>
+        <AutoCastRange value="13"/>
+        <AutoCastValidatorArray value="ThunderNotDead"/>
+        <AutoCastValidatorArray value="ThunderNotExhausted"/>
+        <AutoCastValidatorArray value="AtLeast2EnemyWithin8"/>
+        <AutoCastValidatorArray value="BossAbilityRequirementLvl2"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="CoronaWaves"/>
+        <Cost>
+            <Cooldown TimeStart="7" TimeUse="45"/>
+        </Cost>
+    </CAbilEffectInstant>
+    <CAbilEffectInstant id="HandlerThunderElementals">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Flags index="AutoCast" value="1"/>
+        <Flags index="AutoCastOn" value="1"/>
+        <AutoCastFilters value="Visible;Self,Player,Ally,Neutral,Worker,Missile,Item,Stasis,Dead,Hidden,Invulnerable,Summoned"/>
+        <AutoCastRange value="13"/>
+        <AutoCastValidatorArray value="ThunderNotDead"/>
+        <AutoCastValidatorArray value="ThunderNotExhausted"/>
+        <AutoCastValidatorArray value="EnemyWithin8"/>
+        <AutoCastValidatorArray value="BossAbilityRequirementLvl1"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="ThunderElementals"/>
+        <Cost>
+            <Charge Link="Abil/HandlerLightningElementals"/>
+            <Cooldown Link="Abil/HandlerLightningElementals" TimeStart="7" TimeUse="60"/>
+        </Cost>
+    </CAbilEffectInstant>
+    <CAbilEffectInstant id="HandlerThunderHandsOfSilence">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <AutoCastFilters value="Visible;Self,Player,Ally,Neutral,Worker,Missile,Item,Stasis,Dead,Hidden,Invulnerable,Summoned"/>
+        <AutoCastRange value="13"/>
+        <AutoCastValidatorArray value="ThunderNotDead"/>
+        <AutoCastValidatorArray value="ThunderNotExhausted"/>
+        <AutoCastValidatorArray value="EnemyWithin8"/>
+        <AutoCastValidatorArray value="BossAbilityRequirementLvl3"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="HandsOfSilence"/>
+        <Cost>
+            <Charge Link="Abil/HandlerLightningHandsOfLightning"/>
+            <Cooldown Link="Abil/HandlerLightningHandsOfLightning" TimeStart="6" TimeUse="45"/>
+        </Cost>
+    </CAbilEffectInstant>
+    <CAbilEffectInstant id="HandlerThunderShout">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Flags index="AutoCast" value="1"/>
+        <Flags index="AutoCastOn" value="1"/>
+        <AutoCastFilters value="Visible;Self,Player,Ally,Neutral,Worker,Missile,Item,Stasis,Dead,Hidden,Invulnerable,Summoned"/>
+        <AutoCastRange value="13"/>
+        <AutoCastValidatorArray value="ThunderNotDead"/>
+        <AutoCastValidatorArray value="ThunderNotExhausted"/>
+        <AutoCastValidatorArray value="EnemyWithin8"/>
+        <AutoCastValidatorArray value="BossAbilityRequirementLvl3"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="Shout"/>
+        <Cost>
+            <Cooldown TimeStart="8" TimeUse="55"/>
+        </Cost>
+    </CAbilEffectInstant>
+    <CAbilEffectTarget id="HandlerThunderTornado">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Flags index="AutoCast" value="1"/>
+        <Flags index="AutoCastOn" value="1"/>
+        <Range value="13"/>
+        <Arc value="360"/>
+        <AutoCastFilters value="Visible;Self,Player,Ally,Neutral,Worker,Missile,Item,Stasis,Dead,Hidden,Invulnerable,Summoned"/>
+        <AutoCastRange value="13"/>
+        <AutoCastValidatorArray value="ThunderNotDead"/>
+        <AutoCastValidatorArray value="ThunderNotExhausted"/>
+        <AutoCastValidatorArray value="BossAbilityRequirementLvl4"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="Tornado"/>
+        <Cost>
+            <Cooldown TimeStart="5" TimeUse="50"/>
+        </Cost>
+    </CAbilEffectTarget>
+    <CAbilEffectInstant id="HandsOfSilence">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="HandsOfSilence@InitialSet"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="HandsOfSilence"/>
+    </CAbilEffectInstant>
+    <CAbilEffectInstant id="LightningElementals">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="LightningElementalsInitialSet"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="LightningElementals"/>
+    </CAbilEffectInstant>
+    <CAbilEffectInstant id="ThunderElementals">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="ThunderElementalsInitialSet"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="ThunderElementals"/>
+    </CAbilEffectInstant>
+    <CAbilEffectInstant id="PureEnergy">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="PureEnergyInitialSet"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="PureEnergy"/>
+    </CAbilEffectInstant>
+    <CAbilEffectInstant id="Shout">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="ShoutInitialSet"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="Shout"/>
+    </CAbilEffectInstant>
+    <CAbilEffectInstant id="Storm">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="StormInitialSet"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="Storm"/>
+    </CAbilEffectInstant>
+    <CAbilArmMagazine id="TagTeamHandlerMagazineThunder">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Leash value="5"/>
+        <InfoArray index="Ammo1" CountStart="1" Distance="1.25" Manage="Recall" Unit="Thunder">
+            <Charge Link="Abil/##id##"/>
+            <Cooldown Link="Abil/##id##"/>
+            <Flags index="External" value="1"/>
+        </InfoArray>
+        <EffectArray index="Create" value="HandlerThunderTrackerAdd"/>
+        <EffectArray index="Death" value="ThunderDeadApply"/>
+        <ExternalAngle value="0"/>
+        <MaxCount value="2"/>
+    </CAbilArmMagazine>
+    <CAbilArmMagazine id="TagTeamHandlerMagazineLightning">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Leash value="5"/>
+        <InfoArray index="Ammo1" CountStart="1" Distance="1.25" Manage="Recall" Unit="Lightning">
+            <Charge Link="Abil/##id##"/>
+            <Cooldown Link="Abil/##id##"/>
+            <Flags index="External" value="1"/>
+        </InfoArray>
+        <EffectArray index="Create" value="HandlerLightningTrackerAdd"/>
+        <EffectArray index="Death" value="LightningDeadApply"/>
+        <ExternalAngle value="180"/>
+        <MaxCount value="2"/>
+    </CAbilArmMagazine>
+    <CAbilEffectTarget id="Tornado">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="TornadoInitialSet"/>
+        <Range value="7"/>
+        <FinishTime value="7"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="Tornado"/>
+    </CAbilEffectTarget>
+    <CAbilEffectTarget id="ZapTrap">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="ZapTrapInitialSet"/>
+        <Range value="6"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="ZapTrap"/>
+    </CAbilEffectTarget>
+    <CValidatorUnitCompareBehaviorCount id="HandsOfSilence@On">
+        <WhichUnit Value="Caster"/>
+        <Value value="1"/>
+        <Behavior value="HandsOfSilence"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CButton id="HandsOfSilence">
+        <Icon value="Assets\Textures\btn-ability-hornerhan-hellion-slowbomb.dds"/>
+    </CButton>
+    <CActorModel id="CoronaWavesCast" parent="ModelAnimationStyleContinuous">
+        <EditorCategories value=""/>
+        <On Terms="Effect.CoronaWavesDelay.Start" Send="Create"/>
+        <On Terms="Effect.CoronaWavesDelay.Stop" Send="AnimBracketStop BSD"/>
+        <On Terms="ActorCreation" Send="SetTintColor 255,128,128"/>
+        <Host Subject="_Unit" Scope="Caster"/>
+        <HostSiteOps Ops="SOpAttachOverhead"/>
+        <FogVisibility value="Visible"/>
+    </CActorModel>
+    <CActorAction id="CoronaWavesInfectAction" parent="GenericAttack" effectAttack="CoronaWavesApplyDummy">
+        <EditorCategories value=""/>
+        <LaunchAttachQuery Methods="Overhead 0"/>
+        <ShieldFlashType value="None"/>
+    </CActorAction>
+    <CActorBeamSimple id="CoronaWavesInfectActionBeam" parent="BeamSimpleAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On Terms="ActorCreation" Send="SetTintColor 255,128,128"/>
+        <Model value="CoronaWavesInfect"/>
+        <HostLaunch Subject="_Unit" Scope="Caster"/>
+        <HostLaunchSiteOps Ops="SOpAttachOverhead"/>
+        <HostImpact Subject="_Unit" Scope="Effect"/>
+        <HostImpactSiteOps Ops="SOpAttachCenter"/>
+        <VisibleTo index="All" value="1"/>
+    </CActorBeamSimple>
+    <CActorModel id="HandsOfSilence@LeftHand" parent="ModelAddition">
+        <Inherits index="BaseModelScale" value="0"/>
+        <Inherits index="Scale" value="0"/>
+        <AcceptedHostedPropTransfers index="BaseModelScale" value="0"/>
+        <AcceptedHostedPropTransfers index="Scale" value="0"/>
+        <EditorCategories value=""/>
+        <On Terms="Behavior.HandsOfSilence.On" Send="Create"/>
+        <On Terms="Behavior.HandsOfSilence.Off" Send="Destroy"/>
+        <On Terms="ActorCreation" Send="$Birth 0 0.000000 0.000000"/>
+        <On Terms="AnimDone; AnimName Birth" Send="$Birth 0 0.000000 0.000000"/>
+        <HostSiteOps Ops="SOpAttachWeaponLeft"/>
+        <Model value="HandsOfSilence"/>
+        <VisibleTo index="All" value="1"/>
+        <FogVisibility value="Visible"/>
+    </CActorModel>
+    <CActorModel id="HandsOfSilence@RightHand" parent="ModelAddition">
+        <Inherits index="BaseModelScale" value="0"/>
+        <Inherits index="Scale" value="0"/>
+        <AcceptedHostedPropTransfers index="BaseModelScale" value="0"/>
+        <AcceptedHostedPropTransfers index="Scale" value="0"/>
+        <EditorCategories value=""/>
+        <On Terms="Behavior.HandsOfSilence.On" Send="Create"/>
+        <On Terms="Behavior.HandsOfSilence.Off" Send="Destroy"/>
+        <On Terms="ActorCreation" Send="$Birth 0 0.000000 0.000000"/>
+        <On Terms="AnimDone; AnimName Birth" Send="$Birth 0 0.000000 0.000000"/>
+        <HostSiteOps Ops="SOpAttachWeaponRight"/>
+        <Model value="HandsOfSilence"/>
+        <VisibleTo index="All" value="1"/>
+        <FogVisibility value="Visible"/>
+    </CActorModel>
+    <CActorAction id="CoronaWavesAttack" parent="GenericAttack" effectAttack="CoronaWavesPeriodicDmg">
+        <EditorCategories value=""/>
+        <LaunchAttachQuery Methods="Center 0"/>
+        <Beam value="CoronaWavesDmg"/>
+        <Supporter Subject="_Unit" Scope="Source"/>
+        <BeamScope value="Source"/>
+    </CActorAction>
+    <CActorModel id="CoronaWavesCloud" parent="ModelAddition">
+        <EditorCategories value=""/>
+        <On Terms="Behavior.CoronaWaves.On" Send="Create"/>
+        <On Terms="Behavior.CoronaWaves.Off" Send="AnimBracketStop BSD"/>
+        <On Terms="ActorCreation" Send="SetOpacity 0.500000"/>
+        <HostSiteOps Ops="SOpAttachOverhead"/>
+        <VisibleTo index="All" value="1"/>
+        <FogVisibility value="Visible"/>
+    </CActorModel>
+    <CActorBeamSimple id="CoronaWavesDmg" parent="BeamSimpleAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <ModelFlags index="AllowHitTest" value="0"/>
+        <ModelFlags index="AutomateGlobalLoops" value="1"/>
+        <HostLaunch Subject="_Unit" Scope="Source"/>
+        <HostLaunchSiteOps Ops="SOpAttachCenter"/>
+        <HostImpact Subject="_Unit" Scope="Target"/>
+        <HostImpactSiteOps Ops="SOpAttachCenter"/>
+        <On Terms="ActorCreation" Send="SetTintColor 255,0,0"/>
+        <Supporter Subject="_Unit" Scope="Source"/>
+        <Host Subject="_Unit" Scope="Source"/>
+    </CActorBeamSimple>
+    <CActorBeamSimple id="CrossedBeamsBeamLeft" parent="BeamSimpleAnimationStyleContinuous">
+        <EditorCategories value=""/>
+        <On Terms="Effect.CrossedBeamsTargetBeamPersistent.Start" Send="Create"/>
+        <On Terms="Effect.CrossedBeamsTargetBeamPersistent.Stop" Send="Destroy"/>
+        <Model value="CrossedBeamsBeam"/>
+        <HostLaunch Subject="_Unit" Scope="Caster"/>
+        <HostLaunchSiteOps Ops="SOpAttachWeaponLeft"/>
+        <HostImpact Subject="_Unit" Scope="Target" Effect="CrossedBeamsTargetFacingDummyCreate"/>
+        <HostImpactSiteOps Ops="SOpAttachCenter"/>
+        <VisibleTo index="All" value="1"/>
+        <FogVisibility value="Visible"/>
+    </CActorBeamSimple>
+    <CActorBeamSimple id="CrossedBeamsBeamRight" parent="BeamSimpleAnimationStyleContinuous">
+        <EditorCategories value=""/>
+        <On Terms="Effect.CrossedBeamsTargetBeamPersistent.Start" Send="Create"/>
+        <On Terms="Effect.CrossedBeamsTargetBeamPersistent.Stop" Send="Destroy"/>
+        <Model value="CrossedBeamsBeam"/>
+        <HostLaunch Subject="_Unit" Scope="Caster"/>
+        <HostLaunchSiteOps Ops="SOpAttachWeaponRight"/>
+        <HostImpact Subject="_Unit" Scope="Target" Effect="CrossedBeamsTargetFacingDummyCreate"/>
+        <HostImpactSiteOps Ops="SOpAttachCenter"/>
+        <VisibleTo index="All" value="1"/>
+        <FogVisibility value="Visible"/>
+    </CActorBeamSimple>
+    <CActorUnit id="CrossedBeamsDummy" parent="GenericUnitStandard" unitName="CrossedBeamsDummy">
+        <EditorCategories value=""/>
+        <Model value="Larva"/>
+        <HighlightTooltip value="Unit/Name/Bogus"/>
+        <HostSiteOps Ops="SOpHigherBy1"/>
+    </CActorUnit>
+    <CActorModel id="CrossedBeamsExplosion" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On Terms="Effect.CrossedBeamsTargetExplodeSet.Start" Send="Create"/>
+        <On Terms="ActorCreation" Send="SetTintColor 128,0,255"/>
+        <VisibleTo index="All" value="1"/>
+        <FogVisibility value="Visible"/>
+    </CActorModel>
+    <CActorModel id="CrossedBeamsImpact" parent="ModelAnimationStyleContinuous">
+        <EditorCategories value=""/>
+        <On Terms="Effect.CrossedBeamsTargetImpactPersistent.Start" Send="Create"/>
+        <On Terms="Effect.CrossedBeamsTargetImpactPersistent.Stop" Send="Destroy"/>
+        <Host Subject="_Unit" Scope="Target" Effect="CrossedBeamsTargetFacingDummyCreate"/>
+        <ModelFlags index="AutomateGlobalLoops" value="1"/>
+        <VisibleTo index="All" value="1"/>
+        <FogVisibility value="Visible"/>
+    </CActorModel>
+    <CActorModel id="HandOfLightningLeft" parent="ModelAddition">
+        <Inherits index="BaseModelScale" value="0"/>
+        <Inherits index="Scale" value="0"/>
+        <AcceptedHostedPropTransfers index="BaseModelScale" value="0"/>
+        <AcceptedHostedPropTransfers index="Scale" value="0"/>
+        <EditorCategories value=""/>
+        <On Terms="Behavior.HandOfLightning.On" Send="Create"/>
+        <On Terms="Behavior.HandOfLightning.Off" Send="Destroy"/>
+        <HostSiteOps Ops="SOpAttachWeaponLeft"/>
+        <Model value="HandOfLightning"/>
+        <VisibleTo index="All" value="1"/>
+        <FogVisibility value="Visible"/>
+    </CActorModel>
+    <CActorModel id="HandOfLightningRight" parent="ModelAddition">
+        <Inherits index="BaseModelScale" value="0"/>
+        <Inherits index="Scale" value="0"/>
+        <AcceptedHostedPropTransfers index="BaseModelScale" value="0"/>
+        <AcceptedHostedPropTransfers index="Scale" value="0"/>
+        <EditorCategories value=""/>
+        <On Terms="Behavior.HandOfLightning.On" Send="Create"/>
+        <On Terms="Behavior.HandOfLightning.Off" Send="Destroy"/>
+        <HostSiteOps Ops="SOpAttachWeaponRight"/>
+        <Model value="HandOfLightning"/>
+        <VisibleTo index="All" value="1"/>
+        <FogVisibility value="Visible"/>
+    </CActorModel>
+    <CActorUnit id="LightningElemental" parent="GenericUnitStandard" unitName="LightningElemental">
+        <EditorCategories value=""/>
+        <DeathArray index="Normal" ModelLink="LightningElementalDeath"/>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-protoss-groundarmorlevel0.dds"/>
+        <Wireframe>
+            <Image value="Assets\Textures\wireframe-protoss-xelnagaconstruct.dds"/>
+        </Wireframe>
+    </CActorUnit>
+    <CActorAction id="LightningElementalWeaponAttack" parent="GenericAttack" effectAttack="LightningElementalWeaponSet">
+        <EditorCategories value=""/>
+        <Beam value="LightningElementalWeaponBeam"/>
+    </CActorAction>
+    <CActorAction id="ThunderElementalWeaponAttack" parent="GenericAttack" effectAttack="ThunderElementalWeaponSet">
+        <EditorCategories value=""/>
+        <Beam value="ThunderElementalWeaponBeam"/>
+    </CActorAction>
+    <CActorBeamSimple id="LightningElementalWeaponBeam" parent="BeamSimpleAnimationStyleOneShot">
+        <EditorCategories value=""/>
+    </CActorBeamSimple>
+    <CActorBeamSimple id="ThunderElementalWeaponBeam" parent="BeamSimpleAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On Terms="ActorCreation" Send="SetTintColor 255,55,0"/>
+    </CActorBeamSimple>
+    <CActorModel id="LightningElementalsSpawn" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On Terms="Effect.LightningElementalsCreateUnit.Start" Send="Create"/>
+        <HostSiteOps Ops="StormImpactOffsetUp SOpRotateDownwards"/>
+    </CActorModel>
+    <CActorModel id="ThunderElementalsSpawn" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On Terms="Effect.ThunderElementalsCreateUnit.Start" Send="Create"/>
+        <VisibleTo index="All" value="1"/>
+        <FogVisibility value="Visible"/>
+    </CActorModel>
+    <CActorModel id="PureEnergyChargeUp" parent="ModelAnimationStyleContinuous">
+        <EditorCategories value=""/>
+        <On Terms="Effect.PureEnergyPersistent.Start" Send="Create"/>
+        <On Terms="Effect.PureEnergyPersistent.Stop" Send="TimerSet 0.550000 KillDelay"/>
+        <On Terms="ActorCreation" Send="SetScale 7.500000,7.500000,1.000000 9.000000"/>
+        <On Terms="TimerExpired; TimerName KillDelay" Send="Destroy Immediate"/>
+        <HostSiteOps Ops="SOpHigherBy1"/>
+        <VisibleTo index="All" value="1"/>
+        <FogVisibility value="Visible"/>
+    </CActorModel>
+    <CActorModel id="PureEnergyExplosion" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On Terms="Effect.PureEnergyExplosionDelay.Start" Send="Create"/>
+        <HostSiteOps Ops="SOpHigherBy1 SOpOffsetHigherBy0p5"/>
+        <VisibleTo index="All" value="1"/>
+        <FogVisibility value="Visible"/>
+    </CActorModel>
+    <CActorModel id="Shocked" parent="ModelAddition">
+        <EditorCategories value=""/>
+        <On Terms="Behavior.Shocked.On" Send="Create"/>
+        <On Terms="ActorCreation" Send="SetTintColor 0,200,255"/>
+        <On Terms="Behavior.Shocked.Off" Send="Destroy"/>
+        <HostSiteOps Ops="SOpAttachCenter"/>
+    </CActorModel>
+    <CActorModel id="ShockedStun" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On Terms="Effect.ShockedShockSet.Start; At Source" Send="Create"/>
+        <Host Subject="_Unit" Scope="Source"/>
+        <HostSiteOps Ops="SOpAttachCenter"/>
+    </CActorModel>
+    <CActorModel id="StormCloud" parent="ModelAnimationStyleContinuous">
+        <EditorCategories value=""/>
+        <On Terms="ActorCreation" Send="TextureSelectById StormCloudMainEmissive"/>
+        <On Terms="ActorCreation" Send="SetTintColor 0,77,255"/>
+        <On Terms="Effect.StormPersistent1.Start; At Caster" Send="Create"/>
+        <On Terms="Effect.StormPersistent1.Stop" Send="TimerSet 12.500000 KillDelay"/>
+        <On Terms="TimerExpired; TimerName KillDelay" Send="AnimBracketStop BSD"/>
+        <HostSiteOps Ops="SOpHigherBy5"/>
+    </CActorModel>
+    <CActorModel id="StormImpact" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On Terms="Effect.StormDmgSearch.Start" Send="Create"/>
+        <On Terms="ActorCreation" Send="SetOpacity 0.500000"/>
+        <HostSiteOps Ops="StormImpactOffsetUp SOpRotateDownwards"/>
+    </CActorModel>
+    <CActorSiteOpLocalOffset id="StormImpactOffsetUp">
+        <EditorCategories value=""/>
+        <LocalOffset value="0.000000,0.000000,5.500000"/>
+    </CActorSiteOpLocalOffset>
+    <CActorUnit id="ThunderElemental" parent="GenericUnitStandard" unitName="ThunderElemental">
+        <EditorCategories value=""/>
+        <DeathArray index="Normal" ModelLink="ThunderElementalDeath"/>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-protoss-groundarmorlevel0.dds"/>
+        <Wireframe>
+            <Image value="Assets\Textures\wireframe-protoss-xelnagaconstruct.dds"/>
+        </Wireframe>
+    </CActorUnit>
+    <CActorModel id="ShoutWave" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On Terms="Effect.ShoutSearchRange1.Start; At Caster" Send="Create"/>
+        <VisibleTo index="All" value="1"/>
+        <FogVisibility value="Visible"/>
+    </CActorModel>
+    <CActorModel id="TagTeamSpawning" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On Terms="ActorCreation" Send="SetTintColor 217,0,0"/>
+        <HostSiteOps Ops="SOpOffsetHigherBy0p5"/>
+        <FogVisibility value="Visible"/>
+    </CActorModel>
+    <CActorMissile id="TagTeamWeaponMissile" parent="GenericAttackMissile" unitName="TagTeamWeaponMissile">
+        <Model value="HighTemplarWeapon"/>
+        <On Terms="ActorCreation" Send="SetTintColor 255,0,0"/>
+    </CActorMissile>
+    <CActorAction id="TagTeamWeaponAttack" parent="GenericAttack" effectImpact="TagTeamWeaponImpactSet" effectLaunch="TagTeamWeaponLaunchMissile">
+        <LaunchSiteOps Ops="SOpAttachCenter SOpMoveByDot15"/>
+        <LaunchAssets Sound="Ascendant_Launch"/>
+        <Missile value="TagTeamWeaponMissile"/>
+        <ImpactMap index="None" Model="AscendantAttackImpact" Sound="Ascendant_Impact"/>
+        <ImpactPhysics Name="HighTemplarPsiBlastImpact" MatchKeys="Basic" Physics="HighTemplarPsiBlastDeathImpactForce"/>
+    </CActorAction>
+    <CActorUnit id="Lightning" parent="GenericUnitStandard" unitName="Lightning">
+        <EditorCategories value=""/>
+        <On index="65" Terms="WeaponStart.*.AttackStart" Send="AnimBracketStart Attack Spell,A"/>
+        <On Terms="ActorCreation" Send="Create TagTeamSpawning"/>
+        <On Terms="Abil.CrossedBeamsStart.SourceChannelStart" Send="AnimBracketStart AbilityUse Spell,B Stand,Channel"/>
+        <On Terms="Abil.CrossedBeamsTarget.SourceFinishStop" Send="AnimBracketStop AbilityUse"/>
+        <On Terms="ActorCreation" Send="TextureSelectById TagTeamAttackAnimColor"/>
+        <On Terms="Abil.ZapTrap.SourceCastStart" Send="AnimPlay AbilityEnd Hover,Superior"/>
+        <On Terms="Signal.*.dance" Send="AnimBracketStart Dance {} Stand,Dance,01"/>
+        <On Terms="Signal.*.dance" Send="TimerSet 10.000000 Dance"/>
+        <On Terms="TimerExpired; TimerName Dance" Send="AnimBracketStop Dance"/>
+        <On Terms="Abil.PureEnergy.SourceChannelStart" Send="AnimBracketStart AbilityEnd {} Spell"/>
+        <On Terms="Abil.PureEnergy.SourceFinishStop" Send="AnimBracketStop AbilityEnd"/>
+        <On Terms="Abil.LightningElementals.SourceChannelStart" Send="AnimPlay AbilityStart Spell,A"/>
+        <On Terms="ActorCreation" Send="TimerSet 0.000000 color"/>
+        <On Terms="TimerExpired; TimerName color" Send="SetTeamColor 255,0,0 255,0,0"/>
+        <On Terms="Abil.HandOfLightning.SourceChannelStart" Send="AnimPlay Abil1 Spell,B"/>
+        <Model value="HighTemplarMale"/>
+        <BuildModel value="HighTemplarMale"/>
+        <DeathArray index="Normal" ModelLink="HighTemplarMale"/>
+        <PlacementModel value="HighTemplarMale"/>
+        <PortraitModel value="HighTemplarMalePortrait"/>
+        <CustomUnitStatusFrame value="SSF_UnitStatus/BossStatusShielded"/>
+        <MinimapIcon value="Assets\Icons\btn-unit-malash.dds"/>
+        <MinimapIconScale value="0.300000"/>
+        <MinimapIconBackground value="Assets\MinimapBackground.dds"/>
+        <MinimapIconBackgroundScale value="1.100000"/>
+        <MinimapIconBackgroundTintColor value="255,255,0,0"/>
+        <UnitFlags index="StandAnimBirthVariation" value="0"/>
+        <UnitFlags index="SuppressDefaultStatusBar" value="1"/>
+        <Wireframe>
+            <Image value="Assets\Textures\wireframe-protoss-malash.dds"/>
+        </Wireframe>
+        <WireframeShield>
+            <Image value="Assets\Textures\wireframe-protoss-malash-shield01.dds"/>
+            <Image value="Assets\Textures\wireframe-protoss-malash-shield02.dds"/>
+            <Image value="Assets\Textures\wireframe-protoss-malash-shield03.dds"/>
+        </WireframeShield>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-protoss-groundarmorlevel0.dds"/>
+        <FogVisibility value="Dimmed"/>
+    </CActorUnit>
+    <CActorUnit id="Thunder" parent="GenericUnitStandard" unitName="Thunder">
+        <EditorCategories value=""/>
+        <On index="65" Terms="WeaponStart.*.AttackStart" Send="AnimBracketStart Attack Spell,A"/>
+        <On Terms="TimerExpired; TimerName Color" Send="SetTeamColor 255,0,0 255,0,0"/>
+        <On Terms="ActorCreation" Send="TimerSet 0.000000 Color"/>
+        <On Terms="ActorCreation" Send="Create TagTeamSpawning"/>
+        <On Terms="Abil.Shout.SourceChannelStart" Send="AnimPlay AbilityUse Spell 0 -1.000000 -1.000000 1.000000 AsDuration"/>
+        <On Terms="ActorCreation" Send="TextureSelectById TagTeamAttackAnimColor"/>
+        <On Terms="Signal.*.dance" Send="AnimBracketStart Dance {} Stand,Dance,00"/>
+        <On Terms="Signal.*.dance" Send="TimerSet 10.000000 Dance"/>
+        <On Terms="TimerExpired; TimerName Dance" Send="AnimBracketStop Dance"/>
+        <On Terms="Abil.Tornado.SourceChannelStart" Send="AnimPlay AbilityStart Hover,Superior PlayForever"/>
+        <On Terms="Abil.Tornado.SourceFinishStop" Send="AnimClear AbilityStart"/>
+        <On Terms="Abil.CoronaWaves.SourceChannelStart" Send="AnimPlay Abil2 Stand,Channel"/>
+        <On Terms="Abil.ThunderElementals.SourceChannelStart" Send="AnimPlay Abil1 Spell,A"/>
+        <On Terms="Abil.HandsOfSilence.SourceChannelStart" Send="AnimPlay Abil1 Spell,B"/>
+        <Model value="HighTemplarFemale"/>
+        <BuildModel value="HighTemplarFemale"/>
+        <DeathArray index="Normal" ModelLink="HighTemplarFemale"/>
+        <PlacementModel value="HighTemplarFemale"/>
+        <PortraitModel value="HighTemplarFemalePortrait"/>
+        <CustomUnitStatusFrame value="SSF_UnitStatus/BossStatusShielded"/>
+        <MinimapIcon value="Assets\Icons\btn-unit-jinara.dds"/>
+        <MinimapIconScale value="0.300000"/>
+        <MinimapIconBackground value="Assets\MinimapBackground.dds"/>
+        <MinimapIconBackgroundScale value="1.100000"/>
+        <MinimapIconBackgroundTintColor value="255,255,0,0"/>
+        <UnitFlags index="StandAnimBirthVariation" value="0"/>
+        <UnitFlags index="SuppressDefaultStatusBar" value="1"/>
+        <Wireframe>
+            <Image value="Assets\Wireframes\Jinara\wireframe-jinara-new.dds"/>
+        </Wireframe>
+        <WireframeShield>
+            <Image value="Assets\Wireframes\Jinara\wireframe-jinara-new-shield01.dds"/>
+            <Image value="Assets\Wireframes\Jinara\wireframe-jinara-new-shield02.dds"/>
+            <Image value="Assets\Wireframes\Jinara\wireframe-jinara-new-shield03.dds"/>
+        </WireframeShield>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-protoss-groundarmorlevel0.dds"/>
+        <FogVisibility value="Dimmed"/>
+    </CActorUnit>
+    <CActorUnit id="TagTeamHandler" parent="GenericUnitStandard" unitName="TagTeamHandler">
+        <EditorCategories value=""/>
+        <Model value="Obelisk"/>
+        <CreepHeightClass value="Medium"/>
+        <CreepRateGrow value="Grow"/>
+        <CreepRateShrink value="Shrink"/>
+        <BuildModel value="Obelisk"/>
+        <PlacementModel value="Obelisk"/>
+        <LifeArmorIcon value="Assets\Textures\btn-armor-protoss-buildingplating.dds"/>
+        <Wireframe>
+            <Image value="Assets\Textures\wireframe-protoss-obelisk.dds"/>
+        </Wireframe>
+    </CActorUnit>
+    <CActorModel id="Tornado" parent="ModelAnimationStyleContinuous">
+        <EditorCategories value=""/>
+        <On Terms="Effect.TornadoPersistent.Start" Send="Create"/>
+        <On Terms="Effect.TornadoPersistent.Stop" Send="Destroy"/>
+        <ModelFlags index="AutomateGlobalLoops" value="1"/>
+        <VisibleTo index="All" value="1"/>
+        <FogVisibility value="Visible"/>
+    </CActorModel>
+    <CActorModel id="TornadoRange" parent="ModelAnimationStyleContinuous">
+        <EditorCategories value=""/>
+        <On Terms="Effect.TornadoInitialDelay.Start" Send="Create"/>
+        <On Terms="Effect.TornadoPersistent.Stop" Send="Destroy"/>
+        <HostSiteOps Ops="SOpForwardCasterPoint TornadoSplatRotator"/>
+        <AcceptedTransfers index="Position" value="0"/>
+        <VisibleTo index="All" value="1"/>
+        <FogVisibility value="Visible"/>
+    </CActorModel>
+    <CActorSiteOpRotator id="TornadoSplatRotator">
+        <EditorCategories value=""/>
+        <LocalAxis value="0.000000,0.000000,1.000000"/>
+        <Rate value="10.000000"/>
+        <Type value="AddRotationChange"/>
+    </CActorSiteOpRotator>
+    <CActorUnit id="ZapTrapDummyUnit" parent="GenericUnitStandard" unitName="ZapTrapDummyUnit">
+        <EditorCategories value=""/>
+        <HostSiteOps Ops="SOpHigherBy1"/>
+        <Model value="Larva"/>
+        <HighlightTooltip value="Unit/Name/Bogus"/>
+    </CActorUnit>
+    <CActorMissile id="ZapTrapMissile" parent="GenericAttackMissile" unitName="ZapTrapMissile">
+        <EditorCategories value=""/>
+        <On index="1" Terms="UnitBirth" Send="AnimBracketStart Lifetime Stand,Work,Start Stand,Work"/>
+        <ModelFlags index="AutomateGlobalLoops" value="1"/>
+        <VisibleTo index="All" value="1"/>
+        <FogVisibility value="Visible"/>
+    </CActorMissile>
+    <CActorAction id="ZapTrapMissileAction" parent="GenericAttack" effectImpact="ZapTrapCreateDummyUnit" effectLaunch="ZapTrapLaunchMissile">
+        <EditorCategories value=""/>
+        <Missile value="ZapTrapMissile"/>
+        <ImpactSiteOps Ops="SOpAttachCenter"/>
+        <ShieldFlashType value="None"/>
+        <LaunchAttachQuery Methods="AMFilterWeaponRight"/>
+    </CActorAction>
+    <CActorModel id="ZapTrapPersistent" parent="ModelAddition">
+        <Inherits index="Opacity" value="0"/>
+        <Inherits index="Visibility" value="0"/>
+        <AcceptedHostedPropTransfers index="Opacity" value="0"/>
+        <AcceptedHostedPropTransfers index="Visibility" value="0"/>
+        <EditorCategories value=""/>
+        <On index="0" Terms="ActorCreation" Send="AnimBracketStart BSD Birth Stand,Work Death"/>
+        <On Terms="Behavior.ZapTrapDummyTimedLife.On" Send="Create"/>
+        <On Terms="Behavior.ZapTrapDummyTimedLife.Off" Send="Destroy"/>
+        <ModelFlags index="AutomateGlobalLoops" value="1"/>
+        <VisibleTo index="All" value="1"/>
+        <FogVisibility value="Visible"/>
+    </CActorModel>
+    <CActorModel id="ZapTrapSearch" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On Terms="Effect.ZapTrapPeriodicSearch.Start" Send="Create"/>
+        <Host Subject="_Unit" Scope="Source"/>
+        <HostSiteOps Ops="SOpAttachCenter"/>
+        <VisibleTo index="All" value="1"/>
+        <FogVisibility value="Visible"/>
+    </CActorModel>
+    <CActorBeamSimple id="ZapTrapShock" parent="BeamSimpleAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <HostLaunch Subject="_Unit" Scope="Source"/>
+        <HostLaunchSiteOps Ops="SOpAttachCenter"/>
+        <HostImpact Subject="_Unit" Scope="Target"/>
+        <HostImpactSiteOps Ops="SOpAttachCenter"/>
+        <VisibleTo index="All" value="1"/>
+        <FogVisibility value="Visible"/>
+    </CActorBeamSimple>
+    <CActorAction id="ZapTrapShockAction" parent="GenericAttack" effectAttack="ZapTrapPeriodicSet">
+        <EditorCategories value=""/>
+        <LaunchSiteOps Ops="SOpAttachCenter"/>
+        <LaunchAttachQuery Methods="Center 0"/>
+        <Beam value="ZapTrapShock"/>
+        <ImpactSiteOps Ops="SOpAttachCenter"/>
+        <ShieldFlashType value="None"/>
+    </CActorAction>
+    <CModel id="HandsOfSilence">
+        <Model value="Assets\Effects\Zerg\HybridPsionicShockwave\HybridPsionicShockwave.m3"/>
+        <ScaleMax value="0.080000,0.080000,0.080000"/>
+        <ScaleMin value="0.080000,0.080000,0.080000"/>
+    </CModel>
+    <CWeaponLegacy id="LightningElementalWeapon">
+        <EditorCategories value=""/>
+        <Icon value="Assets\Textures\btn-ability-protoss-purify.dds"/>
+        <DisplayEffect value="LightningElementalWeaponDmg"/>
+        <Range value="3"/>
+        <Effect value="LightningElementalWeaponSet"/>
+        <Period value="1.5"/>
+        <TargetFilters value="Visible;Self,Worker,Missile,Item,Hidden,Invulnerable"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="ThunderElementalWeapon">
+        <EditorCategories value=""/>
+        <Icon value="Assets\Textures\btn-ability-stetmann-banelingmanashield.dds"/>
+        <DisplayEffect value="ThunderElementalWeaponDmg"/>
+        <Range value="3"/>
+        <Period value="1.5"/>
+        <Effect value="ThunderElementalWeaponSet"/>
+        <TargetFilters value="Visible;Self,Worker,Missile,Item,Hidden,Invulnerable"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="TagTeamWeapon">
+        <EditorCategories value=""/>
+        <DisplayEffect value="TagTeamWeaponDmg"/>
+        <Effect value="TagTeamWeaponLaunchMissile"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-alarak-ascendant&apos;spsiorbtravelsfurther.dds"/>
+        <TargetFilters value="Visible;Self,Worker,Missile,Item,Hidden,Invulnerable"/>
+        <Range value="6.5"/>
+        <Period value="1.1"/>
+        <MinScanRange value="11"/>
+    </CWeaponLegacy>
+    <CMoverMissile id="ShoutKnockback">
+        <!--<MotionPhases>
+            <Driver value="Guidance"/>
+            <Acceleration value="7"/>
+            <Speed value="20"/>
+            <MaxSpeed value="10"/>
+            <Gravity value="0"/>
+            <IgnoresTerrain value="1"/>
+            <ArrivalTestType value="2D"/>
+            <RotationActorType value="Upright"/>
+            <ThrowBandYaw value="-360,-360,-360,-360"/>
+            <ThrowBandPitch value="-360,-360,-360,-360"/>
+            <FlightTime value="1.5,-1"/>
+            <Overlays/>
+            <Overlays/>
+        </MotionPhases>-->
+        <Flags index="IgnoreMovementSuppression" value="1"/>
+        <MotionPhases>
+            <Driver value="Ballistic"/>
+            <Acceleration value="-1"/>
+            <Gravity value="1"/>
+            <RotationActorType value="Upright"/>
+            <YawPitchRoll value="MAX"/>
+            <FlightTime value="0.8"/>
+        </MotionPhases>
+        <RotationIgnoredByUnit value="1"/>
+        <PathMode value="Flying"/>
+    </CMoverMissile>
+    <CMoverMissile id="TornadoMover">
+        <!--<MotionPhases>
+            <Driver value="AdaptableParabola"/>
+            <MinSpeed value="14"/>
+            <MaxSpeed value="14"/>
+            <ActorTracking value="Actual"/>
+            <Outro value="-0.5,-0.1"/>
+            <AdaptableParabolaIsUpright value="1"/>
+            <AdaptableParabolaClearance value="3,0.1"/>
+            <AdaptableParabolaDistances index="Launch" value="1"/>
+            <AdaptableParabolaDistances index="PreApex" value="0.3"/>
+            <AdaptableParabolaDistances index="PostApex" value="0.3"/>
+            <AdaptableParabolaDistances index="Land" value="1"/>
+            <AdaptableParabolaAccels index="Launch" value="0"/>
+            <AdaptableParabolaAccels index="Ascent" value="0"/>
+            <AdaptableParabolaAccels index="Apex" value="0"/>
+            <AdaptableParabolaAccels index="Descent" value="0"/>
+            <AdaptableParabolaAccels index="Land" value="0"/>
+        </MotionPhases>-->
+        <Flags index="IgnoreMovementSuppression" value="1"/>
+        <MotionPhases>
+            <Driver value="Ballistic"/>
+            <Acceleration value="-1"/>
+            <Gravity value="40"/>
+            <RotationActorType value="Upright"/>
+            <YawPitchRoll value="MAX"/>
+            <FlightTime value="1"/>
+        </MotionPhases>
+        <RotationIgnoredByUnit value="1"/>
+        <PathMode value="Flying"/>
+    </CMoverMissile>
+    <CMoverMissile id="ZapTrapMissile">
+        <MotionPhases>
+            <Driver value="Guidance"/>
+            <Acceleration value="0.25"/>
+            <ThrowBandYaw value="-360,-360,-360,-360"/>
+            <ThrowBandPitch value="-360,-360,-360,-360"/>
+            <FlightTime value="0.2,-1"/>
+            <Overlays/>
+            <Overlays/>
+        </MotionPhases>
+        <MotionPhases>
+            <Driver value="Guidance"/>
+            <Acceleration value="3"/>
+            <Speed value="2"/>
+            <MaxSpeed value="10"/>
+            <ThrowBandYaw value="-360,-360,-360,-360"/>
+            <ThrowBandPitch value="-360,-360,-360,-360"/>
+            <Overlays/>
+            <Overlays/>
+        </MotionPhases>
+        <MotionPhases YawPitchRoll="MAX"/>
+    </CMoverMissile>
+    <CDataCollectionAbil id="HandsOfSilence">
+        <EditorCategories value=""/>
+        <DataRecord Entry="Abil,HandsOfSilence"/>
+        <DataRecord Entry="Actor,HandsOfSilence@LeftHand"/>
+        <DataRecord Entry="Actor,HandsOfSilence@RightHand"/>
+        <DataRecord Entry="Behavior,HandsOfSilence"/>
+        <DataRecord Entry="Button,HandsOfSilence"/>
+        <DataRecord Entry="Effect,HandsOfSilence@InitialSet"/>
+        <DataRecord Entry="Effect,HandsOfSilence@AlreadyCastingNoWeapons2"/>
+        <DataRecord Entry="Effect,HandsOfSilence@Apply"/>
+        <DataRecord Entry="Model,HandsOfSilence"/>
+        <DataRecord Entry="Validator,HandsOfSilence@On"/>
+    </CDataCollectionAbil>
+    <CUnit id="CrossedBeamsDummy">
+        <FlagArray index="Uncommandable" value="1"/>
+        <FlagArray index="Unselectable" value="1"/>
+        <FlagArray index="Untargetable" value="1"/>
+        <FlagArray index="Uncursorable" value="1"/>
+        <FlagArray index="NoDraw" value="1"/>
+        <FlagArray index="Undetectable" value="1"/>
+        <FlagArray index="Unradarable" value="1"/>
+        <FlagArray index="KillCredit" value="0"/>
+        <FlagArray index="Invulnerable" value="1"/>
+        <FlagArray index="NoScore" value="1"/>
+        <FlagArray index="NoDeathEvent" value="1"/>
+        <FlagArray index="NoPortraitTalk" value="1"/>
+        <FlagArray index="ShowResources" value="0"/>
+        <FlagArray index="PlayerRevivable" value="0"/>
+        <FlagArray index="CameraFollow" value="0"/>
+        <Attributes index="Hover" value="1"/>
+        <Attributes index="Summoned" value="1"/>
+        <Speed value="2.7968"/>
+        <Acceleration value="100"/>
+        <LateralAcceleration value="100"/>
+        <AbilArray Link="stop"/>
+        <AbilArray Link="move"/>
+        <CardLayouts>
+            <LayoutButtons Face="Move" Type="AbilCmd" AbilCmd="move,Move" Row="0" Column="0"/>
+            <LayoutButtons Face="Stop" Type="AbilCmd" AbilCmd="stop,Stop" Row="0" Column="1"/>
+        </CardLayouts>
+        <Radius value="0"/>
+        <SeparationRadius value="0"/>
+        <MinimapRadius value="0"/>
+        <EditorCategories value=""/>
+        <Fidget>
+            <ChanceArray index="Anim" value="33"/>
+            <ChanceArray index="Idle" value="33"/>
+            <ChanceArray index="Turn" value="33"/>
+        </Fidget>
+        <BehaviorArray Link="Taunt@Untauntable"/>
+        <LifeArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </LifeArmorFormula>
+        <ShieldArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </ShieldArmorFormula>
+        <LifeRegenDelay value="5"/>
+        <ShieldRegenDelay value="5"/>
+    </CUnit>
+    <CUnit id="Lightning" parent="GenericEnemyUnit">
+        <Race value="Prot"/>
+        <FlagArray index="Hero" value="1"/>
+        <Attributes index="Light" value="1"/>
+        <Attributes index="Biological" value="1"/>
+        <Attributes index="Heroic" value="1"/>
+        <LifeStart value="30000"/>
+        <LifeMax value="30000"/>
+        <ShieldsStart value="100000"/>
+        <ShieldsMax value="100000"/>
+        <ShieldArmorName value="Unit/ShieldArmorName/ProtossPlasmaShields"/>
+        <Speed value="4.1992"/>
+        <LateralAcceleration value="46.0625"/>
+        <StationaryTurningRate value="999.8437"/>
+        <Sight value="15"/>
+        <AbilArray Link="ZapTrap"/>
+        <AbilArray Link="CrossedBeamsStart"/>
+        <AbilArray Link="CrossedBeamsTarget"/>
+        <AbilArray Link="HandOfLightning"/>
+        <AbilArray Link="PureEnergy"/>
+        <AbilArray Link="LightningElementals"/>
+        <BehaviorArray Link="Spawning"/>
+        <BehaviorArray Link="Detector10"/>
+        <BehaviorArray Link="BossesP1Armor"/>
+        <WeaponArray Link="TagTeamWeapon"/>
+        <CardLayouts index="0">
+            <LayoutButtons Face="ZapTrap" Type="AbilCmd" AbilCmd="ZapTrap,Execute" Row="2" Column="1"/>
+            <LayoutButtons Face="CrossedBeams" Type="AbilCmd" AbilCmd="CrossedBeamsStart,Execute" Row="2" Column="2"/>
+            <LayoutButtons Face="HandOfLightning" Type="AbilCmd" AbilCmd="HandOfLightning,Execute" Row="2" Column="3"/>
+            <LayoutButtons Face="PureEnergy" Type="AbilCmd" AbilCmd="PureEnergy,Execute" Row="2" Column="4"/>
+            <LayoutButtons Face="LightningElementals" Type="AbilCmd" AbilCmd="LightningElementals,Execute" Row="1" Column="0"/>
+        </CardLayouts>
+        <EditorCategories value="ObjectType:Hero"/>
+        <FogVisibility value="Dimmed"/>
+        <LifeRegenRate value="210"/>
+        <ShieldRegenRate value="280"/>
+        <Radius value="1"/>
+        <LifeArmorName value="Unit/LifeArmorName/ProtossArmor"/>
+        <VisionHeight value="4"/>
+        <LifeArmorTip value="Unit/P1Bosses/ArmorTooltip"/>
+    </CUnit>
+    <CUnit id="LightningElemental" parent="GenericEnemyUnit">
+        <Race value="Prot"/>
+        <Attributes index="Light" value="1"/>
+        <Attributes index="Psionic" value="1"/>
+        <Attributes index="Summoned" value="1"/>
+        <LifeStart value="1750"/>
+        <LifeMax value="1750"/>
+        <LifeArmorName value="Unit/LifeArmorName/Elemental"/>
+        <Speed value="2.7968"/>
+        <LateralAcceleration value="46.0625"/>
+        <StationaryTurningRate value="999.8437"/>
+        <Sight value="5"/>
+        <WeaponArray Link="LightningElementalWeapon"/>
+        <Radius value="0.375"/>
+    </CUnit>
+    <CUnit id="ThunderElemental" parent="GenericEnemyUnit">
+        <Race value="Prot"/>
+        <Attributes index="Light" value="1"/>
+        <Attributes index="Psionic" value="1"/>
+        <Attributes index="Summoned" value="1"/>
+        <LifeStart value="1750"/>
+        <LifeMax value="1750"/>
+        <LifeArmorName value="Unit/LifeArmorName/Elemental"/>
+        <Speed value="2.7968"/>
+        <LateralAcceleration value="46.0625"/>
+        <StationaryTurningRate value="999.8437"/>
+        <Sight value="5"/>
+        <WeaponArray Link="ThunderElementalWeapon"/>
+        <Radius value="0.375"/>
+    </CUnit>
+    <CUnit id="Thunder" parent="GenericEnemyUnit">
+        <Race value="Prot"/>
+        <FlagArray index="Hero" value="1"/>
+        <Attributes index="Light" value="1"/>
+        <Attributes index="Biological" value="1"/>
+        <Attributes index="Heroic" value="1"/>
+        <LifeStart value="30000"/>
+        <LifeMax value="30000"/>
+        <ShieldsStart value="100000"/>
+        <ShieldsMax value="100000"/>
+        <ShieldArmorName value="Unit/ShieldArmorName/ProtossPlasmaShields"/>
+        <Speed value="4.1992"/>
+        <LateralAcceleration value="46.0625"/>
+        <StationaryTurningRate value="999.8437"/>
+        <Sight value="15"/>
+        <AbilArray Link="Shout"/>
+        <AbilArray Link="CoronaWaves"/>
+        <AbilArray Link="ThunderElementals"/>
+        <AbilArray Link="Tornado"/>
+        <AbilArray Link="HandsOfSilence"/>
+        <BehaviorArray Link="Spawning"/>
+        <BehaviorArray Link="Detector10"/>
+        <BehaviorArray Link="BossesP1Armor"/>
+        <WeaponArray Link="TagTeamWeapon"/>
+        <CardLayouts index="0">
+            <LayoutButtons Face="Shout" Type="AbilCmd" AbilCmd="Shout,Execute" Row="2" Column="0"/>
+            <LayoutButtons Face="CoronaWaves" Type="AbilCmd" AbilCmd="CoronaWaves,Execute" Row="2" Column="1"/>
+            <LayoutButtons Face="ThunderElementals" Type="AbilCmd" AbilCmd="ThunderElementals,Execute" Row="1" Column="0"/>
+            <LayoutButtons Face="Tornado" Type="AbilCmd" AbilCmd="Tornado,Execute" Row="2" Column="2"/>
+            <LayoutButtons Face="HandsOfSilence" Type="AbilCmd" AbilCmd="HandsOfSilence,Execute" Row="2" Column="3"/>
+        </CardLayouts>
+        <EditorCategories value="ObjectType:Hero"/>
+        <FogVisibility value="Dimmed"/>
+        <LifeRegenRate value="210"/>
+        <ShieldRegenRate value="280"/>
+        <Radius value="1"/>
+        <LifeArmorName value="Unit/LifeArmorName/ProtossArmor"/>
+        <VisionHeight value="4"/>
+        <LifeArmorTip value="Unit/P1Bosses/ArmorTooltip"/>
+    </CUnit>
+    <CUnit id="TagTeamWeaponMissile" parent="MISSILE_INVULNERABLE">
+        <Race value="Prot"/>
+        <Mover value="HighTemplarWeapon"/>
+    </CUnit>
+    <CUnit id="TagTeamHandler">
+        <Facing value="90"/>
+        <Race value="Prot"/>
+        <FlagArray index="Movable" value="0"/>
+        <FlagArray index="Unselectable" value="1"/>
+        <FlagArray index="Untargetable" value="1"/>
+        <FlagArray index="NoDraw" value="1"/>
+        <FlagArray index="Undetectable" value="1"/>
+        <FlagArray index="Invulnerable" value="1"/>
+        <AbilArray Link="TagTeamHandlerMagazineThunder"/>
+        <AbilArray Link="TagTeamHandlerMagazineLightning"/>
+        <AbilArray Link="HandlerLightningElementals"/>
+        <AbilArray Link="HandlerLightningHandsOfLightning"/>
+        <AbilArray Link="HandlerLightningPureEnergy"/>
+        <AbilArray Link="HandlerLightningCrossedBeams"/>
+        <AbilArray Link="HandlerLightningZapTrap"/>
+        <AbilArray Link="HandlerThunderCoronaWaves"/>
+        <AbilArray Link="HandlerThunderElementals"/>
+        <AbilArray Link="HandlerThunderHandsOfSilence"/>
+        <AbilArray Link="HandlerThunderShout"/>
+        <AbilArray Link="HandlerThunderTornado"/>
+        <EditorCategories value="ObjectType:Hero"/>
+        <BehaviorArray Link="HandlerLightningTracker"/>
+        <BehaviorArray Link="HandlerThunderTracker"/>
+        <CardLayouts>
+            <LayoutButtons Face="CoronaWaves" Type="AbilCmd" AbilCmd="HandlerThunderCoronaWaves,Execute" Row="1" Column="0"/>
+            <LayoutButtons Face="HandsOfSilence" Type="AbilCmd" AbilCmd="HandlerThunderHandsOfSilence,Execute" Row="1" Column="1"/>
+            <LayoutButtons Face="Shout" Type="AbilCmd" AbilCmd="HandlerThunderShout,Execute" Row="1" Column="2"/>
+            <LayoutButtons Face="ThunderElementals" Type="AbilCmd" AbilCmd="HandlerThunderElementals,Execute" Row="1" Column="3"/>
+            <LayoutButtons Face="Tornado" Type="AbilCmd" AbilCmd="HandlerThunderTornado,Execute" Row="1" Column="4"/>
+            <LayoutButtons Face="CrossedBeams" Type="AbilCmd" AbilCmd="HandlerLightningCrossedBeams,Execute" Row="2" Column="0"/>
+            <LayoutButtons Face="HandOfLightning" Type="AbilCmd" AbilCmd="HandlerLightningHandsOfLightning,Execute" Row="2" Column="1"/>
+            <LayoutButtons Face="LightningElementals" Type="AbilCmd" AbilCmd="HandlerLightningElementals,Execute" Row="2" Column="2"/>
+            <LayoutButtons Face="PureEnergy" Type="AbilCmd" AbilCmd="HandlerLightningPureEnergy,Execute" Row="2" Column="3"/>
+            <LayoutButtons Face="ZapTrap" Type="AbilCmd" AbilCmd="HandlerLightningZapTrap,Execute" Row="2" Column="4"/>
+        </CardLayouts>
+        <Radius value="0"/>
+        <LifeArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </LifeArmorFormula>
+        <ShieldArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </ShieldArmorFormula>
+        <LifeRegenDelay value="5"/>
+        <ShieldRegenDelay value="5"/>
+    </CUnit>
+    <CUnit id="ZapTrapDummyUnit">
+        <Race value="Prot"/>
+        <FlagArray index="Uncommandable" value="1"/>
+        <FlagArray index="Unselectable" value="1"/>
+        <FlagArray index="Untargetable" value="1"/>
+        <FlagArray index="NoDraw" value="1"/>
+        <FlagArray index="Undetectable" value="1"/>
+        <FlagArray index="Invulnerable" value="1"/>
+        <FlagArray index="NoScore" value="1"/>
+        <FlagArray index="Unstoppable" value="1"/>
+        <Attributes index="Hover" value="1"/>
+        <Attributes index="Summoned" value="1"/>
+        <EditorCategories value=""/>
+        <BehaviorArray Link="Taunt@Untauntable"/>
+        <LifeArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </LifeArmorFormula>
+        <ShieldArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </ShieldArmorFormula>
+        <LifeRegenDelay value="5"/>
+        <ShieldRegenDelay value="5"/>
+    </CUnit>
+    <CUnit id="ZapTrapMissile" parent="MISSILE">
+        <Mover value="ZapTrapMissile"/>
+    </CUnit>
+    <CBehaviorUnitTracker id="HandlerLightningTracker">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+    </CBehaviorUnitTracker>
+    <CBehaviorUnitTracker id="HandlerThunderTracker">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+    </CBehaviorUnitTracker>
+    <CBehaviorBuff id="HandsOfSilence">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification>
+            <DamageDealtScaled index="Melee" value="750"/>
+            <DamageDealtScaled index="Ranged" value="750"/>
+            <DamageDealtScaled index="Splash" value="750"/>
+        </Modification>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="CoronaWaves">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="18"/>
+        <Period value="0.5"/>
+        <PeriodicEffect value="CoronaWavesPeriodicSearch"/>
+        <InfoIcon value="Assets\Textures\btn-ability-stetmann-infestorbuildinginfestation.dds"/>
+        <Alignment value="Negative"/>
+        <RemoveValidatorArray value="CasterNotDead"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="HandOfLightning">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification>
+            <DamageDealtScaled index="Melee" value="750"/>
+            <DamageDealtScaled index="Ranged" value="750"/>
+            <DamageDealtScaled index="Splash" value="750"/>
+        </Modification>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="Shocked">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Period value="1"/>
+        <PeriodicEffect value="ShockedShockSet"/>
+        <Alignment value="Negative"/>
+        <InfoIcon value="Assets\Textures\btn-upgrade-stetmann-ultraliskburrowchargestun.dds"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="ShockedStun">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="0.3571"/>
+        <Modification>
+            <StateFlags index="Stun" value="1"/>
+            <StateFlags index="Uncommandable" value="1"/>
+        </Modification>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="TagTeamHandlerLightningDead">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="TagTeamHandlerThunderDead">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="TagTeamHandlerLightningExhausted">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="TagTeamHandlerThunderExhausted">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="TornadoThrown">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="1.25"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="ZapTrapDummyTimedLife">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="11"/>
+        <Period value="1"/>
+        <PeriodicEffect value="ZapTrapPeriodicSearch"/>
+        <FinalEffect value="Suicide"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="LightningElementalsTimedLife" parent="TimedLifeDisplayed">
+        <Duration value="25"/>
+        <KillCredit Value="Caster"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="ThunderElementalsTimedLife" parent="TimedLifeDisplayed">
+        <Duration value="25"/>
+        <KillCredit Value="Caster"/>
+    </CBehaviorBuff>
+</Catalog>

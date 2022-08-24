@@ -1,0 +1,948 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CEffectAddTrackedUnit id="RespawnEgg@CasterTracker">
+        <EditorCategories value=""/>
+        <BehaviorLink value="RespawnEgg@CasterTracker"/>
+        <TrackerUnit Value="Target"/>
+    </CEffectAddTrackedUnit>
+    <CEffectEnumTrackedUnits id="RespawnEgg@CooldownGetCaster">
+        <EditorCategories value=""/>
+        <BehaviorLink value="RespawnEgg@CasterTracker"/>
+        <TrackerUnit Value="Source"/>
+        <Effect value="RespawnEgg@CooldownSet"/>
+    </CEffectEnumTrackedUnits>
+    <CEffectSet id="RespawnEgg@CooldownSet">
+        <EditorCategories value=""/>
+        <EffectArray value="RespawnEgg@CooldownActivate"/>
+        <EffectArray value="RespawnEgg@NoMoreEggsRemove"/>
+    </CEffectSet>
+    <CEffectModifyUnit id="RespawnEgg@CooldownActivate">
+        <EditorCategories value=""/>
+        <LaunchUnit Value="Target"/>
+        <Cost Abil="RespawnEgg,Execute" CooldownOperation="Set" CooldownTimeUse="15">
+            <Player Value="Caster"/>
+        </Cost>
+    </CEffectModifyUnit>
+    <CEffectSet id="RespawnEgg@CreateSet">
+        <EditorCategories value=""/>
+        <EffectArray value="RespawnEgg@EggDeathResponse"/>
+        <EffectArray value="RespawnEgg@HiveAuraDelay"/>
+        <EffectArray value="RespawnEgg@NoMoreEggs"/>
+        <EffectArray value="RespawnEgg@CasterTracker"/>
+    </CEffectSet>
+    <CEffectApplyBehavior id="RespawnEgg@HiveAuraDelay">
+        <ValidatorArray index="0" removed="1"/>
+        <EditorCategories value=""/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="RespawnEgg@EggDeathResponse">
+        <EditorCategories value=""/>
+    </CEffectApplyBehavior>
+    <CEffectSet id="RespawnEgg@EggSuicideSet">
+        <EditorCategories value=""/>
+    </CEffectSet>
+    <CEffectApplyBehavior id="RespawnEgg@HiveAuraApply">
+        <EditorCategories value=""/>
+        <Behavior value="RespawnEgg@HiveAura"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="RespawnEgg@HiveAuraEmitter">
+        <EditorCategories value=""/>
+    </CEffectApplyBehavior>
+    <CEffectEnumArea id="RespawnEgg@HiveAuraSearch">
+        <EditorCategories value=""/>
+        <SearchFilters value="-;Neutral,Enemy,Missile,Item,Dead,Hidden"/>
+        <AreaArray Radius="4.5" Effect="RespawnEgg@HiveAuraApply"/>
+    </CEffectEnumArea>
+    <CEffectApplyBehavior id="RespawnEgg@NoMoreEggs">
+        <ValidatorArray index="0" removed="1"/>
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+    </CEffectApplyBehavior>
+    <CEffectRemoveBehavior id="RespawnEgg@NoMoreEggsRemove">
+        <EditorCategories value=""/>
+        <BehaviorLink value="RespawnEgg@NoMoreEggs"/>
+    </CEffectRemoveBehavior>
+    <CEffectCreateUnit id="RespawnEgg@CreateEgg">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetPoint"/>
+        <Origin Value="TargetPoint"/>
+        <SpawnUnit value="RespawnEgg@Egg"/>
+        <SpawnRange value="0"/>
+        <ValidatorArray value="TargetPointIsCreep"/>
+        <SpawnEffect value="RespawnEgg@CreateSet"/>
+        <CreateFlags index="PlacementIgnoreBlockers" value="1"/>
+    </CEffectCreateUnit>
+    <CEffectApplyBehavior id="EnergyTransfer@ChannelApply">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Behavior value="EnergyTransfer@Channel"/>
+    </CEffectApplyBehavior>
+    <CEffectRemoveBehavior id="EnergyTransfer@ChannelRemove">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <BehaviorLink value="EnergyTransfer@Channel"/>
+    </CEffectRemoveBehavior>
+    <CEffectCreateHealer id="EnergyTransfer@CreateHealer">
+        <EditorCategories value=""/>
+        <PeriodCount value="1"/>
+        <DrainVital value="Energy"/>
+        <DrainVitalCostFactor value="1"/>
+        <RechargeVital value="Energy"/>
+        <RechargeVitalRate value="7"/>
+        <Flags index="Channeled" value="0"/>
+    </CEffectCreateHealer>
+    <CEffectSet id="EnergyTransfer@InitalSet">
+        <ValidatorArray value="hasEnergy"/>
+        <ValidatorArray value="EnergyLT999Percent"/>
+        <EditorCategories value=""/>
+        <EffectArray value="EnergyTransfer@ChannelApply"/>
+        <EffectArray value="EnergyTransfer@Persistent"/>
+    </CEffectSet>
+    <CEffectCreatePersistent id="EnergyTransfer@Persistent">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetUnit"/>
+        <Flags index="PersistUntilDestroyed" value="1"/>
+        <InitialEffect value="EnergyTransfer@CreateHealer"/>
+        <FinalEffect value="EnergyTransfer@ChannelRemove"/>
+        <PeriodicValidator value="EnergyTransfer@Combine"/>
+        <PeriodicEffectArray value="EnergyTransfer@CreateHealer"/>
+        <PeriodicPeriodArray value="0.0625"/>
+    </CEffectCreatePersistent>
+    <CEffectApplyBehavior id="Frenzy@ApplyBuff">
+        <EditorCategories value=""/>
+        <Behavior value="Frenzy@Frenzied"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="Heal@ApplyBehavior">
+        <EditorCategories value=""/>
+        <Behavior value="Heal@HoT"/>
+    </CEffectApplyBehavior>
+    <CEffectModifyUnit id="Heal@InstantHeal">
+        <EditorCategories value=""/>
+        <VitalArray index="Life">
+            <Change value="1000"/>
+        </VitalArray>
+    </CEffectModifyUnit>
+    <CEffectSet id="Heal@Set">
+        <ValidatorArray value="NotFullLife"/>
+        <EditorCategories value=""/>
+        <EffectArray value="Heal@InstantHeal"/>
+        <EffectArray value="Heal@ApplyBehavior"/>
+    </CEffectSet>
+    <CEffectModifyUnit id="Heal@PeriodicHeal">
+        <EditorCategories value=""/>
+        <VitalArray index="Life">
+            <Change value="50"/>
+        </VitalArray>
+    </CEffectModifyUnit>
+    <CEffectDamage id="HeroSwarmQueenWeaponDmg" parent="DU_WEAP_MISSILE">
+        <EditorCategories value="Race:Zerg"/>
+        <Flags index="Impact" value="1"/>
+        <KindSplash value="Ranged"/>
+        <Amount value="0">
+            <AccumulatorArray value="HeroSwarmQueenWeaponDmgScaled"/>
+            <AccumulatorArray value="HeroSwarmQueenWeaponDmgBase"/>
+        </Amount>
+        <AreaArray Radius="0.75" Fraction="1"/>
+        <ExcludeArray Value="Target"/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Dead,Hidden,Invulnerable"/>
+        <ValidatorArray value="NotInvulnerable"/>
+    </CEffectDamage>
+    <CEffectLaunchMissile id="HeroSwarmQueenWeaponLaunchMissile">
+        <EditorCategories value="Race:Zerg"/>
+        <ImpactEffect value="HeroSwarmQueenWeaponDmg"/>
+        <AmmoUnit value="SwarmQueenAcidSpinesMissile"/>
+        <Movers Link="AcidSpinesWeapon"/>
+    </CEffectLaunchMissile>
+    <CAbilTransport id="RespawnEgg@Carry">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <CmdButtonArray index="Load" DefaultButtonFace="RespawnEgg@CarryEgg" Requirements="RespawnEgg@CarryReq"/>
+        <CmdButtonArray index="UnloadAt" DefaultButtonFace="RespawnEgg@DropEgg" Requirements="RespawnEgg@CarryReq"/>
+        <Flags index="ShowCargoSize" value="0"/>
+        <Flags index="ShowStatus" value="0"/>
+        <MaxUnloadRange value="2"/>
+        <LoadValidatorArray value="RespawnEgg@Egg"/>
+        <LoadValidatorArray value="RespawnEgg@Reviving"/>
+    </CAbilTransport>
+    <CAbilRally id="RespawnEgg@Rally">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <CmdButtonArray index="Rally1" Requirements="RespawnEgg@RallyReq"/>
+    </CAbilRally>
+    <CAbilEffectInstant id="RespawnEgg@EggSuicide">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="Suicide"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="RespawnEgg@EggSuicide"/>
+    </CAbilEffectInstant>
+    <CAbilEffectInstant id="RespawnEgg@Reviving">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <CastIntroTime value="15"/>
+        <ProgressButtonArray index="Cast" value="RespawnEgg@Reviving"/>
+        <ProgressButtonArray index="Channel" value="RespawnEgg@Reviving"/>
+        <ProgressButtonArray index="Bail" value="RespawnEgg@Reviving"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="RespawnEgg@Reviving"/>
+        <Effect index="0" value="EmptySet"/>
+        <Flags index="UninterruptibleTurn" value="1"/>
+        <ShowProgressArray index="Cast" value="1"/>
+    </CAbilEffectInstant>
+    <CAbilEffectTarget id="RespawnEgg">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="RespawnEgg@CreateEgg"/>
+        <Cost>
+            <Vital index="Energy" value="200"/>
+            <Charge TimeUse="-1"/>
+            <Cooldown Link="RespawnEgg" TimeStart="4" TimeUse="15"/>
+        </Cost>
+        <Placeholder value="RespawnEgg@Egg"/>
+        <Range value="0"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="RespawnEgg" Requirements="RespawnEgg@Req"/>
+        <PlaceUnit value="RespawnEgg@Egg"/>
+    </CAbilEffectTarget>
+    <CAbilEffectTarget id="EnergyTransfer">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="EnergyTransfer@InitalSet"/>
+        <Cost>
+            <Cooldown TimeUse="15"/>
+        </Cost>
+        <TargetFilters value="-;Self,Neutral,Enemy,Worker,Item,Dead,Hidden"/>
+        <Range value="6"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="EnergyTransfer" Requirements="EnergyTransfer@Req"/>
+    </CAbilEffectTarget>
+    <CAbilEffectInstant id="EnergyTransfer@Stop">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="EnergyTransfer@ChannelRemove"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="EnergyTransfer@Cancel" Requirements="EnergyTransfer@Channel"/>
+    </CAbilEffectInstant>
+    <CAbilEffectTarget id="Frenzy@Frenzy">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="Frenzy@ApplyBuff"/>
+        <Cost>
+            <Vital index="Energy" value="100"/>
+            <Cooldown TimeUse="2.5"/>
+        </Cost>
+        <TargetFilters value="-;Neutral,Enemy,Structure,Worker,Missile,Item,Hidden,Summoned"/>
+        <Range value="5"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="Frenzy@Frenzy" Requirements="Frenzy@Req"/>
+    </CAbilEffectTarget>
+    <CAbilEffectTarget id="Heal">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="Heal@Set"/>
+        <Cost>
+            <Vital index="Energy" value="50"/>
+            <Cooldown TimeUse="2.5"/>
+        </Cost>
+        <TargetFilters value="Visible;Neutral,Enemy,Worker,Missile,Hidden,Invulnerable,Summoned"/>
+        <Range value="6"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="Heal@Heal"/>
+    </CAbilEffectTarget>
+    <CValidatorUnitType id="RespawnEgg@Egg">
+        <Value value="RespawnEgg@Egg"/>
+    </CValidatorUnitType>
+    <CValidatorUnitCompareBehaviorCount id="RespawnEgg@Reviving">
+        <Behavior value="RespawnEgg@Reviving"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorUnitCompareBehaviorCount id="EnergyTransfer@ChannelOn">
+        <WhichUnit Value="Caster"/>
+        <Value value="1"/>
+        <Behavior value="EnergyTransfer@Channel"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorCombine id="EnergyTransfer@Combine">
+        <Type value="And"/>
+        <CombineArray value="EnergyTransfer@Range"/>
+        <CombineArray value="EnergyTransfer@ChannelOn"/>
+        <CombineArray value="CasterHasEnergy"/>
+        <CombineArray value="EnergyLT999Percent"/>
+        <CombineArray value="CasterNotDead"/>
+        <CombineArray value="TargetNotDead"/>
+        <CombineArray value="NotSilenced"/>
+    </CValidatorCombine>
+    <CValidatorLocationCompareRange id="EnergyTransfer@Range">
+        <WhichLocation Value="TargetUnit"/>
+        <Compare value="LE"/>
+        <Range value="8"/>
+    </CValidatorLocationCompareRange>
+    <CRequirement id="RespawnEgg@CarryReq">
+        <NodeArray index="Show" Link="CountUpgradeRespawnEgg@UnlockCompleteOnly"/>
+    </CRequirement>
+    <CRequirement id="RespawnEgg@RallyReq">
+        <NodeArray index="Use" Link="CountBehaviorRespawnEgg@RevivingQueuedOrBetterAtUnit3227781120"/>
+    </CRequirement>
+    <CRequirement id="RespawnEgg@DummyReg">
+        <NodeArray index="Use" Link="03358450278"/>
+    </CRequirement>
+    <CRequirement id="RespawnEgg@Req">
+        <NodeArray index="Use" Link="GTE999272702CountUpgradeRespawnEgg@UnlockCompleteOnly1"/>
+        <NodeArray index="Show" Link="NotCountBehaviorRespawnEgg@NoMoreEggsQueuedOrBetterAtUnit"/>
+    </CRequirement>
+    <CRequirement id="EnergyTransfer@Channel">
+        <NodeArray index="Show" Link="EqCountBehaviorEnergyTransfer@ChannelCompleteOnlyAtUnit1"/>
+    </CRequirement>
+    <CRequirement id="Frenzy@Req">
+        <NodeArray index="Use" Link="GTE275080916CountUpgradeFrenzy@UnlockCompleteOnly1"/>
+    </CRequirement>
+    <CRequirement id="EnergyTransfer@Req">
+        <NodeArray index="Use" Link="Eq3411278990CountUpgradeEnergyTransfer@UnlockCompleteOnly1"/>
+        <NodeArray index="Show" Link="EqCountBehaviorEnergyTransfer@ChannelCompleteOnlyAtUnit0"/>
+    </CRequirement>
+    <CButton id="RespawnEgg@CarryEgg">
+        <Icon value="Assets\Textures\btn-ability-zerg-carrybiomass.dds"/>
+    </CButton>
+    <CButton id="RespawnEgg@DropEgg">
+        <Icon value="Assets\Textures\btn-ability-kerrigan-droppods.dds"/>
+        <Hotkey value="Button/Hotkey/RespawnEgg@CarryEgg"/>
+        <HotkeyAlias value="RespawnEgg@CarryEgg"/>
+    </CButton>
+    <CButton id="RespawnEgg@EggSuicide">
+        <Icon value="Assets\Textures\btn-unit-zerg-egg.dds"/>
+    </CButton>
+    <CButton id="RespawnEgg@Reviving">
+        <Icon value="Assets\Textures\btn-unit-zerg-roach_collection.dds"/>
+    </CButton>
+    <CButton id="RespawnEgg">
+        <Icon value="Assets\Textures\btn-unit-zerg-egg.dds"/>
+    </CButton>
+    <CButton id="EnergyTransfer@Cancel">
+        <Icon value="Assets\Textures\btn-ability-protoss-feedback.dds"/>
+        <Hotkey value="Button/Hotkey/EnergyTransfer"/>
+        <HotkeyAlias value="EnergyTransfer"/>
+    </CButton>
+    <CButton id="EnergyTransfer">
+        <Icon value="Assets\Textures\btn-ability-protoss-feedbackaoe-color.dds"/>
+    </CButton>
+    <CButton id="Frenzy@Frenzy">
+        <Icon value="Assets\Textures\btn-upgrade-zerg-frenzy.dds"/>
+    </CButton>
+    <CButton id="Heal@Heal">
+        <Icon value="Assets\Textures\btn-ability-zerg-dehaka-healingaura.dds"/>
+    </CButton>
+    <CRequirementGTE id="GTE999272702CountUpgradeRespawnEgg@UnlockCompleteOnly1">
+        <OperandArray index="0" value="CountUpgradeRespawnEgg@UnlockCompleteOnly"/>
+        <OperandArray index="1" value="1"/>
+    </CRequirementGTE>
+    <CRequirementCountBehavior id="CountBehaviorRespawnEgg@RevivingQueuedOrBetterAtUnit3227781120">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="RespawnEgg@Reviving" State="QueuedOrBetterAtUnit"/>
+    </CRequirementCountBehavior>
+    <CRequirementConst id="03358450278"/>
+    <CRequirementCountBehavior id="CountBehaviorRespawnEgg@NoMoreEggsQueuedOrBetterAtUnit">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="RespawnEgg@NoMoreEggs" State="QueuedOrBetterAtUnit"/>
+    </CRequirementCountBehavior>
+    <CRequirementNot id="NotCountBehaviorRespawnEgg@NoMoreEggsQueuedOrBetterAtUnit">
+        <OperandArray index="0" value="CountBehaviorRespawnEgg@NoMoreEggsQueuedOrBetterAtUnit"/>
+    </CRequirementNot>
+    <CRequirementCountUpgrade id="CountUpgradeRespawnEgg@UnlockCompleteOnly">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="RespawnEgg@Unlock" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountBehavior id="CountBehaviorEnergyTransfer@ChannelCompleteOnlyAtUnit">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="EnergyTransfer@Channel" State="CompleteOnlyAtUnit"/>
+    </CRequirementCountBehavior>
+    <CRequirementCountUpgrade id="CountUpgradeEnergyTransfer@UnlockCompleteOnly">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="EnergyTransfer@Unlock" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeFrenzy@UnlockCompleteOnly">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="Frenzy@Unlock" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementEq id="Eq3411278990CountUpgradeEnergyTransfer@UnlockCompleteOnly1">
+        <OperandArray index="0" value="CountUpgradeEnergyTransfer@UnlockCompleteOnly"/>
+        <OperandArray index="1" value="1"/>
+    </CRequirementEq>
+    <CRequirementEq id="EqCountBehaviorEnergyTransfer@ChannelCompleteOnlyAtUnit0">
+        <OperandArray index="0" value="CountBehaviorEnergyTransfer@ChannelCompleteOnlyAtUnit"/>
+        <OperandArray index="1" value="0"/>
+    </CRequirementEq>
+    <CRequirementEq id="EqCountBehaviorEnergyTransfer@ChannelCompleteOnlyAtUnit1">
+        <OperandArray index="0" value="CountBehaviorEnergyTransfer@ChannelCompleteOnlyAtUnit"/>
+        <OperandArray index="1" value="1"/>
+    </CRequirementEq>
+    <CRequirementGTE id="GTE275080916CountUpgradeFrenzy@UnlockCompleteOnly1">
+        <OperandArray index="0" value="CountUpgradeFrenzy@UnlockCompleteOnly"/>
+        <OperandArray index="1" value="1"/>
+    </CRequirementGTE>
+    <CActorSiteOpLocalOffset id="RespawnEgg@EggCarriedOffset">
+        <EditorCategories value=""/>
+        <LocalOffset value="0.000000,0.000000,0.100000"/>
+    </CActorSiteOpLocalOffset>
+    <CActorSiteOpRotationExplicit id="RespawnEgg@EggCarriedRotation">
+        <EditorCategories value=""/>
+        <Forward value="0.000000,0.000000,1.000000"/>
+        <Up value="0.000000,1.000000,0.000000"/>
+        <IsLocal value="1"/>
+    </CActorSiteOpRotationExplicit>
+    <CActorModel id="RespawnEgg@EggCarried" parent="ModelAddition">
+        <Host Subject="::Creator"/>
+        <HostSiteOps Ops="SOpAttachTarget2 RespawnEgg@EggCarriedRotation RespawnEgg@EggCarriedOffset"/>
+        <On Terms="ActorCreation" Target="::Creator" Send="Signal RespawnEgg"/>
+        <On Terms="ActorCreation" Send="AnimPlay Start Stand,Work,Start"/>
+        <On Terms="AnimDone; AnimName Start" Send="AnimPlay Work Stand,Work PlayForever"/>
+        <On Terms="AbilTransport.RespawnEgg@Carry.TransportUnload" Send="Destroy"/>
+        <On Terms="Signal.*.Dead" Send="Destroy"/>
+        <Model value="RespawnEgg@Egg"/>
+        <Scale value="0.800000"/>
+    </CActorModel>
+    <CActorModel id="RespawnEgg@EggCreate" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <HostSiteOps Ops="SOpMoveUpByDot5"/>
+    </CActorModel>
+    <CActorModel id="RespawnEgg@Hatching" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <HostSiteOps Ops="SOpMoveUpByDot25"/>
+    </CActorModel>
+    <CActorModel id="RespawnEgg@ModelSwap" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <HostSiteOps Ops="SOpMoveUpByDot5"/>
+    </CActorModel>
+    <CActorUnit id="RespawnEgg@Egg" parent="GenericUnitStandard" unitName="RespawnEgg@Egg">
+        <EditorCategories value=""/>
+        <Wireframe>
+            <Image value="Assets\Textures\wireframe-zerg-egg.dds"/>
+        </Wireframe>
+        <On Terms="ActorCreation" Send="SetScale 0.350000"/>
+        <On Terms="Behavior.RespawnEgg@HiveAuraDelay.Create" Send="SetScale 1.000000 15.000000"/>
+        <On Terms="ActorCreation" Send="Create RespawnEgg@EggCreate"/>
+        <On Terms="Signal.*.ModelSwap" Send="Create RespawnEgg@ModelSwap"/>
+        <On Terms="Signal.*.Hatching" Send="Create RespawnEgg@Hatching"/>
+        <DeathArray index="Normal" ModelLink="ZergSmallBuildingDeath"/>
+        <UnitIcon value="Assets\Textures\wireframe-zerg-egg.dds"/>
+    </CActorUnit>
+    <CActorRange id="EnergyTransfer@Range" parent="RangeAbil" abil="EnergyTransfer">
+        <EditorCategories value=""/>
+        <On Terms="Abil.EnergyTransfer@Stop.ButtonHoverOn" Send="Create"/>
+        <On Terms="Abil.EnergyTransfer@Stop.ButtonHoverOff" Send="Destroy"/>
+    </CActorRange>
+    <CActorBeamSimple id="EnergyTransfer@Beam" parent="BeamSimpleAnimationStyleContinuous">
+        <EditorCategories value=""/>
+        <On Terms="Effect.EnergyTransfer@Persistent.Start; At Caster" Send="Create"/>
+        <On Terms="Effect.EnergyTransfer@Persistent.Stop; At Caster" Send="Destroy"/>
+        <HostLaunch Subject="_Unit" Scope="Caster" Actor="Find"/>
+        <HostLaunchSiteOps Ops="SOpAttachWeapon"/>
+        <HostImpact Subject="_Unit" Scope="Target" Actor="Find"/>
+        <HostImpactSiteOps Ops="SOpAttachCenter"/>
+    </CActorBeamSimple>
+    <CActorModel id="Frenzy@Effect" parent="ModelAddition">
+        <EditorCategories value=""/>
+        <On index="0" Terms="ActorCreation" Send="$Stand PlayForever"/>
+        <On index="2" Terms="Behavior.Frenzy@Frenzied.On" Send="Create"/>
+        <On Terms="Behavior.Frenzy@Frenzied.Off" Send="Destroy"/>
+        <HostSiteOps Ops="SOpAttachCenter"/>
+        <Model value="FrenzyBuffEffect"/>
+    </CActorModel>
+    <CActorRange id="Frenzy@Range" parent="RangeAbil" abil="Frenzy@Frenzy">
+        <EditorCategories value=""/>
+    </CActorRange>
+    <CActorModel id="Heal@Effect" parent="ModelAddition">
+        <EditorCategories value=""/>
+        <On index="0" Terms="ActorCreation" Send="$Birth"/>
+        <On index="1" Terms="AnimDone; AnimName Birth" Send="Destroy"/>
+        <On index="2" Terms="ActorOrphan" Send="AnimBracketStop BSD"/>
+        <On Terms="Effect.Heal@PeriodicHeal.Start; At Target" Send="Create"/>
+        <On Terms="Effect.Heal@InstantHeal.Start; At Target" Send="Create"/>
+        <HostSiteOps Ops="SOpAttachOverhead"/>
+        <Model value="PrimalHealBuffImpactModel"/>
+    </CActorModel>
+    <CActorRange id="Heal@Range" parent="RangeAbil" abil="Heal">
+        <EditorCategories value=""/>
+    </CActorRange>
+    <CActorUnit id="HeroSwarmQueen" parent="GenericUnitBase" unitName="HeroSwarmQueen">
+        <Macros value="TerrainSquibAnimations"/>
+        <Macros value="ZergBurrowStandardAnimMacro"/>
+        <Macros value="ZergLargeBurrowEffects"/>
+        <Macros value="UnloadDropAnim"/>
+        <On Terms="UnitBirth.HeroSwarmQueen.Normal" Send="$Birth 0 0.000000"/>
+        <On Terms="UnitMovementUpdate; AnimPlaying AbilityUse" Send="AnimClear AbilityUse"/>
+        <On Terms="WeaponStart.*.AttackStart; AnimPlaying AbilityUse" Send="AnimClear AbilityUse"/>
+        <On Terms="WeaponStart.*.AttackStart" Send="AnimBracketStart Attack Spell,C"/>
+        <On Terms="WeaponStop.*.AttackStop" Send="AnimBracketStop Attack"/>
+        <On Terms="ActorCreation" Send="SetScale 0.700000"/>
+        <On Terms="Abil.Heal.SourceCastStart" Send="AnimPlay AbilityUse Spell"/>
+        <On Terms="Abil.Frenzy@Frenzy.SourceCastStart" Send="AnimPlay AbilityUse Spell"/>
+        <On Terms="Behavior.TerranPartTransitionBurrow.On" Send="AnimBracketStart PartTransition Burrow IGNORE Unburrow OpeningPlayForever"/>
+        <On Terms="Behavior.TerranPartTransitionBurrow.Off" Send="AnimBracketStop PartTransition"/>
+        <On Terms="Abil.RespawnEgg.SourceCastStart" Send="AnimBracketStart Work Stand,Work,Start IGNORE Stand,Work,End ContentPlayOnce"/>
+        <On Terms="AbilTransport.RespawnEgg@Carry.TransportLoad; AbilTransport RespawnEgg@Egg" Send="Create RespawnEgg@EggCarried"/>
+        <On Terms="Signal.*.RespawnEgg" Send="RefSetFromMsg ::actor.Thor ::Sender"/>
+        <On Terms="AbilTransport.RespawnEgg@Carry.TransportUnload; AbilTransport RespawnEgg@Egg" Target="::actor.Thor" Send="Signal Dead"/>
+        <On Terms="Signal.*.RespawnEggKill" Target="::actor.Thor" Send="Signal Dead"/>
+        <On Terms="UnitDeath" Target="::actor.Thor" Send="Signal Dead"/>
+        <Model value="HugeSwarmQueen"/>
+        <BuildModel value="HugeSwarmQueen"/>
+        <DeathArray index="Normal" ModelLink="HugeSwarmQueenDeath" SoundLink="Queen_Explode" VoiceLink="Niadra_Death"/>
+        <PlacementModel value="HugeSwarmQueen"/>
+        <PortraitActor value="SwarmQueenPortrait"/>
+        <PortraitModel value="SwarmQueenPortrait"/>
+        <TerrainSquibs>
+            <GroupName value="RippleStandard"/>
+            <MovementDistance value="0.150000,0.150000"/>
+            <IdlePeriod value="0.100000,0.250000"/>
+            <RangeUp value="2.000000"/>
+            <RangeDown value="2.000000"/>
+            <AttachQuery Methods="AMFilterCenter"/>
+            <Visuals TerrainPhysicsMaterial="Water" ActorModel="TerrainSquibHarnessContinuous" ModelLink="WaterRippleHugeSwarmQueen"/>
+        </TerrainSquibs>
+        <WalkAnimMoveSpeed value="1.7031"/>
+        <BarOffset value="75"/>
+        <CustomUnitStatusFrame value="SSF_UnitStatus/HeroStatus"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-Zerg-ExpeditionQueenLevel3.dds"/>
+        </GroupIcon>
+        <HeroIcon value="Assets\Textures\btn-unit-Zerg-broodqueen.dds"/>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-zerg-groundcarapace-level0.dds"/>
+        <SoundArray index="Ready" value="QueenReady"/>
+        <SoundArray index="Help" value="Niadra_Help"/>
+        <SoundArray index="What" value="Niadra_What"/>
+        <SoundArray index="Yes" value="Niadra_Yes"/>
+        <SoundArray index="Attack" value="Niadra_Attack"/>
+        <SoundArray index="Pissed" value="Niadra_Pissed"/>
+        <StatusBarOn index="Shields" value="1"/>
+        <StatusBarOn index="Life" value="1"/>
+        <StatusBarOn index="Energy" value="1"/>
+        <StatusBarOn index="Progress" value="1"/>
+        <StatusBarOn index="Duration" value="1"/>
+        <UnitFlags index="SuppressDefaultStatusBar" value="1"/>
+        <UnitIcon value="Assets\Textures\btn-unit-Zerg-broodqueen.dds"/>
+        <Wireframe>
+            <Image value="Assets\Textures\Wireframe-Zerg-ExpeditionQueenLevel3.dds"/>
+        </Wireframe>
+    </CActorUnit>
+    <CActorAction id="SwarmQueenAttack" parent="GenericAttack" effectImpact="HeroSwarmQueenWeaponDmg" effectLaunch="HeroSwarmQueenWeaponLaunchMissile">
+        <LaunchAttachQuery Methods="Weapon"/>
+        <LaunchAssets Sound="AcidSpines_AttackLaunch"/>
+        <Missile value="SwarmQueenAcidSpinesAttackMissile"/>
+        <ImpactMap index="None" Sound="AcidSpines_AttackImpact"/>
+        <ImpactPhysics Name="AcidSpinesImpact" MatchKeys="Basic" Physics="QueenAttackDeathForce"/>
+        <ShieldFlashType value="Header"/>
+    </CActorAction>
+    <CModel id="EnergyTransfer@Beam">
+        <Model value="Assets\Effects\Protoss\Colossus_Purifier_Coop_TimeBeam\Colossus_Purifier_Coop_TimeBeam.m3"/>
+    </CModel>
+    <CModel id="RespawnEgg@EggCreate">
+        <Model value="Assets\Effects\Zerg\SwarmGuardianMissileImpact\SwarmGuardianMissileImpact.m3"/>
+        <ScaleMax value="2.000000,2.000000,2.000000"/>
+        <ScaleMin value="2.000000,2.000000,2.000000"/>
+    </CModel>
+    <CModel id="RespawnEgg@Hatching">
+        <Flags index="Download" value="0"/>
+        <Model value="Assets\Effects\Zerg\Dehaka_Coop_Psionic\Dehaka_Coop_Psionic.m3"/>
+        <ScaleMax value="0.750000,0.750000,0.750000"/>
+        <ScaleMin value="0.750000,0.750000,0.750000"/>
+    </CModel>
+    <CModel id="RespawnEgg@ModelSwap">
+        <Model value="Assets\Effects\Zerg\PulseCast\PulseCast.m3"/>
+        <ScaleMax value="2.000000,2.000000,2.000000"/>
+        <ScaleMin value="2.000000,2.000000,2.000000"/>
+    </CModel>
+    <CModel id="RespawnEgg@EggHeroBowler">
+        <Model value="Assets\Units\Zerg\Primal_EliteEgg_Coop\Primal_EliteEgg_Coop.m3"/>
+        <ScaleMax value="0.550000,0.550000,0.550000"/>
+        <ScaleMin value="0.550000,0.550000,0.550000"/>
+    </CModel>
+    <CModel id="RespawnEgg@EggHeroRoach">
+        <Model value="Assets\Units\Zerg\LurkerEgg_Primal_Collection\LurkerEgg_Primal_Collection.m3"/>
+    </CModel>
+    <CModel id="RespawnEgg@EggHeroHydra">
+        <Model value="Assets\Units\Zerg\EvolutionEgg\EvolutionEgg.m3"/>
+        <ScaleMax value="1.100000,1.100000,1.100000"/>
+        <ScaleMin value="1.100000,1.100000,1.100000"/>
+    </CModel>
+    <CModel id="RespawnEgg@EggHeroRavager">
+        <Model value="Assets\Units\Zerg\Ravager_Egg\Ravager_Egg.m3"/>
+    </CModel>
+    <CModel id="RespawnEgg@EggHeroSwarmQueen">
+        <Model value="Assets\Units\Zerg\UltraliskEx1Egg\UltraliskEx1Egg.m3"/>
+        <ScaleMax value="0.900000,0.900000,0.900000"/>
+        <ScaleMin value="0.900000,0.900000,0.900000"/>
+    </CModel>
+    <CModel id="RespawnEgg@Egg">
+        <Model value="Assets\Units\Zerg\Egg\Egg.m3"/>
+        <Flags index="Download" value="0"/>
+        <VariationCount value="3"/>
+        <ScaleMax value="1.200000,1.200000,1.200000"/>
+        <ScaleMin value="1.200000,1.200000,1.200000"/>
+    </CModel>
+    <CWeaponLegacy id="HeroSwarmQueenWeapon">
+        <EditorCategories value="Race:Zerg"/>
+        <Icon value="Assets\Textures\btn-upgrade-zerg-missileattacks-level0.dds"/>
+        <DisplayEffect value="HeroSwarmQueenWeaponDmg"/>
+        <TargetFilters value="Visible;Ally,Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <MinScanRange value="7"/>
+        <Period value="1.5"/>
+        <Effect value="HeroSwarmQueenWeaponLaunchMissile"/>
+    </CWeaponLegacy>
+    <CAccumulatorArithmetic id="HeroSwarmQueenWeaponDmgScaled">
+        <Parameters value="0">
+            <AccumulatorArray value="WeaponDmgUpgradeCollector"/>
+            <AccumulatorArray value="HeroLevelWeaponDmgBonus"/>
+        </Parameters>
+        <Parameters value="0">
+            <AccumulatorArray value="HeroSwarmQueenWeaponDmgModifier"/>
+        </Parameters>
+        <Operation value="Multiply"/>
+    </CAccumulatorArithmetic>
+    <CAccumulatorConstant id="HeroSwarmQueenWeaponDmgModifier">
+        <Amount value="0.9"/>
+    </CAccumulatorConstant>
+    <CAccumulatorConstant id="HeroSwarmQueenWeaponDmgBase">
+        <Amount value="90"/>
+    </CAccumulatorConstant>
+    <CDataCollectionAbil id="RespawnEgg">
+        <EditorCategories value=""/>
+        <DataRecord Entry="Abil,RespawnEgg"/>
+        <DataRecord Entry="Button,RespawnEgg"/>
+        <DataRecord Entry="Requirement,RespawnEgg@Req"/>
+        <DataRecord Entry="Upgrade,RespawnEgg@Unlock"/>
+        <DataRecord Entry="Abil,RespawnEgg@EggSuicide"/>
+        <DataRecord Entry="Abil,RespawnEgg@Reviving"/>
+        <DataRecord Entry="Actor,RespawnEgg@EggCreate"/>
+        <DataRecord Entry="Actor,RespawnEgg@Hatching"/>
+        <DataRecord Entry="Actor,RespawnEgg@ModelSwap"/>
+        <DataRecord Entry="Actor,RespawnEgg@Egg"/>
+        <DataRecord Entry="Behavior,RespawnEgg@CasterTracker"/>
+        <DataRecord Entry="Behavior,RespawnEgg@HiveAuraDelay"/>
+        <DataRecord Entry="Behavior,RespawnEgg@EggDeathResponse"/>
+        <DataRecord Entry="Behavior,RespawnEgg@HiveAuraEmitter"/>
+        <DataRecord Entry="Behavior,RespawnEgg@NoMoreEggs"/>
+        <DataRecord Entry="Behavior,RespawnEgg@Reviving"/>
+        <DataRecord Entry="Behavior,RespawnEgg@HiveAura"/>
+        <DataRecord Entry="Button,RespawnEgg@EggSuicide"/>
+        <DataRecord Entry="Button,RespawnEgg@Reviving"/>
+        <DataRecord Entry="Effect,RespawnEgg@CasterTracker"/>
+        <DataRecord Entry="Effect,RespawnEgg@CooldownGetCaster"/>
+        <DataRecord Entry="Effect,RespawnEgg@CooldownSet"/>
+        <DataRecord Entry="Effect,RespawnEgg@CooldownActivate"/>
+        <DataRecord Entry="Effect,RespawnEgg@NoMoreEggsRemove"/>
+        <DataRecord Entry="Effect,RespawnEgg@CreateSet"/>
+        <DataRecord Entry="Effect,RespawnEgg@EggDeathResponse"/>
+        <DataRecord Entry="Effect,RespawnEgg@HiveAuraDelay"/>
+        <DataRecord Entry="Effect,RespawnEgg@NoMoreEggs"/>
+        <DataRecord Entry="Effect,RespawnEgg@EggSuicideSet"/>
+        <DataRecord Entry="Effect,RespawnEgg@HiveAuraApply"/>
+        <DataRecord Entry="Effect,RespawnEgg@HiveAuraEmitter"/>
+        <DataRecord Entry="Effect,RespawnEgg@HiveAuraSearch"/>
+        <DataRecord Entry="Effect,RespawnEgg@CreateEgg"/>
+        <DataRecord Entry="Model,RespawnEgg@EggCreate"/>
+        <DataRecord Entry="Model,RespawnEgg@Hatching"/>
+        <DataRecord Entry="Model,RespawnEgg@ModelSwap"/>
+        <DataRecord Entry="Model,RespawnEgg@Egg"/>
+        <DataRecord Entry="Model,RespawnEgg@EggHeroBowler"/>
+        <DataRecord Entry="Model,RespawnEgg@EggHeroRoach"/>
+        <DataRecord Entry="Model,RespawnEgg@EggHeroHydra"/>
+        <DataRecord Entry="Model,RespawnEgg@EggHeroRavager"/>
+        <DataRecord Entry="Model,RespawnEgg@EggHeroSwarmQueen"/>
+        <DataRecord Entry="Requirement,RespawnEgg@DummyReg"/>
+        <DataRecord Entry="Unit,RespawnEgg@Egg"/>
+        <DataRecord Entry="Behavior,RespawnEgg@Reviving"/>
+        <DataRecord Entry="Upgrade,RespawnEgg@Unlock"/>
+        <DataRecord Entry="Abil,RespawnEgg@Rally"/>
+        <DataRecord Entry="Behavior,RespawnEgg@Reviving"/>
+        <DataRecord Entry="Requirement,RespawnEgg@RallyReq"/>
+        <DataRecord Entry="Upgrade,RespawnEgg@Unlock"/>
+        <DataRecord Entry="Abil,RespawnEgg@Carry"/>
+        <DataRecord Entry="Actor,RespawnEgg@EggCarried"/>
+        <DataRecord Entry="Actor,RespawnEgg@EggCarriedOffset"/>
+        <DataRecord Entry="Actor,RespawnEgg@EggCarriedRotation"/>
+        <DataRecord Entry="Button,RespawnEgg@CarryEgg"/>
+        <DataRecord Entry="Button,RespawnEgg@DropEgg"/>
+        <DataRecord Entry="Validator,RespawnEgg@Egg"/>
+        <DataRecord Entry="Validator,RespawnEgg@Reviving"/>
+        <DataRecord Entry="Requirement,RespawnEgg@CarryReq"/>
+    </CDataCollectionAbil>
+    <CDataCollectionAbil id="EnergyTransfer">
+        <EditorCategories value=""/>
+        <DataRecord Entry="Abil,EnergyTransfer"/>
+        <DataRecord Entry="Abil,EnergyTransfer@Stop"/>
+        <DataRecord Entry="Actor,EnergyTransfer@Range"/>
+        <DataRecord Entry="Actor,EnergyTransfer@Beam"/>
+        <DataRecord Entry="Behavior,EnergyTransfer@Channel"/>
+        <DataRecord Entry="Button,EnergyTransfer"/>
+        <DataRecord Entry="Button,EnergyTransfer@Cancel"/>
+        <DataRecord Entry="Effect,EnergyTransfer@Persistent"/>
+        <DataRecord Entry="Effect,EnergyTransfer@CreateHealer"/>
+        <DataRecord Entry="Effect,EnergyTransfer@ChannelRemove"/>
+        <DataRecord Entry="Effect,EnergyTransfer@ChannelApply"/>
+        <DataRecord Entry="Effect,EnergyTransfer@InitalSet"/>
+        <DataRecord Entry="Requirement,EnergyTransfer@Req"/>
+        <DataRecord Entry="Requirement,EnergyTransfer@Channel"/>
+        <DataRecord Entry="Upgrade,EnergyTransfer@Unlock"/>
+        <DataRecord Entry="Upgrade,EnergyTransfer@Unlock"/>
+        <DataRecord Entry="Validator,EnergyTransfer@Combine"/>
+        <DataRecord Entry="Validator,EnergyTransfer@ChannelOn"/>
+        <DataRecord Entry="Validator,EnergyTransfer@Range"/>
+        <DataRecord Entry="Upgrade,EnergyTransfer@Unlock"/>
+        <DataRecord Entry="Model,EnergyTransfer@Beam"/>
+    </CDataCollectionAbil>
+    <CDataCollectionAbil id="Frenzy">
+        <EditorCategories value=""/>
+        <DataRecord Entry="Abil,Frenzy"/>
+        <DataRecord Entry="Abil,Frenzy@Frenzy"/>
+        <DataRecord Entry="Actor,Frenzy"/>
+        <DataRecord Entry="Actor,Frenzy@Range"/>
+        <DataRecord Entry="Actor,Frenzy@Effect"/>
+        <DataRecord Entry="Behavior,Frenzy"/>
+        <DataRecord Entry="Behavior,Frenzy@Frenzied"/>
+        <DataRecord Entry="Button,Frenzy"/>
+        <DataRecord Entry="Button,Frenzy@Frenzy"/>
+        <DataRecord Entry="Effect,Frenzy@ApplyBuff"/>
+        <DataRecord Entry="Mover,Frenzy"/>
+        <DataRecord Entry="Requirement,Frenzy@Req"/>
+        <DataRecord Entry="Upgrade,Frenzy@Unlock"/>
+    </CDataCollectionAbil>
+    <CDataCollectionAbil id="Heal">
+        <EditorCategories value=""/>
+        <DataRecord Entry="Abil,Heal"/>
+        <DataRecord Entry="Actor,Heal@Effect"/>
+        <DataRecord Entry="Actor,Heal@Range"/>
+        <DataRecord Entry="Behavior,Heal@HoT"/>
+        <DataRecord Entry="Button,Heal"/>
+        <DataRecord Entry="Button,Heal@Heal"/>
+        <DataRecord Entry="Effect,Heal@Set"/>
+        <DataRecord Entry="Effect,Heal@PeriodicHeal"/>
+        <DataRecord Entry="Effect,Heal@ApplyBehavior"/>
+        <DataRecord Entry="Effect,Heal@InstantHeal"/>
+    </CDataCollectionAbil>
+    <CUnit id="RespawnEgg@Egg">
+        <FlagArray index="Movable" value="0"/>
+        <FlagArray index="PreventDestroy" value="1"/>
+        <FlagArray index="UseLineOfSight" value="1"/>
+        <FlagArray index="ArmySelect" value="1"/>
+        <PlaneArray index="Ground" value="1"/>
+        <Collide index="Ground" value="1"/>
+        <Collide index="ForceField" value="1"/>
+        <Collide index="Locust" value="1"/>
+        <Collide index="Small" value="1"/>
+        <Response value="Nothing"/>
+        <Attributes index="Biological" value="1"/>
+        <Attributes index="Psionic" value="1"/>
+        <Attributes index="Summoned" value="1"/>
+        <LifeStart value="1000"/>
+        <LifeMax value="1000"/>
+        <LifeArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </LifeArmorFormula>
+        <ShieldArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </ShieldArmorFormula>
+        <AttackTargetPriority value="20"/>
+        <InnerRadius value="0.625"/>
+        <EditorCategories value=""/>
+        <AbilArray Link="RespawnEgg@Reviving"/>
+        <AbilArray Link="RespawnEgg@EggSuicide"/>
+        <AbilArray Link="stop"/>
+        <AbilArray Link="RespawnEgg@Rally"/>
+        <DeathTime value="0.125"/>
+        <StationaryTurningRate value="0"/>
+        <TurningRate value="0"/>
+        <CardLayouts>
+            <LayoutButtons Face="RespawnEgg@EggSuicide" Type="AbilCmd" AbilCmd="RespawnEgg@EggSuicide,Execute" Row="0" Column="0"/>
+            <LayoutButtons Face="Rally" Type="AbilCmd" AbilCmd="RespawnEgg@Rally,Rally1" Row="1" Column="4"/>
+        </CardLayouts>
+        <BehaviorArray Link="RespawnEgg@CasterTracker"/>
+        <Sight value="2"/>
+        <CargoSize value="1"/>
+    </CUnit>
+    <CUnit id="HeroSwarmQueen">
+        <DeathTime value="-1"/>
+        <DeathRevealRadius value="3"/>
+        <Race value="Zerg"/>
+        <FlagArray index="Hero" value="1"/>
+        <FlagArray index="HiddenCargoUI" value="1"/>
+        <FlagArray index="UseLineOfSight" value="1"/>
+        <FlagArray index="ArmySelect" value="1"/>
+        <PlaneArray index="Ground" value="1"/>
+        <Collide index="Ground" value="1"/>
+        <Collide index="ForceField" value="1"/>
+        <Collide index="Locust" value="1"/>
+        <Collide index="Small" value="1"/>
+        <Attributes index="Light" value="1"/>
+        <Attributes index="Biological" value="1"/>
+        <Attributes index="Heroic" value="1"/>
+        <LifeStart value="2500"/>
+        <LifeMax value="2500"/>
+        <LifeRegenRate value="15"/>
+        <LifeArmorName value="Unit/LifeArmorName/ZergGroundArmor"/>
+        <EnergyStart value="50"/>
+        <EnergyMax value="50"/>
+        <EnergyRegenRate value="1.5"/>
+        <ShieldArmorName value="Unit/ShieldArmorName/ZergWildMutation"/>
+        <Speed value="2.7968"/>
+        <Acceleration value="1000"/>
+        <LateralAcceleration value="46"/>
+        <StationaryTurningRate value="999.8437"/>
+        <TurningRate value="999.8437"/>
+        <Sight value="8.5"/>
+        <CostCategory value="Army"/>
+        <AttackTargetPriority value="20"/>
+        <AbilArray Link="stop"/>
+        <AbilArray Link="attack"/>
+        <AbilArray Link="move"/>
+        <AbilArray Link="Heal"/>
+        <AbilArray Link="Frenzy@Frenzy"/>
+        <AbilArray Link="EnergyTransfer"/>
+        <AbilArray Link="EnergyTransfer@Stop"/>
+        <AbilArray Link="RespawnEgg"/>
+        <AbilArray Link="RespawnEgg@Carry"/>
+        <AbilArray Link="ShieldColor@ColorChange"/>
+        <BehaviorArray Link="Levels"/>
+        <BehaviorArray Link="HeroSwarmQueenAttribute"/>
+        <BehaviorArray Link="HeroSwarmQueenCreepBonusRegen"/>
+        <BehaviorArray Link="HeroSwarmQueenArmor"/>
+        <WeaponArray Link="HeroSwarmQueenWeapon"/>
+        <CardLayouts>
+            <LayoutButtons Face="Move" Type="AbilCmd" AbilCmd="move,Move" Row="0" Column="0"/>
+            <LayoutButtons Face="Stop" Type="AbilCmd" AbilCmd="stop,Stop" Row="0" Column="1"/>
+            <LayoutButtons Face="MoveHoldPosition" Type="AbilCmd" AbilCmd="move,HoldPos" Row="0" Column="2"/>
+            <LayoutButtons Face="MovePatrol" Type="AbilCmd" AbilCmd="move,Patrol" Row="0" Column="3"/>
+            <LayoutButtons Face="Attack" Type="AbilCmd" AbilCmd="attack,Execute" Row="0" Column="4"/>
+            <LayoutButtons Face="Heal@Heal" Type="AbilCmd" AbilCmd="Heal,Execute" Row="2" Column="0"/>
+            <LayoutButtons Face="Frenzy@Frenzy" Type="AbilCmd" AbilCmd="Frenzy@Frenzy,Execute" Row="2" Column="1"/>
+            <LayoutButtons Face="EnergyTransfer" Type="AbilCmd" AbilCmd="EnergyTransfer,Execute" Row="2" Column="2"/>
+            <LayoutButtons Face="EnergyTransfer@Cancel" Type="AbilCmd" AbilCmd="EnergyTransfer@Stop,Execute" Row="2" Column="2"/>
+            <LayoutButtons Face="RespawnEgg" Type="AbilCmd" AbilCmd="RespawnEgg,Execute" Row="2" Column="3"/>
+            <LayoutButtons Face="RespawnEgg" Type="Passive" Requirements="RespawnEgg@DummyReg" Row="2" Column="3"/>
+            <LayoutButtons Face="RespawnEgg@CarryEgg" Type="AbilCmd" AbilCmd="RespawnEgg@Carry,Load" Row="1" Column="3"/>
+            <LayoutButtons Face="RespawnEgg@DropEgg" Type="AbilCmd" AbilCmd="RespawnEgg@Carry,UnloadAt" Row="1" Column="3"/>
+        </CardLayouts>
+        <InnerRadius value="0.5"/>
+        <CargoSize value="1"/>
+        <SubgroupPriority value="50"/>
+        <MinimapRadius value="1"/>
+        <EditorCategories value=""/>
+        <GlossaryPriority value="14"/>
+        <HotkeyCategory value="Unit/Category/SSFPlayerUnits"/>
+        <KillDisplay value="Always"/>
+        <RankDisplay value="Never"/>
+        <AlliedPushPriority value="20"/>
+        <LifeArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </LifeArmorFormula>
+        <ShieldArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </ShieldArmorFormula>
+        <LifeArmorTip value="Unit/SwarmQueen/ArmorTooltip"/>
+    </CUnit>
+    <CBehaviorBuff id="HeroSwarmQueenArmor" parent="ArmorBase">
+        <Name value="Behavior/Name/HeroSwarmQueenArmor"/>
+        <DamageResponse>
+            <Cost>
+                <Charge Link="Behavior/HeroSwarmQueenArmor"/>
+                <Cooldown Link="Behavior/HeroSwarmQueenArmor"/>
+            </Cost>
+        </DamageResponse>
+        <Tooltip value="Behavior/Tooltip/HeroArmorBase"/>
+        <Cost>
+            <Charge Link="Behavior/HeroArmorBase"/>
+            <Cooldown Link="Behavior/HeroArmorBase"/>
+        </Cost>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="RespawnEgg@HiveAura">
+        <Alignment value="Positive"/>
+        <InfoIcon value="Assets\Textures\btn-unit-zerg-egg.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification>
+            <LifeArmorBonus value="5"/>
+            <VitalRegenArray index="Life" value="10"/>
+        </Modification>
+        <StackAlias value="BaseAura"/>
+        <Duration value="0.6"/>
+        <DamageResponse ModifyFraction="0.9057">
+            <Kind index="Spell" value="0"/>
+            <Kind index="NoProc" value="0"/>
+            <Chance value="1"/>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorUnitTracker id="RespawnEgg@CasterTracker">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorUnitTracker>
+    <CBehaviorBuff id="RespawnEgg@EggDeathResponse">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DamageResponse Fatal="1" Handled="RespawnEgg@CooldownGetCaster">
+            <Chance value="1"/>
+        </DamageResponse>
+        <FinalEffect value="RespawnEgg@CooldownGetCaster"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="RespawnEgg@HiveAuraDelay">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DisplayDuration index="Self" value="1"/>
+        <DisplayDuration index="Ally" value="1"/>
+        <DisplayDuration index="Neutral" value="1"/>
+        <DisplayDuration index="Enemy" value="1"/>
+        <Duration value="15"/>
+        <ExpireEffect value="RespawnEgg@HiveAuraEmitter"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="RespawnEgg@HiveAuraEmitter">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DisableValidatorArray value="BaseHiveIsAlive"/>
+        <DisableValidatorArray value="NotHidden"/>
+        <Period value="0.5"/>
+        <PeriodicEffect value="RespawnEgg@HiveAuraSearch"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="RespawnEgg@NoMoreEggs">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="RespawnEgg@Reviving">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification>
+            <AbilLinkDisableArray value="RespawnEgg@EggSuicide"/>
+        </Modification>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="HeroSwarmQueenCreepBonusRegen">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DisableValidatorArray value="OnCreep"/>
+        <Modification MoveSpeedMultiplier="1.5">
+            <VitalRegenArray index="Life" value="15"/>
+            <VitalRegenArray index="Energy" value="1.5"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="EnergyTransfer@Channel">
+        <Alignment value="Positive"/>
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification UnifiedMoveSpeedFactor="-0.5" AttackSpeedMultiplier="0.5"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="Frenzy@Frenzied">
+        <Alignment value="Positive"/>
+        <InfoIcon value="Assets\Textures\btn-upgrade-zerg-frenzy.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="7.5"/>
+        <Modification MoveSpeedMultiplier="1.5" AttackSpeedMultiplier="1.25"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="Heal@HoT">
+        <Alignment value="Positive"/>
+        <InfoIcon value="Assets\Textures\btn-ability-zerg-dehaka-healingaura.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <BuffFlags index="Extend" value="1"/>
+        <Duration value="20"/>
+        <Period value="0.5"/>
+        <PeriodCount value="20"/>
+        <PeriodicEffect value="Heal@PeriodicHeal"/>
+    </CBehaviorBuff>
+    <CBehaviorAttribute id="HeroSwarmQueenAttribute">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification MoveSpeedBonus="0.0781" AttackSpeedMultiplier="1.01">
+            <VitalMaxArray index="Life" value="275"/>
+            <VitalMaxArray index="Energy" value="5"/>
+        </Modification>
+    </CBehaviorAttribute>
+    <CUpgrade id="RespawnEgg@Unlock"/>
+    <CUpgrade id="EnergyTransfer@Unlock"/>
+    <CUpgrade id="Frenzy@Unlock"/>
+</Catalog>

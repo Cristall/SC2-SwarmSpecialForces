@@ -1,0 +1,55 @@
+static int hivePanel_Panel;
+static int hivePanel_HealthBar;
+static int hivePanel_KillCount;
+static int hivePanel_Icon;
+static int hivePanel_UnitTargetFrame;
+static int hivePanel_FlawlessIcon;
+static trigger hivePanel_UpdateHandler;
+
+static void HivePanel_Update(){
+    libNtve_gf_SetDialogItemCurrentValue(hivePanel_HealthBar, Round(UnitGetPropertyFixed(gv_BaseHive, c_unitPropLife, true)), gv_StartingPG);
+    libNtve_gf_SetDialogItemText(hivePanel_KillCount, IntToText(UnitGetPropertyInt(gv_BaseHive,c_unitPropKills,true)), gv_StartingPG);
+}
+
+void HivePanel_FlawlessFailed(){
+    libNtve_gf_SetDialogItemImage(hivePanel_FlawlessIcon, "Assets\\Icons\\acv_requirement_icon_box_crossed.tga", gv_StartingPG); 
+}
+
+void HivePanel_LinkHiveUnit(){
+    string icon;
+         if (gv_BaseHiveLevel == 0){ icon = "Assets\\Textures\\btn-building-zerg-hatchery.dds"; }
+    else if (gv_BaseHiveLevel == 1){ icon = "Assets\\Textures\\btn-building-zerg-lair.dds"; }
+    else if (gv_BaseHiveLevel == 2){ icon = "Assets\\Textures\\btn-building-zerg-hive.dds"; }
+
+    libNtve_gf_SetDialogItemImage(hivePanel_Icon, icon , gv_StartingPG);
+    libNtve_gf_SetDialogItemHotkey(hivePanel_UnitTargetFrame, c_hotkeyHeroSelect1, gv_StartingPG);
+    libNtve_gf_SetDialogItemUnit(hivePanel_UnitTargetFrame, gv_BaseHive, gv_StartingPG);
+    libNtve_gf_SetDialogItemMaximumValue(hivePanel_HealthBar, Round(UnitGetPropertyFixed(gv_BaseHive, c_unitPropLifeMax, true)), gv_StartingPG);
+    DialogControlSetEnabled(hivePanel_UnitTargetFrame, gv_StartingPG, true);
+    TriggerExecute(hivePanel_UpdateHandler, false, false);
+}
+
+void HivePanel_HiveDied(){
+    libNtve_gf_SetDialogItemImage(hivePanel_Icon, "Assets\\Textures\\btn-ability-zerg-generatecreepstop.dds", gv_StartingPG);
+    DialogControlSetEnabled(hivePanel_UnitTargetFrame, gv_StartingPG, false);
+    DialogControlSetEnabled(hivePanel_Icon, gv_StartingPG, false);
+}
+
+
+bool HivePanel_PeriodicUpdate (bool testConds, bool runActions){
+    while(UnitIsAlive(gv_BaseHive)){
+        HivePanel_Update();
+        Wait(0.25, c_timeGame);
+    }
+    return true;
+}
+
+void HivePanel_Init(){
+    hivePanel_Panel = DialogControlHookupStandard(c_triggerControlTypePanel, "UIContainer/FullscreenUpperContainer/SSF_HivePanel");
+    hivePanel_HealthBar = DialogControlHookup(hivePanel_Panel, c_triggerControlTypeProgressBar, "HealthBar");
+    hivePanel_Icon = DialogControlHookup(hivePanel_Panel, c_triggerControlTypeImage, "IconImage");
+    hivePanel_FlawlessIcon = DialogControlHookup(hivePanel_Panel, c_triggerControlTypeImage, "FlawlessIcon");
+    hivePanel_UnitTargetFrame = DialogControlHookup(hivePanel_Panel, c_triggerControlTypeUnitTarget, "UnitTargetFrame");
+    hivePanel_KillCount = DialogControlHookup(hivePanel_Panel, c_triggerControlTypeLabel, "KillCount");
+    hivePanel_UpdateHandler = TriggerCreate("HivePanel_PeriodicUpdate");
+}

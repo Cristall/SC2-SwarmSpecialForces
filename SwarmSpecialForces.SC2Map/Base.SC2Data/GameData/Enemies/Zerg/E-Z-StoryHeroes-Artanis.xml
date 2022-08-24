@@ -1,0 +1,708 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CEffectModifyUnit id="CircuitOverload@SelfDmg">
+        <EditorCategories value=""/>
+        <VitalArray index="Life">
+            <ChangeFraction value="-0.0024"/>
+        </VitalArray>
+    </CEffectModifyUnit>
+    <CEffectSet id="CircuitOverload@InitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="CircuitOverload@AlreadyCastingNoWeapons"/>
+        <EffectArray value="CircuitOverload@CircuitsOverloaded"/>
+    </CEffectSet>
+    <CEffectApplyBehavior id="CircuitOverload@CircuitsOverloaded">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="CircuitOverload@AlreadyCastingNoWeapons" parent="AlreadyCastingNoWeapons">
+        <Duration value="1.5"/>
+    </CEffectApplyBehavior>
+    <CEffectCreatePersistent id="SpearOfStetmann@AreaController">
+        <EditorCategories value=""/>
+        <InitialDelay value="1"/>
+        <PeriodCount value="64"/>
+        <PeriodicEffectArray value="SpearOfStetmann@Search"/>
+        <PeriodicPeriodArray value="0.25"/>
+    </CEffectCreatePersistent>
+    <CEffectCreatePersistent id="SpearOfStetmann@AreaSelectController">
+        <EditorCategories value=""/>
+        <InitialDelay value="0.5"/>
+        <PeriodCount value="4"/>
+        <PeriodicEffectArray value="SpearOfStetmann@AreaController"/>
+        <PeriodicOffsetArray value="5,0,0"/>
+        <PeriodicOffsetArray value="0,5,0"/>
+        <PeriodicOffsetArray value="-5,0,0"/>
+        <PeriodicOffsetArray value="0,-5,0"/>
+        <PeriodicPeriodArray value="0"/>
+    </CEffectCreatePersistent>
+    <CEffectDamage id="SpearOfStetmann@Dmg">
+        <EditorCategories value=""/>
+        <Amount value="350"/>
+    </CEffectDamage>
+    <CEffectSet id="SpearOfStetmann@InitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="SpearOfStetmann@AlreadyCastingNoWeapons"/>
+        <EffectArray value="SpearOfStetmann@AreaSelectController"/>
+    </CEffectSet>
+    <CEffectEnumArea id="SpearOfStetmann@Search">
+        <EditorCategories value=""/>
+        <SearchFilters value="-;Player,Ally,Neutral,Missile,Item,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="2" Effect="SpearOfStetmann@Dmg"/>
+    </CEffectEnumArea>
+    <CEffectApplyBehavior id="SpearOfStetmann@AlreadyCastingNoWeapons" parent="AlreadyCastingNoWeapons"/>
+    <CEffectCreatePersistent id="AidFromAiur@CreateController">
+        <EditorCategories value=""/>
+        <WhichLocation Value="CasterUnit"/>
+        <OffsetVectorStartLocation Value="CasterUnit"/>
+        <OffsetVectorEndLocation Value="CasterUnit"/>
+        <Flags index="RandomOffset" value="1"/>
+        <InitialDelay value="0.125"/>
+        <PeriodCount value="3"/>
+        <PeriodicEffectArray value="AidFromAiur@Zealot"/>
+        <PeriodicOffsetArray value="2,0,0"/>
+        <PeriodicOffsetArray value="-1,1.7,0"/>
+        <PeriodicOffsetArray value="-1,-1.7,0"/>
+        <PeriodicPeriodArray value="0"/>
+        <OffsetRandMode value="Shuffle"/>
+    </CEffectCreatePersistent>
+    <CEffectApplyBehavior id="AidFromAiur@Spawning">
+        <EditorCategories value=""/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="AidFromAiur@TimedLife">
+        <EditorCategories value=""/>
+    </CEffectApplyBehavior>
+    <CEffectCreateUnit id="AidFromAiur@Zealot">
+        <EditorCategories value=""/>
+        <SpawnEffect value="AidFromAiur@Spawning"/>
+        <SpawnUnit value="AidFromAiur@Zealot"/>
+        <WhichLocation Value="TargetPoint"/>
+    </CEffectCreateUnit>
+    <CEffectDamage id="AidFromAiur@ZealotWeaponDmg" parent="DU_WEAP">
+        <EditorCategories value="Race:Protoss"/>
+        <Amount value="300"/>
+    </CEffectDamage>
+    <CEffectSet id="AidFromAiur@InitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="AidFromAiur@AlreadyCastingNoWeapons"/>
+        <EffectArray value="AidFromAiur@CreateController"/>
+    </CEffectSet>
+    <CEffectApplyBehavior id="AidFromAiur@AlreadyCastingNoWeapons" parent="AlreadyCastingNoWeapons"/>
+    <CEffectSet id="Rush@BladeMissileImpact">
+        <EditorCategories value=""/>
+    </CEffectSet>
+    <CEffectCreatePersistent id="Rush@BladeMissileImpactOffset">
+        <EditorCategories value=""/>
+        <WhichLocation Value="CasterUnit"/>
+        <OffsetVectorStartLocation Value="CasterPoint"/>
+        <OffsetVectorEndLocation Value="CasterPoint"/>
+        <InitialEffect value="Rush@BladeMissileLM"/>
+        <InitialOffset value="0,-12,0"/>
+    </CEffectCreatePersistent>
+    <CEffectLaunchMissile id="Rush@BladeMissileLM">
+        <EditorCategories value=""/>
+        <LaunchLocation Value="CasterUnit"/>
+        <ImpactLocation Value="TargetPoint"/>
+        <ImpactOffset value="0,0,2"/>
+        <ImpactEffect value="Rush@BladeMissileImpact"/>
+        <SearchEffect value="Rush@LineSearch"/>
+        <SearchFlags index="DynamicSearchArea" value="1"/>
+        <AmmoUnit value="Rush@Missile"/>
+    </CEffectLaunchMissile>
+    <CEffectDamage id="Rush@LineDmg">
+        <ValidatorArray value="noMarkers"/>
+        <EditorCategories value=""/>
+        <Amount value="2500"/>
+    </CEffectDamage>
+    <CEffectSet id="Rush@ImpactSet">
+        <EditorCategories value=""/>
+        <Marker>
+            <MatchFlags index="Id" value="1"/>
+        </Marker>
+        <EffectArray value="Rush@BladeMissileImpactOffset"/>
+    </CEffectSet>
+    <CEffectLaunchMissile id="Rush@LM">
+        <EditorCategories value=""/>
+        <LaunchLocation Value="CasterUnit"/>
+        <ImpactLocation Value="TargetPoint"/>
+        <ImpactEffect value="Rush@ImpactSet"/>
+        <SearchEffect value="Rush@LineSearch"/>
+        <Flags index="2D" value="1"/>
+        <SearchFlags index="DynamicSearchArea" value="1"/>
+        <AmmoUnit value=""/>
+        <Movers Link="Rush@Mover" IfRangeLTE="500"/>
+        <DeathType value="Unknown"/>
+    </CEffectLaunchMissile>
+    <CEffectEnumArea id="Rush@LineSearch">
+        <EditorCategories value=""/>
+        <ImpactLocation Value="TargetPoint"/>
+        <SearchFilters value="-;Player,Ally,Neutral,Missile,Item,Dead,Hidden,Invulnerable"/>
+        <AreaArray RectangleWidth="3.8" Effect="Rush@LineDmg"/>
+    </CEffectEnumArea>
+    <CEffectSet id="Rush@InitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="Rush@AlreadyCastingNoWeapons"/>
+        <EffectArray value="Rush@WaitPersistent"/>
+        <TargetLocationType value="UnitOrPoint"/>
+    </CEffectSet>
+    <CEffectCreatePersistent id="Rush@WaitPersistent">
+        <EditorCategories value=""/>
+        <ExpireDelay value="0.7"/>
+        <ExpireEffect value="Rush@LM"/>
+    </CEffectCreatePersistent>
+    <CEffectApplyBehavior id="Rush@AlreadyCastingNoWeapons" parent="AlreadyCastingNoWeapons"/>
+    <CEffectCreatePersistent id="Spin@Delay">
+        <EditorCategories value=""/>
+        <InitialDelay value="0.7"/>
+        <InitialEffect value="Spin@SpinningBehavior"/>
+    </CEffectCreatePersistent>
+    <CEffectDamage id="Spin@Dmg">
+        <EditorCategories value=""/>
+        <Amount value="50"/>
+    </CEffectDamage>
+    <CEffectEnumArea id="Spin@DmgSeach">
+        <EditorCategories value=""/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Item,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="1.5" Effect="Spin@Dmg"/>
+    </CEffectEnumArea>
+    <CEffectSet id="Spin@InitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="Spin@AlreadyCastingNoWeapons"/>
+        <EffectArray value="Spin@Delay"/>
+        <TargetLocationType value="UnitOrPoint"/>
+    </CEffectSet>
+    <CEffectEnumArea id="Spin@MoveSearch">
+        <EditorCategories value=""/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Worker,Missile,Item,Dead,Invulnerable"/>
+        <TargetSorts>
+            <SortArray value="TSDistance"/>
+        </TargetSorts>
+        <AreaArray Radius="20" Effect="Spin@MoveToTarget"/>
+    </CEffectEnumArea>
+    <CEffectIssueOrder id="Spin@MoveToTarget">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Abil value="move"/>
+        <Player Value="Caster"/>
+        <Target Value="TargetUnit"/>
+    </CEffectIssueOrder>
+    <CEffectSet id="Spin@PeriodicSet">
+        <EditorCategories value=""/>
+        <EffectArray value="Spin@MoveSearch"/>
+        <EffectArray value="Spin@PullSearch"/>
+        <EffectArray value="Spin@DmgSeach"/>
+    </CEffectSet>
+    <CEffectCreatePersistent id="Spin@PullOffset">
+        <EditorCategories value=""/>
+        <OffsetVectorStartLocation Value="CasterUnit"/>
+        <InitialEffect value="Spin@PullTP"/>
+        <InitialOffset value="0,0.2,0"/>
+    </CEffectCreatePersistent>
+    <CEffectEnumArea id="Spin@PullSearch">
+        <EditorCategories value=""/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Item,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="3" Effect="Spin@PullOffset"/>
+    </CEffectEnumArea>
+    <CEffectTeleport id="Spin@PullTP">
+        <EditorCategories value=""/>
+        <WhichUnit Effect="Spin@PullOffset"/>
+        <ClearQueuedOrders value="0"/>
+        <MinDistance value="0"/>
+        <PlacementRange value="10"/>
+        <SourceLocation Effect="Spin@PullOffset" Value="TargetUnit"/>
+        <TargetLocation Value="TargetPoint"/>
+        <TeleportFlags index="TestCliff" value="1"/>
+        <TeleportFlags index="TestZone" value="1"/>
+    </CEffectTeleport>
+    <CEffectApplyBehavior id="Spin@SpinningBehavior">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Behavior value="Spin@Spinning"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="Spin@AlreadyCastingNoWeapons" parent="AlreadyCastingNoWeapons">
+        <Duration value="0.8928"/>
+    </CEffectApplyBehavior>
+    <CEffectDamage id="MechaArtanisWeaponDmg" parent="DU_WEAP">
+        <EditorCategories value=""/>
+        <Amount value="3000"/>
+        <AttributeFactor index="Armored" value="0.35"/>
+    </CEffectDamage>
+    <CAbilEffectInstant id="CircuitOverload">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="CircuitOverload@InitialSet"/>
+        <AINotifyEffect value="CircuitOverload@CircuitsOverloaded"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="CircuitOverload"/>
+    </CAbilEffectInstant>
+    <CAbilEffectInstant id="SpearOfStetmann">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="SpearOfStetmann@InitialSet"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="SpearOfStetmann"/>
+    </CAbilEffectInstant>
+    <CAbilEffectInstant id="AidFromAiur">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="AidFromAiur@InitialSet"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="AidFromAiur"/>
+    </CAbilEffectInstant>
+    <CAbilEffectTarget id="Rush">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="Rush"/>
+        <Effect index="0" value="Rush@InitialSet"/>
+        <Range value="6"/>
+    </CAbilEffectTarget>
+    <CAbilEffectInstant id="Spin">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="Spin@InitialSet"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="Spin"/>
+    </CAbilEffectInstant>
+    <CButton id="CircuitOverload">
+        <Icon value="Assets\Textures\btn-ability-alarak-massteleport.dds"/>
+    </CButton>
+    <CButton id="SpearOfStetmann">
+        <Icon value="Assets\Textures\btn-ability-hornerhan-hellion-slowbomb.dds"/>
+    </CButton>
+    <CButton id="AidFromAiur">
+        <Icon value="Assets\Textures\btn-ability-hornerhan-hellion-slowbomb.dds"/>
+    </CButton>
+    <CButton id="Rush">
+        <Icon value="Assets\Textures\btn-ability-hornerhan-hellion-slowbomb.dds"/>
+    </CButton>
+    <CButton id="Spin" parent="EnemyBossAbilityButton"/>
+    <CActorModelMaterial id="CircuitOverload@CircuitsOverloaded" parent="BehaviorGlaze" buff="CircuitOverload@CircuitsOverloaded">
+        <EditorCategories value=""/>
+    </CActorModelMaterial>
+    <CActorModel id="SpearOfStetmann@AreaDmg" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On Terms="Effect.SpearOfStetmann@Search.Start" Send="Create"/>
+        <Scale value="2.000000"/>
+        <HostSiteOps Ops="SOpLowerBy066"/>
+    </CActorModel>
+    <CActorSplat id="SpearOfStetmann@AreaIndicator" parent="GenericImpactSplat">
+        <On Terms="Effect.SpearOfStetmann@AreaController.Start" Send="Create"/>
+        <On Terms="Effect.SpearOfStetmann@AreaController.Stop" Send="Destroy"/>
+        <Scale value="2.000000"/>
+    </CActorSplat>
+    <CActorModel id="AidFromAiur@Casting" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On Terms="Abil.AidFromAiur.SourceChannelStart" Send="Create"/>
+        <On Terms="ActorCreation" Send="TimerSet 3.000000 KillDelay"/>
+        <On Terms="TimerExpired; TimerName KillDelay" Send="AnimBracketStop BSD"/>
+        <Host Subject="_Unit"/>
+        <Scale value="1.200000"/>
+        <ModelFlags index="AutomateGlobalLoops" value="1"/>
+    </CActorModel>
+    <CActorModel id="AidFromAiur@Spawning" parent="ModelAddition">
+        <EditorCategories value=""/>
+        <On Terms="Behavior.AidFromAiur@Spawning.On" Send="Create"/>
+        <On Terms="Behavior.AidFromAiur@Spawning.Off" Send="TimerSet 1.000000 DelayedKill"/>
+        <On Terms="Behavior.AidFromAiur@Spawning.Off" Send="SetOpacity 0.000000 1.000000"/>
+        <On Terms="ActorCreation" Target="_Unit" Send="SetOpacity"/>
+        <On Terms="ActorCreation" Target="_Unit" Send="SetOpacity 1.000000 3.000000"/>
+        <On Terms="TimerExpired; TimerName DelayedKill" Send="Destroy"/>
+        <ModelFlags index="AutomateGlobalLoops" value="1"/>
+    </CActorModel>
+    <CActorUnit id="AidFromAiur@Zealot" parent="GenericUnitStandard" unitName="AidFromAiur@Zealot">
+        <Aliases value="_UnitSmall"/>
+        <Scale value="0.900000"/>
+        <ModelFlags index="OutlineEmitter" value="1"/>
+        <BuildModel value="ZealotWarpIn"/>
+        <DeathArray index="Normal" ModelLink="ZealotPurifierDeath" SoundLink="Zealot_DeathFX" VoiceLink="ZealotDeathVoice"/>
+        <PlacementModel value="ZealotPlacement"/>
+        <PlacementSound value="Protoss_BuildingPlacementSmall"/>
+        <PortraitModel value="ZealotPurifierPortrait"/>
+        <WalkAnimMoveSpeed value="3"/>
+        <BarOffset value="45"/>
+        <BarWidth value="42"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-Protoss-Zealot.dds"/>
+        </GroupIcon>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-protoss-groundarmorlevel0.dds"/>
+        <UnitIcon value="Assets\Textures\btn-unit-protoss-zealot.dds"/>
+        <Wireframe>
+            <Image value="Assets\Textures\wireframe-collection-purifier-zealot.dds"/>
+        </Wireframe>
+        <WireframeShield>
+            <Image value="Assets\Textures\wireframe-collection-purifier-zealot-shield01.dds"/>
+            <Image value="Assets\Textures\wireframe-collection-purifier-zealot-shield02.dds"/>
+            <Image value="Assets\Textures\wireframe-collection-purifier-zealot-shield03.dds"/>
+        </WireframeShield>
+    </CActorUnit>
+    <CActorAction id="AidFromAiur@ZealotAttack" parent="GenericAttack" effectAttack="AidFromAiur@ZealotWeaponDmg">
+        <LaunchAttachQuery Methods="AMFilterWeaponLeft"/>
+        <LaunchAssets Sound="Zealot_AttackLaunch"/>
+        <ImpactMap index="None" Sound="Zealot_AttackImpact"/>
+        <ImpactPhysics>
+            <Name value="Attack00"/>
+            <MatchKeys value="Basic"/>
+            <AttackAnimProps value="00"/>
+            <Physics value="ZealotAttackDeathForce00"/>
+        </ImpactPhysics>
+        <ImpactPhysics>
+            <Name value="Attack01"/>
+            <MatchKeys value="Basic"/>
+            <AttackAnimProps value="01"/>
+            <Physics value="ZealotAttackDeathForce01"/>
+        </ImpactPhysics>
+        <ImpactPhysics>
+            <Name value="Attack02"/>
+            <MatchKeys value="Basic"/>
+            <AttackAnimProps value="02"/>
+            <Physics value="ZealotAttackDeathForce02"/>
+        </ImpactPhysics>
+        <AcquisitionYawHalfArc value="25.000000"/>
+        <AcquisitionPitchHalfArc value="25.000000"/>
+        <ShieldFlashType value="Header"/>
+    </CActorAction>
+    <CActorQuad id="Rush@Guide" parent="GuideVisualQuadDown">
+        <VisibleTo index="All" value="1"/>
+        <EditorCategories value=""/>
+        <On index="0" Terms="Abil.Guide" Send="Create"/>
+        <On Terms="Effect.Rush@WaitPersistent.Start" Send="Create"/>
+        <On Terms="Effect.Rush@WaitPersistent.Stop" Send="Destroy"/>
+        <Height value="17.000000"/>
+        <Width value="4.000000"/>
+    </CActorQuad>
+    <CActorModel id="Rush@Impact" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On Terms="Effect.Rush@ImpactSet.Start" Send="Create"/>
+    </CActorModel>
+    <CActorMissile id="Rush@Missile" parent="GenericAttackMissile" unitName="Rush@Missile">
+        <EditorCategories value=""/>
+    </CActorMissile>
+    <CActorAction id="Rush@MissileAction" parent="GenericAttack" effectImpact="Rush@BladeMissileImpact" effectLaunch="Rush@BladeMissileLM">
+        <EditorCategories value=""/>
+        <Missile value="Rush@Missile"/>
+        <ImpactPointSiteOps Ops="SOpTargetPointStationary SOpMoveUpBy1 SOpMoveUpBy1"/>
+    </CActorAction>
+    <CActorModel id="Spin@Spinning" parent="ModelAddition">
+        <EditorCategories value=""/>
+        <On Terms="Behavior.Spin@Spinning.On" Send="Create"/>
+        <On Terms="Behavior.Spin@Spinning.Off" Send="Destroy"/>
+        <HostSiteOps Ops="SOpAttachTarget" HoldRotation="1"/>
+    </CActorModel>
+    <CActorAction id="MechaArtanisWeaponAction" parent="GenericAttack" effectAttack="MechaArtanisWeaponDmg">
+        <EditorCategories value=""/>
+        <LaunchAttachQuery Methods="AMFilterWeaponLeft"/>
+        <LaunchAssets Model="ArtanisMeleeVoid_AttackImpactLaunch" Sound="ArtanisMeleeVoid_AttackLaunch"/>
+        <ImpactMap index="None" Model="ArtanisMeleeVoid_AttackImpactImpact" Sound="ArtanisMeleeVoid_AttackImpact" ModelReaction="ArtanisMeleeVoid_AttackImpactImpactReaction"/>
+        <ImpactMap index="Shield" Sound="ArtanisMeleeVoid_AttackImpactImpactShield" ModelReaction="ArtanisMeleeVoid_AttackImpactImpactReactionShield"/>
+    </CActorAction>
+    <CActorUnit id="MechaArtanis" parent="GenericUnitStandard" unitName="MechaArtanis">
+        <Aliases value="_MissileHybrids"/>
+        <Model value="Purifier_Artanis"/>
+        <BuildModel value="ProtossGenericWarpInOut"/>
+        <DeathArray index="Normal" ModelLink="ArtanisVoidUlnarDeath" SoundLink="Artanis_DeathFX"/>
+        <PlacementModel value="ArtanisVoid"/>
+        <PortraitModel value="ArtanisEx2Portrait"/>
+        <WalkAnimMoveSpeed value="5"/>
+        <BarOffset value="70"/>
+        <BarWidth value="42"/>
+        <CustomUnitStatusFrame value="SSF_UnitStatus/BossStatus"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-Protoss-Artanis.dds"/>
+        </GroupIcon>
+        <HeroIcon value="Assets\Textures\btn-unit-protoss-artanishero.dds"/>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-protoss-groundarmorlevel0.dds"/>
+        <UnitFlags index="SuppressDefaultStatusBar" value="1"/>
+        <UnitIcon value="Assets\Textures\btn-unit-protoss-artanishero.dds"/>
+        <Wireframe>
+            <Image value="Assets\wireframes\purifier_artanis\wireframe-unit-hero-artanispurifier.dds"/>
+        </Wireframe>
+        <On Terms="Behavior.Spin@Spinning.On" Send="AnimBracketStart Abil1 {} Spell,C {} ContentForceLooping"/>
+        <On Terms="Behavior.Spin@Spinning.Off" Send="AnimBracketStop Abil1"/>
+        <On Terms="Effect.Rush@LM.Start" Send="AnimBracketStart Abil2 Spell,A,Start Spell,A,Start Spell,A,End"/>
+        <On Terms="Effect.Rush@ImpactSet.Start" Send="AnimBracketStop Abil2"/>
+        <On Terms="Abil.Rush.SourceChannelStart" Send="AnimPlay Abil2 Spell,Omni"/>
+        <On Terms="Abil.AidFromAiur.SourceChannelStart" Send="AnimPlay Abil1 Spell,Omni 0 -1.000000 -1.000000 0.500000 AsTimeScale"/>
+        <On Terms="Abil.SpearOfStetmann.SourceChannelStart" Send="AnimPlay Abil1 Taunt"/>
+        <On Terms="Abil.CircuitOverload.SourceChannelStart" Send="AnimPlay Abil1 Spell,D"/>
+        <FogVisibility value="Dimmed"/>
+        <MinimapIcon value="Assets\Icons\btn-unit-hero-artanispurifier.dds"/>
+        <MinimapIconScale value="0.300000"/>
+        <MinimapIconBackground value="Assets\MinimapBackground.dds"/>
+        <MinimapIconBackgroundScale value="1.100000"/>
+        <MinimapIconBackgroundTintColor value="255,255,0,0"/>
+        <Macros value="BossDeactivated"/>
+    </CActorUnit>
+    <CModel id="CircuitOverload@CircuitsOverloaded">
+        <Model value="Assets\Effects\Glaze\Glaze_SuppressionTower_LockdownBlast\Glaze_SuppressionTower_LockdownBlast.m3"/>
+    </CModel>
+    <CModel id="SpearOfStetmann@AreaDmg">
+        <Model value="Assets\Effects\Protoss\Alarak_COOP_Sacrifice_CDR\Alarak_COOP_Sacrifice_CDR.m3"/>
+    </CModel>
+    <CModel id="AidFromAiur@Casting">
+        <Model value="Assets\Effects\Protoss\Solar_Forge_Beam\Solar_Forge_Beam.m3"/>
+    </CModel>
+    <CModel id="AidFromAiur@Spawning">
+        <Model value="Assets\Effects\Protoss\AI_Champion_Hologram_Zealot\AI_Champion_Hologram_Zealot.m3"/>
+    </CModel>
+    <CModel id="AidFromAiur@Zealot">
+        <Model value="Assets\Units\Protoss\Zealot_Purifier_Collection\Zealot_Purifier_Collection.m3"/>
+        <ScaleMax value="1.500000,1.500000,1.500000"/>
+        <ScaleMin value="1.500000,1.500000,1.500000"/>
+    </CModel>
+    <CModel id="Rush@Missile">
+        <Model value="Assets\Effects\Protoss\Adept_Collection_Purifier_RicochetGlaive_Missile\Adept_Collection_Purifier_RicochetGlaive_Missile.m3"/>
+        <ScaleMax value="3.000000,3.000000,3.000000"/>
+        <ScaleMin value="3.000000,3.000000,3.000000"/>
+    </CModel>
+    <CModel id="Rush@Impact">
+        <Model value="Assets\Effects\Protoss\Adept_Collection_Purifier_RicochetGlaive_Missile_Impact\Adept_Collection_Purifier_RicochetGlaive_Missile_Impact.m3"/>
+        <ScaleMax value="2.000000,2.000000,2.000000"/>
+        <ScaleMin value="2.000000,2.000000,2.000000"/>
+    </CModel>
+    <CModel id="Spin@Spinning">
+        <Model value="Assets\Effects\Protoss\Fenix_Whirlwind\Fenix_Whirlwind.m3"/>
+    </CModel>
+    <CWeaponLegacy id="AidFromAiur@ZealotWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Options index="Melee" value="1"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-groundweaponslevel0.dds"/>
+        <DisplayEffect value="AidFromAiur@ZealotWeaponDmg"/>
+        <DisplayAttackCount value="2"/>
+        <DisplayName value="Weapon/Name/ZealotWeapon"/>
+        <TargetFilters value="Ground,Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="0.1"/>
+        <Period value="0.6"/>
+        <DamagePoint value="0"/>
+        <Effect value="AidFromAiur@ZealotWeaponDmg"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="MechaArtanisWeaponFake">
+        <EditorCategories value=""/>
+        <Options index="Disabled" value="1"/>
+        <Options index="Hidden" value="1"/>
+        <Options index="Melee" value="1"/>
+        <Icon value="Assets\Icons\btn-ability-protoss-shadowfury-yellow.dds"/>
+        <Range value="1"/>
+        <Period value="0.7"/>
+        <TargetFilters value="Visible;Self,Worker,Missile,Item,Dead,Hidden,Invulnerable"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="MechaArtanisWeapon">
+        <EditorCategories value=""/>
+        <DisplayEffect value="MechaArtanisWeaponDmg"/>
+        <Effect value="MechaArtanisWeaponDmg"/>
+        <Icon value="Assets\Icons\btn-ability-protoss-shadowfury-yellow.dds"/>
+        <Period value="1.25"/>
+        <Range value="1.5"/>
+        <Options index="Melee" value="1"/>
+        <TargetFilters value="Visible;Self,Worker,Missile,Item,Dead,Hidden,Invulnerable"/>
+        <RangeSlop value="1.5"/>
+        <DamagePoint value="0.1"/>
+    </CWeaponLegacy>
+    <CMoverMissile id="Rush@Mover" parent="MissileDefault">
+        <MotionPhases index="0">
+            <Driver value="Guidance"/>
+            <Acceleration value="3200"/>
+            <MaxSpeed value="14"/>
+            <ClearanceAcceleration value="75"/>
+            <Outro value="-1"/>
+            <ThrowBandYaw value="-360,-360,-360,-360"/>
+            <ThrowBandPitch value="-360,-360,-360,-360"/>
+            <YawPitchRoll value="719.2968"/>
+        </MotionPhases>
+    </CMoverMissile>
+    <CDataCollectionAbil id="CircuitOverload">
+        <EditorCategories value=""/>
+        <DataRecord Entry="Abil,CircuitOverload"/>
+        <DataRecord Entry="Actor,CircuitOverload@CircuitsOverloaded"/>
+        <DataRecord Entry="Behavior,CircuitOverload@CircuitsOverloaded"/>
+        <DataRecord Entry="Button,CircuitOverload"/>
+        <DataRecord Entry="Effect,CircuitOverload@InitialSet"/>
+        <DataRecord Entry="Effect,CircuitOverload@AlreadyCastingNoWeapons"/>
+        <DataRecord Entry="Effect,CircuitOverload@CircuitsOverloaded"/>
+        <DataRecord Entry="Effect,CircuitOverload@SelfDmg"/>
+        <DataRecord Entry="Model,CircuitOverload@CircuitsOverloaded"/>
+    </CDataCollectionAbil>
+    <CDataCollectionAbil id="SpearOfStetmann">
+        <EditorCategories value=""/>
+        <DataRecord Entry="Abil,SpearOfStetmann"/>
+        <DataRecord Entry="Actor,SpearOfStetmann@AreaDmg"/>
+        <DataRecord Entry="Actor,SpearOfStetmann@AreaIndicator"/>
+        <DataRecord Entry="Button,SpearOfStetmann"/>
+        <DataRecord Entry="Effect,SpearOfStetmann@AreaController"/>
+        <DataRecord Entry="Effect,SpearOfStetmann@Search"/>
+        <DataRecord Entry="Effect,SpearOfStetmann@AreaSelectController"/>
+        <DataRecord Entry="Effect,SpearOfStetmann@Dmg"/>
+        <DataRecord Entry="Effect,SpearOfStetmann@InitialSet"/>
+        <DataRecord Entry="Effect,SpearOfStetmann@AlreadyCastingNoWeapons"/>
+        <DataRecord Entry="Model,SpearOfStetmann@AreaDmg"/>
+    </CDataCollectionAbil>
+    <CDataCollectionAbil id="AidFromAiur">
+        <EditorCategories value=""/>
+        <DataRecord Entry="Abil,AidFromAiur"/>
+        <DataRecord Entry="Actor,AidFromAiur@Stalker"/>
+        <DataRecord Entry="Actor,AidFromAiur@Adept"/>
+        <DataRecord Entry="Actor,AidFromAiur@AdeptAttack"/>
+        <DataRecord Entry="Actor,AidFromAiur@StalkerAttack"/>
+        <DataRecord Entry="Actor,AidFromAiur@Zealot"/>
+        <DataRecord Entry="Actor,AidFromAiur@ZealotAttack"/>
+        <DataRecord Entry="Actor,AidFromAiur@Spawning"/>
+        <DataRecord Entry="Actor,AidFromAiur@Casting"/>
+        <DataRecord Entry="Behavior,AidFromAiur@Spawning"/>
+        <DataRecord Entry="Behavior,AidFromAiur@TimedLife"/>
+        <DataRecord Entry="Button,AidFromAiur"/>
+        <DataRecord Entry="Effect,AidFromAiur@AdeptWeaponDmg"/>
+        <DataRecord Entry="Effect,AidFromAiur@AdeptWeaponLM"/>
+        <DataRecord Entry="Effect,AidFromAiur@StalkerWeaponDmg"/>
+        <DataRecord Entry="Effect,AidFromAiur@StalkerWeaponLM"/>
+        <DataRecord Entry="Effect,AidFromAiur@ZealotWeaponDmg"/>
+        <DataRecord Entry="Effect,AidFromAiur@InitialSet"/>
+        <DataRecord Entry="Effect,AidFromAiur@AlreadyCastingNoWeapons"/>
+        <DataRecord Entry="Effect,AidFromAiur@Stalker"/>
+        <DataRecord Entry="Effect,AidFromAiur@Zealot"/>
+        <DataRecord Entry="Effect,AidFromAiur@Adept"/>
+        <DataRecord Entry="Effect,AidFromAiur@CreateController"/>
+        <DataRecord Entry="Effect,AidFromAiur@Spawning"/>
+        <DataRecord Entry="Effect,AidFromAiur@TimedLife"/>
+        <DataRecord Entry="Model,AidFromAiur@Stalker"/>
+        <DataRecord Entry="Model,AidFromAiur@Adept"/>
+        <DataRecord Entry="Model,AidFromAiur@Zealot"/>
+        <DataRecord Entry="Model,AidFromAiur@Spawning"/>
+        <DataRecord Entry="Model,AidFromAiur@Casting"/>
+        <DataRecord Entry="Unit,AidFromAiur@Stalker"/>
+        <DataRecord Entry="Unit,AidFromAiur@Adept"/>
+        <DataRecord Entry="Unit,AidFromAiur@Zealot"/>
+        <DataRecord Entry="Weapon,AidFromAiur@AdeptWeapon"/>
+        <DataRecord Entry="Weapon,AidFromAiur@StalkerWeapon"/>
+        <DataRecord Entry="Weapon,AidFromAiur@ZealotWeapon"/>
+    </CDataCollectionAbil>
+    <CDataCollectionAbil id="Rush">
+        <EditorCategories value=""/>
+        <DataRecord Entry="Abil,Rush"/>
+        <DataRecord Entry="Actor,Rush@Guide"/>
+        <DataRecord Entry="Actor,Rush@Impact"/>
+        <DataRecord Entry="Actor,Rush@Missile"/>
+        <DataRecord Entry="Actor,Rush@MissileAction"/>
+        <DataRecord Entry="Button,Rush"/>
+        <DataRecord Entry="Effect,Rush@BladeMissileImpact"/>
+        <DataRecord Entry="Effect,Rush@BladeMissileImpactOffset"/>
+        <DataRecord Entry="Effect,Rush@LMOffset"/>
+        <DataRecord Entry="Effect,Rush@BladeMissileLM"/>
+        <DataRecord Entry="Effect,Rush@LineSearch"/>
+        <DataRecord Entry="Effect,Rush@LM"/>
+        <DataRecord Entry="Effect,Rush@LineDmg"/>
+        <DataRecord Entry="Effect,Rush@ImpactSet"/>
+        <DataRecord Entry="Effect,Rush@InitialSet"/>
+        <DataRecord Entry="Effect,Rush@AlreadyCastingNoWeapons"/>
+        <DataRecord Entry="Effect,Rush@WaitPersistent"/>
+        <DataRecord Entry="Model,Rush@Impact"/>
+        <DataRecord Entry="Model,Rush@Missile"/>
+        <DataRecord Entry="Mover,Rush@Mover"/>
+        <DataRecord Entry="Unit,Rush@Missile"/>
+    </CDataCollectionAbil>
+    <CDataCollectionAbil id="Spin">
+        <EditorCategories value=""/>
+        <DataRecord Entry="Abil,Spin"/>
+        <DataRecord Entry="Behavior,Spin@Spinning"/>
+        <DataRecord Entry="Button,Spin"/>
+        <DataRecord Entry="Effect,Spin@InitialSet"/>
+        <DataRecord Entry="Effect,Spin@AlreadyCasting"/>
+        <DataRecord Entry="Effect,Spin@AlreadyCastingNoWeapons"/>
+        <DataRecord Entry="Effect,Spin@Delay"/>
+        <DataRecord Entry="Effect,Spin@SpinningBehavior"/>
+        <DataRecord Entry="Effect,Spin@DmgSeach"/>
+        <DataRecord Entry="Effect,Spin@Dmg"/>
+        <DataRecord Entry="Effect,Spin@PullTP"/>
+        <DataRecord Entry="Effect,Spin@PullSearch"/>
+        <DataRecord Entry="Effect,Spin@PeriodicSet"/>
+        <DataRecord Entry="Effect,Spin@PullOffset"/>
+        <DataRecord Entry="Actor,Spin@Spinning"/>
+        <DataRecord Entry="Effect,Spin@MoveSearch"/>
+        <DataRecord Entry="Effect,Spin@MoveToTarget"/>
+        <DataRecord Entry="Model,Spin@Spinning"/>
+    </CDataCollectionAbil>
+    <CUnit id="AidFromAiur@Zealot" parent="GenericEnemyUnit">
+        <Name value="Unit/Name/Zealot"/>
+        <Race value="Prot"/>
+        <Mob value="Multiplayer"/>
+        <FlagArray index="PreventDestroy" value="1"/>
+        <Attributes index="Light" value="1"/>
+        <Attributes index="Biological" value="1"/>
+        <Attributes index="Summoned" value="1"/>
+        <LifeStart value="2000"/>
+        <LifeMax value="2000"/>
+        <LifeArmorName value="Unit/LifeArmorName/ProtossArmor"/>
+        <ShieldArmorName value="Unit/ShieldArmorName/ProtossPlasmaShields"/>
+        <Speed value="4.8984"/>
+        <LateralAcceleration value="46.0625"/>
+        <StationaryTurningRate value="999.8437"/>
+        <TurningRate value="999.8437"/>
+        <Sight value="9"/>
+        <WeaponArray Link="AidFromAiur@ZealotWeapon"/>
+        <Radius value="0.4375"/>
+        <SeparationRadius value="0.375"/>
+        <InnerRadius value="0.375"/>
+        <CargoSize value="2"/>
+        <MinimapRadius value="0.375"/>
+    </CUnit>
+    <CUnit id="Rush@Missile" parent="MISSILE"/>
+    <CUnit id="MechaArtanis" parent="GenericEnemyUnit">
+        <Race value="Zerg"/>
+        <Attributes index="Biological" value="1"/>
+        <Attributes index="Psionic" value="1"/>
+        <Attributes index="Heroic" value="1"/>
+        <LifeStart value="25000"/>
+        <LifeMax value="25000"/>
+        <LifeRegenRate value="14"/>
+        <LifeArmorName value="Unit/LifeArmorName/StoryHeroes"/>
+        <ShieldArmorName value="Unit/ShieldArmorName/ProtossPlasmaShields"/>
+        <Speed value="4.125"/>
+        <Sight value="15"/>
+        <BehaviorArray Link="Detector10"/>
+        <BehaviorArray Link="BossesP2Armor"/>
+        <WeaponArray Link="MechaArtanisWeapon"/>
+        <WeaponArray Link="MechaArtanisWeaponFake"/>
+        <SubgroupPriority value="60"/>
+        <MinimapRadius value="0.625"/>
+        <AbilArray Link="Spin"/>
+        <AbilArray Link="Rush"/>
+        <AbilArray Link="AidFromAiur"/>
+        <AbilArray Link="SpearOfStetmann"/>
+        <AbilArray Link="CircuitOverload"/>
+        <CardLayouts index="0">
+            <LayoutButtons Face="Spin" Type="AbilCmd" AbilCmd="Spin,Execute" Row="2" Column="0"/>
+            <LayoutButtons Face="Rush" Type="AbilCmd" AbilCmd="Rush,Execute" Row="2" Column="1"/>
+            <LayoutButtons Face="AidFromAiur" Type="AbilCmd" AbilCmd="AidFromAiur,Execute" Row="2" Column="2"/>
+            <LayoutButtons Face="SpearOfStetmann" Type="AbilCmd" AbilCmd="SpearOfStetmann,Execute" Row="2" Column="3"/>
+            <LayoutButtons Face="CircuitOverload" Type="AbilCmd" AbilCmd="CircuitOverload,Execute" Row="2" Column="4"/>
+        </CardLayouts>
+        <FogVisibility value="Dimmed"/>
+        <VisionHeight value="4"/>
+        <LifeArmorTip value="Unit/P2Bosses/ArmorTooltip"/>
+    </CUnit>
+    <CBehaviorBuff id="CircuitOverload@CircuitsOverloaded">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="120"/>
+        <Modification MoveSpeedMultiplier="1.25">
+            <AdditiveAttackSpeedFactor value="25"/>
+        </Modification>
+        <RemoveValidatorArray value="CasterLifeGT1Percent"/>
+        <Period value="1"/>
+        <PeriodicEffect value="CircuitOverload@SelfDmg"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="AidFromAiur@Spawning">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="3"/>
+        <ExpireEffect value="AidFromAiur@TimedLife"/>
+        <Modification>
+            <StateFlags index="Invulnerable" value="1"/>
+            <StateFlags index="Stun" value="1"/>
+        </Modification>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="AidFromAiur@TimedLife" parent="TimedLifeDisplayed">
+        <Duration value="90"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="Spin@Spinning">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="7.15"/>
+        <Period value="0.0625"/>
+        <PeriodicEffect value="Spin@PeriodicSet"/>
+        <Modification>
+            <StateFlags index="SuppressCollision" value="1"/>
+            <WeaponEnableArray value="MechaArtanisWeaponFake"/>
+            <WeaponDisableArray value="MechaArtanisWeapon"/>
+        </Modification>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+</Catalog>

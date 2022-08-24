@@ -1,0 +1,1764 @@
+//Enemy Zerg (P2)
+
+static int partZerg_Boss_StoryHeroes_OpenerCount;
+static bool partZerg_NydusSpawned;
+static unit partZerg_Nydus;
+static int partZerg_AreasOpened = 1;
+static int partZerg_MoopyDoorsOpened = 0;
+static int partZerg_MoopyChampionsKilled = 0;
+static const int partZerg_MoopyChampionsMax = 2;
+static trigger partZerg_Moopy_ChampionKilled_Trigger;
+static bool partZerg_Stetmann_Dead = false;
+static revealer[gv_MaxAmountPlayers+1] partZerg_CurrentBossFightRevealer;
+
+static timer partZerg_StoryHeroes_DeactivateTimer;          // timer to track when the change the next deactivated boss
+static int partZerg_StoryHeroes_PlayerCount;                // playercount when boss fight starts, does not change afterwards
+static int partZerg_StoryHeroes_ActivatedLastBoss = -1;     // this will either be the deactivated boss (for playercount 3/4) or the activated one (playercount 1/2)
+static bool partZerg_StoryHeroes_OneBossRemaining = false;  // is turned on when only one boss is remaining, allowing the boss handler to enable the ultimate abilities
+static bool partZerg_StoryHeroes_RequestImmediateChange;
+
+static trigger partZerg_Cybermind_GeneratorDeath;
+static int partZerg_Cybermind_GeneratorCount;
+static const int partZerg_Cybermind_GeneratorMaxCount = 5;
+static point[partZerg_Cybermind_GeneratorMaxCount] partZerg_Cybermind_GeneratorLocation;
+static bool partZerg_Cybermind_GeneratorDeathStun;
+
+static const int partZerg_Stetmann_ZergPensCount = 3;
+static unit[partZerg_Stetmann_ZergPensCount] partZerg_Stetmann_ZergPens;
+
+void PartZerg_AreaMix_Upgrade(fixed multiplier){
+    int tmpInt;
+    const int amountEntries = 24;
+    string[amountEntries] entry;
+    const int amountEntries2 = 14;
+    string[amountEntries2] entry2;
+
+    entry[tmpInt] = "MechaZergling";
+    tmpInt += 1;
+    entry[tmpInt] = "MechaBroodling";
+    tmpInt += 1;
+    entry[tmpInt] = "MechaLocust";
+    tmpInt += 1;
+    entry[tmpInt] = "MechaQueen";
+    tmpInt += 1;
+    entry[tmpInt] = "MechaUltralisk";
+    tmpInt += 1;
+    entry[tmpInt] = "MechaRoach";
+    tmpInt += 1;
+    entry[tmpInt] = "MechaHydralisk";
+    tmpInt += 1;
+    entry[tmpInt] = "MechaBaneling";
+    tmpInt += 1;
+    entry[tmpInt] = "MechaInfestor";
+    tmpInt += 1;
+    entry[tmpInt] = "MechaRavager";
+    tmpInt += 1;
+    entry[tmpInt] = "MechaDrone";
+    tmpInt += 1;
+    entry[tmpInt] = "MechaSpawningPool";
+    tmpInt += 1;
+    entry[tmpInt] = "MechaHatchery";
+    tmpInt += 1;
+    entry[tmpInt] = "MechaLair";
+    tmpInt += 1;
+    entry[tmpInt] = "MechaHive";
+    tmpInt += 1;
+    entry[tmpInt] = "MechaEvolutionChamber";
+    tmpInt += 1;
+    entry[tmpInt] = "MechaBanelingNest";
+    tmpInt += 1;
+    entry[tmpInt] = "MechaHydraliskDen";
+    tmpInt += 1;
+    entry[tmpInt] = "MechaRoachWarren";
+    tmpInt += 1;
+    entry[tmpInt] = "MechaUltraliskCavern";
+    tmpInt += 1;
+    entry[tmpInt] = "MechaInfestationPit";
+    tmpInt += 1;
+    entry[tmpInt] = "MechaSpineCrawler";
+    tmpInt += 1;
+    entry[tmpInt] = "MechaSporeCrawler";
+    tmpInt += 1;
+    entry[tmpInt] = "MechaLurker";
+    tmpInt += 1;
+    
+    for ( tmpInt = 0; tmpInt < amountEntries; tmpInt += 1 ) {
+        CatalogFieldValueModify(c_gameCatalogUnit, entry[tmpInt], "LifeMax", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+        CatalogFieldValueModify(c_gameCatalogUnit, entry[tmpInt], "LifeStart", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+        CatalogFieldValueModify(c_gameCatalogUnit, entry[tmpInt], "ShieldsMax", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+        CatalogFieldValueModify(c_gameCatalogUnit, entry[tmpInt], "ShieldsStart", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+        CatalogFieldValueModify(c_gameCatalogUnit, entry[tmpInt], "LifeArmor", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+        CatalogFieldValueModify(c_gameCatalogUnit, entry[tmpInt], "LifeArmorLevel", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+        CatalogFieldValueModify(c_gameCatalogUnit, entry[tmpInt], "ShieldArmor", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+        CatalogFieldValueModify(c_gameCatalogUnit, entry[tmpInt], "ShieldArmorLevel", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    }
+
+    tmpInt = 0;
+
+    entry2[tmpInt] = "MechaZergling";
+    tmpInt += 1;
+    entry2[tmpInt] = "MechaBroodling";
+    tmpInt += 1;
+    entry2[tmpInt] = "MechaLocust";
+    tmpInt += 1;
+    entry2[tmpInt] = "MechaQueen";
+    tmpInt += 1;
+    entry2[tmpInt] = "MechaUltralisk";
+    tmpInt += 1;
+    entry2[tmpInt] = "MechaRoach";
+    tmpInt += 1;
+    entry2[tmpInt] = "MechaHydralisk";
+    tmpInt += 1;
+    entry2[tmpInt] = "MechaBaneling";
+    tmpInt += 1;
+    entry2[tmpInt] = "MechaInfestor";
+    tmpInt += 1;
+    entry2[tmpInt] = "MechaRavager";
+    tmpInt += 1;
+    entry2[tmpInt] = "MechaDrone";
+    tmpInt += 1;
+    entry2[tmpInt] = "MechaSpineCrawler";
+    tmpInt += 1;
+    entry2[tmpInt] = "MechaSporeCrawler";
+    tmpInt += 1;
+    entry2[tmpInt] = "MechaLurker";
+    tmpInt += 1;
+
+    for ( tmpInt = 0; tmpInt < amountEntries2 ; tmpInt += 1 ) {
+        CatalogFieldValueModify(c_gameCatalogEffect, (entry2[tmpInt] + "WeaponDmg"), "Amount", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+        CatalogFieldValueModify(c_gameCatalogWeapon, (entry2[tmpInt] + "Weapon"), "Level", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    }
+}
+bool PartZerg_Nydus_EnemyReturn(bool testConds, bool runActions){
+    unit trigUnit = EventUnit();
+    if(testConds){
+        if (! (UnitGetOwner(trigUnit) == gv_EnemyPlayer) ) {return false;}
+    }
+    if(!runActions) {return true;}
+
+    if(partZerg_NydusSpawned == false){
+        partZerg_NydusSpawned = true;
+        UnitCreate(1, "MechaNydusWorm", 0, gv_EnemyPlayer, PointFromName("PartZerg_Boss_StoryHeroes_Nydus"), 270);
+        partZerg_Nydus = UnitLastCreated();
+        
+        if(partZerg_AreasOpened == 4){
+            UnitSetPosition(partZerg_Nydus, PointFromName("PartZerg_Boss_Moopy_Nydus"), false);
+        }
+        else if(partZerg_AreasOpened == 3){
+            UnitSetPosition(partZerg_Nydus, PointFromName("PartZerg_Boss_Stetmann_Nydus"), false);
+        }
+        else if(partZerg_AreasOpened == 2){
+            UnitSetPosition(partZerg_Nydus, PointFromName("PartZerg_Boss_Cybermind_Nydus"), false);
+        }
+    }
+
+    UnitSetPosition(trigUnit, UnitGetPosition(partZerg_Nydus), false);
+    UnitIssueOrder(trigUnit, OrderTargetingPoint(AbilityCommand("attack", 0), gv_Part_AttackPoint), c_orderQueueReplace);
+
+    return true;
+}
+
+// Areas
+void PartZerg_AreaMix_Second_Open(){
+    int i;
+    int tmp_player;
+    unit tmpUnit;
+    int tmpInt;
+    unitgroup tmpUG;
+
+    partZerg_AreasOpened += 1;
+    gv_Enemy_TypeMultiplier_Biomass[c_EnemyType_ZMecha] *= 1.225;
+    gv_Enemy_TypeMultiplier_Exp    [c_EnemyType_ZMecha] *= 1.225;
+    PartZerg_AreaMix_Upgrade(1.1);
+
+    Player_IncreaseUpgradeCount(4.0);
+
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, StringExternal("Trig/Enemy/AreaOpen/Mecha"));
+    UnitGroupAddUnitGroup(gv_Part_ActiveSpawners, gv_Part_Areas_Spawners[c_Areas_ZMid2]);
+    
+    tmpUG = UnitGroup(null, gv_CollectiblePlayerEnemyAllied, RegionFromName("PartZerg_Mix_Second_Wall"), UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0);
+    tmpInt = UnitGroupCount(tmpUG, c_unitCountAlive);
+    for (;; tmpInt -=1){
+        tmpUnit = UnitGroupUnitFromEnd(tmpUG, tmpInt);
+        if(tmpUnit == null){ break; }
+        if(UnitGetType(tmpUnit) == "MechaSpire"){
+            UnitKill(tmpUnit);
+        } 
+    }
+
+    for (i = 1; i <= PlayerGroupCount(gv_StartingPG); i += 1) {
+        tmp_player = PlayerGroupPlayer(gv_StartingPG, i);
+        VisRevealerDestroy(partZerg_CurrentBossFightRevealer[tmp_player]);
+    }
+    if(partZerg_NydusSpawned == true){
+        UnitKill(partZerg_Nydus);
+        partZerg_NydusSpawned = false;
+    }
+
+}
+void PartZerg_AreaMix_Third_Open(){
+    int i;
+    int tmp_player;
+    unit tmpUnit;
+    int tmpInt;
+    unitgroup tmpUG;
+
+    partZerg_AreasOpened += 1;
+    gv_Enemy_TypeMultiplier_Biomass[c_EnemyType_ZMecha] *= 1.225;
+    gv_Enemy_TypeMultiplier_Exp    [c_EnemyType_ZMecha] *= 1.225;
+    PartZerg_AreaMix_Upgrade(1.1);
+
+    Player_IncreaseUpgradeCount(6.0);
+
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, StringExternal("Trig/Enemy/AreaOpen/Mecha"));
+    UnitGroupAddUnitGroup(gv_Part_ActiveSpawners, gv_Part_Areas_Spawners[c_Areas_ZMid3]);
+    
+    tmpUG = UnitGroup(null, gv_CollectiblePlayerEnemyAllied, RegionFromName("PartZerg_Mix_Third_Wall"), UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0);
+    tmpInt = UnitGroupCount(tmpUG, c_unitCountAlive);
+    for (;; tmpInt -=1){
+        tmpUnit = UnitGroupUnitFromEnd(tmpUG, tmpInt);
+        if(tmpUnit == null){ break; }
+        if(UnitGetType(tmpUnit) == "MechaSpire"){
+            UnitKill(tmpUnit);
+        } 
+    }
+    for (i = 1; i <= PlayerGroupCount(gv_StartingPG); i += 1) {
+        tmp_player = PlayerGroupPlayer(gv_StartingPG, i);
+        VisRevealerDestroy(partZerg_CurrentBossFightRevealer[tmp_player]);
+    }
+    if(partZerg_NydusSpawned == true){
+        UnitKill(partZerg_Nydus);
+        partZerg_NydusSpawned = false;
+    }
+}
+void PartZerg_AreaMix_Fourth_Open(){
+    int i;
+    int tmp_player;
+    unit tmpUnit;
+    int tmpInt;
+    unitgroup tmpUG;
+
+    partZerg_AreasOpened += 1;
+
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, StringExternal("Trig/Enemy/AreaOpen/Moopy"));
+
+    tmpUG = UnitGroup(null, gv_CollectiblePlayerEnemyAllied, RegionFromName("PartZerg_Mix_Fourth_Wall"), UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0);
+    tmpInt = UnitGroupCount(tmpUG, c_unitCountAlive);
+    for (;; tmpInt -=1){
+        tmpUnit = UnitGroupUnitFromEnd(tmpUG, tmpInt);
+        if(tmpUnit == null){ break; }
+        if(UnitGetType(tmpUnit) == "MechaGreaterSpire"){
+            UnitKill(tmpUnit);
+        } 
+    }
+    for (i = 1; i <= PlayerGroupCount(gv_StartingPG); i += 1) {
+        tmp_player = PlayerGroupPlayer(gv_StartingPG, i);
+        VisRevealerDestroy(partZerg_CurrentBossFightRevealer[tmp_player]);
+    }
+    if(partZerg_NydusSpawned == true){
+        UnitKill(partZerg_Nydus);
+        partZerg_NydusSpawned = false;
+    }
+}
+
+void PartZerg_AreaMix_Second_Opener(){
+    partZerg_Boss_StoryHeroes_OpenerCount += 1;
+    if (partZerg_Boss_StoryHeroes_OpenerCount == 2){
+        partZerg_StoryHeroes_OneBossRemaining = true;
+    }
+    if (partZerg_Boss_StoryHeroes_OpenerCount == 3){
+        PartZerg_AreaMix_Second_Open();
+    }
+    partZerg_StoryHeroes_RequestImmediateChange = true;
+}
+void PartZerg_AreaMix_Fourth_Opener(){
+    if(partZerg_MoopyChampionsKilled == partZerg_MoopyChampionsMax
+        && partZerg_Stetmann_Dead == true
+        && PartZerg_MoopyDoor_Requirement()){
+        TriggerDestroy(partZerg_Moopy_ChampionKilled_Trigger);
+        PartZerg_AreaMix_Fourth_Open();
+    }
+}
+
+// Moopy stuff
+static const int MoopySecret_MaxCount = 6;
+static int[gv_MaxAmountParts] MoopySecret_Count;
+static int[gv_MaxAmountParts] MoopySecret_Next;
+static int[gv_MaxAmountParts] MoopySecret_EnableIndex;
+static string[MoopySecret_MaxCount] MoopySecret_UnitTypes;
+static unit  [MoopySecret_MaxCount] MoopySecret_Units;
+static int   [MoopySecret_MaxCount] MoopySecret_Ordering;
+
+bool PartZerg_MoopyAllDoorsOpen(){
+    // required for some debugging functionality
+    return partZerg_MoopyDoorsOpened == partZerg_MoopyChampionsMax;
+}
+void PartZerg_MoopyDoor_Open(){
+    region wallRegion;
+    unit tmpUnit;
+    int tmpInt;
+    unitgroup tmpUG;
+    
+    partZerg_MoopyDoorsOpened += 1;
+    wallRegion = RegionFromName("PartZerg_Moopy_Door" + IntToString(partZerg_MoopyDoorsOpened));
+    tmpUG = UnitGroup(null, gv_CollectiblePlayerEnemyAllied, wallRegion, UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0);
+    tmpInt = UnitGroupCount(tmpUG, c_unitCountAlive);
+    for (;; tmpInt -=1){
+        tmpUnit = UnitGroupUnitFromEnd(tmpUG, tmpInt);
+        if(tmpUnit == null){ break; }
+        if(UnitGetType(tmpUnit) == "MechaGreaterSpire"){
+            UnitKill(tmpUnit);
+        } 
+    }
+
+    UnitCreate(1, "MoopyChampion", 0, gv_EnemyPlayer, PointFromName("PartZerg_Moopy_Champion" + IntToString(partZerg_MoopyDoorsOpened)), 270);
+    UnitBehaviorAddPlayer(UnitLastCreated(), "MoopyHat"+ IntToString(partZerg_MoopyDoorsOpened-1) ,gv_EnemyPlayer, 1 );
+    UnitSetCustomValue(UnitLastCreated(), 0, partZerg_MoopyDoorsOpened-1);
+    if(partZerg_Moopy_ChampionKilled_Trigger == null){
+        partZerg_Moopy_ChampionKilled_Trigger = TriggerCreate("PartZerg_Moopy_ChampionKilled");
+    }
+    TriggerAddEventUnitDied(partZerg_Moopy_ChampionKilled_Trigger, UnitRefFromUnit(UnitLastCreated()));
+    
+}
+bool PartZerg_MoopyDoor_Requirement(){
+    if(objective_ScientistsFound < gv_Difficulty_ScientistsAmount
+        || (gv_Difficulty_PsiOrbSpawns && objective_PsiOrbFound == 0)){
+        return false;
+    }
+    return true;
+}
+bool PartZerg_Moopy_ChampionKilled (bool testConds, bool runActions){
+    partZerg_MoopyChampionsKilled += 1;
+    PartZerg_AreaMix_Fourth_Opener();
+
+    Collectibles_MoopyHat_DropHat(EventUnit());
+
+    return true;
+}
+void PartZerg_Moopy_SecretEnable(int part, int secretIdentifier){
+
+    if(MoopySecret_EnableIndex[part] >= MoopySecret_Count[part]){
+        Debug_ShowMessage("PartZerg_Moopy_SecretEnable: something went wrong with indexes");
+        return;
+    }
+    MoopySecret_Ordering[secretIdentifier] = MoopySecret_EnableIndex[part];
+
+    MoopySecret_EnableIndex[part] += 1;
+
+    UnitBehaviorRemove(MoopySecret_Units[secretIdentifier], "SecretInvulnerable", 1);
+}
+void PartZerg_Moopy_SecretActivated_FeedbackPositive(unit secret){
+    UnitCreateEffectUnit(secret, "SecretActivationCorrect", secret);
+}
+void PartZerg_Moopy_SecretActivated_FeedbackNegative(unit secret){
+    UnitCreateEffectUnit(secret, "SecretActivationWrong", secret);
+}
+void PartZerg_Moopy_SecretActivated_Init(){
+    int i;
+    trigger tmpTrigger;
+
+    MoopySecret_UnitTypes[c_MoopySecretIndex_SweetLimes]   = "Secret_SweetLimes";
+    MoopySecret_UnitTypes[c_MoopySecretIndex_skywalker]    = "Secret_skywalker";
+    MoopySecret_UnitTypes[c_MoopySecretIndex_BlackDevil]   = "Secret_BlackDevil";
+    MoopySecret_UnitTypes[c_MoopySecretIndex_Jan]          = "Secret_Jan";
+    MoopySecret_UnitTypes[c_MoopySecretIndex_muhdiekuh]    = "Secret_muhdiekuh";
+    MoopySecret_UnitTypes[c_MoopySecretIndex_Isatis]       = "Secret_Isatis";
+
+    // creating secrets
+    tmpTrigger = TriggerCreate("PartZerg_Moopy_SecretActivated");
+    for (i = 0; i < MoopySecret_MaxCount; i += 1) {
+        libNtve_gf_CreateUnitsWithDefaultFacing(1, MoopySecret_UnitTypes[i], 0, gv_CollectiblePlayerEnemyNeutral, PointFromName(MoopySecret_UnitTypes[i]));
+        MoopySecret_Units[i] = UnitLastCreated();
+        TriggerAddEventPlayerEffectUsed(tmpTrigger, gv_CollectiblePlayerEnemyNeutral, "SecretDmgResponseSet");
+    }
+
+    //TODO: decide if there is some randomization
+    MoopySecret_Count[c_Part_Terran] = 3;
+    MoopySecret_Count[c_Part_Protoss] = 3;
+    MoopySecret_Count[c_Part_Zerg] = 0;
+}
+// Index is based on the enabling order (which comes from boss kill order). index starts from 0 for each part!
+int PartZerg_Moopy_SecretActivated_GetIndex(unit secret){
+    int i;
+    for (i = 0; i < MoopySecret_MaxCount; i += 1) {
+        if(secret == MoopySecret_Units[i]){
+            return MoopySecret_Ordering[i];
+        }
+    }
+    return -1;
+}
+void PartZerg_Moopy_SecretActivated_ResetCurrentProgress(int part){
+    MoopySecret_Next[part] = 0;
+}
+void PartZerg_Moopy_SecretActivated_IncreaseCurrentProgress(int part){
+    MoopySecret_Next[part] += 1;
+}
+int  PartZerg_Moopy_SecretActivated_GetNextCorrect(int part){
+    return MoopySecret_Next[part];
+}
+bool PartZerg_Moopy_SecretActivated_CheckCurrentProgress(int part){
+    return MoopySecret_Count[part] == MoopySecret_Next[part];
+}
+
+bool PartZerg_Moopy_SecretActivated(bool testConds, bool runActions){
+    unit triggeringUnit = EventPlayerEffectUsedUnit(c_effectUnitCaster);
+    int secretIndex = PartZerg_Moopy_SecretActivated_GetIndex(triggeringUnit);
+    int nextCorrectSecretIndex = PartZerg_Moopy_SecretActivated_GetNextCorrect(gv_Part_ActivePart);
+    
+    if(PartZerg_Moopy_SecretActivated_CheckCurrentProgress(gv_Part_ActivePart)){
+        // secret for this part already finished
+
+        //TODO: do nothing?
+
+    }
+    else if(secretIndex == nextCorrectSecretIndex){
+        //correct secret has been activated => create visual/sound and increase counter and check if current part secret has been completed
+
+        PartZerg_Moopy_SecretActivated_IncreaseCurrentProgress(gv_Part_ActivePart);
+
+        //check if part is now completed
+        if(PartZerg_Moopy_SecretActivated_CheckCurrentProgress(gv_Part_ActivePart)){
+            PartZerg_MoopyDoor_Open();
+        }
+
+        PartZerg_Moopy_SecretActivated_FeedbackPositive(triggeringUnit);
+    }
+    else{
+        //Wrong secret activated => reset current and create visual/sound
+
+        PartZerg_Moopy_SecretActivated_ResetCurrentProgress(gv_Part_ActivePart);
+        PartZerg_Moopy_SecretActivated_FeedbackNegative(triggeringUnit);
+    }
+
+    return true;
+}
+
+// Bossfights
+void PartZerg_StoryHeroes_Init(structref<BossFightData> data){
+    data.amountBosses = 3;
+    data.boss           [c_BossFightIndex_Kerrigan] = gv_Bosses[c_Bosses_ZKerrigan];
+    data.bossState      [c_BossFightIndex_Kerrigan] = c_BossFightState_Alive;
+    data.bossIdlePoint  [c_BossFightIndex_Kerrigan] = PointWithOffsetPolar(PointFromName("PartZerg_Boss_StoryHeroes"),2,0);
+    data.boss           [c_BossFightIndex_Raynor] = gv_Bosses[c_Bosses_ZRaynor];
+    data.bossState      [c_BossFightIndex_Raynor] = c_BossFightState_Alive;
+    data.bossIdlePoint  [c_BossFightIndex_Raynor] = PointWithOffsetPolar(PointFromName("PartZerg_Boss_StoryHeroes"),2,120);
+    data.boss           [c_BossFightIndex_Artanis] = gv_Bosses[c_Bosses_ZArtanis];
+    data.bossState      [c_BossFightIndex_Artanis] = c_BossFightState_Alive;
+    data.bossIdlePoint  [c_BossFightIndex_Artanis] = PointWithOffsetPolar(PointFromName("PartZerg_Boss_StoryHeroes"),2,240);
+    data.arena = RegionFromName("PartZerg_Boss_StoryHeroes_Arena");
+
+    data.ability[0].abil = "FireInTheHole";
+    data.ability[0].targetingType = c_BossFightAbilTargetType_Point;
+    data.ability[0].castTime = 4;
+    data.ability[0].globalCooldown = 15;
+    data.ability[0].selfCooldown = 60;
+    data.ability[0].charges = -1;
+    data.ability[0].minAmountTargets = 1;
+    data.ability[0].bossIndex = c_BossFightIndex_Raynor;
+    data.ability[0].allowedBossStates = c_BossFightState_Alive | c_BossFightState_Deactivated;
+    data.ability[0].targetFilter = UnitFilter(0,0,0,(1 << (c_targetFilterInvulnerable - 32)) | (1 << (c_targetFilterSummoned - 32)));
+    data.ability[0].targetFilterController = c_BossFightAbilAllianceTarget_Player;
+    data.ability[0].requiredBossAbilityLevel = 0;
+
+    data.ability[1].abil = "OverchargedGun";
+    data.ability[1].targetingType = c_BossFightAbilTargetType_Point;
+    data.ability[1].castTime = 4;
+    data.ability[1].globalCooldown = 15;
+    data.ability[1].selfCooldown = 60;
+    data.ability[1].charges = -1;
+    data.ability[1].minAmountTargets = 1;
+    data.ability[1].bossIndex = c_BossFightIndex_Raynor;
+    data.ability[1].allowedBossStates = c_BossFightState_Alive;
+    data.ability[1].disallowedBossStates = c_BossFightState_Deactivated;
+    data.ability[1].targetFilter = UnitFilter(0,0,0,(1 << (c_targetFilterInvulnerable - 32)) | (1 << (c_targetFilterSummoned - 32)));
+    data.ability[1].targetFilterController = c_BossFightAbilAllianceTarget_Player;
+    data.ability[1].requiredBossAbilityLevel = 0;
+
+    data.ability[2].abil = "YouBetterGetMoving";
+    data.ability[2].targetingType = c_BossFightAbilTargetType_Unit;
+    data.ability[2].castTime = 4;
+    data.ability[2].globalCooldown = 15;
+    data.ability[2].selfCooldown = 60;
+    data.ability[2].charges = -1;
+    data.ability[2].minAmountTargets = 1;
+    data.ability[2].bossIndex = c_BossFightIndex_Raynor;
+    data.ability[2].allowedBossStates = c_BossFightState_Alive | c_BossFightState_Deactivated;
+    data.ability[2].disallowedBossStates = 0;
+    data.ability[2].targetFilter = UnitFilter(0,0,0,(1 << (c_targetFilterInvulnerable - 32)) | (1 << (c_targetFilterSummoned - 32)));
+    data.ability[2].targetFilterController = c_BossFightAbilAllianceTarget_Player;
+    data.ability[2].requiredBossAbilityLevel = 0;
+
+    // data.ability[3].abil = "TakeCover";
+    // data.ability[3].targetingType = c_BossFightAbilTargetType_None;
+    // data.ability[3].globalCooldown = 15;
+    // data.ability[3].selfCooldown = 60;
+    // data.ability[3].charges = -1;
+    // data.ability[3].minAmountTargets = 1;
+    // data.ability[3].bossIndex = c_BossFightIndex_Raynor;
+    // data.ability[3].allowedBossStates = c_BossFightState_Alive | c_BossFightState_Deactivated;
+    // data.ability[3].disallowedBossStates = 0;
+    // data.ability[3].targetFilter = UnitFilter(0,0,0,(1 << (c_targetFilterInvulnerable - 32)) | (1 << (c_targetFilterSummoned - 32)));
+    // data.ability[3].targetFilterController = c_BossFightAbilAllianceTarget_Player;
+    // data.ability[3].requiredBossAbilityLevel = 0;
+    
+    data.ability[3].abil = "EatThis";
+    data.ability[3].targetingType = c_BossFightAbilTargetType_None;
+    data.ability[3].castTime = 45;
+    data.ability[3].globalCooldown = 60;
+    data.ability[3].selfCooldown = 180;
+    data.ability[3].charges = 0;    // init with 0 so its not usable. set to 1 if other bosses die
+    data.ability[3].minAmountTargets = 1;
+    data.ability[3].bossIndex = c_BossFightIndex_Raynor;
+    data.ability[3].allowedBossStates = c_BossFightState_LastManStanding;
+    data.ability[3].disallowedBossStates = 0;
+    data.ability[3].targetFilter = UnitFilter(0,0,0,(1 << (c_targetFilterInvulnerable - 32)) | (1 << (c_targetFilterSummoned - 32)));
+    data.ability[3].targetFilterController = c_BossFightAbilAllianceTarget_Player;
+    data.ability[3].requiredBossAbilityLevel = 0;
+
+    data.ability[4].abil = "WingSpikes";
+    data.ability[4].targetingType = c_BossFightAbilTargetType_Point;
+    data.ability[4].castTime = 4;
+    data.ability[4].globalCooldown = 15;
+    data.ability[4].selfCooldown = 60;
+    data.ability[4].charges = -1;
+    data.ability[4].minAmountTargets = 1;
+    data.ability[4].bossIndex = c_BossFightIndex_Kerrigan;
+    data.ability[4].allowedBossStates = c_BossFightState_Alive;
+    data.ability[4].disallowedBossStates = c_BossFightState_Deactivated;
+    data.ability[4].targetFilter = UnitFilter(0,0,0,(1 << (c_targetFilterInvulnerable - 32)) | (1 << (c_targetFilterSummoned - 32)));
+    data.ability[4].targetFilterController = c_BossFightAbilAllianceTarget_Player;
+    data.ability[4].requiredBossAbilityLevel = 0;
+
+    // data.ability[5].abil = "Leap";
+    // data.ability[5].targetingType = c_BossFightAbilTargetType_Point;
+    // data.ability[5].globalCooldown = 15;
+    // data.ability[5].selfCooldown = 60;
+    // data.ability[5].charges = -1;
+    // data.ability[5].minAmountTargets = 1;
+    // data.ability[5].bossIndex = c_BossFightIndex_Kerrigan;
+    // data.ability[5].allowedBossStates = c_BossFightState_Alive;
+    // data.ability[5].disallowedBossStates = c_BossFightState_Deactivated;
+    // data.ability[5].targetFilter = UnitFilter(0,0,0,(1 << (c_targetFilterInvulnerable - 32)) | (1 << (c_targetFilterSummoned - 32)));
+    // data.ability[5].targetFilterController = c_BossFightAbilAllianceTarget_Player;
+    // data.ability[5].requiredBossAbilityLevel = 0;
+
+    data.ability[5].abil = "WatchYourStep";
+    data.ability[5].targetingType = c_BossFightAbilTargetType_None;
+    data.ability[5].castTime = 4;
+    data.ability[5].globalCooldown = 15;
+    data.ability[5].selfCooldown = 120;
+    data.ability[5].charges = -1;
+    data.ability[5].minAmountTargets = 1;
+    data.ability[5].bossIndex = c_BossFightIndex_Kerrigan;
+    data.ability[5].allowedBossStates = c_BossFightState_Alive | c_BossFightState_Deactivated;
+    data.ability[5].disallowedBossStates = 0;
+    data.ability[5].targetFilter = UnitFilter(0,0,0,(1 << (c_targetFilterInvulnerable - 32)) | (1 << (c_targetFilterSummoned - 32)));
+    data.ability[5].targetFilterController = c_BossFightAbilAllianceTarget_Player;
+    data.ability[5].requiredBossAbilityLevel = 0;
+
+    data.ability[6].abil = "Infection";
+    data.ability[6].targetingType = c_BossFightAbilTargetType_Point;
+    data.ability[6].castTime = 4;
+    data.ability[6].globalCooldown = 15;
+    data.ability[6].selfCooldown = 60;
+    data.ability[6].charges = -1;
+    data.ability[6].minAmountTargets = 1;
+    data.ability[6].bossIndex = c_BossFightIndex_Kerrigan;
+    data.ability[6].allowedBossStates = c_BossFightState_Alive| c_BossFightState_Deactivated;
+    data.ability[6].disallowedBossStates = 0;
+    data.ability[6].targetFilter = UnitFilter(0,0,0,(1 << (c_targetFilterInvulnerable - 32)) | (1 << (c_targetFilterSummoned - 32)));
+    data.ability[6].targetFilterController = c_BossFightAbilAllianceTarget_Player;
+    data.ability[6].requiredBossAbilityLevel = 0;
+
+    data.ability[7].abil = "RoyalConstruction";
+    data.ability[7].targetingType = c_BossFightAbilTargetType_None;
+    data.ability[7].castTime = 4;
+    data.ability[7].globalCooldown = 15;
+    data.ability[7].selfCooldown = 60;
+    data.ability[7].charges = 0;
+    data.ability[7].minAmountTargets = 1;
+    data.ability[7].bossIndex = c_BossFightIndex_Kerrigan;
+    data.ability[7].allowedBossStates = c_BossFightState_LastManStanding;
+    data.ability[7].disallowedBossStates = c_BossFightState_Deactivated;
+    data.ability[7].targetFilter = UnitFilter(0,0,0,(1 << (c_targetFilterInvulnerable - 32)) | (1 << (c_targetFilterSummoned - 32)));
+    data.ability[7].targetFilterController = c_BossFightAbilAllianceTarget_Player;
+    data.ability[7].requiredBossAbilityLevel = 0;
+
+    data.ability[8].abil = "Rush";
+    data.ability[8].targetingType = c_BossFightAbilTargetType_Point;
+    data.ability[8].castTime = 6;
+    data.ability[8].globalCooldown = 15;
+    data.ability[8].selfCooldown = 60;
+    data.ability[8].charges = -1;
+    data.ability[8].minAmountTargets = 1;
+    data.ability[8].bossIndex = c_BossFightIndex_Artanis;
+    data.ability[8].allowedBossStates = c_BossFightState_Alive;
+    data.ability[8].disallowedBossStates = c_BossFightState_Deactivated;
+    data.ability[8].targetFilter = UnitFilter(0,0,0,(1 << (c_targetFilterInvulnerable - 32)) | (1 << (c_targetFilterSummoned - 32)));
+    data.ability[8].targetFilterController = c_BossFightAbilAllianceTarget_Player;
+    data.ability[8].requiredBossAbilityLevel = 0;
+
+    // data.ability[11].abil = "Spin";
+    // data.ability[11].targetingType = c_BossFightAbilTargetType_None;
+    // data.ability[11].globalCooldown = 15;
+    // data.ability[11].selfCooldown = 60;
+    // data.ability[11].charges = -1;
+    // data.ability[11].minAmountTargets = 1;
+    // data.ability[11].bossIndex = c_BossFightIndex_Artanis;
+    // data.ability[11].allowedBossStates = c_BossFightState_Alive;
+    // data.ability[11].disallowedBossStates = c_BossFightState_Deactivated;
+    // data.ability[11].targetFilter = UnitFilter(0,0,0,(1 << (c_targetFilterInvulnerable - 32)) | (1 << (c_targetFilterSummoned - 32)));
+    // data.ability[11].targetFilterController = c_BossFightAbilAllianceTarget_Player;
+    // data.ability[11].requiredBossAbilityLevel = 0;
+
+    data.ability[9].abil = "AidFromAiur";
+    data.ability[9].targetingType = c_BossFightAbilTargetType_None;
+    data.ability[9].castTime = 4;
+    data.ability[9].globalCooldown = 15;
+    data.ability[9].selfCooldown = 60;
+    data.ability[9].charges = -1;
+    data.ability[9].minAmountTargets = 1;
+    data.ability[9].bossIndex = c_BossFightIndex_Artanis;
+    data.ability[9].allowedBossStates = c_BossFightState_Alive | c_BossFightState_Deactivated;
+    data.ability[9].disallowedBossStates = 0;
+    data.ability[9].targetFilter = UnitFilter(0,0,0,(1 << (c_targetFilterInvulnerable - 32)) | (1 << (c_targetFilterSummoned - 32)));
+    data.ability[9].targetFilterController = c_BossFightAbilAllianceTarget_Player;
+    data.ability[9].requiredBossAbilityLevel = 0;
+
+    data.ability[10].abil = "SpearOfStetmann";
+    data.ability[10].targetingType = c_BossFightAbilTargetType_None;
+    data.ability[10].castTime = 4;
+    data.ability[10].globalCooldown = 15;
+    data.ability[10].selfCooldown = 60;
+    data.ability[10].charges = -1;
+    data.ability[10].minAmountTargets = 1;
+    data.ability[10].bossIndex = c_BossFightIndex_Artanis;
+    data.ability[10].allowedBossStates = c_BossFightState_Alive | c_BossFightState_Deactivated;
+    data.ability[10].disallowedBossStates = 0;
+    data.ability[10].targetFilter = UnitFilter(0,0,0,(1 << (c_targetFilterInvulnerable - 32)) | (1 << (c_targetFilterSummoned - 32)));
+    data.ability[10].targetFilterController = c_BossFightAbilAllianceTarget_Player;
+    data.ability[10].requiredBossAbilityLevel = 0;
+
+    data.ability[11].abil = "CircuitOverload";
+    data.ability[11].targetingType = c_BossFightAbilTargetType_None;
+    data.ability[11].castTime = 1.5;
+    data.ability[11].globalCooldown = 15;
+    data.ability[11].selfCooldown = 60;
+    data.ability[11].charges = 0;
+    data.ability[11].minAmountTargets = 1;
+    data.ability[11].bossIndex = c_BossFightIndex_Artanis;
+    data.ability[11].allowedBossStates = c_BossFightState_LastManStanding;
+    data.ability[11].disallowedBossStates = c_BossFightState_Deactivated;
+    data.ability[11].targetFilter = UnitFilter(0,0,0,(1 << (c_targetFilterInvulnerable - 32)) | (1 << (c_targetFilterSummoned - 32)));
+    data.ability[11].targetFilterController = c_BossFightAbilAllianceTarget_Player;
+    data.ability[11].requiredBossAbilityLevel = 0;
+
+    data.amountAbility = 12;
+}
+void PartZerg_StoryHeroes_Addition(structref<BossFightData> data){
+    //this function is called by the boss fight handler trigger. all data stored must be in the structref data or in globals. (best use static)
+    fixed cycleTime = 15;
+    int i;
+
+    if(partZerg_StoryHeroes_PlayerCount == 0){
+        //first time this function is called
+        partZerg_StoryHeroes_PlayerCount = gv_PlayerAmount;
+        partZerg_StoryHeroes_DeactivateTimer = TimerCreate();
+        TimerStart(partZerg_StoryHeroes_DeactivateTimer, 0, false, c_timeGame);
+
+    }
+
+    if(partZerg_StoryHeroes_OneBossRemaining){
+        // enables the ultimate abilities
+        partZerg_StoryHeroes_OneBossRemaining = false;
+
+        data.ability[3].charges = 1;    //raynor
+        data.ability[7].charges = 1;    //kerri
+        data.ability[11].charges = 1;   //artanis
+    }
+
+    if(partZerg_StoryHeroes_PlayerCount > 4){
+        //for 5 or 6 players, there will not be any deactivation. so no need to do anything here
+        return;
+    }
+    if(TimerGetRemaining(partZerg_StoryHeroes_DeactivateTimer) <= 0
+        || partZerg_StoryHeroes_RequestImmediateChange){
+        //request a new activation
+        
+        //does nothing if any boss is casting
+        for (i = 0; i < 3; i += 1) {
+            if((data.bossState[i] & c_BossFightState_Casting) > 0 && (data.bossState[i] & c_BossFightState_Alive) > 0){
+                return;
+            }
+        }
+
+
+        if(partZerg_StoryHeroes_PlayerCount < 3){
+            // only 1 boss active
+
+            if(data.remainingBosses == 3){
+                partZerg_StoryHeroes_ActivatedLastBoss = Utility_RandomIntNotLast(0, 2, partZerg_StoryHeroes_ActivatedLastBoss);
+                for (i = 0; i < 3; i += 1) {
+                    if(i != partZerg_StoryHeroes_ActivatedLastBoss){
+                        UnitBehaviorAdd(data.boss[i], "BossDeactivated", data.boss[i], 1);
+                        data.bossState[i] |= c_BossFightState_Deactivated;
+                    }
+                    else{
+                        UnitBehaviorRemove(data.boss[i], "BossDeactivated", 1);
+                        data.bossState[i] &= ~c_BossFightState_Deactivated;
+                    }
+                }
+                TimerStart(partZerg_StoryHeroes_DeactivateTimer, cycleTime, false, c_timeGame);
+            }
+            else if (data.remainingBosses == 2){
+                //get other boss
+                //if last boss died, then start with a random one
+                if(partZerg_StoryHeroes_RequestImmediateChange == true){
+                    partZerg_StoryHeroes_ActivatedLastBoss = RandomInt(0,1);
+                    //this works because either both 0 and 1 are alive => normal random between them,
+                    //or only one of them is alive, but then the below code will then pick the first one it can find that is not the random picked one
+                }
+
+                for (i = 0; i < 3; i += 1) {
+                    if((data.bossState[i] & c_BossFightState_Alive) > 0
+                        && i != partZerg_StoryHeroes_ActivatedLastBoss){
+
+                        UnitBehaviorAdd(data.boss[partZerg_StoryHeroes_ActivatedLastBoss], "BossDeactivated", data.boss[i], 1);
+                        data.bossState[partZerg_StoryHeroes_ActivatedLastBoss] |= c_BossFightState_Deactivated;
+
+                        UnitBehaviorRemove(data.boss[i], "BossDeactivated", 1);
+                        data.bossState[i] &= ~c_BossFightState_Deactivated;
+                        partZerg_StoryHeroes_ActivatedLastBoss = i;
+                        break;
+                    }
+                }
+                TimerStart(partZerg_StoryHeroes_DeactivateTimer, cycleTime, false, c_timeGame);
+            }
+            else{
+
+                //only one boss remaining, remove deactivated buff from the remaining alive boss and stop timer
+                for (i = 0; i < 3; i += 1) {
+                    if((data.bossState[i] & c_BossFightState_Alive) > 0){
+                        UnitBehaviorRemove(data.boss[i], "BossDeactivated", 1);
+                        data.bossState[i] &= ~c_BossFightState_Deactivated;
+                        data.bossState[i] |= c_BossFightState_LastManStanding;
+                    }
+                }
+                TimerStart(partZerg_StoryHeroes_DeactivateTimer, cycleTime, false, c_timeGame);
+                TimerPause(partZerg_StoryHeroes_DeactivateTimer, false);
+                return;
+            }
+
+
+        }
+        else {
+            // 2 bosses active
+            if(data.remainingBosses == 3){
+                partZerg_StoryHeroes_ActivatedLastBoss = Utility_RandomIntNotLast(0, 2, partZerg_StoryHeroes_ActivatedLastBoss);
+                for (i = 0; i < 3; i += 1) {
+                    if(i == partZerg_StoryHeroes_ActivatedLastBoss){
+                        UnitBehaviorAdd(data.boss[i], "BossDeactivated", data.boss[i], 1);
+                        data.bossState[i] |= c_BossFightState_Deactivated;
+                    }
+                    else{
+                        UnitBehaviorRemove(data.boss[i], "BossDeactivated", 1);
+                        data.bossState[i] &= ~c_BossFightState_Deactivated;
+                    }
+                }
+                TimerStart(partZerg_StoryHeroes_DeactivateTimer, cycleTime, false, c_timeGame);
+            }
+            else{
+                //2 or less remaining, activate all and then stop timer
+                for (i = 0; i < 3; i += 1) {
+                    if((data.bossState[i] & c_BossFightState_Alive) > 0){
+                        UnitBehaviorRemove(data.boss[i], "BossDeactivated", 1);
+                        data.bossState[i] &= ~c_BossFightState_Deactivated;
+                    }
+                }
+                TimerStart(partZerg_StoryHeroes_DeactivateTimer, cycleTime, false, c_timeGame);
+                TimerPause(partZerg_StoryHeroes_DeactivateTimer, false);
+                if(data.remainingBosses == 1){
+                    for (i = 0; i < 3; i += 1) {
+                        if((data.bossState[i] & c_BossFightState_Alive) > 0){
+                            data.bossState[i] |= c_BossFightState_LastManStanding;
+                        }
+                    }
+                }
+            }
+            
+        }
+
+        partZerg_StoryHeroes_RequestImmediateChange = false;
+    }
+
+}
+
+static const int partZerg_Cybermind_UnstableTeleporterCount = 6;
+static region [partZerg_Cybermind_UnstableTeleporterCount] partZerg_Cybermind_UnstableTeleporterArea;
+static unit [partZerg_Cybermind_UnstableTeleporterCount] partZerg_Cybermind_UnstableTeleporter;
+static trigger partZerg_Cybermind_UnstableTeleporterTrigger;
+
+bool PartZerg_Cybermind_UnstableTeleportTrigger(bool testConds, bool runActions){
+    region trigRegion = EventUnitRegion();
+    int regionID;
+    unit tpUnit = EventUnit();
+
+    if(!PlayerGroupHasPlayer(gv_ActivePG, UnitGetOwner(tpUnit))
+        || UnitTypeTestFlag(UnitGetType(tpUnit), c_unitFlagMissile)
+        || UnitHasBehavior2(tpUnit, "UnstableTeleport@RecentlyTeleported")
+        || UnitHasBehavior2(tpUnit, "FakeMissileIdentifier")){
+        return false;
+    }
+
+    for(regionID = 0; regionID < partZerg_Cybermind_UnstableTeleporterCount; regionID += 1){
+        if(trigRegion == partZerg_Cybermind_UnstableTeleporterArea[regionID]){
+            break;
+        }
+    }
+    if(regionID == 6){
+        Debug_ShowMessage("PartZerg_Cybermind_UnstableTeleportTrigger: Error region loop failed");
+    }
+    if(regionID > 2){
+        regionID -= 3;
+    }
+    else {
+        regionID += 3;
+    }
+    UnitBehaviorAdd(tpUnit, "UnstableTeleport@RecentlyTeleported", tpUnit, 1);
+    UnitSetPosition(tpUnit, UnitGetPosition(partZerg_Cybermind_UnstableTeleporter[regionID]), true);
+    PlayerCreateEffectUnit(UnitGetOwner(tpUnit),"ClearOrderQueue",tpUnit);
+    UnitDamage(gv_Bosses[c_Bosses_ZCybermind], "UnstableTeleport@Dmg", tpUnit, 0);
+    return true;
+}
+void PartZerg_Cybermind_UnstableTeleportCleanup(){
+    int i;
+    for(i = 0; i < partZerg_Cybermind_UnstableTeleporterCount; i += 1){
+        UnitRemove(partZerg_Cybermind_UnstableTeleporter[i]);
+    }
+    TriggerDestroy(partZerg_Cybermind_UnstableTeleporterTrigger);
+    partZerg_Cybermind_UnstableTeleporterTrigger = null;
+}
+void PartZerg_Cybermind_UnstableTeleportSetup(){
+    fixed randomAngle = RandomFixed(0, 359.9);
+    int i;
+    point cybermindPos = UnitGetPosition(gv_Bosses[c_Bosses_ZCybermind]);
+    const int unitTypesCount = 3;
+    string[unitTypesCount] unitTypes;
+    unitTypes[0] = "UnstableTeleport@TeleporterRed";
+    unitTypes[1] = "UnstableTeleport@TeleporterBlue";
+    unitTypes[2] = "UnstableTeleport@TeleporterGreen";
+    
+    if(unitTypesCount * 2 != partZerg_Cybermind_UnstableTeleporterCount){
+        Debug_ShowMessage("PartZerg_Cybermind_UnstableTeleportTriggerSetup: unitTypesCount does not match the global TeleporterCount!");
+    }
+
+    if(partZerg_Cybermind_UnstableTeleporterTrigger != null){
+        PartZerg_Cybermind_UnstableTeleportCleanup();
+    }
+
+    partZerg_Cybermind_UnstableTeleporterTrigger = TriggerCreate("PartZerg_Cybermind_UnstableTeleportTrigger");
+    TriggerEnable(partZerg_Cybermind_UnstableTeleporterTrigger, false);
+    for(i = 0; i < partZerg_Cybermind_UnstableTeleporterCount; i += 1){
+        UnitCreate(1, unitTypes[i % unitTypesCount], c_unitCreateIgnorePlacement, gv_EnemyPlayer, PointWithOffsetPolar(cybermindPos, 11, randomAngle + 60*i), 0);
+        partZerg_Cybermind_UnstableTeleporter[i] = UnitLastCreated();
+
+        partZerg_Cybermind_UnstableTeleporterArea[i] = RegionCircle(UnitGetPosition(partZerg_Cybermind_UnstableTeleporter[i]), 1.75);
+        TriggerAddEventUnitRegion(partZerg_Cybermind_UnstableTeleporterTrigger, null, partZerg_Cybermind_UnstableTeleporterArea[i], true);
+    }
+
+    Wait(0.25, c_timeGame);
+    TriggerEnable(partZerg_Cybermind_UnstableTeleporterTrigger, true);
+}
+
+bool PartZerg_Cybermind_UnstableTeleportTriggerSetup(bool testConds, bool runActions){
+    PartZerg_Cybermind_UnstableTeleportSetup();
+    return true;
+}
+bool PartZerg_Cybermind_UnstableTeleportTriggerCleanup(bool testConds, bool runActions){
+    PartZerg_Cybermind_UnstableTeleportCleanup();
+    return true;
+}
+
+void PartZerg_Cybermind_CreateGenerators(){
+    unit generator;
+    int i;
+    if(partZerg_Cybermind_GeneratorDeath == null){
+        partZerg_Cybermind_GeneratorDeath = TriggerCreate("PartZerg_Cybermind_GeneratorDeath");
+        for (i = 0; i < partZerg_Cybermind_GeneratorMaxCount; i += 1) {
+            partZerg_Cybermind_GeneratorLocation[i] = PointWithOffsetPolar(PointFromName("PartZerg_Boss_Cybermind"), 18, 72.0*i);
+        }
+    }
+    for (i = 0; i < partZerg_Cybermind_GeneratorMaxCount; i += 1) {
+        UnitCreate(1, "CybermindShield@Generator", c_unitCreateIgnorePlacement, gv_EnemyPlayer, partZerg_Cybermind_GeneratorLocation[i], 270 + 72.0 * i );
+        generator = UnitLastCreated();
+        UnitCreate(1, "MechaSporeCrawler", c_unitCreateIgnorePlacement, gv_EnemyPlayer, PointWithOffsetPolar(partZerg_Cybermind_GeneratorLocation[i], 3, 180 + 72.0 * i), 270 + 72.0 * i );
+        UnitCreate(1, "MechaSpineCrawler", c_unitCreateIgnorePlacement, gv_EnemyPlayer, PointWithOffsetPolar(partZerg_Cybermind_GeneratorLocation[i], 3,  90 + 72.0 * i), 270 + 72.0 * i );
+        UnitCreate(1, "MechaSpineCrawler", c_unitCreateIgnorePlacement, gv_EnemyPlayer, PointWithOffsetPolar(partZerg_Cybermind_GeneratorLocation[i], 3, 270 + 72.0 * i), 270 + 72.0 * i );
+
+        UnitCreateEffectUnit(gv_Bosses[c_Bosses_ZCybermind],"CybermindShield@GeneratorSpawnSet", generator);
+        TriggerAddEventUnitDied(partZerg_Cybermind_GeneratorDeath, UnitRefFromUnit(generator));
+        partZerg_Cybermind_GeneratorCount += 1;
+    }
+}
+bool PartZerg_Cybermind_GeneratorDeath(bool testConds, bool runActions){
+    partZerg_Cybermind_GeneratorCount -= 1;
+    if(partZerg_Cybermind_GeneratorCount > 0){ return true; }
+    partZerg_Cybermind_GeneratorDeathStun = true;
+
+    Wait(30, c_timeGame);
+    if(!UnitIsAlive(gv_Bosses[c_Bosses_ZCybermind])){ return true; }
+
+    PartZerg_Cybermind_CreateGenerators();
+    
+    return true;
+}
+void PartZerg_Cybermind_Addition(structref<BossFightData> data){
+    // if all generators are dead, activate stun AFTER any potential ability casting
+    if(partZerg_Cybermind_GeneratorDeathStun
+        && (data.bossState[0] & c_BossFightState_Casting) == 0){
+        partZerg_Cybermind_GeneratorDeathStun = false;
+        UnitBehaviorAdd(data.boss[0], "CybermindShield@Stun", data.boss[0], 1);
+        data.bossCastingTime[0] = libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogBehavior, "CybermindShield@Stun", "Duration", gv_EnemyPlayer);
+        data.bossState[0] |= c_BossFightState_Casting;
+    }
+}
+void PartZerg_Cybermind_Init(structref<BossFightData> data){
+    data.amountBosses = 1;
+    data.boss           [0] = gv_Bosses[c_Bosses_ZCybermind];
+    data.bossState[0] = c_BossFightState_Alive;
+    data.bossIdlePoint  [0] = PointFromName("PartZerg_Boss_Cybermind");
+    data.arena = RegionFromName("PartZerg_Boss_Cybermind_Arena");
+
+    PartZerg_Cybermind_CreateGenerators();
+    
+    data.ability[0].abil = "BombardThem";
+    data.ability[0].targetingType = c_BossFightAbilTargetType_None;
+    data.ability[0].globalCooldown = 20;
+    data.ability[0].selfCooldown = 60;
+    data.ability[0].charges = -1;
+    data.ability[0].minAmountTargets = 1;
+    data.ability[0].allowedBossStates = c_BossFightState_Alive;
+    data.ability[0].targetFilter = UnitFilter(0,0,0,(1 << (c_targetFilterInvulnerable - 32)) | (1 << (c_targetFilterSummoned - 32)));
+    data.ability[0].targetFilterController = c_BossFightAbilAllianceTarget_Player;
+    data.ability[0].requiredBossAbilityLevel = 0;
+    data.ability[0].castTime = 3;
+
+    data.ability[1].abil = "PushAndPull";
+    data.ability[1].targetingType = c_BossFightAbilTargetType_None;
+    data.ability[1].globalCooldown = 20;
+    data.ability[1].selfCooldown = 60;
+    data.ability[1].charges = -1;
+    data.ability[1].minAmountTargets = 1;
+    data.ability[1].allowedBossStates = c_BossFightState_Alive;
+    data.ability[1].targetFilter = UnitFilter(0,0,0,(1 << (c_targetFilterInvulnerable - 32)) | (1 << (c_targetFilterSummoned - 32)));
+    data.ability[1].targetFilterController = c_BossFightAbilAllianceTarget_Player;
+    data.ability[1].requiredBossAbilityLevel = 0;
+    data.ability[1].castTime = 4;
+
+    data.ability[2].abil = "UnstableTeleport";
+    data.ability[2].targetingType = c_BossFightAbilTargetType_None;
+    data.ability[2].globalCooldown = 20;
+    data.ability[2].selfCooldown = 100;
+    data.ability[2].charges = -1;
+    data.ability[2].minAmountTargets = 1;
+    data.ability[2].allowedBossStates = c_BossFightState_Alive;
+    data.ability[2].targetFilter = UnitFilter(0,0,0,(1 << (c_targetFilterInvulnerable - 32)) | (1 << (c_targetFilterSummoned - 32)));
+    data.ability[2].targetFilterController = c_BossFightAbilAllianceTarget_Player;
+    data.ability[2].requiredBossAbilityLevel = 0;
+    data.ability[2].castTime = 4;
+    
+    data.ability[3].abil = "BuryThem";
+    data.ability[3].targetingType = c_BossFightAbilTargetType_None;
+    data.ability[3].globalCooldown = 18;
+    data.ability[3].selfCooldown = 60;
+    data.ability[3].charges = -1;
+    data.ability[3].minAmountTargets = 1;
+    data.ability[3].allowedBossStates = c_BossFightState_Alive;
+    data.ability[3].targetFilter = UnitFilter(0,0,0,(1 << (c_targetFilterInvulnerable - 32)) | (1 << (c_targetFilterSummoned - 32)));
+    data.ability[3].targetFilterController = c_BossFightAbilAllianceTarget_Player;
+    data.ability[3].requiredBossAbilityLevel = 0;
+    data.ability[3].castTime = 4;
+
+    data.amountAbility = 4;
+}
+
+int PartZerg_Stetmann_SummonMinionsCount(){
+    return 3;
+}
+void PartZerg_Stetmann_CreateCannons(){
+    int i;
+    point cannonPoint;
+    point center = PointFromName("PartZerg_Boss_Gary");
+    for (i = 0; i < 4; i += 1) {
+        cannonPoint = PointFromName("PartZerg_Boss_Stetmann_Cannon" + IntToString(i));
+        UnitCreate(1, "Pinball@Cannon", c_unitCreateIgnorePlacement, gv_EnemyPlayer, cannonPoint, AngleBetweenPoints(cannonPoint, center));
+        UnitCreateEffectUnit(gv_Bosses[c_Bosses_ZStetmann],"Pinball@AddCannonTracking", UnitLastCreated());
+    }
+}
+void PartZerg_Stetmann_DeleteCannons(){
+    unitgroup tmpUg = UnitGroup("Pinball@Cannon", gv_EnemyPlayer, RegionFromName("PartZerg_Boss_Stetmann_Arena"), null, -1);
+    int i;
+    unit tmpUnit;
+
+    for (i = 1; i <= UnitGroupCount(tmpUg, c_unitCountAll); i += 1) {
+        tmpUnit = UnitGroupUnit(tmpUg, i);
+        UnitRemove(tmpUnit);
+    }   
+}
+void PartZerg_Stetmann_SummonMinionsInit(){
+    int i;
+    point currentPen;
+
+    for (i = 0; i < partZerg_Stetmann_ZergPensCount; i += 1) {
+        currentPen = PointFromName("PartZerg_Boss_Stetmann_Pen" + IntToString(i));
+        partZerg_Stetmann_ZergPens[i] = UnitGroupUnit(UnitGroup("StetmannSummons@Pen", gv_EnemyPlayer, RegionCircle(currentPen, 1), null, 1), 1);
+    }
+
+    TriggerAddEventPlayerEffectUsed(TriggerCreate("PartZerg_Stetmann_SummonMinionsAbility"), c_playerAny, "StetmannSummons@InitialSet");
+}
+bool PartZerg_Stetmann_SummonMinionsAbility(bool testConds, bool runActions){
+    int i;
+    point currentPenPoint;
+    int tmp_i;
+    unit tmp_unit;
+    unitgroup tmp_ug;
+
+    for (i = 0; i < partZerg_Stetmann_ZergPensCount; i += 1) {
+        UnitBehaviorAdd(partZerg_Stetmann_ZergPens[i], "StetmannSummons@PenOpen", partZerg_Stetmann_ZergPens[i], 1);
+    }
+    Wait(1.5, c_timeGame);
+    for (i = 0; i < partZerg_Stetmann_ZergPensCount; i += 1) {
+        currentPenPoint = PointFromName("PartZerg_Boss_Stetmann_Pen" + IntToString(i));
+        tmp_ug = UnitCreate(PartZerg_Stetmann_SummonMinionsCount(), "MechaZergling", 0, gv_EnemyPlayer, currentPenPoint, 0);
+
+        for (tmp_i = 1; tmp_i <= UnitGroupCount(tmp_ug, c_unitCountAll); tmp_i += 1) {
+            tmp_unit = UnitGroupUnit(tmp_ug, tmp_i);
+            UnitIssueOrder(tmp_unit, OrderTargetingPoint(AbilityCommand("attack", 0), RegionRandomPoint(RegionFromName("PartZerg_Boss_Stetmann_Arena"))), c_orderQueueReplace);
+            if(UnitIsAlive(gv_Bosses[c_Bosses_ZGary])){
+                // for some reason the accumulator for the scrap transfer messes up if caster unit is not the spawned unit here!
+                UnitCreateEffectUnit(tmp_unit, "StetmannSummons@GenericSpawnSet", tmp_unit);
+                UnitCreateEffectUnit(tmp_unit, "Scrap@SetScrap1", tmp_unit);
+            }
+        }
+    }
+    Wait(1.5, c_timeGame);
+    for (i = 0; i < 3; i += 1) {
+        UnitBehaviorRemove(partZerg_Stetmann_ZergPens[i], "StetmannSummons@PenOpen", 1);
+    }
+
+    return true;
+}
+
+static bool partZerg_Stetmann_PhaseChange;        //controls updating data of the boss fight handler when gary dies
+static fixed partZerg_Stetmann_ScrapCollected;
+
+void PartZerg_Stetmann_ScrapSummon(){
+    fixed remainingScrap = partZerg_Stetmann_ScrapCollected;
+    bool spawnFlag;
+    const int unitTypesCount = 4;
+    int i;
+    int j;
+    region arena = RegionFromName("PartZerg_Boss_Stetmann_Arena");
+    point randomPoint;
+    fixed garySpawnHeight = PointPathingCliffLevel(PointFromName("PartZerg_Boss_Gary"));
+    string[unitTypesCount] unitTypes;
+    fixed[unitTypesCount] unitTypesCost;
+    unitTypes[0] = "StetmannSummons@MrKrabs";
+    unitTypes[1] = "StetmannSummons@Railgun";
+    unitTypes[2] = "MechaUltralisk";
+    unitTypes[3] = "MechaRoach";
+    unitTypesCost[0] = 7;
+    unitTypesCost[1] = 3;
+    unitTypesCost[2] = 2;
+    unitTypesCost[3] = 1;
+
+    while (remainingScrap > 0){
+        spawnFlag = false;
+        for (i = 0; i < unitTypesCount; i += 1) {
+            if (unitTypesCost[i] < remainingScrap){
+                remainingScrap -= unitTypesCost[i];
+                for (j = 0; j < 5; j+=1){
+                    randomPoint = RegionRandomPoint(arena);
+                    if(PointPathingCliffLevel(randomPoint) == garySpawnHeight){
+                        break;
+                    }
+                }
+                if (j == 5){
+                    randomPoint = PointFromName("PartZerg_Boss_Gary");
+                }
+                
+                UnitCreate(1, unitTypes[i], 0, gv_EnemyPlayer, randomPoint, 0);
+                UnitBehaviorAdd(UnitLastCreated(), "StetmannSummons@SpawnIn", UnitLastCreated(), 1);
+                UnitIssueOrder(UnitLastCreated(), OrderTargetingPoint(AbilityCommand("attack", 0), RegionRandomPoint(RegionFromName("PartZerg_Boss_Stetmann_Arena"))), c_orderQueueReplace);
+            
+                UnitCreateEffectUnit(UnitLastCreated(), "StetmannSummons@GenericSpawnSetWithoutScrap", UnitLastCreated());
+                spawnFlag = true;
+            }
+        }
+        if (!spawnFlag){
+            break;
+        }
+    }
+}
+void PartZerg_Stetmann_SwapTp(unitgroup ug, point fromCenter, point toCenter, unit caster,  fixed casterHeight){
+    int i;
+    unit tmpUnit;
+    point newLocation;
+    for (i = 1; i <= UnitGroupCount(ug, c_unitCountAll); i += 1) {
+        tmpUnit = UnitGroupUnit(ug, i);
+        if(PointPathingCliffLevel(UnitGetPosition(tmpUnit)) != casterHeight){
+            // if unit is not on the same height as caster (gary) then do nothing, this is to prevent cannons or stetmann to get teleported
+            continue;
+        }
+
+        newLocation = UnitGetPosition(tmpUnit) - fromCenter + toCenter;
+        if(PointPathingCliffLevel(newLocation) != casterHeight){
+            // if unit would end up on highground, then use center instead
+            newLocation = toCenter;
+        }
+        UnitSetPosition(tmpUnit, newLocation, true);
+        if(libNtve_gf_PlayerIsEnemy(UnitGetOwner(caster),UnitGetOwner(tmpUnit), libNtve_ge_PlayerRelation_Enemy)){
+            // only enemy units get damaged
+            UnitDamage(caster, "Swap@Dmg", tmpUnit, 0);
+        }
+    }
+}
+bool PartZerg_Stetmann_SwapAbility(bool testConds, bool runActions){
+    unit caster = EventPlayerEffectUsedUnit(c_effectUnitCaster);
+    point casterPoint = UnitGetPosition(caster);
+    fixed casterHeight = PointPathingCliffLevel(casterPoint);
+    point targetPoint = EventPlayerEffectUsedPoint(c_effectLocationTargetPoint);
+    fixed radius = libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogEffect, "Swap@SearchDummy", "AreaArray[0].Radius", c_playerAny);
+    unitfilter UF = UnitFilter(0, 0, (1 << c_targetFilterMissile) | (1 << c_targetFilterHover), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterInvulnerable - 32)) | (1 << (c_targetFilterHidden - 32))) ;
+    unitgroup unitsAroundCaster = UnitGroup(null, c_playerAny, RegionCircle(casterPoint, radius), UF, -1);
+    unitgroup unitsAroundTarget = UnitGroup(null, c_playerAny, RegionCircle(targetPoint, radius), UF, -1);
+
+    UnitGroupRemoveUnitGroup(unitsAroundTarget, unitsAroundCaster);
+    
+    PartZerg_Stetmann_SwapTp(unitsAroundCaster, casterPoint, targetPoint, caster, casterHeight);
+    PartZerg_Stetmann_SwapTp(unitsAroundTarget, targetPoint, casterPoint, caster, casterHeight);
+    return true;
+}
+
+void PartZerg_Stetmann_Init(structref<BossFightData> data){
+    data.amountBosses = 2;
+    data.boss           [c_BossFightIndex_Stetmann] = gv_Bosses[c_Bosses_ZStetmann];
+    data.bossState      [c_BossFightIndex_Stetmann] = c_BossFightState_Alive | c_BossFightState_Deactivated;
+    data.bossIdlePoint  [c_BossFightIndex_Stetmann] = PointFromName("PartZerg_Boss_Stetmann");
+    data.boss           [c_BossFightIndex_Gary] = gv_Bosses[c_Bosses_ZGary];
+    data.bossState      [c_BossFightIndex_Gary] = c_BossFightState_Alive;
+    data.bossIdlePoint  [c_BossFightIndex_Gary] = PointFromName("PartZerg_Boss_Gary");
+    data.arena = RegionFromName("PartZerg_Boss_Stetmann_Arena");
+
+    PartZerg_Stetmann_CreateCannons();
+    PartZerg_Stetmann_SummonMinionsInit();
+
+    data.ability[0].abil = "Pinball";
+    data.ability[0].targetingType = c_BossFightAbilTargetType_Point;
+    data.ability[0].globalCooldown = 15;
+    data.ability[0].selfCooldown = 60;
+    data.ability[0].charges = -1;
+    data.ability[0].minAmountTargets = 1;
+    data.ability[0].bossIndex = c_BossFightIndex_Stetmann;
+    data.ability[0].allowedBossStates = c_BossFightState_Alive | c_BossFightState_Deactivated;
+    data.ability[0].targetFilter = UnitFilter(0,0,0,(1 << (c_targetFilterInvulnerable - 32)) | (1 << (c_targetFilterSummoned - 32)));
+    data.ability[0].targetFilterController = c_BossFightAbilAllianceTarget_Player;
+    data.ability[0].requiredBossAbilityLevel = 0;
+    data.ability[0].castTime = 2.5;
+
+    data.ability[1].abil = "Stetellite";
+    data.ability[1].targetingType = c_BossFightAbilTargetType_Point;
+    data.ability[1].globalCooldown = 15;
+    data.ability[1].selfCooldown = 60;
+    data.ability[1].charges = -1;
+    data.ability[1].minAmountTargets = 2;
+    data.ability[1].bossIndex = c_BossFightIndex_Stetmann;
+    data.ability[1].allowedBossStates = c_BossFightState_Alive | c_BossFightState_Deactivated;
+    data.ability[1].targetFilter = UnitFilter(0,0,0,(1 << (c_targetFilterInvulnerable - 32)));
+    data.ability[1].targetFilterController = c_BossFightAbilAllianceTarget_Enemy;
+    data.ability[1].requiredBossAbilityLevel = 0;
+    data.ability[1].castTime = 2.5;
+
+    data.ability[2].abil = "StetmannSummons";
+    data.ability[2].targetingType = c_BossFightAbilTargetType_None;
+    data.ability[2].globalCooldown = 15;
+    data.ability[2].selfCooldown = 30;
+    data.ability[2].charges = -1;
+    data.ability[2].minAmountTargets = 1;
+    data.ability[2].bossIndex = c_BossFightIndex_Stetmann;
+    data.ability[2].allowedBossStates = c_BossFightState_Alive | c_BossFightState_Deactivated;
+    data.ability[2].targetFilter = UnitFilter(0,0,0,(1 << (c_targetFilterInvulnerable - 32)) | (1 << (c_targetFilterSummoned - 32)));
+    data.ability[2].targetFilterController = c_BossFightAbilAllianceTarget_Player;
+    data.ability[2].requiredBossAbilityLevel = 0;
+    data.ability[2].castTime = 2.5;
+
+    data.ability[3].abil = "Swap";
+    data.ability[3].targetingType = c_BossFightAbilTargetType_Point;
+    data.ability[3].globalCooldown = 15;
+    data.ability[3].selfCooldown = 30;
+    data.ability[3].charges = -1;
+    data.ability[3].minAmountTargets = 1;
+    data.ability[3].bossIndex = c_BossFightIndex_Gary;
+    data.ability[3].allowedBossStates = c_BossFightState_Alive | c_BossFightState_Deactivated;
+    data.ability[3].targetFilter = UnitFilter(0,0,0,(1 << (c_targetFilterInvulnerable - 32)) | (1 << (c_targetFilterSummoned - 32)));
+    data.ability[3].targetFilterController = c_BossFightAbilAllianceTarget_Player;
+    data.ability[3].requiredBossAbilityLevel = 0;
+    data.ability[3].castTime = 3.5;
+
+    data.ability[4].abil = "SpinForWin";
+    data.ability[4].targetingType = c_BossFightAbilTargetType_None;
+    data.ability[4].globalCooldown = 15;
+    data.ability[4].selfCooldown = 30;
+    data.ability[4].charges = -1;
+    data.ability[4].minAmountTargets = 1;
+    data.ability[4].bossIndex = c_BossFightIndex_Gary;
+    data.ability[4].allowedBossStates = c_BossFightState_Alive | c_BossFightState_Deactivated;
+    data.ability[4].targetFilter = UnitFilter(0,0,0,(1 << (c_targetFilterInvulnerable - 32)) | (1 << (c_targetFilterSummoned - 32)));
+    data.ability[4].targetFilterController = c_BossFightAbilAllianceTarget_Player;
+    data.ability[4].requiredBossAbilityLevel = 0;
+    data.ability[4].castTime = 10.5;
+
+    data.amountAbility = 5;
+}
+void PartZerg_Stetmann_Addition(structref<BossFightData> data){
+    //this function is called by the boss fight handler trigger. all data stored must be in the structref data or in globals. (best use static)
+    if (partZerg_Stetmann_PhaseChange){
+
+        if((data.bossState[c_BossFightIndex_Stetmann] & c_BossFightState_Casting) == 0){
+            partZerg_Stetmann_PhaseChange = false;
+
+            data.bossState[c_BossFightIndex_Stetmann] |= c_BossFightState_Casting;
+            data.bossCastingTime[c_BossFightIndex_Stetmann] = 5;
+            data.abilityGlobalCooldown = 5;
+            data.bossIdlePoint[c_BossFightIndex_Stetmann] = PointFromName("PartZerg_Boss_Gary");
+
+            UnitIssueOrder(gv_Bosses[c_Bosses_ZStetmann], OrderTargetingPoint(AbilityCommand("StetmannRevenge", 0), data.bossIdlePoint[c_BossFightIndex_Stetmann]), c_orderQueueReplace);
+
+            PartZerg_Stetmann_ScrapSummon();
+        }
+    }
+}
+
+
+static int partZerg_Moopy_Phase = -1;
+static bool partZerg_Moopy_Activation = false;
+
+static const int partZerg_Moopy_ColorMaxCount = 4;
+static int partZerg_Moopy_PlayerColorCurrent = -1;
+static unit[partZerg_Moopy_ColorMaxCount] partZerg_Moopy_Totems;
+
+static int partZerg_Moopy_BossColor_Cycle = partZerg_Moopy_ColorMaxCount;
+static int[partZerg_Moopy_ColorMaxCount] partZerg_Moopy_BossColor_Permutation;
+
+bool PartZerg_Moopy_RandomColorCycleReset(bool testConds, bool runActions){
+    int i;
+    int tmpInt;
+    int randIndex;
+    const int maxCount = partZerg_Moopy_ColorMaxCount;
+    // new permutation and reset
+    partZerg_Moopy_BossColor_Cycle = 0;
+    for(i = 0; i < maxCount; i+=1){
+        partZerg_Moopy_BossColor_Permutation[i] = i;
+    }
+    for(i = 0; i < maxCount-2; i+=1){
+        randIndex = RandomInt(0,maxCount-2-i);
+
+        tmpInt = partZerg_Moopy_BossColor_Permutation[maxCount-1-i];
+        partZerg_Moopy_BossColor_Permutation[maxCount-1-i] = partZerg_Moopy_BossColor_Permutation[randIndex];
+        partZerg_Moopy_BossColor_Permutation[randIndex] = tmpInt;
+    }
+    return true;
+}
+bool PartZerg_Moopy_RandomColorCycle(bool testConds, bool runActions){
+    unit trigUnit = EventPlayerEffectUsedUnit(c_effectUnitSource);
+    // pick next color
+    UnitBehaviorAdd(trigUnit, "ShieldColor@BossColor" + IntToString(partZerg_Moopy_BossColor_Permutation[partZerg_Moopy_BossColor_Cycle]), trigUnit, 1);
+    partZerg_Moopy_BossColor_Cycle += 1;
+
+    return true;
+}
+
+bool PartZerg_Moopy_PlayerColorChange(bool testConds, bool runActions){
+    unit totem = EventPlayerEffectUsedUnit(c_effectUnitTarget);
+    int i;
+    unitgroup tmpUG;
+    int newcolor;
+    unit tmpUnit;
+
+    // check new color
+    for (i = 0; i < partZerg_Moopy_ColorMaxCount; i += 1) {
+        if(totem == partZerg_Moopy_Totems[i]){
+            break;
+        }
+    }
+    newcolor = i;
+    if(newcolor >= partZerg_Moopy_ColorMaxCount){
+        Debug_ShowMessage("PartZerg_Moopy_ColorChange: could not find unit");
+        return true;
+    }
+    if(partZerg_Moopy_PlayerColorCurrent == newcolor){
+        // no change
+        return true;
+    }
+
+    tmpUG = UnitGroup(null, c_playerAny, RegionFromName("PartZerg"), UnitFilter(0,0,(1 << c_targetFilterMissile) | (1<<c_targetFilterWorker), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0);
+
+    // remove old color buffs
+    if(partZerg_Moopy_PlayerColorCurrent != -1){
+        for (i = 1; i <= UnitGroupCount(tmpUG, c_unitCountAll); i += 1) {
+            tmpUnit = UnitGroupUnit(tmpUG, i);
+            if(UnitHasBehavior(tmpUnit, "FakeMissileIdentifier")){
+                continue;
+            }
+            if(PlayerGroupHasPlayer(gv_ActivePG, UnitGetOwner(tmpUnit)) || UnitGetType(tmpUnit) == "PrismaticHybrids@PrismaticHybrids"){
+                UnitBehaviorRemove(tmpUnit, "ShieldColor@PlayerColor" + IntToString(partZerg_Moopy_PlayerColorCurrent), 1);
+            }
+        }
+    }
+
+    // apply new color buffs
+    partZerg_Moopy_PlayerColorCurrent = newcolor;
+
+    for (i = 1; i <= UnitGroupCount(tmpUG, c_unitCountAll); i += 1) {
+        tmpUnit = UnitGroupUnit(tmpUG, i);
+        if(UnitHasBehavior(tmpUnit, "FakeMissileIdentifier")){
+            continue;
+        }
+        if(PlayerGroupHasPlayer(gv_ActivePG, UnitGetOwner(tmpUnit)) || UnitGetType(tmpUnit) == "PrismaticHybrids@PrismaticHybrids"){
+            UnitBehaviorAdd(tmpUnit, "ShieldColor@PlayerColor" + IntToString(partZerg_Moopy_PlayerColorCurrent), tmpUnit, 1);
+        }
+    }
+
+    // check for right color to activate boss
+    if(partZerg_Moopy_Phase == 0){
+        partZerg_Moopy_Activation = true;
+    }
+
+    return true;
+}
+
+bool PartZerg_Moopy_PlayerEnterArena(bool testConds, bool runActions){
+    unit trigUnit = EventUnit();
+    if(partZerg_Moopy_PlayerColorCurrent == -1
+        || (!PlayerGroupHasPlayer(gv_ActivePG, UnitGetOwner(trigUnit))
+            && UnitGetType(trigUnit) != "PrismaticHybrids@PrismaticHybrids")
+        || !UnitIsAlive(trigUnit)
+        || UnitTypeTestFlag(UnitGetType(trigUnit), c_unitFlagMissile)
+        || UnitTypeTestFlag(UnitGetType(trigUnit), c_unitFlagWorker)
+        || UnitHasBehavior(trigUnit, "FakeMissileIdentifier")){
+        return false;
+    }
+    UnitBehaviorAdd(trigUnit, "ShieldColor@PlayerColor" + IntToString(partZerg_Moopy_PlayerColorCurrent), trigUnit, 1);
+    
+    return true;
+}
+
+bool PartZerg_Moopy_TurnTowardsTotemWithSameColor(bool testConds, bool runActions){
+    int i;
+    unit boss = gv_Bosses[c_Bosses_ZMoopy];
+
+    for (i = 0; i< partZerg_Moopy_ColorMaxCount; i+=1){
+        if(UnitHasBehavior(boss, "ShieldColor@BossColor" + IntToString(i))){
+            break;
+        }
+    }
+    if( i== partZerg_Moopy_ColorMaxCount){
+        Debug_ShowMessage("Finding Totem Failed!");
+        return true;
+    }
+
+    UnitIssueOrder(boss, OrderTargetingUnit(AbilityCommand("ChargeUp@Totem", 0), partZerg_Moopy_Totems[i]),c_orderQueueReplace);
+
+    return true;
+}
+
+bool PartZerg_Moopy_PrismaticHybrids(bool testConds, bool runActions){
+    int i;
+    unit tmpUnit;
+    point spawnPoint;
+
+    for (i = 0; i < partZerg_Moopy_ColorMaxCount; i += 1) {
+        if(i == partZerg_Moopy_PlayerColorCurrent){
+            continue;
+        }
+        // for each non active color create hybrid
+        spawnPoint = PointInterpolate(UnitGetPosition(gv_Bosses[c_Bosses_ZMoopy]), UnitGetPosition(partZerg_Moopy_Totems[i]), 0.8);
+        UnitCreate(1, "PrismaticHybrids@PrismaticHybrids", 0, gv_EnemyPlayer, spawnPoint, 270);
+        tmpUnit = UnitLastCreated();
+        UnitBehaviorAdd(tmpUnit, "ShieldColor@BossColor" + IntToString(i), tmpUnit, 1);
+        UnitBehaviorAdd(tmpUnit, "PrismaticHybrids@ColorInvulnerable", tmpUnit, 1);
+    }
+    
+    return true;
+}
+
+void PartZerg_Moopy_InitColor(){
+    int i;
+
+    TriggerAddEventPlayerEffectUsed(TriggerCreate("PartZerg_Moopy_PlayerColorChange"), c_playerAny, "ShieldColor@ColorChangeTriggerDummy");
+    TriggerAddEventPlayerEffectUsed(TriggerCreate("PartZerg_Moopy_RandomColorCycle"), c_playerAny, "ShieldColor@DummyColoringCycleTrigger");
+    TriggerAddEventPlayerEffectUsed(TriggerCreate("PartZerg_Moopy_RandomColorCycleReset"), c_playerAny, "ShieldColor@DummyColoringCycleResetTrigger");
+    TriggerAddEventPlayerEffectUsed(TriggerCreate("PartZerg_Moopy_TurnTowardsTotemWithSameColor"), c_playerAny, "ChargeUp@TurnTowardsTotem");
+    TriggerAddEventPlayerEffectUsed(TriggerCreate("PartZerg_Moopy_PrismaticHybrids"), c_playerAny, "PrismaticHybrids@CUSet");
+
+    TriggerAddEventUnitRegion(TriggerCreate("PartZerg_Moopy_PlayerEnterArena"), null, RegionFromName("PartZerg"), true);
+    for (i = 0; i < partZerg_Moopy_ColorMaxCount; i += 1) {
+        UnitCreate(1, "ShieldColor@Totem", 0, gv_CollectiblePlayerEnemyNeutral, PointWithOffsetPolar(PointFromName("PartZerg_Boss_Moopy"), 8, 90*i+180), 90*i);
+        // UnitCreate(1, "ShieldColor@Totem", 0, gv_CollectiblePlayerEnemyNeutral, PointFromName("PartZerg_Boss_Moopy_ColorTotem"+IntToString(i)), -90*i);
+        partZerg_Moopy_Totems[i] = UnitLastCreated();
+        UnitBehaviorAdd(partZerg_Moopy_Totems[i], "ShieldColor@BossColor" + IntToString(i), partZerg_Moopy_Totems[i], 1);
+        UnitCreateEffectUnit(gv_Bosses[c_Bosses_ZMoopy], "ShieldColor@TotemAddToTracker", partZerg_Moopy_Totems[i]);
+    }
+}
+
+void PartZerg_Moopy_Init(structref<BossFightData> data){
+    data.amountBosses = 1;
+    data.boss           [0] = gv_Bosses[c_Bosses_ZMoopy];
+    data.bossState[0] = c_BossFightState_Alive;
+    data.bossIdlePoint  [0] = PointFromName("PartZerg_Boss_Moopy");
+    data.arena = RegionFromName("PartZerg_Boss_Moopy_Arena");
+
+    data.ability[0].abil = "DanceFloor";
+    data.ability[0].targetingType = c_BossFightAbilTargetType_None;
+    data.ability[0].globalCooldown = 14;
+    data.ability[0].selfCooldown = 50;
+    data.ability[0].charges = 0;
+    data.ability[0].minAmountTargets = 1;
+    data.ability[0].bossIndex = 0;
+    data.ability[0].allowedBossStates = c_BossFightState_Alive | c_BossFightState_Deactivated;
+    data.ability[0].targetFilter = UnitFilter(0,0,0,(1 << (c_targetFilterInvulnerable - 32)) | (1 << (c_targetFilterSummoned - 32)));
+    data.ability[0].targetFilterController = c_BossFightAbilAllianceTarget_Player;
+    data.ability[0].requiredBossAbilityLevel = 0;
+    data.ability[0].castTime = 8.5;
+
+    data.ability[1].abil = "WavesOfChaos";
+    data.ability[1].targetingType = c_BossFightAbilTargetType_None;
+    data.ability[1].globalCooldown = 15;
+    data.ability[1].selfCooldown = 50;
+    data.ability[1].charges = 0;
+    data.ability[1].minAmountTargets = 1;
+    data.ability[1].bossIndex = 0;
+    data.ability[1].allowedBossStates = c_BossFightState_Alive | c_BossFightState_Deactivated;
+    data.ability[1].targetFilter = UnitFilter(0,0,0,(1 << (c_targetFilterInvulnerable - 32)) | (1 << (c_targetFilterSummoned - 32)));
+    data.ability[1].targetFilterController = c_BossFightAbilAllianceTarget_Player;
+    data.ability[1].requiredBossAbilityLevel = 0;
+    data.ability[1].castTime = 10;
+    
+    data.ability[2].abil = "RainbowMeteors";
+    data.ability[2].targetingType = c_BossFightAbilTargetType_None;
+    data.ability[2].globalCooldown = 15;
+    data.ability[2].selfCooldown = 60;
+    data.ability[2].charges = 0;
+    data.ability[2].minAmountTargets = 1;
+    data.ability[2].bossIndex = 0;
+    data.ability[2].allowedBossStates = c_BossFightState_Alive | c_BossFightState_Deactivated;
+    data.ability[2].targetFilter = UnitFilter(0,0,0,(1 << (c_targetFilterInvulnerable - 32)) | (1 << (c_targetFilterSummoned - 32)));
+    data.ability[2].targetFilterController = c_BossFightAbilAllianceTarget_Player;
+    data.ability[2].requiredBossAbilityLevel = 0;
+    data.ability[2].castTime = 4;
+
+
+    data.ability[3].abil = "ChargeUp";
+    data.ability[3].targetingType = c_BossFightAbilTargetType_None;
+    data.ability[3].globalCooldown = 30;
+    data.ability[3].selfCooldown = 120;
+    data.ability[3].charges = 0;
+    data.ability[3].minAmountTargets = 1;
+    data.ability[3].bossIndex = 0;
+    data.ability[3].allowedBossStates = c_BossFightState_Alive;
+    data.ability[3].disallowedBossStates = c_BossFightState_Deactivated;
+    data.ability[3].targetFilter = UnitFilter(0,0,0,(1 << (c_targetFilterInvulnerable - 32)) | (1 << (c_targetFilterSummoned - 32)));
+    data.ability[3].targetFilterController = c_BossFightAbilAllianceTarget_Player;
+    data.ability[3].requiredBossAbilityLevel = 0;
+    data.ability[3].castTime = 3;
+
+    data.ability[4].abil = "ColorfulBeams";
+    data.ability[4].targetingType = c_BossFightAbilTargetType_None;
+    data.ability[4].globalCooldown = 20;
+    data.ability[4].selfCooldown = 60;
+    data.ability[4].charges = 0;
+    data.ability[4].minAmountTargets = 1;
+    data.ability[4].bossIndex = 0;
+    data.ability[4].allowedBossStates = c_BossFightState_Alive;
+    data.ability[4].disallowedBossStates = c_BossFightState_Deactivated;
+    data.ability[4].targetFilter = UnitFilter(0,0,0,(1 << (c_targetFilterInvulnerable - 32)) | (1 << (c_targetFilterSummoned - 32)));
+    data.ability[4].targetFilterController = c_BossFightAbilAllianceTarget_Player;
+    data.ability[4].requiredBossAbilityLevel = 0;
+    data.ability[4].castTime = 6.5;
+
+    data.ability[5].abil = "PrismaticHybrids";
+    data.ability[5].targetingType = c_BossFightAbilTargetType_None;
+    data.ability[5].globalCooldown = 12;
+    data.ability[5].selfCooldown = 90;
+    data.ability[5].charges = 0;
+    data.ability[5].minAmountTargets = 1;
+    data.ability[5].bossIndex = 0;
+    data.ability[5].allowedBossStates = c_BossFightState_Alive;
+    data.ability[5].disallowedBossStates = c_BossFightState_Deactivated;
+    data.ability[5].targetFilter = UnitFilter(0,0,0,(1 << (c_targetFilterInvulnerable - 32)) | (1 << (c_targetFilterSummoned - 32)));
+    data.ability[5].targetFilterController = c_BossFightAbilAllianceTarget_Player;
+    data.ability[5].requiredBossAbilityLevel = 0;
+    data.ability[5].castTime = 2.5;
+
+    data.amountAbility = 6;
+}
+void PartZerg_Moopy_Addition(structref<BossFightData> data){
+    const fixed phase2LifeThreshold = 60;
+    fixed bossLife = UnitGetPropertyFixed(data.boss[0], c_unitPropLifePercent, true);
+
+    // phase change
+    if(partZerg_Moopy_Phase == -1){
+        // initialization
+        partZerg_Moopy_Phase = 0;
+        data.bossState[0] |= c_BossFightState_Deactivated;
+
+        UnitBehaviorAdd(data.boss[0], "ShieldColor@Phase0", data.boss[0], 1);
+
+        // trigger stuff
+        PartZerg_Moopy_InitColor();
+    }
+    else if(partZerg_Moopy_Phase == 0 && partZerg_Moopy_Activation){
+        partZerg_Moopy_Phase = 1;
+        partZerg_Moopy_Activation = false;
+        data.ability[0].charges = -1;
+        data.ability[1].charges = -1;
+        data.ability[2].charges = -1;
+        data.bossCastingTime[0] = 0.5;
+        UnitBehaviorRemove(data.boss[0], "ShieldColor@Phase0", 1);
+        UnitBehaviorAdd(data.boss[0], "ShieldColor@Phase1", data.boss[0], 1);
+        UnitBehaviorAdd(data.boss[0], "KingMoopyDamageReduction", data.boss[0], 1);
+        
+    }
+    else if(partZerg_Moopy_Phase == 1 && bossLife < phase2LifeThreshold){
+        // enable moving, enables different ability set, old ones get deactivated
+        data.bossState[0] &= ~c_BossFightState_Deactivated;
+        partZerg_Moopy_Phase = 2;
+        data.ability[0].charges = 0;
+        data.ability[1].charges = 0;
+        data.ability[2].charges = 0;
+        data.ability[3].charges = -1;
+        data.ability[4].charges = -1;
+        data.ability[5].charges = -1;
+        UnitBehaviorRemove(data.boss[0], "ShieldColor@Phase1", 1);
+
+    }
+}
+
+// Boss deaths
+bool PartZerg_Boss_Artanis_Dies (bool testConds, bool runActions){
+    if(!runActions) {return true;}
+    TriggerDestroy(TriggerGetCurrent());
+    Enemy_BossDeath(libNtve_gf_KillingPlayer(), c_AcvIdentifier_BossZ_Artanis, 10, UnitGetPosition(EventUnit()));
+    PartZerg_AreaMix_Second_Opener();
+    return true;
+}
+bool PartZerg_Boss_Kerrigan_Dies (bool testConds, bool runActions){
+    if(!runActions) {return true;}
+    TriggerDestroy(TriggerGetCurrent());
+    Enemy_BossDeath(libNtve_gf_KillingPlayer(), c_AcvIdentifier_BossZ_Kerrigan, 10, UnitGetPosition(EventUnit()));
+    PartZerg_AreaMix_Second_Opener();
+    return true;
+}
+bool PartZerg_Boss_Raynor_Dies (bool testConds, bool runActions){
+    if(!runActions) {return true;}
+    TriggerDestroy(TriggerGetCurrent());
+    Enemy_BossDeath(libNtve_gf_KillingPlayer(), c_AcvIdentifier_BossZ_Raynor, 10, UnitGetPosition(EventUnit()));
+    PartZerg_AreaMix_Second_Opener();
+    return true;
+}
+bool PartZerg_Boss_Cybermind_Dies (bool testConds, bool runActions){
+    point cybermindPos = UnitGetPosition(EventUnit());
+    actor tmpActor;
+    int i;
+    point randomPoint;
+    region lowGround = RegionCircle(cybermindPos, 4.75);
+    if(!runActions) {return true;}
+    TriggerDestroy(TriggerGetCurrent());
+    Enemy_BossDeath(libNtve_gf_KillingPlayer(), c_AcvIdentifier_BossZ_Cybermind, 10, UnitGetPosition(EventUnit()));
+
+    // visuals
+    for( i=0; i < 15; i+=1){
+        randomPoint = RegionRandomPoint(lowGround);
+        tmpActor = libNtve_gf_CreateActorAtPoint("CybermindDeathDebris", randomPoint);
+        ActorSend(tmpActor, "ModelSwap CybermindDeathDebris " + IntToString(RandomInt(0,3)));
+        ActorSend(tmpActor, "SetRotation {" + Utility_ForwardVectorRandom() + " 0,0,1}");
+    }
+
+    PartZerg_AreaMix_Third_Open();
+    return true;
+}
+bool PartZerg_Boss_Gary_Dies (bool testConds, bool runActions){
+    if(!runActions) {return true;}
+    TriggerDestroy(TriggerGetCurrent());
+    Enemy_BossDeath(libNtve_gf_KillingPlayer(), c_AcvIdentifier_BossZ_Gary, 10, UnitGetPosition(EventUnit()));
+
+    //stetmann update in bossfight handler is done via the addition function when the flag is turned on
+    partZerg_Stetmann_ScrapCollected = UnitGetPropertyFixed(EventUnit(), c_unitPropEnergy, true);
+    partZerg_Stetmann_PhaseChange = true;
+    return true;
+}
+bool PartZerg_Boss_Stetmann_Dies (bool testConds, bool runActions){
+    if(!runActions) {return true;}
+    TriggerDestroy(TriggerGetCurrent());
+    Enemy_BossDeath(libNtve_gf_KillingPlayer(), c_AcvIdentifier_BossZ_Stetmann, 10, UnitGetPosition(EventUnit()));
+
+    partZerg_Stetmann_Dead = true;
+    PartZerg_AreaMix_Fourth_Opener();
+    if(!PartZerg_MoopyDoor_Requirement() || !PartZerg_MoopyAllDoorsOpen()){
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, StringExternal("Trig/Enemy/AreaOpen/MoopyClosed"));
+    }
+    else if(partZerg_MoopyChampionsKilled < partZerg_MoopyChampionsMax){
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, StringExternal("Trig/Enemy/AreaOpen/MoopyCanBeOpened"));
+    }
+
+    TriggerDestroy(TriggerFind("PartZerg_Stetmann_SwapAbility"));
+    TriggerDestroy(TriggerFind("PartZerg_Stetmann_SummonMinionsAbility"));
+    return true;
+}
+bool PartZerg_Boss_Moopy_Dies (bool testConds, bool runActions){
+    if(!runActions) {return true;}
+    TriggerDestroy(TriggerGetCurrent());
+    Enemy_BossDeath(libNtve_gf_KillingPlayer(), c_AcvIdentifier_BossZ_Moopy, 10, UnitGetPosition(EventUnit()));
+    Collectibles_MoopyHat_DropHat(EventUnit());
+    return true;
+}
+
+// Boss spawns
+bool PartZerg_Boss_StoryHeroes_Spawner (bool testConds, bool runActions) {
+    int i;
+    int tmp_player;
+    if (testConds) {
+        if (!PlayerGroupHasPlayer(gv_ActivePG, UnitGetOwner(EventUnit()))
+            || !TriggerIsEnabled(TriggerGetCurrent())
+            || UnitTypeTestAttribute(UnitGetType(EventUnit()), c_unitAttributeSummoned)
+            || UnitTypeTestFlag(UnitGetType(EventUnit()), c_unitFlagMissile)) {return false; }
+    }
+    if (!runActions) {return true;}
+
+    TriggerEnable(TriggerGetCurrent(), false);
+    TriggerDestroy(TriggerGetCurrent());
+    UnitCreate(1, "MechaRaynor",   0, gv_EnemyPlayer, PointWithOffsetPolar(PointFromName("PartZerg_Boss_StoryHeroes"),2,120), 305.0);
+    gv_Bosses[c_Bosses_ZRaynor] = UnitLastCreated();
+    UnitCreate(1, "MechaArtanis",  0, gv_EnemyPlayer, PointWithOffsetPolar(PointFromName("PartZerg_Boss_StoryHeroes"),2,240), 305.0);
+    gv_Bosses[c_Bosses_ZArtanis] = UnitLastCreated();
+    UnitCreate(1, "MechaKerrigan", 0, gv_EnemyPlayer, PointWithOffsetPolar(PointFromName("PartZerg_Boss_StoryHeroes"),2,0), 305.0);
+    gv_Bosses[c_Bosses_ZKerrigan] = UnitLastCreated();
+    TriggerAddEventUnitDied(TriggerCreate("PartZerg_Boss_Artanis_Dies"), UnitRefFromUnit(gv_Bosses[c_Bosses_ZArtanis]));
+    TriggerAddEventUnitDied(TriggerCreate("PartZerg_Boss_Kerrigan_Dies"), UnitRefFromUnit(gv_Bosses[c_Bosses_ZKerrigan]));
+    TriggerAddEventUnitDied(TriggerCreate("PartZerg_Boss_Raynor_Dies"), UnitRefFromUnit(gv_Bosses[c_Bosses_ZRaynor]));
+
+    for (i = 1; i <= PlayerGroupCount(gv_StartingPG); i += 1) {
+        tmp_player = PlayerGroupPlayer(gv_StartingPG, i);
+        partZerg_CurrentBossFightRevealer[tmp_player] = VisRevealerCreate(tmp_player, RegionFromName("PartZerg_Boss_StoryHeroes_Arena"));
+    }
+    gv_Enemy_BossFight_Handler_FightID_Param = c_BossFightID_StoryHeroes;
+    gv_Enemy_BossFight_Handler_InitFunc = PartZerg_StoryHeroes_Init;
+    gv_Enemy_BossFight_Handler_AdditionFlag = true;
+    gv_Enemy_BossFight_Handler_Addition = PartZerg_StoryHeroes_Addition;
+    TriggerExecute(gv_Enemy_BossFight_Handler_Trigger, false, false);
+
+    return true;
+}
+bool PartZerg_Boss_Cybermind_Spawner (bool testConds, bool runActions) {
+    int i;
+    int tmp_player;
+    if (testConds) {
+        if (!PlayerGroupHasPlayer(gv_ActivePG, UnitGetOwner(EventUnit()))
+            || !TriggerIsEnabled(TriggerGetCurrent())
+            || UnitTypeTestAttribute(UnitGetType(EventUnit()), c_unitAttributeSummoned)
+            || UnitTypeTestFlag(UnitGetType(EventUnit()), c_unitFlagMissile)) {return false; }
+    }
+    if (!runActions) {return true;}
+
+    TriggerEnable(TriggerGetCurrent(), false);
+    TriggerDestroy(TriggerGetCurrent());
+    UnitCreate(1, "MechaOvermind",   0, gv_EnemyPlayer, PointFromName("PartZerg_Boss_Cybermind"), 305.0);
+    gv_Bosses[c_Bosses_ZCybermind] = UnitLastCreated();
+    TriggerAddEventUnitDied(TriggerCreate("PartZerg_Boss_Cybermind_Dies"), UnitRefFromUnit(gv_Bosses[c_Bosses_ZCybermind]));
+
+    for (i = 1; i <= PlayerGroupCount(gv_StartingPG); i += 1) {
+        tmp_player = PlayerGroupPlayer(gv_StartingPG, i);
+        partZerg_CurrentBossFightRevealer[tmp_player] = VisRevealerCreate(tmp_player, RegionFromName("PartZerg_Boss_Cybermind_Arena"));
+    }
+    gv_Enemy_BossFight_Handler_FightID_Param = c_BossFightID_Cybermind;
+    gv_Enemy_BossFight_Handler_InitFunc = PartZerg_Cybermind_Init;
+    gv_Enemy_BossFight_Handler_AdditionFlag = true;
+    gv_Enemy_BossFight_Handler_Addition = PartZerg_Cybermind_Addition;
+    TriggerExecute(gv_Enemy_BossFight_Handler_Trigger, false, false);
+
+    TriggerAddEventPlayerEffectUsed(TriggerCreate("PartZerg_Cybermind_UnstableTeleportTriggerSetup"), c_playerAny, "UnstableTeleport@InitialSet");
+    TriggerAddEventPlayerEffectUsed(TriggerCreate("PartZerg_Cybermind_UnstableTeleportTriggerCleanup"), c_playerAny, "UnstableTeleport@Cleanup");
+    
+    return true;
+}
+bool PartZerg_Boss_Stetmann_Spawner (bool testConds, bool runActions) {
+    int i;
+    int tmp_player;
+    if (testConds) {
+        if (!PlayerGroupHasPlayer(gv_ActivePG, UnitGetOwner(EventUnit()))
+            || !TriggerIsEnabled(TriggerGetCurrent())
+            || UnitTypeTestAttribute(UnitGetType(EventUnit()), c_unitAttributeSummoned)
+            || UnitTypeTestFlag(UnitGetType(EventUnit()), c_unitFlagMissile)) {return false; }
+    }
+    if (!runActions) {return true;}
+
+    TriggerEnable(TriggerGetCurrent(), false);
+    TriggerDestroy(TriggerGetCurrent());
+    UnitCreate(1, "EgonStetmann",  0, gv_EnemyPlayer, PointFromName("PartZerg_Boss_Stetmann"), 305.0);
+    gv_Bosses[c_Bosses_ZStetmann] = UnitLastCreated();
+    UnitCreate(1, "Gary", 0, gv_EnemyPlayer, PointFromName("PartZerg_Boss_Gary"), 305.0);
+    gv_Bosses[c_Bosses_ZGary] = UnitLastCreated();
+    TriggerAddEventUnitDied(TriggerCreate("PartZerg_Boss_Stetmann_Dies"), UnitRefFromUnit(gv_Bosses[c_Bosses_ZStetmann]));
+    TriggerAddEventUnitDied(TriggerCreate("PartZerg_Boss_Gary_Dies"), UnitRefFromUnit(gv_Bosses[c_Bosses_ZGary]));
+
+    gv_Enemy_BossFight_Handler_FightID_Param = c_BossFightID_Stetmann;
+    gv_Enemy_BossFight_Handler_InitFunc = PartZerg_Stetmann_Init;
+    gv_Enemy_BossFight_Handler_AdditionFlag = true;
+    gv_Enemy_BossFight_Handler_Addition = PartZerg_Stetmann_Addition;
+    TriggerExecute(gv_Enemy_BossFight_Handler_Trigger, false, false);
+
+    for (i = 1; i <= PlayerGroupCount(gv_StartingPG); i += 1) {
+        tmp_player = PlayerGroupPlayer(gv_StartingPG, i);
+        partZerg_CurrentBossFightRevealer[tmp_player] = VisRevealerCreate(tmp_player, RegionFromName("PartZerg_Boss_Stetmann_Arena"));
+    }
+    TriggerAddEventPlayerEffectUsed(TriggerCreate("PartZerg_Stetmann_SwapAbility"), c_playerAny, "Swap@TriggerHookup");
+
+    return true;
+}
+bool PartZerg_Boss_Moopy_Spawner (bool testConds, bool runActions) {
+    int i;
+    int tmp_player;
+    if (testConds) {
+        if (!PlayerGroupHasPlayer(gv_ActivePG, UnitGetOwner(EventUnit()))
+            || !TriggerIsEnabled(TriggerGetCurrent())
+            || UnitTypeTestAttribute(UnitGetType(EventUnit()), c_unitAttributeSummoned)
+            || UnitTypeTestFlag(UnitGetType(EventUnit()), c_unitFlagMissile)) {return false; }
+    }
+    if (!runActions) {return true;}
+
+    TriggerEnable(TriggerGetCurrent(), false);
+    TriggerDestroy(TriggerGetCurrent());
+    UnitCreate(1, "KingMoopy",  0, gv_EnemyPlayer, PointFromName("PartZerg_Boss_Moopy"), 305.0);
+    gv_Bosses[c_Bosses_ZMoopy] = UnitLastCreated();
+    TriggerAddEventUnitDied(TriggerCreate("PartZerg_Boss_Moopy_Dies"), UnitRefFromUnit(gv_Bosses[c_Bosses_ZMoopy]));
+
+    for (i = 1; i <= PlayerGroupCount(gv_StartingPG); i += 1) {
+        tmp_player = PlayerGroupPlayer(gv_StartingPG, i);
+        partZerg_CurrentBossFightRevealer[tmp_player] = VisRevealerCreate(tmp_player, RegionFromName("PartZerg_Boss_Moopy_Arena"));
+    }
+    gv_Enemy_BossFight_Handler_FightID_Param = c_BossFightID_Moopy;
+    gv_Enemy_BossFight_Handler_InitFunc = PartZerg_Moopy_Init;
+    gv_Enemy_BossFight_Handler_AdditionFlag = true;
+    gv_Enemy_BossFight_Handler_Addition = PartZerg_Moopy_Addition;
+    TriggerExecute(gv_Enemy_BossFight_Handler_Trigger, false, false);
+
+    return true;
+}
+
+void PartZerg_TriggerCreate(){
+    TriggerAddEventUnitRegion(TriggerCreate("PartZerg_Boss_StoryHeroes_Spawner"), null, RegionFromName("PartZerg_Boss_StoryHeroes_Tripwire"), true);
+    TriggerAddEventUnitRegion(TriggerCreate("PartZerg_Boss_Cybermind_Spawner"),   null, RegionFromName("PartZerg_Boss_Cybermind_Tripwire"), true);
+    TriggerAddEventUnitRegion(TriggerCreate("PartZerg_Boss_Stetmann_Spawner"),    null, RegionFromName("PartZerg_Boss_Stetmann_Tripwire"), true);
+    TriggerAddEventUnitRegion(TriggerCreate("PartZerg_Boss_Moopy_Spawner"),       null, RegionFromName("PartZerg_Boss_Moopy_Tripwire"), true);
+    TriggerAddEventUnitRegion(TriggerCreate("PartZerg_Nydus_EnemyReturn"),        null, RegionFromName("PartZerg_Base_NydusEntry"), true);
+}

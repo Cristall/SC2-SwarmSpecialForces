@@ -1,0 +1,1081 @@
+//bank variables
+const fixed version = 2.0;
+static const int hashSecurityLevel = 4;
+
+static trigger Bank_Save_RequestQueueTrigger;
+static trigger Bank_ManualSaveTrigger;
+
+static bool bank_Save_RequestRunning;
+
+// bank storage system
+    static string BankStorageString = "";
+    static bool BankStorageErrorCheck = false;
+
+    static void BankStorageReset(){
+        BankStorageString = "";
+        BankStorageErrorCheck = false;
+    }
+
+    static void BankStorageSet(string str){
+        BankStorageString = str;
+        BankStorageErrorCheck = false;
+    }
+
+    static void BankStorageAddInt(int value){
+        string string_val = IntToString(value);
+        int length = StringLength(string_val);
+
+        if(value >= 0){
+            if(length >= 10){
+                BankStorageErrorCheck = true;
+                BankStorageString += "9999999999";
+            }
+            else{
+                BankStorageString = (BankStorageString + IntToString(length) + string_val);
+            }
+        }
+        else {
+            BankStorageErrorCheck = true;
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaError, StringToText("Bank Storage Error! Value negative."));
+        }
+    }
+
+    static void BankStorageAddBool(bool value){
+        if(value == true){
+            BankStorageString += "1";
+        }
+        else {
+            BankStorageString += "0";
+        }
+    }
+
+    static int BankStorageRetrieveInt(){
+        string tmpString;
+        int length;
+        if(BankStorageString != ""){
+            tmpString = StringSub(BankStorageString, 1, 1);
+            length = StringToInt(tmpString);
+
+            if(length == 0) {
+                BankStorageErrorCheck = true;
+                UIDisplayMessage(PlayerGroupAll(), c_messageAreaError, StringToText("Bank Storage Error! Wrong length (too small)"));
+                return 0;
+            }
+            else if (length +1 > StringLength(BankStorageString)){
+                BankStorageErrorCheck = true;
+                UIDisplayMessage(PlayerGroupAll(), c_messageAreaError, StringToText("Bank Storage Error! Wrong length (too long)"));
+                return 0;
+            }
+            else {
+                tmpString = StringSub(BankStorageString, 2, length+1);
+                BankStorageString = StringSub(BankStorageString, length+2, StringLength(BankStorageString));
+                return StringToInt(tmpString);
+            }
+        }
+        else {
+            BankStorageErrorCheck = true;
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaError, StringToText("Bank Storage Error! Empty String."));
+            return 0;
+        }
+    }
+
+    static bool BankStorageRetrieveBool(){
+        string tmpString = "";
+        if ((BankStorageString != "")) {
+            tmpString = StringSub(BankStorageString, 1, 1);
+            BankStorageString = StringSub(BankStorageString, 2, StringLength(BankStorageString));
+            if ((tmpString == "0")) {
+                return false;
+            }
+            else if ((tmpString == "1")) {
+                return true;
+            }
+            else {
+                BankStorageErrorCheck = true;
+                UIDisplayMessage(PlayerGroupAll(), c_messageAreaError, StringToText("Bank Storage Error! Expected Bool."));
+                return false;
+            }
+        
+        }
+        else {
+            BankStorageErrorCheck = true;
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaError, StringToText("Bank Storage Error! Empty."));
+            return false;
+        }
+    }
+
+    static string BankStorageGetString(){
+        return BankStorageString;
+    }
+
+    static bool BankStorageCheckError(){
+        return BankStorageErrorCheck;
+    }
+
+
+// copies over all data in the fromBankfile into the backupBankfile. backupBankfile will be cleared beforehand
+void Bank_Backup(bank fromBankfile, bank backupBankfile){
+    int i_section;
+    int i_key;
+    int n_section;
+    int n_key;
+    string currentSection;
+    string currentKey;
+    unit value_unit;
+
+    // clears backupBankfile first
+    n_section = BankSectionCount(backupBankfile);
+    for (i_section = 0; i_section < n_section; i_section += 1) {
+        currentSection = BankSectionName(backupBankfile, i_section);
+        BankSectionRemove(backupBankfile, currentSection);
+    }
+
+    // read all data fromBankfile and copy it over
+    n_section = BankSectionCount(fromBankfile);
+    for (i_section = 0; i_section < n_section; i_section += 1) {
+        currentSection = BankSectionName(fromBankfile, i_section);
+        n_key = BankKeyCount(fromBankfile, currentSection);
+        for (i_key = 0; i_key < n_key; i_key += 1) {
+            currentKey = BankKeyName(fromBankfile, currentSection, i_key);
+            if(BankValueIsType(fromBankfile, currentSection, currentKey, c_bankTypeFixed)){
+                BankValueSetFromFixed(backupBankfile, currentSection, currentKey, BankValueGetAsFixed(fromBankfile, currentSection, currentKey));
+            }
+            else if(BankValueIsType(fromBankfile, currentSection, currentKey, c_bankTypeString)){
+                BankValueSetFromString(backupBankfile, currentSection, currentKey, BankValueGetAsString(fromBankfile, currentSection, currentKey));
+            }
+            else if(BankValueIsType(fromBankfile, currentSection, currentKey, c_bankTypeInt)){
+                BankValueSetFromInt(backupBankfile, currentSection, currentKey, BankValueGetAsInt(fromBankfile, currentSection, currentKey));
+            }
+            else if(BankValueIsType(fromBankfile, currentSection, currentKey, c_bankTypePoint)){
+                BankValueSetFromPoint(backupBankfile, currentSection, currentKey, BankValueGetAsPoint(fromBankfile, currentSection, currentKey));
+            }
+            else if(BankValueIsType(fromBankfile, currentSection, currentKey, c_bankTypeUnit)){
+                value_unit = BankValueGetAsUnit(fromBankfile, currentSection, currentKey, 0, Point(0,0), 0);
+                BankValueSetFromUnit(backupBankfile, currentSection, currentKey, value_unit);
+                UnitRemove(value_unit);
+            }
+            else if(BankValueIsType(fromBankfile, currentSection, currentKey, c_bankTypeFlag)){
+                BankValueSetFromFlag(backupBankfile, currentSection, currentKey, BankValueGetAsFlag(fromBankfile, currentSection, currentKey));
+            }
+            else if(BankValueIsType(fromBankfile, currentSection, currentKey, c_bankTypeText)){
+                BankValueSetFromText(backupBankfile, currentSection, currentKey, BankValueGetAsText(fromBankfile, currentSection, currentKey));
+            }
+        }
+    }
+    BankSave(backupBankfile);
+}
+
+//classic backup save
+void Bank_Backup_Classic(int playerID){
+    const string bankName = "SwarmSpecialForcesClassic";
+    bank backupBank;
+
+    // if classic bank already exist, then  do nothing
+    if(BankExists(bankName, playerID)){
+        return;
+    }
+
+    backupBank = BankLoad(bankName, playerID);
+
+    Bank_Backup(gv_PlayerStats[playerID].bankfile, backupBank);
+
+    BankRemove(backupBank);
+}
+void Bank_MigrateTo_v2_00(int playerID){
+    int tmpInt;
+    int tmpInt2;
+    int tmpInt3;
+
+    Debug_ShowMessage("Bankfile migrated to v2.00");
+    
+    // store old throphies
+    // Terran Insane Duo Ftl 40:00
+    if(gv_PlayerStats[playerID].speedrunsTime[c_Part_Terran][4][1] != 0
+        && gv_PlayerStats[playerID].speedrunsTime[c_Part_Terran][4][1] < 40*60){
+        gv_PlayerStats[playerID].archivedAcv |= c_ArchivedAcv_P0D4DuoFtl;
+    }
+    // Terran Hc Duo
+    if(gv_PlayerStats[playerID].speedrunsTime[c_Part_Terran][5][1] != 0){
+        gv_PlayerStats[playerID].archivedAcv |= c_ArchivedAcv_P0D5Duo;
+    }
+    // Protoss Hard Solo Ftl 30:00
+    if(gv_PlayerStats[playerID].speedrunsTime[c_Part_Protoss][2][0] != 0
+        && gv_PlayerStats[playerID].speedrunsTime[c_Part_Terran][2][0] < 30*60){
+        gv_PlayerStats[playerID].archivedAcv |= c_ArchivedAcv_P1D2SoloFtl;
+    }
+    // Protoss Brutal Duo Ftl 45:00
+    if(gv_PlayerStats[playerID].speedrunsTime[c_Part_Protoss][3][1] != 0
+        && gv_PlayerStats[playerID].speedrunsTime[c_Part_Terran][3][1] < 45*60){
+        gv_PlayerStats[playerID].archivedAcv |= c_ArchivedAcv_P1D3DuoFtl;
+    }
+    // Protoss Insane Trio Ftl 1:00:00
+    if(gv_PlayerStats[playerID].speedrunsTime[c_Part_Protoss][4][2] != 0
+        && gv_PlayerStats[playerID].speedrunsTime[c_Part_Terran][4][2] < 60*60){
+        gv_PlayerStats[playerID].archivedAcv |= c_ArchivedAcv_P1D4TrioFtl;
+    }
+    // Protoss Hc Team
+    if(gv_PlayerStats[playerID].speedrunsTime[c_Part_Protoss][5][5] != 0){
+        gv_PlayerStats[playerID].archivedAcv |= c_ArchivedAcv_P1D5Team;
+    }
+
+    // reset speedruns
+    for (tmpInt = 0; tmpInt < gv_MaxAmountDifficulties ; tmpInt += 1 ) {
+        for (tmpInt2 = 0 ; tmpInt2 < gv_MaxAmountParts; tmpInt2 += 1 ) {
+            for (tmpInt3 = 0; tmpInt3 < gv_MaxAmountPlayers - 1; tmpInt3 += 1){
+                // delete everything except 6 player values
+                gv_PlayerStats[playerID].speedrunsTime[tmpInt2][tmpInt][tmpInt3] = 0;
+            }
+            // team wins are set to max time to have a little reward
+            if(gv_PlayerStats[playerID].speedrunsTime[tmpInt2][tmpInt][5] > 0){
+                gv_PlayerStats[playerID].speedrunsTime[tmpInt2][tmpInt][5] = gv_GameTimeMax;
+            }
+        }
+    }
+
+    // new default options
+    gv_PlayerStats[playerID].options_SpeedrunsDetails_Flag = false;
+    gv_PlayerStats[playerID].options_HeroPanelVisible = true;
+    gv_PlayerStats[playerID].options_HivePanelVisible = false;
+    gv_PlayerStats[playerID].options_InitialUnitSelection = c_InitialHeroSelection_Overlord;
+    gv_PlayerStats[playerID].options_ControlGroup_Flag[4]= true;
+    gv_PlayerStats[playerID].options_ControlGroup_Group[4] = 3;
+
+    BankKeyRemove(gv_PlayerStats[playerID].bankfile, "stats", "data");
+
+    return;
+}
+
+//Bank_Load functions
+    static bool Bank_Load_v0_18 (int playerID, string playerHandle) {
+        string tempString = "";
+        int tmpInt;
+        bool tmpbool;
+
+        if (BankVerify(gv_PlayerStats[playerID].bankfile) == false) {
+            return false;
+        }
+
+        tempString = BankValueGetAsString(gv_PlayerStats[playerID].bankfile, "stats", "data");
+        tempString = StarcodeDecryptString(tempString, (playerHandle + superDuperSecretString));
+        if (StarcodeValidateString(tempString, hashSecurityLevel)) {
+            tempString = StarcodeRemoveHashfromString(tempString, hashSecurityLevel);
+            tempString = StarcodeDecompressString(tempString);
+            StarcodeSetCode(tempString);
+            tmpInt = StarcodeGetIntegerValue(500);
+            tmpInt = 5; //gv_MaxAmountDifficulties -1
+            for ( ; tmpInt >= 0 ; tmpInt += -1 ) {
+                Acv_Split_SetFlagFromIdentifier(playerID, c_AcvIdentifier_BossT_Flamer, tmpInt, StarcodeGetIntegerValue(5) == 1);
+                Acv_Split_SetFlagFromIdentifier(playerID, c_AcvIdentifier_BossT_Fortress, tmpInt, StarcodeGetIntegerValue(5) == 1);
+                Acv_Split_SetFlagFromIdentifier(playerID, c_AcvIdentifier_BossT_Hammer, tmpInt, StarcodeGetIntegerValue(5) == 1);
+                Acv_Split_SetFlagFromIdentifier(playerID, c_AcvIdentifier_FlawlessP0, tmpInt, StarcodeGetIntegerValue(5) == 1);
+                gv_PlayerStats[playerID].speedrunsTime[0][tmpInt][0] = StarcodeGetIntegerValue(gv_GameTimeMax);
+                gv_PlayerStats[playerID].speedrunsTime[0][tmpInt][5] = StarcodeGetIntegerValue(gv_GameTimeMax);
+                gv_PlayerStats[playerID].speedrunsTime[0][tmpInt][1] = gv_PlayerStats[playerID].speedrunsTime[0][tmpInt][0];
+                gv_PlayerStats[playerID].speedrunsTime[0][tmpInt][2] = gv_PlayerStats[playerID].speedrunsTime[0][tmpInt][0];
+                gv_PlayerStats[playerID].speedrunsTime[0][tmpInt][3] = gv_PlayerStats[playerID].speedrunsTime[0][tmpInt][0];
+                gv_PlayerStats[playerID].speedrunsTime[0][tmpInt][4] = gv_PlayerStats[playerID].speedrunsTime[0][tmpInt][0];
+            }
+            tmpInt = StarcodeGetIntegerValue(123456789);
+            gv_PlayerStats[playerID].essences = StarcodeGetIntegerValue(123456);
+            gv_PlayerStats[playerID].scientists = StarcodeGetIntegerValue(123456);
+            gv_PlayerStats[playerID].wins[c_Part_Terran] = StarcodeGetIntegerValue(12345);
+            gv_PlayerStats[playerID].points = StarcodeGetIntegerValue(1234567);
+            gv_PlayerStats[playerID].kills = StarcodeGetIntegerValue(100000000);
+            tmpbool = (StarcodeGetIntegerValue(5) == 1);
+            tmpInt = StarcodeGetIntegerValue(100);
+            if (tmpbool) {
+                gv_PlayerStats[playerID].options_HeroSelection_Flag = true;
+                gv_PlayerStats[playerID].options_HeroSelection_Hero = tmpInt;
+            }
+            Bank_MigrateTo_v2_00(playerID);
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    static bool Bank_Load_v0_38 (int playerID, string playerHandle) {
+        string lightData = "";
+        string options = "";
+        int tmpInt;
+        int tmpInt2;
+        const fixed version = 0.38;
+
+        if (BankVerify(gv_PlayerStats[playerID].bankfile) == false) {
+            return false;
+        }
+
+        lightData = BankValueGetAsString(gv_PlayerStats[playerID].bankfile, "stats", "data");
+        lightData = StarcodeDecryptString(lightData, (playerHandle + superDuperSecretString));
+        options = BankValueGetAsString(gv_PlayerStats[playerID].bankfile, "options", "data");
+        options = StarcodeDecryptString(options, (playerHandle + superDuperSecretString));
+        if (StarcodeValidateString(lightData, hashSecurityLevel) && StarcodeValidateString(options, hashSecurityLevel)) {
+            lightData = StarcodeRemoveHashfromString(lightData, hashSecurityLevel);
+            lightData = StarcodeDecompressString(lightData);
+            StarcodeSetCode(lightData);
+            tmpInt = StarcodeGetIntegerValue(100000);
+            if (tmpInt != CeilingI(version * 1000.0)) {
+                return false;
+            }
+
+            tmpInt = StarcodeGetIntegerValue(500);
+            tmpInt = 5; //gv_MaxAmountDifficulties -1
+            for ( ; tmpInt >= 0 ; tmpInt += -1 ) {
+                Acv_Split_SetFlagFromIdentifier(playerID, c_AcvIdentifier_BossP_Thunder, tmpInt, StarcodeGetIntegerValue(5) == 1);
+                Acv_Split_SetFlagFromIdentifier(playerID, c_AcvIdentifier_BossP_Lightning, tmpInt, StarcodeGetIntegerValue(5) == 1);
+                Acv_Split_SetFlagFromIdentifier(playerID, c_AcvIdentifier_BossP_Madness, tmpInt, StarcodeGetIntegerValue(5) == 1);
+                Acv_Split_SetFlagFromIdentifier(playerID, c_AcvIdentifier_BossP_Atlantis, tmpInt, StarcodeGetIntegerValue(5) == 1);
+                Acv_Split_SetFlagFromIdentifier(playerID, c_AcvIdentifier_FlawlessP1, tmpInt, StarcodeGetIntegerValue(5) == 1);
+                Acv_Split_SetFlagFromIdentifier(playerID, c_AcvIdentifier_BossT_Flamer, tmpInt, StarcodeGetIntegerValue(5) == 1);
+                Acv_Split_SetFlagFromIdentifier(playerID, c_AcvIdentifier_BossT_Fortress, tmpInt, StarcodeGetIntegerValue(5) == 1);
+                Acv_Split_SetFlagFromIdentifier(playerID, c_AcvIdentifier_BossT_Hammer, tmpInt, StarcodeGetIntegerValue(5) == 1);
+                Acv_Split_SetFlagFromIdentifier(playerID, c_AcvIdentifier_FlawlessP0, tmpInt, StarcodeGetIntegerValue(5) == 1);
+                tmpInt2 = 1; //gv_MaxAmountParts -1
+                for ( ; tmpInt2 >= 0 ; tmpInt2 += -1 ) {
+                    gv_PlayerStats[playerID].speedrunsTime[tmpInt2][tmpInt][0] = StarcodeGetIntegerValue(gv_GameTimeMax);
+                    gv_PlayerStats[playerID].speedrunsTime[tmpInt2][tmpInt][5] = StarcodeGetIntegerValue(gv_GameTimeMax);
+                }
+            }
+            gv_PlayerStats[playerID].wins[c_Part_Protoss] = StarcodeGetIntegerValue(123456);
+            gv_PlayerStats[playerID].psiOrbs = StarcodeGetIntegerValue(123456);
+            gv_PlayerStats[playerID].essences = StarcodeGetIntegerValue(123456);
+            gv_PlayerStats[playerID].scientists = StarcodeGetIntegerValue(123456);
+            gv_PlayerStats[playerID].wins[c_Part_Terran] = StarcodeGetIntegerValue(12345);
+            gv_PlayerStats[playerID].points = StarcodeGetIntegerValue(1234567);
+            gv_PlayerStats[playerID].kills = StarcodeGetIntegerValue(100000000);
+            options = StarcodeRemoveHashfromString(options, hashSecurityLevel);
+            options = StarcodeDecompressString(options);
+            StarcodeSetCode(options);
+            tmpInt = StarcodeGetIntegerValue(500);
+            for ( tmpInt = 3; tmpInt >= 0 ; tmpInt += -1 ) {
+                gv_PlayerStats[playerID].options_ControlGroup_Flag[tmpInt]= (StarcodeGetIntegerValue(5) == 1);
+                gv_PlayerStats[playerID].options_ControlGroup_Group[tmpInt] = StarcodeGetIntegerValue(10);
+            }
+            gv_PlayerStats[playerID].options_HeroSelection_Flag = (StarcodeGetIntegerValue(5) == 1);
+            gv_PlayerStats[playerID].options_HeroSelection_Hero = StarcodeGetIntegerValue(100);
+            Bank_MigrateTo_v2_00(playerID);
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    static bool Bank_Load_v0_41 (int playerID, string playerHandle) {
+        string lightData ="";
+        string options ="";
+        int tmpInt;
+        int tmpInt2;
+        const fixed version = 0.41;
+
+        if (BankVerify(gv_PlayerStats[playerID].bankfile) == false) {
+            return false;
+        }
+
+        lightData = BankValueGetAsString(gv_PlayerStats[playerID].bankfile, "stats", "data");
+        lightData = StarcodeDecryptString(lightData, (playerHandle + superDuperSecretString));
+        if (StarcodeValidateString(lightData, hashSecurityLevel)) {
+            lightData = StarcodeRemoveHashfromString(lightData, hashSecurityLevel);
+            lightData = StarcodeDecompressString(lightData);
+            BankStorageSet(lightData);
+            gv_PlayerStats[playerID].kills = BankStorageRetrieveInt();
+            gv_PlayerStats[playerID].points = BankStorageRetrieveInt();
+            gv_PlayerStats[playerID].wins[c_Part_Terran] = BankStorageRetrieveInt();
+            gv_PlayerStats[playerID].scientists = BankStorageRetrieveInt();
+            gv_PlayerStats[playerID].essences = BankStorageRetrieveInt();
+            gv_PlayerStats[playerID].psiOrbs = BankStorageRetrieveInt();
+            gv_PlayerStats[playerID].wins[c_Part_Protoss] = BankStorageRetrieveInt();
+            gv_PlayerStats[playerID].tutorialCompleted = BankStorageRetrieveBool();
+            for ( tmpInt = 0; tmpInt <= 5 ; tmpInt += 1 ) {//gv_MaxAmountDifficulties -1
+                for ( tmpInt2 = 0 ; tmpInt2 <= 1; tmpInt2 += 1 ) {//gv_MaxAmountParts -1
+                    gv_PlayerStats[playerID].speedrunsTime[tmpInt2][tmpInt][5] = BankStorageRetrieveInt();
+                    gv_PlayerStats[playerID].speedrunsTime[tmpInt2][tmpInt][0] = BankStorageRetrieveInt();
+                    gv_PlayerStats[playerID].speedrunsTime[tmpInt2][tmpInt][1] = gv_PlayerStats[playerID].speedrunsTime[tmpInt2][tmpInt][0];
+                    gv_PlayerStats[playerID].speedrunsTime[tmpInt2][tmpInt][2] = gv_PlayerStats[playerID].speedrunsTime[tmpInt2][tmpInt][0];
+                    gv_PlayerStats[playerID].speedrunsTime[tmpInt2][tmpInt][3] = gv_PlayerStats[playerID].speedrunsTime[tmpInt2][tmpInt][0];
+                    gv_PlayerStats[playerID].speedrunsTime[tmpInt2][tmpInt][4] = gv_PlayerStats[playerID].speedrunsTime[tmpInt2][tmpInt][0];
+                }
+                Acv_Split_SetFlagFromIdentifier(playerID, c_AcvIdentifier_FlawlessP0, tmpInt, BankStorageRetrieveBool());
+                Acv_Split_SetFlagFromIdentifier(playerID, c_AcvIdentifier_BossT_Hammer, tmpInt, BankStorageRetrieveBool());
+                Acv_Split_SetFlagFromIdentifier(playerID, c_AcvIdentifier_BossT_Fortress, tmpInt, BankStorageRetrieveBool());
+                Acv_Split_SetFlagFromIdentifier(playerID, c_AcvIdentifier_BossT_Flamer, tmpInt, BankStorageRetrieveBool());
+                Acv_Split_SetFlagFromIdentifier(playerID, c_AcvIdentifier_FlawlessP1, tmpInt, BankStorageRetrieveBool());
+                Acv_Split_SetFlagFromIdentifier(playerID, c_AcvIdentifier_BossP_Atlantis, tmpInt, BankStorageRetrieveBool());
+                Acv_Split_SetFlagFromIdentifier(playerID, c_AcvIdentifier_BossP_Madness, tmpInt, BankStorageRetrieveBool());
+                Acv_Split_SetFlagFromIdentifier(playerID, c_AcvIdentifier_BossP_Lightning, tmpInt, BankStorageRetrieveBool());
+                Acv_Split_SetFlagFromIdentifier(playerID, c_AcvIdentifier_BossP_Thunder, tmpInt, BankStorageRetrieveBool());
+            }
+            tmpInt = BankStorageRetrieveInt();
+            tmpInt = BankStorageRetrieveInt();
+            if (BankStorageCheckError() || (tmpInt != CeilingI(version * 1000.0))) {
+                return false;
+            }
+            options = BankValueGetAsString(gv_PlayerStats[playerID].bankfile, "stats", "options");
+            BankStorageSet(options);
+            gv_PlayerStats[playerID].options_HeroSelection_Flag = BankStorageRetrieveBool();
+            gv_PlayerStats[playerID].options_HeroSelection_Hero = BankStorageRetrieveInt();
+            for ( tmpInt = 0 ; tmpInt <= 3; tmpInt += 1 ) { //options_ControlGroup_Amount -1
+                gv_PlayerStats[playerID].options_ControlGroup_Flag[tmpInt]= BankStorageRetrieveBool();
+                gv_PlayerStats[playerID].options_ControlGroup_Group[tmpInt] = BankStorageRetrieveInt();
+            }
+            if (BankStorageCheckError()) {
+                return false;
+            }
+            Bank_MigrateTo_v2_00(playerID);
+
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    static bool Bank_Load_v1_00 (int playerID, string playerHandle) {
+        string lightData ="";
+        string options="";
+        int tmpInt;
+        int tmpInt2;
+        const fixed version = 1.0;
+
+        if (BankVerify(gv_PlayerStats[playerID].bankfile) == false) {
+            return false;
+        }
+
+        lightData = BankValueGetAsString(gv_PlayerStats[playerID].bankfile, "stats", "data");
+        lightData = StarcodeDecryptString(lightData, (playerHandle + superDuperSecretString));
+        if (StarcodeValidateString(lightData, hashSecurityLevel)) {
+            lightData = StarcodeRemoveHashfromString(lightData, hashSecurityLevel);
+            lightData = StarcodeDecompressString(lightData);
+            BankStorageSet(lightData);
+            gv_PlayerStats[playerID].kills = BankStorageRetrieveInt();
+            gv_PlayerStats[playerID].points = BankStorageRetrieveInt();
+            gv_PlayerStats[playerID].wins[c_Part_Terran] = BankStorageRetrieveInt();
+            gv_PlayerStats[playerID].scientists = BankStorageRetrieveInt();
+            gv_PlayerStats[playerID].essences = BankStorageRetrieveInt();
+            gv_PlayerStats[playerID].psiOrbs = BankStorageRetrieveInt();
+            gv_PlayerStats[playerID].wins[c_Part_Protoss] = BankStorageRetrieveInt();
+            gv_PlayerStats[playerID].tutorialCompleted = BankStorageRetrieveBool();
+            for ( tmpInt = 0; tmpInt <= 5 ; tmpInt += 1 ) {//gv_MaxAmountDifficulties -1
+                for ( tmpInt2 = 0 ; tmpInt2 <= 1; tmpInt2 += 1 ) {//gv_MaxAmountParts -1
+                    gv_PlayerStats[playerID].speedrunsTime[tmpInt2][tmpInt][5] = BankStorageRetrieveInt();
+                    gv_PlayerStats[playerID].speedrunsTime[tmpInt2][tmpInt][0] = BankStorageRetrieveInt();
+                    gv_PlayerStats[playerID].speedrunsTime[tmpInt2][tmpInt][1] = gv_PlayerStats[playerID].speedrunsTime[tmpInt2][tmpInt][0];
+                    gv_PlayerStats[playerID].speedrunsTime[tmpInt2][tmpInt][2] = gv_PlayerStats[playerID].speedrunsTime[tmpInt2][tmpInt][0];
+                    gv_PlayerStats[playerID].speedrunsTime[tmpInt2][tmpInt][3] = gv_PlayerStats[playerID].speedrunsTime[tmpInt2][tmpInt][0];
+                    gv_PlayerStats[playerID].speedrunsTime[tmpInt2][tmpInt][4] = gv_PlayerStats[playerID].speedrunsTime[tmpInt2][tmpInt][0];
+                }
+                Acv_Split_SetFlagFromIdentifier(playerID, c_AcvIdentifier_FlawlessP0, tmpInt, BankStorageRetrieveBool());
+                Acv_Split_SetFlagFromIdentifier(playerID, c_AcvIdentifier_BossT_Hammer, tmpInt, BankStorageRetrieveBool());
+                Acv_Split_SetFlagFromIdentifier(playerID, c_AcvIdentifier_BossT_Fortress, tmpInt, BankStorageRetrieveBool());
+                Acv_Split_SetFlagFromIdentifier(playerID, c_AcvIdentifier_BossT_Flamer, tmpInt, BankStorageRetrieveBool());
+                Acv_Split_SetFlagFromIdentifier(playerID, c_AcvIdentifier_FlawlessP1, tmpInt, BankStorageRetrieveBool());
+                Acv_Split_SetFlagFromIdentifier(playerID, c_AcvIdentifier_BossP_Atlantis, tmpInt, BankStorageRetrieveBool());
+                Acv_Split_SetFlagFromIdentifier(playerID, c_AcvIdentifier_BossP_Madness, tmpInt, BankStorageRetrieveBool());
+                Acv_Split_SetFlagFromIdentifier(playerID, c_AcvIdentifier_BossP_Lightning, tmpInt, BankStorageRetrieveBool());
+                Acv_Split_SetFlagFromIdentifier(playerID, c_AcvIdentifier_BossP_Thunder, tmpInt, BankStorageRetrieveBool());
+            }
+            tmpInt = BankStorageRetrieveInt();
+            tmpInt = BankStorageRetrieveInt();
+            if ((BankStorageCheckError() || (tmpInt != CeilingI((version * 1000.0))))) {
+                return false;
+            }
+
+            options = BankValueGetAsString(gv_PlayerStats[playerID].bankfile, "stats", "options");
+            BankStorageSet(options);
+            gv_PlayerStats[playerID].options_HeroSelection_Flag = BankStorageRetrieveBool();
+            gv_PlayerStats[playerID].options_HeroSelection_Hero = BankStorageRetrieveInt();
+            for ( tmpInt = 0 ; tmpInt <= 3; tmpInt += 1 ) { //options_ControlGroup_Amount -1
+                gv_PlayerStats[playerID].options_ControlGroup_Flag[tmpInt]= BankStorageRetrieveBool();
+                gv_PlayerStats[playerID].options_ControlGroup_Group[tmpInt] = BankStorageRetrieveInt();
+            }
+            if (BankStorageCheckError()) {
+                return false;
+            }
+            Bank_MigrateTo_v2_00(playerID);
+
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    static bool Bank_Load_v1_06 (int playerID, string playerHandle) {
+        string lightData ="";
+        string options ="";
+        int tmpInt;
+        int tmpInt2;
+        const fixed version = 1.06;
+
+        if (BankVerify(gv_PlayerStats[playerID].bankfile) == false) {
+            return false;
+        }
+
+        lightData = BankValueGetAsString(gv_PlayerStats[playerID].bankfile, "stats", "data");
+        lightData = StarcodeDecryptString(lightData, (playerHandle + superDuperSecretString));
+        if (StarcodeValidateString(lightData, hashSecurityLevel) == true) {
+            lightData = StarcodeRemoveHashfromString(lightData, hashSecurityLevel);
+            lightData = StarcodeDecompressString(lightData);
+            BankStorageSet(lightData);
+            gv_PlayerStats[playerID].kills = BankStorageRetrieveInt();
+            gv_PlayerStats[playerID].points = BankStorageRetrieveInt();
+            gv_PlayerStats[playerID].wins[c_Part_Terran] = BankStorageRetrieveInt();
+            gv_PlayerStats[playerID].scientists = BankStorageRetrieveInt();
+            gv_PlayerStats[playerID].essences = BankStorageRetrieveInt();
+            gv_PlayerStats[playerID].psiOrbs = BankStorageRetrieveInt();
+            gv_PlayerStats[playerID].wins[c_Part_Protoss] = BankStorageRetrieveInt();
+            gv_PlayerStats[playerID].tutorialCompleted = BankStorageRetrieveBool();
+            for ( tmpInt = 0; tmpInt <= 5 ; tmpInt += 1 ) {//gv_MaxAmountDifficulties -1
+                for ( tmpInt2 = 0 ; tmpInt2 <= 1; tmpInt2 += 1 ) {//gv_MaxAmountParts -1
+                    gv_PlayerStats[playerID].speedrunsTime[tmpInt2][tmpInt][5] = BankStorageRetrieveInt();
+                    gv_PlayerStats[playerID].speedrunsTime[tmpInt2][tmpInt][0] = BankStorageRetrieveInt();
+                    gv_PlayerStats[playerID].speedrunsTime[tmpInt2][tmpInt][1] = gv_PlayerStats[playerID].speedrunsTime[tmpInt2][tmpInt][0];
+                    gv_PlayerStats[playerID].speedrunsTime[tmpInt2][tmpInt][2] = gv_PlayerStats[playerID].speedrunsTime[tmpInt2][tmpInt][0];
+                    gv_PlayerStats[playerID].speedrunsTime[tmpInt2][tmpInt][3] = gv_PlayerStats[playerID].speedrunsTime[tmpInt2][tmpInt][0];
+                    gv_PlayerStats[playerID].speedrunsTime[tmpInt2][tmpInt][4] = gv_PlayerStats[playerID].speedrunsTime[tmpInt2][tmpInt][0];
+                }
+                Acv_Split_SetFlagFromIdentifier(playerID, c_AcvIdentifier_FlawlessP0, tmpInt, BankStorageRetrieveBool());
+                Acv_Split_SetFlagFromIdentifier(playerID, c_AcvIdentifier_BossT_Hammer, tmpInt, BankStorageRetrieveBool());
+                Acv_Split_SetFlagFromIdentifier(playerID, c_AcvIdentifier_BossT_Fortress, tmpInt, BankStorageRetrieveBool());
+                Acv_Split_SetFlagFromIdentifier(playerID, c_AcvIdentifier_BossT_Flamer, tmpInt, BankStorageRetrieveBool());
+                Acv_Split_SetFlagFromIdentifier(playerID, c_AcvIdentifier_FlawlessP1, tmpInt, BankStorageRetrieveBool());
+                Acv_Split_SetFlagFromIdentifier(playerID, c_AcvIdentifier_BossP_Atlantis, tmpInt, BankStorageRetrieveBool());
+                Acv_Split_SetFlagFromIdentifier(playerID, c_AcvIdentifier_BossP_Madness, tmpInt, BankStorageRetrieveBool());
+                Acv_Split_SetFlagFromIdentifier(playerID, c_AcvIdentifier_BossP_Lightning, tmpInt, BankStorageRetrieveBool());
+                Acv_Split_SetFlagFromIdentifier(playerID, c_AcvIdentifier_BossP_Thunder, tmpInt, BankStorageRetrieveBool());
+            }
+            tmpInt = BankStorageRetrieveInt();
+            tmpInt = BankStorageRetrieveInt();
+            if (BankStorageCheckError() || (tmpInt != CeilingI(version * 1000.0))) {
+                return false;
+            }
+
+            options = BankValueGetAsString(gv_PlayerStats[playerID].bankfile, "stats", "options");
+            BankStorageSet(options);
+            gv_PlayerStats[playerID].options_HeroSelection_Flag = BankStorageRetrieveBool();
+            gv_PlayerStats[playerID].options_HeroSelection_Hero = BankStorageRetrieveInt();
+            for ( tmpInt = 0 ; tmpInt <= 3; tmpInt += 1 ) { //options_ControlGroup_Amount -1
+                gv_PlayerStats[playerID].options_ControlGroup_Flag[tmpInt]= BankStorageRetrieveBool();
+                gv_PlayerStats[playerID].options_ControlGroup_Group[tmpInt] = BankStorageRetrieveInt();
+            }
+            if (BankStorageCheckError()) {
+                return false;
+            }
+
+            gv_PlayerStats[playerID].options_InitialUnitSelection = c_InitialHeroSelection_Overlord;
+            gv_PlayerStats[playerID].options_SpeedrunsDetails_Flag = false;
+            gv_PlayerStats[playerID].options_HivePanelVisible = false;
+            gv_PlayerStats[playerID].options_HeroPanelVisible = true;
+
+            Bank_MigrateTo_v2_00(playerID);
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    static bool Bank_Load_v2_00 (int playerID, string playerHandle) {
+        string tmpStr = "";
+        int tmpInt;
+        int tmpInt2;
+        int tmpInt3;
+        const fixed version = 2.0;
+
+
+        if (!BankVerify(gv_PlayerStats[playerID].bankfile)) {
+            return false;
+        }
+
+        //light data
+            tmpStr = StarcodeDecryptString(BankValueGetAsString(gv_PlayerStats[playerID].bankfile, "stats", "lightData"), (playerHandle + superDuperSecretString));
+            if (!StarcodeValidateString(tmpStr, hashSecurityLevel)) {
+                return false;
+            }
+            tmpStr = StarcodeDecompressString(StarcodeRemoveHashfromString(tmpStr, hashSecurityLevel));
+            BankStorageSet(tmpStr);
+            gv_PlayerStats[playerID].kills = BankStorageRetrieveInt();
+            gv_PlayerStats[playerID].points = BankStorageRetrieveInt();
+            gv_PlayerStats[playerID].scientists = BankStorageRetrieveInt();
+            gv_PlayerStats[playerID].essences = BankStorageRetrieveInt();
+            gv_PlayerStats[playerID].psiOrbs = BankStorageRetrieveInt();
+            gv_PlayerStats[playerID].moopyHats = BankStorageRetrieveInt();
+            tmpInt = BankStorageRetrieveInt();
+            tmpInt = BankStorageRetrieveInt();
+            if (BankStorageCheckError() || tmpInt != CeilingI(version * 1000.0)) {
+                return false;
+            }
+
+        //heavy data
+            tmpStr = BankValueGetAsString(gv_PlayerStats[playerID].bankfile, "stats", "heavyData");
+            tmpStr = StarcodeDecryptString(tmpStr, (playerHandle + superDuperSecretString));
+            if (!StarcodeValidateString(tmpStr, hashSecurityLevel)) {
+                return false;
+            }
+            tmpStr = StarcodeDecompressString(StarcodeRemoveHashfromString(tmpStr, hashSecurityLevel));
+            BankStorageSet(tmpStr);
+
+            for(tmpInt2 = 0; tmpInt2 < gv_MaxAmountParts; tmpInt2 +=1){
+                gv_PlayerStats[playerID].wins[tmpInt2] = BankStorageRetrieveInt();
+            }
+            for ( tmpInt = 0; tmpInt < gv_MaxAmountDifficulties ; tmpInt += 1 ) {
+                for ( tmpInt2 = 0 ; tmpInt2 < gv_MaxAmountParts; tmpInt2 += 1 ) {
+                    for (tmpInt3 = 0; tmpInt3 < gv_MaxAmountPlayers; tmpInt3 += 1){
+                        gv_PlayerStats[playerID].speedrunsTime[tmpInt2][tmpInt][tmpInt3] = BankStorageRetrieveInt();
+                    }
+                }
+            }
+            for (tmpInt = 0; tmpInt < 4; tmpInt += 1){
+                gv_PlayerStats[playerID].bossKills[tmpInt] = BankStorageRetrieveInt();
+            }
+            gv_PlayerStats[playerID].flawless = BankStorageRetrieveInt();
+            gv_PlayerStats[playerID].tutorialCompleted = BankStorageRetrieveBool();
+            gv_PlayerStats[playerID].archivedAcv = BankStorageRetrieveInt();
+            tmpInt = BankStorageRetrieveInt();
+            tmpInt = BankStorageRetrieveInt();
+            if (BankStorageCheckError() || tmpInt != CeilingI(version * 1000.0)) {
+                return false;
+            }
+
+
+        //options
+            tmpStr = BankValueGetAsString(gv_PlayerStats[playerID].bankfile, "stats", "options");
+            BankStorageSet(tmpStr);
+            gv_PlayerStats[playerID].options_HeroSelection_Hero = BankStorageRetrieveInt();
+            gv_PlayerStats[playerID].options_HeroSelection_Flag = BankStorageRetrieveBool();
+            gv_PlayerStats[playerID].options_SpeedrunsDetails_Flag = BankStorageRetrieveBool();
+            gv_PlayerStats[playerID].options_HeroPanelVisible = BankStorageRetrieveBool();
+            gv_PlayerStats[playerID].options_HivePanelVisible = BankStorageRetrieveBool();
+            gv_PlayerStats[playerID].options_InitialUnitSelection = BankStorageRetrieveInt();
+            for ( tmpInt = 0 ; tmpInt <= 4; tmpInt += 1 ) { //options_ControlGroup_Amount -1
+                gv_PlayerStats[playerID].options_ControlGroup_Flag[tmpInt]= BankStorageRetrieveBool();
+                gv_PlayerStats[playerID].options_ControlGroup_Group[tmpInt] = BankStorageRetrieveInt();
+            }
+            if (BankStorageCheckError()) {
+                return false;
+            }
+
+        return true;
+    }
+    static bool Bank_Load_test (int playerID, string playerHandle) {
+        string tmpStr = "";
+        int tmpInt;
+        int tmpInt2;
+        int tmpInt3;
+        const fixed version = 2.0;
+
+
+        if (!BankVerify(gv_PlayerStats[playerID].bankfile)) {
+            return false;
+        }
+
+        //light data
+            tmpStr = StarcodeDecryptString(BankValueGetAsString(gv_PlayerStats[playerID].bankfile, "stats", "lightData"), (playerHandle + superDuperSecretString));
+            if (!StarcodeValidateString(tmpStr, hashSecurityLevel)) {
+                return false;
+            }
+            tmpStr = StarcodeDecompressString(StarcodeRemoveHashfromString(tmpStr, hashSecurityLevel));
+            BankStorageSet(tmpStr);
+            gv_PlayerStats[playerID].kills = BankStorageRetrieveInt();
+            gv_PlayerStats[playerID].points = BankStorageRetrieveInt();
+            gv_PlayerStats[playerID].scientists = BankStorageRetrieveInt();
+            gv_PlayerStats[playerID].essences = BankStorageRetrieveInt();
+            gv_PlayerStats[playerID].psiOrbs = BankStorageRetrieveInt();
+            gv_PlayerStats[playerID].moopyHats = BankStorageRetrieveInt();
+            tmpInt = BankStorageRetrieveInt();
+            tmpInt = BankStorageRetrieveInt();
+            if (BankStorageCheckError() || tmpInt != CeilingI(version * 1000.0)) {
+                return false;
+            }
+
+        //heavy data
+            tmpStr = BankValueGetAsString(gv_PlayerStats[playerID].bankfile, "stats", "heavyData");
+            tmpStr = StarcodeDecryptString(tmpStr, (playerHandle + superDuperSecretString));
+            if (!StarcodeValidateString(tmpStr, hashSecurityLevel)) {
+                return false;
+            }
+            tmpStr = StarcodeDecompressString(StarcodeRemoveHashfromString(tmpStr, hashSecurityLevel));
+            BankStorageSet(tmpStr);
+
+            for(tmpInt2 = 0; tmpInt2 < gv_MaxAmountParts; tmpInt2 +=1){
+                gv_PlayerStats[playerID].wins[tmpInt2] = BankStorageRetrieveInt();
+            }
+            for ( tmpInt = 0; tmpInt < gv_MaxAmountDifficulties ; tmpInt += 1 ) {
+                for ( tmpInt2 = 0 ; tmpInt2 < gv_MaxAmountParts; tmpInt2 += 1 ) {
+                    for (tmpInt3 = 0; tmpInt3 < gv_MaxAmountPlayers; tmpInt3 += 1){
+                        gv_PlayerStats[playerID].speedrunsTime[tmpInt2][tmpInt][tmpInt3] = BankStorageRetrieveInt();
+                    }
+                }
+            }
+            for (tmpInt = 0; tmpInt < 4; tmpInt += 1){
+                gv_PlayerStats[playerID].bossKills[tmpInt] = BankStorageRetrieveInt();
+            }
+            gv_PlayerStats[playerID].flawless = BankStorageRetrieveInt();
+            gv_PlayerStats[playerID].tutorialCompleted = BankStorageRetrieveBool();
+            gv_PlayerStats[playerID].archivedAcv = BankStorageRetrieveInt();
+            tmpInt = BankStorageRetrieveInt();
+            tmpInt = BankStorageRetrieveInt();
+            if (BankStorageCheckError() || tmpInt != CeilingI(version * 1000.0)) {
+                return false;
+            }
+
+
+        //options
+            tmpStr = BankValueGetAsString(gv_PlayerStats[playerID].bankfile, "stats", "options");
+            BankStorageSet(tmpStr);
+            gv_PlayerStats[playerID].options_HeroSelection_Hero = BankStorageRetrieveInt();
+            gv_PlayerStats[playerID].options_HeroSelection_Flag = BankStorageRetrieveBool();
+            gv_PlayerStats[playerID].options_SpeedrunsDetails_Flag = BankStorageRetrieveBool();
+            gv_PlayerStats[playerID].options_HeroPanelVisible = BankStorageRetrieveBool();
+            gv_PlayerStats[playerID].options_HivePanelVisible = BankStorageRetrieveBool();
+            gv_PlayerStats[playerID].options_InitialUnitSelection = BankStorageRetrieveInt();
+            for ( tmpInt = 0 ; tmpInt <= 4; tmpInt += 1 ) { //options_ControlGroup_Amount -1
+                gv_PlayerStats[playerID].options_ControlGroup_Flag[tmpInt]= BankStorageRetrieveBool();
+                gv_PlayerStats[playerID].options_ControlGroup_Group[tmpInt] = BankStorageRetrieveInt();
+            }
+            if (BankStorageCheckError()) {
+                return false;
+            }
+
+        return true;
+    }
+//
+bool Bank_LoadSwitch_Handler(int playerID, string playerHandle){
+    fixed ver = BankValueGetAsFixed(gv_PlayerStats[playerID].bankfile, "stats", "version");
+    if(ver < 2 && gv_BankSavingEnabled){
+        Bank_Backup_Classic(playerID);
+    }
+    if (ver == 0.18)      { return Bank_Load_v0_18(playerID, playerHandle); }
+    else if (ver == 0.38) { return Bank_Load_v0_38(playerID, playerHandle); }
+    else if (ver == 0.41) { return Bank_Load_v0_41(playerID, playerHandle); }
+    else if (ver == 1.0)  { return Bank_Load_v1_00(playerID, playerHandle); }
+    else if (ver == 1.06) { return Bank_Load_v1_06(playerID, playerHandle); }
+    else if (ver == 2.00) { return Bank_Load_v2_00(playerID, playerHandle); }
+    else {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, StringToText("Test version Bank_Loading!"));
+        return Bank_Load_test(playerID, playerHandle);
+    }
+}
+static bool Bank_LoadSwitch(int playerID){
+    string playerHandle;
+    if(PlayerType(playerID) != c_playerTypeComputer){
+        playerHandle = PlayerHandle(playerID);
+    }
+    return Bank_LoadSwitch_Handler(playerID, playerHandle);
+}
+
+//initializes or reset everything bank related
+void Bank_ResetStats(int playerID){
+    int tmpInt;
+    int tmpInt2;
+    int tmpInt3;
+
+    for (tmpInt = 0; tmpInt < gv_MaxAmountDifficulties; tmpInt += 1) {
+        for (tmpInt2 = 0; tmpInt2 < gv_MaxAmountParts; tmpInt2 += 1) {
+            for (tmpInt3 = 0; tmpInt3 < gv_MaxAmountPlayers; tmpInt3 +=1 ){
+                gv_PlayerStats[playerID].speedrunsTime[tmpInt2][tmpInt][tmpInt3] = 0;
+            }
+        }
+    }
+    gv_PlayerStats[playerID].flawless = 0;
+    gv_PlayerStats[playerID].bossKills[0] = 0;
+    gv_PlayerStats[playerID].bossKills[1] = 0;
+    gv_PlayerStats[playerID].bossKills[2] = 0;
+    gv_PlayerStats[playerID].bossKills[3] = 0;
+    gv_PlayerStats[playerID].essences = 0;
+    gv_PlayerStats[playerID].psiOrbs = 0;
+    gv_PlayerStats[playerID].scientists = 0;
+    gv_PlayerStats[playerID].moopyHats = 0;
+    for ( tmpInt2 = 0; tmpInt2 < gv_MaxAmountParts ; tmpInt2 += 1 ) {
+        gv_PlayerStats[playerID].wins[tmpInt2] = 0;
+    }
+    gv_PlayerStats[playerID].points = 0;
+    gv_PlayerStats[playerID].kills = 0;
+    gv_PlayerStats[playerID].archivedAcv = 0;
+    gv_PlayerStats[playerID].tutorialCompleted = false;
+
+    
+    gv_PlayerStats[playerID].options_HeroSelection_Flag = false;
+    gv_PlayerStats[playerID].options_HeroSelection_Hero = 0;
+    gv_PlayerStats[playerID].options_SpeedrunsDetails_Flag = false;
+    gv_PlayerStats[playerID].options_HeroPanelVisible = true;
+
+    gv_PlayerStats[playerID].options_ControlGroup_Flag [0] = true;
+    gv_PlayerStats[playerID].options_ControlGroup_Group[0] = 1;
+    gv_PlayerStats[playerID].options_ControlGroup_Flag [1] = true;
+    gv_PlayerStats[playerID].options_ControlGroup_Group[1] = 2;
+    gv_PlayerStats[playerID].options_ControlGroup_Flag [2] = true;
+    gv_PlayerStats[playerID].options_ControlGroup_Group[2] = 3;
+    gv_PlayerStats[playerID].options_ControlGroup_Flag [3] = true;
+    gv_PlayerStats[playerID].options_ControlGroup_Group[3] = 3;
+    gv_PlayerStats[playerID].options_ControlGroup_Flag [4] = true;
+    gv_PlayerStats[playerID].options_ControlGroup_Group[4] = 3;
+
+    gv_PlayerStats[playerID].options_SpeedrunsDetails_Flag = false;
+    gv_PlayerStats[playerID].options_HeroPanelVisible = true;
+    gv_PlayerStats[playerID].options_HivePanelVisible = false;
+    gv_PlayerStats[playerID].options_InitialUnitSelection = c_InitialHeroSelection_Overlord;
+
+}
+
+static void Bank_Save_Options (int playerID) {
+    int tmpInt;
+
+    gv_PlayerStats[playerID].saveFlag_Options = false;
+    BankStorageReset();
+    BankStorageAddInt(gv_PlayerStats[playerID].options_HeroSelection_Hero);
+    BankStorageAddBool(gv_PlayerStats[playerID].options_HeroSelection_Flag);
+    BankStorageAddBool(gv_PlayerStats[playerID].options_SpeedrunsDetails_Flag);
+    BankStorageAddBool(gv_PlayerStats[playerID].options_HeroPanelVisible);
+    BankStorageAddBool(gv_PlayerStats[playerID].options_HivePanelVisible);
+    BankStorageAddInt(gv_PlayerStats[playerID].options_InitialUnitSelection);
+    
+    for ( tmpInt = 0; tmpInt <= gv_Options_ControlGroup_Amount - 1 ; tmpInt += 1 ) {
+        BankStorageAddBool(gv_PlayerStats[playerID].options_ControlGroup_Flag[tmpInt]);
+        BankStorageAddInt(gv_PlayerStats[playerID].options_ControlGroup_Group[tmpInt]);
+    }
+    BankValueSetFromString(gv_PlayerStats[playerID].bankfile, "stats", "options", BankStorageGetString());
+    BankSave(gv_PlayerStats[playerID].bankfile);
+}
+
+// saves data that changes often (kills, points, etc)
+static void Bank_Save_Light (int playerID, string playerHandle) { 
+    int versionInt = CeilingI(version * 1000.0);
+
+    gv_PlayerStats[playerID].saveFlag_Any = false;
+    BankStorageReset();
+    BankStorageAddInt(gv_PlayerStats[playerID].kills);
+    BankStorageAddInt(gv_PlayerStats[playerID].points);
+    BankStorageAddInt(gv_PlayerStats[playerID].scientists);
+    BankStorageAddInt(gv_PlayerStats[playerID].essences);
+    BankStorageAddInt(gv_PlayerStats[playerID].psiOrbs);
+    BankStorageAddInt(gv_PlayerStats[playerID].moopyHats);
+    BankStorageAddInt(RandomInt(0, 500));
+    BankStorageAddInt(versionInt);
+    if (BankStorageCheckError()) {
+        return ;
+    }
+
+    BankValueSetFromString(gv_PlayerStats[playerID].bankfile, "stats", "lightData", StarcodeEncryptString(StarcodeHashString(StarcodeCompressString(BankStorageGetString()), hashSecurityLevel), (playerHandle + superDuperSecretString)));
+    BankSave(gv_PlayerStats[playerID].bankfile);
+}
+
+// saves data that is requires low amount of savings (speedrun time, flawless, flags)
+static void Bank_Save_Heavy(int playerID, string playerHandle){
+    int tmpInt;
+    int tmpInt2;
+    int tmpInt3;
+    int versionInt = CeilingI(version * 1000.0);
+
+    gv_PlayerStats[playerID].saveFlag_Heavy = false;
+    BankStorageReset();
+    for ( tmpInt2 = 0; tmpInt2 < gv_MaxAmountParts ; tmpInt2 += 1 ) {
+        BankStorageAddInt(gv_PlayerStats[playerID].wins[tmpInt2]);
+    }
+    for ( tmpInt = 0; tmpInt < gv_MaxAmountDifficulties ; tmpInt += 1 ) {
+        for ( tmpInt2 = 0; tmpInt2 < gv_MaxAmountParts ; tmpInt2 += 1 ) {
+            for (tmpInt3 = 0; tmpInt3 < gv_MaxAmountPlayers ; tmpInt3 += 1) {
+                BankStorageAddInt(gv_PlayerStats[playerID].speedrunsTime[tmpInt2][tmpInt][tmpInt3]);
+            }
+        }
+    }
+    for (tmpInt = 0; tmpInt < 4; tmpInt += 1){
+        BankStorageAddInt(gv_PlayerStats[playerID].bossKills[tmpInt]);
+    }
+    BankStorageAddInt(gv_PlayerStats[playerID].flawless);
+    BankStorageAddBool(gv_PlayerStats[playerID].tutorialCompleted);
+    BankStorageAddInt(gv_PlayerStats[playerID].archivedAcv);
+    BankStorageAddInt(RandomInt(0, 500));
+    BankStorageAddInt(versionInt);
+
+    BankValueSetFromString(gv_PlayerStats[playerID].bankfile, "stats", "heavyData", StarcodeEncryptString(StarcodeHashString(StarcodeCompressString(BankStorageGetString()), hashSecurityLevel), (playerHandle + superDuperSecretString)));
+    BankSave(gv_PlayerStats[playerID].bankfile);
+}
+
+// saves always light; saves heavy and options only if needed
+void Bank_Save (int playerID, string playerHandle) {
+    if (gv_BankSavingEnabled == false){ 
+        gv_PlayerStats[playerID].saveFlag_Any = false;
+        gv_PlayerStats[playerID].saveFlag_Heavy = false;
+        gv_PlayerStats[playerID].saveFlag_Options = false;
+        return;
+    }
+    BankValueSetFromFixed(gv_PlayerStats[playerID].bankfile, "stats", "version", version);
+
+    Bank_Save_Light(playerID, playerHandle);
+    if(gv_PlayerStats[playerID].saveFlag_Heavy){
+        Bank_Save_Heavy(playerID, playerHandle);
+    }
+    if (gv_PlayerStats[playerID].saveFlag_Options) {
+        Bank_Save_Options(playerID);
+    }
+}
+
+// saves everything forcefully, try to avoid using if possible
+// currently used by votekick, manualy -save command and at the beginning for backups
+void Bank_Save_ForcedAll(int playerID){
+    string playerHandle;
+    BankValueSetFromFixed(gv_PlayerStats[playerID].bankfile, "stats", "version", version);
+    gv_PlayerStats[playerID].saveFlag_Any = true;
+    gv_PlayerStats[playerID].saveFlag_Heavy = true;
+    gv_PlayerStats[playerID].saveFlag_Options = true;
+    if(PlayerType(playerID) != c_playerTypeComputer){
+        playerHandle = PlayerHandle(playerID);
+    }
+    Bank_Save(playerID, playerHandle);
+}
+
+// resets bank variables and save those to bank
+void Bank_Reset(int playerID){
+    Bank_ResetStats(playerID);
+    Bank_Save_ForcedAll(playerID);
+}
+
+// forces a full bank save
+bool Bank_ManualSave (bool testConds, bool runActions) {
+    Bank_Save_ForcedAll(EventPlayer());
+    return true;
+}
+
+void Bank_Save_RequestSave(int playerID){
+    gv_PlayerStats[playerID].saveFlag_Any = true;
+
+    if(bank_Save_RequestRunning == false){
+        bank_Save_RequestRunning = true;
+        TriggerExecute(Bank_Save_RequestQueueTrigger, true, false);
+    }
+}
+
+bool Bank_Save_RequestSaveQueue(bool testConds, bool runActions){
+    bool tmpFlag;
+    int lastPlayer = 0;
+    int i;
+    string playerHandle;
+
+    bank_Save_RequestRunning = true;
+    while (true){
+        Wait(0.0, c_timeGame);
+
+        //search for next player to save. start with lastPlayer
+        tmpFlag = false;
+        for (i = lastPlayer+1; i <= gv_MaxAmountPlayers; i += 1) {
+            if(gv_PlayerStats[i].saveFlag_Any
+                || gv_PlayerStats[i].saveFlag_Heavy
+                || gv_PlayerStats[i].saveFlag_Options){
+                    lastPlayer = i;
+                    tmpFlag = true;
+            }
+        }
+        if(tmpFlag == false){
+            for (i = 1; i < lastPlayer; i += 1) {
+                if(gv_PlayerStats[i].saveFlag_Any
+                    || gv_PlayerStats[i].saveFlag_Heavy
+                    || gv_PlayerStats[i].saveFlag_Options){
+                        lastPlayer = i;
+                        tmpFlag = true;
+                }
+            }
+        }
+        //stop if no player found which request saving
+        if(tmpFlag == false) {break;}
+
+        if(PlayerType(lastPlayer) != c_playerTypeComputer){
+            playerHandle = PlayerHandle(lastPlayer);
+        }
+        Bank_Save(lastPlayer, playerHandle);
+    }
+    bank_Save_RequestRunning = false;
+    return true;
+}
+
+void Bank_Init () {
+    int playerID;
+    int i;
+    bank backupBankfile;
+    const string bankfileName = "SwarmSpecialForces";
+    const string bankfileNameBackup = "SwarmSpecialForcesBackup";
+    playergroup playerPG;
+
+    Bank_ManualSaveTrigger = TriggerCreate("Bank_ManualSave");
+    TriggerAddEventChatMessage(Bank_ManualSaveTrigger, c_playerAny, "-save", true);
+
+    Bank_Save_RequestQueueTrigger = TriggerCreate("Bank_Save_RequestSaveQueue");
+
+    for (i = 1; i <= PlayerGroupCount(gv_ActivePG); i += 1) {
+        playerID = PlayerGroupPlayer(gv_ActivePG, i);
+        playerPG = PlayerGroupSingle(playerID);
+
+        if (BankExists(bankfileName, playerID)) {
+            // main bankfile exist -> try to use that
+
+            gv_PlayerStats[playerID].bankfile = BankLoad(bankfileName, playerID);
+            BankOptionSet(gv_PlayerStats[playerID].bankfile, c_bankOptionSignature, true);
+
+            if (Bank_LoadSwitch(playerID)) {
+                // loading main bankfile succeeded -> make a backup and finish
+                UIDisplayMessage(playerPG, c_messageAreaChat, StringExternal("Trig/Bank/MainSuccess"));
+                Bank_Save_ForcedAll(playerID);
+                backupBankfile = BankLoad(bankfileNameBackup, playerID);
+                BankOptionSet(backupBankfile, c_bankOptionSignature, true);
+                Bank_Backup(gv_PlayerStats[playerID].bankfile, backupBankfile);
+            }
+            else if (BankExists(bankfileNameBackup, playerID)){
+                // main bankfile was corrupted -> try loading backup bank
+                UIDisplayMessage(playerPG, c_messageAreaChat, StringExternal("Trig/Bank/MainFail"));
+
+                gv_PlayerStats[playerID].bankfile = BankLoad(bankfileNameBackup, playerID);
+                BankOptionSet(backupBankfile, c_bankOptionSignature, true);
+
+                if (Bank_LoadSwitch(playerID)) {
+                    // loading backup succeeded -> overwrite main bankfile
+                    gv_PlayerStats[playerID].bankfile = BankLoad(bankfileName, playerID);
+                    UIDisplayMessage(playerPG, c_messageAreaChat, StringExternal("Trig/Bank/BackupSuccess"));
+                    Bank_Save_ForcedAll(playerID);
+                }
+                else {
+                    // backup was also corrupted -> reset everything
+                    gv_PlayerStats[playerID].bankfile = BankLoad(bankfileName, playerID);
+                    UIDisplayMessage(playerPG, c_messageAreaChat, StringExternal("Trig/Bank/BackupFail"));
+                    Bank_Reset(playerID);
+                }
+            }
+            else {
+                // main bankfile corrupted and no backup exist (should never happen) -> reset everything
+                
+                gv_PlayerStats[playerID].bankfile = BankLoad(bankfileName, playerID);
+                UIDisplayMessage(playerPG, c_messageAreaChat, StringExternal("Trig/Bank/BackupFail"));
+                Bank_Reset(playerID);
+            }
+
+        }
+        else if(BankExists(bankfileNameBackup, playerID)){
+            // no main bankfile found, but a backup exist
+
+            UIDisplayMessage(playerPG, c_messageAreaSubtitle, StringExternal("Trig/Bank/NoMainButBackup"));
+
+            gv_PlayerStats[playerID].bankfile = BankLoad("SwarmSpecialForcesBackup", playerID);
+            BankOptionSet(gv_PlayerStats[playerID].bankfile, c_bankOptionSignature, true);
+
+            if (Bank_LoadSwitch(playerID)) {
+                // loading backup succeeded -> overwrite main bankfile
+                gv_PlayerStats[playerID].bankfile = BankLoad(bankfileName, playerID);
+                UIDisplayMessage(playerPG, c_messageAreaChat, StringExternal("Trig/Bank/NoMainButBackupSuccess"));
+                Bank_Save_ForcedAll(playerID);
+            }
+            else {
+                // backup was also corrupted -> reset everything
+                gv_PlayerStats[playerID].bankfile = BankLoad(bankfileName, playerID);
+                UIDisplayMessage(playerPG, c_messageAreaChat, StringExternal("Trig/Bank/BackupFail"));
+                Bank_Reset(playerID);
+            }
+        }
+        else{
+            // no bankfile found at all -> new player
+            if (gv_GameMode != c_GameMode_Tutorial) {
+                UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, StringExternal("Trig/Bank/NewPlayer"));
+            }
+            PlayerGroupAdd(gv_NewPlayers, playerID);
+            Bank_ResetStats(playerID);
+            Bank_Save_ForcedAll(playerID);
+            backupBankfile = BankLoad(bankfileNameBackup, playerID);
+            BankOptionSet(backupBankfile, c_bankOptionSignature, true);
+            Bank_Backup(gv_PlayerStats[playerID].bankfile, backupBankfile);
+        }
+    }
+}

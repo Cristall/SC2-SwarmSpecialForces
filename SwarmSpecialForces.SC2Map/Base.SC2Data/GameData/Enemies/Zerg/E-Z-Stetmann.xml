@@ -1,0 +1,1595 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CEffectSet id="StetmannSummons@MrKrabsFinalImpactSet">
+        <EditorCategories value=""/>
+        <EffectArray value="StetmannSummons@MrKrabsFinalDmg"/>
+        <EffectArray value="Suicide"/>
+    </CEffectSet>
+    <CEffectSet id="StetmannSummons@GenericSpawnSetWithoutScrap">
+        <EditorCategories value=""/>
+        <EffectArray value="SummonState"/>
+        <EffectArray value="StetmannSummons@Wander"/>
+        <EffectArray value="NoKillReward"/>
+    </CEffectSet>
+    <CEffectEnumArea id="Swap@SearchDummy">
+        <EditorCategories value=""/>
+        <AreaArray Radius="4"/>
+    </CEffectEnumArea>
+    <CEffectDamage id="Swap@Dmg">
+        <EditorCategories value=""/>
+        <Amount value="4000"/>
+    </CEffectDamage>
+    <CEffectCreatePersistent id="Swap@Delay">
+        <EditorCategories value=""/>
+        <ExpireDelay value="2"/>
+        <ExpireEffect value="Swap@TriggerHookup"/>
+    </CEffectCreatePersistent>
+    <CEffectSet id="Swap@InitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="Swap@AlreadyCastingNoWeapons"/>
+        <EffectArray value="Swap@Delay"/>
+        <TargetLocationType value="Point"/>
+    </CEffectSet>
+    <CEffectCreatePersistent id="Swap@TriggerHookup">
+        <EditorCategories value=""/>
+    </CEffectCreatePersistent>
+    <CEffectApplyBehavior id="Swap@AlreadyCastingNoWeapons" parent="AlreadyCastingNoWeapons"/>
+    <CEffectDamage id="SpinForWin@ImpactDamage">
+        <EditorCategories value=""/>
+        <Amount value="500"/>
+    </CEffectDamage>
+    <CEffectEnumArea id="SpinForWin@ImpactSearch">
+        <EditorCategories value=""/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Item,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="2.25" Effect="SpinForWin@ImpactDamage"/>
+    </CEffectEnumArea>
+    <CEffectSet id="SpinForWin@InitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="SpinForWin@AlreadyCastingNoWeapons"/>
+        <EffectArray value="SpinForWin@StunAndSpin"/>
+    </CEffectSet>
+    <CEffectSet id="SpinForWin@SearchSet">
+        <EditorCategories value=""/>
+        <EffectArray value="SpinForWin@PullSearch"/>
+        <EffectArray value="SpinForWin@ImpactSearch"/>
+    </CEffectSet>
+    <CEffectApplyBehavior id="SpinForWin@StunAndSpin">
+        <EditorCategories value=""/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="SpinForWin@AlreadyCastingNoWeapons" parent="AlreadyCastingNoWeapons">
+        <Duration value="10.0625"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="Scrap@ScrapSpawnOnDeath">
+        <EditorCategories value=""/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="Scrap@Count">
+        <EditorCategories value=""/>
+    </CEffectApplyBehavior>
+    <CEffectSet id="StetmannSummons@GenericSpawnSet">
+        <EditorCategories value=""/>
+        <EffectArray value="Scrap@Count"/>
+        <EffectArray value="Scrap@ScrapSpawnOnDeath"/>
+        <EffectArray value="SummonState"/>
+        <EffectArray value="StetmannSummons@Wander"/>
+        <EffectArray value="NoKillReward"/>
+    </CEffectSet>
+    <CEffectApplyBehavior id="StetmannSummons@Wander">
+        <EditorCategories value=""/>
+    </CEffectApplyBehavior>
+    <CEffectSet id="StetmannSummons@InitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="StetmannSummons@AlreadyCastingNoWeapons"/>
+    </CEffectSet>
+    <CEffectApplyBehavior id="StetmannSummons@AlreadyCastingNoWeapons" parent="AlreadyCastingNoWeapons"/>
+    <CEffectCreatePersistent id="Pinball@BallMoveDelay">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetUnit"/>
+        <InitialDelay value="1"/>
+        <InitialEffect value="Pinball@BallMove"/>
+    </CEffectCreatePersistent>
+    <CEffectApplyBehavior id="StetmannRevenge@Stun">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+    </CEffectApplyBehavior>
+    <CEffectRemoveBehavior id="StetmannRevenge@InvulnerableRemove">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <BehaviorLink value="StetmannRevenge@Invulnerable"/>
+    </CEffectRemoveBehavior>
+    <CEffectRemoveBehavior id="StetmannRevenge@StunRemove">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <BehaviorLink value="StetmannRevenge@Stun"/>
+    </CEffectRemoveBehavior>
+    <CEffectCreatePersistent id="StetmannRevenge@TimingController">
+        <EditorCategories value=""/>
+        <PeriodCount value="4"/>
+        <PeriodicEffectArray value="StetmannRevenge@Stun"/>
+        <PeriodicEffectArray value="StetmannRevenge@Teleport"/>
+        <PeriodicEffectArray value="StetmannRevenge@StunRemove"/>
+        <PeriodicEffectArray value="StetmannRevenge@InvulnerableRemove"/>
+        <PeriodicPeriodArray value="0"/>
+        <PeriodicPeriodArray value="0.75"/>
+        <PeriodicPeriodArray value="1.25"/>
+        <PeriodicPeriodArray value="0"/>
+    </CEffectCreatePersistent>
+    <CEffectTeleport id="StetmannRevenge@Teleport">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <TargetLocation Value="TargetPoint"/>
+    </CEffectTeleport>
+    <CEffectCreateUnit id="Pinball@CreateBall">
+        <EditorCategories value=""/>
+        <WhichLocation Value="CasterUnit"/>
+        <SpawnEffect value="Pinball@BallSpawnSet"/>
+        <SpawnUnit value="Pinball@Ball"/>
+    </CEffectCreateUnit>
+    <CEffectAddTrackedUnit id="Pinball@AddCannonTracking">
+        <EditorCategories value=""/>
+        <BehaviorLink value="Pinball@CannonTracker"/>
+        <TrackedUnit Value="Target"/>
+    </CEffectAddTrackedUnit>
+    <CEffectIssueOrder id="Pinball@BallMove">
+        <EditorCategories value=""/>
+        <Target Effect="Pinball@CreateBall" Value="TargetPoint"/>
+        <Abil value="move"/>
+    </CEffectIssueOrder>
+    <CEffectSet id="Pinball@BallSpawnSet">
+        <EditorCategories value=""/>
+        <EffectArray value="Pinball@BallMoveDelay"/>
+        <EffectArray value="Pinball@DmgSearchBuff"/>
+    </CEffectSet>
+    <CEffectCreatePersistent id="Pinball@CreateBallOffset">
+        <EditorCategories value=""/>
+        <WhichLocation Value="CasterPoint"/>
+        <InitialEffect value="Pinball@CreateBall"/>
+        <InitialOffset value="0,-30,0"/>
+    </CEffectCreatePersistent>
+    <CEffectDamage id="Pinball@Dmg">
+        <EditorCategories value=""/>
+        <Amount value="400"/>
+    </CEffectDamage>
+    <CEffectEnumArea id="Pinball@DmgSearch">
+        <EditorCategories value=""/>
+        <SearchFilters value="-;Player,Ally,Neutral,Missile,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="3" Effect="Pinball@Dmg"/>
+    </CEffectEnumArea>
+    <CEffectApplyBehavior id="Pinball@DmgSearchBuff">
+        <EditorCategories value=""/>
+    </CEffectApplyBehavior>
+    <CEffectEnumTrackedUnits id="Pinball@GetCannons">
+        <EditorCategories value=""/>
+        <BehaviorLink value="Pinball@CannonTracker"/>
+        <Effect value="Pinball@RandomTargetLocation"/>
+    </CEffectEnumTrackedUnits>
+    <CEffectSet id="Pinball@InitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="Pinball@AlreadyCastingNoWeapons"/>
+        <EffectArray value="Pinball@GetCannons"/>
+        <TargetLocationType value="Point"/>
+    </CEffectSet>
+    <CEffectIssueOrder id="Pinball@IssueShot">
+        <EditorCategories value=""/>
+        <WhichUnit Effect="Pinball@RandomTargetLocation"/>
+        <Abil value="Pinball@Shot"/>
+        <Player Value="Caster"/>
+        <Target Value="TargetPoint"/>
+    </CEffectIssueOrder>
+    <CEffectRandomPointInCircle id="Pinball@RandomTargetLocation">
+        <EditorCategories value=""/>
+        <WhichLocation Effect="Pinball@InitialSet" Value="TargetPoint"/>
+        <Effect value="Pinball@IssueShot"/>
+        <Radius value="5.5"/>
+    </CEffectRandomPointInCircle>
+    <CEffectApplyBehavior id="Pinball@AlreadyCastingNoWeapons" parent="AlreadyCastingNoWeapons">
+        <Duration value="2.5"/>
+    </CEffectApplyBehavior>
+    <CEffectLaunchMissile id="StetmannSummons@MrKrabsFinalLM12">
+        <ValidatorArray index="0" removed="1"/>
+        <EditorCategories value=""/>
+        <ImpactLocation Value="CasterUnit"/>
+        <LaunchOffset value="0,1,20"/>
+        <ImpactEffect value="StetmannSummons@MrKrabsFinalImpactSet"/>
+        <AmmoUnit value="StetmannSummons@MrKrabsFinalMissile"/>
+        <LaunchLocation Value="SourcePoint"/>
+        <Movers Link="StetmannSummons@MrKrabsFinalMissileDown" IfRangeLTE="500"/>
+    </CEffectLaunchMissile>
+    <CEffectRemoveBehavior id="StetmannSummons@MrKrabsFinalRemove">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <BehaviorLink value="StetmannSummons@MrKrabsFinal"/>
+    </CEffectRemoveBehavior>
+    <CEffectDamage id="StetmannSummons@MrKrabsFinalDmg">
+        <EditorCategories value=""/>
+        <ImpactLocation Value="CasterUnit"/>
+        <Amount value="8000"/>
+        <AreaArray Radius="5" Fraction="1"/>
+        <SearchFilters value="-;Player,Ally,Neutral,RawResource,HarvestableResource,Missile,Item,Dead,Hidden,Invulnerable"/>
+    </CEffectDamage>
+    <CEffectApplyBehavior id="StetmannSummons@MrKrabsFinalInvulnerable">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Source"/>
+    </CEffectApplyBehavior>
+    <CEffectLaunchMissile id="StetmannSummons@MrKrabsFinalLM1">
+        <ValidatorArray index="0" removed="1"/>
+        <EditorCategories value=""/>
+        <AmmoUnit value="StetmannSummons@MrKrabsFinalMissile"/>
+        <ImpactLocation Value="SourcePoint"/>
+        <ImpactOffset value="0,1,20"/>
+    </CEffectLaunchMissile>
+    <CEffectCreatePersistent id="StetmannSummons@MrKrabsFinalPersistent">
+        <EditorCategories value=""/>
+        <WhichLocation Value="CasterUnit"/>
+        <PeriodCount value="4"/>
+        <PeriodicEffectArray value="StetmannSummons@MrKrabsFinalInvulnerable"/>
+        <PeriodicEffectArray value="StetmannSummons@MrKrabsFinalRemove"/>
+        <PeriodicEffectArray value="StetmannSummons@MrKrabsFinalLM1"/>
+        <PeriodicEffectArray value="StetmannSummons@MrKrabsFinalLM12"/>
+        <PeriodicPeriodArray value="0"/>
+        <PeriodicPeriodArray value="0.125"/>
+        <PeriodicPeriodArray value="2.375"/>
+        <PeriodicPeriodArray value="2"/>
+    </CEffectCreatePersistent>
+    <CEffectDamage id="StetmannSummons@MrKrabsWeaponDmg" parent="DU_WEAP">
+        <EditorCategories value=""/>
+        <Amount value="2600"/>
+    </CEffectDamage>
+    <CEffectDamage id="StetmannSummons@RailgunWeaponDmg" parent="DU_WEAP">
+        <EditorCategories value=""/>
+        <Amount value="650"/>
+    </CEffectDamage>
+    <CEffectLaunchMissile id="StetmannSummons@RailgunWeaponLMRight">
+        <EditorCategories value=""/>
+        <ImpactEffect value="StetmannSummons@RailgunWeaponDmg"/>
+        <AmmoUnit value="StetmannSummons@RailgunWeaponMissile"/>
+    </CEffectLaunchMissile>
+    <CEffectLaunchMissile id="StetmannSummons@RailgunWeaponLMLeft">
+        <EditorCategories value=""/>
+        <ImpactEffect value="StetmannSummons@RailgunWeaponDmg"/>
+        <AmmoUnit value="StetmannSummons@RailgunWeaponMissile"/>
+    </CEffectLaunchMissile>
+    <CEffectSet id="StetmannSummons@RailgunWeaponSet">
+        <EditorCategories value=""/>
+        <EffectArray value="StetmannSummons@RailgunWeaponLMLeft"/>
+        <EffectArray value="StetmannSummons@RailgunWeaponLMRight"/>
+    </CEffectSet>
+    <CEffectEnumArea id="Scrap@SearchForScrap">
+        <EditorCategories value=""/>
+        <SearchFilters value="Worker;Self,Ally,Neutral,Enemy,Missile,Item,Dead,Hidden"/>
+        <AreaArray Radius="7" Effect="Scrap@SearchForScrapIssueTransfer"/>
+    </CEffectEnumArea>
+    <CEffectIssueOrder id="Scrap@SearchForScrapIssueTransfer">
+        <ValidatorArray value="Scrap@TargetIsScrap"/>
+        <EditorCategories value=""/>
+        <Abil value="Scrap@SearchGary"/>
+        <Target Value="CasterUnit"/>
+    </CEffectIssueOrder>
+    <CEffectUserData id="Scrap@SetScrap2">
+        <EditorCategories value=""/>
+        <Key value="Scrap"/>
+        <Amount value="2"/>
+        <SourceKey value="Scrap"/>
+        <Operation value="Set"/>
+        <BehaviorScope Behavior="Scrap@Count"/>
+    </CEffectUserData>
+    <CEffectUserData id="Scrap@SetScrap3">
+        <EditorCategories value=""/>
+        <Key value="Scrap"/>
+        <Amount value="3"/>
+        <SourceKey value="Scrap"/>
+        <Operation value="Set"/>
+        <BehaviorScope Behavior="Scrap@Count"/>
+    </CEffectUserData>
+    <CEffectUserData id="Scrap@SetScrap4">
+        <EditorCategories value=""/>
+        <Key value="Scrap"/>
+        <Amount value="4"/>
+        <SourceKey value="Scrap"/>
+        <Operation value="Set"/>
+        <BehaviorScope Behavior="Scrap@Count"/>
+    </CEffectUserData>
+    <CEffectUserData id="Scrap@SetScrap5">
+        <EditorCategories value=""/>
+        <Key value="Scrap"/>
+        <Amount value="5"/>
+        <SourceKey value="Scrap"/>
+        <Operation value="Set"/>
+        <BehaviorScope Behavior="Scrap@Count"/>
+    </CEffectUserData>
+    <CEffectUserData id="Scrap@SetScrap6">
+        <EditorCategories value=""/>
+        <Key value="Scrap"/>
+        <Amount value="6"/>
+        <SourceKey value="Scrap"/>
+        <Operation value="Set"/>
+        <BehaviorScope Behavior="Scrap@Count"/>
+    </CEffectUserData>
+    <CEffectUserData id="Scrap@SetScrap7">
+        <EditorCategories value=""/>
+        <Key value="Scrap"/>
+        <Amount value="7"/>
+        <SourceKey value="Scrap"/>
+        <Operation value="Set"/>
+        <BehaviorScope Behavior="Scrap@Count"/>
+    </CEffectUserData>
+    <CEffectUserData id="Scrap@SetScrap8">
+        <EditorCategories value=""/>
+        <Key value="Scrap"/>
+        <Amount value="8"/>
+        <SourceKey value="Scrap"/>
+        <Operation value="Set"/>
+        <BehaviorScope Behavior="Scrap@Count"/>
+    </CEffectUserData>
+    <CEffectUserData id="Scrap@SetScrap9">
+        <EditorCategories value=""/>
+        <Key value="Scrap"/>
+        <Amount value="9"/>
+        <SourceKey value="Scrap"/>
+        <Operation value="Set"/>
+        <BehaviorScope Behavior="Scrap@Count"/>
+    </CEffectUserData>
+    <CEffectUserData id="Scrap@SetScrap10">
+        <EditorCategories value=""/>
+        <Key value="Scrap"/>
+        <Amount value="10"/>
+        <SourceKey value="Scrap"/>
+        <Operation value="Set"/>
+        <BehaviorScope Behavior="Scrap@Count"/>
+    </CEffectUserData>
+    <CEffectSet id="Scrap@TransferToGaryImpactSet">
+        <EditorCategories value=""/>
+        <EffectArray value="Scrap@TransferToGary"/>
+        <EffectArray value="SuicideRemove"/>
+    </CEffectSet>
+    <CEffectLaunchMissile id="Scrap@TransferToGaryLM">
+        <EditorCategories value=""/>
+        <ImpactEffect value="Scrap@TransferToGaryImpactSet"/>
+        <AmmoUnit value=""/>
+        <Movers Link="MissileDefault" IfRangeLTE="500"/>
+        <DeathType value="Unknown"/>
+    </CEffectLaunchMissile>
+    <CEffectModifyUnit id="Scrap@TransferToGary">
+        <EditorCategories value=""/>
+        <VitalArray index="Energy">
+            <Change value="0">
+                <AccumulatorArray value="Scrap@Count"/>
+            </Change>
+        </VitalArray>
+    </CEffectModifyUnit>
+    <CEffectCreateUnit id="Scrap@ScrapSpawn">
+        <EditorCategories value=""/>
+        <WhichLocation Value="SourcePoint"/>
+        <SpawnEffect value="Scrap@TransferScrapCount"/>
+        <SpawnUnit value="Scrap"/>
+    </CEffectCreateUnit>
+    <CEffectUserData id="Scrap@SetScrap1">
+        <EditorCategories value=""/>
+        <Key value="Scrap"/>
+        <SourceKey value="Scrap"/>
+        <Operation value="Set"/>
+        <BehaviorScope Behavior="Scrap@Count"/>
+    </CEffectUserData>
+    <CEffectUserData id="Scrap@TransferScrapCount">
+        <EditorCategories value=""/>
+        <Key value="Scrap"/>
+        <Amount value="0">
+            <AccumulatorArray value="Scrap@Count"/>
+        </Amount>
+        <SourceKey value="Scrap"/>
+        <BehaviorScope Value="Target" Behavior="Scrap@Count"/>
+    </CEffectUserData>
+    <CEffectApplyBehavior id="Stetellite@Buff">
+        <EditorCategories value=""/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="Stetellite@BuffController">
+        <EditorCategories value=""/>
+    </CEffectApplyBehavior>
+    <CEffectEnumArea id="Stetellite@BuffSearch">
+        <EditorCategories value=""/>
+        <AreaArray Radius="5" Effect="Stetellite@Buff"/>
+        <SearchFilters value="-;Neutral,Enemy,Hover,Missile,Item,Dead,Hidden,Invulnerable"/>
+    </CEffectEnumArea>
+    <CEffectCreateUnit id="Stetellite@CreateUnit">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetPoint"/>
+        <SpawnEffect value="Stetellite@SpawnSet"/>
+        <SpawnUnit value="Stetellite"/>
+    </CEffectCreateUnit>
+    <CEffectSet id="Stetellite@ImpactSet">
+        <EditorCategories value=""/>
+        <EffectArray value="RemovePrecursor"/>
+        <EffectArray value="Stetellite@BuffController"/>
+    </CEffectSet>
+    <CEffectSet id="Stetellite@InitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="Stetellite@AlreadyCastingNoWeapons"/>
+        <EffectArray value="Stetellite@CreateUnit"/>
+        <TargetLocationType value="Point"/>
+    </CEffectSet>
+    <CEffectLaunchMissile id="Stetellite@LM">
+        <ValidatorArray index="0" removed="1"/>
+        <EditorCategories value=""/>
+        <ImpactEffect value="Stetellite@ImpactSet"/>
+        <AmmoUnit value="Stetellite"/>
+        <Movers Link="MissileDefault" IfRangeLTE="500"/>
+        <DeathType value="Remove"/>
+    </CEffectLaunchMissile>
+    <CEffectSet id="Stetellite@SpawnSet">
+        <EditorCategories value=""/>
+        <EffectArray value="MakePrecursor"/>
+        <EffectArray value="Stetellite@LM"/>
+    </CEffectSet>
+    <CEffectApplyBehavior id="Stetellite@AlreadyCastingNoWeapons" parent="AlreadyCastingNoWeapons">
+        <Duration value="2.5"/>
+    </CEffectApplyBehavior>
+    <CEffectDamage id="GaryWeaponDmg" parent="DU_WEAP">
+        <EditorCategories value=""/>
+        <Amount value="4000"/>
+        <AttributeFactor index="Armored" value="0.35"/>
+    </CEffectDamage>
+    <CEffectLaunchMissile id="GaryWeaponLM">
+        <EditorCategories value=""/>
+        <AmmoUnit value="GaryWeaponMissile"/>
+        <ImpactEffect value="GaryWeaponDmg"/>
+    </CEffectLaunchMissile>
+    <CEffectEnumArea id="SpinForWin@PullSearch">
+        <EditorCategories value=""/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Item,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="10" Effect="SpinForWin@PullTeleportController"/>
+    </CEffectEnumArea>
+    <CEffectTeleport id="SpinForWin@PullTeleport">
+        <EditorCategories value=""/>
+        <WhichUnit Effect="SpinForWin@PullTeleportOffset"/>
+        <ClearQueuedOrders value="0"/>
+        <MinDistance value="0"/>
+        <SourceLocation Effect="SpinForWin@PullTeleportOffset" Value="TargetUnit"/>
+        <TargetLocation Value="TargetPoint"/>
+    </CEffectTeleport>
+    <CEffectCreatePersistent id="SpinForWin@PullTeleportController">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetUnit"/>
+        <OffsetVectorStartLocation Value="CasterUnit"/>
+        <OffsetVectorEndLocation Value="TargetUnit"/>
+        <PeriodCount value="4"/>
+        <PeriodicEffectArray value="SpinForWin@PullTeleportOffset"/>
+        <PeriodicPeriodArray value="0.0625"/>
+    </CEffectCreatePersistent>
+    <CEffectCreatePersistent id="SpinForWin@PullTeleportOffset">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetUnit"/>
+        <OffsetVectorStartLocation Value="CasterUnit"/>
+        <OffsetVectorEndLocation Value="TargetUnit"/>
+        <InitialEffect value="SpinForWin@PullTeleport"/>
+        <InitialOffset value="0,0.18,0"/>
+    </CEffectCreatePersistent>
+    <CAbilEffectTarget id="Swap">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="Swap@InitialSet"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="Swap"/>
+        <Range value="20"/>
+        <Arc value="360"/>
+    </CAbilEffectTarget>
+    <CAbilEffectInstant id="SpinForWin">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="SpinForWin@InitialSet"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="SpinForWin"/>
+    </CAbilEffectInstant>
+    <CAbilEffectInstant id="StetmannSummons">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="StetmannSummons@InitialSet"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="StetmannSummons"/>
+    </CAbilEffectInstant>
+    <CAbilEffectTarget id="StetmannRevenge">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="StetmannRevenge@TimingController"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="StetmannRevenge"/>
+        <Range value="500"/>
+    </CAbilEffectTarget>
+    <CAbilEffectTarget id="Pinball@Shot">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="Pinball@CreateBallOffset"/>
+        <Range value="500"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="Pinball"/>
+    </CAbilEffectTarget>
+    <CAbilEffectTarget id="Pinball">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="Pinball@InitialSet"/>
+        <Range value="40"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="Pinball"/>
+    </CAbilEffectTarget>
+    <CAbilEffectTarget id="Scrap@SearchGary">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="Scrap@TransferToGaryLM"/>
+        <Range value="7"/>
+        <Arc value="360"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="Stetellite"/>
+    </CAbilEffectTarget>
+    <CAbilEffectTarget id="Stetellite">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="Stetellite@InitialSet"/>
+        <Range value="15"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="Stetellite"/>
+    </CAbilEffectTarget>
+    <CValidatorUnitType id="Pinball@Cannon">
+        <Value value="Pinball@Cannon"/>
+    </CValidatorUnitType>
+    <CValidatorUnitCompareBehaviorCount id="StetmannSummons@MrKrabsFinalNot">
+        <WhichUnit Value="Source"/>
+        <Behavior value="StetmannSummons@MrKrabsFinal"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorUnitType id="Scrap@TargetIsScrap">
+        <Value value="Scrap"/>
+    </CValidatorUnitType>
+    <CButton id="Swap" parent="EnemyBossAbilityButton"/>
+    <CButton id="SpinForWin" parent="EnemyBossAbilityButton"/>
+    <CButton id="StetmannSummons">
+        <Icon value="Assets\Textures\btn-ability-alarak-massteleport.dds"/>
+    </CButton>
+    <CButton id="StetmannRevenge">
+        <Icon value="Assets\Textures\btn-ability-alarak-massteleport.dds"/>
+    </CButton>
+    <CButton id="Pinball" parent="EnemyBossAbilityButton"/>
+    <CButton id="Stetellite" parent="EnemyBossAbilityButton"/>
+    <CActorQuad id="Pinball@Line" parent="GuideVisualQuadDown">
+        <VisibleTo index="All" value="1"/>
+        <EditorCategories value=""/>
+        <On index="0" Terms="Abil.Guide" Send="Create"/>
+        <On Terms="Effect.Pinball@CreateBallOffset.Start" Send="Create"/>
+        <On Terms="ActorCreation" Send="TimerSet 5.500000 DelayedKill"/>
+        <On Terms="TimerExpired; TimerName DelayedKill" Send="Destroy"/>
+        <Height value="15.000000"/>
+        <Width value="3.000000"/>
+        <AddToProximitySystem value="0"/>
+        <LaunchActor value="ProtossGuideVisualQuadLargeLaunch"/>
+        <CenterActor value="ProtossGuideVisualQuadLargeCenter"/>
+        <ImpactActor value="ProtossGuideVisualQuadLargeImpact"/>
+    </CActorQuad>
+    <CActorSplat id="Swap@SplatTarget">
+        <VisibleTo index="All" value="1"/>
+        <EditorCategories value=""/>
+        <On Terms="Effect.Swap@Delay.Start; At Effect" Send="Create"/>
+        <On Terms="ActorCreation" Send="$Birth PlayForever"/>
+        <On Terms="Effect.Swap@Delay.Stop" Send="Destroy"/>
+        <Model value="Swap@Splat"/>
+    </CActorSplat>
+    <CActorSplat id="Swap@SplatCaster">
+        <VisibleTo index="All" value="1"/>
+        <EditorCategories value=""/>
+        <On Terms="Effect.Swap@Delay.Start; At Caster" Send="Create"/>
+        <On Terms="ActorCreation" Send="$Birth PlayForever"/>
+        <On Terms="Effect.Swap@Delay.Stop" Send="Destroy"/>
+        <Model value="Swap@Splat"/>
+    </CActorSplat>
+    <CActorModel id="Swap@TeleportTarget" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On Terms="Effect.Swap@TriggerHookup.Start" Send="Create"/>
+        <HostSiteOps Ops="SOpTargetPointStationary SOpShadow SOpMoveUpBy1Dot5"/>
+        <Model value="Swap@TeleportArea"/>
+    </CActorModel>
+    <CActorModel id="Swap@TeleportCaster" parent="ModelAnimationStyleOneShot">
+        <On Terms="Effect.Swap@TriggerHookup.Start" Send="Create"/>
+        <HostSiteOps Ops="SOpCasterPointStationary SOpShadow SOpMoveUpBy1Dot5"/>
+        <Model value="Swap@TeleportArea"/>
+    </CActorModel>
+    <CActorModel id="StetmannSummons@SpawnIn" parent="ModelAnimationStyleContinuous">
+        <EditorCategories value=""/>
+        <On Terms="Behavior.StetmannSummons@SpawnIn.On" Send="Create"/>
+        <On Terms="TimerExpired; TimerName DelayedKill" Send="AnimBracketStop BSD"/>
+        <On Terms="ActorCreation" Send="TimerSet 1.500000 DelayedKill"/>
+        <On Terms="ActorCreation; ScopeContains _UnitSmall" Send="ModelSwap StetmannSummons@SpawnInSmall"/>
+        <On Terms="ActorCreation; ScopeContains _UnitMedium" Send="ModelSwap StetmannSummons@SpawnInMedium"/>
+        <ModelFlags index="AutomateGlobalLoops" value="1"/>
+    </CActorModel>
+    <CActorModel id="SpinForWin@Pull" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On Terms="Effect.SpinForWin@PullSearch.Start" Send="Create"/>
+        <Scale value="2.400000,2.400000,1.000000"/>
+        <HostSiteOps Ops="SOpMoveDownBy1"/>
+    </CActorModel>
+    <CActorModel id="SpinForWin@RotatorDummyModel" parent="ModelAnimationStyleContinuous">
+        <AcceptedTransfers index="Rotation" value="0"/>
+        <EditorCategories value=""/>
+        <HostSiteOps Ops="SpinForWin@SiteOpsRotator" HoldPosition="1"/>
+        <ScopeBearingsTracking value="ForceOff"/>
+        <Model value="Invisible"/>
+    </CActorModel>
+    <CActorSiteOpRotator id="SpinForWin@SiteOpsRotator">
+        <EditorCategories value=""/>
+        <LocalAxis value="0.000000,0.000000,1.000000"/>
+        <Rate value="-360.000000"/>
+        <Type value="AddRotationChange"/>
+    </CActorSiteOpRotator>
+    <CActorUnit id="StetmannSummons@Pen" parent="GenericUnitStandard" unitName="StetmannSummons@Pen">
+        <EditorCategories value=""/>
+        <On Terms="Behavior.StetmannSummons@PenOpen.On" Send="AnimBracketStart Unpowered Stand,Unpowered,Start Stand,Unpowered Stand,Unpowered,End"/>
+        <On Terms="Behavior.StetmannSummons@PenOpen.Off" Send="AnimBracketStop Unpowered"/>
+        <HighlightTooltip value="Unit/Name/Bogus"/>
+    </CActorUnit>
+    <CActorUnit id="Pinball@Ball" parent="GenericUnitStandard" unitName="Pinball@Ball">
+        <EditorCategories value=""/>
+        <HighlightTooltip value="Unit/Name/Bogus"/>
+    </CActorUnit>
+    <CActorUnit id="Pinball@Cannon" parent="GenericUnitStandard" unitName="Pinball@Cannon">
+        <EditorCategories value=""/>
+        <On Terms="Effect.Pinball@BallMove.Start" Send="AnimPlay Abil1 Attack"/>
+        <HighlightTooltip value="Unit/Name/Bogus"/>
+        <UnitFlags index="SuppressDefaultStatusBar" value="1"/>
+    </CActorUnit>
+    <CActorAction id="StetmannSummons@MrKrabsFinalAction" parent="GenericAttack" effectImpact="StetmannSummons@MrKrabsFinalDmg" effectLaunch="StetmannSummons@MrKrabsFinalLM1">
+        <EditorCategories value=""/>
+        <LaunchSiteOps Ops="SOpAttachHarness SOpAttachWeapon01"/>
+        <Missile value="StetmannSummons@MrKrabsFinalMissile"/>
+        <ImpactPointSiteOps Ops="SOpSourcePointStationary CrystalwingShowerOffset"/>
+    </CActorAction>
+    <CActorAction id="StetmannSummons@MrKrabsFinalAction2" parent="GenericAttack" effectImpact="StetmannSummons@MrKrabsFinalDmg" effectLaunch="StetmannSummons@MrKrabsFinalLM12">
+        <EditorCategories value=""/>
+        <LaunchSiteOps Ops="SOpSourcePointStationary CrystalwingShowerOffset"/>
+        <LaunchAssets Model="StetmannSummons@MrKrabsFinalActionLaunch" Sound="StetmannSummons@MrKrabsFinalActionLaunch"/>
+        <Missile value="StetmannSummons@MrKrabsFinalMissile"/>
+        <ImpactPointSiteOps Ops="SOpSourcePointStationary"/>
+        <ImpactMap index="None" Model="StetmannSummons@MrKrabsFinalImpact" Sound="StetmannSummons@MrKrabsFinalActionImpact" ModelReaction="StetmannSummons@MrKrabsFinalActionImpactReaction"/>
+        <ImpactMap index="Shield" Sound="StetmannSummons@MrKrabsFinalActionImpactShield" ModelReaction="StetmannSummons@MrKrabsFinalActionImpactReactionShield"/>
+        <DamageMap index="None" Model="StetmannSummons@MrKrabsFinalActionDamage" Sound="StetmannSummons@MrKrabsFinalActionDamage" ModelReaction="StetmannSummons@MrKrabsFinalActionDamageReaction"/>
+        <DamageMap index="Shield" Sound="StetmannSummons@MrKrabsFinalActionDamageShield" ModelReaction="StetmannSummons@MrKrabsFinalActionDamageReactionShield"/>
+        <ImpactSiteOps Ops=""/>
+        <ShieldFlashType value="None"/>
+    </CActorAction>
+    <CActorModel id="StetmannSummons@MrKrabsDollarLeft" parent="ModelAddition">
+        <EditorCategories value=""/>
+        <HostSiteOps Ops="SOpAttachWeaponLeft StetmannSummons@MrKrabsDollarOffset SOpRotate90DegClockwise SOpRotate90DegClockwise SOpRotateDownwards2"/>
+        <Model value="StetmannSummons@MrKrabsMoney"/>
+    </CActorModel>
+    <CActorModel id="StetmannSummons@MrKrabsDollarRight" parent="ModelAddition">
+        <EditorCategories value=""/>
+        <HostSiteOps Ops="SOpAttachWeaponRight StetmannSummons@MrKrabsDollarOffset SOpRotate90DegClockwise SOpRotate90DegClockwise SOpRotateDownwards2"/>
+        <Model value="StetmannSummons@MrKrabsMoney"/>
+    </CActorModel>
+    <CActorSiteOpLocalOffset id="StetmannSummons@MrKrabsDollarOffset">
+        <EditorCategories value=""/>
+        <LocalOffset value="0.000000,-0.200000,0.200000"/>
+    </CActorSiteOpLocalOffset>
+    <CActorMissile id="StetmannSummons@MrKrabsFinalMissile" parent="GenericAttackMissile" unitName="StetmannSummons@MrKrabsFinalMissile">
+        <EditorCategories value=""/>
+    </CActorMissile>
+    <CActorAction id="StetmannSummons@MrKrabsWeapon" parent="GenericAttack" effectAttack="StetmannSummons@MrKrabsWeaponDmg">
+        <EditorCategories value=""/>
+    </CActorAction>
+    <CActorAction id="StetmannSummons@RailgunWeaponActionLeft" parent="GenericAttack" effectImpact="StetmannSummons@RailgunWeaponDmg" effectLaunch="StetmannSummons@RailgunWeaponLMLeft">
+        <EditorCategories value=""/>
+        <LaunchSiteOps Ops="SOpAttachHarness SOpAttachWeaponLeft"/>
+        <LaunchAttachQuery Methods="AMFilterWeaponLeft"/>
+        <Missile value="StetmannSummons@RailgunWeaponMissile"/>
+        <ImpactMap index="None" Model="StetmannSummons@RailgunWeaponImpact"/>
+    </CActorAction>
+    <CActorUnit id="StetmannSummons@MrKrabs" parent="GenericUnitStandard" unitName="StetmannSummons@MrKrabs">
+        <EditorCategories value=""/>
+        <On Terms="ActorCreation" Send="Create StetmannSummons@MrKrabsDollarLeft"/>
+        <On Terms="ActorCreation" Send="Create StetmannSummons@MrKrabsDollarRight"/>
+        <On Terms="Behavior.StetmannSummons@MrKrabsFinalInvulnerable.On" Send="AnimBracketStart Abil1 Spell,A,Start Spell,A,Channel Spell,A,End"/>
+        <On Terms="Behavior.StetmannSummons@MrKrabsFinalInvulnerable.On" Send="SetShowStatusBar 0 Life"/>
+        <On Terms="Effect.StetmannSummons@MrKrabsFinalLM1.Start" Send="AnimBracketStart AbilityUse Spell,A,Attack {} {} ContentPlayOnce"/>
+        <PortraitModel value="Hatchery_Mecha_Portrait"/>
+        <WalkAnimMoveSpeed value="1"/>
+        <Wireframe>
+            <Image value="Assets\Wireframes\Umojan_Security_Crab\Umojan_Crab_Wire.dds"/>
+        </Wireframe>
+        <DeathArray index="Normal" ModelLink="TerranLargeBuildingDeath"/>
+        <BarOffset value="120"/>
+        <BarWidth value="120"/>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-stetmann-mechagroundplating-level0.dds"/>
+        <ShieldArmorIcon value="Assets\Textures\btn-upgrade-zerg-swarmfrenzy.dds"/>
+        <Aliases value="_UnitLarge"/>
+    </CActorUnit>
+    <CActorAction id="StetmannSummons@RailgunWeaponActionRight" parent="GenericAttack" effectImpact="StetmannSummons@RailgunWeaponDmg" effectLaunch="StetmannSummons@RailgunWeaponLMRight">
+        <EditorCategories value=""/>
+        <LaunchSiteOps Ops="SOpAttachHarness SOpAttachWeaponRight"/>
+        <LaunchAttachQuery Methods="AMFilterWeaponRight"/>
+        <Missile value="StetmannSummons@RailgunWeaponMissile"/>
+        <ImpactMap index="None" Model="StetmannSummons@RailgunWeaponImpact" Sound="StetmannSummons@RailgunWeaponActionLeftImpact" ModelReaction="StetmannSummons@RailgunWeaponActionLeftImpactReaction"/>
+        <ImpactMap index="Shield" Sound="StetmannSummons@RailgunWeaponActionLeftImpactShield" ModelReaction="StetmannSummons@RailgunWeaponActionLeftImpactReactionShield"/>
+    </CActorAction>
+    <CActorMissile id="StetmannSummons@RailgunWeaponMissile" parent="GenericAttackMissile" unitName="StetmannSummons@RailgunWeaponMissile">
+        <EditorCategories value=""/>
+        <On Terms="ActorCreation" Send="SetTintColor 50,50,255"/>
+    </CActorMissile>
+    <CActorUnit id="StetmannSummons@Railgun" parent="GenericUnitStandard" unitName="StetmannSummons@Railgun">
+        <EditorCategories value=""/>
+        <Wireframe>
+            <Image value="Assets\Wireframes\Longbow\Longbow_Wire.dds"/>
+        </Wireframe>
+        <PortraitModel value="Hatchery_Mecha_Portrait"/>
+        <BarOffset value="80"/>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-stetmann-mechagroundplating-level0.dds"/>
+        <ShieldArmorIcon value="Assets\Textures\btn-upgrade-zerg-swarmfrenzy.dds"/>
+        <DeathArray index="Normal" ModelLink="Cyclone_Umojan_Death"/>
+        <Aliases value="_UnitMedium"/>
+    </CActorUnit>
+    <CActorUnit id="Scrap" parent="GenericUnitStandard" unitName="Scrap">
+        <EditorCategories value=""/>
+        <HighlightTooltip value="Unit/Name/Bogus"/>
+    </CActorUnit>
+    <CActorUnit id="Stetellite" parent="GenericUnitStandard" unitName="Stetellite">
+        <EditorCategories value=""/>
+        <DeathArray index="Normal" ModelLink="Stetellite@Death"/>
+        <PortraitModel value="Stetellite@Portrait"/>
+        <Wireframe>
+            <Image value="Assets\Textures\wireframe-stetmann-stetellite.dds"/>
+        </Wireframe>
+        <On index="35" Terms="UnitBirth.*.Normal" Send="AnimPlay Birth Stand 0 0.000000"/>
+    </CActorUnit>
+    <CActorModel id="Stetellite@Buffed" parent="ModelAddition">
+        <EditorCategories value=""/>
+        <On Terms="Behavior.Stetellite@Buff.On" Send="Create"/>
+        <On Terms="Behavior.Stetellite@Buff.Off" Send="Destroy"/>
+        <Inherits index="BaseModelScale" value="0"/>
+        <Inherits index="Scale" value="0"/>
+        <AcceptedHostedPropTransfers index="BaseModelScale" value="0"/>
+        <AcceptedHostedPropTransfers index="Scale" value="0"/>
+        <HostSiteOps Ops="SOpAttachOverhead"/>
+    </CActorModel>
+    <CActorUnit id="EgonStetmann" parent="GenericUnitStandard" unitName="EgonStetmann">
+        <DeathArray index="Normal" SoundLink="Stetmann_Death"/>
+        <PortraitModel value="StetmannMedicPortrait"/>
+        <WalkAnimMoveSpeed value="2.25"/>
+        <BarOffset value="60"/>
+        <BarWidth value="50"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-Terran-stetmann.dds"/>
+        </GroupIcon>
+        <HeroIcon value="Assets\Textures\ui-heroicon-stetmann.dds"/>
+        <UnitIcon value="Assets\Textures\BTN-Unit-Terran-MedicStetmann.dds"/>
+        <Wireframe>
+            <Image value="Assets\Wireframes\EgonStetmann\wireframe-egonstetmann.dds"/>
+        </Wireframe>
+        <FogVisibility value="Dimmed"/>
+        <CustomUnitStatusFrame value="SSF_UnitStatus/BossStatus"/>
+        <MinimapIcon value="Assets\Icons\btn-unit-egonstetmann.dds"/>
+        <MinimapIconScale value="0.300000"/>
+        <MinimapIconBackground value="Assets\MinimapBackground.dds"/>
+        <MinimapIconBackgroundScale value="1.100000"/>
+        <MinimapIconBackgroundTintColor value="255,255,0,0"/>
+        <UnitFlags index="SuppressDefaultStatusBar" value="1"/>
+    </CActorUnit>
+    <CActorAction id="GaryWeaponAction" parent="GenericAttack" effectImpact="GaryWeaponDmg" effectLaunch="GaryWeaponLM">
+        <EditorCategories value=""/>
+        <LaunchAssets Model="GaryWeaponMissileLaunch"/>
+        <Missile value="GaryWeaponMissile"/>
+        <ImpactMap index="None" Model="GaryWeaponMissileImpact"/>
+        <ImpactSiteOps Ops="SOpTargetUnit SOpAttachCenter"/>
+        <ImpactAttachQuery Methods="Origin"/>
+        <ShieldFlashType value="Full"/>
+    </CActorAction>
+    <CActorMissile id="GaryWeaponMissile" parent="GenericAttackMissile" unitName="GaryWeaponMissile">
+        <EditorCategories value=""/>
+    </CActorMissile>
+    <CActorTurret id="GaryWeaponTurret">
+        <EditorCategories value=""/>
+        <On Terms="TurretEnable.GaryWeapon" Send="Create"/>
+    </CActorTurret>
+    <CActorUnit id="Gary" parent="GenericUnitStandard" unitName="Gary">
+        <Aliases value="_UnitHuge"/>
+        <DeathArray index="Normal" ModelLink="GaryDeath"/>
+        <PortraitModel value="GaryPortrait"/>
+        <BarWidth value="100"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-Terran-sciencevessel.dds"/>
+        </GroupIcon>
+        <HeroIcon value="Assets\Textures\BTN-Unit-Terran-ScienceVessel.dds"/>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-terran-shipplatinglevel0.dds"/>
+        <UnitIcon value="Assets\Textures\BTN-Unit-Terran-ScienceVessel.dds"/>
+        <Wireframe>
+            <Image value="Assets\Textures\wireframe-stetmann-supergary.dds"/>
+        </Wireframe>
+        <FogVisibility value="Dimmed"/>
+        <CustomUnitStatusFrame value="SSF_UnitStatus/BossStatus_Gary"/>
+        <MinimapIcon value="Assets\Textures\btn-unit-stetmann-supergary.dds"/>
+        <MinimapIconScale value="0.300000"/>
+        <MinimapIconBackground value="Assets\MinimapBackground.dds"/>
+        <MinimapIconBackgroundScale value="1.100000"/>
+        <MinimapIconBackgroundTintColor value="255,255,0,0"/>
+        <UnitFlags index="SuppressDefaultStatusBar" value="1"/>
+        <StatusBarFlags index="Energy" value="0"/>
+        <VitalColors index="Energy">
+            <ColorArray value="255,255,255,0"/>
+        </VitalColors>
+        <VitalNames index="Energy" value="Button/Name/Scrap"/>
+        <On Terms="Behavior.SpinForWin@StunAndSpin.On" Send="StatusSet Spin 1"/>
+        <On Terms="Behavior.SpinForWin@StunAndSpin.On" Send="Create SpinForWin@RotatorDummyModel"/>
+        <On Terms="Behavior.SpinForWin@StunAndSpin.Off" Send="StatusSet Spin 0"/>
+        <On Terms="Behavior.SpinForWin@StunAndSpin.Off" Target="SpinForWin@RotatorDummyModel" Send="Destroy"/>
+        <On Terms="Behavior.SpinForWin@StunAndSpin.On" Send="SetRotationFrom SpinForWin@RotatorDummyModel"/>
+        <On Terms="Behavior.SpinForWin@StunAndSpin.On" Send="TimerSet 0.001000 Spin"/>
+        <On Terms="TimerExpired; TimerName Spin; HasStatus Spin" Send="TimerSet 0.001000 Spin"/>
+        <On Terms="TimerExpired; TimerName Spin" Send="SetRotationFrom SpinForWin@RotatorDummyModel"/>
+    </CActorUnit>
+    <CModel id="Swap@Splat">
+        <Model value="Assets\UI\ProtossCursorEx2\ProtossCursorEx2.m3"/>
+    </CModel>
+    <CModel id="Swap@TeleportArea">
+        <Model value="Assets\COOP\Stetmann\Effects\PowerSatellite_Stetmann_COOP_EnergyOverload\PowerSatellite_Stetmann_COOP_EnergyOverload.m3"/>
+        <Flags index="Download" value="0"/>
+        <ScaleMax value="4.500000,4.500000,4.500000"/>
+        <ScaleMin value="4.500000,4.500000,4.500000"/>
+    </CModel>
+    <CModel id="StetmannSummons@SpawnInMedium">
+        <Model value="Assets\Effects\Protoss\SOA_TemporalField\SOA_TemporalField.m3"/>
+        <Lighting value="StetmannSummons@SpawnInSmall"/>
+        <ScaleMax value="0.750000,0.750000,0.750000"/>
+        <ScaleMin value="0.750000,0.750000,0.750000"/>
+    </CModel>
+    <CModel id="StetmannSummons@SpawnIn">
+        <Model value="Assets\Effects\Protoss\SOA_TemporalField\SOA_TemporalField.m3"/>
+        <ScaleMax value="1.000000,1.000000,0.750000"/>
+        <ScaleMin value="1.000000,1.000000,0.750000"/>
+    </CModel>
+    <CModel id="StetmannSummons@SpawnInSmall">
+        <Model value="Assets\Effects\Protoss\SOA_DeployPylon\SOA_DeployPylon.m3"/>
+        <ScaleMax value="1.000000,1.000000,0.750000"/>
+        <ScaleMin value="1.000000,1.000000,0.750000"/>
+    </CModel>
+    <CModel id="SpinForWin@Pull">
+        <Model value="Assets/Effects/Neutral/PulloftheVoid_Coop/PulloftheVoid_Coop.m3"/>
+    </CModel>
+    <CModel id="StetmannSummons@Railgun" parent="ImportedModel">
+        <Model value="Assets\Models\Longbow\Longbow.m3"/>
+    </CModel>
+    <CModel id="StetmannSummons@Pen">
+        <Model value="Assets\Doodads\UmojanLabZergCrates\UmojanLabZergCrates.m3"/>
+        <VariationCount value="3"/>
+    </CModel>
+    <CModel id="Pinball@Ball">
+        <Model value="Assets\COOP\Stetmann\Effects\GARY_Stetmann_COOP_TechnoOrbMissile\GARY_Stetmann_COOP_TechnoOrbMissile.m3"/>
+        <SelectionRadius value="0.000000"/>
+    </CModel>
+    <CModel id="Pinball@Cannon">
+        <Model value="Assets\Buildings\Terran\GunTowerSmall\GunTowerSmall.m3"/>
+        <AnimBlendTime value="0.000000"/>
+    </CModel>
+    <CModel id="StetmannSummons@MrKrabs" parent="ImportedModel">
+        <Model value="Assets\Models\Umojan_Security_Crab\Umojan_Security_Crab.m3"/>
+    </CModel>
+    <CModel id="Scrap">
+        <Model value="Assets\COOP\Stetmann\Effects\ScrapPickup_Stetmann_COOP\ScrapPickup_Stetmann_COOP.m3"/>
+        <AnimSpeed value="0.500000"/>
+    </CModel>
+    <CModel id="StetmannSummons@MrKrabsFinalImpact">
+        <Model value="Assets\Effects\Terran\PlasmaBurst_Missile_Impact\PlasmaBurst_Missile_Impact.m3"/>
+        <ScaleMax value="10.000000,10.000000,10.000000"/>
+        <ScaleMin value="10.000000,10.000000,10.000000"/>
+    </CModel>
+    <CModel id="StetmannSummons@MrKrabsFinalMissile">
+        <Model value="Assets\Effects\Terran\PlasmaBurst_Missile\PlasmaBurst_Missile.m3"/>
+        <Flags index="Download" value="0"/>
+        <ScaleMax value="2.000000,2.000000,2.000000"/>
+        <ScaleMin value="2.000000,2.000000,2.000000"/>
+    </CModel>
+    <CModel id="StetmannSummons@MrKrabsMoney">
+        <Model value="Assets\Doodads\Shapes\ShapeDollarSign\ShapeDollarSign.m3"/>
+    </CModel>
+    <CModel id="StetmannSummons@RailgunWeaponImpact">
+        <Model value="Assets\Models\LaserMissileBlue\LaserMissileBlueImpact.m3"/>
+    </CModel>
+    <CModel id="StetmannSummons@RailgunWeaponMissile">
+        <Model value="Assets\Models\LaserMissileBlue\LaserMissileBlue.m3"/>
+        <Flags index="Download" value="0"/>
+        <ScaleMax value="2.000000,2.000000,2.000000"/>
+        <ScaleMin value="2.000000,2.000000,2.000000"/>
+    </CModel>
+    <CModel id="Stetellite">
+        <Model value="Assets\COOP\Stetmann\Buildings\PowerSatellite_Stetmann_COOP\PowerSatellite_Stetmann_COOP.m3"/>
+    </CModel>
+    <CModel id="Stetellite@Buffed">
+        <Model value="Assets\Effects\Protoss\Scryer\Scryer.m3"/>
+        <ScaleMax value="0.800000,0.800000,0.800000"/>
+        <ScaleMin value="0.800000,0.800000,0.800000"/>
+    </CModel>
+    <CModel id="Stetellite@Portrait" parent="Portrait">
+        <Model value="Assets\Portraits\Terran\ConfederateAdjutantPortrait\ConfederateAdjutantPortrait.m3"/>
+        <EditorCategories value=""/>
+        <Image value="Assets\Textures\confederateadjutantportrait_static.dds"/>
+    </CModel>
+    <CModel id="Stetellite@Death">
+        <Model value="Assets\COOP\Stetmann\Buildings\PowerSatellite_Stetmann_COOP_Death\PowerSatellite_Stetmann_COOP_Death.m3"/>
+        <Flags index="Download" value="0"/>
+    </CModel>
+    <CModel id="EgonStetmann">
+        <Model value="Assets\Models\Bel&apos;Shir_Stetmann\Bel&apos;Shir_Stetmann.m3"/>
+        <ScaleMax value="2.000000,2.000000,2.000000"/>
+        <ScaleMin value="2.000000,2.000000,2.000000"/>
+    </CModel>
+    <CWeaponLegacy id="StetmannSummons@MrKrabsWeapon">
+        <EditorCategories value=""/>
+        <Options index="Melee" value="1"/>
+        <DisplayEffect value="StetmannSummons@MrKrabsWeaponDmg"/>
+        <Range value="2"/>
+        <Effect value="StetmannSummons@MrKrabsWeaponDmg"/>
+        <TargetFilters value="Visible;Self,Worker,Missile,Item,Dead,Hidden,Invulnerable"/>
+        <Icon value="Assets\Textures\btn-ability-stetmann-infestorrecharge.dds"/>
+        <Period value="1.25"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="StetmannSummons@RailgunWeapon">
+        <EditorCategories value=""/>
+        <DisplayEffect value="StetmannSummons@RailgunWeaponDmg"/>
+        <DisplayAttackCount value="2"/>
+        <MinimumRange value="1.5"/>
+        <DamagePoint value="0.3"/>
+        <Effect value="StetmannSummons@RailgunWeaponSet"/>
+        <TargetFilters value="Visible;Self,Worker,Missile,Item,Dead,Hidden,Invulnerable"/>
+        <Icon value="Assets\Textures\btn-ability-protoss-shadowcannon.dds"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="GaryWeapon">
+        <EditorCategories value=""/>
+        <Icon value="Assets\Textures\btn-ability-stetmann-battlecarrierlordmechayamatocannon.dds"/>
+        <DisplayEffect value="GaryWeaponDmg"/>
+        <Range value="6"/>
+        <Effect value="GaryWeaponLM"/>
+        <DamagePoint value="0"/>
+        <TargetFilters value="Visible;Self,Worker,Missile,Item,Dead,Hidden,Invulnerable"/>
+        <Period value="1"/>
+    </CWeaponLegacy>
+    <CMoverMissile id="GaryWeaponMissileMover" parent="MissileDefault">
+        <MotionPhases index="0">
+            <Driver value="Guidance"/>
+            <Acceleration value="3200"/>
+            <MaxSpeed value="18.75"/>
+            <ClearanceAcceleration value="75"/>
+            <ActorTracking value="Linear"/>
+            <Outro value="-1"/>
+            <ThrowBandYaw value="-360,-360,-360,-360"/>
+            <ThrowBandPitch value="-360,-360,-360,-360"/>
+            <YawPitchRoll value="719.2968"/>
+        </MotionPhases>
+        <MotionPhases index="1" removed="1"/>
+    </CMoverMissile>
+    <CMoverMissile id="StetmannSummons@MrKrabsFinalMissileDown">
+        <MotionPhases>
+            <Driver value="Guidance"/>
+            <Acceleration value="4"/>
+            <Speed value="30"/>
+            <MaxSpeed value="30"/>
+            <Clearance value="0.5"/>
+            <ClearanceLookahead value="3"/>
+            <Outro value="5"/>
+            <ThrowBandYaw value="-360,-360,-360,-360"/>
+            <ThrowBandPitch value="-360,-360,-360,-360"/>
+            <YawPitchRoll value="5759.6484"/>
+        </MotionPhases>
+        <MotionPhases>
+            <Driver value="Guidance"/>
+            <Acceleration value="4"/>
+            <MaxSpeed value="30"/>
+            <Clearance value="0.5"/>
+            <ClearanceLookahead value="3"/>
+            <Outro value="-2.25,-2"/>
+            <ThrowBandYaw value="-360,-360,-360,-360"/>
+            <ThrowBandPitch value="-360,-360,-360,-360"/>
+            <YawPitchRoll value="5759.6484"/>
+        </MotionPhases>
+        <MotionPhases>
+            <Driver value="Guidance"/>
+            <Acceleration value="4"/>
+            <MaxSpeed value="40"/>
+            <Clearance value="0"/>
+            <ClearanceLookahead value="0"/>
+            <ThrowBandYaw value="-360,-360,-360,-360"/>
+            <ThrowBandPitch value="-360,-360,-360,-360"/>
+            <YawPitchRoll value="5759.6484"/>
+        </MotionPhases>
+    </CMoverMissile>
+    <CMoverMissile id="StetmannSummons@MrKrabsFinalMissile">
+        <MotionPhases>
+            <Driver value="Throw"/>
+            <Acceleration value="3200"/>
+            <Speed value="30"/>
+            <MaxSpeed value="30"/>
+            <Outro value="3,8"/>
+            <Timeout value="8"/>
+            <ThrowRotationType value="ThrowForward"/>
+            <ThrowVector value="0,-5,5"/>
+            <ThrowBandYaw value="-360,-360,-360,-360"/>
+            <ThrowBandPitch value="-360,-360,-360,-360"/>
+            <ThrowForward value="0,-5,5"/>
+            <YawPitchRollAccel value="0.3515"/>
+            <FlightTime value="5"/>
+        </MotionPhases>
+        <MotionPhases>
+            <Driver value="Guidance"/>
+            <Acceleration value="4"/>
+            <MaxSpeed value="30"/>
+            <Clearance value="0.5"/>
+            <ClearanceLookahead value="3"/>
+            <Timeout value="16"/>
+            <ThrowBandYaw value="-360,-360,-360,-360"/>
+            <ThrowBandPitch value="-360,-360,-360,-360"/>
+            <YawPitchRoll value="5759.6484"/>
+            <YawPitchRollAccel value="0.3515"/>
+        </MotionPhases>
+    </CMoverMissile>
+    <CMoverMissile id="StetmannSummons@RailgunWeaponMissile">
+        <MotionPhases>
+            <Driver value="AdaptableParabola"/>
+            <MinSpeed value="35"/>
+            <MaxSpeed value="35"/>
+            <ActorTracking value="Actual"/>
+            <ThrowBandYaw value="-360,-360,-360,-360"/>
+            <ThrowBandPitch value="-360,-360,-360,-360"/>
+            <AdaptableParabolaIsUpright value="1"/>
+            <AdaptableParabolaClearance value="1"/>
+            <AdaptableParabolaDistances index="Launch" value="0"/>
+            <AdaptableParabolaDistances index="PreApex" value="1"/>
+            <AdaptableParabolaDistances index="PostApex" value="1"/>
+            <AdaptableParabolaDistances index="Land" value="0"/>
+            <AdaptableParabolaAccels index="Launch" value="200"/>
+            <AdaptableParabolaAccels index="Ascent" value="200"/>
+            <AdaptableParabolaAccels index="Apex" value="0"/>
+            <AdaptableParabolaAccels index="Descent" value="0"/>
+            <AdaptableParabolaAccels index="Land" value="0"/>
+        </MotionPhases>
+    </CMoverMissile>
+    <CAccumulatorVitals id="Scrap@DamageFactor">
+        <Ratio value="0.01"/>
+        <VitalType value="Energy"/>
+        <ModificationType value="PerUnit"/>
+    </CAccumulatorVitals>
+    <CAccumulatorUserData id="Scrap@Count">
+        <Key value="Scrap"/>
+        <BehaviorScope Value="Source" Behavior="Scrap@Count"/>
+    </CAccumulatorUserData>
+    <CDataCollectionAbil id="Swap">
+        <EditorCategories value=""/>
+        <DataRecord Entry="Abil,Swap"/>
+        <DataRecord Entry="Actor,Swap@SplatTarget"/>
+        <DataRecord Entry="Actor,Swap@SplatCaster"/>
+        <DataRecord Entry="Actor,Swap@TeleportTarget"/>
+        <DataRecord Entry="Actor,Swap@TeleportCaster"/>
+        <DataRecord Entry="Button,Swap"/>
+        <DataRecord Entry="Effect,Swap@SearchDummy"/>
+        <DataRecord Entry="Effect,Swap@Dmg"/>
+        <DataRecord Entry="Effect,Swap@Delay"/>
+        <DataRecord Entry="Effect,Swap@TriggerHookup"/>
+        <DataRecord Entry="Effect,Swap@InitialSet"/>
+        <DataRecord Entry="Effect,Swap@AlreadyCastingNoWeapons"/>
+        <DataRecord Entry="Model,Swap@Splat"/>
+        <DataRecord Entry="Model,Swap@TeleportArea"/>
+    </CDataCollectionAbil>
+    <CDataCollectionAbil id="SpinForWin">
+        <EditorCategories value=""/>
+        <DataRecord Entry="Actor,SpinForWin@SiteOpsRotator"/>
+        <DataRecord Entry="Actor,SpinForWin@RotatorDummyModel"/>
+        <DataRecord Entry="Behavior,SpinForWin@StunAndSpin"/>
+        <DataRecord Entry="Effect,SpinForWin@PullSearch"/>
+        <DataRecord Entry="Effect,SpinForWin@PullTeleportController"/>
+        <DataRecord Entry="Effect,SpinForWin@PullTeleport"/>
+        <DataRecord Entry="Effect,SpinForWin@PullTeleportOffset"/>
+        <DataRecord Entry="Abil,SpinForWin"/>
+        <DataRecord Entry="Button,SpinForWin"/>
+        <DataRecord Entry="Effect,SpinForWin@ImpactSearch"/>
+        <DataRecord Entry="Effect,SpinForWin@ImpactDamage"/>
+        <DataRecord Entry="Effect,SpinForWin@SearchSet"/>
+        <DataRecord Entry="Effect,SpinForWin@InitialSet"/>
+        <DataRecord Entry="Effect,SpinForWin@AlreadyCastingNoWeapons"/>
+        <DataRecord Entry="Effect,SpinForWin@StunAndSpin"/>
+        <DataRecord Entry="Actor,SpinForWin@Pull"/>
+        <DataRecord Entry="Model,SpinForWin@Pull"/>
+    </CDataCollectionAbil>
+    <CDataCollectionAbil id="StetmannRevenge">
+        <EditorCategories value=""/>
+        <DataRecord Entry="Abil,StetmannRevenge"/>
+        <DataRecord Entry="Behavior,StetmannRevenge@Stun"/>
+        <DataRecord Entry="Behavior,StetmannRevenge@Invulnerable"/>
+        <DataRecord Entry="Button,StetmannRevenge"/>
+        <DataRecord Entry="Effect,StetmannRevenge@Stun"/>
+        <DataRecord Entry="Effect,StetmannRevenge@InvulnerableRemove"/>
+        <DataRecord Entry="Effect,StetmannRevenge@StunRemove"/>
+        <DataRecord Entry="Effect,StetmannRevenge@TimingController"/>
+        <DataRecord Entry="Effect,StetmannRevenge@Teleport"/>
+    </CDataCollectionAbil>
+    <CDataCollectionAbil id="Pinball">
+        <EditorCategories value=""/>
+        <DataRecord Entry="Abil,Pinball"/>
+        <DataRecord Entry="Button,Pinball"/>
+        <DataRecord Entry="Unit,Pinball@Cannon"/>
+        <DataRecord Entry="Unit,Pinball@Ball"/>
+        <DataRecord Entry="Abil,Pinball@Shot"/>
+        <DataRecord Entry="Actor,Pinball@Ball"/>
+        <DataRecord Entry="Actor,Pinball@Cannon"/>
+        <DataRecord Entry="Behavior,Pinball@CannonTracker"/>
+        <DataRecord Entry="Behavior,Pinball@DmgSearchBuff"/>
+        <DataRecord Entry="Effect,Pinball@AddCannonTracking"/>
+        <DataRecord Entry="Effect,Pinball@BallMove"/>
+        <DataRecord Entry="Effect,Pinball@CreateBallOffset"/>
+        <DataRecord Entry="Effect,Pinball@BallSpawnSet"/>
+        <DataRecord Entry="Effect,Pinball@DmgSearchBuff"/>
+        <DataRecord Entry="Effect,Pinball@CreateBall"/>
+        <DataRecord Entry="Effect,Pinball@Dmg"/>
+        <DataRecord Entry="Effect,Pinball@DmgSearch"/>
+        <DataRecord Entry="Effect,Pinball@GetCannons"/>
+        <DataRecord Entry="Effect,Pinball@RandomTargetLocation"/>
+        <DataRecord Entry="Effect,Pinball@InitialSet"/>
+        <DataRecord Entry="Effect,Pinball@AlreadyCastingNoWeapons"/>
+        <DataRecord Entry="Effect,Pinball@IssueShot"/>
+        <DataRecord Entry="Model,Pinball@Ball"/>
+        <DataRecord Entry="Model,Pinball@Cannon"/>
+        <DataRecord Entry="Validator,Pinball@Cannon"/>
+        <DataRecord Entry="Behavior,Pinball@BallTimedLife"/>
+        <DataRecord Entry="Effect,Pinball@BallTimedLife"/>
+        <DataRecord Entry="Effect,Pinball@BallMoveDelay"/>
+        <DataRecord Entry="Actor,Pinball@Line"/>
+    </CDataCollectionAbil>
+    <CDataCollectionAbil id="StetmannSummons">
+        <EditorCategories value=""/>
+        <DataRecord Entry="Actor,StetmannSummons@MrKrabs"/>
+        <DataRecord Entry="Actor,StetmannSummons@Railgun"/>
+        <DataRecord Entry="Model,StetmannSummons@MrKrabs"/>
+        <DataRecord Entry="Model,StetmannSummons@Railgun"/>
+        <DataRecord Entry="Unit,StetmannSummons@MrKrabs"/>
+        <DataRecord Entry="Unit,StetmannSummons@Railgun"/>
+        <DataRecord Entry="Actor,StetmannSummons@MrKrabsFinalAction"/>
+        <DataRecord Entry="Actor,StetmannSummons@MrKrabsFinalAction2"/>
+        <DataRecord Entry="Actor,StetmannSummons@MrKrabsDollarLeft"/>
+        <DataRecord Entry="Actor,StetmannSummons@MrKrabsDollarOffset"/>
+        <DataRecord Entry="Actor,StetmannSummons@MrKrabsDollarRight"/>
+        <DataRecord Entry="Actor,StetmannSummons@MrKrabsFinalMissile"/>
+        <DataRecord Entry="Actor,StetmannSummons@MrKrabsWeapon"/>
+        <DataRecord Entry="Actor,StetmannSummons@RailgunWeaponActionLeft"/>
+        <DataRecord Entry="Actor,StetmannSummons@RailgunWeaponActionRight"/>
+        <DataRecord Entry="Actor,StetmannSummons@RailgunWeaponMissile"/>
+        <DataRecord Entry="Behavior,StetmannSummons@MrKrabsFinal"/>
+        <DataRecord Entry="Behavior,StetmannSummons@MrKrabsFinalInvulnerable"/>
+        <DataRecord Entry="Effect,StetmannSummons@MrKrabsFinalLM12"/>
+        <DataRecord Entry="Effect,StetmannSummons@MrKrabsFinalDmg"/>
+        <DataRecord Entry="Effect,StetmannSummons@MrKrabsFinalRemove"/>
+        <DataRecord Entry="Effect,StetmannSummons@MrKrabsFinalInvulnerable"/>
+        <DataRecord Entry="Effect,StetmannSummons@MrKrabsFinalLM1"/>
+        <DataRecord Entry="Effect,StetmannSummons@MrKrabsFinalPersistent"/>
+        <DataRecord Entry="Effect,StetmannSummons@MrKrabsWeaponDmg"/>
+        <DataRecord Entry="Effect,StetmannSummons@RailgunWeaponDmg"/>
+        <DataRecord Entry="Effect,StetmannSummons@RailgunWeaponLMRight"/>
+        <DataRecord Entry="Effect,StetmannSummons@RailgunWeaponLMLeft"/>
+        <DataRecord Entry="Effect,StetmannSummons@RailgunWeaponSet"/>
+        <DataRecord Entry="Model,StetmannSummons@MrKrabsFinalImpact"/>
+        <DataRecord Entry="Model,StetmannSummons@MrKrabsMoney"/>
+        <DataRecord Entry="Model,StetmannSummons@MrKrabsFinalMissile"/>
+        <DataRecord Entry="Model,StetmannSummons@RailgunWeaponImpact"/>
+        <DataRecord Entry="Model,StetmannSummons@RailgunWeaponMissile"/>
+        <DataRecord Entry="Mover,StetmannSummons@MrKrabsFinalMissileDown"/>
+        <DataRecord Entry="Mover,StetmannSummons@MrKrabsFinalMissile"/>
+        <DataRecord Entry="Mover,StetmannSummons@RailgunWeaponMissile"/>
+        <DataRecord Entry="Unit,StetmannSummons@MrKrabsFinalMissile"/>
+        <DataRecord Entry="Unit,StetmannSummons@RailgunWeaponMissile"/>
+        <DataRecord Entry="Unit,StetmannSummons@Railgun"/>
+        <DataRecord Entry="Unit,StetmannSummons@MrKrabs"/>
+        <DataRecord Entry="Validator,StetmannSummons@MrKrabsFinalNot"/>
+        <DataRecord Entry="Weapon,StetmannSummons@MrKrabsWeapon"/>
+        <DataRecord Entry="Weapon,StetmannSummons@RailgunWeapon"/>
+        <DataRecord Entry="Abil,StetmannSummons"/>
+        <DataRecord Entry="Actor,StetmannSummons@Pen"/>
+        <DataRecord Entry="Behavior,StetmannSummons@Wander"/>
+        <DataRecord Entry="Behavior,StetmannSummons@PenOpen"/>
+        <DataRecord Entry="Button,StetmannSummons"/>
+        <DataRecord Entry="Effect,StetmannSummons@GenericSpawnSet"/>
+        <DataRecord Entry="Effect,StetmannSummons@Wander"/>
+        <DataRecord Entry="Effect,StetmannSummons@InitialSet"/>
+        <DataRecord Entry="Effect,StetmannSummons@AlreadyCastingNoWeapons"/>
+        <DataRecord Entry="Model,StetmannSummons@Pen"/>
+        <DataRecord Entry="Unit,StetmannSummons@Pen"/>
+        <DataRecord Entry="Unit,StetmannSummons@Railgun"/>
+        <DataRecord Entry="Unit,StetmannSummons@MrKrabs"/>
+        <DataRecord Entry="Actor,StetmannSummons@SpawnIn"/>
+        <DataRecord Entry="Behavior,StetmannSummons@SpawnIn"/>
+        <DataRecord Entry="Effect,StetmannSummons@GenericSpawnSetWithoutScrap"/>
+        <DataRecord Entry="Model,StetmannSummons@SpawnInSmall"/>
+        <DataRecord Entry="Model,StetmannSummons@SpawnInMedium"/>
+        <DataRecord Entry="Model,StetmannSummons@SpawnIn"/>
+        <DataRecord Entry="Effect,StetmannSummons@MrKrabsFinalImpactSet"/>
+        <DataRecord Entry="Behavior,StetmannSummons@SpawnIn"/>
+        <DataRecord Entry="Behavior,StetmannSummons@PenOpen"/>
+        <DataRecord Entry="Unit,StetmannSummons@Pen"/>
+        <DataRecord Entry="Unit,StetmannSummons@Railgun"/>
+        <DataRecord Entry="Unit,StetmannSummons@MrKrabs"/>
+    </CDataCollectionAbil>
+    <CDataCollectionAbil id="Scrap">
+        <EditorCategories value=""/>
+        <DataRecord Entry="Abil,Scrap@SearchGary"/>
+        <DataRecord Entry="Actor,Scrap"/>
+        <DataRecord Entry="Behavior,Scrap@Count"/>
+        <DataRecord Entry="Behavior,Scrap@ScrapSpawnOnDeath"/>
+        <DataRecord Entry="Behavior,Scrap@SearchForScrap"/>
+        <DataRecord Entry="Effect,Scrap@TransferToGary"/>
+        <DataRecord Entry="Effect,Scrap@ScrapSpawn"/>
+        <DataRecord Entry="Effect,Scrap@TransferScrapCount"/>
+        <DataRecord Entry="Effect,Scrap@SetScrap1"/>
+        <DataRecord Entry="Effect,Scrap@TransferToGaryLM"/>
+        <DataRecord Entry="Effect,Scrap@TransferToGaryImpactSet"/>
+        <DataRecord Entry="Effect,Scrap@SetScrap10"/>
+        <DataRecord Entry="Effect,Scrap@SetScrap2"/>
+        <DataRecord Entry="Effect,Scrap@SetScrap3"/>
+        <DataRecord Entry="Effect,Scrap@SetScrap4"/>
+        <DataRecord Entry="Effect,Scrap@SetScrap5"/>
+        <DataRecord Entry="Effect,Scrap@SetScrap6"/>
+        <DataRecord Entry="Effect,Scrap@SetScrap7"/>
+        <DataRecord Entry="Effect,Scrap@SetScrap8"/>
+        <DataRecord Entry="Effect,Scrap@SetScrap9"/>
+        <DataRecord Entry="Effect,Scrap@SearchForScrap"/>
+        <DataRecord Entry="Effect,Scrap@SearchForScrapIssueTransfer"/>
+        <DataRecord Entry="Model,Scrap"/>
+        <DataRecord Entry="Unit,Scrap"/>
+        <DataRecord Entry="Validator,Scrap@TargetIsScrap"/>
+        <DataRecord Entry="Accumulator,Scrap@Count"/>
+        <DataRecord Entry="Behavior,Scrap@ScrapSpawnOnDeath"/>
+        <DataRecord Entry="Behavior,Scrap@SearchForScrap"/>
+        <DataRecord Entry="Behavior,Scrap@ScrapTimedLife"/>
+        <DataRecord Entry="Behavior,Scrap@SearchForScrap"/>
+        <DataRecord Entry="Behavior,Scrap@DamageBonus"/>
+        <DataRecord Entry="Effect,Scrap@ScrapSpawnOnDeath"/>
+        <DataRecord Entry="Effect,Scrap@Count"/>
+        <DataRecord Entry="Accumulator,Scrap@DamageFactor"/>
+    </CDataCollectionAbil>
+    <CDataCollectionAbil id="Stetellite">
+        <EditorCategories value=""/>
+        <DataRecord Entry="Abil,Stetellite"/>
+        <DataRecord Entry="Actor,Stetellite"/>
+        <DataRecord Entry="Actor,Stetellite@Buffed"/>
+        <DataRecord Entry="Behavior,Stetellite@Buff"/>
+        <DataRecord Entry="Behavior,Stetellite@BuffController"/>
+        <DataRecord Entry="Button,Stetellite"/>
+        <DataRecord Entry="Effect,Stetellite@Buff"/>
+        <DataRecord Entry="Effect,Stetellite@BuffController"/>
+        <DataRecord Entry="Effect,Stetellite@BuffSearch"/>
+        <DataRecord Entry="Effect,Stetellite@CreateUnit"/>
+        <DataRecord Entry="Effect,Stetellite@SpawnSet"/>
+        <DataRecord Entry="Effect,Stetellite@ImpactSet"/>
+        <DataRecord Entry="Effect,Stetellite@InitialSet"/>
+        <DataRecord Entry="Effect,Stetellite@AlreadyCastingNoWeapons"/>
+        <DataRecord Entry="Effect,Stetellite@LM"/>
+        <DataRecord Entry="Model,Stetellite@Death"/>
+        <DataRecord Entry="Model,Stetellite@Portrait"/>
+        <DataRecord Entry="Model,Stetellite"/>
+        <DataRecord Entry="Model,Stetellite@Buffed"/>
+        <DataRecord Entry="Unit,Stetellite"/>
+    </CDataCollectionAbil>
+    <CTurret id="GaryWeapon">
+        <YawArc value="360"/>
+        <Idle value="Hold"/>
+        <YawRate value="360"/>
+    </CTurret>
+    <CUnit id="StetmannSummons@Pen">
+        <Race value="Zerg"/>
+        <FlagArray index="Movable" value="0"/>
+        <FlagArray index="Unselectable" value="1"/>
+        <FlagArray index="Untargetable" value="1"/>
+        <FlagArray index="Invulnerable" value="1"/>
+        <Collide index="Ground" value="1"/>
+        <Collide index="ForceField" value="1"/>
+        <Collide index="Locust" value="1"/>
+        <Collide index="Small" value="1"/>
+        <Radius value="1"/>
+        <EditorCategories value=""/>
+    </CUnit>
+    <CUnit id="Pinball@Cannon" parent="GenericEnemyUnit">
+        <AbilArray index="0" Link="Pinball@Shot"/>
+        <AbilArray index="1" removed="1"/>
+        <AbilArray index="2" removed="1"/>
+        <CardLayouts index="0">
+            <LayoutButtons Face="Pinball" Type="AbilCmd" AbilCmd="Pinball@Shot,Execute" Row="2" Column="0"/>
+        </CardLayouts>
+        <Attributes index="Structure" value="1"/>
+        <Attributes index="Summoned" value="1"/>
+        <FlagArray index="Movable" value="0"/>
+        <FlagArray index="Unselectable" value="1"/>
+        <FlagArray index="Untargetable" value="1"/>
+        <FlagArray index="Invulnerable" value="1"/>
+    </CUnit>
+    <CUnit id="Pinball@Ball" parent="GenericEnemyUnit">
+        <FlagArray index="Turnable" value="0"/>
+        <FlagArray index="Uncommandable" value="1"/>
+        <FlagArray index="Unselectable" value="1"/>
+        <FlagArray index="Untargetable" value="1"/>
+        <FlagArray index="Invulnerable" value="1"/>
+        <FlagArray index="Unstoppable" value="1"/>
+        <PlaneArray index="Ground" value="0"/>
+        <Collide index="Ground" value="0"/>
+        <Collide index="ForceField" value="0"/>
+        <Collide index="Locust" value="0"/>
+        <Collide index="Small" value="0"/>
+        <Mover value="Fly"/>
+        <Height value="1.15"/>
+        <InnerRadius value="0"/>
+        <Attributes index="Summoned" value="1"/>
+    </CUnit>
+    <CUnit id="StetmannSummons@MrKrabsFinalMissile" parent="MISSILE">
+        <Race value="Zerg"/>
+        <EditorCategories value=""/>
+    </CUnit>
+    <CUnit id="StetmannSummons@RailgunWeaponMissile" parent="MISSILE">
+        <Race value="Zerg"/>
+        <EditorCategories value=""/>
+    </CUnit>
+    <CUnit id="StetmannSummons@Railgun" parent="GenericEnemyUnit">
+        <Race value="Zerg"/>
+        <Speed value="4.1992"/>
+        <WeaponArray Link="StetmannSummons@RailgunWeapon"/>
+        <LifeStart value="1750"/>
+        <LifeMax value="1750"/>
+        <Radius value="0.75"/>
+        <InnerRadius value="0.75"/>
+        <LifeArmorName value="Unit/LifeArmorName/MechaZergArmor"/>
+    </CUnit>
+    <CUnit id="StetmannSummons@MrKrabs" parent="GenericEnemyUnit">
+        <Race value="Zerg"/>
+        <LifeStart value="2500"/>
+        <LifeMax value="2500"/>
+        <Speed value="4.1992"/>
+        <Acceleration value="5"/>
+        <StationaryTurningRate value="180"/>
+        <TurningRate value="180"/>
+        <BehaviorArray Link="StetmannSummons@MrKrabsFinal"/>
+        <WeaponArray Link="StetmannSummons@MrKrabsWeapon"/>
+        <Radius value="1.25"/>
+        <InnerRadius value="1"/>
+        <MinimapRadius value="0.75"/>
+        <LifeArmorName value="Unit/LifeArmorName/MechaZergArmor"/>
+    </CUnit>
+    <CUnit id="Scrap">
+        <Race value="Zerg"/>
+        <EditorCategories value=""/>
+        <FlagArray index="Worker" value="1"/>
+        <FlagArray index="Uncommandable" value="1"/>
+        <FlagArray index="Unselectable" value="1"/>
+        <FlagArray index="Untargetable" value="1"/>
+        <FlagArray index="Invulnerable" value="1"/>
+        <AbilArray Link="Scrap@SearchGary"/>
+        <BehaviorArray Link="Scrap@Count"/>
+        <BehaviorArray Link="Scrap@ScrapTimedLife"/>
+        <CardLayouts>
+            <LayoutButtons Face="Stetellite" Type="AbilCmd" AbilCmd="Scrap@SearchGary,Execute" Row="2" Column="0"/>
+        </CardLayouts>
+        <LifeRegenDelay value="5"/>
+        <ShieldRegenDelay value="5"/>
+        <Attributes index="Summoned" value="1"/>
+    </CUnit>
+    <CUnit id="Stetellite" parent="GenericEnemyUnit">
+        <Race value="Zerg"/>
+        <FlagArray index="UseLineOfSight" value="0"/>
+        <FlagArray index="ArmySelect" value="0"/>
+        <PlaneArray index="Ground" value="0"/>
+        <PlaneArray index="Air" value="1"/>
+        <Collide index="Ground" value="0"/>
+        <Collide index="ForceField" value="0"/>
+        <Collide index="Locust" value="0"/>
+        <Collide index="Small" value="0"/>
+        <Collide index="Flying" value="1"/>
+        <Response value="Nothing"/>
+        <Attributes index="Mechanical" value="1"/>
+        <Attributes index="Hover" value="1"/>
+        <LifeStart value="7500"/>
+        <LifeMax value="7500"/>
+        <LifeArmorFormula>
+            <NegativeArmorMultiplier value="-1"/>
+            <NegativeDamageBase value="1"/>
+            <NegativeDamageUnscaled value="1"/>
+            <PositiveArmorMultiplier value="1"/>
+        </LifeArmorFormula>
+        <ShieldArmorFormula>
+            <NegativeArmorMultiplier value="-1"/>
+            <NegativeDamageBase value="1"/>
+            <NegativeDamageUnscaled value="1"/>
+            <PositiveArmorMultiplier value="1"/>
+        </ShieldArmorFormula>
+        <Speed value="0"/>
+        <Acceleration value="0"/>
+        <Sight value="0"/>
+        <Height value="5"/>
+        <CostCategory value="None"/>
+        <AbilArray index="0" removed="1"/>
+        <AbilArray index="1" removed="1"/>
+        <AbilArray index="2" removed="1"/>
+        <BehaviorArray index="0" removed="1"/>
+        <BehaviorArray index="1" removed="1"/>
+        <BehaviorArray index="2" removed="1"/>
+        <BehaviorArray index="3" removed="1"/>
+        <BehaviorArray index="4" removed="1"/>
+        <BehaviorArray index="5" removed="1"/>
+        <BehaviorArray index="6" removed="1"/>
+        <CardLayouts index="0" removed="1"/>
+        <InnerRadius value="0"/>
+    </CUnit>
+    <CUnit id="GaryWeaponMissile" parent="MISSILE">
+        <Mover value="GaryWeaponMissileMover"/>
+    </CUnit>
+    <CUnit id="EgonStetmann" parent="GenericEnemyUnit">
+        <Race value="Zerg"/>
+        <AbilArray Link="Stetellite"/>
+        <AbilArray Link="Pinball"/>
+        <AbilArray Link="StetmannRevenge"/>
+        <AbilArray Link="StetmannSummons"/>
+        <CardLayouts index="0">
+            <LayoutButtons Face="Stetellite" Type="AbilCmd" AbilCmd="Stetellite,Execute" Row="2" Column="0"/>
+            <LayoutButtons Face="Pinball" Type="AbilCmd" AbilCmd="Pinball,Execute" Row="2" Column="1"/>
+            <LayoutButtons Face="StetmannRevenge" Type="AbilCmd" AbilCmd="StetmannRevenge,Execute" Row="2" Column="2"/>
+            <LayoutButtons Face="StetmannSummons" Type="AbilCmd" AbilCmd="StetmannSummons,Execute" Row="2" Column="3"/>
+        </CardLayouts>
+        <FogVisibility value="Dimmed"/>
+        <Attributes index="Biological" value="1"/>
+        <Attributes index="Psionic" value="1"/>
+        <Attributes index="Heroic" value="1"/>
+        <LifeStart value="25000"/>
+        <LifeMax value="25000"/>
+        <LifeRegenRate value="140"/>
+        <Sight value="15"/>
+        <VisionHeight value="4"/>
+        <BehaviorArray Link="Detector10"/>
+        <BehaviorArray Link="Pinball@CannonTracker"/>
+        <BehaviorArray Link="StetmannRevenge@Invulnerable"/>
+        <BehaviorArray Link="BossesP2Armor"/>
+        <LifeArmorName value="Unit/LifeArmorName/Stetmann"/>
+        <Response value="Nothing"/>
+    </CUnit>
+    <CUnit id="Gary" parent="GenericEnemyUnit">
+        <Race value="Zerg"/>
+        <FlagArray index="Turnable" value="0"/>
+        <Height value="2"/>
+        <WeaponArray Link="GaryWeapon" Turret="GaryWeapon"/>
+        <FogVisibility value="Dimmed"/>
+        <PlaneArray index="Ground" value="0"/>
+        <PlaneArray index="Air" value="1"/>
+        <Collide index="Ground" value="0"/>
+        <Collide index="ForceField" value="0"/>
+        <Collide index="Locust" value="0"/>
+        <Collide index="Small" value="0"/>
+        <Collide index="Flying" value="1"/>
+        <Attributes index="Armored" value="1"/>
+        <Attributes index="Mechanical" value="1"/>
+        <Attributes index="Massive" value="1"/>
+        <Attributes index="Heroic" value="1"/>
+        <LifeStart value="37500"/>
+        <LifeMax value="37500"/>
+        <LifeRegenRate value="140"/>
+        <Mover value="Fly"/>
+        <Acceleration value="20"/>
+        <Deceleration value="3"/>
+        <Sight value="15"/>
+        <VisionHeight value="4"/>
+        <BehaviorArray Link="Detector10"/>
+        <BehaviorArray Link="Scrap@SearchForScrap"/>
+        <BehaviorArray Link="Scrap@DamageBonus"/>
+        <BehaviorArray Link="BossesP2Armor"/>
+        <Radius value="2"/>
+        <SeparationRadius value="1.375"/>
+        <MinimapRadius value="1"/>
+        <EnergyMax value="1000"/>
+        <LifeArmorName value="Unit/LifeArmorName/Gary"/>
+        <AbilArray Link="SpinForWin"/>
+        <AbilArray Link="Swap"/>
+        <CardLayouts index="0">
+            <LayoutButtons Face="SpinForWin" Type="AbilCmd" AbilCmd="SpinForWin,Execute" Row="2" Column="0"/>
+            <LayoutButtons Face="Swap" Type="AbilCmd" AbilCmd="Swap,Execute" Row="2" Column="1"/>
+        </CardLayouts>
+        <LifeArmorTip value="Unit/P2Bosses/ArmorTooltip"/>
+    </CUnit>
+    <CBehaviorBuff id="StetmannSummons@SpawnIn">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="2"/>
+        <Modification>
+            <StateFlags index="Invulnerable" value="1"/>
+            <StateFlags index="Stun" value="1"/>
+            <StateFlags index="Untargetable" value="1"/>
+        </Modification>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="Scrap@DamageBonus">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification>
+            <DamageDealtFraction index="Spell" value="0">
+                <AccumulatorArray value="Scrap@DamageFactor"/>
+            </DamageDealtFraction>
+            <DamageDealtFraction index="Melee" value="0">
+                <AccumulatorArray value="Scrap@DamageFactor"/>
+            </DamageDealtFraction>
+            <DamageDealtFraction index="Ranged" value="0">
+                <AccumulatorArray value="Scrap@DamageFactor"/>
+            </DamageDealtFraction>
+            <DamageDealtFraction index="Splash" value="0">
+                <AccumulatorArray value="Scrap@DamageFactor"/>
+            </DamageDealtFraction>
+        </Modification>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="SpinForWin@StunAndSpin">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="10.0625"/>
+        <Period value="0.25"/>
+        <PeriodicEffect value="SpinForWin@SearchSet"/>
+        <Modification>
+            <StateFlags index="Stun" value="1"/>
+        </Modification>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="Scrap@ScrapTimedLife" parent="TimedLifeHidden">
+        <Duration value="60"/>
+    </CBehaviorBuff>
+    <CBehaviorWander id="StetmannSummons@Wander">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Range value="1.5"/>
+        <Delay value="0.5"/>
+    </CBehaviorWander>
+    <CBehaviorBuff id="StetmannSummons@PenOpen">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification>
+            <StateFlags index="SuppressCollision" value="1"/>
+        </Modification>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="StetmannRevenge@Invulnerable">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification>
+            <StateFlags index="Invulnerable" value="1"/>
+        </Modification>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="StetmannRevenge@Stun">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification MoveSpeedMaximum="0">
+            <AbilClassDisableArray index="CAbilAttack" value="1"/>
+        </Modification>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorUnitTracker id="Pinball@CannonTracker">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorUnitTracker>
+    <CBehaviorBuff id="Pinball@DmgSearchBuff">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <PeriodicEffect value="Pinball@DmgSearch"/>
+        <Duration value="5.35"/>
+        <Period value="0.25"/>
+        <FinalEffect value="Suicide"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="StetmannSummons@MrKrabsFinal">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DamageResponse Fatal="1" Handled="StetmannSummons@MrKrabsFinalPersistent" ModifyFraction="0">
+            <Chance value="1"/>
+        </DamageResponse>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="StetmannSummons@MrKrabsFinalInvulnerable">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification MoveSpeedMaximum="0">
+            <StateFlags index="Invulnerable" value="1"/>
+            <StateFlags index="Stasis" value="1"/>
+            <StateFlags index="Stun" value="1"/>
+            <StateFlags index="Untargetable" value="1"/>
+            <AbilClassDisableArray index="CAbilMove" value="1"/>
+        </Modification>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="Scrap@SearchForScrap">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Period value="0.125"/>
+        <PeriodicEffect value="Scrap@SearchForScrap"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="Scrap@Count">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="Scrap@ScrapSpawnOnDeath">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DamageResponse Fatal="1" Handled="Scrap@ScrapSpawn">
+            <Chance value="1"/>
+        </DamageResponse>
+        <DisableValidatorArray value="StetmannSummons@MrKrabsFinalNot"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="Stetellite@Buff">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="0.2"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="Stetellite@BuffController">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Period value="0.125"/>
+        <PeriodicEffect value="Stetellite@BuffSearch"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+</Catalog>

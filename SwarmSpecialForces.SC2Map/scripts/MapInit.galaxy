@@ -1,0 +1,229 @@
+
+// initializes playergroups and alliances between players
+void MapInit_ActivePlayers(){
+    int tmpInt;
+
+    gv_ActivePG = PlayerGroupEmpty();
+    gv_StartingPG = PlayerGroupEmpty();
+    gv_NewPlayers = PlayerGroupEmpty();
+    gv_SpectatingPG = PlayerGroupEmpty();
+
+    libNtve_gf_SetPlayerGroupAlliance(PlayerGroupAll(), libNtve_ge_AllianceSetting_Neutral);
+    libNtve_gf_SetAlliance(gv_BasePlayer, gv_EnemyPlayer, libNtve_ge_AllianceSetting_Enemy);
+    libNtve_gf_SetAlliance(gv_EnemyPlayer, gv_CollectiblePlayerEnemyAllied, libNtve_ge_AllianceSetting_AllyWithSharedVision);
+    libNtve_gf_SetAlliance(gv_EnemyPlayer, gv_CollectiblePlayerEnemyNeutral, libNtve_ge_AllianceSetting_Neutral);
+    
+    for ( tmpInt = 1; tmpInt <= gv_MaxAmountPlayers ; tmpInt += 1 ) {
+        if (PlayerStatus(tmpInt) == c_playerStatusActive) {
+            gv_PlayerStats[tmpInt].activeFlag = true;
+            libNtve_gf_SetAlliance(tmpInt, gv_CollectiblePlayerEnemyAllied, libNtve_ge_AllianceSetting_Neutral);
+            libNtve_gf_SetAlliance(tmpInt, gv_CollectiblePlayerEnemyNeutral, libNtve_ge_AllianceSetting_Neutral);
+            PlayerGroupAdd(gv_ActivePG, tmpInt);
+            PlayerGroupAdd(gv_StartingPG, tmpInt);
+            libNtve_gf_SetAlliance(tmpInt, gv_EnemyPlayer, libNtve_ge_AllianceSetting_Enemy);
+            libNtve_gf_SetAlliance(tmpInt, gv_BasePlayer, libNtve_ge_AllianceSetting_AllyWithSharedVisionAndControl);
+
+        }
+    }
+    gv_PlayerAmount = PlayerGroupCount(gv_ActivePG);
+    gv_PlayerAmountStart = gv_PlayerAmount;
+    PlayerSetColorIndex(gv_EnemyPlayer, 13, true);
+    PlayerSetColorIndex(gv_CollectiblePlayerEnemyNeutral, 15, true);
+    libNtve_gf_SetPlayerGroupAlliance(gv_StartingPG, libNtve_ge_AllianceSetting_AllyWithSharedVisionAndPushable);
+}
+
+// setup for the heroselection and other non tutorial stuff 
+void MapInit_NotTutorial () {
+    UISetMode(PlayerGroupAll(), c_uiModeFullscreen, c_transitionDurationImmediate);
+    DialogControlSetVisible(gv_HeroSelection_MainFrame, PlayerGroupAll(), true);
+    if (PlayerGroupCount(gv_NewPlayers) != 0) {
+        DialogControlSetVisible(gv_HeroSelection_MainFrame, gv_NewPlayers, false);
+        Tutorial_MiniIntroduction_Init();
+    }
+}
+
+// sets trademenu steps and makes it available immediately
+void MapInit_TradeMenu () {
+    UISetResourceTradeCountdownTime(0);
+    UISetResourceTradingMajorStep(c_resourceTypeMinerals, 1000);
+    UISetResourceTradingMinorStep(c_resourceTypeMinerals, 100);
+    UISetResourceTradingMajorStep(c_resourceTypeVespene, 2);
+    UISetResourceTradingMinorStep(c_resourceTypeVespene, 1);
+    UISetFrameVisible(PlayerGroupAll(), c_syncFrameTypeSupply, false);
+}
+
+// creates a dummy actor, because for some reason the model doesnt want to show the first time the actor is created
+void MapInit_BuggedModels () {
+    libNtve_gf_CreateActorAtPoint("SeekerMissileTimer", PointFromName("DummySpawn"));
+    ActorSend(libNtve_gf_ActorLastCreated(), "Destroy");
+}
+
+void MapInit_FillBunkers(){
+    unitgroup tmpUG;
+    int tmpInt;
+    unit tmpUnit;
+    tmpUG = UnitGroup(null, gv_EnemyPlayer, RegionEntireMap(), UnitFilter((1 << c_targetFilterStructure), 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0);
+    tmpInt = UnitGroupCount(tmpUG, c_unitCountAll);
+    for (;; tmpInt -= 1) {
+        tmpUnit = UnitGroupUnitFromEnd(tmpUG, tmpInt);
+        if (tmpUnit == null) { break; }
+
+        if (UnitGetType(tmpUnit) == "Bunker") {
+            UnitCargoCreate(tmpUnit, "Marine2", 4);
+        }
+        else if (UnitGetType(tmpUnit) == "Bunker2") {
+            UnitCargoCreate(tmpUnit, "Marine22", 4);
+        }
+    }
+}
+
+// fills arrays with default values that are non-zero
+void MapInit_SetVariableDefaults(){
+    int i;
+
+    for (i = 0; i < gv_Enemy_TypeMultiplier_Amount; i += 1) {
+        gv_Enemy_TypeMultiplier_Biomass[i] = 1;
+        gv_Enemy_TypeMultiplier_Exp[i] = 1;
+    }
+    for (i = 1; i <= gv_MaxAmountPlayers; i += 1) {
+        gv_PlayerStats[i].expBonusMult = 1;
+        gv_PlayerStats[i].biomassBonusMult = 1;
+    }
+
+    gv_Hero_UnitTypes[0] = "HeroRoach";
+    gv_Hero_UnitTypes[1] = "HeroBowler";
+    gv_Hero_UnitTypes[2] = "HeroRavager";
+    gv_Hero_UnitTypes[3] = "HeroHydra";
+    gv_Hero_UnitTypes[4] = "HeroSwarmQueen";
+
+    gv_Hive_Upgrades[0].aura_Armor = 10;
+}
+
+// only function that is called on map init, runs all initialization functions
+bool MapInit_Main(bool testConds, bool runActions){
+    int tmpInt;
+    text tmpText;
+    string tmpStr;
+    playergroup notNewPlayers;
+
+    // ---------------------------------------------
+    // GAME IS IN PUBLIC TESTING MODE
+    // ---------------------------------------------
+
+    // gv_TestingMode = true;
+    // gv_BankSavingEnabled = false;
+    // Debug_ShowMessage("Testing mode enabled: progress will not be saved!");
+
+    // ---------------------------------------------
+    // GAME IS IN PUBLIC TESTING MODE
+    // ---------------------------------------------
+
+    libLbty_gf_EnableDisablePingPanel(true, PlayerGroupAll());
+
+    // read gamemode from lobby
+    tmpStr = GameAttributeGameValue("1");
+    if (tmpStr == "0002"){
+        gv_GameMode = c_GameMode_Classic;
+    }
+    else if (tmpStr == "0001") {
+        gv_GameMode = c_GameMode_Tutorial;
+    }
+    else if (tmpStr == "0003") {
+        Debug_ShowMessage("Custom Difficulty is currently disabled.");
+        gv_GameMode = c_GameMode_Classic;
+        // gv_GameMode = c_GameMode_CustomDiff;
+    }
+
+    GameSetMissionTimePaused(true);
+    MapInit_SetVariableDefaults();
+
+    // important to init playergroups first as they are used everywhere
+    MapInit_ActivePlayers();
+
+    // general map init stuff
+    PlayerBoard_InitRankNames();
+    MapInit_BuggedModels();
+    MapInit_FillBunkers();
+    MapInit_TradeMenu();
+    Player_TriggerCreate();
+    HeroAbility_TriggerCreate();
+    Player_Cybernetic_Init();
+
+    // initialize all the ui, content is filled after bank has been loaded
+    SSFCustomUI_Init();
+
+    // needs to be done before bank load, as bank can set hero selection properties
+    HeroSelection_Init();
+
+    // loads stats from bankfile
+    Bank_Init();
+
+    // use loaded stats to update ui and resolve achievements
+    Speedruns_UpdateTimeAllForAllPlayers();
+    StatsInterface_Update();
+    Acv_RewardUI_InitFunctionRef();
+    Acv_InitAllAcv();
+    PlayerBoard_InitRanksForAllPlayers();
+    // after loading all other achievements, update score (again)
+    tmpInt = -1;
+    while (true) {
+        tmpInt = PlayerGroupNextPlayer(gv_ActivePG, tmpInt);
+        if(tmpInt < 0) { break; }
+        Acv_Grind_Check(tmpInt, c_AcvIdentifier_Score);
+    }
+
+    // lock game speed to normal
+    GameSetSpeedValue(c_gameSpeedNormal);
+    GameSetSpeedLocked(true);
+
+    // fill hint menu (f12) with content, clear tips at the right side
+    tmpInt = -1;
+    while (true) {
+        tmpInt = PlayerGroupNextPlayer(gv_ActivePG, tmpInt);
+        if(tmpInt < 0) { break; }
+        
+        Options_SetOptions(tmpInt);
+
+        PlayerOptionOverride(tmpInt, "simplecommandcard", "0");
+        tmpText += (PlayerName(tmpInt) + StringToText(": ") + StringToText(PlayerHandle(tmpInt)) + StringToText("<n/>"));
+    }
+    tmpText += (StringToText("<n/>v") + FixedToText(version, 2));
+
+    HelpPanelAddHint(PlayerGroupAll(), libNtve_gf_FormatTipTitle(StringToText("Handles"), libNtve_ge_TipType_NormalTip), tmpText, "Assets\\Textures\\btn-tips-hacking.dds");
+    TipAlertPanelClear(PlayerGroupAll());
+    HelpPanelAddTip(PlayerGroupAll(), libNtve_gf_FormatTipTitle(StringToText("Credits"), libNtve_ge_TipType_NormalTip), StringToText("<s val=\"aazHelpPanelTip_SubHeader\">Development:</s><n/>Cristall (initial idea, all technical work)<n/>Scythe (part 2 and 3 designs, balance, community interactions)<n/><n/><s val=\"aazHelpPanelTip_SubHeader\">Testers:</s><n/>Shadows<n/>Jan<n/>Sweetlimes<n/>Mehere<n/>elsanguinario<n/>and all the other testers who I forgot to write down<n/><n/><s val=\"aazHelpPanelTip_SubHeader\">Assets:</s><n/>WingedArchon @sc2mapster.com (Talon protoss faction, Purifier Artanis)<n/>Gumba @sc2mapster.com (Wireframes for cybernetics & mercanaries)<n/>Alleyvsc2 @sc2mapster.com (Egon Stetmann, Cybermind, Slingshot, fixed Malash model)<n/>PurpleMania @sc2mapster.com (Longshot, Umojan Security Crab)<n/>Edhriano @sc2mapster.com (Mecha Kerrigan)<n/>Ghostnova @ sc2mapster.com (Umojan Marine)<n/><n/><s val=\"aazHelpPanelTip_SubHeader\">Other:</s><n/>Skunk's loading screen layout file and layout tutorial<n/>Talv's sc2 galaxy and layout vscode extensions<n/>Sc2Mapster Community (Forum, Wiki and Discord) creating tutorials and answering questions"), StringToText("Credits"), "Assets\\Textures\\btn-tips-hacking.dds");
+    HelpPanelAddTip(PlayerGroupAll(), libNtve_gf_FormatTipTitle(StringExternal("Trig/HelpMenu/FAQ/Title"), libNtve_ge_TipType_NormalTip), StringExternal("Trig/HelpMenu/FAQ/Content"), StringExternal("Trig/HelpMenu/FAQ/Title"), "Assets\\Textures\\btn-unit-zerg-roach_collection.dds");
+    notNewPlayers = PlayerGroupCopy(gv_ActivePG);
+    libNtve_gf_RemovePlayerGroupFromPlayerGroup(gv_NewPlayers, notNewPlayers);
+    TipAlertPanelClear(notNewPlayers);
+    HelpPanelEnableTechGlossaryButton(PlayerGroupAll(), false);
+    HelpPanelEnableTechTreeButton(PlayerGroupAll(), false);
+
+    // tutorial check and dialog if solo without tutorial completed
+    if(gv_GameMode == c_GameMode_Tutorial){
+        Tutorial_Init();
+    }
+    else {
+        if (gv_PlayerAmount == 1){
+            tmpInt = PlayerGroupPlayer(gv_ActivePG, 1);
+            if(!gv_PlayerStats[tmpInt].tutorialCompleted){
+                Tutorial_AskTutorial_Init();
+            }
+            else {
+                MapInit_NotTutorial();
+            }
+        }
+        else {
+            MapInit_NotTutorial();
+        }
+    }
+
+    // show debug menu if started from editor
+    if(GameIsTestMap(false)){
+        gv_TestingMode = true;
+    }
+    Debug_Init();
+
+    TriggerDestroy(TriggerGetCurrent());
+    return true;
+}

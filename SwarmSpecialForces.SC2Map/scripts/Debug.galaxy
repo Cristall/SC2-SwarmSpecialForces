@@ -1,0 +1,702 @@
+//variables
+    static int debug_InputValue;
+    static int debug_PartSelection;
+    static int debug_DiffSelection;
+    static int debug_TeamGame;
+    static int debug_SmallGame;
+    static int debug_BossFlamer;
+    static int debug_BossFortress;
+    static int debug_BossHammer;
+    static int debug_BossMadness;
+    static int debug_BossLightning;
+    static int debug_BossThunder;
+    static int debug_BossAtlantis;
+    static int debug_BossRaynor;
+    static int debug_BossKerrigan;
+    static int debug_BossArtanis;
+    static int debug_BossCybermind;
+    static int debug_BossGary;
+    static int debug_BossStetmann;
+    static int debug_BossMoopy;
+    static int debug_Tutorial;
+    static int debug_FlawlessP0;
+    static int debug_FlawlessP1;
+    static int debug_FlawlessP2;
+    static int debug_WinsP0;
+    static int debug_WinsP1;
+    static int debug_WinsP2;
+    static int debug_Points;
+    static int debug_Kills;
+    static int debug_Scientists;
+    static int debug_Essences;
+    static int debug_PsiOrbs;
+    static int debug_MoopyHats;
+    static int debug_Money;
+    static int debug_Exp;
+    static int debug_Bounds;
+    static int debug_Vision;
+    static int debug_Pause;
+    static int debug_SpawnUnitType;
+    static int debug_SpawnUnit;
+    static int debug_Objectives;
+    static int debug_Invulnerable;
+    static int debug_SkipPart;
+    static bool debug_PauseState;
+    static bool[gv_MaxAmountPlayers+1] debug_InvulnerableState;
+//
+void Debug_ShowMessage(string input){
+    if(gv_TestingMode){
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(input));
+    }
+}
+
+bool Debug_Popup (bool testConds, bool runActions){
+    int player = StringToInt(StringWord(EventChatMessage(false), 2));
+    if(!runActions) {return true;}
+    
+    Popup_CreateFromAcvTypeAndIdentifier(player, c_AcvType_Grind, c_AcvIdentifier_Points, StringToText("Test"),StringToText("tooooltip"), "Assets\\Textures\\btn-unit-zerg-mutalisk-broodlord.dds");
+    // Popup_NewSpeedrunTimeDetailed(player, 0, 0, 3765, 4, 5 );
+    // Popup_NewSpeedrunTimeSimplified(player, 0, 0, 3765, 6 );
+    // Popup_NewSpeedrunTimeSimplified(player, 0, 0, 3765, 1 );
+    return true;
+}
+
+//Debug frame controls
+    bool Debug_AcvSpeedrun (bool testConds, bool runActions){
+        int player = EventPlayer();
+        int button = EventDialogControl();
+        int diff = DialogControlGetSelectedItem(debug_DiffSelection, player) -1;
+        int part = DialogControlGetSelectedItem(debug_PartSelection, player) -1;
+        bool team;
+        int teamSize;
+        int value;
+        string inputstring;
+        int inputLength = 1;
+        int tmpInt;
+        if( button == debug_TeamGame){team = true; }
+        else if (button == debug_SmallGame){ team = false;}
+        else {return true;}
+
+        inputstring = DialogControlGetPropertyAsString(debug_InputValue, c_triggerControlPropertyEditText, player);
+        inputstring = StringReplaceWord(inputstring, ":", " ", c_stringReplaceAll, c_stringCase);
+        while(StringWord(inputstring, inputLength) != ""){
+            inputLength += 1;
+        }
+        inputLength-=1;
+        for (tmpInt = 1; tmpInt <= inputLength; tmpInt += 1) {
+            value += StringToInt(StringWord(inputstring, tmpInt)) * PowI(60, inputLength - tmpInt);
+        }
+        if(team == true){
+            teamSize = gv_MaxAmountPlayers;
+        }
+        else{
+            teamSize = UserDataGetInt("AcvReqSpeedruns", "P"+IntToString(part)+"D"+IntToString(diff), "TeamSizeMaxForSmall", 1);
+        }
+        gv_PlayerStats[player].speedrunsTime[part][diff][teamSize-1] = value;
+        Acv_Speedruns_Check(player, part, diff, !team);
+        
+        return true;
+    }
+    bool Debug_AcvGrind (bool testConds, bool runActions){
+        int player = EventPlayer();
+        int acvIndentifier;
+        int button = EventDialogControl();
+        string inputstring;
+        int value;
+        int oldvalue;
+             if(button == debug_Points    ){ acvIndentifier = c_AcvIdentifier_Points; }
+        else if(button == debug_Kills     ){ acvIndentifier = c_AcvIdentifier_Kills; }
+        else if(button == debug_WinsP0    ){ acvIndentifier = c_AcvIdentifier_WinsP0; }
+        else if(button == debug_WinsP1    ){ acvIndentifier = c_AcvIdentifier_WinsP1; }
+        else if(button == debug_WinsP2    ){ acvIndentifier = c_AcvIdentifier_WinsP2; }
+        else if(button == debug_Scientists){ acvIndentifier = c_AcvIdentifier_Scientists; }
+        else if(button == debug_Essences  ){ acvIndentifier = c_AcvIdentifier_Essences; }
+        else if(button == debug_PsiOrbs   ){ acvIndentifier = c_AcvIdentifier_PsiOrbs; }
+        else if(button == debug_MoopyHats ){ acvIndentifier = c_AcvIdentifier_MoopyHats; }
+        else{ return true; }
+
+        inputstring = DialogControlGetPropertyAsString(debug_InputValue, c_triggerControlPropertyEditText, player);
+        if(Utility_IsNumber(inputstring)){
+            value = StringToInt(inputstring);
+        }
+        else{
+            return true;
+        }
+        oldvalue = Acv_Grind_GetCounterFromIdentifier(player, acvIndentifier);
+        Acv_Grind_AddCounterFromIdentifier(player, acvIndentifier, value - oldvalue);
+        Acv_Grind_Check(player, acvIndentifier);
+        
+        return true;
+    }
+    bool Debug_AcvSplit (bool testConds, bool runActions){
+        int player = EventPlayer();
+        int acvIndentifier;
+        int button = EventDialogControl();
+        int diff = DialogControlGetSelectedItem(debug_DiffSelection, player) -1;
+        bool acvFlag;
+             if(button == debug_BossFlamer    ){ acvIndentifier = c_AcvIdentifier_BossT_Flamer; }
+        else if(button == debug_BossFortress  ){ acvIndentifier = c_AcvIdentifier_BossT_Fortress; }
+        else if(button == debug_BossHammer    ){ acvIndentifier = c_AcvIdentifier_BossT_Hammer; }
+        else if(button == debug_BossMadness   ){ acvIndentifier = c_AcvIdentifier_BossP_Madness; }
+        else if(button == debug_BossLightning ){ acvIndentifier = c_AcvIdentifier_BossP_Lightning; }
+        else if(button == debug_BossThunder   ){ acvIndentifier = c_AcvIdentifier_BossP_Thunder; }
+        else if(button == debug_BossAtlantis  ){ acvIndentifier = c_AcvIdentifier_BossP_Atlantis; }
+        else if(button == debug_BossRaynor    ){ acvIndentifier = c_AcvIdentifier_BossZ_Raynor; }
+        else if(button == debug_BossKerrigan  ){ acvIndentifier = c_AcvIdentifier_BossZ_Kerrigan; }
+        else if(button == debug_BossArtanis   ){ acvIndentifier = c_AcvIdentifier_BossZ_Artanis; }
+        else if(button == debug_BossCybermind ){ acvIndentifier = c_AcvIdentifier_BossZ_Cybermind; }
+        else if(button == debug_BossGary      ){ acvIndentifier = c_AcvIdentifier_BossZ_Gary; }
+        else if(button == debug_BossStetmann  ){ acvIndentifier = c_AcvIdentifier_BossZ_Stetmann; }
+        else if(button == debug_BossMoopy     ){ acvIndentifier = c_AcvIdentifier_BossZ_Moopy; }
+        else if(button == debug_FlawlessP0    ){ acvIndentifier = c_AcvIdentifier_FlawlessP0; }
+        else if(button == debug_FlawlessP1    ){ acvIndentifier = c_AcvIdentifier_FlawlessP1; }
+        else if(button == debug_FlawlessP2    ){ acvIndentifier = c_AcvIdentifier_FlawlessP2; }
+        else{ return true; }
+
+        acvFlag = ! Acv_Split_GetFlagFromIdentifier(player, acvIndentifier, diff);
+        if(acvFlag){
+            Acv_Split_Unlock(player, acvIndentifier, diff);
+        }
+        else{
+            Acv_Split_SetFlagFromIdentifier(player, acvIndentifier, diff,  acvFlag);
+        }
+        return true;
+    }
+    bool Debug_AcvOneTime (bool testConds, bool runActions){
+        int player = EventPlayer();
+        int acvIndentifier;
+        int button = EventDialogControl();
+        bool acvFlag;
+        if(button == debug_Tutorial){ acvIndentifier = c_AcvIdentifier_Tutorial; }
+        else{ return true; }
+
+        acvFlag = !Acv_OneTime_GetFlagFromIdentifier(player, acvIndentifier);
+        if(acvFlag){
+            Acv_OneTime_Unlock(player, acvIndentifier);
+        }
+        else{
+            Acv_OneTime_SetFlagFromIdentifier(player, acvIndentifier,  acvFlag);
+        }
+        
+        return true;
+    }
+    bool Debug_Money (bool testConds, bool runActions){
+        PlayerModifyPropertyFixed(EventPlayer(), c_playerPropMinerals, c_playerPropOperAdd, 100000.0);
+        PlayerModifyPropertyFixed(EventPlayer(), c_playerPropVespene, c_playerPropOperAdd, 110.0);
+        return true;
+    }
+    bool Debug_Exp (bool testConds, bool runActions){
+        unitgroup tmpUG;
+        int i;
+        unit tmpUnit;
+        tmpUG = UnitGroup(null, EventPlayer(), RegionEntireMap(), UnitFilter((1 << c_targetFilterHeroic), 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0);
+        for (i = 1; i <= UnitGroupCount(tmpUG, c_unitCountAll); i += 1) {
+            tmpUnit = UnitGroupUnit(tmpUG, i);
+            UnitSetPropertyFixed(tmpUnit, c_unitPropXP, 96383.0);
+        }
+
+        return true;
+    }
+    bool Debug_Bounds (bool testConds, bool runActions){
+        CameraSetBounds(PlayerGroupSingle(EventPlayer()), RegionEntireMap(), true);
+        return true;
+    }
+    bool Debug_Vision (bool testConds, bool runActions){
+        VisRevealArea(EventPlayer(), RegionEntireMap(), 0.0, false);
+        return true;
+    }
+    bool Debug_Pause (bool testConds, bool runActions){
+        debug_PauseState = !debug_PauseState;
+
+        Utility_PauseGame(debug_PauseState);
+        if(debug_PauseState){
+            libNtve_gf_SetDialogItemColor(debug_Pause, Color(22*100/255,128*100/255,0), PlayerGroupAll());
+        }
+        else{
+            libNtve_gf_SetDialogItemColor(debug_Pause, ColorWithAlpha(0,0,0,0), PlayerGroupAll());
+        }
+        return true;
+    }
+    bool Debug_SpawnUnit (bool testConds, bool runActions){
+        int selectedItem = DialogControlGetSelectedItem(debug_SpawnUnitType, EventPlayer());
+        string unitType;
+             if(selectedItem == 1){ unitType = "HeroRoach"; }
+        else if(selectedItem == 2){ unitType = "HeroBowler"; }
+        else if(selectedItem == 3){ unitType = "HeroRavager"; }
+        else if(selectedItem == 4){ unitType = "HeroHydra"; }
+        else if(selectedItem == 5){ unitType = "HeroSwarmQueen"; }
+        else if(selectedItem == 6){ unitType = "CyberneticLurker"; }
+        else if(selectedItem == 7){ unitType = "Runling"; }
+        else if(selectedItem == 8){ unitType = "CyberneticLifeBank"; }
+        else if(selectedItem == 9){ unitType = "BaseOverlord"; }
+
+        libNtve_gf_CreateUnitsWithDefaultFacing(1, unitType, 0, EventPlayer(), gv_Part_PlayerSpawnPoints[EventPlayer()]);
+
+        return true;
+    }
+    bool Debug_Objectives (bool testConds, bool runActions){
+        ObjectiveSetState(objective_Bosses, c_objectiveStateHidden);
+        ObjectiveSetState(objective_Scientists, c_objectiveStateHidden);
+        ObjectiveSetState(objective_Essences, c_objectiveStateHidden);
+        ObjectiveSetState(objective_PsiOrbs, c_objectiveStateHidden);
+        ObjectiveSetState(objective_Observer, c_objectiveStateHidden);
+        ObjectiveSetState(objective_NydusWorm, c_objectiveStateHidden);
+        return true;
+    }
+    bool Debug_Invulnerable (bool testConds, bool runActions){
+        debug_InvulnerableState[EventPlayer()] = !debug_InvulnerableState[EventPlayer()];
+        UnitSetState(gv_PlayerStats[EventPlayer()].heroUnit, c_unitStateInvulnerable, debug_InvulnerableState[EventPlayer()]);
+        if(debug_InvulnerableState[EventPlayer()]){
+            libNtve_gf_SetDialogItemColor(debug_Invulnerable, Color(22*100/255,128*100/255,0), PlayerGroupSingle(EventPlayer()));
+        }
+        else{
+            libNtve_gf_SetDialogItemColor(debug_Invulnerable, ColorWithAlpha(0,0,0,0), PlayerGroupSingle(EventPlayer()));
+        }
+        return true;
+    }
+    void Debug_SkipTerran (int player){
+        if(!gv_Part_Areas_Open[c_Areas_TLeft2]){
+            PartTerran_AreaJunker_Second_Open();
+        }
+        if(!gv_Part_Areas_Open[c_Areas_TLeft3]){
+            PartTerran_AreaJunker_Third_Open();
+        }
+        if(!gv_Part_Areas_Open[c_Areas_TRight2]){
+            PartTerran_AreaBlackOps_Second_Open();
+        }
+        if(!gv_Part_Areas_Open[c_Areas_TRight3]){
+            PartTerran_AreaBlackOps_Third_Open();
+        }
+        
+        if(gv_Bosses[c_Bosses_TFlamer] == null){
+            TriggerExecute(TriggerFind("PartTerran_Flamer_Spawner"), false, true);
+        }
+        if(gv_Bosses[c_Bosses_THammer] == null){
+            TriggerExecute(TriggerFind("PartTerran_Hammer_Spawner"), false, true);
+        }
+        if(gv_Bosses[c_Bosses_TFortress] == null){
+            TriggerExecute(TriggerFind("PartTerran_Fortress_Spawner"), false, true);
+        }
+
+        if(UnitIsAlive(gv_Bosses[c_Bosses_TFlamer])){
+            UnitDamage(gv_PlayerStats[player].heroUnit, "Kill", gv_Bosses[c_Bosses_TFlamer], 100000);
+        }
+        if(UnitIsAlive(gv_Bosses[c_Bosses_THammer])){
+            UnitDamage(gv_PlayerStats[player].heroUnit, "Kill", gv_Bosses[c_Bosses_THammer], 100000);
+        }
+        if(UnitIsAlive(gv_Bosses[c_Bosses_TFortress])){
+            UnitDamage(gv_PlayerStats[player].heroUnit, "Kill", gv_Bosses[c_Bosses_TFortress], 100000);
+        }
+        
+        if(UnitIsAlive(gv_Observer_Unit)){
+            UnitDamage(gv_PlayerStats[player].heroUnit, "Kill", gv_Observer_Unit, 100000);
+        }
+    }
+    void Debug_SkipProtoss (int player){
+        if(!gv_Part_Areas_Open[c_Areas_PBottom2]){
+            PartProtoss_AreaMech_Second_Open();
+        }
+        if(!gv_Part_Areas_Open[c_Areas_PTop2]){
+            PartProtoss_AreaPsi_Second_Open();
+        }
+        if(!gv_Part_Areas_Open[c_Areas_PTop3]){
+            PartProtoss_AreaPsi_Third_Open();
+        }
+
+        if(gv_Bosses[c_Bosses_PMadness] == null){
+            UnitDamage(gv_PlayerStats[player].heroUnit, "Kill", UnitFromId(2104120799), 100000);
+        }
+        if(gv_Bosses[c_Bosses_PLightning] == null || gv_Bosses[c_Bosses_PThunder] == null){
+            UnitDamage(gv_PlayerStats[player].heroUnit, "Kill", UnitFromId(2009472328), 100000);
+        }
+
+        
+        Wait(0.0625, c_timeGame);
+        if(UnitIsAlive(gv_Bosses[c_Bosses_PLightning])){
+            UnitDamage(gv_PlayerStats[player].heroUnit, "Kill", gv_Bosses[c_Bosses_PLightning], 100000);
+        }
+        Wait(0.0625, c_timeGame);
+        if(UnitIsAlive(gv_Bosses[c_Bosses_PThunder])){
+            UnitDamage(gv_PlayerStats[player].heroUnit, "Kill", gv_Bosses[c_Bosses_PThunder], 100000);
+        }
+        Wait(0.25, c_timeGame);
+        if(UnitIsAlive(gv_Bosses[c_Bosses_PMadness])){
+            UnitDamage(gv_PlayerStats[player].heroUnit, "Kill", gv_Bosses[c_Bosses_PMadness], 100000);
+        }
+        Wait(0.0625, c_timeGame);
+        if(gv_Bosses[c_Bosses_PAtlantis] == null){
+            UnitDamage(gv_PlayerStats[player].heroUnit, "Kill", UnitFromId(1461303459), 100000);
+        }
+        Wait(0.0625, c_timeGame);
+        if(UnitIsAlive(gv_Bosses[c_Bosses_PAtlantis])){
+            UnitDamage(gv_PlayerStats[player].heroUnit, "Kill", gv_Bosses[c_Bosses_PAtlantis], 100000);
+        }
+        Wait(0.0625, c_timeGame);
+        if(UnitIsAlive(gv_NydusWorm_Unit)){
+            UnitDamage(gv_PlayerStats[player].heroUnit, "Kill", gv_NydusWorm_Unit, 100000);
+        }
+    }
+    void Debug_SkipZerg (int player){
+        unitgroup tmpUG;
+        int tmpInt;
+        int i;
+        int tmp_player;
+        unit tmpUnit;
+        while(PartZerg_MoopyAllDoorsOpen() == false){
+            PartZerg_MoopyDoor_Open();
+        }
+        if(gv_Bosses[c_Bosses_ZArtanis] == null){
+            TriggerExecute(TriggerFind("PartZerg_Boss_StoryHeroes_Spawner"), false, true);
+            Wait(0.0625, c_timeGame);
+            UnitDamage(gv_PlayerStats[player].heroUnit, "Kill", gv_Bosses[c_Bosses_ZArtanis], 100000);
+            UnitDamage(gv_PlayerStats[player].heroUnit, "Kill", gv_Bosses[c_Bosses_ZKerrigan], 100000);
+            UnitDamage(gv_PlayerStats[player].heroUnit, "Kill", gv_Bosses[c_Bosses_ZRaynor], 100000);
+            Wait(0.0625, c_timeGame);
+        }
+
+        if(gv_Bosses[c_Bosses_ZCybermind] == null){
+            TriggerExecute(TriggerFind("PartZerg_Boss_Cybermind_Spawner"), false, true);
+            Wait(0.0625, c_timeGame);
+            UnitDamage(gv_PlayerStats[player].heroUnit, "Kill", gv_Bosses[c_Bosses_ZCybermind], 100000);
+            Wait(0.0625, c_timeGame);
+        }
+        if(gv_Bosses[c_Bosses_ZGary] == null){
+            TriggerExecute(TriggerFind("PartZerg_Boss_Stetmann_Spawner"), false, true);
+            Wait(0.0625, c_timeGame);
+            UnitDamage(gv_PlayerStats[player].heroUnit, "Kill", gv_Bosses[c_Bosses_ZGary], 100000);
+            UnitDamage(gv_PlayerStats[player].heroUnit, "Kill", gv_Bosses[c_Bosses_ZStetmann], 100000);
+            Wait(0.0625, c_timeGame);
+        }
+
+        tmpUG = UnitGroup(null, c_playerAny, RegionFromName("PartZerg"), UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32))), 0);
+        tmpInt = UnitGroupCount(tmpUG, c_unitCountAll);
+        for (;; tmpInt -= 1) {
+            tmpUnit = UnitGroupUnitFromEnd(tmpUG, tmpInt);
+            if (tmpUnit == null) { break; }
+            if(PlayerGroupHasPlayer(gv_StartingPG, UnitGetOwner(tmpUnit))){
+                UnitSetPosition(tmpUnit, PointFromName("PartZerg_Boss_Gary"), false);
+            }
+            else if(UnitGetType(tmpUnit) == "MoopyChampion"){
+                UnitDamage(gv_PlayerStats[player].heroUnit, "Kill", tmpUnit, 100000);
+            }
+        }
+        for (i = 1; i <= PlayerGroupCount(gv_StartingPG); i += 1) {
+            tmp_player = PlayerGroupPlayer(gv_StartingPG, i);
+            CameraPan(tmp_player, PointFromName("PartZerg_Boss_Gary"), 0.0, -1, 10.0, false);
+        }
+    }
+    bool Debug_SkipPart(bool testConds, bool runActions){
+        int player = EventPlayer();
+        if( gv_Part_ActivePart == c_Part_Terran){
+            Debug_SkipTerran(player);
+        }
+        else if( gv_Part_ActivePart == c_Part_Protoss){
+            Debug_SkipProtoss(player);
+        }
+        else if( gv_Part_ActivePart == c_Part_Zerg){
+            Debug_SkipZerg(player);
+        }
+        
+        return true;
+    }
+
+void Debug_InitFrames(){
+    int containerFrame = DialogControlHookupStandard(c_triggerControlTypePanel, "UIContainer/FullscreenUpperContainer/DebugContainerFrame");
+    trigger tmpTrigger;
+
+    DialogControlSetVisible( DialogControlHookupStandard(c_triggerControlTypeButton, "UIContainer/FullscreenUpperContainer/DebugOpener"), PlayerGroupAll(),true);
+
+    debug_InputValue    = DialogControlHookup(containerFrame, c_triggerControlTypeEditBox , "ValueInput");
+    debug_PartSelection = DialogControlHookup(containerFrame, c_triggerControlTypePulldown, "PartSelection");
+        DialogControlAddItem(debug_PartSelection, PlayerGroupAll(), StringToText("Terran"));
+        DialogControlAddItem(debug_PartSelection, PlayerGroupAll(), StringToText("Protoss"));
+        DialogControlAddItem(debug_PartSelection, PlayerGroupAll(), StringToText("Zerg"));
+        DialogControlSelectItem(debug_PartSelection, PlayerGroupAll(), 1);
+    debug_DiffSelection = DialogControlHookup(containerFrame, c_triggerControlTypePulldown, "DiffSelection");
+        DialogControlAddItem(debug_DiffSelection, PlayerGroupAll(), StringToText("Easy"));
+        DialogControlAddItem(debug_DiffSelection, PlayerGroupAll(), StringToText("Normal"));
+        DialogControlAddItem(debug_DiffSelection, PlayerGroupAll(), StringToText("Hard"));
+        DialogControlAddItem(debug_DiffSelection, PlayerGroupAll(), StringToText("Brutal"));
+        DialogControlAddItem(debug_DiffSelection, PlayerGroupAll(), StringToText("Insane"));
+        DialogControlAddItem(debug_DiffSelection, PlayerGroupAll(), StringToText("Hardcore"));
+        DialogControlSelectItem(debug_DiffSelection, PlayerGroupAll(), 1);
+
+    tmpTrigger = TriggerCreate("Debug_AcvSpeedrun");
+    debug_TeamGame      = DialogControlHookup(containerFrame, c_triggerControlTypeButton  , "TeamGame");
+    debug_SmallGame     = DialogControlHookup(containerFrame, c_triggerControlTypeButton  , "SmallGame");
+        TriggerAddEventDialogControl(tmpTrigger, c_playerAny, debug_TeamGame, c_triggerControlEventTypeClick);
+        TriggerAddEventDialogControl(tmpTrigger, c_playerAny, debug_SmallGame, c_triggerControlEventTypeClick);
+
+    tmpTrigger = TriggerCreate("Debug_AcvSplit");
+    debug_BossFlamer    = DialogControlHookup(containerFrame, c_triggerControlTypeButton  , "BossFlamer");
+    debug_BossFortress  = DialogControlHookup(containerFrame, c_triggerControlTypeButton  , "BossFortress");
+    debug_BossHammer    = DialogControlHookup(containerFrame, c_triggerControlTypeButton  , "BossHammer");
+    debug_BossMadness   = DialogControlHookup(containerFrame, c_triggerControlTypeButton  , "BossMadness");
+    debug_BossLightning = DialogControlHookup(containerFrame, c_triggerControlTypeButton  , "BossLightning");
+    debug_BossThunder   = DialogControlHookup(containerFrame, c_triggerControlTypeButton  , "BossThunder");
+    debug_BossAtlantis  = DialogControlHookup(containerFrame, c_triggerControlTypeButton  , "BossAtlantis");
+    debug_BossRaynor    = DialogControlHookup(containerFrame, c_triggerControlTypeButton  , "BossRaynor");
+    debug_BossKerrigan  = DialogControlHookup(containerFrame, c_triggerControlTypeButton  , "BossKerrigan");
+    debug_BossArtanis   = DialogControlHookup(containerFrame, c_triggerControlTypeButton  , "BossArtanis");
+    debug_BossCybermind = DialogControlHookup(containerFrame, c_triggerControlTypeButton  , "BossCybermind");
+    debug_BossGary      = DialogControlHookup(containerFrame, c_triggerControlTypeButton  , "BossGary");
+    debug_BossStetmann  = DialogControlHookup(containerFrame, c_triggerControlTypeButton  , "BossStetmann");
+    debug_BossMoopy     = DialogControlHookup(containerFrame, c_triggerControlTypeButton  , "BossMoopy");
+    debug_FlawlessP0    = DialogControlHookup(containerFrame, c_triggerControlTypeButton  , "FlawlessP0");
+    debug_FlawlessP1    = DialogControlHookup(containerFrame, c_triggerControlTypeButton  , "FlawlessP1");
+    debug_FlawlessP2    = DialogControlHookup(containerFrame, c_triggerControlTypeButton  , "FlawlessP2");
+        TriggerAddEventDialogControl(tmpTrigger, c_playerAny, debug_BossFlamer, c_triggerControlEventTypeClick);
+        TriggerAddEventDialogControl(tmpTrigger, c_playerAny, debug_BossFortress, c_triggerControlEventTypeClick);
+        TriggerAddEventDialogControl(tmpTrigger, c_playerAny, debug_BossHammer, c_triggerControlEventTypeClick);
+        TriggerAddEventDialogControl(tmpTrigger, c_playerAny, debug_BossMadness, c_triggerControlEventTypeClick);
+        TriggerAddEventDialogControl(tmpTrigger, c_playerAny, debug_BossLightning, c_triggerControlEventTypeClick);
+        TriggerAddEventDialogControl(tmpTrigger, c_playerAny, debug_BossThunder, c_triggerControlEventTypeClick);
+        TriggerAddEventDialogControl(tmpTrigger, c_playerAny, debug_BossAtlantis, c_triggerControlEventTypeClick);
+        TriggerAddEventDialogControl(tmpTrigger, c_playerAny, debug_BossRaynor, c_triggerControlEventTypeClick);
+        TriggerAddEventDialogControl(tmpTrigger, c_playerAny, debug_BossKerrigan, c_triggerControlEventTypeClick);
+        TriggerAddEventDialogControl(tmpTrigger, c_playerAny, debug_BossArtanis, c_triggerControlEventTypeClick);
+        TriggerAddEventDialogControl(tmpTrigger, c_playerAny, debug_BossCybermind, c_triggerControlEventTypeClick);
+        TriggerAddEventDialogControl(tmpTrigger, c_playerAny, debug_BossGary, c_triggerControlEventTypeClick);
+        TriggerAddEventDialogControl(tmpTrigger, c_playerAny, debug_BossStetmann, c_triggerControlEventTypeClick);
+        TriggerAddEventDialogControl(tmpTrigger, c_playerAny, debug_BossMoopy, c_triggerControlEventTypeClick);
+        TriggerAddEventDialogControl(tmpTrigger, c_playerAny, debug_FlawlessP0, c_triggerControlEventTypeClick);
+        TriggerAddEventDialogControl(tmpTrigger, c_playerAny, debug_FlawlessP1, c_triggerControlEventTypeClick);
+        TriggerAddEventDialogControl(tmpTrigger, c_playerAny, debug_FlawlessP2, c_triggerControlEventTypeClick);
+
+    tmpTrigger = TriggerCreate("Debug_AcvOneTime");
+    debug_Tutorial      = DialogControlHookup(containerFrame, c_triggerControlTypeButton  , "Tutorial");
+        TriggerAddEventDialogControl(tmpTrigger, c_playerAny, debug_Tutorial, c_triggerControlEventTypeClick);
+    
+    tmpTrigger = TriggerCreate("Debug_AcvGrind");
+    debug_WinsP0        = DialogControlHookup(containerFrame, c_triggerControlTypeButton  , "WinsP0");
+    debug_WinsP1        = DialogControlHookup(containerFrame, c_triggerControlTypeButton  , "WinsP1");
+    debug_WinsP2        = DialogControlHookup(containerFrame, c_triggerControlTypeButton  , "WinsP2");
+    debug_Points        = DialogControlHookup(containerFrame, c_triggerControlTypeButton  , "Points");
+    debug_Kills         = DialogControlHookup(containerFrame, c_triggerControlTypeButton  , "Kills");
+    debug_Scientists    = DialogControlHookup(containerFrame, c_triggerControlTypeButton  , "Scientists");
+    debug_Essences      = DialogControlHookup(containerFrame, c_triggerControlTypeButton  , "Essences");
+    debug_PsiOrbs       = DialogControlHookup(containerFrame, c_triggerControlTypeButton  , "PsiOrbs");
+    debug_MoopyHats     = DialogControlHookup(containerFrame, c_triggerControlTypeButton  , "MoopyHats");
+        TriggerAddEventDialogControl(tmpTrigger, c_playerAny, debug_WinsP0, c_triggerControlEventTypeClick);
+        TriggerAddEventDialogControl(tmpTrigger, c_playerAny, debug_WinsP1, c_triggerControlEventTypeClick);
+        TriggerAddEventDialogControl(tmpTrigger, c_playerAny, debug_WinsP2, c_triggerControlEventTypeClick);
+        TriggerAddEventDialogControl(tmpTrigger, c_playerAny, debug_Points, c_triggerControlEventTypeClick);
+        TriggerAddEventDialogControl(tmpTrigger, c_playerAny, debug_Kills, c_triggerControlEventTypeClick);
+        TriggerAddEventDialogControl(tmpTrigger, c_playerAny, debug_Scientists, c_triggerControlEventTypeClick);
+        TriggerAddEventDialogControl(tmpTrigger, c_playerAny, debug_Essences, c_triggerControlEventTypeClick);
+        TriggerAddEventDialogControl(tmpTrigger, c_playerAny, debug_PsiOrbs, c_triggerControlEventTypeClick);
+        TriggerAddEventDialogControl(tmpTrigger, c_playerAny, debug_MoopyHats, c_triggerControlEventTypeClick);
+
+    debug_Money         = DialogControlHookup(containerFrame, c_triggerControlTypeButton  , "Money");
+        TriggerAddEventDialogControl(TriggerCreate("Debug_Money"), c_playerAny, debug_Money, c_triggerControlEventTypeClick);
+    debug_Exp           = DialogControlHookup(containerFrame, c_triggerControlTypeButton  , "Exp");
+        TriggerAddEventDialogControl(TriggerCreate("Debug_Exp"), c_playerAny, debug_Exp, c_triggerControlEventTypeClick);
+    debug_Bounds        = DialogControlHookup(containerFrame, c_triggerControlTypeButton  , "Bounds");
+        TriggerAddEventDialogControl(TriggerCreate("Debug_Bounds"), c_playerAny, debug_Bounds, c_triggerControlEventTypeClick);
+    debug_Vision        = DialogControlHookup(containerFrame, c_triggerControlTypeButton  , "Vision");
+        TriggerAddEventDialogControl(TriggerCreate("Debug_Vision"), c_playerAny, debug_Vision, c_triggerControlEventTypeClick);
+    debug_Pause         = DialogControlHookup(containerFrame, c_triggerControlTypeButton  , "Pause");
+        TriggerAddEventDialogControl(TriggerCreate("Debug_Pause"), c_playerAny, debug_Pause, c_triggerControlEventTypeClick);
+    debug_SpawnUnitType = DialogControlHookup(containerFrame, c_triggerControlTypePulldown, "SpawnUnitType");
+        DialogControlAddItem(debug_SpawnUnitType, PlayerGroupAll(), StringToText("Spitter"));
+        DialogControlAddItem(debug_SpawnUnitType, PlayerGroupAll(), StringToText("Bowler"));
+        DialogControlAddItem(debug_SpawnUnitType, PlayerGroupAll(), StringToText("Hardskin"));
+        DialogControlAddItem(debug_SpawnUnitType, PlayerGroupAll(), StringToText("Stinger"));
+        DialogControlAddItem(debug_SpawnUnitType, PlayerGroupAll(), StringToText("SwarmMother"));
+        DialogControlAddItem(debug_SpawnUnitType, PlayerGroupAll(), StringToText("Lurker"));
+        DialogControlAddItem(debug_SpawnUnitType, PlayerGroupAll(), StringToText("Runling"));
+        DialogControlAddItem(debug_SpawnUnitType, PlayerGroupAll(), StringToText("Life Bank"));
+        DialogControlAddItem(debug_SpawnUnitType, PlayerGroupAll(), StringToText("Overlord"));
+        DialogControlSelectItem(debug_SpawnUnitType, PlayerGroupAll(), 1);
+    debug_SpawnUnit     = DialogControlHookup(containerFrame, c_triggerControlTypeButton  , "SpawnUnit");
+        TriggerAddEventDialogControl(TriggerCreate("Debug_SpawnUnit"), c_playerAny, debug_SpawnUnit, c_triggerControlEventTypeClick);
+    debug_Objectives    = DialogControlHookup(containerFrame, c_triggerControlTypeButton  , "Objectives");
+        TriggerAddEventDialogControl(TriggerCreate("Debug_Objectives"), c_playerAny, debug_Objectives, c_triggerControlEventTypeClick);
+    debug_Invulnerable  = DialogControlHookup(containerFrame, c_triggerControlTypeButton  , "Invulnerable");
+        TriggerAddEventDialogControl(TriggerCreate("Debug_Invulnerable"), c_playerAny, debug_Invulnerable, c_triggerControlEventTypeClick);
+    debug_SkipPart      = DialogControlHookup(containerFrame, c_triggerControlTypeButton  , "SkipPart");
+        TriggerAddEventDialogControl(TriggerCreate("Debug_SkipPart"), c_playerAny, debug_SkipPart, c_triggerControlEventTypeClick);
+}
+
+// debug overrides, always need to be added to Header.galaxy
+void Debug_Override_FirstPart(){
+    if(gv_TestingMode){
+        // gv_Part_ActivePart = c_Part_Protoss;
+        // Player_IncreaseUpgradeCount(10+10);
+        
+        // gv_Part_ActivePart = c_Part_Zerg;
+        // Player_IncreaseUpgradeCount(10+10+10+10);
+    }
+}
+
+
+
+// other testing functionality
+bool Debug_Test (bool testConds, bool runActions){
+    Debug_ShowMessage(IntToString(ValidatorExecute("CasterLifeLT75Percent", gv_PlayerStats[1].heroUnit, gv_PlayerStats[1].heroUnit)));
+    return true;
+}
+bool Debug_Kick (bool testConds, bool runActions){
+    int player = StringToInt(StringWord(EventChatMessage(false), 2));
+    GameOver(player , c_gameOverDefeat, false, false);
+
+    return true;
+}
+bool Debug_Kill (bool testConds, bool runActions){
+    int player = StringToInt(StringWord(EventChatMessage(false), 2));
+    UnitKill(gv_PlayerStats[player].heroUnit);
+
+    return true;
+}
+bool Debug_Skip (bool testConds, bool runActions){
+    // heroSelection_Timer = 0;
+    return true;
+}
+bool Debug_Moopy (bool testConds, bool runActions){
+    PartZerg_MoopyDoor_Open();
+    return true;
+}
+
+bool Debug_Stetmann_Test(bool a, bool b){
+    UnitCreate(1, "EgonStetmann", 0, 14, PointFromName("PartZerg_Boss_Stetmann"), 0);
+    gv_Bosses[c_Bosses_ZStetmann] = UnitLastCreated();
+
+    PartZerg_Stetmann_CreateCannons();
+    PlayerSetAlliance(14, c_allianceIdControl, 1, true);
+    return true;
+}
+
+bool Debug_PrintDmg (bool testConds, bool runActions){
+    Debug_ShowMessage("Dmg: " + FixedToString(EventUnitDamageAttempted(),2));
+    return true;
+}
+
+
+bool Debug_GetUnitgroupCount(bool testConds, bool runActions){
+    
+    unitgroup tempUG;
+    tempUG = UnitGetTrackedUnitGroup(gv_Bosses[c_Bosses_ZMoopy], "ShieldColor@DummyTracker");
+    Debug_ShowMessage(IntToString(UnitGroupCount(tempUG, c_unitCountAll)));
+    
+    return true;
+}
+
+bool Debug_SkipStoryHeroesFight(bool testConds, bool runActions){
+    int player = EventPlayer();
+    TriggerExecute(TriggerFind("PartZerg_Boss_StoryHeroes_Spawner"), false, true);
+    
+    UnitDamage(gv_PlayerStats[player].heroUnit, "Kill", gv_Bosses[c_Bosses_ZKerrigan], 100000);
+    UnitDamage(gv_PlayerStats[player].heroUnit, "Kill", gv_Bosses[c_Bosses_ZRaynor], 100000);
+    UnitDamage(gv_PlayerStats[player].heroUnit, "Kill", gv_Bosses[c_Bosses_ZArtanis], 100000);
+    
+    return true;
+}
+
+bool Debug_EffectExecuted(bool testConds, bool runActions){
+    
+    string effect = EventPlayerEffectUsed();
+    point location_target;
+
+    if(testConds){if (!(true)) {return false;}}
+    if(!runActions) {return true;}
+    
+    Debug_ShowMessage(effect);
+    // location_target = EventPlayerEffectUsedPoint(c_effectLocationTargetPoint);
+
+    // UnitIssueOrder(EventPlayerEffectUsedUnit(c_effectUnitTarget), OrderTargetingPoint(AbilityCommand("Pinball@Shot", 0), location_target), c_orderQueueReplace);
+
+    // UnitCreate(1, "ZerglingCarbot", 0, 14, location_target, 0);
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug,StringToText("caster: ") + UnitGetName(EventPlayerEffectUsedUnit(c_effectUnitCaster)));
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug,StringToText("source: ") + UnitGetName(EventPlayerEffectUsedUnit(c_effectUnitSource)));
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug,StringToText("target: ") + UnitGetName(EventPlayerEffectUsedUnit(c_effectUnitTarget)));
+    
+    return true;
+}
+
+bool Debug_UnstableTp(bool testConds, bool runActions){
+    PartZerg_Cybermind_UnstableTeleportSetup();
+    return true;
+}
+
+bool Debug_NydusWorms(bool a, bool b){
+    int tmpInt;
+    point tmpPoint;
+    unitgroup tmpUG = UnitGroup(null, gv_EnemyPlayer, RegionFromName("PartProtoss"), UnitFilter((1 << c_targetFilterStructure), 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0);
+    unit tmpUnit;
+    int i;
+
+    for (i = 1; i <= UnitGroupCount(tmpUG, c_unitCountAll); i += 1) {
+        tmpUnit = UnitGroupUnit(tmpUG, i);
+    
+        UnitRemove(tmpUnit);
+    }
+
+    for ( tmpInt = 0; tmpInt < 7 ; tmpInt += 1 ) {
+        tmpPoint = PointFromName("PartProtoss_NydusSpawns" + IntToString(tmpInt));
+        UnitCreate(1, "NydusWorm", 0, gv_CollectiblePlayerEnemyNeutral, tmpPoint, RandomFixed(0,360));
+    }
+    return true;
+}
+
+bool Debug_SpeedrunTime(bool testConds, bool runActions){
+    int tmpInt;
+    int tmpInt2;
+    int tmpInt3;
+    int playerID = EventPlayer();
+    
+    for ( tmpInt = 0; tmpInt < gv_MaxAmountDifficulties ; tmpInt += 1 ) {
+        for ( tmpInt2 = 0 ; tmpInt2 < gv_MaxAmountParts; tmpInt2 += 1 ) {
+            for (tmpInt3 = 0; tmpInt3 < gv_MaxAmountPlayers; tmpInt3 += 1){
+                gv_PlayerStats[playerID].speedrunsTime[tmpInt2][tmpInt][tmpInt3] = 12500;
+            }
+        }
+    }
+    
+    return true;
+}
+
+void Debug_Init(){
+    int i;
+    int tmp_player;
+    trigger tmp_trigger;
+    if(gv_TestingMode){
+        for (i = 1; i <= PlayerGroupCount(gv_ActivePG); i += 1) {
+            tmp_player = PlayerGroupPlayer(gv_ActivePG, i);
+            gv_PlayerStats[tmp_player].lifes = 100;
+        }
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaChat, StringToText("Started game in testing mode!"));
+        Debug_InitFrames();
+        // Debug_Stetmann_Test();
+        // HeroSelection_UnlockDiff(1, 2);
+        // HeroSelection_UnlockDiff(1, 3);
+        // HeroSelection_UnlockDiff(1, 4);
+        // HeroSelection_UnlockDiff(1, 5);
+        // TriggerAddEventChatMessage(TriggerCreate("Debug_SpeedrunTime"), c_playerAny, "-speedrun", false);
+        // TriggerAddEventChatMessage(TriggerCreate("Debug_NydusWorms"), c_playerAny, "-worms", false);
+        // TriggerAddEventChatMessage(TriggerCreate("Debug_Popup"), c_playerAny, "-popup", false);
+        // TriggerAddEventChatMessage(TriggerCreate("Debug_Test"), c_playerAny, "-test", false);
+        // TriggerAddEventChatMessage(TriggerCreate("Debug_Kick"), c_playerAny, "-kick", false);
+        // TriggerAddEventChatMessage(TriggerCreate("Debug_Kill"), c_playerAny, "-kill", false);
+        // TriggerAddEventChatMessage(TriggerCreate("Debug_Skip"), c_playerAny, "-skip", false);
+        // TriggerAddEventChatMessage(TriggerCreate("Debug_MoopyReset"), c_playerAny, "-moopyreset", false);
+        // TriggerAddEventChatMessage(TriggerCreate("Debug_UnstableTp"), c_playerAny, "-unstable", false);
+
+        // TriggerAddEventChatMessage(TriggerCreate("Debug_CybermindAddTracking"), c_playerAny, "-gen", false);
+        // TriggerAddEventChatMessage(TriggerCreate("Debug_GetUnitgroupCount"), c_playerAny, "-count", false);
+
+        // TriggerAddEventChatMessage(TriggerCreate("Debug_SkipStoryHeroesFight"), c_playerAny, "-skip", false);
+        // TriggerAddEventChatMessage(TriggerCreate("Debug_Stetmann_Test"), c_playerAny, "-stetmann", false);
+
+        // tmp_trigger = TriggerCreate("Debug_EffectExecuted");
+        // TriggerAddEventPlayerEffectUsed(tmp_trigger, c_playerAny, "Pinball@GetCannons");
+        // TriggerAddEventPlayerEffectUsed(tmp_trigger, c_playerAny, "RainbowMeteors@ImpactSet");
+        // TriggerAddEventPlayerEffectUsed(tmp_trigger, c_playerAny, "ChargeUp@Dmg");
+        // TriggerAddEventPlayerEffectUsed(tmp_trigger, c_playerAny, "ColorfulBeams@BeamDmg");
+
+        // libNtve_gf_SetAllianceOneWay(1, 8, libNtve_ge_AllianceSetting_EnemyWithSharedVision);
+        // libNtve_gf_SetAllianceOneWay(8, 1, libNtve_ge_AllianceSetting_EnemyWithSharedVision);
+        // PlayerSetAlliance(1, c_allianceIdControl, 8, true);
+        // PlayerSetAlliance(8, c_allianceIdControl, 1, true);
+        // TriggerAddEventUnitDamaged(TriggerCreate("Debug_PrintDmg"),null, c_unitDamageTypeAny, c_unitDamageEither, "AbsorbExplosion@Dmg");
+    }
+}

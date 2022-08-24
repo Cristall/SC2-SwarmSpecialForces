@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Desc>
+    <Frame type="Frame" name="GameUI/UIContainer/FullscreenUpperContainer" file="GameUI">
+        <Frame type="Frame" name="SSF_HivePanel">
+
+            <Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+            <Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+            <Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+
+            <Height val="100"/>
+            <Width val="327"/>
+
+            <Frame type="Image" name="IconBackground">
+                <Anchor side="Top" relative="$parent/IconImage" pos="Min" offset="0"/>
+                <Anchor side="Left" relative="$parent/IconImage" pos="Min" offset="0"/>
+                <Anchor side="Bottom" relative="$parent/IconImage" pos="Max" offset="0"/>
+                <Anchor side="Right" relative="$parent/IconImage" pos="Max" offset="0"/>
+                <Color val="27,16,10"/>
+                <Alpha val="216"/>
+            </Frame>
+            <Frame type="Image" name="BarBackground">
+                <Anchor side="Top" relative="$parent/HealthBar" pos="Min" offset="0"/>
+                <Anchor side="Left" relative="$parent/HealthBar" pos="Min" offset="0"/>
+                <Anchor side="Right" relative="$parent/HealthBar" pos="Max" offset="0"/>
+                <Anchor side="Bottom" relative="$parent/HealthBar" pos="Max" offset="0"/>
+                <Color val="27,16,10"/>
+                <Alpha val="216"/>
+                <AcceptsMouse val="true"/>
+            </Frame>
+
+            <Frame type="Image" name="IconImage">
+                <Anchor side="Top" relative="$parent" pos="Min" offset="10"/>
+                <Anchor side="Right" relative="$parent" pos="Max" offset="-10"/>
+                <Width val="79"/>
+                <Height val="79"/>
+                <Texture val="Assets/Textures/ui_ingame_help_techtree_questionmark.dds"/>
+            </Frame>
+            <Frame type="UnitTargetFrame" name="UnitTargetFrame">
+                <Anchor side="Top" relative="$parent/IconImage" pos="Min" offset="0"/>
+                <Anchor side="Bottom" relative="$parent/IconImage" pos="Max" offset="0"/>
+                <Anchor side="Left" relative="$parent/IconImage" pos="Min" offset="0"/>
+                <Anchor side="Right" relative="$parent/IconImage" pos="Max" offset="0"/>
+                <AllowCursorChanging val="false"/>
+
+                <Frame type="Label" name="HotkeyFrame" template="SSF_Templates/HotkeyFrameLabelTemplate">
+                    <Text val="&lt;k val=&quot;HeroSelect1&quot;/&gt;"/>
+                </Frame>
+            </Frame>
+
+
+            <Frame type="ProgressBar" name="HealthBar" template="SSF_HeroPanel/ProgressBarTemplate">
+                <Anchor side="Right" relative="$parent/IconImage" pos="Min" offset="-6"/>
+                <Anchor side="Top" relative="$parent/IconImage" pos="Min" offset="1"/>
+                <Height val="23"/>
+                <Frame type="MathFrame" name="Percent">
+                    <Operator val="Divide"/>
+                    <A val="{$parent/@Value}"/>
+                    <B val="{$parent/@MaxValue}"/>
+                </Frame>
+                <StateGroup name="Colorchanger">
+                    <DefaultState val="Green"/>
+                    <State name="Red">
+                        <When type="Property" frame="Percent" operator="LessThanOrEqual" Result="0.25"/>
+                        <Action type="SetProperty" frame="FillImageContainer/FillImage" LayerColor="255,0,0"/>
+                    </State>
+                    <State name="Orange">
+                        <When type="Property" frame="Percent" operator="GreaterThan" Result="0.25"/>
+                        <When type="Property" frame="Percent" operator="LessThanOrEqual" Result="0.50"/>
+                        <Action type="SetProperty" frame="FillImageContainer/FillImage" LayerColor="255,128,0"/>
+                    </State>
+                    <State name="Yellow">
+                        <When type="Property" frame="Percent" operator="GreaterThan" Result="0.50"/>
+                        <When type="Property" frame="Percent" operator="LessThanOrEqual" Result="0.75"/>
+                        <Action type="SetProperty" frame="FillImageContainer/FillImage" LayerColor="255,255,0"/>
+                    </State>
+                    <State name="Green">
+                        <When type="Property" frame="Percent" operator="GreaterThan" Result="0.75"/>
+                        <Action type="SetProperty" frame="FillImageContainer/FillImage" LayerColor="0,255,0"/></State>
+                </StateGroup>
+
+                <Frame type="Frame" name="FillImageContainer">
+                    <Frame type="Image" name="FillImage">
+                        <LayerColor val="42,213,0"/>
+                    </Frame>
+                </Frame>
+            </Frame>
+
+            <Frame type="Image" name="FrontImage">
+                <Anchor relative="$parent"/>
+                <Texture val="Assets/Icons/HivePanel.dds"/>
+                <AcceptsMouse val="false"/>
+            </Frame>
+
+
+            <Frame type="Label" name="HealthBarValueLabel">
+                <Anchor side="Top" relative="$parent/HealthBar" pos="Mid" offset="0"/>
+                <Anchor side="Bottom" relative="$parent/HealthBar" pos="Mid" offset="0"/>
+                <Anchor side="Left" relative="$parent/HealthBar" pos="Min" offset="0"/>
+                <Anchor side="Right" relative="$parent/HealthBar" pos="Max" offset="0"/>
+                <Height val="24"/>
+                <Style val="SSF_HeroPanel_ValueLabel"/>
+                <Text val="{$parent/HealthBar/TextFormat/@Text}"/>
+                <Visible val="false"/>
+                <AcceptsMouse val="false"/>
+            </Frame>
+
+            <Frame type="Label" name="KillLabel">
+                <Anchor side="Top" relative="$parent/FlawlessIcon" pos="Max" offset="1"/>
+                <Anchor side="Left" relative="$parent/HealthBar" pos="Min" offset="0"/>
+                <Anchor side="Right" relative="$parent/FlawlessIcon" pos="Max" offset="0"/>
+                <Height val="30"/>
+                <Visible val="true"/>
+                <Style val="SSF_HivePanel_ValueLabel_Right"/>
+                <Text val="{$parent/KillLabelFormat/@Text}"/>
+                <AcceptsMouse val="false"/>
+            </Frame>
+            <Frame type="TextFormatFrame" name="KillLabelFormat">
+                <Anchor side="Top" relative="$parent" pos="Min" offset="5000"/>
+                <Anchor side="Left" relative="$parent" pos="Min" offset="5000"/>
+                <Anchor side="Bottom" relative="$parent" pos="Min" offset="5000"/>
+                <Anchor side="Right" relative="$parent" pos="Min" offset="5000"/>
+                <FormatText val="%0% %1%"/>
+                <Replacement val="Kills:" index="0"/>
+                <Replacement val="{$parent/KillCount/@Text}" index="1"/>
+            </Frame>
+            <Frame type="Label" name="KillCount">
+                <Anchor side="Top" relative="$parent" pos="Min" offset="5000"/>
+                <Anchor side="Bottom" relative="$parent" pos="Min" offset="5000"/>
+                <Anchor side="Left" relative="$parent" pos="Min" offset="5000"/>
+                <Anchor side="Right" relative="$parent" pos="Min" offset="5000"/>
+                <Text val="0"/>
+                <AcceptsMouse val="false"/>
+            </Frame>
+
+            <Frame type="Label" name="FlawlessLabel">
+                <Anchor side="Top" relative="$parent/FlawlessIcon" pos="Min" offset="0"/>
+                <Anchor side="Bottom" relative="$parent/FlawlessIcon" pos="Max" offset="0"/>
+                <Anchor side="Right" relative="$parent/FlawlessIcon" pos="Min" offset="0"/>
+                <Anchor side="Left" relative="$parent/HealthBar" pos="Min" offset="0"/>
+                <Visible val="true"/>
+                <Style val="SSF_HivePanel_ValueLabel_Right"/>
+                <Text val="Flawless: "/>
+                <AcceptsMouse val="false"/>
+            </Frame>
+            <Frame type="Image" name="FlawlessIcon">
+                <Anchor side="Top" relative="$parent/HealthBar" pos="Max" offset="7"/>
+                <Anchor side="Right" relative="$parent/HealthBar" pos="Max" offset="-1"/>
+                <Width val="25"/>
+                <Height val="25"/>
+                <Texture val="Assets\Icons\acv_requirement_icon_check.tga"/>
+            </Frame>
+
+
+            <!-- MouseHover makes the bar labels visible -->
+            <Animation name="MouseHover">
+                <Event event="OnMouseEnter" action="DirectionForward,Play" frame="BarBackground"/>
+                <Event event="OnMouseExit" action="DirectionReverse,Play" frame="BarBackground"/>
+                <Controller type="State" end="Pause" frame="$this" stateGroup="MouseHoverState">
+                    <Key type="Identifier" time="0.0" value="False"/>
+                    <Key type="Identifier" time="0.01" value="True"/>
+                </Controller>
+            </Animation>
+            <StateGroup name="MouseHoverState">
+                <DefaultState val="False"/>
+                <State name="True">
+                    <Action type="SetProperty" frame="HealthBarValueLabel" Visible="True"/>
+                </State>
+                <State name="False"></State>
+            </StateGroup>
+
+            <Visible val="false"/>
+            <StateGroup name="SSF_HivePanel_Shown">
+                <DefaultState val="False"/>
+                <State name="True">
+                    <!-- the option checkbox defaults to Checked="true" so the panel will default to Visible="true" as well -->
+                    <When type="Property" frame="$SSF_CustomUI/Options/HivePanelShowCheckbox" operator="Equal" Checked="True"/>
+
+                    <Action type="SetProperty" frame="$this" Visible="True"/>
+                </State>
+                <State name="False"></State>
+            </StateGroup>
+        </Frame>
+    </Frame>
+</Desc>

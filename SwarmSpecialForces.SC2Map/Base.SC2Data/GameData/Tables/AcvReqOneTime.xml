@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CUser id="AcvReqOneTime">
+        <Fields Id="Color" Type="Color"/>
+        <Instances Id="[Default]">
+            <Color Color="255,255,255,255">
+                <Field Id="Color"/>
+            </Color>
+        </Instances>
+        <Instances Id="Tutorial">
+            <Color Color="255,0,255,0">
+                <Field Id="Color"/>
+            </Color>
+        </Instances>
+        <Instances Id="Trophy"/>
+    </CUser>
+</Catalog>

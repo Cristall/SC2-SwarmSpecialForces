@@ -1,0 +1,1294 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Desc>
+	<Constant name="AcvColorLocked" val="135,135,135"/>
+	<Constant name="AcvColor0" val="0,178,0"/>
+	<Constant name="AcvColor1" val="178,178,0"/>
+	<Constant name="AcvColor2" val="178,0,0"/>
+	<Constant name="AcvColor3" val="178,89,0"/>
+	<Constant name="AcvColor4" val="0,0,178"/>
+	<Constant name="AcvColor5" val="0,178,178"/>
+	<Constant name="AcvColor6" val="178,0,178"/>
+	<Constant name="AcvColor7" val="36,146,2"/>
+	<Constant name="AcvColor8" val="82,49,0"/>
+	<Constant name="AcvColor9" val="132,0,255"/>
+	<Constant name="AcvColor10" val="55,109,102"/>
+	<!-- new colors could be: purple, dark green/olive, brown, -->
+	
+	<Constant name="AchievementIconSpacing" val="6"/>
+	<Constant name="AchievementIconSize" val="76"/>
+	<Constant name="AchievementIconBorderSize" val="88"/>
+
+	<Frame type="Frame" name="AchievementIconNormalTemplate">
+		<Width val="#AchievementIconBorderSize"/>
+		<Height val="#AchievementIconBorderSize"/>
+
+		<AcceptsMouseTooltip val="True"/>
+
+		<Frame type="Image" name="Icon">
+			<Anchor side="Top" relative="$parent" pos="Min" offset="6"/>
+			<Anchor side="Left" relative="$parent" pos="Min" offset="6"/>
+			<Texture val="Assets/Textures/ui_ingame_help_techtree_questionmark.dds"/>
+			<Width val="#AchievementIconSize"/>
+		</Frame>
+		<Frame type="Image" name="Border">
+			<Anchor relative="$parent"/>
+			<Texture val="Assets/Icons/Icon_Border/Icon_Border_White.tga"/>
+		</Frame>
+
+		<Animation name="Stage0">
+			<Event event="Stage0" action="Reset,Play" frame="$this"/>
+			<Controller type="State" end="Pause" frame="$this" stateGroup="Stage">
+				<Key type="Identifier" time="0.0" value="0"/>
+			</Controller>
+		</Animation>
+		<Animation name="Stage1">
+			<Event event="Stage1" action="Reset,Play" frame="$this"/>
+			<Controller type="State" end="Pause" frame="$this" stateGroup="Stage">
+				<Key type="Identifier" time="0.0" value="1"/>
+			</Controller>
+		</Animation>
+		<Animation name="Stage2">
+			<Event event="Stage2" action="Reset,Play" frame="$this"/>
+			<Controller type="State" end="Pause" frame="$this" stateGroup="Stage">
+				<Key type="Identifier" time="0.0" value="2"/>
+			</Controller>
+		</Animation>
+		<Animation name="Stage3">
+			<Event event="Stage3" action="Reset,Play" frame="$this"/>
+			<Controller type="State" end="Pause" frame="$this" stateGroup="Stage">
+				<Key type="Identifier" time="0.0" value="3"/>
+			</Controller>
+		</Animation>
+		<Animation name="Stage4">
+			<Event event="Stage4" action="Reset,Play" frame="$this"/>
+			<Controller type="State" end="Pause" frame="$this" stateGroup="Stage">
+				<Key type="Identifier" time="0.0" value="4"/>
+			</Controller>
+		</Animation>
+		<Animation name="Stage5">
+			<Event event="Stage5" action="Reset,Play" frame="$this"/>
+			<Controller type="State" end="Pause" frame="$this" stateGroup="Stage">
+				<Key type="Identifier" time="0.0" value="5"/>
+			</Controller>
+		</Animation>
+		<Animation name="Stage6">
+			<Event event="Stage6" action="Reset,Play" frame="$this"/>
+			<Controller type="State" end="Pause" frame="$this" stateGroup="Stage">
+				<Key type="Identifier" time="0.0" value="6"/>
+			</Controller>
+		</Animation>
+		<Animation name="Stage7">
+			<Event event="Stage7" action="Reset,Play" frame="$this"/>
+			<Controller type="State" end="Pause" frame="$this" stateGroup="Stage">
+				<Key type="Identifier" time="0.0" value="7"/>
+			</Controller>
+		</Animation>
+		<Animation name="Stage8">
+			<Event event="Stage8" action="Reset,Play" frame="$this"/>
+			<Controller type="State" end="Pause" frame="$this" stateGroup="Stage">
+				<Key type="Identifier" time="0.0" value="8"/>
+			</Controller>
+		</Animation>
+		<Animation name="Stage9">
+			<Event event="Stage9" action="Reset,Play" frame="$this"/>
+			<Controller type="State" end="Pause" frame="$this" stateGroup="Stage">
+				<Key type="Identifier" time="0.0" value="9"/>
+			</Controller>
+		</Animation>
+		<Animation name="Stage10">
+			<Event event="Stage10" action="Reset,Play" frame="$this"/>
+			<Controller type="State" end="Pause" frame="$this" stateGroup="Stage">
+				<Key type="Identifier" time="0.0" value="10"/>
+			</Controller>
+		</Animation>
+		<Animation name="Stage11">
+			<Event event="Stage11" action="Reset,Play" frame="$this"/>
+			<Controller type="State" end="Pause" frame="$this" stateGroup="Stage">
+				<Key type="Identifier" time="0.0" value="11"/>
+			</Controller>
+		</Animation>
+
+		<StateGroup name="Stage">
+			<DefaultState val="0"/>
+			<State name="0">
+				<Action type="SetProperty" frame="$this/Border" color="#AcvColorLocked"/>
+			</State>
+			<State name="1">
+				<Action type="SetProperty" frame="$this/Border" color="#AcvColor0"/>
+			</State>
+			<State name="2">
+				<Action type="SetProperty" frame="$this/Border" color="#AcvColor1"/>
+			</State>
+			<State name="3">
+				<Action type="SetProperty" frame="$this/Border" color="#AcvColor2"/>
+			</State>
+			<State name="4">
+				<Action type="SetProperty" frame="$this/Border" color="#AcvColor3"/>
+			</State>
+			<State name="5">
+				<Action type="SetProperty" frame="$this/Border" color="#AcvColor4"/>
+			</State>
+			<State name="6">
+				<Action type="SetProperty" frame="$this/Border" color="#AcvColor5"/>
+			</State>
+			<State name="7">
+				<Action type="SetProperty" frame="$this/Border" color="#AcvColor6"/>
+			</State>
+			<State name="8">
+				<Action type="SetProperty" frame="$this/Border" color="#AcvColor7"/>
+			</State>
+			<State name="9">
+				<Action type="SetProperty" frame="$this/Border" color="#AcvColor8"/>
+			</State>
+			<State name="10">
+				<Action type="SetProperty" frame="$this/Border" color="#AcvColor9"/>
+			</State>
+			<State name="11">
+				<Action type="SetProperty" frame="$this/Border" color="#AcvColor10"/>
+			</State>
+		</StateGroup>
+	</Frame>
+	<Frame type="Frame" name="AchievementIconCutsTemplate">
+		<Width val="#AchievementIconBorderSize"/>
+		<Height val="#AchievementIconBorderSize"/>
+
+		<AcceptsMouseTooltip val="True"/>
+
+		<Animation name="Unlock0">
+			<Event event="Unlock0" action="Reset,Play" frame="$this"/>
+			<Controller type="State" end="Pause" frame="$this/Border0" stateGroup="Unlocked">
+				<Key type="Identifier" time="0.0" value="Unlocked"/>
+			</Controller>
+		</Animation>
+		<Animation name="Unlock1">
+			<Event event="Unlock1" action="Reset,Play" frame="$this"/>
+			<Controller type="State" end="Pause" frame="$this/Border1" stateGroup="Unlocked">
+				<Key type="Identifier" time="0.0" value="Unlocked"/>
+			</Controller>
+		</Animation>
+		<Animation name="Unlock2">
+			<Event event="Unlock2" action="Reset,Play" frame="$this"/>
+			<Controller type="State" end="Pause" frame="$this/Border2" stateGroup="Unlocked">
+				<Key type="Identifier" time="0.0" value="Unlocked"/>
+			</Controller>
+		</Animation>
+		<Animation name="Unlock3">
+			<Event event="Unlock3" action="Reset,Play" frame="$this"/>
+			<Controller type="State" end="Pause" frame="$this/Border3" stateGroup="Unlocked">
+				<Key type="Identifier" time="0.0" value="Unlocked"/>
+			</Controller>
+		</Animation>
+		<Animation name="Unlock4">
+			<Event event="Unlock4" action="Reset,Play" frame="$this"/>
+			<Controller type="State" end="Pause" frame="$this/Border4" stateGroup="Unlocked">
+				<Key type="Identifier" time="0.0" value="Unlocked"/>
+			</Controller>
+		</Animation>
+		<Animation name="Unlock5">
+			<Event event="Unlock5" action="Reset,Play" frame="$this"/>
+			<Controller type="State" end="Pause" frame="$this/Border5" stateGroup="Unlocked">
+				<Key type="Identifier" time="0.0" value="Unlocked"/>
+			</Controller>
+		</Animation>
+
+		
+		<Animation name="Lock0">
+			<Event event="Lock0" action="Reset,Play" frame="$this"/>
+			<Controller type="State" end="Pause" frame="$this/Border0" stateGroup="Unlocked">
+				<Key type="Identifier" time="0.0" value="Locked"/>
+			</Controller>
+		</Animation>
+		<Animation name="Lock1">
+			<Event event="Lock1" action="Reset,Play" frame="$this"/>
+			<Controller type="State" end="Pause" frame="$this/Border1" stateGroup="Unlocked">
+				<Key type="Identifier" time="0.0" value="Locked"/>
+			</Controller>
+		</Animation>
+		<Animation name="Lock2">
+			<Event event="Lock2" action="Reset,Play" frame="$this"/>
+			<Controller type="State" end="Pause" frame="$this/Border2" stateGroup="Unlocked">
+				<Key type="Identifier" time="0.0" value="Locked"/>
+			</Controller>
+		</Animation>
+		<Animation name="Lock3">
+			<Event event="Lock3" action="Reset,Play" frame="$this"/>
+			<Controller type="State" end="Pause" frame="$this/Border3" stateGroup="Unlocked">
+				<Key type="Identifier" time="0.0" value="Locked"/>
+			</Controller>
+		</Animation>
+		<Animation name="Lock4">
+			<Event event="Lock4" action="Reset,Play" frame="$this"/>
+			<Controller type="State" end="Pause" frame="$this/Border4" stateGroup="Unlocked">
+				<Key type="Identifier" time="0.0" value="Locked"/>
+			</Controller>
+		</Animation>
+		<Animation name="Lock5">
+			<Event event="Lock5" action="Reset,Play" frame="$this"/>
+			<Controller type="State" end="Pause" frame="$this/Border5" stateGroup="Unlocked">
+				<Key type="Identifier" time="0.0" value="Locked"/>
+			</Controller>
+		</Animation>
+
+
+		<Frame type="Image" name="Icon">
+			<Anchor side="Top" relative="$parent" pos="Min" offset="6"/>
+			<Anchor side="Left" relative="$parent" pos="Min" offset="6"/>
+			<Texture val="Assets/Textures/ui_ingame_help_techtree_questionmark.dds"/>
+			<Width val="#AchievementIconSize"/>
+		</Frame>
+		<Frame type="Image" name="Border0">
+			<Anchor relative="$parent"/>
+			<Texture val="Assets/Icons/Icon_Border/Icon_Border_Segmented_TopRight.tga"/>
+			<StateGroup name="Unlocked">
+				<DefaultState val="Locked"/>
+				<State name="Unlocked">
+					<Action type="SetProperty" frame="$this" Color="#AcvColor0"/>
+				</State>
+				<State name="Locked">
+					<Action type="SetProperty" frame="$this" Color="#AcvColorLocked"/>
+				</State>
+			</StateGroup>
+		</Frame>
+		<Frame type="Image" name="Border1">
+			<Anchor relative="$parent"/>
+			<Texture val="Assets/Icons/Icon_Border/Icon_Border_Segmented_Right.tga"/>
+			<StateGroup name="Unlocked">
+				<DefaultState val="Locked"/>
+				<State name="Unlocked">
+					<Action type="SetProperty" frame="$this" Color="#AcvColor1"/>
+				</State>
+				<State name="Locked">
+					<Action type="SetProperty" frame="$this" Color="#AcvColorLocked"/>
+				</State>
+			</StateGroup>
+		</Frame>
+		<Frame type="Image" name="Border2">
+			<Anchor relative="$parent"/>
+			<Texture val="Assets/Icons/Icon_Border/Icon_Border_Segmented_BottomRight.tga"/>
+			<StateGroup name="Unlocked">
+				<DefaultState val="Locked"/>
+				<State name="Unlocked">
+					<Action type="SetProperty" frame="$this" Color="#AcvColor2"/>
+				</State>
+				<State name="Locked">
+					<Action type="SetProperty" frame="$this" Color="#AcvColorLocked"/>
+				</State>
+			</StateGroup>
+		</Frame>
+		<Frame type="Image" name="Border3">
+			<Anchor relative="$parent"/>
+			<Texture val="Assets/Icons/Icon_Border/Icon_Border_Segmented_BottomLeft.tga"/>
+			<StateGroup name="Unlocked">
+				<DefaultState val="Locked"/>
+				<State name="Unlocked">
+					<Action type="SetProperty" frame="$this" Color="#AcvColor3"/>
+				</State>
+				<State name="Locked">
+					<Action type="SetProperty" frame="$this" Color="#AcvColorLocked"/>
+				</State>
+			</StateGroup>
+		</Frame>
+		<Frame type="Image" name="Border4">
+			<Anchor relative="$parent"/>
+			<Texture val="Assets/Icons/Icon_Border/Icon_Border_Segmented_Left.tga"/>
+			<StateGroup name="Unlocked">
+				<DefaultState val="Locked"/>
+				<State name="Unlocked">
+					<Action type="SetProperty" frame="$this" Color="#AcvColor4"/>
+				</State>
+				<State name="Locked">
+					<Action type="SetProperty" frame="$this" Color="#AcvColorLocked"/>
+				</State>
+			</StateGroup>
+		</Frame>
+		<Frame type="Image" name="Border5">
+			<Anchor relative="$parent"/>
+			<Texture val="Assets/Icons/Icon_Border/Icon_Border_Segmented_TopLeft.tga"/>
+			<StateGroup name="Unlocked">
+				<DefaultState val="Locked"/>
+				<State name="Unlocked">
+					<Action type="SetProperty" frame="$this" Color="#AcvColor5"/>
+				</State>
+				<State name="Locked">
+					<Action type="SetProperty" frame="$this" Color="#AcvColorLocked"/>
+				</State>
+			</StateGroup>
+		</Frame>
+	</Frame>
+
+	<Frame type="Label" name="AchievementLabelTemplate" template="SSF_Templates/LabelTemplate">
+		<Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+		<Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+		<Height val="25"/>
+	</Frame>
+
+	<Frame type="Button" name="AchievementSetScrollButtonTemplate" template="SSF_Templates/ButtonTemplate">
+		<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+		<Height val="50"/>
+		<Width val="120"/>
+	</Frame>
+
+	<Frame type="Frame" name="AchievementPulldownHandlerIndexTemplate">
+		<Anchor relative="$parent"/>
+		<Visible val="false"/>
+
+		<Frame type="Frame" name="Player1">
+			<Anchor relative="$parent"/>
+			<Visible val="false"/>
+			<Animation name="ShowPlayer">
+				<Event event="OnShown" action="Reset,Play" frame="$this"/>
+				<Controller type="State" end="Pause" frame="$ancestor[@name=Achievements]" stateGroup="Player">
+					<Key type="Identifier" time="0.0" value="1"/>
+				</Controller>
+			</Animation>
+		</Frame>
+		<Frame type="Frame" name="Player2">
+			<Anchor relative="$parent"/>
+			<Visible val="false"/>
+			<Animation name="ShowPlayer">
+				<Event event="OnShown" action="Reset,Play" frame="$this"/>
+				<Controller type="State" end="Pause" frame="$ancestor[@name=Achievements]" stateGroup="Player">
+					<Key type="Identifier" time="0.0" value="2"/>
+				</Controller>
+			</Animation>
+		</Frame>
+		<Frame type="Frame" name="Player3">
+			<Anchor relative="$parent"/>
+			<Visible val="false"/>
+			<Animation name="ShowPlayer">
+				<Event event="OnShown" action="Reset,Play" frame="$this"/>
+				<Controller type="State" end="Pause" frame="$ancestor[@name=Achievements]" stateGroup="Player">
+					<Key type="Identifier" time="0.0" value="3"/>
+				</Controller>
+			</Animation>
+		</Frame>
+		<Frame type="Frame" name="Player4">
+			<Anchor relative="$parent"/>
+			<Visible val="false"/>
+			<Animation name="ShowPlayer">
+				<Event event="OnShown" action="Reset,Play" frame="$this"/>
+				<Controller type="State" end="Pause" frame="$ancestor[@name=Achievements]" stateGroup="Player">
+					<Key type="Identifier" time="0.0" value="4"/>
+				</Controller>
+			</Animation>
+		</Frame>
+		<Frame type="Frame" name="Player5">
+			<Anchor relative="$parent"/>
+			<Visible val="false"/>
+			<Animation name="ShowPlayer">
+				<Event event="OnShown" action="Reset,Play" frame="$this"/>
+				<Controller type="State" end="Pause" frame="$ancestor[@name=Achievements]" stateGroup="Player">
+					<Key type="Identifier" time="0.0" value="5"/>
+				</Controller>
+			</Animation>
+		</Frame>
+		<Frame type="Frame" name="Player6">
+			<Visible val="false"/>
+			<Animation name="ShowPlayer">
+				<Event event="OnShown" action="Reset,Play" frame="$this"/>
+				<Controller type="State" end="Pause" frame="$ancestor[@name=Achievements]" stateGroup="Player">
+					<Key type="Identifier" time="0.0" value="6"/>
+				</Controller>
+			</Animation>
+		</Frame>
+	</Frame>
+	
+	<Frame type="Frame" name="AchievementPlayerIndexTemplate">
+		<Anchor side="Left" relative="$parent" pos="Min" offset="3000"/>
+		<Anchor side="Top" relative="$parent" pos="Min" offset="3000"/>
+		<Height val="1"/>
+		<Width val="1"/>
+
+		<Frame type="Frame" name="Index1">
+			<Anchor relative="$parent"/>
+			<Visible val="false"/>
+			
+			<Animation name="SelectIndex">
+				<Event event="OnShown" action="Reset,Play" frame="$this"/>
+				<Controller type="Property" end="Pause" frame="$SSF_AchievementPanel/PlayerPulldown" property="SelectedIndex">
+					<Key type="Property" time="0.01" value="0"/>
+				</Controller>
+			</Animation>
+		</Frame>
+		<Frame type="Frame" name="Index2">
+			<Anchor relative="$parent"/>
+			<Visible val="false"/>
+			
+			<Animation name="SelectIndex">
+				<Event event="OnShown" action="Reset,Play" frame="$this"/>
+				<Controller type="Property" end="Pause" frame="$SSF_AchievementPanel/PlayerPulldown" property="SelectedIndex">
+					<Key type="Property" time="0.01" value="1"/>
+				</Controller>
+			</Animation>
+		</Frame>
+		<Frame type="Frame" name="Index3">
+			<Anchor relative="$parent"/>
+			<Visible val="false"/>
+			
+			<Animation name="SelectIndex">
+				<Event event="OnShown" action="Reset,Play" frame="$this"/>
+				<Controller type="Property" end="Pause" frame="$SSF_AchievementPanel/PlayerPulldown" property="SelectedIndex">
+					<Key type="Property" time="0.01" value="2"/>
+				</Controller>
+			</Animation>
+		</Frame>
+		<Frame type="Frame" name="Index4">
+			<Anchor relative="$parent"/>
+			<Visible val="false"/>
+			
+			<Animation name="SelectIndex">
+				<Event event="OnShown" action="Reset,Play" frame="$this"/>
+				<Controller type="Property" end="Pause" frame="$SSF_AchievementPanel/PlayerPulldown" property="SelectedIndex">
+					<Key type="Property" time="0.01" value="3"/>
+				</Controller>
+			</Animation>
+		</Frame>
+		<Frame type="Frame" name="Index5">
+			<Anchor relative="$parent"/>
+			<Visible val="false"/>
+			
+			<Animation name="SelectIndex">
+				<Event event="OnShown" action="Reset,Play" frame="$this"/>
+				<Controller type="Property" end="Pause" frame="$SSF_AchievementPanel/PlayerPulldown" property="SelectedIndex">
+					<Key type="Property" time="0.01" value="4"/>
+				</Controller>
+			</Animation>
+		</Frame>
+		<Frame type="Frame" name="Index6">
+			<Anchor relative="$parent"/>
+			<Visible val="false"/>
+			
+			<Animation name="SelectIndex">
+				<Event event="OnShown" action="Reset,Play" frame="$this"/>
+				<Controller type="Property" end="Pause" frame="$SSF_AchievementPanel/PlayerPulldown" property="SelectedIndex">
+					<Key type="Property" time="0.01" value="5"/>
+				</Controller>
+			</Animation>
+		</Frame>
+	</Frame>
+
+	<Frame type="Frame" name="AchievementPlayerFrameTemplate">
+		<Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+		<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+		<Anchor side="Bottom" relative="$this/KingMoopy" pos="Max" offset="0"/>
+		<Anchor side="Right" relative="$this/MoopyHats" pos="Max" offset="0"/>
+		<Visible val="False"/>
+
+
+		<Frame type="Frame" name="IndexHandler" template="SSF_Achievements/AchievementPlayerIndexTemplate"></Frame>
+
+		<Frame type="Label" name="TitleGlobal" template="SSF_Achievements/AchievementLabelTemplate">
+			<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+			<Text val="@Trig/AcvUI/Global"/>
+		</Frame>
+
+		<Frame type="Frame" name="Tutorial" template="SSF_Achievements/AchievementIconNormalTemplate">
+			<Anchor side="Top" relative="$parent/TitleGlobal" pos="Max" offset="#AchievementIconSpacing"/>
+			<Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+		</Frame>
+		<Frame type="Frame" name="Score" template="SSF_Achievements/AchievementIconNormalTemplate">
+			<Anchor side="Top" relative="$parent/Tutorial" pos="Min" offset="0"/>
+			<Anchor side="Left" relative="$parent/Tutorial" pos="Max" offset="#AchievementIconSpacing"/>
+		</Frame>
+		<Frame type="Frame" name="Trophy" template="SSF_Achievements/AchievementIconNormalTemplate">
+			<Anchor side="Top" relative="$parent/Score" pos="Min" offset="0"/>
+			<Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+			<Visible val="false"/>
+		</Frame>
+		<Frame type="Frame" name="Points" template="SSF_Achievements/AchievementIconNormalTemplate">
+			<Anchor side="Top" relative="$parent/Tutorial" pos="Max" offset="#AchievementIconSpacing"/>
+			<Anchor side="Left" relative="$parent/Tutorial" pos="Min" offset="0"/>
+		</Frame>
+		<Frame type="Frame" name="Kills" template="SSF_Achievements/AchievementIconNormalTemplate">
+			<Anchor side="Top" relative="$parent/Points" pos="Min" offset="0"/>
+			<Anchor side="Left" relative="$parent/Points" pos="Max" offset="#AchievementIconSpacing"/>
+		</Frame>
+		<Frame type="Frame" name="Scientists" template="SSF_Achievements/AchievementIconNormalTemplate">
+			<Anchor side="Top" relative="$parent/Kills" pos="Min" offset="0"/>
+			<Anchor side="Left" relative="$parent/Kills" pos="Max" offset="#AchievementIconSpacing"/>
+		</Frame>
+		<Frame type="Frame" name="Essences" template="SSF_Achievements/AchievementIconNormalTemplate">
+			<Anchor side="Top" relative="$parent/Scientists" pos="Min" offset="0"/>
+			<Anchor side="Left" relative="$parent/Scientists" pos="Max" offset="#AchievementIconSpacing"/>
+		</Frame>
+		<Frame type="Frame" name="PsiOrbs" template="SSF_Achievements/AchievementIconNormalTemplate">
+			<Anchor side="Top" relative="$parent/Essences" pos="Min" offset="0"/>
+			<Anchor side="Left" relative="$parent/Essences" pos="Max" offset="#AchievementIconSpacing"/>
+		</Frame>
+		<Frame type="Frame" name="MoopyHats" template="SSF_Achievements/AchievementIconNormalTemplate">
+			<Anchor side="Top" relative="$parent/PsiOrbs" pos="Min" offset="0"/>
+			<Anchor side="Left" relative="$parent/PsiOrbs" pos="Max" offset="#AchievementIconSpacing"/>
+		</Frame>
+		<Frame type="Frame" name="WinsP0" template="SSF_Achievements/AchievementIconNormalTemplate">
+			<Anchor side="Top" relative="$parent/Points" pos="Max" offset="#AchievementIconSpacing"/>
+			<Anchor side="Left" relative="$parent/Points" pos="Min" offset="0"/>
+		</Frame>
+		<Frame type="Frame" name="WinsP1" template="SSF_Achievements/AchievementIconNormalTemplate">
+			<Anchor side="Top" relative="$parent/WinsP0" pos="Min" offset="0"/>
+			<Anchor side="Left" relative="$parent/WinsP0" pos="Max" offset="#AchievementIconSpacing"/>
+		</Frame>
+		<Frame type="Frame" name="WinsP2" template="SSF_Achievements/AchievementIconNormalTemplate">
+			<Anchor side="Top" relative="$parent/WinsP1" pos="Min" offset="0"/>
+			<Anchor side="Left" relative="$parent/WinsP1" pos="Max" offset="#AchievementIconSpacing"/>
+		</Frame>
+
+		<Frame type="Label" name="TitleP0" template="SSF_Achievements/AchievementLabelTemplate">
+			<Anchor side="Top" relative="$parent/WinsP0" pos="Max" offset="#AchievementIconSpacing"/>
+			<Text val="@Trig/Generic/PartName/0"/>
+		</Frame>
+
+		<Frame type="Frame" name="SpeedrunP0D0" template="SSF_Achievements/AchievementIconNormalTemplate">
+			<Anchor side="Top" relative="$parent/TitleP0" pos="Max" offset="#AchievementIconSpacing"/>
+			<Anchor side="Left" relative="$parent/TitleP0" pos="Min" offset="0"/>
+		</Frame>
+		<Frame type="Frame" name="SpeedrunP0D1" template="SSF_Achievements/AchievementIconNormalTemplate">
+			<Anchor side="Top" relative="$parent/SpeedrunP0D0" pos="Min" offset="0"/>
+			<Anchor side="Left" relative="$parent/SpeedrunP0D0" pos="Max" offset="#AchievementIconSpacing"/>
+		</Frame>
+		<Frame type="Frame" name="SpeedrunP0D2" template="SSF_Achievements/AchievementIconNormalTemplate">
+			<Anchor side="Top" relative="$parent/SpeedrunP0D1" pos="Min" offset="0"/>
+			<Anchor side="Left" relative="$parent/SpeedrunP0D1" pos="Max" offset="#AchievementIconSpacing"/>
+		</Frame>
+		<Frame type="Frame" name="SpeedrunP0D3" template="SSF_Achievements/AchievementIconNormalTemplate">
+			<Anchor side="Top" relative="$parent/SpeedrunP0D2" pos="Min" offset="0"/>
+			<Anchor side="Left" relative="$parent/SpeedrunP0D2" pos="Max" offset="#AchievementIconSpacing"/>
+		</Frame>
+		<Frame type="Frame" name="SpeedrunP0D4" template="SSF_Achievements/AchievementIconNormalTemplate">
+			<Anchor side="Top" relative="$parent/SpeedrunP0D3" pos="Min" offset="0"/>
+			<Anchor side="Left" relative="$parent/SpeedrunP0D3" pos="Max" offset="#AchievementIconSpacing"/>
+		</Frame>
+		<Frame type="Frame" name="SpeedrunP0D5" template="SSF_Achievements/AchievementIconNormalTemplate">
+			<Anchor side="Top" relative="$parent/SpeedrunP0D4" pos="Min" offset="0"/>
+			<Anchor side="Left" relative="$parent/SpeedrunP0D4" pos="Max" offset="#AchievementIconSpacing"/>
+		</Frame>
+
+		<Frame type="Frame" name="SpeedrunP0D0Small" template="SSF_Achievements/AchievementIconNormalTemplate">
+			<Anchor side="Top" relative="$parent/SpeedrunP0D0" pos="Max" offset="#AchievementIconSpacing"/>
+			<Anchor side="Left" relative="$parent/SpeedrunP0D0" pos="Min" offset="0"/>
+		</Frame>
+		<Frame type="Frame" name="SpeedrunP0D1Small" template="SSF_Achievements/AchievementIconNormalTemplate">
+			<Anchor side="Top" relative="$parent/SpeedrunP0D0Small" pos="Min" offset="0"/>
+			<Anchor side="Left" relative="$parent/SpeedrunP0D0Small" pos="Max" offset="#AchievementIconSpacing"/>
+		</Frame>
+		<Frame type="Frame" name="SpeedrunP0D2Small" template="SSF_Achievements/AchievementIconNormalTemplate">
+			<Anchor side="Top" relative="$parent/SpeedrunP0D1Small" pos="Min" offset="0"/>
+			<Anchor side="Left" relative="$parent/SpeedrunP0D1Small" pos="Max" offset="#AchievementIconSpacing"/>
+		</Frame>
+		<Frame type="Frame" name="SpeedrunP0D3Small" template="SSF_Achievements/AchievementIconNormalTemplate">
+			<Anchor side="Top" relative="$parent/SpeedrunP0D2Small" pos="Min" offset="0"/>
+			<Anchor side="Left" relative="$parent/SpeedrunP0D2Small" pos="Max" offset="#AchievementIconSpacing"/>
+		</Frame>
+		<Frame type="Frame" name="SpeedrunP0D4Small" template="SSF_Achievements/AchievementIconNormalTemplate">
+			<Anchor side="Top" relative="$parent/SpeedrunP0D3Small" pos="Min" offset="0"/>
+			<Anchor side="Left" relative="$parent/SpeedrunP0D3Small" pos="Max" offset="#AchievementIconSpacing"/>
+		</Frame>
+		<Frame type="Frame" name="SpeedrunP0D5Small" template="SSF_Achievements/AchievementIconNormalTemplate">
+			<Anchor side="Top" relative="$parent/SpeedrunP0D4Small" pos="Min" offset="0"/>
+			<Anchor side="Left" relative="$parent/SpeedrunP0D4Small" pos="Max" offset="#AchievementIconSpacing"/>
+			<Visible val="false"/>
+		</Frame>
+
+		<Frame type="Frame" name="Flamer" template="SSF_Achievements/AchievementIconCutsTemplate">
+			<Anchor side="Top" relative="$parent/SpeedrunP0D0Small" pos="Max" offset="#AchievementIconSpacing"/>
+			<Anchor side="Left" relative="$parent/SpeedrunP0D0Small" pos="Min" offset="0"/>
+		</Frame>
+		<Frame type="Frame" name="Fortress" template="SSF_Achievements/AchievementIconCutsTemplate">
+			<Anchor side="Top" relative="$parent/Flamer" pos="Min" offset="0"/>
+			<Anchor side="Left" relative="$parent/Flamer" pos="Max" offset="#AchievementIconSpacing"/>
+		</Frame>
+		<Frame type="Frame" name="Hammer" template="SSF_Achievements/AchievementIconCutsTemplate">
+			<Anchor side="Top" relative="$parent/Fortress" pos="Min" offset="0"/>
+			<Anchor side="Left" relative="$parent/Fortress" pos="Max" offset="#AchievementIconSpacing"/>
+		</Frame>
+		<Frame type="Frame" name="FlawlessP0" template="SSF_Achievements/AchievementIconCutsTemplate">
+			<Anchor side="Top" relative="$parent/Hammer" pos="Min" offset="0"/>
+			<Anchor side="Left" relative="$parent/Hammer" pos="Max" offset="#AchievementIconSpacing"/>
+		</Frame>
+
+		
+		<Frame type="Label" name="TitleP1" template="SSF_Achievements/AchievementLabelTemplate">
+			<Anchor side="Top" relative="$parent/Flamer" pos="Max" offset="#AchievementIconSpacing"/>
+			<Text val="@Trig/Generic/PartName/1"/>
+		</Frame>
+
+		<Frame type="Frame" name="SpeedrunP1D0" template="SSF_Achievements/AchievementIconNormalTemplate">
+			<Anchor side="Top" relative="$parent/TitleP1" pos="Max" offset="#AchievementIconSpacing"/>
+			<Anchor side="Left" relative="$parent/TitleP1" pos="Min" offset="0"/>
+		</Frame>
+		<Frame type="Frame" name="SpeedrunP1D1" template="SSF_Achievements/AchievementIconNormalTemplate">
+			<Anchor side="Top" relative="$parent/SpeedrunP1D0" pos="Min" offset="0"/>
+			<Anchor side="Left" relative="$parent/SpeedrunP1D0" pos="Max" offset="#AchievementIconSpacing"/>
+		</Frame>
+		<Frame type="Frame" name="SpeedrunP1D2" template="SSF_Achievements/AchievementIconNormalTemplate">
+			<Anchor side="Top" relative="$parent/SpeedrunP1D1" pos="Min" offset="0"/>
+			<Anchor side="Left" relative="$parent/SpeedrunP1D1" pos="Max" offset="#AchievementIconSpacing"/>
+		</Frame>
+		<Frame type="Frame" name="SpeedrunP1D3" template="SSF_Achievements/AchievementIconNormalTemplate">
+			<Anchor side="Top" relative="$parent/SpeedrunP1D2" pos="Min" offset="0"/>
+			<Anchor side="Left" relative="$parent/SpeedrunP1D2" pos="Max" offset="#AchievementIconSpacing"/>
+		</Frame>
+		<Frame type="Frame" name="SpeedrunP1D4" template="SSF_Achievements/AchievementIconNormalTemplate">
+			<Anchor side="Top" relative="$parent/SpeedrunP1D3" pos="Min" offset="0"/>
+			<Anchor side="Left" relative="$parent/SpeedrunP1D3" pos="Max" offset="#AchievementIconSpacing"/>
+		</Frame>
+		<Frame type="Frame" name="SpeedrunP1D5" template="SSF_Achievements/AchievementIconNormalTemplate">
+			<Anchor side="Top" relative="$parent/SpeedrunP1D4" pos="Min" offset="0"/>
+			<Anchor side="Left" relative="$parent/SpeedrunP1D4" pos="Max" offset="#AchievementIconSpacing"/>
+		</Frame>
+
+		<Frame type="Frame" name="SpeedrunP1D0Small" template="SSF_Achievements/AchievementIconNormalTemplate">
+			<Anchor side="Top" relative="$parent/SpeedrunP1D0" pos="Max" offset="#AchievementIconSpacing"/>
+			<Anchor side="Left" relative="$parent/SpeedrunP1D0" pos="Min" offset="0"/>
+		</Frame>
+		<Frame type="Frame" name="SpeedrunP1D1Small" template="SSF_Achievements/AchievementIconNormalTemplate">
+			<Anchor side="Top" relative="$parent/SpeedrunP1D0Small" pos="Min" offset="0"/>
+			<Anchor side="Left" relative="$parent/SpeedrunP1D0Small" pos="Max" offset="#AchievementIconSpacing"/>
+		</Frame>
+		<Frame type="Frame" name="SpeedrunP1D2Small" template="SSF_Achievements/AchievementIconNormalTemplate">
+			<Anchor side="Top" relative="$parent/SpeedrunP1D1Small" pos="Min" offset="0"/>
+			<Anchor side="Left" relative="$parent/SpeedrunP1D1Small" pos="Max" offset="#AchievementIconSpacing"/>
+		</Frame>
+		<Frame type="Frame" name="SpeedrunP1D3Small" template="SSF_Achievements/AchievementIconNormalTemplate">
+			<Anchor side="Top" relative="$parent/SpeedrunP1D2Small" pos="Min" offset="0"/>
+			<Anchor side="Left" relative="$parent/SpeedrunP1D2Small" pos="Max" offset="#AchievementIconSpacing"/>
+		</Frame>
+		<Frame type="Frame" name="SpeedrunP1D4Small" template="SSF_Achievements/AchievementIconNormalTemplate">
+			<Anchor side="Top" relative="$parent/SpeedrunP1D3Small" pos="Min" offset="0"/>
+			<Anchor side="Left" relative="$parent/SpeedrunP1D3Small" pos="Max" offset="#AchievementIconSpacing"/>
+		</Frame>
+		<Frame type="Frame" name="SpeedrunP1D5Small" template="SSF_Achievements/AchievementIconNormalTemplate">
+			<Anchor side="Top" relative="$parent/SpeedrunP1D4Small" pos="Min" offset="0"/>
+			<Anchor side="Left" relative="$parent/SpeedrunP1D4Small" pos="Max" offset="#AchievementIconSpacing"/>
+			<Visible val="false"/>
+		</Frame>
+
+		<Frame type="Frame" name="Madness" template="SSF_Achievements/AchievementIconCutsTemplate">
+			<Anchor side="Top" relative="$parent/SpeedrunP1D0Small" pos="Max" offset="#AchievementIconSpacing"/>
+			<Anchor side="Left" relative="$parent/SpeedrunP1D0Small" pos="Min" offset="0"/>
+		</Frame>
+		<Frame type="Frame" name="Lightning" template="SSF_Achievements/AchievementIconCutsTemplate">
+			<Anchor side="Top" relative="$parent/Madness" pos="Min" offset="0"/>
+			<Anchor side="Left" relative="$parent/Madness" pos="Max" offset="#AchievementIconSpacing"/>
+		</Frame>
+		<Frame type="Frame" name="Thunder" template="SSF_Achievements/AchievementIconCutsTemplate">
+			<Anchor side="Top" relative="$parent/Lightning" pos="Min" offset="0"/>
+			<Anchor side="Left" relative="$parent/Lightning" pos="Max" offset="#AchievementIconSpacing"/>
+		</Frame>
+		<Frame type="Frame" name="Atlantis" template="SSF_Achievements/AchievementIconCutsTemplate">
+			<Anchor side="Top" relative="$parent/Thunder" pos="Min" offset="0"/>
+			<Anchor side="Left" relative="$parent/Thunder" pos="Max" offset="#AchievementIconSpacing"/>
+		</Frame>
+		<Frame type="Frame" name="FlawlessP1" template="SSF_Achievements/AchievementIconCutsTemplate">
+			<Anchor side="Top" relative="$parent/Atlantis" pos="Min" offset="0"/>
+			<Anchor side="Left" relative="$parent/Atlantis" pos="Max" offset="#AchievementIconSpacing"/>
+		</Frame>
+
+
+		<Frame type="Label" name="TitleP2" template="SSF_Achievements/AchievementLabelTemplate">
+			<Anchor side="Top" relative="$parent/Madness" pos="Max" offset="#AchievementIconSpacing"/>
+			<Text val="@Trig/Generic/PartName/2"/>
+		</Frame>
+
+		<Frame type="Frame" name="SpeedrunP2D0" template="SSF_Achievements/AchievementIconNormalTemplate">
+			<Anchor side="Top" relative="$parent/TitleP2" pos="Max" offset="#AchievementIconSpacing"/>
+			<Anchor side="Left" relative="$parent/TitleP2" pos="Min" offset="0"/>
+		</Frame>
+		<Frame type="Frame" name="SpeedrunP2D1" template="SSF_Achievements/AchievementIconNormalTemplate">
+			<Anchor side="Top" relative="$sibling-1" pos="Min" offset="0"/>
+			<Anchor side="Left" relative="$sibling-1" pos="Max" offset="#AchievementIconSpacing"/>
+		</Frame>
+		<Frame type="Frame" name="SpeedrunP2D2" template="SSF_Achievements/AchievementIconNormalTemplate">
+			<Anchor side="Top" relative="$sibling-1" pos="Min" offset="0"/>
+			<Anchor side="Left" relative="$sibling-1" pos="Max" offset="#AchievementIconSpacing"/>
+		</Frame>
+		<Frame type="Frame" name="SpeedrunP2D3" template="SSF_Achievements/AchievementIconNormalTemplate">
+			<Anchor side="Top" relative="$sibling-1" pos="Min" offset="0"/>
+			<Anchor side="Left" relative="$sibling-1" pos="Max" offset="#AchievementIconSpacing"/>
+		</Frame>
+		<Frame type="Frame" name="SpeedrunP2D4" template="SSF_Achievements/AchievementIconNormalTemplate">
+			<Anchor side="Top" relative="$sibling-1" pos="Min" offset="0"/>
+			<Anchor side="Left" relative="$sibling-1" pos="Max" offset="#AchievementIconSpacing"/>
+		</Frame>
+		<Frame type="Frame" name="SpeedrunP2D5" template="SSF_Achievements/AchievementIconNormalTemplate">
+			<Anchor side="Top" relative="$sibling-1" pos="Min" offset="0"/>
+			<Anchor side="Left" relative="$sibling-1" pos="Max" offset="#AchievementIconSpacing"/>
+		</Frame>
+
+
+		<Frame type="Frame" name="SpeedrunP2D0Small" template="SSF_Achievements/AchievementIconNormalTemplate">
+			<Anchor side="Top" relative="$parent/SpeedrunP2D0" pos="Max" offset="#AchievementIconSpacing"/>
+			<Anchor side="Left" relative="$parent/SpeedrunP2D0" pos="Min" offset="0"/>
+		</Frame>
+		<Frame type="Frame" name="SpeedrunP2D1Small" template="SSF_Achievements/AchievementIconNormalTemplate">
+			<Anchor side="Top" relative="$parent/SpeedrunP2D0Small" pos="Min" offset="0"/>
+			<Anchor side="Left" relative="$parent/SpeedrunP2D0Small" pos="Max" offset="#AchievementIconSpacing"/>
+		</Frame>
+		<Frame type="Frame" name="SpeedrunP2D2Small" template="SSF_Achievements/AchievementIconNormalTemplate">
+			<Anchor side="Top" relative="$parent/SpeedrunP2D1Small" pos="Min" offset="0"/>
+			<Anchor side="Left" relative="$parent/SpeedrunP2D1Small" pos="Max" offset="#AchievementIconSpacing"/>
+		</Frame>
+		<Frame type="Frame" name="SpeedrunP2D3Small" template="SSF_Achievements/AchievementIconNormalTemplate">
+			<Anchor side="Top" relative="$parent/SpeedrunP2D2Small" pos="Min" offset="0"/>
+			<Anchor side="Left" relative="$parent/SpeedrunP2D2Small" pos="Max" offset="#AchievementIconSpacing"/>
+		</Frame>
+		<Frame type="Frame" name="SpeedrunP2D4Small" template="SSF_Achievements/AchievementIconNormalTemplate">
+			<Anchor side="Top" relative="$parent/SpeedrunP2D3Small" pos="Min" offset="0"/>
+			<Anchor side="Left" relative="$parent/SpeedrunP2D3Small" pos="Max" offset="#AchievementIconSpacing"/>
+		</Frame>
+		<Frame type="Frame" name="SpeedrunP2D5Small" template="SSF_Achievements/AchievementIconNormalTemplate">
+			<Anchor side="Top" relative="$parent/SpeedrunP2D4Small" pos="Min" offset="0"/>
+			<Anchor side="Left" relative="$parent/SpeedrunP2D4Small" pos="Max" offset="#AchievementIconSpacing"/>
+			<Visible val="false"/>
+		</Frame>
+
+		<Frame type="Frame" name="Artanis" template="SSF_Achievements/AchievementIconCutsTemplate">
+			<Anchor side="Top" relative="$parent/SpeedrunP2D0Small" pos="Max" offset="#AchievementIconSpacing"/>
+			<Anchor side="Left" relative="$parent/SpeedrunP2D0Small" pos="Min" offset="0"/>
+		</Frame>
+		<Frame type="Frame" name="Kerrigan" template="SSF_Achievements/AchievementIconCutsTemplate">
+			<Anchor side="Top" relative="$parent/Artanis" pos="Min" offset="0"/>
+			<Anchor side="Left" relative="$parent/Artanis" pos="Max" offset="#AchievementIconSpacing"/>
+		</Frame>
+		<Frame type="Frame" name="Raynor" template="SSF_Achievements/AchievementIconCutsTemplate">
+			<Anchor side="Top" relative="$parent/Kerrigan" pos="Min" offset="0"/>
+			<Anchor side="Left" relative="$parent/Kerrigan" pos="Max" offset="#AchievementIconSpacing"/>
+		</Frame>
+		<Frame type="Frame" name="Cybermind" template="SSF_Achievements/AchievementIconCutsTemplate">
+			<Anchor side="Top" relative="$parent/Raynor" pos="Min" offset="0"/>
+			<Anchor side="Left" relative="$parent/Raynor" pos="Max" offset="#AchievementIconSpacing"/>
+		</Frame>
+		<Frame type="Frame" name="Gary" template="SSF_Achievements/AchievementIconCutsTemplate">
+			<Anchor side="Top" relative="$parent/Cybermind" pos="Min" offset="0"/>
+			<Anchor side="Left" relative="$parent/Cybermind" pos="Max" offset="#AchievementIconSpacing"/>
+		</Frame>
+		<Frame type="Frame" name="Stetmann" template="SSF_Achievements/AchievementIconCutsTemplate">
+			<Anchor side="Top" relative="$parent/Gary" pos="Min" offset="0"/>
+			<Anchor side="Left" relative="$parent/Gary" pos="Max" offset="#AchievementIconSpacing"/>
+		</Frame>
+
+		<Frame type="Frame" name="FlawlessP2" template="SSF_Achievements/AchievementIconCutsTemplate">
+			<Anchor side="Top" relative="$parent/Artanis" pos="Max" offset="#AchievementIconSpacing"/>
+			<Anchor side="Left" relative="$parent/Artanis" pos="Min" offset="0"/>
+		</Frame>
+		<Frame type="Frame" name="KingMoopy" template="SSF_Achievements/AchievementIconCutsTemplate">
+			<Anchor side="Top" relative="$parent/FlawlessP2" pos="Min" offset="0"/>
+			<Anchor side="Left" relative="$parent/FlawlessP2" pos="Max" offset="#AchievementIconSpacing"/>
+			<Visible val="false"/>
+		</Frame>
+	</Frame>
+
+
+	<Frame type="Frame" name="AchievementTemplate">
+		<Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+		<Anchor side="Right" relative="$this/ScrollableFrame" pos="Max" offset="#Border"/>
+		<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+		<Anchor side="Bottom" relative="$this/ScrollableFrame" pos="Max" offset="#Border"/>
+		<!-- <Width val="638"/> -->
+		<!-- <Height val="585"/> -->
+		<Visible val="false"/>
+		<Handle val="SSF_AchievementPanel"/>
+
+		<Frame type="Image" name="BackgroundImage" template="SSF_Templates/BackgroundImageTemplate"></Frame>
+		<Frame type="Button" name="CloseButton" template="SSF_Templates/CloseButtonTemplate"></Frame>
+		<!-- Player Select -->
+
+		<Frame type="Frame" name="PlayerPrevButtons">
+			<Anchor relative="$parent"/>
+			<Frame type="Button" name="PlayerPrevIndex1" template="SSF_Templates/ButtonTemplate">
+				<Anchor side="Top" relative="$parent" pos="Min" offset="#Border"/>
+				<Anchor side="Left" relative="$parent" pos="Min" offset="#Border"/>
+				<Width val="50"/>
+				<Height val="50"/>
+				<Visible val="false"/>
+
+				<Text val="&lt;"/>
+				<Tooltip val="@Trig/AcvUI/PrevPlayerTooltip"/>
+
+				<Animation name="Onclick">
+					<Event event="OnClick" action="Reset,Play" frame="$this"/>
+					<Controller type="Visibility" end="Pause" frame="$parent/$parent/PrevPlayerHandler/Index1">
+						<Key type="Bool" time="0.00" value="true"/>
+						<Key type="Bool" time="0.001" value="false"/>
+					</Controller>
+				</Animation>
+			</Frame>
+			<Frame type="Button" name="PlayerPrevIndex2" template="SSF_Templates/ButtonTemplate">
+				<Anchor side="Top" relative="$parent" pos="Min" offset="#Border"/>
+				<Anchor side="Left" relative="$parent" pos="Min" offset="#Border"/>
+				<Width val="50"/>
+				<Height val="50"/>
+				<Visible val="false"/>
+
+				<Text val="&lt;"/>
+				<Tooltip val="@Trig/AcvUI/PrevPlayerTooltip"/>
+
+				<Animation name="Onclick">
+					<Event event="OnClick" action="Reset,Play" frame="$this"/>
+					<Controller type="Visibility" end="Pause" frame="$parent/$parent/PrevPlayerHandler/Index2">
+						<Key type="Bool" time="0.00" value="true"/>
+						<Key type="Bool" time="0.001" value="false"/>
+					</Controller>
+				</Animation>
+			</Frame>
+			<Frame type="Button" name="PlayerPrevIndex3" template="SSF_Templates/ButtonTemplate">
+				<Anchor side="Top" relative="$parent" pos="Min" offset="#Border"/>
+				<Anchor side="Left" relative="$parent" pos="Min" offset="#Border"/>
+				<Width val="50"/>
+				<Height val="50"/>
+				<Visible val="false"/>
+
+				<Text val="&lt;"/>
+				<Tooltip val="@Trig/AcvUI/PrevPlayerTooltip"/>
+
+				<Animation name="Onclick">
+					<Event event="OnClick" action="Reset,Play" frame="$this"/>
+					<Controller type="Visibility" end="Pause" frame="$parent/$parent/PrevPlayerHandler/Index3">
+						<Key type="Bool" time="0.00" value="true"/>
+						<Key type="Bool" time="0.001" value="false"/>
+					</Controller>
+				</Animation>
+			</Frame>
+			<Frame type="Button" name="PlayerPrevIndex4" template="SSF_Templates/ButtonTemplate">
+				<Anchor side="Top" relative="$parent" pos="Min" offset="#Border"/>
+				<Anchor side="Left" relative="$parent" pos="Min" offset="#Border"/>
+				<Width val="50"/>
+				<Height val="50"/>
+				<Visible val="false"/>
+
+				<Text val="&lt;"/>
+				<Tooltip val="@Trig/AcvUI/PrevPlayerTooltip"/>
+
+				<Animation name="Onclick">
+					<Event event="OnClick" action="Reset,Play" frame="$this"/>
+					<Controller type="Visibility" end="Pause" frame="$parent/$parent/PrevPlayerHandler/Index4">
+						<Key type="Bool" time="0.00" value="true"/>
+						<Key type="Bool" time="0.001" value="false"/>
+					</Controller>
+				</Animation>
+			</Frame>
+			<Frame type="Button" name="PlayerPrevIndex5" template="SSF_Templates/ButtonTemplate">
+				<Anchor side="Top" relative="$parent" pos="Min" offset="#Border"/>
+				<Anchor side="Left" relative="$parent" pos="Min" offset="#Border"/>
+				<Width val="50"/>
+				<Height val="50"/>
+				<Visible val="false"/>
+
+				<Text val="&lt;"/>
+				<Tooltip val="@Trig/AcvUI/PrevPlayerTooltip"/>
+
+				<Animation name="Onclick">
+					<Event event="OnClick" action="Reset,Play" frame="$this"/>
+					<Controller type="Visibility" end="Pause" frame="$parent/$parent/PrevPlayerHandler/Index5">
+						<Key type="Bool" time="0.00" value="true"/>
+						<Key type="Bool" time="0.001" value="false"/>
+					</Controller>
+				</Animation>
+			</Frame>
+			<Frame type="Button" name="PlayerPrevIndex6" template="SSF_Templates/ButtonTemplate">
+				<Anchor side="Top" relative="$parent" pos="Min" offset="#Border"/>
+				<Anchor side="Left" relative="$parent" pos="Min" offset="#Border"/>
+				<Width val="50"/>
+				<Height val="50"/>
+				<Visible val="false"/>
+
+				<Text val="&lt;"/>
+				<Tooltip val="@Trig/AcvUI/PrevPlayerTooltip"/>
+
+				<Animation name="Onclick">
+					<Event event="OnClick" action="Reset,Play" frame="$this"/>
+					<Controller type="Visibility" end="Pause" frame="$parent/$parent/PrevPlayerHandler/Index6">
+						<Key type="Bool" time="0.00" value="true"/>
+						<Key type="Bool" time="0.001" value="false"/>
+					</Controller>
+				</Animation>
+			</Frame>
+		</Frame>
+
+		<Frame type="Pulldown" name="PlayerPulldown" template="TriggerDialogFrame/TriggerControlPulldownTemplate">
+			<Anchor side="Left" relative="$parent/PlayerPrevButtons/PlayerPrevIndex1" pos="max" offset="15"/>
+			<Anchor side="Top" relative="$parent" pos="Min" offset="#Border"/>
+			<Width val="260"/>
+			<Height val="50"/>
+		</Frame>
+
+		<StateGroup name="PlayerIndexSelected">
+			<State name="1">
+				<When type="Property" frame="$this/PlayerPulldown" operator="Equal" SelectedIndex="0"/>
+				<Action type="SetProperty" frame="$this/PulldownHandler/Index1" Visible="True"/>
+				<Action type="SetProperty" frame="$this/PlayerPrevButtons/PlayerPrevIndex1" Visible="True"/>
+				<Action type="SetProperty" frame="$this/PlayerNextButtons/PlayerNextIndex1" Visible="True"/>
+				
+			</State>
+			<State name="2">
+				<When type="Property" frame="$this/PlayerPulldown" operator="Equal" SelectedIndex="1"/>
+				<Action type="SetProperty" frame="$this/PulldownHandler/Index2" Visible="True"/>
+				<Action type="SetProperty" frame="$this/PlayerPrevButtons/PlayerPrevIndex2" Visible="True"/>
+				<Action type="SetProperty" frame="$this/PlayerNextButtons/PlayerNextIndex2" Visible="True"/>
+			</State>
+			<State name="3">
+				<When type="Property" frame="$this/PlayerPulldown" operator="Equal" SelectedIndex="2"/>
+				<Action type="SetProperty" frame="$this/PulldownHandler/Index3" Visible="True"/>
+				<Action type="SetProperty" frame="$this/PlayerPrevButtons/PlayerPrevIndex3" Visible="True"/>
+				<Action type="SetProperty" frame="$this/PlayerNextButtons/PlayerNextIndex3" Visible="True"/>
+			</State>
+			<State name="4">
+				<When type="Property" frame="$this/PlayerPulldown" operator="Equal" SelectedIndex="3"/>
+				<Action type="SetProperty" frame="$this/PulldownHandler/Index4" Visible="True"/>
+				<Action type="SetProperty" frame="$this/PlayerPrevButtons/PlayerPrevIndex4" Visible="True"/>
+				<Action type="SetProperty" frame="$this/PlayerNextButtons/PlayerNextIndex4" Visible="True"/>
+			</State>
+			<State name="5">
+				<When type="Property" frame="$this/PlayerPulldown" operator="Equal" SelectedIndex="4"/>
+				<Action type="SetProperty" frame="$this/PulldownHandler/Index5" Visible="True"/>
+				<Action type="SetProperty" frame="$this/PlayerPrevButtons/PlayerPrevIndex5" Visible="True"/>
+				<Action type="SetProperty" frame="$this/PlayerNextButtons/PlayerNextIndex5" Visible="True"/>
+			</State>
+			<State name="6">
+				<When type="Property" frame="$this/PlayerPulldown" operator="Equal" SelectedIndex="5"/>
+				<Action type="SetProperty" frame="$this/PulldownHandler/Index6" Visible="True"/>
+				<Action type="SetProperty" frame="$this/PlayerPrevButtons/PlayerPrevIndex6" Visible="True"/>
+				<Action type="SetProperty" frame="$this/PlayerNextButtons/PlayerNextIndex6" Visible="True"/>
+			</State>
+
+		</StateGroup>
+		
+		<StateGroup name="Solo">
+			<DefaultState val="False"/>
+			<State name="True">
+				<When type="AnimationState" frame="$this" operator="Equal" Solo="True"/>
+				<Action type="SetProperty" frame="$this/PlayerLabel" Visible="True"/>
+				<Action type="SetAnchor" frame="$this/PlayerPulldown" side="Left" relative="$parent" pos="Max" offset="3000"/>
+				<Action type="SetAnchor" frame="$this/PlayerNextButtons" side="Left" relative="$parent" pos="Max" offset="3000"/>
+				<Action type="SetAnchor" frame="$this/PlayerPrevButtons" side="Left" relative="$parent" pos="Max" offset="3000"/>
+			</State>
+			<State name="False"></State>
+		</StateGroup>
+
+		<Frame type="Frame" name="PlayerNextButtons">
+			<Anchor relative="$parent"/>
+			
+			<Frame type="Button" name="PlayerNextIndex1" template="SSF_Templates/ButtonTemplate">
+				<Anchor side="Top" relative="$parent" pos="Min" offset="#Border"/>
+				<Anchor side="Left" relative="$parent/$parent/PlayerPulldown" pos="Max" offset="15"/>
+				<Width val="50"/>
+				<Height val="50"/>
+				<Visible val="false"/>
+
+				<Text val="&gt;"/>
+				<Tooltip val="@Trig/AcvUI/NextPlayerTooltip"/>
+				
+				<Animation name="Onclick">
+					<Event event="OnClick" action="Reset,Play" frame="$this"/>
+					<Controller type="Visibility" end="Pause" frame="$parent/$parent/NextPlayerHandler/Index1">
+						<Key type="Bool" time="0.00" value="true"/>
+						<Key type="Bool" time="0.001" value="false"/>
+					</Controller>
+				</Animation>
+			</Frame>
+			<Frame type="Button" name="PlayerNextIndex2" template="SSF_Templates/ButtonTemplate">
+				<Anchor side="Top" relative="$parent" pos="Min" offset="#Border"/>
+				<Anchor side="Left" relative="$parent/$parent/PlayerPulldown" pos="Max" offset="15"/>
+				<Width val="50"/>
+				<Height val="50"/>
+				<Visible val="false"/>
+
+				<Text val="&gt;"/>
+				<Tooltip val="@Trig/AcvUI/NextPlayerTooltip"/>
+				
+				<Animation name="Onclick">
+					<Event event="OnClick" action="Reset,Play" frame="$this"/>
+					<Controller type="Visibility" end="Pause" frame="$parent/$parent/NextPlayerHandler/Index2">
+						<Key type="Bool" time="0.00" value="true"/>
+						<Key type="Bool" time="0.001" value="false"/>
+					</Controller>
+				</Animation>
+			</Frame>
+			<Frame type="Button" name="PlayerNextIndex3" template="SSF_Templates/ButtonTemplate">
+				<Anchor side="Top" relative="$parent" pos="Min" offset="#Border"/>
+				<Anchor side="Left" relative="$parent/$parent/PlayerPulldown" pos="Max" offset="15"/>
+				<Width val="50"/>
+				<Height val="50"/>
+				<Visible val="false"/>
+
+				<Text val="&gt;"/>
+				<Tooltip val="@Trig/AcvUI/NextPlayerTooltip"/>
+				
+				<Animation name="Onclick">
+					<Event event="OnClick" action="Reset,Play" frame="$this"/>
+					<Controller type="Visibility" end="Pause" frame="$parent/$parent/NextPlayerHandler/Index3">
+						<Key type="Bool" time="0.00" value="true"/>
+						<Key type="Bool" time="0.001" value="false"/>
+					</Controller>
+				</Animation>
+			</Frame>
+			<Frame type="Button" name="PlayerNextIndex4" template="SSF_Templates/ButtonTemplate">
+				<Anchor side="Top" relative="$parent" pos="Min" offset="#Border"/>
+				<Anchor side="Left" relative="$parent/$parent/PlayerPulldown" pos="Max" offset="15"/>
+				<Width val="50"/>
+				<Height val="50"/>
+				<Visible val="false"/>
+
+				<Text val="&gt;"/>
+				<Tooltip val="@Trig/AcvUI/NextPlayerTooltip"/>
+				
+				<Animation name="Onclick">
+					<Event event="OnClick" action="Reset,Play" frame="$this"/>
+					<Controller type="Visibility" end="Pause" frame="$parent/$parent/NextPlayerHandler/Index4">
+						<Key type="Bool" time="0.00" value="true"/>
+						<Key type="Bool" time="0.001" value="false"/>
+					</Controller>
+				</Animation>
+			</Frame>
+			<Frame type="Button" name="PlayerNextIndex5" template="SSF_Templates/ButtonTemplate">
+				<Anchor side="Top" relative="$parent" pos="Min" offset="#Border"/>
+				<Anchor side="Left" relative="$parent/$parent/PlayerPulldown" pos="Max" offset="15"/>
+				<Width val="50"/>
+				<Height val="50"/>
+				<Visible val="false"/>
+
+				<Text val="&gt;"/>
+				<Tooltip val="@Trig/AcvUI/NextPlayerTooltip"/>
+				
+				<Animation name="Onclick">
+					<Event event="OnClick" action="Reset,Play" frame="$this"/>
+					<Controller type="Visibility" end="Pause" frame="$parent/$parent/NextPlayerHandler/Index5">
+						<Key type="Bool" time="0.00" value="true"/>
+						<Key type="Bool" time="0.001" value="false"/>
+					</Controller>
+				</Animation>
+			</Frame>
+			<Frame type="Button" name="PlayerNextIndex6" template="SSF_Templates/ButtonTemplate">
+				<Anchor side="Top" relative="$parent" pos="Min" offset="#Border"/>
+				<Anchor side="Left" relative="$parent/$parent/PlayerPulldown" pos="Max" offset="15"/>
+				<Width val="50"/>
+				<Height val="50"/>
+				<Visible val="false"/>
+
+				<Text val="&gt;"/>
+				<Tooltip val="@Trig/AcvUI/NextPlayerTooltip"/>
+				
+				<Animation name="Onclick">
+					<Event event="OnClick" action="Reset,Play" frame="$this"/>
+					<Controller type="Visibility" end="Pause" frame="$parent/$parent/NextPlayerHandler/Index6">
+						<Key type="Bool" time="0.00" value="true"/>
+						<Key type="Bool" time="0.001" value="false"/>
+					</Controller>
+				</Animation>
+			</Frame>
+		</Frame>
+
+		<Frame type="Frame" name="PulldownHandler">
+			<Anchor side="Top" relative="$parent" pos="Max" offset="3000"/>
+			<Anchor side="Left" relative="$parent" pos="Max" offset="3000"/>
+			<Width val="1"/>
+			<Height val="1"/>
+
+			<Frame type="Frame" name="Index1" template="SSF_Achievements/AchievementPulldownHandlerIndexTemplate"></Frame>
+			<Frame type="Frame" name="Index2" template="SSF_Achievements/AchievementPulldownHandlerIndexTemplate"></Frame>
+			<Frame type="Frame" name="Index3" template="SSF_Achievements/AchievementPulldownHandlerIndexTemplate"></Frame>
+			<Frame type="Frame" name="Index4" template="SSF_Achievements/AchievementPulldownHandlerIndexTemplate"></Frame>
+			<Frame type="Frame" name="Index5" template="SSF_Achievements/AchievementPulldownHandlerIndexTemplate"></Frame>
+			<Frame type="Frame" name="Index6" template="SSF_Achievements/AchievementPulldownHandlerIndexTemplate"></Frame>
+		</Frame>
+		<Frame type="Frame" name="NextPlayerHandler">
+			<Anchor side="Top" relative="$parent" pos="Max" offset="3000"/>
+			<Anchor side="Left" relative="$parent" pos="Max" offset="3000"/>
+			<Width val="1"/>
+			<Height val="1"/>
+
+			<Frame type="Frame" name="Index1" template="SSF_Achievements/AchievementPulldownHandlerIndexTemplate"></Frame>
+			<Frame type="Frame" name="Index2" template="SSF_Achievements/AchievementPulldownHandlerIndexTemplate"></Frame>
+			<Frame type="Frame" name="Index3" template="SSF_Achievements/AchievementPulldownHandlerIndexTemplate"></Frame>
+			<Frame type="Frame" name="Index4" template="SSF_Achievements/AchievementPulldownHandlerIndexTemplate"></Frame>
+			<Frame type="Frame" name="Index5" template="SSF_Achievements/AchievementPulldownHandlerIndexTemplate"></Frame>
+			<Frame type="Frame" name="Index6" template="SSF_Achievements/AchievementPulldownHandlerIndexTemplate"></Frame>
+		</Frame>
+		<Frame type="Frame" name="PrevPlayerHandler">
+			<Anchor side="Top" relative="$parent" pos="Max" offset="3000"/>
+			<Anchor side="Left" relative="$parent" pos="Max" offset="3000"/>
+			<Width val="1"/>
+			<Height val="1"/>
+
+			<Frame type="Frame" name="Index1" template="SSF_Achievements/AchievementPulldownHandlerIndexTemplate"></Frame>
+			<Frame type="Frame" name="Index2" template="SSF_Achievements/AchievementPulldownHandlerIndexTemplate"></Frame>
+			<Frame type="Frame" name="Index3" template="SSF_Achievements/AchievementPulldownHandlerIndexTemplate"></Frame>
+			<Frame type="Frame" name="Index4" template="SSF_Achievements/AchievementPulldownHandlerIndexTemplate"></Frame>
+			<Frame type="Frame" name="Index5" template="SSF_Achievements/AchievementPulldownHandlerIndexTemplate"></Frame>
+			<Frame type="Frame" name="Index6" template="SSF_Achievements/AchievementPulldownHandlerIndexTemplate"></Frame>
+		</Frame>
+
+		<Frame type="Label" name="PlayerLabel" template="SSF_Templates/LabelTemplate">
+			<Anchor side="Top" relative="$parent" pos="Min" offset="#Border"/>
+			<Anchor side="Left" relative="$parent" pos="Min" offset="40"/>
+			<Anchor side="Right" relative="$parent/CloseButton" pos="Min" offset="-40"/>
+			<Height val="50"/>
+			<Style val="aaDialogItemStyleCentered"/>
+			<Visible val="false"/>
+		</Frame>
+
+		<StateGroup name="Player">
+			<DefaultState val="1"/>
+			<State name="1">
+				<Action type="SetProperty" frame="$this/ScrollableFrame/ContainerFrame/Player1" visible="true"/>
+			</State>
+			<State name="2">
+				<Action type="SetProperty" frame="$this/ScrollableFrame/ContainerFrame/Player2" visible="true"/>
+			</State>
+			<State name="3">
+				<Action type="SetProperty" frame="$this/ScrollableFrame/ContainerFrame/Player3" visible="true"/>
+			</State>
+			<State name="4">
+				<Action type="SetProperty" frame="$this/ScrollableFrame/ContainerFrame/Player4" visible="true"/>
+			</State>
+			<State name="5">
+				<Action type="SetProperty" frame="$this/ScrollableFrame/ContainerFrame/Player5" visible="true"/>
+			</State>
+			<State name="6">
+				<Action type="SetProperty" frame="$this/ScrollableFrame/ContainerFrame/Player6" visible="true"/>
+			</State>
+		</StateGroup>
+
+		<Frame type="Frame" name="ScrollButtonContainer">
+			<Anchor side="Top" relative="$parent/PlayerLabel" pos="Max" offset="3"/>
+			<Anchor side="Left" relative="$parent" pos="Min" offset="#Border"/>
+			<Anchor side="Right" relative="$parent" pos="Max" offset="#BorderNegative"/>
+			<Anchor side="Bottom" relative="$this/Global" pos="Max" offset="0"/>
+
+			<Frame type="Button" name="Global" template="SSF_Achievements/AchievementSetScrollButtonTemplate">
+				<Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+				<Text val="@Trig/AcvUI/Global"/>
+				<Animation name="SetScroll">
+					<Event event="OnClick" action="Reset,Play" frame="$this"/>
+					<Controller type="Property" end="Pause" frame="$SSF_AchievementPanel/ScrollableFrame/ScrollBar" property="Value">
+						<Key type="Property" time="0.0" value="0"/>
+					</Controller>
+				</Animation>
+			</Frame>
+			<Frame type="Button" name="PartP0" template="SSF_Achievements/AchievementSetScrollButtonTemplate">
+				<Anchor side="Left" relative="$parent/Global" pos="Max" offset="#AchievementIconSpacing"/>
+				<Text val="@Trig/Generic/PartName/0"/>
+				<Animation name="SetScroll">
+					<Event event="OnClick" action="Reset,Play" frame="$this"/>
+					<Controller type="Property" end="Pause" frame="$SSF_AchievementPanel/ScrollableFrame/ScrollBar" property="Value">
+						<Key type="Property" time="0.0" value="310"/>
+					</Controller>
+				</Animation>
+			</Frame>
+			<Frame type="Button" name="PartP1" template="SSF_Achievements/AchievementSetScrollButtonTemplate">
+				<Anchor side="Left" relative="$parent/PartP0" pos="Max" offset="#AchievementIconSpacing"/>
+				<Text val="@Trig/Generic/PartName/1"/>
+				<Animation name="SetScroll">
+					<Event event="OnClick" action="Reset,Play" frame="$this"/>
+					<Controller type="Property" end="Pause" frame="$SSF_AchievementPanel/ScrollableFrame/ScrollBar" property="Value">
+						<Key type="Property" time="0.0" value="620"/>
+					</Controller>
+				</Animation>
+			</Frame>
+			<Frame type="Button" name="PartP2" template="SSF_Achievements/AchievementSetScrollButtonTemplate">
+				<Anchor side="Left" relative="$parent/PartP1" pos="Max" offset="#AchievementIconSpacing"/>
+				<Text val="@Trig/Generic/PartName/2"/>
+				<Animation name="SetScroll">
+					<Event event="OnClick" action="Reset,Play" frame="$this"/>
+					<Controller type="Property" end="Pause" frame="$SSF_AchievementPanel/ScrollableFrame/ScrollBar" property="Value">
+						<Key type="Property" time="0.0" value="780"/>
+					</Controller>
+				</Animation>
+			</Frame>
+		</Frame>
+
+
+		<!-- The second scroll frame. This one scrolls horizontally. -->
+		<Frame type="ScrollableFrame" name="ScrollableFrame">
+			<Anchor side="Top" relative="$parent/ScrollButtonContainer" pos="Max" offset="5"/>
+			<Anchor side="Left" relative="$parent" pos="Min" offset="#Border"/>
+			<Anchor side="Right" relative="$this/ScrollBar" pos="Max" offset="0"/>
+			<Height val="560"/>
+			
+			<AcceptsMouse val="true"/>
+
+			<Frame type="Frame" name="ContainerFrame">
+				<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+				<Anchor side="Bottom" relative="$this/Player1" pos="Max" offset="0"/>
+				<Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+				<Anchor side="Right" relative="$this/Player1" pos="Max" offset="0"/>
+				<CollapseLayout val="true"/>
+				
+				<Frame type="Frame" name="Player1" template="SSF_Achievements/AchievementPlayerFrameTemplate"></Frame>
+				<Frame type="Frame" name="Player2" template="SSF_Achievements/AchievementPlayerFrameTemplate"></Frame>
+				<Frame type="Frame" name="Player3" template="SSF_Achievements/AchievementPlayerFrameTemplate"></Frame>
+				<Frame type="Frame" name="Player4" template="SSF_Achievements/AchievementPlayerFrameTemplate"></Frame>
+				<Frame type="Frame" name="Player5" template="SSF_Achievements/AchievementPlayerFrameTemplate"></Frame>
+				<Frame type="Frame" name="Player6" template="SSF_Achievements/AchievementPlayerFrameTemplate"></Frame>
+			</Frame>
+
+
+			<Frame type="ScrollBar" name="ScrollBar">
+				<Anchor side="Top"    relative="$parent" pos="Min" offset="0"/>
+				<Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
+				<Anchor side="Left"  relative="$parent/ContainerFrame" pos="Max" offset="#AchievementIconSpacing"/>
+				<Width val="25"/>
+				
+				<!-- StepValue controls the speed when using mousewheel -->
+				<StepValue val="75"/>
+				<Continuous val="true"/>
+				<Visible val="true"/>
+				<RenderPriority val="600"/>
+				<Orientation val="Vertical"/>
+				
+				<Frame type="Image" name="Image">
+					<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+					<Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+					<Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
+					<Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+					
+					<Texture val="Assets/Textures/ui_hots_frame_shared_scrollbar.dds"/>
+					<TextureType val="NineSlice"/>
+					<Tiled val="true"/>
+				</Frame>
+
+				<Frame type="Button" name="Button">
+					<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+					<Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+					<Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
+					<Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+					<ClickSound val="@UI_GenericButton"/>
+					
+					<Frame type="Image" name="NormalImage">
+						<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+						<Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+						<Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
+						<Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+						
+						<Texture val="Assets\Textures\ui_hots_button_shared_scrollbar_normal.dds"/>
+						<TextureType val="NineSlice"/>
+						<Tiled val="false"/>
+						<StateCount val="2"/>
+					</Frame>
+
+					<Frame type="Image" name="HoverImage">
+						<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+						<Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+						<Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
+						<Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+						
+						<Texture val="Assets\Textures\ui_hots_button_shared_scrollbar_hover.dds"/>
+						<TextureType val="NineSlice"/>
+						<Tiled val="false"/>
+						<StateCount val="2"/>
+					</Frame>
+				</Frame>
+			</Frame>
+
+			<!-- Debug Frame to get Value from the scrollbar to set the animation value of the SetScrollButtons -->
+			<!-- <Frame type="Label" name="ScrollBarValue">
+				<Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
+				<Anchor side="Right" relative="$parent/ScrollBar" pos="Min" offset="-3"/>
+				<Height val="25"/>
+				<Text val="{$parent/ScrollBar/@Value}"/>
+			</Frame> -->
+			
+		</Frame>
+	</Frame>
+
+
+</Desc>

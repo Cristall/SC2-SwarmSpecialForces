@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><!--
+    <Style  name=""                 - string identifier
+            font=""                 - file name (preferably a constant)
+            height=""               - integer [1, 200]
+            vjustify=""             - "Top","Middle","Bottom"
+            hjustify=""             - "Left","Center","Right"
+            styleflags=""           - Shadow|Glow|InlineJustification|Uppercase|TightGradient
+                                        |Outline|Bold|Italic
+                                        |HintingOff|HintingNative|HintingAuto
+                                        |HintStyleNormal|HintStyleLight|HintStyleLCD|HintStyleLCDVertical
+            textcolor=""            - Gradient Color
+            disabledcolor=""        - Gradient Color
+            highlightcolor=""       - Gradient Color
+            hotkeycolor=""          - Gradient Color
+            hyperlinkcolor=""       - Gradient Color
+            glowcolor=""            - Color
+            glowMode=""             - "Add","Normal"
+            highlightglowcolor=""   - Color
+            disabledglowcolor=""    - Color
+            shadowoffset=""         - integer value [-128, 127]
+            outlinewidth=""         - integer value [0,height]
+            outlinecolor=""         - Color
+            lineSpacing=""          - decimal multiplier [1.0, 4.0]
+            characterSpacing=""     - integer addition [0, 255]
+            />
+-->
+<StyleFile>
+    <Style name="SSF_HotkeyStyle" font="UI\Fonts\bl.ttf" height="16" vjustify="Bottom" hjustify="Right" styleflags="Shadow | Uppercase | Bold" textcolor="255,255,255,255" highlightcolor="255,0,0,0" disabledcolor="255,255,255,255" hotkeycolor="255,255,255,255" hyperlinkcolor="255,0,0,0" glowcolor="255,0,0,0" shadowoffset="1" outlinewidth="1"/>
+    <Style name="SSF_HivePanel_ValueLabel" template="SSF_HeroPanel_ValueLabel" font="UI\Fonts\bl.ttf" height="17" vjustify="Middle" hjustify="Center" styleflags="Shadow | Outline" textcolor="255,255,255,255" highlightcolor="255,0,0,0" disabledcolor="255,192,192,192" hotkeycolor="255,0,0,0" hyperlinkcolor="255,0,0,0" glowcolor="255,0,0,0" shadowoffset="1" outlinewidth="1"/>
+    <Style name="SSF_HivePanel_ValueLabel_Right" template="SSF_HivePanel_ValueLabel" font="UI\Fonts\bl.ttf" height="17" vjustify="Middle" hjustify="Right" styleflags="Shadow | Outline" textcolor="255,255,255,255" highlightcolor="255,0,0,0" disabledcolor="255,192,192,192" hotkeycolor="255,0,0,0" hyperlinkcolor="255,0,0,0" glowcolor="255,0,0,0" shadowoffset="1" outlinewidth="1"/>
+    <Style name="SSF_HeroPanel_ValueLabel" template="aaDialogItemStyleCentered" font="UI\Fonts\bl.ttf" height="15" vjustify="Middle" hjustify="Center" styleflags="Shadow | Outline" textcolor="255,255,255,255" highlightcolor="255,0,0,0" disabledcolor="255,192,192,192" hotkeycolor="255,0,0,0" hyperlinkcolor="255,0,0,0" glowcolor="255,0,0,0" shadowoffset="1" outlinewidth="1"/>
+    <Style name="BossStatusFrameScrapLabel" template="BossStatusFrameNameLabel" font="UI\Fonts\bl.ttf" height="22" vjustify="Top" hjustify="Center" styleflags="Shadow | Outline" textcolor="255,255,255,255" highlightcolor="255,0,0,0" disabledcolor="255,0,0,0" hotkeycolor="255,0,0,0" hyperlinkcolor="255,0,0,0" glowcolor="255,0,0,0" shadowoffset="2" outlinewidth="1"/>
+    <Style name="aabTooltipGrey" template="StandardTooltip" font="UI\Fonts\Eurostile-Reg.otf" height="20" vjustify="Middle" hjustify="Left" textcolor="255,180,180,180" highlightcolor="255,0,0,0" disabledcolor="255,0,0,0" hotkeycolor="255,255,255,255" hyperlinkcolor="255,180,180,180" glowcolor="255,0,0,0" shadowoffset="2" outlinewidth="0"/>
+    <Style name="aUnitStatusNameLabel" template="HotS_KerriganUnitStatusNameLabel"/>
+    <Style name="aaDialogItemStyleCenterBottom" font="UI\Fonts\bl.ttf" height="20" vjustify="Bottom" hjustify="Center" styleflags="Shadow" textcolor="255,255,255,255" highlightcolor="255,0,0,0" disabledcolor="255,192,192,192" hotkeycolor="255,0,0,0" hyperlinkcolor="255,0,0,0" glowcolor="255,0,0,0" shadowoffset="2" outlinewidth="0"/>
+    <Style name="aaDialogItemStyleRightTop" font="UI\Fonts\bl.ttf" height="20" vjustify="Top" hjustify="Right" styleflags="Shadow" textcolor="255,255,255,255" highlightcolor="255,0,0,0" disabledcolor="255,192,192,192" hotkeycolor="255,0,0,0" hyperlinkcolor="255,0,0,0" glowcolor="255,0,0,0" shadowoffset="2" outlinewidth="0"/>
+    <Style name="aaDialogItemStyleRightBottom" font="UI\Fonts\bl.ttf" height="20" vjustify="Bottom" hjustify="Right" styleflags="Shadow" textcolor="255,255,255,255" highlightcolor="255,0,0,0" disabledcolor="255,192,192,192" hotkeycolor="255,0,0,0" hyperlinkcolor="255,0,0,0" glowcolor="255,0,0,0" shadowoffset="2" outlinewidth="0"/>
+    <Style name="aaDialogItemStyleRightMiddle" font="UI\Fonts\bl.ttf" height="20" vjustify="Middle" hjustify="Right" styleflags="Shadow" textcolor="255,255,255,255" highlightcolor="255,0,0,0" disabledcolor="255,192,192,192" hotkeycolor="255,0,0,0" hyperlinkcolor="255,0,0,0" glowcolor="255,0,0,0" shadowoffset="2" outlinewidth="0"/>
+    <Style name="aaDialogItemStyleCenterTop" font="UI\Fonts\bl.ttf" height="20" vjustify="Top" hjustify="Center" styleflags="Shadow" textcolor="255,255,255,255" highlightcolor="255,0,0,0" disabledcolor="255,192,192,192" hotkeycolor="255,0,0,0" hyperlinkcolor="255,0,0,0" glowcolor="255,0,0,0" shadowoffset="2" outlinewidth="0"/>
+    <Style name="LoadingScreenMission_Right" template="HeaderExtendedTemplate" font="UI\Fonts\bl.ttf" height="18" vjustify="Top" hjustify="Right" styleflags="Shadow" textcolor="255,255,255,255" highlightcolor="255,0,0,0" disabledcolor="255,0,0,0" hotkeycolor="255,0,0,0" hyperlinkcolor="255,0,0,0" glowcolor="255,0,0,0" shadowoffset="2" outlinewidth="0"/>
+    <Style name="aabTutorialTextLabel" font="UI\Fonts\bl.ttf" height="20" vjustify="Middle" hjustify="Center" styleflags="Shadow" textcolor="255,255,255,255" highlightcolor="255,0,0,0" disabledcolor="255,192,192,192" hotkeycolor="255,0,0,0" hyperlinkcolor="255,0,0,0" glowcolor="255,0,0,0" shadowoffset="2" outlinewidth="0"/>
+    <Style name="aazHelpPanelTip_SubHeader" template="aazHelpPanelTip_Text" font="UI\Fonts\bl.ttf" height="22" vjustify="Top" hjustify="Left" textcolor="255,255,255,0" highlightcolor="255,0,0,0" disabledcolor="255,0,0,0" hotkeycolor="255,0,0,0" hyperlinkcolor="255,0,0,0" glowcolor="255,0,0,0" shadowoffset="0" outlinewidth="0"/>
+    <Style name="aazHelpPanelTip_Text" font="UI\Fonts\bl.ttf" height="20" vjustify="Top" hjustify="Left" textcolor="255,255,255,255" highlightcolor="255,0,0,0" disabledcolor="255,0,0,0" hotkeycolor="255,0,0,0" hyperlinkcolor="255,0,0,0" glowcolor="255,0,0,0" shadowoffset="0" outlinewidth="0"/>
+    <Style name="aaChat" template="ChatTooltip" font="UI\Fonts\bl.ttf" height="22" vjustify="Bottom" hjustify="Center" styleflags="Shadow" textcolor="255,255,255,255" highlightcolor="255,0,0,0" disabledcolor="255,0,0,0" hotkeycolor="255,255,255,255" hyperlinkcolor="255,255,255,255" glowcolor="255,0,0,0" shadowoffset="2" outlinewidth="0"/>
+    <Style name="BossStatusFrameNameLabel" font="UI\Fonts\bl.ttf" height="26" vjustify="Top" hjustify="Center" styleflags="Shadow | Outline" textcolor="255,255,255,255" highlightcolor="255,0,0,0" disabledcolor="255,0,0,0" hotkeycolor="255,0,0,0" hyperlinkcolor="255,0,0,0" glowcolor="255,0,0,0" shadowoffset="2" outlinewidth="1"/>
+    <Style name="aaDialogItemStyleLeftBottom" font="UI\Fonts\bl.ttf" height="20" vjustify="Bottom" hjustify="Left" styleflags="Shadow" textcolor="255,255,255,255" highlightcolor="255,0,0,0" disabledcolor="255,192,192,192" hotkeycolor="255,0,0,0" hyperlinkcolor="255,0,0,0" glowcolor="255,0,0,0" shadowoffset="2" outlinewidth="0"/>
+    <Style name="aaDialogItemStyleLeftMiddle" font="UI\Fonts\bl.ttf" height="20" vjustify="Middle" hjustify="Left" styleflags="Shadow" textcolor="255,255,255,255" highlightcolor="255,0,0,0" disabledcolor="255,192,192,192" hotkeycolor="255,0,0,0" hyperlinkcolor="255,0,0,0" glowcolor="255,0,0,0" shadowoffset="2" outlinewidth="0"/>
+    <Style name="aaDialogItemStyleCentered" font="UI\Fonts\bl.ttf" height="20" vjustify="Middle" hjustify="Center" styleflags="Shadow" textcolor="255,255,255,255" highlightcolor="255,0,0,0" disabledcolor="255,192,192,192" hotkeycolor="255,0,0,0" hyperlinkcolor="255,0,0,0" glowcolor="255,0,0,0" shadowoffset="2" outlinewidth="0"/>
+    <Style name="aaDialogItemStyle" font="UI\Fonts\bl.ttf" height="20" vjustify="Top" hjustify="Left" styleflags="Shadow" textcolor="255,255,255,255" highlightcolor="255,0,0,0" disabledcolor="255,192,192,192" hotkeycolor="255,0,0,0" hyperlinkcolor="255,0,0,0" glowcolor="255,0,0,0" shadowoffset="2" outlinewidth="0"/>
+</StyleFile>

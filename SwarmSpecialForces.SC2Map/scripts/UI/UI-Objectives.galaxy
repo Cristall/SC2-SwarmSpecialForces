@@ -1,0 +1,67 @@
+
+int objective_Bosses = c_invalidObjectiveId;
+int objective_Scientists = c_invalidObjectiveId;
+int objective_Essences = c_invalidObjectiveId;
+int objective_PsiOrbs = c_invalidObjectiveId;
+int objective_Observer = c_invalidObjectiveId;
+int objective_NydusWorm = c_invalidObjectiveId;
+int objective_EssencesFound = 0;
+int objective_ScientistsFound = 0;
+int objective_PsiOrbFound = 0;
+
+static void Objectives_Global(){
+    objective_Bosses = ObjectiveCreate(Utility_TextExpressionReplacement2("Trig/Objectives/Main", IntToText(0), IntToText(gv_Part_AmountObjectivesMax)), StringToText(""), c_objectiveStateActive, true);
+    if (gv_Difficulty_EssenceAmount >= 1) {
+        objective_Essences = ObjectiveCreate(Utility_TextExpressionReplacement("Trig/Objectives/Essences", IntToText(0)), StringToText(""), c_objectiveStateActive, false);
+    }
+}
+
+static void Objectives_TerranInit () {
+    if (gv_Difficulty_ScientistsAmount >= 2) {
+        objective_Scientists = ObjectiveCreate(Utility_TextExpressionReplacement2("Trig/Objectives/Scientist/Two", IntToText(0), IntToText(gv_Difficulty_ScientistsAmount)), StringToText(""), c_objectiveStateActive, false);
+    }
+    else {
+        objective_Scientists = ObjectiveCreate(StringExternal("Trig/Objectives/Scientist/One/Init"), StringToText(""), c_objectiveStateActive, false);
+    }
+    objective_Observer = ObjectiveCreate(StringExternal("Trig/Objectives/Observer"), StringToText(""), c_objectiveStateHidden, false);
+}
+static void Objectives_ProtossInit () {
+    ObjectiveSetName(objective_Bosses, Utility_TextExpressionReplacement2("Trig/Objectives/Main", IntToText(0), IntToText(gv_Part_AmountObjectivesMax)));
+    ObjectiveSetState(objective_Bosses, c_objectiveStateActive);
+    ObjectiveSetState(objective_Observer, c_objectiveStateHidden);
+    objective_PsiOrbs = ObjectiveCreate((StringExternal("Trig/Objectives/PsiOrb")), StringToText(""), c_objectiveStateActive, false);
+    if (!gv_Difficulty_PsiOrbSpawns) {
+        ObjectiveSetState(ObjectiveLastCreated(), c_objectiveStateHidden);
+    }
+
+    if ((ObjectiveGetState(objective_Scientists) != c_objectiveStateCompleted)) {
+        ObjectiveSetState(objective_Scientists, c_objectiveStateFailed);
+    }
+    objective_NydusWorm = ObjectiveCreate(StringExternal("Trig/Objectives/NydusWorm"), StringToText(""), c_objectiveStateHidden, false);
+
+}
+static void Objectives_ZergInit () {
+    ObjectiveSetName(objective_Bosses, Utility_TextExpressionReplacement2("Trig/Objectives/Main", IntToText(0), IntToText(gv_Part_AmountObjectivesMax)));
+    ObjectiveSetState(objective_Bosses, c_objectiveStateActive);
+    ObjectiveSetState(objective_NydusWorm, c_objectiveStateHidden);
+
+    if(ObjectiveGetState(objective_PsiOrbs) != c_objectiveStateCompleted
+        && ObjectiveGetState(objective_PsiOrbs) != c_objectiveStateHidden) {
+        ObjectiveSetState(objective_PsiOrbs, c_objectiveStateFailed);
+    }
+}
+
+void Objectives_InitPart(){
+    if(objective_Bosses == c_invalidObjectiveId){
+        Objectives_Global();
+    }
+    if(gv_Part_ActivePart == c_Part_Terran){
+        Objectives_TerranInit();
+    }
+    else if (gv_Part_ActivePart == c_Part_Protoss){
+        Objectives_ProtossInit ();
+    }
+    else if (gv_Part_ActivePart == c_Part_Zerg){
+        Objectives_ZergInit();
+    }
+}

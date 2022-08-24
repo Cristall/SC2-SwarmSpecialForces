@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CActorSplat default="1" id="GenericImpactSplat">
+        <VisibleTo index="All" value="1"/>
+        <EditorCategories value=""/>
+        <On Terms="ActorCreation" Send="$Birth PlayForever"/>
+        <Model value="TerranAOECursorSplat"/>
+    </CActorSplat>
+    <CActorDoodad id="MechaNydusNetworkDoodad">
+        <EditorCategories value=""/>
+        <Model value="NydusNetwork_Mecha"/>
+    </CActorDoodad>
+    <CActorUnit id="DummyInstantExpire" parent="GenericUnitStandard" unitName="DummyInstantExpire">
+        <Model value="Larva"/>
+    </CActorUnit>
+    <CActorUnit id="IndistructibleRock" parent="DestructibleUnitStandard" unitName="IndistructibleRocks">
+        <Model value="DestructibleRockEx12x6"/>
+        <BuildModel value="DestructibleRock2x6Vertical"/>
+        <DeathArray index="Normal" ModelLink="DestructibleRock2x6Vertical"/>
+        <PlacementModel value="DestructibleRock2x6Vertical"/>
+        <BarWidth value="200"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-General-Destructiblerocks-2x6.dds"/>
+        </GroupIcon>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-terran-buildingarmor.dds"/>
+        <MinimapIcon value="Assets\Textures\ui_minimap_icon_destructibledebris.dds"/>
+        <UnitFlags index="ShowBlobShadow" value="0"/>
+        <Wireframe>
+            <Image value="Assets\Textures\Wireframe-General-Destructiblerocks-2x6.dds"/>
+        </Wireframe>
+    </CActorUnit>
+    <CActorStateMonitor id="MechaFlamesMediumBuilding">
+        <On Terms="UnitCreation.MechaBanelingNest" Send="Create"/>
+        <On Terms="UnitCreation.MechaEvolutionChamber" Send="Create"/>
+        <On Terms="UnitCreation.MechaGreaterSpire" Send="Create"/>
+        <On Terms="UnitCreation.MechaHatchery" Send="Create"/>
+        <On Terms="UnitCreation.MechaHive" Send="Create"/>
+        <On Terms="UnitCreation.MechaHydraliskDen" Send="Create"/>
+        <On Terms="UnitCreation.MechaInfestationPit" Send="Create"/>
+        <On Terms="UnitCreation.MechaLair" Send="Create"/>
+        <On Terms="UnitCreation.MechaLurkerDen" Send="Create"/>
+        <On Terms="UnitCreation.MechaSpawningDen" Send="Create"/>
+        <On Terms="UnitCreation.MechaSpineCrawler" Send="Create"/>
+        <On Terms="UnitCreation.MechaSpire" Send="Create"/>
+        <On Terms="UnitCreation.MechaSporeCrawler" Send="Create"/>
+        <On Terms="UnitCreation.MechaUltraliskCavern" Send="Create"/>
+    </CActorStateMonitor>
+    <CActorUnit id="ObserverMinimapHint" parent="GenericUnitStandard" unitName="ObserverMinimapHint">
+        <On Terms="Signal.*.Hint1" Send="SetMinimapVisibility 1"/>
+        <On Terms="Signal.*.Hint2" Send="SetMinimapVisibility 1"/>
+        <On Terms="Signal.*.Hint3" Send="SetMinimapVisibility 1"/>
+        <On Terms="Signal.*.Hint4" Send="SetMinimapVisibility 1"/>
+        <On Terms="Signal.*.Hint5" Send="SetMinimapVisibility 1"/>
+        <On Terms="Signal.*.Hint1" Send="MinimapIconScale 2.100000"/>
+        <On Terms="Signal.*.Hint2" Send="MinimapIconScale 1.680000"/>
+        <On Terms="Signal.*.Hint3" Send="MinimapIconScale 1.260000"/>
+        <On Terms="Signal.*.Hint4" Send="MinimapIconScale 0.840000"/>
+        <On Terms="Signal.*.Hint5" Send="MinimapIconScale 0.420000"/>
+        <On Terms="Signal.*.Hint1" Send="MinimapIconTintColor 255,255,0,0"/>
+        <On Terms="Signal.*.Hint2" Send="MinimapIconTintColor 255,255,0,0"/>
+        <On Terms="Signal.*.Hint3" Send="MinimapIconTintColor 255,255,0,0"/>
+        <On Terms="Signal.*.Hint4" Send="MinimapIconTintColor 255,255,0,0"/>
+        <On Terms="Signal.*.Hint5" Send="MinimapIconTintColor 255,255,0,0"/>
+        <On Terms="Signal.*.Clear" Send="SetMinimapVisibility"/>
+        <Model value="Invisible"/>
+        <MinimapIcon value="Assets\Icons\ui_minimap_icon_hint.dds"/>
+        <MinimapIconTintColor value="255,255,255,0"/>
+        <VisibleTo index="All" value="1"/>
+    </CActorUnit>
+    <CActorUnit id="DummyInvisibleNoMove" parent="GenericUnitStandard" unitName="DummyInvisibleNoMove">
+        <Model value="Larva"/>
+    </CActorUnit>
+    <CActorTurret id="MothershipCoreTurret">
+        <On Terms="Signal.*.Reset" Send="SetRotation"/>
+    </CActorTurret>
+    <CActorSiteOpEffect id="SOpCasterPointStationary">
+        <HoldPosition value="1"/>
+        <HoldRotation value="1"/>
+        <Location value="CasterPoint"/>
+    </CActorSiteOpEffect>
+    <CActorSiteOpForward id="SOpForwardCasterPointGROUND">
+        <HoldPosition value="1"/>
+        <HoldRotation value="1"/>
+        <HostForwardSiteOps Ops="SOpCasterPoint SOpShadow"/>
+    </CActorSiteOpForward>
+    <CActorSiteOpForward id="SOpForwardCasterPointGROUNDInverted">
+        <HoldPosition value="1"/>
+        <HoldRotation value="1"/>
+        <HostForwardSiteOps Ops="SOpCasterPoint SOpShadow"/>
+        <Invert value="1"/>
+    </CActorSiteOpForward>
+    <CActorSiteOpForward id="SOpForwardTargetPointGROUND">
+        <HoldPosition value="1"/>
+        <HoldRotation value="1"/>
+        <HostForwardSiteOps Ops="SOpTargetPoint SOpShadow"/>
+    </CActorSiteOpForward>
+    <CActorSiteOpLocalOffset id="SOpOffsetHigherBy066">
+        <EditorCategories value=""/>
+        <LocalOffset value="0.000000,0.000000,0.660000"/>
+    </CActorSiteOpLocalOffset>
+    <CActorSiteOpLocalOffset id="SOpOffsetXNegative2">
+        <EditorCategories value=""/>
+        <LocalOffset value="-2.000000,0.000000,0.000000"/>
+    </CActorSiteOpLocalOffset>
+    <CActorSiteOpRotationExplicit id="SOpRotateDownwards2">
+        <EditorCategories value=""/>
+        <Forward value="0.000000,0.000000,-1.000000"/>
+        <Up value="0.000000,1.000000,0.000000"/>
+        <IsLocal value="1"/>
+    </CActorSiteOpRotationExplicit>
+    <CActorSiteOpRotationExplicit id="SOpRotateDownwardsBackwards">
+        <EditorCategories value=""/>
+        <Forward value="0.000000,0.000000,-1.000000"/>
+        <Up value="0.000000,-1.000000,0.000000"/>
+        <IsLocal value="1"/>
+    </CActorSiteOpRotationExplicit>
+    <CActorSiteOpRotationExplicit id="SOpRotationPositive45Deg">
+        <EditorCategories value=""/>
+        <Forward value="0.500000,-0.500000,0.000000"/>
+        <Up value="0.000000,0.000000,1.000000"/>
+        <IsLocal value="1"/>
+    </CActorSiteOpRotationExplicit>
+    <CActorSiteOpRotationExplicit id="SOpRotationPositive72Deg">
+        <EditorCategories value=""/>
+        <Forward value="0.951100,-0.309000,0.000000"/>
+        <Up value="0.000000,0.000000,1.000000"/>
+        <IsLocal value="1"/>
+    </CActorSiteOpRotationExplicit>
+    <CActorUnit id="HeroDummyPrespawn" parent="GenericUnitStandard" unitName="HeroDummyPrespawn">
+        <Model value="Larva"/>
+        <HighlightTooltip value="Unit/Name/HeroDummyHiveDead"/>
+    </CActorUnit>
+    <CActorSiteOpLocalOffset id="SOpForwardby1">
+        <EditorCategories value=""/>
+        <LocalOffset value="0.000000,-1.000000,0.000000"/>
+    </CActorSiteOpLocalOffset>
+    <CActorSiteOpRotationExplicit id="SOpRotateDownwards">
+        <EditorCategories value=""/>
+        <Forward value="0.000000,0.000000,-1.000000"/>
+        <Up value="0.000000,0.000000,1.000000"/>
+        <IsLocal value="1"/>
+    </CActorSiteOpRotationExplicit>
+    <CActorSiteOpLocalOffset id="SOpOffsetHigherBy0p5">
+        <EditorCategories value=""/>
+        <LocalOffset value="0.000000,0.000000,0.500000"/>
+    </CActorSiteOpLocalOffset>
+    <CActorBeamSimple id="SentryAttackBeam">
+        <On Terms="Effect.SentryNerazimWeaponPersistent.Stop; At Effect" Send="AnimBracketStop BSD"/>
+        <On Terms="Effect.SentryPurifierWeaponPersistent.Stop; At Effect" Send="AnimBracketStop BSD"/>
+    </CActorBeamSimple>
+    <CActorSiteOpRotationExplicit id="SOpRotationPositive30Deg">
+        <EditorCategories value=""/>
+        <Forward value="0.500000,-0.866000,0.000000"/>
+        <Up value="0.000000,0.000000,1.000000"/>
+        <IsLocal value="1"/>
+    </CActorSiteOpRotationExplicit>
+    <CActorSiteOpRotationExplicit id="SOpRotate90DegClockwise">
+        <EditorCategories value=""/>
+        <Forward value="-1.000000,0.000000,0.000000"/>
+        <Up value="0.000000,0.000000,1.000000"/>
+        <IsLocal value="1"/>
+    </CActorSiteOpRotationExplicit>
+    <CActorSiteOpRotationExplicit id="SOpRotationNegative30Deg">
+        <EditorCategories value=""/>
+        <Forward value="-0.500000,-0.866000,0.000000"/>
+        <Up value="0.000000,0.000000,1.000000"/>
+        <IsLocal value="1"/>
+    </CActorSiteOpRotationExplicit>
+    <CActorUnit id="ExtendingBridgeNWShort12" parent="ExtendingBridgeParent" unitNameAlt="ExtendingBridgeNWShort12Out" unitName="ExtendingBridgeNWShort12">
+        <Model value="ExtendingBridgeShort"/>
+        <MinimapIcon value="Assets\Textures\ui_minimap_icon_retractablebridge_tlbr_off.dds"/>
+    </CActorUnit>
+    <CActorUnit id="ExtendingBridgeNWShort12Out" parent="ExtendingBridgeParentOut" unitNameAlt="ExtendingBridgeNWShort12" unitName="ExtendingBridgeNWShort12Out">
+        <Model value="ExtendingBridgeShort"/>
+        <MinimapIcon value="Assets\Textures\ui_minimap_icon_retractablebridge_tlbr_on.dds"/>
+    </CActorUnit>
+    <CActorUnit id="HeroDummyBaseDead" parent="GenericUnitStandard" unitName="HeroDummyHiveDead">
+        <Model value="Larva"/>
+    </CActorUnit>
+    <CActorUnit id="HeroDummyDifficulty" parent="GenericUnitStandard" unitName="HeroDummyDifficulty">
+        <Model value="Larva"/>
+    </CActorUnit>
+    <CActorModel id="MercDropModel">
+        <On Terms="Effect.RequestRepairCreateUnit.Start" Send="Create"/>
+        <On Terms="Effect.RequestRepairDropSet.Start" Send="AnimBracketStop BSD"/>
+    </CActorModel>
+    <CActorSiteOpAttach id="SOpAttachWeaponBottom">
+        <AttachQuery Methods="AMFilterWeaponBottom"/>
+    </CActorSiteOpAttach>
+    <CActorSiteOpLocalOffset id="SOpLowerBy066">
+        <EditorCategories value=""/>
+        <LocalOffset value="0.000000,0.000000,-0.660000"/>
+    </CActorSiteOpLocalOffset>
+    <CActorSiteOpLocalOffset id="SOpOffsetHigherBy2">
+        <EditorCategories value=""/>
+        <LocalOffset value="0.000000,0.000000,2.000000"/>
+    </CActorSiteOpLocalOffset>
+    <CActorModel id="LevelUpmodel" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On index="0" Terms="ActorCreation" Send="AnimPlay stand Stand 0 -1.000000 -1.000000 1.300000 AsDuration"/>
+        <On index="1" Terms="BehaviorLevel.Levels; ValidateUnit HeroLevel" Send="Create"/>
+        <On index="2" Terms="AnimDone" Send="Destroy"/>
+        <Scale value="0.800000"/>
+    </CActorModel>
+    <CActorSound id="LevelUpsound" parent="SoundOneShot">
+        <EditorCategories value=""/>
+        <On Terms="BehaviorLevel.Levels; ValidateUnit HeroLevel" Send="Create"/>
+    </CActorSound>
+    <CActorModel id="MindBlastStun">
+        <On Terms="Behavior.ScientistStunned.On" Send="Create"/>
+        <On Terms="Behavior.ScientistStunned.Off" Send="AnimBracketStop BSD"/>
+    </CActorModel>
+    <CActorSplat id="TESTAoESplat" parent="ZergCursorSplat" abil="TESTAoESplat">
+        <EditorCategories value=""/>
+    </CActorSplat>
+    <CActorModel id="TESTimpactlocation" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On Terms="Effect.TESTimpactlocation.Start" Send="Create"/>
+    </CActorModel>
+</Catalog>

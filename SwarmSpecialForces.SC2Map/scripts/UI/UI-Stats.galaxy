@@ -1,0 +1,81 @@
+
+static const int statsInterface_AmountLabels = 9;
+struct StatsInterface {
+    int playerFrame;
+    int [statsInterface_AmountLabels] label;
+};
+
+static StatsInterface [gv_MaxAmountPlayers+1] statsInterface_Player;
+
+void StatsInterface_Update () {
+    int tmpPlayer = -1;
+    while (true) {
+        tmpPlayer = PlayerGroupNextPlayer(gv_ActivePG, tmpPlayer);
+        if (tmpPlayer < 0) { break; }
+        libNtve_gf_SetDialogItemText(statsInterface_Player[tmpPlayer].label[0], IntToText(gv_PlayerStats[tmpPlayer].points), PlayerGroupAll());
+        libNtve_gf_SetDialogItemText(statsInterface_Player[tmpPlayer].label[1], IntToText(gv_PlayerStats[tmpPlayer].kills), PlayerGroupAll());
+        libNtve_gf_SetDialogItemText(statsInterface_Player[tmpPlayer].label[2], IntToText(gv_PlayerStats[tmpPlayer].wins[c_Part_Terran]), PlayerGroupAll());
+        libNtve_gf_SetDialogItemText(statsInterface_Player[tmpPlayer].label[3], IntToText(gv_PlayerStats[tmpPlayer].wins[c_Part_Protoss]), PlayerGroupAll());
+        libNtve_gf_SetDialogItemText(statsInterface_Player[tmpPlayer].label[4], IntToText(gv_PlayerStats[tmpPlayer].wins[c_Part_Zerg]), PlayerGroupAll());
+        libNtve_gf_SetDialogItemText(statsInterface_Player[tmpPlayer].label[5], IntToText(gv_PlayerStats[tmpPlayer].scientists), PlayerGroupAll());
+        libNtve_gf_SetDialogItemText(statsInterface_Player[tmpPlayer].label[6], IntToText(gv_PlayerStats[tmpPlayer].essences), PlayerGroupAll());
+        libNtve_gf_SetDialogItemText(statsInterface_Player[tmpPlayer].label[7], IntToText(gv_PlayerStats[tmpPlayer].psiOrbs), PlayerGroupAll());
+        libNtve_gf_SetDialogItemText(statsInterface_Player[tmpPlayer].label[8], IntToText(gv_PlayerStats[tmpPlayer].moopyHats), PlayerGroupAll());
+    }
+}
+
+bool StatsInterface_UpdatePeriodic (bool testConds, bool runActions){
+    if (!runActions){return true;}
+    StatsInterface_Update();
+    return true;
+}
+
+void StatsInterface_PlayerRemove(int playerID){
+    libNtve_gf_SetDialogItemDesaturated( statsInterface_Player[playerID].playerFrame,  true , PlayerGroupAll());
+}
+
+void StatsInterface_Init(){
+    int currentMainFrame = DialogControlHookup(gv_UI_MasterFrame, c_triggerControlTypePanel, "Stats");
+    int x = 40;
+    int y = 40;
+    int totalWidth;
+    int totalHeight;
+    int tmpPlayer;
+    int tmpInt;
+
+    if (gv_PlayerAmount >= 2) {
+        totalWidth = (40 + 40 + (300 * 2) + 4);
+    }
+    else {
+        totalWidth = (40 + 40 + 300);
+    }
+    totalHeight = 40 + ((284 + 6) * CeilingI(gv_PlayerAmount / 2.0)) + 40 + (0 - 4);
+    DialogControlSetSize(currentMainFrame, PlayerGroupAll(), totalWidth, totalHeight);
+    tmpPlayer = -1;
+    while (true) {
+        tmpPlayer = PlayerGroupNextPlayer(gv_ActivePG, tmpPlayer);
+        if (tmpPlayer < 0) { break; }
+
+        statsInterface_Player[tmpPlayer].playerFrame = DialogControlCreateInPanelFromTemplate(currentMainFrame, c_triggerControlTypePanel, "SSF_Stats/StatsPlayerTemplate");
+        statsInterface_Player[tmpPlayer].label[0] = DialogControlHookup(statsInterface_Player[tmpPlayer].playerFrame, c_triggerControlTypeLabel, "Points");
+        statsInterface_Player[tmpPlayer].label[1] = DialogControlHookup(statsInterface_Player[tmpPlayer].playerFrame, c_triggerControlTypeLabel, "Kills");
+        statsInterface_Player[tmpPlayer].label[2] = DialogControlHookup(statsInterface_Player[tmpPlayer].playerFrame, c_triggerControlTypeLabel, "WinsP0");
+        statsInterface_Player[tmpPlayer].label[3] = DialogControlHookup(statsInterface_Player[tmpPlayer].playerFrame, c_triggerControlTypeLabel, "WinsP1");
+        statsInterface_Player[tmpPlayer].label[4] = DialogControlHookup(statsInterface_Player[tmpPlayer].playerFrame, c_triggerControlTypeLabel, "WinsP2");
+        statsInterface_Player[tmpPlayer].label[5] = DialogControlHookup(statsInterface_Player[tmpPlayer].playerFrame, c_triggerControlTypeLabel, "Scientists");
+        statsInterface_Player[tmpPlayer].label[6] = DialogControlHookup(statsInterface_Player[tmpPlayer].playerFrame, c_triggerControlTypeLabel, "Essences");
+        statsInterface_Player[tmpPlayer].label[7] = DialogControlHookup(statsInterface_Player[tmpPlayer].playerFrame, c_triggerControlTypeLabel, "PsiOrbs");
+        statsInterface_Player[tmpPlayer].label[8] = DialogControlHookup(statsInterface_Player[tmpPlayer].playerFrame, c_triggerControlTypeLabel, "MoopyHats");
+        DialogControlSetPosition(statsInterface_Player[tmpPlayer].playerFrame, PlayerGroupAll(), c_anchorTopLeft, x, y);
+        libNtve_gf_SetDialogItemText(DialogControlHookup(statsInterface_Player[tmpPlayer].playerFrame, c_triggerControlTypeLabel, "PlayerName"), Utility_PlayerNameWithPlayerColor(tmpPlayer), PlayerGroupAll());
+        tmpInt += 1;
+        if (tmpInt == 2) {
+            tmpInt = 0;
+            y += (284 + 6);
+            x = 40;
+        }
+        else {
+            x += (300 + 4);
+        }
+    }
+}

@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Preload>
+<Actor id="SYSTEM_ActorConfig"/>
+<Actor id="AiurTree_Ex2" Variations="0,2,5"/>
+<Actor id="AiurTree_Grouped" Variations="2,4"/>
+<Actor id="Aiur_CityBuilding_Floating_Temple_Abandoned" Variations="2"/>
+<Actor id="Aiur_CliffRocks_Islands" Variations="0"/>
+<Actor id="Aiur_Stone_Temple"/>
+<Actor id="Aiur_Stone_Temple_Doodads" Variations="5"/>
+<Actor id="Aiur_Stone_Temple_Rubble" Variations="0"/>
+<Actor id="Aiur_Stone_Temple_Shrine" Variations="1"/>
+<Actor id="Aiur_Stone_Temple_Shrine_Destroyed" Variations="2"/>
+<Actor id="Aiur_Temple_Bigwalls" Variations="9"/>
+<Actor id="Aiur_Temple_BrickGroup" Variations="1,2,7"/>
+<Actor id="Aiur_Temple_Bricks" Variations="0"/>
+<Actor id="Aiur_Temple_CliffDoodads" Variations="4"/>
+<Actor id="Aiur_Temple_CliffDoodads_Destructible" Variations="0"/>
+<Actor id="Aiur_Temple_Pillars" Variations="0"/>
+<Actor id="Aiur_Temple_Pillars_Broken" Variations="5"/>
+<Actor id="Aiur_Temple_StoneAltar"/>
+<Actor id="Aiur_Tree_Large" Variations="0,1"/>
+<Actor id="Aiur_Trees_Giant" Variations="2"/>
+<Actor id="Aiur_Trees_Log" Variations="2"/>
+<Actor id="Aiur_Trees_Log_Small" Variations="0,1,2,3"/>
+<Actor id="Aiur_Trees_Regular" Variations="0,1,2,3,4,5,7,8,9,10,11,12,13,14,15"/>
+<Actor id="Aiur_Trees_Regular_Grouped" Variations="0,1,2,3,4,5"/>
+<Actor id="Aiur_Trees_Tall" Variations="2,5,10"/>
+<Actor id="BrokenRocks" Variations="4"/>
+<Actor id="CliffZerusRockShort" Variations="0,2,3"/>
+<Actor id="CliffZerusRockTall" Variations="0,1,2"/>
+<Actor id="Elsecaro_Large_Rock" Variations="1,6"/>
+<Actor id="Elsecaro_Large_Rock_NoShadow" Variations="1,4,5"/>
+<Actor id="Elsecaro_Medium_Rock_Group" Variations="2,6"/>
+<Actor id="Elsecaro_Small_Rock_Group" Variations="0,1,2"/>
+<Actor id="IceProtossReliquary"/>
+<Actor id="IceProtossSanctum"/>
+<Actor id="JarbanMinor_Small_Rock" Variations="0,1,4,5"/>
+<Actor id="JarbanMinor_Small_Rock_Group" Variations="1,2"/>
+<Actor id="JarbanMinor_TreeStump"/>
+<Actor id="ProtossBaseArch" Variations="1"/>
+<Actor id="ProtossWarpInPadFlat"/>
+<Actor id="Protoss_Base_Console_Small" Variations="2"/>
+<Actor id="Protoss_Base_Screens" Variations="3"/>
+<Actor id="PurificationDesert_Small_Rock_Group" Variations="0,2,3"/>
+<Actor id="Purifier_Trees_Giant" Variations="0"/>
+<Actor id="Purifier_Trees_Regular" Variations="11"/>
+<Actor id="Purifier_Trees_Tall" Variations="10"/>
+<Actor id="Rock_Cliff" Variations="4"/>
+<Actor id="Rock_Cliff_Chunks" Variations="3"/>
+<Actor id="Slayn_TallGrass" Variations="0,1,4,5,6"/>
+<Actor id="Slayn_Temple_Pillars" Variations="1"/>
+<Actor id="Slayn_Temple_Pillars_Broken" Variations="3"/>
+<Actor id="SnowRefinery_Rock" Variations="0,1,2"/>
+<Actor id="Void_CliffRocks_Edge" Variations="3"/>
+<Actor id="Void_CliffRocks_Mass_A" Variations="2,3"/>
+<Actor id="Void_CliffRocks_Rubble" Variations="1"/>
+<Actor id="XelNaga_Cavern_Rock_Cliffs" Variations="0,1"/>
+<Actor id="XelNaga_Cavern_Rock_Cliffs_Chunks" Variations="0,1,2,3"/>
+<Actor id="ZerusLargeTree" Variations="0,1"/>
+<Actor id="ZerusRockCliffShort" Variations="3"/>
+<Actor id="ZerusTallGrassCluster" Variations="0"/>
+<Actor id="ZerusTree" Variations="0"/>
+<Actor id="AiurTree" Variations="1"/>
+<Actor id="AiurTempleBuildings" Variations="1"/>
+<Actor id="BelShirTree" Variations="0,2,3"/>
+<Actor id="CharFoliage" Variations="4"/>
+<Actor id="DecalProtoss" Variations="0"/>
+<Actor id="RockTower" Variations="0,1,2"/>
+<Actor id="RockVolcanicGiant" Variations="4,5"/>
+<Actor id="RockGiant" Variations="1,3,4,6,7,10,13,15"/>
+<Actor id="ShakurasArchonStatue" Variations="1,3,4"/>
+<Actor id="TempleArch" Variations="1"/>
+<Actor id="TempleBricksLarge" Variations="2"/>
+<Actor id="TempleBridgeBroken"/>
+<Actor id="TempleColumnWalls" Variations="1"/>
+<Actor id="TempleStoneInlay"/>
+<Actor id="TempleWallCorner" Variations="1"/>
+<Actor id="BelShirFlowers" Variations="0,1,2,3,4,5,6,8,9"/>
+<Actor id="MechaNydusNetworkDoodad"/>
+<Actor id="StructureMadnessCrystalThrone"/>
+<Terrain id="Part1"/>
+<Unit id="Barracks"/>
+<Unit id="EngineeringBay"/>
+<Unit id="Bunker"/>
+<Unit id="GhostAcademy"/>
+<Unit id="Factory"/>
+<Unit id="Starport"/>
+<Unit id="Armory"/>
+<Unit id="FusionCore"/>
+<Unit id="AutoTurret"/>
+<Unit id="OrbitalCommand"/>
+<Unit id="ExtendingBridgeNEWide12"/>
+<Unit id="ExtendingBridgeNEShort10"/>
+<Unit id="HERCCompound"/>
+<Unit id="PylonPurifier"/>
+<Unit id="ExtendingBridgeNWShort12"/>
+<Unit id="ProtossDoorN"/>
+<Unit id="MadnessSpawnerDefensive"/>
+<Unit id="MadnessSpawnerDefensive2"/>
+<Unit id="MadnessSpawnerOffensive"/>
+<Unit id="MadnessSpawnerOffensive2"/>
+<Unit id="MadnessSpawnerSupport"/>
+<Unit id="MadnessVoidContainment"/>
+<Unit id="MadnessCannon"/>
+<Unit id="MadnessHealer"/>
+<Unit id="Hive2"/>
+<Unit id="SupplyDepot2"/>
+<Unit id="SupplyDepot22"/>
+<Unit id="Barracks2"/>
+<Unit id="Factory2"/>
+<Unit id="OrbitalCommand2"/>
+<Unit id="Starport2"/>
+<Unit id="Armory2"/>
+<Unit id="AutoTurret2"/>
+<Unit id="Bunker2"/>
+<Unit id="Cyclone2"/>
+<Unit id="Cyclone22"/>
+<Unit id="EngineeringBay2"/>
+<Unit id="FusionCore2"/>
+<Unit id="Ghost2"/>
+<Unit id="Ghost3"/>
+<Unit id="GhostAcademy2"/>
+<Unit id="HERCCompound2"/>
+<Unit id="Hellion2"/>
+<Unit id="Hellion22"/>
+<Unit id="Marauder22"/>
+<Unit id="Marine22"/>
+<Unit id="Reaper22"/>
+<Unit id="SiegeTank22"/>
+<Unit id="SiegeTankSieged2"/>
+<Unit id="SiegeTankSieged22"/>
+<Unit id="Marauder2"/>
+<Unit id="Marine2"/>
+<Unit id="Reaper2"/>
+<Unit id="SiegeTank2"/>
+<Unit id="Viking2"/>
+<Unit id="Viking22"/>
+<Unit id="WidowMine2"/>
+<Unit id="WidowMine22"/>
+<Unit id="AdeptShadow"/>
+<Unit id="ObeliskStandard"/>
+<Unit id="VoidMine"/>
+<Unit id="AdeptTaldarim"/>
+<Unit id="AdeptAncient"/>
+<Unit id="ArchonPurifier"/>
+<Unit id="ArchonAncient"/>
+<Unit id="ColossusAncient"/>
+<Unit id="ColossusPurifier2"/>
+<Unit id="ColossusTaldarim2"/>
+<Unit id="DarkTemplarTaldarim2"/>
+<Unit id="DarkTemplarAncient"/>
+<Unit id="DisruptorAncient"/>
+<Unit id="DisruptorStandard"/>
+<Unit id="DragoonStandard"/>
+<Unit id="DragoonPurifier"/>
+<Unit id="PylonColossus"/>
+<Unit id="ImmortalAncient"/>
+<Unit id="ImmortalPurifier"/>
+<Unit id="MonolithNerazim"/>
+<Unit id="CyberneticsCoreAncient"/>
+<Unit id="DarkShrineTaldarim"/>
+<Unit id="DarkShrineAncient"/>
+<Unit id="FleetBeaconTaldarim"/>
+<Unit id="ForgePurifier"/>
+<Unit id="ForgeTaldarim"/>
+<Unit id="GatewayAncient"/>
+<Unit id="GatewayTaldarim"/>
+<Unit id="GatewayPurifier"/>
+<Unit id="GeneratorStandard"/>
+<Unit id="GeneratorTaldarim"/>
+<Unit id="MonolithStandard"/>
+<Unit id="MonolithAncient"/>
+<Unit id="NexusStandard"/>
+<Unit id="NexusPurifier"/>
+<Unit id="NexusNerazim"/>
+<Unit id="CyberneticsCoreStandard"/>
+<Unit id="PylonStandard"/>
+<Unit id="NexusTaldarim"/>
+<Unit id="NexusAncient"/>
+<Unit id="GatewayStandard"/>
+<Unit id="PhotonCannonStandard"/>
+<Unit id="PhotonCannonPurifier"/>
+<Unit id="PhotonCannonTaldarim"/>
+<Unit id="PhotonCannonAncient"/>
+<Unit id="PylonAncient"/>
+<Unit id="PylonNerazim"/>
+<Unit id="TemplarArchiveAncient"/>
+<Unit id="VoidContainmentAncient"/>
+<Unit id="SentryPurifier2"/>
+<Unit id="SentryNerazim"/>
+<Unit id="TemplarArchiveStandard"/>
+<Unit id="RoboticsBayTaldarim"/>
+<Unit id="RoboticsBayAncient"/>
+<Unit id="RoboticsBayPurifier"/>
+<Unit id="PylonTaldarim"/>
+<Unit id="PylonJudicator"/>
+<Unit id="RoboticsFacilityAncient"/>
+<Unit id="RoboticsFacilityPurifier"/>
+<Unit id="VoidContainmentStandard"/>
+<Unit id="VoidContainmentNerazim"/>
+<Unit id="VoidContainmentTaldarim"/>
+<Unit id="TwilightCouncilTaldarim"/>
+<Unit id="TwilightCouncilPurifier"/>
+<Unit id="ZealotAncient"/>
+<Unit id="ZealotStandard"/>
+<Unit id="ZealotTaldarim"/>
+<Unit id="ZealotPurifier2"/>
+<Unit id="ZealotNerazim"/>
+<Unit id="MechaLurker"/>
+<Unit id="MechaRoachWarren"/>
+<Unit id="MechaHive"/>
+<Unit id="MechaInfestationPit"/>
+<Unit id="MechaInfestor"/>
+<Unit id="MechaLocust"/>
+<Unit id="MechaHydralisk"/>
+<Unit id="MechaBaneling"/>
+<Unit id="MechaDrone"/>
+<Unit id="MechaBroodling"/>
+<Unit id="MechaRavager"/>
+<Unit id="MechaQueen"/>
+<Unit id="MechaRoach"/>
+<Unit id="MechaUltralisk"/>
+<Unit id="MechaZergling"/>
+<Unit id="MechaBanelingNest"/>
+<Unit id="MechaEvolutionChamber"/>
+<Unit id="MechaGreaterSpire"/>
+<Unit id="MechaHatchery"/>
+<Unit id="MechaHydraliskDen"/>
+<Unit id="MechaLair"/>
+<Unit id="MechaSpawningPool"/>
+<Unit id="MechaSpineCrawler"/>
+<Unit id="MechaSpire"/>
+<Unit id="MechaSporeCrawler"/>
+<Unit id="MechaUltraliskCavern"/>
+<Unit id="MechaOvermind"/>
+<Unit id="MechaRaynor"/>
+<Unit id="MechaArtanis"/>
+<Unit id="MechaKerrigan"/>
+<Unit id="StetmannSummons@Pen" Variations="0,1,2"/>
+<Unit id="EgonStetmann"/>
+<Unit id="Gary"/>
+<Unit id="KingMoopy"/>
+</Preload>

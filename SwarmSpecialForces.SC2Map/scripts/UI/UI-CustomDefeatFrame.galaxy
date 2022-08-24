@@ -1,0 +1,31 @@
+
+static int customDefeatFrame_Frame;
+static int customDefeatFrame_SpectateButton;
+static int customDefeatFrame_LeaveButton;
+
+
+bool CustomDefeatFrame_SpectateButton_Handler(bool testConds, bool runActions){
+    DialogControlSetVisible(customDefeatFrame_Frame, PlayerGroupSingle(EventPlayer()), false);
+    gv_PlayerStats[EventPlayer()].spectatingFlag = true;
+    return true;
+}
+
+bool CustomDefeatFrame_LeaveButton_Handler(bool testConds, bool runActions){
+    GameOver(EventPlayer(), c_gameOverDefeat, false, true);
+    DialogControlSetVisible(customDefeatFrame_Frame, PlayerGroupSingle(EventPlayer()), false);
+    gv_PlayerStats[EventPlayer()].spectatingFlag = false;
+    return true;
+}
+
+void CustomDefeatFrame_Show(int playerID){
+    DialogControlSetVisible(customDefeatFrame_Frame, PlayerGroupSingle(playerID), true);
+}
+
+void CustomDefeatFrame_Init () {
+    customDefeatFrame_Frame = DialogControlHookupStandard(c_triggerControlTypePanel, "UIContainer/FullscreenUpperContainer/SSF_CustomDefeat");
+    customDefeatFrame_LeaveButton = DialogControlHookup(customDefeatFrame_Frame, c_triggerControlTypeButton, "LeaveButton");
+    customDefeatFrame_SpectateButton = DialogControlHookup(customDefeatFrame_Frame, c_triggerControlTypeButton, "SpectateButton");
+    TriggerAddEventDialogControl(TriggerCreate("CustomDefeatFrame_SpectateButton_Handler"), c_playerAny, customDefeatFrame_SpectateButton, c_triggerControlEventTypeClick);
+    TriggerAddEventDialogControl(TriggerCreate("CustomDefeatFrame_LeaveButton_Handler"), c_playerAny, customDefeatFrame_LeaveButton, c_triggerControlEventTypeClick);
+    DialogControlSetAnimationState(customDefeatFrame_Frame, PlayerGroupAll(), "TeamSize", IntToString(gv_PlayerAmountStart));
+}

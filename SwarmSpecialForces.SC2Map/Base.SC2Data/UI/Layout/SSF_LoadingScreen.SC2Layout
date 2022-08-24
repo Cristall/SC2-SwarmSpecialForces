@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Desc>
+	<!-- Thanks to Skunk for the loading screen layout that I used as a base -->
+	<!-- Constants -->
+	<!-- Note: &lt;n/&gt; causes a new line in text. -->
+	<!-- &lt;c val=&quot;800080&quot;&gt; color start, &lt;c/&gt; color end -->
+	
+	<Constant name="MapName" val="&lt;c val=&quot;FF0000&quot;&gt;Swarm Special Forces&lt;c/&gt;"/>
+	<Constant name="BackgroundImg" val="Assets/Textures/ui_hots_loading_missionselect_zzerus02.dds"/>
+
+	<Constant name="CopyButtonPopupBackgroundImage" val="Assets/Textures/ui_unitbuttons_frame_zerg.dds"/>
+ 
+	<Constant name="MapNameStyle" val="BoardWarAppraiseBig3"/>
+	<Constant name="TextStyle" val="First_Blood"/>
+	<Constant name="TextWidth" val="800"/>
+
+	<!-- default enUS locale -->
+	<Constant name="BodyText" val="The zerg swarm has been hunted for many years and is nearly extinct. &lt;n/&gt;The local swarm has evolved a new trait to directly absorb the biomass of fallen enemies and convert it into powerful upgrades. &lt;n/&gt;Go and gather as much biomass as you can from the terran outpost surrounding the hive and destroy them in the process. &lt;n/&gt;" />
+	<Constant name="HintText" val="Tutorial mode is recommended for new players. It also rewards you with an achievement. &lt;n/&gt;Also checkout the FAQ in the help menu. &lt;n/&gt;If you are interested in the game join our discord."/>
+	<Constant name="CopyButtonPopupText" val="Link copied to clipboard!"/>
+
+	<!-- deDE locale -->
+	<Constant name="BodyTextDE" val="The zerg swarm has been hunted for many years and is nearly extinct. &lt;n/&gt;The local swarm has evolved a new trait to directly absorb the biomass of fallen enemies and convert it into powerful upgrades. &lt;n/&gt;Go and gather as much biomass as you can from the terran outpost surrounding the hive and destroy them in the process. &lt;n/&gt;" />
+	<Constant name="HintTextDE" val="Tutorial mode is recommended for new players. It also rewards you with an achievement. &lt;n/&gt;Also checkout the FAQ in the help menu. &lt;n/&gt;If you are interested in the game join our discord."/>
+	<Constant name="CopyButtonPopupTextDE" val="Link copied to clipboard!"/>
+
+	<Constant name="CopyText" val="Discord link"/>
+	<Constant name="CopyLink" val="https://discord.gg/KwxNAJ2"/>
+
+
+	<Constant name="Credits" val="Main Developer&lt;n/&gt;Cristall&lt;n/&gt;&lt;n/&gt;Game Design&lt;n/&gt;Scythe&lt;n/&gt;&lt;n/&gt;&lt;n/&gt; Assets from sc2mapster.com by:&lt;n/&gt;WingedArchon&lt;n/&gt; Alleyvsc2&lt;n/&gt; PurpleMania&lt;n/&gt; Edhriano&lt;n/&gt; Ghostnova&lt;n/&gt; Gumba&lt;n/&gt;&lt;n/&gt;Press F12 ingame for full credits"/>
+
+	<!-- Local Templates -->
+	<Frame type="Frame" name="CopyButtonTemplate">
+		<Width val="500"/>
+		<Height val="180"/>
+
+		<Frame type="CopyClipboardButton" name="ClipBoardBtn" template="StandardTemplates/StandardButtonTemplate">
+			<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+			<Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+			<Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+			
+			<ClipboardText val="#CopyLink"/>
+			<ClickSound val="@UI_ActionButtonSelect"/>
+			<HoverSound val="@UI_HoverTick"/>
+			<Width val="270"/>
+			<Height val="70"/>
+
+			<Frame type="Image" name="NormalImage">
+				<Texture val="@UI/StandardGlueButtonNormal_Zerg"/>
+				<TextureType val="Border"/>
+				<Tiled val="false"/>
+				<StateCount val="2"/>
+			</Frame>
+	
+			<Frame type="Image" name="HoverImage">
+				<Texture val="@UI/StandardGlueButtonHover_Zerg"/>
+				<TextureType val="Border"/>
+				<Tiled val="false"/>
+				<StateCount val="2"/>
+			</Frame>	
+		</Frame>	
+
+		<Frame type="Frame" name="Popup">
+			<Anchor side="Top" relative="$parent/ClipBoardBtn" pos="Max" offset="9"/>
+			<Anchor side="Left" relative="$parent/ClipBoardBtn" pos="Min" offset="0"/>
+			<Anchor side="Right" relative="$parent/ClipBoardBtn" pos="Max" offset="0"/>
+			<Width val="270"/>
+			<Height val="80"/>
+			<Alpha val="0"/>	
+			
+			<Frame type="Image" name="GameplayBackground">
+				<Anchor relative="$parent"/>
+				<TextureType val="Nineslice"/>
+				<Texture val="#CopyButtonPopupBackgroundImage"/>
+			</Frame>
+			
+			<Frame type="Label" name="Header">
+				<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+				<Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
+				<Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+				<Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+				<Style val="BattlenetAlternateButton"/>
+				<Text val="Link copied to clipboard!"/>
+			</Frame>
+			
+			<Animation name="Show">
+				<Event event="OnClick" action="Reset,Play" frame="$parent/ClipBoardBtn"/>
+					 
+				<Controller type="Fade" end="Pause">
+					<Key type="Curve" time="0" value="0" in="Slow"/>
+					<Key type="Curve" time="0.5" value="255" in="Slow"/>
+					<Key type="Curve" time="5" value="255" in="Slow"/>
+					<Key type="Curve" time="5.5" value="0" in="Slow"/>					
+				</Controller>
+				<Controller type="Dimension" dimension="Width" relative="False" percentage="True" end="Pause">
+					<Key type="Curve" time="0" value="0"/>
+					<Key type="Curve" time="0.5" value="100"/>
+					<Key type="Curve" time="5" value="100"/>
+					<Key type="Curve" time="5.5" value="0"/>					
+				</Controller>	
+				<Controller type="Dimension" dimension="Height" relative="False" percentage="True" end="Pause">
+					<Key type="Curve" time="0" value="0"/>
+					<Key type="Curve" time="0.5" value="100"/>
+					<Key type="Curve" time="5" value="100"/>
+					<Key type="Curve" time="5.5" value="0"/>					
+				</Controller>					
+			</Animation>	
+			
+		</Frame>
+	</Frame>
+
+
+	<!-- actual loading screen frame -->
+	<Frame type="Frame" name="CustomLoadingScreen">
+		<Anchor relative="$parent"/>
+	
+		<Frame type="Image" name="LoadScreenImage">
+			<Anchor relative="$parent"/>									
+			<Texture val="#BackgroundImg"/>
+		</Frame>
+	
+		<Frame type="Label" name="Title">
+			<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+			<Anchor side="Bottom" relative="$parent" pos="Mid" offset="-200"/>
+			<Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+			<Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+			<Style val="#MapNameStyle"/>
+			<Text val="#MapName"/>
+		</Frame>	
+	
+
+		<Frame type="Label" name="BodyText">
+			<Anchor side="Top" relative="$parent/Title" pos="Max" offset="0"/>
+			<Anchor side="Left" relative="$parent" pos="Min" offset="40"/>
+			<Width val="#TextWidth"/>
+			
+			<Style val="#TextStyle"/>
+			<Text val="#BodyText"/>
+		</Frame>
+
+		<Frame type="Label" name="HintText">
+			<Anchor side="Top" relative="$parent/BodyText" pos="Max" offset="30"/>
+			<Anchor side="Left" relative="$parent/BodyText" pos="Min" offset="0"/>
+			<Width val="#TextWidth"/>
+			
+			<Style val="#TextStyle"/>
+			<Text val="#HintText"/>
+		</Frame>
+
+		<Frame type="Label" name="CreditsText">
+			<Anchor side="Top" relative="$parent/Title" pos="Max" offset="0"/>
+			<Anchor side="Right" relative="$parent" pos="Max" offset="-10"/>
+			<Width val="500"/>
+			
+			<Style val="#TextStyle"/>
+			<Text val="#Credits"/>
+		</Frame>
+
+		<!-- this is the actual copy-to-clipboard button -->
+		<Frame type="Frame" name="CopyDiscord" template="SSF_LoadingScreen/CopyButtonTemplate">
+			<Anchor side="Top" relative="$parent/HintText" pos="Max" offset="15"/>
+			<Anchor side="Left" relative="$parent/HintText" pos="Min" offset="0"/>
+			<Anchor side="Right" relative="$parent/HintText" pos="Max" offset="0"/>
+
+			<Frame type="CopyClipboardButton" name="ClipBoardBtn">
+				<ClipboardText val="#CopyLink"/>
+	
+				<Frame type="Label" name="Label">
+					<Text val="#CopyText"/>
+				</Frame>		
+			</Frame>	
+		
+			<Frame type="Frame" name="Popup">
+				<Frame type="Label" name="Header">
+					<Text val="#CopyButtonPopupText"/>
+				</Frame>	
+			</Frame>
+		</Frame>
+
+		<StateGroup name="LanguageCheck">
+			<DefaultState val="enUS"/>
+
+			<State name="deDE">
+				<When type="Option" localeiddata="deDE"/>
+				<Action type="SetProperty" frame="$this/BodyText" Text="#BodyTextDE"/>
+				<Action type="SetProperty" frame="$this/HintText" Text="#HintTextDE"/>
+				<Action type="SetProperty" frame="$this/CopyDiscord/Popup/Header" Text="#CopyButtonPopupTextDE"/>
+			</State>
+
+			<State name="enUS"/>
+		</StateGroup>
+
+
+		
+		
+
+		<!-- Hide help tip -->
+		<StateGroup name="Visible">
+			<State name="DisableHelpTip">
+				<When type="Property" frame="$parent/$parent/LoadingHelpLabel" Visible="True"/>
+				<Action type="SetProperty" frame="$parent/$parent/LoadingHelpLabel" Visible="False"/>
+				<Action type="SetProperty" frame="$parent/$parent/LoadingHelpBackgroundImage" Alpha="0"/>
+				<Action type="SendEvent" frame="$parent/Zergling" event="Start"/>
+			</State>
+			<State name="DisableHelpTipKRNGL">
+				<When type="Property" frame="$parent/$parent/LoadingHelpLabel" Visible="True"/>
+				<Action type="SetProperty" frame="$parent/$parent/LoadingLegalLabelKRNGL" Visible="False"/>
+				<Action type="SetProperty" frame="$parent/$parent/LoadingLegalBackgroundImageKRNGL" Alpha="0"/>
+				<Action type="SendEvent" frame="$parent/Zergling" event="Start"/>
+			</State>
+		</StateGroup>
+	</Frame>
+
+</Desc>

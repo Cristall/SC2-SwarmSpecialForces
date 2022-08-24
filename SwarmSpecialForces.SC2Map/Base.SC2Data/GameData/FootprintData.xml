@@ -1,0 +1,633 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CFootprint id="BarrageDestructibleRock">
+        <Layers index="Check">
+            <Rows value=".."/>
+            <Rows value=".."/>
+        </Layers>
+        <Layers index="Place">
+            <Rows value=".."/>
+            <Rows value=".."/>
+        </Layers>
+        <Shape>
+            <Radius value="0.7907"/>
+            <Offsets value="-0.25,-0.75;0.25,-0.75;-0.25,0.75;0.25,0.75;-0.75,-0.25;-0.75,0.25;0.75,-0.25;0.75,0.25"/>
+            <Borders value="0,4,2;1,0,2;2,3,2;3,7,2;4,5,2;5,2,2;6,1,2;7,6,2"/>
+        </Shape>
+    </CFootprint>
+    <CFootprint id="ExtendingBridgeNEShortCliffBorders">
+        <Layers index="Check" Area="-7,-7,8,8">
+            <Rows value="..............."/>
+            <Rows value="..............."/>
+            <Rows value="..........x...."/>
+            <Rows value=".........xxx..."/>
+            <Rows value="........xxxxx.."/>
+            <Rows value=".......xxxxx..."/>
+            <Rows value="......xxxxx...."/>
+            <Rows value=".....xxxxx....."/>
+            <Rows value="....xxxxx......"/>
+            <Rows value="...xxxxx......."/>
+            <Rows value="..xxxxx........"/>
+            <Rows value="...xxx........."/>
+            <Rows value="....x.........."/>
+            <Rows value="..............."/>
+            <Rows value="..............."/>
+        </Layers>
+        <Layers index="Place" Area="-7,-7,8,8">
+            <Sets index="0">
+                <Positive index="GroundNoSpawn" value="0"/>
+                <Positive index="BoostCliff" value="1"/>
+                <Negative index="GroundNoSpawn" value="1"/>
+                <Negative index="NoCreep" value="1"/>
+            </Sets>
+            <Sets Character="o">
+                <Positive index="NoBuild" value="1"/>
+                <Positive index="NoCreep" value="1"/>
+                <Positive index="BoostCliff" value="1"/>
+            </Sets>
+            <Rows value="..............."/>
+            <Rows value=".........ooo..."/>
+            <Rows value="........ooooo.."/>
+            <Rows value=".......ooooooo."/>
+            <Rows value="......oooooooo."/>
+            <Rows value=".....ooooooooo."/>
+            <Rows value="....ooooooooo.."/>
+            <Rows value="...ooooooooo..."/>
+            <Rows value="..ooooooooo...."/>
+            <Rows value=".ooooooooo....."/>
+            <Rows value=".oooooooo......"/>
+            <Rows value=".ooooooo......."/>
+            <Rows value="..ooooo........"/>
+            <Rows value="...ooo........."/>
+            <Rows value="..............."/>
+        </Layers>
+        <Shape>
+            <Mode value="Persist"/>
+            <Radius value="7.9057"/>
+            <Offsets value="-7.5,-2.5;2.5,7.5;-6.5,-3.5;-6,-3;3,6;3.5,6.5;-3.5,-6.5;-3,-6;6,3;6.5,3.5;-2.5,-7.5;7.5,2.5"/>
+            <Borders value="3,4,0;4,8,0;7,3,0;8,7,0;2,3,2;3,7,2;4,5,2;5,9,2;6,2,2;7,6,2;8,4,2;9,8,2;0,1,3;1,5,3;2,0,3;3,2,3;4,3,3;5,4,3;6,7,3;7,8,3;8,9,3;9,11,3;10,6,3;11,10,3"/>
+        </Shape>
+    </CFootprint>
+    <CFootprint id="ExtendingBridgeNEShortOutCliffBorders">
+        <Layers index="Check" Area="-7,-7,8,8">
+            <Rows value="..............."/>
+            <Rows value="..............."/>
+            <Rows value="..........x...."/>
+            <Rows value=".........xxx..."/>
+            <Rows value="..........xxx.."/>
+            <Rows value="...........x..."/>
+            <Rows value="..............."/>
+            <Rows value="..............."/>
+            <Rows value="..............."/>
+            <Rows value="...x..........."/>
+            <Rows value="..xxx.........."/>
+            <Rows value="...xxx........."/>
+            <Rows value="....x.........."/>
+            <Rows value="..............."/>
+            <Rows value="..............."/>
+        </Layers>
+        <Layers index="Place" Area="-7,-7,8,8">
+            <Sets index="0">
+                <Positive index="GroundNoSpawn" value="0"/>
+                <Positive index="BoostCliff" value="1"/>
+                <Negative index="GroundNoSpawn" value="1"/>
+                <Negative index="NoCreep" value="1"/>
+            </Sets>
+            <Sets Character="o">
+                <Positive index="NoBuild" value="1"/>
+                <Positive index="NoCreep" value="1"/>
+                <Positive index="BoostCliff" value="1"/>
+            </Sets>
+            <Rows value="..............."/>
+            <Rows value=".........oo...."/>
+            <Rows value="........oox...."/>
+            <Rows value=".......ooxxx..."/>
+            <Rows value="......ooxxxxxo."/>
+            <Rows value=".....ooxxxxxoo."/>
+            <Rows value="....ooxxxxxoo.."/>
+            <Rows value="...ooxxxxxoo..."/>
+            <Rows value="..ooxxxxxoo...."/>
+            <Rows value=".ooxxxxxoo....."/>
+            <Rows value=".oxxxxxoo......"/>
+            <Rows value="...xxxoo......."/>
+            <Rows value="....xoo........"/>
+            <Rows value="....oo........."/>
+            <Rows value="..............."/>
+        </Layers>
+        <Shape>
+            <Mode value="Persist"/>
+            <Radius value="7.9057"/>
+            <Offsets value="-7.5,-2.5;2.5,7.5;-6.5,-3.5;3.5,6.5;-3.5,-6.5;6.5,3.5;-2.5,-7.5;7.5,2.5"/>
+            <Borders value="2,3,1;3,5,1;4,2,1;5,4,1;0,1,3;1,3,3;2,0,3;3,2,3;4,5,3;5,7,3;6,4,3;7,6,3"/>
+        </Shape>
+    </CFootprint>
+    <CFootprint id="ExtendingBridgeNEWideCliffBorders">
+        <Layers index="Check" Area="-8,-8,9,9">
+            <Rows value="................."/>
+            <Rows value="............x...."/>
+            <Rows value="...........xxx..."/>
+            <Rows value="..........xxxxx.."/>
+            <Rows value=".........xxxxxxx."/>
+            <Rows value="........xxxxxxx.."/>
+            <Rows value=".......xxxxxxx..."/>
+            <Rows value="......xxxxxxx...."/>
+            <Rows value=".....xxxxxxx....."/>
+            <Rows value="....xxxxxxx......"/>
+            <Rows value="...xxxxxxx......."/>
+            <Rows value="..xxxxxxx........"/>
+            <Rows value=".xxxxxxx........."/>
+            <Rows value="..xxxxx.........."/>
+            <Rows value="...xxx..........."/>
+            <Rows value="....x............"/>
+            <Rows value="................."/>
+        </Layers>
+        <Layers index="Place" Area="-8,-8,9,9">
+            <Sets index="0">
+                <Positive index="GroundNoSpawn" value="0"/>
+                <Positive index="BoostCliff" value="1"/>
+                <Negative index="GroundNoSpawn" value="1"/>
+                <Negative index="NoCreep" value="1"/>
+            </Sets>
+            <Sets Character="o">
+                <Positive index="NoBuild" value="1"/>
+                <Positive index="NoCreep" value="1"/>
+                <Positive index="BoostCliff" value="1"/>
+            </Sets>
+            <Rows value="...........oo...."/>
+            <Rows value="..........oooo..."/>
+            <Rows value=".........oooooo.."/>
+            <Rows value="........oooooooo."/>
+            <Rows value=".......oooooooooo"/>
+            <Rows value="......ooooooooooo"/>
+            <Rows value=".....ooooooooooo."/>
+            <Rows value="....ooooooooooo.."/>
+            <Rows value="...ooooooooooo..."/>
+            <Rows value="..ooooooooooo...."/>
+            <Rows value=".ooooooooooo....."/>
+            <Rows value="ooooooooooo......"/>
+            <Rows value="oooooooooo......."/>
+            <Rows value=".oooooooo........"/>
+            <Rows value="..oooooo........."/>
+            <Rows value="...oooo.........."/>
+            <Rows value="....oo..........."/>
+        </Layers>
+        <Shape>
+            <Mode value="Persist"/>
+            <Radius value="9.618"/>
+            <Offsets value="-4.5,-8.5;-2.5,-8.5;2.5,8.5;4.5,8.5;-8.5,-4.5;-8.5,-2.5;8.5,2.5;8.5,4.5;-6.5,-0.5;0.5,6.5;-6,-1;1,6;-8,-4;-7,-3;-5.5,-1.5;1.5,5.5;3,7;4,8;-7.5,-4.5;-7,-4;4,7;4.5,7.5;-4.5,-7.5;-4,-7;7,4;7.5,4.5;-4,-8;-3,-7;-1.5,-5.5;5.5,1.5;7,3;8,4;-1,-6;6,1;-0.5,-6.5;6.5,0.5"/>
+            <Borders value="10,11,0;11,15,0;13,14,0;14,10,0;15,16,0;16,30,0;27,13,0;28,27,0;29,33,0;30,29,0;32,28,0;33,32,0;0,4,1;3,7,1;4,12,1;7,31,1;12,18,1;17,3,1;18,19,1;19,23,1;20,21,1;21,17,1;22,26,1;23,22,1;24,20,1;25,24,1;26,0,1;31,25,1;0,26,3;1,0,3;2,3,3;3,17,3;4,5,3;5,8,3;6,35,3;7,6,3;8,10,3;9,2,3;10,14,3;11,9,3;12,4,3;13,27,3;14,13,3;15,11,3;16,15,3;17,21,3;18,12,3;19,18,3;20,24,3;21,20,3;22,23,3;23,19,3;24,25,3;25,31,3;26,22,3;27,28,3;28,32,3;29,30,3;30,16,3;31,7,3;32,34,3;33,29,3;34,1,3;35,33,3"/>
+        </Shape>
+    </CFootprint>
+    <CFootprint id="ExtendingBridgeNEWideOutCliffBorders">
+        <Layers index="Check" Area="-8,-8,9,9">
+            <Rows value="................."/>
+            <Rows value="............x...."/>
+            <Rows value="...........xxx..."/>
+            <Rows value="............xxx.."/>
+            <Rows value=".............xxx."/>
+            <Rows value="..............x.."/>
+            <Rows value="................."/>
+            <Rows value="................."/>
+            <Rows value="................."/>
+            <Rows value="................."/>
+            <Rows value="................."/>
+            <Rows value="..x.............."/>
+            <Rows value=".xxx............."/>
+            <Rows value="..xxx............"/>
+            <Rows value="...xxx..........."/>
+            <Rows value="....x............"/>
+            <Rows value="................."/>
+        </Layers>
+        <Layers index="Place" Area="-8,-8,9,9">
+            <Sets index="0">
+                <Positive index="GroundNoSpawn" value="0"/>
+                <Positive index="BoostCliff" value="1"/>
+                <Negative index="GroundNoSpawn" value="1"/>
+                <Negative index="NoCreep" value="1"/>
+            </Sets>
+            <Sets Character="o">
+                <Positive index="NoBuild" value="1"/>
+                <Positive index="NoCreep" value="1"/>
+                <Positive index="BoostCliff" value="1"/>
+            </Sets>
+            <Rows value="...........oo...."/>
+            <Rows value="..........oox...."/>
+            <Rows value=".........ooxxx..."/>
+            <Rows value="........ooxxxxx.."/>
+            <Rows value=".......ooxxxxxxxo"/>
+            <Rows value="......ooxxxxxxxoo"/>
+            <Rows value=".....ooxxxxxxxoo."/>
+            <Rows value="....ooxxxxxxxoo.."/>
+            <Rows value="...ooxxxxxxxoo..."/>
+            <Rows value="..ooxxxxxxxoo...."/>
+            <Rows value=".ooxxxxxxxoo....."/>
+            <Rows value="ooxxxxxxxoo......"/>
+            <Rows value="oxxxxxxxoo......."/>
+            <Rows value="..xxxxxoo........"/>
+            <Rows value="...xxxoo........."/>
+            <Rows value="....xoo.........."/>
+            <Rows value="....oo..........."/>
+        </Layers>
+        <Shape>
+            <Mode value="Persist"/>
+            <Radius value="9.618"/>
+            <Offsets value="-4.5,-8.5;-2.5,-8.5;2.5,8.5;4.5,8.5;-8.5,-4.5;-8.5,-2.5;8.5,2.5;8.5,4.5"/>
+            <Borders value="0,4,1;3,7,1;4,3,1;7,0,1;0,7,3;1,0,3;2,3,3;3,4,3;4,5,3;5,2,3;6,1,3;7,6,3"/>
+        </Shape>
+    </CFootprint>
+    <CFootprint id="ExtendingBridgeNWLongCliffBorders">
+        <Layers index="Check" Area="-8,-8,9,9">
+            <Rows value="................."/>
+            <Rows value="...x............."/>
+            <Rows value="..xxx............"/>
+            <Rows value=".xxxxx..........."/>
+            <Rows value="..xxxxx.........."/>
+            <Rows value="...xxxxx........."/>
+            <Rows value="....xxxxx........"/>
+            <Rows value=".....xxxxx......."/>
+            <Rows value="......xxxxx......"/>
+            <Rows value=".......xxxxx....."/>
+            <Rows value="........xxxxx...."/>
+            <Rows value=".........xxxxx..."/>
+            <Rows value="..........xxxxx.."/>
+            <Rows value="...........xxxxx."/>
+            <Rows value="............xxx.."/>
+            <Rows value=".............x..."/>
+            <Rows value="................."/>
+        </Layers>
+        <Layers index="Place" Area="-8,-8,9,9">
+            <Sets index="0">
+                <Positive index="GroundNoSpawn" value="0"/>
+                <Positive index="BoostCliff" value="1"/>
+                <Negative index="GroundNoSpawn" value="1"/>
+                <Negative index="NoCreep" value="1"/>
+            </Sets>
+            <Sets Character="o">
+                <Positive index="NoBuild" value="1"/>
+                <Positive index="NoCreep" value="1"/>
+                <Positive index="BoostCliff" value="1"/>
+            </Sets>
+            <Rows value="...oo............"/>
+            <Rows value="..oooo..........."/>
+            <Rows value=".oooooo.........."/>
+            <Rows value="oooooooo........."/>
+            <Rows value="ooooooooo........"/>
+            <Rows value=".ooooooooo......."/>
+            <Rows value="..ooooooooo......"/>
+            <Rows value="...ooooooooo....."/>
+            <Rows value="....ooooooooo...."/>
+            <Rows value=".....ooooooooo..."/>
+            <Rows value="......ooooooooo.."/>
+            <Rows value=".......ooooooooo."/>
+            <Rows value="........ooooooooo"/>
+            <Rows value=".........oooooooo"/>
+            <Rows value="..........oooooo."/>
+            <Rows value="...........oooo.."/>
+            <Rows value="............oo..."/>
+        </Layers>
+        <Shape>
+            <Mode value="Persist"/>
+            <Radius value="10.1242"/>
+            <Offsets value="3.5,-8.5;5.5,-8.5;-5.5,8.5;-3.5,8.5;-8.5,3.5;-8.5,5.5;8.5,-5.5;8.5,-3.5;-8,5;-5,8;5,-8;8,-5"/>
+            <Borders value="8,9,0;9,11,0;10,8,0;11,10,0;1,10,2;2,9,2;5,2,2;6,1,2;8,5,2;9,8,2;10,11,2;11,6,2;0,4,3;1,0,3;2,3,3;3,7,3;4,5,3;5,8,3;6,11,3;7,6,3;8,10,3;9,2,3;10,1,3;11,9,3"/>
+        </Shape>
+    </CFootprint>
+    <CFootprint id="ExtendingBridgeNWLongOutCliffBorders">
+        <Layers index="Check" Area="-8,-8,9,9">
+            <Rows value="................."/>
+            <Rows value="...x............."/>
+            <Rows value="..xxx............"/>
+            <Rows value=".xxx............."/>
+            <Rows value="..x.............."/>
+            <Rows value="................."/>
+            <Rows value="................."/>
+            <Rows value="................."/>
+            <Rows value="................."/>
+            <Rows value="................."/>
+            <Rows value="................."/>
+            <Rows value="................."/>
+            <Rows value="..............x.."/>
+            <Rows value=".............xxx."/>
+            <Rows value="............xxx.."/>
+            <Rows value=".............x..."/>
+            <Rows value="................."/>
+        </Layers>
+        <Layers index="Place" Area="-8,-8,9,9">
+            <Sets index="0">
+                <Positive index="GroundNoSpawn" value="0"/>
+                <Positive index="BoostCliff" value="1"/>
+                <Negative index="GroundNoSpawn" value="1"/>
+                <Negative index="NoCreep" value="1"/>
+            </Sets>
+            <Sets Character="o">
+                <Positive index="NoBuild" value="1"/>
+                <Positive index="NoCreep" value="1"/>
+                <Positive index="BoostCliff" value="1"/>
+            </Sets>
+            <Rows value="...oo............"/>
+            <Rows value="...xoo..........."/>
+            <Rows value="..xxxoo.........."/>
+            <Rows value="oxxxxxoo........."/>
+            <Rows value="ooxxxxxoo........"/>
+            <Rows value=".ooxxxxxoo......."/>
+            <Rows value="..ooxxxxxoo......"/>
+            <Rows value="...ooxxxxxoo....."/>
+            <Rows value="....ooxxxxxoo...."/>
+            <Rows value=".....ooxxxxxoo..."/>
+            <Rows value="......ooxxxxxoo.."/>
+            <Rows value=".......ooxxxxxoo."/>
+            <Rows value="........ooxxxxxoo"/>
+            <Rows value=".........ooxxxxxo"/>
+            <Rows value="..........ooxxx.."/>
+            <Rows value="...........oox..."/>
+            <Rows value="............oo..."/>
+        </Layers>
+        <Shape>
+            <Mode value="Persist"/>
+            <Radius value="10.1242"/>
+            <Offsets value="3.5,-8.5;5.5,-8.5;-5.5,8.5;-3.5,8.5;-8.5,3.5;-8.5,5.5;8.5,-5.5;8.5,-3.5"/>
+            <Borders value="1,5,1;2,6,1;5,2,1;6,1,1;0,4,3;1,0,3;2,3,3;3,7,3;4,5,3;5,1,3;6,2,3;7,6,3"/>
+        </Shape>
+    </CFootprint>
+    <CFootprint id="ExtendingBridgeNWShortCliffBorders">
+        <Layers index="Check" Area="-7,-7,8,8">
+            <Rows value="..............."/>
+            <Rows value="..............."/>
+            <Rows value="....x.........."/>
+            <Rows value="...xxx........."/>
+            <Rows value="..xxxxx........"/>
+            <Rows value="...xxxxx......."/>
+            <Rows value="....xxxxx......"/>
+            <Rows value=".....xxxxx....."/>
+            <Rows value="......xxxxx...."/>
+            <Rows value=".......xxxxx..."/>
+            <Rows value="........xxxxx.."/>
+            <Rows value=".........xxx..."/>
+            <Rows value="..........x...."/>
+            <Rows value="..............."/>
+            <Rows value="..............."/>
+        </Layers>
+        <Layers index="Place" Area="-7,-7,8,8">
+            <Sets index="0">
+                <Positive index="GroundNoSpawn" value="0"/>
+                <Positive index="BoostCliff" value="1"/>
+                <Negative index="GroundNoSpawn" value="1"/>
+                <Negative index="NoCreep" value="1"/>
+            </Sets>
+            <Sets Character="o">
+                <Positive index="NoBuild" value="1"/>
+                <Positive index="NoCreep" value="1"/>
+                <Positive index="BoostCliff" value="1"/>
+            </Sets>
+            <Rows value="..............."/>
+            <Rows value="...ooo........."/>
+            <Rows value="..ooooo........"/>
+            <Rows value=".ooooooo......."/>
+            <Rows value=".oooooooo......"/>
+            <Rows value=".ooooooooo....."/>
+            <Rows value="..ooooooooo...."/>
+            <Rows value="...ooooooooo..."/>
+            <Rows value="....ooooooooo.."/>
+            <Rows value=".....ooooooooo."/>
+            <Rows value="......oooooooo."/>
+            <Rows value=".......ooooooo."/>
+            <Rows value="........ooooo.."/>
+            <Rows value=".........ooo..."/>
+            <Rows value="..............."/>
+        </Layers>
+        <Shape>
+            <Mode value="Persist"/>
+            <Radius value="7.9057"/>
+            <Offsets value="-7.5,2.5;-6.5,3.5;-3.5,6.5;-2.5,7.5;-6,3;-3,6;3,-6;6,-3;2.5,-7.5;3.5,-6.5;6.5,-3.5;7.5,-2.5"/>
+            <Borders value="4,5,0;5,7,0;6,4,0;7,6,0;1,2,2;2,5,2;4,1,2;5,4,2;6,7,2;7,10,2;9,6,2;10,9,2;0,1,3;1,4,3;2,3,3;3,11,3;4,6,3;5,2,3;6,9,3;7,5,3;8,0,3;9,8,3;10,7,3;11,10,3"/>
+        </Shape>
+    </CFootprint>
+    <CFootprint id="ExtendingBridgeNWShortOutCliffBorders">
+        <Layers index="Check" Area="-7,-7,8,8">
+            <Rows value="..............."/>
+            <Rows value="..............."/>
+            <Rows value="....x.........."/>
+            <Rows value="...xxx........."/>
+            <Rows value="..xxx.........."/>
+            <Rows value="...x..........."/>
+            <Rows value="..............."/>
+            <Rows value="..............."/>
+            <Rows value="..............."/>
+            <Rows value="...........x..."/>
+            <Rows value="..........xxx.."/>
+            <Rows value=".........xxx..."/>
+            <Rows value="..........x...."/>
+            <Rows value="..............."/>
+            <Rows value="..............."/>
+        </Layers>
+        <Layers index="Place" Area="-7,-7,8,8">
+            <Sets index="0">
+                <Positive index="GroundNoSpawn" value="0"/>
+                <Positive index="BoostCliff" value="1"/>
+                <Negative index="GroundNoSpawn" value="1"/>
+                <Negative index="NoCreep" value="1"/>
+            </Sets>
+            <Sets Character="o">
+                <Positive index="NoBuild" value="1"/>
+                <Positive index="NoCreep" value="1"/>
+                <Positive index="BoostCliff" value="1"/>
+            </Sets>
+            <Rows value="..............."/>
+            <Rows value="....oo........."/>
+            <Rows value="....xoo........"/>
+            <Rows value="...xxxoo......."/>
+            <Rows value=".oxxxxxoo......"/>
+            <Rows value=".ooxxxxxoo....."/>
+            <Rows value="..ooxxxxxoo...."/>
+            <Rows value="...ooxxxxxoo..."/>
+            <Rows value="....ooxxxxxoo.."/>
+            <Rows value=".....ooxxxxxoo."/>
+            <Rows value="......ooxxxxxo."/>
+            <Rows value=".......ooxxx..."/>
+            <Rows value="........oox...."/>
+            <Rows value=".........oo...."/>
+            <Rows value="..............."/>
+        </Layers>
+        <Shape>
+            <Mode value="Persist"/>
+            <Radius value="7.9057"/>
+            <Offsets value="-7.5,2.5;-6.5,3.5;-3.5,6.5;-2.5,7.5;2.5,-7.5;3.5,-6.5;6.5,-3.5;7.5,-2.5"/>
+            <Borders value="1,2,1;2,6,1;5,1,1;6,5,1;0,1,3;1,5,3;2,3,3;3,7,3;4,0,3;5,4,3;6,2,3;7,6,3"/>
+        </Shape>
+    </CFootprint>
+    <CFootprint id="Footprint2x2in3x3GridContour">
+        <Layers index="Check" Area="-1,-1,2,2">
+            <Rows value="xxx"/>
+            <Rows value="xxx"/>
+            <Rows value="xxx"/>
+        </Layers>
+        <Layers index="Place" Area="-1,-1,2,2">
+            <Rows value="xxx"/>
+            <Rows value="xxx"/>
+            <Rows value="xxx"/>
+        </Layers>
+        <Shape>
+            <Radius value="1.1181"/>
+            <Offsets value="-0.5,-1;0.5,-1;-0.5,1;0.5,1;-1,-0.5;-1,0.5;1,-0.5;1,0.5"/>
+            <Borders value="0,4,2;1,0,2;2,3,2;3,7,2;4,5,2;5,2,2;6,1,2;7,6,2"/>
+        </Shape>
+    </CFootprint>
+    <CFootprint id="Footprint2dot5x2dot5Contour">
+        <Layers index="Check" Area="-1,-1,2,2">
+            <Rows value="xxx"/>
+            <Rows value="xxx"/>
+            <Rows value="xxx"/>
+        </Layers>
+        <Layers index="Place" Area="-1,-1,2,2">
+            <Rows value="xxx"/>
+            <Rows value="xxx"/>
+            <Rows value="xxx"/>
+        </Layers>
+        <Shape>
+            <Radius value="1.3464"/>
+            <Offsets value="-0.5,-1.25;0.5,-1.25;-0.5,1.25;0.5,1.25;-1.25,-0.5;-1.25,0.5;1.25,-0.5;1.25,0.5"/>
+            <Borders value="0,4,2;1,0,2;2,3,2;3,7,2;4,5,2;5,2,2;6,1,2;7,6,2"/>
+        </Shape>
+    </CFootprint>
+    <CFootprint id="Footprint4x4CliffBorderContour">
+        <Layers index="Check" Area="-2,-2,2,2">
+            <Rows value="xxxx"/>
+            <Rows value="xxxx"/>
+            <Rows value="xxxx"/>
+            <Rows value="xxxx"/>
+        </Layers>
+        <Layers index="Place" Area="-2,-2,2,2">
+            <Rows value="xxxx"/>
+            <Rows value="xxxx"/>
+            <Rows value="xxxx"/>
+            <Rows value="xxxx"/>
+        </Layers>
+        <Shape>
+            <Radius value="2.236"/>
+            <Offsets value="-1,-2;1,-2;-1,-1.75;1,-1.75;-1,1.75;1,1.75;-1,2;1,2;-2,-1;-2,1;-1.75,-1;-1.75,1;1.75,-1;1.75,1;2,-1;2,1"/>
+            <Borders value="2,10,2;3,2,2;4,5,2;5,13,2;10,11,2;11,4,2;12,3,2;13,12,2;0,8,3;1,0,3;2,3,3;3,12,3;4,11,3;5,4,3;6,7,3;7,15,3;8,9,3;9,6,3;10,2,3;11,10,3;12,13,3;13,5,3;14,1,3;15,14,3"/>
+        </Shape>
+    </CFootprint>
+    <CFootprint id="CreepCircle4x4BaseRadius10">
+        <Layers index="Check" Area="-10,-10,10,10">
+            <Sets Character="o">
+                <Negative index="NoCreep" value="1"/>
+            </Sets>
+            <Rows value="........oooo........"/>
+            <Rows value="......oooooooo......"/>
+            <Rows value="....oooooooooooo...."/>
+            <Rows value="...oooooooooooooo..."/>
+            <Rows value="..oooooooooooooooo.."/>
+            <Rows value="..oooooooooooooooo.."/>
+            <Rows value=".oooooooooooooooooo."/>
+            <Rows value=".oooooooooooooooooo."/>
+            <Rows value="oooooooooooooooooooo"/>
+            <Rows value="oooooooooooooooooooo"/>
+            <Rows value="oooooooooooooooooooo"/>
+            <Rows value="oooooooooooooooooooo"/>
+            <Rows value=".oooooooooooooooooo."/>
+            <Rows value=".oooooooooooooooooo."/>
+            <Rows value="..oooooooooooooooo.."/>
+            <Rows value="..oooooooooooooooo.."/>
+            <Rows value="...oooooooooooooo..."/>
+            <Rows value="....oooooooooooo...."/>
+            <Rows value="......oooooooo......"/>
+            <Rows value="........oooo........"/>
+        </Layers>
+        <Layers index="Place" Area="-10,-10,10,10">
+            <Sets Character="o">
+                <Positive index="Creep" value="1"/>
+            </Sets>
+            <Rows value="........oooo........"/>
+            <Rows value="......oooooooo......"/>
+            <Rows value="....oooooooooooo...."/>
+            <Rows value="...oooooooooooooo..."/>
+            <Rows value="..oooooooooooooooo.."/>
+            <Rows value="..oooooooooooooooo.."/>
+            <Rows value=".oooooooooooooooooo."/>
+            <Rows value=".oooooooooooooooooo."/>
+            <Rows value="oooooooooooooooooooo"/>
+            <Rows value="oooooooooooooooooooo"/>
+            <Rows value="oooooooooooooooooooo"/>
+            <Rows value="oooooooooooooooooooo"/>
+            <Rows value=".oooooooooooooooooo."/>
+            <Rows value=".oooooooooooooooooo."/>
+            <Rows value="..oooooooooooooooo.."/>
+            <Rows value="..oooooooooooooooo.."/>
+            <Rows value="...oooooooooooooo..."/>
+            <Rows value="....oooooooooooo...."/>
+            <Rows value="......oooooooo......"/>
+            <Rows value="........oooo........"/>
+        </Layers>
+        <Shape>
+            <Radius value="10.4404"/>
+            <Offsets value="-2,-10;2,-10;-4,-9;-2,-9;2,-9;4,-9;-6,-8;-4,-8;4,-8;6,-8;-7,-7;-6,-7;6,-7;7,-7;-8,-6;-7,-6;7,-6;8,-6;8,-5;9,-5;-9,-4;-8,-4;9,-3;10,-3;-10,-2;-9,-2;-10,2;-9,2;9,2;10,2;-9,4;-8,4;8,4;9,4;-8,6;-7,6;7,6;8,6;-7,7;-6,7;6,7;7,7;-6,8;-4,8;4,8;6,8;-4,9;-2,9;2,9;4,9;-2,10;2,10"/>
+            <Borders value="0,3,2;1,0,2;2,7,2;3,2,2;4,1,2;5,4,2;6,11,2;7,6,2;8,5,2;9,8,2;10,15,2;11,10,2;12,9,2;13,12,2;14,21,2;15,14,2;16,13,2;17,16,2;18,17,2;19,18,2;20,25,2;21,20,2;22,19,2;23,22,2;24,26,2;25,24,2;26,27,2;27,30,2;28,29,2;29,23,2;30,31,2;31,34,2;32,33,2;33,28,2;34,35,2;35,38,2;36,37,2;37,32,2;38,39,2;39,42,2;40,41,2;41,36,2;42,43,2;43,46,2;44,45,2;45,40,2;46,47,2;47,50,2;48,49,2;49,44,2;50,51,2;51,48,2"/>
+        </Shape>
+    </CFootprint>
+    <CFootprint id="FootprintSieged2">
+        <Layers index="Check" Area="0,0,0,0">
+            <Sets index="0">
+                <Negative index="Creep" value="0"/>
+            </Sets>
+            <Rows value="x"/>
+        </Layers>
+        <Layers index="Place" Area="0,0,0,0"/>
+        <Shape>
+            <Radius value="0.8386"/>
+            <Offsets value="0.75,0.375;0.75,-0.375;0.375,-0.75;-0.375,-0.75;-0.75,-0.375;-0.75,0.375;-0.375,0.75;0.375,0.75"/>
+            <Borders value="7,0,2;0,1,2;1,2,2;2,3,2;3,4,2;4,5,2;5,6,2;6,7,2"/>
+        </Shape>
+    </CFootprint>
+    <CFootprint id="FootprintSieged22">
+        <Layers index="Check" Area="0,0,0,0">
+            <Sets index="0">
+                <Negative index="Creep" value="0"/>
+            </Sets>
+            <Rows value="x"/>
+        </Layers>
+        <Layers index="Place" Area="0,0,0,0"/>
+        <Shape>
+            <Radius value="0.8386"/>
+            <Offsets value="0.75,0.375;0.75,-0.375;0.375,-0.75;-0.375,-0.75;-0.75,-0.375;-0.75,0.375;-0.375,0.75;0.375,0.75"/>
+            <Borders value="7,0,2;0,1,2;1,2,2;2,3,2;3,4,2;4,5,2;5,6,2;6,7,2"/>
+        </Shape>
+    </CFootprint>
+    <CFootprint id="ProtossDoorNClosed">
+        <Layers index="Check" Area="-5,-2,5,2">
+            <Rows value=".........."/>
+            <Rows value=".........."/>
+            <Rows value=".........."/>
+            <Rows value=".........."/>
+        </Layers>
+        <Layers index="Place" Area="-5,-2,5,2">
+            <Sets index="0">
+                <Positive index="ShrubVision" value="1"/>
+            </Sets>
+            <Rows value=".........."/>
+            <Rows value=".........."/>
+            <Rows value="xxxxxxxxxx"/>
+            <Rows value="xxxxxxxxxx"/>
+        </Layers>
+        <Shape>
+            <Radius value="5.154"/>
+            <Offsets value="-5,-1.25;-4.5,-1.25;4.5,-1.25;5,-1.25;-4.5,-0.5;4.5,-0.5;-4.5,0.5;4.5,0.5;-5,1.25;-4.5,1.25;4.5,1.25;5,1.25"/>
+            <Borders value="1,4,2;2,1,2;4,5,2;5,2,2;6,9,2;7,6,2;9,10,2;10,7,2;0,8,3;1,0,3;2,5,3;3,2,3;4,1,3;5,4,3;6,7,3;7,10,3;8,9,3;9,6,3;10,11,3;11,3,3"/>
+        </Shape>
+    </CFootprint>
+    <CFootprint id="ProtossDoorNOpen">
+        <Layers index="Check" Area="-5,-1,5,1">
+            <Rows value=".........."/>
+            <Rows value=".........."/>
+        </Layers>
+        <Layers index="Place" Area="-5,-1,5,1">
+            <Rows value=".........."/>
+            <Rows value=".........."/>
+        </Layers>
+        <Shape>
+            <Radius value="5.099"/>
+            <Offsets value="-5,-1;-3.5,-1;3.5,-1;5,-1;-4.5,-0.5;-4,-0.5;4,-0.5;4.5,-0.5;-4.5,0.5;-4,0.5;4,0.5;4.5,0.5;-5,1;-3.5,1;3.5,1;5,1"/>
+            <Borders value="4,8,2;5,4,2;6,10,2;7,6,2;8,9,2;9,5,2;10,11,2;11,7,2;0,12,3;1,0,3;2,14,3;3,2,3;4,5,3;5,9,3;6,7,3;7,11,3;8,4,3;9,8,3;10,6,3;11,10,3;12,13,3;13,1,3;14,15,3;15,3,3"/>
+        </Shape>
+    </CFootprint>
+</Catalog>

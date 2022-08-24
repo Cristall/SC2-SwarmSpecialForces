@@ -1,0 +1,1690 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CModel default="1" id="ImportedModel" parent="Unit">
+        <?token id="Prefix" value="Mod"?>
+        <?token id="Race" value="els"?>
+        <EditorCategories value=""/>
+    </CModel>
+    <CModel id="AdeptShadow">
+        <Model value="Assets\Units\Protoss\AdeptSpirit_Collection_Purifier_Coop\AdeptSpirit_Collection_Purifier_Coop.m3"/>
+    </CModel>
+    <CModel id="AdeptShadowDeath">
+        <Model value="Assets\Effects\Protoss\Adept_SpiritOut\Adept_SpiritOut.m3"/>
+    </CModel>
+    <CModel id="AdeptShadowSpawn">
+        <Model value="Assets\Effects\Protoss\Adept_SpiritSpawn\Adept_SpiritSpawn.m3"/>
+    </CModel>
+    <CModel id="AdeptShadowTeleport">
+        <Model value="Assets\Effects\Protoss\Adept_Spirit_Fizzle\Adept_Spirit_Fizzle.m3"/>
+    </CModel>
+    <CModel id="Baneling_CollectionSkin_Webby">
+        <SelectionLayer value="4"/>
+    </CModel>
+    <CModel id="Bomber">
+        <Model value="Assets\Units\Protoss\Interceptor_Golden\Interceptor_Golden.m3"/>
+        <ScaleMax value="1.250000,1.250000,1.250000"/>
+        <ScaleMin value="1.250000,1.250000,1.250000"/>
+    </CModel>
+    <CModel id="BomberBeam">
+        <Model value="Assets\Effects\Protoss\Carrier_Purifier_Coop_Beam\Carrier_Purifier_Coop_Beam.m3"/>
+    </CModel>
+    <CModel id="CoronaWavesCast">
+        <Model value="Assets\Effects\Zerg\KerriganApocalypseChannel\KerriganApocalypseChannel.m3"/>
+        <AnimSpeed value="0.500000"/>
+    </CModel>
+    <CModel id="CoronaWavesCloud">
+        <Model value="Assets\Effects\Protoss\Void_Cloud_Damage\Void_Cloud_Damage.m3"/>
+        <ScaleMax value="1.400000,1.400000,0.800000"/>
+        <ScaleMin value="1.400000,1.400000,0.800000"/>
+    </CModel>
+    <CModel id="CoronaWavesDmg">
+        <Model value="Assets\Effects\Zerg\HybridEnergizeBeam\HybridEnergizeBeam.m3"/>
+        <AnimSpeed value="2.000000"/>
+        <ScaleMax value="0.300000,0.300000,0.300000"/>
+        <ScaleMin value="0.300000,0.300000,0.300000"/>
+    </CModel>
+    <CModel id="CoronaWavesInfect">
+        <Model value="Assets\Effects\Protoss\DisruptorBeam\DisruptorBeam.m3"/>
+    </CModel>
+    <CModel id="CrossedBeamsBeam">
+        <Model value="Assets\Effects\Zerg\KerriganHybridBeam\KerriganHybridBeam.m3"/>
+        <ScaleMax value="0.500000,0.500000,0.500000"/>
+        <ScaleMin value="0.500000,0.500000,0.500000"/>
+    </CModel>
+    <CModel id="CrossedBeamsExplosion">
+        <Model value="Assets\Effects\Protoss\TempestPlasmaMissileImpact\TempestPlasmaMissileImpact.m3"/>
+        <ScaleMax value="3.000000,3.000000,3.000000"/>
+        <ScaleMin value="3.000000,3.000000,3.000000"/>
+    </CModel>
+    <CModel id="CrossedBeamsImpact">
+        <Model value="Assets\Effects\Protoss\Disintegration_Missile\Disintegration_Missile.m3"/>
+        <AnimSpeed value="2.000000"/>
+        <ScaleMax value="2.500000,2.500000,2.500000"/>
+        <ScaleMin value="2.500000,2.500000,2.500000"/>
+    </CModel>
+    <CModel id="CrystalwingShowerImpact">
+        <Model value="Assets\Effects\Protoss\DarkStalkerMissileImpact\DarkStalkerMissileImpact.m3"/>
+    </CModel>
+    <CModel id="CrystalwingShowerSplat">
+        <Model value="Assets\UI\ProtossCursorEx2\ProtossCursorEx2.m3"/>
+        <ScaleMax value="0.500000,0.500000,0.500000"/>
+        <ScaleMin value="0.500000,0.500000,0.500000"/>
+    </CModel>
+    <CModel id="FinalWillExplode">
+        <Model value="Assets\Effects\Protoss\Xelnaga_Construct_EntropicBlast_Explosion\Xelnaga_Construct_EntropicBlast_Explosion.m3"/>
+        <ScaleMax value="0.800000,0.800000,0.800000"/>
+        <ScaleMin value="0.800000,0.800000,0.800000"/>
+    </CModel>
+    <CModel id="Gary">
+        <Model value="Assets\COOP\Stetmann\Units\GARY_Stetmann_COOP_Upgrade\GARY_Stetmann_COOP_Upgrade.m3"/>
+        <ScaleMax value="1.350000,1.350000,1.350000"/>
+        <ScaleMin value="1.350000,1.350000,1.350000"/>
+    </CModel>
+    <CModel id="GaryDeath" parent="UnitDeath">
+        <Model value="Assets\COOP\Stetmann\Units\GARY_Stetmann_COOP_UpgradeDeath\GARY_Stetmann_COOP_UpgradeDeath.m3"/>
+        <EditorCategories value=""/>
+    </CModel>
+    <CModel id="GaryPortrait" parent="Portrait">
+        <Model value="Assets\COOP\Stetmann\Portraits\GARY_Stetmann_COOP_PortraitUpgrade\GARY_Stetmann_COOP_PortraitUpgrade.m3"/>
+        <EditorCategories value=""/>
+        <Image value="Assets\Textures\gary_stetmann_coop_portraitupgrade_static.dds"/>
+    </CModel>
+    <CModel id="GaryWeaponMissile">
+        <Model value="Assets\COOP\Stetmann\Effects\GARY_Stetmann_COOP_CannonMissile\GARY_Stetmann_COOP_CannonMissile.m3"/>
+    </CModel>
+    <CModel id="GaryWeaponMissileImpact">
+        <Model value="Assets\COOP\Stetmann\Effects\GARY_Stetmann_COOP_CannonImpact\GARY_Stetmann_COOP_CannonImpact.m3"/>
+    </CModel>
+    <CModel id="GaryWeaponMissileLaunch">
+        <Model value="Assets\COOP\Stetmann\Effects\GARY_Stetmann_COOP_CannonLaunch\GARY_Stetmann_COOP_CannonLaunch.m3"/>
+    </CModel>
+    <CModel id="HandOfLightning">
+        <Model value="Assets\Effects\Protoss\PsiStormImpact\PsiStormImpact.m3"/>
+        <ScaleMax value="0.500000,0.500000,0.500000"/>
+        <ScaleMin value="0.500000,0.500000,0.500000"/>
+    </CModel>
+    <CModel id="Cannon">
+        <Model value="Assets\Models\Talon_ParticleCannon\Talon_ParticleCannon.m3"/>
+        <SelectionRadius value="1.100000"/>
+    </CModel>
+    <CModel id="HighTemplarCrystalwingTalonMissile">
+        <Model value="Assets\Models\Talon_Crystalwing\Crystalwing_Weapon.m3"/>
+    </CModel>
+    <CModel id="HighTemplarTalonMissile">
+        <Model value="Assets\Models\Talon_Obelisk\Obelisk_BlastWeapon.m3"/>
+    </CModel>
+    <CModel id="Hive">
+        <SelectionLayer value="4"/>
+    </CModel>
+    <CModel id="KamikazeBeacon">
+        <Model value="Assets\Doodads\DOM_PsiEmitter\DOM_PsiEmitter.m3"/>
+        <ScaleMax value="4.500000,4.500000,4.500000"/>
+        <ScaleMin value="4.500000,4.500000,4.500000"/>
+    </CModel>
+    <CModel id="KamikazeMissile1">
+        <Model value="Assets\Units\Protoss\Scout_Taldarim\Scout_Taldarim.m3"/>
+    </CModel>
+    <CModel id="KamikazeMissile2">
+        <Model value="Assets\Units\Protoss\VoidRay_TalDarim\VoidRay_TalDarim.m3"/>
+    </CModel>
+    <CModel id="KamikazeMissile1ActionImpact">
+        <Model value="Assets\Units\Protoss\Scout_Taldarim_Death\Scout_Taldarim_Death.m3"/>
+    </CModel>
+    <CModel id="KamikazeMissile3ActionImpact">
+        <Model value="Assets\Units\Protoss\Phoenix_TalDarim_Death\Phoenix_TalDarim_Death.m3"/>
+    </CModel>
+    <CModel id="KamikazeMissile3">
+        <Model value="Assets\Units\Protoss\Phoenix_TalDarim\Phoenix_TalDarim.m3"/>
+    </CModel>
+    <CModel id="KamikazeMissile2ActionImpact">
+        <Model value="Assets\Units\Protoss\VoidRay_TalDarim_Death\VoidRay_TalDarim_Death.m3"/>
+    </CModel>
+    <CModel id="LaserLanceBeam">
+        <Model value="Assets\Effects\Protoss\Mothership_Taldarim_Thermal_Lance_Beam\Mothership_Taldarim_Thermal_Lance_Beam.m3"/>
+    </CModel>
+    <CModel id="LaserLanceFire">
+        <Model value="Assets\Effects\Protoss\Mothership_Taldarim_Thermal_Lance_Beam_Unit_Impact\Mothership_Taldarim_Thermal_Lance_Beam_Unit_Impact.m3"/>
+        <ScaleMax value="5.000000,5.000000,1.500000"/>
+        <ScaleMin value="5.000000,5.000000,1.500000"/>
+        <LowQualityModel value="LaserLanceFireLow"/>
+    </CModel>
+    <CModel id="LaserLanceFireLow">
+        <Model value="Assets\Effects\Terran\TerranBuildingFireLarge\TerranBuildingFireLarge_Low.m3"/>
+        <ScaleMax value="3.000000,3.000000,1.500000"/>
+        <ScaleMin value="3.000000,3.000000,1.500000"/>
+    </CModel>
+    <CModel id="LaserLanceFireBuff">
+        <Model value="Assets\Effects\Protoss\Mothership_Taldarim_Thermal_Lance_Beam_Unit_Impact\Mothership_Taldarim_Thermal_Lance_Beam_Unit_Impact.m3"/>
+    </CModel>
+    <CModel id="LongLifeCastBeam">
+        <Model value="Assets\COOP\Zeratul\Effects\Stalker_BlinkAttackBeam_Zeratul_COOP\Stalker_BlinkAttackBeam_Zeratul_COOP.m3"/>
+    </CModel>
+    <CModel id="LongLifeSpawn">
+        <Model value="Assets\Effects\Protoss\ProtossUnitWarpIn\ProtossUnitWarpIn.m3"/>
+        <AnimSpeed value="1.700000"/>
+    </CModel>
+    <CModel id="MadnessHealerBeam">
+        <Model value="Assets\Effects\Protoss\HybridEnergizeBeamLarge\HybridEnergizeBeamLarge.m3"/>
+    </CModel>
+    <CModel id="MadnessStructureOverboost">
+        <Model value="Assets\Effects\Protoss\TimeWarpImpact\TimeWarpImpact.m3"/>
+    </CModel>
+    <CModel id="MadnessThrone" parent="Doodad" Prefix="Mod" Race="els">
+        <Model value="Assets\Models\Talon_Augmentor\Talon_Augmentor.m3"/>
+        <EditorCategories value=""/>
+    </CModel>
+    <CModel id="MassHealCast">
+        <Model value="Assets\Effects\Protoss\Scryer\Scryer.m3"/>
+    </CModel>
+    <CModel id="MassHealImpact">
+        <Model value="Assets\Effects\Protoss\Revelation\Revelation.m3"/>
+    </CModel>
+    <CModel id="Mecha_Kerrigan" parent="ImportedModel">
+        <RequiredAnims value="Assets\Models\Mecha_Kerrigan\mecha_kerrigan_requiredanims.m3a"/>
+        <ScaleMax value="1.150000,1.150000,1.150000"/>
+        <ScaleMin value="1.150000,1.150000,1.150000"/>
+    </CModel>
+    <CModel id="Purifier_Artanis" parent="ImportedModel">
+        <ScaleMax value="0.850000,0.850000,0.850000"/>
+        <ScaleMin value="0.850000,0.850000,0.850000"/>
+    </CModel>
+    <CModel id="RaynorAttackImpact2" parent="ImpactFX">
+        <Model value="Assets\Effects\Terran\MarineWeaponImpact\MarineWeaponImpact.m3"/>
+        <EditorCategories value="Race:Terran"/>
+        <Lighting value="RaynorAttackImpact"/>
+        <ScaleMax value="2.000000,2.000000,2.000000"/>
+        <ScaleMin value="2.000000,2.000000,2.000000"/>
+    </CModel>
+    <CModel id="RaynorAttackLaunch2" parent="LaunchFX">
+        <Model value="Assets\Effects\Terran\MarineWeaponLaunch\MarineWeaponLaunch.m3"/>
+        <EditorCategories value="Race:Terran"/>
+        <Lighting value="RaynorAttackLaunch"/>
+        <ScaleMax value="2.000000,2.000000,2.000000"/>
+        <ScaleMin value="2.000000,2.000000,2.000000"/>
+    </CModel>
+    <CModel id="PhaseTransition">
+        <Model value="Assets\Units\Protoss\MotherShip_Taldarim_Death\MotherShip_Taldarim_Death.m3"/>
+        <AnimSpeed value="1.500000"/>
+    </CModel>
+    <CModel id="PortalBeam">
+        <Model value="Assets\Effects\Protoss\Alarak_Attack_Beam_Strong\Alarak_Attack_Beam_Strong.m3"/>
+    </CModel>
+    <CModel id="PortalBeamImpact">
+        <Model value="Assets\Effects\Protoss\Alarak_COOP_Empower_PowerUp\Alarak_COOP_Empower_PowerUp.m3"/>
+        <ScaleMax value="2.000000,2.000000,2.000000"/>
+        <ScaleMin value="2.000000,2.000000,2.000000"/>
+    </CModel>
+    <CModel id="PortalTempestPart">
+        <Model value="Assets\Models\Tempest_TalDarim_Red\Tempest_TalDarim_Red.m3"/>
+    </CModel>
+    <CModel id="ProtossPortraitTalon" parent="Portrait">
+        <Model value="Assets\Models\Talon_Executor\Talon_Executor4_Portrait.m3"/>
+        <EditorCategories value="Race:Protoss"/>
+        <Image value="Assets\Icons\Talon-Executor4-Static-Portrait.dds"/>
+    </CModel>
+    <CModel id="LaserLanceImpactDmg" parent="ImpactFX">
+        <Model value="Assets\Effects\Protoss\Mothership_Taldarim_Thermal_Lance_Beam_Unit_Impact\Mothership_Taldarim_Thermal_Lance_Beam_Unit_Impact.m3"/>
+        <EditorCategories value="Race:Protoss"/>
+    </CModel>
+    <CModel id="LaserLanceMissile" parent="MissileFX">
+        <Model value="Assets\Effects\Protoss\Mothership_Taldarim_Thermal_Lance_Beam_Impact\Mothership_Taldarim_Thermal_Lance_Beam_Impact.m3"/>
+    </CModel>
+    <CModel id="PylonColossus">
+        <Model value="Assets\Buildings\Protoss\PylonCannon\PylonCannon.m3"/>
+    </CModel>
+    <CModel id="Scientist1Portrait2" parent="FXAPortrait" Race="Terran">
+        <Model value="Assets\Portraits\Terran\Scientist1Portrait\Scientist1Portrait.m3"/>
+        <FacialController value="LocalizedData\Facial\Scientist1Portrait.fxa"/>
+        <Image value="Assets\Textures\Scientist1Portrait_Static.dds"/>
+        <Lighting value="Scientist1Portrait"/>
+    </CModel>
+    <CModel id="SentryTalonWeaponMissile">
+        <Model value="Assets\Models\Talon_Vindicator\Vindicator_Weapon.m3"/>
+    </CModel>
+    <CModel id="SpawnerOffensive2">
+        <Model value="Assets\Models\Talon_RoboticsFacility\Talon_RoboticsFacility.m3"/>
+        <SelectionRadius value="2.000000"/>
+    </CModel>
+    <CModel id="SpawnerSupport1">
+        <Model value="Assets\Models\Talon_Stargate\Talon_Stargate.m3"/>
+        <Radius value="2.000000"/>
+        <SelectionLayer value="2"/>
+        <SelectionRadius value="2.000000"/>
+        <ShadowRadius value="2.500000"/>
+        <SquibTypeDefault value="Metal"/>
+    </CModel>
+    <CModel id="MadnessThrone2">
+        <Model value="Assets\Models\Talon_Augmentor\Talon_Augmentor.m3"/>
+        <SelectionRadius value="1.500000"/>
+    </CModel>
+    <CModel id="StalkerTalonWeaponBeam">
+        <Model value="Assets\Models\Talon_Vaporizer\Vaporizer_RailgunBeamStraight.m3"/>
+    </CModel>
+    <CModel id="StasisBubble">
+        <Model value="Assets\Effects\Protoss\StasisTomb\StasisTomb.m3"/>
+        <ScaleMax value="0.800000,0.800000,0.800000"/>
+        <ScaleMin value="0.800000,0.800000,0.800000"/>
+    </CModel>
+    <CModel id="StasisBubbleRange">
+        <Model value="Assets\Effects\Protoss\SuppressionTower_SuppressionBeam_Cursor\SuppressionTower_SuppressionBeam_Cursor.m3"/>
+        <ScaleMax value="2.000000,2.000000,1.000000"/>
+        <ScaleMin value="2.000000,2.000000,1.000000"/>
+    </CModel>
+    <CModel id="StasisBubbleStasisAddition">
+        <Model value="Assets\COOP\Zeratul\Effects\DarkTemplar_Zeratul_COOP_StasisCacoon\DarkTemplar_Zeratul_COOP_StasisCacoon.m3"/>
+    </CModel>
+    <CModel id="KamikazeImpactIndicator" parent="OneShotSpellFX">
+        <Model value="Assets\UI\LaserDrillTargetingUI\LaserDrillTargetingUI.m3"/>
+        <EditorCategories value="Race:Terran"/>
+    </CModel>
+    <CModel id="Talon_CrusadorRoyal" parent="ImportedModel">
+        <ScaleMax value="0.900000,0.900000,0.900000"/>
+        <ScaleMin value="0.900000,0.900000,0.900000"/>
+    </CModel>
+    <CModel id="Talon_Crystalwing" parent="ImportedModel">
+        <ScaleMax value="1.750000,1.750000,1.750000"/>
+        <ScaleMin value="1.750000,1.750000,1.750000"/>
+        <SelectionRadius value="0.350000"/>
+    </CModel>
+    <CModel id="Talon_Crystalwing_Portrait">
+        <Model value="Assets\Models\Talon_Crystalwing\Talon_Crystalwing_Portrait.m3"/>
+    </CModel>
+    <CModel id="Talon_Kahlani_Portrait">
+        <Model value="Assets\Models\Talon_Kahlani\Talon_Kahlani_Portrait.m3"/>
+    </CModel>
+    <CModel id="Talon_Nokryss_Portrait">
+        <Model value="Assets\Models\Talon_Nokryss\Talon_Nokryss_Portrait.m3"/>
+    </CModel>
+    <CModel id="Talon_CrusadorRoyal_Portrait">
+        <Model value="Assets\Models\Talon_CrusadorRoyal\Talon_Crusader_Portrait.m3"/>
+    </CModel>
+    <CModel id="Talon_Probe" parent="ImportedModel"/>
+    <CModel id="Talon_Probe_Portrait">
+        <Model value="Assets\Models\Talon_Probe\Talon_Probe_Portrait.m3"/>
+    </CModel>
+    <CModel id="Talon_Vaporizer_Portrait">
+        <Model value="Assets\Models\Talon_Vaporizer\Talon_Vaporizer_Portrait.m3"/>
+    </CModel>
+    <CModel id="Talon_Vindicator_Portrait">
+        <Model value="Assets\Models\Talon_Vindicator\Talon_Vindicator_Portrait.m3"/>
+    </CModel>
+    <CModel id="Talon_Hunter_Forged_Portrait">
+        <Model value="Assets\Models\Talon_Volchron\Talon_Hunter_Portrait.m3"/>
+    </CModel>
+    <CModel id="Talon_Pacifier_Portrait">
+        <Model value="Assets\Models\Talon_Pacifier\Talon_Pacifier_Portrait.m3"/>
+    </CModel>
+    <CModel id="Talon_Hunter_Forged" parent="ImportedModel">
+        <Model value="Assets\Models\Talon_Volchron\Talon_Volchron.m3"/>
+        <SelectionRadius value="0.540000"/>
+    </CModel>
+    <CModel id="Talon_Kahlani" parent="ImportedModel">
+        <ScaleMax value="1.700000,1.700000,1.700000"/>
+        <ScaleMin value="1.700000,1.700000,1.700000"/>
+        <SelectionRadius value="0.450000"/>
+    </CModel>
+    <CModel id="Talon_Nokryss" parent="ImportedModel">
+        <ScaleMax value="1.100000,1.100000,1.100000"/>
+        <ScaleMin value="1.100000,1.100000,1.100000"/>
+        <SelectionRadius value="0.450000"/>
+    </CModel>
+    <CModel id="Talon_Pacifier" parent="ImportedModel">
+        <SelectionRadius value="0.600000"/>
+    </CModel>
+    <CModel id="Talon_ParticleCannon" parent="ImportedModel"/>
+    <CModel id="Talon_PylonUpgraded" parent="ImportedModel">
+        <ScaleMax value="1.500000,1.500000,1.250000"/>
+        <ScaleMin value="1.500000,1.500000,1.250000"/>
+        <SelectionRadius value="0.650000"/>
+    </CModel>
+    <CModel id="Talon_Vaporizer" parent="ImportedModel">
+        <ScaleMax value="0.850000,0.850000,0.850000"/>
+        <ScaleMin value="0.850000,0.850000,0.850000"/>
+        <SelectionRadius value="1.200000"/>
+    </CModel>
+    <CModel id="Talon_Vindicator" parent="ImportedModel">
+        <ScaleMax value="0.700000,0.700000,0.700000"/>
+        <ScaleMin value="0.700000,0.700000,0.700000"/>
+        <SelectionRadius value="1.000000"/>
+    </CModel>
+    <CModel id="Tornado">
+        <Model value="Assets\Effects\Neutral\Tornadoes_Coop\Tornadoes_Coop.m3"/>
+    </CModel>
+    <CModel id="TornadoRange">
+        <Model value="Assets\Models\AreaSplatInwards\AreaSplatInwards.m3"/>
+        <ScaleMax value="1.700000,1.700000,1.000000"/>
+        <ScaleMin value="1.700000,1.700000,1.000000"/>
+    </CModel>
+    <CModel id="TurbochargeBuff">
+        <Model value="Assets\Effects\Neutral\XelNagaAccelerator_Impact\XelNagaAccelerator_Impact.m3"/>
+        <ScaleMax value="1.400000,1.400000,1.400000"/>
+        <ScaleMin value="1.400000,1.400000,1.400000"/>
+    </CModel>
+    <CModel id="TurbochargeCast">
+        <Model value="Assets\Effects\Protoss\Envision\Envision.m3"/>
+        <ScaleMax value="8.000000,8.000000,2.000000"/>
+        <ScaleMin value="8.000000,8.000000,2.000000"/>
+    </CModel>
+    <CModel id="VoidContainment">
+        <Model value="Assets\Models\Talon_ShieldBattery\Talon_ShieldBattery.m3"/>
+        <SelectionRadius value="1.100000"/>
+    </CModel>
+    <CModel id="LightningElemental" parent="Unit">
+        <Model value="Assets\COOP\Zeratul\Units\Construct_Form_Zeratul_COOP\Construct_Form_Zeratul_COOP.m3"/>
+        <ScaleMax value="0.250000,0.250000,0.250000"/>
+        <ScaleMin value="0.250000,0.250000,0.250000"/>
+        <SelectionRadius value="2.500000"/>
+    </CModel>
+    <CModel id="AtlantisSpawning">
+        <Model value="Assets\Effects\Protoss\Mothership_Taldarim_TeleportIn\Mothership_Taldarim_TeleportIn.m3"/>
+    </CModel>
+    <CModel id="BarrageLineEnd" parent="UI">
+        <Model value="Assets\UI\Cursors\UI_AOEStretchLine_Terran_End\UI_AOEStretchLine_Terran_End.m3"/>
+    </CModel>
+    <CModel id="BarrageLineMid" parent="UI">
+        <Model value="Assets\UI\Cursors\UI_AOEStretchLine_Terran_Mid\UI_AOEStretchLine_Terran_Mid.m3"/>
+    </CModel>
+    <CModel id="BarrageLineStart" parent="UI">
+        <Model value="Assets\UI\Cursors\UI_AOEStretchLine_Terran_Start\UI_AOEStretchLine_Terran_Start.m3"/>
+    </CModel>
+    <CModel id="ArmoryDeathJunker" parent="ArmoryDeathBase">
+        <Model value="Assets\Buildings\Terran\Armory_HornerHan_Coop_Death\Armory_HornerHan_Coop_Death.m3"/>
+    </CModel>
+    <CModel id="ArmoryDeathRyoal" parent="ArmoryDeathBase">
+        <Model value="Assets\COOP\Mengsk\Buildings\Armory_Mengsk_COOP_Death\Armory_Mengsk_COOP_Death.m3"/>
+        <Lighting value="ArmoryDeathJunker"/>
+    </CModel>
+    <CModel id="ArmoryJunker" parent="ArmoryBase">
+        <Model value="Assets\Buildings\Terran\Armory_HornerHan_Coop\Armory_HornerHan_Coop.m3"/>
+    </CModel>
+    <CModel id="BeamDroneWeaponBeam" parent="PersistentSpellFX">
+        <Model value="Assets\Effects\Protoss\ColossusBeam\ColossusBeam.m3"/>
+        <EditorCategories value="Race:Protoss"/>
+        <RadiusLoose value="1.000000"/>
+    </CModel>
+    <CModel id="BeamDroneWeaponBeamImpact" parent="ImpactFX">
+        <Model value="Assets\Effects\Protoss\ColossusBeamBurn\ColossusBeamBurn.m3"/>
+        <EditorCategories value="Race:Protoss"/>
+    </CModel>
+    <CModel id="BombardmentImpact">
+        <Model value="Assets\Effects\Terran\Banshee_Airstrike_Impact\Banshee_Airstrike_Impact.m3"/>
+    </CModel>
+    <CModel id="CyberneticsCoreAncient" parent="Building" Race="Protoss">
+        <Model value="Assets\Buildings\Protoss\CyberneticsCore_Ihanrii\CyberneticsCore_Ihanrii.m3"/>
+        <Radius value="1.500000"/>
+        <SelectionLayer value="2"/>
+        <SelectionRadius value="1.500000"/>
+        <ShadowRadius value="1.500000"/>
+        <SquibTypeDefault value="Metal"/>
+    </CModel>
+    <CModel id="CyberneticsCoreAncientDeath" parent="BuildingDeath" Race="Protoss">
+        <Model value="Assets\Buildings\Protoss\CyberneticsCore_Ihanrii_Death\CyberneticsCore_Ihanrii_Death.m3"/>
+    </CModel>
+    <CModel id="DarkShrineAncient" parent="Building" Race="Protoss">
+        <Model value="Assets\Buildings\Protoss\DarkShrine_Ihanrii\DarkShrine_Ihanrii.m3"/>
+        <AttachProps Id="Ref_Target 01">
+            <Keys index="Ground" value="0"/>
+        </AttachProps>
+        <Lighting value="DarkShrine"/>
+        <Radius value="1.150000"/>
+        <ScaleMax value="0.850000,0.850000,0.850000"/>
+        <ScaleMin value="0.850000,0.850000,0.850000"/>
+        <SelectionLayer value="2"/>
+        <SelectionRadius value="1.352500"/>
+        <ShadowRadius value="1.352500"/>
+        <SquibTypeDefault value="Metal"/>
+        <TextureDeclares Prefix="darkshrine_">
+            <Adaptions TriggerOnSubstring="_Diffuse" Slot="main"/>
+            <Adaptions TriggerOnSubstring="_Specular" Slot="main"/>
+            <Adaptions TriggerOnSubstring="_Emissive" Slot="main"/>
+        </TextureDeclares>
+        <TextureDeclares Prefix="pylon_">
+            <Adaptions TriggerOnSubstring="_Diffuse" Slot="campaign"/>
+            <Adaptions TriggerOnSubstring="_Specular" Slot="campaign"/>
+            <Adaptions TriggerOnSubstring="_Emissive" Slot="campaign"/>
+        </TextureDeclares>
+        <TextureDeclares Prefix="glow_">
+            <Adaptions Slot="generic01"/>
+        </TextureDeclares>
+        <TextureDeclares Prefix="grad_rays_blue">
+            <Adaptions Slot="generic02"/>
+        </TextureDeclares>
+    </CModel>
+    <CModel id="DarkShrineAncientDeath" parent="BuildingDeath" Race="Protoss" low="ProtossSmallBuildingDeathLow">
+        <Model value="Assets\Buildings\Protoss\DarkShrine_Ihanrii_Death\DarkShrine_Ihanrii_Death.m3"/>
+        <LowQualityModel value="ProtossSmallBuildingTaldarimDeathLow"/>
+        <Lighting value="DarkShrineDeath"/>
+        <TextureDeclares Prefix="darkshrine_">
+            <Adaptions TriggerOnSubstring="_Diffuse" Slot="main"/>
+            <Adaptions TriggerOnSubstring="_Specular" Slot="main"/>
+            <Adaptions TriggerOnSubstring="_Emissive" Slot="main"/>
+        </TextureDeclares>
+        <TextureDeclares Prefix="pylon_">
+            <Adaptions TriggerOnSubstring="_Diffuse" Slot="campaign"/>
+            <Adaptions TriggerOnSubstring="_Specular" Slot="campaign"/>
+            <Adaptions TriggerOnSubstring="_Emissive" Slot="campaign"/>
+        </TextureDeclares>
+        <TextureDeclares Prefix="glow_">
+            <Adaptions Slot="generic01"/>
+        </TextureDeclares>
+        <TextureDeclares Prefix="grad_">
+            <Adaptions Slot="generic02"/>
+        </TextureDeclares>
+    </CModel>
+    <CModel id="DarkShrineTaldarim">
+        <Model value="Assets\Buildings\Protoss\DarkShrine_Forged\DarkShrine_Forged.m3"/>
+    </CModel>
+    <CModel id="Decoy">
+        <Model value="Assets\Models\Hologram_Ravager_Bone\Hologram-Ravager-Custom.m3"/>
+        <SelectionLayer value="4"/>
+    </CModel>
+    <CModel id="DecoySpawn">
+        <Model value="Assets\Effects\Protoss\Purifier_Hologram_WarpIn_Ravager\Purifier_Hologram_WarpIn_Ravager.m3"/>
+        <AnimSpeed value="5.000000"/>
+    </CModel>
+    <CModel id="DisruptorAttackNova">
+        <Model value="Assets\Effects\Protoss\Disruptor_PurificationNova\Disruptor_PurificationNova.m3"/>
+        <ScaleMax value="2.000000,2.000000,1.000000"/>
+        <ScaleMin value="2.000000,2.000000,1.000000"/>
+    </CModel>
+    <CModel id="ExtendingBridgeLong">
+        <SelectionRadius value="0.000000"/>
+        <ShadowRadius value="0.000000"/>
+    </CModel>
+    <CModel id="ExtendingBridgeShort">
+        <SelectionRadius value="0.000000"/>
+        <ShadowRadius value="0.000000"/>
+    </CModel>
+    <CModel id="ExtendingBridgeWide">
+        <SelectionRadius value="0.000000"/>
+        <ShadowRadius value="0.000000"/>
+    </CModel>
+    <CModel id="FireGrenadeDotFireLowQuality" parent="PersistentSpellFX">
+        <Model value="Assets\Effects\Terran\TerranBuildingFireLarge\TerranBuildingFireLarge_Low.m3"/>
+        <EditorCategories value="Race:Terran"/>
+        <ScaleMax value="10.500000,10.500000,1.000000"/>
+        <ScaleMin value="10.500000,10.500000,1.000000"/>
+    </CModel>
+    <CModel id="FireGrenadeFireLineDot">
+        <Model value="Assets\Effects\Terran\FireImpact\FireImpact.m3"/>
+        <Flags index="Download" value="0"/>
+        <ScaleMax value="3.000000,3.000000,3.000000"/>
+        <ScaleMin value="3.000000,3.000000,3.000000"/>
+    </CModel>
+    <CModel id="FocusedFireBeam" parent="PersistentSpellFX">
+        <Model value="Assets\Effects\Terran\HellionUpgradeBeam\HellionUpgradeBeam.m3"/>
+        <LowQualityModel value="HellionAttackBeamLow"/>
+        <EditorCategories value="Race:Terran"/>
+        <RadiusLoose value="1.000000"/>
+    </CModel>
+    <CModel id="BeamDrone">
+        <Model value="Assets\Units\Terran\DefensiveMatrixDrone_CovertOps_Collection\DefensiveMatrixDrone_CovertOps_Collection.m3"/>
+    </CModel>
+    <CModel id="BarrageDestructibleRocks">
+        <Model value="Assets\Doodads\DestructibleRockEx16x6\DestructibleRockEx16x6.m3"/>
+        <Radius value="0.750000"/>
+        <SelectionRadius value="1.000000"/>
+        <ShadowRadius value="0.750000"/>
+    </CModel>
+    <CModel id="GatewayAncient" parent="Building" Race="Protoss">
+        <Model value="Assets\Buildings\Protoss\Gateway_Ihanrii\Gateway_Ihanrii.m3"/>
+        <Lighting value="GatewayPurifierCoop"/>
+        <Radius value="2.000000"/>
+        <ScaleMax value="0.800000,0.800000,0.800000"/>
+        <ScaleMin value="0.800000,0.800000,0.800000"/>
+        <SelectionLayer value="2"/>
+        <SelectionRadius value="2.500000"/>
+        <ShadowRadius value="2.500000"/>
+        <SquibTypeDefault value="Metal"/>
+    </CModel>
+    <CModel id="GatewayAncientDeath" parent="BuildingDeath" Race="Protoss">
+        <Model value="Assets\Buildings\Protoss\Gateway_Ihanrii_Death\Gateway_Ihanrii_Death.m3"/>
+        <LowQualityModel value="ProtossBuildingDeathLow"/>
+        <Lighting value="GatewayPurifierCoopDeath"/>
+    </CModel>
+    <CModel id="GeneratorStandardBeam">
+        <Model value="Assets\Effects\Protoss\Solar_Forge_Beam\Solar_Forge_Beam.m3"/>
+    </CModel>
+    <CModel id="GlueSprayCast">
+        <Model value="Assets\Effects\Zerg\BioStasisMissileImpact\BioStasisMissileImpact.m3"/>
+    </CModel>
+    <CModel id="GlueSprayTarget">
+        <Model value="Assets\Effects\Zerg\CorrosiveBileImpactB\CorrosiveBileImpactB.m3"/>
+        <ScaleMax value="1.250000,1.250000,1.250000"/>
+        <ScaleMin value="1.250000,1.250000,1.250000"/>
+    </CModel>
+    <CModel id="HighTemplarFemalePortrait" parent="Portrait">
+        <Model value="Assets\Portraits\Protoss\Jinara_Portrait\Jinara_Portrait.m3"/>
+        <EditorCategories value=""/>
+    </CModel>
+    <CModel id="HighTemplarMalePortrait" parent="Portrait">
+        <Model value="Assets\Portraits\Protoss\SMX2_MalashEx2Portrait\SMX2_MalashEx2Portrait.m3"/>
+        <EditorCategories value=""/>
+    </CModel>
+    <CModel id="HighTemplarMale" parent="Unit">
+        <Model value="Assets\Models\Malash_Fix_TC\Malash_TC_&amp;_FIX.m3"/>
+        <EditorCategories value=""/>
+        <ScaleMax value="2.000000,2.000000,2.000000"/>
+        <ScaleMin value="2.000000,2.000000,2.000000"/>
+        <TextureDeclares Prefix="FireAnim_X4Blue">
+            <Adaptions TriggerOnSubstring="_Blend" Slot="main.diffuse"/>
+        </TextureDeclares>
+    </CModel>
+    <CModel id="HighTemplarFemale" parent="Unit">
+        <Model value="Assets\Units\Protoss\Jinara\Jinara.m3"/>
+        <EditorCategories value=""/>
+        <ScaleMax value="2.300000,2.300000,2.300000"/>
+        <ScaleMin value="2.300000,2.300000,2.300000"/>
+        <TextureDeclares Prefix="FireAnim_X4Blue">
+            <Adaptions TriggerOnSubstring="_Blend" Slot="main.diffuse"/>
+        </TextureDeclares>
+    </CModel>
+    <CModel id="HighTemplarMaleDeath" parent="UnitDeath">
+        <Model value="Assets\Units\Protoss\MalashDeath\MalashDeath.m3"/>
+        <EditorCategories value=""/>
+    </CModel>
+    <CModel id="HighTemplarFemaleDeath" parent="UnitDeath">
+        <Model value="Assets\Units\Protoss\MalashDeath\MalashDeath.m3"/>
+        <EditorCategories value=""/>
+        <Lighting value="HighTemplarMaleDeath"/>
+    </CModel>
+    <CModel id="ImmortalAncientWeaponLaunch" parent="LaunchFX">
+        <Model value="Assets\COOP\Zeratul\Effects\Immortal_Zeratul_COOP_CannonLaunch\Immortal_Zeratul_COOP_CannonLaunch.m3"/>
+    </CModel>
+    <CModel id="ImmortalTaldarim">
+        <AttachProps index="0">
+            <Keys index="Weapon" value="1"/>
+        </AttachProps>
+    </CModel>
+    <CModel id="Immortal_Ihanrii">
+        <AttachProps Id="Ref_Weapon Left">
+            <Keys index="Weapon" value="1"/>
+        </AttachProps>
+        <AttachProps Id="Ref_Weapon Right">
+            <Keys index="Weapon" value="1"/>
+        </AttachProps>
+    </CModel>
+    <CModel id="AtlantisCore" parent="MothershipCore_Purifier_Collection">
+        <TextureDeclares Prefix="MothershipCore_Purifier_CollectionComposite_">
+            <Adaptions TriggerOnSubstring="_Norm" Slot="main.normal"/>
+            <Adaptions TriggerOnSubstring="_Spec" Slot="main.specular"/>
+            <Adaptions TriggerOnSubstring="_Diff" Slot="main.diffuse"/>
+        </TextureDeclares>
+        <TextureDeclares Prefix="MothershipCore_Purifier_Collection_">
+            <Adaptions TriggerOnSubstring="_Diff" Slot="body.diffuse"/>
+        </TextureDeclares>
+    </CModel>
+    <CModel id="Atlantis" parent="MothershipBase">
+        <Model value="Assets\Units\Protoss\Mothership_TalDarim_Collection\Mothership_TalDarim_Collection.m3"/>
+        <ScaleMax value="0.800000,0.800000,0.800000"/>
+        <ScaleMin value="0.800000,0.800000,0.800000"/>
+    </CModel>
+    <CModel id="LightningElementalDeath" parent="UnitDeath">
+        <Model value="Assets\COOP\Zeratul\Units\Construct_Form_Zeratul_COOP_Death\Construct_Form_Zeratul_COOP_Death.m3"/>
+        <EditorCategories value=""/>
+    </CModel>
+    <CModel id="SpawnerDefensive1">
+        <Model value="Assets\Models\Talon_Portal\Talon_Portal.m3"/>
+        <ScaleMax value="0.900000,0.900000,0.900000"/>
+        <ScaleMin value="0.900000,0.900000,0.900000"/>
+        <SelectionRadius value="2.000000"/>
+    </CModel>
+    <CModel id="SpawnerDefensive2">
+        <Model value="Assets\Models\Talon_Shrine\Talon_Shrine.m3"/>
+        <SelectionRadius value="1.200000"/>
+    </CModel>
+    <CModel id="SpawnerOffensive1">
+        <Model value="Assets\Models\Talon_RoboticsBay\Talon_RoboticsBay.m3"/>
+        <SelectionRadius value="2.000000"/>
+    </CModel>
+    <CModel id="ThunderElementalDeath" parent="UnitDeath">
+        <Model value="Assets\COOP\Zeratul\Units\Construct_Essence_Zeratul_COOP_Death\Construct_Essence_Zeratul_COOP_Death.m3"/>
+        <EditorCategories value=""/>
+        <Lighting value="LightningElementalDeath"/>
+    </CModel>
+    <CModel id="LightningElementalWeaponBeam">
+        <Model value="Assets\Effects\Protoss\TempestGroundBeam\TempestGroundBeam.m3"/>
+    </CModel>
+    <CModel id="ThunderElementalWeaponBeam">
+        <Model value="Assets\Effects\Protoss\TempestGroundBeam\TempestGroundBeam.m3"/>
+    </CModel>
+    <CModel id="LightningElementalsSpawn">
+        <Model value="Assets\Effects\Protoss\TempestGroundBeam\TempestGroundBeam.m3"/>
+    </CModel>
+    <CModel id="ThunderElementalsSpawn">
+        <Model value="Assets\Effects\Protoss\Fenix_Whirlwind\Fenix_Whirlwind.m3"/>
+    </CModel>
+    <CModel id="PureEnergyChargeUp">
+        <Model value="Assets\Effects\Protoss\PurifierPowerUp\PurifierPowerUp.m3"/>
+        <ScaleMax value="0.200000,0.200000,1.000000"/>
+        <ScaleMin value="0.200000,0.200000,1.000000"/>
+    </CModel>
+    <CModel id="PureEnergyExplosion">
+        <Model value="Assets\Effects\Protoss\Artanis_AstralWinds\Artanis_AstralWinds.m3"/>
+        <ScaleMax value="1.800000,1.800000,1.300000"/>
+        <ScaleMin value="1.800000,1.800000,1.300000"/>
+    </CModel>
+    <CModel id="Shocked">
+        <Model value="Assets\Effects\Protoss\TheVoid_DeathCloud_Impact\TheVoid_DeathCloud_Impact.m3"/>
+    </CModel>
+    <CModel id="ShockedStun">
+        <Model value="Assets\Effects\Terran\Electrocute\Electrocute.m3"/>
+    </CModel>
+    <CModel id="StormImpact">
+        <Model value="Assets\Effects\Protoss\TempestGroundBeam\TempestGroundBeam.m3"/>
+    </CModel>
+    <CModel id="StormCloud">
+        <Model value="Assets\Effects\Terran\LabToxicGasCloud\LabToxicGasCloud.m3"/>
+        <TextureDeclares Prefix="GooSplat_">
+            <Adaptions TriggerOnSubstring="_1" Slot="main.emissive"/>
+        </TextureDeclares>
+        <ScaleMax value="1.400000,1.400000,1.000000"/>
+        <ScaleMin value="1.400000,1.400000,1.000000"/>
+    </CModel>
+    <CModel id="ThunderElemental" parent="Unit">
+        <Model value="Assets\COOP\Zeratul\Units\Construct_Essence_Zeratul_COOP\Construct_Essence_Zeratul_COOP.m3"/>
+        <ScaleMax value="0.250000,0.250000,0.250000"/>
+        <ScaleMin value="0.250000,0.250000,0.250000"/>
+        <SelectionRadius value="2.500000"/>
+    </CModel>
+    <CModel id="MadnessSpawning">
+        <Model value="Assets\Effects\Protoss\ProtossUnitWarpIn\ProtossUnitWarpIn.m3"/>
+        <ScaleMax value="1.400000,1.400000,1.200000"/>
+        <ScaleMin value="1.400000,1.400000,1.200000"/>
+    </CModel>
+    <CModel id="Obelisk">
+        <SelectionRadius value="1.000000"/>
+        <ShadowRadius value="1.000000"/>
+    </CModel>
+    <CModel id="ObeliskPlacement">
+        <Radius value="1.000000"/>
+        <ScaleMax value="1.050000,1.050000,1.050000"/>
+        <ScaleMin value="1.050000,1.050000,1.050000"/>
+        <SelectionLayer value="2"/>
+        <SelectionRadius value="1.000000"/>
+        <ShadowRadius value="1.000000"/>
+    </CModel>
+    <CModel id="ObserverTrail">
+        <Model value="Assets\Effects\Protoss\TheVoid_DeathCloud_Impact\TheVoid_DeathCloud_Impact.m3"/>
+    </CModel>
+    <CModel id="Ravager_Bone">
+        <TextureDeclares Prefix="Ravager_CollectionSkin_Bone_">
+            <Adaptions TriggerOnSubstring="_Emiss" Slot="main.emissive"/>
+        </TextureDeclares>
+    </CModel>
+    <CModel id="ShoutWave">
+        <Model value="Assets\Effects\Protoss\Void_Narud_Psionic_Shock_Wave\Void_Narud_Psionic_Shock_Wave.m3"/>
+        <AnimSpeed value="0.500000"/>
+        <ScaleMax value="0.950000,0.950000,0.800000"/>
+        <ScaleMin value="0.950000,0.950000,0.800000"/>
+    </CModel>
+    <CModel id="TagTeamSpawning">
+        <Model value="Assets\Effects\Protoss\ProtossUnitWarpIn\ProtossUnitWarpIn.m3"/>
+        <ScaleMax value="1.350000,1.350000,1.650000"/>
+        <ScaleMin value="1.350000,1.350000,1.650000"/>
+    </CModel>
+    <CModel id="TransportEscort" parent="OracleBase">
+        <Model value="Assets\Units\Protoss\Oracle_Golden\Oracle_Golden.m3"/>
+        <ScaleMax value="0.450000,0.450000,0.450000"/>
+        <ScaleMin value="0.450000,0.450000,0.450000"/>
+    </CModel>
+    <CModel id="PsiOrb">
+        <Model value="Assets\Units\Protoss\StasisWard\StasisWard.m3"/>
+        <AnimSpeed value="0.500000"/>
+    </CModel>
+    <CModel id="ReaperExplosives" parent="Unit" Race="Terran">
+        <Model value="Assets\Units\Terran\MagneticMine\MagneticMine.m3"/>
+        <LowQualityModel value="KD8ChargeLow"/>
+        <AnimSpeed value="2.500000"/>
+        <ScaleMax value="1.500000,1.500000,1.500000"/>
+        <ScaleMin value="1.500000,1.500000,1.500000"/>
+        <SelectionLayer value="3"/>
+    </CModel>
+    <CModel id="MonolithAncient" parent="Building">
+        <Model value="Assets\COOP\Zeratul\Buildings\MonolithCannon_Zeratul_COOP\MonolithCannon_Zeratul_COOP.m3"/>
+        <EditorCategories value="Race:Protoss"/>
+        <SquibTypeDefault value="Metal"/>
+        <SelectionRadius value="1.176200"/>
+        <ScaleMax value="0.900000,0.900000,0.850000"/>
+        <ScaleMin value="0.900000,0.900000,0.850000"/>
+        <SelectionLayer value="2"/>
+    </CModel>
+    <CModel id="MonolithNerazim" parent="Building">
+        <Model value="Assets\Buildings\Protoss\DarkProtossTurretEx2_Shakuras\DarkProtossTurretEx2_Shakuras.m3"/>
+        <EditorCategories value="Race:Protoss"/>
+        <ScaleMax value="0.700000,0.700000,0.800000"/>
+        <ScaleMin value="0.700000,0.700000,0.800000"/>
+        <SelectionRadius value="1.700000"/>
+        <SquibTypeDefault value="Metal"/>
+        <SelectionLayer value="2"/>
+    </CModel>
+    <CModel id="MonolithAncientDeath" parent="BuildingDeath">
+        <Model value="Assets\COOP\Zeratul\Buildings\MonolithCannon_Zeratul_COOP_Death\MonolithCannon_Zeratul_COOP_Death.m3"/>
+        <EditorCategories value="Race:Protoss"/>
+    </CModel>
+    <CModel id="MonolithNerazimDeath" parent="BuildingDeath">
+        <Model value="Assets\Buildings\Protoss\DarkProtossTurretEx2_Shakuras_Death\DarkProtossTurretEx2_Shakuras_Death.m3"/>
+        <EditorCategories value="Race:Protoss"/>
+    </CModel>
+    <CModel id="NexusStandard" parent="NexusBase">
+        <Model value="Assets\Buildings\Protoss\NexusEx1\NexusEx1.m3"/>
+        <Radius value="1.000000"/>
+        <ScaleMax value="0.800000,0.800000,0.900000"/>
+        <ScaleMin value="0.800000,0.800000,0.900000"/>
+        <SelectionRadius value="2.200000"/>
+        <ShadowRadius value="2.000000"/>
+    </CModel>
+    <CModel id="NexusAncient" parent="Building" Race="Protoss">
+        <Model value="Assets\Buildings\Protoss\Nexus_Ihanrii\Nexus_Ihanrii.m3"/>
+        <Lighting value="Nexus"/>
+        <Radius value="1.000000"/>
+        <SelectionLayer value="2"/>
+        <SelectionRadius value="2.200000"/>
+        <ShadowRadius value="2.000000"/>
+        <SquibTypeDefault value="Metal"/>
+        <ScaleMax value="0.800000,0.800000,0.900000"/>
+        <ScaleMin value="0.800000,0.800000,0.900000"/>
+    </CModel>
+    <CModel id="NexusAncientDeath" parent="BuildingDeath" Race="Protoss">
+        <Model value="Assets\Buildings\Protoss\Nexus_Ihanrii_Death\Nexus_Ihanrii_Death.m3"/>
+        <LowQualityModel value="NexusDeathLow"/>
+        <Events>
+            <Anim value="Death,00"/>
+            <Name value="ProtossPreExplosionSmall"/>
+            <Type value="Sound"/>
+            <Time value="0.010000"/>
+        </Events>
+        <Events>
+            <Anim value="Death,00"/>
+            <Name value="ProtossPreExplosionSmall"/>
+            <Type value="Sound"/>
+            <Time value="0.300000"/>
+        </Events>
+        <Events>
+            <Anim value="Death,00"/>
+            <Name value="ProtossPreExplosionSmall"/>
+            <Type value="Sound"/>
+            <Time value="0.733000"/>
+        </Events>
+        <Events>
+            <Anim value="Death,00"/>
+            <Name value="ProtossPreExplosionSmall"/>
+            <Type value="Sound"/>
+            <Time value="1.133000"/>
+        </Events>
+        <Events>
+            <Anim value="Death,00"/>
+            <Name value="ProtossExplosionLarge"/>
+            <Type value="Sound"/>
+            <Time value="1.433000"/>
+        </Events>
+        <Lighting value="NexusPurifierCoopDeath"/>
+    </CModel>
+    <CModel id="NexusNerazimDeath" parent="BuildingDeath" Race="Protoss">
+        <Model value="Assets\Buildings\Protoss\NexusDarkDeath\NexusDarkDeath.m3"/>
+        <LowQualityModel value="NexusDeathLow"/>
+        <Events>
+            <Anim value="Death,00"/>
+            <Name value="ProtossPreExplosionSmall"/>
+            <Type value="Sound"/>
+            <Time value="0.010000"/>
+        </Events>
+        <Events>
+            <Anim value="Death,00"/>
+            <Name value="ProtossPreExplosionSmall"/>
+            <Type value="Sound"/>
+            <Time value="0.300000"/>
+        </Events>
+        <Events>
+            <Anim value="Death,00"/>
+            <Name value="ProtossPreExplosionSmall"/>
+            <Type value="Sound"/>
+            <Time value="0.733000"/>
+        </Events>
+        <Events>
+            <Anim value="Death,00"/>
+            <Name value="ProtossPreExplosionSmall"/>
+            <Type value="Sound"/>
+            <Time value="1.133000"/>
+        </Events>
+        <Events>
+            <Anim value="Death,00"/>
+            <Name value="ProtossExplosionLarge"/>
+            <Type value="Sound"/>
+            <Time value="1.433000"/>
+        </Events>
+        <Lighting value="NexusPurifierCoopDeath"/>
+    </CModel>
+    <CModel id="NexusNerazim" parent="Building">
+        <Model value="Assets\Buildings\Protoss\NexusDark\NexusDark.m3"/>
+        <EditorCategories value="Race:Protoss"/>
+        <Radius value="1.000000"/>
+        <SelectionLayer value="2"/>
+        <SelectionRadius value="2.200000"/>
+        <ShadowRadius value="2.000000"/>
+        <SquibTypeDefault value="Metal"/>
+        <ScaleMax value="0.800000,0.800000,0.900000"/>
+        <ScaleMin value="0.800000,0.800000,0.900000"/>
+    </CModel>
+    <CModel id="PhotonCannonAncient" parent="Building" Race="Protoss">
+        <Model value="Assets\Buildings\Protoss\PhotonCannon_Ihanrii\PhotonCannon_Ihanrii.m3"/>
+        <AttachProps Id="Ref_TurretZ">
+            <Keys index="Turret" value="0"/>
+        </AttachProps>
+        <Events>
+            <Anim value="Stand,Unpowered,End,00"/>
+            <Name value="PhaseCannon_PowerOn"/>
+            <Type value="Sound"/>
+            <Time value="0.010000"/>
+            <Payload value="PhaseCannon_PowerOn"/>
+        </Events>
+        <Events>
+            <Anim value="Stand,Unpowered,Start,00"/>
+            <Name value="PhaseCannon_PowerOff"/>
+            <Type value="Sound"/>
+            <Time value="0.010000"/>
+            <Payload value="PhaseCannon_PowerOff"/>
+        </Events>
+        <Lighting value="PhotonCannonPurifierCoop"/>
+        <PlanetPanelCamera value="Star2CameraMid06"/>
+        <Radius value="1.000000"/>
+        <ScaleMax value="0.850000,0.850000,0.850000"/>
+        <ScaleMin value="0.850000,0.850000,0.850000"/>
+        <SelectionLayer value="2"/>
+        <SelectionRadius value="1.176200"/>
+        <ShadowRadius value="1.176200"/>
+        <SquibTypeDefault value="Metal"/>
+        <TechPurchaseCamera value="Star2CameraMid06"/>
+        <UnitGlossaryCamera value="Star2CameraMid06"/>
+    </CModel>
+    <CModel id="PhotonCannonAncientDeath" parent="BuildingDeath" Race="Protoss">
+        <Model value="Assets\Buildings\Protoss\PhotonCannon_Ihanrii_Death\PhotonCannon_Ihanrii_Death.m3"/>
+        <LowQualityModel value="ProtossSmallBuildingDeathLow"/>
+        <Lighting value="PhotonCannonPurifierCoopDeath"/>
+    </CModel>
+    <CModel id="PhotonCannonPurifierDeath" parent="BuildingDeath" Race="Protoss">
+        <LowQualityModel value="ProtossSmallBuildingDeathLow"/>
+        <VariationCount value="2"/>
+        <Model value="Assets\Buildings\Protoss\PhotonCannon_Purifier_Coop_Death\PhotonCannon_Purifier_Coop_Death.m3"/>
+    </CModel>
+    <CModel id="EvilProbe" parent="ProbeBase">
+        <Model value="Assets\Units\Protoss\Blizzcon17_Probe\Blizzcon17_Probe.m3"/>
+        <AttachProps index="0" removed="1"/>
+        <ScaleMax value="2.300000,2.300000,2.300000"/>
+        <ScaleMin value="2.300000,2.300000,2.300000"/>
+    </CModel>
+    <CModel id="ProtossDoorN">
+        <Model value="Assets\Doodads\StarShipAdun_Door\StarShipAdun_Door.m3"/>
+    </CModel>
+    <CModel id="ProtossPortraitStandard" parent="Portrait">
+        <Model value="Assets\Portraits\Protoss\ExecutorPortrait\ExecutorPortrait.m3"/>
+        <EditorCategories value="Race:Protoss"/>
+        <Image value="Assets\Textures\executorportrait_static.dds"/>
+    </CModel>
+    <CModel id="ProtossPortraitPurifier" parent="Portrait">
+        <Model value="Assets\Portraits\Protoss\Executor_Purifier_Collection_Portrait\Executor_Purifier_Collection_Portrait.m3"/>
+        <EditorCategories value="Race:Protoss"/>
+        <Image value="Assets\Textures\executor_purifier_collection_static.dds"/>
+    </CModel>
+    <CModel id="ProtossPortraitTaldarim" parent="Portrait">
+        <Model value="Assets\Portraits\Protoss\Executor_Taldarim_Portrait\Executor_Taldarim_Portrait.m3"/>
+        <EditorCategories value="Race:Protoss"/>
+        <Image value="Assets\Textures\executor_taldarim_static.dds"/>
+    </CModel>
+    <CModel id="ProtossPortraitAncient" parent="Portrait">
+        <Model value="Assets\Portraits\Protoss\ProtossBuilding_Ihanrii_Portrait\ProtossBuilding_Ihanrii_Portrait.m3"/>
+        <EditorCategories value="Race:Protoss"/>
+        <Image value="Assets\Textures\protossbuilding_ihanrii_portrait_static.dds"/>
+    </CModel>
+    <CModel id="ProtossPortraitNerazim" parent="Portrait">
+        <Model value="Assets\Portraits\Protoss\ExecutorPortrait\ExecutorPortrait.m3"/>
+        <EditorCategories value="Race:Protoss"/>
+        <Image value="Assets\Textures\executorportrait_static.dds"/>
+    </CModel>
+    <CModel id="PurifierConclave">
+        <Model value="Assets\Buildings\Protoss\Conclave_Purifier_COOP\Conclave_Purifier_COOP.m3"/>
+    </CModel>
+    <CModel id="PylonAncient" parent="Building">
+        <Model value="Assets\Buildings\Protoss\Pylon_Ihanrii\Pylon_Ihanrii.m3"/>
+        <EditorCategories value=""/>
+        <Radius value="1.000000"/>
+        <ScaleMax value="0.800000,0.800000,0.750000"/>
+        <ScaleMin value="0.800000,0.800000,0.750000"/>
+        <SelectionLayer value="2"/>
+        <SelectionRadius value="1.176200"/>
+        <ShadowRadius value="1.176200"/>
+        <SquibTypeDefault value="Metal"/>
+    </CModel>
+    <CModel id="PylonJudicator" parent="Building">
+        <Model value="Assets\Buildings\Protoss\PylonXPReward\PylonXPReward.m3"/>
+        <EditorCategories value=""/>
+        <Radius value="1.000000"/>
+        <ScaleMax value="0.850000,0.850000,0.850000"/>
+        <ScaleMin value="0.850000,0.850000,0.850000"/>
+        <SelectionLayer value="2"/>
+        <SelectionRadius value="1.176200"/>
+        <ShadowRadius value="1.176200"/>
+        <SquibTypeDefault value="Metal"/>
+    </CModel>
+    <CModel id="PylonAncientDeath" parent="BuildingDeath" Race="Protoss">
+        <Model value="Assets\Buildings\Protoss\Pylon_Ihanrii_Death\Pylon_Ihanrii_Death.m3"/>
+        <LowQualityModel value="ProtossSmallBuildingDeathLow"/>
+        <Lighting value="PylonPurifierDeath"/>
+    </CModel>
+    <CModel id="PylonJudicatorDeath" parent="BuildingDeath" Race="Protoss">
+        <Model value="Assets\Buildings\Protoss\PylonXPRewardDeath\PylonXPRewardDeath.m3"/>
+        <LowQualityModel value="ProtossSmallBuildingDeathLow"/>
+    </CModel>
+    <CModel id="PylonWeaponMissile" parent="MissileFX">
+        <Model value="Assets\Effects\Protoss\MothershipPurifyMissile\MothershipPurifyMissile.m3"/>
+    </CModel>
+    <CModel id="PylonWeaponMissileImpact">
+        <Model value="Assets\Effects\Protoss\MothershipPurifyMissileImpact\MothershipPurifyMissileImpact.m3"/>
+    </CModel>
+    <CModel id="PylonWeaponOverhead">
+        <Model value="Assets\Effects\Protoss\PurifyLaunch\PurifyLaunch.m3"/>
+    </CModel>
+    <CModel id="RoboticsFacilityAncient" parent="Building" Race="Protoss">
+        <Model value="Assets\Buildings\Protoss\RoboticsFacility_Ihanrii\RoboticsFacility_Ihanrii.m3"/>
+        <Lighting value="RoboticsFacilityPurifierCoop"/>
+        <Radius value="1.500000"/>
+        <ScaleMax value="0.900000,0.900000,0.900000"/>
+        <ScaleMin value="0.900000,0.900000,0.900000"/>
+        <SelectionLayer value="2"/>
+        <SelectionRadius value="1.666500"/>
+        <ShadowRadius value="1.666500"/>
+        <SquibTypeDefault value="Metal"/>
+    </CModel>
+    <CModel id="RoboticsFacilityAncientDeath" parent="BuildingDeath" Race="Protoss">
+        <Model value="Assets\Buildings\Protoss\RoboticsFacility_Ihanrii_Death\RoboticsFacility_Ihanrii_Death.m3"/>
+        <LowQualityModel value="ProtossBuildingDeathLow"/>
+        <Lighting value="RoboticsFacilityPurifierCoopDeath"/>
+    </CModel>
+    <CModel id="RoboticsBayAncient" parent="Building" Race="Protoss">
+        <Model value="Assets\Buildings\Protoss\RoboticsBay_Ihanrii\RoboticsBay_Ihanrii.m3"/>
+        <Lighting value="RoboticsSupportBayPurifierCoop"/>
+        <Radius value="1.500000"/>
+        <SelectionLayer value="2"/>
+        <SelectionRadius value="1.500000"/>
+        <ShadowRadius value="1.500000"/>
+        <SquibTypeDefault value="Metal"/>
+    </CModel>
+    <CModel id="RoboticsBayAncientDeath" parent="BuildingDeath" Race="Protoss">
+        <Model value="Assets\Buildings\Protoss\RoboticsBay_Ihanrii_Death\RoboticsBay_Ihanrii_Death.m3"/>
+        <LowQualityModel value="ProtossBuildingDeathLow"/>
+        <Lighting value="RoboticsSupportBayPurifierCoopDeath"/>
+    </CModel>
+    <CModel id="RocketLaunchExplosion" parent="OneShotSpellFX">
+        <Model value="Assets\Effects\Terran\Nuke\Nuke.m3"/>
+        <EditorCategories value="Race:Terran"/>
+        <RadiusLoose value="1.000000"/>
+        <TextureDeclares Prefix="LargeSmoke2">
+            <Adaptions Slot="main.diffuse"/>
+            <Adaptions TriggerOnSubstring="_Normal" Slot="main.normal"/>
+        </TextureDeclares>
+    </CModel>
+    <CModel id="RocketLaunchRadioactiveCloud" parent="Unit">
+        <Model value="Assets\Effects\Terran\LabToxicGasCloud\LabToxicGasCloud.m3"/>
+        <ScaleMax value="0.500000,0.500000,0.500000"/>
+        <ScaleMin value="0.500000,0.500000,0.500000"/>
+    </CModel>
+    <CModel id="RotatingWallsBeam" parent="PersistentSpellFX">
+        <Model value="Assets\Effects\Terran\TargetingDroneBeam\TargetingDroneBeam.m3"/>
+        <EditorCategories value="Race:Terran"/>
+    </CModel>
+    <CModel id="RotatingWallsTower">
+        <Model value="Assets\Buildings\Terran\SensorTower\SensorTower.m3"/>
+    </CModel>
+    <CModel id="RotatingWallsWall">
+        <Model value="Assets\Doodads\ForceFieldWall\ForceFieldWall.m3"/>
+    </CModel>
+    <CModel id="SeekerMissileAttackImpact" parent="ImpactFX">
+        <Model value="Assets\Effects\Terran\HunterKillerMissileImpact\HunterKillerMissileImpact.m3"/>
+        <EditorCategories value="Race:Terran"/>
+    </CModel>
+    <CModel id="SeaOfFlamesFireDot">
+        <Model value="Assets\Effects\Terran\FirebatHitSprite\FirebatHitSprite.m3"/>
+        <ScaleMax value="4.500000,4.500000,1.750000"/>
+        <ScaleMin value="4.500000,4.500000,1.750000"/>
+    </CModel>
+    <CModel id="SeaOfFlamesImpactSplat">
+        <Model value="Assets\UI\BossTargetCursorSplat\BossTargetCursorSplat.m3"/>
+        <ScaleMax value="1.400000,1.400000,1.000000"/>
+        <ScaleMin value="1.400000,1.400000,1.000000"/>
+    </CModel>
+    <CModel id="SeaOfFlamesPersistentModel">
+        <Model value="Assets\Units\Terran\DefensiveMatrixDrone_CovertOps_Collection\DefensiveMatrixDrone_CovertOps_Collection.m3"/>
+    </CModel>
+    <CModelFoliage id="SeekerMissileTimer">
+        <Model value="Assets\Effects\Terran\WidowMineTimerUI\WidowMineTimerUI.m3"/>
+    </CModelFoliage>
+    <CModel id="ShieldBatteryNerazim">
+        <SelectionRadius value="1.250000"/>
+    </CModel>
+    <CModel id="SolarForge">
+        <Model value="Assets\Buildings\Protoss\Solar_Forge\Solar_Forge.m3"/>
+        <SelectionRadius value="2.200000"/>
+        <SelectionLayer value="2"/>
+    </CModel>
+    <CModel id="Supplicant" parent="Unit">
+        <Model value="Assets\Units\Protoss\Supplicant\Supplicant.m3"/>
+        <EditorCategories value=""/>
+    </CModel>
+    <CModel id="TESTimpactlocation" parent="OneShotSpellFX">
+        <Model value="Assets\UI\LaserDrillTargetingUI\LaserDrillTargetingUI.m3"/>
+        <EditorCategories value="Race:Terran"/>
+    </CModel>
+    <CModel id="BombardmentMissile" parent="MissileFX">
+        <Model value="Assets\Effects\Terran\MissileTurretMissile\MissileTurretMissile.m3"/>
+        <EditorCategories value="Race:Terran"/>
+        <SelectionRadius value="0.666500"/>
+        <ShadowRadius value="0.666500"/>
+    </CModel>
+    <CModel id="BombardmentTarget" parent="OneShotSpellFX">
+        <Model value="Assets\UI\LaserDrillTargetingUI\LaserDrillTargetingUI.m3"/>
+        <EditorCategories value="Race:Terran"/>
+    </CModel>
+    <CModel id="MercCompoundDeath2" parent="BuildingDeath">
+        <Model value="Assets\Buildings\Terran\MercCompoundDeath\MercCompoundDeath.m3"/>
+        <LowQualityModel value="HERCCompoundDeathLow"/>
+        <EditorCategories value="Race:Zerg"/>
+    </CModel>
+    <CModel id="MercCompund" parent="ArmoryBase">
+        <Model value="Assets\Buildings\Terran\MercCompound\MercCompound.m3"/>
+    </CModel>
+    <CModel id="ArmoryRyoal" parent="ArmoryBase">
+        <Model value="Assets\COOP\Mengsk\Buildings\Armory_Mengsk_COOP\Armory_Mengsk_COOP.m3"/>
+        <Lighting value="ArmoryJunker"/>
+    </CModel>
+    <CModel id="AutoTurret2" parent="AutoTurretBase">
+        <Model value="Assets\Buildings\Terran\AutoTurret\AutoTurret.m3"/>
+    </CModel>
+    <CModel id="BarracksDeathRoyal" parent="BarracksDeathBase">
+        <Model value="Assets\COOP\Mengsk\Buildings\Barracks_Mengsk_COOP_Death\Barracks_Mengsk_COOP_Death.m3"/>
+    </CModel>
+    <CModel id="BarracksRoyal" parent="BarracksBase">
+        <Model value="Assets\COOP\Mengsk\Buildings\Barracks_Mengsk_COOP\Barracks_Mengsk_COOP.m3"/>
+    </CModel>
+    <CModel id="BurrowChargeStun2" parent="PersistentSpellFX">
+        <Model value="Assets\Effects\Zerg\UnitStunImpact\UnitStunImpact.m3"/>
+        <EditorCategories value="Race:Terran"/>
+    </CModel>
+    <CModel id="BurrowedSplat2" parent="Splat">
+        <Model value="Assets\Splats\Splat_ZerglingBurrowed\Splat_ZerglingBurrowed.m3"/>
+        <EditorCategories value="Race:Zerg"/>
+        <VariationCount value="3"/>
+    </CModel>
+    <CModel id="CommandCenterDeathJunker" parent="CommandCenterDeathBase">
+        <Model value="Assets\Units\Terran\CommandCenter_HornerHan_Coop_Death\CommandCenter_HornerHan_Coop_Death.m3"/>
+        <Events>
+            <Anim value="Death,00"/>
+            <Name value="TerranPreExplosionSmall"/>
+            <Type value="Sound"/>
+            <Time value="0.070000"/>
+        </Events>
+        <Events>
+            <Anim value="Death,00"/>
+            <Name value="TerranPreExplosionSmall"/>
+            <Type value="Sound"/>
+            <Time value="0.230000"/>
+        </Events>
+        <Events>
+            <Anim value="Death,00"/>
+            <Name value="TerranPreExplosionSmall"/>
+            <Type value="Sound"/>
+            <Time value="0.510000"/>
+        </Events>
+        <Events>
+            <Anim value="Death,00"/>
+            <Name value="TerranPreExplosionSmall"/>
+            <Type value="Sound"/>
+            <Time value="0.800000"/>
+        </Events>
+        <Events>
+            <Anim value="Death,00"/>
+            <Name value="TerranExplosionLarge"/>
+            <Type value="Sound"/>
+            <Time value="1.630000"/>
+        </Events>
+    </CModel>
+    <CModel id="CommandCenterDeathRoyal" parent="CommandCenterDeathBase">
+        <Model value="Assets\COOP\Mengsk\Buildings\CommandCenter_Mengsk_COOP_Death\CommandCenter_Mengsk_COOP_Death.m3"/>
+        <Events>
+            <Anim value="Death,00"/>
+            <Name value="TerranPreExplosionSmall"/>
+            <Type value="Sound"/>
+            <Time value="0.070000"/>
+        </Events>
+        <Events>
+            <Anim value="Death,00"/>
+            <Name value="TerranPreExplosionSmall"/>
+            <Type value="Sound"/>
+            <Time value="0.230000"/>
+        </Events>
+        <Events>
+            <Anim value="Death,00"/>
+            <Name value="TerranPreExplosionSmall"/>
+            <Type value="Sound"/>
+            <Time value="0.510000"/>
+        </Events>
+        <Events>
+            <Anim value="Death,00"/>
+            <Name value="TerranPreExplosionSmall"/>
+            <Type value="Sound"/>
+            <Time value="0.800000"/>
+        </Events>
+        <Events>
+            <Anim value="Death,00"/>
+            <Name value="TerranExplosionLarge"/>
+            <Type value="Sound"/>
+            <Time value="1.630000"/>
+        </Events>
+        <Lighting value="CommandCenterDeathJunker"/>
+    </CModel>
+    <CModel id="CommandCenterJunker" parent="CommandCenterBase">
+        <Model value="Assets\Units\Terran\CommandCenter_HornerHan_Coop\CommandCenter_HornerHan_Coop.m3"/>
+    </CModel>
+    <CModel id="CommandCenterRoyal" parent="CommandCenterBase">
+        <Model value="Assets\COOP\Mengsk\Buildings\CommandCenter_Mengsk_COOP\CommandCenter_Mengsk_COOP.m3"/>
+    </CModel>
+    <CModel id="FactoryDeathRoyal" parent="FactoryDeathBase">
+        <Model value="Assets\COOP\Mengsk\Buildings\Factory_Mengsk_COOP_Death\Factory_Mengsk_COOP_Death.m3"/>
+    </CModel>
+    <CModel id="FactoryRoyal" parent="FactoryBase">
+        <Model value="Assets\COOP\Mengsk\Buildings\Factory_Mengsk_COOP\Factory_Mengsk_COOP.m3"/>
+    </CModel>
+    <CModel id="FireGrenadeDotFire" parent="PersistentSpellFX">
+        <Model value="Assets\Effects\Terran\MiraHorner_NapalmBomb_Coop_Fire\MiraHorner_NapalmBomb_Coop_Fire.m3"/>
+        <EditorCategories value="Race:Terran"/>
+        <ScaleMax value="1.900000,1.900000,1.400000"/>
+        <ScaleMin value="1.900000,1.900000,1.400000"/>
+        <LowQualityModel value="FireGrenadeDotFireLowQuality"/>
+    </CModel>
+    <CModel id="FrenzyBuffEffect">
+        <Model value="Assets\Effects\Zerg\Zagara_MassFrenzy_State\Zagara_MassFrenzy_State.m3"/>
+        <ScaleMax value="3.500000,3.500000,3.500000"/>
+        <ScaleMin value="3.500000,3.500000,3.500000"/>
+    </CModel>
+    <CModel id="LevelUpmodel">
+        <Model value="Assets\Effects\Zerg\HybridEnergizeImpact\HybridEnergizeImpact.m3"/>
+    </CModel>
+    <CModel id="AcidPit@Puddle" Prefix="Units\" Race="Zerg">
+        <Model value="Assets\Effects\Zerg\SlivanAcidPuddle\SlivanAcidPuddle.m3"/>
+        <EditorCategories value="Race:Zerg"/>
+        <Events>
+            <Anim value="Birth,00"/>
+            <Name value="AcidPuddleImpact"/>
+            <Type value="Sound"/>
+            <Time value="0.020000"/>
+            <Payload value="Nova05_Bilespawn_AcidPuddleImpact"/>
+        </Events>
+        <Events>
+            <Anim value="Birth,00"/>
+            <Name value="Nova05_Bilespawn_AcidPuddle"/>
+            <Type value="Sound"/>
+            <Time value="0.008000"/>
+            <Payload value="Nova05_Bilespawn_AcidPuddle"/>
+        </Events>
+        <Lighting value="PukePuddle"/>
+        <Occlusion value="Show"/>
+        <ScaleMax value="0.875000,0.875000,0.875000"/>
+        <ScaleMin value="0.875000,0.875000,0.875000"/>
+    </CModel>
+    <CModel id="HeroBowler" parent="MutaliskBase">
+        <Model value="Assets\Units\Zerg\MutaliskEx1A\MutaliskEx1A.m3"/>
+    </CModel>
+    <CModel id="HeroBowlerDeath" parent="UnitDeath" Race="Zerg">
+        <Model value="Assets\Units\Zerg\MutaliskEx1ADeath\MutaliskEx1ADeath.m3"/>
+        <LowQualityModel value="ZergMediumUnitDeathLow"/>
+        <Occlusion value="Show"/>
+        <Variations Number="0" Probability="3"/>
+        <Variations Number="1" Probability="1"/>
+    </CModel>
+    <CModel id="Mutalisk">
+        <ScaleMax value="0.600000,0.600000,0.600000"/>
+        <ScaleMin value="0.600000,0.600000,0.600000"/>
+    </CModel>
+    <CModel id="Overlord_Mutant">
+        <SelectionLayer value="2"/>
+    </CModel>
+    <CModel id="OverseerOversightMode">
+        <ScaleMax value="7.500000,7.500000,7.500000"/>
+        <ScaleMin value="7.500000,7.500000,7.500000"/>
+    </CModel>
+    <CModel id="ProtectiveBarrier">
+        <ScaleMax value="1.100000,1.100000,1.100000"/>
+        <ScaleMin value="1.100000,1.100000,1.100000"/>
+    </CModel>
+    <CModel id="RunlingLaserTurret">
+        <Model value="Assets\Buildings\Terran\AutoTurret_BlackOps\AutoTurret_BlackOps.m3"/>
+    </CModel>
+    <CModel id="FireGreandeMissile" parent="MissileFX">
+        <Model value="Assets\Effects\Terran\MiraHorner_Hellion_BasicGrenade_Coop_Missile\MiraHorner_Hellion_BasicGrenade_Coop_Missile.m3"/>
+        <EditorCategories value="Race:Terran"/>
+        <SelectionRadius value="0.833200"/>
+        <ShadowRadius value="0.833200"/>
+    </CModel>
+    <CModel id="SiegeTankSiegedAttackDamage">
+        <ScaleMax value="0.750000,0.750000,0.750000"/>
+        <ScaleMin value="0.750000,0.750000,0.750000"/>
+    </CModel>
+    <CModel id="SiegeTankSiegedAttackImpact">
+        <ScaleMax value="0.750000,0.750000,0.750000"/>
+        <ScaleMin value="0.750000,0.750000,0.750000"/>
+    </CModel>
+    <CModel id="SiegeTankSiegedAttackLaunch">
+        <ScaleMax value="0.750000,0.750000,0.750000"/>
+        <ScaleMin value="0.750000,0.750000,0.750000"/>
+    </CModel>
+    <CModel id="StarportDeathRoyal" parent="StarportDeathBase">
+        <Model value="Assets\COOP\Mengsk\Buildings\Starport_Mengsk_COOP_Death\Starport_Mengsk_COOP_Death.m3"/>
+    </CModel>
+    <CModel id="StarportRoyal" parent="StarportBase">
+        <Model value="Assets\COOP\Mengsk\Buildings\Starport_Mengsk_COOP\Starport_Mengsk_COOP.m3"/>
+    </CModel>
+    <CModel id="SupplyDepotDeathJunker" parent="SupplyDepotDeathBase">
+        <Model value="Assets\Buildings\Terran\SupplyDepot_HornerHan_Coop_Death\SupplyDepot_HornerHan_Coop_Death.m3"/>
+    </CModel>
+    <CModel id="SupplyDepotJunker" parent="SupplyDepotBase">
+        <Model value="Assets\Buildings\Terran\SupplyDepot_HornerHan_Coop\SupplyDepot_HornerHan_Coop.m3"/>
+    </CModel>
+    <CModel id="SupplyDepotLoweredDeathJunker" parent="SupplyDepotLoweredDeathBase">
+        <Model value="Assets\Buildings\Terran\SupplyDepot_HornerHan_Coop_LoweredDeath\SupplyDepot_HornerHan_Coop_LoweredDeath.m3"/>
+    </CModel>
+    <CModel id="BeamDroneWeaponTargetIndicator" parent="OneShotSpellFX">
+        <Model value="Assets\UI\LaserDrillTargetingUI\LaserDrillTargetingUI.m3"/>
+        <EditorCategories value="Race:Terran"/>
+    </CModel>
+    <!-- include all purifier model entries from coop dependency -->
+    <CModel id="CyberneticsCorePurifier" parent="Building" Race="Protoss">
+        <Model value="Assets\Buildings\Protoss\CyberneticsCore_Purifier_Coop\CyberneticsCore_Purifier_Coop.m3"/>
+        <Radius value="1.500000"/>
+        <SelectionLayer value="2"/>
+        <SelectionRadius value="1.500000"/>
+        <ShadowRadius value="1.500000"/>
+        <SquibTypeDefault value="Metal"/>
+    </CModel>
+    <CModel id="CyberneticsCorePurifierDeath" parent="BuildingDeath" Race="Protoss">
+        <Model value="Assets\Buildings\Protoss\CyberneticsCore_Purifier_Coop_Death\CyberneticsCore_Purifier_Coop_Death.m3"/>
+    </CModel>
+    <CModel id="FleetBeaconPurifier" parent="Building" Race="Protoss">
+        <Model value="Assets\Buildings\Protoss\FleetBeacon_Purifier_Coop\FleetBeacon_Purifier_Coop.m3"/>
+        <Radius value="1.500000"/>
+        <ScaleMax value="0.900000,0.900000,0.900000"/>
+        <ScaleMin value="0.900000,0.900000,0.900000"/>
+        <SelectionLayer value="2"/>
+        <SelectionRadius value="1.666500"/>
+        <ShadowRadius value="1.666500"/>
+        <SquibTypeDefault value="Metal"/>
+    </CModel>
+    <CModel id="FleetBeaconPurifierDeath" parent="BuildingDeath" Race="Protoss">
+        <Model value="Assets\Buildings\Protoss\FleetBeacon_Purifier_Coop_Death\FleetBeacon_Purifier_Coop_Death.m3"/>
+        <LowQualityModel value="ProtossBuildingDeathLow"/>
+    </CModel>
+    <CModel id="ForgePurifier" parent="Building" Race="Protoss">
+        <Model value="Assets\Buildings\Protoss\Forge_Purifier_Coop\Forge_Purifier_Coop.m3"/>
+        <Radius value="1.500000"/>
+        <ScaleMax value="0.850000,0.850000,0.850000"/>
+        <ScaleMin value="0.850000,0.850000,0.850000"/>
+        <SelectionLayer value="2"/>
+        <SelectionRadius value="1.764400"/>
+        <ShadowRadius value="1.764400"/>
+        <SquibTypeDefault value="Metal"/>
+    </CModel>
+    <CModel id="ForgePurifierDeath" parent="BuildingDeath" Race="Protoss">
+        <Model value="Assets\Buildings\Protoss\Forge_Purifier_Coop_Death\Forge_Purifier_Coop_Death.m3"/>
+    </CModel>
+    <CModel id="GatewayPurifier" parent="Building" Race="Protoss">
+        <Model value="Assets\Buildings\Protoss\Gateway_Purifier_Coop\Gateway_Purifier_Coop.m3"/>
+        <Radius value="2.000000"/>
+        <ScaleMax value="0.800000,0.800000,0.800000"/>
+        <ScaleMin value="0.800000,0.800000,0.800000"/>
+        <SelectionLayer value="2"/>
+        <SelectionRadius value="2.500000"/>
+        <ShadowRadius value="2.500000"/>
+        <SquibTypeDefault value="Metal"/>
+    </CModel>
+    <CModel id="GatewayPurifierDeath" parent="BuildingDeath" Race="Protoss">
+        <Model value="Assets\Buildings\Protoss\Gateway_Purifier_Coop_Death\Gateway_Purifier_Coop_Death.m3"/>
+        <LowQualityModel value="ProtossBuildingDeathLow"/>
+    </CModel>
+    <!-- Model setup for dark protoss versions of normal protoss buildings for TZeratul02.-->
+    <!--        The Nexus requires a special model, the rest are texture swaps. -->
+    <CModel id="TZNexus">
+        <Radius value="1.000000"/>
+        <ScaleMax value="0.800000,0.800000,0.900000"/>
+        <ScaleMin value="0.800000,0.800000,0.900000"/>
+        <SelectionRadius value="2.200000"/>
+        <ShadowRadius value="2.000000"/>
+    </CModel>
+    <CModel id="TaldarimShieldGenerator">
+        <Model value="Assets\Buildings\Protoss\Taldarim_Shield_Generator\Taldarim_Shield_Generator.m3"/>
+        <SelectionRadius value="2.200000"/>
+        <SelectionLayer value="2"/>
+    </CModel>
+    <CModel id="TaldarimShieldGeneratorDeath" parent="BuildingDeath">
+        <Model value="Assets\Buildings\Protoss\Taldarim_Shield_Generator_Death\Taldarim_Shield_Generator_Death.m3"/>
+        <EditorCategories value=""/>
+    </CModel>
+    <CModel id="VoidContainmentMissile">
+        <Model value="Assets\Models\VoidContainmentMissile\VoidContainmentMissile.m3"/>
+    </CModel>
+    <CModel id="VoidContainmentMissileImpact">
+        <Model value="Assets\Models\VoidContainmentMissile\VoidContainmentMissileImpact.m3"/>
+    </CModel>
+    <CModel id="VoidMineWeapon">
+        <Model value="Assets\Effects\Protoss\Taldarim_Mothership_Black_Hole\Taldarim_Mothership_Black_Hole.m3"/>
+        <ScaleMax value="0.660000,0.660000,0.400000"/>
+        <ScaleMin value="0.660000,0.660000,0.400000"/>
+        <SelectionRadius value="0.000000"/>
+    </CModel>
+    <CModel id="PsiOrbTransporter" parent="WarpPrismBase">
+        <Model value="Assets\Units\Protoss\WarpPrism_Golden\WarpPrism_Golden.m3"/>
+    </CModel>
+    <CModel id="WarpgatePurifierDeath" parent="BuildingDeath" Race="Protoss">
+        <Model value="Assets\Buildings\Protoss\WarpGate_Purifier_Coop_Death\WarpGate_Purifier_Coop_Death.m3"/>
+        <LowQualityModel value="ProtossBuildingDeathLow"/>
+    </CModel>
+    <CModel id="NexusPurifier" parent="Building" Race="Protoss">
+        <Model value="Assets\Buildings\Protoss\Nexus_Purifier_Coop\Nexus_Purifier_Coop.m3"/>
+        <Lighting value="Nexus"/>
+        <Radius value="1.000000"/>
+        <SelectionLayer value="2"/>
+        <SelectionRadius value="2.200000"/>
+        <ShadowRadius value="2.000000"/>
+        <SquibTypeDefault value="Metal"/>
+        <ScaleMax value="0.800000,0.800000,0.900000"/>
+        <ScaleMin value="0.800000,0.800000,0.900000"/>
+    </CModel>
+    <CModel id="NexusPurifierDeath" parent="BuildingDeath" Race="Protoss">
+        <Model value="Assets\Buildings\Protoss\Nexus_Purifier_Coop_Death\Nexus_Purifier_Coop_Death.m3"/>
+        <LowQualityModel value="NexusDeathLow"/>
+        <Events>
+            <Anim value="Death,00"/>
+            <Name value="ProtossPreExplosionSmall"/>
+            <Type value="Sound"/>
+            <Time value="0.010000"/>
+        </Events>
+        <Events>
+            <Anim value="Death,00"/>
+            <Name value="ProtossPreExplosionSmall"/>
+            <Type value="Sound"/>
+            <Time value="0.300000"/>
+        </Events>
+        <Events>
+            <Anim value="Death,00"/>
+            <Name value="ProtossPreExplosionSmall"/>
+            <Type value="Sound"/>
+            <Time value="0.733000"/>
+        </Events>
+        <Events>
+            <Anim value="Death,00"/>
+            <Name value="ProtossPreExplosionSmall"/>
+            <Type value="Sound"/>
+            <Time value="1.133000"/>
+        </Events>
+        <Events>
+            <Anim value="Death,00"/>
+            <Name value="ProtossExplosionLarge"/>
+            <Type value="Sound"/>
+            <Time value="1.433000"/>
+        </Events>
+    </CModel>
+    <CModel id="PhotonCannonPurifier" parent="Building" Race="Protoss">
+        <Model value="Assets\Buildings\Protoss\PhotonCannon_Purifier_Coop\PhotonCannon_Purifier_Coop.m3"/>
+        <AttachProps Id="Ref_TurretZ">
+            <Keys index="Turret" value="0"/>
+        </AttachProps>
+        <Events>
+            <Anim value="Stand,Unpowered,End,00"/>
+            <Name value="PhaseCannon_PowerOn"/>
+            <Type value="Sound"/>
+            <Time value="0.010000"/>
+            <Payload value="PhaseCannon_PowerOn"/>
+        </Events>
+        <Events>
+            <Anim value="Stand,Unpowered,Start,00"/>
+            <Name value="PhaseCannon_PowerOff"/>
+            <Type value="Sound"/>
+            <Time value="0.010000"/>
+            <Payload value="PhaseCannon_PowerOff"/>
+        </Events>
+        <PlanetPanelCamera value="Star2CameraMid06"/>
+        <Radius value="1.000000"/>
+        <ScaleMax value="0.850000,0.850000,0.850000"/>
+        <ScaleMin value="0.850000,0.850000,0.850000"/>
+        <SelectionLayer value="2"/>
+        <SelectionRadius value="1.176200"/>
+        <ShadowRadius value="1.176200"/>
+        <SquibTypeDefault value="Metal"/>
+        <TechPurchaseCamera value="Star2CameraMid06"/>
+        <UnitGlossaryCamera value="Star2CameraMid06"/>
+    </CModel>
+    <CModel id="PylonPurifier" parent="Building" Race="Protoss">
+        <Model value="Assets\Buildings\Protoss\Pylon_Purifier_Coop\Pylon_Purifier_Coop.m3"/>
+        <Radius value="1.000000"/>
+        <ScaleMax value="0.850000,0.850000,0.850000"/>
+        <ScaleMin value="0.850000,0.850000,0.850000"/>
+        <SelectionLayer value="2"/>
+        <SelectionRadius value="1.176200"/>
+        <ShadowRadius value="1.176200"/>
+        <SquibTypeDefault value="Metal"/>
+    </CModel>
+    <CModel id="PylonPurifierDeath" parent="BuildingDeath" Race="Protoss">
+        <Model value="Assets\Buildings\Protoss\Pylon_Purifier_Coop_Death\Pylon_Purifier_Coop_Death.m3"/>
+        <LowQualityModel value="ProtossSmallBuildingDeathLow"/>
+    </CModel>
+    <CModel id="RoboticsFacilityPurifier" parent="Building" Race="Protoss">
+        <Model value="Assets\Buildings\Protoss\RoboticsFacility_Purifier_Coop\RoboticsFacility_Purifier_Coop.m3"/>
+        <Radius value="1.500000"/>
+        <ScaleMax value="0.900000,0.900000,0.900000"/>
+        <ScaleMin value="0.900000,0.900000,0.900000"/>
+        <SelectionLayer value="2"/>
+        <SelectionRadius value="1.666500"/>
+        <ShadowRadius value="1.666500"/>
+        <SquibTypeDefault value="Metal"/>
+    </CModel>
+    <CModel id="RoboticsFacilityPurifierDeath" parent="BuildingDeath" Race="Protoss">
+        <Model value="Assets\Buildings\Protoss\RoboticsFacility_Purifier_Coop_Death\RoboticsFacility_Purifier_Coop_Death.m3"/>
+        <LowQualityModel value="ProtossBuildingDeathLow"/>
+    </CModel>
+    <CModel id="RoboticsBayPurifier" parent="Building" Race="Protoss">
+        <Model value="Assets\Buildings\Protoss\RoboticsSupportBay_Purifier_Coop\RoboticsSupportBay_Purifier_Coop.m3"/>
+        <Radius value="1.500000"/>
+        <SelectionLayer value="2"/>
+        <SelectionRadius value="1.500000"/>
+        <ShadowRadius value="1.500000"/>
+        <SquibTypeDefault value="Metal"/>
+    </CModel>
+    <CModel id="RoboticsBayPurifierDeath" parent="BuildingDeath" Race="Protoss">
+        <Model value="Assets\Buildings\Protoss\RoboticsSupportBay_Purifier_Coop_Death\RoboticsSupportBay_Purifier_Coop_Death.m3"/>
+        <LowQualityModel value="ProtossBuildingDeathLow"/>
+    </CModel>
+    <CModel id="StargatePurifier" parent="Building" Race="Protoss">
+        <Model value="Assets\Buildings\Protoss\Stargate_Purifier_Coop\Stargate_Purifier_Coop.m3"/>
+        <Radius value="2.000000"/>
+        <ScaleMax value="0.800000,0.800000,0.800000"/>
+        <ScaleMin value="0.800000,0.800000,0.800000"/>
+        <SelectionLayer value="2"/>
+        <SelectionRadius value="2.500000"/>
+        <ShadowRadius value="2.500000"/>
+        <SquibTypeDefault value="Metal"/>
+    </CModel>
+    <CModel id="StargatePurifierDeath" parent="BuildingDeath" Race="Protoss">
+        <Model value="Assets\Buildings\Protoss\Stargate_Purifier_Coop_Death\Stargate_Purifier_Coop_Death.m3"/>
+        <Lighting value="StargateDeath"/>
+    </CModel>
+    <CModel id="TwilightCouncilPurifier" parent="Building" Race="Protoss">
+        <Model value="Assets\Buildings\Protoss\TwilightCouncil_Purifier_Coop\TwilightCouncil_Purifier_Coop.m3"/>
+        <Radius value="1.500000"/>
+        <ScaleMax value="0.750000,0.750000,0.750000"/>
+        <ScaleMin value="0.750000,0.750000,0.750000"/>
+        <SelectionLayer value="2"/>
+        <SelectionRadius value="1.999700"/>
+        <ShadowRadius value="1.999700"/>
+        <SquibTypeDefault value="Metal"/>
+    </CModel>
+    <CModel id="TwilightCouncilPurifierDeath" parent="BuildingDeath" Race="Protoss">
+        <Model value="Assets\Buildings\Protoss\TwilightCouncil_Purifier_Coop_Death\TwilightCouncil_Purifier_Coop_Death.m3"/>
+        <LowQualityModel value="ProtossBuildingDeathLow"/>
+    </CModel>
+    <CModel id="DragoonPurifier" parent="Unit" Race="Protoss">
+        <Model value="Assets\Units\Protoss\Dragoon_Purifier_Coop\Dragoon_Purifier_Coop.m3"/>
+        <Occlusion value="Show"/>
+        <PlanetPanelCamera value="Star2CameraHigh08"/>
+        <Radius value="0.650000"/>
+        <SelectionRadius value="0.650000"/>
+        <ShadowRadius value="0.866400"/>
+        <SquibTypeDefault value="Metal"/>
+        <TechPurchaseCamera value="Star2CameraHigh08"/>
+        <Tipability value="0.750000"/>
+        <TipabilityLength value="0.800000"/>
+        <TipabilityWidth value="0.800000"/>
+        <UnitGlossaryCamera value="Star2CameraHigh08"/>
+    </CModel>
+    <CModel id="DragoonPurifierDeath" parent="UnitDeath" Race="Protoss">
+        <Model value="Assets\Units\Protoss\Dragoon_Purifier_Coop_Death\Dragoon_Purifier_Coop_Death.m3"/>
+        <LowQualityModel value="ProtossLargeUnitDeathLow"/>
+    </CModel>
+    <CModel id="Healer">
+        <Model value="Assets\Models\Talon_Obelisk\Talon_Obelisk.m3"/>
+        <SelectionRadius value="1.100000"/>
+    </CModel>
+    <CModel id="ZapTrapMissile" parent="MissileFX">
+        <Model value="Assets\Effects\Protoss\TempestPlasmaMissile\TempestPlasmaMissile.m3"/>
+    </CModel>
+    <CModel id="ZapTrapPersistent">
+        <Model value="Assets\Effects\Protoss\TempestPlasmaMissile\TempestPlasmaMissile.m3"/>
+    </CModel>
+    <CModel id="ZapTrapSearch">
+        <Model value="Assets\Effects\Protoss\TempestPlasmaMissileImpact\TempestPlasmaMissileImpact.m3"/>
+        <ScaleMax value="1.200000,1.200000,0.500000"/>
+        <ScaleMin value="1.200000,1.200000,0.500000"/>
+    </CModel>
+    <CModel id="ZapTrapShock">
+        <Model value="Assets\Effects\Protoss\ArchonBeam\ArchonBeam.m3"/>
+        <AnimSpeed value="1.750000"/>
+        <ScaleMax value="0.500000,0.500000,0.500000"/>
+        <ScaleMin value="0.500000,0.500000,0.500000"/>
+    </CModel>
+    <CModel id="ZealotPurifier2" parent="Unit" Race="Protoss">
+        <Model value="Assets\Units\Protoss\Zealot_Purifier_Collection\Zealot_Purifier_Collection.m3"/>
+        <Occlusion value="Show"/>
+        <PlanetPanelCamera value="Star2CameraMid05"/>
+        <Radius value="0.375000"/>
+        <SelectionRadius value="0.416500"/>
+        <ShadowRadius value="0.416500"/>
+        <SquibTypeDefault value="Metal"/>
+        <TechPurchaseCamera value="Star2CameraMid05"/>
+        <UnitGlossaryCamera value="Star2CameraMid05"/>
+    </CModel>
+    <CModel id="ZealotPurifierDeath2" parent="UnitDeath" Race="Protoss">
+        <Model value="Assets\Units\Protoss\Zealot_Purifier_Collection_Death\Zealot_Purifier_Collection_Death.m3"/>
+        <LowQualityModel value="ProtossSpiritDeathLow"/>
+        <Events>
+            <Anim value="Death,00"/>
+            <Name value="Fenix_Zealot_Purifier_Death"/>
+            <Type value="Sound"/>
+            <Time value="0.023000"/>
+            <Payload value="Fenix_Zealot_Purifier_Death"/>
+        </Events>
+        <Events>
+            <Anim value="Death,00"/>
+            <Name value="Fenix_Zealot_Purifier_Death_Fx"/>
+            <Type value="Sound"/>
+            <Time value="0.048000"/>
+            <Payload value="Fenix_Zealot_Purifier_Death_Fx"/>
+        </Events>
+        <Occlusion value="Show"/>
+        <SelectionRadius value="0.555400"/>
+        <ShadowRadius value="0.555400"/>
+        <VariationCount value="2"/>
+    </CModel>
+    <CModel id="ScoutPurifier" parent="Unit" Race="Protoss">
+        <Model value="Assets\Units\Protoss\Scout_Purifier_Coop\Scout_Purifier_Coop.m3"/>
+        <Occlusion value="Show"/>
+        <PlanetPanelCamera value="Star2CameraLow05"/>
+        <Radius value="0.750000"/>
+        <SelectionRadius value="0.750000"/>
+        <ShadowRadius value="0.750000"/>
+        <TechPurchaseCamera value="Star2CameraLow05"/>
+        <UnitGlossaryCamera value="Star2CameraLow05"/>
+    </CModel>
+    <CModel id="ScoutPurifierDeath" parent="UnitDeath" Race="Protoss">
+        <Model value="Assets\Units\Protoss\Scout_Purifier_Coop_Death\Scout_Purifier_Coop_Death.m3"/>
+        <LowQualityModel value="ProtossMediumUnitDeathLow"/>
+        <Occlusion value="Show"/>
+        <Radius value="0.750000"/>
+        <SelectionRadius value="0.750000"/>
+        <ShadowRadius value="0.750000"/>
+    </CModel>
+    <CModel id="ArbiterPurifier" parent="Unit" Race="Protoss">
+        <Model value="Assets\Units\Protoss\Arbiter_Purifier_Coop\Arbiter_Purifier_Coop.m3"/>
+        <Occlusion value="Show"/>
+        <Radius value="1.000000"/>
+        <ScaleMax value="1.200000,1.200000,1.200000"/>
+        <ScaleMin value="1.200000,1.200000,1.200000"/>
+        <SelectionRadius value="1.000000"/>
+        <ShadowRadius value="1.000000"/>
+    </CModel>
+    <CModel id="ArbiterPurifierDeath" parent="UnitDeath" Race="Protoss">
+        <Model value="Assets\Units\Protoss\Arbiter_Purifier_Coop_Death\Arbiter_Purifier_Coop_Death.m3"/>
+        <LowQualityModel value="ProtossMediumUnitDeathLow"/>
+        <Events>
+            <Anim value="Death,00"/>
+            <Name value="Fenix_Dragoon_DeathExp"/>
+            <Type value="Sound"/>
+            <Time value="0.107000"/>
+            <Payload value="Fenix_Dragoon_DeathExp"/>
+        </Events>
+        <Events>
+            <Anim value="Death,00"/>
+            <Name value="Fenix_Zealot_Purifier_Death_Fx"/>
+            <Type value="Sound"/>
+            <Time value="0.048000"/>
+            <Payload value="Fenix_Zealot_Purifier_Death_Fx"/>
+        </Events>
+        <Events>
+            <Anim value="Death,01"/>
+            <Name value="Fenix_Dragoon_DeathExp"/>
+            <Type value="Sound"/>
+            <Time value="0.062000"/>
+            <Payload value="Fenix_Dragoon_DeathExp"/>
+        </Events>
+        <Events>
+            <Anim value="Death,01"/>
+            <Name value="Fenix_Dragoon_Death_Fx"/>
+            <Type value="Sound"/>
+            <Time value="0.027000"/>
+            <Payload value="Fenix_Dragoon_Death_Fx"/>
+        </Events>
+        <Events>
+            <Anim value="Death,02"/>
+            <Name value="Fenix_Dragoon_DeathExp"/>
+            <Type value="Sound"/>
+            <Time value="0.046000"/>
+            <Payload value="Fenix_Dragoon_DeathExp"/>
+        </Events>
+        <Events>
+            <Anim value="Death,02"/>
+            <Name value="Fenix_Dragoon_Death_Fx"/>
+            <Type value="Sound"/>
+            <Time value="0.147000"/>
+            <Payload value="Fenix_Dragoon_Death_Fx"/>
+        </Events>
+        <Occlusion value="Show"/>
+        <Radius value="0.750000"/>
+        <SelectionRadius value="0.750000"/>
+        <ShadowRadius value="0.750000"/>
+    </CModel>
+    <CModel id="ScoutPurifierPortrait" parent="Portrait" Race="Protoss">
+        <Model value="Assets\Portraits\Protoss\Scout_Purifier_Collection_Portrait\Scout_Purifier_Collection_Portrait.m3"/>
+        <Image value="Assets\Textures\Scout_Purifier_Collection_Portrait_Static.dds"/>
+    </CModel>
+    <CModel id="PurifierDataCore" parent="Building" Race="Protoss">
+        <Model value="Assets\Buildings\Protoss\Purifier_DataCore_Coop\Purifier_DataCore_Coop.m3"/>
+        <Radius value="2.000000"/>
+        <SelectionRadius value="2.000000"/>
+        <ShadowRadius value="3.000000"/>
+    </CModel>
+</Catalog>

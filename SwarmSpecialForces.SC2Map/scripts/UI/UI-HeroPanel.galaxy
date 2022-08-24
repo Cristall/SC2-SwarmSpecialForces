@@ -1,0 +1,74 @@
+
+static int heroPanel_Panel;
+static int heroPanel_HealthBar;
+static int heroPanel_EnergyBar;
+static int heroPanel_ExpBar;
+static int heroPanel_Icon;
+static int heroPanel_UnitTargetFrame;
+static int heroPanel_Level;
+
+void HeroPanel_SetIcon(int playerID ,int heroID){
+    string icon = CatalogFieldValueGet(c_gameCatalogActor, gv_Hero_UnitTypes[heroID],"UnitIcon", c_playerAny);
+
+    libNtve_gf_SetDialogItemImage(heroPanel_Icon, icon , PlayerGroupSingle(playerID));
+    libNtve_gf_SetDialogItemHotkey(heroPanel_UnitTargetFrame, c_hotkeyHeroSelect0, PlayerGroupSingle(playerID));
+    libNtve_gf_SetDialogItemUnit(heroPanel_UnitTargetFrame, gv_PlayerStats[playerID].heroUnit, PlayerGroupSingle(playerID));
+}
+
+static void HeroPanel_UpdateVitals(int playerID){
+    playergroup tmpPG = PlayerGroupSingle(playerID);
+    int level = UnitXPGetCurrentLevel(gv_PlayerStats[playerID].heroUnit, "Levels");
+    libNtve_gf_SetDialogItemMaximumValue(heroPanel_HealthBar, Round(UnitGetPropertyFixed(gv_PlayerStats[playerID].heroUnit, c_unitPropLifeMax, true)), tmpPG);
+    libNtve_gf_SetDialogItemCurrentValue(heroPanel_HealthBar, Round(UnitGetPropertyFixed(gv_PlayerStats[playerID].heroUnit, c_unitPropLife, true)), tmpPG);
+    libNtve_gf_SetDialogItemMaximumValue(heroPanel_EnergyBar, Round(UnitGetPropertyFixed(gv_PlayerStats[playerID].heroUnit, c_unitPropEnergyMax, true)), tmpPG);
+    libNtve_gf_SetDialogItemCurrentValue(heroPanel_EnergyBar, Round(UnitGetPropertyFixed(gv_PlayerStats[playerID].heroUnit, c_unitPropEnergy, true)), tmpPG);
+    if(level < 50){
+        libNtve_gf_SetDialogItemMaximumValue(heroPanel_ExpBar, Round(UnitXPGetXPForLevel(gv_PlayerStats[playerID].heroUnit, "Levels", -1)), tmpPG);
+        libNtve_gf_SetDialogItemCurrentValue(heroPanel_ExpBar, Round(UnitXPGetCurrentXP( gv_PlayerStats[playerID].heroUnit, "Levels")), tmpPG);
+        libNtve_gf_SetDialogItemMinimumValue(heroPanel_ExpBar, Round(UnitXPGetXPForLevel(gv_PlayerStats[playerID].heroUnit, "Levels", level)), tmpPG);
+    }
+    else{
+        libNtve_gf_SetDialogItemMaximumValue(heroPanel_ExpBar, gv_Player_MaxExp, tmpPG);
+        libNtve_gf_SetDialogItemCurrentValue(heroPanel_ExpBar, gv_Player_MaxExp, tmpPG);
+        libNtve_gf_SetDialogItemMinimumValue(heroPanel_ExpBar, 0, tmpPG);
+    }
+    libNtve_gf_SetDialogItemText(heroPanel_Level, IntToText(level), tmpPG);
+}
+
+void HeroPanel_HeroDied(int playerID){
+    playergroup tmpPG = PlayerGroupSingle(playerID);
+    libNtve_gf_SetDialogItemImage(heroPanel_Icon, "Assets\\Textures\\ui_ingame_help_techtree_questionmark.dds" , tmpPG);
+    libNtve_gf_SetDialogItemUnit(heroPanel_UnitTargetFrame, null, tmpPG);
+    libNtve_gf_SetDialogItemCurrentValue(heroPanel_HealthBar, 0, tmpPG);
+    libNtve_gf_SetDialogItemCurrentValue(heroPanel_EnergyBar, 0, tmpPG);
+    libNtve_gf_SetDialogItemCurrentValue(heroPanel_ExpBar   , 0, tmpPG);
+    libNtve_gf_SetDialogItemText(heroPanel_Level, IntToText(0), tmpPG);
+}
+
+bool HeroPanel_PeriodicUpdate (bool testConds, bool runActions){
+    int i;
+    int tmp_player;
+    
+    while(gv_GameActive){
+        for (i = 1; i <= PlayerGroupCount(gv_ActivePG); i += 1) {
+            tmp_player = PlayerGroupPlayer(gv_ActivePG, i);
+            if(gv_PlayerStats[tmp_player].options_HeroPanelVisible
+                && UnitIsAlive(gv_PlayerStats[tmp_player].heroUnit)){
+                HeroPanel_UpdateVitals(tmp_player);
+            }
+        }
+        Wait(0.25, c_timeGame);
+    }
+    
+    return true;
+}
+
+void HeroPanel_Init(){
+    heroPanel_Panel = DialogControlHookupStandard(c_triggerControlTypePanel, "UIContainer/FullscreenUpperContainer/SSF_HeroPanel");
+    heroPanel_HealthBar = DialogControlHookup(heroPanel_Panel, c_triggerControlTypeProgressBar, "HealthBar");
+    heroPanel_EnergyBar = DialogControlHookup(heroPanel_Panel, c_triggerControlTypeProgressBar, "EnergyBar");
+    heroPanel_ExpBar = DialogControlHookup(heroPanel_Panel, c_triggerControlTypeProgressBar, "ExpBar");
+    heroPanel_Icon = DialogControlHookup(heroPanel_Panel, c_triggerControlTypeImage, "IconImage");
+    heroPanel_UnitTargetFrame = DialogControlHookup(heroPanel_Panel, c_triggerControlTypeUnitTarget, "UnitTargetFrame");
+    heroPanel_Level = DialogControlHookup(heroPanel_Panel, c_triggerControlTypeLabel, "LevelLabel");
+}

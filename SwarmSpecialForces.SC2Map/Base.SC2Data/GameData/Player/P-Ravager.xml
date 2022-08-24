@@ -1,0 +1,983 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CEffectDamage id="AbsorbExplosion@StoreDamageActorDummy">
+        <EditorCategories value=""/>
+        <ImpactLocation Value="CasterUnit"/>
+        <Maximum value="0"/>
+    </CEffectDamage>
+    <CEffectSet id="AbsorbExplosion@StoreDamageSet">
+        <EditorCategories value=""/>
+        <EffectArray value="AbsorbExplosion@StoreDamage"/>
+        <EffectArray value="AbsorbExplosion@StoreDamageActorDummy"/>
+    </CEffectSet>
+    <CEffectSwitch id="AbsorbExplosion@DmgCheck">
+        <EditorCategories value=""/>
+        <CaseArray Validator="AbsorbExplosion@DmgCheck" Effect="AbsorbExplosion@DmgSearch"/>
+        <CaseDefault value="AbsorbExplosion@LowerCooldown"/>
+    </CEffectSwitch>
+    <CEffectUserData id="AbsorbExplosion@InitUD">
+        <EditorCategories value=""/>
+        <Key value="AbsorbExplosion"/>
+        <Amount value="0"/>
+        <SourceKey value="AbsorbExplosion"/>
+        <Operation value="Set"/>
+    </CEffectUserData>
+    <CEffectModifyUnit id="AbsorbExplosion@LowerCooldown">
+        <EditorCategories value=""/>
+        <ImpactUnit Value="Caster"/>
+        <Cost Abil="AbsorbExplosion,Execute" CooldownOperation="Multiply" CooldownTimeUse="0.5"/>
+    </CEffectModifyUnit>
+    <CEffectRemoveBehavior id="AbsorbExplosion@DmgReponseRemove">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <BehaviorLink value="AbsorbExplosion@DmgResponse"/>
+    </CEffectRemoveBehavior>
+    <CEffectEnumArea id="AbsorbExplosion@DmgSearch">
+        <EditorCategories value=""/>
+        <AreaArray Radius="5" Effect="AbsorbExplosion@Dmg"/>
+        <SearchFlags index="OffsetByUnitRadius" value="1"/>
+        <SearchFilters value="-;Player,Ally,Neutral,RawResource,HarvestableResource,Missile,Item,Hidden,Invulnerable"/>
+        <ImpactLocation Value="CasterUnit"/>
+    </CEffectEnumArea>
+    <CEffectSet id="AbsorbExplosion@ExplodeSet">
+        <EditorCategories value=""/>
+        <EffectArray value="AbsorbExplosion@DmgCheck"/>
+    </CEffectSet>
+    <CEffectDamage id="AbsorbExplosion@Dmg">
+        <EditorCategories value=""/>
+        <Amount value="0.35">
+            <AccumulatorArray value="AbsorbExplosion@StoredDmg"/>
+            <AccumulatorArray value="HeroSpellDmgMultiplier"/>
+        </Amount>
+    </CEffectDamage>
+    <CEffectApplyBehavior id="AbsorbExplosion@DmgResponse">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+    </CEffectApplyBehavior>
+    <CEffectUserData id="AbsorbExplosion@StoreDamage">
+        <EditorCategories value=""/>
+        <Key value="AbsorbExplosion"/>
+        <Amount value="0">
+            <AccumulatorArray value="AbsorbExplosion@DmgResponse"/>
+        </Amount>
+        <SourceKey value="AbsorbExplosion"/>
+    </CEffectUserData>
+    <CEffectEnumArea id="Headbutt@Search">
+        <EditorCategories value=""/>
+        <SearchFilters value="Visible;Player,Ally,Neutral,Structure,RawResource,HarvestableResource,Missile,Item,Hidden,Invulnerable"/>
+        <AreaArray Radius="4" Effect="Headbutt@Swtich"/>
+        <SearchFlags index="ExtendByUnitRadius" value="1"/>
+    </CEffectEnumArea>
+    <CEffectApplyBehavior id="Headbutt@Slow">
+        <EditorCategories value=""/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="Headbutt@Stun">
+        <EditorCategories value=""/>
+    </CEffectApplyBehavior>
+    <CEffectSwitch id="Headbutt@Swtich">
+        <EditorCategories value=""/>
+        <CaseArray Validator="Headbutt@BossCheck" Effect="Headbutt@Slow"/>
+        <CaseDefault value="Headbutt@Stun"/>
+    </CEffectSwitch>
+    <CEffectSet id="DamageTransferAura@ApplySet">
+        <EditorCategories value=""/>
+        <EffectArray value="DamageTransferAura@DmgResponse"/>
+        <EffectArray value="DamageTransferAura@CasterTracker"/>
+        <EffectArray value="DamageTransferAura@CasterTrackerAddCaster"/>
+    </CEffectSet>
+    <CEffectApplyBehavior id="DamageTransferAura@Aura">
+        <EditorCategories value=""/>
+    </CEffectApplyBehavior>
+    <CEffectSet id="DamageTransferAura@Cleanup">
+        <EditorCategories value=""/>
+        <EffectArray value="DamageTransferAura@CasterTrackerRemove"/>
+    </CEffectSet>
+    <CEffectApplyBehavior id="DamageTransferAura@DmgResponse">
+        <ValidatorArray index="0" removed="1"/>
+        <EditorCategories value=""/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="DamageTransferAura@CasterTracker">
+        <EditorCategories value=""/>
+    </CEffectApplyBehavior>
+    <CEffectAddTrackedUnit id="DamageTransferAura@CasterTrackerAddCaster">
+        <EditorCategories value=""/>
+        <BehaviorLink value="DamageTransferAura@CasterTracker"/>
+        <TrackerUnit Value="Target"/>
+    </CEffectAddTrackedUnit>
+    <CEffectRemoveBehavior id="DamageTransferAura@CasterTrackerRemove">
+        <EditorCategories value=""/>
+        <BehaviorLink value="DamageTransferAura@CasterTracker"/>
+    </CEffectRemoveBehavior>
+    <CEffectDamage id="DamageTransferAura@Dmg">
+        <EditorCategories value=""/>
+    </CEffectDamage>
+    <CEffectRemoveBehavior id="DamageTransferAura@DmgResponseRemove">
+        <ValidatorArray index="0" removed="1"/>
+        <EditorCategories value=""/>
+        <BehaviorLink value="DamageTransferAura@DmgResponse"/>
+    </CEffectRemoveBehavior>
+    <CEffectEnumTrackedUnits id="DamageTransferAura@GetCaster">
+        <EditorCategories value=""/>
+        <BehaviorLink value="DamageTransferAura@CasterTracker"/>
+        <TrackerUnit Value="Source"/>
+        <Effect value="DamageTransferAura@Dmg"/>
+        <TrackedUnitFilters value="-;Dead,Hidden,Invulnerable"/>
+        <DistributDamage value="1"/>
+    </CEffectEnumTrackedUnits>
+    <CEffectEnumArea id="DamageTransferAura@Search">
+        <EditorCategories value=""/>
+        <SearchFilters value="-;Self,Neutral,Enemy,Structure,Worker,Missile,Item,UnderConstruction,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="5.5" Effect="DamageTransferAura@ApplySet"/>
+    </CEffectEnumArea>
+    <CEffectCreateUnit id="Decoy@CreateUnit">
+        <ValidatorArray value="Pathable"/>
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetPoint"/>
+        <CreateFlags index="SetFacing" value="1"/>
+        <SpawnEffect value="Decoy@SpawnDelay"/>
+        <SpawnUnit value="Decoy"/>
+    </CEffectCreateUnit>
+    <CEffectIssueOrder id="Decoy@IssueTaunt">
+        <EditorCategories value=""/>
+        <Abil value="Taunt@Taunt"/>
+        <CmdFlags index="Preempt" value="1"/>
+    </CEffectIssueOrder>
+    <CEffectCreatePersistent id="Decoy@SpawnDelay">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetUnit"/>
+        <InitialEffect value="MakePrecursor"/>
+        <PeriodCount value="2"/>
+        <PeriodicEffectArray value="RemovePrecursor"/>
+        <PeriodicEffectArray value="Decoy@SpawnSet"/>
+        <PeriodicPeriodArray value="0.35"/>
+        <PeriodicPeriodArray value="0"/>
+    </CEffectCreatePersistent>
+    <CEffectSet id="Decoy@SpawnSet">
+        <EditorCategories value=""/>
+        <EffectArray value="Decoy@TimedLifeApply"/>
+        <EffectArray value="Decoy@IssueTaunt"/>
+    </CEffectSet>
+    <CEffectApplyBehavior id="Decoy@TimedLifeApply">
+        <EditorCategories value=""/>
+        <Behavior value="Decoy@TimedLife"/>
+    </CEffectApplyBehavior>
+    <CEffectDamage id="Decoy@DummyWeaponDmg" parent="DU_WEAP">
+        <EditorCategories value=""/>
+        <Maximum value="0"/>
+    </CEffectDamage>
+    <CEffectApplyBehavior id="Taunt@ApplyUntauntable">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Behavior value="Taunt@Untauntable"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="HardenedShell@ApplyBuff">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Behavior value="HardenedShell"/>
+    </CEffectApplyBehavior>
+    <CEffectDamage id="HeroRavagerWeaponDmg" parent="DU_WEAP_MISSILE">
+        <EditorCategories value="Race:Zerg"/>
+        <KindSplash value="Ranged"/>
+        <Amount value="0">
+            <AccumulatorArray value="HeroRavagerWeaponDmgScaled"/>
+            <AccumulatorArray value="HeroRavagerWeaponDmgBase"/>
+        </Amount>
+        <AreaArray Radius="0.43" Fraction="1"/>
+        <ExcludeArray Value="Target"/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Dead,Hidden,Invulnerable"/>
+        <Flags index="Impact" value="1"/>
+        <ValidatorArray value="NotInvulnerable"/>
+    </CEffectDamage>
+    <CEffectLaunchMissile id="HeroRavagerWeaponLaunchMissile">
+        <EditorCategories value="Race:Zerg"/>
+        <ImpactEffect value="HeroRavagerWeaponDmg"/>
+        <AmmoUnit value="RavagerWeaponMissile"/>
+    </CEffectLaunchMissile>
+    <CEffectApplyBehavior id="Taunt@ApplyTauntBuff">
+        <EditorCategories value=""/>
+        <Behavior value="Taunt@Taunted"/>
+    </CEffectApplyBehavior>
+    <CEffectEnumArea id="Taunt@Search">
+        <EditorCategories value=""/>
+        <ImpactLocation Value="CasterUnit"/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Item,Dead,Hidden"/>
+        <AreaArray Radius="6.5"/>
+        <MinCount value="1"/>
+        <MaxCount value="1"/>
+        <SearchFlags index="ExtendByUnitRadius" value="1"/>
+        <SearchFlags index="OffsetByUnitRadius" value="1"/>
+    </CEffectEnumArea>
+    <CAbilEffectInstant id="AbsorbExplosion">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="AbsorbExplosion@DmgResponse"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="AbsorbExplosion" Requirements="AbsorbExplosion@Req"/>
+        <Cost>
+            <Vital index="Energy" value="200"/>
+            <Cooldown TimeUse="65"/>
+        </Cost>
+    </CAbilEffectInstant>
+    <CAbilEffectInstant id="Headbutt">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="Headbutt@Search"/>
+        <CursorEffect value="Headbutt@Search"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="Headbutt" Requirements="Headbutt@Req"/>
+        <Cost>
+            <Vital index="Energy" value="125"/>
+            <Cooldown TimeUse="12"/>
+        </Cost>
+    </CAbilEffectInstant>
+    <CAbilEffectInstant id="DamageTransferAura">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="DamageTransferAura@Aura"/>
+        <Flags index="BestUnit" value="1"/>
+        <Cost>
+            <Vital index="Energy" value="2"/>
+            <Cooldown TimeUse="2"/>
+        </Cost>
+        <CmdButtonArray index="Execute" DefaultButtonFace="DamageTransferAura" Requirements="DamageTransferAura@Req"/>
+    </CAbilEffectInstant>
+    <CAbilEffectTarget id="Decoy">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="Decoy@CreateUnit"/>
+        <Cost>
+            <Vital index="Energy" value="150"/>
+            <Cooldown TimeUse="30"/>
+        </Cost>
+        <Range value="4.5"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="Decoy" Requirements="Decoy@Req"/>
+    </CAbilEffectTarget>
+    <CAbilEffectInstant id="HardenedShell">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="HardenedShell@ApplyBuff"/>
+        <Cost>
+            <Vital index="Energy" value="125"/>
+            <Cooldown TimeUse="30"/>
+        </Cost>
+        <CmdButtonArray index="Execute" DefaultButtonFace="HardenedShell" Requirements="HardenedShell@Req"/>
+    </CAbilEffectInstant>
+    <CAbilEffectInstant id="Taunt@Taunt">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="Taunt@Search"/>
+        <Flags index="BestUnit" value="1"/>
+        <Cost>
+            <Vital index="Energy" value="50"/>
+            <Charge>
+                <CountMax value="2"/>
+                <CountStart value="1"/>
+                <CountUse value="1"/>
+                <TimeStart value="15"/>
+                <TimeUse value="15"/>
+            </Charge>
+            <Cooldown TimeUse="1"/>
+        </Cost>
+        <CmdButtonArray index="Execute" DefaultButtonFace="Taunt@Taunt"/>
+    </CAbilEffectInstant>
+    <CValidatorEffectTreeUserData id="AbsorbExplosion@DmgCheck">
+        <CheckExistence value="0"/>
+        <Compare value="GT"/>
+        <Key value="AbsorbExplosion"/>
+    </CValidatorEffectTreeUserData>
+    <CValidatorUnitFilters id="Headbutt@BossCheck">
+        <Filters value="Heroic;-"/>
+    </CValidatorUnitFilters>
+    <CValidatorUnitCompareBehaviorCount id="DamageTransferAura@AuraStillActive">
+        <WhichUnit Value="Caster"/>
+        <Value value="1"/>
+        <Behavior value="DamageTransferAura@Aura"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorLocationCompareRange id="DamageTransferAura@Range">
+        <WhichLocation Value="TargetUnit"/>
+        <Compare value="LE"/>
+        <Range value="6.5"/>
+    </CValidatorLocationCompareRange>
+    <CRequirement id="AbsorbExplosion@Req">
+        <NodeArray index="Use" Link="CountUpgradeAbsorbExplosion@UnlockCompleteOnly1015183818"/>
+    </CRequirement>
+    <CRequirement id="Headbutt@Req">
+        <NodeArray index="Use" Link="GTE888989534CountUpgradeHeadbutt@UnlockCompleteOnly1"/>
+    </CRequirement>
+    <CRequirement id="DamageTransferAura@Req">
+        <NodeArray index="Use" Link="CountUpgradeDamageTransferAura@UnlockCompleteOnly1671390315"/>
+    </CRequirement>
+    <CRequirement id="HardenedShell@Req">
+        <NodeArray index="Use" Link="GTE888989534CountUpgradeHardenedShell@UnlockCompleteOnly1"/>
+    </CRequirement>
+    <CRequirement id="Decoy@Req">
+        <NodeArray index="Use" Link="Eq1208018857CountUpgradeDecoy@UnlockCompleteOnly1"/>
+    </CRequirement>
+    <CButton id="AbsorbExplosion">
+        <Icon value="Assets\Textures\btn-ability-alarak-massteleport.dds"/>
+    </CButton>
+    <CButton id="Headbutt">
+        <Icon value="Assets\Textures\btn-upgrade-zerg-peristalsis.dds"/>
+    </CButton>
+    <CButton id="DamageTransferAura">
+        <Icon value="Assets\Textures\btn-ability-alarak-massteleport.dds"/>
+    </CButton>
+    <CButton id="Decoy">
+        <Icon value="Assets\Textures\btn-ability-mengsk-battlecruiser-decksights.dds"/>
+    </CButton>
+    <CButton id="HardenedShell">
+        <Icon value="Assets\Textures\btn-upgrade-zerg-organiccarapace.dds"/>
+    </CButton>
+    <CButton id="Taunt@Taunt">
+        <Icon value="Assets\Textures\btn-ability-kerrigan-wildmutation.dds"/>
+    </CButton>
+    <CRequirementCountUpgrade id="CountUpgradeAbsorbExplosion@UnlockCompleteOnly1015183818">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="AbsorbExplosion@Unlock" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeHeadbutt@UnlockCompleteOnly">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="Headbutt@Unlock" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementGTE id="GTE888989534CountUpgradeHeadbutt@UnlockCompleteOnly1">
+        <OperandArray index="0" value="CountUpgradeHeadbutt@UnlockCompleteOnly"/>
+        <OperandArray index="1" value="1"/>
+    </CRequirementGTE>
+    <CRequirementCountUpgrade id="CountUpgradeDamageTransferAura@UnlockCompleteOnly1671390315">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="DamageTransferAura@Unlock" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeDecoy@UnlockCompleteOnly">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="Decoy@Unlock" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeHardenedShell@UnlockCompleteOnly">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="HardenedShell@Unlock" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementEq id="Eq1208018857CountUpgradeDecoy@UnlockCompleteOnly1">
+        <OperandArray index="0" value="CountUpgradeDecoy@UnlockCompleteOnly"/>
+        <OperandArray index="1" value="1"/>
+    </CRequirementEq>
+    <CRequirementGTE id="GTE888989534CountUpgradeHardenedShell@UnlockCompleteOnly1">
+        <OperandArray index="0" value="CountUpgradeHardenedShell@UnlockCompleteOnly"/>
+        <OperandArray index="1" value="1"/>
+    </CRequirementGTE>
+    <CActorRange id="AbsorbExplosion@Range" parent="RangeAbil" abil="AbsorbExplosion">
+        <EditorCategories value=""/>
+        <Abil Link=""/>
+        <Range value="5.000000"/>
+    </CActorRange>
+    <CActorAction id="AbsorbExplosion@StoreDmgAction" parent="GenericAttack" effectAttack="AbsorbExplosion@StoreDamageActorDummy">
+        <EditorCategories value=""/>
+        <ImpactMap index="None" Model="AbsorbExplosion@StoreDmg"/>
+    </CActorAction>
+    <CActorModel id="AbsorbExplosion@Explode" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On Terms="Effect.AbsorbExplosion@DmgSearch.Start" Send="Create"/>
+    </CActorModel>
+    <CActorRange id="Headbutt@Range" parent="RangeAbil" abil="Headbutt">
+        <EditorCategories value=""/>
+        <Abil Link=""/>
+        <Range value="4.000000"/>
+    </CActorRange>
+    <CActorModel id="Headbutt@Cast" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <HostSiteOps Ops="SOpAttachWeapon"/>
+        <On Terms="Effect.Headbutt@Search.Start; At Caster" Send="Create"/>
+        <Host Subject="_Unit" Scope="Caster"/>
+    </CActorModel>
+    <CActorModel id="Headbutt@Slow" parent="ModelAddition">
+        <EditorCategories value=""/>
+        <On Terms="Behavior.Headbutt@Slow.On" Send="Create"/>
+        <On Terms="Behavior.Headbutt@Slow.Off" Send="Destroy"/>
+        <On Terms="Behavior.Headbutt@Stun.On" Send="Create"/>
+        <On Terms="Behavior.Headbutt@Stun.Off" Send="Destroy"/>
+        <HostSiteOps Ops="SOpAttachOverhead"/>
+        <HostForProps Subject="_Selectable"/>
+    </CActorModel>
+    <CActorModel id="DamageTransferAura@Aura" parent="ModelAddition">
+        <EditorCategories value=""/>
+        <On Terms="Behavior.DamageTransferAura@Aura.On" Send="Create"/>
+        <On Terms="Behavior.DamageTransferAura@Aura.Off" Send="AnimBracketStop BSD"/>
+        <HostSiteOps Ops="SOpAttachCenter"/>
+        <Scale value="1.250000"/>
+    </CActorModel>
+    <CActorModel id="DamageTransferAura@Linked" parent="ModelAddition">
+        <Inherits index="BaseModelScale" value="0"/>
+        <Inherits index="Scale" value="0"/>
+        <AcceptedHostedPropTransfers index="BaseModelScale" value="0"/>
+        <AcceptedHostedPropTransfers index="Scale" value="0"/>
+        <EditorCategories value=""/>
+        <On Terms="Behavior.DamageTransferAura@DmgResponse.On" Send="Create"/>
+        <On Terms="Behavior.DamageTransferAura@DmgResponse.Off" Send="AnimBracketStop BSD"/>
+        <On Terms="ActorCreation" Send="SetOpacity 0.350000"/>
+        <HostSiteOps Ops="SOpAttachCenter"/>
+        <Scale value="0.900000"/>
+    </CActorModel>
+    <CActorRange id="Decoy@Range" parent="RangeAbil" abil="Decoy">
+        <EditorCategories value=""/>
+    </CActorRange>
+    <CActorUnit id="Decoy" parent="GenericUnitStandard" unitName="Decoy">
+        <EditorCategories value=""/>
+        <On index="67" Terms="ActorCreation" Send="Create Decoy@Spawn"/>
+        <On index="68" Terms="ActorCreation" Send="SetTintColor 255,255,200"/>
+        <PortraitModel value="Ravager_Bone_Collection_Portrait"/>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-zerg-groundcarapace-level0.dds"/>
+        <StatusBarFlags index="Energy" value="0"/>
+        <UnitIcon value="Assets\Textures\btn-unit-collection-bone-ravager.dds"/>
+        <Wireframe>
+            <Image value="Assets\Textures\wireframe-collection-bone-ravager.dds"/>
+        </Wireframe>
+    </CActorUnit>
+    <CActorModel id="Decoy@Spawn" parent="ModelAnimationStyleOneShot">
+        <AcceptedHostedPropTransfers index="Visibility" value="0"/>
+        <EditorCategories value=""/>
+        <On Terms="ActorCreation" Send="SetTintColor 255,255,200"/>
+        <Model value="DecoySpawn"/>
+    </CActorModel>
+    <CActorModel id="HardenedShell@Effect" parent="ModelAddition">
+        <EditorCategories value=""/>
+        <On index="0" Terms="ActorCreation" Send="$Birth"/>
+        <On index="2" Terms="AnimDone; AnimName Birth" Send="$Stand PlayForever"/>
+        <On Terms="Behavior.HardenedShell.On" Send="Create"/>
+        <On Terms="Behavior.HardenedShell.Off" Send="$Death"/>
+        <On Terms="AnimDone; AnimName Death" Send="Destroy"/>
+        <HostSiteOps Ops="SOpAttachCenter"/>
+        <Model value="ProtectiveBarrier"/>
+    </CActorModel>
+    <CActorUnit id="HeroRavager" parent="GenericBurrowerStandard" unitName="HeroRavager">
+        <Aliases value="_UnitLarge"/>
+        <Macros value="ZergBurrowStandardAnimMacro"/>
+        <Macros value="ZergMediumBurrowEffects"/>
+        <Macros value="UnloadDropAnim"/>
+        <Macros value="PhysicsDeathsSwarmGround"/>
+        <Macros value="PhysicsDeathsVoidGround"/>
+        <Macros value="TerrainSquibAnimations"/>
+        <On index="69" Terms="UnitHeightUpdate.*.Land" Send="Create Ravager_Land"/>
+        <On index="70" Terms="UnitMovementUpdate.*.Walk" Send="AnimClear Spell"/>
+        <On Terms="UnitMovementUpdate.*.Walk" Send="AnimClear Birth"/>
+        <On Terms="Behavior.TerranPartTransitionBurrow.On" Send="AnimBracketStart PartTransition Burrow IGNORE Unburrow OpeningPlayForever"/>
+        <On Terms="Behavior.TerranPartTransitionBurrow.Off" Send="AnimBracketStop PartTransition"/>
+        <On Terms="Abil.Headbutt.SourceChannelStart" Send="AnimPlay Abil1 Attack"/>
+        <Model value="Ravager_Bone"/>
+        <ModelFlags index="OutlineEmitter" value="1"/>
+        <BuildModel value="Ravager_Bone"/>
+        <DeathArray index="Normal" ModelLink="Ravager_Bone_Collection_Death" SoundLink="Roach_Explode"/>
+        <DeathArray index="Disintegrate" ModelLink="Ravager_Bone_Collection_DeathAcid" SoundLink="Uni_DeathFXAcid"/>
+        <DeathArray index="Fire" ModelLink="Ravager_Bone_Collection_DeathFire" SoundLink="Uni_DeathFXFire"/>
+        <DeathCustoms ActorModel="RavagerDeathRagdoll" ModelLink="Ravager_Bone_Collection_DeathRagdoll" Name="RagdollBasic">
+            <BodySquibs Name="FireOnMetal"/>
+            <BodySquibs Name="Blood" IsFallback="1"/>
+        </DeathCustoms>
+        <DeathCustoms Name="RagdollSiegeTank" InheritsFrom="RagdollBasic"/>
+        <DeathCustoms Name="RagdollNuke" InheritsFrom="RagdollBasic">
+            <BodySquibs Name="Fire"/>
+        </DeathCustoms>
+        <DeathCustoms Name="RagdollFire" InheritsFrom="RagdollBasic">
+            <BodySquibs Name="Fire"/>
+        </DeathCustoms>
+        <DeathCustoms Name="RagdollAcid" InheritsFrom="RagdollBasic">
+            <BodySquibs Name="Acid"/>
+        </DeathCustoms>
+        <DeathCustoms Name="RagdollBaneling" InheritsFrom="RagdollBasic">
+            <BodySquibs Name="Acid"/>
+        </DeathCustoms>
+        <DeathCustoms Name="RagdollUltraUnburrow" InheritsFrom="RagdollBasic"/>
+        <DeathCustoms Name="RagdollOverkillDPRH" InheritsFrom="RagdollBasic"/>
+        <DeathCustoms Name="RagdollOverkillDOI" InheritsFrom="RagdollBasic"/>
+        <DeathCustoms Name="RagdollMidair" InheritsFrom="RagdollBasic"/>
+        <DeathCustoms ActorModel="SpineCrawlerHurlDeathRagdollBloodPrevent" ModelLink="RavagerDeathRagdoll" Name="RagdollSpineCrawlerHurl">
+            <BodySquibs Name="None"/>
+        </DeathCustoms>
+        <PlacementModel value="Ravager_Bone"/>
+        <PortraitModel value="Ravager_Bone_Collection_Portrait"/>
+        <TerrainSquibs>
+            <MovementDistance value="0.150000,0.150000"/>
+            <IdlePeriod value="0.100000,0.250000"/>
+            <RangeUp value="0.600000"/>
+            <RangeDown value="1.000000"/>
+            <AttachQuery Methods="AMFilterCenter"/>
+            <Visuals TerrainPhysicsMaterial="Water" ActorModel="TerrainSquibHarnessContinuous" ModelLink="WaterRippleImmortal"/>
+        </TerrainSquibs>
+        <WalkAnimMoveSpeed value="2.25"/>
+        <BarOffset value="85"/>
+        <BarWidth value="75"/>
+        <CustomUnitStatusFrame value="SSF_UnitStatus/HeroStatus"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\wireframe-collection-bone-ravager.dds"/>
+        </GroupIcon>
+        <HeroIcon value="Assets\Textures\btn-unit-collection-bone-ravager.dds"/>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-zerg-groundcarapace-level0.dds"/>
+        <SoundArray index="Ready" value="Ravager_Ready"/>
+        <SoundArray index="What" value="Ravager_What"/>
+        <SoundArray index="Yes" value="Ravager_Yes"/>
+        <SoundArray index="Attack" value="Ravager_Attack"/>
+        <SoundArray index="Pissed" value="Ravager_Pissed"/>
+        <StatusBarOn index="Shields" value="1"/>
+        <StatusBarOn index="Life" value="1"/>
+        <StatusBarOn index="Energy" value="1"/>
+        <StatusBarOn index="Progress" value="1"/>
+        <StatusBarOn index="Duration" value="1"/>
+        <UnitFlags index="SuppressDefaultStatusBar" value="1"/>
+        <UnitIcon value="Assets\Textures\btn-unit-collection-bone-ravager.dds"/>
+        <Wireframe>
+            <Image value="Assets\Textures\wireframe-collection-bone-ravager.dds"/>
+        </Wireframe>
+    </CActorUnit>
+    <CActorAction id="HeroRavagerAttack" parent="GenericAttack" effectImpact="HeroRavagerWeaponDmg" effectLaunch="HeroRavagerWeaponLaunchMissile">
+        <LaunchAssets Model="" Sound="Ravager_AttackLaunch"/>
+        <Missile value="RavagerWeaponMissile"/>
+        <ImpactMap index="None" Model="RavagerWeaponImpact" Sound="Ravager_Attack_Impact"/>
+    </CActorAction>
+    <CActorModel id="Taunt@CastEffect" parent="ModelAddition">
+        <EditorCategories value=""/>
+        <On index="0" Terms="ActorCreation" Send="$Birth"/>
+        <On index="2" Terms="AnimDone; AnimName Birth" Send="Destroy"/>
+        <On Terms="Abil.Taunt@Taunt.SourceCastStart" Send="Create"/>
+        <HostSiteOps Ops="SOpAttachOverhead"/>
+        <Model value="DefilerMPConsumeImpact"/>
+        <Scale value="3.200000,3.200000,1.000000"/>
+    </CActorModel>
+    <CActorRange id="Taunt@Range" parent="RangeAbilHover" abil="Taunt@Taunt">
+        <EditorCategories value=""/>
+        <Abil Link=""/>
+        <Range value="6.500000"/>
+    </CActorRange>
+    <CActorModel id="Taunt@TauntedEffect" parent="ModelAddition">
+        <Inherits index="CreepEngulfment" value="0"/>
+        <AcceptedHostedPropTransfers index="CreepEngulfment" value="0"/>
+        <EditorCategories value=""/>
+        <On index="0" Terms="ActorCreation" Send="$Stand PlayForever"/>
+        <On index="2" Terms="Behavior.Taunt@Taunted.On" Send="Create"/>
+        <On Terms="Behavior.Taunt@Taunted.Off" Send="Destroy"/>
+        <HostSiteOps Ops="SOpAttachOverhead"/>
+        <Model value="FrenzyModel"/>
+        <Scale value="2.000000"/>
+    </CActorModel>
+    <CModel id="AbsorbExplosion@StoreDmg">
+        <Model value="Assets\Effects\Protoss\Xelnaga_Construct_EntropicBlast_Impact\Xelnaga_Construct_EntropicBlast_Impact.m3"/>
+        <ScaleMax value="1.250000,1.250000,1.250000"/>
+        <ScaleMin value="1.250000,1.250000,1.250000"/>
+    </CModel>
+    <CModel id="AbsorbExplosion@Explode">
+        <Model value="Assets\Effects\Zerg\Dehaka_Coop_Psionic\Dehaka_Coop_Psionic.m3"/>
+    </CModel>
+    <CModel id="Headbutt@Cast">
+        <Model value="Assets\Effects\Protoss\Arbiter_Purifier_Coop_Missile_Impact\Arbiter_Purifier_Coop_Missile_Impact.m3"/>
+        <ScaleMax value="1.750000,1.750000,1.750000"/>
+        <ScaleMin value="1.750000,1.750000,1.750000"/>
+    </CModel>
+    <CModel id="Headbutt@Slow">
+        <Model value="Assets\COOP\Zeratul\Effects\DarkArchon_Zeratul_COOP_Maelstrom\DarkArchon_Zeratul_COOP_Maelstrom.m3"/>
+        <ScaleMax value="0.400000,0.400000,0.400000"/>
+        <ScaleMin value="0.400000,0.400000,0.400000"/>
+    </CModel>
+    <CModel id="DamageTransferAura@Aura">
+        <Model value="Assets\Effects\Protoss\Envision\Envision.m3"/>
+    </CModel>
+    <CModel id="DamageTransferAura@Linked">
+        <Model value="Assets\Effects\Protoss\MineralShield\MineralShield.m3"/>
+    </CModel>
+    <CWeaponLegacy id="Decoy@DummyWeapon">
+        <EditorCategories value=""/>
+        <Range value="3.5"/>
+        <Arc value="360"/>
+        <Period value="2.15"/>
+        <Effect value="Decoy@DummyWeaponDmg"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="HeroRavagerWeapon">
+        <EditorCategories value="Race:Zerg"/>
+        <Icon value="Assets\Textures\btn-upgrade-zerg-missileattacks-level0.dds"/>
+        <DisplayEffect value="HeroRavagerWeaponDmg"/>
+        <TargetFilters value="Visible;Ally,Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="3.5"/>
+        <Period value="1.425"/>
+        <DamagePoint value="0.2"/>
+        <Effect value="HeroRavagerWeaponLaunchMissile"/>
+        <MinScanRange value="6"/>
+    </CWeaponLegacy>
+    <CAccumulatorEffectAmount id="AbsorbExplosion@DmgResponse">
+        <AmountType value="DamageInherited"/>
+    </CAccumulatorEffectAmount>
+    <CAccumulatorUserData id="AbsorbExplosion@StoredDmg">
+        <ApplicationRule value="Multiply"/>
+        <Key value="AbsorbExplosion"/>
+    </CAccumulatorUserData>
+    <CAccumulatorArithmetic id="HeroRavagerWeaponDmgScaled">
+        <Parameters value="0">
+            <AccumulatorArray value="WeaponDmgUpgradeCollector"/>
+            <AccumulatorArray value="HeroLevelWeaponDmgBonus"/>
+        </Parameters>
+        <Parameters value="0">
+            <AccumulatorArray value="HeroRavagerWeaponDmgModifier"/>
+        </Parameters>
+        <Operation value="Multiply"/>
+    </CAccumulatorArithmetic>
+    <CAccumulatorConstant id="HeroRavagerWeaponDmgModifier">
+        <Amount value="0.8"/>
+    </CAccumulatorConstant>
+    <CAccumulatorConstant id="HeroRavagerWeaponDmgBase">
+        <Amount value="80"/>
+    </CAccumulatorConstant>
+    <CDataCollectionAbil id="AbsorbExplosion">
+        <EditorCategories value=""/>
+        <DataRecord Entry="Abil,AbsorbExplosion"/>
+        <DataRecord Entry="Button,AbsorbExplosion"/>
+        <DataRecord Entry="Requirement,AbsorbExplosion@Req"/>
+        <DataRecord Entry="Upgrade,AbsorbExplosion@Unlock"/>
+        <DataRecord Entry="Actor,AbsorbExplosion@Explode"/>
+        <DataRecord Entry="Behavior,AbsorbExplosion@DmgResponse"/>
+        <DataRecord Entry="Effect,AbsorbExplosion@DmgResponse"/>
+        <DataRecord Entry="Effect,AbsorbExplosion@StoreDamage"/>
+        <DataRecord Entry="Effect,AbsorbExplosion@Dmg"/>
+        <DataRecord Entry="Effect,AbsorbExplosion@ExplodeSet"/>
+        <DataRecord Entry="Effect,AbsorbExplosion@DmgReponseRemove"/>
+        <DataRecord Entry="Effect,AbsorbExplosion@DmgSearch"/>
+        <DataRecord Entry="Effect,AbsorbExplosion@DmgCheck"/>
+        <DataRecord Entry="Effect,AbsorbExplosion@LowerCooldown"/>
+        <DataRecord Entry="Effect,AbsorbExplosion@InitUD"/>
+        <DataRecord Entry="Model,AbsorbExplosion@Explode"/>
+        <DataRecord Entry="Validator,AbsorbExplosion@DmgCheck"/>
+        <DataRecord Entry="Accumulator,AbsorbExplosion@DmgResponse"/>
+        <DataRecord Entry="Accumulator,AbsorbExplosion@StoredDmg"/>
+        <DataRecord Entry="Actor,AbsorbExplosion@StoreDmgAction"/>
+        <DataRecord Entry="Actor,AbsorbExplosion@Range"/>
+        <DataRecord Entry="Effect,AbsorbExplosion@StoreDamageSet"/>
+        <DataRecord Entry="Effect,AbsorbExplosion@StoreDamageActorDummy"/>
+        <DataRecord Entry="Model,AbsorbExplosion@StoreDmg"/>
+        <DataRecord Entry="Upgrade,AbsorbExplosion@Unlock"/>
+    </CDataCollectionAbil>
+    <CDataCollectionAbil id="Headbutt">
+        <EditorCategories value=""/>
+        <DataRecord Entry="Abil,Headbutt"/>
+        <DataRecord Entry="Actor,Headbutt@Range"/>
+        <DataRecord Entry="Actor,Headbutt@Cast"/>
+        <DataRecord Entry="Actor,Headbutt@Slow"/>
+        <DataRecord Entry="Behavior,Headbutt@Stun"/>
+        <DataRecord Entry="Behavior,Headbutt@Slow"/>
+        <DataRecord Entry="Button,Headbutt"/>
+        <DataRecord Entry="Effect,Headbutt@Search"/>
+        <DataRecord Entry="Effect,Headbutt@Swtich"/>
+        <DataRecord Entry="Effect,Headbutt@Stun"/>
+        <DataRecord Entry="Effect,Headbutt@Slow"/>
+        <DataRecord Entry="Model,Headbutt@Cast"/>
+        <DataRecord Entry="Model,Headbutt@Slow"/>
+        <DataRecord Entry="Requirement,Headbutt@Req"/>
+        <DataRecord Entry="Upgrade,Headbutt@Unlock"/>
+        <DataRecord Entry="Validator,Headbutt@BossCheck"/>
+    </CDataCollectionAbil>
+    <CDataCollectionAbil id="DamageTransferAura">
+        <EditorCategories value=""/>
+        <DataRecord Entry="Abil,DamageTransferAura"/>
+        <DataRecord Entry="Button,DamageTransferAura"/>
+        <DataRecord Entry="Requirement,DamageTransferAura@Req"/>
+        <DataRecord Entry="Upgrade,DamageTransferAura@Unlock"/>
+        <DataRecord Entry="Effect,DamageTransferAura@Aura"/>
+        <DataRecord Entry="Actor,DamageTransferAura@Aura"/>
+        <DataRecord Entry="Actor,DamageTransferAura@Linked"/>
+        <DataRecord Entry="Actor,DamageTransferAura@TEST"/>
+        <DataRecord Entry="Behavior,DamageTransferAura@Aura"/>
+        <DataRecord Entry="Behavior,DamageTransferAura@CasterTracker"/>
+        <DataRecord Entry="Behavior,DamageTransferAura@DmgResponse"/>
+        <DataRecord Entry="Effect,DamageTransferAura@CasterTracker"/>
+        <DataRecord Entry="Effect,DamageTransferAura@CasterTrackerAddCaster"/>
+        <DataRecord Entry="Effect,DamageTransferAura@Dmg"/>
+        <DataRecord Entry="Effect,DamageTransferAura@GetCaster"/>
+        <DataRecord Entry="Effect,DamageTransferAura@CasterTrackerRemove"/>
+        <DataRecord Entry="Effect,DamageTransferAura@DmgResponseRemove"/>
+        <DataRecord Entry="Effect,DamageTransferAura@Search"/>
+        <DataRecord Entry="Effect,DamageTransferAura@ApplySet"/>
+        <DataRecord Entry="Effect,DamageTransferAura@DmgResponse"/>
+        <DataRecord Entry="Effect,DamageTransferAura@Cleanup"/>
+        <DataRecord Entry="Model,DamageTransferAura@Aura"/>
+        <DataRecord Entry="Model,DamageTransferAura@Linked"/>
+        <DataRecord Entry="Validator,DamageTransferAura@Range"/>
+        <DataRecord Entry="Validator,DamageTransferAura@AuraStillActive"/>
+        <DataRecord Entry="Upgrade,DamageTransferAura@Unlock"/>
+    </CDataCollectionAbil>
+    <CDataCollectionAbil id="Decoy">
+        <EditorCategories value=""/>
+        <DataRecord Entry="Abil,Decoy"/>
+        <DataRecord Entry="Actor,Decoy"/>
+        <DataRecord Entry="Actor,Decoy@Range"/>
+        <DataRecord Entry="Actor,Decoy@Spawn"/>
+        <DataRecord Entry="Behavior,Decoy@TimedLife"/>
+        <DataRecord Entry="Button,Decoy"/>
+        <DataRecord Entry="Effect,Decoy@CreateUnit"/>
+        <DataRecord Entry="Effect,Decoy@IssueTaunt"/>
+        <DataRecord Entry="Effect,Decoy@SpawnDelay"/>
+        <DataRecord Entry="Effect,Decoy@SpawnSet"/>
+        <DataRecord Entry="Effect,Decoy@TimedLifeApply"/>
+        <DataRecord Entry="Effect,Decoy@DummyWeaponDmg"/>
+        <DataRecord Entry="Model,Decoy"/>
+        <DataRecord Entry="Unit,Decoy"/>
+        <DataRecord Entry="Weapon,Decoy@DummyWeapon"/>
+        <DataRecord Entry="Requirement,Decoy@Req"/>
+        <DataRecord Entry="Upgrade,Decoy@Unlock"/>
+    </CDataCollectionAbil>
+    <CDataCollectionAbil id="HardenedShell">
+        <EditorCategories value=""/>
+        <DataRecord Entry="Abil,HardenedShell"/>
+        <DataRecord Entry="Actor,HardenedShell@Effect"/>
+        <DataRecord Entry="Behavior,HardenedShell"/>
+        <DataRecord Entry="Button,HardenedShell"/>
+        <DataRecord Entry="Effect,HardenedShell@ApplyBuff"/>
+        <DataRecord Entry="Requirement,HardenedShell@Req"/>
+        <DataRecord Entry="Upgrade,HardenedShell@Unlock"/>
+    </CDataCollectionAbil>
+    <CDataCollectionAbil id="Taunt">
+        <EditorCategories value=""/>
+        <DataRecord Entry="Actor,Taunt@CastEffect"/>
+        <DataRecord Entry="Actor,Taunt@Range"/>
+        <DataRecord Entry="Actor,Taunt@TauntedEffect"/>
+        <DataRecord Entry="Behavior,Taunt@Taunted"/>
+        <DataRecord Entry="Behavior,Taunt@Untauntable"/>
+        <DataRecord Entry="Effect,Taunt@ApplyTauntBuff"/>
+        <DataRecord Entry="Effect,Taunt@ApplyUntauntable"/>
+        <DataRecord Entry="Effect,Taunt@Search"/>
+        <DataRecord Entry="Abil,Taunt@Taunt"/>
+        <DataRecord Entry="Button,Taunt@Taunt"/>
+    </CDataCollectionAbil>
+    <CUnit id="Decoy">
+        <Race value="Zerg"/>
+        <FlagArray index="Movable" value="0"/>
+        <FlagArray index="Uncommandable" value="1"/>
+        <FlagArray index="Unselectable" value="1"/>
+        <PlaneArray index="Ground" value="1"/>
+        <Collide index="Larva" value="1"/>
+        <Attributes index="Armored" value="1"/>
+        <Attributes index="Hover" value="1"/>
+        <Attributes index="Summoned" value="1"/>
+        <LifeStart value="500"/>
+        <LifeMax value="500"/>
+        <LifeArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </LifeArmorFormula>
+        <LifeArmorName value="Unit/LifeArmorName/ZergGroundArmor"/>
+        <EnergyStart value="500"/>
+        <EnergyMax value="500"/>
+        <ShieldArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </ShieldArmorFormula>
+        <CostCategory value="Army"/>
+        <AttackTargetPriority value="20"/>
+        <AbilArray Link="stop"/>
+        <AbilArray Link="attack"/>
+        <AbilArray Link="Taunt@Taunt"/>
+        <WeaponArray Link="Decoy@DummyWeapon"/>
+        <CardLayouts>
+            <LayoutButtons Face="Taunt@Taunt" Type="AbilCmd" AbilCmd="Taunt@Taunt,255" Row="2" Column="0"/>
+            <LayoutButtons Face="Stop" Type="AbilCmd" AbilCmd="stop,Stop" Row="0" Column="1"/>
+            <LayoutButtons Face="Attack" Type="AbilCmd" AbilCmd="attack,Execute" Row="0" Column="4"/>
+        </CardLayouts>
+        <Radius value="0.0625"/>
+        <EditorCategories value=""/>
+        <BehaviorArray Link="DecoyArmor"/>
+        <Sight value="2"/>
+    </CUnit>
+    <CUnit id="HeroRavager">
+        <DeathTime value="-1"/>
+        <DeathRevealRadius value="3"/>
+        <Race value="Zerg"/>
+        <FlagArray index="Hero" value="1"/>
+        <FlagArray index="UseLineOfSight" value="1"/>
+        <FlagArray index="ArmySelect" value="1"/>
+        <PlaneArray index="Ground" value="1"/>
+        <Collide index="Ground" value="1"/>
+        <Collide index="ForceField" value="1"/>
+        <Collide index="Locust" value="1"/>
+        <Collide index="Small" value="1"/>
+        <Attributes index="Armored" value="1"/>
+        <Attributes index="Biological" value="1"/>
+        <Attributes index="Heroic" value="1"/>
+        <LifeStart value="3000"/>
+        <LifeMax value="3000"/>
+        <LifeRegenRate value="27.5"/>
+        <LifeArmorName value="Unit/LifeArmorName/ZergGroundArmor"/>
+        <EnergyStart value="50"/>
+        <EnergyMax value="50"/>
+        <EnergyRegenRate value="0.75"/>
+        <Speed value="2.4492"/>
+        <Acceleration value="1000"/>
+        <LateralAcceleration value="46"/>
+        <StationaryTurningRate value="999.8437"/>
+        <TurningRate value="999.8437"/>
+        <Sight value="8.5"/>
+        <CostCategory value="Army"/>
+        <AttackTargetPriority value="20"/>
+        <AbilArray Link="stop"/>
+        <AbilArray Link="attack"/>
+        <AbilArray Link="move"/>
+        <AbilArray Link="Taunt@Taunt"/>
+        <AbilArray Link="Headbutt"/>
+        <AbilArray Link="Decoy"/>
+        <AbilArray Link="AbsorbExplosion"/>
+        <AbilArray Link="ShieldColor@ColorChange"/>
+        <BehaviorArray Link="Levels"/>
+        <BehaviorArray Link="HeroRavagerAttribute"/>
+        <BehaviorArray Link="HeroRavagerCreepBonusRegen"/>
+        <BehaviorArray Link="HeroRavagerArmor"/>
+        <WeaponArray Link="HeroRavagerWeapon"/>
+        <CardLayouts>
+            <LayoutButtons Face="Move" Type="AbilCmd" AbilCmd="move,Move" Row="0" Column="0"/>
+            <LayoutButtons Face="Stop" Type="AbilCmd" AbilCmd="stop,Stop" Row="0" Column="1"/>
+            <LayoutButtons Face="MoveHoldPosition" Type="AbilCmd" AbilCmd="move,HoldPos" Row="0" Column="2"/>
+            <LayoutButtons Face="Attack" Type="AbilCmd" AbilCmd="attack,Execute" Row="0" Column="4"/>
+            <LayoutButtons Face="MovePatrol" Type="AbilCmd" AbilCmd="move,Patrol" Row="0" Column="3"/>
+            <LayoutButtons Face="Taunt@Taunt" Type="AbilCmd" AbilCmd="Taunt@Taunt,Execute" Row="2" Column="0"/>
+            <LayoutButtons Face="Headbutt" Type="AbilCmd" AbilCmd="Headbutt,Execute" Row="2" Column="1"/>
+            <LayoutButtons Face="Decoy" Type="AbilCmd" AbilCmd="Decoy,Execute" Row="2" Column="2"/>
+            <LayoutButtons Face="AbsorbExplosion" Type="AbilCmd" AbilCmd="AbsorbExplosion,Execute" Row="2" Column="3"/>
+        </CardLayouts>
+        <Radius value="0.75"/>
+        <SeparationRadius value="0.75"/>
+        <InnerRadius value="0.75"/>
+        <CargoSize value="1"/>
+        <SubgroupPriority value="50"/>
+        <MinimapRadius value="1"/>
+        <EditorCategories value=""/>
+        <GlossaryPriority value="12"/>
+        <HotkeyCategory value="Unit/Category/SSFPlayerUnits"/>
+        <KillDisplay value="Always"/>
+        <RankDisplay value="Never"/>
+        <AlliedPushPriority value="20"/>
+        <LifeArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </LifeArmorFormula>
+        <ShieldArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </ShieldArmorFormula>
+        <LifeArmorTip value="Unit/HeroRavager/ArmorTooltip"/>
+    </CUnit>
+    <CBehaviorBuff id="AbsorbExplosion@DmgResponse">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DamageResponse>
+            <Handled value="AbsorbExplosion@StoreDamageSet"/>
+            <TargetFilters value="-;Player,Ally,Neutral"/>
+            <Priority value="100"/>
+            <HandledValue value="Original"/>
+            <Kind index="Spell" value="0"/>
+            <Kind index="NoProc" value="0"/>
+            <Chance value="1"/>
+        </DamageResponse>
+        <DisplayDuration index="Self" value="1"/>
+        <DisplayDuration index="Ally" value="1"/>
+        <DisplayDuration index="Neutral" value="1"/>
+        <DisplayDuration index="Enemy" value="1"/>
+        <Duration value="5"/>
+        <InitialEffect value="AbsorbExplosion@InitUD"/>
+        <FinalEffect value="AbsorbExplosion@ExplodeSet"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="Headbutt@Slow">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="6"/>
+        <Modification MoveSpeedMultiplier="0.5" AttackSpeedMultiplier="0.75"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="Headbutt@Stun">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="8"/>
+        <Modification>
+            <StateFlags index="Stun" value="1"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="DecoyArmor" parent="ArmorBase">
+        <Name value="Behavior/Name/DecoyArmor"/>
+        <Tooltip value="Behavior/Tooltip/DecoyArmor"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="HeroRavagerArmor" parent="ArmorBase">
+        <Name value="Behavior/Name/HeroRavagerArmor"/>
+        <Tooltip value="Behavior/Tooltip/HeroRavagerArmor"/>
+        <Cost>
+            <Charge Link="Behavior/HeroRavagerArmor"/>
+            <Cooldown Link="Behavior/HeroRavagerArmor"/>
+        </Cost>
+        <DamageResponse>
+            <Cost>
+                <Charge Link="Behavior/HeroRavagerArmor"/>
+                <Cooldown Link="Behavior/HeroRavagerArmor"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="DamageTransferAura@Aura">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="10"/>
+        <Period value="0.125"/>
+        <PeriodicEffect value="DamageTransferAura@Search"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorUnitTracker id="DamageTransferAura@CasterTracker">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorUnitTracker>
+    <CBehaviorBuff id="DamageTransferAura@DmgResponse">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <RemoveValidatorArray value="DamageTransferAura@Range"/>
+        <RemoveValidatorArray value="DamageTransferAura@AuraStillActive"/>
+        <FinalEffect value="DamageTransferAura@Cleanup"/>
+        <DamageResponse>
+            <Handled value="DamageTransferAura@GetCaster"/>
+            <ModifyFraction value="0.5"/>
+            <ModifyMinimumDamage value="1"/>
+            <HandledValue value="Absorbed"/>
+            <ExcludeEffectArray value="DamageTransferAura@Dmg"/>
+            <Chance value="1"/>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="HeroRavagerCreepBonusRegen">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DisableValidatorArray value="OnCreep"/>
+        <Modification MoveSpeedMultiplier="1.5">
+            <VitalRegenArray index="Life" value="30"/>
+            <VitalRegenArray index="Energy" value="0.75"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="HardenedShell">
+        <Alignment value="Positive"/>
+        <InfoIcon value="Assets\Textures\btn-upgrade-zerg-organiccarapace.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="10"/>
+        <DamageResponse ClampMaximum="200" Minimum="200">
+            <Kind index="Spell" value="0"/>
+            <Chance value="1"/>
+            <Cost>
+                <Charge Link="Behavior/HardenedShield"/>
+                <Cooldown Link="Behavior/HardenedShield"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="Taunt@Taunted">
+        <Alignment value="Negative"/>
+        <InfoIcon value="Assets\Textures\btn-ability-terran-domination.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="21.425"/>
+    </CBehaviorBuff>
+    <CBehaviorAttribute id="HeroRavagerAttribute">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification MoveSpeedBonus="0.0507" AttackSpeedMultiplier="1.01">
+            <VitalMaxArray index="Life" value="400"/>
+            <VitalMaxArray index="Energy" value="5"/>
+        </Modification>
+    </CBehaviorAttribute>
+    <CBehaviorBuff id="Taunt@Untauntable">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="Decoy@TimedLife" parent="TimedLifeDisplayed">
+        <Duration value="20"/>
+        <Modification>
+            <DamageTakenFraction index="Spell" value="2"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CUpgrade id="AbsorbExplosion@Unlock"/>
+    <CUpgrade id="Headbutt@Unlock"/>
+    <CUpgrade id="DamageTransferAura@Unlock"/>
+    <CUpgrade id="Decoy@Unlock"/>
+    <CUpgrade id="HardenedShell@Unlock"/>
+</Catalog>

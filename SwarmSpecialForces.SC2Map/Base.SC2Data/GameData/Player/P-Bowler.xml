@@ -1,0 +1,1444 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CEffectSwitch id="TheySeeMeRolling@BossCheck">
+        <EditorCategories value=""/>
+        <CaseArray Validator="IsHeroic" Effect="Suicide"/>
+        <CaseDefault value="TheySeeMeRolling@TargetSet"/>
+    </CEffectSwitch>
+    <CEffectDamage id="TheySeeMeRolling@FinalExplosionDmg">
+        <EditorCategories value=""/>
+        <ResponseFlags index="Acquire" value="1"/>
+        <ResponseFlags index="Flee" value="1"/>
+        <Flags index="Notification" value="1"/>
+        <Kind value="Ranged"/>
+        <Amount value="0">
+            <AccumulatorArray value="TheySeeMeRolling@ExplodeDmgScaled"/>
+            <AccumulatorArray value="TheySeeMeRolling@ExplodeDmgBase"/>
+            <AccumulatorArray value="HeroSpellDmgMultiplier"/>
+        </Amount>
+        <Death value="Disintegrate"/>
+    </CEffectDamage>
+    <CEffectEnumArea id="TheySeeMeRolling@FinalExplosionSearch">
+        <EditorCategories value=""/>
+        <LaunchLocation Value="CasterUnit"/>
+        <ImpactLocation Value="SourceUnit"/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Item,Stasis,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="2" Effect="TheySeeMeRolling@FinalExplosionDmg"/>
+        <SearchFlags index="SameCliff" value="1"/>
+    </CEffectEnumArea>
+    <CEffectSet id="TheySeeMeRolling@InitialSet">
+        <ValidatorArray value="TargetNotAcrossCliff"/>
+        <EditorCategories value=""/>
+        <EffectArray value="TheySeeMeRolling@Offset1"/>
+        <TargetLocationType value="UnitOrPoint"/>
+    </CEffectSet>
+    <CEffectCreatePersistent id="TheySeeMeRolling@Offset1">
+        <EditorCategories value=""/>
+        <WhichLocation Value="CasterUnit"/>
+        <OffsetVectorStartLocation Value="CasterUnit"/>
+        <PeriodCount value="1"/>
+        <PeriodicEffectArray value="TheySeeMeRolling@Offset2"/>
+        <PeriodicOffsetArray value="0,-10,0"/>
+        <PeriodicPeriodArray value="0"/>
+    </CEffectCreatePersistent>
+    <CEffectCreateUnit id="TheySeeMeRolling@CreateUnit">
+        <EditorCategories value=""/>
+        <WhichLocation Value="CasterUnit"/>
+        <CreateFlags index="OffsetByRadius" value="0"/>
+        <CreateFlags index="Placement" value="0"/>
+        <CreateFlags index="ProvideFood" value="0"/>
+        <CreateFlags index="UseFood" value="0"/>
+        <SpawnEffect value="TheySeeMeRolling@SpawnSet"/>
+        <SpawnUnit value="TheySeeMeRolling@Ball"/>
+    </CEffectCreateUnit>
+    <CEffectCreatePersistent id="TheySeeMeRolling@Offset5">
+        <EditorCategories value=""/>
+        <WhichLocation Value="CasterUnit"/>
+        <OffsetVectorStartLocation Value="CasterUnit"/>
+        <PeriodCount value="1"/>
+        <PeriodicEffectArray value="TheySeeMeRolling@CreateUnit"/>
+        <PeriodicOffsetArray value="0,-50,0"/>
+        <PeriodicPeriodArray value="0"/>
+    </CEffectCreatePersistent>
+    <CEffectApplyBehavior id="TheySeeMeRolling@ApplyTimedLife">
+        <EditorCategories value=""/>
+        <Behavior value="TheySeeMeRolling@TimedLife"/>
+    </CEffectApplyBehavior>
+    <CEffectIssueOrder id="TheySeeMeRolling@IssueMoveOffset5">
+        <EditorCategories value=""/>
+        <Abil value="move"/>
+        <CmdFlags index="Queued" value="1"/>
+        <Target Effect="TheySeeMeRolling@CreateUnit" Value="TargetPoint"/>
+    </CEffectIssueOrder>
+    <CEffectIssueOrder id="TheySeeMeRolling@IssueMoveOffset2">
+        <EditorCategories value=""/>
+        <Abil value="move"/>
+        <CmdFlags index="Queued" value="1"/>
+        <Target Effect="TheySeeMeRolling@Offset3" Value="TargetPoint"/>
+    </CEffectIssueOrder>
+    <CEffectIssueOrder id="TheySeeMeRolling@IssueMoveOffset1">
+        <EditorCategories value=""/>
+        <Abil value="move"/>
+        <Target Effect="TheySeeMeRolling@Offset2" Value="TargetPoint"/>
+    </CEffectIssueOrder>
+    <CEffectIssueOrder id="TheySeeMeRolling@IssueMoveOffset3">
+        <EditorCategories value=""/>
+        <Abil value="move"/>
+        <CmdFlags index="Queued" value="1"/>
+        <Target Effect="TheySeeMeRolling@Offset4" Value="TargetPoint"/>
+    </CEffectIssueOrder>
+    <CEffectSet id="TheySeeMeRolling@NotInChasmCheck">
+        <ValidatorArray value="SouceInChasm"/>
+        <EditorCategories value=""/>
+        <EffectArray value="Suicide"/>
+    </CEffectSet>
+    <CEffectSet id="TheySeeMeRolling@NotPathableSet">
+        <ValidatorArray value="SourceUnitNotOnPathable"/>
+        <EditorCategories value=""/>
+        <EffectArray value="Suicide"/>
+    </CEffectSet>
+    <CEffectIssueOrder id="TheySeeMeRolling@IssueMoveOffset4">
+        <EditorCategories value=""/>
+        <Abil value="move"/>
+        <CmdFlags index="Queued" value="1"/>
+        <Target Effect="TheySeeMeRolling@Offset5" Value="TargetPoint"/>
+    </CEffectIssueOrder>
+    <CEffectCreatePersistent id="TheySeeMeRolling@Offset2">
+        <EditorCategories value=""/>
+        <WhichLocation Value="CasterUnit"/>
+        <OffsetVectorStartLocation Value="CasterUnit"/>
+        <PeriodCount value="1"/>
+        <PeriodicEffectArray value="TheySeeMeRolling@Offset3"/>
+        <PeriodicOffsetArray value="0,-20,0"/>
+        <PeriodicPeriodArray value="0"/>
+    </CEffectCreatePersistent>
+    <CEffectCreatePersistent id="TheySeeMeRolling@Offset3">
+        <EditorCategories value=""/>
+        <WhichLocation Value="CasterUnit"/>
+        <OffsetVectorStartLocation Value="CasterUnit"/>
+        <PeriodCount value="1"/>
+        <PeriodicEffectArray value="TheySeeMeRolling@Offset4"/>
+        <PeriodicOffsetArray value="0,-30,0"/>
+        <PeriodicPeriodArray value="0"/>
+    </CEffectCreatePersistent>
+    <CEffectSet id="TheySeeMeRolling@TargetSet">
+        <EditorCategories value=""/>
+        <EffectArray value="TheySeeMeRolling@EnemyDebuff"/>
+        <EffectArray value="TheySeeMeRolling@Dmg"/>
+        <EffectArray value="TheySeeMeRolling@KnockbackController"/>
+        <EffectArray value="TheySeeMeRolling@BossCheck"/>
+    </CEffectSet>
+    <CEffectCreatePersistent id="TheySeeMeRolling@Offset4">
+        <EditorCategories value=""/>
+        <WhichLocation Value="CasterUnit"/>
+        <OffsetVectorStartLocation Value="CasterUnit"/>
+        <PeriodCount value="1"/>
+        <PeriodicEffectArray value="TheySeeMeRolling@Offset5"/>
+        <PeriodicOffsetArray value="0,-40,0"/>
+        <PeriodicPeriodArray value="0"/>
+    </CEffectCreatePersistent>
+    <CEffectDamage id="TheySeeMeRolling@Dmg">
+        <ValidatorArray value="TargetIsEnemy"/>
+        <ValidatorArray value="noMarkers"/>
+        <EditorCategories value=""/>
+        <Amount value="0">
+            <AccumulatorArray value="TheySeeMeRolling@KnockbackDmgScaled"/>
+            <AccumulatorArray value="TheySeeMeRolling@KnockbackDmgBase"/>
+            <AccumulatorArray value="HeroSpellDmgMultiplier"/>
+        </Amount>
+    </CEffectDamage>
+    <CEffectSet id="TheySeeMeRolling@ScanSet">
+        <EditorCategories value=""/>
+        <EffectArray value="TheySeeMeRolling@NotInChasmCheck"/>
+        <EffectArray value="TheySeeMeRolling@NotPathableSet"/>
+        <EffectArray value="TheySeeMeRolling@Search"/>
+    </CEffectSet>
+    <CEffectSet id="TheySeeMeRolling@SpawnSet">
+        <EditorCategories value=""/>
+        <EffectArray value="TheySeeMeRolling@ApplyTimedLife"/>
+        <EffectArray value="TheySeeMeRolling@IssueMoveOffset1"/>
+        <EffectArray value="TheySeeMeRolling@IssueMoveOffset2"/>
+        <EffectArray value="TheySeeMeRolling@IssueMoveOffset3"/>
+        <EffectArray value="TheySeeMeRolling@IssueMoveOffset4"/>
+        <EffectArray value="TheySeeMeRolling@IssueMoveOffset5"/>
+    </CEffectSet>
+    <CEffectApplyBehavior id="TheySeeMeRolling@EnemyDebuff">
+        <ValidatorArray index="0" value="NotStructureTarget"/>
+        <ValidatorArray value="TargetIsEnemy"/>
+        <EditorCategories value=""/>
+        <Behavior value="TheySeeMeRolling@Debuff"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyForce id="TheySeeMeRolling@Knockback">
+        <EditorCategories value=""/>
+        <WhichLocation Effect="TheySeeMeRolling@KnockbackController" Value="SourceUnit"/>
+        <Amount value="100"/>
+        <MassFraction value="0.5"/>
+    </CEffectApplyForce>
+    <CEffectCreatePersistent id="TheySeeMeRolling@KnockbackController">
+        <ValidatorArray value="TargetIsEnemyAndNotHeroic"/>
+        <ValidatorArray value="TheySeeMeRolling@NoKnockback"/>
+        <ValidatorArray value="NotStructureTarget"/>
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetUnit"/>
+        <InitialEffect value="TheySeeMeRolling@KnockbackMinimumSpeed"/>
+        <PeriodCount value="3"/>
+        <PeriodicEffectArray value="TheySeeMeRolling@KnockbackSet"/>
+        <PeriodicPeriodArray value="0"/>
+        <PeriodicPeriodArray value="0.0625"/>
+        <PeriodicPeriodArray value="0.0625"/>
+    </CEffectCreatePersistent>
+    <CEffectApplyBehavior id="TheySeeMeRolling@KnockbackMinimumSpeed">
+        <EditorCategories value=""/>
+    </CEffectApplyBehavior>
+    <CEffectEnumArea id="TheySeeMeRolling@KnockbackRekursion">
+        <EditorCategories value=""/>
+        <LaunchLocation Value="CasterUnit"/>
+        <ImpactLocation Value="TargetUnit"/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Heroic,Missile,Dead,Hidden"/>
+        <AreaArray Arc="90" Radius="0.5" Effect="TheySeeMeRolling@KnockbackController"/>
+        <SearchFlags index="ExtendByUnitRadius" value="1"/>
+        <ExcludeArray Value="Target"/>
+    </CEffectEnumArea>
+    <CEffectSet id="TheySeeMeRolling@KnockbackSet">
+        <EditorCategories value=""/>
+        <EffectArray value="TheySeeMeRolling@Knockback"/>
+        <EffectArray value="TheySeeMeRolling@KnockbackRekursion"/>
+        <SetSource value="1"/>
+    </CEffectSet>
+    <CEffectEnumArea id="HeroBowlerWeaponCollectibleSearch">
+        <EditorCategories value=""/>
+        <ImpactLocation Value="SourceUnit"/>
+        <SearchFilters value="Visible;Self,Player,Ally,Enemy,Missile,Item,Stasis,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="0.5" Effect="HeroBowlerWeaponExplodeSet"/>
+        <MaxCount value="1"/>
+    </CEffectEnumArea>
+    <CEffectEnumArea id="HeroBowlerWeaponExplodeSearch">
+        <EditorCategories value=""/>
+        <LaunchLocation Value="CasterUnit"/>
+        <ImpactLocation Value="SourceUnit"/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Item,Stasis,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="1.75" Effect="HeroBowlerWeaponDmg"/>
+        <SearchFlags index="SameCliff" value="1"/>
+    </CEffectEnumArea>
+    <CEffectEnumArea id="TheySeeMeRolling@Search">
+        <EditorCategories value=""/>
+        <ImpactLocation Value="SourceUnit"/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Structure,Item,Dead,Hidden,Invulnerable"/>
+        <AreaArray Arc="144.9975" Radius="1.65" Effect="TheySeeMeRolling@BossCheck"/>
+        <SearchFlags index="ExtendByUnitRadius" value="1"/>
+    </CEffectEnumArea>
+    <CEffectUserData id="JumpingBaneling@UserData">
+        <EditorCategories value=""/>
+        <Key value="JumpingBanling"/>
+        <SourceKey value="JumpingBanling"/>
+        <SourceFailBackValue value="20"/>
+        <Operation value="Subtract"/>
+        <ValidateMax value="999"/>
+        <EffectSuccess value="JumpingBaneling@SearchBounce"/>
+    </CEffectUserData>
+    <CEffectApplyBehavior id="HeroBowlerWeaponMissileApplyTimedLife">
+        <EditorCategories value=""/>
+        <Behavior value="HeroBowlerWeaponUnitTimedLife"/>
+    </CEffectApplyBehavior>
+    <CEffectCreateUnit id="HeroBowlerWeaponMissileCreateUnit">
+        <EditorCategories value=""/>
+        <WhichLocation Value="CasterUnit"/>
+        <CreateFlags index="OffsetByRadius" value="0"/>
+        <CreateFlags index="Placement" value="0"/>
+        <CreateFlags index="ProvideFood" value="0"/>
+        <CreateFlags index="UseFood" value="0"/>
+        <SpawnEffect value="HeroBowlerWeaponSpawnSet"/>
+        <SpawnUnit value="HeroBowlerWeaponUnit"/>
+    </CEffectCreateUnit>
+    <CEffectCreatePersistent id="HeroBowlerWeaponMissileEndPoint">
+        <EditorCategories value=""/>
+        <WhichLocation Value="CasterUnit"/>
+        <OffsetVectorStartLocation Value="CasterUnit"/>
+        <PeriodCount value="1"/>
+        <PeriodicEffectArray value="HeroBowlerWeaponMissileCreateUnit"/>
+        <PeriodicOffsetArray value="0,-34,0"/>
+        <PeriodicPeriodArray value="0"/>
+    </CEffectCreatePersistent>
+    <CEffectIssueOrder id="HeroBowlerWeaponMissileIssueMoveOffset1">
+        <EditorCategories value=""/>
+        <Abil value="move"/>
+        <Target Effect="HeroBowlerWeaponMissileOffset2" Value="TargetPoint"/>
+    </CEffectIssueOrder>
+    <CEffectIssueOrder id="HeroBowlerWeaponMissileIssueMoveOffset2">
+        <EditorCategories value=""/>
+        <Abil value="move"/>
+        <CmdFlags index="Queued" value="1"/>
+        <Target Effect="HeroBowlerWeaponMissileOffset3" Value="TargetPoint"/>
+    </CEffectIssueOrder>
+    <CEffectIssueOrder id="HeroBowlerWeaponMissileIssueMoveOffset3">
+        <EditorCategories value=""/>
+        <Abil value="move"/>
+        <CmdFlags index="Queued" value="1"/>
+        <Target Effect="HeroBowlerWeaponMissileOffset4" Value="TargetPoint"/>
+    </CEffectIssueOrder>
+    <CEffectIssueOrder id="HeroBowlerWeaponMissileIssueMoveOffset4">
+        <EditorCategories value=""/>
+        <Abil value="move"/>
+        <CmdFlags index="Queued" value="1"/>
+        <Target Effect="HeroBowlerWeaponMissileEndPoint" Value="TargetPoint"/>
+    </CEffectIssueOrder>
+    <CEffectCreatePersistent id="HeroBowlerWeaponMissileOffset1">
+        <ValidatorArray value="TargetNotAcrossCliff"/>
+        <EditorCategories value=""/>
+        <Marker Link="Effect/BanelingMissileEndPoint"/>
+        <WhichLocation Value="CasterUnit"/>
+        <OffsetVectorStartLocation Value="CasterUnit"/>
+        <PeriodCount value="1"/>
+        <PeriodicEffectArray value="HeroBowlerWeaponMissileOffset2"/>
+        <PeriodicOffsetArray value="0,-5,0"/>
+        <PeriodicPeriodArray value="0"/>
+    </CEffectCreatePersistent>
+    <CEffectCreatePersistent id="HeroBowlerWeaponMissileOffset2">
+        <EditorCategories value=""/>
+        <Marker Link="Effect/BanelingMissileEndPoint"/>
+        <WhichLocation Value="CasterUnit"/>
+        <OffsetVectorStartLocation Value="CasterUnit"/>
+        <PeriodCount value="1"/>
+        <PeriodicEffectArray value="HeroBowlerWeaponMissileOffset3"/>
+        <PeriodicOffsetArray value="0,-10,0"/>
+        <PeriodicPeriodArray value="0"/>
+    </CEffectCreatePersistent>
+    <CEffectCreatePersistent id="HeroBowlerWeaponMissileOffset3">
+        <EditorCategories value=""/>
+        <Marker Link="Effect/BanelingMissileEndPoint"/>
+        <WhichLocation Value="CasterUnit"/>
+        <OffsetVectorStartLocation Value="CasterUnit"/>
+        <PeriodCount value="1"/>
+        <PeriodicEffectArray value="HeroBowlerWeaponMissileOffset4"/>
+        <PeriodicOffsetArray value="0,-15,0"/>
+        <PeriodicPeriodArray value="0"/>
+    </CEffectCreatePersistent>
+    <CEffectCreatePersistent id="HeroBowlerWeaponMissileOffset4">
+        <EditorCategories value=""/>
+        <Marker Link="Effect/BanelingMissileEndPoint"/>
+        <WhichLocation Value="CasterUnit"/>
+        <OffsetVectorStartLocation Value="CasterUnit"/>
+        <PeriodCount value="1"/>
+        <PeriodicEffectArray value="HeroBowlerWeaponMissileEndPoint"/>
+        <PeriodicOffsetArray value="0,-20,0"/>
+        <PeriodicPeriodArray value="0"/>
+    </CEffectCreatePersistent>
+    <CEffectIssueOrder id="HeroBowlerWeaponMissileIssueMoveEnd">
+        <EditorCategories value=""/>
+        <Abil value="move"/>
+        <CmdFlags index="Queued" value="1"/>
+        <Target Effect="HeroBowlerWeaponMissileCreateUnit" Value="TargetPoint"/>
+    </CEffectIssueOrder>
+    <CEffectSet id="HeroBowlerWeaponMissileNotInChasmCheck">
+        <ValidatorArray value="SouceInChasm"/>
+        <EditorCategories value=""/>
+        <EffectArray value="HeroBowlerWeaponExplodeSet"/>
+    </CEffectSet>
+    <CEffectDamage id="HeroBowlerWeaponDmg">
+        <ValidatorArray value="SourceNotDead"/>
+        <ValidatorArray value="NotInvulnerable"/>
+        <EditorCategories value=""/>
+        <ResponseFlags index="Acquire" value="1"/>
+        <ResponseFlags index="Flee" value="1"/>
+        <ArmorReduction value="1"/>
+        <Flags index="Notification" value="1"/>
+        <Flags index="Impact" value="1"/>
+        <Kind value="Ranged"/>
+        <Amount value="0">
+            <AccumulatorArray value="HeroBowlerWeaponDmgScaled"/>
+            <AccumulatorArray value="HeroBowlerWeaponDmgBase"/>
+        </Amount>
+        <Death value="Disintegrate"/>
+    </CEffectDamage>
+    <CEffectDamage id="HeroBowlerWeaponCollectibleDmg">
+        <EditorCategories value=""/>
+        <ResponseFlags index="Acquire" value="1"/>
+        <ResponseFlags index="Flee" value="1"/>
+        <LaunchLocation Value="CasterUnit"/>
+        <ImpactLocation Value="SourceUnit"/>
+        <ArmorReduction value="1"/>
+        <Flags index="Notification" value="1"/>
+        <Kind value="Ranged"/>
+        <KindSplash value="Ranged"/>
+        <Amount value="500"/>
+        <Death value="Disintegrate"/>
+        <AreaArray Radius="1" Fraction="1"/>
+        <SearchFilters value="Visible;Self,Player,Ally,Enemy,Missile,Item,Stasis,Dead,Hidden,Invulnerable"/>
+        <SearchFlags index="CallForHelp" value="1"/>
+        <SearchFlags index="OffsetByUnitRadius" value="1"/>
+        <SearchFlags index="OffsetAreaByAngle" value="1"/>
+        <ValidatorArray value="NotInvulnerable"/>
+    </CEffectDamage>
+    <CEffectSet id="HeroBowlerWeaponMissileNotPathableSet">
+        <ValidatorArray value="SourceUnitNotOnPathable"/>
+        <EditorCategories value=""/>
+        <EffectArray value="HeroBowlerWeaponExplodeSet"/>
+    </CEffectSet>
+    <CEffectEnumArea id="HeroBowlerWeaponEnemySearch">
+        <EditorCategories value=""/>
+        <ImpactLocation Value="SourceUnit"/>
+        <SearchFilters value="Ground;Self,Player,Ally,Neutral,Missile,Item,Stasis,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="0.5" Effect="HeroBowlerWeaponExplodeSet"/>
+        <MaxCount value="1"/>
+    </CEffectEnumArea>
+    <CEffectSet id="HeroBowlerWeaponMissileScanSet">
+        <EditorCategories value=""/>
+        <EffectArray value="HeroBowlerWeaponMissileNotInChasmCheck"/>
+        <EffectArray value="HeroBowlerWeaponMissileNotPathableSet"/>
+        <EffectArray value="HeroBowlerWeaponEnemySearch"/>
+        <EffectArray value="HeroBowlerWeaponCollectibleSearch"/>
+    </CEffectSet>
+    <CEffectSet id="HeroBowlerWeaponSpawnSet">
+        <EditorCategories value=""/>
+        <EffectArray value="HeroBowlerWeaponMissileApplyTimedLife"/>
+        <EffectArray value="HeroBowlerWeaponMissileIssueMoveOffset1"/>
+        <EffectArray value="HeroBowlerWeaponMissileIssueMoveOffset2"/>
+        <EffectArray value="HeroBowlerWeaponMissileIssueMoveOffset3"/>
+        <EffectArray value="HeroBowlerWeaponMissileIssueMoveOffset4"/>
+        <EffectArray value="HeroBowlerWeaponMissileIssueMoveEnd"/>
+    </CEffectSet>
+    <CEffectSet id="HeroBowlerWeaponExplodeSet">
+        <EditorCategories value=""/>
+        <EffectArray value="HeroBowlerWeaponExplodeSearch"/>
+        <EffectArray value="HeroBowlerWeaponCollectibleDmg"/>
+        <EffectArray value="Suicide"/>
+    </CEffectSet>
+    <CEffectEnumArea id="Banemine@ExplosionDmgSearch">
+        <EditorCategories value=""/>
+        <ImpactLocation Value="SourcePoint"/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Item,Stasis,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="3" Effect="Banemine@ExplosionDmg"/>
+        <SearchFlags index="SameCliff" value="1"/>
+    </CEffectEnumArea>
+    <CEffectSet id="HeroBowlerWeaponAntiAirExplodeSet">
+        <EditorCategories value=""/>
+        <EffectArray value="HeroBowlerWeaponExplodeSearch"/>
+        <EffectArray value="HeroBowlerWeaponCollectibleDmg"/>
+    </CEffectSet>
+    <CEffectApplyBehavior id="Banemine@ApplyTimedLife">
+        <EditorCategories value=""/>
+        <Behavior value="Banemine@TimedLife"/>
+    </CEffectApplyBehavior>
+    <CEffectCreateUnit id="Banemine@CreateUnit">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetPoint"/>
+        <CreateFlags index="Birth" value="0"/>
+        <CreateFlags index="DropOff" value="0"/>
+        <CreateFlags index="OffsetByRadius" value="0"/>
+        <CreateFlags index="Placement" value="0"/>
+        <CreateFlags index="PlacementIgnoreBlockers" value="1"/>
+        <CreateFlags index="PlacementIgnoreCliffTest" value="1"/>
+        <CreateFlags index="SetFacing" value="1"/>
+        <CreateFlags index="NormalizeSpawnOffset" value="0"/>
+        <SpawnEffect value="Banemine@ApplyTimedLife"/>
+        <SpawnUnit value="Banemine"/>
+    </CEffectCreateUnit>
+    <CEffectDamage id="Banemine@ExplosionDmg">
+        <EditorCategories value=""/>
+        <ResponseFlags index="Acquire" value="1"/>
+        <ResponseFlags index="Flee" value="1"/>
+        <Flags index="Notification" value="1"/>
+        <Amount value="0">
+            <AccumulatorArray value="Banemine@DmgScaled"/>
+            <AccumulatorArray value="Banemine@DmgBase"/>
+            <AccumulatorArray value="HeroSpellDmgMultiplier"/>
+        </Amount>
+        <Death value="Disintegrate"/>
+        <SearchFlags index="CallForHelp" value="1"/>
+    </CEffectDamage>
+    <CEffectSet id="Banemine@ExplosionSet">
+        <EditorCategories value=""/>
+        <EffectArray value="Banemine@ExplosionDmgSearch"/>
+        <EffectArray value="Suicide"/>
+    </CEffectSet>
+    <CEffectSet id="Banemine@InitalSet">
+        <ValidatorArray value="Pathable"/>
+        <EditorCategories value=""/>
+        <EffectArray value="Banemine@LaunchMissile"/>
+        <TargetLocationType value="Point"/>
+    </CEffectSet>
+    <CEffectLaunchMissile id="Banemine@LaunchMissile">
+        <EditorCategories value=""/>
+        <ImpactLocation Value="TargetPoint"/>
+        <ImpactOffset value="0,0,0.05"/>
+        <ImpactEffect value="Banemine@CreateUnit"/>
+        <Flags index="ValidateBenign" value="0"/>
+        <AmmoUnit value="Banemine@Missile"/>
+    </CEffectLaunchMissile>
+    <CEffectLaunchMissile id="HeroBowlerWeaponAntiAirMissile">
+        <EditorCategories value=""/>
+        <ImpactEffect value="HeroBowlerWeaponAntiAirExplodeSet"/>
+        <AmmoUnit value="HeroBowlerWeaponUnit"/>
+        <Movers Link="BanemineMissileMover" IfRangeLTE="500"/>
+    </CEffectLaunchMissile>
+    <CEffectEnumArea id="JumpingBaneling@DmgSearch">
+        <EditorCategories value=""/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Item,Stasis,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="1.75" Effect="JumpingBaneling@Dmg"/>
+        <SearchFlags index="SameCliff" value="1"/>
+    </CEffectEnumArea>
+    <CEffectApplyBehavior id="KillStreak@StackBuffApply">
+        <ValidatorArray index="0" value="IsDead"/>
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Behavior value="KillStreak@BuffStack"/>
+    </CEffectApplyBehavior>
+    <CEffectCreatePersistent id="KillStreak@TargetDelay">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetUnit"/>
+        <InitialDelay value="0.001"/>
+        <FinalEffect value="KillStreak@StackBuffApply"/>
+    </CEffectCreatePersistent>
+    <CEffectDamage id="JumpingBaneling@Dmg">
+        <EditorCategories value=""/>
+        <ResponseFlags index="Acquire" value="1"/>
+        <ResponseFlags index="Flee" value="1"/>
+        <Flags index="Notification" value="1"/>
+        <Amount value="0">
+            <AccumulatorArray value="JumpingBaneling@DmgScaled"/>
+            <AccumulatorArray value="JumpingBaneling@DmgBase"/>
+            <AccumulatorArray value="HeroSpellDmgMultiplier"/>
+        </Amount>
+        <Death value="Disintegrate"/>
+        <SearchFlags index="CallForHelp" value="1"/>
+    </CEffectDamage>
+    <CEffectSet id="JumpingBaneling@ImpactSet">
+        <EditorCategories value=""/>
+        <EffectArray value="JumpingBaneling@UserData"/>
+        <EffectArray value="JumpingBaneling@DmgSearch"/>
+        <SetSource value="1"/>
+    </CEffectSet>
+    <CEffectSet id="JumpingBaneling@InitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="JumpingBaneling@LaunchMissileInitial"/>
+    </CEffectSet>
+    <CEffectLaunchMissile id="JumpingBaneling@LaunchMissileInitial">
+        <EditorCategories value=""/>
+        <LaunchLocation Value="CasterUnit"/>
+        <ImpactEffect value="JumpingBaneling@ImpactSet"/>
+        <AmmoUnit value="JumpingBaneling@Missile"/>
+        <Movers Link="JumpingBaneling@InitialMover" IfRangeLTE="10"/>
+    </CEffectLaunchMissile>
+    <CEffectLaunchMissile id="JumpingBaneling@LaunchMissileBounce">
+        <EditorCategories value=""/>
+        <ImpactEffect value="JumpingBaneling@ImpactSet"/>
+        <AmmoUnit value="JumpingBaneling@Missile"/>
+        <LaunchLocation Value="SourcePoint"/>
+    </CEffectLaunchMissile>
+    <CEffectEnumArea id="JumpingBaneling@SearchBounce">
+        <EditorCategories value=""/>
+        <ImpactLocation Value="SourceUnitOrPoint"/>
+        <ExcludeArray Value="Source"/>
+        <SearchFilters value="Visible;Self,Player,Ally,Neutral,Hover,Missile,Item,Stasis,Dead,Hidden,Invulnerable"/>
+        <TargetSorts>
+            <SortArray value="TSRandom"/>
+        </TargetSorts>
+        <AreaArray Radius="2.5" Effect="JumpingBaneling@LaunchMissileBounce"/>
+        <MaxCount value="1"/>
+    </CEffectEnumArea>
+    <CAbilEffectTarget id="TheySeeMeRolling">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="TheySeeMeRolling@InitialSet"/>
+        <Flags index="RangeUsePathing" value="1"/>
+        <Flags index="RequireTargetVision" value="0"/>
+        <Cost>
+            <Vital index="Energy" value="200"/>
+            <Charge Link="Abil/GlueStream"/>
+            <Cooldown Link="Abil/HeroRoachSharedCooldown" Location="Unit" TimeUse="60"/>
+        </Cost>
+        <Range value="500"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="TheySeeMeRolling" Requirements="TheySeeMeRolling@Req"/>
+    </CAbilEffectTarget>
+    <CAbilEffectTarget id="Banemine">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="Banemine@InitalSet"/>
+        <Cost>
+            <Vital index="Energy" value="50"/>
+            <Cooldown TimeUse="5"/>
+        </Cost>
+        <Range value="4"/>
+        <CastOutroTime value="0.125"/>
+        <CursorEffect value="Banemine@ExplosionDmgSearch"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="Banemine" Requirements="Banemine@Req"/>
+    </CAbilEffectTarget>
+    <CAbilEffectInstant id="Banemine@ExplodeCast">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="Suicide"/>
+        <Flags index="AutoCast" value="1"/>
+        <Flags index="AutoCastOn" value="1"/>
+        <Flags index="ChannelingMinimum" value="0"/>
+        <Flags index="RangeUseCasterRadius" value="0"/>
+        <Flags index="ReApproachable" value="0"/>
+        <Flags index="RequireTargetVision" value="0"/>
+        <Flags index="UninterruptibleTurn" value="1"/>
+        <Flags index="UpdateChargesOnLevelChange" value="0"/>
+        <Cost>
+            <Cooldown TimeStart="1.3"/>
+        </Cost>
+        <Arc value="360"/>
+        <AutoCastFilters value="Visible;Self,Player,Ally,Neutral,Missile,Item,Stasis,Dead,Hidden,Invulnerable"/>
+        <AutoCastRange value="3"/>
+        <AutoCastValidatorArray value="EnemyInRangeOf2"/>
+        <CastIntroTime value="0.25"/>
+        <UninterruptibleArray index="Cast" value="1"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="Banemine@Explode"/>
+    </CAbilEffectInstant>
+    <CAbilEffectTarget id="JumpingBaneling">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="JumpingBaneling@InitialSet"/>
+        <Cost>
+            <Vital index="Energy" value="50"/>
+            <Cooldown TimeUse="5"/>
+        </Cost>
+        <TargetFilters value="Visible;Self,Player,Ally,Neutral,Missile,Item,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="5"/>
+        <CastOutroTime value="0.125"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="JumpingBaneling"/>
+    </CAbilEffectTarget>
+    <CValidatorLocationPlacement id="Banemine@PlacementAllowsBanemine">
+        <Range value="1"/>
+        <Unit value="Banemine"/>
+    </CValidatorLocationPlacement>
+    <CValidatorUnitCompareBehaviorCount id="TheySeeMeRolling@NoKnockback">
+        <Behavior value="TheySeeMeRolling@KnockbackMinimumSpeed"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorPlayerRequirement id="KillStreak@Req">
+        <Find value="1"/>
+        <Value value="KillStreak@Req"/>
+    </CValidatorPlayerRequirement>
+    <CValidatorUnitFilters id="KillStreak@TargetDead">
+        <Filters value="Dead;-"/>
+    </CValidatorUnitFilters>
+    <CRequirement id="TheySeeMeRolling@Req">
+        <NodeArray index="Use" Link="GTE884099205CountUpgradeTheySeeMeRolling@UnlockCompleteOnly1"/>
+    </CRequirement>
+    <CRequirement id="Banemine@Req">
+        <NodeArray index="Use" Link="Eq428702543CountUpgradeBanemine@UnlockCompleteOnly1"/>
+    </CRequirement>
+    <CRequirement id="KillStreak@Req">
+        <NodeArray index="Use" Link="Eq1040997399CountUpgradeKillStreak@UnlockCompleteOnly1"/>
+    </CRequirement>
+    <CButton id="TheySeeMeRolling">
+        <Icon value="Assets\Textures\btn-upgrade-zerg-centrifugalhooks.dds"/>
+    </CButton>
+    <CButton id="Banemine">
+        <Icon value="Assets\Textures\btn-upgrade-zerg-rupture.dds"/>
+    </CButton>
+    <CButton id="KillStreak">
+        <Icon value="Assets\Textures\btn-ability-mengsk-ghost-pyrokineticimmolation_blue.dds"/>
+    </CButton>
+    <CButton id="Banemine@Explode">
+        <Icon value="Assets\Textures\btn-upgrade-zerg-rupture.dds"/>
+    </CButton>
+    <CButton id="JumpingBaneling">
+        <Icon value="Assets\Textures\btn-upgrade-zerg-stukov-infestedciviliansleap.dds"/>
+    </CButton>
+    <CRequirementGTE id="GTE884099205CountUpgradeTheySeeMeRolling@UnlockCompleteOnly1">
+        <OperandArray index="0" value="CountUpgradeTheySeeMeRolling@UnlockCompleteOnly"/>
+        <OperandArray index="1" value="1"/>
+    </CRequirementGTE>
+    <CRequirementCountUpgrade id="CountUpgradeTheySeeMeRolling@UnlockCompleteOnly">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="TheySeeMeRolling@Unlock" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeBanemine@UnlockCompleteOnly">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="Banemine@Unlock" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeKillStreak@UnlockCompleteOnly">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="KillStreak@Unlock" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementEq id="Eq1040997399CountUpgradeKillStreak@UnlockCompleteOnly1">
+        <OperandArray index="0" value="CountUpgradeKillStreak@UnlockCompleteOnly"/>
+        <OperandArray index="1" value="1"/>
+    </CRequirementEq>
+    <CRequirementEq id="Eq428702543CountUpgradeBanemine@UnlockCompleteOnly1">
+        <OperandArray index="0" value="CountUpgradeBanemine@UnlockCompleteOnly"/>
+        <OperandArray index="1" value="1"/>
+    </CRequirementEq>
+    <CActorModel id="TheySeeMeRolling@FinalExplosion" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On Terms="Effect.TheySeeMeRolling@FinalExplosionSearch.Start" Send="Create"/>
+        <Model value="BanelingCorrosiveExplosion"/>
+        <Scale value="1.500000"/>
+    </CActorModel>
+    <CActorUnit id="TheySeeMeRolling@Ball" parent="GenericUnitStandard" unitName="TheySeeMeRolling@Ball">
+        <EditorCategories value=""/>
+        <On index="35" Terms="UnitBirth.*.Normal" Send="AnimPlay Birth Walk PlayForever 0.000000"/>
+        <On Terms="ActorCreation" Send="AnimGroupApply Superior"/>
+        <Model value="Baneling"/>
+        <Scale value="2.000000"/>
+        <BuildModel value=""/>
+        <DeathActorModel value=""/>
+        <DeathActorModelLow value=""/>
+        <DeathActorSound value=""/>
+        <DeathActorVoice value=""/>
+        <PlacementModel value=""/>
+        <BarDistance value="0"/>
+        <BarOffset value="0"/>
+        <HighlightTooltip value="Unit/Name/Bogus"/>
+        <StatusBarFlags index="Shields" value="0"/>
+        <StatusBarFlags index="Life" value="0"/>
+        <StatusBarFlags index="Energy" value="0"/>
+        <StatusBarFlags index="Cargo" value="0"/>
+        <StatusBarFlags index="Progress" value="0"/>
+        <StatusBarFlags index="Duration" value="0"/>
+        <StatusBarFlags index="Magazine" value="0"/>
+        <StatusBarFlags index="Workers" value="0"/>
+        <StatusBarFlags index="Custom" value="0"/>
+        <StatusBarGroups index="Owner" value="0"/>
+        <StatusBarGroups index="Allied" value="0"/>
+        <StatusBarGroups index="Enemy" value="0"/>
+        <StatusBarGroups index="All" value="0"/>
+        <UnitFlags index="SuppressDefaultStatusBar" value="1"/>
+    </CActorUnit>
+    <CActorQuad id="TheySeeMeRolling@Guide" parent="ZergGuideVisualQuadDown" abil="TheySeeMeRolling">
+        <EditorCategories value=""/>
+        <LaunchActor value="ZergGuideVisualQuadRedLaunch"/>
+        <CenterActor value="ZergGuideVisualQuadRedCenter"/>
+        <ImpactActor value="ZergGuideVisualQuadRedImpact"/>
+        <Height value="15.000000"/>
+        <Width value="3.500000"/>
+    </CActorQuad>
+    <CActorAction id="JumpingBaneling@ActionBounce" parent="GenericAttack" effectImpact="JumpingBaneling@ImpactSet" effectLaunch="JumpingBaneling@LaunchMissileBounce">
+        <EditorCategories value=""/>
+        <Missile value="JumpingBaneling@Missile"/>
+        <LaunchSiteOps Ops="SOpSourcePoint"/>
+    </CActorAction>
+    <CActorSplat id="Banemine@BurrowSplat" parent="BurrowedSplat" unitName="Banemine">
+        <On index="2" Terms="UnitBirth.Banemine" Send="Create"/>
+        <On index="3" Terms="AbilMorph.*.Start; MorphTo Banemine" Send="Create"/>
+        <On index="4" Terms="AbilMorph.*.Finish; MorphFrom Banemine" Send="RefClear ::Host"/>
+        <On index="5" Terms="AbilMorph.*.Start; MorphFrom Banemine" Send="TimerSet 4.000000,2.000000 DelayDestroy"/>
+    </CActorSplat>
+    <CActorAction id="HeroBowlerWeaponAttack" parent="GenericAttack" effectImpact="HeroBowlerWeaponExplodeSet" effectLaunch="BanelingMissileLaunchMissile">
+        <EditorCategories value=""/>
+        <LaunchSiteOps Ops="SOpAttachWeaponBottom SOpLowerBy066"/>
+        <Missile value="BanelingMissile"/>
+        <ImpactSiteOps Ops="SOpAttachHarness SOpAttachVolumeStandard SOpAttachOrigin"/>
+        <ImpactMap index="None" Sound="BanelingMissileAttack"/>
+    </CActorAction>
+    <CActorModel id="HeroBowlerWeaponDeath" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On Terms="Effect.HeroBowlerWeaponDmg.Start; At Source" Send="Create"/>
+        <Model value="BanelingCorrosiveExplosion"/>
+        <Scale value="0.800000"/>
+    </CActorModel>
+    <CActorSplat id="Banemine@CurserSplat" parent="CursorSplat" abil="Banemine">
+        <EditorCategories value=""/>
+        <Model value="ZergAOECursorSplat"/>
+    </CActorSplat>
+    <CActorModel id="Banemine@Explosion" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On Terms="Effect.Banemine@ExplosionDmgSearch.Start; At Source" Send="Create"/>
+        <On Terms="ActorCreation" Send="SetTintColor 128,0,128"/>
+        <Model value="BanelingRuptureExplosion"/>
+        <Scale value="0.900000,0.900000,0.750000"/>
+    </CActorModel>
+    <CActorModel id="Banemine@ExplosionCastCurserSplat" parent="ModelAnimationStyleContinuous">
+        <EditorCategories value=""/>
+        <On Terms="Abil.Banemine@ExplodeCast.ButtonHoverOn" Send="Create"/>
+        <On Terms="Abil.Banemine@ExplodeCast.ButtonHoverOff" Send="Destroy Immediate"/>
+        <Model value="ZergAOECursorSplat"/>
+        <Scale value="3.000000"/>
+    </CActorModel>
+    <CActorMissile id="Banemine@Missile" parent="GenericAttackMissile" unitName="Banemine@Missile">
+        <EditorCategories value=""/>
+        <On index="1" Terms="UnitBirth" Send="AnimPlay Walk Walk,Superior PlayForever"/>
+        <On Terms="ActorCreation" Send="SetTintColor {128,0,128 0.500000}"/>
+        <Model value="Baneling_CollectionSkin_Webby"/>
+    </CActorMissile>
+    <CActorRange id="Banemine@Range" parent="RangeAbil" abil="Banemine">
+        <EditorCategories value=""/>
+        <Icon value="Assets\Textures\RadarIcon2.dds"/>
+    </CActorRange>
+    <CActorRange id="JumpingBaneling@Range" parent="RangeAbil" abil="JumpingBaneling">
+        <VisibleTo index="Self" value="1"/>
+        <EditorCategories value=""/>
+        <Icon value="Assets\Textures\RadarIcon2.dds"/>
+    </CActorRange>
+    <CActorModel id="JumpingBaneling@Impact" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On Terms="Effect.JumpingBaneling@DmgSearch.Start" Send="Create"/>
+        <On Terms="ActorCreation" Send="SetOpacity 0.350000"/>
+        <Model value="HunterCorrosiveExplosion"/>
+        <Scale value="0.700000"/>
+    </CActorModel>
+    <CActorUnit id="HeroBowlerWeaponUnit" parent="GenericUnitStandard" unitName="HeroBowlerWeaponUnit">
+        <EditorCategories value=""/>
+        <On index="35" Terms="UnitBirth.*.Normal" Send="AnimPlay Birth Walk PlayForever 0.000000"/>
+        <On Terms="ActorCreation" Send="AnimGroupApply Superior"/>
+        <Model value="Baneling"/>
+        <Scale value="0.800000"/>
+        <BuildModel value=""/>
+        <DeathActorModel value=""/>
+        <DeathActorModelLow value=""/>
+        <DeathActorSound value=""/>
+        <DeathActorVoice value=""/>
+        <PlacementModel value=""/>
+        <BarDistance value="0"/>
+        <BarOffset value="0"/>
+        <HighlightTooltip value="Unit/Name/Bogus"/>
+        <StatusBarFlags index="Shields" value="0"/>
+        <StatusBarFlags index="Life" value="0"/>
+        <StatusBarFlags index="Energy" value="0"/>
+        <StatusBarFlags index="Cargo" value="0"/>
+        <StatusBarFlags index="Progress" value="0"/>
+        <StatusBarFlags index="Duration" value="0"/>
+        <StatusBarFlags index="Magazine" value="0"/>
+        <StatusBarFlags index="Workers" value="0"/>
+        <StatusBarFlags index="Custom" value="0"/>
+        <StatusBarGroups index="Owner" value="0"/>
+        <StatusBarGroups index="Allied" value="0"/>
+        <StatusBarGroups index="Enemy" value="0"/>
+        <StatusBarGroups index="All" value="0"/>
+        <UnitFlags index="SuppressDefaultStatusBar" value="1"/>
+    </CActorUnit>
+    <CActorAction id="JumpingBaneling@ActionInitial" parent="GenericAttack" effectImpact="JumpingBaneling@Dmg" effectLaunch="JumpingBaneling@LaunchMissileInitial">
+        <EditorCategories value=""/>
+        <LaunchSiteOps Ops="SOpAttachHarness SOpAttachWeaponBottom"/>
+        <Missile value="JumpingBaneling@Missile"/>
+        <ImpactMap index="None" Sound="BanelingMissileAttack"/>
+    </CActorAction>
+    <CActorMissile id="JumpingBaneling@Missile" parent="GenericAttackMissile" unitName="JumpingBaneling@Missile">
+        <EditorCategories value=""/>
+        <On index="1" Terms="UnitBirth" Send="AnimPlay Walk Walk,Superior PlayForever"/>
+        <Model value="Hunter"/>
+        <Scale value="0.800000"/>
+    </CActorMissile>
+    <CActorUnit id="HeroBowler" parent="GenericUnitStandard" unitName="HeroBowler">
+        <Macros value="PhysicsDeathsSwarmAir"/>
+        <Macros value="PhysicsDeathsVoidAir"/>
+        <EditorCategories value=""/>
+        <On index="0" Send="Create SoundEmitter Mutalisk_Ambience"/>
+        <HostSiteOps Ops="SOpBankerMutalisk"/>
+        <Scale value="1.450000"/>
+        <ModelFlags index="OutlineEmitter" value="1"/>
+        <DeathArray index="Normal" ModelLink="HeroBowlerDeath" SoundLink="Mutalisk_Explode" VoiceLink="MutaliskDeathVoice"/>
+        <DeathCustoms ModelLink="HallucinationDeath" SoundLink="Spectre_KillerPhantasmDeath" Name="Hallucination"/>
+        <DeathCustoms>
+            <ActorModel value="MutaliskDeathRagdoll"/>
+            <ModelLink value="MutaliskDeathRagdoll"/>
+            <Name value="RagdollBasic"/>
+            <PhysicsMatchKeysOrdered value="BasicAir,Basic"/>
+            <BodySquibs Name="FireOnMetal"/>
+            <BodySquibs Name="BloodReduced" IsFallback="1"/>
+        </DeathCustoms>
+        <DeathCustoms Name="RagdollNuke" InheritsFrom="RagdollBasic">
+            <BodySquibs Name="Fire"/>
+        </DeathCustoms>
+        <DeathCustoms Name="RagdollFire" InheritsFrom="RagdollBasic">
+            <BodySquibs Name="Fire"/>
+        </DeathCustoms>
+        <DeathCustoms Name="RagdollAcid" InheritsFrom="RagdollBasic">
+            <BodySquibs Name="Acid"/>
+        </DeathCustoms>
+        <DeathCustoms Name="RagdollOverkillDPRH" InheritsFrom="RagdollBasic"/>
+        <DeathCustoms Name="RagdollOverkillDOI" InheritsFrom="RagdollBasic"/>
+        <DeathCustoms Name="RagdollMidair" InheritsFrom="RagdollBasic"/>
+        <DeathCustoms>
+            <ModelLink value="DeathVoidShadowMedium"/>
+            <SoundLink value="ShadowUnit_DeathFX"/>
+            <VoiceLink value="ShadowUnit_DeathVox"/>
+            <Name value="Shadow"/>
+        </DeathCustoms>
+        <DeathActorModel value="UnitDeathModelWithDeathMotionFlier"/>
+        <PhysicsMatchKeysOrdered value="BasicAir,Basic"/>
+        <PortraitModel value="MutaliskBroodlordPortrait"/>
+        <WalkAnimMoveSpeed value="2"/>
+        <BarOffset value="60"/>
+        <BarWidth value="50"/>
+        <CustomUnitStatusFrame value="SSF_UnitStatus/HeroStatus"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\wireframe-zerg-mutaliskex1a.dds"/>
+        </GroupIcon>
+        <GroupSoundArray index="What" value="Mutalisk_GroupWhat"/>
+        <GroupSoundArray index="Yes" value="Mutalisk_GroupYes"/>
+        <GroupSoundArray index="Attack" value="Mutalisk_GroupAttack"/>
+        <GroupSoundArray index="Board" value="Mutalisk_GroupBoard"/>
+        <HeroIcon value="Assets\Textures\btn-unit-zerg-mutalisk-broodlord.dds"/>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-zerg-flyercarapace-level0.dds"/>
+        <SoundArray index="Birth" value="Mutalisk_Birth"/>
+        <SoundArray index="Ready" value="Mutalisk_Ready"/>
+        <SoundArray index="Help" value="Mutalisk_Help"/>
+        <SoundArray index="What" value="Mutalisk_What"/>
+        <SoundArray index="Yes" value="Mutalisk_Yes"/>
+        <SoundArray index="Attack" value="Mutalisk_Attack"/>
+        <SoundArray index="Pissed" value="Mutalisk_Pissed"/>
+        <SoundArray index="Movement" value="Mutalisk_Movement"/>
+        <SoundArray index="Turning" value="Mutalisk_Turning"/>
+        <SoundArray index="Board" value="Mutalisk_Board"/>
+        <SoundArray index="Click" value="Mutalisk_Click"/>
+        <SoundArray index="ClickError" value="Mutalisk_ClickError"/>
+        <SoundArray index="Highlight" value="Mutalisk_Highlight"/>
+        <StatusColors index="Shields">
+            <ColorArray index="0" value="255,0,128,0"/>
+        </StatusColors>
+        <UnitFlags index="SuppressDefaultStatusBar" value="1"/>
+        <UnitIcon value="Assets\Textures\btn-unit-zerg-mutalisk-broodlord.dds"/>
+        <VitalColors index="Shields">
+            <ColorArray value="255,0,128,0"/>
+        </VitalColors>
+        <VitalNames index="Shields" value="Vital/ZergShields"/>
+        <Wireframe>
+            <Image value="Assets\Textures\wireframe-zerg-mutaliskex1a.dds"/>
+        </Wireframe>
+        <WireframeShieldColor value="255,0,128,0"/>
+    </CActorUnit>
+    <CActorUnit id="Banemine" parent="GenericUnitStandard" unitName="Banemine">
+        <Aliases value="_UnitSmall"/>
+        <Macros value="UnloadDropAnim"/>
+        <Macros value="ZergBurrowStandardAnimMacro"/>
+        <Macros value="ZergSmallBurrowEffects"/>
+        <Macros value="TerrainSquibAnimations"/>
+        <EditorCategories value=""/>
+        <Remove Terms="UnitDeathCustomize; ValidateUnit NotStructure; IsStatus InAir 1" Send="DeathCustomize AntiGravGeneric"/>
+        <Remove Terms="UnitDeathCustomize; ValidateUnit IsZergUnit; IsStatus InAir 1" Send="DeathCustomize AntiGravZerg"/>
+        <On Terms="ActorCreation" Send="AnimBracketStart AbilityEnd Burrow Stand,Burrow {} OpeningPlayForever"/>
+        <On Terms="ActorCreation" Send="SetTintColor {128,0,128 0.500000}"/>
+        <On Terms="Behavior.Banemine@TimedLife.On" Send="SetStatusBarOn 1 Duration"/>
+        <Model value="Baneling_CollectionSkin_Webby"/>
+        <ModelFlags index="OutlineEmitter" value="1"/>
+        <BuildModel value="Baneling_CollectionSkin_Webby"/>
+        <PlacementModel value="Baneling_CollectionSkin_Webby"/>
+        <PortraitModel value="Baneling_Webby_Portrait"/>
+        <TerrainSquibs>
+            <GroupName value="RippleStandard"/>
+            <MovementDistance value="0.150000,0.150000"/>
+            <IdlePeriod value="0.100000,0.250000"/>
+            <RangeUp value="1.000000"/>
+            <RangeDown value="1.000000"/>
+            <AttachQuery Methods="AMFilterCenter"/>
+            <Visuals TerrainPhysicsMaterial="Water" ActorModel="TerrainSquibHarnessContinuous" ModelLink="WaterRippleSmall"/>
+        </TerrainSquibs>
+        <BarOffset value="45"/>
+        <BarWidth value="36"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\wireframe-collection-webby-baneling.dds"/>
+        </GroupIcon>
+        <HeroIcon value="Assets\Textures\btn-unit-collection-webby-baneling.dds"/>
+        <HighlightTooltip value="Unit/Name/Bogus"/>
+        <StatusBarFlags index="Life" value="0"/>
+        <StatusColors index="Shields">
+            <ColorArray index="0" value="255,0,128,0"/>
+        </StatusColors>
+        <UnitFlags index="StandAnimBirthVariation" value="0"/>
+        <UnitIcon value="Assets\Textures\btn-unit-collection-webby-baneling.dds"/>
+        <VitalColors index="Shields">
+            <ColorArray value="255,0,128,0"/>
+        </VitalColors>
+        <Wireframe>
+            <Image value="Assets\Textures\wireframe-collection-webby-baneling.dds"/>
+        </Wireframe>
+        <WireframeShieldColor value="255,0,128,0"/>
+    </CActorUnit>
+    <CWeaponLegacy id="HeroBowlerWeaponAntiAir">
+        <EditorCategories value="Race:Zerg"/>
+        <Options index="Hidden" value="1"/>
+        <Icon value="Assets\Textures\btn-unit-zerg-baneling.dds"/>
+        <DisplayEffect value="HeroBowlerWeaponDmg"/>
+        <TargetFilters value="Air,Visible;Player,Ally,Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Period value="1.5"/>
+        <DamagePoint value="0.0625"/>
+        <Backswing value="0.4375"/>
+        <Effect value="HeroBowlerWeaponAntiAirMissile"/>
+        <MinScanRange value="7"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="HeroBowlerWeapon">
+        <EditorCategories value="Race:Zerg"/>
+        <Icon value="Assets\Textures\btn-unit-zerg-baneling.dds"/>
+        <DisplayEffect value="HeroBowlerWeaponDmg"/>
+        <TargetFilters value="Ground,Visible;Player,Ally,Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Period value="1.5"/>
+        <DamagePoint value="0.0625"/>
+        <Backswing value="0.4375"/>
+        <Effect value="HeroBowlerWeaponMissileOffset1"/>
+        <AllowedMovement value="Slowing"/>
+        <MinScanRange value="7"/>
+    </CWeaponLegacy>
+    <CMoverMissile id="JumpingBaneling@Mover">
+        <MotionPhases>
+            <Driver value="Ballistic"/>
+            <Speed value="1.3984"/>
+            <Gravity value="2.5"/>
+            <ThrowBandYaw value="-360,-360,-360,-360"/>
+            <ThrowBandPitch value="-360,-360,-360,-360"/>
+            <FlightTime value="0.5,-1"/>
+            <Overlays/>
+            <Overlays/>
+        </MotionPhases>
+    </CMoverMissile>
+    <CMoverMissile id="JumpingBaneling@InitialMover">
+        <MotionPhases>
+            <Driver value="Ballistic"/>
+            <Speed value="1.3984"/>
+            <Gravity value="4"/>
+            <ThrowBandYaw value="-360,-360,-360,-360"/>
+            <ThrowBandPitch value="-360,-360,-360,-360"/>
+            <FlightTime value="1,-1"/>
+            <Overlays/>
+            <Overlays/>
+        </MotionPhases>
+    </CMoverMissile>
+    <CAccumulatorArithmetic id="HeroBowlerWeaponDmgScaled">
+        <Parameters value="0">
+            <AccumulatorArray value="WeaponDmgUpgradeCollector"/>
+            <AccumulatorArray value="HeroLevelWeaponDmgBonus"/>
+        </Parameters>
+        <Parameters value="0">
+            <AccumulatorArray value="HeroBowlerWeaponDmgModifier"/>
+        </Parameters>
+        <Operation value="Multiply"/>
+    </CAccumulatorArithmetic>
+    <CAccumulatorArithmetic id="TheySeeMeRolling@ExplodeDmgScaled">
+        <Parameters value="0">
+            <AccumulatorArray value="HeroLevelWeaponDmgBonus"/>
+        </Parameters>
+        <Parameters value="0">
+            <AccumulatorArray value="TheySeeMeRolling@ExplodeDmgModifier"/>
+        </Parameters>
+        <Operation value="Multiply"/>
+    </CAccumulatorArithmetic>
+    <CAccumulatorArithmetic id="JumpingBaneling@DmgScaled">
+        <Parameters value="0">
+            <AccumulatorArray value="HeroLevelWeaponDmgBonus"/>
+        </Parameters>
+        <Parameters value="0">
+            <AccumulatorArray value="JumpingBaneling@DmgModifier"/>
+        </Parameters>
+        <Operation value="Multiply"/>
+    </CAccumulatorArithmetic>
+    <CAccumulatorArithmetic id="Banemine@DmgScaled">
+        <Parameters value="0">
+            <AccumulatorArray value="HeroLevelWeaponDmgBonus"/>
+        </Parameters>
+        <Parameters value="0">
+            <AccumulatorArray value="Banemine@DmgModifier"/>
+        </Parameters>
+        <Operation value="Multiply"/>
+    </CAccumulatorArithmetic>
+    <CAccumulatorArithmetic id="TheySeeMeRolling@KnockbackDmgScaled">
+        <Parameters value="0">
+            <AccumulatorArray value="HeroLevelWeaponDmgBonus"/>
+        </Parameters>
+        <Parameters value="0">
+            <AccumulatorArray value="TheySeeMeRolling@KnockbackDmgModifier"/>
+        </Parameters>
+        <Operation value="Multiply"/>
+    </CAccumulatorArithmetic>
+    <CAccumulatorConstant id="Banemine@DmgBase">
+        <Amount value="375"/>
+    </CAccumulatorConstant>
+    <CAccumulatorConstant id="Banemine@DmgModifier">
+        <Amount value="1"/>
+    </CAccumulatorConstant>
+    <CAccumulatorConstant id="JumpingBaneling@DmgBase">
+        <Amount value="100"/>
+    </CAccumulatorConstant>
+    <CAccumulatorConstant id="JumpingBaneling@DmgModifier">
+        <Amount value="1"/>
+    </CAccumulatorConstant>
+    <CAccumulatorConstant id="TheySeeMeRolling@KnockbackDmgBase">
+        <Amount value="125"/>
+    </CAccumulatorConstant>
+    <CAccumulatorConstant id="TheySeeMeRolling@ExplodeDmgBase">
+        <Amount value="125"/>
+    </CAccumulatorConstant>
+    <CAccumulatorConstant id="TheySeeMeRolling@KnockbackDmgModifier">
+        <Amount value="1"/>
+    </CAccumulatorConstant>
+    <CAccumulatorConstant id="TheySeeMeRolling@ExplodeDmgModifier">
+        <Amount value="1"/>
+    </CAccumulatorConstant>
+    <CAccumulatorConstant id="HeroBowlerWeaponDmgModifier">
+        <Amount value="1.05"/>
+    </CAccumulatorConstant>
+    <CAccumulatorConstant id="HeroBowlerWeaponDmgBase">
+        <Amount value="105"/>
+    </CAccumulatorConstant>
+    <CDataCollectionAbil id="Banemine">
+        <EditorCategories value=""/>
+        <DataRecord Entry="Abil,Banemine"/>
+        <DataRecord Entry="Abil,Banemine@ExplodeCast"/>
+        <DataRecord Entry="Actor,Banemine"/>
+        <DataRecord Entry="Actor,Banemine@BurrowSplat"/>
+        <DataRecord Entry="Actor,Banemine@CurserSplat"/>
+        <DataRecord Entry="Actor,Banemine@Explosion"/>
+        <DataRecord Entry="Actor,Banemine@ExplosionCastCurserSplat"/>
+        <DataRecord Entry="Actor,Banemine@Missile"/>
+        <DataRecord Entry="Actor,Banemine@Range"/>
+        <DataRecord Entry="Behavior,Banemine@TimedLife"/>
+        <DataRecord Entry="Button,Banemine"/>
+        <DataRecord Entry="Button,Banemine@Explode"/>
+        <DataRecord Entry="Effect,Banemine@ApplyTimedLife"/>
+        <DataRecord Entry="Effect,Banemine@ExplosionDmg"/>
+        <DataRecord Entry="Effect,Banemine@ExplosionDmgSearch"/>
+        <DataRecord Entry="Effect,Banemine@ExplosionSet"/>
+        <DataRecord Entry="Effect,Banemine@CreateUnit"/>
+        <DataRecord Entry="Effect,Banemine@LaunchMissile"/>
+        <DataRecord Entry="Effect,Banemine@InitalSet"/>
+        <DataRecord Entry="Requirement,Banemine@Req"/>
+        <DataRecord Entry="Unit,Banemine"/>
+        <DataRecord Entry="Unit,Banemine@Missile"/>
+        <DataRecord Entry="Upgrade,Banemine@Unlock"/>
+        <DataRecord Entry="Validator,Banemine@PlacementAllowsBanemine"/>
+        <DataRecord Entry="Accumulator,Banemine@DmgBase"/>
+        <DataRecord Entry="Accumulator,Banemine@DmgModifier"/>
+        <DataRecord Entry="Accumulator,Banemine@DmgScaled"/>
+    </CDataCollectionAbil>
+    <CDataCollectionAbil id="KillStreak">
+        <EditorCategories value=""/>
+        <DataRecord Entry="Behavior,KillStreak@BuffStack"/>
+        <DataRecord Entry="Behavior,KillStreak@Handler"/>
+        <DataRecord Entry="Button,KillStreak"/>
+        <DataRecord Entry="Effect,KillStreak@StackBuffApply"/>
+        <DataRecord Entry="Effect,KillStreak@TargetDelay"/>
+        <DataRecord Entry="Requirement,KillStreak@Req"/>
+        <DataRecord Entry="Upgrade,KillStreak@Unlock"/>
+        <DataRecord Entry="Validator,KillStreak@TargetDead"/>
+        <DataRecord Entry="Validator,KillStreak@Req"/>
+    </CDataCollectionAbil>
+    <CDataCollectionAbil id="JumpingBaneling">
+        <EditorCategories value=""/>
+        <DataRecord Entry="Abil,JumpingBaneling"/>
+        <DataRecord Entry="Actor,JumpingBaneling@ActionBounce"/>
+        <DataRecord Entry="Actor,JumpingBaneling@ActionInitial"/>
+        <DataRecord Entry="Actor,JumpingBaneling@Impact"/>
+        <DataRecord Entry="Actor,JumpingBaneling@Missile"/>
+        <DataRecord Entry="Actor,JumpingBaneling@Range"/>
+        <DataRecord Entry="Button,JumpingBaneling"/>
+        <DataRecord Entry="Effect,JumpingBaneling@Dmg"/>
+        <DataRecord Entry="Effect,JumpingBaneling@DmgSearch"/>
+        <DataRecord Entry="Effect,JumpingBaneling@ImpactSet"/>
+        <DataRecord Entry="Effect,JumpingBaneling@InitialSet"/>
+        <DataRecord Entry="Effect,JumpingBaneling@LaunchMissileBounce"/>
+        <DataRecord Entry="Effect,JumpingBaneling@LaunchMissileInitial"/>
+        <DataRecord Entry="Effect,JumpingBaneling@SearchBounce"/>
+        <DataRecord Entry="Effect,JumpingBaneling@UserData"/>
+        <DataRecord Entry="Unit,JumpingBaneling@Missile"/>
+        <DataRecord Entry="Accumulator,JumpingBaneling@DmgBase"/>
+        <DataRecord Entry="Accumulator,JumpingBaneling@DmgModifier"/>
+        <DataRecord Entry="Accumulator,JumpingBaneling@DmgScaled"/>
+        <DataRecord Entry="Mover,JumpingBaneling@InitialMover"/>
+        <DataRecord Entry="Mover,JumpingBaneling@Mover"/>
+    </CDataCollectionAbil>
+    <CDataCollectionAbil id="TheySeeMeRolling">
+        <EditorCategories value=""/>
+        <DataRecord Entry="Abil,TheySeeMeRolling"/>
+        <DataRecord Entry="Behavior,TheySeeMeRolling@Debuff"/>
+        <DataRecord Entry="Effect,TheySeeMeRolling@InitialSet"/>
+        <DataRecord Entry="Effect,TheySeeMeRolling@EnemyDebuff"/>
+        <DataRecord Entry="Effect,TheySeeMeRolling@Search"/>
+        <DataRecord Entry="Effect,TheySeeMeRolling@TargetSet"/>
+        <DataRecord Entry="Effect,TheySeeMeRolling@Dmg"/>
+        <DataRecord Entry="Effect,TheySeeMeRolling@KnockbackController"/>
+        <DataRecord Entry="Effect,TheySeeMeRolling@Knockback"/>
+        <DataRecord Entry="Effect,TheySeeMeRolling@KnockbackRekursion"/>
+        <DataRecord Entry="Effect,TheySeeMeRolling@KnockbackSet"/>
+        <DataRecord Entry="Actor,TheySeeMeRolling@Guide"/>
+        <DataRecord Entry="Behavior,TheySeeMeRolling@KnockbackMinimumSpeed"/>
+        <DataRecord Entry="Button,TheySeeMeRolling"/>
+        <DataRecord Entry="Effect,TheySeeMeRolling@KnockbackMinimumSpeed"/>
+        <DataRecord Entry="Validator,TheySeeMeRolling@NoKnockback"/>
+        <DataRecord Entry="Requirement,TheySeeMeRolling@Req"/>
+        <DataRecord Entry="Upgrade,TheySeeMeRolling@Unlock"/>
+        <DataRecord Entry="Actor,TheySeeMeRolling@FinalExplosion"/>
+        <DataRecord Entry="Actor,TheySeeMeRolling@Ball"/>
+        <DataRecord Entry="Behavior,TheySeeMeRolling@TimedLife"/>
+        <DataRecord Entry="Effect,TheySeeMeRolling@BossCheck"/>
+        <DataRecord Entry="Effect,TheySeeMeRolling@FinalExplosionDmg"/>
+        <DataRecord Entry="Effect,TheySeeMeRolling@FinalExplosionSearch"/>
+        <DataRecord Entry="Effect,TheySeeMeRolling@Offset1"/>
+        <DataRecord Entry="Effect,TheySeeMeRolling@Offset2"/>
+        <DataRecord Entry="Effect,TheySeeMeRolling@CreateUnit"/>
+        <DataRecord Entry="Effect,TheySeeMeRolling@SpawnSet"/>
+        <DataRecord Entry="Effect,TheySeeMeRolling@Offset5"/>
+        <DataRecord Entry="Effect,TheySeeMeRolling@ApplyTimedLife"/>
+        <DataRecord Entry="Effect,TheySeeMeRolling@IssueMoveOffset5"/>
+        <DataRecord Entry="Effect,TheySeeMeRolling@IssueMoveOffset2"/>
+        <DataRecord Entry="Effect,TheySeeMeRolling@Offset3"/>
+        <DataRecord Entry="Effect,TheySeeMeRolling@IssueMoveOffset1"/>
+        <DataRecord Entry="Effect,TheySeeMeRolling@IssueMoveOffset3"/>
+        <DataRecord Entry="Effect,TheySeeMeRolling@Offset4"/>
+        <DataRecord Entry="Effect,TheySeeMeRolling@NotInChasmCheck"/>
+        <DataRecord Entry="Effect,TheySeeMeRolling@NotPathableSet"/>
+        <DataRecord Entry="Effect,TheySeeMeRolling@IssueMoveOffset4"/>
+        <DataRecord Entry="Effect,TheySeeMeRolling@ScanSet"/>
+        <DataRecord Entry="Unit,TheySeeMeRolling@Ball"/>
+        <DataRecord Entry="Upgrade,TheySeeMeRolling@Unlock"/>
+        <DataRecord Entry="Accumulator,TheySeeMeRolling@ExplodeDmgModifier"/>
+        <DataRecord Entry="Accumulator,TheySeeMeRolling@ExplodeDmgBase"/>
+        <DataRecord Entry="Accumulator,TheySeeMeRolling@KnockbackDmgModifier"/>
+        <DataRecord Entry="Accumulator,TheySeeMeRolling@KnockbackDmgBase"/>
+        <DataRecord Entry="Accumulator,TheySeeMeRolling@ExplodeDmgScaled"/>
+        <DataRecord Entry="Accumulator,TheySeeMeRolling@KnockbackDmgScaled"/>
+    </CDataCollectionAbil>
+    <CUnit id="TheySeeMeRolling@Ball">
+        <DeathRevealRadius value="0"/>
+        <DeathRevealDuration value="0"/>
+        <Race value="Zerg"/>
+        <FlagArray index="Uncommandable" value="1"/>
+        <FlagArray index="Unselectable" value="1"/>
+        <FlagArray index="Untargetable" value="1"/>
+        <FlagArray index="KillCredit" value="0"/>
+        <FlagArray index="Invulnerable" value="1"/>
+        <FlagArray index="NoScore" value="1"/>
+        <FlagArray index="NoDeathEvent" value="1"/>
+        <Mover value="FlyGround"/>
+        <Speed value="9.0976"/>
+        <Acceleration value="1000"/>
+        <AbilArray Link="move"/>
+        <Radius value="0"/>
+        <SeparationRadius value="0"/>
+        <MinimapRadius value="0"/>
+        <EditorCategories value="ObjectType:Projectile"/>
+        <Sight value="1.35"/>
+        <Attributes index="Summoned" value="1"/>
+        <BehaviorArray Link="FakeMissileIdentifier"/>
+    </CUnit>
+    <CUnit id="HeroBowlerWeaponUnit">
+        <DeathRevealRadius value="0"/>
+        <DeathRevealDuration value="0"/>
+        <Race value="Zerg"/>
+        <FlagArray index="Uncommandable" value="1"/>
+        <FlagArray index="Unselectable" value="1"/>
+        <FlagArray index="Untargetable" value="1"/>
+        <FlagArray index="KillCredit" value="0"/>
+        <FlagArray index="Invulnerable" value="1"/>
+        <FlagArray index="NoScore" value="1"/>
+        <FlagArray index="NoDeathEvent" value="1"/>
+        <Mover value="FlyGround"/>
+        <Speed value="9"/>
+        <Acceleration value="1000"/>
+        <AbilArray Link="move"/>
+        <Radius value="0"/>
+        <SeparationRadius value="0"/>
+        <MinimapRadius value="0"/>
+        <EditorCategories value="ObjectType:Projectile"/>
+        <Attributes index="Summoned" value="1"/>
+        <BehaviorArray Link="FakeMissileIdentifier"/>
+    </CUnit>
+    <CUnit id="Banemine">
+        <Race value="Zerg"/>
+        <FlagArray index="UseLineOfSight" value="1"/>
+        <FlagArray index="KillCredit" value="0"/>
+        <FlagArray index="Cloaked" value="1"/>
+        <FlagArray index="Buried" value="1"/>
+        <FlagArray index="NoScore" value="1"/>
+        <Collide index="Flying" value="1"/>
+        <Response value="Nothing"/>
+        <Attributes index="Summoned" value="1"/>
+        <LifeArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </LifeArmorFormula>
+        <ShieldArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </ShieldArmorFormula>
+        <Sight value="2"/>
+        <AbilArray Link="Banemine@ExplodeCast"/>
+        <CardLayouts>
+            <LayoutButtons Face="Banemine@Explode" Type="AbilCmd" AbilCmd="Banemine@ExplodeCast,Execute" Row="2" Column="1"/>
+        </CardLayouts>
+        <Radius value="0"/>
+        <EditorCategories value=""/>
+        <KillDisplay value="Never"/>
+        <RankDisplay value="Never"/>
+        <BehaviorArray Link="FakeMissileIdentifier"/>
+    </CUnit>
+    <CUnit id="Banemine@Missile" parent="MISSILE">
+        <Race value="Zerg"/>
+        <Mover value="BanemineMissileMover"/>
+    </CUnit>
+    <CUnit id="JumpingBaneling@Missile" parent="MISSILE">
+        <Race value="Zerg"/>
+        <Mover value="JumpingBaneling@Mover"/>
+        <Attributes index="Summoned" value="1"/>
+    </CUnit>
+    <CUnit id="HeroBowler">
+        <DeathTime value="-1"/>
+        <DeathRevealRadius value="3"/>
+        <Race value="Zerg"/>
+        <FlagArray index="Hero" value="1"/>
+        <FlagArray index="UseLineOfSight" value="1"/>
+        <FlagArray index="ArmySelect" value="1"/>
+        <PlaneArray index="Ground" value="1"/>
+        <Collide index="Ground" value="1"/>
+        <Collide index="ForceField" value="1"/>
+        <Collide index="Locust" value="1"/>
+        <Collide index="Small" value="1"/>
+        <Attributes index="Light" value="1"/>
+        <Attributes index="Biological" value="1"/>
+        <Attributes index="Heroic" value="1"/>
+        <LifeStart value="2000"/>
+        <LifeMax value="2000"/>
+        <LifeArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </LifeArmorFormula>
+        <LifeRegenRate value="15"/>
+        <LifeArmorName value="Unit/LifeArmorName/ZergAirArmor"/>
+        <EnergyStart value="50"/>
+        <EnergyMax value="50"/>
+        <EnergyRegenRate value="0.75"/>
+        <ShieldArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </ShieldArmorFormula>
+        <ShieldArmorName value="Unit/ShieldArmorName/ZergWildMutation"/>
+        <Speed value="2.7968"/>
+        <Acceleration value="1000"/>
+        <LateralAcceleration value="64"/>
+        <StationaryTurningRate value="999.8437"/>
+        <TurningRate value="999.8437"/>
+        <Sight value="8.5"/>
+        <Height value="0.66"/>
+        <CostCategory value="Army"/>
+        <AttackTargetPriority value="20"/>
+        <AbilArray Link="stop"/>
+        <AbilArray Link="attack"/>
+        <AbilArray Link="move"/>
+        <AbilArray Link="JumpingBaneling"/>
+        <AbilArray Link="Banemine"/>
+        <AbilArray Link="TheySeeMeRolling"/>
+        <AbilArray Link="ShieldColor@ColorChange"/>
+        <BehaviorArray Link="Levels"/>
+        <BehaviorArray Link="HeroBowlerAttribute"/>
+        <BehaviorArray Link="KillStreak@Handler"/>
+        <BehaviorArray Link="HeroBowlerCreepBonusRegen"/>
+        <BehaviorArray Link="HeroBowlerArmor"/>
+        <WeaponArray Link="HeroBowlerWeapon"/>
+        <WeaponArray Link="HeroBowlerWeaponAntiAir"/>
+        <CardLayouts>
+            <LayoutButtons Face="Move" Type="AbilCmd" AbilCmd="move,Move" Row="0" Column="0"/>
+            <LayoutButtons Face="Stop" Type="AbilCmd" AbilCmd="stop,Stop" Row="0" Column="1"/>
+            <LayoutButtons Face="MoveHoldPosition" Type="AbilCmd" AbilCmd="move,HoldPos" Row="0" Column="2"/>
+            <LayoutButtons Face="Attack" Type="AbilCmd" AbilCmd="attack,Execute" Row="0" Column="4"/>
+            <LayoutButtons Face="MovePatrol" Type="AbilCmd" AbilCmd="move,Patrol" Row="0" Column="3"/>
+            <LayoutButtons Face="JumpingBaneling" Type="AbilCmd" AbilCmd="JumpingBaneling,Execute" Row="2" Column="0"/>
+            <LayoutButtons Face="Banemine" Type="AbilCmd" AbilCmd="Banemine,Execute" Row="2" Column="1"/>
+            <LayoutButtons>
+                <Face value="KillStreak"/>
+                <Type value="Passive"/>
+                <Behavior value="KillStreak@Handler"/>
+                <Requirements value="KillStreak@Req"/>
+                <Row value="1"/>
+                <Column value="0"/>
+            </LayoutButtons>
+            <LayoutButtons Face="TheySeeMeRolling" Type="AbilCmd" AbilCmd="TheySeeMeRolling,Execute" Row="2" Column="2"/>
+        </CardLayouts>
+        <InnerRadius value="0.5"/>
+        <SubgroupPriority value="50"/>
+        <MinimapRadius value="1"/>
+        <EditorCategories value=""/>
+        <GlossaryPriority value="11"/>
+        <HotkeyCategory value="Unit/Category/SSFPlayerUnits"/>
+        <AlliedPushPriority value="20"/>
+        <LifeArmorTip value="Unit/HeroBowler/ArmorTooltip"/>
+    </CUnit>
+    <CBehaviorBuff id="HeroBowlerArmor" parent="ArmorBase">
+        <Name value="Behavior/Name/HeroBowlerArmor"/>
+        <Tooltip value="Behavior/Tooltip/HeroArmorBase"/>
+        <Cost>
+            <Charge Link="Behavior/HeroArmorBase"/>
+            <Cooldown Link="Behavior/HeroArmorBase"/>
+        </Cost>
+        <DamageResponse>
+            <Cost>
+                <Charge Link="Behavior/HeroBowlerArmor"/>
+                <Cooldown Link="Behavior/HeroBowlerArmor"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="HeroBowlerCreepBonusRegen">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DisableValidatorArray value="OnCreep"/>
+        <Modification MoveSpeedMultiplier="1.5">
+            <VitalRegenArray index="Life" value="15"/>
+            <VitalRegenArray index="Energy" value="0.75"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="TheySeeMeRolling@TimedLife" parent="TimedLifeDisplayed">
+        <Name value="Behavior/Name/HeroBowlerWeaponUnitTheySeeMeRolling@TimedLife2"/>
+        <DisplayDuration index="Self" value="0"/>
+        <DisplayDuration index="Ally" value="0"/>
+        <DisplayDuration index="Neutral" value="0"/>
+        <DisplayDuration index="Enemy" value="0"/>
+        <Duration value="5.5"/>
+        <Period value="0.125"/>
+        <PeriodicEffect value="TheySeeMeRolling@ScanSet"/>
+        <FinalEffect value="TheySeeMeRolling@FinalExplosionSearch"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="TheySeeMeRolling@Debuff">
+        <Alignment value="Negative"/>
+        <InfoIcon value="Assets\Textures\btn-upgrade-zerg-centrifugalhooks.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <BuffFlags index="UpdateDurationWhileDisabled" value="1"/>
+        <Duration value="7.15"/>
+        <Modification>
+            <DamageDealtScaled index="Ranged" value="10"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="TheySeeMeRolling@KnockbackMinimumSpeed">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="0.1875"/>
+        <Modification MoveSpeedMinimum="10"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="KillStreak@BuffStack">
+        <Alignment value="Positive"/>
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <MaxStackCount value="10"/>
+        <TimeScaleSource Value="Caster"/>
+        <Duration value="15"/>
+        <Modification>
+            <DamageDealtFraction index="Spell" value="0.025"/>
+            <DamageDealtFraction index="Melee" value="0.05"/>
+            <DamageDealtFraction index="Ranged" value="0.05"/>
+            <DamageDealtFraction index="Splash" value="0.05"/>
+        </Modification>
+        <StackAlias value="KillStreakBuffStack"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="KillStreak@Handler">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Requirements value="KillStreak@Req"/>
+        <DamageResponse Handled="KillStreak@TargetDelay" Location="Attacker" TargetFilters="-;Player,Ally,Neutral">
+            <Chance value="1"/>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="HeroBowlerWeaponUnitTimedLife">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="2.85"/>
+        <Period value="0.0625"/>
+        <PeriodicEffect value="HeroBowlerWeaponMissileScanSet"/>
+        <FinalEffect value="HeroBowlerWeaponExplodeSet"/>
+    </CBehaviorBuff>
+    <CBehaviorAttribute id="HeroBowlerAttribute">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification MoveSpeedBonus="0.0781" AttackSpeedMultiplier="1.01">
+            <VitalMaxArray index="Life" value="250"/>
+            <VitalMaxArray index="Energy" value="5"/>
+        </Modification>
+    </CBehaviorAttribute>
+    <CBehaviorBuff id="Banemine@TimedLife" parent="TimedLifeDisplayed">
+        <Duration value="90"/>
+        <FinalEffect value="Banemine@ExplosionSet"/>
+        <ExpireEffect value=""/>
+    </CBehaviorBuff>
+    <CUpgrade id="TheySeeMeRolling@Unlock"/>
+    <CUpgrade id="KillStreak@Unlock"/>
+    <CUpgrade id="Banemine@Unlock"/>
+</Catalog>

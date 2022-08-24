@@ -1,0 +1,1048 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CEffectCreateHealer id="CyberneticLifeBank@TransferLifeHealer">
+        <EditorCategories value=""/>
+        <PeriodicValidator value="LifeBankPeriodicCheck"/>
+        <RechargeVitalRate value="100"/>
+        <DrainVitalCostFactor value="1"/>
+        <ValidatorArray value="TargetNotCyberneticLifeBank"/>
+        <ValidatorArray value="TargetIsAllyorPlayer"/>
+        <ValidatorArray value="CasterLifeGT1Percent"/>
+        <ValidatorArray value="CasterNotStunned"/>
+    </CEffectCreateHealer>
+    <CEffectModifyPlayer id="CyberneticLifeBank@DeathChargeUp">
+        <EditorCategories value=""/>
+        <WhichPlayer Value="Caster"/>
+        <Cost Abil="CyberneticChargeRestore">
+            <Charge>
+                <CountMax value="50"/>
+                <CountUse value="-1"/>
+                <Link value="Abil/CyberneticRestore/LifeBank"/>
+                <Location value="Global"/>
+            </Charge>
+        </Cost>
+    </CEffectModifyPlayer>
+    <CEffectModifyPlayer id="CyberneticLifeBank@RestoreCharge">
+        <EditorCategories value=""/>
+        <WhichPlayer Value="Caster"/>
+        <Cost Abil="CyberneticTrain">
+            <Charge>
+                <CountMax value="50"/>
+                <CountUse value="-1"/>
+                <Link value="Abil/CyberneticTrain/LifeBank"/>
+                <Location value="Global"/>
+            </Charge>
+        </Cost>
+    </CEffectModifyPlayer>
+    <CEffectSet id="CyberneticLifeBank@RestoreSet">
+        <EditorCategories value=""/>
+        <EffectArray value="CyberneticLifeBank@RestoreCharge"/>
+        <EffectArray value="KillRemove"/>
+    </CEffectSet>
+    <CEffectModifyPlayer id="CyberneticLurkerRestoreCharge">
+        <EditorCategories value=""/>
+        <WhichPlayer Value="Caster"/>
+        <Cost Abil="CyberneticTrain">
+            <Charge>
+                <CountMax value="50"/>
+                <CountStart value="50"/>
+                <CountUse value="-1"/>
+                <Link value="Abil/CyberneticTrain/Lurker"/>
+                <Location value="Player"/>
+            </Charge>
+        </Cost>
+        <EffectArray Reference="Abil,CyberneticChargeRestore,InfoArray[Train1].Resource[Vespene]" Value="3"/>
+    </CEffectModifyPlayer>
+    <CEffectSet id="CyberneticLurkerRestoreSet">
+        <EditorCategories value=""/>
+        <EffectArray value="CyberneticLurkerRestoreCharge"/>
+        <EffectArray value="KillRemove"/>
+    </CEffectSet>
+    <CEffectSet id="CyberneticRunlingRestoreSet">
+        <EditorCategories value=""/>
+        <EffectArray value="CyberneticRunlingRestoreCharge"/>
+        <EffectArray value="KillRemove"/>
+    </CEffectSet>
+    <CEffectModifyPlayer id="CyberneticRunlingDeathChargeUp">
+        <EditorCategories value=""/>
+        <WhichPlayer Value="Caster"/>
+        <Cost Abil="CyberneticChargeRestore">
+            <Charge>
+                <CountMax value="50"/>
+                <CountStart value="50"/>
+                <CountUse value="-1"/>
+                <Link value="Abil/CyberneticRestore/Runling"/>
+                <Location value="Player"/>
+            </Charge>
+        </Cost>
+    </CEffectModifyPlayer>
+    <CEffectModifyPlayer id="CyberneticRunlingRestoreCharge">
+        <EditorCategories value=""/>
+        <WhichPlayer Value="Caster"/>
+        <Cost Abil="CyberneticTrain">
+            <Charge>
+                <CountMax value="50"/>
+                <CountStart value="50"/>
+                <CountUse value="-1"/>
+                <Link value="Abil/CyberneticTrain/Runling"/>
+                <Location value="Player"/>
+            </Charge>
+        </Cost>
+        <EffectArray Reference="Abil,CyberneticChargeRestore,InfoArray[Train2].Resource[Vespene]" Value="1"/>
+    </CEffectModifyPlayer>
+    <CEffectModifyPlayer id="CyberneticLurkerDeathChargeUp">
+        <EditorCategories value=""/>
+        <WhichPlayer Value="Caster"/>
+        <Cost Abil="CyberneticChargeRestore">
+            <Charge>
+                <CountMax value="50"/>
+                <CountStart value="50"/>
+                <CountUse value="-1"/>
+                <Link value="Abil/CyberneticRestore/Lurker"/>
+                <Location value="Player"/>
+            </Charge>
+        </Cost>
+    </CEffectModifyPlayer>
+    <CEffectCreatePersistent id="CyberneticLurkerWeaponPersistent">
+        <ValidatorArray value="TargetNotAcrossChasm"/>
+        <EditorCategories value="Race:Zerg"/>
+        <WhichLocation Value="CasterUnit"/>
+        <TimeScaleSource Value="Caster"/>
+        <Flags index="Channeled" value="1"/>
+        <PeriodCount value="7"/>
+        <PeriodicValidator value="CasterIsAttacking"/>
+        <PeriodicEffectArray value="CyberneticLurkerWeaponSearch"/>
+        <PeriodicOffsetArray value="0,-1,0"/>
+        <PeriodicOffsetArray value="0,-2,0"/>
+        <PeriodicOffsetArray value="0,-3,0"/>
+        <PeriodicOffsetArray value="0,-4,0"/>
+        <PeriodicOffsetArray value="0,-5,0"/>
+        <PeriodicOffsetArray value="0,-6,0"/>
+        <PeriodicOffsetArray value="0,-7,0"/>
+        <PeriodicPeriodArray value="0.0625"/>
+        <Marker>
+            <MatchFlags index="Id" value="1"/>
+        </Marker>
+    </CEffectCreatePersistent>
+    <CEffectDamage id="CyberneticLurkerWeaponDamage" parent="DU_WEAP">
+        <ValidatorArray value="noMarkers"/>
+        <ValidatorArray value="NotInvulnerable"/>
+        <EditorCategories value="Race:Zerg"/>
+        <Kind value="Ranged"/>
+        <Amount value="0">
+            <AccumulatorArray value="LurkerWeaponDmgScaled"/>
+            <AccumulatorArray value="LurkerWeaponDmgBase"/>
+        </Amount>
+        <Flags index="Impact" value="1"/>
+    </CEffectDamage>
+    <CEffectEnumArea id="CyberneticLurkerWeaponSearch">
+        <ValidatorArray value="CliffLevelGE1"/>
+        <EditorCategories value="Race:Zerg"/>
+        <SearchFilters value="Ground;Player,Ally,Neutral,Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="0.625" Effect="CyberneticLurkerWeaponDamage"/>
+        <SearchFlags index="CallForHelp" value="1"/>
+    </CEffectEnumArea>
+    <CEffectDamage id="RunlingWeaponDmg" parent="DU_WEAP">
+        <Kind value="Ranged"/>
+        <KindSplash value="Ranged"/>
+        <Amount value="0">
+            <AccumulatorArray value="RunlingWeaponDmgScaled"/>
+            <AccumulatorArray value="RunlingWeaponDmgBase"/>
+        </Amount>
+        <SearchFlags index="CallForHelp" value="0"/>
+        <SearchFlags index="OffsetByUnitRadius" value="0"/>
+        <SearchFlags index="OffsetAreaByAngle" value="0"/>
+        <Flags index="Impact" value="1"/>
+        <ValidatorArray value="NotInvulnerable"/>
+    </CEffectDamage>
+    <CEffectLaunchMissile id="RunlingWeaponRangeLaunchMissile2">
+        <ValidatorArray index="0" value="SourceIsStationary"/>
+        <EditorCategories value="Race:Terran"/>
+        <ImpactEffect value="RunlingWeaponDmg"/>
+        <AmmoUnit value="WraithGroundWeapon"/>
+    </CEffectLaunchMissile>
+    <CEffectLaunchMissile id="RunlingWeaponRangeLaunchMissile">
+        <EditorCategories value="Race:Terran"/>
+        <ImpactEffect value="RunlingWeaponDmg"/>
+        <AmmoUnit value="WraithGroundWeapon"/>
+        <ValidatorArray index="0" value="SourceIsNotStationary"/>
+    </CEffectLaunchMissile>
+    <CAbilEffectTarget id="CyberneticLifeBank@TransferLife">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="CyberneticLifeBank@TransferLifeHealer"/>
+        <Range value="5"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="CyberneticLifeBank@LifeTransfer"/>
+        <Cost>
+            <Cooldown TimeUse="1"/>
+        </Cost>
+        <Arc value="360"/>
+        <Flags index="AutoCast" value="1"/>
+        <Flags index="AutoCastOn" value="1"/>
+        <AutoCastAcquireLevel value="Defensive"/>
+        <AutoCastRange value="5"/>
+        <AutoCastValidatorArray value="TargetLifeLT90Percent"/>
+        <AutoCastValidatorArray value="CasterLifeGT1Percent"/>
+        <AutoCastFilters value="Visible;Neutral,Enemy,Worker,Missile,Item,Stasis,Dead,Hidden,Invulnerable"/>
+    </CAbilEffectTarget>
+    <CAbilTrain id="CyberneticTrain">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Flags index="Transient" value="1"/>
+        <InfoArray index="Train1" Time="1">
+            <Charge>
+                <CountMax value="2"/>
+                <CountStart value="2"/>
+                <CountUse value="1"/>
+                <Link value="Abil/CyberneticTrain/Lurker"/>
+                <Location value="Player"/>
+            </Charge>
+            <Button DefaultButtonFace="CreateLurker" Requirements="LurkerUnlocked"/>
+            <Unit value="CyberneticLurker"/>
+        </InfoArray>
+        <InfoArray index="Train2" Time="1">
+            <Charge>
+                <CountMax value="5"/>
+                <CountStart value="5"/>
+                <CountUse value="1"/>
+                <Link value="Abil/CyberneticTrain/Runling"/>
+                <Location value="Player"/>
+            </Charge>
+            <Button DefaultButtonFace="CreateRunling" Requirements="CyberneticRunlingUnlocked"/>
+            <Unit value="Runling"/>
+        </InfoArray>
+        <InfoArray index="Train3">
+            <Charge>
+                <CountMax value="6"/>
+                <CountStart value="1"/>
+                <CountUse value="1"/>
+                <Link value="Abil/CyberneticTrain/LifeBank"/>
+                <Location value="Global"/>
+            </Charge>
+            <Button DefaultButtonFace="CyberneticLifeBank@CreateLifeBank" Requirements="CyberneticLifeBank@Unlocked"/>
+            <Unit value="CyberneticLifeBank"/>
+        </InfoArray>
+        <Range value="1.75"/>
+    </CAbilTrain>
+    <CAbilTrain id="CyberneticChargeRestore">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Flags index="DisableCollision" value="1"/>
+        <Flags index="Transient" value="1"/>
+        <InfoArray index="Train1" Time="0.0625" Effect="CyberneticLurkerRestoreSet">
+            <Resource index="Vespene" value="10"/>
+            <Charge>
+                <CountMax value="50"/>
+                <CountUse value="1"/>
+                <Link value="Abil/CyberneticRestore/Lurker"/>
+                <Location value="Player"/>
+            </Charge>
+            <Button DefaultButtonFace="CyberneticLurkerRestoreCharge" Requirements="CyberneticLurkerChargeRestore"/>
+            <Unit value="DummyInstantExpire"/>
+        </InfoArray>
+        <InfoArray index="Train2" Time="0.625" Effect="CyberneticRunlingRestoreSet">
+            <Resource index="Vespene" value="3"/>
+            <Charge>
+                <CountMax value="50"/>
+                <CountUse value="1"/>
+                <Link value="Abil/CyberneticRestore/Runling"/>
+                <Location value="Player"/>
+            </Charge>
+            <Button DefaultButtonFace="CyberneticRunlingRestoreCharge" Requirements="CyberneticRunlingChargeRestore"/>
+            <Unit value="DummyInstantExpire"/>
+        </InfoArray>
+        <InfoArray index="Train3" Time="0.625" Effect="CyberneticLifeBank@RestoreSet">
+            <Resource index="Vespene" value="5"/>
+            <Charge>
+                <CountMax value="50"/>
+                <CountUse value="1"/>
+                <Link value="Abil/CyberneticRestore/LifeBank"/>
+                <Location value="Global"/>
+            </Charge>
+            <Button DefaultButtonFace="CyberneticLifeBank@LifeBankRestoreCharge" Requirements="CyberneticRunlingChargeRestore"/>
+            <Unit value="DummyInstantExpire"/>
+        </InfoArray>
+    </CAbilTrain>
+    <CAbilMorph id="CyberneticLurkerBurrow">
+        <EditorCategories value="Race:Zerg,AbilityorEffectType:MorphsandBurrows"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="BurrowDown"/>
+        <CmdButtonArray index="Cancel" DefaultButtonFace="Cancel"/>
+        <ActorKey value="BurrowDown"/>
+        <Flags index="Interruptible" value="1"/>
+        <Flags index="IgnoreFacing" value="1"/>
+        <Flags index="IgnorePlacement" value="0"/>
+        <Flags index="SuppressMovement" value="1"/>
+        <InfoArray Unit="CyberneticLurkerBurrowed" RandomDelayMax="0.2">
+            <SectionArray index="Actor">
+                <DurationArray index="Duration" value="2"/>
+            </SectionArray>
+            <SectionArray index="Collide">
+                <DurationArray index="Delay" value="1.2"/>
+            </SectionArray>
+            <SectionArray index="Stats">
+                <DurationArray index="Delay" value="1.2"/>
+            </SectionArray>
+        </InfoArray>
+    </CAbilMorph>
+    <CAbilMorph id="CyberneticLurkerUnburrow">
+        <EditorCategories value="Race:Zerg,AbilityorEffectType:MorphsandBurrows"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="BurrowUp"/>
+        <ActorKey value="BurrowUp"/>
+        <Flags index="IgnoreFacing" value="1"/>
+        <Flags index="SuppressMovement" value="1"/>
+        <InfoArray Unit="CyberneticLurker" RandomDelayMax="0.35">
+            <SectionArray index="Actor">
+                <DurationArray index="Duration" value="0.35"/>
+            </SectionArray>
+        </InfoArray>
+    </CAbilMorph>
+    <CValidatorCombine id="LifeBankPeriodicCheck">
+        <Type value="And"/>
+        <CombineArray value="RangeCheckLE7"/>
+        <CombineArray value="CasterLifeGT1Percent"/>
+    </CValidatorCombine>
+    <CValidatorUnitType id="TargetNotCyberneticLifeBank">
+        <ResultNoUnit value="Error,Validator/NotCyberneticLifeBank"/>
+        <Value value="CyberneticLifeBank"/>
+        <ResultFailed value="Error,Validator/NotCyberneticLifeBank"/>
+        <Find value="0"/>
+    </CValidatorUnitType>
+    <CRequirement id="CyberneticLifeBank@Unlocked">
+        <NodeArray index="Show" Link="GTE612606772CountUpgradeUnlockCyberneticsCompleteOnly3"/>
+    </CRequirement>
+    <CRequirement id="CyberneticLurkerChargeRestore">
+        <NodeArray index="Show" Link="EqCountUpgradeCyberneticLurkerChargeRestoreUnlockCompleteOnly1"/>
+    </CRequirement>
+    <CRequirement id="CyberneticRunlingChargeRestore">
+        <NodeArray index="Show" Link="EqCountUpgradeCyberneticRunlingChargeRestoreUnlockCompleteOnly1"/>
+    </CRequirement>
+    <CRequirement id="CyberneticsUnlocked">
+        <NodeArray index="Show" Link="GTECountUpgradeUnlockCyberneticsCompleteOnly1"/>
+    </CRequirement>
+    <CRequirement id="LurkerUnlocked">
+        <NodeArray index="Show" Link="GTECountUpgradeUnlockCyberneticsCompleteOnly1"/>
+    </CRequirement>
+    <CRequirement id="CyberneticRunlingUnlocked">
+        <NodeArray index="Show" Link="GTE4159062706CountUpgradeUnlockCyberneticsCompleteOnly2"/>
+    </CRequirement>
+    <CButton id="CyberneticLifeBank@CreateLifeBank">
+        <Icon value="Assets\Textures\btn-building-zerg-sporecrawler-rcz.dds"/>
+        <AlertIcon value="Assets\Textures\btn-building-zerg-sporecrawler-rcz.dds"/>
+    </CButton>
+    <CButton id="CyberneticLifeBank@LifeBankRestoreCharge">
+        <Icon value="Assets\Icons\btn-building-zerg-sporecrawler-rcz-recharge.dds"/>
+        <HotkeyAlias value="CyberneticLifeBank@CreateLifeBank"/>
+        <AlertIcon value="Assets\Icons\btn-building-zerg-sporecrawler-rcz-recharge.dds"/>
+    </CButton>
+    <CButton id="CyberneticRunlingRestoreCharge">
+        <Icon value="Assets\Icons\btn-unit-zerg-zergling-rcz-recharge.dds"/>
+        <AlertIcon value="Assets\Icons\btn-unit-zerg-zergling-rcz-recharge.dds"/>
+    </CButton>
+    <CButton id="CyberneticLifeBank@LifeTransfer">
+        <Icon value="Assets\Textures\btn-ability-kerrigan-vespeneefficiency.dds"/>
+    </CButton>
+    <CButton id="CyberneticLurkerRestoreCharge">
+        <Icon value="Assets\Icons\btn-unit-zerg-lurker-rcz-recharge.dds"/>
+        <AlertIcon value="Assets\Icons\btn-unit-zerg-lurker-rcz-recharge.dds"/>
+    </CButton>
+    <CButton id="CyberneticLurkerBurrow">
+        <Icon value="Assets\Textures\btn-ability-zerg-burrow-color.dds"/>
+        <AlertIcon value="Assets\Textures\btn-ability-zerg-burrow.dds"/>
+        <EditorCategories value="Race:Zerg"/>
+        <Universal value="1"/>
+    </CButton>
+    <CButton id="CyberneticLurkerBurrowUp">
+        <Icon value="Assets\Textures\btn-ability-zerg-upburrow-color.dds"/>
+        <AlertIcon value="Assets\Textures\btn-ability-zerg-upburrow-color.dds"/>
+        <EditorCategories value="Race:Zerg"/>
+        <Universal value="1"/>
+    </CButton>
+    <CButton id="CyberneticSubmenu">
+        <Icon value="Assets\Textures\btn-unit-zerg-overlord-rcz.dds"/>
+    </CButton>
+    <CButton id="CreateRunling">
+        <Icon value="Assets\Textures\btn-unit-zerg-zergling-rcz.dds"/>
+        <AlertIcon value="Assets\Textures\btn-unit-zerg-zergling-rcz.dds"/>
+    </CButton>
+    <CButton id="CreateLurker">
+        <Icon value="Assets\Textures\btn-unit-zerg-lurker-rcz.dds"/>
+        <AlertIcon value="Assets\Textures\btn-unit-zerg-lurker-rcz.dds"/>
+    </CButton>
+    <CRequirementGTE id="GTE612606772CountUpgradeUnlockCyberneticsCompleteOnly3">
+        <OperandArray index="0" value="CountUpgradeUnlockCyberneticsCompleteOnly"/>
+        <OperandArray index="1" value="3"/>
+    </CRequirementGTE>
+    <CActorBeamSimple id="CyberneticLifeBank@TransferLifeBeam" parent="BeamSimpleAnimationStyleContinuous">
+        <Flags index="SuppressSaveLoad" value="1"/>
+        <EditorCategories value=""/>
+        <On Terms="Effect.CyberneticLifeBank@TransferLifeHealer.Start" Send="Create"/>
+        <On Terms="Effect.CyberneticLifeBank@TransferLifeHealer.Stop" Send="Destroy"/>
+        <HostLaunch Subject="_Unit" Scope="Caster"/>
+        <HostLaunchSiteOps Ops="SOpAttachWeapon"/>
+        <HostImpact Subject="_Unit" Scope="Target"/>
+        <HostImpactSiteOps Ops="SOpAttachCenter"/>
+    </CActorBeamSimple>
+    <CActorUnit id="CyberneticLifeBank" parent="ZergBuildingEx" unitName="CyberneticLifeBank">
+        <Aliases value="_UnitLarge"/>
+        <Macros index="1" removed="1"/>
+        <Macros index="2" removed="1"/>
+        <Model value="SporeCrawlerRCZ"/>
+        <AnimBlendTime value="0.400000"/>
+        <EventDataSound Name="SporeCrawlerBurrowEnd" Actor="UnitSound" Sound="Zerg_BurrowLarge"/>
+        <PlacementSound value="Zerg_BuildingPlacementSmall"/>
+        <PlacementActorModel value="SporeCrawlerPlacementModel"/>
+        <PlaceholderActorModel value="SporeCrawlerPlacementModel"/>
+        <PortraitModel value="SporeCrawler_RCZ_Portrait"/>
+        <WalkAnimMoveSpeed value="0.7968"/>
+        <BarOffset value="60"/>
+        <BarWidth value="90"/>
+        <GroupIcon>
+            <Image value="Assets\Wireframes\RCZ\Wireframe-Zerg-SporeCrawler-rcz-collection-uprooted.dds"/>
+        </GroupIcon>
+        <HeroIcon value="Assets\Textures\btn-building-zerg-sporecrawler-rcz.dds"/>
+        <NameOffset value="30"/>
+        <UnitIcon value="Assets\Textures\btn-building-zerg-sporecrawler-rcz.dds"/>
+        <Wireframe>
+            <Image value="Assets\Wireframes\RCZ\Wireframe-Zerg-SporeCrawler-rcz-collection-uprooted.dds"/>
+        </Wireframe>
+        <DeathArray index="Normal" ModelLink="SporeCrawlerRCZDeath"/>
+        <On index="69" removed="1"/>
+        <On index="70" removed="1"/>
+        <On index="71" removed="1"/>
+        <On index="72" removed="1"/>
+        <On index="73" removed="1"/>
+        <On index="74" removed="1"/>
+        <On index="75" removed="1"/>
+        <On index="76" removed="1"/>
+        <ModelFlags index="OutlineOccluder" value="0"/>
+    </CActorUnit>
+    <CActorRange id="CyberneticLurkerAttackRange" parent="RangeWeapon" weapon="CyberneticLurkerWeapon">
+        <EditorCategories value=""/>
+        <On Terms="SelectionLocalUpdate.CyberneticLurkerBurrowed.Start" Send="Create"/>
+        <On Terms="SelectionLocalUpdate.CyberneticLurkerBurrowed.Stop" Send="Destroy"/>
+        <On Terms="SelectionLocalUpdate.CyberneticLurker.Start" Send="Create"/>
+        <On Terms="SelectionLocalUpdate.CyberneticLurker.Stop" Send="Destroy"/>
+    </CActorRange>
+    <CActorUnit id="CyberneticLurker" parent="GenericBurrowerStandard" unitName="CyberneticLurker">
+        <Aliases value="_UnitLarge"/>
+        <On index="64" Terms="UnitBirth.CyberneticLurkerBurrowed" Send="Create"/>
+        <On index="65" Terms="UnitBirth.CyberneticLurkerBurrowed" Send="AnimBracketStart Burrow Burrow IGNORE Unburrow ClosingFull,OpeningPlayForever,Instant,DontResetOnUnhide"/>
+        <On index="66" Terms="AbilMorph.*.Start; MorphTo CyberneticLurker; MorphFrom CyberneticLurkerBurrowed" Send="AnimBracketStop Burrow"/>
+        <On index="67" Terms="UnitMovementUpdate.*.Walk; AnimPlaying Birth" Send="AnimClear Birth"/>
+        <On index="68" Terms="Behavior.TerranPartTransitionBurrow.On" Send="AnimBracketStart PartTransition Burrow IGNORE Unburrow OpeningPlayForever"/>
+        <On index="69" Terms="Behavior.TerranPartTransitionBurrow.Off" Send="AnimBracketStop PartTransition"/>
+        <On index="70" Terms="AbilMorph.*.Start; MorphFrom CyberneticLurker; MorphTo CyberneticLurkerBurrowed" Send="AnimBracketStart Burrow Burrow IGNORE Unburrow ClosingFull,OpeningPlayForever,DontResetOnUnhide"/>
+        <Model value="Lurker_RCZ"/>
+        <ModelFlags index="OutlineEmitter" value="1"/>
+        <BuildModel value="Lurker_RCZ"/>
+        <DeathArray index="Normal" ModelLink="Lurker_RCZ_Death" SoundLink="Lurker_Explode"/>
+        <DeathArray index="Disintegrate" ModelLink="LurkerMPDeathAcid" SoundLink="Uni_DeathFXAcid"/>
+        <DeathArray index="Fire" ModelLink="LurkerMPDeathFire" SoundLink="Uni_DeathFXFire"/>
+        <PlacementModel value="Lurker_RCZ"/>
+        <PortraitModel value="Lurker_RCZ_Portrait"/>
+        <WalkAnimMoveSpeed value="3"/>
+        <BarOffset value="70"/>
+        <BarWidth value="80"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-Zerg-Lurker.dds"/>
+        </GroupIcon>
+        <HeroIcon value="Assets\Textures\btn-unit-zerg-lurker-rcz.dds"/>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-zerg-groundcarapace-level0.dds"/>
+        <SoundArray index="Birth" value="Lurker_Birth"/>
+        <SoundArray index="Ready" value="Lurker_Ready"/>
+        <SoundArray index="Help" value="Lurker_Help"/>
+        <SoundArray index="What" value="Lurker_What"/>
+        <SoundArray index="Yes" value="Lurker_Yes"/>
+        <SoundArray index="Attack" value="Lurker_Yes"/>
+        <SoundArray index="Pissed" value="Lurker_Pissed"/>
+        <SoundArray index="Movement" value="Lurker_Movement"/>
+        <UnitIcon value="Assets\Textures\btn-unit-zerg-lurker-rcz.dds"/>
+        <Wireframe>
+            <Image value="Assets\Wireframes\RCZ\wireframe-zerg-lurker-rcz-collection.dds"/>
+        </Wireframe>
+        <VitalColors index="Shields">
+            <ColorArray value="255,0,128,0"/>
+        </VitalColors>
+    </CActorUnit>
+    <CActorModel id="CyberneticLurkerAttackSpike" parent="ModelAnimationStyleOneShot">
+        <On index="0" Terms="ActorCreation" Send="AnimPlay Attack Attack"/>
+        <On index="1" Terms="AnimDone; AnimName Attack" Send="Destroy"/>
+        <On index="2" Terms="Effect.CyberneticLurkerWeaponSearch.Start" Send="Create"/>
+        <HostSiteOps Ops="SOpForwardCasterPoint"/>
+        <Model value="LurkerAttackSpikeEx2"/>
+    </CActorModel>
+    <CActorSound id="CyberneticLurkerAttackSound" parent="SoundOneShot">
+        <FogVisibility value="Visible"/>
+        <On Terms="Effect.CyberneticLurkerWeaponPersistent.Start" Send="Create"/>
+        <Sound value="Lurker_AttackLaunch2"/>
+    </CActorSound>
+    <CActorSplat id="CyberneticLurkerBurrowSplat" parent="BurrowedSplat" unitName="CyberneticLurker">
+        <Scale value="0.800000"/>
+    </CActorSplat>
+    <CActorAction id="RunlingRangedAttack22" parent="GenericAttack" effectImpact="RunlingWeaponDmg" effectLaunch="RunlingWeaponRangeLaunchMissile2">
+        <EditorCategories value=""/>
+        <LaunchSite value="RunlingRangedAttackSite"/>
+        <LaunchModel value="RunlingTurretAttachLaunchModel"/>
+        <ContainerModel value="RunlingTurretAttachLaunchModel"/>
+        <Missile value="WraithGroundAttackMissile"/>
+    </CActorAction>
+    <CActorAction id="RunlingRangedAttack2" parent="GenericAttack" effectImpact="RunlingWeaponDmg" effectLaunch="RunlingWeaponRangeLaunchMissile">
+        <EditorCategories value=""/>
+        <LaunchSite value="RunlingRangedAttackSite"/>
+        <LaunchModel value="RunlingTurretAttachLaunchModel"/>
+        <ContainerModel value="RunlingTurretAttachLaunchModel"/>
+        <Missile value="WraithGroundAttackMissile"/>
+    </CActorAction>
+    <CActorModel id="RunlingTurretAttachLaunchModel" parent="GenericAttackModel">
+        <On Terms="ActorCreation" Send="HostSetOffset ::Host RunlingTurretAttach 0.000000,0.000000,0.000000 {} SOpAttachWeapon"/>
+    </CActorModel>
+    <CActorSite id="RunlingRangedAttackSite">
+        <EditorCategories value=""/>
+        <On Terms="ActorCreation.Runling" Send="Create"/>
+        <On Terms="ActorDestruction.Runling" Send="Destroy"/>
+        <Host Subject="RunlingTurretAttach"/>
+        <HostSiteOps Ops="SOpAttachWeapon"/>
+    </CActorSite>
+    <CActorModel id="RunlingTurretAttach" parent="ModelAddition">
+        <EditorCategories value=""/>
+        <On Terms="ActorDestruction.Runling" Send="Destroy"/>
+        <On Terms="ActorCreation" Send="AnimPlay Attach Stand PlayForever"/>
+        <On Terms="WeaponStart.Laser.AttackStart" Send="AnimPlay Attack Spell,D"/>
+        <On Terms="WeaponStop.Laser.AttackStop" Send="AnimClear Attack"/>
+        <On Terms="ActorCreation" Send="SetScale 0.150000"/>
+        <Host Subject="Runling"/>
+        <HostSiteOps Ops="RunlingAttachTurretPoint"/>
+        <Model value="RunlingLaserTurret"/>
+        <Scale value="0.150000"/>
+    </CActorModel>
+    <CActorSiteOpAttach id="RunlingAttachTurretPoint">
+        <EditorCategories value=""/>
+        <AttachQuery Methods="Head 0" Fallback="Head"/>
+    </CActorSiteOpAttach>
+    <CActorTurret id="RunlingTurretActor">
+        <EditorCategories value=""/>
+        <On Terms="TurretEnable.RunlingLaserTurret" Send="Create"/>
+        <YawQuery Methods="TurretZ 0"/>
+        <TurretBody Subject="RunlingTurretAttach"/>
+    </CActorTurret>
+    <CActorUnit id="Runling" parent="GenericUnitStandard" unitName="Runling">
+        <Aliases value="_UnitSmall"/>
+        <On index="0" Send="Create SoundEmitter Zergling_Ambience"/>
+        <On index="65" Terms="WeaponStart.Claws2.AttackStart" Send="AnimBracketStart Attack Attack"/>
+        <On index="67" Terms="WeaponStop.Claws2.AttackStop" Send="AnimBracketStop Attack"/>
+        <On Terms="UnitMovementUpdate.*.Walk; AnimPlaying Birth" Send="AnimClear Birth"/>
+        <On Terms="ActorCreation" Send="Create RunlingTurretAttach"/>
+        <On Terms="Behavior.TerranPartTransitionBurrow.On" Send="AnimBracketStart PartTransition Burrow IGNORE Unburrow OpeningPlayForever"/>
+        <On Terms="Behavior.TerranPartTransitionBurrow.Off" Send="AnimBracketStop PartTransition"/>
+        <Model value="Zergling_RCZ"/>
+        <Scale value="1.250000"/>
+        <ModelFlags index="OutlineEmitter" value="1"/>
+        <EventDataFootprint index="0" Actor="UnitFootprint" Model="ZerglingFootprint"/>
+        <BuildModel value="Zergling_RCZ"/>
+        <DeathArray index="Normal" ModelLink="Zergling_RCZ_Death" SoundLink="Zergling_Explode" VoiceLink="ZerglingDeathVoice"/>
+        <DeathArray index="Disintegrate" ModelLink="ZerglingDeathAcid" SoundLink="Uni_DeathFXAcid"/>
+        <DeathArray index="Eviscerate" ModelLink="ZerglingDeathEviscerate" SoundLink="Zergling_DeathFXEviscerate"/>
+        <DeathArray index="Fire" ModelLink="ZerglingDeathFire" SoundLink="Zergling_DeathFXFire"/>
+        <PlacementModel value="Zergling_RCZ"/>
+        <PortraitModel value="ZerglingPortrait"/>
+        <WalkAnimMoveSpeed value="3.1328"/>
+        <BarOffset value="30"/>
+        <BarWidth value="36"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-Zerg-Zergling.dds"/>
+        </GroupIcon>
+        <GroupSoundArray index="What" value="Zergling_GroupWhat"/>
+        <GroupSoundArray index="Yes" value="Zergling_GroupYes"/>
+        <GroupSoundArray index="Attack" value="Zergling_GroupAttack"/>
+        <GroupSoundArray index="Board" value="Zergling_GroupBoard"/>
+        <HeroIcon value="Assets\Textures\btn-unit-zerg-zergling-rcz.dds"/>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-zerg-groundcarapace-level0.dds"/>
+        <MovementHerdNode value="HerdNode_ZergSmall"/>
+        <ShieldArmorIcon value="Assets\Textures\btn-upgrade-zerg-swarmfrenzy.dds"/>
+        <SoundArray index="Birth" value="Zergling_Birth"/>
+        <SoundArray index="Ready" value="Zergling_Ready"/>
+        <SoundArray index="Help" value="Zergling_Help"/>
+        <SoundArray index="What" value="Zergling_What"/>
+        <SoundArray index="Yes" value="Zergling_Yes"/>
+        <SoundArray index="Attack" value="Zergling_Attack"/>
+        <SoundArray index="Pissed" value="Zergling_Pissed"/>
+        <SoundArray index="Movement" value="Zergling_Movement"/>
+        <SoundArray index="Turning" value="Zergling_Turning"/>
+        <SoundArray index="Board" value="Zergling_Board"/>
+        <SoundArray index="Click" value="Zergling_Click"/>
+        <SoundArray index="ClickError" value="Zergling_ClickError"/>
+        <SoundArray index="Highlight" value="Zergling_Highlight"/>
+        <StatusColors index="Shields">
+            <ColorArray index="0" value="255,0,128,0"/>
+        </StatusColors>
+        <UnitIcon value="Assets\Textures\btn-unit-zerg-zergling-rcz.dds"/>
+        <VitalColors index="Shields">
+            <ColorArray value="255,0,128,0"/>
+        </VitalColors>
+        <VitalNames index="Shields" value="Vital/ZergShields"/>
+        <Wireframe>
+            <Image value="Assets\Wireframes\RCZ\wireframe-zerg-zergling-rcz-collection.dds"/>
+        </Wireframe>
+        <WireframeShieldColor value="255,0,128,0"/>
+    </CActorUnit>
+    <CActorAction id="RunlingAttack" parent="GenericAttack" effectAttack="RunlingMeleeDmg">
+        <ImpactAttachQuery Methods="AMFilterTargetVolumes"/>
+        <ImpactMap index="None" Sound="Zergling_AttackImpact"/>
+        <ShieldFlashType value="Header"/>
+    </CActorAction>
+    <CActorSound id="Runling_Death" parent="SoundOneShot">
+        <On Terms="UnitDeath.Runling; PassChance 25.000000" Send="Create"/>
+        <On Terms="UnitDeath.ZerglingBurrowed; PassChance 25.000000" Send="Create"/>
+        <Sound value="Zergling_Death"/>
+    </CActorSound>
+    <CModel id="CyberneticLifeBank@TransferLifeBeam">
+        <Model value="Assets\Effects\Zerg\Primal_Wurm_Coop_Beam\Primal_Wurm_Coop_Beam.m3"/>
+    </CModel>
+    <CModel id="SporeCrawlerRCZ">
+        <Model value="Assets\Buildings\Zerg\SporeCrawler_RCZ\SporeCrawler_RCZ.m3"/>
+        <Radius value="1.000000"/>
+        <ScaleMax value="0.750000,0.750000,0.750000"/>
+        <ScaleMin value="0.750000,0.750000,0.750000"/>
+        <SelectionRadius value="1.333200"/>
+        <ShadowRadius value="1.176200"/>
+    </CModel>
+    <CModel id="SporeCrawlerRCZDeath" parent="SporeCrawlerDeathBase">
+        <Model value="Assets\Buildings\Zerg\SporeCrawler_RCZ_Unburrowed_Death\SporeCrawler_RCZ_Unburrowed_Death.m3"/>
+        <EditorCategories value=""/>
+    </CModel>
+    <CWeaponLegacy id="Claws2">
+        <EditorCategories value="Race:Zerg"/>
+        <Options index="Melee" value="1"/>
+        <Icon value="Assets\Textures\btn-upgrade-zerg-meleeattacks-level0.dds"/>
+        <DisplayEffect value="RunlingWeaponDmg"/>
+        <TargetFilters value="Ground,Visible;Player,Ally,Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="0.1"/>
+        <Period value="0.75"/>
+        <Effect value="RunlingWeaponDmg"/>
+        <MinScanRange value="2"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="CyberneticLurkerWeapon">
+        <EditorCategories value="Race:Zerg"/>
+        <Icon value="Assets\Textures\btn-upgrade-zerg-missileattacks-level0.dds"/>
+        <DisplayEffect value="CyberneticLurkerWeaponDamage"/>
+        <TargetFilters value="Ground,Visible;Player,Ally,Neutral,Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="6"/>
+        <Period value="1.5"/>
+        <DamagePoint value="0"/>
+        <Effect value="CyberneticLurkerWeaponPersistent"/>
+        <LegacyOptions index="KeepChanneling" value="1"/>
+        <ReloadDuration value="0.0625"/>
+        <RandomDelayMin value="0"/>
+        <RandomDelayMax value="0"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="Laser">
+        <EditorCategories value=""/>
+        <Options index="OnlyFireWhileInAttackOrder" value="0"/>
+        <Options index="OnlyFireAtAttackOrderTarget" value="0"/>
+        <Icon value="Assets\Textures\btn-upgrade-swann-improvedburstlaser.dds"/>
+        <DisplayEffect value="RunlingWeaponDmg"/>
+        <TargetFilters value="Visible;Self,Player,Ally,Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="4"/>
+        <MinimumRange value="0.1"/>
+        <Arc value="99.9975"/>
+        <Period value="0.75"/>
+        <DamagePoint value="0.125"/>
+        <Backswing value="0"/>
+        <Effect value="RunlingWeaponRangeLaunchMissile"/>
+        <AllowedMovement value="Moving"/>
+        <ArcSlop value="19.995"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="Laser2">
+        <Name value="Weapon/Name/Laser"/>
+        <EditorCategories value=""/>
+        <Options index="Hidden" value="1"/>
+        <Options index="OnlyFireWhileInAttackOrder" value="0"/>
+        <Options index="OnlyFireAtAttackOrderTarget" value="0"/>
+        <Icon value="Assets\Textures\btn-upgrade-swann-improvedburstlaser.dds"/>
+        <DisplayEffect value="RunlingWeaponDmg"/>
+        <DisplayName value="Weapon/Name/Laser"/>
+        <TargetFilters value="Visible;Self,Player,Ally,Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="4"/>
+        <MinimumRange value="0.1"/>
+        <Arc value="99.9975"/>
+        <ArcSlop value="19.995"/>
+        <Period value="0.75"/>
+        <DamagePoint value="0.125"/>
+        <Backswing value="0"/>
+        <Effect value="RunlingWeaponRangeLaunchMissile2"/>
+    </CWeaponLegacy>
+    <CAccumulatorArithmetic id="LurkerWeaponDmgScaled">
+        <Parameters value="0">
+            <AccumulatorArray value="WeaponDmgUpgradeCollector"/>
+            <AccumulatorArray value="CyberneticWeaponDmgUpgradeCollector"/>
+        </Parameters>
+        <Parameters value="0">
+            <AccumulatorArray value="LurkerWeaponDmgModifier"/>
+        </Parameters>
+        <Operation value="Multiply"/>
+    </CAccumulatorArithmetic>
+    <CAccumulatorArithmetic id="RunlingWeaponDmgScaled">
+        <Parameters value="0">
+            <AccumulatorArray value="WeaponDmgUpgradeCollector"/>
+            <AccumulatorArray value="CyberneticWeaponDmgUpgradeCollector"/>
+        </Parameters>
+        <Parameters value="0">
+            <AccumulatorArray value="RunlingWeaponDmgModifier"/>
+        </Parameters>
+        <Operation value="Multiply"/>
+    </CAccumulatorArithmetic>
+    <CAccumulatorConstant id="RunlingWeaponDmgModifier">
+        <Amount value="0.75"/>
+    </CAccumulatorConstant>
+    <CAccumulatorConstant id="RunlingWeaponDmgBase">
+        <Amount value="35"/>
+    </CAccumulatorConstant>
+    <CAccumulatorConstant id="LurkerWeaponDmgModifier">
+        <Amount value="0.85"/>
+    </CAccumulatorConstant>
+    <CAccumulatorConstant id="LurkerWeaponDmgBase">
+        <Amount value="75"/>
+    </CAccumulatorConstant>
+    <CAccumulatorConstant id="CyberneticWeaponDmgUpgradeCollector"/>
+    <CDataCollectionUnit id="CyberneticLifeBank">
+        <EditorCategories value=""/>
+        <DataRecord Entry="Actor,CyberneticLifeBank"/>
+        <DataRecord Entry="Unit,CyberneticLifeBank"/>
+        <DataRecord Entry="Abil,CyberneticLifeBank@TransferLife"/>
+        <DataRecord Entry="Actor,CyberneticLifeBank@TransferLifeBeam"/>
+        <DataRecord Entry="Behavior,CyberneticLifeBank@Death"/>
+        <DataRecord Entry="Behavior,CyberneticLifeBank@CreepBonusRegen"/>
+        <DataRecord Entry="Button,CyberneticLifeBank@CreateLifeBank"/>
+        <DataRecord Entry="Button,CyberneticLifeBank@LifeBankRestoreCharge"/>
+        <DataRecord Entry="Button,CyberneticLifeBank@LifeTransfer"/>
+        <DataRecord Entry="Effect,CyberneticLifeBank@TransferLifeHealer"/>
+        <DataRecord Entry="Effect,CyberneticLifeBank@DeathChargeUp"/>
+        <DataRecord Entry="Effect,CyberneticLifeBank@RestoreCharge"/>
+        <DataRecord Entry="Effect,CyberneticLifeBank@RestoreSet"/>
+        <DataRecord Entry="Model,CyberneticLifeBank@TransferLifeBeam"/>
+        <DataRecord Entry="Requirement,CyberneticLifeBank@Unlocked"/>
+        <DataRecord Entry="Behavior,CyberneticLifeBank@CreepBonusRegen"/>
+        <DataRecord Entry="Behavior,CyberneticLifeBank@Death"/>
+        <DataRecord Entry="Behavior,CyberneticLifeBank@CreepBonusRegen"/>
+        <DataRecord Entry="Behavior,CyberneticLifeBank@Death"/>
+    </CDataCollectionUnit>
+    <CUnit id="CyberneticLifeBank">
+        <DeathRevealRadius value="3"/>
+        <Race value="Zerg"/>
+        <FlagArray index="Turnable" value="0"/>
+        <FlagArray index="UseLineOfSight" value="1"/>
+        <FlagArray index="NoPortraitTalk" value="1"/>
+        <PlaneArray index="Ground" value="1"/>
+        <Collide index="Ground" value="1"/>
+        <Collide index="ForceField" value="1"/>
+        <Collide index="Locust" value="1"/>
+        <Collide index="Small" value="1"/>
+        <Attributes index="Armored" value="1"/>
+        <Attributes index="Biological" value="1"/>
+        <Attributes index="Mechanical" value="1"/>
+        <LifeStart value="5000"/>
+        <LifeMax value="15000"/>
+        <LifeArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </LifeArmorFormula>
+        <LifeRegenRate value="-2"/>
+        <LifeArmorName value="Unit/LifeArmorName/CyberneticZergArmor"/>
+        <ShieldArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </ShieldArmorFormula>
+        <Speed value="1"/>
+        <SpeedMultiplierCreep value="2.5"/>
+        <Acceleration value="1000"/>
+        <LateralAcceleration value="46.0625"/>
+        <Sight value="8"/>
+        <CostResource index="Minerals" value="4000"/>
+        <AttackTargetPriority value="19"/>
+        <AbilArray Link="stop"/>
+        <AbilArray Link="move"/>
+        <AbilArray Link="CyberneticLifeBank@TransferLife"/>
+        <BehaviorArray Link="CyberneticLifeBank@CreepBonusRegen"/>
+        <BehaviorArray Link="CyberneticLifeBank@Death"/>
+        <CardLayouts>
+            <LayoutButtons Face="Move" Type="AbilCmd" AbilCmd="move,Move" Row="0" Column="0"/>
+            <LayoutButtons Face="MoveHoldPosition" Type="AbilCmd" AbilCmd="move,HoldPos" Row="0" Column="2"/>
+            <LayoutButtons Face="MovePatrol" Type="AbilCmd" AbilCmd="move,Patrol" Row="0" Column="3"/>
+            <LayoutButtons Face="Stop" Type="AbilCmd" AbilCmd="stop,Stop" Row="0" Column="1"/>
+            <LayoutButtons Face="CyberneticLifeBank@LifeTransfer" Type="AbilCmd" AbilCmd="CyberneticLifeBank@TransferLife,Execute" Row="2" Column="0"/>
+            <LayoutButtons Face="AcquireMove" Type="AbilCmd" AbilCmd="move,AcquireMove" Row="0" Column="4"/>
+        </CardLayouts>
+        <SeparationRadius value="0.875"/>
+        <InnerRadius value="0.5"/>
+        <SubgroupPriority value="3"/>
+        <EditorCategories value=""/>
+        <RankDisplay value="Always"/>
+    </CUnit>
+    <CUnit id="CyberneticLurker">
+        <Facing value="45"/>
+        <Race value="Zerg"/>
+        <FlagArray index="UseLineOfSight" value="1"/>
+        <FlagArray index="AIPreferBurrow" value="1"/>
+        <FlagArray index="ArmySelect" value="1"/>
+        <PlaneArray index="Ground" value="1"/>
+        <Collide index="Ground" value="1"/>
+        <Collide index="ForceField" value="1"/>
+        <Collide index="Locust" value="1"/>
+        <Collide index="Small" value="1"/>
+        <Attributes index="Armored" value="1"/>
+        <Attributes index="Biological" value="1"/>
+        <Attributes index="Mechanical" value="1"/>
+        <LifeStart value="4000"/>
+        <LifeMax value="4000"/>
+        <LifeRegenRate value="14"/>
+        <LifeArmorName value="Unit/LifeArmorName/CyberneticZergArmor"/>
+        <Speed value="0.0625"/>
+        <Acceleration value="1000"/>
+        <LateralAcceleration value="46.0625"/>
+        <StationaryTurningRate value="999.8437"/>
+        <TurningRate value="999.8437"/>
+        <Sight value="8"/>
+        <CostCategory value="Army"/>
+        <CostResource index="Minerals" value="1000"/>
+        <AttackTargetPriority value="20"/>
+        <AbilArray Link="stop"/>
+        <AbilArray Link="move"/>
+        <AbilArray Link="CyberneticLurkerBurrow"/>
+        <BehaviorArray Link="CyberneticLurkerArmor"/>
+        <BehaviorArray Link="CyberneticLurkerDeath"/>
+        <BehaviorArray Link="LurkerCreepBonusRegen"/>
+        <CardLayouts>
+            <LayoutButtons Face="Move" Type="AbilCmd" AbilCmd="move,Move" Row="0" Column="0"/>
+            <LayoutButtons Face="Stop" Type="AbilCmd" AbilCmd="stop,Stop" Row="0" Column="1"/>
+            <LayoutButtons Face="MoveHoldPosition" Type="AbilCmd" AbilCmd="move,HoldPos" Row="0" Column="2"/>
+            <LayoutButtons Face="MovePatrol" Type="AbilCmd" AbilCmd="move,Patrol" Row="0" Column="3"/>
+            <LayoutButtons Face="Attack" Type="AbilCmd" AbilCmd="attack,Execute" Row="0" Column="4"/>
+            <LayoutButtons Face="AcquireMove" Type="AbilCmd" AbilCmd="move,AcquireMove" Row="0" Column="4"/>
+            <LayoutButtons Face="CyberneticLurkerBurrow" Type="AbilCmd" AbilCmd="CyberneticLurkerBurrow,Execute" Row="2" Column="4"/>
+        </CardLayouts>
+        <Radius value="0.75"/>
+        <SeparationRadius value="0.75"/>
+        <InnerRadius value="0.375"/>
+        <SubgroupPriority value="11"/>
+        <MinimapRadius value="0.75"/>
+        <EquipmentArray Weapon="CyberneticLurkerWeapon"/>
+        <HotkeyCategory value="Unit/Category/SSFPlayerUnits"/>
+        <KillDisplay value="Always"/>
+        <RankDisplay value="Always"/>
+        <SpeedBonusCreep value="3"/>
+        <GlossaryPriority value="29"/>
+        <Name value="Unit/Name/Lurker"/>
+        <LifeArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </LifeArmorFormula>
+        <ShieldArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </ShieldArmorFormula>
+        <LifeArmorTip value="Unit/CyberneticLurker/ArmorTooltip"/>
+    </CUnit>
+    <CUnit id="CyberneticLurkerBurrowed" parent="CyberneticLurker">
+        <FlagArray index="Buried" value="1"/>
+        <FlagArray index="AIPreferBurrow" value="0"/>
+        <Collide index="Burrow" value="1"/>
+        <Collide index="Ground" value="0"/>
+        <Collide index="ForceField" value="0"/>
+        <Collide index="Locust" value="0"/>
+        <Collide index="Small" value="0"/>
+        <Mover value="Burrowed"/>
+        <Speed value="0"/>
+        <SpeedBonusCreep value="0"/>
+        <Acceleration value="0"/>
+        <LateralAcceleration value="0"/>
+        <StationaryTurningRate value="720"/>
+        <TurningRate value="720"/>
+        <AbilArray index="2" Link="CyberneticLurkerUnburrow"/>
+        <AbilArray Link="attack"/>
+        <BehaviorArray Link="CloakLurker"/>
+        <WeaponArray Link="CyberneticLurkerWeapon" Turret="Lurker"/>
+        <CardLayouts index="0">
+            <LayoutButtons index="0" Face="Stop" Type="AbilCmd" AbilCmd="stop,Stop" Row="0" Column="1"/>
+            <LayoutButtons index="1" Face="AttackBuilding" Type="AbilCmd" AbilCmd="attack,Execute" Row="0" Column="4"/>
+            <LayoutButtons index="2" Face="CyberneticLurkerBurrowUp" Type="AbilCmd" AbilCmd="CyberneticLurkerUnburrow,Execute" Row="2" Column="4"/>
+            <LayoutButtons index="3" Face="Move" Type="AbilCmd" AbilCmd="move,Move" Row="0" Column="0"/>
+            <LayoutButtons index="4" Face="MoveHoldPosition" Type="AbilCmd" AbilCmd="move,HoldPos" Row="0" Column="2"/>
+            <LayoutButtons index="5" Face="MovePatrol" Type="AbilCmd" AbilCmd="move,Patrol" Row="0" Column="3"/>
+            <LayoutButtons index="6" removed="1"/>
+        </CardLayouts>
+        <SeparationRadius value="0"/>
+        <InnerRadius value="0.25"/>
+        <SubgroupPriority value="12"/>
+        <EquipmentArray index="0" removed="1"/>
+        <HotkeyCategory value=""/>
+    </CUnit>
+    <CUnit id="Runling">
+        <DeathRevealRadius value="3"/>
+        <Race value="Zerg"/>
+        <FlagArray index="PreventDestroy" value="1"/>
+        <FlagArray index="UseLineOfSight" value="1"/>
+        <FlagArray index="ArmySelect" value="1"/>
+        <PlaneArray index="Ground" value="1"/>
+        <Collide index="Ground" value="1"/>
+        <Collide index="ForceField" value="1"/>
+        <Collide index="Locust" value="1"/>
+        <Collide index="Small" value="1"/>
+        <Attributes index="Light" value="1"/>
+        <Attributes index="Biological" value="1"/>
+        <Attributes index="Mechanical" value="1"/>
+        <LifeStart value="1000"/>
+        <LifeMax value="1000"/>
+        <LifeRegenRate value="2.5"/>
+        <LifeArmorName value="Unit/LifeArmorName/CyberneticZergArmor"/>
+        <ShieldArmorName value="Unit/ShieldArmorName/ZergWildMutation"/>
+        <Speed value="2.0976"/>
+        <SpeedBonusCreep value="2.0976"/>
+        <Acceleration value="1000"/>
+        <LateralAcceleration value="46.0625"/>
+        <StationaryTurningRate value="999.8437"/>
+        <TurningRate value="999.8437"/>
+        <Sight value="8"/>
+        <CostCategory value="Army"/>
+        <CostResource index="Minerals" value="350"/>
+        <AttackTargetPriority value="20"/>
+        <AbilArray Link="stop"/>
+        <AbilArray Link="attack"/>
+        <AbilArray Link="move"/>
+        <WeaponArray Link="Claws2"/>
+        <WeaponArray Link="Laser" Turret="RunlingLaserTurret"/>
+        <WeaponArray Link="Laser2" Turret="RunlingLaserTurret"/>
+        <BehaviorArray Link="RunlingArmor"/>
+        <BehaviorArray Link="CyberneticRunlingDeath"/>
+        <BehaviorArray Link="RunlingCreepBonusRegen"/>
+        <CardLayouts>
+            <LayoutButtons Face="Move" Type="AbilCmd" AbilCmd="move,Move" Row="0" Column="0"/>
+            <LayoutButtons Face="Stop" Type="AbilCmd" AbilCmd="stop,Stop" Row="0" Column="1"/>
+            <LayoutButtons Face="MoveHoldPosition" Type="AbilCmd" AbilCmd="move,HoldPos" Row="0" Column="2"/>
+            <LayoutButtons Face="Attack" Type="AbilCmd" AbilCmd="attack,Execute" Row="0" Column="4"/>
+            <LayoutButtons Face="MovePatrol" Type="AbilCmd" AbilCmd="move,Patrol" Row="0" Column="3"/>
+        </CardLayouts>
+        <Radius value="0.375"/>
+        <SeparationRadius value="0.375"/>
+        <CargoSize value="1"/>
+        <SubgroupPriority value="10"/>
+        <MinimapRadius value="0.375"/>
+        <EditorCategories value=""/>
+        <TacticalAI value="Zergling"/>
+        <GlossaryCategory value="Unit/Category/ZergUnits"/>
+        <GlossaryPriority value="30"/>
+        <HotkeyCategory value="Unit/Category/SSFPlayerUnits"/>
+        <KillDisplay value="Always"/>
+        <RankDisplay value="Always"/>
+        <AIEvaluateAlias value="Zergling"/>
+        <Fidget>
+            <ChanceArray index="Anim" value="33"/>
+            <ChanceArray index="Idle" value="33"/>
+            <ChanceArray index="Turn" value="33"/>
+        </Fidget>
+        <LifeArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </LifeArmorFormula>
+        <ShieldArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </ShieldArmorFormula>
+        <LifeArmorTip value="Unit/Runling/ArmorTooltip"/>
+    </CUnit>
+    <CBehaviorBuff id="CyberneticLurkerArmor" parent="ArmorBase">
+        <Name value="Behavior/Name/CyberneticLurkerArmor"/>
+        <Tooltip value="Behavior/Tooltip/CyberneticLurkerArmor"/>
+        <Cost>
+            <Charge Link="Behavior/CyberneticLurkerArmor"/>
+            <Cooldown Link="Behavior/CyberneticLurkerArmor"/>
+        </Cost>
+        <DamageResponse>
+            <Cost>
+                <Charge Link="Behavior/CyberneticLurkerArmor"/>
+                <Cooldown Link="Behavior/CyberneticLurkerArmor"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="RunlingArmor" parent="ArmorBase">
+        <Name value="Behavior/Name/RunlingArmor"/>
+        <Tooltip value="Behavior/Tooltip/RunlingArmor"/>
+        <Cost>
+            <Charge Link="Behavior/RunlingArmor"/>
+            <Cooldown Link="Behavior/RunlingArmor"/>
+        </Cost>
+        <DamageResponse>
+            <Cost>
+                <Charge Link="Behavior/RunlingArmor"/>
+                <Cooldown Link="Behavior/RunlingArmor"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="CyberneticLifeBank@Death">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DamageResponse Fatal="1" Handled="CyberneticLifeBank@DeathChargeUp">
+            <Chance value="1"/>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="CyberneticLifeBank@CreepBonusRegen">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DisableValidatorArray value="OnCreep"/>
+        <Modification>
+            <VitalRegenArray index="Life" value="2"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="RunlingCreepBonusRegen">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DisableValidatorArray value="OnCreep"/>
+        <Modification>
+            <VitalRegenArray index="Life" value="7.5"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="CyberneticLurkerDeath">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DamageResponse Fatal="1" Handled="CyberneticLurkerDeathChargeUp">
+            <Chance value="1"/>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="CyberneticRunlingDeath">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DamageResponse Fatal="1" Handled="CyberneticRunlingDeathChargeUp">
+            <Chance value="1"/>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="LurkerCreepBonusRegen">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DisableValidatorArray value="OnCreep"/>
+        <Modification>
+            <VitalRegenArray index="Life" value="7.5"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="CloakLurker">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DisableValidatorArray value="HiveAlive"/>
+        <Modification>
+            <StateFlags index="Bury" value="1"/>
+            <StateFlags index="Cloak" value="1"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CUpgrade id="CyberneticLurkerChargeRestoreUnlock"/>
+    <CUpgrade id="CyberneticRunlingChargeRestoreUnlock"/>
+    <CUpgrade id="UnlockCybernetics">
+        <MaxLevel value="10"/>
+    </CUpgrade>
+</Catalog>

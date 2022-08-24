@@ -1,0 +1,1517 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CEffectDamage id="WavesOfChaos@InitialBeamDummy">
+        <EditorCategories value=""/>
+        <Maximum value="0"/>
+        <LaunchLocation Value="CasterUnit"/>
+        <ImpactLocation Value="SourceUnit"/>
+    </CEffectDamage>
+    <CEffectEnumTrackedUnits id="WavesOfChaos@InitialBeamGetTotems">
+        <EditorCategories value=""/>
+        <BehaviorLink value="ShieldColor@TotemTracker"/>
+        <Effect value="WavesOfChaos@InitialBeamSetSource"/>
+    </CEffectEnumTrackedUnits>
+    <CEffectSet id="WavesOfChaos@InitialBeamSetSource">
+        <EditorCategories value=""/>
+        <EffectArray value="WavesOfChaos@InitialBeamDummy"/>
+        <SetSource value="1"/>
+    </CEffectSet>
+    <CEffectSet id="PrismaticHybrids@CUSet">
+        <EditorCategories value=""/>
+        <SetSource value="1"/>
+    </CEffectSet>
+    <CEffectLaunchMissile id="PrismaticHybrids@HybridWeaponLM">
+        <EditorCategories value="Race:Protoss"/>
+        <ImpactEffect value="PrismaticHybrids@HybridWeaponDmg"/>
+        <AmmoUnit value="PrismaticHybrids@HybridWeaponMissile"/>
+    </CEffectLaunchMissile>
+    <CEffectDamage id="PrismaticHybrids@HybridWeaponDmg" parent="DU_WEAP">
+        <Kind value="Ranged"/>
+        <Amount value="4000"/>
+        <SearchFilters value="-;Player,Ally,Missile,Stasis,Dead,Hidden,Invulnerable"/>
+    </CEffectDamage>
+    <CEffectSet id="PrismaticHybrids@InitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="PrismaticHybrids@AlreadyCastingNoWeapons"/>
+        <EffectArray value="ShieldColor@DummyColoringCycleResetTrigger"/>
+        <EffectArray value="PrismaticHybrids@CUSet"/>
+    </CEffectSet>
+    <CEffectApplyBehavior id="PrismaticHybrids@AlreadyCastingNoWeapons" parent="AlreadyCastingNoWeapons"/>
+    <CEffectCreatePersistent id="ColorfulBeams@BeamController">
+        <EditorCategories value=""/>
+        <WhichLocation Value="SourceUnit"/>
+        <FinalEffect value="KillRemoveSource"/>
+        <PeriodCount value="1"/>
+        <PeriodicEffectArray value="ColorfulBeams@BeamSearch"/>
+        <PeriodicPeriodArray value="2"/>
+    </CEffectCreatePersistent>
+    <CEffectDamage id="ColorfulBeams@BeamDmg">
+        <ValidatorArray value="ShieldColor@ColorCheck"/>
+        <EditorCategories value=""/>
+        <Amount value="5000"/>
+    </CEffectDamage>
+    <CEffectEnumArea id="ColorfulBeams@BeamSearch">
+        <EditorCategories value=""/>
+        <ImpactLocation Value="CasterUnit"/>
+        <SearchFilters value="-;Player,Ally,Neutral,RawResource,HarvestableResource,Missile,Item,Dead,Hidden,Invulnerable"/>
+        <AreaArray RectangleWidth="1" RectangleHeight="30" Effect="ColorfulBeams@BeamDmg"/>
+        <AreaRelativeOffset value="0,15"/>
+    </CEffectEnumArea>
+    <CEffectRandomPointInCircle id="ColorfulBeams@RandomDirection">
+        <EditorCategories value=""/>
+        <Effect value="ColorfulBeams@ColorDummyCU"/>
+        <Radius value="4"/>
+        <RestrictToCircumference value="1"/>
+    </CEffectRandomPointInCircle>
+    <CEffectSet id="ColorfulBeams@ColorDummySet">
+        <EditorCategories value=""/>
+        <EffectArray value="ShieldColor@DummyColoring"/>
+        <EffectArray value="ColorfulBeams@BeamController"/>
+        <SetSource value="1"/>
+    </CEffectSet>
+    <CEffectCreatePersistent id="ColorfulBeams@MainController">
+        <EditorCategories value=""/>
+        <WhichLocation Value="CasterUnit"/>
+        <PeriodCount value="14"/>
+        <PeriodicEffectArray value="ColorfulBeams@RandomDirection"/>
+        <PeriodicPeriodArray value="0.125"/>
+        <PeriodicPeriodArray value="0.1875"/>
+        <PeriodicPeriodArray value="0.25"/>
+        <PeriodicPeriodArray value="0.3125"/>
+        <PeriodicPeriodArray value="0.375"/>
+        <PeriodicPeriodArray value="0.4375"/>
+        <PeriodicPeriodArray value="0.5"/>
+        <Flags index="RandomPeriod" value="1"/>
+        <PeriodRandMode value="Shuffle"/>
+        <PeriodicValidator value="CasterNotDead"/>
+    </CEffectCreatePersistent>
+    <CEffectCreateUnit id="ColorfulBeams@ColorDummyCU">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetPoint"/>
+        <SpawnEffect value="ColorfulBeams@ColorDummySet"/>
+        <SpawnUnit value="ShieldColor@DummySource"/>
+    </CEffectCreateUnit>
+    <CEffectSet id="ColorfulBeams@InitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="ColorfulBeams@AlreadyCastingNoWeapons"/>
+        <EffectArray value="ColorfulBeams@MainController"/>
+    </CEffectSet>
+    <CEffectApplyBehavior id="ColorfulBeams@AlreadyCastingNoWeapons" parent="AlreadyCastingNoWeapons">
+        <Duration value="6.5"/>
+    </CEffectApplyBehavior>
+    <CEffectEnumArea id="KingMoopyWeaponDmgSearch">
+        <EditorCategories value=""/>
+        <AreaArray Radius="1" Effect="KingMoopyWeaponDmg"/>
+        <SearchFilters value="-;Player,Ally,Neutral,RawResource,HarvestableResource,Missile,Item,Hidden,Invulnerable"/>
+    </CEffectEnumArea>
+    <CEffectSet id="ChargeUp@TurnTowardsTotem">
+        <EditorCategories value=""/>
+    </CEffectSet>
+    <CEffectCreatePersistent id="ChargeUp@Channeling">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetUnit"/>
+        <PeriodCount value="1"/>
+        <PeriodicEffectArray value="ChargeUp@ChargeUpComplete"/>
+        <PeriodicPeriodArray value="3"/>
+    </CEffectCreatePersistent>
+    <CEffectApplyBehavior id="ChargeUp@ChargeUp">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+    </CEffectApplyBehavior>
+    <CEffectRemoveBehavior id="ChargeUp@ChargeUpRB">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <BehaviorLink value="ChargeUp@ChargeUp"/>
+    </CEffectRemoveBehavior>
+    <CEffectSet id="ChargeUp@ChargeUpComplete">
+        <EditorCategories value=""/>
+        <EffectArray value="ChargeUp@ChargeUp"/>
+        <EffectArray value="ChargeUp@Duration"/>
+    </CEffectSet>
+    <CEffectDamage id="ChargeUp@Dmg">
+        <EditorCategories value=""/>
+        <ValidatorArray value="ShieldColor@ColorCheckCaster"/>
+        <Amount value="3500"/>
+        <SearchFilters value="-;Player,Ally,Neutral,RawResource,HarvestableResource,Missile,Item,Hidden,Invulnerable"/>
+    </CEffectDamage>
+    <CEffectCreatePersistent id="ChargeUp@Duration">
+        <EditorCategories value=""/>
+        <WhichLocation Value="CasterUnit"/>
+        <PeriodCount value="1"/>
+        <PeriodicEffectArray value="ChargeUp@ChargeUpRB"/>
+        <PeriodicPeriodArray value="30"/>
+        <FinalEffect value="ShieldColor@ClearBossColor"/>
+    </CEffectCreatePersistent>
+    <CEffectSet id="ChargeUp@InitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="ChargeUp@AlreadyCastingNoWeapons"/>
+        <EffectArray value="ShieldColor@NewRandomBossColor"/>
+        <EffectArray value="ChargeUp@TurnTowardsTotem"/>
+    </CEffectSet>
+    <CEffectSet id="ShieldColor@DummyColoringCycleResetTrigger">
+        <EditorCategories value=""/>
+    </CEffectSet>
+    <CEffectApplyBehavior id="ChargeUp@AlreadyCastingNoWeapons" parent="AlreadyCastingNoWeapons"/>
+    <CEffectSet id="ShieldColor@DummyColoringCycleTrigger">
+        <EditorCategories value=""/>
+        <EffectArray value="ShieldColor@DummyAddToTracker"/>
+        <SetSource value="1"/>
+    </CEffectSet>
+    <CEffectCreatePersistent id="RainbowMeteors@MissileBuffLocation">
+        <EditorCategories value=""/>
+        <WhichLocation Value="SourceUnit"/>
+        <InitialEffect value="RainbowMeteors@MissileBuff"/>
+    </CEffectCreatePersistent>
+    <CEffectEnumArea id="RainbowMeteors@ImpactSearch">
+        <ValidatorArray value="ShieldColor@ColorCheck"/>
+        <EditorCategories value=""/>
+        <SearchFilters value="-;Player,Ally,Neutral,RawResource,HarvestableResource,Missile,Item,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="2" Effect="RainbowMeteors@Dmg"/>
+    </CEffectEnumArea>
+    <CEffectSet id="RainbowMeteors@MissileBuff">
+        <EditorCategories value=""/>
+        <EffectArray value="ShieldColor@DummyColoringCycleTrigger"/>
+    </CEffectSet>
+    <CEffectDamage id="RainbowMeteors@Dmg">
+        <EditorCategories value=""/>
+        <Amount value="5000"/>
+    </CEffectDamage>
+    <CEffectSet id="RainbowMeteors@InitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="RainbowMeteors@AlreadyCastingNoWeapons"/>
+        <EffectArray value="ShieldColor@DummyColoringCycleResetTrigger"/>
+        <EffectArray value="RainbowMeteors@MainController"/>
+    </CEffectSet>
+    <CEffectLaunchMissile id="RainbowMeteors@LaunchMeteor">
+        <EditorCategories value=""/>
+        <LaunchLocation Value="CasterUnit"/>
+        <LaunchEffect value="RainbowMeteors@MissileBuffLocation"/>
+        <ImpactEffect value="RainbowMeteors@ImpactSearch"/>
+        <AmmoUnit value="RainbowMeteors@Meteor"/>
+        <ValidatorArray index="0" value="noMarkers"/>
+    </CEffectLaunchMissile>
+    <CEffectCreatePersistent id="RainbowMeteors@MainController">
+        <EditorCategories value=""/>
+        <Marker>
+            <MatchFlags index="Id" value="1"/>
+        </Marker>
+        <WhichLocation Value="CasterUnit"/>
+        <Flags index="EffectFailure" value="1"/>
+        <PeriodCount value="4"/>
+        <PeriodicEffectArray value="RainbowMeteors@SearchTarget"/>
+        <PeriodicPeriodArray value="0"/>
+        <PeriodicPeriodArray value="0.75"/>
+        <PeriodicPeriodArray value="0.75"/>
+        <PeriodicPeriodArray value="0.75"/>
+        <PeriodicValidator value="CasterNotDead"/>
+    </CEffectCreatePersistent>
+    <CEffectEnumArea id="RainbowMeteors@SearchTarget">
+        <EditorCategories value=""/>
+        <SearchFilters value="-;Player,Ally,Neutral,Worker,RawResource,HarvestableResource,Missile,Item,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="25" Effect="RainbowMeteors@LaunchMeteor"/>
+        <MaxCount value="1"/>
+        <TargetSorts>
+            <SortArray value="TSLifeLargestFirst"/>
+        </TargetSorts>
+    </CEffectEnumArea>
+    <CEffectApplyBehavior id="RainbowMeteors@AlreadyCastingNoWeapons" parent="AlreadyCastingNoWeapons"/>
+    <CEffectUserData id="ShieldColor@DummyColorUserDataReset">
+        <EditorCategories value=""/>
+        <Key value="DummyColor"/>
+        <Amount value="-4"/>
+        <SourceKey value="DummyColor"/>
+        <EffectSuccess value="ShieldColor@DummyColorSwitch"/>
+        <ValidateMax value="4"/>
+    </CEffectUserData>
+    <CEffectSet id="DanceFloor@AreaColorDummySet">
+        <EditorCategories value=""/>
+        <EffectArray value="ShieldColor@DummyColoring"/>
+        <EffectArray value="DanceFloor@AreaController"/>
+        <SetSource value="1"/>
+    </CEffectSet>
+    <CEffectCreateUnit id="DanceFloor@AreaColorDummyCU">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetPoint"/>
+        <SpawnEffect value="DanceFloor@AreaColorDummySet"/>
+        <SpawnUnit value="ShieldColor@DummySource"/>
+        <CreateFlags index="SetFacing" value="1"/>
+    </CEffectCreateUnit>
+    <CEffectCreatePersistent id="DanceFloor@AreaController">
+        <EditorCategories value=""/>
+        <WhichLocation Value="SourceUnit"/>
+        <FinalEffect value="ShieldColor@RemoveDummies"/>
+        <PeriodCount value="1"/>
+        <PeriodicEffectArray value="DanceFloor@AreaSearch"/>
+        <PeriodicPeriodArray value="3.4375"/>
+        <PeriodicValidator value="CasterNotDead"/>
+    </CEffectCreatePersistent>
+    <CEffectCreatePersistent id="DanceFloor@AreaOffsets">
+        <EditorCategories value=""/>
+        <WhichLocation Value="CasterUnit"/>
+        <PeriodCount value="4"/>
+        <PeriodicEffectArray value="DanceFloor@AreaColorDummyCU"/>
+        <PeriodicOffsetArray value="7.07,0,0"/>
+        <PeriodicOffsetArray value="-7.07,0,0"/>
+        <PeriodicOffsetArray value="0,7.07,0"/>
+        <PeriodicOffsetArray value="0,-7.07,0"/>
+        <PeriodicPeriodArray value="0"/>
+        <Flags index="RandomOffset" value="1"/>
+        <OffsetRandMode value="Shuffle"/>
+    </CEffectCreatePersistent>
+    <CEffectEnumArea id="DanceFloor@AreaSearch">
+        <EditorCategories value=""/>
+        <SearchFilters value="-;Player,Ally,Neutral,RawResource,HarvestableResource,Missile,Item,Dead,Hidden,Invulnerable"/>
+        <AreaArray>
+            <RectangleWidth value="20"/>
+            <RectangleHeight value="20"/>
+            <FacingAdjustment value="45"/>
+            <Effect value="DanceFloor@Dmg"/>
+        </AreaArray>
+        <LaunchLocation Value="CasterUnit"/>
+        <AreaRelativeOffset value="0,-7.07"/>
+    </CEffectEnumArea>
+    <CEffectDamage id="DanceFloor@Dmg">
+        <ValidatorArray value="ShieldColor@ColorCheck"/>
+        <EditorCategories value=""/>
+        <Amount value="8000"/>
+    </CEffectDamage>
+    <CEffectCreatePersistent id="DanceFloor@MainController">
+        <EditorCategories value=""/>
+        <WhichLocation Value="CasterUnit"/>
+        <ExpireDelay value="5"/>
+        <ExpireEffect value="ShieldColor@EnableTotems"/>
+        <PeriodCount value="3"/>
+        <PeriodicEffectArray value="DanceFloor@AreaOffsets"/>
+        <PeriodicPeriodArray value="0.75"/>
+        <PeriodicPeriodArray value="3.5"/>
+        <PeriodicPeriodArray value="3.5"/>
+        <PeriodicValidator value="CasterNotDead"/>
+    </CEffectCreatePersistent>
+    <CEffectSwitch id="ShieldColor@DummyColorSwitch">
+        <EditorCategories value=""/>
+        <CaseArray Validator="ShieldColor@DummyColorUD0" Effect="ShieldColor@BossColor0"/>
+        <CaseArray Validator="ShieldColor@DummyColorUD1" Effect="ShieldColor@BossColor1"/>
+        <CaseArray Validator="ShieldColor@DummyColorUD2" Effect="ShieldColor@BossColor2"/>
+        <CaseArray Validator="ShieldColor@DummyColorUD3" Effect="ShieldColor@BossColor3"/>
+        <CaseDefault value="ShieldColor@BossColor0"/>
+    </CEffectSwitch>
+    <CEffectUserData id="ShieldColor@DummyColorUserData">
+        <EditorCategories value=""/>
+        <Key value="DummyColor"/>
+        <SourceKey value="DummyColor"/>
+        <ValidateMax value="3"/>
+        <EffectSuccess value="ShieldColor@DummyColorSwitch"/>
+        <EffectFailure value="ShieldColor@DummyColorUserDataReset"/>
+    </CEffectUserData>
+    <CEffectSet id="ShieldColor@DummyColoring">
+        <EditorCategories value=""/>
+        <SetSource value="1"/>
+        <EffectArray value="ShieldColor@DummyAddToTracker"/>
+        <EffectArray value="ShieldColor@DummyColorUserData"/>
+    </CEffectSet>
+    <CEffectSet id="DanceFloor@InitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="DanceFloor@AlreadyCastingNoWeapons"/>
+        <EffectArray value="ShieldColor@DisableTotems"/>
+        <EffectArray value="DanceFloor@MainController"/>
+    </CEffectSet>
+    <CEffectEnumTrackedUnits id="ShieldColor@DisableTotems">
+        <EditorCategories value=""/>
+        <BehaviorLink value="ShieldColor@TotemTracker"/>
+        <Effect value="ShieldColor@TotemDisabled"/>
+    </CEffectEnumTrackedUnits>
+    <CEffectEnumTrackedUnits id="ShieldColor@EnableTotems">
+        <EditorCategories value=""/>
+        <BehaviorLink value="ShieldColor@TotemTracker"/>
+        <Effect value="ShieldColor@TotemDisabledRM"/>
+    </CEffectEnumTrackedUnits>
+    <CEffectAddTrackedUnit id="ShieldColor@TotemAddToTracker">
+        <EditorCategories value=""/>
+        <BehaviorLink value="ShieldColor@TotemTracker"/>
+        <TrackedUnit Value="Target"/>
+    </CEffectAddTrackedUnit>
+    <CEffectApplyBehavior id="ShieldColor@TotemDisabled">
+        <EditorCategories value=""/>
+    </CEffectApplyBehavior>
+    <CEffectRemoveBehavior id="ShieldColor@TotemDisabledRM">
+        <EditorCategories value=""/>
+        <BehaviorLink value="ShieldColor@TotemDisabled"/>
+    </CEffectRemoveBehavior>
+    <CEffectApplyBehavior id="DanceFloor@AlreadyCastingNoWeapons" parent="AlreadyCastingNoWeapons">
+        <Duration value="11.5"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="ShieldColor@BossColor0">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Source"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="ShieldColor@BossColor1">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Source"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="ShieldColor@BossColor2">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Source"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="ShieldColor@BossColor3">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Source"/>
+    </CEffectApplyBehavior>
+    <CEffectRemoveBehavior id="ShieldColor@ClearBossColor">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Source"/>
+        <BehaviorCategories index="User1" value="1"/>
+    </CEffectRemoveBehavior>
+    <CEffectSet id="ShieldColor@NewRandomBossColor">
+        <EditorCategories value=""/>
+        <EffectArray value="ShieldColor@ClearBossColor"/>
+        <EffectArray value="ShieldColor@RandomBossColor"/>
+    </CEffectSet>
+    <CEffectSet id="ShieldColor@RandomBossColor">
+        <EditorCategories value=""/>
+        <EffectArray value="ShieldColor@BossColor0"/>
+        <EffectArray value="ShieldColor@BossColor1"/>
+        <EffectArray value="ShieldColor@BossColor2"/>
+        <EffectArray value="ShieldColor@BossColor3"/>
+        <Random value="1"/>
+        <MinCount value="1"/>
+        <MaxCount value="1"/>
+    </CEffectSet>
+    <CEffectDamage id="WavesOfChaos@Dmg">
+        <EditorCategories value=""/>
+        <Amount value="8000"/>
+        <ValidatorArray value="ShieldColor@ColorCheck"/>
+    </CEffectDamage>
+    <CEffectSet id="WavesOfChaos@InitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="WavesOfChaos@NoWeapons"/>
+        <EffectArray value="WavesOfChaos@MainController"/>
+        <EffectArray value="WavesOfChaos@InitialBeamGetTotems"/>
+    </CEffectSet>
+    <CEffectCreatePersistent id="WavesOfChaos@MainController">
+        <EditorCategories value=""/>
+        <PeriodCount value="3"/>
+        <PeriodicEffectArray value="WavesOfChaos@WaveController"/>
+        <PeriodicPeriodArray value="3"/>
+        <PeriodicValidator value="CasterNotDead"/>
+    </CEffectCreatePersistent>
+    <CEffectCreatePersistent id="WavesOfChaos@WaveController">
+        <EditorCategories value=""/>
+        <InitialEffect value="ShieldColor@NewRandomBossColor"/>
+        <PeriodCount value="1"/>
+        <PeriodicEffectArray value="WavesOfChaos@WaveSearch"/>
+        <PeriodicPeriodArray value="2"/>
+        <PeriodicValidator value="CasterNotDead"/>
+    </CEffectCreatePersistent>
+    <CEffectEnumArea id="WavesOfChaos@WaveSearch">
+        <EditorCategories value=""/>
+        <SearchFilters value="-;Player,Ally,Neutral,Missile,Hidden,Invulnerable"/>
+        <AreaArray Radius="20" Effect="WavesOfChaos@Dmg"/>
+    </CEffectEnumArea>
+    <CEffectApplyBehavior id="WavesOfChaos@NoWeapons" parent="AlreadyCastingNoWeapons">
+        <Duration value="9.5"/>
+    </CEffectApplyBehavior>
+    <CEffectAddTrackedUnit id="ShieldColor@DummyAddToTracker">
+        <EditorCategories value=""/>
+        <BehaviorLink value="ShieldColor@DummyTracker"/>
+        <TrackedUnit Value="Target"/>
+    </CEffectAddTrackedUnit>
+    <CEffectEnumTrackedUnits id="ShieldColor@RemoveDummies">
+        <EditorCategories value=""/>
+        <BehaviorLink value="ShieldColor@DummyTracker"/>
+        <Effect value="KillRemove"/>
+    </CEffectEnumTrackedUnits>
+    <CEffectSet id="ShieldColor@ColorChangeTriggerDummy">
+        <ValidatorArray value="ShieldColor@TotemActivated"/>
+        <EditorCategories value=""/>
+    </CEffectSet>
+    <CEffectDamage id="KingMoopyWeaponDmg" parent="DU_WEAP">
+        <EditorCategories value=""/>
+        <Kind value="Ranged"/>
+        <AttributeFactor index="Armored" value="0.35"/>
+        <Flags index="Impact" value="1"/>
+        <Amount value="5500"/>
+    </CEffectDamage>
+    <CEffectLaunchMissile id="KingMoopyWeaponLM">
+        <EditorCategories value=""/>
+        <ImpactEffect value="KingMoopyWeaponDmgSearch"/>
+        <AmmoUnit value="KingMoopyWeaponMissile"/>
+        <LaunchLocation Value="CasterUnit"/>
+    </CEffectLaunchMissile>
+    <CEffectDamage id="MoopyChampionWeaponDmg" parent="DU_WEAP">
+        <EditorCategories value=""/>
+        <Amount value="3000"/>
+        <AttributeFactor index="Armored" value="0.15"/>
+    </CEffectDamage>
+    <CAbilEffectInstant id="PrismaticHybrids">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="PrismaticHybrids@InitialSet"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="PrismaticHybrids"/>
+    </CAbilEffectInstant>
+    <CAbilEffectInstant id="ColorfulBeams">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="ColorfulBeams@InitialSet"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="ColorfulBeams"/>
+    </CAbilEffectInstant>
+    <CAbilEffectTarget id="ChargeUp@Totem">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="ChargeUp@Channeling"/>
+        <Range value="20"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="ChargeUp"/>
+    </CAbilEffectTarget>
+    <CAbilEffectInstant id="ChargeUp">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="ChargeUp@InitialSet"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="ChargeUp"/>
+    </CAbilEffectInstant>
+    <CAbilEffectInstant id="RainbowMeteors">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="RainbowMeteors@InitialSet"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="RainbowMeteors"/>
+    </CAbilEffectInstant>
+    <CAbilEffectInstant id="DanceFloor">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="DanceFloor@InitialSet"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="DanceFloor"/>
+    </CAbilEffectInstant>
+    <CAbilEffectInstant id="WavesOfChaos">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="WavesOfChaos@InitialSet"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="WavesOfChaos"/>
+    </CAbilEffectInstant>
+    <CAbilEffectTarget id="ShieldColor@ColorChange">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="ShieldColor@ColorChangeTriggerDummy"/>
+        <Flags index="Smart" value="1"/>
+        <Range value="0.5"/>
+    </CAbilEffectTarget>
+    <CValidatorUnitType id="PrismaticHybrids@PrismaticHybrids">
+        <Value value="PrismaticHybrids@PrismaticHybrids"/>
+    </CValidatorUnitType>
+    <CValidatorUnitCompareBehaviorCount id="ShieldColor@BossColorCaster1">
+        <WhichUnit Value="Caster"/>
+        <Value value="1"/>
+        <Behavior value="ShieldColor@BossColor1"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorUnitCompareBehaviorCount id="ShieldColor@BossColorCaster2">
+        <WhichUnit Value="Caster"/>
+        <Value value="1"/>
+        <Behavior value="ShieldColor@BossColor2"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorUnitCompareBehaviorCount id="ShieldColor@BossColorCaster3">
+        <WhichUnit Value="Caster"/>
+        <Value value="1"/>
+        <Behavior value="ShieldColor@BossColor3"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorCombine id="ShieldColor@ColorCaster0">
+        <Type value="And"/>
+        <CombineArray value="ShieldColor@BossColorCaster0"/>
+        <CombineArray value="ShieldColor@PlayerColor0"/>
+    </CValidatorCombine>
+    <CValidatorUnitCompareBehaviorCount id="ShieldColor@BossColorCaster0">
+        <WhichUnit Value="Caster"/>
+        <Value value="1"/>
+        <Behavior value="ShieldColor@BossColor0"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorCombine id="ShieldColor@ColorCaster1">
+        <Type value="And"/>
+        <CombineArray value="ShieldColor@BossColor1"/>
+        <CombineArray value="ShieldColor@PlayerColor1"/>
+    </CValidatorCombine>
+    <CValidatorCombine id="ShieldColor@ColorCaster2">
+        <Type value="And"/>
+        <CombineArray value="ShieldColor@BossColor2"/>
+        <CombineArray value="ShieldColor@PlayerColor2"/>
+    </CValidatorCombine>
+    <CValidatorCombine id="ShieldColor@ColorCaster3">
+        <Type value="And"/>
+        <CombineArray value="ShieldColor@BossColor3"/>
+        <CombineArray value="ShieldColor@PlayerColor3"/>
+    </CValidatorCombine>
+    <CValidatorCombine id="ShieldColor@ColorCheckCaster">
+        <CombineArray value="ShieldColor@ColorCaster0"/>
+        <CombineArray value="ShieldColor@ColorCaster1"/>
+        <CombineArray value="ShieldColor@ColorCaster2"/>
+        <CombineArray value="ShieldColor@ColorCaster3"/>
+    </CValidatorCombine>
+    <CValidatorEffectTreeUserData id="ShieldColor@DummyColorUD0">
+        <Key value="DummyColor"/>
+    </CValidatorEffectTreeUserData>
+    <CValidatorEffectTreeUserData id="ShieldColor@DummyColorUD1">
+        <Key value="DummyColor"/>
+        <Value value="1"/>
+    </CValidatorEffectTreeUserData>
+    <CValidatorEffectTreeUserData id="ShieldColor@DummyColorUD2">
+        <Key value="DummyColor"/>
+        <Value value="2"/>
+    </CValidatorEffectTreeUserData>
+    <CValidatorEffectTreeUserData id="ShieldColor@DummyColorUD3">
+        <Key value="DummyColor"/>
+        <Value value="3"/>
+    </CValidatorEffectTreeUserData>
+    <CValidatorCombine id="ShieldColor@TotemActivated">
+        <Type value="And"/>
+        <CombineArray value="ShieldColor@Totem"/>
+        <CombineArray value="ShieldColor@TotemNotDsiabled"/>
+    </CValidatorCombine>
+    <CValidatorUnitCompareBehaviorCount id="ShieldColor@TotemNotDsiabled">
+        <Behavior value="ShieldColor@TotemDisabled"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorUnitCompareBehaviorCount id="ShieldColor@BossColor0">
+        <WhichUnit Value="Source"/>
+        <Value value="1"/>
+        <Behavior value="ShieldColor@BossColor0"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorUnitCompareBehaviorCount id="ShieldColor@BossColor1">
+        <WhichUnit Value="Source"/>
+        <Value value="1"/>
+        <Behavior value="ShieldColor@BossColor1"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorUnitCompareBehaviorCount id="ShieldColor@BossColor2">
+        <WhichUnit Value="Source"/>
+        <Value value="1"/>
+        <Behavior value="ShieldColor@BossColor2"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorCombine id="ShieldColor@Color1">
+        <Type value="And"/>
+        <CombineArray value="ShieldColor@BossColor1"/>
+        <CombineArray value="ShieldColor@PlayerColor1"/>
+    </CValidatorCombine>
+    <CValidatorUnitCompareBehaviorCount id="ShieldColor@BossColor3">
+        <WhichUnit Value="Source"/>
+        <Value value="1"/>
+        <Behavior value="ShieldColor@BossColor3"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorCombine id="ShieldColor@Color2">
+        <Type value="And"/>
+        <CombineArray value="ShieldColor@BossColor2"/>
+        <CombineArray value="ShieldColor@PlayerColor2"/>
+    </CValidatorCombine>
+    <CValidatorCombine id="ShieldColor@Color0">
+        <Type value="And"/>
+        <CombineArray value="ShieldColor@BossColor0"/>
+        <CombineArray value="ShieldColor@PlayerColor0"/>
+    </CValidatorCombine>
+    <CValidatorCombine id="ShieldColor@Color3">
+        <Type value="And"/>
+        <CombineArray value="ShieldColor@BossColor3"/>
+        <CombineArray value="ShieldColor@PlayerColor3"/>
+    </CValidatorCombine>
+    <CValidatorCombine id="ShieldColor@ColorCheck">
+        <CombineArray value="ShieldColor@Color0"/>
+        <CombineArray value="ShieldColor@Color1"/>
+        <CombineArray value="ShieldColor@Color2"/>
+        <CombineArray value="ShieldColor@Color3"/>
+    </CValidatorCombine>
+    <CValidatorUnitCompareBehaviorCount id="ShieldColor@PlayerColor1">
+        <Behavior value="ShieldColor@PlayerColor1"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorUnitCompareBehaviorCount id="ShieldColor@PlayerColor2">
+        <Behavior value="ShieldColor@PlayerColor2"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorUnitCompareBehaviorCount id="ShieldColor@PlayerColor0">
+        <Behavior value="ShieldColor@PlayerColor0"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorUnitCompareBehaviorCount id="ShieldColor@PlayerColor3">
+        <Behavior value="ShieldColor@PlayerColor3"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorUnitType id="ShieldColor@Totem">
+        <Value value="ShieldColor@Totem"/>
+    </CValidatorUnitType>
+    <CButton id="PrismaticHybrids" parent="EnemyBossAbilityButton"/>
+    <CButton id="ColorfulBeams" parent="EnemyBossAbilityButton"/>
+    <CButton id="ChargeUp" parent="EnemyBossAbilityButton"/>
+    <CButton id="RainbowMeteors" parent="EnemyBossAbilityButton"/>
+    <CButton id="DanceFloor" parent="EnemyBossAbilityButton"/>
+    <CButton id="WavesOfChaos" parent="EnemyBossAbilityButton"/>
+    <CActorSiteOpLocalOffset id="DanceFloor@FloorOffset">
+        <EditorCategories value=""/>
+        <LocalOffset value="0.000000,-7.070000,0.000000"/>
+    </CActorSiteOpLocalOffset>
+    <CActorModel id="PrismaticHybrids@SpawnIn" parent="ModelAnimationStyleOneShot">
+        <Macros value="ShieldColor@BossColorMacroDelayed"/>
+        <EditorCategories value=""/>
+        <On Terms="Behavior.PrismaticHybrids@SpawnIn.On" Send="Create"/>
+        <Host Subject="_Unit" Scope="Caster"/>
+        <ModelFlags index="AllowHitTest" value="0"/>
+    </CActorModel>
+    <CActorModel id="ShieldColor@Phase0" parent="ModelAddition">
+        <EditorCategories value=""/>
+        <On Terms="Behavior.ShieldColor@Phase0.On" Send="Create"/>
+        <On Terms="Behavior.ShieldColor@Phase0.Off" Send="AnimBracketStop BSD"/>
+        <HostSiteOps Ops="SOpAttachOverhead"/>
+        <ModelFlags index="AllowHitTest" value="0"/>
+    </CActorModel>
+    <CActorModel id="ShieldColor@Phase0End" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On Terms="Behavior.ShieldColor@Phase0.Off" Send="Create"/>
+    </CActorModel>
+    <CActorAction id="WavesOfChaos@InitialBeamAction" parent="GenericAttack" effectAttack="WavesOfChaos@InitialBeamDummy">
+        <EditorCategories value=""/>
+        <Beam value="WavesOfChaos@InitialBeam"/>
+        <LaunchAttachQuery Methods="" Fallback="Origin"/>
+        <ShieldFlashType value="None"/>
+    </CActorAction>
+    <CActorModel id="PrismaticHybrids@HybridDeathActor" parent="UnitDeathModel">
+        <Macros value="ShieldColor@BossColorCasterMacro"/>
+    </CActorModel>
+    <CActorBeamSimple id="WavesOfChaos@InitialBeam" parent="BeamSimpleAnimationStyleContinuous">
+        <Macros value="ShieldColor@BossColorMacro"/>
+        <VisibleTo index="All" value="1"/>
+        <EditorCategories value=""/>
+        <!--<On Terms="Effect.WavesOfChaos@InitialBeamDummy.Start; At Effect" Send="Create"/>-->
+        <On Terms="ActorCreation" Send="TimerSet 1.500000 KillDelay"/>
+        <On Terms="TimerExpired; TimerName KillDelay" Send="AnimBracketStop BSD"/>
+        <ModelFlags index="AllowHitTest" value="0"/>
+        <ModelFlags index="AutomateGlobalLoops" value="1"/>
+        <HostLaunch Subject="_Unit" Scope="Source"/>
+        <HostLaunchSiteOps Ops="SOpHigherBy1"/>
+        <HostImpact Subject="_Unit" Scope="Caster"/>
+        <HostImpactSiteOps Ops="SOpHigherBy1"/>
+    </CActorBeamSimple>
+    <CActorUnit id="PrismaticHybrids@PrismaticHybrids" parent="GenericUnitBase" unitName="PrismaticHybrids@PrismaticHybrids">
+        <Macros value="ShieldColor@BossColorBuffMacro"/>
+        <On Terms="WeaponStart.*.AttackStart" Send="AnimBracketStart Attack Spell"/>
+        <On Terms="WeaponStop.*.AttackStop" Send="AnimBracketStop Attack"/>
+        <On Terms="Behavior.HybridSingularity.On" Send="ModelSwap HybridProtossBlackDeath"/>
+        <On Terms="Behavior.HybridSingularity.On" Send="$Birth"/>
+        <AnimBlendTime value="0.200000"/>
+        <BuildModel value="HybridDestroyer"/>
+        <DeathArray index="Normal" ModelLink="HybridProtossDeath" SoundLink="Hybrid_Protoss_Death" VoiceLink="Hybrid_DeathFX"/>
+        <PlacementModel value="HybridDestroyer"/>
+        <PortraitModel value="HybridProtossPortrait"/>
+        <BarOffset value="120"/>
+        <BarWidth value="66"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-Hybrid-Destroyer.dds"/>
+        </GroupIcon>
+        <GroupSoundArray index="Birth" value="HybridABirth"/>
+        <GroupSoundArray index="Ready" value="HybridAReady"/>
+        <GroupSoundArray index="Help" value="HybridAHelp"/>
+        <GroupSoundArray index="What" value="HybridAWhat"/>
+        <GroupSoundArray index="Yes" value="HybridAYes"/>
+        <GroupSoundArray index="Attack" value="HybridAYes"/>
+        <GroupSoundArray index="Pissed" value="HybridAPissed"/>
+        <HighlightTooltip value="Unit/Name/PrismaticHybrids@PrismaticHybridsestroyer"/>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-protoss-groundarmorlevel1.dds"/>
+        <SoundArray index="Help" value="HybridCHelp"/>
+        <SoundArray index="Attack" value="HybridDestroyer_Attack"/>
+        <SoundArray index="Movement" value="HybridCMovement"/>
+        <SoundArray index="Turning" value="HybridCTurning"/>
+        <SoundArray index="Board" value="HybridCBoard"/>
+        <SoundArray index="Click" value="HybridCClick"/>
+        <SoundArray index="ClickError" value="HybridCClickError"/>
+        <SoundArray index="Highlight" value="HybridCHighlight"/>
+        <UnitIcon value="Assets\Textures\BTN-Unit-xelnaga-destroyer.dds"/>
+        <UnitKillRank Text="UnitKillRank/Z02Hybrid"/>
+        <Wireframe>
+            <Image value="Assets\Textures\Wireframe-Hybrid-Destroyer.dds"/>
+        </Wireframe>
+        <WireframeShield>
+            <Image value="Assets\Textures\Wireframe-Hybrid-Destroyer-Shield01.dds"/>
+            <Image value="Assets\Textures\Wireframe-Hybrid-Destroyer-Shield02.dds"/>
+            <Image value="Assets\Textures\Wireframe-Hybrid-Destroyer-Shield03.dds"/>
+        </WireframeShield>
+        <DeathActorModel value="PrismaticHybrids@HybridDeathActor"/>
+    </CActorUnit>
+    <CActorAction id="PrismaticHybrids@HybridWeaponAttack" parent="GenericAttack" effectImpact="PrismaticHybrids@HybridWeaponDmg" effectLaunch="PrismaticHybrids@HybridWeaponLM">
+        <LaunchAssets Sound="HybridDAttackLaunch"/>
+        <Missile value="PrismaticHybrids@HybridWeaponMissile"/>
+        <ImpactMap index="None" Model="HybridDAttackImpact" Sound="HybridDAttackImpact"/>
+    </CActorAction>
+    <CActorMissile id="PrismaticHybrids@HybridWeaponMissile" parent="GenericAttackMissile" unitName="PrismaticHybrids@HybridWeaponMissile">
+        <Macros value="ShieldColor@BossColorCasterMacro"/>
+        <Model value="WeaponHybridD"/>
+    </CActorMissile>
+    <CActorModel id="ColorfulBeams@Center" parent="ModelAnimationStyleContinuous">
+        <EditorCategories value=""/>
+        <On Terms="Effect.ColorfulBeams@MainController.Start" Send="Create"/>
+        <On Terms="ActorCreation" Send="TimerSet 6.500000 DelayedKill"/>
+        <On Terms="TimerExpired; TimerName DelayedKill" Send="AnimBracketStop BSD"/>
+        <Host Subject="_Unit" Scope="Caster"/>
+        <HostSiteOps Ops="SOpHigherBy1"/>
+        <Scale value="2.000000"/>
+        <ModelFlags index="AllowHitTest" value="0"/>
+    </CActorModel>
+    <CActorModel id="ColorfulBeams@Beam" parent="ModelAnimationStyleContinuous">
+        <Macros value="ShieldColor@BossColorMacro"/>
+        <EditorCategories value=""/>
+        <On index="0" Terms="ActorCreation" Send="$Birth 0 -1.000000 -1.000000 1.900000 AsDuration"/>
+        <On Terms="Effect.ColorfulBeams@BeamController.Start" Send="Create"/>
+        <On Terms="Effect.ColorfulBeams@BeamController.Stop" Send="AnimBracketStop BSD"/>
+        <On Terms="AnimDone; AnimName Birth" Send="AnimBracketStart BSD {} Stand Death"/>
+        <On Terms="ActorCreation" Send="SetOpacity 0.500000"/>
+        <Host Subject="_Unit" Scope="Caster"/>
+        <HostSiteOps Ops="SOpForwardSourcePoint SOpHigherBy1"/>
+        <ModelFlags index="AllowHitTest" value="0"/>
+        <ModelFlags index="AutomateGlobalLoops" value="1"/>
+    </CActorModel>
+    <CActorBeamSimple id="ChargeUp@ChannelBeam" parent="BeamSimpleAnimationStyleContinuous">
+        <Macros value="ShieldColor@BossColorMacro"/>
+        <EditorCategories value=""/>
+        <On Terms="Effect.ChargeUp@Channeling.Start" Send="Create"/>
+        <On Terms="Effect.ChargeUp@Channeling.Stop" Send="AnimBracketStop BSD"/>
+        <HostLaunch Subject="_Unit" Scope="Target"/>
+        <HostImpact Subject="_Unit" Scope="Caster"/>
+        <VisibleTo index="All" value="1"/>
+        <HostLaunchSiteOps Ops="SOpHigherBy3"/>
+        <HostImpactSiteOps Ops="SOpAttachWeapon"/>
+        <ModelFlags index="AllowHitTest" value="0"/>
+        <ModelFlags index="AutomateGlobalLoops" value="1"/>
+    </CActorBeamSimple>
+    <CActorModel id="ChargeUp@ChargedUp" parent="ModelAddition">
+        <EditorCategories value=""/>
+        <On Terms="Behavior.ChargeUp@ChargeUp.Create" Send="Create"/>
+        <On Terms="Behavior.ChargeUp@ChargeUp.Destroy" Send="AnimBracketStop BSD"/>
+        <Macros value="ShieldColor@BossColorMacro"/>
+        <Inherits index="BaseModelScale" value="0"/>
+        <Inherits index="Scale" value="0"/>
+        <AcceptedHostedPropTransfers index="BaseModelScale" value="0"/>
+        <AcceptedHostedPropTransfers index="Scale" value="0"/>
+        <ModelFlags index="AllowHitTest" value="0"/>
+        <ModelFlags index="AutomateGlobalLoops" value="1"/>
+    </CActorModel>
+    <CActorModel id="ChargeUp@Impact" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <Macros value="ShieldColor@BossColorMacro"/>
+        <On Terms="Effect.ChargeUp@Dmg.Start" Send="Create"/>
+        <ModelFlags index="AllowHitTest" value="0"/>
+    </CActorModel>
+    <CActorAction id="RainbowMeteors@Action" parent="GenericAttack" effectImpact="RainbowMeteors@ImpactSearch" effectLaunch="RainbowMeteors@LaunchMeteor">
+        <EditorCategories value=""/>
+        <Missile value="RainbowMeteors@Meteor"/>
+        <ImpactSiteOps Ops="SOpTargetUnit SOpAttachCenter"/>
+        <ImpactAttachQuery Methods="Origin"/>
+        <ShieldFlashType value="Full"/>
+    </CActorAction>
+    <CActorModel id="RainbowMeteors@Impact" parent="ModelAnimationStyleOneShot">
+        <Macros value="ShieldColor@BossColorMacro"/>
+        <On Terms="Effect.RainbowMeteors@ImpactSearch.Start" Send="Create"/>
+    </CActorModel>
+    <CActorMissile id="RainbowMeteors@Meteor" parent="GenericAttackMissile" unitName="RainbowMeteors@Meteor">
+        <Macros value="ShieldColor@BossColorBuffMacro"/>
+        <EditorCategories value=""/>
+    </CActorMissile>
+    <CActorEventMacro id="ShieldColor@BossColorBuffMacro">
+        <EditorCategories value=""/>
+        <On Terms="Behavior.ShieldColor@BossColor0.On" Send="SetTintColor 255,0,0"/>
+        <On Terms="Behavior.ShieldColor@BossColor1.On" Send="SetTintColor 255,255,0"/>
+        <On Terms="Behavior.ShieldColor@BossColor2.On" Send="SetTintColor 0,0,255"/>
+        <On Terms="Behavior.ShieldColor@BossColor3.On" Send="SetTintColor 0,255,0"/>
+    </CActorEventMacro>
+    <CActorEventMacro id="ShieldColor@BossColorMacroDelayed">
+        <EditorCategories value=""/>
+        <On Terms="ActorCreation" Send="TimerSet 0.005000 Color"/>
+        <On Terms="TimerExpired; TimerName Color; ValidateCreationEffect ShieldColor@BossColor0" Send="SetTintColor 255,0,0"/>
+        <On Terms="TimerExpired; TimerName Color; ValidateCreationEffect ShieldColor@BossColor1" Send="SetTintColor 255,255,0"/>
+        <On Terms="TimerExpired; TimerName Color; ValidateCreationEffect ShieldColor@BossColor2" Send="SetTintColor 0,0,255"/>
+        <On Terms="TimerExpired; TimerName Color; ValidateCreationEffect ShieldColor@BossColor3" Send="SetTintColor 0,255,0"/>
+    </CActorEventMacro>
+    <CActorModel id="DanceFloor@Dmg" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <Macros value="ShieldColor@BossColorMacro"/>
+        <On Terms="Effect.DanceFloor@Dmg.Start" Send="Create"/>
+    </CActorModel>
+    <CActorEventMacro id="ShieldColor@BossColorMacro">
+        <EditorCategories value=""/>
+        <On Terms="ActorCreation; ValidateCreationEffect ShieldColor@BossColor0" Send="SetTintColor 255,0,0"/>
+        <On Terms="ActorCreation; ValidateCreationEffect ShieldColor@BossColor1" Send="SetTintColor 255,255,0"/>
+        <On Terms="ActorCreation; ValidateCreationEffect ShieldColor@BossColor2" Send="SetTintColor 0,0,255"/>
+        <On Terms="ActorCreation; ValidateCreationEffect ShieldColor@BossColor3" Send="SetTintColor 0,255,0"/>
+    </CActorEventMacro>
+    <CActorEventMacro id="ShieldColor@BossColorCasterMacro">
+        <EditorCategories value=""/>
+        <On Terms="ActorCreation; ValidateCreationEffect ShieldColor@BossColorCaster0" Send="SetTintColor 255,0,0"/>
+        <On Terms="ActorCreation; ValidateCreationEffect ShieldColor@BossColorCaster1" Send="SetTintColor 255,255,0"/>
+        <On Terms="ActorCreation; ValidateCreationEffect ShieldColor@BossColorCaster2" Send="SetTintColor 0,0,255"/>
+        <On Terms="ActorCreation; ValidateCreationEffect ShieldColor@BossColorCaster3" Send="SetTintColor 0,255,0"/>
+    </CActorEventMacro>
+    <CActorModel id="DanceFloor@Floor" parent="ModelAnimationStyleContinuous">
+        <EditorCategories value=""/>
+        <On Terms="Effect.DanceFloor@AreaController.Start; At Source" Send="Create"/>
+        <On Terms="Effect.DanceFloor@AreaController.Stop" Send="Destroy"/>
+        <Scale value="20.000000,20.000000,1.000000"/>
+        <HostSiteOps Ops="DanceFloor@FloorOffset SOpRotationPositive45Deg SOpMoveUpByDot2"/>
+        <Macros value="ShieldColor@BossColorMacro"/>
+        <ModelFlags index="AllowHitTest" value="0"/>
+    </CActorModel>
+    <CActorUnit id="ShieldColor@DummySource" parent="GenericUnitStandard" unitName="ShieldColor@DummySource">
+        <EditorCategories value=""/>
+        <Model value="Sphere"/>
+        <Macros value="ShieldColor@BossColorBuffMacro"/>
+    </CActorUnit>
+    <CActorModel id="WavesOfChaos@ChargeUp" parent="ModelAnimationStyleContinuous">
+        <EditorCategories value=""/>
+        <On Terms="Effect.WavesOfChaos@WaveController.Start; At Caster" Send="Create"/>
+        <On Terms="Effect.WavesOfChaos@WaveController.Stop" Send="Destroy"/>
+        <Macros value="ShieldColor@BossColorMacroDelayed"/>
+        <ModelFlags index="AllowHitTest" value="0"/>
+    </CActorModel>
+    <CActorModel id="WavesOfChaos@Wave" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On Terms="Effect.WavesOfChaos@WaveSearch.Start; At Caster" Send="Create"/>
+        <Macros value="ShieldColor@BossColorMacro"/>
+        <ModelFlags index="AllowHitTest" value="0"/>
+    </CActorModel>
+    <CActorModel id="ShieldColor@PlayerColor" parent="ModelAddition">
+        <EditorCategories value=""/>
+        <On index="0" Terms="ActorCreation" Send="AnimBracketStart BSD Stand,Work,Start Stand,Work Stand,Work,End"/>
+        <On Terms="Behavior.ShieldColor@PlayerColor0.On" Send="Create"/>
+        <On Terms="Behavior.ShieldColor@PlayerColor0.On" Send="SetTintColor 255,0,0"/>
+        <On Terms="Behavior.ShieldColor@PlayerColor0.Off" Send="Destroy"/>
+        <On Terms="Behavior.ShieldColor@PlayerColor1.On" Send="Create"/>
+        <On Terms="Behavior.ShieldColor@PlayerColor1.On" Send="SetTintColor 255,255,0"/>
+        <On Terms="Behavior.ShieldColor@PlayerColor1.Off" Send="Destroy"/>
+        <On Terms="Behavior.ShieldColor@PlayerColor2.On" Send="Create"/>
+        <On Terms="Behavior.ShieldColor@PlayerColor2.On" Send="SetTintColor 0,0,255"/>
+        <On Terms="Behavior.ShieldColor@PlayerColor2.Off" Send="Destroy"/>
+        <On Terms="Behavior.ShieldColor@PlayerColor3.On" Send="Create"/>
+        <On Terms="Behavior.ShieldColor@PlayerColor3.On" Send="SetTintColor 0,255,0"/>
+        <On Terms="Behavior.ShieldColor@PlayerColor3.Off" Send="Destroy"/>
+        <On Terms="ActorCreation; ValidateUnit PrismaticHybrids@PrismaticHybrids" Send="Destroy"/>
+        <HostSiteOps Ops="SOpAttachCenter"/>
+        <ModelFlags index="AutomateGlobalLoops" value="1"/>
+    </CActorModel>
+    <CActorUnit id="ShieldColor@Totem" parent="GenericUnitStandard" unitName="ShieldColor@Totem">
+        <EditorCategories value=""/>
+        <On Terms="Behavior.ShieldColor@TotemDisabled.On" Send="SetTintColor 50,50,50 0.250000 OneShot Disabled 200.000000"/>
+        <On Terms="Behavior.ShieldColor@TotemDisabled.Off" Send="ClearTintColor 0.250000 Disabled"/>
+        <Macros value="ShieldColor@BossColorBuffMacro"/>
+    </CActorUnit>
+    <CActorModel id="MoopyHat0" parent="ModelAddition">
+        <EditorCategories value=""/>
+        <On Terms="Behavior.MoopyHat0.On" Send="Create"/>
+        <On Terms="Behavior.MoopyHat0.Off" Send="Destroy"/>
+        <HostSiteOps Ops="SOpAttachHead SOpOffsetHigherBy0p5"/>
+        <Inherits index="BaseModelScale" value="0"/>
+        <Inherits index="Scale" value="0"/>
+        <AcceptedHostedPropTransfers index="BaseModelScale" value="0"/>
+        <AcceptedHostedPropTransfers index="Scale" value="0"/>
+    </CActorModel>
+    <CActorModel id="MoopyHat1" parent="ModelAddition">
+        <EditorCategories value=""/>
+        <On Terms="Behavior.MoopyHat1.On" Send="Create"/>
+        <On Terms="Behavior.MoopyHat1.Off" Send="Destroy"/>
+        <HostSiteOps Ops="SOpAttachHead SOpOffsetHigherBy0p5"/>
+        <Inherits index="BaseModelScale" value="0"/>
+        <Inherits index="Scale" value="0"/>
+        <AcceptedHostedPropTransfers index="BaseModelScale" value="0"/>
+        <AcceptedHostedPropTransfers index="Scale" value="0"/>
+    </CActorModel>
+    <CActorModel id="MoopyHat2" parent="ModelAddition">
+        <EditorCategories value=""/>
+        <On Terms="Behavior.MoopyHat2.On" Send="Create"/>
+        <On Terms="Behavior.MoopyHat2.Off" Send="Destroy"/>
+        <HostSiteOps Ops="SOpAttachHead SOpOffsetHigherBy0p5"/>
+        <Inherits index="BaseModelScale" value="0"/>
+        <Inherits index="Scale" value="0"/>
+        <AcceptedHostedPropTransfers index="BaseModelScale" value="0"/>
+        <AcceptedHostedPropTransfers index="Scale" value="0"/>
+    </CActorModel>
+    <CActorUnit id="KingMoopy" parent="GenericUnitStandard" unitName="KingMoopy">
+        <EditorCategories value=""/>
+        <Model value="Moopy_Reaper"/>
+        <PortraitModel value="MoopyPortrait"/>
+        <HighlightTooltip value="Unit/Name/Bogus"/>
+        <Scale value="4.000000"/>
+        <Wireframe>
+            <Image value="Assets\Wireframes\Moopy_Reaper\wireframe-moopy_reaper.dds"/>
+        </Wireframe>
+        <DeathArray index="Normal" ModelLink="Reaper_Umojan"/>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-zerg-ancillaryarmor.dds"/>
+        <Macros value="BossDeactivated"/>
+        <On Terms="Abil.ChargeUp@Totem.SourceChannelStart" Send="AnimPlay Abil1 Spell,E PlayForever"/>
+        <On Terms="Effect.ChargeUp@Channeling.Stop" Send="AnimClear Abil1"/>
+        <FogVisibility value="Dimmed"/>
+        <BarHeight value="14"/>
+        <CustomUnitStatusFrame value="SSF_UnitStatus/BossStatus"/>
+        <MinimapIcon value="Assets\Icons\btn-unit-kingmoopy.dds"/>
+        <MinimapIconScale value="0.300000"/>
+        <MinimapIconBackground value="Assets\MinimapBackground.dds"/>
+        <MinimapIconBackgroundScale value="1.100000"/>
+        <MinimapIconBackgroundTintColor value="255,255,0,0"/>
+        <UnitFlags index="SuppressDefaultStatusBar" value="1"/>
+    </CActorUnit>
+    <CActorAction id="KingMoopyAttack" parent="GenericAttack" effectImpact="KingMoopyWeaponDmgSearch" effectLaunch="KingMoopyWeaponLM">
+        <EditorCategories value=""/>
+        <Missile value="KingMoopyWeaponMissile"/>
+        <LaunchAssets Model="KingMoopyWeaponMissileLaunch"/>
+        <ImpactMap index="None" Model="KingMoopyWeaponMissileImpact"/>
+        <ShieldFlashType value="Full"/>
+    </CActorAction>
+    <CActorMissile id="KingMoopyWeaponMissile" parent="GenericAttackMissile" unitName="KingMoopyWeaponMissile">
+        <EditorCategories value=""/>
+    </CActorMissile>
+    <CActorUnit id="MoopyChampion" parent="GenericUnitStandard" unitName="MoopyChampion">
+        <EditorCategories value=""/>
+        <Model value="Moopy_Unit"/>
+        <PortraitModel value="MoopyPortrait"/>
+        <HighlightTooltip value="Unit/Name/Bogus"/>
+        <Scale value="3.000000"/>
+        <Wireframe>
+            <Image value="Assets\Textures\wireframe-critter-moopy.dds"/>
+        </Wireframe>
+        <DeathArray index="Normal" ModelLink="MoopyUnitDeath"/>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-zerg-ancillaryarmor.dds"/>
+    </CActorUnit>
+    <CActorAction id="MoopyChampionAttack" parent="GenericAttack" effectAttack="MoopyChampionWeaponDmg">
+        <EditorCategories value=""/>
+    </CActorAction>
+    <CModel id="PrismaticHybrids@PrismaticHybrids">
+        <Model value="Assets\Models\HybridProtoss_White\HybridProtoss_white.m3"/>
+    </CModel>
+    <CModel id="PrismaticHybrids@SpawnIn">
+        <Model value="Assets\Models\HybridWarpin_White\HybridWarpin_white.m3"/>
+        <AnimSpeed value="2.000000"/>
+        <ScaleMax value="0.750000,0.750000,0.750000"/>
+        <ScaleMin value="0.750000,0.750000,0.750000"/>
+    </CModel>
+    <CModel id="ShieldColor@Phase0">
+        <Model value="Assets\Models\war3_creepsleeptarget\War3_CreepSleepTarget.m3"/>
+        <ScaleMax value="2.000000,2.000000,2.000000"/>
+        <ScaleMin value="2.000000,2.000000,2.000000"/>
+    </CModel>
+    <CModel id="ShieldColor@Phase0End">
+        <Model value="Assets\Doodads\LightningBolt\LightningBolt.m3"/>
+    </CModel>
+    <CModel id="ShieldColor@Phase1"/>
+    <CModel id="WavesOfChaos@InitialBeam">
+        <Model value="Assets\Effects\Protoss\ProtossShield_Battery_Beam\ProtossShield_Battery_Beam.m3"/>
+    </CModel>
+    <CModel id="ColorfulBeams@Center">
+        <Model value="Assets\Effects\Protoss\ArcadePlasmaMissile\ArcadePlasmaMissile.m3"/>
+    </CModel>
+    <CModel id="ColorfulBeams@Beam">
+        <Model value="Assets\Models\DetonateBeam_White\DetonateBeam_white.m3"/>
+        <ScaleMax value="5.000000,5.000000,4.000000"/>
+        <ScaleMin value="5.000000,5.000000,4.000000"/>
+    </CModel>
+    <CModel id="ChargeUp@ChannelBeam">
+        <Model value="Assets\Effects\Protoss\ProtossShield_Battery_Beam\ProtossShield_Battery_Beam.m3"/>
+    </CModel>
+    <CModel id="ChargeUp@ChargedUp">
+        <Model value="Assets\Effects\Protoss\Alarak_Malash_Storm\Alarak_Malash_Storm.m3"/>
+        <ScaleMax value="0.900000,0.900000,0.900000"/>
+        <ScaleMin value="0.900000,0.900000,0.900000"/>
+    </CModel>
+    <CModel id="ChargeUp@Impact">
+        <Model value="Assets\Effects\Terran\Liberator_GroundCannon_Upgrade_Impact\Liberator_GroundCannon_Upgrade_Impact.m3"/>
+        <ScaleMax value="2.000000,2.000000,2.000000"/>
+        <ScaleMin value="2.000000,2.000000,2.000000"/>
+    </CModel>
+    <CModel id="RainbowMeteors@Impact">
+        <Model value="Assets\Effects\Zerg\YagdraFireBallMissileImpact\YagdraFireBallMissileImpact.m3"/>
+    </CModel>
+    <CModel id="RainbowMeteors@Meteor">
+        <Model value="Assets\Models\war3_demonhuntermissile_white\War3_DemonHunterMissile_white.m3"/>
+        <ScaleMax value="2.000000,2.000000,2.000000"/>
+        <ScaleMin value="2.000000,2.000000,2.000000"/>
+    </CModel>
+    <CModel id="DanceFloor@Dmg">
+        <Model value="Assets\Effects\Protoss\FeedbackLaunch\FeedbackLaunch.m3"/>
+    </CModel>
+    <CModel id="DanceFloor@Floor">
+        <Model value="Assets\Models\DiscoFloor\DiscoFloor.m3"/>
+    </CModel>
+    <CModel id="WavesOfChaos@ChargeUp">
+        <Model value="Assets\Models\XelNagaArtifactSpellPowerUp_White\XelNagaArtifactSpellPowerUp_white.m3"/>
+        <ScaleMax value="2.000000,2.000000,2.000000"/>
+        <ScaleMin value="2.000000,2.000000,2.000000"/>
+    </CModel>
+    <CModel id="WavesOfChaos@Wave">
+        <Model value="Assets\Models\XelNagaArtifactSpell_White\XelNagaArtifactSpell_white.m3"/>
+        <AnimSpeed value="1.500000"/>
+        <ScaleMax value="0.500000,0.500000,0.500000"/>
+        <ScaleMin value="0.500000,0.500000,0.500000"/>
+    </CModel>
+    <CModel id="ShieldColor@BossColor">
+        <Model value="Assets\Effects\Terran\Nova_Blink_Shield\Nova_Blink_Shield.m3"/>
+    </CModel>
+    <CModel id="ShieldColor@PlayerColor">
+        <Model value="Assets\Models\Conclave_Purifier_Shield_White\Conclave_Purifier_Shield_White.m3"/>
+        <ScaleMax value="0.500000,0.500000,0.500000"/>
+        <ScaleMin value="0.500000,0.500000,0.500000"/>
+    </CModel>
+    <CModel id="ShieldColor@Totem">
+        <Model value="Assets\Doodads\Purifier_Force_Field_Pillar\Purifier_Force_Field_Pillar_01.m3"/>
+    </CModel>
+    <CModel id="KingMoopyWeaponMissileImpact">
+        <Model value="Assets\Effects\Terran\PlasmaRifle_Missile_Impact\PlasmaRifle_Missile_Impact.m3"/>
+        <ScaleMax value="4.000000,4.000000,4.000000"/>
+        <ScaleMin value="4.000000,4.000000,4.000000"/>
+    </CModel>
+    <CModel id="KingMoopyWeaponMissileLaunch">
+        <Model value="Assets\Effects\Terran\PlasmaRifle_Launch\PlasmaRifle_Launch.m3"/>
+        <Lighting value="KingMoopyWeaponMissileImpact"/>
+        <ScaleMax value="4.000000,4.000000,4.000000"/>
+        <ScaleMin value="4.000000,4.000000,4.000000"/>
+    </CModel>
+    <CModel id="Moopy_Unit" parent="ImportedModel"/>
+    <CModel id="MoopyHat0">
+        <Model value="Assets\Doodads\AnniversaryHatTerran\AnniversaryHatTerran.m3"/>
+        <ScaleMax value="3.000000,3.000000,3.000000"/>
+        <ScaleMin value="3.000000,3.000000,3.000000"/>
+    </CModel>
+    <CModel id="MoopyHat1">
+        <Model value="Assets\Doodads\AnniversaryHatProtoss\AnniversaryHatProtoss.m3"/>
+        <Lighting value="MoopyHat0"/>
+        <ScaleMax value="3.000000,3.000000,3.000000"/>
+        <ScaleMin value="3.000000,3.000000,3.000000"/>
+    </CModel>
+    <CModel id="MoopyHat2">
+        <Model value="Assets\Doodads\AnniversaryHatZerg\AnniversaryHatZerg.m3"/>
+        <Lighting value="MoopyHat0"/>
+        <ScaleMax value="3.000000,3.000000,3.000000"/>
+        <ScaleMin value="3.000000,3.000000,3.000000"/>
+    </CModel>
+    <CModel id="Moopy_Reaper" parent="ImportedModel"/>
+    <CModel id="KingMoopyWeaponMissile">
+        <Model value="Assets\Effects\Terran\PlasmaRifle_Missile\PlasmaRifle_Missile.m3"/>
+        <ScaleMax value="4.000000,4.000000,4.000000"/>
+        <ScaleMin value="4.000000,4.000000,4.000000"/>
+    </CModel>
+    <CWeaponLegacy id="PrismaticHybrids@HybridWeapon">
+        <Icon value="Assets\Textures\btn-upgrade-protoss-groundweaponslevel0.dds"/>
+        <DisplayEffect value="PrismaticHybrids@HybridWeaponDmg"/>
+        <TargetFilters value="Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="7"/>
+        <Cost>
+            <Cooldown Location="Unit"/>
+        </Cost>
+        <Period value="1.694"/>
+        <Effect value="PrismaticHybrids@HybridWeaponLM"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="KingMoopyWeapon">
+        <EditorCategories value=""/>
+        <TargetFilters value="Visible;Self,Worker,Missile,Item,Hidden,Invulnerable"/>
+        <Period value="0.75"/>
+        <Effect value="KingMoopyWeaponLM"/>
+        <Icon value="Assets\Textures\btn-upgrade-nova-equipment-plasmagun.dds"/>
+        <DisplayEffect value="KingMoopyWeaponDmg"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="MoopyChampionWeapon">
+        <EditorCategories value=""/>
+        <Effect value="MoopyChampionWeaponDmg"/>
+        <Period value="1"/>
+        <Icon value="Assets\Textures\btn-ability-dehaka-thornaura.dds"/>
+        <DisplayEffect value="MoopyChampionWeaponDmg"/>
+    </CWeaponLegacy>
+    <CMoverMissile id="RainbowMeteors@Meteor">
+        <MotionPhases>
+            <Driver value="Guidance"/>
+            <Acceleration value="3200"/>
+            <Speed value="3"/>
+            <MaxSpeed value="3"/>
+            <Clearance value="0.5"/>
+            <ClearanceLookahead value="3"/>
+            <ActorTracking value="Actual"/>
+            <Outro value="100"/>
+            <ThrowBandYaw value="-360,-360,-360,-360"/>
+            <ThrowBandPitch value="-360,-360,-360,-360"/>
+            <YawPitchRoll value="5759.6484"/>
+        </MotionPhases>
+    </CMoverMissile>
+    <CDataCollectionAbil id="PrismaticHybrids">
+        <EditorCategories value=""/>
+        <DataRecord Entry="Actor,PrismaticHybrids@PrismaticHybrids"/>
+        <DataRecord Entry="Actor,PrismaticHybrids@HybridWeaponAttack"/>
+        <DataRecord Entry="Actor,PrismaticHybrids@HybridWeaponMissile"/>
+        <DataRecord Entry="Effect,PrismaticHybrids@HybridWeaponLM"/>
+        <DataRecord Entry="Effect,PrismaticHybrids@HybridWeaponDmg"/>
+        <DataRecord Entry="Unit,PrismaticHybrids@PrismaticHybrids"/>
+        <DataRecord Entry="Unit,PrismaticHybrids@HybridWeaponMissile"/>
+        <DataRecord Entry="Weapon,PrismaticHybrids@HybridWeapon"/>
+        <DataRecord Entry="Abil,PrismaticHybrids"/>
+        <DataRecord Entry="Actor,PrismaticHybrids@HybridDeathActor"/>
+        <DataRecord Entry="Actor,PrismaticHybrids@SpawnIn"/>
+        <DataRecord Entry="Behavior,PrismaticHybrids@ColorInvulnerable"/>
+        <DataRecord Entry="Behavior,PrismaticHybrids@SpawnIn"/>
+        <DataRecord Entry="Button,PrismaticHybrids"/>
+        <DataRecord Entry="Effect,PrismaticHybrids@CUSet"/>
+        <DataRecord Entry="Effect,PrismaticHybrids@InitialSet"/>
+        <DataRecord Entry="Effect,PrismaticHybrids@AlreadyCastingNoWeapons"/>
+        <DataRecord Entry="Model,PrismaticHybrids@SpawnIn"/>
+        <DataRecord Entry="Validator,PrismaticHybrids@PrismaticHybrids"/>
+        <DataRecord Entry="Model,PrismaticHybrids@PrismaticHybrids"/>
+        <DataRecord Entry="Behavior,PrismaticHybrids@SpawnIn"/>
+        <DataRecord Entry="Behavior,PrismaticHybrids@ColorInvulnerable"/>
+    </CDataCollectionAbil>
+    <CDataCollectionAbil id="ColorfulBeams">
+        <EditorCategories value=""/>
+        <DataRecord Entry="Abil,ColorfulBeams"/>
+        <DataRecord Entry="Actor,ColorfulBeams@Beam"/>
+        <DataRecord Entry="Actor,ColorfulBeams@Center"/>
+        <DataRecord Entry="Button,ColorfulBeams"/>
+        <DataRecord Entry="Effect,ColorfulBeams@InitialSet"/>
+        <DataRecord Entry="Effect,ColorfulBeams@AlreadyCastingNoWeapons"/>
+        <DataRecord Entry="Effect,ColorfulBeams@ColorDummyCU"/>
+        <DataRecord Entry="Effect,ColorfulBeams@RandomDirection"/>
+        <DataRecord Entry="Effect,ColorfulBeams@MainController"/>
+        <DataRecord Entry="Effect,ColorfulBeams@BeamController"/>
+        <DataRecord Entry="Effect,ColorfulBeams@BeamSearch"/>
+        <DataRecord Entry="Effect,ColorfulBeams@BeamDmg"/>
+        <DataRecord Entry="Effect,ColorfulBeams@ColorDummySet"/>
+        <DataRecord Entry="Model,ColorfulBeams@Beam"/>
+        <DataRecord Entry="Model,ColorfulBeams@Center"/>
+    </CDataCollectionAbil>
+    <CDataCollectionAbil id="ChargeUp">
+        <EditorCategories value=""/>
+        <DataRecord Entry="Abil,ChargeUp"/>
+        <DataRecord Entry="Abil,ChargeUp@Totem"/>
+        <DataRecord Entry="Actor,ChargeUp@ChannelBeam"/>
+        <DataRecord Entry="Actor,ChargeUp@ChargedUp"/>
+        <DataRecord Entry="Actor,ChargeUp@Impact"/>
+        <DataRecord Entry="Behavior,ChargeUp"/>
+        <DataRecord Entry="Behavior,ChargeUp@ChargeUp"/>
+        <DataRecord Entry="Button,ChargeUp"/>
+        <DataRecord Entry="Effect,ChargeUp@TurnTowardsTotem"/>
+        <DataRecord Entry="Effect,ChargeUp@Channeling"/>
+        <DataRecord Entry="Effect,ChargeUp@ChargeUpComplete"/>
+        <DataRecord Entry="Effect,ChargeUp@ChargeUp"/>
+        <DataRecord Entry="Effect,ChargeUp@ChargeUpRB"/>
+        <DataRecord Entry="Effect,ChargeUp@Duration"/>
+        <DataRecord Entry="Effect,ChargeUp@Dmg"/>
+        <DataRecord Entry="Effect,ChargeUp@InitialSet"/>
+        <DataRecord Entry="Effect,ChargeUp@AlreadyCastingNoWeapons"/>
+        <DataRecord Entry="Model,ChargeUp@ChannelBeam"/>
+        <DataRecord Entry="Model,ChargeUp@ChargedUp"/>
+        <DataRecord Entry="Model,ChargeUp@Impact"/>
+    </CDataCollectionAbil>
+    <CDataCollectionAbil id="RainbowMeteors">
+        <EditorCategories value=""/>
+        <DataRecord Entry="Abil,RainbowMeteors"/>
+        <DataRecord Entry="Actor,RainbowMeteors@Meteor"/>
+        <DataRecord Entry="Button,RainbowMeteors"/>
+        <DataRecord Entry="Effect,RainbowMeteors@InitialSet"/>
+        <DataRecord Entry="Effect,RainbowMeteors@AlreadyCastingNoWeapons"/>
+        <DataRecord Entry="Effect,RainbowMeteors@Dmg"/>
+        <DataRecord Entry="Effect,RainbowMeteors@LaunchMeteor"/>
+        <DataRecord Entry="Effect,RainbowMeteors@MainController"/>
+        <DataRecord Entry="Effect,RainbowMeteors@SearchTarget"/>
+        <DataRecord Entry="Effect,RainbowMeteors@MissileBuff"/>
+        <DataRecord Entry="Effect,RainbowMeteors@ImpactSearch"/>
+        <DataRecord Entry="Effect,RainbowMeteors@MissileBuffLocation"/>
+        <DataRecord Entry="Model,RainbowMeteors@Meteor"/>
+        <DataRecord Entry="Mover,RainbowMeteors@Meteor"/>
+        <DataRecord Entry="Unit,RainbowMeteors@Meteor"/>
+        <DataRecord Entry="Actor,RainbowMeteors@Action"/>
+        <DataRecord Entry="Actor,RainbowMeteors@Impact"/>
+        <DataRecord Entry="Model,RainbowMeteors@Impact"/>
+    </CDataCollectionAbil>
+    <CDataCollectionAbil id="DanceFloor">
+        <EditorCategories value=""/>
+        <DataRecord Entry="Abil,DanceFloor"/>
+        <DataRecord Entry="Actor,DanceFloor@Floor"/>
+        <DataRecord Entry="Actor,DanceFloor@Dmg"/>
+        <DataRecord Entry="Button,DanceFloor"/>
+        <DataRecord Entry="Effect,DanceFloor@InitialSet"/>
+        <DataRecord Entry="Effect,DanceFloor@AlreadyCastingNoWeapons"/>
+        <DataRecord Entry="Effect,DanceFloor@AreaOffsets"/>
+        <DataRecord Entry="Effect,DanceFloor@AreaColorDummyCU"/>
+        <DataRecord Entry="Effect,DanceFloor@MainController"/>
+        <DataRecord Entry="Effect,DanceFloor@AreaController"/>
+        <DataRecord Entry="Effect,DanceFloor@AreaSearch"/>
+        <DataRecord Entry="Effect,DanceFloor@Dmg"/>
+        <DataRecord Entry="Effect,DanceFloor@AreaColorDummySet"/>
+        <DataRecord Entry="Model,DanceFloor@Floor"/>
+        <DataRecord Entry="Model,DanceFloor@Dmg"/>
+        <DataRecord Entry="Actor,DanceFloor@FloorOffset"/>
+    </CDataCollectionAbil>
+    <CDataCollectionAbil id="WavesOfChaos">
+        <EditorCategories value=""/>
+        <DataRecord Entry="Abil,WavesOfChaos"/>
+        <DataRecord Entry="Actor,WavesOfChaos@ChargeUp"/>
+        <DataRecord Entry="Actor,WavesOfChaos@Wave"/>
+        <DataRecord Entry="Button,WavesOfChaos"/>
+        <DataRecord Entry="Effect,WavesOfChaos@Dmg"/>
+        <DataRecord Entry="Effect,WavesOfChaos@InitialSet"/>
+        <DataRecord Entry="Effect,WavesOfChaos@NoWeapons"/>
+        <DataRecord Entry="Effect,WavesOfChaos@MainController"/>
+        <DataRecord Entry="Effect,WavesOfChaos@WaveController"/>
+        <DataRecord Entry="Effect,WavesOfChaos@WaveSearch"/>
+        <DataRecord Entry="Model,WavesOfChaos@ChargeUp"/>
+        <DataRecord Entry="Model,WavesOfChaos@Wave"/>
+        <DataRecord Entry="Actor,WavesOfChaos@InitialBeam"/>
+        <DataRecord Entry="Actor,WavesOfChaos@InitialBeamAction"/>
+        <DataRecord Entry="Effect,WavesOfChaos@InitialBeamDummy"/>
+        <DataRecord Entry="Effect,WavesOfChaos@InitialBeamGetTotems"/>
+        <DataRecord Entry="Effect,WavesOfChaos@InitialBeamSetSource"/>
+        <DataRecord Entry="Model,WavesOfChaos@InitialBeam"/>
+    </CDataCollectionAbil>
+    <CDataCollectionAbil id="ShieldColor">
+        <EditorCategories value=""/>
+        <DataRecord Entry="Abil,ShieldColor@ColorChange"/>
+        <DataRecord Entry="Actor,ShieldColor@PlayerColor"/>
+        <DataRecord Entry="Actor,ShieldColor@Totem"/>
+        <DataRecord Entry="Behavior,ShieldColor@DummyTracker"/>
+        <DataRecord Entry="Behavior,ShieldColor@BossColor0"/>
+        <DataRecord Entry="Behavior,ShieldColor@BossColor1"/>
+        <DataRecord Entry="Behavior,ShieldColor@BossColor2"/>
+        <DataRecord Entry="Behavior,ShieldColor@BossColor3"/>
+        <DataRecord Entry="Behavior,ShieldColor@PlayerColor0"/>
+        <DataRecord Entry="Behavior,ShieldColor@PlayerColor1"/>
+        <DataRecord Entry="Behavior,ShieldColor@PlayerColor2"/>
+        <DataRecord Entry="Behavior,ShieldColor@PlayerColor3"/>
+        <DataRecord Entry="Effect,ShieldColor@DummyAddToTracker"/>
+        <DataRecord Entry="Effect,ShieldColor@RemoveDummies"/>
+        <DataRecord Entry="Effect,ShieldColor@ColorChangeTriggerDummy"/>
+        <DataRecord Entry="Model,ShieldColor@PlayerColor"/>
+        <DataRecord Entry="Model,ShieldColor@Totem"/>
+        <DataRecord Entry="Unit,ShieldColor@Totem"/>
+        <DataRecord Entry="Unit,ShieldColor@DummySource"/>
+        <DataRecord Entry="Validator,ShieldColor@Totem"/>
+        <DataRecord Entry="Effect,ShieldColor@BossColor0"/>
+        <DataRecord Entry="Effect,ShieldColor@BossColor1"/>
+        <DataRecord Entry="Effect,ShieldColor@BossColor2"/>
+        <DataRecord Entry="Effect,ShieldColor@BossColor3"/>
+        <DataRecord Entry="Effect,ShieldColor@ClearBossColor"/>
+        <DataRecord Entry="Effect,ShieldColor@RandomBossColor"/>
+        <DataRecord Entry="Effect,ShieldColor@NewRandomBossColor"/>
+        <DataRecord Entry="Model,ShieldColor@BossColor"/>
+        <DataRecord Entry="Validator,ShieldColor@BossColor0"/>
+        <DataRecord Entry="Validator,ShieldColor@PlayerColor0"/>
+        <DataRecord Entry="Validator,ShieldColor@Color0"/>
+        <DataRecord Entry="Validator,ShieldColor@BossColor1"/>
+        <DataRecord Entry="Validator,ShieldColor@BossColor2"/>
+        <DataRecord Entry="Validator,ShieldColor@BossColor3"/>
+        <DataRecord Entry="Validator,ShieldColor@PlayerColor1"/>
+        <DataRecord Entry="Validator,ShieldColor@PlayerColor2"/>
+        <DataRecord Entry="Validator,ShieldColor@PlayerColor3"/>
+        <DataRecord Entry="Validator,ShieldColor@Color1"/>
+        <DataRecord Entry="Validator,ShieldColor@Color2"/>
+        <DataRecord Entry="Validator,ShieldColor@Color3"/>
+        <DataRecord Entry="Validator,ShieldColor@ColorCheck"/>
+        <DataRecord Entry="Behavior,ShieldColor@TotemDisabled"/>
+        <DataRecord Entry="Behavior,ShieldColor@TotemTracker"/>
+        <DataRecord Entry="Effect,ShieldColor@TotemAddToTracker"/>
+        <DataRecord Entry="Effect,ShieldColor@DisableTotems"/>
+        <DataRecord Entry="Effect,ShieldColor@TotemDisabled"/>
+        <DataRecord Entry="Effect,ShieldColor@EnableTotems"/>
+        <DataRecord Entry="Effect,ShieldColor@TotemDisabledRM"/>
+        <DataRecord Entry="Validator,ShieldColor@TotemNotDsiabled"/>
+        <DataRecord Entry="Validator,ShieldColor@TotemActivated"/>
+        <DataRecord Entry="Actor,ShieldColor@BossColorBuffMacro"/>
+        <DataRecord Entry="Actor,ShieldColor@BossColorMacroDelayed"/>
+        <DataRecord Entry="Actor,ShieldColor@BossColorMacro"/>
+        <DataRecord Entry="Actor,ShieldColor@DummySource"/>
+        <DataRecord Entry="Effect,ShieldColor@DummyColoringCycleTrigger"/>
+        <DataRecord Entry="Effect,ShieldColor@DummyColorUserData"/>
+        <DataRecord Entry="Effect,ShieldColor@DummyColorUserDataReset"/>
+        <DataRecord Entry="Effect,ShieldColor@DummyColorSwitch"/>
+        <DataRecord Entry="Effect,ShieldColor@DummyColoring"/>
+        <DataRecord Entry="Validator,ShieldColor@DummyColorUD0"/>
+        <DataRecord Entry="Validator,ShieldColor@DummyColorUD1"/>
+        <DataRecord Entry="Validator,ShieldColor@DummyColorUD2"/>
+        <DataRecord Entry="Validator,ShieldColor@DummyColorUD3"/>
+        <DataRecord Entry="Effect,ShieldColor@DummyColoringCycleResetTrigger"/>
+        <DataRecord Entry="Validator,ShieldColor@ColorCheckCaster"/>
+        <DataRecord Entry="Validator,ShieldColor@BossColorCaster0"/>
+        <DataRecord Entry="Validator,ShieldColor@ColorCaster0"/>
+        <DataRecord Entry="Validator,ShieldColor@ColorCaster3"/>
+        <DataRecord Entry="Validator,ShieldColor@ColorCaster2"/>
+        <DataRecord Entry="Validator,ShieldColor@ColorCaster1"/>
+        <DataRecord Entry="Validator,ShieldColor@BossColorCaster1"/>
+        <DataRecord Entry="Validator,ShieldColor@BossColorCaster2"/>
+        <DataRecord Entry="Validator,ShieldColor@BossColorCaster3"/>
+        <DataRecord Entry="Actor,ShieldColor@BossColorCasterMacro"/>
+        <DataRecord Entry="Behavior,ShieldColor@Phase1"/>
+        <DataRecord Entry="Behavior,ShieldColor@Phase0"/>
+        <DataRecord Entry="Actor,ShieldColor@Phase0"/>
+        <DataRecord Entry="Actor,ShieldColor@Phase0End"/>
+        <DataRecord Entry="Model,ShieldColor@Phase0"/>
+        <DataRecord Entry="Model,ShieldColor@Phase0End"/>
+        <DataRecord Entry="Model,ShieldColor@Phase1"/>
+        <DataRecord Entry="Behavior,ShieldColor@Phase1"/>
+        <DataRecord Entry="Behavior,ShieldColor@Phase0"/>
+    </CDataCollectionAbil>
+    <CUnit id="PrismaticHybrids@HybridWeaponMissile" parent="MISSILE">
+        <Race value="Zerg"/>
+        <EditorCategories value=""/>
+    </CUnit>
+    <CUnit id="PrismaticHybrids@PrismaticHybrids" parent="GenericEnemyUnit">
+        <DeathRevealRadius value="3"/>
+        <LifeStart value="7500"/>
+        <LifeMax value="7500"/>
+        <LifeArmorName value="Unit/LifeArmorName/HybridArmor"/>
+        <ShieldArmorName value="Unit/ShieldArmorName/HybridShields"/>
+        <Speed value="2.8125"/>
+        <BehaviorArray Link="PrismaticHybrids@SpawnIn"/>
+        <WeaponArray Link="PrismaticHybrids@HybridWeapon"/>
+        <Radius value="0.8125"/>
+        <InnerRadius value="0.75"/>
+        <Attributes index="Biological" value="1"/>
+        <Attributes index="Psionic" value="1"/>
+        <Attributes index="Summoned" value="1"/>
+    </CUnit>
+    <CUnit id="RainbowMeteors@Meteor" parent="MISSILE">
+        <Race value="Zerg"/>
+        <EditorCategories value=""/>
+        <Mover value="RainbowMeteors@Meteor"/>
+    </CUnit>
+    <CUnit id="ShieldColor@DummySource" parent="GenericEnemyUnit">
+        <Race value="Zerg"/>
+        <AbilArray index="1" removed="1"/>
+        <AbilArray index="2" removed="1"/>
+        <FlagArray index="Uncommandable" value="1"/>
+        <FlagArray index="Unselectable" value="1"/>
+        <FlagArray index="Untargetable" value="1"/>
+        <FlagArray index="NoDraw" value="1"/>
+        <FlagArray index="Invulnerable" value="1"/>
+        <PlaneArray index="Ground" value="0"/>
+        <Collide index="Ground" value="0"/>
+        <Collide index="ForceField" value="0"/>
+        <Collide index="Locust" value="0"/>
+        <Collide index="Small" value="0"/>
+        <Speed value="0"/>
+        <Acceleration value="0"/>
+        <Sight value="0"/>
+        <CostCategory value="None"/>
+        <CardLayouts index="0" removed="1"/>
+        <InnerRadius value="0"/>
+    </CUnit>
+    <CUnit id="ShieldColor@Totem">
+        <Race value="Zerg"/>
+        <EditorCategories value=""/>
+        <FlagArray index="Movable" value="0"/>
+        <FlagArray index="Unselectable" value="1"/>
+        <FlagArray index="Invulnerable" value="1"/>
+    </CUnit>
+    <CUnit id="KingMoopyWeaponMissile" parent="MISSILE"/>
+    <CUnit id="KingMoopy" parent="GenericEnemyUnit">
+        <Race value="Zerg"/>
+        <Attributes index="Biological" value="1"/>
+        <Attributes index="Heroic" value="1"/>
+        <LifeStart value="150000"/>
+        <LifeMax value="150000"/>
+        <BehaviorArray Link="MoopyHat2"/>
+        <BehaviorArray Link="ShieldColor@TotemTracker"/>
+        <BehaviorArray Link="ShieldColor@DummyTracker"/>
+        <BehaviorArray Link="KingMoopyDamageReduction"/>
+        <BehaviorArray Link="KingMoopyArmor"/>
+        <WeaponArray Link="KingMoopyWeapon"/>
+        <LifeArmorName value="Unit/LifeArmorName/Moopy"/>
+        <AbilArray Link="WavesOfChaos"/>
+        <AbilArray Link="DanceFloor"/>
+        <AbilArray Link="RainbowMeteors"/>
+        <AbilArray Link="ChargeUp"/>
+        <AbilArray Link="ChargeUp@Totem"/>
+        <AbilArray Link="ColorfulBeams"/>
+        <AbilArray Link="PrismaticHybrids"/>
+        <CardLayouts index="0">
+            <LayoutButtons Face="WavesOfChaos" Type="AbilCmd" AbilCmd="WavesOfChaos,Execute" Row="2" Column="0"/>
+            <LayoutButtons Face="DanceFloor" Type="AbilCmd" AbilCmd="DanceFloor,Execute" Row="2" Column="1"/>
+            <LayoutButtons Face="RainbowMeteors" Type="AbilCmd" AbilCmd="RainbowMeteors,Execute" Row="2" Column="2"/>
+            <LayoutButtons Face="ChargeUp" Type="AbilCmd" AbilCmd="ChargeUp,Execute" Row="1" Column="0"/>
+            <LayoutButtons Face="ColorfulBeams" Type="AbilCmd" AbilCmd="ColorfulBeams,Execute" Row="1" Column="1"/>
+            <LayoutButtons Face="PrismaticHybrids" Type="AbilCmd" AbilCmd="PrismaticHybrids,Execute" Row="1" Column="2"/>
+        </CardLayouts>
+        <Sight value="30"/>
+        <LifeArmorTip value="Unit/KingMoopy/ArmorTooltip"/>
+    </CUnit>
+    <CUnit id="MoopyChampion" parent="GenericEnemyUnit">
+        <Race value="Zerg"/>
+        <Attributes index="Biological" value="1"/>
+        <Attributes index="Heroic" value="1"/>
+        <LifeStart value="25000"/>
+        <LifeMax value="25000"/>
+        <WeaponArray Link="MoopyChampionWeapon"/>
+        <LifeArmorName value="Unit/LifeArmorName/Moopy"/>
+    </CUnit>
+    <CBehaviorBuff id="KingMoopyArmor" parent="ArmorBase">
+        <Name value="Behavior/Name/KingMoopyArmor"/>
+        <Tooltip value="Behavior/Tooltip/KingMoopyArmor"/>
+        <Cost>
+            <Charge Link="Behavior/KingMoopyArmor"/>
+            <Cooldown Link="Behavior/KingMoopyArmor"/>
+        </Cost>
+        <DamageResponse ModifyFraction="0.5">
+            <Cost>
+                <Charge Link="Behavior/KingMoopyArmor"/>
+                <Cooldown Link="Behavior/KingMoopyArmor"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="PrismaticHybrids@SpawnIn">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="0.8"/>
+        <Modification>
+            <StateFlags index="Stun" value="1"/>
+            <StateFlags index="NoDraw" value="1"/>
+        </Modification>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="ShieldColor@Phase1">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification MoveSpeedMaximum="0" MoveSpeedMultiplier="0.01">
+            <WeaponDisableArray value="KingMoopyWeapon"/>
+        </Modification>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="ShieldColor@Phase0">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification MoveSpeedMaximum="0" MoveSpeedMultiplier="0.01">
+            <StateFlags index="Invulnerable" value="1"/>
+            <WeaponDisableArray value="KingMoopyWeapon"/>
+        </Modification>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="PrismaticHybrids@ColorInvulnerable">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DisableValidatorArray value="ShieldColor@ColorCheckCaster"/>
+        <Modification>
+            <StateFlags index="Invulnerable" value="1"/>
+        </Modification>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorAttackModifier id="ChargeUp@ChargeUp">
+        <InfoFlags index="Hidden" value="0"/>
+        <PreImpactEffect value="ChargeUp@Dmg"/>
+    </CBehaviorAttackModifier>
+    <CBehaviorBuff id="ShieldColor@TotemDisabled">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorUnitTracker id="ShieldColor@TotemTracker">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorUnitTracker>
+    <CBehaviorUnitTracker id="ShieldColor@DummyTracker">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorUnitTracker>
+    <CBehaviorBuff id="ShieldColor@BossColor0">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <BehaviorCategories index="User1" value="1"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="ShieldColor@BossColor1" parent="ShieldColor@BossColor0">
+        <Name value="Behavior/Name/ShieldColor@BossColor1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="ShieldColor@BossColor2" parent="ShieldColor@BossColor0">
+        <Name value="Behavior/Name/ShieldColor@BossColor2"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="ShieldColor@BossColor3" parent="ShieldColor@BossColor0">
+        <Name value="Behavior/Name/ShieldColor@BossColor3"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="ShieldColor@PlayerColor0">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="ShieldColor@PlayerColor1" parent="ShieldColor@PlayerColor0">
+        <Name value="Behavior/Name/ShieldColor@PlayerColor1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="ShieldColor@PlayerColor2" parent="ShieldColor@PlayerColor0">
+        <Name value="Behavior/Name/ShieldColor@PlayerColor2"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="ShieldColor@PlayerColor3" parent="ShieldColor@PlayerColor0">
+        <Name value="Behavior/Name/ShieldColor@PlayerColor3"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="MoopyHat0">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="MoopyHat1">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="MoopyHat2">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+    </CBehaviorBuff>
+</Catalog>

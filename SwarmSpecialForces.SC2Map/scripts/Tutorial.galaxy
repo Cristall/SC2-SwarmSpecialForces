@@ -1,0 +1,574 @@
+//variables
+static int tutorial_Frame;
+static int tutorial_CloseButton;
+static int tutorial_TimerLabel;
+static int tutorial_StartTutorialButton;
+static int tutorial_Stage;
+static int tutorial_TextLabel;
+static int tutorial_Player;
+static timer tutorial_MoneySkipTimer;
+static bool tutorial_FirstDeath = true;
+static bool tutorial_TpBackToHive;
+static bool tutorial_Active;
+static unit tutorial_Larva;
+static unit tutorial_Scientist;
+static revealer tutorial_Revealer;
+static point tutorial_CameraBefore;
+
+
+// Mini Introduction - show dialog for first time players
+
+void Tutorial_MiniIntroduction_Init() {
+    int tmpInt;
+    tutorial_Frame = DialogControlHookupStandard( c_triggerControlTypePanel, "UIContainer/FullscreenUpperContainer/MiniIntroduction");
+    tutorial_CloseButton = DialogControlHookup(tutorial_Frame, c_triggerControlTypeButton, "CloseButton");
+
+    if(gv_PlayerAmountStart > 1){
+        DialogControlSetVisible( DialogControlHookup(tutorial_Frame, c_triggerControlTypeLabel, "CounterLabel") ,PlayerGroupAll(), true);
+    }
+    tmpInt = -1;
+    while (true) {
+        tmpInt = PlayerGroupNextPlayer(gv_NewPlayers, tmpInt);
+        if (tmpInt < 0) { break; }
+        HeroSelection_Player_ShowcaseSetDiff(tmpInt, StringExternal("Trig/Tutorial/MiniIntroduction/Showcase"));
+        HeroSelection_SelectHero(tmpInt, 0);
+    }
+    DialogControlSetVisible(tutorial_Frame, gv_NewPlayers, true);
+    TriggerAddEventDialogControl(TriggerCreate("Tutorial_MiniIntroduction_CloseButtonHandler"), c_playerAny, tutorial_CloseButton, c_triggerControlEventTypeClick);
+}
+
+// when the mini introduction is closed, opens the hero selection if its still on going
+bool Tutorial_MiniIntroduction_CloseButtonHandler(bool testConds, bool runActions){
+    if(!runActions) {return true;}
+
+    PlayerGroupRemove(gv_NewPlayers, EventPlayer());
+    if(PlayerGroupCount(gv_NewPlayers) == 0){
+        TriggerDestroy(TriggerGetCurrent());
+    }
+    if(gv_Part_ActivePart == c_Part_None){
+        DialogControlSetVisible(gv_HeroSelection_MainFrame, PlayerGroupSingle(EventPlayer()), true);
+        HeroSelection_Player_ShowcaseSetDiff(EventPlayer(), StringToText(""));
+    }
+    
+    return true;
+}
+
+// Tutorial
+
+// pause all units and game time
+void Tutorial_Pause (bool state) {
+    // overlord gets bugged if you research an upgrade while the unit is paused because of the bad transient implementation 
+    if (state) {
+        UnitBehaviorAddPlayer(gv_PlayerStats[tutorial_Player].overlord, "TutorialNotPaused", tutorial_Player, 1);
+    }
+    else {
+        UnitBehaviorRemove(gv_PlayerStats[tutorial_Player].overlord, "TutorialNotPaused", 1);
+    }
+    UnitPauseAll(state);
+    Utility_PauseGame(state);
+    TimerPause(tutorial_MoneySkipTimer, state);
+}
+
+// shows the dialog, pauses the game and locks camera
+void Tutorial_ShowFrame(){
+    Tutorial_Pause(true);
+    DialogControlSetVisible(tutorial_Frame, PlayerGroupAll(), true);
+    CameraLockInput(tutorial_Player, true);
+}
+
+// tutorial spawns larva and scientist
+void Tutorial_CollectiblesInit () {
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Scientist", 0, gv_CollectiblePlayerEnemyAllied, PointFromName("ScientistSpawn3"));
+    tutorial_Scientist = UnitLastCreated();
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Larva2", 0, gv_CollectiblePlayerEnemyNeutral, PointFromName("LarvaSpawn12"));
+    tutorial_Larva = UnitLastCreated();
+}
+
+// various dialog messages
+void Tutorial_WelcomeMsg () {
+    // initial message
+    libNtve_gf_SetDialogItemText(tutorial_TextLabel, StringExternal("Trig/Tutorial/WelcomeMsg"), PlayerGroupAll());
+    CameraPan(tutorial_Player, UnitGetPosition(gv_PlayerStats[tutorial_Player].heroUnit), 1.0, -1, 10.0, false);
+    tutorial_CameraBefore = CameraGetTarget(tutorial_Player);
+    Tutorial_ShowFrame();
+}
+void Tutorial_Hero () {
+    // explains hero roach
+    libNtve_gf_SetDialogItemText(tutorial_TextLabel, StringExternal("Trig/Tutorial/Hero"), PlayerGroupAll());
+    CameraPan(tutorial_Player, UnitGetPosition(gv_PlayerStats[tutorial_Player].heroUnit), 1.0, -1, 10.0, false);
+    UnitClearSelection(tutorial_Player);
+    UnitSelect(gv_PlayerStats[tutorial_Player].heroUnit, tutorial_Player, true);
+    Tutorial_ShowFrame();
+}
+void Tutorial_Overlord () {
+    // explains overlord
+    libNtve_gf_SetDialogItemText(tutorial_TextLabel, StringExternal("Trig/Tutorial/Overlord"), PlayerGroupAll());
+    CameraPan(tutorial_Player, UnitGetPosition(gv_PlayerStats[tutorial_Player].overlord), 1.0, -1, 10.0, false);
+    UnitClearSelection(tutorial_Player);
+    UnitSelect(gv_PlayerStats[tutorial_Player].overlord, tutorial_Player, true);
+    Tutorial_ShowFrame();
+}
+void Tutorial_Hive () {
+    // explains hive
+    libNtve_gf_SetDialogItemText(tutorial_TextLabel, StringExternal("Trig/Tutorial/Hive"), PlayerGroupAll());
+    CameraPan(tutorial_Player, UnitGetPosition(gv_BaseHive), 1.0, -1, 10.0, false);
+    UnitClearSelection(tutorial_Player);
+    UnitSelect(gv_BaseHive, tutorial_Player, true);
+    Tutorial_ShowFrame();
+}
+void Tutorial_IssueExplore () {
+    // tells the player to move around
+    libNtve_gf_SetDialogItemText(tutorial_TextLabel, StringExternal("Trig/Tutorial/IssueExplore"), PlayerGroupAll());
+    CameraPan(tutorial_Player, UnitGetPosition(gv_PlayerStats[tutorial_Player].heroUnit), 1.0, -1, 10.0, false);
+    objective_Bosses = ObjectiveCreate(StringExternal("Trig/Tutorial/MainObjective"), StringToText(""), c_objectiveStateActive, true);
+    UnitClearSelection(tutorial_Player);
+    UnitSelect(gv_PlayerStats[tutorial_Player].heroUnit, tutorial_Player, true);
+    Tutorial_ShowFrame();
+}
+void Tutorial_FirstAttackWave (unit lp_attackingunit) {
+    // first enemy enters hive area, explains who are enemies
+    if (tutorial_Stage != -1) {
+        tutorial_CameraBefore = CameraGetTarget(tutorial_Player);
+    }
+    libNtve_gf_SetDialogItemText(tutorial_TextLabel, StringExternal("Trig/Tutorial/FirstAttackWave"), PlayerGroupAll());
+    CameraPan(tutorial_Player, UnitGetPosition(lp_attackingunit), 1.0, -1, 10.0, false);
+    tutorial_MoneySkipTimer = TimerCreate();
+    TimerStart(tutorial_MoneySkipTimer, 25.0, false, c_timeGame);
+    TriggerAddEventTimer(TriggerCreate("Tutorial_After2ndAttackWave"), tutorial_MoneySkipTimer);
+    Tutorial_ShowFrame();
+}
+void Tutorial_MoneySkip () {
+    // throws a ton of money and exp to the player so speed up the tutorial
+    tutorial_CameraBefore = CameraGetTarget(tutorial_Player);
+    libNtve_gf_SetDialogItemText(tutorial_TextLabel, StringExternal("Trig/Tutorial/MoneySkip"), PlayerGroupAll());
+    CameraPan(tutorial_Player, UnitGetPosition(gv_PlayerStats[tutorial_Player].overlord), 1.0, -1, 10.0, false);
+    PlayerModifyPropertyInt(tutorial_Player, c_playerPropMinerals, c_playerPropOperAdd, 10000);
+    Player_AddExp(tutorial_Player, 40000.0);
+    Tutorial_ShowFrame();
+}
+void Tutorial_FirstPush () {
+    // first time leaving the hive area
+    tutorial_CameraBefore = CameraGetTarget(tutorial_Player);
+    libNtve_gf_SetDialogItemText(tutorial_TextLabel, StringExternal("Trig/Tutorial/FirstPush"), PlayerGroupAll());
+    CameraPan(tutorial_Player, UnitGetPosition(gv_PlayerStats[tutorial_Player].heroUnit), 1.0, -1, 10.0, false);
+    Tutorial_ShowFrame();
+}
+void Tutorial_FirstSpawner (unit lp_spawner) {
+    // explains widow mine spawn
+    tutorial_CameraBefore = CameraGetTarget(tutorial_Player);
+    libNtve_gf_SetDialogItemText(tutorial_TextLabel, StringExternal("Trig/Tutorial/FirstSpawner"), PlayerGroupAll());
+    CameraPan(tutorial_Player, UnitGetPosition(lp_spawner), 1.0, -1, 10.0, false);
+    Tutorial_ShowFrame();
+}
+void Tutorial_SurvivedWidowMinesUseMutations (unit lp_unit) {
+    // explains mutations gained from killing spawner, using at overlord
+    tutorial_CameraBefore = CameraGetTarget(tutorial_Player);
+    libNtve_gf_SetDialogItemText(tutorial_TextLabel, StringExternal("Trig/Tutorial/SurvivedWidowMines"), PlayerGroupAll());
+    CameraPan(tutorial_Player, UnitGetPosition(lp_unit), 1.0, -1, 10.0, false);
+    Tutorial_ShowFrame();
+}
+void Tutorial_Larva (unit lp_unit) {
+    // explains that there is a cloaked larva, when coming close to it. this should happen naturally when doing a full clear
+    tutorial_CameraBefore = CameraGetTarget(tutorial_Player);
+    libNtve_gf_SetDialogItemText(tutorial_TextLabel, StringExternal("Trig/Tutorial/Larva"), PlayerGroupAll());
+    CameraPan(tutorial_Player, UnitGetPosition(lp_unit), 1.0, -1, 10.0, false);
+    Tutorial_ShowFrame();
+    ObjectiveCreate(StringExternal("Trig/Tutorial/LarvaObjective"), StringToText(""), c_objectiveStateActive, false);
+    objective_Essences = ObjectiveLastCreated();
+}
+void Tutorial_Essencecollected (unit lp_unit) {
+    // explains ability unlock, only if player does not already have roach baility unlocked
+    tutorial_CameraBefore = CameraGetTarget(tutorial_Player);
+    if (TechTreeUpgradeCount(tutorial_Player, "GlueStream@Unlock", c_techCountCompleteOnly) == 0) {
+        libNtve_gf_SetDialogItemText(tutorial_TextLabel, StringExternal("Trig/Tutorial/Essence"), PlayerGroupAll());
+        TechTreeUpgradeAddLevel(tutorial_Player, "GlueStream@Unlock", 1);
+        CameraPan(tutorial_Player, UnitGetPosition(lp_unit), 1.0, -1, 10.0, false);
+        Tutorial_ShowFrame();
+    }
+
+}
+void Tutorial_Scientist (unit lp_unit) {
+    // explains how to capturea scientist, happens naturally as you have to kill the bridge controller
+    tutorial_CameraBefore = CameraGetTarget(tutorial_Player);
+    libNtve_gf_SetDialogItemText(tutorial_TextLabel, StringExternal("Trig/Tutorial/Scientist"), PlayerGroupAll());
+    CameraPan(tutorial_Player, UnitGetPosition(lp_unit), 1.0, -1, 10.0, false);
+    VisRevealerCreate(tutorial_Player, RegionCircle(UnitGetPosition(lp_unit), 2.25));
+    tutorial_Revealer = VisRevealerLastCreated();
+    tutorial_Stage = -73;
+    Tutorial_ShowFrame();
+    ObjectiveCreate(StringExternal("Trig/Tutorial/ScientistObjective"), StringToText(""), c_objectiveStateActive, false);
+    objective_Scientists = ObjectiveLastCreated();
+}
+void Tutorial_Scientistcaptured (unit lp_unit) {
+    // explains what you get from collecting scientist, spawns 3 runlings as an example, also helps killing fortress faster
+    tutorial_CameraBefore = CameraGetTarget(tutorial_Player);
+    libNtve_gf_SetDialogItemText(tutorial_TextLabel, StringExternal("Trig/Tutorial/ScientistCaptured"), PlayerGroupAll());
+    libNtve_gf_CreateUnitsWithDefaultFacing(3, "Runling", 0, tutorial_Player, UnitGetPosition(lp_unit));
+    CameraPan(tutorial_Player, UnitGetPosition(lp_unit), 1.0, -1, 10.0, false);
+    ObjectiveSetState(objective_Scientists, c_objectiveStateCompleted);
+    Tutorial_ShowFrame();
+}
+void Tutorial_BridgeController (unit lp_unit) {
+    // explains that bridge is now open, changes the objective text
+    tutorial_CameraBefore = CameraGetTarget(tutorial_Player);
+    UnitIssueOrder(UnitFromId(973134657), Order(AbilityCommand("ExtendingBridgeNEWide12Out", 0)), c_orderQueueReplace);
+    libNtve_gf_SetDialogItemText(tutorial_TextLabel, StringExternal("Trig/Tutorial/BridgeController"), PlayerGroupAll());
+    VisRevealerCreate(tutorial_Player, RegionCircle(UnitGetPosition(UnitFromId(973134657)), 9.0));
+    tutorial_Revealer = VisRevealerLastCreated();
+    tutorial_Stage = -5;
+    CameraPan(tutorial_Player, UnitGetPosition(lp_unit), 1.0, -1, 10.0, false);
+    Tutorial_ShowFrame();
+    ObjectiveSetName(objective_Bosses, StringExternal("Trig/Tutorial/MainObjective2"));
+}
+void Tutorial_Fortress (unit lp_unit) {
+    // explains boss fortress as you mvoe across the bridge
+    tutorial_CameraBefore = CameraGetTarget(tutorial_Player);
+    libNtve_gf_SetDialogItemText(tutorial_TextLabel, StringExternal("Trig/Tutorial/Fortress"), PlayerGroupAll());
+    VisRevealerCreate(tutorial_Player, RegionCircle(UnitGetPosition(lp_unit), 5.0));
+    tutorial_Revealer = VisRevealerLastCreated();
+    tutorial_Stage = -40;
+    Tutorial_ShowFrame();
+
+    UnitCreate(1, "PlanetaryFortress", 0, gv_EnemyPlayer, PointFromName("PartTerran_Boss_Fortress"), 305.0);
+    gv_Bosses[c_Bosses_TFortress] = UnitLastCreated();
+    CameraPan(tutorial_Player, UnitGetPosition(gv_Bosses[c_Bosses_TFortress]), 1.0, -1, 10.0, false);
+    TriggerAddEventUnitDied(TriggerCreate("Tutorial_FortressDead"), UnitRefFromUnit(gv_Bosses[c_Bosses_TFortress]));
+}
+void Tutorial_Finish (unit lp_unit) {
+    // explains that tutorial is now finished
+    libNtve_gf_SetDialogItemText(tutorial_TextLabel, StringExternal("Trig/Tutorial/End"), PlayerGroupAll());
+    libNtve_gf_SetDialogItemText(tutorial_CloseButton, StringExternal("Trig/Tutorial/EndButton"), PlayerGroupAll());
+    CameraPan(tutorial_Player, UnitGetPosition(lp_unit), 1.0, -1, 10.0, false);
+    TriggerDestroy(TriggerFind("Tutorial_HeroDiesIntercept"));
+    Tutorial_ShowFrame();
+    tutorial_Stage = -10;
+    Acv_OneTime_Unlock(tutorial_Player, c_AcvIdentifier_Tutorial);
+}
+void Tutorial_HeroDies () {
+    // explains that death is bad, only shows once
+    libNtve_gf_SetDialogItemText(tutorial_TextLabel, StringExternal("Trig/Tutorial/HeroDies"), PlayerGroupAll());
+    CameraPan(tutorial_Player, UnitGetPosition(gv_PlayerStats[tutorial_Player].heroUnit), 1.0, -1, 10.0, false);
+    Tutorial_ShowFrame();
+}
+
+void Tutorial_Init () {
+    int tmpInt;
+    unitgroup cargoUG;
+    unit tmpUnit;
+
+    PlayerBoard_SetTitle(StringExternal("Trig/Acv/Tutorial/Name"));
+
+    gv_GameMode = c_GameMode_Tutorial;
+    tutorial_Player = PlayerGroupPlayer(gv_ActivePG, 1);
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "IndistructibleRocks", 0, 0, PointFromName("Tutorial_Rock_Left"));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "IndistructibleRocks", 0, 0, PointFromName("Tutorial_Rock_Right"));
+    
+    // copy pasta from Part_InitVariables() from Terran case, with a bunch of overrides and shortcuts as there is only one player
+    gv_Part_ActivePart = c_Part_Terran;
+    
+    gv_Part_ActiveSpawners = UnitGroupEmpty();
+    gv_Part_AmountObjectivesMax = 3;
+
+    gv_Part_Areas_Spawners[c_Areas_TLeft1]  = UnitGroupEmpty();
+    gv_Part_Areas_Spawners[c_Areas_TLeft2]  = UnitGroupEmpty();
+    gv_Part_Areas_Spawners[c_Areas_TLeft3]  = UnitGroupEmpty();
+    gv_Part_Areas_Spawners[c_Areas_TRight1] = UnitGroupEmpty();
+    gv_Part_Areas_Spawners[c_Areas_TRight2] = UnitGroupEmpty();
+    gv_Part_Areas_Spawners[c_Areas_TRight3] = UnitGroupEmpty();
+    gv_Part_Areas_Spawners[c_Areas_TMid1]   = Part_Spawners_GetSpawnerFromRegion(RegionFromName("PartTerran_Mix_First"));
+    gv_Part_Areas_Open[c_Areas_TMid1] = true;
+    UnitGroupAddUnitGroup(gv_Part_ActiveSpawners, gv_Part_Areas_Spawners[c_Areas_TMid1]);
+    
+    gv_Part_AmountObjectivesDefeated = 0;
+    gv_Part_EnemyRegion = RegionFromName("PartTerran");
+    gv_Part_BaseRegion = RegionFromName("PartTerran_Base");
+    gv_Part_BoundsRegion = RegionFromName("PartTerran_Bounds");
+    gv_Part_AttackPoint = PointFromName("PartTerran_AttackPoint");
+    for(tmpInt=1; tmpInt <= gv_MaxAmountPlayers; tmpInt+=1){
+        gv_Part_PlayerSpawnPoints[tmpInt] = PointFromName("PartTerran_HeroSpawn"+IntToString(tmpInt));
+    }
+    GameSetLighting("Part" + IntToString(gv_Part_ActivePart) , 0.0);
+    gv_Part_AllStructures = UnitGroup(null, gv_EnemyPlayer, gv_Part_EnemyRegion, UnitFilter((1 << c_targetFilterStructure), 0, (1 << c_targetFilterHeroic) | (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0);
+
+    CameraSetBounds(gv_StartingPG, gv_Part_BoundsRegion, true);
+    gv_Part_BaseRevealer[tutorial_Player] = VisRevealerCreate(tmpInt, gv_Part_BaseRegion);
+    CameraPan(tutorial_Player, UnitGetPosition(gv_BaseHive), 0.0, -1, 10.0, false);
+    
+
+    // copy pasta from HeroSelection_Finish(), spawns hero/overlord and sets difficulty
+    UnitRemove(gv_PlayerStats[tutorial_Player].heroUnit);
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, gv_Hero_UnitTypes[0], 0, tutorial_Player, PointFromName("PartTerran_HeroSpawn1"));
+    gv_PlayerStats[tutorial_Player].heroUnit = UnitLastCreated();
+
+    UnitSetPropertyFixed(UnitLastCreated(), c_unitPropXP, gv_PlayerStats[tutorial_Player].startExp[c_Part_Terran]);
+    if (gv_PlayerStats[tutorial_Player].options_ControlGroup_Flag[0]) {
+        UnitControlGroupAddUnit(tutorial_Player, gv_PlayerStats[tutorial_Player].options_ControlGroup_Group[0], UnitLastCreated());
+    }
+    UnitGroupSelect(UnitGroupSelected(tutorial_Player), tutorial_Player, false);
+    UnitSelect(UnitLastCreated(), tutorial_Player, true);
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "BaseOverlord", 0, tutorial_Player, PointFromName("PartTerran_HeroSpawn2"));
+    if (gv_PlayerStats[tutorial_Player].options_ControlGroup_Flag[1]) {
+        UnitControlGroupAddUnit(tutorial_Player, gv_PlayerStats[tutorial_Player].options_ControlGroup_Group[1], UnitLastCreated());
+    }
+    gv_PlayerStats[tutorial_Player].overlord = UnitLastCreated();
+    HeroPanel_SetIcon(tutorial_Player, 0);
+
+    gv_Difficulty = 0;
+    PlayerModifyPropertyInt(tutorial_Player, c_playerPropCustom, c_playerPropOperSetTo, gv_Difficulty);
+    PlayerModifyPropertyInt(gv_EnemyPlayer, c_playerPropCustom, c_playerPropOperSetTo, gv_Difficulty);
+    Difficulty_SetVariables(gv_Difficulty);
+    Player_IncreaseUpgradeCount(40);
+
+    gv_GameActive = true;
+    TriggerExecute(TriggerCreate("HeroPanel_PeriodicUpdate"), false, false);
+    Hive_TriggerCreate();
+
+    Enemy_Generic_TriggerCreate();
+
+    Tutorial_CollectiblesInit();
+
+    tutorial_Frame = DialogControlHookupStandard(c_triggerControlTypePanel, "UIContainer/FullscreenUpperContainer/Tutorial");
+    tutorial_CloseButton = DialogControlHookup(tutorial_Frame, c_triggerControlTypeButton, "CloseButton");
+    tutorial_TextLabel = DialogControlHookup(tutorial_Frame, c_triggerControlTypeLabel, "Label");
+
+    // creates tutorial trigger
+    TriggerAddEventDialogControl(TriggerCreate("Tutorial_CloseButton_Handler"), c_playerAny, tutorial_CloseButton, c_triggerControlEventTypeClick);
+    TriggerAddEventUnitRegion   (TriggerCreate("Tutorial_FirstAttackWaveComes"), null, RegionFromName("Tutorial Attack Wave"), true);
+    TriggerAddEventUnitRegion   (TriggerCreate("Tutorial_MoveOut"), null, RegionFromName("Tutorial Attack Wave"), true);
+    TriggerAddEventUnitDamaged  (TriggerCreate("Tutorial_FirstSpawnerNearDeath"), null, c_unitDamageTypeAny, c_unitDamageEither, null);
+    TriggerAddEventUnitDied     (TriggerCreate("Tutorial_WidowMinesKilled"),null);
+    TriggerAddEventUnitRegion   (TriggerCreate("Tutorial_NearLarva"), null, RegionFromName("Tutorial Larva Nearby"), true);
+    TriggerAddEventUnitAbility  (TriggerCreate("Tutorial_EssencePickup"), null, AbilityCommand("Pickup", 0), c_unitAbilStageExecute, false);
+    TriggerAddEventUnitRegion   (TriggerCreate("Tutorial_NearScientist"), null, RegionFromName("Tutorial Scientist Nearby"), true);
+    TriggerAddEventUnitCargo    (TriggerCreate("Tutorial_ScientistCaptured"), null, true);
+    TriggerAddEventUnitDied     (TriggerCreate("Tutorial_KilledBridgeController"), UnitRefFromUnit(UnitFromId(1799608622)));
+    TriggerAddEventUnitRegion   (TriggerCreate("Tutorial_EntersArena"), null, RegionFromName("PartTerran_Boss_Fortress_Tripwire"), true);
+    TriggerAddEventUnitDied     (TriggerCreate("Tutorial_HeroDiesIntercept"), UnitRefFromUnit(gv_PlayerStats[tutorial_Player].heroUnit));
+
+
+    // removes some bunker and marines inside
+    cargoUG = UnitCargoGroup(UnitFromId(714363349));
+    UnitGroupAddUnitGroup( cargoUG, UnitCargoGroup(UnitFromId(1167641812)));
+    tmpInt = UnitGroupCount(cargoUG, c_unitCountAll);
+    for (;; tmpInt -= 1) {
+        tmpUnit = UnitGroupUnitFromEnd(cargoUG, tmpInt);
+        if (tmpUnit == null) { break; }
+        UnitRemove(tmpUnit);
+    }
+    UnitRemove(UnitFromId(714363349));
+    UnitRemove(UnitFromId(1167641812));
+    UnitRemove(UnitFromId(318333928));
+    UnitRemove(UnitFromId(948230513));
+    UnitRemove(UnitFromId(1180084131));
+    UnitRemove(UnitFromId(773039508));
+    UnitRemove(UnitFromId(467899988));
+
+    Wait(0.5, c_timeGame);
+    Tutorial_WelcomeMsg();
+}
+
+// triggers
+bool Tutorial_CloseButton_Handler(bool testConds, bool runActions){
+    Tutorial_Pause(false);
+    CameraLockInput(tutorial_Player, false);
+
+    // TODO create a proper enum for the tutorial stages instead of random numbers here
+    if(tutorial_Stage == 0){
+        Tutorial_Hero();
+    }
+    else if (tutorial_Stage == 1){
+        Tutorial_Overlord();
+    }
+    else if (tutorial_Stage == 2){
+        Tutorial_Hive();
+    }
+    else if (tutorial_Stage == 3){
+        Tutorial_IssueExplore();
+    }
+    else if (tutorial_Stage == 5){
+        UnitClearSelection(tutorial_Player);
+        UnitSelect(gv_PlayerStats[tutorial_Player].heroUnit, tutorial_Player, true);
+    }
+    else if (tutorial_Stage == -73){
+        VisRevealerDestroy(tutorial_Revealer);
+        CameraPan(tutorial_Player, tutorial_CameraBefore, 1.0, -1, 10.0, false);
+    }
+    else if (tutorial_Stage == -5){
+        VisRevealerDestroy(tutorial_Revealer);
+        CameraPan(tutorial_Player, tutorial_CameraBefore, 1.0, -1, 10.0, false);
+    }
+    else if (tutorial_Stage == -40){
+        VisRevealerDestroy(tutorial_Revealer);
+        CameraPan(tutorial_Player, tutorial_CameraBefore, 1.0, -1, 10.0, false);
+    }
+    else if (tutorial_Stage == -1){
+        Tutorial_FirstPush();
+        tutorial_Stage = 6;
+    }
+    else if (tutorial_Stage == -10){
+        Bank_Save_ForcedAll(tutorial_Player);
+        GameOver(tutorial_Player, c_gameOverVictory, true, true);
+    }
+    else{
+        if(!tutorial_TpBackToHive){
+            CameraPan(tutorial_Player, tutorial_CameraBefore, 1.0, -1, 10.0, false);
+        }
+    }
+    if(tutorial_TpBackToHive){
+        tutorial_TpBackToHive = false;
+        UnitSetPosition(gv_PlayerStats[tutorial_Player].heroUnit, PointFromId(1940962760), false);
+        UnitSetState(gv_PlayerStats[tutorial_Player].heroUnit, c_unitStateInvulnerable, false);
+        UnitSetState(gv_PlayerStats[tutorial_Player].heroUnit, c_unitStateStunned, false);
+        libNtve_gf_ShowHideUnit(gv_PlayerStats[tutorial_Player].heroUnit, true);
+        CameraPan(tutorial_Player, gv_Part_PlayerSpawnPoints[tutorial_Player], 1.0, -1, 10.0, false);
+    }
+
+    tutorial_Stage +=1;
+    return true;
+}
+bool Tutorial_FirstAttackWaveComes (bool testConds, bool runActions){
+    if(testConds){
+        if (!(UnitGetOwner(EventUnit()) == gv_EnemyPlayer)){return false;}
+    }
+    TriggerDestroy(TriggerGetCurrent());
+    Tutorial_FirstAttackWave(EventUnit());
+    return true;
+}
+bool Tutorial_After2ndAttackWave (bool testConds, bool runActions){
+    TriggerDestroy(TriggerGetCurrent());
+    Tutorial_MoneySkip();
+    return true;
+}
+bool Tutorial_MoveOut (bool testConds, bool runActions){
+    if(testConds){
+        if (!(UnitGetOwner(EventUnit()) == tutorial_Player)) {return false;}
+    }
+    TriggerDestroy(TriggerGetCurrent());
+    if(tutorial_Stage == 4){
+        tutorial_Stage = -1;
+        TriggerDestroy(TriggerFind("Tutorial_FirstAttackWaveComes"));
+        Tutorial_FirstAttackWave(EventUnit());
+    }
+    else {
+        Tutorial_FirstPush();
+    }
+    return true;
+}
+bool Tutorial_FirstSpawnerNearDeath (bool testConds, bool runActions){
+    if(testConds){
+        if (!(UnitHasBehavior2(EventUnit(), "EnemySpawner") && UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, true) <= 30)) {return false;}
+    }
+    TriggerDestroy(TriggerGetCurrent());
+    Tutorial_FirstSpawner(EventUnit());
+    return true;
+}
+bool Tutorial_WidowMinesKilled (bool testConds, bool runActions){
+    if(testConds){
+        if (!( UnitGetType(EventUnit()) == "WidowMine22" || UnitGetType(EventUnit()) == "WidowMine2")) {return false;}
+    }
+    TriggerDestroy(TriggerGetCurrent());
+    Tutorial_SurvivedWidowMinesUseMutations(gv_PlayerStats[tutorial_Player].overlord);
+    return true;
+}
+bool Tutorial_NearLarva (bool testConds, bool runActions){
+    if(testConds){
+        if (!(UnitGetOwner(EventUnit()) == tutorial_Player)) {return false;}
+    }
+    TriggerDestroy(TriggerGetCurrent());
+    Tutorial_Larva(tutorial_Larva);
+    return true;
+}
+bool Tutorial_EssencePickup (bool testConds, bool runActions){
+    TriggerDestroy(TriggerGetCurrent());
+    UnitKill(EventUnit());
+    ObjectiveSetState(objective_Essences, c_objectiveStateCompleted);
+    Tutorial_Essencecollected(gv_PlayerStats[tutorial_Player].heroUnit);
+    return true;
+}
+bool Tutorial_NearScientist (bool testConds, bool runActions){
+    if(testConds){
+        if (!(UnitGetOwner(EventUnit()) == tutorial_Player)) {return false;}
+    }
+    TriggerDestroy(TriggerGetCurrent());
+    Tutorial_Scientist(tutorial_Scientist);
+    return true;
+}
+bool Tutorial_ScientistCaptured (bool testConds, bool runActions){
+    if(testConds){
+        if (!(UnitGetType(EventUnitCargo()) == "Scientist" && UnitGetType(EventUnit()) == "BaseOverlord")) {return false;}
+    }
+    TriggerDestroy(TriggerGetCurrent());
+    UnitRemove(EventUnitCargo());
+    Tutorial_Scientistcaptured(gv_PlayerStats[tutorial_Player].overlord);
+    return true;
+}
+bool Tutorial_KilledBridgeController (bool testConds, bool runActions){
+    TriggerDestroy(TriggerGetCurrent());
+    Tutorial_BridgeController(UnitFromId(973134657));
+    return true;
+}
+bool Tutorial_EntersArena (bool testConds, bool runActions){
+    if(testConds){
+        if (!(UnitGetOwner(EventUnit()) == tutorial_Player)) {return false;}
+    }
+    TriggerDestroy(TriggerGetCurrent());
+    Wait(0.125,c_timeGame);
+    Tutorial_Fortress(gv_Bosses[c_Bosses_TFortress]);
+    return true;
+}
+bool Tutorial_FortressDead (bool testConds, bool runActions){
+    TriggerDestroy(TriggerGetCurrent());
+    ObjectiveSetState(objective_Bosses, c_objectiveStateCompleted);
+    Tutorial_Finish(EventUnit());
+    return true;
+}
+bool Tutorial_HeroDiesIntercept (bool testConds, bool runActions){
+    if(tutorial_FirstDeath){
+        Tutorial_HeroDies();
+        tutorial_FirstDeath = false;
+        tutorial_TpBackToHive = true;
+        UnitRevive(EventUnit());
+        UnitSetState(EventUnit(), c_unitStateInvulnerable, true);
+        UnitSetPropertyFixed(EventUnit(), c_unitPropLifePercent, 100.0);
+        UnitSetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, 100.0);
+        UnitSetPropertyFixed(EventUnit(), c_unitPropEnergyPercent, 100.0);
+        libNtve_gf_ShowHideUnit(EventUnit(), false);
+        UnitSetState(EventUnit(), c_unitStateStunned, true);
+    }
+    else {
+        UnitRevive(EventUnit());
+        UnitSetPropertyFixed(EventUnit(), c_unitPropLifePercent, 100.0);
+        UnitSetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, 100.0);
+        UnitSetPropertyFixed(EventUnit(), c_unitPropEnergyPercent, 100.0);
+        UnitSetPosition(EventUnit(), gv_Part_PlayerSpawnPoints[EventPlayer()], false);
+        CameraPan(EventPlayer(), gv_Part_PlayerSpawnPoints[EventPlayer()], 1.0, -1, 10.0, false);
+    }
+    return true;
+}
+
+// AskTutorial - show dialog to allow a solo player to start the tutorial
+void Tutorial_AskTutorial_Init () {
+    tutorial_Frame = DialogControlHookupStandard(c_triggerControlTypePanel, "UIContainer/FullscreenUpperContainer/AskTutorial");
+    tutorial_CloseButton = DialogControlHookup(tutorial_Frame, c_triggerControlTypeButton, "NoButton");
+    tutorial_StartTutorialButton = DialogControlHookup(tutorial_Frame, c_triggerControlTypeButton, "YesButton");
+    
+    DialogControlSetVisible(tutorial_Frame, PlayerGroupAll(), true);
+
+    TriggerAddEventDialogControl(TriggerCreate("Tutorial_AskTutorial_CloseButton_Handler"), c_playerAny, tutorial_CloseButton, c_triggerControlEventTypeClick);
+    TriggerAddEventDialogControl(TriggerCreate("Tutorial_AskTutorial_StartTutorialButton_Handler"), c_playerAny, tutorial_StartTutorialButton, c_triggerControlEventTypeClick);
+}
+bool Tutorial_AskTutorial_StartTutorialButton_Handler(bool testConds, bool runActions){
+    TriggerDestroy(TriggerGetCurrent());
+    TriggerDestroy(TriggerFind("Tutorial_AskTutorial_CloseButton_Handler"));
+    DialogControlDestroy(tutorial_Frame);
+    Tutorial_Init();
+    return true;
+}
+bool Tutorial_AskTutorial_CloseButton_Handler(bool testConds, bool runActions){
+    TriggerDestroy(TriggerGetCurrent());
+    TriggerDestroy(TriggerFind("Tutorial_AskTutorial_StartTutorialButton_Handler"));
+    DialogControlDestroy(tutorial_Frame);
+    MapInit_NotTutorial();
+    return true;
+}
+

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CGame id="Dflt">
+        <CreepDecayLimit value="0"/>
+        <CreepDecayTime value="500"/>
+        <AcquireLeashRadius value="10"/>
+        <TeamColors index="9" MinPlayerCount="0"/>
+        <TeamColors index="10" MinPlayerCount="0"/>
+        <TeamColors index="11" MinPlayerCount="0"/>
+        <TeamColors index="12" MinPlayerCount="0"/>
+        <TeamColors index="13" MinPlayerCount="0"/>
+        <TeamColors index="14" MinPlayerCount="0"/>
+        <TeamColors index="15" MinPlayerCount="0"/>
+        <DamageCategories index="Normal" SupportedFilters="-;-"/>
+        <DamageCategories index="Enhanced" SupportedFilters="-;-"/>
+        <DamageCategories index="Fire" SupportedFilters="-;-"/>
+        <DamageCategories index="Cold" SupportedFilters="-;-"/>
+        <DamageCategories index="Lightning" SupportedFilters="-;-"/>
+        <DamageCategories index="Poison" SupportedFilters="-;-"/>
+        <DamageCategories index="Disease" SupportedFilters="-;-"/>
+        <DamageCategories index="Divine" SupportedFilters="-;-"/>
+        <DamageCategories index="Magic" SupportedFilters="-;-"/>
+        <DamageCategories index="Sonic" SupportedFilters="-;-"/>
+        <DamageCategories index="Acid" SupportedFilters="-;-"/>
+        <DamageCategories index="Force" SupportedFilters="-;-"/>
+        <DamageCategories index="Death" SupportedFilters="-;-"/>
+        <DamageCategories index="Mind" SupportedFilters="-;-"/>
+        <DamageCategories index="Plant" SupportedFilters="-;-"/>
+        <DamageCategories index="Defensive" SupportedFilters="-;-"/>
+        <DamageCategories index="Demolition" SupportedFilters="-;-"/>
+        <DamageCategories index="SlowPoison" SupportedFilters="-;-"/>
+        <DamageCategories index="SpiritLink" SupportedFilters="-;-"/>
+        <DamageCategories index="ShadowStrike" SupportedFilters="-;-"/>
+        <AttackArmorTable index="Normal" SupportedFilters="-;-"/>
+        <AttackArmorTable index="Pierce" SupportedFilters="-;-"/>
+        <AttackArmorTable index="Siege" SupportedFilters="-;-"/>
+        <AttackArmorTable index="Magic" SupportedFilters="-;-"/>
+        <AttackArmorTable index="Chaos" SupportedFilters="-;-"/>
+        <AttackArmorTable index="Hero" SupportedFilters="-;-"/>
+        <TeleportResetRange index="Missile" value="2"/>
+        <DamageMinimum value="0"/>
+        <!-- Test Builds -->
+        <!-- <AIBuilds index="213" Enabled="0"/>
+             <AIBuilds index="214" Enabled="0"/>
+             <AIBuilds index="215" Enabled="1"/> -->
+    </CGame>
+</Catalog>

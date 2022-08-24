@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CMoverMissile id="AcidSporesMissile">
+        <MotionPhases index="0" MaxSpeed="9" ThrowBandYaw="-360,-360,-360,-360" ThrowBandPitch="-360,-360,-360,-360"/>
+    </CMoverMissile>
+    <CMoverMissile id="BanelingMissileMover">
+        <MotionPhases>
+            <Driver value="Ballistic"/>
+            <Acceleration value="10"/>
+            <MinSpeed value="7"/>
+            <MaxSpeed value="8"/>
+            <Gravity value="2"/>
+            <ThrowBandYaw value="-360,-360,-360,-360"/>
+            <ThrowBandPitch value="-360,-360,-360,-360"/>
+            <Overlays/>
+            <Overlays/>
+        </MotionPhases>
+        <MotionPhases YawPitchRoll="MAX"/>
+    </CMoverMissile>
+    <CMoverMissile id="BanemineMissileMover" parent="MissileDefault">
+        <MotionPhases index="0">
+            <Driver value="Guidance"/>
+            <Acceleration value="3200"/>
+            <MaxSpeed value="14"/>
+            <ClearanceAcceleration value="75"/>
+            <Outro value="-1"/>
+            <ThrowBandYaw value="-360,-360,-360,-360"/>
+            <ThrowBandPitch value="-360,-360,-360,-360"/>
+            <YawPitchRoll value="719.2968"/>
+        </MotionPhases>
+    </CMoverMissile>
+    <CMoverFlock id="FlyGround">
+        <RestoreHeightDuration value="0"/>
+    </CMoverFlock>
+</Catalog>

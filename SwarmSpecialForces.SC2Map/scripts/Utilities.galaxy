@@ -1,0 +1,253 @@
+
+//checks if string can be converted to fixed type, allows negative numbers and omitted 0 before decimal point
+bool Utility_IsNumber (string input) {
+    int length = StringLength(input);
+    int currentPosition;
+    string currentCharacter = "";
+    bool hasDecimalPoint;
+
+    if (length == 0) {
+        return false;
+    }
+
+    currentCharacter = StringSub(input, (currentPosition + 1), (currentPosition + 1));
+    if (currentCharacter == "-") {
+        if (length == 1) {
+            return false;
+        }
+
+        currentPosition += 1;
+    }
+
+    while (currentPosition < length) {
+        currentCharacter = StringSub(input, (currentPosition + 1), (currentPosition + 1));
+        if (currentCharacter == ".") {
+            if (hasDecimalPoint == false) {
+                hasDecimalPoint = true;
+            }
+            else {
+                return false;
+            }
+        }
+        else {
+            if (currentCharacter == "0"
+                || currentCharacter == "1"
+                || currentCharacter == "2"
+                || currentCharacter == "3"
+                || currentCharacter == "4"
+                || currentCharacter == "5"
+                || currentCharacter == "6"
+                || currentCharacter == "7"
+                || currentCharacter == "8"
+                || currentCharacter == "9") {
+            }
+            else {
+                return false;
+            }
+        }
+        currentPosition += 1;
+    }
+    return true;
+}
+
+static int Utility_DelayedTextTagDestroyer_ParamTextTag;
+static trigger Utility_DelayedTextTagDestroyer_Trigger;
+
+void Utility_DelayedTextTagCreate(text inText, color inColor, point position, playergroup pg, fixed offset){
+    Utility_DelayedTextTagDestroyer_ParamTextTag = TextTagCreate(TextWithColor(inText, inColor), 24, position, offset, true, false, pg);
+    TextTagSetVelocity(Utility_DelayedTextTagDestroyer_ParamTextTag, 1.0, 90.0);
+    TextTagSetTime(Utility_DelayedTextTagDestroyer_ParamTextTag, c_textTagTimeDuration, 3.0);
+    TriggerExecute(Utility_DelayedTextTagDestroyer_Trigger, false, false);
+}
+bool Utility_DelayedTextTagDestroyer(bool testCond, bool runActions){
+    int textTag = Utility_DelayedTextTagDestroyer_ParamTextTag;
+    Wait(3.5, c_timeGame);
+    TextTagDestroy(textTag);
+
+    return true;
+}
+
+//overwrites the target units life, shield and energy from the source unit
+void Utility_CopyVitals(unit source, unit target){
+    UnitSetPropertyFixed(target, c_unitPropLifeMax, UnitGetPropertyFixed(source, c_unitPropLifeMax, c_unitPropCurrent));
+    UnitSetPropertyFixed(target, c_unitPropShieldsMax, UnitGetPropertyFixed(source, c_unitPropShieldsMax, c_unitPropCurrent));
+    UnitSetPropertyFixed(target, c_unitPropEnergyMax, UnitGetPropertyFixed(source, c_unitPropEnergyMax, c_unitPropCurrent));
+    UnitSetPropertyFixed(target, c_unitPropLife, UnitGetPropertyFixed(source, c_unitPropLife, c_unitPropCurrent));
+    UnitSetPropertyFixed(target, c_unitPropShields, UnitGetPropertyFixed(source, c_unitPropShields, c_unitPropCurrent));
+    UnitSetPropertyFixed(target, c_unitPropEnergy, UnitGetPropertyFixed(source, c_unitPropEnergy, c_unitPropCurrent));
+    UnitSetPropertyFixed(target, c_unitPropKills, UnitGetPropertyFixed(source, c_unitPropKills, c_unitPropCurrent));
+}
+
+bool Utility_PlayerIsCristall(int playerID){
+    string handleStr = PlayerHandle(playerID);
+    return (handleStr == "2-S2-1-1066242") || (handleStr == "1-S2-1-4330213") || (handleStr == "3-S2-1-7096262");
+}
+bool Utility_PlayerIsScythe(int playerID){
+    string handleStr = PlayerHandle(playerID);
+    return (handleStr == "2-S2-1-7526206");
+}
+bool Utility_PlayerIsDev(int playerID){
+    return Utility_PlayerIsCristall(playerID) || Utility_PlayerIsScythe(playerID);
+}
+
+bool Fun_DanceCommand(bool testConds, bool runActions){
+    if(testConds){
+        if(!(Utility_PlayerIsDev(EventPlayer()) || gv_PlayerStats[EventPlayer()].allowDanceCommand)){
+            return false;
+        }
+    }
+    if (!runActions) {
+        return true;
+    }
+
+    ActorSend(libNtve_gf_MainActorofUnit(PartProtoss_Thunder_GetUnit()), "Signal dance");
+    ActorSend(libNtve_gf_MainActorofUnit(PartProtoss_Lightning_GetUnit()), "Signal dance");
+    return true;
+}
+
+void Utility_TriggerCreate(){
+    TriggerAddEventChatMessage( TriggerCreate("Fun_DanceCommand"), c_playerAny, "-dance", true );
+    Utility_DelayedTextTagDestroyer_Trigger = TriggerCreate("Utility_DelayedTextTagDestroyer");
+}
+
+text Utility_TextWithStyle(text textVar, string style){
+    return StringToText("<s val=\""+style+"\">") + textVar + StringToText("</s>");
+}
+
+color Utility_DiffColor(int diff){
+         if(diff == 0){ return Color(  0,100,  0); }
+    else if(diff == 1){ return Color(100,100,  0); }
+    else if(diff == 2){ return Color(100,  0,  0); }
+    else if(diff == 3){ return Color(100, 50,  0); }
+    else if(diff == 4){ return Color( 15, 15,100); }
+    else if(diff == 5){ return Color(  0,100,100); }
+    else { return Color(100,100,100); }
+}
+
+text Utility_DiffName(int diff){
+    return StringExternal("Trig/Generic/DiffName/"+IntToString(diff));
+}
+
+text Utility_DiffNameColored(int diff){
+    return TextWithColor(StringExternal("Trig/Generic/DiffName/"+IntToString(diff)),Utility_DiffColor(diff));
+}
+
+text Utility_DiffNameShortColored(int diff){
+    return TextWithColor(StringExternal("Trig/Generic/DiffNameShort/"+IntToString(diff)),Utility_DiffColor(diff));
+}
+
+text Utility_PartName(int part){
+    return StringExternal("Trig/Generic/PartName/" + IntToString(part));
+}
+
+
+text Utility_TimeFormat (int time) {
+    if (time >= 3600) {
+        return TextTimeFormat(StringToText("<hour/>:<min2/>:<sec2/>"), time);
+    }
+    else {
+        if (time >= 600) {
+            return TextTimeFormat(StringToText("<min2/>:<sec2/>"), time);
+        }
+        else {
+            return TextTimeFormat(StringToText("<min/>:<sec2/>"), time);
+        }
+    }
+}
+
+text Utility_TeamSize(int playerAmount){
+    return StringExternal("Trig/Generic/TeamSize/"+ IntToString(playerAmount));
+}
+
+int Utility_RandomIntNotLast(int min, int max, int not){
+    int tmpInt;
+
+    if(min > max){
+        tmpInt = min;
+        min = max;
+        max = tmpInt;
+    }
+    else if(min == max){
+        return min;
+    }
+
+    if(not < min || max < not){
+        return RandomInt(min,max);
+    }
+    else {
+        tmpInt = RandomInt(min, max-1);
+        if(tmpInt >= not){
+            tmpInt +=1;
+        }
+        return tmpInt;
+    }
+}
+
+int Utility_GetBossAbilityLevel(){
+    return TechTreeUpgradeCount(gv_EnemyPlayer,  "BossAbilityDifficultyRequirement", c_techCountCompleteOnly);
+}
+
+static const string textExpressionToken = "VALUE";
+static const string textExpressionToken2 = "VALUE2";
+static const string textExpressionToken3 = "VALUE3";
+
+text Utility_TextExpressionReplacement(string textkey, text replacementText){
+    TextExpressionSetToken(textkey, textExpressionToken, replacementText);
+    return TextExpressionAssemble(textkey);
+}
+text Utility_TextExpressionReplacement2(string textkey, text replacementText1, text replacementText2){
+    TextExpressionSetToken(textkey, textExpressionToken, replacementText1);
+    TextExpressionSetToken(textkey, textExpressionToken2, replacementText2);
+    return TextExpressionAssemble(textkey);
+}
+text Utility_TextExpressionReplacement3(string textkey, text replacementText1, text replacementText2, text replacementText3){
+    TextExpressionSetToken(textkey, textExpressionToken, replacementText1);
+    TextExpressionSetToken(textkey, textExpressionToken2, replacementText2);
+    TextExpressionSetToken(textkey, textExpressionToken3, replacementText3);
+    return TextExpressionAssemble(textkey);
+}
+
+//Pauses mission time as well as all timers (spawn, idle etc). true = pause, false = unpause
+void Utility_PauseGame(bool pause){
+    
+    TimerPause(gv_SpawnTimer,pause);
+    TimerPause(gv_IdleTimer, pause);
+    GameSetMissionTimePaused(pause);
+}
+
+//calculates the % armor reduction from the flat armor value
+fixed Utility_ArmorModifier(fixed armor){
+    return Pow(1+0.02, 0-armor);
+}
+
+fixed Utility_GetArmorValue(string unittype, int playerID){
+    return libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogUnit, unittype,"LifeArmor", playerID);
+}
+
+fixed Utility_ArmorModifierFromUnitType(string unittype, int playerID){
+    return Utility_ArmorModifier(Utility_GetArmorValue(unittype, playerID));
+}
+
+void Utility_UpdateArmorModifierForUnitType(string unittype, int playerID){
+    CatalogFieldValueSet(c_gameCatalogBehavior, unittype+"Armor", "DamageResponse.ModifyFraction", playerID, 
+                            FixedToString(Utility_ArmorModifierFromUnitType(unittype, playerID) , c_fixedPrecisionAny));
+}
+
+// Set Catalog field value to the power of its default value
+void Utility_CatalogFieldSetPower(int catalog, string entry, string fieldPath, int player, fixed power){
+    fixed value = libNtve_gf_CatalogFieldValueGetAsReal(catalog, entry, fieldPath, c_playerAny);
+    CatalogFieldValueSet(catalog, entry, fieldPath, player, FixedToString(Pow(value, power),-1));
+}
+
+bool Utility_CheckHeroUnlocked(int playerID, int heroID){
+    return (gv_PlayerStats[playerID].heroUnlocked & (1 << heroID)) > 0;
+}
+
+string Utility_ForwardVectorRandom(){
+    fixed randomAngle = RandomFixed(0,360);
+    return FixedToString(Sin(randomAngle), c_fixedPrecisionAny) + "," + FixedToString(Cos(randomAngle), c_fixedPrecisionAny) + ",0";
+}
+
+text Utility_PlayerNameWithPlayerColor(int playerID){
+    return TextWithColor(PlayerName(playerID), libNtve_gf_ConvertPlayerColorToColor(PlayerGetColorIndex(playerID, false)));
+}

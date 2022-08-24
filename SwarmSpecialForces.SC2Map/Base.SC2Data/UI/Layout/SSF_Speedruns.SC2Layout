@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Desc>
+	<Constant name="SpeedrunsPartButtonHeight" val="50"/>
+	<Constant name="SpeedrunsPartButtonWidth" val="120"/>
+	<Constant name="SpeedrunsPartGap" val="15"/>
+
+	<Constant name="SpeedrunsDiffButtonHeight" val="50"/>
+	<Constant name="SpeedrunsDiffButtonWidth" val="150"/>
+	<Constant name="SpeedrunsDiffGap" val="10"/>
+
+	<Constant name="SpeedrunsTextRowHeight" val="#StatsTextRowHeight"/>
+	<Constant name="SpeedrunsTextRowGap" val="2"/>
+	<Constant name="SpeedrunsTextColGap" val="3"/>
+	<Constant name="SpeedrunsTextRowSpacing" val="#StatsTextRowSpacing"/>
+	<Constant name="SpeedrunsLabelWidth" val="130"/>
+
+
+	<Frame type="Label" name="SpeedrunsPlayerTimeLabelTemplate" template="SSF_Templates/LabelTemplate">
+		<Anchor side="Top" relative="$sibling+1" pos="Max" offset="#SpeedrunsTextRowGap"/>
+		<Anchor side="Left" relative="$sibling+1" pos="Min" offset="0"/>
+		<Anchor side="Right" relative="$sibling+1" pos="Max" offset="0"/>
+		<Height val="#SpeedrunsTextRowHeight"/>
+
+		<Style val="aaDialogItemStyleCentered"/>
+		<Visible val="false"/>
+		<Text val="@Trig/Speedruns/EmptyTime"/>
+		<Color val="199,199,199"/>
+
+		<StateGroup name="MoveUpIfHidden">
+			<DefaultState val="Visible"/>
+			<State name="Hidden">
+				<When type="Property" frame="$this" operator="Equal" Visible="False"/>
+				<Action type="SetAnchor" frame="$this" side="Top" relative="$sibling+1" pos="Min" offset="0"/>
+			</State>
+			<State name="Visible"></State>
+		</StateGroup>
+
+		<StateGroup name="DetailViewVisibility">
+			<DefaultState val="Off"/>
+			<State name="On">
+				<When type="StateGroup" frame="$SSF_CustomUI/Speedruns" operator="Equal" DetailView="On"/>
+				<Action type="SetProperty" frame="$this" Visible="True"/>
+			</State>
+			<State name="Off"></State>
+		</StateGroup>
+	</Frame>
+
+	<Frame type="Frame" name="SpeedrunsPlayerTemplate">
+		<Anchor side="Top" relative="$sibling-1" pos="Min" offset="0"/>
+		<Anchor side="Left" relative="$sibling-1" pos="Max" offset="#SpeedrunsTextColGap"/>
+		<Anchor side="Bottom" relative="$this/TimeLabelPlayerCount1" pos="Max" offset="0"/>
+		<Width val="#SpeedrunsLabelWidth"/>
+
+		<Visible val="false"/>
+
+		<StateGroup name="MoveLeftIfHidden">
+			<DefaultState val="Visible"/>
+			<State name="Hidden">
+				<When type="Property" frame="$this" operator="Equal" Visible="False"/>
+				<Action type="SetAnchor" frame="$this" side="Left" relative="$sibling-1" pos="Min" offset="0"/>
+			</State>
+			<State name="Visible"></State>
+		</StateGroup>
+
+		<Frame type="Label" name="PlayerName" template="SSF_Templates/LabelTemplate">
+			<Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+			<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+			<Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+			<Height val="#SpeedrunsTextRowHeight"/>
+			<Style val="aaDialogItemStyleCentered"/>
+		</Frame>
+
+		<Frame type="Label" name="TimeLabelPlayerCount6" template="SSF_Templates/LabelTemplate">
+			<Anchor side="Top" relative="$parent/PlayerName" pos="Max" offset="#SpeedrunsTextRowGap"/>
+			<Anchor side="Left" relative="$parent/PlayerName" pos="Min" offset="0"/>
+			<Anchor side="Right" relative="$parent/PlayerName" pos="Max" offset="0"/>
+			<Height val="#SpeedrunsTextRowHeight"/>
+			<Style val="aaDialogItemStyleCentered"/>
+			<Text val="@Trig/Speedruns/EmptyTime"/>
+		</Frame>
+		<Frame type="Label" name="TimeLabelPlayerCount5" template="SSF_Speedruns/SpeedrunsPlayerTimeLabelTemplate"></Frame>
+		<Frame type="Label" name="TimeLabelPlayerCount4" template="SSF_Speedruns/SpeedrunsPlayerTimeLabelTemplate"></Frame>
+		<Frame type="Label" name="TimeLabelPlayerCount3" template="SSF_Speedruns/SpeedrunsPlayerTimeLabelTemplate"></Frame>
+		<Frame type="Label" name="TimeLabelPlayerCount2" template="SSF_Speedruns/SpeedrunsPlayerTimeLabelTemplate"></Frame>
+		<Frame type="Label" name="TimeLabelPlayerCount1" template="SSF_Speedruns/SpeedrunsPlayerTimeLabelTemplate"></Frame>
+	</Frame>
+
+	<Frame type="Frame" name="SpeedrunsDiffTemplate">
+		<Anchor side="Top" relative="$parent/DiffButton3" pos="Max" offset="#SpeedrunsDiffGap"/>
+		<Anchor side="Bottom" relative="$this/Player0" pos="Max" offset="0"/>
+		<Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+		<Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+		<Visible val="False"/>
+		
+		<!-- player0 is for labels to the left, but for convencience of stategroups its called player0 -->
+		<Frame type="Frame" name="Player0" template="SSF_Speedruns/SpeedrunsPlayerTemplate">
+			<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+			<Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+			<Visible val="true"/>
+			<Width val="75"/>
+
+			<Frame type="Label" name="TimeLabelPlayerCount6">
+				<Text val="6:"/>
+				<Style val="aaDialogItemStyleRightMiddle"/>
+				<Frame type="TextFormatFrame" name="TextFormat">
+					<FormatText val="%0%%1%"/>
+					<Replacement val="@Trig/Generic/TeamSize/6" index="0"/>
+					<Replacement val=":" index="1"/>
+				</Frame>
+
+				<StateGroup name="DetailViewText">
+					<DefaultState val="On"/>
+					<State name="Off">
+						<When type="StateGroup" frame="$SSF_CustomUI/Speedruns" operator="Equal" DetailView="Off"/>
+						<Action type="SetProperty" frame="$this" Text="{TextFormat/@Text}"/>
+					</State>
+					<State name="On"></State>
+				</StateGroup>
+			</Frame>
+			<Frame type="Label" name="TimeLabelPlayerCount5">
+				<Text val="5:"/>
+				<Style val="aaDialogItemStyleRightMiddle"/>
+			</Frame>
+			<Frame type="Label" name="TimeLabelPlayerCount4">
+				<Text val="4:"/>
+				<Style val="aaDialogItemStyleRightMiddle"/>
+			</Frame>
+			<Frame type="Label" name="TimeLabelPlayerCount3">
+				<Text val="3:"/>
+				<Style val="aaDialogItemStyleRightMiddle"/>
+				<Frame type="TextFormatFrame" name="TextFormat">
+					<FormatText val="%0%%1%"/>
+					<Replacement val="@Trig/Generic/TeamSize/3" index="0"/>
+					<Replacement val=":" index="1"/>
+				</Frame>
+				
+				<StateGroup name="DetailViewText">
+					<DefaultState val="On"/>
+					<State name="Off">
+						<When type="StateGroup" frame="$SSF_CustomUI/Speedruns" operator="Equal" DetailView="Off"/>
+						<Action type="SetProperty" frame="$this" Text="{TextFormat/@Text}"/>
+					</State>
+					<State name="On"></State>
+				</StateGroup>
+			</Frame>
+			<Frame type="Label" name="TimeLabelPlayerCount2">
+				<Text val="2:"/>
+				<Style val="aaDialogItemStyleRightMiddle"/>
+				<Frame type="TextFormatFrame" name="TextFormat">
+					<FormatText val="%0%%1%"/>
+					<Replacement val="@Trig/Generic/TeamSize/2" index="0"/>
+					<Replacement val=":" index="1"/>
+				</Frame>
+				
+				<StateGroup name="DetailViewText">
+					<DefaultState val="On"/>
+					<State name="Off">
+						<When type="StateGroup" frame="$SSF_CustomUI/Speedruns" operator="Equal" DetailView="Off"/>
+						<Action type="SetProperty" frame="$this" Text="{TextFormat/@Text}"/>
+					</State>
+					<State name="On"></State>
+				</StateGroup>
+			</Frame>
+			<Frame type="Label" name="TimeLabelPlayerCount1">
+				<Text val="1:"/>
+				<Style val="aaDialogItemStyleRightMiddle"/>
+				<Frame type="TextFormatFrame" name="TextFormat">
+					<FormatText val="%0%%1%"/>
+					<Replacement val="@Trig/Generic/TeamSize/1" index="0"/>
+					<Replacement val=":" index="1"/>
+				</Frame>
+
+				<StateGroup name="DetailViewText">
+					<DefaultState val="On"/>
+					<State name="Off">
+						<When type="StateGroup" frame="$SSF_CustomUI/Speedruns" operator="Equal" DetailView="Off"/>
+						<Action type="SetProperty" frame="$this" Text="{TextFormat/@Text}"/>
+					</State>
+					<State name="On"></State>
+				</StateGroup>
+			</Frame>
+		</Frame>
+
+		<Frame type="Frame" name="Player1" template="SSF_Speedruns/SpeedrunsPlayerTemplate"></Frame>
+		<Frame type="Frame" name="Player2" template="SSF_Speedruns/SpeedrunsPlayerTemplate"/>
+		<Frame type="Frame" name="Player3" template="SSF_Speedruns/SpeedrunsPlayerTemplate"/>
+		<Frame type="Frame" name="Player4" template="SSF_Speedruns/SpeedrunsPlayerTemplate"/>
+		<Frame type="Frame" name="Player5" template="SSF_Speedruns/SpeedrunsPlayerTemplate"/>
+		<Frame type="Frame" name="Player6" template="SSF_Speedruns/SpeedrunsPlayerTemplate"/>
+	</Frame>
+
+	<Frame type="Button" name="SpeedrunDiffButtonTemplate" template="SSF_Templates/ButtonTemplate">
+		<Anchor side="Left" relative="$sibling-1" pos="Max" offset="#SpeedrunsDiffGap"/>
+		<Anchor side="Top" relative="$sibling-1" pos="Min" offset="0"/>
+		<Height val="#SpeedrunsDiffButtonHeight"/>
+		<Width val="#SpeedrunsDiffButtonWidth"/>
+	</Frame>
+
+	<Frame type="Frame" name="SpeedrunsPartTemplate">
+		<Anchor side="Top" relative="$parent/PartButton1" pos="Max" offset="#SpeedrunsDiffGap"/>
+		<Anchor side="Bottom" relative="$this/Diff0" pos="Max" offset="0"/>
+		<Anchor side="Left" relative="$parent" pos="Min" offset="#Border"/>
+		<Anchor side="Right" relative="$this/DiffButton5" pos="Max" offset="0"/>
+		<Visible val="False"/>
+
+		<!-- Diffs -->
+		<Frame type="Button" name="DiffButton0" template="SSF_Speedruns/SpeedrunDiffButtonTemplate">
+			<Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+			<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+			<Text val="@Trig/Generic/DiffName/0"/>
+			<Animation name="IsClicked">
+				<Event event="OnClick" action="Reset,Play"/>
+				<Controller type="State" frame="$parent/$parent" stateGroup="DiffSelected" end="Pause">
+					<Key type="Identifier" time="0" value="Diff0"/>
+				</Controller>
+			</Animation> 
+		</Frame>
+		<Frame type="Button" name="DiffButton1" template="SSF_Speedruns/SpeedrunDiffButtonTemplate">
+			<Text val="@Trig/Generic/DiffName/1"/>
+			<Animation name="IsClicked">
+				<Event event="OnClick" action="Reset,Play"/>
+				<Controller type="State" frame="$parent/$parent" stateGroup="DiffSelected" end="Pause">
+					<Key type="Identifier" time="0" value="Diff1"/>
+				</Controller>
+			</Animation> 
+		</Frame>
+		<Frame type="Button" name="DiffButton2" template="SSF_Speedruns/SpeedrunDiffButtonTemplate">
+			<Text val="@Trig/Generic/DiffName/2"/>
+			<Animation name="IsClicked">
+				<Event event="OnClick" action="Reset,Play"/>
+				<Controller type="State" frame="$parent/$parent" stateGroup="DiffSelected" end="Pause">
+					<Key type="Identifier" time="0" value="Diff2"/>
+				</Controller>
+			</Animation> 
+		</Frame>
+		<Frame type="Button" name="DiffButton3" template="SSF_Speedruns/SpeedrunDiffButtonTemplate">
+			<Text val="@Trig/Generic/DiffName/3"/>
+			<Animation name="IsClicked">
+				<Event event="OnClick" action="Reset,Play"/>
+				<Controller type="State" frame="$parent/$parent" stateGroup="DiffSelected" end="Pause">
+					<Key type="Identifier" time="0" value="Diff3"/>
+				</Controller>
+			</Animation> 
+		</Frame>
+		<Frame type="Button" name="DiffButton4" template="SSF_Speedruns/SpeedrunDiffButtonTemplate">
+			<Text val="@Trig/Generic/DiffName/4"/>
+			<Animation name="IsClicked">
+				<Event event="OnClick" action="Reset,Play"/>
+				<Controller type="State" frame="$parent/$parent" stateGroup="DiffSelected" end="Pause">
+					<Key type="Identifier" time="0" value="Diff4"/>
+				</Controller>
+			</Animation> 
+		</Frame>
+		<Frame type="Button" name="DiffButton5" template="SSF_Speedruns/SpeedrunDiffButtonTemplate">
+			<Text val="@Trig/Generic/DiffName/5"/>
+			<Animation name="IsClicked">
+				<Event event="OnClick" action="Reset,Play"/>
+				<Controller type="State" frame="$parent/$parent" stateGroup="DiffSelected" end="Pause">
+					<Key type="Identifier" time="0" value="Diff5"/>
+				</Controller>
+			</Animation> 
+		</Frame>
+
+		<Frame type="Frame" name="Diff0" template="SSF_Speedruns/SpeedrunsDiffTemplate"/>
+		<Frame type="Frame" name="Diff1" template="SSF_Speedruns/SpeedrunsDiffTemplate"/>
+		<Frame type="Frame" name="Diff2" template="SSF_Speedruns/SpeedrunsDiffTemplate"/>
+		<Frame type="Frame" name="Diff3" template="SSF_Speedruns/SpeedrunsDiffTemplate"/>
+		<Frame type="Frame" name="Diff4" template="SSF_Speedruns/SpeedrunsDiffTemplate"/>
+		<Frame type="Frame" name="Diff5" template="SSF_Speedruns/SpeedrunsDiffTemplate"/>
+
+
+		<StateGroup name="Diff">
+			<DefaultState val="0"/>
+			<State name="0">
+				<Action type="SetProperty" frame="$this/Diff0" Visible="true"/>
+				<Action type="SetProperty" frame="$this/DiffButton0" Enabled="False"/>
+			</State>
+			<State name="1">
+				<Action type="SetProperty" frame="$this/Diff1" Visible="true"/>
+				<Action type="SetProperty" frame="$this/DiffButton1" Enabled="False"/>
+			</State>
+			<State name="2">
+				<Action type="SetProperty" frame="$this/Diff2" Visible="true"/>
+				<Action type="SetProperty" frame="$this/DiffButton2" Enabled="False"/>
+			</State>
+			<State name="3">
+				<Action type="SetProperty" frame="$this/Diff3" Visible="true"/>
+				<Action type="SetProperty" frame="$this/DiffButton3" Enabled="False"/>
+			</State>
+			<State name="4">
+				<Action type="SetProperty" frame="$this/Diff4" Visible="true"/>
+				<Action type="SetProperty" frame="$this/DiffButton4" Enabled="False"/>
+			</State>
+			<State name="5">
+				<Action type="SetProperty" frame="$this/Diff5" Visible="true"/>
+				<Action type="SetProperty" frame="$this/DiffButton5" Enabled="False"/>
+			</State>
+		</StateGroup>
+	</Frame>
+
+
+	<Frame type="Frame" name="SpeedrunsTemplate">
+		<Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+		<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+		<Anchor side="Bottom" relative="$this/Part0" pos="Max" offset="#Border"/>
+		<Anchor side="Right" relative="$this/Part0" pos="Max" offset="#Border"/>
+		<Visible val="false"/>
+
+		<Frame type="Image" name="BackgroundImage" template="SSF_Templates/BackgroundImageTemplate"></Frame>
+		<Frame type="Button" name="CloseButton" template="SSF_Templates/CloseButtonTemplate"></Frame>
+
+		<!-- Parts -->
+		<Frame type="Button" name="PartButton0" template="SSF_Templates/ButtonTemplate">
+			<Anchor side="Left" relative="$parent" pos="Min" offset="#Border"/>
+			<Anchor side="Top" relative="$parent" pos="Min" offset="#Border"/>
+			<Height val="#SpeedrunsPartButtonHeight"/>
+			<Width val="#SpeedrunsPartButtonWidth"/>
+			<Text val="@Trig/Generic/PartName/0"/>
+			<Animation name="IsClicked">
+				<Event event="OnClick" action="Reset,Play"/>
+				<Controller type="State" frame="$parent" stateGroup="PartSelected" end="Pause">
+					<Key type="Identifier" time="0" value="Part0"/>
+				</Controller>
+			</Animation>
+		</Frame>
+		<Frame type="Button" name="PartButton1" template="SSF_Templates/ButtonTemplate">
+			<Anchor side="Left" relative="$sibling-1" pos="Max" offset="#SpeedrunsPartGap"/>
+			<Anchor side="Top" relative="$sibling-1" pos="Min" offset="0"/>
+			<Height val="#SpeedrunsPartButtonHeight"/>
+			<Width val="#SpeedrunsPartButtonWidth"/>
+			<Text val="@Trig/Generic/PartName/1"/>
+			<Animation name="IsClicked">
+				<Event event="OnClick" action="Reset,Play"/>
+				<Controller type="State" frame="$parent" stateGroup="PartSelected" end="Pause">
+					<Key type="Identifier" time="0" value="Part1"/>
+				</Controller>
+			</Animation> 
+		</Frame>
+		<Frame type="Button" name="PartButton2" template="SSF_Templates/ButtonTemplate">
+			<Anchor side="Left" relative="$sibling-1" pos="Max" offset="#SpeedrunsPartGap"/>
+			<Anchor side="Top" relative="$sibling-1" pos="Min" offset="0"/>
+			<Height val="#SpeedrunsPartButtonHeight"/>
+			<Width val="#SpeedrunsPartButtonWidth"/>
+			<Text val="@Trig/Generic/PartName/2"/>
+			<Animation name="IsClicked">
+				<Event event="OnClick" action="Reset,Play"/>
+				<Controller type="State" frame="$parent" stateGroup="PartSelected" end="Pause">
+					<Key type="Identifier" time="0" value="Part2"/>
+				</Controller>
+			</Animation> 
+		</Frame>
+
+		<Frame type="Frame" name="Part0" template="SSF_Speedruns/SpeedrunsPartTemplate"/>
+		<Frame type="Frame" name="Part1" template="SSF_Speedruns/SpeedrunsPartTemplate"/>
+		<Frame type="Frame" name="Part2" template="SSF_Speedruns/SpeedrunsPartTemplate"/>
+
+		<StateGroup name="PartSelected">
+			<DefaultState val="Part0"/>
+
+			<State name="Part0">
+				<Action type="SetProperty" frame="$this/PartButton0" Enabled="False"/>
+				<Action type="SetProperty" frame="$this/Part0" Visible="True"/>
+			</State>
+			<State name="Part1">
+				<Action type="SetProperty" frame="$this/PartButton1" Enabled="False"/>
+				<Action type="SetProperty" frame="$this/Part1" Visible="True"/>
+			</State>
+			<State name="Part2">
+				<Action type="SetProperty" frame="$this/PartButton2" Enabled="False"/>
+				<Action type="SetProperty" frame="$this/Part2" Visible="True"/>
+			</State>
+		</StateGroup>
+
+		<StateGroup name="DiffSelected">
+			<DefaultState val="Diff0"/>
+
+			<State name="Diff0">
+				<Action type="SetState" frame="$this/Part1" group="Diff" state="0"/>
+				<Action type="SetState" frame="$this/Part0" group="Diff" state="0"/>
+				<Action type="SetState" frame="$this/Part2" group="Diff" state="0"/>
+			</State>
+			<State name="Diff1">
+				<Action type="SetState" frame="$this/Part1" group="Diff" state="1"/>
+				<Action type="SetState" frame="$this/Part0" group="Diff" state="1"/>
+				<Action type="SetState" frame="$this/Part2" group="Diff" state="1"/>
+			</State>
+			<State name="Diff2">
+				<Action type="SetState" frame="$this/Part1" group="Diff" state="2"/>
+				<Action type="SetState" frame="$this/Part0" group="Diff" state="2"/>
+				<Action type="SetState" frame="$this/Part2" group="Diff" state="2"/>
+			</State>
+			<State name="Diff3">
+				<Action type="SetState" frame="$this/Part1" group="Diff" state="3"/>
+				<Action type="SetState" frame="$this/Part0" group="Diff" state="3"/>
+				<Action type="SetState" frame="$this/Part2" group="Diff" state="3"/>
+			</State>
+			<State name="Diff4">
+				<Action type="SetState" frame="$this/Part1" group="Diff" state="4"/>
+				<Action type="SetState" frame="$this/Part0" group="Diff" state="4"/>
+				<Action type="SetState" frame="$this/Part2" group="Diff" state="4"/>
+			</State>
+			<State name="Diff5">
+				<Action type="SetState" frame="$this/Part1" group="Diff" state="5"/>
+				<Action type="SetState" frame="$this/Part0" group="Diff" state="5"/>
+				<Action type="SetState" frame="$this/Part2" group="Diff" state="5"/>
+			</State>
+		</StateGroup>
+
+		<StateGroup name="DetailView">
+			<DefaultState val="Off"/>
+			<State name="On">
+				<When type="Property" frame="$SSF_CustomUI/Options/SpeedrunsDetailsCheckbox" operator="Equal" Checked="True"/>
+			</State>
+			<State name="Off">
+				<When type="Property" frame="$SSF_CustomUI/Options/SpeedrunsDetailsCheckbox" operator="Equal" Checked="False"/>
+			</State>
+		</StateGroup>
+
+		<!-- player data is handled by triggers -->
+	</Frame>
+
+
+</Desc>

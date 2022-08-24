@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CWeapon default="1">
+        <TargetFilters value="Visible;Self,Missile,Item,Dead,Hidden,Invulnerable"/>
+    </CWeapon>
+    <CWeaponLegacy default="1">
+        <TargetFilters value="Visible;Self,Missile,Item,Dead,Hidden,Invulnerable"/>
+    </CWeaponLegacy>
+    <CWeaponStrafe default="1">
+        <TargetFilters value="Visible;Self,Missile,Item,Dead,Hidden,Invulnerable"/>
+    </CWeaponStrafe>
+    <CWeaponLegacy id="AutoTurret">
+        <Period value="0.5"/>
+    </CWeaponLegacy>
+</Catalog>

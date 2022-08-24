@@ -1,0 +1,466 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Desc>
+	<Constant name="PopupBorder" val="25"/>
+	<Constant name="PopupBorderNegative" val="-25"/>
+	<Constant name="PopupHeight" val="138"/>
+	<Constant name="PopupWidth" val="450"/>
+	<Constant name="PopupGap" val="3"/>
+
+	<Constant name="PopupIntroTime" val="1.0"/>
+	<Constant name="PopupMaxDurationTime" val="25"/>
+
+	<Frame type="Frame" name="PopupTemplate">
+		<Anchor side="Top" relative="$sibling-1" pos="Max" offset="#PopupGap"/>
+		<Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+		<Visible val="false"/>
+
+		<Height val="#PopupHeight"/>
+		<Width val="#PopupWidth"/>
+
+
+		<Animation name="OnShown">
+			<Event event="OnShown" action="Reset,Play" frame="$this"/>
+			<Controller type="Event" end="Pause" frame="$this/Countdown">
+				<Key type="Event" time="0.0" event="ResetCounter"/>
+				<Key type="Event" time="#PopupIntroTime" event="StartCounting"/>
+			</Controller>
+			<Controller type="Event" end="Pause" frame="$this">
+				<Key type="Event" time="0.0" event="MoveIn"/>
+			</Controller>
+		</Animation>
+
+
+		<Animation name="Move">
+			<Event event="MoveIn" action="Reset, DirectionForward, Play" frame="$this"/>
+			<Event event="MoveOut" action="DirectionReverse, Play" frame="$this"/>
+			<Controller type="Anchor" end="Pause" frame="$this" side="Right" relative="True">
+				<Key type="Curve" time="0.0" value="#PopupWidth" inout="Fast"/>
+				<Key type="Curve" time="#PopupIntroTime" value="0" inout="Slow"/>
+			</Controller>
+		</Animation>
+
+		<StateGroup name="PopupType">
+			<DefaultState val="None"/>
+			<State name="Achievement">
+				<Action type="SetProperty" frame="$this/OpenAcvButton" Visible="True"/>
+				<Action type="SetProperty" frame="$this/Description" Text="@Trig/Popup/AcvMsg"/>
+			</State>
+			<State name="Speedruns">
+				<Action type="SetProperty" frame="$this/OpenSpeedrunsButton" Visible="True"/>
+				<Action type="SetProperty" frame="$this/Description" Text="@Trig/Popup/SpeedrunMsg"/>
+				<Action type="SetAnchor" frame="$this/Description" side="Left" relative="$parent" pos="Min" offset="#PopupBorder"/>
+				<Action type="SetAnchor" frame="$this/Description" side="Bottom" relative="$parent" pos="0.39" offset="0"/>
+				<Action type="SetAnchor" frame="$this/Title" side="Bottom" relative="$parent" pos="0.61" offset="0"/>
+				<Action type="SetProperty" frame="$this/TimeLabel" Visible="True"/>
+			</State>
+			<State name="None"></State>
+		</StateGroup>
+
+		<Animation name="SetTypeAcv">
+			<Event event="SetTypeAcv" action="Reset,Play" frame="$this"/>
+			<Controller type="State" end="Pause" frame="$this" stateGroup="PopupType">
+				<Key type="Identifier" time="0.0" value="Achievement"/>
+			</Controller>
+		</Animation>
+		<Animation name="SetTypeSpeedruns">
+			<Event event="SetTypeSpeedruns" action="Reset,Play" frame="$this"/>
+			<Controller type="State" end="Pause" frame="$this" stateGroup="PopupType">
+				<Key type="Identifier" time="0.0" value="Speedruns"/>
+			</Controller>
+		</Animation>
+
+		<Animation name="Clear">
+			<Event event="Clear" action="Reset,Play" frame="$this"/>
+
+			<Controller type="State" end="Pause" frame="$this" stateGroup="PopupType">
+				<Key type="Identifier" time="0.0" value="None"/>
+			</Controller>
+			
+			<Controller type="Event" end="Pause" frame="$this/OpenAcvButton/AcvIconNormal">
+				<Key type="Event" time="0.0" event="Stage0"/>
+			</Controller>
+			
+			<Controller type="Event" end="Pause" frame="$this/OpenAcvButton/AcvIconSplit">
+				<Key type="Event" time="0.0" event="Lock0"/>
+				<Key type="Event" time="0.0" event="Lock1"/>
+				<Key type="Event" time="0.0" event="Lock2"/>
+				<Key type="Event" time="0.0" event="Lock3"/>
+				<Key type="Event" time="0.0" event="Lock4"/>
+				<Key type="Event" time="0.0" event="Lock5"/>
+			</Controller>
+		</Animation>
+
+		<Frame type="Image" name="BackgroundImage" template="SSF_Templates/BackgroundImageTemplate"/>
+
+		<Frame type="Button" name="OpenAcvButton">
+			<Anchor side="Top" relative="$parent" pos="Min" offset="#PopupBorder"/>
+			<Anchor side="Left" relative="$parent" pos="Min" offset="#PopupBorder"/>
+			<Visible val="false"/>
+
+			<Height val="#AchievementIconBorderSize"/>
+			<Width val="#AchievementIconBorderSize"/>
+
+			<Frame type="Frame" name="AcvIconNormal" template="SSF_Achievements/AchievementIconNormalTemplate">
+				<Anchor relative="$parent"/>
+				<Visible val="False"/>
+			</Frame>
+
+			<Frame type="Frame" name="AcvIconSplit" template="SSF_Achievements/AchievementIconCutsTemplate">
+				<Anchor relative="$parent"/>
+				<Visible val="False"/>
+			</Frame>
+
+			<Animation name="OnClick">
+				<Event event="OnClick" action="Reset,Play" frame="$this"/>
+				<Controller type="Visibility" end="Pause" frame="$this/Player">
+					<Key type="Bool" time="0.0" value="true"/>
+					<Key type="Bool" time="0.1" value="false"/>
+				</Controller>
+				<Controller type="Event" end="Pause" frame="$SSF_CustomUI/Menu">
+					<Key type="Event" time="0.0" event="CloseEverything"/>
+				</Controller>
+				<Controller type="Visibility" end="Pause" frame="$SSF_CustomUI/Menu">
+					<Key type="Bool" time="0.0" value="false"/>
+				</Controller>
+				<Controller type="Visibility" end="Pause" frame="$SSF_CustomUI/Achievements">
+					<Key type="Bool" time="0.01" value="true"/>
+				</Controller>
+				<Controller type="Event" end="Pause" frame="$parent">
+					<Key type="Event" time="0.0" event="MoveOut"/>
+				</Controller>
+			</Animation>
+
+			<Frame type="Frame" name="Player">
+				<Anchor side="Right" relative="$parent" pos="Min" offset="-5000"/>
+				<Anchor side="Left" relative="$parent" pos="Min" offset="-5000"/>
+				<Anchor side="Top" relative="$parent" pos="Min" offset="-5000"/>
+				<Anchor side="Bottom" relative="$parent" pos="Min" offset="-5000"/>
+				<Visible val="false"/>
+
+				<Frame type="Frame" name="1">
+					<Anchor relative="$parent"/>
+					<Visible val="false"/>
+					<Animation name="OnShown">
+						<Event event="OnShown" action="Reset,Play" frame="$this"/>
+						<Controller type="State" end="Pause" frame="$SSF_CustomUI/Achievements" stateGroup="Player">
+							<Key type="Identifier" time="0.0" value="1"/>
+						</Controller>
+					</Animation>
+				</Frame>
+				<Frame type="Frame" name="2">
+					<Anchor relative="$parent"/>
+					<Visible val="false"/>
+					<Animation name="OnShown">
+						<Event event="OnShown" action="Reset,Play" frame="$this"/>
+						<Controller type="State" end="Pause" frame="$SSF_CustomUI/Achievements" stateGroup="Player">
+							<Key type="Identifier" time="0.0" value="2"/>
+						</Controller>
+					</Animation>
+				</Frame>
+				<Frame type="Frame" name="3">
+					<Anchor relative="$parent"/>
+					<Visible val="false"/>
+					<Animation name="OnShown">
+						<Event event="OnShown" action="Reset,Play" frame="$this"/>
+						<Controller type="State" end="Pause" frame="$SSF_CustomUI/Achievements" stateGroup="Player">
+							<Key type="Identifier" time="0.0" value="3"/>
+						</Controller>
+					</Animation>
+				</Frame>
+				<Frame type="Frame" name="4">
+					<Anchor relative="$parent"/>
+					<Visible val="false"/>
+					<Animation name="OnShown">
+						<Event event="OnShown" action="Reset,Play" frame="$this"/>
+						<Controller type="State" end="Pause" frame="$SSF_CustomUI/Achievements" stateGroup="Player">
+							<Key type="Identifier" time="0.0" value="4"/>
+						</Controller>
+					</Animation>
+				</Frame>
+				<Frame type="Frame" name="5">
+					<Anchor relative="$parent"/>
+					<Visible val="false"/>
+					<Animation name="OnShown">
+						<Event event="OnShown" action="Reset,Play" frame="$this"/>
+						<Controller type="State" end="Pause" frame="$SSF_CustomUI/Achievements" stateGroup="Player">
+							<Key type="Identifier" time="0.0" value="5"/>
+						</Controller>
+					</Animation>
+				</Frame>
+				<Frame type="Frame" name="6">
+					<Anchor relative="$parent"/>
+					<Visible val="false"/>
+					<Animation name="OnShown">
+						<Event event="OnShown" action="Reset,Play" frame="$this"/>
+						<Controller type="State" end="Pause" frame="$SSF_CustomUI/Achievements" stateGroup="Player">
+							<Key type="Identifier" time="0.0" value="6"/>
+						</Controller>
+					</Animation>
+				</Frame>
+			</Frame>
+		</Frame>
+
+
+		<Frame type="Button" name="OpenSpeedrunsButton">
+			<Anchor side="Top" relative="$parent" pos="Min" offset="#PopupBorder"/>
+			<Anchor side="Left" relative="$parent" pos="Min" offset="#PopupBorder"/>
+			<Anchor side="Bottom" relative="$parent" pos="Max" offset="#PopupBorderNegative"/>
+			<Anchor side="Right" relative="$parent/CloseButton" pos="Min" offset="-2"/>
+			<Visible val="false"/>
+
+			<Tooltip val="@Trig/Popup/SpeedrunsTooltipExtra"/>
+
+			<Animation name="OnClick">
+				<Event event="OnClick" action="Reset,Play" frame="$this"/>
+				<Controller type="Visibility" end="Pause" frame="$this/Part">
+					<Key type="Bool" time="0.0" value="true"/>
+					<Key type="Bool" time="0.1" value="false"/>
+				</Controller>"/>
+				<Controller type="Visibility" end="Pause" frame="$this/Diff">
+					<Key type="Bool" time="0.0" value="true"/>
+					<Key type="Bool" time="0.1" value="false"/>
+				</Controller>
+				<Controller type="Event" end="Pause" frame="$SSF_CustomUI/Menu">
+					<Key type="Event" time="0.0" event="CloseEverything"/>
+				</Controller>
+				<Controller type="Visibility" end="Pause" frame="$SSF_CustomUI/Menu">
+					<Key type="Bool" time="0.0" value="false"/>
+				</Controller>
+				<Controller type="Visibility" end="Pause" frame="$SSF_CustomUI/Speedruns">
+					<Key type="Bool" time="0.01" value="true"/>
+				</Controller>
+				<Controller type="Event" end="Pause" frame="$parent">
+					<Key type="Event" time="0.0" event="MoveOut"/>
+				</Controller>
+			</Animation>
+
+			<Frame type="Frame" name="Part">
+				<Anchor side="Right" relative="$parent" pos="Min" offset="-5000"/>
+				<Anchor side="Left" relative="$parent" pos="Min" offset="-5000"/>
+				<Anchor side="Top" relative="$parent" pos="Min" offset="-5000"/>
+				<Anchor side="Bottom" relative="$parent" pos="Min" offset="-5000"/>
+				<Visible val="false"/>
+
+				<Frame type="Frame" name="0">
+					<Anchor relative="$parent"/>
+					<Visible val="false"/>
+					<Animation name="OnShown">
+						<Event event="OnShown" action="Reset,Play" frame="$this"/>
+						<Controller type="State" end="Pause" frame="$SSF_CustomUI/Speedruns" stateGroup="PartSelected">
+							<Key type="Identifier" time="0.0" value="Part0"/>
+						</Controller>
+					</Animation>
+				</Frame>
+				<Frame type="Frame" name="1">
+					<Anchor relative="$parent"/>
+					<Visible val="false"/>
+					<Animation name="OnShown">
+						<Event event="OnShown" action="Reset,Play" frame="$this"/>
+						<Controller type="State" end="Pause" frame="$SSF_CustomUI/Speedruns" stateGroup="PartSelected">
+							<Key type="Identifier" time="0.0" value="Part1"/>
+						</Controller>
+					</Animation>
+				</Frame>
+				<Frame type="Frame" name="2">
+					<Anchor relative="$parent"/>
+					<Visible val="false"/>
+					<Animation name="OnShown">
+						<Event event="OnShown" action="Reset,Play" frame="$this"/>
+						<Controller type="State" end="Pause" frame="$SSF_CustomUI/Speedruns" stateGroup="PartSelected">
+							<Key type="Identifier" time="0.0" value="Part2"/>
+						</Controller>
+					</Animation>
+				</Frame>
+			</Frame>
+
+			<Frame type="Frame" name="Diff">
+				<Anchor side="Right" relative="$parent" pos="Min" offset="-5000"/>
+				<Anchor side="Left" relative="$parent" pos="Min" offset="-5000"/>
+				<Anchor side="Top" relative="$parent" pos="Min" offset="-5000"/>
+				<Anchor side="Bottom" relative="$parent" pos="Min" offset="-5000"/>
+				<Visible val="false"/>
+
+				<Frame type="Frame" name="0">
+					<Anchor relative="$parent"/>
+					<Visible val="false"/>
+					<Animation name="OnShown">
+						<Event event="OnShown" action="Reset,Play" frame="$this"/>
+						<Controller type="State" end="Pause" frame="$SSF_CustomUI/Speedruns" stateGroup="DiffSelected">
+							<Key type="Identifier" time="0.0" value="Diff0"/>
+						</Controller>
+					</Animation>
+				</Frame>
+				<Frame type="Frame" name="1">
+					<Anchor relative="$parent"/>
+					<Visible val="false"/>
+					<Animation name="OnShown">
+						<Event event="OnShown" action="Reset,Play" frame="$this"/>
+						<Controller type="State" end="Pause" frame="$SSF_CustomUI/Speedruns" stateGroup="DiffSelected">
+							<Key type="Identifier" time="0.0" value="Diff1"/>
+						</Controller>
+					</Animation>
+				</Frame>
+				<Frame type="Frame" name="2">
+					<Anchor relative="$parent"/>
+					<Visible val="false"/>
+					<Animation name="OnShown">
+						<Event event="OnShown" action="Reset,Play" frame="$this"/>
+						<Controller type="State" end="Pause" frame="$SSF_CustomUI/Speedruns" stateGroup="DiffSelected">
+							<Key type="Identifier" time="0.0" value="Diff2"/>
+						</Controller>
+					</Animation>
+				</Frame>
+				<Frame type="Frame" name="3">
+					<Anchor relative="$parent"/>
+					<Visible val="false"/>
+					<Animation name="OnShown">
+						<Event event="OnShown" action="Reset,Play" frame="$this"/>
+						<Controller type="State" end="Pause" frame="$SSF_CustomUI/Speedruns" stateGroup="DiffSelected">
+							<Key type="Identifier" time="0.0" value="Diff3"/>
+						</Controller>
+					</Animation>
+				</Frame>
+				<Frame type="Frame" name="4">
+					<Anchor relative="$parent"/>
+					<Visible val="false"/>
+					<Animation name="OnShown">
+						<Event event="OnShown" action="Reset,Play" frame="$this"/>
+						<Controller type="State" end="Pause" frame="$SSF_CustomUI/Speedruns" stateGroup="DiffSelected">
+							<Key type="Identifier" time="0.0" value="Diff4"/>
+						</Controller>
+					</Animation>
+				</Frame>
+				<Frame type="Frame" name="5">
+					<Anchor relative="$parent"/>
+					<Visible val="false"/>
+					<Animation name="OnShown">
+						<Event event="OnShown" action="Reset,Play" frame="$this"/>
+						<Controller type="State" end="Pause" frame="$SSF_CustomUI/Speedruns" stateGroup="DiffSelected">
+							<Key type="Identifier" time="0.0" value="Diff5"/>
+						</Controller>
+					</Animation>
+				</Frame>
+			</Frame>
+
+		</Frame>
+
+
+		<Frame type="Label" name="Description" template="SSF_Templates/LabelTemplate">
+			<Anchor side="Left" relative="$parent/OpenAcvButton" pos="Max" offset="5"/>
+			<Anchor side="Right" relative="$parent/CloseButton" pos="Min" offset="-2"/>
+			<Anchor side="Top" relative="$parent/OpenAcvButton" pos="Min" offset="0"/>
+			<Anchor side="Bottom" relative="$parent" pos="Mid" offset="0"/>
+			<AcceptsMouse val="false"/>
+			<Text val="@Trig/Popup/AcvMsg"/>
+			<Style val="aaDialogItemStyleCentered"/>
+		</Frame>
+		<Frame type="Label" name="Title" template="SSF_Templates/LabelTemplate">
+			<Anchor side="Left" relative="$parent/Description" pos="Min" offset="0"/>
+			<Anchor side="Right" relative="$parent/Description" pos="Max" offset="0"/>
+			<Anchor side="Top" relative="$parent/Description" pos="Max" offset="0"/>
+			<Anchor side="Bottom" relative="$parent/OpenAcvButton" pos="Max" offset="0"/>
+			<AcceptsMouse val="false"/>
+			<Style val="aaDialogItemStyleCentered"/>
+		</Frame>
+		<Frame type="Label" name="TimeLabel" template="SSF_Templates/LabelTemplate">
+			<Anchor side="Top" relative="$parent/Title" pos="Max" offset="0"/>
+			<Anchor side="Left" relative="$parent/Description" pos="Min" offset="0"/>
+			<Anchor side="Right" relative="$parent/Description" pos="Max" offset="0"/>
+			<Anchor side="Bottom" relative="$parent/OpenAcvButton" pos="Max" offset="0"/>
+			<AcceptsMouse val="false"/>
+			<Visible val="false"/>
+			<Style val="aaDialogItemStyleCentered"/>
+		</Frame>
+
+		<Frame type="Button" name="CloseButton">
+			<Anchor side="Top" relative="$parent" pos="Mid" offset="0"/>
+			<Anchor side="Bottom" relative="$parent" pos="Mid" offset="0"/>
+			<Anchor side="Right" relative="$parent" pos="Max" offset="#PopupBorderNegative"/>
+			<Width val="#AchievementIconSize"/>
+			<Height val="#AchievementIconSize"/>
+			
+			<Tooltip val="@Trig/Popup/Close"/>
+
+			<Animation name="Close">
+				<Event event="OnClick" action="Reset,Play" frame="$this"/>
+				<Controller type="Event" end="Pause" frame="$parent">
+					<Key type="Event" time="0.0" event="MoveOut"/>
+				</Controller>
+			</Animation>
+
+			<Frame type="Label" name="CloseLabel" template="SSF_Templates/LabelTemplate">
+				<Anchor side="Top" relative="$parent" pos="Mid" offset="0"/>
+				<Anchor side="Bottom" relative="$parent" pos="Mid" offset="0"/>
+				<Anchor side="Left" relative="$parent" pos="Mid" offset="0"/>
+				<Anchor side="Right" relative="$parent" pos="Mid" offset="0"/>
+				<!-- <Anchor relative="$parent"/> -->
+				<Width val="30"/>
+				<Height val="30"/>
+				<AcceptsMouse val="false"/>
+
+				<Text val="X"/>
+				<Style val="aaDialogItemStyleCentered"/>
+			</Frame>
+
+			<Frame type="ProgressBar" name="TimerProgress">
+				<Anchor side="Top" relative="$parent" pos="Mid" offset="0"/>
+				<Anchor side="Bottom" relative="$parent" pos="Mid" offset="0"/>
+				<Anchor side="Left" relative="$parent" pos="Mid" offset="0"/>
+				<Anchor side="Right" relative="$parent" pos="Mid" offset="0"/>
+				<!-- <Anchor relative="$parent"/> -->
+				<Width val="50"/>
+				<Height val="50"/>
+				<AcceptsMouse val="false"/>
+
+				<Color val="FFFFFF"/>
+				<ColorStep val="FFFFFF"/>
+				<UseFillContainer val="False"/>
+				<Circular val="True"/>
+				<CircularStart val="0"/>
+				<CircularEndOffset val="360"/>
+
+				<MaxValue val="{$parent/$parent/Countdown/@TargetValue}"/>
+				<Value val="{$parent/$parent/Countdown/@CurrentValue}"/>
+				<MinValue val="0"/>
+				
+				<Frame type="Frame" name="FillImageContainer">
+					<Anchor relative="$parent"/>
+					
+					<Frame type="Image" name="FillImage">
+						<Anchor relative="$parent"/>
+						<Texture val="@UI/SC2_UI_Coop_CommanderIcon_CircularProgress_Fill_Max"/>
+						<TextureType val="Circular"/>
+					</Frame>
+				</Frame>
+			</Frame>
+
+		</Frame>
+		<Frame type="CountdownLabel" name="Countdown">
+			<Anchor side="Left" relative="$parent" pos="Min" offset="5000"/>
+			<Anchor side="Right" relative="$parent" pos="Max" offset="5000"/>
+			<Anchor side="Top" relative="$parent" pos="Min" offset="5000"/>
+			<Anchor side="Bottom" relative="$parent" pos="Max" offset="5000"/>
+
+			<UseAlternateTime val="true"/>
+			<StartValue val="0"/>
+			<CurrentValue val="#PopupMaxDurationTime"/>
+			<TargetValue val="#PopupMaxDurationTime"/>
+
+			<Animation name="CountDown">
+				<Event event="ResetCounter" action="Reset" frame="$this"/>
+				<Event event="StartCounting" action="Reset,Play" frame="$this"/>
+				<Controller type="Counter" end="Pause" frame="$this">
+					<!-- values 0 and 1 are % of start to target -->
+					<Key type="Curve" time="0.0" value="1" out="Linear"/>
+					<Key type="Curve" time="#PopupMaxDurationTime" value="0" in="Linear"/>
+				</Controller>
+				<Controller type="Event" end="Pause" frame="$parent">
+					<Key type="Event" time="#PopupMaxDurationTime" event="MoveOut"/>
+				</Controller>
+			</Animation>
+		</Frame>
+
+	</Frame>
+
+
+</Desc>

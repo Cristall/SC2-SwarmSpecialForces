@@ -1,0 +1,749 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CBehaviorAttackModifier default="1">
+        <Chance value="1"/>
+    </CBehaviorAttackModifier>
+    <CBehaviorBuff default="1" id="TimedLifeDisplayed">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DisplayDuration index="Self" value="1"/>
+        <DisplayDuration index="Ally" value="1"/>
+        <DisplayDuration index="Neutral" value="1"/>
+        <DisplayDuration index="Enemy" value="1"/>
+        <Duration value="5"/>
+        <ExpireEffect value="Suicide"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff default="1" id="TimedLifeHidden">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="5"/>
+        <ExpireEffect value="Suicide"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff default="1" id="ArmorBase">
+        <Name value="Behavior/Name/ArmorBase"/>
+        <Tooltip value="Behavior/Tooltip/ArmorBase"/>
+        <Cost>
+            <Charge Link="Behavior/ArmorBase"/>
+            <Cooldown Link="Behavior/ArmorBase"/>
+        </Cost>
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DamageResponse>
+            <Kind index="Spell" value="0"/>
+            <Kind index="NoProc" value="0"/>
+            <Chance value="1"/>
+            <Cost>
+                <Charge Link="Behavior/ArmorBase"/>
+                <Cooldown Link="Behavior/ArmorBase"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="InstantExpire" parent="TimedLifeHidden">
+        <Duration value="0.0625"/>
+    </CBehaviorBuff>
+    <CBehaviorVeterancy id="LevelsTest">
+        <Alignment value="Positive"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <XPFraction index="Kills" value="0"/>
+        <VeterancyLevelArray>
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroRavagerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroSwarmQueenAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroBowlerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="175">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroRavagerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroSwarmQueenAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroBowlerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <Levels value="50"/>
+        <MinVeterancyXPLevelFactor value="4"/>
+        <MinVeterancyXPPreviousValueFactor value="1"/>
+        <MinVeterancyXPBonusPerLevel value="8"/>
+    </CBehaviorVeterancy>
+    <CBehaviorBuff id="BunkerWeaponRangeBonus">
+        <Modification WeaponRange="4"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="TutorialNotPaused">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="FakeMissileIdentifier">
+        <InfoFlags index="Hidden"/>
+    </CBehaviorBuff>
+    <CBehaviorAttribute id="Unknown3Stats">
+        <Cost>
+            <Charge Link="Behavior/HeroRoachAttribute"/>
+            <Cooldown Link="Behavior/HeroRoachAttribute"/>
+        </Cost>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification>
+            <MoveSpeedBonus value="0.1015"/>
+            <AccelerationBonus value="0.125"/>
+            <DecelerationBonus value="0.125"/>
+            <AttackSpeedMultiplier value="1.01"/>
+            <DamageDealtUnscaled index="Ranged" value="1"/>
+            <VitalMaxArray index="Life" value="25"/>
+            <VitalMaxArray index="Energy" value="5"/>
+        </Modification>
+    </CBehaviorAttribute>
+    <CBehaviorAttribute id="Unknown4Stats">
+        <Cost>
+            <Charge Link="Behavior/HeroRoachAttribute"/>
+            <Cooldown Link="Behavior/HeroRoachAttribute"/>
+        </Cost>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification>
+            <MoveSpeedBonus value="0.1015"/>
+            <AccelerationBonus value="0.125"/>
+            <DecelerationBonus value="0.125"/>
+            <AttackSpeedMultiplier value="1.01"/>
+            <DamageDealtUnscaled index="Ranged" value="1"/>
+            <VitalMaxArray index="Life" value="25"/>
+            <VitalMaxArray index="Energy" value="5"/>
+        </Modification>
+    </CBehaviorAttribute>
+    <CBehaviorAttribute id="Unknown5Stats">
+        <Cost>
+            <Charge Link="Behavior/HeroRoachAttribute"/>
+            <Cooldown Link="Behavior/HeroRoachAttribute"/>
+        </Cost>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification>
+            <MoveSpeedBonus value="0.1015"/>
+            <AccelerationBonus value="0.125"/>
+            <DecelerationBonus value="0.125"/>
+            <AttackSpeedMultiplier value="1.01"/>
+            <DamageDealtUnscaled index="Ranged" value="1"/>
+            <VitalMaxArray index="Life" value="25"/>
+            <VitalMaxArray index="Energy" value="5"/>
+        </Modification>
+    </CBehaviorAttribute>
+    <CBehaviorVeterancy id="Levels">
+        <Alignment value="Positive"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <XPFraction index="Kills" value="0"/>
+        <VeterancyLevelArray>
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroRavagerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroSwarmQueenAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroBowlerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="175">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroRavagerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroSwarmQueenAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroBowlerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="187">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroRavagerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroSwarmQueenAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroBowlerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="203">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroRavagerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroSwarmQueenAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroBowlerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="223">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroRavagerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroSwarmQueenAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroBowlerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="247">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroRavagerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroSwarmQueenAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroBowlerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="275">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroRavagerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroSwarmQueenAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroBowlerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="307">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroRavagerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroSwarmQueenAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroBowlerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="343">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroRavagerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroSwarmQueenAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroBowlerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="383">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroRavagerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroSwarmQueenAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroBowlerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="427">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroRavagerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroSwarmQueenAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroBowlerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="475">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroRavagerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroSwarmQueenAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroBowlerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="527">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroRavagerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroSwarmQueenAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroBowlerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="583">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroRavagerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroSwarmQueenAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroBowlerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="643">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroRavagerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroSwarmQueenAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroBowlerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="707">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroRavagerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroSwarmQueenAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroBowlerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="775">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroRavagerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroSwarmQueenAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroBowlerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="847">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroRavagerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroSwarmQueenAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroBowlerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="923">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroRavagerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroSwarmQueenAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroBowlerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="1003">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroRavagerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroSwarmQueenAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroBowlerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="1087">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroRavagerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroSwarmQueenAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroBowlerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="1175">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroRavagerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroSwarmQueenAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroBowlerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="1267">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroRavagerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroSwarmQueenAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroBowlerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="1363">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroRavagerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroSwarmQueenAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroBowlerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="1463">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroRavagerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroSwarmQueenAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroBowlerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="1567">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroRavagerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroSwarmQueenAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroBowlerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="1675">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroRavagerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroSwarmQueenAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroBowlerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="1787">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroRavagerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroSwarmQueenAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroBowlerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="1903">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroRavagerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroSwarmQueenAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroBowlerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="2023">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroRavagerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroSwarmQueenAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroBowlerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="2147">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroRavagerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroSwarmQueenAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroBowlerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="2275">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroRavagerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroSwarmQueenAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroBowlerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="2407">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroRavagerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroSwarmQueenAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroBowlerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="2543">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroRavagerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroSwarmQueenAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroBowlerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="2683">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroRavagerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroSwarmQueenAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroBowlerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="2827">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroRavagerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroSwarmQueenAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroBowlerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="2975">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroRavagerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroSwarmQueenAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroBowlerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="3127">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroRavagerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroSwarmQueenAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroBowlerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="3283">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroRavagerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroSwarmQueenAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroBowlerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="3443">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroRavagerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroSwarmQueenAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroBowlerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="3607">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroRavagerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroSwarmQueenAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroBowlerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="3775">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroRavagerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroSwarmQueenAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroBowlerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="3947">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroRavagerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroSwarmQueenAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroBowlerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="4123">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroRavagerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroSwarmQueenAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroBowlerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="4303">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroRavagerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroSwarmQueenAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroBowlerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="4487">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroRavagerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroSwarmQueenAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroBowlerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="4675">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroRavagerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroSwarmQueenAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroBowlerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="4867">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroRavagerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroSwarmQueenAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroBowlerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="5063">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroRavagerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroSwarmQueenAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroBowlerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+        <VeterancyLevelArray MinVeterancyXP="5263">
+            <Modification>
+                <AttributeChangeArray Attribute="HeroRoachAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroHydraAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroRavagerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroSwarmQueenAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="HeroBowlerAttribute" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown3Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown4Stats" Points="1"/>
+                <AttributeChangeArray Attribute="Unknown5Stats" Points="1"/>
+            </Modification>
+        </VeterancyLevelArray>
+    </CBehaviorVeterancy>
+    <CBehaviorCreepSource id="CreepGen4x4BaseRadius10">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="Race:Zerg,AbilityorEffectType:Structures"/>
+        <Period value="10"/>
+        <Build value="CreepCircle4x4BaseRadius10"/>
+        <Start value="CreepCircle4x4BaseRadius10"/>
+        <Birth value="CreepCircle4x4BaseRadius10"/>
+        <Grown value="CreepCircle4x4BaseRadius10"/>
+    </CBehaviorCreepSource>
+</Catalog>

@@ -1,0 +1,1397 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CEffectApplyBehavior id="UltimateBeing@UltimateBuff">
+        <ValidatorArray index="0" removed="1"/>
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="ChargePushed">
+        <EditorCategories value=""/>
+    </CEffectApplyBehavior>
+    <CEffectCreatePersistent id="CreepTunnel@BurrowDelay">
+        <EditorCategories value=""/>
+        <InitialDelay value="0.325"/>
+        <InitialEffect value="CreepTunnel@TunnelingCloak"/>
+        <ExpireDelay value="0.1"/>
+        <ExpireEffect value="CreepTunnel@UnburrowDelay"/>
+    </CEffectCreatePersistent>
+    <CEffectDamage id="CreepTunnel@Dmg">
+        <EditorCategories value=""/>
+        <ResponseFlags index="Acquire" value="1"/>
+        <ResponseFlags index="Flee" value="1"/>
+        <ArmorReduction value="1"/>
+        <Flags index="Notification" value="1"/>
+        <Amount value="0">
+            <AccumulatorArray value="CreepTunnel@Multiply"/>
+            <AccumulatorArray value="CreepTunnel@FlatDmgBonus"/>
+        </Amount>
+        <ExcludeArray Value="Target"/>
+    </CEffectDamage>
+    <CEffectSet id="CreepTunnel@InitialSet">
+        <ValidatorArray value="TargetPointIsCreep"/>
+        <ValidatorArray value="TargetIsPathable"/>
+        <EditorCategories value=""/>
+        <EffectArray value="CreepTunnel@BurrowDelay"/>
+        <TargetLocationType value="Point"/>
+    </CEffectSet>
+    <CEffectEnumArea id="CreepTunnel@Search">
+        <EditorCategories value=""/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Item,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="1.3" Effect="CreepTunnel@Dmg"/>
+    </CEffectEnumArea>
+    <CEffectTeleport id="CreepTunnel@Teleport">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <TargetLocation Value="TargetPoint"/>
+        <PlacementArc value="360"/>
+        <PlacementRange value="3"/>
+        <TeleportFlags index="TestZone" value="1"/>
+    </CEffectTeleport>
+    <CEffectApplyBehavior id="CreepTunnel@TunnelingCloak">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+    </CEffectApplyBehavior>
+    <CEffectRemoveBehavior id="CreepTunnel@TunnelingCloakRemove">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <BehaviorLink value="CreepTunnel@TunnelingCloak"/>
+    </CEffectRemoveBehavior>
+    <CEffectCreatePersistent id="CreepTunnel@UnburrowDelay">
+        <EditorCategories value=""/>
+        <InitialEffect value="CreepTunnel@Teleport"/>
+        <ExpireDelay value="0.175"/>
+        <ExpireEffect value="CreepTunnel@TunnelingCloakRemove"/>
+        <PeriodCount value="1"/>
+        <PeriodicEffectArray value="CreepTunnel@Search"/>
+        <PeriodicPeriodArray value="0.0625"/>
+    </CEffectCreatePersistent>
+    <CEffectApplyBehavior id="DefensiveRoar@ApplyBuffCaster">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Behavior value="DefensiveRoar@Caster"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="DefensiveRoar@ApplyBuffOther">
+        <EditorCategories value=""/>
+        <Behavior value="DefensiveRoar@Other"/>
+    </CEffectApplyBehavior>
+    <CEffectSet id="DefensiveRoar@InitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="DefensiveRoar@ApplyBuffCaster"/>
+        <EffectArray value="DefensiveRoar@SearchOther"/>
+    </CEffectSet>
+    <CEffectEnumArea id="DefensiveRoar@SearchOther">
+        <EditorCategories value=""/>
+        <ImpactLocation Value="CasterUnit"/>
+        <SearchFilters value="-;Self,Neutral,Enemy,Worker,Missile,Item,Dead,Hidden"/>
+        <AreaArray Radius="5" Effect="DefensiveRoar@ApplyBuffOther"/>
+        <SearchFlags index="ExtendByUnitRadius" value="1"/>
+        <SearchFlags index="OffsetAreaByAngle" value="0"/>
+    </CEffectEnumArea>
+    <CEffectApplyBehavior id="GlueStream@ApplyEnemy">
+        <ValidatorArray index="0" value="TargetIsEnemy"/>
+        <EditorCategories value=""/>
+        <Behavior value="GlueStream@Debuff"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="GlueStream@ApplyFriendly">
+        <ValidatorArray index="0" value="TargetIsAllyorPlayer"/>
+        <ValidatorArray value="TargetNotWorker"/>
+        <ValidatorArray value="NotStructureTarget"/>
+        <EditorCategories value=""/>
+        <Behavior value="GlueStream@Buff"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="GlueStream@ApplyCaster">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Behavior value="GlueStream@BuffCaster"/>
+    </CEffectApplyBehavior>
+    <CEffectSet id="GlueStream@ApplySet">
+        <ValidatorArray value="noMarkers"/>
+        <EditorCategories value=""/>
+        <EffectArray value="GlueStream@ApplyEnemy"/>
+        <EffectArray value="GlueStream@Dmg"/>
+        <EffectArray value="GlueStream@ApplyFriendly"/>
+    </CEffectSet>
+    <CEffectDamage id="GlueStream@Dmg">
+        <ValidatorArray value="TargetIsEnemy"/>
+        <EditorCategories value=""/>
+        <Amount value="0">
+            <AccumulatorArray value="GlueStream@DmgScaled"/>
+            <AccumulatorArray value="GlueStream@DmgBase"/>
+            <AccumulatorArray value="HeroSpellDmgMultiplier"/>
+        </Amount>
+    </CEffectDamage>
+    <CEffectSet id="GlueStream@ExplosionDummy">
+        <EditorCategories value=""/>
+        <TargetLocationType value="Point"/>
+    </CEffectSet>
+    <CEffectCreatePersistent id="GlueStream@InitialPersistent">
+        <EditorCategories value=""/>
+        <Marker>
+            <MatchFlags index="Id" value="1"/>
+        </Marker>
+        <WhichLocation Value="CasterPoint"/>
+        <OffsetVectorStartLocation Value="CasterPoint"/>
+        <InitialOffset value="0,-7,0"/>
+        <FinalOffset value="0,-7,0"/>
+        <PeriodCount value="7"/>
+        <PeriodicEffectArray value="GlueStream@Search"/>
+        <PeriodicOffsetArray value="0,-0.5,0"/>
+        <PeriodicOffsetArray value="0,-1.5,0"/>
+        <PeriodicOffsetArray value="0,-2.5,0"/>
+        <PeriodicOffsetArray value="0,-3.5,0"/>
+        <PeriodicOffsetArray value="0,-4.5,0"/>
+        <PeriodicOffsetArray value="0,-5.5,0"/>
+        <PeriodicOffsetArray value="0,-6.5,0"/>
+        <PeriodicPeriodArray value="0.0625"/>
+        <Flags index="Channeled" value="1"/>
+        <InitialEffect value="GlueStream@ApplyCaster"/>
+    </CEffectCreatePersistent>
+    <CEffectEnumArea id="GlueStream@Search">
+        <EditorCategories value=""/>
+        <LaunchLocation Value="SourcePoint"/>
+        <SearchFilters value="-;Self,Neutral,Worker,RawResource,HarvestableResource,Missile,Item,Dead,Hidden,Invulnerable"/>
+        <AreaArray RectangleWidth="2" RectangleHeight="1" Effect="GlueStream@ApplySet"/>
+    </CEffectEnumArea>
+    <CEffectSet id="Tackle@ApplySet">
+        <EditorCategories value=""/>
+        <EffectArray value="Tackle@FriendlyTackle"/>
+        <EffectArray value="Tackle@Dmg"/>
+        <EffectArray value="Tackle@KnockbackController"/>
+    </CEffectSet>
+    <CEffectCancelOrder id="Tackle@CancelMove">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <AbilCmd value="move,Move"/>
+    </CEffectCancelOrder>
+    <CEffectApplyBehavior id="Tackle@CasterBuff">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="Tackle@CasterSelfBuff">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Behavior value="Tackle@FriendlyTackleCaster"/>
+    </CEffectApplyBehavior>
+    <CEffectDamage id="Tackle@Dmg">
+        <ValidatorArray value="TargetIsEnemy"/>
+        <ValidatorArray value="noMarkers"/>
+        <EditorCategories value=""/>
+        <Amount value="0">
+            <AccumulatorArray value="Tackle@DmgScaled"/>
+            <AccumulatorArray value="Tackle@DmgBase"/>
+            <AccumulatorArray value="HeroSpellDmgMultiplier"/>
+        </Amount>
+    </CEffectDamage>
+    <CEffectCreatePersistent id="Tackle@Endpoint">
+        <EditorCategories value=""/>
+        <WhichLocation Value="CasterUnit"/>
+        <OffsetVectorStartLocation Value="CasterUnit"/>
+        <InitialEffect value="Tackle@IssueMove"/>
+        <InitialOffset value="0,-7,0"/>
+    </CEffectCreatePersistent>
+    <CEffectApplyBehavior id="Tackle@FriendlyTackle">
+        <ValidatorArray index="0" value="TargetIsAllyorPlayer"/>
+        <ValidatorArray value="TargetNotWorker"/>
+        <ValidatorArray value="NotStructureTarget"/>
+        <EditorCategories value=""/>
+    </CEffectApplyBehavior>
+    <CEffectSet id="Tackle@InitialSet">
+        <EditorCategories value=""/>
+        <TargetLocationType value="Point"/>
+        <ValidatorArray value="Pathable"/>
+        <EffectArray value="Tackle@CasterBuff"/>
+        <EffectArray value="Tackle@CasterSelfBuff"/>
+        <EffectArray value="Tackle@Endpoint"/>
+        <EffectArray value="Tackle@Persistent"/>
+    </CEffectSet>
+    <CEffectIssueOrder id="Tackle@IssueMove">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Abil value="move"/>
+        <Player Value="Caster"/>
+        <Target Value="TargetPoint"/>
+    </CEffectIssueOrder>
+    <CEffectApplyForce id="Tackle@Knockback">
+        <EditorCategories value=""/>
+        <WhichLocation Effect="Tackle@KnockbackController" Value="SourceUnit"/>
+        <Amount value="100"/>
+        <MassFraction value="0.5"/>
+    </CEffectApplyForce>
+    <CEffectCreatePersistent id="Tackle@KnockbackController">
+        <ValidatorArray value="TargetIsEnemyAndNotHeroic"/>
+        <ValidatorArray value="Tackle@NoKnockback"/>
+        <ValidatorArray value="NotStructureTarget"/>
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetUnit"/>
+        <InitialEffect value="Tackle@KnockbackMinimumSpeed"/>
+        <PeriodCount value="3"/>
+        <PeriodicEffectArray value="Tackle@KnockbackSet"/>
+        <PeriodicPeriodArray value="0"/>
+        <PeriodicPeriodArray value="0.0625"/>
+        <PeriodicPeriodArray value="0.0625"/>
+    </CEffectCreatePersistent>
+    <CEffectApplyBehavior id="Tackle@KnockbackMinimumSpeed">
+        <EditorCategories value=""/>
+    </CEffectApplyBehavior>
+    <CEffectEnumArea id="Tackle@KnockbackRekursion">
+        <EditorCategories value=""/>
+        <LaunchLocation Value="CasterUnit"/>
+        <ImpactLocation Value="TargetUnit"/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Heroic,Missile,Dead,Hidden"/>
+        <AreaArray Arc="90" Radius="0.5" Effect="Tackle@KnockbackController"/>
+        <SearchFlags index="ExtendByUnitRadius" value="1"/>
+    </CEffectEnumArea>
+    <CEffectSet id="Tackle@KnockbackSet">
+        <EditorCategories value=""/>
+        <EffectArray value="Tackle@Knockback"/>
+        <EffectArray value="Tackle@KnockbackRekursion"/>
+        <SetSource value="1"/>
+    </CEffectSet>
+    <CEffectCreatePersistent id="Tackle@Persistent">
+        <EditorCategories value=""/>
+        <WhichLocation Value="CasterUnit"/>
+        <PeriodCount value="16"/>
+        <PeriodicEffectArray value="Tackle@Search"/>
+        <PeriodicPeriodArray value="0.0446"/>
+        <Marker>
+            <MatchFlags index="Id" value="1"/>
+        </Marker>
+    </CEffectCreatePersistent>
+    <CEffectEnumArea id="Tackle@Search">
+        <EditorCategories value=""/>
+        <LaunchLocation Value="CasterUnit"/>
+        <ImpactLocation Value="CasterUnit"/>
+        <SearchFilters value="-;Self,Neutral,Item,Dead,Hidden,Invulnerable"/>
+        <AreaArray Arc="144.9975" Radius="1.5" Effect="Tackle@ApplySet"/>
+        <SearchFlags index="ExtendByUnitRadius" value="1"/>
+    </CEffectEnumArea>
+    <CEffectSet id="ChargeForceSetSmall">
+        <EditorCategories value=""/>
+        <EffectArray value="ChargeApplyForceBuff"/>
+        <EffectArray value="ChargeForceController"/>
+        <EffectArray value="ChargeSearchSmall"/>
+        <EffectArray value="ChargePushed"/>
+        <ValidatorArray value="ChargeNotPushed"/>
+    </CEffectSet>
+    <CEffectApplyBehavior id="GlueSprayApplyBuff">
+        <EditorCategories value=""/>
+        <Behavior value="GlueSprayBuff"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="GlueSprayApplyDebuff">
+        <EditorCategories value=""/>
+        <Behavior value="GlueSprayDebuff"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="GlueSprayApplyDebuffBoss">
+        <EditorCategories value=""/>
+        <Behavior value="GlueSprayDebuffBoss"/>
+    </CEffectApplyBehavior>
+    <CEffectSet id="GlueSprayInitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="GlueSpraySearchEnemy"/>
+        <EffectArray value="GlueSpraySearchFriend"/>
+        <EffectArray value="GlueSpraySearchBoss"/>
+        <TargetLocationType value="Point"/>
+    </CEffectSet>
+    <CEffectEnumArea id="GlueSpraySearchBoss">
+        <EditorCategories value=""/>
+        <SearchFilters value="Heroic;Self,Player,Ally,Neutral,Structure,Missile,Item,Stasis,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="6" Effect="GlueSprayApplyDebuffBoss"/>
+        <SearchFlags index="ExtendByUnitRadius" value="1"/>
+        <SearchFlags index="OffsetAreaByAngle" value="0"/>
+    </CEffectEnumArea>
+    <CEffectEnumArea id="GlueSpraySearchEnemy">
+        <EditorCategories value=""/>
+        <LaunchLocation Value="CasterUnit"/>
+        <ImpactLocation Value="CasterUnit"/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Structure,Heroic,Missile,Item,Stasis,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="6" Effect="GlueSprayApplyDebuff"/>
+        <SearchFlags index="ExtendByUnitRadius" value="1"/>
+        <SearchFlags index="OffsetAreaByAngle" value="0"/>
+    </CEffectEnumArea>
+    <CEffectEnumArea id="GlueSpraySearchFriend">
+        <EditorCategories value=""/>
+        <SearchFilters value="-;Neutral,Enemy,Structure,Worker,Missile,Item,Buried,Stasis,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="6" Effect="GlueSprayApplyBuff"/>
+        <SearchFlags index="ExtendByUnitRadius" value="1"/>
+        <SearchFlags index="OffsetAreaByAngle" value="0"/>
+    </CEffectEnumArea>
+    <CEffectApplyBehavior id="ChargeApplyArmorBuff">
+        <EditorCategories value=""/>
+        <OwningPlayer Value="Source"/>
+        <WhichUnit Value="Source"/>
+        <Behavior value="ChargeArmorBuff"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="ChargeApplyForceBuff">
+        <EditorCategories value=""/>
+        <Behavior value="ChargeForceBuff"/>
+    </CEffectApplyBehavior>
+    <CEffectDestroyPersistent id="ChargeDestoyEndpoint">
+        <EditorCategories value=""/>
+        <WhichLocation Effect="ChargeEndPointSet" Value="SourcePoint"/>
+        <Effect value="ChargeEndPointPersistent"/>
+        <Count value="1"/>
+        <Radius value="2"/>
+        <OwningPlayer Effect="ChargeInitialSet" Value="Source"/>
+    </CEffectDestroyPersistent>
+    <CEffectDamage id="ChargeDmg">
+        <EditorCategories value=""/>
+        <Amount value="60"/>
+    </CEffectDamage>
+    <CEffectCreatePersistent id="ChargeEndPointPersistent">
+        <EditorCategories value=""/>
+        <InitialOffset value="0,1,0"/>
+        <ExpireOffset value="0,1,0"/>
+        <FinalOffset value="0,1,0"/>
+        <PeriodCount value="12"/>
+        <PeriodicEffectArray value="ChargeEndPointSearch"/>
+        <PeriodicPeriodArray value="0.17"/>
+        <OwningPlayer Effect="ChargeInitialSet" Value="Source"/>
+    </CEffectCreatePersistent>
+    <CEffectRemoveBehavior id="ChargeEndPointRemoveBeh">
+        <EditorCategories value=""/>
+        <BehaviorLink value="ChargePushBuff"/>
+    </CEffectRemoveBehavior>
+    <CEffectSet id="ChargeEndPointSet">
+        <EditorCategories value=""/>
+        <EffectArray value="ChargeDestoyEndpoint"/>
+        <EffectArray value="ChargeEndPointRemoveBeh"/>
+        <EffectArray value="ChargeEndPointIssueStop"/>
+        <EffectArray value="ChargeApplyArmorBuff"/>
+    </CEffectSet>
+    <CEffectIssueOrder id="ChargeEndPointIssueStop">
+        <EditorCategories value=""/>
+        <Abil value="stop"/>
+    </CEffectIssueOrder>
+    <CEffectApplyForce id="ChargeForce">
+        <EditorCategories value=""/>
+        <Amount value="100"/>
+        <WhichLocation Value="SourcePoint"/>
+        <MassFraction value="0.5"/>
+    </CEffectApplyForce>
+    <CEffectCreatePersistent id="ChargeForceController">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetUnit"/>
+        <InitialEffect value="ChargeForce"/>
+        <PeriodCount value="3"/>
+        <PeriodicEffectArray value="ChargeForce"/>
+        <PeriodicPeriodArray value="0.0625"/>
+        <OffsetVectorStartLocation Value="SourcePoint"/>
+    </CEffectCreatePersistent>
+    <CEffectSet id="ChargeForceSet">
+        <EditorCategories value=""/>
+        <EffectArray value="ChargeDmg"/>
+        <EffectArray value="ChargeApplyForceBuff"/>
+        <EffectArray value="ChargeForceController"/>
+        <EffectArray value="ChargeSearchSmall"/>
+        <EffectArray value="ChargePushed"/>
+    </CEffectSet>
+    <CEffectIssueOrder id="ChargeIssueOrder">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Source"/>
+        <Abil value="move"/>
+        <CmdFlags index="Preempt" value="1"/>
+        <Target Value="TargetPoint"/>
+        <Player Value="Source"/>
+    </CEffectIssueOrder>
+    <CEffectApplyBehavior id="ChargeApplyPushBuff">
+        <EditorCategories value=""/>
+        <OwningPlayer Value="Source"/>
+        <WhichUnit Value="Source"/>
+        <Behavior value="ChargePushBuff"/>
+    </CEffectApplyBehavior>
+    <CEffectEnumArea id="ChargeSearch">
+        <EditorCategories value=""/>
+        <AreaArray Arc="169.9804" Radius="1.5" Effect="ChargeForceSet"/>
+        <LaunchLocation Value="SourcePoint"/>
+        <SearchFilters value="Ground;Self,Player,Ally,Neutral,Structure,Heroic,Missile,Dead,Hidden,Invulnerable"/>
+        <SearchFlags index="ExtendByUnitRadius" value="1"/>
+        <SearchFlags index="SameCliff" value="1"/>
+        <ExcludeArray Effect="ChargeSearch" Value="Target"/>
+        <ExcludeArray Effect="ChargeSearchSmall" Value="Target"/>
+    </CEffectEnumArea>
+    <CEffectSet id="ChargeInitialSet">
+        <EditorCategories value=""/>
+        <OwningPlayer Value="Origin"/>
+        <EffectArray value="ChargeIssueOrder"/>
+        <EffectArray value="ChargeApplyPushBuff"/>
+        <EffectArray value="ChargeEndPointPersistent"/>
+        <EffectArray value="ChargeApplyArmorBuff"/>
+        <TargetLocationType value="Point"/>
+        <ValidatorArray value="TargetIsPathable"/>
+    </CEffectSet>
+    <CEffectEnumArea id="ChargeSearchSmall">
+        <EditorCategories value=""/>
+        <LaunchLocation Effect="ChargeInitialSet" Value="SourcePoint"/>
+        <ImpactLocation Effect="ChargeForceSet" Value="TargetUnit"/>
+        <ExcludeArray Effect="ChargeSearch" Value="Target"/>
+        <ExcludeArray Effect="ChargeSearchSmall" Value="Target"/>
+        <SearchFilters value="Ground;Self,Player,Ally,Neutral,Structure,Heroic,Missile,Dead,Hidden,Invulnerable"/>
+        <AreaArray Arc="45" Radius="0.125" Effect="ChargeForceSetSmall"/>
+        <SearchFlags index="ExtendByUnitRadius" value="1"/>
+        <SearchFlags index="SameCliff" value="1"/>
+    </CEffectEnumArea>
+    <CEffectEnumArea id="ChargeSearchHeroic">
+        <EditorCategories value=""/>
+        <SearchFilters value="Heroic;Player,Ally,Neutral,Missile,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="1" Effect="ChargeEndPointSearch"/>
+        <SearchFlags index="ExtendByUnitRadius" value="1"/>
+        <SearchFlags index="OffsetByUnitRadius" value="1"/>
+        <SearchFlags index="OffsetAreaByAngle" value="0"/>
+    </CEffectEnumArea>
+    <CEffectSet id="ChargeSearchSet">
+        <EditorCategories value=""/>
+        <EffectArray value="ChargeSearch"/>
+        <EffectArray value="ChargeSearchHeroic"/>
+    </CEffectSet>
+    <CEffectDamage id="HeroRoachWeaponDmg" parent="DU_WEAP_MISSILE">
+        <EditorCategories value="Race:Zerg"/>
+        <KindSplash value="Ranged"/>
+        <Amount value="0">
+            <AccumulatorArray value="HeroRoachWeaponDmgScaled"/>
+            <AccumulatorArray value="HeroRoachWeaponDmgBase"/>
+        </Amount>
+        <AreaArray Radius="0.75" Fraction="1"/>
+        <ExcludeArray Value="Target"/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Item,Dead,Hidden,Invulnerable"/>
+        <ValidatorArray value="NotInvulnerable"/>
+    </CEffectDamage>
+    <CEffectLaunchMissile id="HeroRoachWeaponMissle">
+        <EditorCategories value="Race:Zerg"/>
+        <ImpactEffect value="HeroRoachWeaponDmg"/>
+        <AmmoUnit value="AcidSalivaWeapon"/>
+    </CEffectLaunchMissile>
+    <CEffectEnumArea id="ChargeEndPointSearch">
+        <EditorCategories value=""/>
+        <LaunchLocation Effect="ChargeEndPointPersistent" Value="TargetPoint"/>
+        <SearchFilters value="Self;Ally,Neutral,Enemy,Dead,Hidden,Invulnerable"/>
+        <AreaArray RadiusBonus="0.1" Effect="ChargeEndPointSet"/>
+        <SearchFlags index="OffsetByUnitRadius" value="1"/>
+        <SearchFlags index="OffsetAreaByAngle" value="0"/>
+    </CEffectEnumArea>
+    <CAbilEffectInstant id="UltimateBeing">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Flags index="BestUnit" value="1"/>
+        <Flags index="Transient" value="1"/>
+        <Cost>
+            <Vital index="Energy" value="150"/>
+            <Cooldown Link="Abil/HeroRoachSharedCooldown" Location="Unit" TimeUse="45"/>
+        </Cost>
+        <CmdButtonArray index="Execute" DefaultButtonFace="UltimateBeing" Requirements="UltimateBeing@Req"/>
+        <Effect index="0" value="UltimateBeing@UltimateBuff"/>
+    </CAbilEffectInstant>
+    <CAbilEffectTarget id="Charge2">
+        <Alignment value="Negative"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="ChargeInitialSet"/>
+        <Flags index="RangeUsePathing" value="1"/>
+        <Flags index="RequireTargetVision" value="0"/>
+        <Cost>
+            <Vital index="Energy" value="75"/>
+            <Charge Link="Abil/UltraliskBurrowCharge"/>
+            <Cooldown Link="UltraliskBurrowCharge" Location="Unit" TimeUse="15"/>
+        </Cost>
+        <Range value="8"/>
+        <Arc value="360"/>
+        <CastIntroTime value="0.25"/>
+        <UninterruptibleArray index="Cast" value="1"/>
+        <UninterruptibleArray index="Channel" value="1"/>
+        <UninterruptibleArray index="Finish" value="1"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="Charge2" Requirements="HeroRoachChargeReq"/>
+    </CAbilEffectTarget>
+    <CAbilEffectTarget id="CreepTunnel">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="CreepTunnel@InitialSet"/>
+        <Cost>
+            <Vital index="Energy" value="25"/>
+            <Cooldown TimeUse="5"/>
+        </Cost>
+        <Range value="7"/>
+        <CastOutroTime value="1.1"/>
+        <CursorEffect value="CreepTunnel@Search"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="CreepTunnel" Requirements="CreepTunnel@Req"/>
+    </CAbilEffectTarget>
+    <CAbilEffectInstant id="DefensiveRoar">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="DefensiveRoar@InitialSet"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="DefensiveRoar"/>
+        <Flags index="Transient" value="1"/>
+        <Cost>
+            <Vital index="Energy" value="25"/>
+            <Charge Link="Abil/GlueStream"/>
+            <Cooldown Link="Abil/HeroRoachSharedCooldown" Location="Unit" TimeUse="20"/>
+        </Cost>
+    </CAbilEffectInstant>
+    <CAbilEffectInstant id="GlueSpray">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="GlueSprayInitialSet"/>
+        <Cost>
+            <Vital index="Energy" value="50"/>
+            <Cooldown TimeUse="10"/>
+        </Cost>
+        <CmdButtonArray index="Execute" DefaultButtonFace="GlueSpray"/>
+        <Flags index="Transient" value="1"/>
+    </CAbilEffectInstant>
+    <CAbilEffectTarget id="GlueStream">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="GlueStream@InitialPersistent"/>
+        <Range value="7"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="GlueStream" Requirements="GlueStream@Req"/>
+        <Flags index="RangeUseCasterRadius" value="0"/>
+        <Cost>
+            <Vital index="Energy" value="25"/>
+            <Cooldown Link="Abil/HeroRoachSharedCooldown" Location="Unit" TimeUse="20"/>
+        </Cost>
+    </CAbilEffectTarget>
+    <CAbilEffectTarget id="Tackle">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="Tackle@InitialSet"/>
+        <Range value="7"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="Tackle" Requirements="Tackle@Req"/>
+        <Cost>
+            <Vital index="Energy" value="25"/>
+            <Charge Link="Abil/GlueStream"/>
+            <Cooldown Link="Abil/HeroRoachSharedCooldown" Location="Unit" TimeUse="20"/>
+        </Cost>
+        <Flags index="RangeUsePathing" value="1"/>
+    </CAbilEffectTarget>
+    <CValidatorUnitCompareBehaviorCount id="DefensiveRoar@CasterBuffNotActive">
+        <Behavior value="DefensiveRoar@Caster"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorUnitCompareBehaviorCount id="DefensiveRoar@FriendlyBuffNotActive">
+        <Behavior value="DefensiveRoar@Other"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorUnitCompareBehaviorCount id="GlueStream@FriendlyBuffNotActive">
+        <Behavior value="GlueStream@Buff"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorUnitCompareBehaviorCount id="Tackle@CasterBuffNotActive">
+        <Behavior value="Tackle@FriendlyTackleCaster"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorUnitCompareBehaviorCount id="GlueStream@CasterBuffNotActive">
+        <Behavior value="GlueStream@BuffCaster"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorUnitCompareBehaviorCount id="Tackle@FriendlyBuffNotActive">
+        <Behavior value="Tackle@FriendlyTackle"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorUnitCompareBehaviorCount id="Tackle@NoKnockback">
+        <Behavior value="Tackle@KnockbackMinimumSpeed"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CRequirement id="Tackle@Req">
+        <NodeArray index="Use" Link="GTE875380897CountUpgradeTackle@UnlockCompleteOnly1"/>
+    </CRequirement>
+    <CRequirement id="GlueStream@Req">
+        <NodeArray index="Use" Link="GTE2043916139CountUpgradeGlueStream@UnlockCompleteOnly1"/>
+    </CRequirement>
+    <CRequirement id="HeroRoachChargeReq">
+        <NodeArray index="Use" Link="Eq2514512276CountUpgradeUnlockHeroRoachChargeCompleteOnly1"/>
+    </CRequirement>
+    <CRequirement id="CreepTunnel@Req">
+        <NodeArray index="Use" Link="GTE1136276364CountUpgradeCreepTunnel@UnlockCompleteOnly1"/>
+    </CRequirement>
+    <CRequirement id="UltimateBeing@Req">
+        <NodeArray index="Use" Link="CountUpgradeUltimateBeing@UnlockCompleteOnly1302983693"/>
+    </CRequirement>
+    <CButton id="UltimateBeing">
+        <Icon value="Assets\Textures\btn-upgrade-zerg-muscularaugments.dds"/>
+    </CButton>
+    <CButton id="GlueSpray">
+        <Icon value="Assets\Textures\btn-ability-zerg-contaminate-color.dds"/>
+    </CButton>
+    <CButton id="Charge2">
+        <Icon value="Assets\Textures\btn-upgrade-zerg-tunnelingclaws.dds"/>
+    </CButton>
+    <CButton id="CreepTunnel">
+        <Icon value="Assets\Textures\btn-ability-zerg-creepteleport.dds"/>
+    </CButton>
+    <CButton id="DefensiveRoar">
+        <Icon value="Assets\Textures\btn-ability-zerg-dehaka-superroar.dds"/>
+    </CButton>
+    <CButton id="GlueStream">
+        <Icon value="Assets\Textures\btn-ability-zerg-acidspores.dds"/>
+    </CButton>
+    <CButton id="Tackle">
+        <Icon value="Assets\Textures\btn-upgrade-zerg-tunnelingclaws.dds"/>
+    </CButton>
+    <CRequirementCountUpgrade id="CountUpgradeUltimateBeing@UnlockCompleteOnly1302983693">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="UltimateBeing@Unlock" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeGlueStream@UnlockCompleteOnly">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="GlueStream@Unlock" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeTackle@UnlockCompleteOnly">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="Tackle@Unlock" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementGTE id="GTE2043916139CountUpgradeGlueStream@UnlockCompleteOnly1">
+        <OperandArray index="0" value="CountUpgradeGlueStream@UnlockCompleteOnly"/>
+        <OperandArray index="1" value="1"/>
+    </CRequirementGTE>
+    <CRequirementGTE id="GTE875380897CountUpgradeTackle@UnlockCompleteOnly1">
+        <OperandArray index="0" value="CountUpgradeTackle@UnlockCompleteOnly"/>
+        <OperandArray index="1" value="1"/>
+    </CRequirementGTE>
+    <CActorModel id="GlueStream@Buff" parent="ModelAddition">
+        <EditorCategories value=""/>
+        <On Terms="Behavior.GlueStream@Buff.Create" Send="Create"/>
+        <On Terms="Behavior.GlueStream@Debuff.Create" Send="Create"/>
+        <On Terms="Behavior.GlueStream@BuffCaster.Create" Send="Create"/>
+        <On Terms="ActorCreation" Send="TimerSet 10.000000 AutoDestroy"/>
+        <On Terms="TimerExpired; TimerName AutoDestroy" Send="AnimBracketStop BSD"/>
+        <On Terms="ActorCreation" Send="SetTintColor 150,80,255"/>
+        <HostSiteOps Ops="SOpAttachCenter"/>
+    </CActorModel>
+    <CActorQuad id="GlueStream@Guide" parent="ZergGuideVisualQuadDown" abil="GlueStream">
+        <EditorCategories value=""/>
+        <Height value="7.000000"/>
+        <Width value="2.000000"/>
+    </CActorQuad>
+    <CActorModel id="DefensiveRoar@Buff" parent="ModelAddition">
+        <EditorCategories value=""/>
+        <On Terms="Behavior.DefensiveRoar@Caster.Create" Send="Create"/>
+        <On Terms="Behavior.DefensiveRoar@Other.Create" Send="Create"/>
+        <On Terms="ActorCreation" Send="SetTintColor 255,0,128"/>
+        <On Terms="ActorCreation" Send="TimerSet 10.000000 AutoDestroy"/>
+        <On Terms="TimerExpired; TimerName AutoDestroy" Send="AnimBracketStop BSD"/>
+        <HostSiteOps Ops="SOpAttachCenter"/>
+    </CActorModel>
+    <CActorModel id="DefensiveRoar@Cast" parent="ModelAnimationStyleOneShot">
+        <Inherits index="Scale" value="1"/>
+        <EditorCategories value=""/>
+        <On Terms="Effect.DefensiveRoar@InitialSet.Start; At Caster" Send="Create"/>
+        <On Terms="ActorCreation" Send="SetTintColor 255,0,128"/>
+        <HostSiteOps Ops="SOpAttachCenter"/>
+    </CActorModel>
+    <CActorRange id="DefensiveRoar@Range" parent="RangeAbil" abil="DefensiveRoar">
+        <EditorCategories value=""/>
+        <Abil Link=""/>
+        <Range value="5.000000"/>
+    </CActorRange>
+    <CActorModel id="GlueStream@Stream" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On Terms="Effect.GlueStream@InitialPersistent.Start; At Caster" Send="Create"/>
+        <On Terms="ActorCreation" Send="SetTintColor 128,128,255"/>
+        <On Terms="Effect.GlueStream@InitialPersistent.Stop" Send="Destroy"/>
+        <On Terms="ActorCreation" Send="SetScale 1.000000,2.200000,1.000000 0.700000"/>
+        <HostSiteOps Ops="SOpAttachHead SOpMoveUpByDot5"/>
+        <ModelFlags index="AutomateGlobalLoops" value="1"/>
+    </CActorModel>
+    <CActorModel id="CreepTunnel@Explosion" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On Terms="Effect.CreepTunnel@Dmg.Start" Send="Create"/>
+        <HostSiteOps Ops="SOpHigherBy1"/>
+    </CActorModel>
+    <CActorRange id="CreepTunnel@Range" parent="RangeAbil" abil="CreepTunnel">
+        <EditorCategories value=""/>
+    </CActorRange>
+    <CActorSplat id="CreepTunnel@Splat" parent="ZergCursorSplat" abil="CreepTunnel">
+        <EditorCategories value=""/>
+    </CActorSplat>
+    <CActorModel id="Tackle@Buffed" parent="ModelAddition">
+        <EditorCategories value=""/>
+        <On Terms="Behavior.Tackle@FriendlyTackle.Create" Send="Create"/>
+        <On Terms="Behavior.Tackle@FriendlyTackleCaster.Create" Send="Create"/>
+        <On Terms="ActorCreation" Send="TimerSet 10.000000 AutoDestroy"/>
+        <On Terms="TimerExpired; TimerName AutoDestroy" Send="AnimBracketStop BSD"/>
+        <On Terms="ActorCreation" Send="SetTintColor 255,150,150"/>
+        <HostSiteOps Ops="SOpAttachOverhead"/>
+    </CActorModel>
+    <CActorModel id="Tackle@Caster" parent="ModelAddition">
+        <EditorCategories value=""/>
+        <On Terms="Behavior.Tackle@CasterBuff.On" Send="Create"/>
+        <On Terms="Behavior.Tackle@CasterBuff.Off" Send="Destroy"/>
+        <HostSiteOps Ops="SOpAttachHead"/>
+    </CActorModel>
+    <CActorQuad id="Tackle@Guide" parent="ZergGuideVisualQuadDown" abil="Tackle">
+        <EditorCategories value=""/>
+        <LaunchActor value="ZergGuideVisualQuadRedLaunch"/>
+        <CenterActor value="ZergGuideVisualQuadRedCenter"/>
+        <ImpactActor value="ZergGuideVisualQuadRedImpact"/>
+        <Height value="8.800000"/>
+        <Width value="3.500000"/>
+    </CActorQuad>
+    <CActorModel id="GlueSprayCast" parent="ModelAnimationStyleOneShot">
+        <Inherits index="Scale" value="1"/>
+        <EditorCategories value=""/>
+        <On Terms="Effect.GlueSprayInitialSet.Start" Send="Create"/>
+        <On Terms="ActorCreation" Send="SetTintColor 56,0,72"/>
+        <On Terms="ActorCreation" Send="SetScale 1.500000"/>
+        <HostSiteOps Ops="SOpAttachCenter"/>
+    </CActorModel>
+    <CActorRange id="GlueSprayRange" parent="RangeAbilHover" abil="GlueSpray">
+        <EditorCategories value=""/>
+        <Abil Link=""/>
+        <Range value="6.000000"/>
+    </CActorRange>
+    <CActorModel id="GlueSprayTarget" parent="ModelAnimationStyleContinuous">
+        <Inherits index="Scale" value="1"/>
+        <EditorCategories value=""/>
+        <On Terms="Behavior.GlueSprayBuff.On" Send="Create"/>
+        <On Terms="Behavior.GlueSprayBuff.Off" Send="Destroy"/>
+        <On Terms="Behavior.GlueSprayDebuff.On" Send="Create"/>
+        <On Terms="Behavior.GlueSprayDebuff.Off" Send="Destroy"/>
+        <On Terms="Behavior.GlueSprayDebuffBoss.On" Send="Create"/>
+        <On Terms="Behavior.GlueSprayDebuffBoss.Off" Send="Destroy"/>
+        <On Terms="ActorCreation" Send="SetScale 1.250000"/>
+        <HostSiteOps Ops="SOpAttachCenter"/>
+    </CActorModel>
+    <CActorModel id="ChargeDustImpact" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On index="0" Terms="ActorCreation" Send="$Birth"/>
+        <On index="1" Terms="AnimDone" Send="Destroy"/>
+        <On index="2" Terms="ActorOrphan" Send="Destroy"/>
+        <On Terms="Effect.ChargeDmg.Start" Send="Create"/>
+        <Model value="PhysicsImpactDustLight"/>
+    </CActorModel>
+    <CActorRange id="ChargeRange" parent="RangeAbil" abil="Charge2">
+        <EditorCategories value=""/>
+    </CActorRange>
+    <CActorModel id="ChargeRoachEffect" parent="ModelAddition">
+        <EditorCategories value=""/>
+        <On index="0" Terms="ActorCreation" Send="$Stand PlayForever"/>
+        <On index="2" Terms="Behavior.ChargeArmorBuff.On" Send="Create"/>
+        <On Terms="Behavior.ChargeArmorBuff.Off" Send="Destroy"/>
+        <HostSiteOps Ops="SOpAttachHead"/>
+        <Model value="RoachShield"/>
+    </CActorModel>
+    <CActorUnit id="HeroRoach" parent="GenericUnitStandard" unitName="HeroRoach">
+        <Aliases value="_UnitMedium"/>
+        <Macros value="ZergBurrowMobileAnimMacro"/>
+        <Macros value="ZergMediumBurrowEffects"/>
+        <Macros value="UnloadDropAnim"/>
+        <Macros value="PhysicsDeathsSwarmGround"/>
+        <Macros value="PhysicsDeathsVoidGround"/>
+        <Macros value="TerrainSquibAnimations"/>
+        <EditorCategories value=""/>
+        <On Terms="Abil.DefensiveRoar.SourceChannelStart" Send="AnimPlay AbilityUse Attack,Cover,02"/>
+        <On Terms="Behavior.TerranPartTransitionBurrow.On" Send="AnimBracketStart PartTransition Burrow IGNORE Unburrow OpeningPlayForever"/>
+        <On Terms="Behavior.TerranPartTransitionBurrow.Off" Send="AnimBracketStop PartTransition"/>
+        <On Terms="Abil.CreepTunnel.SourceChannelStart" Send="AnimPlay Abil1 Burrow"/>
+        <On Terms="Abil.CreepTunnel.SourceChannelStart" Send="TimerSet 0.600000 CreepTunnelIntro"/>
+        <On Terms="TimerExpired; TimerName CreepTunnelIntro" Send="AnimPlay Abil1 Unburrow"/>
+        <On Terms="Abil.GlueStream.SourceChannelStart" Send="AnimPlay Abil1 Attack"/>
+        <On Terms="Behavior.UltimateBeing@UltimateBuff.On" Send="ModelSwap UltimateBeing@RoachUpgrade"/>
+        <On Terms="Behavior.UltimateBeing@UltimateBuff.Off" Send="ModelSwap Roach_Deluxe"/>
+        <On Terms="Behavior.UltimateBeing@UltimateBuff.On" Send="SetScale 1.450000 0.250000 UltimateBeing"/>
+        <On Terms="Behavior.UltimateBeing@UltimateBuff.Off" Send="ClearScale 0.250000 UltimateBeing"/>
+        <Model value="Roach_Deluxe"/>
+        <ModelFlags index="OutlineEmitter" value="1"/>
+        <BuildModel value="Roach_Deluxe"/>
+        <DeathArray index="Normal" ModelLink="Roach_Deluxe_Death" SoundLink="Roach_Explode"/>
+        <DeathArray index="Disintegrate" ModelLink="Roach_Deluxe_Death_Acid" SoundLink="Uni_DeathFXAcid"/>
+        <DeathArray index="Fire" ModelLink="Roach_Deluxe_Death_Fire" SoundLink="Uni_DeathFXFire"/>
+        <DeathCustoms ModelLink="Roach_Deluxe_DeathRagdoll" Name="RagdollBasic">
+            <BodySquibs Name="FireOnMetal"/>
+            <BodySquibs Name="BloodReduced" IsFallback="1"/>
+        </DeathCustoms>
+        <DeathCustoms Name="RagdollSiegeTank" InheritsFrom="RagdollBasic"/>
+        <DeathCustoms Name="RagdollNuke" InheritsFrom="RagdollBasic">
+            <BodySquibs Name="Fire"/>
+        </DeathCustoms>
+        <DeathCustoms Name="RagdollFire" InheritsFrom="RagdollBasic">
+            <BodySquibs Name="Fire"/>
+        </DeathCustoms>
+        <DeathCustoms Name="RagdollAcid" InheritsFrom="RagdollBasic">
+            <BodySquibs Name="Acid"/>
+        </DeathCustoms>
+        <DeathCustoms Name="RagdollBaneling" InheritsFrom="RagdollBasic">
+            <BodySquibs Name="Acid"/>
+        </DeathCustoms>
+        <DeathCustoms Name="RagdollUltraUnburrow" InheritsFrom="RagdollBasic"/>
+        <DeathCustoms Name="RagdollOverkillDPRH" InheritsFrom="RagdollBasic"/>
+        <DeathCustoms Name="RagdollOverkillDOI" InheritsFrom="RagdollBasic"/>
+        <DeathCustoms Name="RagdollMidair" InheritsFrom="RagdollBasic"/>
+        <DeathCustoms>
+            <ModelLink value="DeathVoidShadowMedium"/>
+            <SoundLink value="ShadowUnit_DeathFX"/>
+            <VoiceLink value="ShadowUnit_DeathVox"/>
+            <Name value="Shadow"/>
+        </DeathCustoms>
+        <DeathActorModel value="UnitDeathModelWithDeathMotionGround"/>
+        <PlacementModel value="Roach_Deluxe"/>
+        <PortraitModel value="Roach_Deluxe_Portrait"/>
+        <TerrainSquibs>
+            <GroupName value="RippleStandard"/>
+            <MovementDistance value="0.150000,0.150000"/>
+            <IdlePeriod value="0.100000,0.250000"/>
+            <RangeUp value="1.000000"/>
+            <RangeDown value="1.000000"/>
+            <AttachQuery Methods="AMFilterCenter"/>
+            <Visuals TerrainPhysicsMaterial="Water" ActorModel="TerrainSquibHarnessContinuous" ModelLink="WaterRippleLarge"/>
+        </TerrainSquibs>
+        <WalkAnimMoveSpeed value="2.25"/>
+        <BarOffset value="55"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\wireframe-zerg-roach-collectionskins-deluxe.dds"/>
+        </GroupIcon>
+        <HeroIcon value="Assets\Textures\btn-unit-roach-collectionskin-deluxe.dds"/>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-zerg-groundcarapace-level0.dds"/>
+        <ShieldArmorIcon value="Assets\Textures\btn-upgrade-zerg-swarmfrenzy.dds"/>
+        <SoundArray index="Ready" value="Roach_Ready"/>
+        <SoundArray index="What" value="Roach_What"/>
+        <SoundArray index="Yes" value="Roach_Yes"/>
+        <SoundArray index="Attack" value="Roach_Attack"/>
+        <SoundArray index="Pissed" value="Roach_Pissed"/>
+        <StatusColors index="Shields">
+            <ColorArray index="0" value="255,0,128,0"/>
+        </StatusColors>
+        <UnitIcon value="Assets\Textures\btn-unit-roach-collectionskin-deluxe.dds"/>
+        <VitalColors index="Shields">
+            <ColorArray value="255,0,128,0"/>
+        </VitalColors>
+        <VitalNames index="Shields" value="Vital/ZergShields"/>
+        <Wireframe>
+            <Image value="Assets\Textures\wireframe-zerg-roach_collection.dds"/>
+        </Wireframe>
+        <WireframeShieldColor value="255,0,128,0"/>
+        <Scale value="1.200000"/>
+        <CustomUnitStatusFrame value="SSF_UnitStatus/HeroStatus"/>
+        <StatusBarOn index="Shields" value="1"/>
+        <StatusBarOn index="Life" value="1"/>
+        <StatusBarOn index="Energy" value="1"/>
+        <StatusBarOn index="Progress" value="1"/>
+        <StatusBarOn index="Duration" value="1"/>
+        <UnitFlags index="SuppressDefaultStatusBar" value="1"/>
+    </CActorUnit>
+    <CActorAction id="HeroRoachAttack" parent="GenericAttack" effectImpact="HeroRoachWeaponDmg" effectLaunch="HeroRoachWeaponMissle">
+        <EditorCategories value=""/>
+        <LaunchAttachQuery Methods="Head"/>
+        <LaunchAssets Model="RoachAttackLaunch" Sound="Roach_AttackLaunchRanged"/>
+        <Beam value="RoachAttackBeam"/>
+        <Missile value="RoachAttackMissile"/>
+        <ImpactMap index="None" Model="RoachMissileImpact" Sound="Roach_AttackImpactRanged" ModelReaction="RoachAttackImpactReaction"/>
+        <ImpactMap index="Shield" Sound="RoachAttackImpactShield" ModelReaction="RoachAttackImpactReactionShield"/>
+        <ImpactPhysics Name="AcidSalivaImpact" MatchKeys="Basic" Physics="RoachAttackDeathForce"/>
+        <DamageMap index="None" Model="RoachAttackDamage" Sound="RoachAttackDamage" ModelReaction="RoachAttackDamageReaction"/>
+        <DamageMap index="Shield" Sound="RoachAttackDamageShield" ModelReaction="RoachAttackDamageReactionShield"/>
+        <AcquisitionYawHalfArc value="10.000000"/>
+        <AcquisitionPitchHalfArc value="15.000000"/>
+        <AccuracyHalfArc value="15.000000"/>
+    </CActorAction>
+    <CActorModel id="UltimateBeing@ModelSwapVisual" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On Terms="Behavior.UltimateBeing@UltimateBuff.Create" Send="Create"/>
+        <On Terms="Behavior.UltimateBeing@UltimateBuff.Destroy" Send="Create"/>
+        <Host Subject="_Selectable"/>
+        <HostSiteOps Ops="SOpAttachCenter"/>
+    </CActorModel>
+    <CModel id="UltimateBeing@ModelSwapVisual">
+        <Model value="Assets\Effects\Zerg\Dehaka_Coop_LevelUp\Dehaka_Coop_LevelUp.m3"/>
+    </CModel>
+    <CModel id="UltimateBeing@RoachUpgrade">
+        <Model value="Assets\Units\Zerg\Roach_Deluxe_Collection_Upgrade\Roach_Deluxe_Collection_Upgrade.m3"/>
+    </CModel>
+    <CModel id="CreepTunnel@Explosion">
+        <Model value="Assets\Effects\Other\PhysicsImpactRockMassive\PhysicsImpactRockMassive.m3"/>
+        <ScaleMax value="2.000000,2.000000,2.000000"/>
+        <ScaleMin value="2.000000,2.000000,2.000000"/>
+    </CModel>
+    <CModel id="DefensiveRoar@Buff">
+        <Model value="Assets\Effects\Zerg\Fungal_Snare\Fungal_Snare.m3"/>
+        <ScaleMax value="1.200000,1.200000,1.200000"/>
+        <ScaleMin value="1.200000,1.200000,1.200000"/>
+    </CModel>
+    <CModel id="DefensiveRoar@Cast">
+        <Model value="Assets\Effects\Zerg\Fungal_Snare_Missile_Impact\Fungal_Snare_Missile_Impact.m3"/>
+        <ScaleMax value="2.750000,2.750000,1.300000"/>
+        <ScaleMin value="2.750000,2.750000,1.300000"/>
+    </CModel>
+    <CModel id="GlueStream@Buff">
+        <Model value="Assets\Effects\Zerg\CorrosiveBileImpact\CorrosiveBileImpact.m3"/>
+        <ScaleMax value="1.250000,1.250000,1.250000"/>
+        <ScaleMin value="1.250000,1.250000,1.250000"/>
+    </CModel>
+    <CModel id="GlueStream@Stream">
+        <Model value="Assets\Effects\Zerg\Infested_Diamondback_Slime\Infested_Diamondback_Slime.m3"/>
+        <ScaleMax value="2.000000,0.625000,1.500000"/>
+        <ScaleMin value="2.000000,0.625000,1.500000"/>
+    </CModel>
+    <CModel id="Tackle@Buffed">
+        <Model value="Assets\Effects\Zerg\AggressiveMutation_State\AggressiveMutation_State.m3"/>
+        <ScaleMax value="1.600000,1.600000,1.600000"/>
+        <ScaleMin value="1.600000,1.600000,1.600000"/>
+    </CModel>
+    <CModel id="Tackle@Caster">
+        <Model value="Assets\Effects\Zerg\AdaptivePlating\AdaptivePlating.m3"/>
+    </CModel>
+    <CWeaponLegacy id="HeroRoachWeapon">
+        <EditorCategories value="Race:Zerg"/>
+        <Icon value="Assets\Textures\btn-upgrade-zerg-missileattacks-level0.dds"/>
+        <DisplayEffect value="HeroRoachWeaponDmg"/>
+        <TargetFilters value="Visible;Ally,Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <MinScanRange value="7"/>
+        <Marker Link="Weapon/AcidSaliva"/>
+        <Cost>
+            <Cooldown Link="Weapon/AcidSaliva"/>
+        </Cost>
+        <Period value="1.5"/>
+        <Effect value="HeroRoachWeaponMissle"/>
+    </CWeaponLegacy>
+    <CAccumulatorArithmetic id="GlueStream@DmgScaled">
+        <Parameters value="0">
+            <AccumulatorArray value="HeroLevelWeaponDmgBonus"/>
+        </Parameters>
+        <Parameters value="0">
+            <AccumulatorArray value="GlueStream@DmgModifier"/>
+        </Parameters>
+        <Operation value="Multiply"/>
+    </CAccumulatorArithmetic>
+    <CAccumulatorArithmetic id="HeroRoachWeaponDmgScaled">
+        <Parameters value="0">
+            <AccumulatorArray value="WeaponDmgUpgradeCollector"/>
+            <AccumulatorArray value="HeroLevelWeaponDmgBonus"/>
+        </Parameters>
+        <Parameters value="0">
+            <AccumulatorArray value="HeroRoachWeaponDmgModifier"/>
+        </Parameters>
+        <Operation value="Multiply"/>
+    </CAccumulatorArithmetic>
+    <CAccumulatorArithmetic id="Tackle@DmgScaled">
+        <Parameters value="0">
+            <AccumulatorArray value="HeroLevelWeaponDmgBonus"/>
+        </Parameters>
+        <Parameters value="0">
+            <AccumulatorArray value="Tackle@DmgModifier"/>
+        </Parameters>
+        <Operation value="Multiply"/>
+    </CAccumulatorArithmetic>
+    <CAccumulatorConstant id="GlueStream@DmgBase">
+        <Amount value="175"/>
+    </CAccumulatorConstant>
+    <CAccumulatorConstant id="GlueStream@DmgModifier">
+        <Amount value="1.5"/>
+    </CAccumulatorConstant>
+    <CAccumulatorConstant id="Tackle@DmgBase">
+        <Amount value="275"/>
+    </CAccumulatorConstant>
+    <CAccumulatorConstant id="Tackle@DmgModifier">
+        <Amount value="2"/>
+    </CAccumulatorConstant>
+    <CAccumulatorConstant id="HeroRoachWeaponDmgModifier">
+        <Amount value="1"/>
+    </CAccumulatorConstant>
+    <CAccumulatorConstant id="CreepTunnel@DmgMultiplier">
+        <ApplicationRule value="Multiply"/>
+        <Amount value="1.2"/>
+    </CAccumulatorConstant>
+    <CAccumulatorConstant id="CreepTunnel@FlatDmgBonus">
+        <Amount value="50"/>
+    </CAccumulatorConstant>
+    <CAccumulatorArithmetic id="CreepTunnel@Multiply">
+        <Parameters value="0">
+            <AccumulatorArray value="HeroRoachWeaponDmgBase"/>
+            <AccumulatorArray value="VeterancyLvlx1"/>
+        </Parameters>
+        <Parameters value="1">
+            <AccumulatorArray value="CreepTunnel@DmgMultiplier"/>
+        </Parameters>
+        <Operation value="Multiply"/>
+    </CAccumulatorArithmetic>
+    <CAccumulatorConstant id="HeroRoachWeaponDmgBase">
+        <Amount value="100"/>
+    </CAccumulatorConstant>
+    <CDataCollectionAbil id="CreepTunnel">
+        <EditorCategories value="DataGroup:Ability,Race:Zerg"/>
+        <DataRecord Entry="Abil,CreepTunnel"/>
+        <DataRecord Entry="Actor,CreepTunnel@Explosion"/>
+        <DataRecord Entry="Actor,CreepTunnel@Range"/>
+        <DataRecord Entry="Actor,CreepTunnel@Splat"/>
+        <DataRecord Entry="Behavior,CreepTunnel@TunnelingCloak"/>
+        <DataRecord Entry="Button,CreepTunnel"/>
+        <DataRecord Entry="Effect,CreepTunnel@InitialSet"/>
+        <DataRecord Entry="Effect,CreepTunnel@BurrowDelay"/>
+        <DataRecord Entry="Effect,CreepTunnel@UnburrowDelay"/>
+        <DataRecord Entry="Effect,CreepTunnel@Teleport"/>
+        <DataRecord Entry="Effect,CreepTunnel@Dmg"/>
+        <DataRecord Entry="Effect,CreepTunnel@Search"/>
+        <DataRecord Entry="Effect,CreepTunnel@TunnelingCloak"/>
+        <DataRecord Entry="Effect,CreepTunnel@TunnelingCloakRemove"/>
+        <DataRecord Entry="Model,CreepTunnel@Explosion"/>
+        <DataRecord Entry="Requirement,CreepTunnel@Req"/>
+        <DataRecord Entry="Upgrade,CreepTunnel@Unlock"/>
+        <DataRecord Entry="Accumulator,CreepTunnel@Multiply"/>
+        <DataRecord Entry="Accumulator,CreepTunnel@FlatDmgBonus"/>
+        <DataRecord Entry="Accumulator,CreepTunnel@DmgMultiplier"/>
+    </CDataCollectionAbil>
+    <CDataCollectionAbil id="DefensiveRoar">
+        <EditorCategories value=""/>
+        <DataRecord Entry="Abil,DefensiveRoar"/>
+        <DataRecord Entry="Actor,DefensiveRoar@Buff"/>
+        <DataRecord Entry="Actor,DefensiveRoar@Cast"/>
+        <DataRecord Entry="Actor,DefensiveRoar@Range"/>
+        <DataRecord Entry="Behavior,DefensiveRoar@Caster"/>
+        <DataRecord Entry="Behavior,DefensiveRoar@Other"/>
+        <DataRecord Entry="Button,DefensiveRoar"/>
+        <DataRecord Entry="Effect,DefensiveRoar@InitialSet"/>
+        <DataRecord Entry="Effect,DefensiveRoar@ApplyBuffCaster"/>
+        <DataRecord Entry="Effect,DefensiveRoar@ApplyBuffOther"/>
+        <DataRecord Entry="Effect,DefensiveRoar@SearchOther"/>
+        <DataRecord Entry="Model,DefensiveRoar@Buff"/>
+        <DataRecord Entry="Model,DefensiveRoar@Cast"/>
+        <DataRecord Entry="Validator,DefensiveRoar@CasterBuffNotActive"/>
+        <DataRecord Entry="Validator,DefensiveRoar@FriendlyBuffNotActive"/>
+    </CDataCollectionAbil>
+    <CDataCollectionAbil id="GlueStream">
+        <EditorCategories value=""/>
+        <DataRecord Entry="Abil,GlueStream"/>
+        <DataRecord Entry="Actor,GlueStream@Buff"/>
+        <DataRecord Entry="Actor,GlueStream@Guide"/>
+        <DataRecord Entry="Actor,GlueStream@Stream"/>
+        <DataRecord Entry="Behavior,GlueStream@Buff"/>
+        <DataRecord Entry="Behavior,GlueStream@BuffCaster"/>
+        <DataRecord Entry="Behavior,GlueStream@Debuff"/>
+        <DataRecord Entry="Button,GlueStream"/>
+        <DataRecord Entry="Effect,GlueStream@InitialPersistent"/>
+        <DataRecord Entry="Effect,GlueStream@ApplyEnemy"/>
+        <DataRecord Entry="Effect,GlueStream@ApplyFriendly"/>
+        <DataRecord Entry="Effect,GlueStream@ApplyCaster"/>
+        <DataRecord Entry="Effect,GlueStream@ApplySet"/>
+        <DataRecord Entry="Effect,GlueStream@Dmg"/>
+        <DataRecord Entry="Effect,GlueStream@ExplosionDummy"/>
+        <DataRecord Entry="Effect,GlueStream@Search"/>
+        <DataRecord Entry="Model,GlueStream@Buff"/>
+        <DataRecord Entry="Model,GlueStream@Stream"/>
+        <DataRecord Entry="Validator,GlueStream@CasterBuffNotActive"/>
+        <DataRecord Entry="Validator,GlueStream@FriendlyBuffNotActive"/>
+        <DataRecord Entry="Requirement,GlueStream@Req"/>
+        <DataRecord Entry="Upgrade,GlueStream@Unlock"/>
+        <DataRecord Entry="Accumulator,GlueStream@DmgBase"/>
+        <DataRecord Entry="Accumulator,GlueStream@DmgModifier"/>
+        <DataRecord Entry="Accumulator,GlueStream@DmgScaled"/>
+    </CDataCollectionAbil>
+    <CDataCollectionAbil id="Tackle">
+        <EditorCategories value=""/>
+        <DataRecord Entry="Abil,Tackle"/>
+        <DataRecord Entry="Behavior,Tackle@CasterBuff"/>
+        <DataRecord Entry="Behavior,Tackle@FriendlyTackle"/>
+        <DataRecord Entry="Effect,Tackle@InitialSet"/>
+        <DataRecord Entry="Effect,Tackle@FriendlyTackle"/>
+        <DataRecord Entry="Effect,Tackle@CasterBuff"/>
+        <DataRecord Entry="Effect,Tackle@IssueMove"/>
+        <DataRecord Entry="Effect,Tackle@Search"/>
+        <DataRecord Entry="Effect,Tackle@ApplySet"/>
+        <DataRecord Entry="Effect,Tackle@Dmg"/>
+        <DataRecord Entry="Effect,Tackle@KnockbackController"/>
+        <DataRecord Entry="Effect,Tackle@Knockback"/>
+        <DataRecord Entry="Effect,Tackle@KnockbackRekursion"/>
+        <DataRecord Entry="Effect,Tackle@KnockbackSet"/>
+        <DataRecord Entry="Actor,Tackle@Buffed"/>
+        <DataRecord Entry="Actor,Tackle@Caster"/>
+        <DataRecord Entry="Actor,Tackle@Guide"/>
+        <DataRecord Entry="Behavior,Tackle@FriendlyTackleCaster"/>
+        <DataRecord Entry="Behavior,Tackle@KnockbackMinimumSpeed"/>
+        <DataRecord Entry="Button,Tackle"/>
+        <DataRecord Entry="Effect,Tackle@CasterSelfBuff"/>
+        <DataRecord Entry="Effect,Tackle@Endpoint"/>
+        <DataRecord Entry="Effect,Tackle@Persistent"/>
+        <DataRecord Entry="Effect,Tackle@KnockbackMinimumSpeed"/>
+        <DataRecord Entry="Model,Tackle@Buffed"/>
+        <DataRecord Entry="Model,Tackle@Caster"/>
+        <DataRecord Entry="Validator,Tackle@CasterBuffNotActive"/>
+        <DataRecord Entry="Validator,Tackle@NoKnockback"/>
+        <DataRecord Entry="Validator,Tackle@FriendlyBuffNotActive"/>
+        <DataRecord Entry="Effect,Tackle@CancelMove"/>
+        <DataRecord Entry="Requirement,Tackle@Req"/>
+        <DataRecord Entry="Upgrade,Tackle@Unlock"/>
+        <DataRecord Entry="Accumulator,Tackle@DmgBase"/>
+        <DataRecord Entry="Accumulator,Tackle@DmgModifier"/>
+        <DataRecord Entry="Accumulator,Tackle@DmgScaled"/>
+    </CDataCollectionAbil>
+    <CDataCollectionAbil id="UltimateBeing">
+        <EditorCategories value=""/>
+        <DataRecord Entry="Abil,UltimateBeing"/>
+        <DataRecord Entry="Button,UltimateBeing"/>
+        <DataRecord Entry="Requirement,UltimateBeing@Req"/>
+        <DataRecord Entry="Upgrade,UltimateBeing@Unlock"/>
+        <DataRecord Entry="Actor,UltimateBeing@ModelSwapVisual"/>
+        <DataRecord Entry="Behavior,UltimateBeing@UltimateBuff"/>
+        <DataRecord Entry="Effect,UltimateBeing@UltimateBuff"/>
+        <DataRecord Entry="Model,UltimateBeing@RoachUpgrade"/>
+        <DataRecord Entry="Model,UltimateBeing@ModelSwapVisual"/>
+    </CDataCollectionAbil>
+    <CUnit id="HeroRoach">
+        <DeathTime value="-1"/>
+        <DeathRevealRadius value="3"/>
+        <Race value="Zerg"/>
+        <FlagArray index="Hero" value="1"/>
+        <FlagArray index="UseLineOfSight" value="1"/>
+        <FlagArray index="ArmySelect" value="1"/>
+        <PlaneArray index="Ground" value="1"/>
+        <Collide index="Ground" value="1"/>
+        <Collide index="ForceField" value="1"/>
+        <Collide index="Locust" value="1"/>
+        <Collide index="Small" value="1"/>
+        <Attributes index="Light" value="1"/>
+        <Attributes index="Biological" value="1"/>
+        <Attributes index="Heroic" value="1"/>
+        <LifeStart value="2500"/>
+        <LifeMax value="2500"/>
+        <LifeRegenRate value="15"/>
+        <LifeArmorName value="Unit/LifeArmorName/ZergGroundArmor"/>
+        <EnergyStart value="50"/>
+        <EnergyMax value="50"/>
+        <EnergyRegenRate value="0.75"/>
+        <ShieldArmorName value="Unit/ShieldArmorName/ZergWildMutation"/>
+        <Speed value="2.7968"/>
+        <Acceleration value="1000"/>
+        <LateralAcceleration value="46"/>
+        <StationaryTurningRate value="999.8437"/>
+        <TurningRate value="999.8437"/>
+        <Sight value="8.5"/>
+        <CostCategory value="Army"/>
+        <AttackTargetPriority value="20"/>
+        <AbilArray Link="stop"/>
+        <AbilArray Link="attack"/>
+        <AbilArray Link="move"/>
+        <AbilArray Link="DefensiveRoar"/>
+        <AbilArray Link="GlueStream"/>
+        <AbilArray Link="Tackle"/>
+        <AbilArray Link="UltimateBeing"/>
+        <AbilArray Link="ShieldColor@ColorChange"/>
+        <BehaviorArray Link="Levels"/>
+        <BehaviorArray Link="HeroRoachAttribute"/>
+        <BehaviorArray Link="HeroRoachCreepBonusRegen"/>
+        <BehaviorArray Link="HeroRoachArmor"/>
+        <WeaponArray Link="HeroRoachWeapon"/>
+        <CardLayouts>
+            <LayoutButtons Face="Move" Type="AbilCmd" AbilCmd="move,Move" Row="0" Column="0"/>
+            <LayoutButtons Face="Stop" Type="AbilCmd" AbilCmd="stop,Stop" Row="0" Column="1"/>
+            <LayoutButtons Face="MoveHoldPosition" Type="AbilCmd" AbilCmd="move,HoldPos" Row="0" Column="2"/>
+            <LayoutButtons Face="Attack" Type="AbilCmd" AbilCmd="attack,Execute" Row="0" Column="4"/>
+            <LayoutButtons Face="MovePatrol" Type="AbilCmd" AbilCmd="move,Patrol" Row="0" Column="3"/>
+            <LayoutButtons Face="DefensiveRoar" Type="AbilCmd" AbilCmd="DefensiveRoar,Execute" Row="2" Column="0"/>
+            <LayoutButtons Face="GlueStream" Type="AbilCmd" AbilCmd="GlueStream,Execute" Row="2" Column="1"/>
+            <LayoutButtons Face="Tackle" Type="AbilCmd" AbilCmd="Tackle,Execute" Row="2" Column="2"/>
+            <LayoutButtons Face="UltimateBeing" Type="AbilCmd" AbilCmd="UltimateBeing,Execute" Row="2" Column="3"/>
+        </CardLayouts>
+        <InnerRadius value="0.5"/>
+        <CargoSize value="1"/>
+        <SubgroupPriority value="50"/>
+        <MinimapRadius value="1"/>
+        <EditorCategories value=""/>
+        <GlossaryCategory value="Unit/Category/SSFPlayerUnits"/>
+        <GlossaryPriority value="10"/>
+        <HotkeyCategory value="Unit/Category/SSFPlayerUnits"/>
+        <KillDisplay value="Always"/>
+        <RankDisplay value="Never"/>
+        <Fidget>
+            <ChanceArray index="Anim" value="33"/>
+            <ChanceArray index="Idle" value="33"/>
+            <ChanceArray index="Turn" value="33"/>
+        </Fidget>
+        <AlliedPushPriority value="20"/>
+        <LifeArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </LifeArmorFormula>
+        <ShieldArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </ShieldArmorFormula>
+        <LifeArmorTip value="Unit/HeroRoach/ArmorTooltip"/>
+    </CUnit>
+    <CBehaviorBuff id="HeroRoachArmor" parent="ArmorBase">
+        <Name value="Behavior/Name/HeroRoachArmor"/>
+        <DamageResponse>
+            <Cost>
+                <Charge Link="Behavior/HeroRoachArmor"/>
+                <Cooldown Link="Behavior/HeroRoachArmor"/>
+            </Cost>
+        </DamageResponse>
+        <Tooltip value="Behavior/Tooltip/HeroArmorBase"/>
+        <Cost>
+            <Charge Link="Behavior/HeroArmorBase"/>
+            <Cooldown Link="Behavior/HeroArmorBase"/>
+        </Cost>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="UltimateBeing@UltimateBuff">
+        <Alignment value="Positive"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification MoveSpeedMultiplier="1.3">
+            <DamageDealtUnscaled index="Ranged" value="100"/>
+        </Modification>
+        <Duration value="15"/>
+        <InfoIcon value="Assets\Textures\btn-upgrade-zerg-muscularaugments.dds"/>
+        <DamageResponse>
+            <Chance value="1"/>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="ChargePushed">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="0.125"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="DefensiveRoar@Caster">
+        <InfoIcon value="Assets\Textures\btn-ability-zerg-dehaka-superroar.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="15"/>
+        <Alignment value="Positive"/>
+        <DamageResponse>
+            <Chance value="1"/>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="DefensiveRoar@Other">
+        <InfoIcon value="Assets\Textures\btn-ability-zerg-dehaka-superroar.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DisableValidatorArray value="DefensiveRoar@CasterBuffNotActive"/>
+        <BuffFlags index="UpdateDurationWhileDisabled" value="1"/>
+        <Duration value="15"/>
+        <Name value="Behavior/Name/DefensiveRoar@Caster"/>
+        <Tooltip value="Behavior/Tooltip/DefensiveRoar@Caster"/>
+        <Alignment value="Positive"/>
+        <DamageResponse>
+            <Chance value="1"/>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="GlueStream@Buff">
+        <InfoIcon value="Assets\Textures\btn-ability-zerg-acidspores.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="15"/>
+        <Modification MoveSpeedMultiplier="1.2"/>
+        <DisableValidatorArray value="GlueStream@CasterBuffNotActive"/>
+        <BuffFlags index="UpdateDurationWhileDisabled" value="1"/>
+        <Alignment value="Positive"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="GlueStream@BuffCaster">
+        <Name value="Behavior/Name/GlueStream@Buff"/>
+        <Tooltip value="Behavior/Tooltip/GlueStream@Buff"/>
+        <InfoIcon value="Assets\Textures\btn-ability-zerg-acidspores.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="15"/>
+        <Modification MoveSpeedMultiplier="1.3"/>
+        <Alignment value="Positive"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="GlueStream@Debuff">
+        <InfoIcon value="Assets\Textures\btn-ability-zerg-acidspores.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="15"/>
+        <Name value="Behavior/Name/GlueStream@Buff"/>
+        <Modification MoveSpeedMultiplier="0.8"/>
+        <Alignment value="Negative"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="HeroRoachCreepBonusRegen">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DisableValidatorArray value="OnCreep"/>
+        <Modification MoveSpeedMultiplier="1.5">
+            <VitalRegenArray index="Life" value="15"/>
+            <VitalRegenArray index="Energy" value="0.75"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="CreepTunnel@TunnelingCloak">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="3.6"/>
+        <Modification>
+            <StateFlags index="Bury" value="1"/>
+            <StateFlags index="Cloak" value="1"/>
+            <StateFlags index="SuppressCollision" value="1"/>
+            <StateFlags index="Uncommandable" value="1"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="Tackle@FriendlyTackle">
+        <Alignment value="Positive"/>
+        <InfoIcon value="Assets\Textures\btn-upgrade-zerg-tunnelingclaws.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DisableValidatorArray value="Tackle@CasterBuffNotActive"/>
+        <BuffFlags index="UpdateDurationWhileDisabled" value="1"/>
+        <Duration value="7.15"/>
+        <Modification>
+            <DamageDealtScaled index="Ranged" value="100"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="Tackle@CasterBuff">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="0.7"/>
+        <Period value="0.0625"/>
+        <Modification MoveSpeedMaximum="8" MoveSpeedMinimum="8">
+            <StateFlags index="SuppressCollision" value="1"/>
+            <StateFlags index="Uncommandable" value="1"/>
+            <WeaponDisableArray value="HeroRoachWeapon"/>
+        </Modification>
+        <InfoFlags index="Hidden" value="1"/>
+        <FinalEffect value="Tackle@CancelMove"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="Tackle@FriendlyTackleCaster">
+        <Name value="Behavior/Name/Tackle@FriendlyTackle"/>
+        <Tooltip value="Behavior/Tooltip/Tackle@FriendlyTackle"/>
+        <Alignment value="Positive"/>
+        <InfoIcon value="Assets\Textures\btn-upgrade-zerg-tunnelingclaws.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="7.85"/>
+        <Modification>
+            <DamageDealtScaled index="Ranged" value="200"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="Tackle@KnockbackMinimumSpeed">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="0.15"/>
+        <Modification MoveSpeedMinimum="10"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="ChargePushBuff">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="2.15"/>
+        <Period value="0.0625"/>
+        <PeriodicEffect value="ChargeSearchSet"/>
+        <Modification MoveSpeedMultiplier="1.5">
+            <StateFlags index="SuppressCollision" value="1"/>
+            <StateFlags index="Uncommandable" value="1"/>
+        </Modification>
+        <Alignment value="Positive"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="ChargeArmorBuff">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="2.15"/>
+        <Modification LifeArmorMultiplier="1.5">
+            <LifeArmorBonus value="15"/>
+        </Modification>
+        <InfoIcon value="Assets\Textures\btn-upgrade-zerg-adaptivecarapace.dds"/>
+        <Alignment value="Positive"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="ChargeForceBuff">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="0.09"/>
+        <Modification MoveSpeedMinimum="4"/>
+        <Alignment value="Negative"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="GlueSprayDebuff">
+        <InfoIcon value="Assets\Textures\btn-ability-zerg-contaminate-color.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="14.3"/>
+        <Modification MoveSpeedMultiplier="0.7"/>
+        <Alignment value="Negative"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="GlueSprayDebuffBoss">
+        <InfoIcon value="Assets\Textures\btn-ability-zerg-contaminate-color.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="7.15"/>
+        <Modification MoveSpeedMultiplier="0.85"/>
+        <Alignment value="Negative"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="GlueSprayBuff">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="14.3"/>
+        <Modification MoveSpeedMultiplier="1.15"/>
+        <InfoIcon value="Assets\Textures\btn-ability-zerg-contaminate-color.dds"/>
+        <Alignment value="Positive"/>
+    </CBehaviorBuff>
+    <CBehaviorAttribute id="HeroRoachAttribute">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification MoveSpeedBonus="0.0781" AttackSpeedMultiplier="1.01">
+            <VitalMaxArray index="Life" value="275"/>
+            <VitalMaxArray index="Energy" value="5"/>
+        </Modification>
+    </CBehaviorAttribute>
+    <CUpgrade id="UltimateBeing@Unlock"/>
+    <CUpgrade id="GlueStream@Unlock"/>
+    <CUpgrade id="Tackle@Unlock"/>
+    <CUpgrade id="UnlockHeroRoachCharge"/>
+    <CUpgrade id="CreepTunnel@Unlock"/>
+</Catalog>

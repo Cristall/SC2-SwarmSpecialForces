@@ -1,0 +1,2474 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CEffectSet id="MechaDroneWeaponSet">
+        <EditorCategories value=""/>
+        <EffectArray value="MechaDroneWeaponDmg"/>
+        <EffectArray value="MechaDroneWeaponSilence"/>
+    </CEffectSet>
+    <CEffectApplyBehavior id="MechaDroneWeaponSilence">
+        <EditorCategories value=""/>
+        <Behavior value="Silenced"/>
+        <Flags index="UseDuration" value="1"/>
+        <Duration value="3.5"/>
+    </CEffectApplyBehavior>
+    <CEffectIssueOrder id="NydusWorm@RelocateIssueMove">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Abil value="move"/>
+        <Player Value="Caster"/>
+        <Target Value="TargetPoint"/>
+    </CEffectIssueOrder>
+    <CEffectTeleport id="NydusWorm@RelocateTeleport">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <ClearQueuedOrders value="0"/>
+        <TargetLocation Value="TargetPoint"/>
+        <TeleportFlags index="TestFog" value="0"/>
+    </CEffectTeleport>
+    <CEffectCreatePersistent id="NydusWorm@RelocateDelay">
+        <EditorCategories value=""/>
+        <PeriodicEffectArray value="NydusWorm@RelocateIssueMove"/>
+        <PeriodicEffectArray value="NydusWorm@RelocateDownSet"/>
+        <PeriodicEffectArray value="NydusWorm@RelocateTeleport"/>
+        <PeriodicEffectArray value="NydusWorm@RelocateUpSet"/>
+        <PeriodicPeriodArray value="0"/>
+        <PeriodicPeriodArray value="0"/>
+        <PeriodicPeriodArray value="2"/>
+        <PeriodicPeriodArray value="0"/>
+        <PeriodCount value="4"/>
+        <PeriodicOffsetArray value="0,0,0"/>
+        <PeriodicOffsetArray value="0,0,0"/>
+        <PeriodicOffsetArray value="0,5,0"/>
+        <PeriodicOffsetArray value="0,0,0"/>
+    </CEffectCreatePersistent>
+    <CEffectSet id="NydusWorm@RelocateDownSet">
+        <EditorCategories value=""/>
+        <EffectArray value="NydusWorm@RelocateInvulnerable"/>
+        <EffectArray value="NydusWorm@RelocateTravelDown"/>
+    </CEffectSet>
+    <CEffectSet id="NydusWorm@RelocateInitial">
+        <EditorCategories value=""/>
+        <TargetLocationType value="Point"/>
+        <EffectArray value="NydusWorm@RelocateDelay"/>
+    </CEffectSet>
+    <CEffectApplyBehavior id="NydusWorm@RelocateTravelUp">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Behavior value="NydusWorm@RelocateHeight"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="NydusWorm@RelocateInvulnerable">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+    </CEffectApplyBehavior>
+    <CEffectRemoveBehavior id="NydusWorm@RelocateInvulnerableRemove">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <BehaviorLink value="NydusWorm@RelocateInvulnerable"/>
+    </CEffectRemoveBehavior>
+    <CEffectRemoveBehavior id="NydusWorm@RelocateTravelDown">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <BehaviorLink value="NydusWorm@RelocateHeight"/>
+    </CEffectRemoveBehavior>
+    <CEffectCreatePersistent id="NydusWorm@RelocateUpSet">
+        <EditorCategories value=""/>
+        <WhichLocation Value="CasterUnit"/>
+        <PeriodicEffectArray value="NydusWorm@RelocateTravelUp"/>
+        <PeriodicEffectArray value="NydusWorm@RelocateInvulnerableRemove"/>
+        <PeriodicPeriodArray value="0"/>
+        <PeriodicPeriodArray value="1.5"/>
+        <PeriodCount value="2"/>
+    </CEffectCreatePersistent>
+    <CEffectApplyBehavior id="NydusWorm@ThrowHide">
+        <EditorCategories value=""/>
+    </CEffectApplyBehavior>
+    <CEffectRemoveBehavior id="NydusWorm@ThrowHideRemove">
+        <EditorCategories value=""/>
+        <BehaviorLink value="NydusWorm@ThrowHide"/>
+    </CEffectRemoveBehavior>
+    <CEffectRemoveBehavior id="NydusWorm@ThrowCollisionRemove">
+        <EditorCategories value=""/>
+        <BehaviorLink value="NydusWorm@ThrowCollision"/>
+        <WhichUnit Effect="NydusWorm@ThrowInitial"/>
+    </CEffectRemoveBehavior>
+    <CEffectCreatePersistent id="NydusWorm@ThrowImpactLocation">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetUnit"/>
+        <OffsetVectorStartLocation Value="CasterUnit"/>
+        <OffsetVectorEndLocation Value="TargetUnit"/>
+        <InitialEffect value="NydusWorm@ThrowHide"/>
+        <ExpireDelay value="1.25"/>
+        <ExpireEffect value="NydusWorm@ThrowLM"/>
+        <ExpireOffset value="0,-10,0"/>
+        <FinalOffset value="0,-10,0"/>
+    </CEffectCreatePersistent>
+    <CEffectSet id="NydusWorm@ThrowInitial">
+        <EditorCategories value=""/>
+        <EffectArray value="NydusWorm@ThrowImpactLocation"/>
+    </CEffectSet>
+    <CEffectLaunchMissile id="NydusWorm@ThrowLM">
+        <EditorCategories value=""/>
+        <LaunchLocation Effect="NydusWorm@ThrowInitial" Value="TargetUnit"/>
+        <AmmoUnit value=""/>
+        <Movers Link="NydusWorm@Throw" IfRangeLTE="500"/>
+        <DeathType value="Unknown"/>
+        <ImpactLocation Value="TargetPoint"/>
+        <ImpactEffect value="NydusWorm@ThrowCollisionRemove"/>
+        <LaunchEffect value="NydusWorm@ThrowHideRemove"/>
+    </CEffectLaunchMissile>
+    <CEffectApplyBehavior id="NydusWorm@DmgResponseInvulnerable">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+    </CEffectApplyBehavior>
+    <CEffectDamage id="MechaLurkerWeaponDmg" parent="DU_WEAP">
+        <ValidatorArray value="noMarkers"/>
+        <EditorCategories value="Race:Zerg"/>
+        <Flags index="Impact" value="1"/>
+        <Kind value="Ranged"/>
+        <Amount value="700"/>
+    </CEffectDamage>
+    <CEffectCreatePersistent id="MechaLurkerWeaponPersistent">
+        <ValidatorArray value="TargetNotAcrossChasm"/>
+        <EditorCategories value="Race:Zerg"/>
+        <Marker>
+            <MatchFlags index="Id" value="1"/>
+        </Marker>
+        <WhichLocation Value="CasterUnit"/>
+        <TimeScaleSource Value="Caster"/>
+        <Flags index="Channeled" value="1"/>
+        <PeriodCount value="8"/>
+        <PeriodicValidator value="CasterIsAttacking"/>
+        <PeriodicEffectArray value="MechaLurkerWeaponSearch"/>
+        <PeriodicOffsetArray value="0,-1,0"/>
+        <PeriodicOffsetArray value="0,-2,0"/>
+        <PeriodicOffsetArray value="0,-3,0"/>
+        <PeriodicOffsetArray value="0,-4,0"/>
+        <PeriodicOffsetArray value="0,-5,0"/>
+        <PeriodicOffsetArray value="0,-6,0"/>
+        <PeriodicOffsetArray value="0,-7,0"/>
+        <PeriodicOffsetArray value="0,-8,0"/>
+        <PeriodicPeriodArray value="0.05"/>
+    </CEffectCreatePersistent>
+    <CEffectEnumArea id="MechaLurkerWeaponSearch">
+        <ValidatorArray value="CliffLevelGE1"/>
+        <EditorCategories value="Race:Zerg"/>
+        <SearchFilters value="Ground;Player,Ally,Neutral,Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="0.625" Effect="MechaLurkerWeaponDmg"/>
+        <SearchFlags index="CallForHelp" value="1"/>
+    </CEffectEnumArea>
+    <CEffectLaunchMissile id="MechaBanelingWeaponLaunchMissile">
+        <EditorCategories value=""/>
+        <ImpactEffect value="MechaBanelingWeaponSet"/>
+        <AmmoUnit value=""/>
+        <DeathType value="Unknown"/>
+        <Movers Link="MechaBanelingWeaponAttack" IfRangeLTE="400"/>
+    </CEffectLaunchMissile>
+    <CEffectDamage id="MechaInfestorWeaponDmg" parent="DU_WEAP">
+        <EditorCategories value=""/>
+        <Amount value="450"/>
+    </CEffectDamage>
+    <CEffectLaunchMissile id="MechaInfestorWeaponLaunchMissile">
+        <EditorCategories value=""/>
+        <ImpactEffect value="MechaInfestorWeaponDmg"/>
+        <AmmoUnit value="MechaInfestorMissile"/>
+    </CEffectLaunchMissile>
+    <CEffectDamage id="MechaBanelingWeaponDmg" parent="DU_WEAP">
+        <EditorCategories value=""/>
+        <Amount value="3000"/>
+    </CEffectDamage>
+    <CEffectEnumArea id="MechaBanelingWeaponSearch">
+        <EditorCategories value=""/>
+        <ImpactLocation Value="SourceUnitOrPoint"/>
+        <IncludeArray Value="Target"/>
+        <SearchFilters value="Visible;Player,Ally,Neutral,Missile,Item,Stasis,Dead,Hidden"/>
+        <AreaArray Radius="1.5" Effect="MechaBanelingWeaponDmg"/>
+    </CEffectEnumArea>
+    <CEffectSet id="MechaBanelingWeaponSet">
+        <EditorCategories value=""/>
+        <EffectArray value="MechaBanelingWeaponSearch"/>
+        <EffectArray value="Suicide"/>
+    </CEffectSet>
+    <CEffectDamage id="MechaUltraliskWeaponDmg" parent="DU_WEAP">
+        <EditorCategories value=""/>
+        <ResponseFlags index="Acquire" value="0"/>
+        <ResponseFlags index="Flee" value="0"/>
+        <Amount value="400"/>
+        <SearchFlags index="CallForHelp" value="0"/>
+        <SearchFlags index="OffsetByUnitRadius" value="0"/>
+        <SearchFlags index="OffsetAreaByAngle" value="0"/>
+    </CEffectDamage>
+    <CEffectEnumArea id="MechaUltraliskWeaponSearch">
+        <EditorCategories value=""/>
+        <LaunchLocation Value="TargetUnit"/>
+        <ImpactLocation Value="CasterUnit"/>
+        <IncludeArray Value="Target"/>
+        <SearchFilters value="Visible;Player,Ally,Neutral,Missile,Dead,Hidden,Invulnerable"/>
+        <AreaArray>
+            <Arc value="119.9816"/>
+            <Radius value="1.25"/>
+            <FacingAdjustment value="180"/>
+            <Effect value="MechaUltraliskWeaponDmg"/>
+        </AreaArray>
+    </CEffectEnumArea>
+    <CEffectLaunchMissile id="MechaSpineCrawlerWeaponLM">
+        <ValidatorArray index="0" value="SpineCrawlerLMTargetFilters"/>
+        <EditorCategories value="Race:Zerg"/>
+        <ImpactEffect value="MechaSpineCrawlerWeaponDmg"/>
+        <Flags index="Return" value="1"/>
+        <AmmoUnit value="MechaSpineCrawlerMissile"/>
+        <ReturnDelay value="0.175"/>
+        <ReturnMovers Link="SpineCrawlerTentacleRetractShort" IfRangeLTE="3"/>
+        <ReturnMovers Link="SpineCrawlerTentacleRetractLong" IfRangeLTE="7"/>
+        <Movers Link="SpineCrawlerTentacleExtendShort" IfRangeLTE="3"/>
+        <Movers Link="SpineCrawlerTentacleExtendLong" IfRangeLTE="7"/>
+    </CEffectLaunchMissile>
+    <CEffectDamage id="MechaSporeCrawlerWeaponDmg" parent="DU_WEAP_MISSILE">
+        <EditorCategories value="Race:Zerg"/>
+        <Amount value="600"/>
+    </CEffectDamage>
+    <CEffectDamage id="MechaSpineCrawlerWeaponDmg" parent="DU_WEAP_MISSILE">
+        <EditorCategories value="Race:Zerg"/>
+        <Amount value="750"/>
+    </CEffectDamage>
+    <CEffectLaunchMissile id="MechaSporeCrawlerWeaponLM">
+        <EditorCategories value="Race:Zerg"/>
+        <ImpactEffect value="MechaSporeCrawlerWeaponDmg"/>
+        <AmmoUnit value="SporeCrawlerWeapon"/>
+    </CEffectLaunchMissile>
+    <CEffectLaunchMissile id="MechaRoachWeaponLaunchMissile">
+        <ValidatorArray index="0" value="RoachLMTargetFilters"/>
+        <EditorCategories value="Race:Zerg"/>
+        <ImpactEffect value="MechaRoachWeaponDmg"/>
+        <AmmoUnit value="AcidSalivaWeapon"/>
+    </CEffectLaunchMissile>
+    <CEffectDamage id="MechaRoachWeaponDmg" parent="DU_WEAP_MISSILE">
+        <EditorCategories value="Race:Zerg"/>
+        <Amount value="320"/>
+    </CEffectDamage>
+    <CEffectDamage id="MechaQueenWeaponDmg" parent="DU_WEAP">
+        <EditorCategories value="Race:Zerg"/>
+        <Kind value="Ranged"/>
+        <Amount value="375"/>
+    </CEffectDamage>
+    <CEffectLaunchMissile id="MechaQueenWeaponLaunchMissile">
+        <EditorCategories value="Race:Zerg"/>
+        <ImpactEffect value="MechaQueenWeaponDmg"/>
+        <AmmoUnit value="AcidSpinesWeapon"/>
+        <Movers Link="AcidSpinesWeapon"/>
+    </CEffectLaunchMissile>
+    <CEffectDamage id="MechaZerglingWeaponDmg" parent="DU_WEAP">
+        <EditorCategories value="Race:Zerg"/>
+        <Amount value="275"/>
+    </CEffectDamage>
+    <CEffectDamage id="MechaLocustWeaponDmg">
+        <EditorCategories value="Race:Zerg"/>
+        <ResponseFlags index="Acquire" value="1"/>
+        <ResponseFlags index="Flee" value="1"/>
+        <ArmorReduction value="1"/>
+        <Flags index="Notification" value="1"/>
+        <Kind value="Ranged"/>
+        <Amount value="150"/>
+        <SearchFlags index="CallForHelp" value="1"/>
+        <SearchFlags index="OffsetByUnitRadius" value="1"/>
+    </CEffectDamage>
+    <CEffectLaunchMissile id="MechaLocustWeaponLaunchMissile">
+        <EditorCategories value="Race:Zerg"/>
+        <ImpactEffect value="MechaLocustWeaponDmg"/>
+        <AmmoUnit value="LocustWeapon"/>
+    </CEffectLaunchMissile>
+    <CEffectDamage id="MechaBroodlingWeaponDmg" parent="DU_WEAP">
+        <EditorCategories value="Race:Zerg"/>
+        <Amount value="250"/>
+    </CEffectDamage>
+    <CEffectDamage id="MechaHydraliskWeaponDmg" parent="DU_WEAP">
+        <EditorCategories value="Race:Zerg"/>
+        <Marker Link="Effect/NeedleSpinesDamage"/>
+        <Amount value="350"/>
+    </CEffectDamage>
+    <CEffectLaunchMissile id="MechaHydraliskWeaponLaunchMissile">
+        <EditorCategories value="Race:Zerg"/>
+        <ImpactEffect value="MechaHydraliskWeaponDmg"/>
+        <AmmoUnit value="NeedleSpinesWeapon"/>
+    </CEffectLaunchMissile>
+    <CEffectDamage id="MechaRavagerWeaponDmg" parent="DU_WEAP_MISSILE">
+        <EditorCategories value="Race:Zerg"/>
+        <Amount value="300"/>
+    </CEffectDamage>
+    <CEffectLaunchMissile id="MechaRavagerWeaponLM">
+        <EditorCategories value="Race:Zerg"/>
+        <ImpactEffect value="MechaRavagerWeaponDmg"/>
+        <AmmoUnit value="RavagerWeaponMissile"/>
+    </CEffectLaunchMissile>
+    <CEffectDamage id="MechaDroneWeaponDmg" parent="DU_WEAP">
+        <EditorCategories value="Race:Zerg"/>
+        <Amount value="900"/>
+    </CEffectDamage>
+    <CAbilEffectTarget id="NydusWorm@Relocate">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="NydusWorm@RelocateInitial"/>
+        <Flags index="RequireTargetVision" value="0"/>
+        <Cost>
+            <Cooldown TimeUse="1"/>
+        </Cost>
+        <Range value="500"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="NydusWorm@Relocate"/>
+    </CAbilEffectTarget>
+    <CAbilEffectTarget id="NydusWorm@Throw">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="NydusWorm@ThrowInitial"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="NydusWorm@Throw"/>
+        <Flags index="Transient" value="1"/>
+        <Range value="40"/>
+        <Arc value="360"/>
+    </CAbilEffectTarget>
+    <CButton id="NydusWorm@Relocate">
+        <Icon value="Assets\Textures\btn-ability-alarak-massteleport.dds"/>
+        <HotkeyAlias value="NydusWorm@Throw"/>
+    </CButton>
+    <CButton id="NydusWorm@Throw">
+        <Icon value="Assets\Textures\btn-ability-alarak-massteleport.dds"/>
+    </CButton>
+    <CActorSiteOpRotationExplicit id="NydusWorm@NydusWormExitRotation">
+        <EditorCategories value=""/>
+        <Forward value="0.000000,-1.000000,-1.000000"/>
+        <Up value="0.000000,0.000000,1.000000"/>
+        <IsLocal value="1"/>
+    </CActorSiteOpRotationExplicit>
+    <CActorUnit id="NydusWorm@NydusWormEntrance" parent="GenericUnitStandard" unitName="NydusWorm@NydusWormEntrance">
+        <EditorCategories value=""/>
+        <Scale value="2.000000"/>
+        <HighlightTooltip value="Unit/Name/Bogus"/>
+        <Wireframe>
+            <Image value="Assets\Textures\Wireframe-Zerg-NydusDragon.dds"/>
+        </Wireframe>
+        <UnitFlags index="SuppressDefaultStatusBar" value="1"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-Zerg-NydusWorm.dds"/>
+        </GroupIcon>
+        <UnitIcon value="Assets\Textures\btn-building-zerg-nydusworm.dds"/>
+    </CActorUnit>
+    <CActorUnit id="NydusWorm@NydusWormExit" parent="GenericUnitStandard" unitName="NydusWorm@NydusWormExit">
+        <EditorCategories value=""/>
+        <Model value="NydusWorm@NydusWormEntrance"/>
+        <Scale value="2.000000"/>
+        <BuildModel value="NydusWorm@NydusWormEntrance"/>
+        <PlacementModel value="NydusWorm@NydusWormEntrance"/>
+        <HighlightTooltip value="Unit/Name/Bogus"/>
+        <Wireframe>
+            <Image value="Assets\Textures\Wireframe-Zerg-NydusDragon.dds"/>
+        </Wireframe>
+        <HostSiteOps Ops="NydusWorm@NydusWormExitRotation"/>
+        <UnitFlags index="SuppressDefaultStatusBar" value="1"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-Zerg-NydusWorm.dds"/>
+        </GroupIcon>
+        <UnitIcon value="Assets\Textures\btn-building-zerg-nydusworm.dds"/>
+    </CActorUnit>
+    <CActorModel id="NydusWorm@HitTestSphere" parent="ModelAddition">
+        <EditorCategories value=""/>
+        <Scale value="7.500000"/>
+        <HostSiteOps Ops="SOpAttachOrigin"/>
+    </CActorModel>
+    <CActorUnit id="NydusWorm" parent="GenericUnitStandard" unitName="NydusWorm">
+        <EditorCategories value=""/>
+        <Model value="NydusWorm@Model"/>
+        <HighlightTooltip value="Unit/Name/Bogus"/>
+        <On Terms="ActorCreation" Send="Create NydusWorm@HitTestSphere"/>
+        <On Terms="Behavior.NydusWorm@RelocateInvulnerable.On" Send="SetStatusBarOn 0 Life"/>
+        <On Terms="Behavior.NydusWorm@RelocateInvulnerable.Off" Send="SetStatusBarOn 1 Life"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-Zerg-NydusWorm.dds"/>
+        </GroupIcon>
+        <UnitIcon value="Assets\Textures\btn-building-zerg-nydusworm.dds"/>
+        <Wireframe>
+            <Image value="Assets\Textures\Wireframe-Zerg-NydusDragon.dds"/>
+        </Wireframe>
+    </CActorUnit>
+    <CActorUnit id="MechaLurker" parent="GenericUnitStandard" unitName="MechaLurker">
+        <Aliases value="_UnitLarge"/>
+        <On index="64" Terms="UnitBirth.MechaLurker" Send="AnimBracketStart Burrow Burrow IGNORE Unburrow ClosingFull,OpeningPlayForever,Instant,DontResetOnUnhide"/>
+        <On index="65" removed="1"/>
+        <On index="66" removed="1"/>
+        <On index="67" removed="1"/>
+        <On index="68" removed="1"/>
+        <Model value="Lurker_Mecha"/>
+        <ModelFlags index="OutlineEmitter" value="1"/>
+        <BuildModel value="Lurker_Mecha"/>
+        <DeathArray index="Normal" ModelLink="Lurker_Mecha_Death" SoundLink="Lurker_Explode"/>
+        <DeathArray index="Disintegrate" ModelLink="LurkerMPDeathAcid" SoundLink="Uni_DeathFXAcid"/>
+        <DeathArray index="Fire" ModelLink="LurkerMPDeathFire" SoundLink="Uni_DeathFXFire"/>
+        <PlacementModel value="Lurker_Mecha"/>
+        <PortraitModel value="Lurker_Mecha_Portrait"/>
+        <WalkAnimMoveSpeed value="3"/>
+        <BarOffset value="70"/>
+        <BarWidth value="80"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-Zerg-Lurker.dds"/>
+        </GroupIcon>
+        <HeroIcon value="Assets\Textures\btn-unit-zerg-lurker-rcz.dds"/>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-stetmann-mechagroundplating-level0.dds"/>
+        <SoundArray index="Birth" value="Lurker_Birth"/>
+        <SoundArray index="Ready" value="Lurker_Ready"/>
+        <SoundArray index="Help" value="Lurker_Help"/>
+        <SoundArray index="What" value="Lurker_What"/>
+        <SoundArray index="Yes" value="Lurker_Yes"/>
+        <SoundArray index="Attack" value="Lurker_Yes"/>
+        <SoundArray index="Pissed" value="Lurker_Pissed"/>
+        <SoundArray index="Movement" value="Lurker_Movement"/>
+        <UnitIcon value="Assets\Textures\btn-unit-zerg-lurker-rcz.dds"/>
+        <VitalColors index="Shields">
+            <ColorArray value="255,0,128,0"/>
+        </VitalColors>
+        <Wireframe>
+            <Image value="Assets\Wireframes\Mecha\wireframe-zerg-lurker-mecha.dds"/>
+        </Wireframe>
+    </CActorUnit>
+    <CActorModel id="MechaLurkerAttackSpike" parent="ModelAnimationStyleOneShot">
+        <On index="0" Terms="ActorCreation" Send="AnimPlay Attack Attack"/>
+        <On index="1" Terms="AnimDone; AnimName Attack" Send="Destroy"/>
+        <On index="2" Terms="Effect.MechaLurkerWeaponSearch.Start" Send="Create"/>
+        <HostSiteOps Ops="SOpRotationRandomDisc"/>
+        <Scale value="0.750000"/>
+    </CActorModel>
+    <CActorSplat id="MechaLurkerBurrowSplat" parent="BurrowedSplat" unitName="CyberneticLurker">
+        <VisibleTo index="All" value="1"/>
+        <Inherits index="Visibility" value="0"/>
+        <AcceptedHostedPropTransfers index="Visibility" value="0"/>
+        <Supporter Subject=""/>
+        <On index="0" Terms="ActorOrphan" Send="Destroy"/>
+        <On index="1" Terms="UnitBirth.MechaLurker" Send="Create"/>
+        <On index="2" removed="1"/>
+        <On index="3" removed="1"/>
+        <On index="4" removed="1"/>
+        <On index="5" removed="1"/>
+        <On index="6" removed="1"/>
+    </CActorSplat>
+    <CActorAction id="MechaInfestorAttack" parent="GenericAttack" effectImpact="MechaInfestorWeaponDmg" effectLaunch="MechaInfestorWeaponLaunchMissile">
+        <EditorCategories value=""/>
+        <Missile value="MechaInfestorMissile"/>
+    </CActorAction>
+    <CActorMissile id="MechaInfestorMissile" parent="GenericAttackMissile" unitName="MechaInfestorMissile">
+        <EditorCategories value=""/>
+    </CActorMissile>
+    <CActorUnit id="MechaNydusWorm" parent="ZergBuildingEx" unitName="MechaNydusWorm">
+        <Aliases value="_UnitHuge"/>
+        <On Terms="Behavior.NydusWormInvuln.On" Send="SetScale 0.300000"/>
+        <On Terms="Behavior.NydusWormInvuln.On" Send="SetScale 1.000000 20.000000"/>
+        <Model value="NydusCanal_Mecha"/>
+        <BuildModel value="NydusRumble"/>
+        <DeathArray index="Normal" ModelLink="NydusCanal_Mecha_Death" SoundLink=""/>
+        <DeathArray index="Disintegrate" ModelLink="NydusCanalDeathAcid" SoundLink="Uni_DeathFXAcid"/>
+        <DeathArray index="Fire" ModelLink="NydusCanalDeathFire" SoundLink="Uni_DeathFXFireLarge"/>
+        <DeathArray index="UnderConstruction" ModelLink="NydusCanalDeathUnderConstruction" SoundLink="Zerg_ExplosionLarge"/>
+        <PlacementModel value="NydusCanalPlacement"/>
+        <PortraitModel value="NydusCanal_Mecha_Portrait"/>
+        <BarOffset value="115"/>
+        <BarWidth value="85"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-Zerg-NydusWorm.dds"/>
+        </GroupIcon>
+        <HeroIcon value="Assets\Textures\btn-building-zerg-nydusworm.dds"/>
+        <NameOffset value="70"/>
+        <SoundArray index="Birth" value=""/>
+        <SoundArray index="Ready" value="NydusWorm_Ready"/>
+        <SoundArray index="What" value="NydusWorm_What"/>
+        <SoundArray index="Yes" value="NydusWorm_What"/>
+        <SoundArray index="Construction" value="Zerg_RockBuildingMorph_What"/>
+        <UnitIcon value="Assets\Textures\btn-building-zerg-nydusworm.dds"/>
+        <Wireframe>
+            <Image value="Assets\Textures\Wireframe-Zerg-NydusDragon.dds"/>
+        </Wireframe>
+    </CActorUnit>
+    <CActorAction id="MechaUltraliskWeaponAttack" parent="GenericAttack" effectAttack="MechaUltraliskWeaponDmg">
+        <ImpactPhysics>
+            <Name value="AttackSpell"/>
+            <MatchKeys value="Basic"/>
+            <AttackAnimProps value="Spell,A"/>
+            <Physics value="UltraliskAttackForce"/>
+        </ImpactPhysics>
+        <ShieldFlashType value="Full"/>
+    </CActorAction>
+    <CActorUnit id="MechaHive" parent="ZergBuildingEx" unitName="MechaHive">
+        <Aliases value="_UnitHuge"/>
+        <On Terms="ActorCreation" Send="AnimGroupApply C"/>
+        <On Terms="UnitDeathCustomize; ValidateUnit HasZergGenericDeath" Send="DeathCustomize Detached"/>
+        <Model value="Hatchery_Mecha"/>
+        <BuildModel value="Hive"/>
+        <DeathArray index="Normal" ModelLink="Hatchery_Mecha_Hive_Death" SoundLink=""/>
+        <DeathCustoms ModelLink="ZergGenericBuildingDeath" Name="Detached"/>
+        <PortraitModel value="Hatchery_Mecha_Portrait"/>
+        <BarOffset value="190"/>
+        <BarWidth value="260"/>
+        <GlossaryAnim value="Stand,C"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-Zerg-Hive.dds"/>
+        </GroupIcon>
+        <HeroIcon value="Assets\Textures\btn-building-zerg-hive.dds"/>
+        <NameOffset value="130"/>
+        <SoundArray index="Ready" value="Hive_Ready"/>
+        <SoundArray index="What" value="Hive_What"/>
+        <StatusHarvesterData Text="UI/HarvesterCountMinerals" SearchFilters="HarvestableResource;Player,Ally,Enemy" SearchRadius="8"/>
+        <UnitIcon value="Assets\Textures\btn-building-zerg-hive.dds"/>
+        <Wireframe>
+            <Image value="Assets\Wireframes\Mecha\Wireframe-Zerg-Hive-mecha.dds"/>
+        </Wireframe>
+        <Scale value="0.850000"/>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-stetmann-mechagroundplating-level0.dds"/>
+    </CActorUnit>
+    <CActorUnit id="MechaLurkerDen" parent="ZergBuildingEx" unitName="MechaLurkerDen">
+        <Aliases value="_UnitHuge"/>
+        <Model value="LurkerDen_Mecha"/>
+        <BuildModel value="LurkerDen_Mecha"/>
+        <DeathArray index="Normal" ModelLink="LurkerDen_Mecha_Death" SoundLink="LurkerDen_Explode"/>
+        <DeathArray index="UnderConstruction" ModelLink="LurkerDenMPDeathUnderConstruction" SoundLink="InfestationPit_Explode"/>
+        <PlacementModel value="LurkerDenMPPlacement"/>
+        <PortraitModel value="LurkerDen_Mecha_Portrait"/>
+        <BarOffset value="140"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-Zerg-LurkerDen.dds"/>
+        </GroupIcon>
+        <HeroIcon value="Assets\Textures\btn-building-zerg-lurkerden.dds"/>
+        <NameOffset value="110"/>
+        <SoundArray index="Ready" value="LurkerDen_What"/>
+        <SoundArray index="What" value="LurkerDen_What"/>
+        <UnitIcon value="Assets\Textures\btn-building-zerg-lurkerden.dds"/>
+        <Wireframe>
+            <Image value="Assets\Wireframes\Mecha\Wireframe-Zerg-LurkerDen-mecha.dds"/>
+        </Wireframe>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-stetmann-mechagroundplating-level0.dds"/>
+    </CActorUnit>
+    <CActorUnit id="MechaLair" parent="ZergBuildingEx" unitName="MechaLair">
+        <Aliases value="_ZergHiveMorph"/>
+        <Aliases value="_UnitHuge"/>
+        <On Terms="ActorCreation" Send="AnimGroupApply B"/>
+        <On Terms="UnitDeathCustomize; ValidateUnit HasZergGenericDeath" Send="DeathCustomize Detached"/>
+        <Model value="Hatchery_Mecha"/>
+        <BuildModel value="Lair"/>
+        <DeathArray index="Normal" ModelLink="Hatchery_Mecha_Lair_Death" SoundLink=""/>
+        <DeathCustoms ModelLink="ZergGenericBuildingDeath" Name="Detached"/>
+        <PortraitModel value="Hatchery_Mecha_Portrait"/>
+        <BarOffset value="180"/>
+        <BarWidth value="230"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-Zerg-Lair.dds"/>
+        </GroupIcon>
+        <HeroIcon value="Assets\Textures\btn-building-zerg-lair.dds"/>
+        <NameOffset value="130"/>
+        <SoundArray index="Ready" value="Lair_Ready"/>
+        <SoundArray index="What" value="Lair_What"/>
+        <StatusHarvesterData Text="UI/HarvesterCountMinerals" SearchFilters="HarvestableResource;Player,Ally,Enemy" SearchRadius="8"/>
+        <UnitIcon value="Assets\Textures\btn-building-zerg-lair.dds"/>
+        <Wireframe>
+            <Image value="Assets\Wireframes\Mecha\Wireframe-Zerg-Lair-mecha.dds"/>
+        </Wireframe>
+        <Scale value="0.850000"/>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-stetmann-mechagroundplating-level0.dds"/>
+    </CActorUnit>
+    <CActorUnit id="MechaInfestationPit" parent="ZergBuildingEx" unitName="MechaInfestationPit">
+        <Aliases value="_UnitHuge"/>
+        <On Terms="UnitDeathCustomize; ValidateUnit HasZergGenericDeath" Send="DeathCustomize Detached"/>
+        <Model value="InfestationPit_Mecha"/>
+        <BuildModel value="InfestationPit"/>
+        <DeathArray index="Normal" ModelLink="InfestationPit_Mecha_Death" SoundLink="InfestationPit_Explode"/>
+        <DeathArray index="UnderConstruction" ModelLink="InfestationPitDeathUnderConstruction" SoundLink="InfestationPit_Explode"/>
+        <DeathCustoms ModelLink="ZergGenericBuildingDeath" Name="Detached"/>
+        <PlacementModel value="InfestationPitPlacement"/>
+        <PortraitModel value="InfestationPit_Mecha_Portrait"/>
+        <BarOffset value="90"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-Zerg-InfestationPit.dds"/>
+        </GroupIcon>
+        <HeroIcon value="Assets\Textures\btn-building-zerg-infestationpit.dds"/>
+        <SoundArray index="Ready" value="InfestationPit_Ready"/>
+        <SoundArray index="What" value="InfestationPit_What"/>
+        <UnitIcon value="Assets\Textures\btn-building-zerg-infestationpit.dds"/>
+        <Wireframe>
+            <Image value="Assets\Wireframes\Mecha\Wireframe-Zerg-InfestationPit-mecha.dds"/>
+        </Wireframe>
+        <Scale value="1.250000"/>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-stetmann-mechagroundplating-level0.dds"/>
+    </CActorUnit>
+    <CActorUnit id="MechaHydraliskDen" parent="ZergBuildingEx" unitName="MechaHydraliskDen">
+        <Aliases value="_UnitHuge"/>
+        <Model value="HydraliskDen_Mecha"/>
+        <BuildModel value="HydraliskDen_Mecha"/>
+        <DeathArray index="Normal" ModelLink="HydraliskDen_Mecha_Death" SoundLink="HydraliskDen_Explode"/>
+        <DeathArray index="UnderConstruction" ModelLink="HydraliskDenDeathUnderConstruction" SoundLink="HydraliskDen_Explode"/>
+        <DeathCustoms ModelLink="ZergGenericBuildingDeath" Name="Detached"/>
+        <PlacementModel value="HydraliskDenPlacement"/>
+        <PortraitModel value="HydraliskDen_Mecha_Portrait"/>
+        <BarOffset value="140"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-Zerg-HydraliskDen.dds"/>
+        </GroupIcon>
+        <HeroIcon value="Assets\Textures\btn-building-zerg-hydraliskden.dds"/>
+        <SoundArray index="Ready" value="HydraliskDen_Ready"/>
+        <SoundArray index="What" value="HydraliskDen_What"/>
+        <UnitIcon value="Assets\Textures\btn-building-zerg-hydraliskden.dds"/>
+        <Wireframe>
+            <Image value="Assets\Wireframes\Mecha\Wireframe-Zerg-HydraliskDen-mecha.dds"/>
+        </Wireframe>
+        <Scale value="1.250000"/>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-stetmann-mechagroundplating-level0.dds"/>
+    </CActorUnit>
+    <CActorUnit id="MechaGreaterSpire" parent="ZergBuildingEx" unitName="MechaGreaterSpire">
+        <Aliases value="_UnitHuge"/>
+        <On Terms="UnitDeathCustomize; ValidateUnit HasZergGenericDeath" Send="DeathCustomize Detached"/>
+        <Model value="Spire_Mecha_GreaterSpire"/>
+        <BuildModel value="GreaterSpireBuild"/>
+        <DeathArray index="Normal" ModelLink="Spire_Mecha_GreaterSpire_Death" SoundLink=""/>
+        <DeathArray index="UnderConstruction" SoundLink="GreaterSpire_Explode"/>
+        <DeathCustoms ModelLink="ZergGenericBuildingDeath" Name="Detached"/>
+        <PortraitModel value="Spire_Mecha_GreaterSpire_Portrait"/>
+        <BarOffset value="190"/>
+        <BarWidth value="120"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-Zerg-GreaterSpire.dds"/>
+        </GroupIcon>
+        <HeroIcon value="Assets\Textures\btn-building-zerg-greaterspire.dds"/>
+        <NameOffset value="70"/>
+        <SoundArray index="Ready" value="GreaterSpire_Ready"/>
+        <SoundArray index="What" value="GreaterSpire_What"/>
+        <UnitIcon value="Assets\Textures\btn-building-zerg-greaterspire.dds"/>
+        <Wireframe>
+            <Image value="Assets\Wireframes\Mecha\Wireframe-Zerg-GreaterSpire-mecha.dds"/>
+        </Wireframe>
+        <UnitFlags index="SuppressDefaultStatusBar" value="1"/>
+    </CActorUnit>
+    <CActorUnit id="MechaHatchery" parent="ZergBuildingEx" unitName="MechaHatchery">
+        <Aliases value="_ZergLairMorph"/>
+        <Aliases value="_UnitHuge"/>
+        <On Terms="UnitDeathCustomize; ValidateUnit HasZergGenericDeath" Send="DeathCustomize Detached"/>
+        <Model value="Hatchery_Mecha"/>
+        <BuildModel value="Hatchery"/>
+        <DeathArray index="Normal" ModelLink="Hatchery_Mecha_Death" SoundLink=""/>
+        <DeathArray index="UnderConstruction" ModelLink="HatcheryDeathUnderConstruction" SoundLink="Hatchery_Explode"/>
+        <DeathCustoms ModelLink="ZergGenericBuildingDeath" Name="Detached"/>
+        <PlacementModel value="HatcheryPlacement"/>
+        <PortraitModel value="Hatchery_Mecha_Portrait"/>
+        <BarOffset value="135"/>
+        <BarWidth value="200"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-Zerg-Hatchery.dds"/>
+        </GroupIcon>
+        <HeroIcon value="Assets\Textures\btn-building-zerg-hatchery.dds"/>
+        <NameOffset value="130"/>
+        <SoundArray index="Ready" value="Hatchery_Ready"/>
+        <SoundArray index="What" value="Hatchery_What"/>
+        <StatusHarvesterData Text="UI/HarvesterCountMinerals" SearchFilters="HarvestableResource;Player,Ally,Enemy" SearchRadius="8"/>
+        <UnitIcon value="Assets\Textures\btn-building-zerg-hatchery.dds"/>
+        <Wireframe>
+            <Image value="Assets\Wireframes\Mecha\Wireframe-Zerg-Hatchery-mecha.dds"/>
+        </Wireframe>
+        <Scale value="0.850000"/>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-stetmann-mechagroundplating-level0.dds"/>
+    </CActorUnit>
+    <CActorUnit id="MechaEvolutionChamber" parent="ZergBuildingEx" unitName="MechaEvolutionChamber">
+        <Aliases value="_UnitHuge"/>
+        <On Terms="UnitDeathCustomize; ValidateUnit HasZergGenericDeath" Send="DeathCustomize Detached"/>
+        <Model value="EvolutionChamber_Mecha"/>
+        <BuildModel value="EvolutionChamber_Mecha"/>
+        <DeathArray index="Normal" ModelLink="EvolutionChamber_Mecha_Death" SoundLink="EvolutionChamber_Explode"/>
+        <DeathArray index="UnderConstruction" ModelLink="EvolutionChamberDeathUnderConstruction" SoundLink="EvolutionChamber_Explode"/>
+        <DeathCustoms ModelLink="ZergGenericBuildingDeath" Name="Detached"/>
+        <PlacementModel value="EvolutionChamberPlacement"/>
+        <PortraitModel value="EvolutionChamber_Mecha_Portrait"/>
+        <BarOffset value="95"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-Zerg-EvolutionChamber.dds"/>
+        </GroupIcon>
+        <HeroIcon value="Assets\Textures\btn-building-zerg-evolutionchamber.dds"/>
+        <SoundArray index="Ready" value="EvolutionChamber_Ready"/>
+        <SoundArray index="What" value="EvolutionChamber_What"/>
+        <UnitIcon value="Assets\Textures\btn-building-zerg-evolutionchamber.dds"/>
+        <Wireframe>
+            <Image value="Assets\Wireframes\Mecha\Wireframe-Zerg-EvolutionChamber-mecha.dds"/>
+        </Wireframe>
+        <Scale value="1.250000"/>
+    </CActorUnit>
+    <CActorUnit id="MechaBanelingNest" parent="ZergBuildingEx" unitName="MechaBanelingNest">
+        <Aliases value="_UnitHuge"/>
+        <On Terms="UnitDeathCustomize; ValidateUnit HasZergGenericDeath" Send="DeathCustomize Detached"/>
+        <Model value="BanelingNest_Mecha"/>
+        <BuildModel value="BanelingNest_Mecha"/>
+        <DeathArray index="Normal" ModelLink="BanelingNest_Mecha_Death" SoundLink="BanelingNest_Explode"/>
+        <DeathArray index="UnderConstruction" ModelLink="BanelingNestDeathUnderConstruction" SoundLink="BanelingNest_Explode"/>
+        <PlacementModel value="BanelingNest_Mecha_Placement"/>
+        <PortraitModel value="BanelingNest_Mecha_Portrait"/>
+        <BarOffset value="180"/>
+        <GroupIcon>
+            <Image value="Assets\Wireframes\Mecha\Wireframe-Zerg-BanelingNest-mecha.dds"/>
+        </GroupIcon>
+        <HeroIcon value="Assets\Textures\btn-building-zerg-banelingnest.dds"/>
+        <SoundArray index="Ready" value="BanelingNest_Ready"/>
+        <SoundArray index="What" value="BanelingNest_What"/>
+        <UnitIcon value="Assets\Textures\btn-building-zerg-banelingnest.dds"/>
+        <Wireframe>
+            <Image value="Assets\Wireframes\Mecha\Wireframe-Zerg-BanelingNest-mecha.dds"/>
+        </Wireframe>
+        <Scale value="1.330000"/>
+    </CActorUnit>
+    <CActorUnit id="MechaSpawningPool" parent="ZergBuildingEx" unitName="MechaSpawningPool">
+        <Aliases value="_UnitHuge"/>
+        <Model value="SpawningPool_Mecha"/>
+        <BuildModel value="SpawningPool"/>
+        <DeathArray index="Normal" ModelLink="SpawningPool_Mecha_Death" SoundLink=""/>
+        <DeathArray index="UnderConstruction" ModelLink="SpawningPoolDeathUnderConstruction" SoundLink="SpawningPool_Explode"/>
+        <PlacementModel value="SpawningPoolPlacement"/>
+        <PortraitModel value="SpawningPool_Mecha_Portrait"/>
+        <BarOffset value="95"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-Zerg-SpawningPool.dds"/>
+        </GroupIcon>
+        <HeroIcon value="Assets\Textures\btn-building-zerg-spawningpool.dds"/>
+        <SoundArray index="Ready" value="SpawningPool_Ready"/>
+        <SoundArray index="What" value="SpawningPool_What"/>
+        <UnitIcon value="Assets\Textures\btn-building-zerg-spawningpool.dds"/>
+        <Wireframe>
+            <Image value="Assets\Wireframes\Mecha\Wireframe-Zerg-SpawningPool-mecha.dds"/>
+        </Wireframe>
+        <Scale value="1.250000"/>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-stetmann-mechagroundplating-level0.dds"/>
+    </CActorUnit>
+    <CActorUnit id="MechaSpineCrawler" parent="ZergBuildingEx" unitName="MechaSpineCrawler">
+        <Aliases value="_UnitLarge"/>
+        <On Terms="ActorCreation" Send="AnimGroupApply Burrow"/>
+        <On Terms="WeaponStart.*.AttackStart" Send="AnimPlay Attack Attack PlayForever"/>
+        <On Terms="WeaponStop.*.AttackStop; !MissileTentacleIsReturning TentacleAttack" Send="AnimClear Attack"/>
+        <On Terms="WeaponStop.*.AttackStop; !MissileTentacleIsReturning TentacleAttack" Send="AnimGroupRemove Ready"/>
+        <On Terms="MissileTentacleRetracted" Send="AnimClear Attack"/>
+        <On Terms="MissileTentacleRetracted" Send="RefClear TentacleAttack"/>
+        <On Terms="MissileTentacleRetracted" Send="AnimGroupRemove Ready"/>
+        <On Terms="MissileTentacleRetracted" Send="AnimPlay AttackEnd Attack,End 0 0.000000"/>
+        <Model value="SpineCrawler_Mecha"/>
+        <BuildModel value="SpineCrawler"/>
+        <DeathArray index="Normal" ModelLink="SpineCrawler_Mecha_Death" SoundLink="SpineCrawler_Explode"/>
+        <DeathArray index="UnderConstruction" ModelLink="SpineCrawlerDeathUnderConstruction" SoundLink="SpineCrawler_Explode"/>
+        <PlacementModel value="SpineCrawler_Mecha_Placement"/>
+        <PlacementSound value="Zerg_BuildingPlacementSmall"/>
+        <PortraitModel value="SpineCrawlerPortrait"/>
+        <BarOffset value="110"/>
+        <BarWidth value="90"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-Zerg-SpineCrawler.dds"/>
+        </GroupIcon>
+        <HeroIcon value="Assets\Textures\btn-building-zerg-spinecrawler.dds"/>
+        <NameOffset value="30"/>
+        <SoundArray index="Ready" value="SpineCrawler_Ready"/>
+        <SoundArray index="What" value="SpineCrawler_What"/>
+        <SoundArray index="Yes" value="SpineCrawler_Yes"/>
+        <SoundArray index="Attack" value="SpineCrawler_Attack"/>
+        <UnitIcon value="Assets\Textures\btn-building-zerg-spinecrawler.dds"/>
+        <Wireframe>
+            <Image value="Assets\Wireframes\Mecha\Wireframe-Zerg-SpineCrawler-mecha.dds"/>
+        </Wireframe>
+        <Scale value="1.250000"/>
+        <Remove Terms="WeaponStart.*.AttackStart" Send="AnimBracketStart Attack Attack"/>
+        <Remove Terms="WeaponStop.*.AttackStop" Send="AnimBracketStop Attack"/>
+        <Remove Terms="Abil.attack.ReadyStop" Send="AnimGroupRemove Ready"/>
+        <HostedAttaches Name="TentacleAttack">
+            <AttachQuery Methods="Weapon"/>
+        </HostedAttaches>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-stetmann-mechagroundplating-level0.dds"/>
+    </CActorUnit>
+    <CActorAction id="MechaSpineCrawlerAttack" parent="GenericAttack" effectImpact="MechaSpineCrawlerWeaponDmg" effectLaunch="MechaSpineCrawlerWeaponLM">
+        <LaunchSiteOps Ops="SOpAttachHarnessStationary"/>
+        <LaunchAttachQuery Methods="Weapon"/>
+        <LaunchAssets Sound="SpineCrawler_AttackLaunch"/>
+        <Missile value="MechaSpineCrawlerMissile"/>
+        <ImpactSiteOps Ops="SOpAttachHarness SOpAttachVolumeStandard SOpForwardLaunchGuide"/>
+        <ImpactSiteOpsReaction Ops="SOp2DRotation SOp180" HoldPosition="1" HoldRotation="1"/>
+        <ImpactMap index="None" Sound="SpineCrawler_AttackImpact"/>
+        <ImpactMap index="LightArmor" ModelReaction="LightArmorTargetImpact"/>
+        <ImpactMap index="Metal" ModelReaction="MetalTargetImpact"/>
+        <ImpactPhysics Name="ImpalerTentacleHurl" MatchKeys="SpineCrawlerHurl" Physics="SpineCrawlerHurlDeathForce"/>
+        <ImpactPhysics Name="ImpalerTentacleImpact" MatchKeys="Basic" Physics="SpineCrawlerAttackDeathForce"/>
+        <AcquisitionYawHalfArc value="30.000000"/>
+        <AcquisitionPitchHalfArc value="60.000000"/>
+        <ActionFlags index="VictimRevealsAttacker" value="1"/>
+    </CActorAction>
+    <CActorUnit id="MechaSpire" parent="ZergBuildingEx" unitName="MechaSpire">
+        <Aliases value="_UnitHuge"/>
+        <On Terms="UnitDeathCustomize; ValidateUnit HasZergGenericDeath" Send="DeathCustomize Detached"/>
+        <Model value="Spire_Mecha"/>
+        <BuildModel value="Spire"/>
+        <DeathArray index="Normal" ModelLink="Spire_Mecha_Death" SoundLink=""/>
+        <DeathArray index="UnderConstruction" ModelLink="SpireDeathUnderConstruction" SoundLink="Spire_Explode"/>
+        <PlacementModel value="SpirePlacement"/>
+        <PortraitModel value="Spire_Mecha_Portrait"/>
+        <BarOffset value="190"/>
+        <BarWidth value="120"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-Zerg-Spire.dds"/>
+        </GroupIcon>
+        <HeroIcon value="Assets\Textures\btn-building-zerg-spire.dds"/>
+        <NameOffset value="70"/>
+        <SoundArray index="Ready" value="Spire_Ready"/>
+        <SoundArray index="What" value="Spire_What"/>
+        <UnitIcon value="Assets\Textures\btn-building-zerg-spire.dds"/>
+        <Wireframe>
+            <Image value="Assets\Wireframes\Mecha\Wireframe-Zerg-Spire-mecha.dds"/>
+        </Wireframe>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-stetmann-mechagroundplating-level0.dds"/>
+    </CActorUnit>
+    <CActorUnit id="MechaSporeCrawler" parent="ZergBuildingEx" unitName="MechaSporeCrawler">
+        <Aliases value="_UnitLarge"/>
+        <On Terms="ActorCreation" Send="AnimGroupApply Burrow"/>
+        <On Terms="UnitDeathCustomize; ValidateUnit HasZergGenericDeath" Send="DeathCustomize Detached"/>
+        <Model value="SporeCrawler_Mecha"/>
+        <BuildModel value="SporeCrawler"/>
+        <DeathArray index="Normal" ModelLink="SporeCrawler_Mecha_Death" SoundLink="SporeCrawler_Explode"/>
+        <DeathArray index="UnderConstruction" ModelLink="SporeCrawlerDeathUnderConstruction" SoundLink="SporeCrawler_Explode"/>
+        <PlacementModel value="SporeCrawlerPlacement"/>
+        <PlacementSound value="Zerg_BuildingPlacementSmall"/>
+        <PortraitModel value="SporeCrawler_Mecha_Portrait"/>
+        <BarOffset value="60"/>
+        <BarWidth value="90"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-Zerg-SporeCrawler.dds"/>
+        </GroupIcon>
+        <HeroIcon value="Assets\Textures\btn-building-zerg-sporecrawler.dds"/>
+        <NameOffset value="30"/>
+        <SoundArray index="Ready" value="SporeCrawler_Ready"/>
+        <SoundArray index="What" value="SporeCrawler_What"/>
+        <SoundArray index="Yes" value="SporeCrawler_Yes"/>
+        <SoundArray index="Attack" value="SporeCrawler_Attack"/>
+        <UnitIcon value="Assets\Textures\btn-building-zerg-sporecrawler.dds"/>
+        <Wireframe>
+            <Image value="Assets\Wireframes\Mecha\Wireframe-Zerg-SporeCrawler-mecha.dds"/>
+        </Wireframe>
+        <Scale value="1.500000"/>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-stetmann-mechagroundplating-level0.dds"/>
+    </CActorUnit>
+    <CActorAction id="MechaSporeCrawlerAttack" parent="GenericAttack" effectImpact="MechaSporeCrawlerWeaponDmg" effectLaunch="MechaSporeCrawlerWeaponLM">
+        <LaunchAssets Sound="SporeCrawler_AttackLaunch"/>
+        <Missile value="SporeCrawlerAttackMissile"/>
+        <ImpactMap index="None" Model="SporeCrawlerAttackImpact" Sound="SporeCrawler_AttackImpact"/>
+        <ImpactPhysics Name="AcidSpewImpact" MatchKeys="Basic" Physics="SporeCrawlerAttackForce"/>
+    </CActorAction>
+    <CActorUnit id="MechaUltraliskCavern" parent="ZergBuildingEx" unitName="MechaUltraliskCavern">
+        <Aliases value="_UnitHuge"/>
+        <On Terms="UnitDeathCustomize; ValidateUnit HasZergGenericDeath" Send="DeathCustomize Detached"/>
+        <Model value="UltraliskCavern_Mecha"/>
+        <BuildModel value="UltraliskCavern"/>
+        <DeathArray index="Normal" ModelLink="UltraliskCavern_Mecha_Death" SoundLink="UltraliskCavern_Explode"/>
+        <DeathArray index="UnderConstruction" ModelLink="UltraliskCavernDeathUnderConstruction" SoundLink="UltraliskCavern_Explode"/>
+        <PlacementModel value="UltraliskCavernPlacement"/>
+        <PortraitModel value="UltraliskCavern_Mecha_Portrait"/>
+        <BarOffset value="135"/>
+        <BarWidth value="135"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-Zerg-UltraliskCavern.dds"/>
+        </GroupIcon>
+        <HeroIcon value="Assets\Textures\btn-building-zerg-ultraliskcavern.dds"/>
+        <NameOffset value="110"/>
+        <SoundArray index="Ready" value="UltraliskCavern_Ready"/>
+        <SoundArray index="What" value="UltraliskCavern_What"/>
+        <UnitIcon value="Assets\Textures\btn-building-zerg-ultraliskcavern.dds"/>
+        <Wireframe>
+            <Image value="Assets\Wireframes\Mecha\Wireframe-Zerg-UltraliskCavern-mecha.dds"/>
+        </Wireframe>
+        <Scale value="1.250000"/>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-stetmann-mechagroundplating-level0.dds"/>
+    </CActorUnit>
+    <CActorUnit id="MechaInfestor" parent="GenericUnitBase" unitName="MechaInfestor">
+        <Aliases value="_UnitLarge"/>
+        <Model value="Infestor_Mecha"/>
+        <ModelFlags index="OutlineEmitter" value="1"/>
+        <BuildModel value="Infestor"/>
+        <DeathArray index="Normal" ModelLink="Infestor_Mecha_Death" SoundLink=""/>
+        <DeathArray index="Disintegrate" ModelLink="Infestor_Mecha_DeathAcid" SoundLink="Uni_DeathFXAcid"/>
+        <DeathArray index="Fire" ModelLink="Infestor_Mecha_DeathFire" SoundLink="Uni_DeathFXFire"/>
+        <PlacementModel value="Infestor"/>
+        <PortraitModel value="Infestor_Mecha_Portrait"/>
+        <WalkAnimMoveSpeed value="1.875"/>
+        <BarOffset value="70"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-Zerg-Infestor.dds"/>
+        </GroupIcon>
+        <HeroIcon value="Assets\Textures\btn-unit-zerg-infestor.dds"/>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-stetmann-mechagroundplating-level0.dds"/>
+        <SelectAbilCmd value="FungalGrowth,Execute"/>
+        <ShieldArmorIcon value="Assets\Textures\btn-upgrade-zerg-swarmfrenzy.dds"/>
+        <SoundArray index="Ready" value="Infestor_Ready"/>
+        <SoundArray index="What" value="Infestor_What"/>
+        <SoundArray index="Yes" value="Infestor_Yes"/>
+        <SoundArray index="Pissed" value="Infestor_Pissed"/>
+        <StatusColors index="Shields">
+            <ColorArray index="0" value="255,0,128,0"/>
+        </StatusColors>
+        <UnitIcon value="Assets\Textures\btn-unit-zerg-infestor.dds"/>
+        <VitalColors index="Shields">
+            <ColorArray value="255,0,128,0"/>
+        </VitalColors>
+        <VitalNames index="Shields" value="Vital/ZergShields"/>
+        <Wireframe>
+            <Image value="Assets\Wireframes\Mecha\Wireframe-Zerg-Infestor-mecha.dds"/>
+        </Wireframe>
+        <WireframeShieldColor value="255,0,128,0"/>
+        <Scale value="0.800000"/>
+    </CActorUnit>
+    <CActorAction id="MechaQueenAttack" parent="GenericAttack" effectImpact="MechaQueenWeaponDmg" effectLaunch="MechaQueenWeaponLaunchMissile">
+        <LaunchAttachQuery Methods="Weapon"/>
+        <LaunchAssets Model="AcidSpinesAttackLaunch" Sound="AcidSpines_AttackLaunch"/>
+        <Missile value="AcidSpinesAttackMissile"/>
+        <ImpactMap index="None" Model="QueenMissileImpact" Sound="AcidSpines_AttackImpact"/>
+        <ImpactPhysics Name="AcidSpinesImpact" MatchKeys="Basic" Physics="QueenAttackDeathForce"/>
+        <ShieldFlashType value="Header"/>
+    </CActorAction>
+    <CActorUnit id="MechaLocust" parent="GenericUnitStandard" unitName="MechaLocust">
+        <Aliases value="_UnitSmall"/>
+        <Model value="Locust_Mecha"/>
+        <ModelFlags index="OutlineEmitter" value="1"/>
+        <DeathArray index="Normal" ModelLink="Locust_Mecha_Death" SoundLink="Locust_Death"/>
+        <DeathArray index="Disintegrate" ModelLink="Locust_Mecha_DeathAcid" SoundLink="Uni_DeathFXAcid"/>
+        <DeathArray index="Fire" ModelLink="Locust_Mecha_DeathFire" SoundLink="Uni_DeathFXFire"/>
+        <PortraitModel value="Locust_Mecha_Portrait"/>
+        <WalkAnimMoveSpeed value="2.25"/>
+        <BarOffset value="45"/>
+        <BarWidth value="36"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-Zerg-Locust.dds"/>
+        </GroupIcon>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-stetmann-mechagroundplating-level0.dds"/>
+        <ShieldArmorIcon value="Assets\Textures\btn-upgrade-zerg-swarmfrenzy.dds"/>
+        <SoundArray index="Birth" value="InfestedSwarm_Birth"/>
+        <SoundArray index="Ready" value="InfestedSwarm_Ready"/>
+        <SoundArray index="Help" value="InfestedSwarm_Help"/>
+        <SoundArray index="What" value="InfestedSwarm_What"/>
+        <SoundArray index="Yes" value="InfestedSwarm_Yes"/>
+        <SoundArray index="Attack" value="InfestedSwarm_Attack"/>
+        <SoundArray index="Pissed" value="InfestedSwarm_Pissed"/>
+        <SoundArray index="Movement" value="zLocust_moveLoop"/>
+        <StatusColors index="Shields">
+            <ColorArray index="0" value="255,0,128,0"/>
+        </StatusColors>
+        <UnitFlags index="StandAnimBirthVariation" value="0"/>
+        <UnitIcon value="Assets\Textures\btn-unit-zerg-locust.dds"/>
+        <VitalColors index="Shields">
+            <ColorArray value="255,0,128,0"/>
+        </VitalColors>
+        <VitalNames index="Shields" value="Vital/ZergShields"/>
+        <Wireframe>
+            <Image value="Assets\Wireframes\Mecha\Wireframe-Zerg-Locust-mecha.dds"/>
+        </Wireframe>
+        <WireframeShieldColor value="255,0,128,0"/>
+        <Scale value="1.500000"/>
+    </CActorUnit>
+    <CActorAction id="MechaLocustAttack" parent="GenericAttack" effectImpact="MechaLocustWeaponDmg" effectLaunch="MechaLocustWeaponLaunchMissile">
+        <LaunchAttachQuery Methods="AMFilterWeapon"/>
+        <LaunchAssets Sound="Locust_Spit"/>
+        <Missile value="LocustAttackMissile"/>
+        <ImpactMap index="None" Model="LocustAttackImpact" Sound="Locust_Spit_impact"/>
+        <ImpactPhysics Name="AcidSpit" MatchKeys="Basic" Physics="LocustAttackDeathForce"/>
+    </CActorAction>
+    <CActorUnit id="MechaHydralisk" parent="GenericUnitStandard" unitName="MechaHydralisk">
+        <Aliases value="_UnitMedium"/>
+        <Macros value="ZergBurrowStandardAnimMacro"/>
+        <Macros value="ZergMediumBurrowEffects"/>
+        <Macros value="UnloadDropAnim"/>
+        <Model value="Hydralisk_Mecha"/>
+        <ModelFlags index="OutlineEmitter" value="1"/>
+        <EventDataSound Name="HydraliskAttackImpactMelee" Actor="UnitSound" Sound="Hydralisk_AttackImpactMelee"/>
+        <BuildModel value="Hydralisk"/>
+        <DeathArray index="Normal" ModelLink="Hydralisk_Mecha_Death" SoundLink="Hydralisk_Explode"/>
+        <DeathArray index="Disintegrate" ModelLink="Hydralisk_Mecha_DeathAcid" SoundLink="Uni_DeathFXAcid"/>
+        <DeathArray index="Fire" ModelLink="Hydralisk_Mecha_DeathFire" SoundLink="Uni_DeathFXFire"/>
+        <PlacementModel value="Hydralisk"/>
+        <PortraitModel value="Hydralisk_Mecha_Portrait"/>
+        <WalkAnimMoveSpeed value="2.086"/>
+        <BarOffset value="60"/>
+        <BarWidth value="48"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-Zerg-Hydralisk.dds"/>
+        </GroupIcon>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-stetmann-mechagroundplating-level0.dds"/>
+        <ShieldArmorIcon value="Assets\Textures\btn-upgrade-zerg-swarmfrenzy.dds"/>
+        <SoundArray index="Ready" value="Hydralisk_Ready"/>
+        <SoundArray index="What" value="Hydralisk_What"/>
+        <SoundArray index="Yes" value="Hydralisk_Yes"/>
+        <SoundArray index="Attack" value="Hydralisk_Attack"/>
+        <SoundArray index="Pissed" value="Hydralisk_Pissed"/>
+        <StatusColors index="Shields">
+            <ColorArray index="0" value="255,0,128,0"/>
+        </StatusColors>
+        <UnitIcon value="Assets\Textures\btn-unit-zerg-hydralisk-mecha.dds"/>
+        <VitalColors index="Shields">
+            <ColorArray value="255,0,128,0"/>
+        </VitalColors>
+        <VitalNames index="Shields" value="Vital/ZergShields"/>
+        <Wireframe>
+            <Image value="Assets\Wireframes\Mecha\Wireframe-Zerg-Hydralisk-mecha.dds"/>
+        </Wireframe>
+        <WireframeShieldColor value="255,0,128,0"/>
+        <Scale value="1.100000"/>
+    </CActorUnit>
+    <CActorAction id="MechaHydraliskAttack" parent="GenericAttack" effectImpact="NeedleSpinesDamage" effectLaunch="MechaHydraliskWeaponLaunchMissile">
+        <LaunchSiteOps Ops="SOpAttachHarness SOpForwardImpactGuide"/>
+        <LaunchAttachQuery Methods="AMFilterWeaponSetA0"/>
+        <LaunchAssets Sound="Hydralisk_GroundAttackLaunch"/>
+        <Missile value="HydraliskAttackMissile"/>
+        <ImpactMap index="None" Model="HydraliskAttackImpact" Sound="Hydralisk_AttackImpactRanged"/>
+        <ImpactMap index="Flesh" ModelReaction="BloodTargetImpact"/>
+        <ImpactPhysics Name="NeedleSpinesImpact" MatchKeys="Basic" Physics="HydraliskAttackDeathForce"/>
+        <AcquisitionYawHalfArc value="20.000000"/>
+        <AcquisitionPitchHalfArc value="20.000000"/>
+        <AccuracyHalfArc value="25.000000"/>
+    </CActorAction>
+    <CActorUnit id="MechaDrone" parent="GenericBurrowerStandard" unitName="MechaDrone">
+        <Aliases value="_UnitSmall"/>
+        <Model value="Drone_Mecha"/>
+        <ModelFlags index="OutlineEmitter" value="1"/>
+        <BuildModel value="Drone"/>
+        <DeathArray index="Normal" ModelLink="Drone_Mecha_Death" SoundLink="Drone_Explode"/>
+        <DeathArray index="Disintegrate" ModelLink="Drone_Mecha_DeathAcid" SoundLink="Uni_DeathFXAcid"/>
+        <DeathArray index="Fire" ModelLink="Drone_Mecha_DeathFire" SoundLink="Uni_DeathFXFire"/>
+        <PlacementModel value="Drone"/>
+        <PortraitModel value="Drone_Mecha_Portrait"/>
+        <BarOffset value="40"/>
+        <BarWidth value="42"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-Zerg-Drone.dds"/>
+        </GroupIcon>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-stetmann-mechagroundplating-level0.dds"/>
+        <ShieldArmorIcon value="Assets\Textures\btn-upgrade-zerg-swarmfrenzy.dds"/>
+        <SoundArray index="Ready" value="Drone_Ready"/>
+        <SoundArray index="Help" value="Alert_ZergEconomyUnderAttack"/>
+        <SoundArray index="What" value="Drone_What"/>
+        <SoundArray index="Yes" value="Drone_Yes"/>
+        <SoundArray index="Attack" value="Drone_Attack"/>
+        <SoundArray index="Pissed" value="Drone_Pissed"/>
+        <StatusColors index="Shields">
+            <ColorArray index="0" value="255,0,128,0"/>
+        </StatusColors>
+        <UnitIcon value="Assets\Textures\btn-unit-zerg-drone.dds"/>
+        <VitalColors index="Shields">
+            <ColorArray value="255,0,128,0"/>
+        </VitalColors>
+        <VitalNames index="Shields" value="Vital/ZergShields"/>
+        <Wireframe>
+            <Image value="Assets\Wireframes\Mecha\Wireframe-Zerg-Drone-mecha.dds"/>
+        </Wireframe>
+        <WireframeShieldColor value="255,0,128,0"/>
+        <Scale value="1.350000"/>
+    </CActorUnit>
+    <CActorAction id="MechaDroneAttack" parent="GenericAttack" effectAttack="MechaDroneWeaponDmg">
+        <ImpactMap index="None" Model="DroneAttackImpact" Sound="Drone_AttackImpact"/>
+        <ShieldFlashType value="Header"/>
+    </CActorAction>
+    <CActorUnit id="MechaBroodling" parent="GenericUnitStandard" unitName="MechaBroodling">
+        <Aliases value="_UnitSmall"/>
+        <Macros value="BroodlingAnimSlateCleaner"/>
+        <Macros value="TerrainSquibAnimations"/>
+        <Macros value="PhysicsDeathsSwarmGround"/>
+        <Macros value="PhysicsDeathsVoidGround"/>
+        <On Terms="ActorCreation" Send="$Birth 0 0.000000"/>
+        <On Terms="UnitHeightUpdate.*.Land" Send="Create Broodling_Land"/>
+        <HostSiteOps Ops="SOpMoveUpByDot2"/>
+        <Model value="Broodling_Mecha"/>
+        <ModelFlags index="OutlineEmitter" value="1"/>
+        <BuildModel value="Broodling"/>
+        <DeathArray index="Normal" ModelLink="Broodling_Mecha_Death" SoundLink="Broodling_Explode"/>
+        <DeathArray index="Disintegrate" ModelLink="Broodling_Mecha_DeathAcid" SoundLink="Broodling_DeathFXAcid"/>
+        <DeathArray index="Fire" ModelLink="Broodling_Mecha_DeathFire" SoundLink="Broodling_DeathFXFire"/>
+        <PlacementModel value="Broodling"/>
+        <PortraitModel value="Broodling_Mecha_Portrait"/>
+        <WalkAnimMoveSpeed value="1.5"/>
+        <BarOffset value="25"/>
+        <BarWidth value="40"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-Zerg-Broodling.dds"/>
+        </GroupIcon>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-stetmann-mechagroundplating-level0.dds"/>
+        <ShieldArmorIcon value="Assets\Textures\btn-upgrade-zerg-swarmfrenzy.dds"/>
+        <SoundArray index="Ready" value="Broodling_Ready"/>
+        <SoundArray index="What" value="Broodling_What"/>
+        <SoundArray index="Yes" value="Broodling_Yes"/>
+        <SoundArray index="Attack" value="Broodling_Attack"/>
+        <SoundArray index="Pissed" value="Broodling_Pissed"/>
+        <StatusColors index="Shields">
+            <ColorArray index="0" value="255,0,128,0"/>
+        </StatusColors>
+        <UnitIcon value="Assets\Textures\btn-unit-zerg-symbiote.dds"/>
+        <VitalColors index="Shields">
+            <ColorArray value="255,0,128,0"/>
+        </VitalColors>
+        <VitalNames index="Shields" value="Vital/ZergShields"/>
+        <Wireframe>
+            <Image value="Assets\Wireframes\Mecha\Wireframe-Zerg-Broodling-mecha.dds"/>
+        </Wireframe>
+        <WireframeShieldColor value="255,0,128,0"/>
+        <Scale value="1.500000"/>
+    </CActorUnit>
+    <CActorAction id="MechaBroodlingAttack" parent="GenericAttack" effectAttack="MechaBroodlingWeaponDmg">
+        <ImpactMap index="None" Sound="Broodling_AttackImpact"/>
+        <ShieldFlashType value="Header"/>
+    </CActorAction>
+    <CActorUnit id="MechaBaneling" parent="GenericBurrowerStandard" unitName="MechaBaneling">
+        <Aliases value="_UnitSmall"/>
+        <Model value="Baneling_Mecha"/>
+        <ModelFlags index="OutlineEmitter" value="1"/>
+        <BuildModel value="Baneling"/>
+        <DeathArray index="Normal" ModelLink="Baneling_Mecha_Death" SoundLink=""/>
+        <PlacementModel value="Baneling"/>
+        <PortraitModel value="Baneling_Mecha_Portrait"/>
+        <WalkAnimMoveSpeed value="2"/>
+        <BarOffset value="35"/>
+        <BarWidth value="36"/>
+        <GroupIcon>
+            <Image value="Assets\Wireframes\Mecha\Wireframe-Zerg-Baneling-mecha.dds"/>
+        </GroupIcon>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-stetmann-mechagroundplating-level0.dds"/>
+        <ShieldArmorIcon value="Assets\Textures\btn-upgrade-zerg-swarmfrenzy.dds"/>
+        <SoundArray index="Ready" value="Baneling_Ready"/>
+        <SoundArray index="Help" value="Baneling_Help"/>
+        <SoundArray index="What" value="Baneling_What"/>
+        <SoundArray index="Yes" value="Baneling_Yes"/>
+        <SoundArray index="Attack" value="Baneling_Attack"/>
+        <SoundArray index="Pissed" value="Baneling_Pissed"/>
+        <SoundArray index="Movement" value="Baneling_Movement"/>
+        <StatusColors index="Shields">
+            <ColorArray index="0" value="255,0,128,0"/>
+        </StatusColors>
+        <UnitIcon value="Assets\Textures\btn-unit-zerg-baneling-mecha.dds"/>
+        <VitalColors index="Shields">
+            <ColorArray value="255,0,128,0"/>
+        </VitalColors>
+        <VitalNames index="Shields" value="Vital/ZergShields"/>
+        <Wireframe>
+            <Image value="Assets\Wireframes\Mecha\Wireframe-Zerg-Baneling-mecha.dds"/>
+        </Wireframe>
+        <WireframeShieldColor value="255,0,128,0"/>
+        <Scale value="1.300000"/>
+        <On index="65" Terms="WeaponStart.*.AttackStart; AnimPlaying Birth" Send="AnimClear Birth"/>
+        <On index="66" Terms="Abil.attack.ReadyStop" Send="AnimGroupRemove Ready"/>
+        <On index="67" Terms="Effect.MechaBanelingWeaponLaunchMissile.Start" Send="AnimBracketStart Attack Walk,Superior,Start Walk,Superior"/>
+        <On index="68" removed="1"/>
+        <On index="69" removed="1"/>
+        <On index="70" removed="1"/>
+    </CActorUnit>
+    <CActorUnit id="MechaRavager" parent="GenericUnitStandard" unitName="MechaRavager">
+        <Aliases value="_UnitLarge"/>
+        <Model value="Ravager_Mecha"/>
+        <ModelFlags index="OutlineEmitter" value="1"/>
+        <BuildModel value="Ravager_Mecha"/>
+        <DeathArray index="Normal" ModelLink="Ravager_Mecha_Death" SoundLink="Roach_Explode"/>
+        <DeathArray index="Disintegrate" ModelLink="Ravager_Mecha_DeathAcid" SoundLink="Uni_DeathFXAcid"/>
+        <DeathArray index="Fire" ModelLink="Ravager_Mecha_DeathFire" SoundLink="Uni_DeathFXFire"/>
+        <PlacementModel value="Ravager"/>
+        <PortraitModel value="Ravager_Mecha_Portrait"/>
+        <WalkAnimMoveSpeed value="2.25"/>
+        <BarOffset value="85"/>
+        <BarWidth value="75"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\wireframe-zerg-ravagers.dds"/>
+        </GroupIcon>
+        <HeroIcon value="Assets\Textures\btn-unit-zerg-ravager.dds"/>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-stetmann-mechagroundplating-level0.dds"/>
+        <SoundArray index="Ready" value="Ravager_Ready"/>
+        <SoundArray index="What" value="Ravager_What"/>
+        <SoundArray index="Yes" value="Ravager_Yes"/>
+        <SoundArray index="Attack" value="Ravager_Attack"/>
+        <SoundArray index="Pissed" value="Ravager_Pissed"/>
+        <UnitIcon value="Assets\Textures\btn-unit-zerg-ravager.dds"/>
+        <Wireframe>
+            <Image value="Assets\Wireframes\Mecha\wireframe-zerg-ravager-mecha.dds"/>
+        </Wireframe>
+        <Scale value="0.900000"/>
+    </CActorUnit>
+    <CActorUnit id="MechaQueen" parent="GenericUnitStandard" unitName="MechaQueen">
+        <Aliases value="_UnitLarge"/>
+        <Model value="Queen_Mecha"/>
+        <ModelFlags index="OutlineEmitter" value="1"/>
+        <BuildModel value="Queen"/>
+        <DeathArray index="Normal" ModelLink="Queen_Mecha_Death" SoundLink="Queen_Explode"/>
+        <DeathArray index="Disintegrate" ModelLink="Queen_Mecha_DeathAcid" SoundLink="Uni_DeathFXAcid"/>
+        <DeathArray index="Fire" ModelLink="Queen_Mecha_DeathFire" SoundLink="Uni_DeathFXFire"/>
+        <PlacementModel value="Queen"/>
+        <PortraitModel value="Queen_Mecha_Portrait"/>
+        <WalkAnimMoveSpeed value="1.7031"/>
+        <BarOffset value="75"/>
+        <ErrorArray Error="CantSeeBuildLocation" Sound="Alert_ZergBuildError" GroupSound="Alert_ZergBuildError"/>
+        <ErrorArray Error="CantSeeLandLocation" Sound="Alert_ZergBuildError" GroupSound="Alert_ZergBuildError"/>
+        <ErrorArray Error="CantBuildLocationInvalid" Sound="Alert_ZergBuildError" GroupSound="Alert_ZergBuildError"/>
+        <ErrorArray Error="CantLandLocationInvalid" Sound="Alert_ZergBuildError" GroupSound="Alert_ZergBuildError"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-Zerg-ExpeditionQueenLevel1.dds"/>
+        </GroupIcon>
+        <HeroIcon value="Assets\Textures\btn-unit-zerg-queen.dds"/>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-stetmann-mechagroundplating-level0.dds"/>
+        <MovementHerdNode value="HerdNode_ZergQueens"/>
+        <ShieldArmorIcon value="Assets\Textures\btn-upgrade-zerg-swarmfrenzy.dds"/>
+        <SoundArray index="Birth" value="Queen_Birth"/>
+        <SoundArray index="Ready" value="QueenReady"/>
+        <SoundArray index="Help" value="QueenHelp"/>
+        <SoundArray index="What" value="QueenWhat"/>
+        <SoundArray index="Yes" value="QueenYes"/>
+        <SoundArray index="Attack" value="Queen_Attack"/>
+        <SoundArray index="Pissed" value="Queen_Pissed"/>
+        <SoundArray index="Movement" value="zQueen_moveLoop"/>
+        <StatusColors index="Shields">
+            <ColorArray index="0" value="255,0,128,0"/>
+        </StatusColors>
+        <UnitFlags index="StandAnimBirthVariation" value="0"/>
+        <UnitIcon value="Assets\Textures\btn-unit-zerg-queen.dds"/>
+        <VitalColors index="Shields">
+            <ColorArray value="255,0,128,0"/>
+        </VitalColors>
+        <VitalNames index="Shields" value="Vital/ZergShields"/>
+        <Wireframe>
+            <Image value="Assets\Wireframes\Mecha\Wireframe-Zerg-queen-mecha.dds"/>
+        </Wireframe>
+        <WireframeShieldColor value="255,0,128,0"/>
+        <Scale value="1.100000"/>
+    </CActorUnit>
+    <CActorAction id="MechaRavagerAttack" parent="GenericAttack" effectImpact="MechaRavagerWeaponDmg" effectLaunch="MechaRavagerWeaponLM">
+        <LaunchAssets Model="" Sound="Ravager_AttackLaunch"/>
+        <Missile value="RavagerWeaponMissile"/>
+        <ImpactMap index="None" Model="RavagerWeaponImpact" Sound="Ravager_Attack_Impact"/>
+    </CActorAction>
+    <CActorUnit id="MechaRoach" parent="GenericUnitStandard" unitName="MechaRoach">
+        <Aliases value="_UnitSmall"/>
+        <Model value="Roach_Mecha"/>
+        <ModelFlags index="OutlineEmitter" value="1"/>
+        <BuildModel value="Roach_Mecha"/>
+        <DeathArray index="Normal" ModelLink="Roach_Mecha_Death" SoundLink="Roach_Explode"/>
+        <DeathArray index="Disintegrate" ModelLink="Roach_Mecha_DeathAcid" SoundLink="Uni_DeathFXAcid"/>
+        <DeathArray index="Fire" ModelLink="Roach_Mecha_DeathFire" SoundLink="Uni_DeathFXFire"/>
+        <DeathActorModel value="UnitDeathModelWithDeathMotionGround"/>
+        <PlacementModel value="Roach"/>
+        <PortraitModel value="Roach_Mecha_Portrait"/>
+        <WalkAnimMoveSpeed value="2.25"/>
+        <BarOffset value="55"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-Zerg-Roach.dds"/>
+        </GroupIcon>
+        <HeroIcon value="Assets\Textures\btn-unit-zerg-roach.dds"/>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-stetmann-mechagroundplating-level0.dds"/>
+        <ShieldArmorIcon value="Assets\Textures\btn-upgrade-zerg-swarmfrenzy.dds"/>
+        <SoundArray index="Ready" value="Roach_Ready"/>
+        <SoundArray index="What" value="Roach_What"/>
+        <SoundArray index="Yes" value="Roach_Yes"/>
+        <SoundArray index="Attack" value="Roach_Attack"/>
+        <SoundArray index="Pissed" value="Roach_Pissed"/>
+        <StatusColors index="Shields">
+            <ColorArray index="0" value="255,0,128,0"/>
+        </StatusColors>
+        <UnitIcon value="Assets\Textures\btn-unit-zerg-roach.dds"/>
+        <VitalColors index="Shields">
+            <ColorArray value="255,0,128,0"/>
+        </VitalColors>
+        <VitalNames index="Shields" value="Vital/ZergShields"/>
+        <Wireframe>
+            <Image value="Assets\Wireframes\Mecha\Wireframe-Zerg-Roach-mecha.dds"/>
+        </Wireframe>
+        <WireframeShieldColor value="255,0,128,0"/>
+        <Scale value="1.200000"/>
+    </CActorUnit>
+    <CActorUnit id="MechaUltralisk" parent="GenericUnitStandard" unitName="MechaUltralisk">
+        <Aliases value="_UnitMedium"/>
+        <Model value="Ultralisk_Mecha"/>
+        <AnimBlendTime value="0.300000"/>
+        <ModelFlags index="OutlineEmitter" value="1"/>
+        <EventDataSound Name="UltraliskAttack" Actor="UnitSound" Sound="Ultralisk_AttackLaunch"/>
+        <EventDataSound Name="UltraliskHeadAttack" Actor="UnitSound" Sound="Ultralisk_HeadAttackImpact"/>
+        <EventDataSound Name="UltraliskAttackImpact" Actor="UnitSound" Sound="Ultralisk_AttackImpact"/>
+        <BuildModel value="Ultralisk"/>
+        <DeathArray index="Normal" ModelLink="Ultralisk_Mecha_Death" SoundLink="Ultralisk_Explode" VoiceLink=""/>
+        <DeathArray index="Disintegrate" ModelLink="Ultralisk_Mecha_DeathAcid" SoundLink="Uni_DeathFXAcid"/>
+        <DeathArray index="Fire" ModelLink="Ultralisk_Mecha_DeathFire" SoundLink="Uni_DeathFXFireLarge"/>
+        <DeathActorModel value="UnitDeathModelWithDeathMotionGround"/>
+        <PlacementModel value="Ultralisk"/>
+        <PortraitModel value="Ultralisk_Mecha_Portrait"/>
+        <TerrainSquibs>
+            <GroupName value="RippleStandard"/>
+            <MovementDistance value="0.150000,0.150000"/>
+            <IdlePeriod value="0.100000,0.250000"/>
+            <RangeUp value="2.000000"/>
+            <RangeDown value="2.000000"/>
+            <AttachQuery Methods="AMFilterCenter"/>
+            <Visuals TerrainPhysicsMaterial="Water" ActorModel="TerrainSquibHarnessContinuous" ModelLink="WaterRippleUltralisk"/>
+        </TerrainSquibs>
+        <WalkAnimMoveSpeed value="2.9375"/>
+        <BarOffset value="30"/>
+        <BarWidth value="160"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-Zerg-Ultralisk.dds"/>
+        </GroupIcon>
+        <HeroIcon value="Assets\Textures\btn-unit-zerg-omegalisk.dds"/>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-stetmann-mechagroundplating-level0.dds"/>
+        <NameOffset value="40"/>
+        <ShieldArmorIcon value="Assets\Textures\btn-upgrade-zerg-swarmfrenzy.dds"/>
+        <SoundArray index="Ready" value="Ultralisk_Ready"/>
+        <SoundArray index="What" value="Ultralisk_What"/>
+        <SoundArray index="Yes" value="Ultralisk_Yes"/>
+        <SoundArray index="Attack" value="Ultralisk_Attack"/>
+        <SoundArray index="Pissed" value="Ultralisk_Pissed"/>
+        <SoundArray index="Movement" value="Ultralisk_Movement"/>
+        <StatusColors index="Shields">
+            <ColorArray index="0" value="255,0,128,0"/>
+        </StatusColors>
+        <UnitIcon value="Assets\Textures\btn-unit-zerg-omegalisk.dds"/>
+        <VitalColors index="Shields">
+            <ColorArray value="255,0,128,0"/>
+        </VitalColors>
+        <VitalNames index="Shields" value="Vital/ZergShields"/>
+        <Wireframe>
+            <Image value="Assets\Wireframes\Mecha\Wireframe-Zerg-Ultralisk-mecha.dds"/>
+        </Wireframe>
+        <WireframeShieldColor value="255,0,128,0"/>
+        <Scale value="0.750000"/>
+    </CActorUnit>
+    <CActorAction id="MechaRoachAttack" parent="GenericAttack" effectImpact="MechaRoachWeaponDmg" effectLaunch="MechaRoachWeaponLaunchMissile">
+        <LaunchAttachQuery Methods="Head"/>
+        <LaunchAssets Sound="Roach_AttackLaunchRanged"/>
+        <Missile value="RoachAttackMissile"/>
+        <ImpactMap index="None" Model="RoachMissileImpact" Sound="Roach_AttackImpactRanged"/>
+        <ImpactPhysics Name="AcidSalivaImpact" MatchKeys="Basic" Physics="RoachAttackDeathForce"/>
+        <AcquisitionYawHalfArc value="10.000000"/>
+        <AcquisitionPitchHalfArc value="15.000000"/>
+        <AccuracyHalfArc value="15.000000"/>
+    </CActorAction>
+    <CActorUnit id="MechaSwarmHost" parent="GenericUnitStandard" unitName="MechaSwarmHost">
+        <Aliases value="_UnitLarge"/>
+        <Model value="SwarmHost_Mecha"/>
+        <ModelFlags index="OutlineEmitter" value="1"/>
+        <BuildModel value="SwarmHostMP"/>
+        <DeathArray index="Normal" ModelLink="SwarmHost_Mecha_Death" SoundLink="BroodLord_Explode" VoiceLink="SwarmHost_Death"/>
+        <DeathArray index="Disintegrate" ModelLink="SwarmHost_Mecha_DeathAcid" SoundLink="Uni_DeathFXAcid" VoiceLink="SwarmHost_Death"/>
+        <DeathArray index="Fire" ModelLink="SwarmHost_Mecha_DeathFire" SoundLink="Uni_DeathFXFire" VoiceLink="SwarmHost_Death"/>
+        <PlacementModel value="SwarmHostMP"/>
+        <PlacementSound value="Zerg_BuildingPlacement"/>
+        <PortraitModel value="SwarmHost_Mecha_Portrait"/>
+        <WalkAnimMoveSpeed value="0.707"/>
+        <BarOffset value="80"/>
+        <BarWidth value="80"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\wireframe-zerg-swarmhost.dds"/>
+        </GroupIcon>
+        <HeroIcon value="Assets\Textures\btn-unit-zerg-swarmhost.dds"/>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-stetmann-mechagroundplating-level0.dds"/>
+        <MovementHerdNode value="HerdNode_ZergLarge"/>
+        <NameOffset value="80"/>
+        <SoundArray index="Ready" value="SwarmHost_Ready"/>
+        <SoundArray index="What" value="SwarmHost_What"/>
+        <SoundArray index="Yes" value="SwarmHost_Yes"/>
+        <SoundArray index="Attack" value="SwarmHost_Attack"/>
+        <SoundArray index="Pissed" value="SwarmHost_What"/>
+        <SoundArray index="Movement" value="SwarmHost_moveStart"/>
+        <UnitIcon value="Assets\Textures\btn-unit-zerg-swarmhost.dds"/>
+        <Wireframe>
+            <Image value="Assets\Wireframes\Mecha\wireframe-zerg-swarmhost-mecha.dds"/>
+        </Wireframe>
+    </CActorUnit>
+    <CActorUnit id="MechaZergling" parent="GenericBurrowerStandard" unitName="MechaZergling">
+        <Aliases value="_UnitSmall"/>
+        <Model value="Zergling_Mecha"/>
+        <ModelFlags index="OutlineEmitter" value="1"/>
+        <BuildModel value="Zergling"/>
+        <DeathArray index="Normal" ModelLink="Zergling_Mecha_Death" SoundLink="Zergling_Explode"/>
+        <DeathArray index="Disintegrate" ModelLink="Zergling_Mecha_DeathAcid" SoundLink="Uni_DeathFXAcid"/>
+        <DeathArray index="Eviscerate" ModelLink="Zergling_Mecha_DeathEviscerate" SoundLink="Zergling_DeathFXEviscerate"/>
+        <DeathArray index="Fire" ModelLink="Zergling_Mecha_DeathFire" SoundLink="Zergling_DeathFXFire"/>
+        <DeathActorModel value="UnitDeathModelWithDeathMotionGround"/>
+        <PlacementModel value="Zergling"/>
+        <PortraitModel value="Zergling_Mecha_Portrait"/>
+        <TerrainSquibs>
+            <GroupName value="RippleStandard"/>
+            <MovementDistance value="0.250000,0.250000"/>
+            <IdlePeriod value="0.200000,0.400000"/>
+            <RangeUp value="1.000000"/>
+            <RangeDown value="1.000000"/>
+            <AttachQuery Methods="AMFilterCenter"/>
+            <Visuals TerrainPhysicsMaterial="Water" ActorModel="TerrainSquibHarnessContinuous" ModelLink="WaterRippleTiny"/>
+        </TerrainSquibs>
+        <WalkAnimMoveSpeed value="3.1328"/>
+        <BarOffset value="30"/>
+        <BarWidth value="36"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-Zerg-Zergling.dds"/>
+        </GroupIcon>
+        <HeroIcon value="Assets\Textures\btn-unit-zerg-zergling.dds"/>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-stetmann-mechagroundplating-level0.dds"/>
+        <MovementHerdNode value="HerdNode_ZergSmall"/>
+        <ShieldArmorIcon value="Assets\Textures\btn-upgrade-zerg-swarmfrenzy.dds"/>
+        <SoundArray index="Ready" value="Zergling_Ready"/>
+        <SoundArray index="What" value="Zergling_What"/>
+        <SoundArray index="Yes" value="Zergling_Yes"/>
+        <SoundArray index="Attack" value="Zergling_Attack"/>
+        <SoundArray index="Pissed" value="Zergling_Pissed"/>
+        <StatusColors index="Shields">
+            <ColorArray index="0" value="255,0,128,0"/>
+        </StatusColors>
+        <UnitIcon value="Assets\Textures\btn-unit-zerg-zergling.dds"/>
+        <VitalColors index="Shields">
+            <ColorArray value="255,0,128,0"/>
+        </VitalColors>
+        <VitalNames index="Shields" value="Vital/ZergShields"/>
+        <Wireframe>
+            <Image value="Assets\Wireframes\Mecha\Wireframe-Zerg-Zergling-mecha.dds"/>
+        </Wireframe>
+        <WireframeShieldColor value="255,0,128,0"/>
+        <Scale value="1.400000"/>
+    </CActorUnit>
+    <CActorAction id="MechaZerglingAttack" parent="GenericAttack" effectAttack="MechaZerglingWeaponDmg">
+        <ImpactAttachQuery Methods="AMFilterTargetVolumes"/>
+        <ImpactMap index="None" Sound="Zergling_AttackImpact"/>
+        <ShieldFlashType value="Header"/>
+    </CActorAction>
+    <CActorUnit id="MechaRoachWarren" parent="ZergBuildingEx" unitName="MechaRoachWarren">
+        <Aliases value="_UnitHuge"/>
+        <Model value="RoachWarren_Mecha"/>
+        <BuildModel value="RoachWarren"/>
+        <DeathArray index="Normal" ModelLink="RoachWarren_Mecha_Death" SoundLink=""/>
+        <DeathArray index="UnderConstruction" ModelLink="RoachWarrenDeathUnderConstruction" SoundLink="RoachWarren_Explode"/>
+        <DeathCustoms ModelLink="ZergGenericBuildingDeath" Name="Detached"/>
+        <PlacementModel value="RoachWarrenPlacement"/>
+        <PortraitModel value="RoachWarrenPortrait"/>
+        <BarOffset value="145"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-Zerg-RoachWarren.dds"/>
+        </GroupIcon>
+        <HeroIcon value="Assets\Textures\btn-building-zerg-roachwarren.dds"/>
+        <SoundArray index="Ready" value="RoachWarren_Ready"/>
+        <SoundArray index="What" value="RoachWarren_What"/>
+        <UnitIcon value="Assets\Textures\btn-building-zerg-roachwarren.dds"/>
+        <Wireframe>
+            <Image value="Assets\Textures\Wireframe-Zerg-RoachWarren.dds"/>
+        </Wireframe>
+        <Scale value="1.250000"/>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-stetmann-mechagroundplating-level0.dds"/>
+    </CActorUnit>
+    <CActorMissile id="MechaSpineCrawlerMissile" parent="GenericTentacleMissile" unitName="MechaSpineCrawlerMissile">
+        <Supporter>
+            <Subject value="_Selectable"/>
+            <Scope value="Caster"/>
+            <Actor value="Find"/>
+            <Effect value="MechaSpineCrawlerWeaponLM"/>
+        </Supporter>
+        <Remove Terms="UnitBirth" Send="AnimBracketStart Lifetime Birth Stand"/>
+        <On Terms="UnitBirth" Send="AnimPlay Main Birth"/>
+        <On Terms="Effect.*.Return" Send="AnimPlay Main Back PlayForever"/>
+        <On Terms="SupporterDestruction" Send="$Death"/>
+        <On Terms="MotionPhaseStart; MotionPhase" Target="::Supporter" Send="RefSet TentacleAttack ::Self"/>
+        <Model value="Invisible"/>
+        <BarHeight value="1"/>
+        <BarWidth value="1"/>
+        <HostReturn>
+            <Subject value="_Selectable"/>
+            <Scope value="Caster"/>
+            <Actor value="Find"/>
+            <Effect value="MechaSpineCrawlerWeaponLM"/>
+        </HostReturn>
+        <HostReturnSiteOps Ops="SOpAttachHardPoint"/>
+    </CActorMissile>
+    <CModel id="NydusWorm@HitTestSphere">
+        <Model value="Assets\Units\Test\HitTestSphere\HitTestSphere.m3"/>
+    </CModel>
+    <CModel id="NydusWorm@NydusWormEntrance">
+        <Model value="Assets\Units\Zerg\NydusDragon\NydusDragon.m3"/>
+    </CModel>
+    <CModel id="NydusWorm@Model">
+        <Model value="Assets\Units\Zerg\NydusWorm\NydusWorm.m3"/>
+        <ScaleMax value="0.750000,0.750000,0.750000"/>
+        <ScaleMin value="0.750000,0.750000,0.750000"/>
+    </CModel>
+    <CModel id="MechaLurkerAttackSpike">
+        <Model value="Assets\COOP\Stetmann\Effects\Lurker_Stetmann_COOP_SuperSpike\Lurker_Stetmann_COOP_SuperSpike.m3"/>
+    </CModel>
+    <CModel id="MechaInfestorMissile">
+        <Model value="Assets\COOP\Stetmann\Effects\Infestor_Stetmann_COOP_NeuralParasite\Infestor_Stetmann_COOP_NeuralParasite.m3"/>
+    </CModel>
+    <CWeaponLegacy id="MechaLurkerWeapon">
+        <EditorCategories value="Race:Zerg"/>
+        <Icon value="Assets\Textures\btn-upgrade-stetmann-mechameleeattacks-level0.dds"/>
+        <DisplayEffect value="MechaLurkerWeaponDmg"/>
+        <Range value="7"/>
+        <Period value="1.5"/>
+        <DamagePoint value="0"/>
+        <Effect value="MechaLurkerWeaponPersistent"/>
+        <LegacyOptions index="KeepChanneling" value="1"/>
+        <ReloadDuration value="0.0625"/>
+        <RandomDelayMin value="0"/>
+        <RandomDelayMax value="0"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="MechaBanelingWeapon">
+        <EditorCategories value=""/>
+        <DisplayEffect value="MechaBanelingWeaponDmg"/>
+        <Range value="1.25"/>
+        <Effect value="MechaBanelingWeaponLaunchMissile"/>
+        <Icon value="Assets\Textures\btn-upgrade-stetmann-mechameleeattacks-level0.dds"/>
+        <DamagePoint value="0"/>
+        <Period value="1"/>
+        <TargetFilters value="Visible;Self,Worker,Missile,Item,Dead,Hidden,Invulnerable"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="MechaInfestorWeapon">
+        <EditorCategories value=""/>
+        <DisplayEffect value="MechaInfestorWeaponDmg"/>
+        <Effect value="MechaInfestorWeaponLaunchMissile"/>
+        <Icon value="Assets\Textures\btn-upgrade-stetmann-mechameleeattacks-level0.dds"/>
+        <Range value="6.5"/>
+        <Period value="1.25"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="MechaRoachWeapon">
+        <EditorCategories value="Race:Zerg"/>
+        <Icon value="Assets\Textures\btn-upgrade-stetmann-mechameleeattacks-level0.dds"/>
+        <DisplayEffect value="MechaRoachWeaponDmg"/>
+        <Range value="3.5"/>
+        <Period value="1.5"/>
+        <Effect value="MechaRoachWeaponLaunchMissile"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="MechaSporeCrawlerWeapon">
+        <EditorCategories value="Race:Zerg"/>
+        <Icon value="Assets\Textures\btn-upgrade-zerg-missileattacks-level0.dds"/>
+        <DisplayEffect value="MechaSporeCrawlerWeaponDmg"/>
+        <Range value="7"/>
+        <RangeSlop value="0"/>
+        <Period value="0.65"/>
+        <Effect value="MechaSporeCrawlerWeaponLM"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="MechaQueenWeapon">
+        <EditorCategories value="Race:Zerg"/>
+        <Icon value="Assets\Textures\btn-upgrade-stetmann-mechameleeattacks-level0.dds"/>
+        <DisplayEffect value="MechaQueenWeaponDmg"/>
+        <Range value="6"/>
+        <Period value="1"/>
+        <Effect value="MechaQueenWeaponLaunchMissile"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="MechaSpineCrawlerWeapon">
+        <EditorCategories value="Race:Zerg"/>
+        <Icon value="Assets\Textures\btn-upgrade-zerg-seismicspines.dds"/>
+        <DisplayEffect value="MechaSpineCrawlerWeaponDmg"/>
+        <Range value="7"/>
+        <RangeSlop value="0"/>
+        <Period value="1.35"/>
+        <DamagePoint value="0.3332"/>
+        <Effect value="MechaSpineCrawlerWeaponLM"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="MechaZerglingWeapon">
+        <EditorCategories value="Race:Zerg"/>
+        <Options index="Melee" value="1"/>
+        <Icon value="Assets\Textures\btn-upgrade-stetmann-mechameleeattacks-level0.dds"/>
+        <DisplayEffect value="MechaZerglingWeaponDmg"/>
+        <Range value="0.125"/>
+        <Period value="0.75"/>
+        <Effect value="MechaZerglingWeaponDmg"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="MechaUltraliskWeapon">
+        <EditorCategories value="Race:Zerg"/>
+        <Options index="Melee" value="1"/>
+        <Icon value="Assets\Textures\btn-upgrade-stetmann-mechameleeattacks-level0.dds"/>
+        <AcquirePrioritization value="ByAngle"/>
+        <Range value="0.75"/>
+        <Cost>
+            <Cooldown Link="Abil/UltraliskWeaponCooldown" Location="Unit" TimeUse="0.86"/>
+        </Cost>
+        <Period value="1"/>
+        <DamagePoint value="0.3332"/>
+        <Effect value="MechaUltraliskWeaponSearch"/>
+        <DisplayEffect value="MechaUltraliskWeaponDmg"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="MechaLocustWeapon">
+        <EditorCategories value="Race:Zerg"/>
+        <Icon value="Assets\Textures\btn-upgrade-stetmann-mechameleeattacks-level0.dds"/>
+        <DisplayEffect value="MechaLocustWeaponDmg"/>
+        <MinScanRange value="10"/>
+        <Range value="2.5"/>
+        <Period value="0.85"/>
+        <DamagePoint value="0.2666"/>
+        <Effect value="MechaLocustWeaponLaunchMissile"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="MechaBroodlingWeapon">
+        <EditorCategories value="Race:Zerg"/>
+        <Options index="Melee" value="1"/>
+        <Icon value="Assets\Textures\btn-upgrade-stetmann-mechameleeattacks-level0.dds"/>
+        <DisplayEffect value="MechaBroodlingWeaponDmg"/>
+        <MinScanRange value="15"/>
+        <Range value="0.15"/>
+        <Period value="0.5"/>
+        <Effect value="MechaBroodlingWeaponDmg"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="MechaHydraliskWeapon">
+        <EditorCategories value="Race:Zerg"/>
+        <Icon value="Assets\Textures\btn-upgrade-stetmann-mechameleeattacks-level0.dds"/>
+        <DisplayEffect value="MechaHydraliskWeaponDmg"/>
+        <Period value="0.8"/>
+        <DamagePoint value="0.2"/>
+        <Effect value="MechaHydraliskWeaponLaunchMissile"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="MechaRavagerWeapon">
+        <EditorCategories value="Race:Zerg"/>
+        <Icon value="Assets\Textures\btn-upgrade-stetmann-mechameleeattacks-level0.dds"/>
+        <DisplayEffect value="MechaRavagerWeaponDmg"/>
+        <Range value="4"/>
+        <Period value="0.75"/>
+        <DamagePoint value="0.2"/>
+        <Effect value="MechaRavagerWeaponLM"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="MechaDroneWeapon">
+        <EditorCategories value="Race:Zerg"/>
+        <Options index="Melee" value="1"/>
+        <Icon value="Assets\Textures\btn-upgrade-stetmann-mechameleeattacks-level0.dds"/>
+        <DisplayEffect value="MechaDroneWeaponDmg"/>
+        <Range value="0.2"/>
+        <Period value="0.4"/>
+        <Effect value="MechaDroneWeaponSet"/>
+    </CWeaponLegacy>
+    <CMoverMissile id="MechaBanelingWeaponAttack">
+        <MotionPhases>
+            <Driver value="Ballistic"/>
+            <Speed value="1"/>
+            <Gravity value="1"/>
+            <ThrowBandYaw value="-360,-360,-360,-360"/>
+            <ThrowBandPitch value="-360,-360,-360,-360"/>
+            <FlightTime value="0.25,-1"/>
+            <Overlays/>
+            <Overlays/>
+        </MotionPhases>
+    </CMoverMissile>
+    <CMoverMissile id="NydusWorm@Throw">
+        <!--<MotionPhases>
+            <Driver value="AdaptableParabola"/>
+            <Acceleration value="0.5"/>
+            <SpeedRange value="4"/>
+            <MinSpeed value="9"/>
+            <MaxSpeed value="20"/>
+            <ActorTracking value="Actual"/>
+            <Outro value="-0.5,-0.1"/>
+            <ThrowBandYaw value="-360,-360,-360,-360"/>
+            <ThrowBandPitch value="-360,-360,-360,-360"/>
+            <AdaptableParabolaIsUpright value="1"/>
+            <AdaptableParabolaClearance value="7,0.5"/>
+            <AdaptableParabolaDistances index="Launch" value="1"/>
+            <AdaptableParabolaDistances index="PreApex" value="0.5"/>
+            <AdaptableParabolaDistances index="PostApex" value="0.5"/>
+            <AdaptableParabolaDistances index="Land" value="0.5"/>
+            <AdaptableParabolaAccels index="Launch" value="0"/>
+            <AdaptableParabolaAccels index="Ascent" value="0"/>
+            <AdaptableParabolaAccels index="Apex" value="0"/>
+            <AdaptableParabolaAccels index="Descent" value="0"/>
+            <AdaptableParabolaAccels index="Land" value="0"/>
+        </MotionPhases>-->
+        <Flags index="IgnoreMovementSuppression" value="1"/>
+        <MotionPhases>
+            <Driver value="Ballistic"/>
+            <Acceleration value="-1"/>
+            <Gravity value="25"/>
+            <RotationActorType value="Upright"/>
+            <YawPitchRoll value="MAX"/>
+            <FlightTime value="1.5"/>
+        </MotionPhases>
+        <RotationIgnoredByUnit value="1"/>
+        <PathMode value="Flying"/>
+    </CMoverMissile>
+    <CMoverMissile id="MechaSpineCrawlerTentacleExtendLong">
+        <MotionPhases>
+            <Driver value="Guidance"/>
+            <Acceleration value="180"/>
+            <Speed value="18"/>
+            <MaxSpeed value="200"/>
+            <IgnoresTerrain value="1"/>
+            <TurnType value="RevertToUp"/>
+            <ActorTracking value="Actual"/>
+            <RotationLaunchActorType value="Supplied"/>
+            <ThrowBandYaw value="-360,-360,-360,-360"/>
+            <ThrowBandPitch value="-360,-360,-360,-360"/>
+            <YawPitchRoll value="5759.6484"/>
+        </MotionPhases>
+    </CMoverMissile>
+    <CMoverMissile id="MechaSpineCrawlerTentacleExtendShort">
+        <MotionPhases>
+            <Driver value="Throw"/>
+            <Acceleration value="15"/>
+            <Speed value="1"/>
+            <MaxSpeed value="25"/>
+            <IgnoresTerrain value="1"/>
+            <Outro value="0.2,0.4"/>
+            <RotationLaunchActorType value="Supplied"/>
+            <ThrowRotationType value="LookAtTarget"/>
+            <ThrowVector value="0,-1,0.6"/>
+        </MotionPhases>
+        <MotionPhases>
+            <Driver value="Guidance"/>
+            <Acceleration value="180"/>
+            <MaxSpeed value="200"/>
+            <IgnoresTerrain value="1"/>
+            <TurnType value="RevertToUp"/>
+            <ActorTracking value="Actual"/>
+            <YawPitchRoll value="180"/>
+            <YawPitchRollAccel value="1440"/>
+        </MotionPhases>
+    </CMoverMissile>
+    <CMoverMissile id="MechaSpineCrawlerTentacleRetractLong">
+        <MotionPhases>
+            <Driver value="Throw"/>
+            <Speed value="15"/>
+            <MaxSpeed value="15"/>
+            <IgnoresTerrain value="1"/>
+            <TurnType value="RevertToUp"/>
+            <Outro value="1,3.8,0.1,0.1"/>
+            <ThrowVector value="0,-1,1"/>
+            <ThrowBandYaw value="14.9963,-14.9963"/>
+            <ThrowBandPitch value="4.9987,-1.9995"/>
+        </MotionPhases>
+        <MotionPhases>
+            <Driver value="Guidance"/>
+            <Acceleration value="25"/>
+            <MaxSpeed value="60"/>
+            <IgnoresTerrain value="1"/>
+            <ActorTracking value="Actual"/>
+            <RotationActorType value="Docking"/>
+            <YawPitchRoll value="119.8828"/>
+            <YawPitchRollAccel value="180"/>
+        </MotionPhases>
+    </CMoverMissile>
+    <CMoverMissile id="MechaSpineCrawlerTentacleRetractShort">
+        <MotionPhases>
+            <Driver value="Throw"/>
+            <Speed value="12"/>
+            <MaxSpeed value="12"/>
+            <IgnoresTerrain value="1"/>
+            <Outro value="0.5,0.75"/>
+            <ThrowVector value="0,-1,6"/>
+        </MotionPhases>
+        <MotionPhases>
+            <Driver value="Throw"/>
+            <Speed value="12"/>
+            <MaxSpeed value="12"/>
+            <IgnoresTerrain value="1"/>
+            <Outro value="0.9,1.5"/>
+            <ThrowRotationType value="LookAtTarget2D"/>
+            <ThrowVector value="0,-1,0"/>
+        </MotionPhases>
+        <MotionPhases>
+            <Driver value="Guidance"/>
+            <Acceleration value="40"/>
+            <Speed value="12"/>
+            <MaxSpeed value="49"/>
+            <IgnoresTerrain value="1"/>
+            <TurnType value="RevertToUp"/>
+            <ActorTracking value="Actual"/>
+            <RotationActorType value="Docking"/>
+            <YawPitchRoll value="MAX"/>
+        </MotionPhases>
+    </CMoverMissile>
+    <CDataCollectionUnit id="NydusWorm">
+        <EditorCategories value=""/>
+        <DataRecord Entry="Actor,NydusWorm"/>
+        <DataRecord Entry="Model,NydusWorm"/>
+        <DataRecord Entry="Unit,NydusWorm"/>
+        <DataRecord Entry="Abil,NydusWorm@Throw"/>
+        <DataRecord Entry="Actor,NydusWorm@HitTestSphere"/>
+        <DataRecord Entry="Actor,NydusWorm@NydusWormExit"/>
+        <DataRecord Entry="Behavior,NydusWorm@DmgResponseInvulnerable"/>
+        <DataRecord Entry="Behavior,NydusWorm@DmgResponse"/>
+        <DataRecord Entry="Button,NydusWorm@Throw"/>
+        <DataRecord Entry="Effect,NydusWorm@DmgResponseInvulnerable"/>
+        <DataRecord Entry="Effect,NydusWorm@ThrowLM"/>
+        <DataRecord Entry="Model,NydusWorm@HitTestSphere"/>
+        <DataRecord Entry="Model,NydusWorm@NydusWormEntrance"/>
+        <DataRecord Entry="Model,NydusWorm@Model"/>
+        <DataRecord Entry="Mover,NydusWorm@Throw"/>
+        <DataRecord Entry="Unit,NydusWorm"/>
+        <DataRecord Entry="Unit,NydusWorm@NydusWormExit"/>
+        <DataRecord Entry="Actor,NydusWorm@NydusWormEntrance"/>
+        <DataRecord Entry="Actor,NydusWorm@NydusWormExitRotation"/>
+        <DataRecord Entry="Behavior,NydusWorm@ThrowCollision"/>
+        <DataRecord Entry="Behavior,NydusWorm@DmgResponse"/>
+        <DataRecord Entry="Behavior,NydusWorm@ThrowHide"/>
+        <DataRecord Entry="Effect,NydusWorm@ThrowCollisionRemove"/>
+        <DataRecord Entry="Effect,NydusWorm@ThrowImpactLocation"/>
+        <DataRecord Entry="Effect,NydusWorm@ThrowInitial"/>
+        <DataRecord Entry="Effect,NydusWorm@ThrowHide"/>
+        <DataRecord Entry="Effect,NydusWorm@ThrowHideRemove"/>
+        <DataRecord Entry="Unit,NydusWorm"/>
+        <DataRecord Entry="Unit,NydusWorm@NydusWormEntrance"/>
+        <DataRecord Entry="Unit,NydusWorm@NydusWormExit"/>
+        <DataRecord Entry="Abil,NydusWorm@Relocate"/>
+        <DataRecord Entry="Behavior,NydusWorm@RelocateHeight"/>
+        <DataRecord Entry="Behavior,NydusWorm@RelocateInvulnerable"/>
+        <DataRecord Entry="Button,NydusWorm@Relocate"/>
+        <DataRecord Entry="Effect,NydusWorm@RelocateInitial"/>
+        <DataRecord Entry="Effect,NydusWorm@RelocateDelay"/>
+        <DataRecord Entry="Effect,NydusWorm@RelocateTravelDown"/>
+        <DataRecord Entry="Effect,NydusWorm@RelocateTravelUp"/>
+        <DataRecord Entry="Effect,NydusWorm@RelocateInvulnerable"/>
+        <DataRecord Entry="Effect,NydusWorm@RelocateInvulnerableRemove"/>
+        <DataRecord Entry="Effect,NydusWorm@RelocateDownSet"/>
+        <DataRecord Entry="Effect,NydusWorm@RelocateUpSet"/>
+        <DataRecord Entry="Effect,NydusWorm@RelocateTeleport"/>
+        <DataRecord Entry="Effect,NydusWorm@RelocateIssueMove"/>
+        <DataRecord Entry="Behavior,NydusWorm@DmgResponse"/>
+        <DataRecord Entry="Unit,NydusWorm"/>
+        <DataRecord Entry="Unit,NydusWorm@NydusWormEntrance"/>
+        <DataRecord Entry="Unit,NydusWorm@NydusWormExit"/>
+        <DataRecord Entry="Behavior,NydusWorm@DmgResponse"/>
+        <DataRecord Entry="Unit,NydusWorm"/>
+        <DataRecord Entry="Unit,NydusWorm@NydusWormEntrance"/>
+        <DataRecord Entry="Unit,NydusWorm@NydusWormExit"/>
+    </CDataCollectionUnit>
+    <CUnit id="NydusWorm@NydusWormEntrance">
+        <Name value="Unit/Name/NydusWorm"/>
+        <Race value="Zerg"/>
+        <FlagArray index="Invulnerable" value="1"/>
+        <LifeStart value="500"/>
+        <LifeMax value="500"/>
+        <AbilArray Link="ProtossPartTransition"/>
+        <AbilArray Link="stop"/>
+        <CardLayouts>
+            <LayoutButtons Face="ProtossPartTransition" Type="AbilCmd" AbilCmd="ProtossPartTransition,Execute" Row="0" Column="0"/>
+            <LayoutButtons Face="Stop" Type="AbilCmd" AbilCmd="stop,Stop" Row="0" Column="1"/>
+        </CardLayouts>
+        <EditorCategories value=""/>
+        <LifeArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </LifeArmorFormula>
+        <EnergyArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </EnergyArmorFormula>
+        <MinimapRadius value="2"/>
+    </CUnit>
+    <CUnit id="NydusWorm@NydusWormExit">
+        <Name value="Unit/Name/NydusWorm"/>
+        <Race value="Zerg"/>
+        <FlagArray index="Uncommandable" value="1"/>
+        <FlagArray index="Unselectable" value="1"/>
+        <FlagArray index="Untargetable" value="1"/>
+        <FlagArray index="Invulnerable" value="1"/>
+        <LifeStart value="500"/>
+        <LifeMax value="500"/>
+        <AbilArray Link="NydusWorm@Throw"/>
+        <AbilArray Link="stop"/>
+        <CardLayouts>
+            <LayoutButtons Face="NydusWorm@Throw" Type="AbilCmd" AbilCmd="NydusWorm@Throw,Execute" Row="0" Column="0"/>
+            <LayoutButtons Face="Stop" Type="AbilCmd" AbilCmd="stop,Stop" Row="0" Column="1"/>
+        </CardLayouts>
+        <EditorCategories value=""/>
+        <LifeArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </LifeArmorFormula>
+        <EnergyArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </EnergyArmorFormula>
+    </CUnit>
+    <CUnit id="NydusWorm">
+        <Race value="Zerg"/>
+        <PlaneArray index="Ground" value="1"/>
+        <PlaneArray index="Air" value="1"/>
+        <Attributes index="Biological" value="1"/>
+        <LifeStart value="200"/>
+        <LifeMax value="200"/>
+        <LifeArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </LifeArmorFormula>
+        <ShieldArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </ShieldArmorFormula>
+        <Mover value="Fly"/>
+        <Speed value="4"/>
+        <Acceleration value="1000"/>
+        <Sight value="7"/>
+        <AbilArray Link="move"/>
+        <AbilArray Link="stop"/>
+        <AbilArray Link="NydusWorm@Relocate"/>
+        <BehaviorArray Link="NydusWorm@DmgResponse"/>
+        <BehaviorArray Link="NydusWorm@RelocateHeight"/>
+        <CardLayouts>
+            <LayoutButtons Face="Move" Type="AbilCmd" AbilCmd="move,Move" Row="0" Column="0"/>
+            <LayoutButtons Face="Stop" Type="AbilCmd" AbilCmd="stop,Stop" Row="0" Column="1"/>
+            <LayoutButtons Face="MoveHoldPosition" Type="AbilCmd" AbilCmd="move,HoldPos" Row="0" Column="2"/>
+            <LayoutButtons Face="Attack" Type="AbilCmd" AbilCmd="attack,Execute" Row="0" Column="4"/>
+            <LayoutButtons Face="MovePatrol" Type="AbilCmd" AbilCmd="move,Patrol" Row="0" Column="3"/>
+            <LayoutButtons Face="NydusWorm@Relocate" Type="AbilCmd" AbilCmd="NydusWorm@Relocate,Execute" Row="2" Column="0"/>
+        </CardLayouts>
+        <Radius value="0.375"/>
+        <InnerRadius value="0.375"/>
+        <MinimapRadius value="1"/>
+        <EditorCategories value=""/>
+        <FlagArray index="IgnoreTerrainZInit" value="1"/>
+        <Height value="0.25"/>
+    </CUnit>
+    <CUnit id="MechaLurker" parent="GenericEnemyTower">
+        <Name value="Unit/Name/Lurker"/>
+        <Description value="Button/Tooltip/CyberneticLurker"/>
+        <Race value="Zerg"/>
+        <FlagArray index="Turnable" value="1"/>
+        <FlagArray index="Buried" value="1"/>
+        <FlagArray index="NoScore" value="0"/>
+        <FlagArray index="ArmySelect" value="1"/>
+        <Collide index="Ground" value="0"/>
+        <Collide index="Structure" value="0"/>
+        <Collide index="RoachBurrow" value="0"/>
+        <Collide index="ForceField" value="0"/>
+        <Collide index="Locust" value="0"/>
+        <Collide index="Small" value="0"/>
+        <Attributes index="Structure" value="0"/>
+        <LifeStart value="4750"/>
+        <LifeMax value="4750"/>
+        <LifeArmorName value="Unit/LifeArmorName/ZergGroundArmor"/>
+        <Mover value="Burrowed"/>
+        <TurningRate value="720"/>
+        <Sight value="8"/>
+        <BehaviorArray index="7" Link="CloakNotOnCreep"/>
+        <WeaponArray Link="MechaLurkerWeapon" Turret="Lurker"/>
+        <Radius value="0.75"/>
+        <SeparationRadius value="0"/>
+        <InnerRadius value="0.25"/>
+        <Footprint value=""/>
+        <PlacementFootprint value=""/>
+        <SubgroupPriority value="12"/>
+        <KillDisplay value="Always"/>
+        <RankDisplay value="Always"/>
+    </CUnit>
+    <CUnit id="MechaInfestorMissile" parent="MISSILE">
+        <Race value="Zerg"/>
+        <LifeArmorName value="Unit/LifeArmorName/MechaZergArmor"/>
+        <EditorCategories value=""/>
+    </CUnit>
+    <CUnit id="MechaSpineCrawlerMissile" parent="MISSILE_INVULNERABLE">
+        <Race value="Zerg"/>
+        <EditorCategories value=""/>
+    </CUnit>
+    <CUnit id="MechaRoachWarren" parent="GenericEnemySpawner">
+        <Facing value="26.565"/>
+        <Race value="Zerg"/>
+        <Radius value="2"/>
+        <Footprint value="Footprint4x4Contour"/>
+        <DeadFootprint value="Footprint4x4Contour"/>
+        <PlacementFootprint value="Footprint4x4Contour"/>
+        <MinimapRadius value="2"/>
+        <LifeArmorName value="Unit/LifeArmorName/MechaZergArmor"/>
+        <LifeStart value="10000"/>
+        <LifeMax value="10000"/>
+    </CUnit>
+    <CUnit id="MechaNydusWorm">
+        <DeathRevealRadius value="3"/>
+        <Facing value="29.9707"/>
+        <FlagArray index="Turnable" value="0"/>
+        <FlagArray index="Movable" value="0"/>
+        <FlagArray index="Unselectable" value="1"/>
+        <FlagArray index="Untargetable" value="1"/>
+        <FlagArray index="UseLineOfSight" value="1"/>
+        <FlagArray index="Invulnerable" value="1"/>
+        <PlaneArray index="Ground" value="1"/>
+        <PlaneArray index="Air" value="1"/>
+        <Attributes index="Armored" value="1"/>
+        <Attributes index="Biological" value="1"/>
+        <Attributes index="Structure" value="1"/>
+        <Attributes index="Summoned" value="1"/>
+        <LifeStart value="1000"/>
+        <LifeMax value="1000"/>
+        <LifeArmorName value="Unit/LifeArmorName/MechaZergArmor"/>
+        <StationaryTurningRate value="719.4726"/>
+        <TurningRate value="719.4726"/>
+        <Sight value="10"/>
+        <AttackTargetPriority value="11"/>
+        <Radius value="0"/>
+        <SeparationRadius value="0"/>
+        <MinimapRadius value="1"/>
+        <EditorCategories value=""/>
+    </CUnit>
+    <CUnit id="MechaHive" parent="GenericEnemySpawner">
+        <Race value="Zerg"/>
+        <LifeStart value="15000"/>
+        <LifeMax value="15000"/>
+        <LifeArmorName value="Unit/LifeArmorName/MechaZergArmor"/>
+        <AttackTargetPriority value="11"/>
+        <Radius value="2"/>
+        <Facing value="180"/>
+        <Footprint value="Footprint4x4Contour"/>
+        <DeadFootprint value="Footprint4x4Contour"/>
+        <PlacementFootprint value="Footprint4x4Contour"/>
+        <MinimapRadius value="2"/>
+    </CUnit>
+    <CUnit id="MechaLurkerDen" parent="GenericEnemySpawner">
+        <Facing value="29.9926"/>
+        <Race value="Zerg"/>
+        <LifeStart value="4250"/>
+        <LifeMax value="4250"/>
+        <LifeArmorName value="Unit/LifeArmorName/MechaZergArmor"/>
+        <AttackTargetPriority value="11"/>
+        <Radius value="2"/>
+        <Footprint value="Footprint4x4Contour"/>
+        <DeadFootprint value="Footprint4x4Contour"/>
+        <PlacementFootprint value="Footprint4x4Contour"/>
+        <MinimapRadius value="2"/>
+    </CUnit>
+    <CUnit id="MechaInfestationPit" parent="GenericEnemySpawner">
+        <Race value="Zerg"/>
+        <LifeStart value="10000"/>
+        <LifeMax value="10000"/>
+        <LifeArmorName value="Unit/LifeArmorName/MechaZergArmor"/>
+        <AttackTargetPriority value="11"/>
+        <Radius value="2"/>
+        <Footprint value="Footprint4x4Contour"/>
+        <DeadFootprint value="Footprint4x4Contour"/>
+        <PlacementFootprint value="Footprint4x4Contour"/>
+        <MinimapRadius value="2"/>
+    </CUnit>
+    <CUnit id="MechaInfestor" parent="GenericEnemyUnit">
+        <Name value="Unit/Name/Infestor"/>
+        <DeathRevealRadius value="3"/>
+        <Race value="Zerg"/>
+        <Attributes index="Armored" value="1"/>
+        <Attributes index="Mechanical" value="1"/>
+        <Attributes index="Psionic" value="1"/>
+        <LifeStart value="1750"/>
+        <LifeMax value="1750"/>
+        <LifeArmorName value="Unit/LifeArmorName/MechaZergArmor"/>
+        <Speed value="3.5"/>
+        <SpeedMultiplierCreep value="0.8"/>
+        <LateralAcceleration value="46"/>
+        <StationaryTurningRate value="999.8437"/>
+        <TurningRate value="999.8437"/>
+        <Sight value="10"/>
+        <Radius value="0.75"/>
+        <KillDisplay value="Always"/>
+        <RankDisplay value="Always"/>
+        <WeaponArray Link="MechaInfestorWeapon"/>
+    </CUnit>
+    <CUnit id="MechaLocust" parent="GenericEnemyUnit">
+        <Name value="Unit/Name/Locust"/>
+        <Race value="Zerg"/>
+        <Collide index="LocustForceField" value="1"/>
+        <Attributes index="Light" value="1"/>
+        <Attributes index="Mechanical" value="1"/>
+        <LifeStart value="750"/>
+        <LifeMax value="750"/>
+        <LifeArmorName value="Unit/LifeArmorName/MechaZergArmor"/>
+        <SpeedMultiplierCreep value="0.8"/>
+        <LateralAcceleration value="46.0625"/>
+        <Sight value="6"/>
+        <Radius value="0.375"/>
+        <SeparationRadius value="0.375"/>
+        <InnerRadius value="0.25"/>
+        <MinimapRadius value="0.375"/>
+        <KillDisplay value="Always"/>
+        <RankDisplay value="Always"/>
+        <WeaponArray Link="MechaLocustWeapon"/>
+    </CUnit>
+    <CUnit id="MechaHydralisk" parent="GenericEnemyUnit">
+        <DeathRevealRadius value="3"/>
+        <Race value="Zerg"/>
+        <Attributes index="Light" value="1"/>
+        <Attributes index="Mechanical" value="1"/>
+        <LifeArmorName value="Unit/LifeArmorName/MechaZergArmor"/>
+        <SpeedMultiplierCreep value="0.8"/>
+        <LateralAcceleration value="46"/>
+        <StationaryTurningRate value="999.8437"/>
+        <TurningRate value="999.8437"/>
+        <Sight value="9"/>
+        <Radius value="0.625"/>
+        <InnerRadius value="0.375"/>
+        <KillDisplay value="Always"/>
+        <RankDisplay value="Always"/>
+        <Name value="Unit/Name/Hydralisk"/>
+        <WeaponArray Link="MechaHydraliskWeapon"/>
+    </CUnit>
+    <CUnit id="MechaBaneling" parent="GenericEnemyUnit">
+        <Name value="Unit/Name/Baneling"/>
+        <DeathRevealRadius value="3"/>
+        <Facing value="45"/>
+        <Race value="Zerg"/>
+        <Attributes index="Mechanical" value="1"/>
+        <LifeStart value="875"/>
+        <LifeMax value="875"/>
+        <LifeArmorName value="Unit/LifeArmorName/MechaZergArmor"/>
+        <Speed value="4.5"/>
+        <SpeedMultiplierCreep value="0.8"/>
+        <LateralAcceleration value="46.0625"/>
+        <StationaryTurningRate value="999.8437"/>
+        <TurningRate value="999.8437"/>
+        <Sight value="8"/>
+        <Radius value="0.375"/>
+        <SeparationRadius value="0.375"/>
+        <InnerRadius value="0.375"/>
+        <MinimapRadius value="0.375"/>
+        <KillDisplay value="Always"/>
+        <RankDisplay value="Always"/>
+        <WeaponArray Link="MechaBanelingWeapon"/>
+    </CUnit>
+    <CUnit id="MechaDrone" parent="GenericEnemyUnit">
+        <DeathRevealRadius value="3"/>
+        <Race value="Zerg"/>
+        <Attributes index="Light" value="1"/>
+        <Attributes index="Mechanical" value="1"/>
+        <LifeStart value="2500"/>
+        <LifeMax value="2500"/>
+        <LifeArmorName value="Unit/LifeArmorName/MechaZergArmor"/>
+        <Speed value="4"/>
+        <LateralAcceleration value="46.0625"/>
+        <StationaryTurningRate value="999.8437"/>
+        <TurningRate value="999.8437"/>
+        <Sight value="8"/>
+        <Radius value="0.375"/>
+        <SeparationRadius value="0.375"/>
+        <InnerRadius value="0.375"/>
+        <MinimapRadius value="0.375"/>
+        <KillDisplay value="Always"/>
+        <RankDisplay value="Always"/>
+        <SpeedMultiplierCreep value="0.8"/>
+        <Name value="Unit/Name/Drone"/>
+        <WeaponArray Link="MechaDroneWeapon"/>
+    </CUnit>
+    <CUnit id="MechaBroodling" parent="GenericEnemyUnit">
+        <DeathRevealRadius value="3"/>
+        <Race value="Zerg"/>
+        <Attributes index="Light" value="1"/>
+        <Attributes index="Mechanical" value="1"/>
+        <LifeStart value="550"/>
+        <LifeMax value="550"/>
+        <LifeArmorName value="Unit/LifeArmorName/MechaZergArmor"/>
+        <Speed value="4"/>
+        <LateralAcceleration value="46.0625"/>
+        <StationaryTurningRate value="999.8437"/>
+        <TurningRate value="999.8437"/>
+        <Radius value="0.375"/>
+        <SeparationRadius value="0.375"/>
+        <InnerRadius value="0.375"/>
+        <MinimapRadius value="0.375"/>
+        <AIEvaluateAlias value="Broodling"/>
+        <KillDisplay value="Always"/>
+        <RankDisplay value="Always"/>
+        <SpeedMultiplierCreep value="0.8"/>
+        <Name value="Unit/Name/Broodling"/>
+        <WeaponArray Link="MechaBroodlingWeapon"/>
+    </CUnit>
+    <CUnit id="MechaRavager" parent="GenericEnemyUnit">
+        <Name value="Unit/Name/Ravager"/>
+        <DeathRevealRadius value="3"/>
+        <Race value="Zerg"/>
+        <Attributes index="Mechanical" value="1"/>
+        <LifeStart value="1750"/>
+        <LifeMax value="1750"/>
+        <LifeArmorName value="Unit/LifeArmorName/MechaZergArmor"/>
+        <Speed value="3.8476"/>
+        <SpeedMultiplierCreep value="0.8"/>
+        <LateralAcceleration value="46.0625"/>
+        <StationaryTurningRate value="999.8437"/>
+        <TurningRate value="999.8437"/>
+        <Sight value="9"/>
+        <Radius value="0.75"/>
+        <MinimapRadius value="0.75"/>
+        <KillDisplay value="Always"/>
+        <RankDisplay value="Always"/>
+        <WeaponArray Link="MechaRavagerWeapon"/>
+    </CUnit>
+    <CUnit id="MechaQueen" parent="GenericEnemyUnit">
+        <Name value="Unit/Name/Queen"/>
+        <DeathRevealRadius value="3"/>
+        <Race value="Zerg"/>
+        <Attributes index="Armored" value="1"/>
+        <Attributes index="Mechanical" value="1"/>
+        <Attributes index="Psionic" value="1"/>
+        <LifeStart value="1500"/>
+        <LifeMax value="1500"/>
+        <LifeArmorName value="Unit/LifeArmorName/MechaZergArmor"/>
+        <SpeedMultiplierCreep value="0.8"/>
+        <LateralAcceleration value="46"/>
+        <StationaryTurningRate value="999.8437"/>
+        <TurningRate value="999.8437"/>
+        <Sight value="9"/>
+        <Radius value="0.875"/>
+        <SeparationRadius value="0.875"/>
+        <MinimapRadius value="0.875"/>
+        <KillDisplay value="Always"/>
+        <RankDisplay value="Always"/>
+        <Fidget>
+            <ChanceArray index="Anim" value="50"/>
+            <ChanceArray index="Idle" value="50"/>
+        </Fidget>
+        <WeaponArray Link="MechaQueenWeapon"/>
+    </CUnit>
+    <CUnit id="MechaRoach" parent="GenericEnemyUnit">
+        <Name value="Unit/Name/Roach"/>
+        <DeathRevealRadius value="3"/>
+        <Race value="Zerg"/>
+        <Attributes index="Armored" value="1"/>
+        <Attributes index="Mechanical" value="1"/>
+        <LifeStart value="1300"/>
+        <LifeMax value="1300"/>
+        <LifeArmorName value="Unit/LifeArmorName/MechaZergArmor"/>
+        <SpeedMultiplierCreep value="0.8"/>
+        <LateralAcceleration value="46.0625"/>
+        <StationaryTurningRate value="999.8437"/>
+        <TurningRate value="999.8437"/>
+        <Sight value="9"/>
+        <InnerRadius value="0.625"/>
+        <KillDisplay value="Always"/>
+        <RankDisplay value="Always"/>
+        <WeaponArray Link="MechaRoachWeapon"/>
+    </CUnit>
+    <CUnit id="MechaSwarmHost" parent="GenericEnemyUnit">
+        <Name value="Unit/Name/SwarmHost"/>
+        <DeathRevealRadius value="3"/>
+        <Race value="Zerg"/>
+        <Attributes index="Armored" value="1"/>
+        <Attributes index="Mechanical" value="1"/>
+        <LifeStart value="800"/>
+        <LifeMax value="800"/>
+        <LifeArmorName value="Unit/LifeArmorName/MechaZergArmor"/>
+        <SpeedMultiplierCreep value="0.8"/>
+        <TurningRate value="360"/>
+        <Sight value="10"/>
+        <Radius value="0.8125"/>
+        <SeparationRadius value="0.8125"/>
+        <KillDisplay value="Always"/>
+        <RankDisplay value="Always"/>
+    </CUnit>
+    <CUnit id="MechaUltralisk" parent="GenericEnemyUnit">
+        <Name value="Unit/Name/Ultralisk"/>
+        <DeathRevealRadius value="3"/>
+        <Race value="Zerg"/>
+        <Collide index="Colossus" value="1"/>
+        <Attributes index="Armored" value="1"/>
+        <Attributes index="Mechanical" value="1"/>
+        <Attributes index="Massive" value="1"/>
+        <LifeStart value="2250"/>
+        <LifeMax value="2250"/>
+        <LifeArmorName value="Unit/LifeArmorName/MechaZergArmor"/>
+        <Speed value="4.5"/>
+        <SpeedMultiplierCreep value="0.8"/>
+        <LateralAcceleration value="46.0625"/>
+        <TurningRate value="360"/>
+        <Sight value="9"/>
+        <Radius value="1"/>
+        <SeparationRadius value="1"/>
+        <InnerRadius value="0.75"/>
+        <MinimapRadius value="1"/>
+        <KillDisplay value="Always"/>
+        <RankDisplay value="Always"/>
+        <Fidget>
+            <ChanceArray index="Anim" value="50"/>
+            <ChanceArray index="Idle" value="50"/>
+        </Fidget>
+        <WeaponArray Link="MechaUltraliskWeapon"/>
+    </CUnit>
+    <CUnit id="MechaZergling" parent="GenericEnemyUnit">
+        <Name value="Unit/Name/Zergling"/>
+        <DeathRevealRadius value="3"/>
+        <Race value="Zerg"/>
+        <Attributes index="Light" value="1"/>
+        <Attributes index="Mechanical" value="1"/>
+        <LifeStart value="875"/>
+        <LifeMax value="875"/>
+        <LifeArmorName value="Unit/LifeArmorName/MechaZergArmor"/>
+        <Speed value="4.5"/>
+        <SpeedMultiplierCreep value="0.8"/>
+        <LateralAcceleration value="46.0625"/>
+        <StationaryTurningRate value="999.8437"/>
+        <TurningRate value="999.8437"/>
+        <Sight value="8"/>
+        <Radius value="0.375"/>
+        <SeparationRadius value="0.375"/>
+        <MinimapRadius value="0.375"/>
+        <KillDisplay value="Always"/>
+        <RankDisplay value="Always"/>
+        <WeaponArray Link="MechaZerglingWeapon"/>
+    </CUnit>
+    <CUnit id="MechaBanelingNest" parent="GenericEnemySpawner">
+        <Facing value="356.9897"/>
+        <Race value="Zerg"/>
+        <LifeStart value="7500"/>
+        <LifeMax value="7500"/>
+        <LifeArmorName value="Unit/LifeArmorName/MechaZergArmor"/>
+        <AttackTargetPriority value="11"/>
+        <Radius value="2"/>
+        <Footprint value="Footprint4x4Contour"/>
+        <DeadFootprint value="Footprint4x4Contour"/>
+        <PlacementFootprint value="Footprint4x4Contour"/>
+        <MinimapRadius value="2"/>
+    </CUnit>
+    <CUnit id="MechaEvolutionChamber" parent="GenericEnemySpawner">
+        <Facing value="351.8591"/>
+        <Race value="Zerg"/>
+        <LifeStart value="9000"/>
+        <LifeMax value="9000"/>
+        <LifeArmorName value="Unit/LifeArmorName/MechaZergArmor"/>
+        <AttackTargetPriority value="11"/>
+        <Radius value="2"/>
+        <Footprint value="Footprint4x4Contour"/>
+        <DeadFootprint value="Footprint4x4Contour"/>
+        <PlacementFootprint value="Footprint4x4Contour"/>
+        <MinimapRadius value="2"/>
+    </CUnit>
+    <CUnit id="MechaGreaterSpire" parent="GenericEnemySpawner">
+        <Facing value="339.994"/>
+        <Race value="Zerg"/>
+        <Mob value="Multiplayer"/>
+        <LifeStart value="5000"/>
+        <LifeMax value="5000"/>
+        <LifeArmorName value="Unit/LifeArmorName/MechaZergArmor"/>
+        <Radius value="1"/>
+        <Footprint value="Footprint2x2Contour"/>
+        <DeadFootprint value="Footprint2x2Contour"/>
+        <PlacementFootprint value="Footprint2x2Contour"/>
+        <BehaviorArray index="7" removed="1"/>
+        <FlagArray index="Invulnerable" value="1"/>
+    </CUnit>
+    <CUnit id="MechaHatchery" parent="GenericEnemySpawner">
+        <Race value="Zerg"/>
+        <LifeStart value="12500"/>
+        <LifeMax value="12500"/>
+        <LifeArmorName value="Unit/LifeArmorName/MechaZergArmor"/>
+        <AttackTargetPriority value="11"/>
+        <Radius value="2"/>
+        <Facing value="9.4592"/>
+        <Footprint value="Footprint4x4Contour"/>
+        <DeadFootprint value="Footprint4x4Contour"/>
+        <PlacementFootprint value="Footprint4x4Contour"/>
+        <MinimapRadius value="2"/>
+    </CUnit>
+    <CUnit id="MechaHydraliskDen" parent="GenericEnemySpawner">
+        <Facing value="351.8591"/>
+        <Race value="Zerg"/>
+        <LifeStart value="8750"/>
+        <LifeMax value="8750"/>
+        <LifeArmorName value="Unit/LifeArmorName/MechaZergArmor"/>
+        <AttackTargetPriority value="11"/>
+        <Radius value="2"/>
+        <Footprint value="Footprint4x4Contour"/>
+        <DeadFootprint value="Footprint4x4Contour"/>
+        <PlacementFootprint value="Footprint4x4Contour"/>
+        <MinimapRadius value="2"/>
+    </CUnit>
+    <CUnit id="MechaLair" parent="GenericEnemySpawner">
+        <Race value="Zerg"/>
+        <LifeStart value="13750"/>
+        <LifeMax value="13750"/>
+        <LifeArmorName value="Unit/LifeArmorName/MechaZergArmor"/>
+        <AttackTargetPriority value="11"/>
+        <Radius value="2"/>
+        <Facing value="336.7968"/>
+        <Footprint value="Footprint4x4Contour"/>
+        <DeadFootprint value="Footprint4x4Contour"/>
+        <PlacementFootprint value="Footprint4x4Contour"/>
+        <MinimapRadius value="2"/>
+    </CUnit>
+    <CUnit id="MechaSpawningPool" parent="GenericEnemySpawner">
+        <Race value="Zerg"/>
+        <LifeStart value="8500"/>
+        <LifeMax value="8500"/>
+        <LifeArmorName value="Unit/LifeArmorName/MechaZergArmor"/>
+        <AttackTargetPriority value="11"/>
+        <Radius value="2"/>
+        <Facing value="348.684"/>
+        <Footprint value="Footprint4x4Contour"/>
+        <DeadFootprint value="Footprint4x4Contour"/>
+        <PlacementFootprint value="Footprint4x4Contour"/>
+        <MinimapRadius value="2"/>
+    </CUnit>
+    <CUnit id="MechaSpineCrawler" parent="GenericEnemyTower">
+        <Facing value="315"/>
+        <Race value="Zerg"/>
+        <LifeStart value="5000"/>
+        <LifeMax value="5000"/>
+        <LifeArmorName value="Unit/LifeArmorName/MechaZergArmor"/>
+        <TurningRate value="719.4726"/>
+        <WeaponArray Link="MechaSpineCrawlerWeapon" Turret="SpineCrawler"/>
+        <Radius value="0.875"/>
+        <Footprint value="Footprint2dot5x2dot5Contour"/>
+        <PlacementFootprint value="Footprint2dot5x2dot5Contour"/>
+    </CUnit>
+    <CUnit id="MechaSpire" parent="GenericEnemySpawner">
+        <Facing value="315"/>
+        <Race value="Zerg"/>
+        <LifeStart value="9000"/>
+        <LifeMax value="9000"/>
+        <LifeArmorName value="Unit/LifeArmorName/MechaZergArmor"/>
+        <Radius value="1"/>
+        <Footprint value="Footprint2x2Contour"/>
+        <DeadFootprint value="Footprint2x2Contour"/>
+        <PlacementFootprint value="Footprint2x2Contour"/>
+        <BehaviorArray index="7" removed="1"/>
+        <FlagArray index="Invulnerable" value="1"/>
+    </CUnit>
+    <CUnit id="MechaSporeCrawler" parent="GenericEnemyTower">
+        <Facing value="315"/>
+        <Race value="Zerg"/>
+        <LifeStart value="4500"/>
+        <LifeMax value="4500"/>
+        <LifeArmorName value="Unit/LifeArmorName/MechaZergArmor"/>
+        <TurningRate value="719.4726"/>
+        <WeaponArray Link="MechaSporeCrawlerWeapon" Turret="SporeCrawler"/>
+        <Radius value="0.875"/>
+        <Footprint value="Footprint2dot5x2dot5Contour"/>
+        <PlacementFootprint value="Footprint2dot5x2dot5Contour"/>
+    </CUnit>
+    <CUnit id="MechaUltraliskCavern" parent="GenericEnemySpawner">
+        <Facing value="344.74"/>
+        <Race value="Zerg"/>
+        <LifeStart value="4250"/>
+        <LifeMax value="4250"/>
+        <LifeArmorName value="Unit/LifeArmorName/MechaZergArmor"/>
+        <AttackTargetPriority value="11"/>
+        <Radius value="2"/>
+        <Footprint value="Footprint4x4Contour"/>
+        <DeadFootprint value="Footprint4x4Contour"/>
+        <PlacementFootprint value="Footprint4x4Contour"/>
+        <MinimapRadius value="2"/>
+    </CUnit>
+    <CBehaviorBuff id="NydusWorm@RelocateHeight">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification Height="8">
+            <HeightTime index="Start" value="1.5"/>
+            <HeightTime index="Stop" value="1.5"/>
+        </Modification>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="NydusWorm@RelocateInvulnerable">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification>
+            <StateFlags index="Invulnerable" value="1"/>
+        </Modification>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="NydusWorm@ThrowHide">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification>
+            <StateFlags index="NoDraw" value="1"/>
+        </Modification>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="NydusWorm@ThrowCollision">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification>
+            <StateFlags index="SuppressCollision" value="1"/>
+            <StateFlags index="Uncommandable" value="1"/>
+        </Modification>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="NydusWorm@DmgResponseInvulnerable">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="0.5"/>
+        <Modification>
+            <StateFlags index="Invulnerable" value="1"/>
+        </Modification>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="NydusWorm@DmgResponse">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DamageResponse ClampMaximum="100" ClampMinimum="100" Handled="NydusWorm@DmgResponseInvulnerable">
+            <Chance value="1"/>
+        </DamageResponse>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+</Catalog>

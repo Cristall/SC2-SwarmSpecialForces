@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Includes>
+    <Catalog path="GameData/Player/P-Base.xml"/>
+    <Catalog path="GameData/Player/P-Cybernetics.xml"/>
+    <Catalog path="GameData/Player/P-Roach.xml"/>
+    <Catalog path="GameData/Player/P-Hydralisk.xml"/>
+    <Catalog path="GameData/Player/P-Ravager.xml"/>
+    <Catalog path="GameData/Player/P-SwarmQueen.xml"/>
+    <Catalog path="GameData/Player/P-Bowler.xml"/>
+    <Catalog path="GameData/Player/P-Special.xml"/>
+    <Catalog path="GameData/Enemies/E-General.xml"/>
+    <Catalog path="GameData/Enemies/Terran/E-T-Generics.xml"/>
+    <Catalog path="GameData/Enemies/Terran/E-T-Flamer.xml"/>
+    <Catalog path="GameData/Enemies/Terran/E-T-Fortress.xml"/>
+    <Catalog path="GameData/Enemies/Terran/E-T-Hammer.xml"/>
+    <Catalog path="GameData/Enemies/Protoss/E-P-Generics.xml"/>
+    <Catalog path="GameData/Enemies/Protoss/E-P-Madness.xml"/>
+    <Catalog path="GameData/Enemies/Protoss/E-P-TagTeam.xml"/>
+    <Catalog path="GameData/Enemies/Protoss/E-P-Atlantis.xml"/>
+    <Catalog path="GameData/Enemies/Zerg/E-Z-Generics.xml"/>
+    <Catalog path="GameData/Enemies/Zerg/E-Z-Cybermind.xml"/>
+    <Catalog path="GameData/Enemies/Zerg/E-Z-StoryHeroes-Raynor.xml"/>
+    <Catalog path="GameData/Enemies/Zerg/E-Z-StoryHeroes-Kerrigan.xml"/>
+    <Catalog path="GameData/Enemies/Zerg/E-Z-StoryHeroes-Artanis.xml"/>
+    <Catalog path="GameData/Enemies/Zerg/E-Z-Stetmann.xml"/>
+    <Catalog path="GameData/Enemies/Zerg/E-Z-Moopy.xml"/>
+    <Catalog path="GameData/Tables/AcvReqGrind.xml"/>
+    <Catalog path="GameData/Tables/AcvReqOneTime.xml"/>
+    <Catalog path="GameData/Tables/AcvReqSpeedruns.xml"/>
+    <Catalog path="GameData/Tables/AcvReqSplit.xml"/>
+    <Catalog path="GameData/Tables/AcvRewards.xml"/>
+    <Catalog path="GameData/Tables/DifficultyTable.xml"/>
+    <Catalog path="GameData/Tables/KillRewards.xml"/>
+    <Catalog path="GameData/Tables/SpawnTable.xml"/>
+</Includes>

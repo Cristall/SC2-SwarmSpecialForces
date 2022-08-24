@@ -1,0 +1,2120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CEffectAddTrackedUnit id="BomberAddTracking">
+        <EditorCategories value=""/>
+        <BehaviorLink value="BomberTracker"/>
+        <TrackedUnit Value="Target"/>
+    </CEffectAddTrackedUnit>
+    <CEffectModifyUnit id="Illusion@SetVitals">
+        <EditorCategories value=""/>
+    </CEffectModifyUnit>
+    <CEffectSet id="Phase2ClearPortal">
+        <ValidatorArray value="PortalRunning"/>
+        <EditorCategories value=""/>
+        <EffectArray value="PortalTargetCleanupSearchDummy"/>
+    </CEffectSet>
+    <CEffectAddTrackedUnit id="PortalStartAddDummyTracker">
+        <EditorCategories value=""/>
+        <BehaviorLink value="PortalDummyTracker"/>
+        <TrackedUnit Value="Target"/>
+    </CEffectAddTrackedUnit>
+    <CEffectDestroyPersistent id="PortalStartTargetGoneCleanup">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetUnit"/>
+        <Effect value="PortalTargetPersistent"/>
+        <Count value="1"/>
+        <Radius value="1"/>
+    </CEffectDestroyPersistent>
+    <CEffectApplyBehavior id="PortalStartTrackerApply">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Behavior value="PortalDummyTracker"/>
+    </CEffectApplyBehavior>
+    <CEffectRemoveBehavior id="PortalTargetCleanupEnableWeapon">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <BehaviorLink value="AlreadyCastingNoWeapons"/>
+    </CEffectRemoveBehavior>
+    <CEffectSet id="PortalTargetCleanupSet">
+        <EditorCategories value=""/>
+        <EffectArray value="PortalTargetCleanupSearchDummy"/>
+        <EffectArray value="PortalCasterStationaryRemove"/>
+        <EffectArray value="PortalTargetTrackerRemove"/>
+        <EffectArray value="PortalTargetCleanupEnableWeapon"/>
+    </CEffectSet>
+    <CEffectRemoveBehavior id="PortalTargetTrackerRemove">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <BehaviorLink value="PortalDummyTracker"/>
+    </CEffectRemoveBehavior>
+    <CEffectApplyBehavior id="Illusion@AlreadyCastingNoWeapons2" parent="AlreadyCastingNoWeapons">
+        <Duration value="2.85"/>
+    </CEffectApplyBehavior>
+    <CEffectDamage id="Illusion@AtlantisCoreIllusionWeaponDmg" parent="DU_WEAP">
+        <EditorCategories value="Race:Protoss"/>
+        <Visibility value="Visible"/>
+        <Kind value="Ranged"/>
+        <Amount value="0">
+            <AccumulatorArray value="AtlantisCoreWeaponDmg"/>
+            <AccumulatorArray value="Illusion@IllusionDmgModifier"/>
+        </Amount>
+        <AttributeFactor index="Armored" value="0.25"/>
+    </CEffectDamage>
+    <CEffectLaunchMissile id="Illusion@AtlantisCoreIllusionWeaponLaunchMissile2">
+        <EditorCategories value="Race:Protoss"/>
+        <ImpactEffect value="Illusion@AtlantisCoreIllusionWeaponDmg"/>
+        <AmmoUnit value="AtlantisCoreWeaponMissile"/>
+    </CEffectLaunchMissile>
+    <CEffectApplyBehavior id="BomberBeam">
+        <EditorCategories value=""/>
+    </CEffectApplyBehavior>
+    <CEffectEnumArea id="BomberBeamSearch">
+        <EditorCategories value=""/>
+        <SearchFilters value="-;Player,Ally,Neutral,Missile,Item,Stasis,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="1.15" Effect="BomberBeamDmg"/>
+    </CEffectEnumArea>
+    <CEffectCreateUnit id="BomberCreate">
+        <EditorCategories value=""/>
+        <WhichLocation Value="CasterUnit"/>
+        <SpawnEffect value="BomberSet"/>
+        <SpawnUnit value="Bomber"/>
+        <CreateFlags index="Birth" value="0"/>
+        <CreateFlags index="DropOff" value="0"/>
+        <CreateFlags index="OffsetByRadius" value="0"/>
+        <CreateFlags index="Placement" value="0"/>
+        <CreateFlags index="PlacementIgnoreBlockers" value="1"/>
+        <CreateFlags index="PlacementIgnoreCliffTest" value="1"/>
+        <CreateFlags index="NormalizeSpawnOffset" value="0"/>
+    </CEffectCreateUnit>
+    <CEffectDamage id="BomberBeamDmg">
+        <EditorCategories value=""/>
+        <Amount value="750"/>
+        <Kind value="Melee"/>
+    </CEffectDamage>
+    <CEffectSet id="BomberSet">
+        <EditorCategories value=""/>
+        <EffectArray value="KillsToCaster"/>
+        <EffectArray value="BomberBeam"/>
+        <EffectArray value="BomberWander"/>
+        <EffectArray value="BomberAddTracking"/>
+        <TargetLocationType value="Point"/>
+    </CEffectSet>
+    <CEffectApplyBehavior id="BomberWander">
+        <EditorCategories value=""/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="Illusion@AlreadyCasting" parent="AlreadyCasting">
+        <Duration value="24.65"/>
+    </CEffectApplyBehavior>
+    <CEffectRemoveBehavior id="Illusion@BossIllusionHandlerRemove">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <BehaviorLink value="Illusion@BossIllusionHandler"/>
+        <Count value="1"/>
+        <ValidatorArray index="0" value="Illusion@AllIllusionsDead"/>
+    </CEffectRemoveBehavior>
+    <CEffectRemoveBehavior id="Illusion@AlreadyCastingRemove">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <BehaviorLink value="AlreadyCasting"/>
+        <Count value="1"/>
+    </CEffectRemoveBehavior>
+    <CEffectSet id="Illusion@CleanupSet">
+        <EditorCategories value=""/>
+        <EffectArray value="Illusion@TrackerClear"/>
+        <EffectArray value="Illusion@AlreadyCastingRemove"/>
+    </CEffectSet>
+    <CEffectCreateUnit id="Illusion@CreateIllusion">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetPoint"/>
+        <CreateFlags index="Birth" value="0"/>
+        <CreateFlags index="DropOff" value="0"/>
+        <CreateFlags index="OffsetByRadius" value="0"/>
+        <CreateFlags index="Placement" value="0"/>
+        <CreateFlags index="PlacementIgnoreBlockers" value="1"/>
+        <CreateFlags index="SetFacing" value="1"/>
+        <CreateFlags index="NormalizeSpawnOffset" value="0"/>
+        <SpawnEffect value="Illusion@SpawnSet"/>
+        <SpawnUnit value="Illusion@AtlantisCore"/>
+    </CEffectCreateUnit>
+    <CEffectCreatePersistent id="Illusion@Delay">
+        <EditorCategories value=""/>
+        <WhichLocation Value="CasterUnit"/>
+        <ExpireDelay value="3"/>
+        <ExpireEffect value="Illusion@StartSet"/>
+    </CEffectCreatePersistent>
+    <CEffectSet id="Illusion@InitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="Illusion@AlreadyCasting"/>
+        <EffectArray value="Illusion@AlreadyCastingNoWeapons2"/>
+        <EffectArray value="Illusion@Delay"/>
+        <TargetLocationType value="Point"/>
+    </CEffectSet>
+    <CEffectCreatePersistent id="Illusion@Offsets">
+        <EditorCategories value=""/>
+        <WhichLocation Value="CasterPoint"/>
+        <InitialEffect value="Illusion@RemoveDebuffs"/>
+        <PeriodicEffectArray value="Illusion@CreateIllusion"/>
+        <PeriodicEffectArray value="Illusion@CreateIllusion"/>
+        <PeriodicEffectArray value="Illusion@CreateIllusion"/>
+        <PeriodicOffsetArray value="-1,0,0"/>
+        <PeriodicOffsetArray value="1,0,0"/>
+        <PeriodicOffsetArray value="0,-1,0"/>
+        <PeriodicOffsetArray value="0,1,0"/>
+        <PeriodicPeriodArray value="0"/>
+        <PeriodCount value="3"/>
+        <OffsetVectorStartLocation Value="CasterPoint"/>
+        <PeriodicValidator value="CasterNotDead"/>
+    </CEffectCreatePersistent>
+    <CEffectRemoveBehavior id="Illusion@RemoveDebuffs">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <BehaviorLink value=""/>
+        <BehaviorAlignment value="Negative"/>
+    </CEffectRemoveBehavior>
+    <CEffectSet id="Illusion@SpawnSet">
+        <EditorCategories value=""/>
+        <EffectArray value="Illusion@IllusionDmgHandler"/>
+        <EffectArray value="Illusion@TrackerAdd"/>
+        <EffectArray value="Illusion@Spawning"/>
+    </CEffectSet>
+    <CEffectApplyBehavior id="Illusion@Spawning">
+        <EditorCategories value=""/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="Illusion@SpawningCaster">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Behavior value="Illusion@Spawning"/>
+    </CEffectApplyBehavior>
+    <CEffectSet id="Illusion@StartSet">
+        <EditorCategories value=""/>
+        <EffectArray value="Illusion@TrackerApply"/>
+        <EffectArray value="Illusion@TrackerAddCaster"/>
+        <EffectArray value="Illusion@SpawningCaster"/>
+        <EffectArray value="Illusion@RemoveDebuffs"/>
+        <EffectArray value="Illusion@BossIllusionHandler"/>
+        <EffectArray value="Illusion@Offsets"/>
+        <ValidatorArray value="CasterNotDead"/>
+    </CEffectSet>
+    <CEffectApplyBehavior id="Illusion@BossIllusionHandler">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+    </CEffectApplyBehavior>
+    <CEffectAddTrackedUnit id="Illusion@TrackerAdd">
+        <EditorCategories value=""/>
+        <BehaviorLink value="Illusion@Tracker"/>
+        <TrackedUnit Value="Target"/>
+    </CEffectAddTrackedUnit>
+    <CEffectAddTrackedUnit id="Illusion@TrackerAddCaster">
+        <EditorCategories value=""/>
+        <BehaviorLink value="Illusion@Tracker"/>
+    </CEffectAddTrackedUnit>
+    <CEffectApplyBehavior id="Illusion@TrackerApply">
+        <EditorCategories value=""/>
+        <Behavior value="Illusion@Tracker"/>
+    </CEffectApplyBehavior>
+    <CEffectRemoveBehavior id="Illusion@TrackerClear">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <BehaviorLink value="Illusion@Tracker"/>
+    </CEffectRemoveBehavior>
+    <CEffectSet id="InitialSet">
+        <EditorCategories value=""/>
+    </CEffectSet>
+    <CEffectApplyBehavior id="KamikazeAlreadyCasting" parent="AlreadyCasting"/>
+    <CEffectApplyBehavior id="KamikazeAlreadyCastingNoWeapons" parent="AlreadyCastingNoWeapons"/>
+    <CEffectCreatePersistent id="KamikazeLaunchPoint">
+        <EditorCategories value=""/>
+        <WhichLocation Value="SourceUnit"/>
+        <OffsetVectorStartLocation Value="CasterUnit"/>
+        <OffsetVectorEndLocation Value="SourceUnit"/>
+        <Flags index="RandomEffect" value="1"/>
+        <InitialDelay value="0.25"/>
+        <PeriodCount value="1"/>
+        <PeriodicEffectArray value="KamikazeMissile1"/>
+        <PeriodicEffectArray value="KamikazeMissile2"/>
+        <PeriodicEffectArray value="KamikazeMissile3"/>
+        <PeriodicOffsetArray value="0,20,17.5"/>
+        <PeriodicPeriodArray value="0"/>
+    </CEffectCreatePersistent>
+    <CEffectDamage id="KamikazeImpactDmg">
+        <EditorCategories value=""/>
+        <Amount value="4000">
+            <AccumulatorArray value="Phase2"/>
+        </Amount>
+        <AreaArray Radius="1.15" Fraction="1"/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Item,Dead,Hidden,Invulnerable"/>
+    </CEffectDamage>
+    <CEffectSet id="KamikazeInitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="KamikazeAlreadyCasting"/>
+        <EffectArray value="KamikazeAlreadyCastingNoWeapons"/>
+        <EffectArray value="KamikazeLocation"/>
+        <TargetLocationType value="Point"/>
+    </CEffectSet>
+    <CEffectSet id="KamikazeMakeSource">
+        <EditorCategories value=""/>
+        <EffectArray value="KamikazeLaunchPoint"/>
+        <SetSource value="1"/>
+    </CEffectSet>
+    <CEffectLaunchMissile id="KamikazeMissile1">
+        <EditorCategories value=""/>
+        <LaunchLocation Value="TargetPoint"/>
+        <ImpactLocation Value="SourceUnit"/>
+        <ImpactEffect value="KamikazeImpactDmg"/>
+        <AmmoUnit value="KamikazeMissile1"/>
+    </CEffectLaunchMissile>
+    <CEffectLaunchMissile id="KamikazeMissile2">
+        <EditorCategories value=""/>
+        <LaunchLocation Value="TargetPoint"/>
+        <ImpactLocation Value="SourceUnit"/>
+        <ImpactEffect value="KamikazeImpactDmg"/>
+        <AmmoUnit value="KamikazeMissile2"/>
+    </CEffectLaunchMissile>
+    <CEffectLaunchMissile id="KamikazeMissile3">
+        <EditorCategories value=""/>
+        <LaunchLocation Value="TargetPoint"/>
+        <ImpactLocation Value="SourceUnit"/>
+        <ImpactEffect value="KamikazeImpactDmg"/>
+        <AmmoUnit value="KamikazeMissile3"/>
+    </CEffectLaunchMissile>
+    <CEffectCreateUnit id="KamikazeMissileImpactDummy">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetPoint"/>
+        <CreateFlags index="Birth" value="0"/>
+        <CreateFlags index="DropOff" value="0"/>
+        <CreateFlags index="NormalizeSpawnOffset" value="0"/>
+        <SpawnEffect value="KamikazeMakeSource"/>
+        <SpawnUnit value="DummyInvisibleNoMove"/>
+    </CEffectCreateUnit>
+    <CEffectCreatePersistent id="KamikazeLocation">
+        <EditorCategories value=""/>
+        <Flags index="RandomEffect" value="1"/>
+        <Flags index="RandomOffset" value="1"/>
+        <InitialDelay value="0.85"/>
+        <PeriodCount value="20"/>
+        <PeriodicEffectArray value="KamikazeOffsetsRandom"/>
+        <PeriodicPeriodArray value="0.05"/>
+    </CEffectCreatePersistent>
+    <CEffectRandomPointInCircle id="KamikazeOffsetsRandom">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetPoint"/>
+        <Effect value="KamikazeMissileImpactDummy"/>
+        <Radius value="2.5"/>
+    </CEffectRandomPointInCircle>
+    <CEffectCreateUnit id="LaserLanceCreateQuadDummy">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetPoint"/>
+        <SpawnEffect value="LaserLanceDummyPersistent"/>
+        <SpawnUnit value="DummyInvisibleNoMove"/>
+    </CEffectCreateUnit>
+    <CEffectApplyBehavior id="LaserLanceAlreadyCastingNoWeapons" parent="AlreadyCastingNoWeapons"/>
+    <CEffectCreatePersistent id="LaserLanceDelay">
+        <EditorCategories value=""/>
+        <WhichLocation Value="CasterUnit"/>
+        <InitialDelay value="1.0625"/>
+        <PeriodCount value="1"/>
+        <PeriodicEffectArray value="LaserLanceLaunchMissile"/>
+        <PeriodicOffsetArray value="0,-10,0"/>
+        <PeriodicPeriodArray value="0"/>
+    </CEffectCreatePersistent>
+    <CEffectCreatePersistent id="LaserLanceDummyPersistent">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetUnit"/>
+        <InitialDelay value="1.5"/>
+        <InitialEffect value="KillTargetDeathNormal"/>
+    </CEffectCreatePersistent>
+    <CEffectEnumArea id="LaserLanceImpactSearch">
+        <EditorCategories value=""/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Item,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="1.5" Effect="LaserLanceImpactDmg"/>
+        <LaunchLocation Value="CasterUnit"/>
+        <ImpactLocation Value="SourceUnit"/>
+    </CEffectEnumArea>
+    <CEffectSet id="LaserLanceInitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="LaserLanceAlreadyCasting"/>
+        <EffectArray value="LaserLanceAlreadyCastingNoWeapons"/>
+        <EffectArray value="LaserLanceOffsets"/>
+        <EffectArray value="LaserLanceCreateQuadDummy"/>
+    </CEffectSet>
+    <CEffectCreatePersistent id="LaserLanceMissilePersistent">
+        <EditorCategories value=""/>
+        <WhichLocation Value="SourceUnit"/>
+        <PeriodCount value="10"/>
+        <PeriodicEffectArray value="LaserLanceSearchPersistent"/>
+        <PeriodicPeriodArray value="0.05"/>
+        <PeriodicValidator value="SourceNotDead"/>
+    </CEffectCreatePersistent>
+    <CEffectCreatePersistent id="LaserLanceOffsets">
+        <EditorCategories value=""/>
+        <WhichLocation Value="CasterUnit"/>
+        <PeriodCount value="5"/>
+        <PeriodicEffectArray value="LaserLanceDelay"/>
+        <PeriodicOffsetArray value="0,-1,0"/>
+        <PeriodicOffsetArray value="0.9511,-0.309,0"/>
+        <PeriodicOffsetArray value="-0.9511,-0.3,0"/>
+        <PeriodicOffsetArray value="0.588,0.809,0"/>
+        <PeriodicOffsetArray value="-0.588,0.809,0"/>
+        <PeriodicPeriodArray value="0"/>
+    </CEffectCreatePersistent>
+    <CEffectDamage id="LaserLancePeriodicDmg">
+        <EditorCategories value=""/>
+        <Amount value="750">
+            <AccumulatorArray value="Phase2Small"/>
+        </Amount>
+        <ImpactLocation Value="SourceUnit"/>
+    </CEffectDamage>
+    <CEffectApplyBehavior id="LaserLancePeriodicFireApply">
+        <EditorCategories value=""/>
+        <Behavior value="LaserLanceFire"/>
+    </CEffectApplyBehavior>
+    <CEffectEnumArea id="LaserLancePeriodicSearch">
+        <EditorCategories value=""/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Item,Stasis,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="1.5" Effect="LaserLancePeriodicFireApply"/>
+        <LaunchLocation Value="CasterUnit"/>
+        <ImpactLocation Value="TargetPoint"/>
+    </CEffectEnumArea>
+    <CEffectCreatePersistent id="LaserLanceSearchPersistent">
+        <EditorCategories value="Race:Protoss"/>
+        <WhichLocation Value="SourcePoint"/>
+        <InitialEffect value="LaserLanceImpactSearch"/>
+        <PeriodCount value="30"/>
+        <PeriodicEffectArray value="LaserLancePeriodicSearch"/>
+        <PeriodicPeriodArray value="0.09"/>
+    </CEffectCreatePersistent>
+    <CEffectApplyBehavior id="Phase2ApplySpawning">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Behavior value="Spawning"/>
+        <Flags index="UseDuration" value="1"/>
+        <Duration value="2.15"/>
+    </CEffectApplyBehavior>
+    <CEffectModifyUnit id="Phase2Heal">
+        <EditorCategories value=""/>
+        <ImpactUnit Value="Source"/>
+        <VitalArray index="Shields">
+            <ChangeFraction value="1"/>
+        </VitalArray>
+    </CEffectModifyUnit>
+    <CEffectIssueOrder id="Phase2IssueMorph">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Abil value="Phase2"/>
+        <Player Value="Source"/>
+    </CEffectIssueOrder>
+    <CEffectSet id="Phase2Set">
+        <ValidatorArray value="CasterLifeLT50Percent"/>
+        <EditorCategories value=""/>
+        <EffectArray value="Phase2StopAbilitySet"/>
+        <EffectArray value="Phase2Heal"/>
+        <EffectArray value="Phase2IssueMorph"/>
+    </CEffectSet>
+    <!--Every ability that should be stopped requires its own stop effect, ie destroy persistent or whatever.-->
+    <CEffectSet id="Phase2StopAbilitySet">
+        <EditorCategories value=""/>
+    </CEffectSet>
+    <CEffectApplyBehavior id="PortalCasterStationary">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+    </CEffectApplyBehavior>
+    <CEffectRemoveBehavior id="PortalCasterStationaryRemove">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <BehaviorLink value="PortalCasterStationary"/>
+    </CEffectRemoveBehavior>
+    <CEffectApplyBehavior id="PortalStartModels">
+        <EditorCategories value=""/>
+        <Behavior value="PortalModels"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="PortalStartAlreadyCasting" parent="AlreadyCasting">
+        <Duration value="15.725"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="PortalStartAlreadyCastingNoWeapons" parent="AlreadyCastingNoWeapons">
+        <Duration value="11.425"/>
+    </CEffectApplyBehavior>
+    <CEffectCreateUnit id="PortalStartCasterPortalCreateDummy">
+        <EditorCategories value=""/>
+        <WhichLocation Value="CasterUnit"/>
+        <CreateFlags index="Birth" value="0"/>
+        <CreateFlags index="DropOff" value="0"/>
+        <CreateFlags index="OffsetByRadius" value="0"/>
+        <CreateFlags index="SetFacing" value="1"/>
+        <CreateFlags index="NormalizeSpawnOffset" value="0"/>
+        <SpawnEffect value="PortalStartDummyBuffs"/>
+        <SpawnUnit value="DummyNoMovingNoTurningHeight5"/>
+    </CEffectCreateUnit>
+    <CEffectCreateUnit id="PortalStartCreateFollowDummy">
+        <EditorCategories value=""/>
+        <CreateFlags index="Birth" value="0"/>
+        <CreateFlags index="DropOff" value="0"/>
+        <CreateFlags index="OffsetByRadius" value="0"/>
+        <CreateFlags index="SetFacing" value="1"/>
+        <CreateFlags index="NormalizeSpawnOffset" value="0"/>
+        <SpawnEffect value="PortalStartFollowPersistent"/>
+        <SpawnUnit value="DummyMovingNoTurning"/>
+    </CEffectCreateUnit>
+    <CEffectSet id="PortalStartDummyBuffs">
+        <EditorCategories value=""/>
+        <EffectArray value="PortalStartModels"/>
+        <EffectArray value="PortalStartAddDummyTracker"/>
+    </CEffectSet>
+    <CEffectApplyBehavior id="PortalStartEndHeight">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Source"/>
+        <Behavior value="PortalStartDummyHeightEnd"/>
+    </CEffectApplyBehavior>
+    <CEffectIssueOrder id="PortalStartFollow">
+        <EditorCategories value=""/>
+        <Abil value="move"/>
+        <Target Effect="PortalStartInitialSet" Value="TargetUnit"/>
+    </CEffectIssueOrder>
+    <CEffectSet id="PortalStartFollowDummySet">
+        <EditorCategories value=""/>
+        <EffectArray value="PortalStartIssueCast"/>
+        <EffectArray value="PortalStartModels"/>
+        <EffectArray value="PortalStartAddDummyTracker"/>
+    </CEffectSet>
+    <CEffectCreatePersistent id="PortalStartFollowPersistent">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetUnit"/>
+        <Flags index="PersistUntilDestroyed" value="1"/>
+        <InitialEffect value="PortalStartFollowDummySet"/>
+        <PeriodicValidator value="PortalStartTargetNotDead"/>
+        <PeriodicEffectArray value="PortalStartFollow"/>
+        <PeriodicPeriodArray value="0.09"/>
+        <FinalEffect value="PortalStartTargetGoneCleanup"/>
+    </CEffectCreatePersistent>
+    <CEffectSet id="PortalStartInitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="PortalStartAlreadyCasting"/>
+        <EffectArray value="PortalStartAlreadyCastingNoWeapons"/>
+        <EffectArray value="PortalStartTrackerApply"/>
+        <EffectArray value="PortalStartCreateFollowDummy"/>
+        <EffectArray value="PortalStartCasterPortalCreateDummy"/>
+        <EffectArray value="PortalCasterStationary"/>
+    </CEffectSet>
+    <CEffectIssueOrder id="PortalStartIssueCast">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Abil value="PortalTarget"/>
+        <Player Value="Caster"/>
+        <Target Value="TargetUnit"/>
+    </CEffectIssueOrder>
+    <CEffectApplyBehavior id="PortalStartStartHeight">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Source"/>
+        <Behavior value="PortalStartDummyHeightStart"/>
+    </CEffectApplyBehavior>
+    <CEffectRemoveBehavior id="PortalTargetCleanupRemoveBehavior">
+        <EditorCategories value=""/>
+        <BehaviorLink value="PortalModels"/>
+    </CEffectRemoveBehavior>
+    <CEffectCreatePersistent id="PortalTargetDelay">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetUnit"/>
+        <InitialDelay value="1"/>
+        <InitialEffect value="PortalTargetPersistent"/>
+    </CEffectCreatePersistent>
+    <CEffectDamage id="PortalTargetDmg">
+        <EditorCategories value=""/>
+        <Amount value="1275">
+            <AccumulatorArray value="Phase2Small"/>
+        </Amount>
+    </CEffectDamage>
+    <!--This Persistent time + delay time has to be synced with PortalStartModels Behavior and Atlantis animation bracket-->
+    <CEffectCreatePersistent id="PortalTargetPersistent">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetUnit"/>
+        <FinalEffect value="PortalTargetCleanupSet"/>
+        <PeriodCount value="86"/>
+        <PeriodicEffectArray value="PortalTargetSearch"/>
+        <PeriodicPeriodArray value="0.125"/>
+        <PeriodicValidator value="PortalTargetPeriodicValidator"/>
+    </CEffectCreatePersistent>
+    <CEffectEnumArea id="PortalTargetSearch">
+        <EditorCategories value=""/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Item,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="2" Effect="PortalTargetDmg"/>
+    </CEffectEnumArea>
+    <CEffectEnumTrackedUnits id="PortalTargetCleanupSearchDummy">
+        <EditorCategories value=""/>
+        <BehaviorLink value="PortalDummyTracker"/>
+        <Effect value="PortalTargetCleanupRemoveBehavior"/>
+    </CEffectEnumTrackedUnits>
+    <CEffectSet id="LaserLanceMissileImpactDummy"/>
+    <CEffectLaunchMissile id="LaserLanceLaunchMissile">
+        <ValidatorArray index="0" value="CasterNotDead"/>
+        <ImpactLocation Value="TargetPoint"/>
+        <LaunchEffect value="LaserLanceMissilePersistent"/>
+        <ImpactEffect value="LaserLanceMissileImpactDummy"/>
+        <Flags index="2D" value="1"/>
+        <AmmoUnit value="LaserLanceMissile"/>
+        <LaunchOffset value="0,0,-5"/>
+    </CEffectLaunchMissile>
+    <CEffectDamage id="LaserLanceImpactDmg">
+        <ValidatorArray value="noMarkers"/>
+        <EditorCategories value="Race:Protoss"/>
+        <Flags index="Notification" value="1"/>
+        <Amount value="2500">
+            <AccumulatorArray value="Phase2"/>
+        </Amount>
+    </CEffectDamage>
+    <CEffectApplyBehavior id="StasisBubbleAlreadyCasting" parent="AlreadyCasting">
+        <Duration value="4.25"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="StasisBubbleAlreadyCastingNoWeapons" parent="AlreadyCastingNoWeapons">
+        <Duration value="2.15"/>
+    </CEffectApplyBehavior>
+    <CEffectCreateUnit id="StasisBubbleCreateUnit">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetPoint"/>
+        <SpawnEffect value="StasisBubbleDelay"/>
+        <SpawnUnit value="StasisBubble"/>
+    </CEffectCreateUnit>
+    <CEffectCreatePersistent id="StasisBubbleDelay">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetUnit"/>
+        <InitialDelay value="1.425"/>
+        <InitialEffect value="StasisBubbleTimedLife"/>
+    </CEffectCreatePersistent>
+    <CEffectSet id="StasisBubbleInitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="StasisBubbleAlreadyCasting"/>
+        <EffectArray value="StasisBubbleAlreadyCastingNoWeapons"/>
+        <EffectArray value="StasisBubbleCreateUnit"/>
+        <TargetLocationType value="Point"/>
+    </CEffectSet>
+    <CEffectEnumArea id="StasisBubblePeriodicSearch">
+        <EditorCategories value=""/>
+        <ImpactLocation Value="SourceUnit"/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Item,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="2.8" Effect="StasisBubbleStasis"/>
+    </CEffectEnumArea>
+    <CEffectApplyBehavior id="StasisBubbleStasis">
+        <EditorCategories value=""/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="StasisBubbleTimedLife">
+        <EditorCategories value=""/>
+    </CEffectApplyBehavior>
+    <CEffectDamage id="AtlantisWeaponDmg" parent="DU_WEAP_MISSILE">
+        <ValidatorArray value="MothershipRangeCheck"/>
+        <ValidatorArray value="NotHidden"/>
+        <EditorCategories value="Race:Protoss"/>
+        <Visibility value="Visible"/>
+        <Amount value="1000"/>
+        <AttributeFactor index="Armored" value="0.25"/>
+    </CEffectDamage>
+    <CEffectCreatePersistent id="AtlantisWeaponPersistent">
+        <EditorCategories value="Race:Protoss"/>
+        <WhichLocation Value="TargetUnit"/>
+        <TimeScaleSource Value="Caster"/>
+        <InitialEffect value="AtlantisLaunchQueryIndexDummy"/>
+        <PeriodCount value="2"/>
+        <PeriodicValidator value="CasterNotDead"/>
+        <PeriodicEffectArray value="AtlantisWeaponDmg"/>
+        <PeriodicPeriodArray value="0.275"/>
+    </CEffectCreatePersistent>
+    <CEffectSet id="AtlantisWeaponInitialSet">
+        <EditorCategories value="Race:Protoss"/>
+        <EffectArray value="AtlantisWeaponPersistent"/>
+        <EffectArray value="AtlantisWeaponSecondPersistent"/>
+    </CEffectSet>
+    <CEffectCreatePersistent id="AtlantisWeaponSecondPersistent">
+        <EditorCategories value="Race:Protoss"/>
+        <WhichLocation Value="TargetUnit"/>
+        <TimeScaleSource Value="Caster"/>
+        <InitialDelay value="0.175"/>
+        <InitialEffect value="AtlantisLaunchQueryIndexDummy"/>
+        <PeriodCount value="2"/>
+        <PeriodicValidator value="MothershipRangeCheckCombine"/>
+        <PeriodicEffectArray value="AtlantisWeaponDmg"/>
+        <PeriodicPeriodArray value="0.275"/>
+    </CEffectCreatePersistent>
+    <CEffectModifyUnit id="AtlantisLaunchQueryIndexDummy">
+        <EditorCategories value="Race:Protoss"/>
+    </CEffectModifyUnit>
+    <CEffectLaunchMissile id="AtlantisCoreWeaponLaunchMissile">
+        <EditorCategories value="Race:Protoss"/>
+        <ImpactEffect value="AtlantisCoreWeaponDmg"/>
+        <AmmoUnit value="AtlantisCoreWeaponMissile"/>
+    </CEffectLaunchMissile>
+    <CEffectDamage id="AtlantisCoreWeaponDmg" parent="DU_WEAP">
+        <EditorCategories value="Race:Protoss"/>
+        <Visibility value="Visible"/>
+        <Kind value="Ranged"/>
+        <Amount value="0">
+            <AccumulatorArray value="AtlantisCoreWeaponDmg"/>
+        </Amount>
+        <AttributeFactor index="Armored" value="0.25"/>
+    </CEffectDamage>
+    <CEffectApplyBehavior id="LaserLanceAlreadyCasting" parent="AlreadyCasting">
+        <Duration value="8.5"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="Illusion@IllusionDmgHandler">
+        <EditorCategories value=""/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="VoidSummonAlreadyCasting" parent="AlreadyCasting">
+        <Duration value="8.5"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="VoidSummonAlreadyCastingNoWeapons" parent="AlreadyCastingNoWeapons">
+        <Duration value="4.3"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="VoidSummonPrecursorBuff">
+        <EditorCategories value=""/>
+    </CEffectApplyBehavior>
+    <CEffectRemoveBehavior id="VoidSummonPrecursorBuffRemove">
+        <EditorCategories value=""/>
+        <BehaviorLink value="VoidSummonPrecursorBuff"/>
+    </CEffectRemoveBehavior>
+    <CEffectCreateUnit id="VoidSummonPrecursorCreate">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetPoint"/>
+        <SpawnEffect value="VoidSummonPrecursorDelay"/>
+        <SpawnUnit value="VoidSummonPrecursor"/>
+    </CEffectCreateUnit>
+    <CEffectSet id="VoidSummonInitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="VoidSummonAlreadyCasting"/>
+        <EffectArray value="VoidSummonAlreadyCastingNoWeapons"/>
+        <EffectArray value="VoidSummonLocations"/>
+        <TargetLocationType value="Point"/>
+    </CEffectSet>
+    <CEffectCreatePersistent id="VoidSummonLocations">
+        <EditorCategories value=""/>
+        <WhichLocation Value="CasterUnit"/>
+        <OffsetVectorStartLocation Value="CasterUnit"/>
+        <OffsetVectorEndLocation Value="CasterUnit"/>
+        <Flags index="RandomOffset" value="1"/>
+        <PeriodCount value="6"/>
+        <PeriodicEffectArray value="VoidSummonPrecursorCreate"/>
+        <PeriodicOffsetArray value="0,-3,0"/>
+        <PeriodicOffsetArray value="0,3,0"/>
+        <PeriodicOffsetArray value="3,0,0"/>
+        <PeriodicOffsetArray value="-3,0,0"/>
+        <PeriodicOffsetArray value="0,0,0"/>
+        <PeriodicOffsetArray value="2.121,2.121,0"/>
+        <PeriodicOffsetArray value="-2.121,2.121,0"/>
+        <PeriodicOffsetArray value="2.121,-2.121,0"/>
+        <PeriodicOffsetArray value="-2.121,-2.121,0"/>
+        <PeriodicPeriodArray value="0.275"/>
+        <OffsetRandMode value="Shuffle"/>
+    </CEffectCreatePersistent>
+    <CEffectCreatePersistent id="VoidSummonPrecursorDelay">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetUnit"/>
+        <InitialEffect value="VoidSummonPrecursorBuff"/>
+        <ExpireDelay value="2.15"/>
+        <ExpireEffect value="VoidSummonPrecursorMorph"/>
+        <FinalEffect value="VoidSummonPrecursorBuffRemove"/>
+    </CEffectCreatePersistent>
+    <CEffectIssueOrder id="VoidSummonPrecursorMorph">
+        <ValidatorArray value="TargetNotDead"/>
+        <EditorCategories value=""/>
+        <Abil value="VoidSummonPrecursorMorph"/>
+    </CEffectIssueOrder>
+    <CAbilEffectInstant id="Bomber">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="BomberCreate"/>
+        <Flags index="AutoCast" value="1"/>
+        <Flags index="AutoCastOn" value="1"/>
+        <Flags index="Transient" value="1"/>
+        <Cost>
+            <Cooldown TimeStart="5" TimeUse="5"/>
+        </Cost>
+        <Arc value="360"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="Bomber"/>
+        <AutoCastFilters value="Visible;Player,Ally,Neutral,Missile,Item,Dead,Hidden"/>
+        <AutoCastRange value="7"/>
+        <AutoCastValidatorArray value="BomberLimit"/>
+        <AutoCastAcquireLevel value="Defensive"/>
+    </CAbilEffectInstant>
+    <CAbilEffectInstant id="Illusion">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="Illusion@InitialSet"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="Illusion"/>
+        <Flags index="AutoCast" value="1"/>
+        <Flags index="AutoCastOn" value="1"/>
+        <Cost>
+            <Cooldown TimeStart="10" TimeUse="120"/>
+        </Cost>
+        <AutoCastRange value="7"/>
+        <AutoCastValidatorArray value="NotAlreadyCasting"/>
+        <AutoCastValidatorArray value="EnemyWithin8"/>
+        <AutoCastValidatorArray value="BossAbilityRequirementLvl3"/>
+    </CAbilEffectInstant>
+    <CAbilEffectTarget id="Kamikaze">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="KamikazeInitialSet"/>
+        <Range value="7"/>
+        <Arc value="360"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="Kamikaze"/>
+    </CAbilEffectTarget>
+    <CAbilMorph id="Phase2">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="Phase2"/>
+        <InfoArray Unit="AtlantisCore" CollideRange="3">
+            <SectionArray index="Stats">
+                <EffectArray index="Finish" value="Phase2ApplySpawning"/>
+            </SectionArray>
+        </InfoArray>
+    </CAbilMorph>
+    <CAbilEffectTarget id="PortalStart">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="PortalStartInitialSet"/>
+        <Range value="8"/>
+        <Arc value="360"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="Portal"/>
+    </CAbilEffectTarget>
+    <CAbilEffectTarget id="PortalTarget">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="PortalTargetDelay"/>
+        <Range value="15"/>
+        <Arc value="360"/>
+    </CAbilEffectTarget>
+    <CAbilEffectTarget id="LaserLance">
+        <EditorCategories value="Race:Protoss,AbilityorEffectType:Units"/>
+        <Effect index="0" value="LaserLanceInitialSet"/>
+        <Range value="7.5"/>
+        <Arc value="360"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="LaserLance"/>
+    </CAbilEffectTarget>
+    <CAbilEffectTarget id="StasisBubble">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="StasisBubbleInitialSet"/>
+        <Range value="7"/>
+        <Arc value="360"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="StasisBubble"/>
+    </CAbilEffectTarget>
+    <CAbilEffectInstant id="VoidSummon">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="VoidSummonInitialSet"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="VoidSummon"/>
+    </CAbilEffectInstant>
+    <CAbilMorph id="VoidSummonPrecursorMorph">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <InfoArray Unit="VoidMine"/>
+    </CAbilMorph>
+    <CButton id="Illusion">
+        <Icon value="Assets\Textures\btn-ability-hornerhan-hellion-slowbomb.dds"/>
+    </CButton>
+    <CActorUnit id="DummyNoMovingNoTurningHeight16" parent="GenericUnitStandard" unitName="DummyNoMovingNoTurningHeight16">
+        <EditorCategories value=""/>
+        <Model value="Larva"/>
+    </CActorUnit>
+    <CActorUnit id="Illusion@AtlantisCore" parent="GenericUnitStandard" unitName="Illusion@AtlantisCore">
+        <Macros value="PhysicsDeathsSwarmAir"/>
+        <Macros value="PhysicsDeathsVoidAir"/>
+        <Macros value="Illusion@ColoringMacro"/>
+        <On Terms="UnitHeightUpdate.*.Land" Send="Create MothershipCore_Land"/>
+        <On Terms="UnitBirth.Illusion@AtlantisCore.Normal" Send="AnimPlay MorphStart Morph,End,A"/>
+        <On Terms="ActorCreation" Send="AnimBracketStart GL_BSD GLbirth GLstand GLdeath"/>
+        <On Terms="ActorCreation" Send="TextureSelectById MothershipCoreMainDiffuse"/>
+        <On Terms="ActorCreation" Send="TextureSelectById MothershipCoreMainEmissive"/>
+        <On Terms="ActorCreation" Send="TextureSelectById MothershipCoreMainSpecular"/>
+        <On Terms="ActorCreation" Send="TextureSelectById MothershipCoreMainNormal"/>
+        <On Terms="ActorCreation" Send="TextureSelectById MothershipCoreBodyDiffuse"/>
+        <On Terms="TimerExpired; TimerName Color" Send="SetTeamColor 128,255,128 255,0,0"/>
+        <On Terms="ActorCreation" Send="TimerSet 0.000000 Color"/>
+        <Model value="AtlantisCore"/>
+        <ModelFlags index="AutomateGlobalLoops" value="0"/>
+        <ModelFlags index="OutlineOccluder" value="1"/>
+        <BuildModel value="MothershipCoreTeleportIn"/>
+        <DeathArray index="Normal" AnimProps="Death,A" ModelLink="" SoundLink="Mothership_Explode"/>
+        <DeathCustoms AnimProps="Death,B" SoundLink="Mothership_Explode" Name="Variation0"/>
+        <DeathCustoms ModelLink="ProtossMediumUnitDeathLow" Name="Low"/>
+        <DeathCustoms ActorModel="MothershipCoreDeathRagdollFlier" Name="RagdollBasic" PhysicsMatchKeysOrdered="BasicAir,Basic">
+            <BodySquibs Name="Basic" Model="ProtossTinyRobotSquibDeathRagdoll"/>
+        </DeathCustoms>
+        <DeathCustoms Name="RagdollNuke" InheritsFrom="RagdollBasic">
+            <BodySquibs Name="Fire"/>
+        </DeathCustoms>
+        <DeathCustoms Name="RagdollFire" InheritsFrom="RagdollBasic">
+            <BodySquibs Name="Fire"/>
+        </DeathCustoms>
+        <DeathCustoms Name="RagdollAcid" InheritsFrom="RagdollBasic">
+            <BodySquibs Name="Acid"/>
+        </DeathCustoms>
+        <DeathCustoms Name="RagdollOverkillDPRH" InheritsFrom="RagdollBasic"/>
+        <DeathCustoms Name="RagdollOverkillDOI" InheritsFrom="RagdollBasic"/>
+        <DeathCustoms Name="RagdollMidair" InheritsFrom="RagdollBasic"/>
+        <DeathActorModel value="UnitDeathModelWithDeathMotionFlier"/>
+        <PhysicsMatchKeysOrdered value="BasicAir,Basic"/>
+        <PlacementModel value="MothershipCore"/>
+        <PortraitModel value="Mothership_Taldarim_Portrait"/>
+        <CustomUnitStatusFrame value="SSF_UnitStatus/BossStatusShielded"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-Protoss-mothershipcore.dds"/>
+        </GroupIcon>
+        <HeroIcon value="Assets\Textures\btn-unit-protoss-mothershipcore.dds"/>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-protoss-airarmorlevel0.dds"/>
+        <MinimapIcon value="Assets\Textures\btn-unit-protoss-alarak-taldarim-mothership-collection.dds"/>
+        <MinimapIconScale value="0.300000"/>
+        <MinimapIconBackground value="Assets\MinimapBackground.dds"/>
+        <MinimapIconBackgroundScale value="1.100000"/>
+        <MinimapIconBackgroundTintColor value="255,255,0,0"/>
+        <SoundArray index="Birth" value="Mothership_Birth"/>
+        <SoundArray index="Ready" value="Mothership_Ready"/>
+        <SoundArray index="Help" value="Mothership_Help"/>
+        <SoundArray index="What" value="Mothership_What"/>
+        <SoundArray index="Yes" value="Mothership_Yes"/>
+        <SoundArray index="Attack" value="Mothership_Attack"/>
+        <SoundArray index="Pissed" value="Mothership_Pissed"/>
+        <SoundArray index="Movement" value="MothershipCore_Movement"/>
+        <UnitFlags index="StandAnimBirthVariation" value="0"/>
+        <UnitFlags index="SuppressDefaultStatusBar" value="1"/>
+        <UnitIcon value="Assets\Textures\btn-unit-protoss-mothershipcore.dds"/>
+        <Wireframe>
+            <Image value="Assets\Textures\wireframe-collection-purifier-mothershipcore.dds"/>
+        </Wireframe>
+        <WireframeShield>
+            <Image value="Assets\Textures\wireframe-collection-purifier-mothershipcore-shield01.dds"/>
+            <Image value="Assets\Textures\wireframe-collection-purifier-mothershipcore-shield02.dds"/>
+            <Image value="Assets\Textures\wireframe-collection-purifier-mothershipcore-shield03.dds"/>
+        </WireframeShield>
+    </CActorUnit>
+    <CActorAction id="AtlantisCoreIllusionAttack" parent="GenericAttack" effectImpact="Illusion@AtlantisCoreIllusionWeaponDmg" effectLaunch="Illusion@AtlantisCoreIllusionWeaponLaunchMissile2">
+        <LaunchAssets Sound="PhotonCannon_AttackLaunch"/>
+        <ImpactMap index="None" Model="MothershipCoreAttackImpact" Sound="PhotonCannon_AttackImpact"/>
+        <ImpactMap index="Flesh" ModelReaction="BloodTargetImpact"/>
+        <Missile value="AtlantisCoreAttackMissile"/>
+    </CActorAction>
+    <CActorUnit id="Bomber" parent="GenericUnitStandard" unitName="Bomber">
+        <EditorCategories value=""/>
+        <Wireframe>
+            <Image value="Assets\Wireframes\Interceptor_Golden\wireframe-interceptor-golden.dds"/>
+        </Wireframe>
+        <WireframeShield>
+            <Image value="Assets\Wireframes\Interceptor_Golden\wireframe-interceptor-golden-shield01.dds"/>
+            <Image value="Assets\Wireframes\Interceptor_Golden\wireframe-interceptor-golden-shield02.dds"/>
+            <Image value="Assets\Wireframes\Interceptor_Golden\wireframe-interceptor-golden-shield03.dds"/>
+        </WireframeShield>
+    </CActorUnit>
+    <CActorBeamSimple id="BomberBeam" parent="BeamSimpleAnimationStyleContinuous">
+        <EditorCategories value=""/>
+        <On Terms="Effect.BomberBeam.Start" Send="Create"/>
+        <ModelFlags index="AutomateGlobalLoops" value="1"/>
+        <HostLaunch Subject="_Unit" Scope="Target"/>
+        <HostLaunchSiteOps Ops="SOpAttachOrigin"/>
+        <HostImpact Subject="_Unit" Scope="Target"/>
+        <HostImpactSiteOps Ops="SOpShadow"/>
+    </CActorBeamSimple>
+    <CActorUnit id="DummyNoMovingNoTurningHeight5" parent="GenericUnitStandard" unitName="DummyNoMovingNoTurningHeight5">
+        <EditorCategories value=""/>
+        <Model value="Larva"/>
+        <HighlightTooltip value="Unit/Name/Bogus"/>
+    </CActorUnit>
+    <CActorEventMacro id="Illusion@ColoringMacro">
+        <EditorCategories value=""/>
+        <On Terms="Signal.*.Color1" Send="SetTeamColor 128,255,128 255,255,0 0.500000 OneShot Color"/>
+        <On Terms="Signal.*.Color2" Send="SetTeamColor 128,255,128 255,255,255 0.500000 OneShot Color"/>
+        <On Terms="Signal.*.Color3" Send="SetTeamColor 128,255,128 128,0,255 0.500000 OneShot Color"/>
+        <On Terms="Signal.*.Color0" Send="SetTeamColor 128,255,128 255,0,0 0.500000 OneShot Color"/>
+        <On Terms="Signal.*.Clear" Send="ClearTeamColor 0.500000 Color"/>
+    </CActorEventMacro>
+    <CActorModel id="Illusion@SpawningEnd" parent="ModelAnimationStyleContinuous">
+        <EditorCategories value=""/>
+        <On Terms="Effect.Illusion@Spawning.Start" Send="Create"/>
+        <On Terms="Effect.Illusion@SpawningCaster.Start" Send="Create"/>
+        <On Terms="ActorCreation" Send="TimerSet 1.000000 KillDelay"/>
+        <On Terms="TimerExpired; TimerName KillDelay" Send="AnimBracketStop BSD"/>
+        <VisibleTo index="All" value="1"/>
+        <FogVisibility value="Visible"/>
+    </CActorModel>
+    <CActorModel id="Illusion@SpawningStart" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On Terms="Effect.Illusion@InitialSet.Start" Send="Create"/>
+        <VisibleTo index="All" value="1"/>
+        <FogVisibility value="Visible"/>
+    </CActorModel>
+    <CActorModel id="KamikazeBeacon" parent="ModelAnimationStyleContinuous">
+        <EditorCategories value=""/>
+        <On Terms="Effect.KamikazeLocation.Start" Send="Create"/>
+        <On Terms="ActorCreation" Send="TimerSet 2.500000 KillDelay"/>
+        <On Terms="TimerExpired; TimerName KillDelay" Send="Destroy"/>
+        <ModelFlags index="OutlineEmitter" value="1"/>
+        <VisibleTo index="All" value="1"/>
+        <FogVisibility value="Visible"/>
+    </CActorModel>
+    <CActorUnit id="KamikazeLaunchMissileDummy" parent="GenericUnitStandard" unitName="KamikazeLaunchMissileDummy">
+        <EditorCategories value=""/>
+        <Model value="Larva"/>
+        <HighlightTooltip value="Unit/Name/Bogus"/>
+    </CActorUnit>
+    <CActorMissile id="AtlantisCoreAttackMissile" parent="GenericAttackMissile" unitName="AtlantisCoreWeaponMissile">
+        <On Terms="UnitBirth" Send="AnimSetTimeScaleAbsolute Lifetime 1.000000"/>
+        <Model value="MothershipCoreWeapon"/>
+    </CActorMissile>
+    <CActorModel id="AtlantisSpawning" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <FogVisibility value="Visible"/>
+    </CActorModel>
+    <CActorMissile id="KamikazeMissile1" parent="GenericAttackMissile" unitName="KamikazeMissile1">
+        <EditorCategories value=""/>
+        <VisibleTo index="All" value="1"/>
+        <FogVisibility value="Visible"/>
+    </CActorMissile>
+    <CActorAction id="KamikazeMissile3Action" parent="GenericAttack" effectImpact="KamikazeImpactDmg" effectLaunch="KamikazeMissile3">
+        <EditorCategories value=""/>
+        <LaunchSiteOps Ops="SOpTargetPoint"/>
+        <Missile value="KamikazeMissile3"/>
+        <ImpactSiteOps Ops="SOpSourcePointSationary"/>
+        <ImpactModel value="KamikazeMissile3ActionImpact"/>
+        <ShieldFlashType value="None"/>
+    </CActorAction>
+    <CActorModel id="KamikazeMissile3ActionImpact" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <HostSiteOps Ops="SOpForwardCasterPointInverted"/>
+    </CActorModel>
+    <CActorMissile id="KamikazeMissile3" parent="GenericAttackMissile" unitName="KamikazeMissile3">
+        <EditorCategories value=""/>
+        <VisibleTo index="All" value="1"/>
+        <FogVisibility value="Visible"/>
+    </CActorMissile>
+    <CActorAction id="KamikazeMissile2Action" parent="GenericAttack" effectImpact="KamikazeImpactDmg" effectLaunch="KamikazeMissile2">
+        <EditorCategories value=""/>
+        <LaunchSiteOps Ops="SOpTargetPoint"/>
+        <Missile value="KamikazeMissile2"/>
+        <ImpactSiteOps Ops="SOpSourcePointSationary"/>
+        <ImpactModel value="KamikazeMissile2ActionImpact"/>
+        <ShieldFlashType value="None"/>
+    </CActorAction>
+    <CActorMissile id="KamikazeMissile2" parent="GenericAttackMissile" unitName="KamikazeMissile2">
+        <EditorCategories value=""/>
+        <VisibleTo index="All" value="1"/>
+        <FogVisibility value="Visible"/>
+    </CActorMissile>
+    <CActorAction id="KamikazeMissile1Action" parent="GenericAttack" effectImpact="KamikazeImpactDmg" effectLaunch="KamikazeMissile1">
+        <EditorCategories value=""/>
+        <LaunchSiteOps Ops="SOpTargetPoint"/>
+        <Missile value="KamikazeMissile1"/>
+        <ImpactSiteOps Ops="SOpSourcePointSationary"/>
+        <ImpactModel value="KamikazeMissile1ActionImpact"/>
+        <ShieldFlashType value="None"/>
+    </CActorAction>
+    <CActorModel id="KamikazeMissile1ActionImpact" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <HostSiteOps Ops="SOpForwardCasterPointInverted"/>
+    </CActorModel>
+    <CActorModel id="KamikazeMissile2ActionImpact" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <HostSiteOps Ops="SOpForwardCasterPointInverted"/>
+    </CActorModel>
+    <CActorBeamSimple id="LaserLanceBeam" parent="BeamSimpleAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <VisibleTo index="All" value="1"/>
+        <FogVisibility value="Visible"/>
+    </CActorBeamSimple>
+    <CActorModel id="LaserLanceFire" parent="ModelAnimationStyleContinuous">
+        <EditorCategories value=""/>
+        <On Terms="Effect.LaserLanceSearchPersistent.Start; At Effect" Send="Create"/>
+        <On Terms="ActorCreation" Send="TimerSet 5.000000 KillDelay"/>
+        <On Terms="TimerExpired; TimerName KillDelay" Send="Destroy"/>
+        <HostSiteOps Ops="SOpForwardCasterPoint SOpRotate90DegClockwise"/>
+        <VisibleTo index="All" value="1"/>
+        <FogVisibility value="Visible"/>
+    </CActorModel>
+    <CActorModel id="LaserLanceFireBuff" parent="ModelAddition">
+        <EditorCategories value=""/>
+    </CActorModel>
+    <CActorSiteMover id="LaserLanceImpactSite">
+        <EditorCategories value=""/>
+    </CActorSiteMover>
+    <CActorSiteOpLocalOffset id="LaserLanceMissileLaunchOffset">
+        <EditorCategories value=""/>
+        <LocalOffset value="0.000000,0.000000,-5.000000"/>
+    </CActorSiteOpLocalOffset>
+    <CActorQuad id="LaserLanceQuad2" parent="ZergGuideVisualQuadDown">
+        <Filter index="All" value="1"/>
+        <FogVisibility value="Visible"/>
+        <Supporter Subject="LaserLanceQuad"/>
+        <On index="0" Terms="Abil.Guide" Send="Create"/>
+        <Host Subject="LaserLanceQuad"/>
+        <HostSiteOps Ops="SOpRotationPositive72Deg"/>
+        <LaunchActor value="ProtossGuideVisualQuadLargeLaunch"/>
+        <CenterActor value="ProtossGuideVisualQuadLargeCenter"/>
+        <ImpactActor value="ProtossGuideVisualQuadLargeImpact"/>
+        <Height value="11.000000"/>
+        <Width value="3.000000"/>
+        <VisibleTo index="All" value="1"/>
+    </CActorQuad>
+    <CActorQuad id="LaserLanceQuad3" parent="ZergGuideVisualQuadDown">
+        <Filter index="All" value="1"/>
+        <FogVisibility value="Visible"/>
+        <Supporter Subject="LaserLanceQuad"/>
+        <On index="0" Terms="Abil.Guide" Send="Create"/>
+        <Host Subject="LaserLanceQuad"/>
+        <HostSiteOps Ops="SOpRotationPositive72Deg SOpRotationPositive72Deg"/>
+        <LaunchActor value="ProtossGuideVisualQuadLargeLaunch"/>
+        <CenterActor value="ProtossGuideVisualQuadLargeCenter"/>
+        <ImpactActor value="ProtossGuideVisualQuadLargeImpact"/>
+        <Height value="11.000000"/>
+        <Width value="3.000000"/>
+        <VisibleTo index="All" value="1"/>
+    </CActorQuad>
+    <CActorQuad id="LaserLanceQuad4" parent="ZergGuideVisualQuadDown">
+        <Filter index="All" value="1"/>
+        <FogVisibility value="Visible"/>
+        <Supporter Subject="LaserLanceQuad"/>
+        <On index="0" Terms="Abil.Guide" Send="Create"/>
+        <Host Subject="LaserLanceQuad"/>
+        <HostSiteOps Ops="SOpRotationPositive72Deg SOpRotationPositive72Deg SOpRotationPositive72Deg"/>
+        <LaunchActor value="ProtossGuideVisualQuadLargeLaunch"/>
+        <CenterActor value="ProtossGuideVisualQuadLargeCenter"/>
+        <ImpactActor value="ProtossGuideVisualQuadLargeImpact"/>
+        <Height value="11.000000"/>
+        <Width value="3.000000"/>
+        <VisibleTo index="All" value="1"/>
+    </CActorQuad>
+    <CActorQuad id="LaserLanceQuad5" parent="ZergGuideVisualQuadDown">
+        <Filter index="All" value="1"/>
+        <FogVisibility value="Visible"/>
+        <Supporter Subject="LaserLanceQuad"/>
+        <On index="0" Terms="Abil.Guide" Send="Create"/>
+        <Host Subject="LaserLanceQuad"/>
+        <HostSiteOps Ops="SOpRotationPositive72Deg SOpRotationPositive72Deg SOpRotationPositive72Deg SOpRotationPositive72Deg"/>
+        <LaunchActor value="ProtossGuideVisualQuadLargeLaunch"/>
+        <CenterActor value="ProtossGuideVisualQuadLargeCenter"/>
+        <ImpactActor value="ProtossGuideVisualQuadLargeImpact"/>
+        <Height value="11.000000"/>
+        <Width value="3.000000"/>
+        <VisibleTo index="All" value="1"/>
+    </CActorQuad>
+    <CActorModel id="PhaseTransition" parent="ModelAnimationStyleOneShot">
+        <Inherits index="Scale" value="1"/>
+        <EditorCategories value=""/>
+        <VisibleTo index="All" value="1"/>
+        <HostSiteOps Ops="SOpAttachTurret"/>
+    </CActorModel>
+    <CActorBeamSimple id="PortalBeam" parent="BeamSimpleAnimationStyleContinuous">
+        <VisibleTo index="All" value="1"/>
+        <FogVisibility value="Visible"/>
+        <EditorCategories value=""/>
+        <On Terms="Effect.PortalTargetPersistent.Start" Send="Create"/>
+        <On Terms="Effect.PortalTargetPersistent.Stop" Send="Destroy"/>
+        <On Terms="ActorCreation" Send="SetTintColor 255,0,0"/>
+        <HostLaunch Subject="_Unit" Scope="Target"/>
+        <HostLaunchSiteOps Ops="PortalTempestHeight"/>
+        <HostImpact Subject="_Unit" Scope="Target"/>
+    </CActorBeamSimple>
+    <CActorBeamSimple id="PortalBeamCaster" parent="PortalBeam">
+        <HostLaunch Scope="Caster"/>
+        <HostLaunchSiteOps Ops="SOpAttachOverhead"/>
+        <HostImpact Scope="Caster"/>
+        <HostImpactSiteOps Ops="PortalTempestHeight"/>
+    </CActorBeamSimple>
+    <CActorModel id="PortalBeamImpact" parent="ModelAnimationStyleContinuous">
+        <EditorCategories value=""/>
+        <On Terms="Effect.PortalTargetPersistent.Start" Send="Create"/>
+        <On Terms="Effect.PortalTargetPersistent.Stop" Send="Destroy"/>
+        <Host Subject="_Unit" Scope="Target"/>
+        <HostSiteOps Ops="SOpAttachCenter"/>
+        <ModelFlags index="AutomateGlobalLoops" value="1"/>
+        <VisibleTo index="All" value="1"/>
+        <FogVisibility value="Visible"/>
+    </CActorModel>
+    <CActorModel id="PortalTempest1" parent="ModelAddition">
+        <Aliases index="0" removed="1"/>
+        <Inherits index="BaseModelScale" value="0"/>
+        <Inherits index="CastShadows" value="0"/>
+        <Inherits index="CloakEffect" value="0"/>
+        <Inherits index="CreepEngulfment" value="0"/>
+        <Inherits index="Decal" value="0"/>
+        <Inherits index="ModelMaterials" value="0"/>
+        <Inherits index="Opacity" value="0"/>
+        <Inherits index="Scale" value="0"/>
+        <Inherits index="TeamColor" value="0"/>
+        <Inherits index="TimeScale" value="0"/>
+        <Inherits index="TintColor" value="0"/>
+        <Inherits index="Visibility" value="0"/>
+        <Inherits index="WarpGroup" value="0"/>
+        <AcceptedTransfers index="Rotation" value="0"/>
+        <EditorCategories value=""/>
+        <On Terms="Behavior.PortalModels.On" Send="Create"/>
+        <On Terms="Behavior.PortalStartDummyHeightEnd.Off" Send="Destroy"/>
+        <HostSiteOps Ops="PortalTempestHeight PortalTempestRotator PortalTempestOffset"/>
+        <Model value="PortalTempestPart"/>
+        <ModelFlags index="UseSyncSeed" value="0"/>
+        <VisibleTo index="All" value="1"/>
+        <FogVisibility value="Visible"/>
+    </CActorModel>
+    <CActorModel id="PortalTempestCaster1" parent="PortalTempest1"/>
+    <CActorModel id="PortalTempest2" parent="PortalTempest1">
+        <HostSiteOps Ops="PortalTempestHeight SOpRotate90DegClockwise SOpRotate90DegClockwise PortalTempestRotator PortalTempestOffset"/>
+    </CActorModel>
+    <CActorModel id="PortalTempestCaster2" parent="PortalTempestCaster1">
+        <HostSiteOps Ops="SOpRotate90DegClockwise SOpRotate90DegClockwise PortalTempestHeight PortalTempestRotator PortalTempestOffset"/>
+    </CActorModel>
+    <CActorSiteOpLocalOffset id="PortalTempestHeight">
+        <EditorCategories value=""/>
+        <LocalOffset value="0.000000,0.000000,8.000000"/>
+    </CActorSiteOpLocalOffset>
+    <CActorSiteOpLocalOffset id="PortalTempestOffset">
+        <EditorCategories value=""/>
+        <LocalOffset value="0.000000,1.000000,0.000000"/>
+    </CActorSiteOpLocalOffset>
+    <CActorSiteOpRotator id="PortalTempestRotator">
+        <EditorCategories value=""/>
+        <LocalAxis value="0.000000,0.000000,1.000000"/>
+        <Rate value="30.000000"/>
+    </CActorSiteOpRotator>
+    <CActorQuad id="LaserLanceQuad" parent="ZergGuideVisualQuadDown">
+        <Filter index="All" value="1"/>
+        <FogVisibility value="Visible"/>
+        <On index="0" Terms="Abil.Guide" Send="Create"/>
+        <On Terms="Effect.LaserLanceDummyPersistent.Start; At Caster" Send="Create"/>
+        <On Terms="ActorCreation" Send="Create LaserLanceQuad2"/>
+        <On Terms="ActorCreation" Send="Create LaserLanceQuad3"/>
+        <On Terms="ActorCreation" Send="Create LaserLanceQuad4"/>
+        <On Terms="ActorCreation" Send="Create LaserLanceQuad5"/>
+        <On Terms="ActorCreation" Send="TimerSet 2.000000 KillDelay"/>
+        <On Terms="TimerExpired; TimerName KillDelay" Send="Destroy"/>
+        <LaunchActor value="ProtossGuideVisualQuadLargeLaunch"/>
+        <CenterActor value="ProtossGuideVisualQuadLargeCenter"/>
+        <ImpactActor value="ProtossGuideVisualQuadLargeImpact"/>
+        <Height value="11.000000"/>
+        <Width value="3.000000"/>
+        <HostImpact Subject="_Unit" Scope="Target" Actor="Find"/>
+        <VisibleTo index="All" value="1"/>
+    </CActorQuad>
+    <CActorAction id="LaserLanceMissileAttack" parent="GenericAttack" effectImpact="LaserLanceMissileImpactDummy" effectLaunch="LaserLanceLaunchMissile">
+        <LaunchSiteOps Ops="LaserLanceMissileLaunchOffset"/>
+        <Missile value="LaserLanceMissile"/>
+        <ImpactPointSiteOps Ops="SOpTargetPointStationary SOpShadow"/>
+        <ImpactMap index="None" Model="LaserLanceImpactDmg"/>
+    </CActorAction>
+    <CActorModel id="LaserLanceDmg" parent="ModelAnimationStyleOneShot">
+        <On Terms="Effect.LaserLanceImpactDmg.Start; At Target" Send="Create"/>
+        <On Terms="Effect.LaserLancePeriodicDmg.Start; At Target" Send="Create"/>
+        <Host Subject="_Selectable"/>
+        <HostSiteOps Ops="SOpAttachOverhead"/>
+        <Model value="LaserLanceImpactDmg"/>
+        <AutoScaleFactor value="1.000000"/>
+        <ModelFlags index="AllowHitTest" value="0"/>
+        <VisibleTo index="All" value="1"/>
+        <FogVisibility value="Visible"/>
+    </CActorModel>
+    <CActorMissile id="LaserLanceMissile" parent="GenericAttackMissile" unitName="LaserLanceMissile">
+        <On Terms="ActorCreation" Send="Create SOAMothershipLineAttackMissileBeam"/>
+        <On Terms="ActorDestruction" Target="SOAMothershipLineAttackMissileBeam" Send="Destroy"/>
+        <VisibleTo index="All" value="1"/>
+    </CActorMissile>
+    <CActorUnit id="StasisBubble" parent="GenericUnitStandard" unitName="StasisBubble">
+        <EditorCategories value=""/>
+        <On Terms="UnitDeath.StasisBubble" Send="$Death"/>
+        <ModelFlags index="OutlineEmitter" value="1"/>
+        <Wireframe>
+            <Image value="Assets\Wireframes\StasisBubble\wireframe-stasisbubble.dds"/>
+        </Wireframe>
+        <VisibleTo index="All" value="1"/>
+    </CActorUnit>
+    <CActorModel id="StasisBubbleRange" parent="ModelAddition">
+        <EditorCategories value=""/>
+        <On Terms="Behavior.StasisBubbleTimedLife.On" Send="Create"/>
+        <On Terms="Behavior.StasisBubbleTimedLife.Off" Send="Destroy"/>
+        <ModelFlags index="AutomateGlobalLoops" value="1"/>
+        <VisibleTo index="All" value="1"/>
+        <FogVisibility value="Visible"/>
+    </CActorModel>
+    <CActorModel id="StasisBubbleStasisAddition" parent="ModelAddition">
+        <EditorCategories value=""/>
+        <On Terms="Behavior.StasisBubbleStasis.On" Send="Create"/>
+        <On Terms="Behavior.StasisBubbleStasis.Off" Send="Destroy"/>
+        <HostSiteOps Ops="SOpAttachCenter"/>
+        <FogVisibility value="Visible"/>
+    </CActorModel>
+    <CActorModel id="KamikazeImpactIndicator" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On Terms="Effect.KamikazeLaunchPoint.Start" Send="Create"/>
+        <VisibleTo index="All" value="1"/>
+        <FogVisibility value="Visible"/>
+    </CActorModel>
+    <CActorUnit id="Atlantis" parent="GenericUnitBase" unitName="Atlantis">
+        <Aliases value="_UnitHuge"/>
+        <Macros value="TerrainSquibAnimations"/>
+        <Macros value="PhysicsDeathsSwarmAir"/>
+        <Macros value="PhysicsDeathsVoidAir"/>
+        <On index="0" Send="Create SoundEmitter Mothership_Ambience"/>
+        <On Terms="UnitHeightUpdate.*.Land" Send="Create Mothership_Land"/>
+        <On Terms="TimerExpired; TimerName Color" Send="SetTeamColor 128,255,128 128,0,0"/>
+        <On Terms="ActorCreation" Send="TimerSet 0.000000 Color"/>
+        <On Terms="ActorCreation" Send="Create AtlantisSpawning"/>
+        <On Terms="AbilMorph.*.Start; MorphFrom Atlantis; MorphTo AtlantisCore" Send="Create PhaseTransition"/>
+        <On Terms="AbilMorph.*.Start; MorphFrom Atlantis; MorphTo AtlantisCore" Send="Destroy"/>
+        <On Terms="Behavior.PortalCasterStationary.On" Send="AnimBracketStart AbilityUse Stand,Work,Start Stand,Work Stand,Work,End"/>
+        <On Terms="Behavior.PortalCasterStationary.Off" Send="AnimBracketStop AbilityUse"/>
+        <ModelFlags index="OutlineOccluder" value="1"/>
+        <EventDataFootprint index="0" Actor="UnitFootprint" Model="MothershipFootprint"/>
+        <Baselines index="Walk" AnimProps="Walk,01"/>
+        <BuildModel value="MothershipTeleportIn"/>
+        <DeathArray index="Normal" ModelLink="Mothership_Taldarim_Collection_Death" SoundLink="Mothership_Explode_Start" VoiceLink="MothershipDeathVoice"/>
+        <DeathActorModel value="UnitDeathModelWithDeathMotionFlier"/>
+        <PhysicsMatchKeysOrdered value="BasicAir,Basic"/>
+        <PlacementModel value="Mothership"/>
+        <PortraitModel value="Mothership_Taldarim_Portrait"/>
+        <TerrainSquibs>
+            <MovementDistance value="0.150000,0.150000"/>
+            <IdlePeriod value="0.250000,0.500000"/>
+            <RangeDown value="5.000000"/>
+            <RangeDownFade value="1.000000"/>
+            <AttachQuery Methods="AMFilterCenter"/>
+            <Visuals TerrainPhysicsMaterial="Water" ActorModel="TerrainSquibHarnessContinuous" ModelLink="WaterRippleMassive3"/>
+        </TerrainSquibs>
+        <GlossaryAnim value="GLstand"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-Protoss-Mothership.dds"/>
+        </GroupIcon>
+        <GroupSoundArray index="What" value="Mothership_GroupWhat"/>
+        <GroupSoundArray index="Yes" value="Mothership_GroupYes"/>
+        <GroupSoundArray index="Attack" value="Mothership_GroupAttack"/>
+        <GroupSoundArray index="Board" value="Mothership_GroupBoard"/>
+        <HeroIcon value="Assets\Textures\btn-unit-protoss-mothership.dds"/>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-protoss-airarmorlevel0.dds"/>
+        <SoundArray index="Birth" value="Mothership_Birth"/>
+        <SoundArray index="Ready" value="Mothership_Ready"/>
+        <SoundArray index="Help" value="Mothership_Help"/>
+        <SoundArray index="What" value="Mothership_What"/>
+        <SoundArray index="Yes" value="Mothership_Yes"/>
+        <SoundArray index="Attack" value="Mothership_Attack"/>
+        <SoundArray index="Pissed" value="Mothership_Pissed"/>
+        <SoundArray index="Movement" value="Mothership_Movement"/>
+        <SoundArray index="Turning" value="Mothership_Turning"/>
+        <SoundArray index="Board" value="Mothership_Board"/>
+        <SoundArray index="Click" value="Mothership_Click"/>
+        <SoundArray index="ClickError" value="Mothership_ClickError"/>
+        <SoundArray index="Highlight" value="Mothership_Highlight"/>
+        <UnitIcon value="Assets\Textures\btn-unit-protoss-mothership.dds"/>
+        <Wireframe>
+            <Image value="Assets\Textures\wireframe-protoss-mothership-taldarim.dds"/>
+        </Wireframe>
+        <WireframeShield>
+            <Image value="Assets\Textures\Wireframe-Protoss-Mothership-taldarim-Shield01.dds"/>
+            <Image value="Assets\Textures\Wireframe-Protoss-Mothership-taldarim-Shield02.dds"/>
+            <Image value="Assets\Textures\Wireframe-Protoss-Mothership-taldarim-Shield03.dds"/>
+        </WireframeShield>
+        <CustomUnitStatusFrame value="SSF_UnitStatus/BossStatusShielded"/>
+        <MinimapIcon value="Assets\Textures\btn-unit-protoss-alarak-taldarim-mothership-collection.dds"/>
+        <MinimapIconScale value="0.300000"/>
+        <MinimapIconBackground value="Assets\MinimapBackground.dds"/>
+        <MinimapIconBackgroundScale value="1.100000"/>
+        <MinimapIconBackgroundTintColor value="255,255,0,0"/>
+        <UnitFlags index="StandAnimBirthVariation" value="0"/>
+        <UnitFlags index="SuppressDefaultStatusBar" value="1"/>
+        <FogVisibility value="Dimmed"/>
+    </CActorUnit>
+    <CActorAction id="AtlantisAttack" parent="GenericAttackBase">
+        <On Terms="Effect.AtlantisWeaponPersistent.Start" Send="Create"/>
+        <On Terms="Effect.AtlantisWeaponDmg.Start; FromEffectTreeDescendant" Send="ActionDamage"/>
+        <On Terms="Effect.AtlantisWeaponPersistent.Stop" Send="Destroy WhenReady"/>
+        <LaunchAttachQuery Methods="AMFilterWeaponSetA0 AMClosest2ToTarget AMPatternAtlantisBeam"/>
+        <LaunchAssets Sound="Mothership_AttackLaunch"/>
+        <ActionFlags index="AlignedImpactsAndDamages" value="1"/>
+        <ActionFlags index="ImpactMonitorsTeleports" value="1"/>
+        <Lifetime value="-1.000000"/>
+    </CActorAction>
+    <CActorBeamSimple id="AtlantisAttackBeam" parent="BeamSimpleAnimationStyleContinuous">
+        <Macros value="ActionTargetTeleportDestroy"/>
+        <On Terms="Effect.AtlantisWeaponPersistent.Stop" Send="AnimBracketStop BSD"/>
+        <On Terms="ActorCreation" Send="SetTintColor 128,0,0"/>
+        <Model value="MothershipAttackBeam"/>
+    </CActorBeamSimple>
+    <CActorSound id="AtlantisAttackImpact" parent="SoundContinuous">
+        <On Terms="Effect.AtlantisWeaponDmg.Start; EffectExecuteIndex 1" Send="Create"/>
+        <On Terms="Effect.MothershipBeamPersistent.Stop" Send="Destroy"/>
+        <Sound value="Mothership_AttackImpact"/>
+    </CActorSound>
+    <CActorUnit id="AtlantisCore" parent="GenericUnitStandard" unitName="AtlantisCore">
+        <Macros value="PhysicsDeathsSwarmAir"/>
+        <Macros value="PhysicsDeathsVoidAir"/>
+        <Macros value="Illusion@ColoringMacro"/>
+        <On Terms="UnitHeightUpdate.*.Land" Send="Create MothershipCore_Land"/>
+        <On Terms="UnitBirth.AtlantisCore.Normal" Send="AnimPlay MorphStart Morph,End,A"/>
+        <On Terms="ActorCreation" Send="AnimBracketStart GL_BSD GLbirth GLstand GLdeath"/>
+        <On Terms="ActorCreation" Send="TextureSelectById MothershipCoreMainDiffuse"/>
+        <On Terms="ActorCreation" Send="TextureSelectById MothershipCoreMainEmissive"/>
+        <On Terms="ActorCreation" Send="TextureSelectById MothershipCoreMainSpecular"/>
+        <On Terms="ActorCreation" Send="TextureSelectById MothershipCoreMainNormal"/>
+        <On Terms="ActorCreation" Send="TextureSelectById MothershipCoreBodyDiffuse"/>
+        <On Terms="TimerExpired; TimerName Color" Send="SetTeamColor 128,255,128 255,0,0"/>
+        <On Terms="ActorCreation" Send="TimerSet 0.000000 Color"/>
+        <On Terms="AbilMorph.*.Start; MorphFrom Atlantis; MorphTo AtlantisCore" Send="Create"/>
+        <On Terms="Abil.Illusion.SourceChannelStart" Target="MothershipCoreTurret" Send="Signal Reset"/>
+        <On Terms="Behavior.Illusion@BossIllusionHandler.Off" Send="Signal Clear"/>
+        <ModelFlags index="AutomateGlobalLoops" value="0"/>
+        <ModelFlags index="OutlineOccluder" value="1"/>
+        <BuildModel value="MothershipCoreTeleportIn"/>
+        <DeathArray index="Normal" AnimProps="Death,A" ModelLink="" SoundLink="Mothership_Explode"/>
+        <DeathCustoms AnimProps="Death,B" SoundLink="Mothership_Explode" Name="Variation0"/>
+        <DeathCustoms ModelLink="ProtossMediumUnitDeathLow" Name="Low"/>
+        <DeathCustoms ActorModel="MothershipCoreDeathRagdollFlier" Name="RagdollBasic" PhysicsMatchKeysOrdered="BasicAir,Basic">
+            <BodySquibs Name="Basic" Model="ProtossTinyRobotSquibDeathRagdoll"/>
+        </DeathCustoms>
+        <DeathCustoms Name="RagdollNuke" InheritsFrom="RagdollBasic">
+            <BodySquibs Name="Fire"/>
+        </DeathCustoms>
+        <DeathCustoms Name="RagdollFire" InheritsFrom="RagdollBasic">
+            <BodySquibs Name="Fire"/>
+        </DeathCustoms>
+        <DeathCustoms Name="RagdollAcid" InheritsFrom="RagdollBasic">
+            <BodySquibs Name="Acid"/>
+        </DeathCustoms>
+        <DeathCustoms Name="RagdollOverkillDPRH" InheritsFrom="RagdollBasic"/>
+        <DeathCustoms Name="RagdollOverkillDOI" InheritsFrom="RagdollBasic"/>
+        <DeathCustoms Name="RagdollMidair" InheritsFrom="RagdollBasic"/>
+        <DeathActorModel value="UnitDeathModelWithDeathMotionFlier"/>
+        <PhysicsMatchKeysOrdered value="BasicAir,Basic"/>
+        <PlacementModel value="MothershipCore"/>
+        <PortraitModel value="Mothership_Taldarim_Portrait"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-Protoss-mothershipcore.dds"/>
+        </GroupIcon>
+        <HeroIcon value="Assets\Textures\btn-unit-protoss-mothershipcore.dds"/>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-protoss-airarmorlevel0.dds"/>
+        <SoundArray index="Birth" value="Mothership_Birth"/>
+        <SoundArray index="Ready" value="Mothership_Ready"/>
+        <SoundArray index="Help" value="Mothership_Help"/>
+        <SoundArray index="What" value="Mothership_What"/>
+        <SoundArray index="Yes" value="Mothership_Yes"/>
+        <SoundArray index="Attack" value="Mothership_Attack"/>
+        <SoundArray index="Pissed" value="Mothership_Pissed"/>
+        <SoundArray index="Movement" value="MothershipCore_Movement"/>
+        <UnitIcon value="Assets\Textures\btn-unit-protoss-mothershipcore.dds"/>
+        <Wireframe>
+            <Image value="Assets\Textures\wireframe-collection-purifier-mothershipcore.dds"/>
+        </Wireframe>
+        <WireframeShield>
+            <Image value="Assets\Textures\wireframe-collection-purifier-mothershipcore-shield01.dds"/>
+            <Image value="Assets\Textures\wireframe-collection-purifier-mothershipcore-shield02.dds"/>
+            <Image value="Assets\Textures\wireframe-collection-purifier-mothershipcore-shield03.dds"/>
+        </WireframeShield>
+        <CustomUnitStatusFrame value="SSF_UnitStatus/BossStatusShielded"/>
+        <MinimapIcon value="Assets\Textures\btn-unit-protoss-alarak-taldarim-mothership-collection.dds"/>
+        <MinimapIconScale value="0.300000"/>
+        <MinimapIconBackground value="Assets\MinimapBackground.dds"/>
+        <MinimapIconBackgroundScale value="1.100000"/>
+        <MinimapIconBackgroundTintColor value="255,255,0,0"/>
+        <UnitFlags index="StandAnimBirthVariation" value="0"/>
+        <UnitFlags index="SuppressDefaultStatusBar" value="1"/>
+        <FogVisibility value="Dimmed"/>
+    </CActorUnit>
+    <CActorAction id="AtlantisCoreAttack" parent="GenericAttack" effectImpact="AtlantisCoreWeaponDmg" effectLaunch="AtlantisCoreWeaponLaunchMissile">
+        <LaunchAssets Model="" Sound="PhotonCannon_AttackLaunch"/>
+        <ImpactMap index="None" Model="MothershipCoreAttackImpact" Sound="PhotonCannon_AttackImpact"/>
+        <ImpactMap index="Flesh" ModelReaction="BloodTargetImpact"/>
+    </CActorAction>
+    <CActorAction id="AtlantisSecondaryAttack" parent="GenericAttackBase">
+        <On Terms="Effect.AtlantisWeaponSecondPersistent.Start" Send="Create"/>
+        <On Terms="Effect.AtlantisWeaponDmg.Start; FromEffectTreeDescendant" Send="ActionDamage"/>
+        <On Terms="Effect.AtlantisWeaponSecondPersistent.Stop" Send="Destroy WhenReady"/>
+        <LaunchAttachQuery Methods="AMFilterWeaponSetA0 AMClosest2ToTarget AMPatternAtlantisBeam"/>
+        <ActionFlags index="AlignedImpactsAndDamages" value="1"/>
+        <ActionFlags index="ImpactMonitorsTeleports" value="1"/>
+        <Lifetime value="-1.000000"/>
+    </CActorAction>
+    <CActorBeamSimple id="AtlantisSecondaryAttackBeam" parent="BeamSimpleAnimationStyleContinuous">
+        <Macros value="ActionTargetTeleportDestroy"/>
+        <On Terms="Effect.AtlantisWeaponSecondPersistent.Stop" Send="AnimBracketStop BSD"/>
+        <On Terms="ActorCreation" Send="SetTintColor 128,0,0"/>
+        <Model value="MothershipAttackBeam"/>
+    </CActorBeamSimple>
+    <CActorUnit id="VoidSummonPrecursor" parent="GenericUnitStandard" unitName="VoidSummonPrecursor">
+        <Aliases value="_UnitMedium"/>
+        <Macros value="ChargingAnim"/>
+        <Macros value="TerrainSquibAnimations"/>
+        <Macros value="PhysicsDeathsSwarmGround"/>
+        <EditorCategories value=""/>
+        <On index="65" Terms="WeaponStart.*.AttackStart" Send="AnimBracketStart Attack Stand,Work,Start Stand,Work Stand,Work,End 0 8.000000 AsTimeScale"/>
+        <On Terms="TimerExpired; TimerName Color" Send="SetTeamColor 128,255,128 255,255,0"/>
+        <On Terms="ActorCreation" Send="TimerSet 0.000000 Color"/>
+        <On Terms="TimerExpired; TimerName Color" Send="SetTintColor 128,128,128"/>
+        <On Terms="AbilMorph.*.Start; MorphFrom VoidSummonPrecursor; MorphTo VoidMine" Send="Destroy"/>
+        <Model value="ReplicantWarpIn"/>
+        <Scale value="0.950000"/>
+        <ModelFlags index="OutlineEmitter" value="1"/>
+        <BuildModel value="ReplicantWarpIn"/>
+        <DeathArray index="Normal" ModelLink="ProtossSmallUnitDeath" SoundLink="VoidMineDeath" VoiceLink="VoidMineDeathVoice"/>
+        <DeathActorModel value="UnitDeathModelWithDeathMotionGround"/>
+        <PlacementModel value="ReplicantWarpIn"/>
+        <PlacementSound value="Protoss_BuildingPlacementSmall"/>
+        <PortraitModel value="ReplicantPortrait"/>
+        <TerrainSquibs>
+            <MovementDistance value="0.150000,0.150000"/>
+            <IdlePeriod value="0.100000,0.250000"/>
+            <RangeUp value="0.600000"/>
+            <RangeDown value="0.600000"/>
+            <AttachQuery Methods="AMFilterCenter"/>
+            <Visuals TerrainPhysicsMaterial="Water" ActorModel="TerrainSquibHarnessContinuous" ModelLink="WaterRippleMedium"/>
+        </TerrainSquibs>
+        <WalkAnimMoveSpeed value="2.25"/>
+        <BarOffset value="45"/>
+        <BarWidth value="42"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\wireframe-protoss-replicant.dds"/>
+        </GroupIcon>
+        <HeroIcon value="Assets\Textures\btn-unit-protoss-replicant.dds"/>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-protoss-groundarmorlevel0.dds"/>
+        <SoundArray index="Birth" value="Observer_Birth"/>
+        <SoundArray index="Ready" value="Observer_Ready"/>
+        <SoundArray index="Help" value="Observer_Help"/>
+        <SoundArray index="What" value="Observer_What"/>
+        <SoundArray index="Yes" value="Observer_Yes"/>
+        <SoundArray index="Attack" value="Observer_Attack"/>
+        <SoundArray index="Pissed" value="Observer_Pissed"/>
+        <SoundArray index="Movement" value="Observer_Movement"/>
+        <SoundArray index="Turning" value="Observer_Turning"/>
+        <SoundArray index="Board" value="Observer_Board"/>
+        <SoundArray index="Click" value="Observer_Click"/>
+        <SoundArray index="ClickError" value="Observer_ClickError"/>
+        <SoundArray index="Highlight" value="Observer_Highlight"/>
+        <UnitIcon value="Assets\Textures\btn-unit-protoss-replicant.dds"/>
+        <Wireframe>
+            <Image value="Assets\Textures\wireframe-protoss-replicant.dds"/>
+        </Wireframe>
+        <WireframeShield>
+            <Image value="Assets\Textures\wireframe-protoss-replicant-shield01.dds"/>
+            <Image value="Assets\Textures\wireframe-protoss-replicant-shield02.dds"/>
+            <Image value="Assets\Textures\wireframe-protoss-replicant-shield03.dds"/>
+        </WireframeShield>
+        <VisibleTo index="All" value="1"/>
+        <FogVisibility value="Visible"/>
+    </CActorUnit>
+    <CActorUnit id="DummyMovingNoTurning" parent="GenericUnitStandard" unitName="DummyMovingNoTurning">
+        <EditorCategories value=""/>
+        <Model value="Larva"/>
+        <HighlightTooltip value="Unit/Name/Bogus"/>
+    </CActorUnit>
+    <CModel id="Illusion@SpawningEnd">
+        <Model value="Assets\Effects\Protoss\Recall\Recall.m3"/>
+    </CModel>
+    <CModel id="Illusion@SpawningStart">
+        <Model value="Assets\Effects\Protoss\MotherShipBeaconLight\MotherShipBeaconLight.m3"/>
+    </CModel>
+    <CWeaponLegacy id="Illusion@AtlantisCoreIllusionWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-airweaponslevel0.dds"/>
+        <DisplayEffect value="AtlantisCoreWeaponDmg"/>
+        <TargetFilters value="Ground,Visible;Worker,Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Period value="0.9"/>
+        <Effect value="Illusion@AtlantisCoreIllusionWeaponLaunchMissile2"/>
+        <AllowedMovement value="Slowing"/>
+        <Range value="6"/>
+        <Name value="Weapon/Name/AtlantisCoreWeapon"/>
+        <DisplayName value="Weapon/Name/AtlantisCoreWeapon"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="BomberWeapon">
+        <EditorCategories value=""/>
+        <Icon value="Assets\Textures\btn-karax-upgrade-purifierbeam.dds"/>
+        <DisplayEffect value="BomberBeamDmg"/>
+        <Range value="1.25"/>
+        <Effect value=""/>
+        <Period value="0.125"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="AtlantisWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-airweaponslevel0.dds"/>
+        <DisplayEffect value="AtlantisWeaponDmg"/>
+        <DisplayAttackCount value="4"/>
+        <TargetFilters value="Visible;Worker,Missile,Item,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="7"/>
+        <TeleportResetRange value="0"/>
+        <Arc value="360"/>
+        <Period value="1.5"/>
+        <DamagePoint value="0"/>
+        <Effect value="AtlantisWeaponInitialSet"/>
+        <AllowedMovement value="Slowing"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="AtlantisCoreWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-airweaponslevel0.dds"/>
+        <DisplayEffect value="AtlantisCoreWeaponDmg"/>
+        <TargetFilters value="Ground,Visible;Worker,Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Period value="0.9"/>
+        <Effect value="AtlantisCoreWeaponLaunchMissile"/>
+        <AllowedMovement value="Slowing"/>
+        <Range value="6"/>
+    </CWeaponLegacy>
+    <CMoverMissile id="KamikazeMover" parent="MissileDefault">
+        <MotionPhases index="0">
+            <Driver value="Guidance"/>
+            <Acceleration value="3200"/>
+            <MaxSpeed value="17"/>
+            <ClearanceAcceleration value="75"/>
+            <Outro value="-1"/>
+            <ThrowBandYaw value="-360,-360,-360,-360"/>
+            <ThrowBandPitch value="-360,-360,-360,-360"/>
+            <YawPitchRoll value="719.2968"/>
+        </MotionPhases>
+    </CMoverMissile>
+    <CMoverMissile id="LaserLanceMissileMover">
+        <MotionPhases>
+            <Driver value="Guidance"/>
+            <Acceleration value="3200"/>
+            <MaxSpeed value="10"/>
+            <ClearanceAcceleration value="75"/>
+            <Outro value="-1"/>
+            <ThrowBandYaw value="-360,-360,-360,-360"/>
+            <ThrowBandPitch value="-360,-360,-360,-360"/>
+            <YawPitchRoll value="719.2968"/>
+        </MotionPhases>
+        <MotionPhases YawPitchRoll="MAX"/>
+    </CMoverMissile>
+    <CAccumulatorConstant id="AtlantisCoreWeaponDmg">
+        <Amount value="1750"/>
+    </CAccumulatorConstant>
+    <CAccumulatorConstant id="Illusion@IllusionDmgModifier">
+        <ApplicationRule value="Multiply"/>
+        <Amount value="0.75"/>
+    </CAccumulatorConstant>
+    <CAccumulatorSwitch id="Phase2">
+        <CaseArray Validator="AtlantisCore" Accumulator="Phase2Amount"/>
+        <CaseDefault value="Const0"/>
+    </CAccumulatorSwitch>
+    <CAccumulatorSwitch id="Phase2Small">
+        <CaseArray Validator="AtlantisCore" Accumulator="Phase2SmallAmount"/>
+        <CaseDefault value="Const0"/>
+    </CAccumulatorSwitch>
+    <CAccumulatorConstant id="Phase2Amount">
+        <Amount value="1500"/>
+    </CAccumulatorConstant>
+    <CAccumulatorConstant id="Phase2SmallAmount">
+        <Amount value="350"/>
+    </CAccumulatorConstant>
+    <CDataCollectionAbil id="Illusion">
+        <EditorCategories value="DataGroup:Ability"/>
+        <DataRecord Entry="Abil,Illusion"/>
+        <DataRecord Entry="Effect,Illusion@Offsets"/>
+        <DataRecord Entry="Effect,Illusion@CreateIllusion"/>
+        <DataRecord Entry="Effect,Illusion@IllusionDmgHandler"/>
+        <DataRecord Entry="Effect,Illusion@InitialSet"/>
+        <DataRecord Entry="Effect,Illusion@AlreadyCasting"/>
+        <DataRecord Entry="Actor,Illusion@AtlantisCore"/>
+        <DataRecord Entry="Behavior,Illusion@IllusionDmgHandler"/>
+        <DataRecord Entry="Behavior,Illusion@Spawning"/>
+        <DataRecord Entry="Behavior,Illusion@BossIllusionHandler"/>
+        <DataRecord Entry="Button,Illusion"/>
+        <DataRecord Entry="Effect,Illusion@TeleportCore"/>
+        <DataRecord Entry="Effect,Illusion@Spawning"/>
+        <DataRecord Entry="Effect,Illusion@BossIllusionHandler"/>
+        <DataRecord Entry="Effect,Illusion@AtlantisCoreIllusionWeaponDmg"/>
+        <DataRecord Entry="Effect,Illusion@AtlantisCoreIllusionWeaponLaunchMissile2"/>
+        <DataRecord Entry="Effect,Illusion@Delay"/>
+        <DataRecord Entry="Effect,Illusion@AlreadyCastingNoWeapons2"/>
+        <DataRecord Entry="Effect,Illusion@RemoveDebuffs"/>
+        <DataRecord Entry="Unit,Illusion@AtlantisCore"/>
+        <DataRecord Entry="Weapon,Illusion@AtlantisCoreIllusionWeapon"/>
+        <DataRecord Entry="Actor,Illusion@ColoringMacro"/>
+        <DataRecord Entry="Accumulator,Illusion@IllusionDmgModifier"/>
+        <DataRecord Entry="Actor,Illusion@SpawningEnd"/>
+        <DataRecord Entry="Actor,Illusion@SpawningStart"/>
+        <DataRecord Entry="Behavior,Illusion@Tracker"/>
+        <DataRecord Entry="Effect,Illusion@CleanupSet"/>
+        <DataRecord Entry="Effect,Illusion@BossIllusionHandlerRemove"/>
+        <DataRecord Entry="Effect,Illusion@SetVitals"/>
+        <DataRecord Entry="Effect,Illusion@AlreadyCastingRemove"/>
+        <DataRecord Entry="Effect,Illusion@TrackerClear"/>
+        <DataRecord Entry="Effect,Illusion@SpawnSet"/>
+        <DataRecord Entry="Effect,Illusion@StartSet"/>
+        <DataRecord Entry="Effect,Illusion@TrackerAdd"/>
+        <DataRecord Entry="Effect,Illusion@SpawningCaster"/>
+        <DataRecord Entry="Effect,Illusion@TrackerApply"/>
+        <DataRecord Entry="Effect,Illusion@TrackerAddCaster"/>
+        <DataRecord Entry="Model,Illusion@SpawningEnd"/>
+        <DataRecord Entry="Model,Illusion@SpawningStart"/>
+        <DataRecord Entry="Validator,Illusion@AllIllusionsDead"/>
+    </CDataCollectionAbil>
+    <CUnit id="DummyNoMovingNoTurningHeight16">
+        <ReviveType value="DummyNoMovingNoTurningHeight5"/>
+        <Race value="Prot"/>
+        <FlagArray index="Turnable" value="0"/>
+        <FlagArray index="Movable" value="0"/>
+        <FlagArray index="Uncommandable" value="1"/>
+        <FlagArray index="Unselectable" value="1"/>
+        <FlagArray index="Untargetable" value="1"/>
+        <FlagArray index="NoDraw" value="1"/>
+        <FlagArray index="Undetectable" value="1"/>
+        <FlagArray index="Invulnerable" value="1"/>
+        <FlagArray index="NoScore" value="1"/>
+        <FlagArray index="IgnoreTerrainZInit" value="1"/>
+        <FlagArray index="Unstoppable" value="1"/>
+        <Attributes index="Hover" value="1"/>
+        <Attributes index="Summoned" value="1"/>
+        <LifeArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0.975"/>
+            <PositiveArmorMultiplier value="0"/>
+            <PositiveDamageRatio value="0.025"/>
+        </LifeArmorFormula>
+        <ShieldArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0.975"/>
+            <PositiveArmorMultiplier value="0"/>
+            <PositiveDamageRatio value="0.025"/>
+        </ShieldArmorFormula>
+        <Height value="16"/>
+        <BehaviorArray Link="Taunt@Untauntable"/>
+        <Radius value="0"/>
+        <SeparationRadius value="0"/>
+        <MinimapRadius value="0"/>
+        <EditorCategories value=""/>
+        <TacticalAI value="DummyNoMovingNoTurningHeight5"/>
+        <LeaderAlias value="DummyNoMovingNoTurningHeight5"/>
+        <HotkeyAlias value="DummyNoMovingNoTurningHeight5"/>
+        <SelectAlias value="DummyNoMovingNoTurningHeight5"/>
+        <SubgroupAlias value="DummyNoMovingNoTurningHeight5"/>
+        <AIEvaluateAlias value="DummyNoMovingNoTurningHeight5"/>
+        <ReviveInfoBase>
+            <Charge Link="DummyNoMovingNoTurningHeight5/Revive"/>
+            <Cooldown Link="DummyNoMovingNoTurningHeight5/Revive"/>
+        </ReviveInfoBase>
+    </CUnit>
+    <CUnit id="Bomber" parent="GenericEnemyUnit">
+        <Race value="Prot"/>
+        <PlaneArray index="Ground" value="0"/>
+        <PlaneArray index="Air" value="1"/>
+        <Collide index="Ground" value="0"/>
+        <Collide index="ForceField" value="0"/>
+        <Collide index="Locust" value="0"/>
+        <Collide index="Small" value="0"/>
+        <Collide index="Flying" value="1"/>
+        <DefaultAcquireLevel value="Passive"/>
+        <Response value="Nothing"/>
+        <Attributes index="Light" value="1"/>
+        <Attributes index="Armored" value="1"/>
+        <Attributes index="Mechanical" value="1"/>
+        <Attributes index="Summoned" value="1"/>
+        <LifeArmorName value="Unit/LifeArmorName/ProtossBuildingPlating"/>
+        <ShieldsStart value="2000"/>
+        <ShieldsMax value="2000"/>
+        <ShieldArmorName value="Unit/ShieldArmorName/ProtossPlasmaShields"/>
+        <Mover value="Fly"/>
+        <Speed value="4.1992"/>
+        <Deceleration value="3"/>
+        <Height value="4.5"/>
+        <BehaviorArray Link="Taunt@Untauntable"/>
+        <WeaponArray Link="BomberWeapon"/>
+        <CardLayouts>
+            <LayoutButtons Face="Move" Type="AbilCmd" AbilCmd="move,Move" Row="0" Column="0"/>
+            <LayoutButtons Face="Stop" Type="AbilCmd" AbilCmd="stop,Stop" Row="0" Column="1"/>
+            <LayoutButtons Face="MoveHoldPosition" Type="AbilCmd" AbilCmd="move,HoldPos" Row="0" Column="2"/>
+            <LayoutButtons Face="MovePatrol" Type="AbilCmd" AbilCmd="move,Patrol" Row="0" Column="3"/>
+            <LayoutButtons Face="MothershipCoreAttack" Type="AbilCmd" AbilCmd="attack,Execute" Row="0" Column="4"/>
+        </CardLayouts>
+        <SubgroupPriority value="18"/>
+    </CUnit>
+    <CUnit id="DummyNoMovingNoTurningHeight5">
+        <Race value="Prot"/>
+        <FlagArray index="Turnable" value="0"/>
+        <FlagArray index="Movable" value="0"/>
+        <FlagArray index="Uncommandable" value="1"/>
+        <FlagArray index="Unselectable" value="1"/>
+        <FlagArray index="Untargetable" value="1"/>
+        <FlagArray index="NoDraw" value="1"/>
+        <FlagArray index="Undetectable" value="1"/>
+        <FlagArray index="Invulnerable" value="1"/>
+        <FlagArray index="NoScore" value="1"/>
+        <FlagArray index="Unstoppable" value="1"/>
+        <Attributes index="Hover" value="1"/>
+        <Attributes index="Summoned" value="1"/>
+        <Height value="5"/>
+        <Radius value="0"/>
+        <SeparationRadius value="0"/>
+        <MinimapRadius value="0"/>
+        <EditorCategories value=""/>
+        <BehaviorArray Link="Taunt@Untauntable"/>
+    </CUnit>
+    <CUnit id="KamikazeLaunchMissileDummy">
+        <Race value="Prot"/>
+        <FlagArray index="Turnable" value="0"/>
+        <FlagArray index="Movable" value="0"/>
+        <FlagArray index="Uncommandable" value="1"/>
+        <FlagArray index="Unselectable" value="1"/>
+        <FlagArray index="Untargetable" value="1"/>
+        <FlagArray index="NoDraw" value="1"/>
+        <FlagArray index="Undetectable" value="1"/>
+        <FlagArray index="Invulnerable" value="1"/>
+        <FlagArray index="NoScore" value="1"/>
+        <FlagArray index="Unstoppable" value="1"/>
+        <FlagArray index="NeverThink" value="1"/>
+        <Attributes index="Hover" value="1"/>
+        <Attributes index="Summoned" value="1"/>
+        <Height value="15"/>
+        <Radius value="0"/>
+        <SeparationRadius value="0"/>
+        <MinimapRadius value="0"/>
+        <EditorCategories value=""/>
+        <BehaviorArray Link="Taunt@Untauntable"/>
+    </CUnit>
+    <CUnit id="KamikazeMissile1" parent="MISSILE"/>
+    <CUnit id="KamikazeMissile2" parent="MISSILE"/>
+    <CUnit id="KamikazeMissile3" parent="MISSILE"/>
+    <CUnit id="LaserLanceMissile" parent="MISSILE_INVULNERABLE">
+        <Race value="Prot"/>
+        <Mover value="MissileDefault"/>
+        <LifeArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </LifeArmorFormula>
+        <ShieldArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </ShieldArmorFormula>
+        <LifeRegenDelay value="5"/>
+        <ShieldRegenDelay value="5"/>
+    </CUnit>
+    <CUnit id="StasisBubble">
+        <Race value="Prot"/>
+        <LifeStart value="2500"/>
+        <LifeMax value="2500"/>
+        <EditorCategories value=""/>
+        <PlaneArray index="Ground" value="1"/>
+        <AttackTargetPriority value="20"/>
+        <FogVisibility value="Visible"/>
+        <LifeArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </LifeArmorFormula>
+        <ShieldArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </ShieldArmorFormula>
+        <LifeRegenDelay value="5"/>
+        <ShieldRegenDelay value="5"/>
+    </CUnit>
+    <CUnit id="AtlantisCore" parent="GenericEnemyUnit">
+        <Facing value="45"/>
+        <Race value="Prot"/>
+        <FlagArray index="Turnable" value="0"/>
+        <FlagArray index="Hero" value="1"/>
+        <FlagArray index="PreventDestroy" value="1"/>
+        <FogVisibility value="Dimmed"/>
+        <PlaneArray index="Ground" value="0"/>
+        <PlaneArray index="Air" value="1"/>
+        <Collide index="Ground" value="0"/>
+        <Collide index="ForceField" value="0"/>
+        <Collide index="Locust" value="0"/>
+        <Collide index="Small" value="0"/>
+        <Collide index="Flying" value="1"/>
+        <Attributes index="Armored" value="1"/>
+        <Attributes index="Mechanical" value="1"/>
+        <Attributes index="Psionic" value="1"/>
+        <Attributes index="Massive" value="1"/>
+        <Attributes index="Heroic" value="1"/>
+        <LifeStart value="60000"/>
+        <LifeMax value="60000"/>
+        <LifeRegenRate value="140"/>
+        <LifeArmorName value="Unit/LifeArmorName/ProtossBuildingPlating"/>
+        <ShieldsStart value="75000"/>
+        <ShieldsMax value="75000"/>
+        <ShieldRegenRate value="280"/>
+        <ShieldArmorName value="Unit/ShieldArmorName/ProtossPlasmaShields"/>
+        <Mover value="Fly"/>
+        <Speed value="2.7968"/>
+        <Acceleration value="20"/>
+        <Deceleration value="3"/>
+        <Sight value="15"/>
+        <Height value="5"/>
+        <VisionHeight value="4"/>
+        <AbilArray Link="Bomber"/>
+        <AbilArray Link="LaserLance"/>
+        <AbilArray Link="StasisBubble"/>
+        <AbilArray Link="VoidSummon"/>
+        <AbilArray Link="Kamikaze"/>
+        <AbilArray Link="Illusion"/>
+        <BehaviorArray Link="BomberTracker"/>
+        <BehaviorArray Link="Detector10"/>
+        <BehaviorArray Link="Phase2"/>
+        <BehaviorArray Link="BossesP1Armor"/>
+        <WeaponArray Link="AtlantisCoreWeapon" Turret="MothershipCoreTurret"/>
+        <CardLayouts index="0">
+            <LayoutButtons Face="Bomber" Type="AbilCmd" AbilCmd="Bomber,Execute" Row="1" Column="0"/>
+            <LayoutButtons Face="LaserLance" Type="AbilCmd" AbilCmd="LaserLance,Execute" Row="2" Column="0"/>
+            <LayoutButtons Face="StasisBubble" Type="AbilCmd" AbilCmd="StasisBubble,Execute" Row="2" Column="1"/>
+            <LayoutButtons Face="VoidSummon" Type="AbilCmd" AbilCmd="VoidSummon,Execute" Row="2" Column="3"/>
+            <LayoutButtons Face="Kamikaze" Type="AbilCmd" AbilCmd="Kamikaze,Execute" Row="2" Column="4"/>
+            <LayoutButtons Face="Illusion" Type="AbilCmd" AbilCmd="Illusion,Execute" Row="1" Column="1"/>
+        </CardLayouts>
+        <Radius value="3"/>
+        <SeparationRadius value="1"/>
+        <SubgroupPriority value="18"/>
+        <MinimapRadius value="1"/>
+        <EditorCategories value="ObjectType:Hero"/>
+        <LifeArmorTip value="Unit/P1Bosses/ArmorTooltip"/>
+    </CUnit>
+    <CUnit id="Atlantis" parent="GenericEnemyUnit">
+        <Facing value="45"/>
+        <Race value="Prot"/>
+        <FlagArray index="Turnable" value="0"/>
+        <FlagArray index="Hero" value="1"/>
+        <FlagArray index="PreventDestroy" value="1"/>
+        <PlaneArray index="Ground" value="0"/>
+        <PlaneArray index="Air" value="1"/>
+        <Collide index="Ground" value="0"/>
+        <Collide index="ForceField" value="0"/>
+        <Collide index="Locust" value="0"/>
+        <Collide index="Small" value="0"/>
+        <Collide index="Flying" value="1"/>
+        <Attributes index="Armored" value="1"/>
+        <Attributes index="Mechanical" value="1"/>
+        <Attributes index="Psionic" value="1"/>
+        <Attributes index="Massive" value="1"/>
+        <Attributes index="Heroic" value="1"/>
+        <LifeStart value="60000"/>
+        <LifeMax value="60000"/>
+        <LifeArmorName value="Unit/LifeArmorName/ProtossBuildingPlating"/>
+        <ShieldsStart value="75000"/>
+        <ShieldsMax value="75000"/>
+        <ShieldRegenRate value="280"/>
+        <ShieldArmorName value="Unit/ShieldArmorName/ProtossPlasmaShields"/>
+        <Speed value="2.7968"/>
+        <Acceleration value="20"/>
+        <Deceleration value="3"/>
+        <Sight value="15"/>
+        <Height value="5"/>
+        <VisionHeight value="4"/>
+        <AbilArray Link="Phase2"/>
+        <AbilArray Link="LaserLance"/>
+        <AbilArray Link="StasisBubble"/>
+        <AbilArray Link="PortalStart"/>
+        <AbilArray Link="PortalTarget"/>
+        <AbilArray Link="VoidSummon"/>
+        <AbilArray Link="Kamikaze"/>
+        <WeaponArray Link="AtlantisWeapon" Turret="FreeRotate"/>
+        <WeaponArray Turret="MothershipRotate"/>
+        <CardLayouts index="0">
+            <LayoutButtons Face="Phase2" Type="AbilCmd" AbilCmd="Phase2,Execute" Row="1" Column="0"/>
+            <LayoutButtons Face="LaserLance" Type="AbilCmd" AbilCmd="LaserLance,Execute" Row="2" Column="0"/>
+            <LayoutButtons Face="StasisBubble" Type="AbilCmd" AbilCmd="StasisBubble,Execute" Row="2" Column="1"/>
+            <LayoutButtons Face="Portal" Type="AbilCmd" AbilCmd="PortalStart,Execute" Row="2" Column="2"/>
+            <LayoutButtons Face="VoidSummon" Type="AbilCmd" AbilCmd="VoidSummon,Execute" Row="2" Column="3"/>
+            <LayoutButtons Face="Kamikaze" Type="AbilCmd" AbilCmd="Kamikaze,Execute" Row="2" Column="4"/>
+        </CardLayouts>
+        <Radius value="3"/>
+        <SeparationRadius value="1.375"/>
+        <SubgroupPriority value="18"/>
+        <MinimapRadius value="1"/>
+        <EditorCategories value="ObjectType:Hero"/>
+        <LifeRegenRate value="140"/>
+        <BehaviorArray Link="Spawning"/>
+        <BehaviorArray Link="Phase2Handler"/>
+        <BehaviorArray Link="Detector10"/>
+        <BehaviorArray Link="BossesP1Armor"/>
+        <FogVisibility value="Dimmed"/>
+        <Mover value="Fly"/>
+        <LifeArmorTip value="Unit/P1Bosses/ArmorTooltip"/>
+    </CUnit>
+    <CUnit id="AtlantisCoreWeaponMissile" parent="MISSILE">
+        <Race value="Prot"/>
+        <Mover value="OracleWeapon"/>
+    </CUnit>
+    <CUnit id="Illusion@AtlantisCore" parent="AtlantisCore">
+        <AbilArray index="3" removed="1"/>
+        <AbilArray index="4" removed="1"/>
+        <AbilArray index="5" removed="1"/>
+        <AbilArray index="6" removed="1"/>
+        <AbilArray index="7" removed="1"/>
+        <AbilArray index="8" removed="1"/>
+        <BehaviorArray index="7" Link="Detector10"/>
+        <BehaviorArray index="8" Link="Phase2"/>
+        <BehaviorArray index="9" removed="1"/>
+        <BehaviorArray index="10" removed="1"/>
+        <WeaponArray index="0" Link="Illusion@AtlantisCoreIllusionWeapon" Turret="MothershipCoreTurret"/>
+    </CUnit>
+    <CUnit id="VoidSummonPrecursor" parent="VoidMine">
+        <Name value="Unit/Name/VoidSummonPrecursor"/>
+        <Description value="Button/Tooltip/VoidSummonPrecursor"/>
+        <ReviveType value="VoidSummonPrecursor"/>
+        <PlaneArray index="Air" value="0"/>
+        <AbilArray index="1" Link="move"/>
+        <AbilArray index="2" Link="VoidSummonPrecursorMorph"/>
+        <TacticalAI value="VoidSummonPrecursor"/>
+        <LeaderAlias value="VoidSummonPrecursor"/>
+        <HotkeyAlias value="VoidSummonPrecursor"/>
+        <SelectAlias value="VoidSummonPrecursor"/>
+        <SubgroupAlias value="VoidSummonPrecursor"/>
+        <AIEvaluateAlias value="VoidSummonPrecursor"/>
+        <ReviveInfoBase>
+            <Charge Link="VoidSummonPrecursor/Revive"/>
+            <Cooldown Link="VoidSummonPrecursor/Revive"/>
+        </ReviveInfoBase>
+    </CUnit>
+    <CUnit id="DummyMovingNoTurning">
+        <Race value="Prot"/>
+        <FlagArray index="Turnable" value="0"/>
+        <FlagArray index="Uncommandable" value="1"/>
+        <FlagArray index="Unselectable" value="1"/>
+        <FlagArray index="Untargetable" value="1"/>
+        <FlagArray index="NoDraw" value="1"/>
+        <FlagArray index="Undetectable" value="1"/>
+        <FlagArray index="Invulnerable" value="1"/>
+        <FlagArray index="NoScore" value="1"/>
+        <FlagArray index="Unstoppable" value="1"/>
+        <Speed value="3.5"/>
+        <Acceleration value="100"/>
+        <LateralAcceleration value="100"/>
+        <AbilArray Link="stop"/>
+        <AbilArray Link="move"/>
+        <CardLayouts>
+            <LayoutButtons Face="Move" Type="AbilCmd" AbilCmd="move,Move" Row="0" Column="0"/>
+            <LayoutButtons Face="Stop" Type="AbilCmd" AbilCmd="stop,Stop" Row="0" Column="1"/>
+        </CardLayouts>
+        <Radius value="0"/>
+        <SeparationRadius value="0"/>
+        <MinimapRadius value="0"/>
+        <EditorCategories value=""/>
+        <Attributes index="Hover" value="1"/>
+        <Attributes index="Summoned" value="1"/>
+        <BehaviorArray Link="Taunt@Untauntable"/>
+        <LifeArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </LifeArmorFormula>
+        <ShieldArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </ShieldArmorFormula>
+        <LifeRegenDelay value="5"/>
+        <ShieldRegenDelay value="5"/>
+    </CUnit>
+    <CBehaviorUnitTracker id="BomberTracker">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+    </CBehaviorUnitTracker>
+    <CBehaviorUnitTracker id="PortalDummyTracker">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorUnitTracker>
+    <CBehaviorBuff id="BomberBeam">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Period value="0.125"/>
+        <PeriodicEffect value="BomberBeamSearch"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorWander id="BomberWander">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Leash value="1"/>
+        <Range value="8"/>
+        <Delay value="1"/>
+    </CBehaviorWander>
+    <CBehaviorBuff id="Illusion@BossIllusionHandler">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <MaxStackCount value="10"/>
+        <FinalEffect value="Illusion@CleanupSet"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="Illusion@Spawning">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="0.7"/>
+        <Modification>
+            <StateFlags index="Invulnerable" value="1"/>
+            <StateFlags index="Stun" value="1"/>
+            <StateFlags index="SuppressAttack" value="1"/>
+            <StateFlags index="SuppressCombat" value="1"/>
+            <StateFlags index="NoDraw" value="1"/>
+        </Modification>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="Illusion@IllusionDmgHandler">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DisplayDuration index="Self" value="1"/>
+        <Duration value="14.25"/>
+        <FinalEffect value="Illusion@BossIllusionHandlerRemove"/>
+        <ExpireEffect value="Suicide"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorUnitTracker id="Illusion@Tracker">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <UnitTrackerFlags index="SnapUnitToCircumference" value="1"/>
+        <WhichLocation Value="CasterPoint"/>
+        <SnapRange value="3"/>
+        <SnapCount value="4"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorUnitTracker>
+    <CBehaviorBuff id="LaserLanceFire">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="0.75"/>
+        <PeriodicEffect value="LaserLancePeriodicDmg"/>
+        <Period value="0.25"/>
+        <InfoIcon value="Assets\Textures\btn-ability-protoss-firebeam.dds"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="Phase2">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <InfoFlags index="Hidden" value="1"/>
+        <Modification TimeScale="1.15"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="PortalCasterStationary">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification MoveSpeedMaximum="0"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="PortalModels">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="11.75"/>
+        <InitialEffect value="PortalStartStartHeight"/>
+        <FinalEffect value="PortalStartEndHeight"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="PortalStartDummyHeightStart">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="0.05"/>
+        <Modification Height="10">
+            <HeightTime index="Stop" value="1"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="PortalStartDummyHeightEnd">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="0.75"/>
+        <FinalEffect value="Suicide"/>
+        <Modification Height="10">
+            <HeightTime index="Start" value="1"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="Phase2Handler">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DamageResponse Handled="Phase2Set">
+            <Chance value="1"/>
+        </DamageResponse>
+        <InfoFlags index="Hidden" value="1"/>
+        <DisableValidatorArray value="DifficultyValidatorNormal2"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="StasisBubbleStasis">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="0.3"/>
+        <Modification>
+            <StateFlags index="Stasis" value="1"/>
+            <StateFlags index="Stun" value="1"/>
+            <StateFlags index="SuppressAttack" value="1"/>
+            <StateFlags index="SuppressLifeRegen" value="1"/>
+            <StateFlags index="SuppressShieldsRegen" value="1"/>
+            <StateFlags index="SuppressEnergyRegen" value="1"/>
+            <StateFlags index="Uncommandable" value="1"/>
+        </Modification>
+        <Alignment value="Negative"/>
+        <InfoIcon value="Assets\Textures\btn-ability-protoss-stasisfield.dds"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="StasisBubbleTimedLife" parent="TimedLifeDisplayed">
+        <Duration value="20"/>
+        <Period value="0.25"/>
+        <PeriodicEffect value="StasisBubblePeriodicSearch"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="VoidSummonPrecursorBuff">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification MoveSpeedMaximum="0">
+            <StateFlags index="Stun" value="1"/>
+            <StateFlags index="SuppressAttack" value="1"/>
+            <StateFlags index="SuppressCombat" value="1"/>
+        </Modification>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+</Catalog>

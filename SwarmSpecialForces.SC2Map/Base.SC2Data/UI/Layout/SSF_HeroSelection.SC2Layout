@@ -1,0 +1,953 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Desc>
+<!-- constants -->
+    <Constant name="Border" val="50"/>
+    <Constant name="BorderNegative" val="-50"/>
+
+    <Constant name="ShowcasePlayerWidth" val="258"/>
+    <Constant name="ShowcasePlayerHeight" val="86"/>
+    <Constant name="ShowcasePlayerIconSize" val="76"/>
+    <Constant name="ShowcasePlayerNoHeroSelectedTexture" val="Assets/Textures/ui_ingame_help_techtree_questionmark.dds"/>
+    <Constant name="ShowcasePlayerTextHeight" val="28"/>
+    <Constant name="ShowcasePlayerTextGap" val="1"/>
+
+    <Constant name="HeroButtonSize" val="80"/>
+    <Constant name="HeroButtonIconSize" val="76"/>
+    <Constant name="HeroButtonGap" val="4"/>
+
+    <Constant name="DiffButtonHeight" val="50"/>
+    <Constant name="DiffButtonWidth" val="200"/>
+    <Constant name="DiffButtonGap" val="4"/>
+    <Constant name="CounterWidth" val="40"/>
+
+    <Constant name="GameModeCustomSettingWidth" val="433"/>
+    <Constant name="GameModeCustomSettingLabelWidth" val="200"/>
+    <Constant name="GameModeCustomSettingHeight" val="50"/>
+    <Constant name="GameModeCustomSettingEditBoxGap" val="4"/>
+    <Constant name="GameModeCustomSettingGap" val="12"/>
+    <Constant name="GameModeCustomSettingAcceptIconSize" val="40"/>
+
+    <Constant name="GameModeCustomSettingAcceptedValueIcon" val="Assets/Textures/ui_objectives_checkmark.dds"/>
+    <Constant name="GameModeCustomSettingRejectedValueIcon" val="Assets/Textures/ui_objectives_checkbox_failed.dds"/>
+
+    <Constant name="Hero1_Name" val="@Unit/Name/HeroRoach"/>
+    <Constant name="Hero1_Unlock" val="@Trig/HeroSelection/Hero/Spitter/Unlock"/>
+    <Constant name="Hero1_Icon" val="Assets/Textures/btn-unit-roach-collectionskin-deluxe.dds"/>
+    <Constant name="Hero2_Name" val="@Unit/Name/HeroBowler"/>
+    <Constant name="Hero2_Unlock" val="@Trig/HeroSelection/Hero/Bowler/Unlock"/>
+    <Constant name="Hero2_Icon" val="Assets/Textures/btn-unit-zerg-mutalisk-broodlord.dds"/>
+    <Constant name="Hero3_Name" val="@Unit/Name/HeroRavager"/>
+    <Constant name="Hero3_Unlock" val="@Trig/HeroSelection/Hero/Hardskin/Unlock"/>
+    <Constant name="Hero3_Icon" val="Assets/Textures/btn-unit-collection-bone-ravager.dds"/>
+    <Constant name="Hero4_Name" val="@Unit/Name/HeroHydra"/>
+    <Constant name="Hero4_Unlock" val="@Trig/HeroSelection/Hero/Stinger/Unlock"/>
+    <Constant name="Hero4_Icon" val="Assets/Textures/btn-unit-collection-noxious-hydralisk.dds"/>
+    <Constant name="Hero5_Name" val="@Unit/Name/HeroSwarmQueen"/>
+    <Constant name="Hero5_Unlock" val="@Trig/HeroSelection/Hero/SwarmMother/Unlock"/>
+    <Constant name="Hero5_Icon" val="Assets/Textures/btn-unit-zerg-broodqueen.dds"/>
+
+<!-- local templates -->
+
+    <Frame type="Frame" name="ShowcasePlayerTemplate">
+        <Anchor side="Left" relative="$sibling-1" pos="Max" offset="10"/>
+        <Anchor side="Top" relative="$parent" pos="Min" offset="#Border"/>
+        <Visible val="False"/>
+
+        <Width val="#ShowcasePlayerWidth"/>
+        <Height val="#ShowcasePlayerHeight"/>
+        
+        <Animation name="Ready">
+            <Event event="PlayerReady" action="Reset,Play" frame="$this"/>
+            <Controller type="Property" end="Pause" frame="$this/SelectedHeroImage" property="Desaturated">
+                <Key type="Property" time="0.0" value="False"/>
+            </Controller>
+        </Animation>
+        
+        <Frame type="Image" name="SelectedHeroImage">
+            <Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+            <Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+            <Height val="#ShowcasePlayerIconSize"/>
+            <Width val="#ShowcasePlayerIconSize"/>
+            <Desaturated val="True"/>
+            <Texture val="#ShowcasePlayerNoHeroSelectedTexture"/> 
+            <AcceptsMouse val="True"/>
+        </Frame>
+        
+        <Frame type="Label" name="PlayerName" template="SSF_Templates/LabelTemplate">
+            <Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+            <Anchor side="Left" relative="$parent/SelectedHeroImage" pos="Max" offset="2"/>
+            <Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+            <Height val="#ShowcasePlayerTextHeight"/>
+        </Frame>
+        <Frame type="Label" name="Rank" template="SSF_Templates/LabelTemplate">
+            <Anchor side="Left" relative="$parent/PlayerName" pos="Min" offset="0"/>
+            <Anchor side="Top" relative="$parent/PlayerName" pos="Max" offset="#ShowcasePlayerTextGap"/>
+            <Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+            <Height val="#ShowcasePlayerTextHeight"/>
+        </Frame>
+        <Frame type="Label" name="Diff" template="SSF_Templates/LabelTemplate">
+            <Anchor side="Left" relative="$parent/Rank" pos="Min" offset="0"/>
+            <Anchor side="Top" relative="$parent/Rank" pos="Max" offset="#ShowcasePlayerTextGap"/>
+            <Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+            <Height val="#ShowcasePlayerTextHeight"/>
+        </Frame>
+        
+        <StateGroup name="SelectedHero">
+            <DefaultState val="None"/>
+            <State name="Hero1">
+                <When type="AnimationState" frame="$this" operator="Equal" Hero="1"/>
+                <Action type="SetProperty" frame="$this/SelectedHeroImage" Texture="#Hero1_Icon"/>
+                <Action type="SetProperty" frame="$this/SelectedHeroImage" Tooltip="#Hero1_Name"/>
+            </State>
+            <State name="Hero2">
+                <When type="AnimationState" frame="$this" operator="Equal" Hero="2"/>
+                <Action type="SetProperty" frame="$this/SelectedHeroImage" Texture="#Hero2_Icon"/>
+                <Action type="SetProperty" frame="$this/SelectedHeroImage" Tooltip="#Hero2_Name"/>
+            </State>
+            <State name="Hero3">
+                <When type="AnimationState" frame="$this" operator="Equal" Hero="3"/>
+                <Action type="SetProperty" frame="$this/SelectedHeroImage" Texture="#Hero3_Icon"/>
+                <Action type="SetProperty" frame="$this/SelectedHeroImage" Tooltip="#Hero3_Name"/>
+            </State>
+            <State name="Hero4">
+                <When type="AnimationState" frame="$this" operator="Equal" Hero="4"/>
+                <Action type="SetProperty" frame="$this/SelectedHeroImage" Texture="#Hero4_Icon"/>
+                <Action type="SetProperty" frame="$this/SelectedHeroImage" Tooltip="#Hero4_Name"/>
+            </State>
+            <State name="Hero5">
+                <When type="AnimationState" frame="$this" operator="Equal" Hero="5"/>
+                <Action type="SetProperty" frame="$this/SelectedHeroImage" Texture="#Hero5_Icon"/>
+                <Action type="SetProperty" frame="$this/SelectedHeroImage" Tooltip="#Hero5_Name"/>
+            </State>
+            <State name="None"></State>
+        </StateGroup>
+
+        
+    </Frame>
+
+    <Frame type="Frame" name="HeroButtonFrame">
+        <Anchor side="Left" relative="$sibling-2" pos="Min" offset="0"/>
+        <Anchor side="Top" relative="$sibling-2" pos="Max" offset="#HeroButtonGap"/>
+        <Width val="#HeroButtonSize"/>
+        <Height val="#HeroButtonSize"/>
+
+        <Frame type="Button" name="Button" template="SSF_Templates/ButtonTemplate">
+            <Anchor relative="$parent"/>
+            <UseAlternateTime val="True"/>
+        </Frame>
+
+        <Frame type="Image" name="Icon">
+            <Anchor side="Top" relative="$parent" pos="Min" offset="2"/>
+            <Anchor side="Left" relative="$parent" pos="Min" offset="2"/>
+            <Anchor side="Right" relative="$parent" pos="Max" offset="-2"/>
+            <Anchor side="Bottom" relative="$parent" pos="Max" offset="-2"/>
+        </Frame>
+
+
+        <StateGroup name="Unlocked">
+            <DefaultState val="Locked"/>
+            <State name="Unlocked">
+                <When type="AnimationState" frame="$this" operator="Equal" Unlocked="True"/>
+
+            </State>
+            <State name="Locked">
+                <Action type="SetProperty" frame="$this" Enabled="False"/>
+                <Action type="SetProperty" frame="$this/Button" Visible="False"/>
+                <Action type="SetProperty" frame="$this/Icon" AcceptsMouseTooltip="True"/>
+            </State>
+        </StateGroup>
+    </Frame>
+
+    <Frame type="Button" name="DiffButtonTemplate" template="SSF_Templates/ButtonTemplate">
+        <Anchor side="Top" relative="$sibling-1" pos="Max" offset="#DiffButtonGap"/>
+        <Anchor side="Right" relative="$sibling-1" pos="Max" offset="0"/>
+        
+        <Width val="#DiffButtonWidth"/>
+        <Height val="#DiffButtonHeight"/>
+
+        <Tooltip val="{TooltipTextFormat/@Text}"/>
+        <Enabled val="False"/>
+        <Frame type="TextFormatFrame" name="TooltipTextFormat">
+            <Anchor relative="$parent"/>
+            <FormatText val="%1%%2%"/>
+            <Replacement val="@Trig/HeroSelection/Dialog/DiffButton/D0Tooltip" index="1"/>
+            <Replacement val="@Behavior/Tooltip/Difficulty0" index="2"/>
+        </Frame>
+    </Frame>
+
+    <Frame type="Frame" name="GameModeCustomSettingTemplate">
+        <Width val="#GameModeCustomSettingWidth"/>
+        <Height val="#GameModeCustomSettingHeight"/>
+
+        <Frame type="Label" name="NameLabel" template="SSF_Templates/LabelTemplate">
+            <Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+            <Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+            <Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
+            <Anchor side="Right" relative="$parent" pos="Min" offset="#GameModeCustomSettingLabelWidth"/>
+            <Style val="aaDialogItemStyleRightMiddle"/>
+            <AcceptsMouse val="True"/>
+        </Frame>
+        <Frame type="Label" name="InputLabel" template="SSF_Templates/LabelTemplate">
+            <Anchor side="Top" relative="$parent/Input" pos="Min" offset="0"/>
+            <Anchor side="Bottom" relative="$parent/Input" pos="Max" offset="0"/>
+            <Anchor side="Left" relative="$parent/Input" pos="Min" offset="11"/>
+            <Anchor side="Right" relative="$parent/Input" pos="Max" offset="-11"/>
+            <Style val="aaDialogItemStyleLeftMiddle"/>
+            <Text val="{$parent/Input/@Text}"/>
+            <StateGroup name="Shown">
+                <DefaultState val="True"/>
+                <State name="False">
+                    <When type="Property" frame="$parent/Input" operator="Equal" Visible="True"/>
+                    <Action type="SetProperty" frame="$this" Visible="False"/>
+                </State>
+                <State name="True"></State>
+            </StateGroup>
+        </Frame>
+        <Frame type="EditBox" name="Input" template="TriggerDialogFrame/TriggerControlEditBoxTemplate">
+            <Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+            <Anchor side="Left" relative="$parent/NameLabel" pos="Max" offset="#GameModeCustomSettingEditBoxGap"/>
+            <Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
+            <Anchor side="Right" relative="$parent/ValueAccepted" pos="Min" offset="-4"/>
+            <Visible val="False"/>
+            <Text val="0"/>
+        </Frame>
+        <Frame type="Image" name="ValueAccepted">
+            <Anchor side="Top" relative="$parent" pos="Min" offset="5"/>
+            <Anchor side="Left" relative="$parent" pos="Max" offset="-40"/>
+            <Anchor side="Bottom" relative="$parent" pos="Max" offset="-5"/>
+            <Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+            <Height val="#GameModeCustomSettingAcceptIconSize"/>
+            <Tooltip val="@Trig/HeroSelection/CustomDiff/InputRejected"/>
+            
+            <AcceptsMouse val="True"/>
+            <Texture val="#GameModeCustomSettingRejectedValueIcon"/>
+        </Frame>
+        <StateGroup name="ValidInput">
+            <DefaultState val="True"/>
+            <State name="False">
+                <When type="AnimationState" frame="$this/Input" operator="Equal" ValidInput="False"/>
+                <Action type="SetProperty" frame="$this/ValueAccepted" Texture="#GameModeCustomSettingRejectedValueIcon"/>
+                <Action type="SetProperty" frame="$this/ValueAccepted" Tooltip="@Trig/HeroSelection/CustomDiff/InputRejected"/>
+            </State>
+            <State name="True">
+                <Action type="SetProperty" frame="$this/ValueAccepted" Texture="#GameModeCustomSettingAcceptedValueIcon"/>
+                <Action type="SetProperty" frame="$this/ValueAccepted" Tooltip="@Trig/HeroSelection/CustomDiff/InputAccepted"/>
+            </State>
+        </StateGroup>
+
+    </Frame>
+
+    <Frame type="Button" name="GameModeCustomPresetTemplate" template="SSF_Templates/ButtonTemplate">
+        <Anchor side="Bottom" relative="$sibling-1" pos="Max" offset="0"/>
+        <Anchor side="Left" relative="$sibling-1" pos="Max" offset="6"/>
+        <Height val="50"/>
+        <Width val="50"/>
+        <Enabled val="False"/>
+    </Frame>
+
+<!-- actual frame -->
+    <Frame type="Frame" name="GameUI/UIContainer/FullscreenUpperContainer" file="GameUI">
+        <Frame type="Frame" name="SSF_HeroSelection">
+            <Handle val="SSF_HeroSelection"/>
+            <Visible val="False"/>
+            <Anchor side="Top" relative="$parent" pos="Min" offset="100"/>
+            <Anchor side="Bottom" relative="$parent" pos="Max" offset="-400"/>
+            <Anchor side="Left" relative="$parent" pos="Min" offset="50"/>
+            <Anchor side="Right" relative="$parent" pos="Max" offset="-50"/>
+
+            <Width val="1698"/>
+            <RenderPriority val="500"/>
+
+            <StateGroup name="DisabledWhilePaused" template="SSF_Templates/DisabledWhilePausedTemplate"/>
+
+            <Frame type="Image" name="BackgroundImage" template="SSF_Templates/BackgroundImageTemplate"></Frame>
+
+            <Frame type="Frame" name="ShowcasePlayer1" template="SSF_HeroSelection/ShowcasePlayerTemplate">
+                <Anchor side="Left" relative="$parent" pos="Min" offset="#Border"/>
+            </Frame>
+            <Frame type="Frame" name="ShowcasePlayer2" template="SSF_HeroSelection/ShowcasePlayerTemplate"/>
+            <Frame type="Frame" name="ShowcasePlayer3" template="SSF_HeroSelection/ShowcasePlayerTemplate"/>
+            <Frame type="Frame" name="ShowcasePlayer4" template="SSF_HeroSelection/ShowcasePlayerTemplate"/>
+            <Frame type="Frame" name="ShowcasePlayer5" template="SSF_HeroSelection/ShowcasePlayerTemplate"/>
+            <Frame type="Frame" name="ShowcasePlayer6" template="SSF_HeroSelection/ShowcasePlayerTemplate"/>
+
+            <Frame type="Label" name="ChooseHeroLabel">
+                <Anchor side="Top" relative="$parent/ShowcasePlayer1" pos="Max" offset="15"/>
+                <Anchor side="Left" relative="$parent" pos="Min" offset="#Border"/>
+                <Height val="30"/>
+                <Width val="200"/>
+                <Text val="@Trig/HeroSelection/Dialog/SelectHeroLabel"/>
+                <Style val="aaDialogItemStyle"/>
+            </Frame>
+
+            <Frame type="Frame" name="Hero1" template="SSF_HeroSelection/HeroButtonFrame">
+                <Anchor side="Top" relative="$parent/ChooseHeroLabel" pos="Max" offset="10"/>
+                <Anchor side="Left" relative="$parent" pos="Min" offset="#Border"/>
+                
+                <StateGroup name="Unlocked">
+                    <DefaultState val="Unlocked"/>
+                    <State name="Unlocked">
+                        <Action type="SetProperty" frame="$this/Button" Tooltip="#Hero1_Name"/>
+                        <Action type="SetProperty" frame="$this/Icon" Tooltip=""/>
+                    </State>
+                </StateGroup>
+
+                <Frame type="Image" name="Icon">
+                    <Tooltip val="#Hero1_Unlock"/>
+                    <Texture val="#Hero1_Icon"/>
+                </Frame>
+            </Frame>
+            <Frame type="Frame" name="Hero2" template="SSF_HeroSelection/HeroButtonFrame">
+                <Anchor side="Top" relative="$parent/Hero1" pos="Min" offset="0"/>
+                <Anchor side="Left" relative="$parent/Hero1" pos="Max" offset="#HeroButtonGap"/>
+
+                <StateGroup name="Unlocked">
+                    <State name="Unlocked">
+                        <Action type="SetProperty" frame="$this/Button" Tooltip="#Hero2_Name"/>
+                        <Action type="SetProperty" frame="$this/Icon" Tooltip=""/>
+                    </State>
+                </StateGroup>
+
+                <Frame type="Image" name="Icon">
+                    <Tooltip val="#Hero2_Unlock"/>
+                    <Texture val="#Hero2_Icon"/>
+                </Frame>
+            </Frame>
+            <Frame type="Frame" name="Hero3" template="SSF_HeroSelection/HeroButtonFrame">
+                
+                <StateGroup name="Unlocked">
+                    <State name="Unlocked">
+                        <Action type="SetProperty" frame="$this/Button" Tooltip="#Hero3_Name"/>
+                        <Action type="SetProperty" frame="$this/Icon" Tooltip=""/>
+                    </State>
+                </StateGroup>
+
+                <Frame type="Image" name="Icon">
+                    <Tooltip val="#Hero3_Unlock"/>
+                    <Texture val="#Hero3_Icon"/>
+                </Frame>
+            </Frame>
+            <Frame type="Frame" name="Hero4" template="SSF_HeroSelection/HeroButtonFrame">
+                
+                <StateGroup name="Unlocked">
+                    <State name="Unlocked">
+                        <Action type="SetProperty" frame="$this/Button" Tooltip="#Hero4_Name"/>
+                        <Action type="SetProperty" frame="$this/Icon" Tooltip=""/>
+                    </State>
+                </StateGroup>
+
+                <Frame type="Image" name="Icon">
+                    <Tooltip val="#Hero4_Unlock"/>
+                    <Texture val="#Hero4_Icon"/>
+                </Frame>
+            </Frame>
+            <Frame type="Frame" name="Hero5" template="SSF_HeroSelection/HeroButtonFrame">
+                
+                <StateGroup name="Unlocked">
+                    <State name="Unlocked">
+                        <Action type="SetProperty" frame="$this/Button" Tooltip="#Hero5_Name"/>
+                        <Action type="SetProperty" frame="$this/Icon" Tooltip=""/>
+                    </State>
+                </StateGroup>
+
+                <Frame type="Image" name="Icon">
+                    <Tooltip val="#Hero5_Unlock"/>
+                    <Texture val="#Hero5_Icon"/>
+                </Frame>
+            </Frame>
+
+            <Frame type="Button" name="AutoSelectionButton" template="SSF_Templates/ButtonTemplate">
+                <Anchor side="Bottom" relative="$parent" pos="Max" offset="#BorderNegative"/>
+                <Anchor side="Left" relative="$parent/Hero1" pos="Min" offset="0"/>
+                <Anchor side="Right" relative="$parent/Hero2" pos="Max" offset="0"/>
+                <Height val="#DiffButtonHeight"/>
+                <Text val="@Trig/HeroSelection/Dialog/AutoSelection"/>
+                <Tooltip val="@Trig/HeroSelection/Dialog/AutoSelectionTooltip"/>
+                <Visible val="False"/>
+            </Frame>     
+            <Frame type="Label" name="CounterLabel">
+                <Anchor side="Bottom" relative="$parent" pos="Max" offset="#BorderNegative"/>
+                <Anchor side="Right" relative="$parent" pos="Max" offset="#BorderNegative"/>
+                <Width val="#CounterWidth"/>
+                <Height val="#DiffButtonHeight"/>
+                <Style val="aaDialogItemStyleCentered"/>
+                <Text val="60"/>
+                <Visible val="False"/>
+
+                <Animation name="Onshown">
+                    <Event event="OnShown" action="Reset,Play" frame="$this"/>
+                    <Controller type="Anchor" end="Pause" frame="$parent/ReadyButton" side="Right" relative="True">
+                        <Key type="Curve" time="0.0" value="-55"/>
+                    </Controller>
+                </Animation>
+
+            </Frame>
+            <Frame type="Button" name="ReadyButton" template="SSF_Templates/ButtonTemplate">
+                <Anchor side="Bottom" relative="$parent" pos="Max" offset="#BorderNegative"/>
+                <Anchor side="Left" relative="$parent/GameModeClassic/Diff-1" pos="Min" offset="0"/>
+                <Anchor side="Right" relative="$parent/GameModeClassic/Diff-1" pos="Max" offset="0"/>
+                <Height val="#DiffButtonHeight"/>
+                <Text val="@Trig/HeroSelection/Dialog/ReadyButton"/>
+                <Tooltip val="@Trig/HeroSelection/Dialog/ReadyButtonTooltip"/>
+                <Enabled val="False"/>
+
+                <StateGroup name="Enabled">
+                    <DefaultState val="False"/>
+                    <State name="False">
+                    </State>
+                    <State name="True">
+                        <When type="Property" frame="$this" operator="Equal" Enabled="True"/>
+                        <Action type="SetProperty" frame="$this" Tooltip=""/>
+                    </State>
+                </StateGroup>
+            </Frame>
+
+
+            <Frame type="Frame" name="GameModeClassic">
+
+                <Visible val="False"/>
+
+                <Anchor relative="$parent"/>
+                <Frame type="Frame" name="DescriptionMasterFrame">
+                    <Anchor side="Left" relative="$parent/$parent/Hero2" pos="Max" offset="40"/>
+                    <Anchor side="Right" relative="$parent/Diff-1" pos="Min" offset="-40"/>
+                    <Anchor side="Top" relative="$parent/$parent/Hero2" pos="Min" offset="0"/>
+                    <Anchor side="Bottom" relative="$parent" pos="Max" offset="#BorderNegative"/>
+
+                    <StateGroup name="Hero">
+                        <DefaultState val="None"/>
+                        <State name="None"></State>
+                        <State name="1">
+                            <When type="AnimationState" frame="$this" operator="Equal" Hero="1"/>
+                            <Action type="SetProperty" frame="$this/Hero1" Visible="True"/>
+                        </State>
+                        <State name="2">
+                            <When type="AnimationState" frame="$this" operator="Equal" Hero="2"/>
+                            <Action type="SetProperty" frame="$this/Hero2" Visible="True"/>
+                        </State>
+                        <State name="3">
+                            <When type="AnimationState" frame="$this" operator="Equal" Hero="3"/>
+                            <Action type="SetProperty" frame="$this/Hero3" Visible="True"/>
+                        </State>
+                        <State name="4">
+                            <When type="AnimationState" frame="$this" operator="Equal" Hero="4"/>
+                            <Action type="SetProperty" frame="$this/Hero4" Visible="True"/>
+                        </State>
+                        <State name="5">
+                            <When type="AnimationState" frame="$this" operator="Equal" Hero="5"/>
+                            <Action type="SetProperty" frame="$this/Hero5" Visible="True"/>
+                        </State>
+                    </StateGroup>
+
+                    <Frame type="Label" name="Hero1" template="SSF_Templates/LabelTemplate">
+                        <Visible val="False"/>
+                        <Anchor relative="$parent"/>
+                        <Text val="@Trig/HeroSelection/Hero/Spitter/Long"/>
+                    </Frame>
+                    <Frame type="Label" name="Hero2" template="SSF_Templates/LabelTemplate">
+                        <Visible val="False"/>
+                        <Anchor relative="$parent"/>
+                        <Text val="@Trig/HeroSelection/Hero/Bowler/Long"/>
+                    </Frame>
+                    <Frame type="Label" name="Hero3" template="SSF_Templates/LabelTemplate">
+                        <Visible val="False"/>
+                        <Anchor relative="$parent"/>
+                        <Text val="@Trig/HeroSelection/Hero/Hardskin/Long"/>
+                    </Frame>
+                    <Frame type="Label" name="Hero4" template="SSF_Templates/LabelTemplate">
+                        <Visible val="False"/>
+                        <Anchor relative="$parent"/>
+                        <Text val="@Trig/HeroSelection/Hero/Stinger/Long"/>
+                    </Frame>
+                    <Frame type="Label" name="Hero5" template="SSF_Templates/LabelTemplate">
+                        <Visible val="False"/>
+                        <Anchor relative="$parent"/>
+                        <Text val="@Trig/HeroSelection/Hero/SwarmMother/Long"/>
+                    </Frame>
+                </Frame>
+
+                <Frame type="Label" name="DifficultyLabel">
+                    <Anchor side="Top" relative="$parent/$parent/ChooseHeroLabel" pos="Min" offset="0"/>
+                    <Anchor side="Right" relative="$parent" pos="Max" offset="#BorderNegative"/>
+                    <Height val="30"/>
+                    <Width val="#DiffButtonWidth"/>
+                    <Style val="aaDialogItemStyle"/>
+
+                    <Text val="@Trig/HeroSelection/Diff"/>
+                </Frame>
+
+                <Frame type="Button" name="Diff-1" template="SSF_HeroSelection/DiffButtonTemplate">
+                    <Anchor side="Top" relative="$parent/$parent/Hero1" pos="Min" offset="0"/>
+                    <Anchor side="Right" relative="$parent" pos="Max" offset="#BorderNegative"/>
+                    <Enabled val="True"/>
+                    <Text val="@Trig/HeroSelection/Dialog/DiffButton/Any"/>
+                    <Tooltip val="@Trig/HeroSelection/Dialog/DiffButton/AnyTooltip"/>
+                </Frame>
+                <Frame type="Button" name="Diff0" template="SSF_HeroSelection/DiffButtonTemplate">
+                    <Anchor side="Top" relative="$parent/Diff-1" pos="Max" offset="#DiffButtonGap"/>
+                    <Anchor side="Right" relative="$parent" pos="Max" offset="#BorderNegative"/>
+                    <Enabled val="True"/>
+                    <Text val="@Trig/HeroSelection/Dialog/DiffButton/D0"/>
+                    <Frame type="TextFormatFrame" name="TooltipTextFormat">
+                        <Replacement val="@Trig/HeroSelection/Dialog/DiffButton/D0Tooltip" index="1"/>
+                        <Replacement val="@Behavior/Tooltip/Difficulty0" index="2"/>
+                    </Frame>
+                </Frame>
+                <Frame type="Button" name="Diff1" template="SSF_HeroSelection/DiffButtonTemplate">
+                    <Text val="@Trig/HeroSelection/Dialog/DiffButton/D1"/>
+                    <Frame type="TextFormatFrame" name="TooltipTextFormat">
+                        <Replacement val="@Trig/HeroSelection/Dialog/DiffButton/D1Tooltip" index="1"/>
+                        <Replacement val="@Behavior/Tooltip/Difficulty1" index="2"/>
+                    </Frame>
+                </Frame>
+                <Frame type="Button" name="Diff2" template="SSF_HeroSelection/DiffButtonTemplate">
+                    <Text val="@Trig/HeroSelection/Dialog/DiffButton/D2"/>
+                    <Frame type="TextFormatFrame" name="TooltipTextFormat">
+                        <Replacement val="@Trig/HeroSelection/Dialog/DiffButton/D2Tooltip" index="1"/>
+                        <Replacement val="@Behavior/Tooltip/Difficulty2" index="2"/>
+                    </Frame>
+                </Frame>
+                <Frame type="Button" name="Diff3" template="SSF_HeroSelection/DiffButtonTemplate">
+                    <Text val="@Trig/HeroSelection/Dialog/DiffButton/D3"/>
+                    <Frame type="TextFormatFrame" name="TooltipTextFormat">
+                        <Replacement val="@Trig/HeroSelection/Dialog/DiffButton/D3Tooltip" index="1"/>
+                        <Replacement val="@Behavior/Tooltip/Difficulty3" index="2"/>
+                    </Frame>
+                </Frame>
+                <Frame type="Button" name="Diff4" template="SSF_HeroSelection/DiffButtonTemplate">
+                    <Text val="@Trig/HeroSelection/Dialog/DiffButton/D4"/>
+                    <Frame type="TextFormatFrame" name="TooltipTextFormat">
+                        <Replacement val="@Trig/HeroSelection/Dialog/DiffButton/D4Tooltip" index="1"/>
+                        <Replacement val="@Behavior/Tooltip/Difficulty4" index="2"/>
+                    </Frame>
+                </Frame>
+                <Frame type="Button" name="Diff5" template="SSF_HeroSelection/DiffButtonTemplate">
+                    <Text val="@Trig/HeroSelection/Dialog/DiffButton/D5"/>
+                    <Frame type="TextFormatFrame" name="TooltipTextFormat">
+                        <Replacement val="@Trig/HeroSelection/Dialog/DiffButton/D5Tooltip" index="1"/>
+                        <Replacement val="@Behavior/Tooltip/Difficulty5" index="2"/>
+                    </Frame>
+                </Frame>
+            </Frame>
+
+            <Frame type="Frame" name="GameModeCustom">
+                <Anchor relative="$parent"/>
+                <Visible val="False"/>
+
+                <StateGroup name="Host">
+                    <DefaultState val="False"/>
+                    <State name="True">
+                        <When type="AnimationState" frame="$this" operator="Equal" Host="True"/>
+                        
+                        <Action type="SetProperty" frame="$this/DmgFlat/Input" Visible="True"/>
+                        <Action type="SetProperty" frame="$this/DmgPercent/Input" Visible="True"/>
+                        <Action type="SetProperty" frame="$this/Atkspd/Input" Visible="True"/>
+                        <Action type="SetProperty" frame="$this/ArmorFlat/Input" Visible="True"/>
+                        <Action type="SetProperty" frame="$this/ArmorPercent/Input" Visible="True"/>
+                        <Action type="SetProperty" frame="$this/Vitals/Input" Visible="True"/>
+                        <Action type="SetProperty" frame="$this/RegenFlat/Input" Visible="True"/>
+                        <Action type="SetProperty" frame="$this/RegenPercent/Input" Visible="True"/>
+                        <Action type="SetProperty" frame="$this/Movementspeed/Input" Visible="True"/>
+                        <Action type="SetProperty" frame="$this/SpawnMultiplier/Input" Visible="True"/>
+                        <Action type="SetProperty" frame="$this/BiomassMultiplier/Input" Visible="True"/>
+                        <Action type="SetProperty" frame="$this/ExpMultiplier/Input" Visible="True"/>
+                        <Action type="SetProperty" frame="$this/StartExp/Input" Visible="True"/>
+                        <Action type="SetProperty" frame="$this/StartBiomass/Input" Visible="True"/>
+                        <Action type="SetProperty" frame="$this/StartMutation/Input" Visible="True"/>
+                        <Action type="SetProperty" frame="$this/BossAbilities/Input" Visible="True"/>
+                        <Action type="SetProperty" frame="$this/Lifes/Input" Visible="True"/>
+                        <Action type="SetProperty" frame="$this/Upgrades/Input" Visible="True"/>
+                        <Action type="SetProperty" frame="$this/SkipToP1/CheckBox" Enabled="True"/>
+
+                        <Action type="SetProperty" frame="$this/DiffPreset0" Enabled="True"/>
+                        <Action type="SetProperty" frame="$this/DiffPreset1" Enabled="True"/>
+                        <Action type="SetProperty" frame="$this/DiffPreset2" Enabled="True"/>
+                        <Action type="SetProperty" frame="$this/DiffPreset3" Enabled="True"/>
+                        <Action type="SetProperty" frame="$this/DiffPreset4" Enabled="True"/>
+                        <Action type="SetProperty" frame="$this/DiffPreset5" Enabled="True"/>
+
+                        <Action type="SetProperty" frame="$this/CustomPreset/LoadInputButton" Tooltip="@Trig/HeroSelection/CustomDiff/CustomPreset/LoadButtonTooltip"/>
+                        <Action type="SetProperty" frame="$this/CustomPreset/Input" Enabled="True"/>
+                    </State>
+                    <State name="False"></State>
+                </StateGroup>
+
+
+
+                <Frame type="Frame" name="CustomPreset">
+                    <Anchor side="Top" relative="$parent/DiffPreset5" pos="Min" offset="0"/>
+                    <Anchor side="Left" relative="$parent/DiffPreset5" pos="Max" offset="55"/>
+                    <Anchor side="Bottom" relative="$parent/DiffPreset5" pos="Max" offset="0"/>
+                    <Anchor side="Right" relative="$parent/$parent/ReadyButton" pos="Min" offset="-50"/>
+
+                    <Frame type="EditBox" name="Input" template="TriggerDialogFrame/TriggerControlEditBoxTemplate">
+                        <Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+                        <Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+                        <Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
+                        <Width val="200"/>
+
+                        <Enabled val="False"/>
+                    </Frame>
+                    
+                    <Frame type="Button" name="CreateInputButton" template="SSF_Templates/ButtonTemplate">
+                        <Anchor side="Left" relative="$parent/Input" pos="Max" offset="20"/>
+                        <Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
+                        <Width val="110"/>
+                        <Height val="50"/>
+
+                        <Text val="@Trig/HeroSelection/CustomDiff/CustomPreset/CreateButton"/>
+                        <Tooltip val="@Trig/HeroSelection/CustomDiff/CustomPreset/CreateButtonTooltip"/>
+                    </Frame>
+
+
+                    <Frame type="CopyClipboardButton" name="CopyInputButton" template="SSF_Templates/ButtonTemplate">
+                        <Anchor side="Left" relative="$parent/CreateInputButton" pos="Max" offset="20"/>
+                        <Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
+                        <Width val="110"/>
+                        <Height val="50"/>
+
+                        <Enabled val="False"/>
+                        <ClipboardText val="{$parent/Input/@Text}"/>
+                        <Text val="@Trig/HeroSelection/CustomDiff/CustomPreset/CopyClipboardButton"/>
+                        <Tooltip val="@Trig/HeroSelection/CustomDiff/CustomPreset/CopyClipboardButtonTooltip"/>
+
+                        <Animation name="Color">
+                            <Event event="OnClick" action="Restart,Play" frame="$this"/>
+                            <Controller type="Color" end="Reset">
+                                <Key type="Curve" time="0" value="255,255,255" in="Fast"/>
+                                <Key type="Curve" time="0.1" value="0,255,0" in="Slow"/>
+                                <Key type="Curve" time="3.5" value="0,255,0" in="Slow"/>				
+                            </Controller>
+                        </Animation>
+                    </Frame>
+
+                    <Frame type="Button" name="LoadInputButton" template="SSF_Templates/ButtonTemplate">
+                        <Anchor side="Left" relative="$parent/CopyInputButton" pos="Max" offset="20"/>
+                        <Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
+                        <Width val="110"/>
+                        <Height val="50"/>
+
+                        <Enabled val="False"/>
+                        <Text val="@Trig/HeroSelection/CustomDiff/CustomPreset/LoadButton"/>
+                        <Tooltip val="@Trig/HeroSelection/CustomDiff/CustomPreset/LoadButtonTooltipNotHost"/>
+                    </Frame>
+
+
+
+
+                </Frame>
+
+
+
+                
+                <Frame type="Frame" name="AnchorCol1">
+                    <Anchor side="Left" relative="$parent/$parent/Hero2" pos="Max" offset="30"/>
+                    <Anchor side="Top" relative="$parent/$parent/ChooseHeroLabel" pos="Min" offset="0"/>
+                    <Anchor side="Right" relative="$this" pos="Min" offset="#GameModeCustomSettingWidth"/>
+                    <Anchor side="Bottom" relative="$this" pos="Min" offset="0"/>
+                    <Visible val="False"/>
+                </Frame>
+                <Frame type="Frame" name="AnchorCol2">
+                    <Anchor side="Left" relative="$sibling-1" pos="Max" offset="35"/>
+                    <Anchor side="Top" relative="$sibling-1" pos="Min" offset="0"/>
+                    <Anchor side="Right" relative="$this" pos="Min" offset="#GameModeCustomSettingWidth"/>
+                    <Anchor side="Bottom" relative="$this" pos="Min" offset="0"/>
+                    <Visible val="False"/>
+                </Frame>
+                <Frame type="Frame" name="AnchorCol3">
+                    <Anchor side="Left" relative="$sibling-1" pos="Max" offset="35"/>
+                    <Anchor side="Top" relative="$sibling-1" pos="Min" offset="0"/>
+                    <Anchor side="Right" relative="$this" pos="Min" offset="#GameModeCustomSettingWidth"/>
+                    <Anchor side="Bottom" relative="$this" pos="Min" offset="0"/>
+                    <Visible val="False"/>
+                </Frame>
+
+                <Frame type="Frame" name="AnchorRow1">
+                    <Anchor side="Left" relative="$parent/AnchorCol1" pos="Min" offset="0"/>
+                    <Anchor side="Top" relative="$parent/AnchorCol1" pos="Min" offset="0"/>
+                    <Anchor side="Right" relative="$this" pos="Min" offset="0"/>
+                    <Anchor side="Bottom" relative="$this" pos="Min" offset="#GameModeCustomSettingHeight"/>
+                    <Visible val="False"/>
+                </Frame>
+                <Frame type="Frame" name="AnchorRow2">
+                    <Anchor side="Left" relative="$sibling-1" pos="Min" offset="0"/>
+                    <Anchor side="Top" relative="$sibling-1" pos="Max" offset="#GameModeCustomSettingGap"/>
+                    <Anchor side="Right" relative="$this" pos="Min" offset="0"/>
+                    <Anchor side="Bottom" relative="$this" pos="Min" offset="#GameModeCustomSettingHeight"/>
+                    <Visible val="False"/>
+                </Frame>
+                <Frame type="Frame" name="AnchorRow3">
+                    <Anchor side="Left" relative="$sibling-1" pos="Min" offset="0"/>
+                    <Anchor side="Top" relative="$sibling-1" pos="Max" offset="#GameModeCustomSettingGap"/>
+                    <Anchor side="Right" relative="$this" pos="Min" offset="0"/>
+                    <Anchor side="Bottom" relative="$this" pos="Min" offset="#GameModeCustomSettingHeight"/>
+                    <Visible val="False"/>
+                </Frame>
+                <Frame type="Frame" name="AnchorRow4">
+                    <Anchor side="Left" relative="$sibling-1" pos="Min" offset="0"/>
+                    <Anchor side="Top" relative="$sibling-1" pos="Max" offset="#GameModeCustomSettingGap"/>
+                    <Anchor side="Right" relative="$this" pos="Min" offset="0"/>
+                    <Anchor side="Bottom" relative="$this" pos="Min" offset="#GameModeCustomSettingHeight"/>
+                    <Visible val="False"/>
+                </Frame>
+                <Frame type="Frame" name="AnchorRow5">
+                    <Anchor side="Left" relative="$sibling-1" pos="Min" offset="0"/>
+                    <Anchor side="Top" relative="$sibling-1" pos="Max" offset="#GameModeCustomSettingGap"/>
+                    <Anchor side="Right" relative="$this" pos="Min" offset="0"/>
+                    <Anchor side="Bottom" relative="$this" pos="Min" offset="#GameModeCustomSettingHeight"/>
+                    <Visible val="False"/>
+                </Frame>
+                <Frame type="Frame" name="AnchorRow6">
+                    <Anchor side="Left" relative="$sibling-1" pos="Min" offset="0"/>
+                    <Anchor side="Top" relative="$sibling-1" pos="Max" offset="#GameModeCustomSettingGap"/>
+                    <Anchor side="Right" relative="$this" pos="Min" offset="0"/>
+                    <Anchor side="Bottom" relative="$this" pos="Min" offset="#GameModeCustomSettingHeight"/>
+                    <Visible val="False"/>
+                </Frame>
+                <Frame type="Frame" name="AnchorRow7">
+                    <Anchor side="Left" relative="$sibling-1" pos="Min" offset="0"/>
+                    <Anchor side="Top" relative="$sibling-1" pos="Max" offset="#GameModeCustomSettingGap"/>
+                    <Anchor side="Right" relative="$this" pos="Min" offset="0"/>
+                    <Anchor side="Bottom" relative="$this" pos="Min" offset="#GameModeCustomSettingHeight"/>
+                    <Visible val="False"/>
+                </Frame>
+
+                <Frame type="Frame" name="DmgFlat" template="SSF_HeroSelection/GameModeCustomSettingTemplate">
+                    <Anchor side="Top" relative="$parent/AnchorRow1" pos="Min" offset="0"/>
+                    <Anchor side="Left" relative="$parent/AnchorCol1" pos="Min" offset="0"/>
+
+                    <Frame type="Label" name="NameLabel">
+                        <Text val="@Trig/HeroSelection/CustomDiff/DmgFlat"/>
+                        <Tooltip val="@Trig/HeroSelection/CustomDiff/DmgFlatTooltip"/>
+                    </Frame>
+                </Frame>
+                <Frame type="Frame" name="DmgPercent" template="SSF_HeroSelection/GameModeCustomSettingTemplate">
+                    <Anchor side="Top" relative="$parent/AnchorRow1" pos="Min" offset="0"/>
+                    <Anchor side="Left" relative="$parent/AnchorCol2" pos="Min" offset="0"/>
+
+                    <Frame type="Label" name="NameLabel">
+                        <Text val="@Trig/HeroSelection/CustomDiff/DmgPercent"/>
+                        <Tooltip val="@Trig/HeroSelection/CustomDiff/DmgPercentTooltip"/>
+                    </Frame>
+                </Frame>
+                <Frame type="Frame" name="Atkspd" template="SSF_HeroSelection/GameModeCustomSettingTemplate">
+                    <Anchor side="Top" relative="$parent/AnchorRow1" pos="Min" offset="0"/>
+                    <Anchor side="Left" relative="$parent/AnchorCol3" pos="Min" offset="0"/>
+
+                    <Frame type="Label" name="NameLabel">
+                        <Text val="@Trig/HeroSelection/CustomDiff/Atkspd"/>
+                        <Tooltip val="@Trig/HeroSelection/CustomDiff/AtkspdTooltip"/>
+                    </Frame>
+                </Frame>
+
+                <Frame type="Frame" name="Vitals" template="SSF_HeroSelection/GameModeCustomSettingTemplate">
+                    <Anchor side="Top" relative="$parent/AnchorRow2" pos="Min" offset="0"/>
+                    <Anchor side="Left" relative="$parent/AnchorCol1" pos="Min" offset="0"/>
+
+                    <Frame type="Label" name="NameLabel">
+                        <Text val="@Trig/HeroSelection/CustomDiff/Vitals"/>
+                        <Tooltip val="@Trig/HeroSelection/CustomDiff/VitalsTooltip"/>
+                    </Frame>
+                </Frame>
+                <Frame type="Frame" name="ArmorFlat" template="SSF_HeroSelection/GameModeCustomSettingTemplate">
+                    <Anchor side="Top" relative="$parent/AnchorRow2" pos="Min" offset="0"/>
+                    <Anchor side="Left" relative="$parent/AnchorCol2" pos="Min" offset="0"/>
+
+                    <Frame type="Label" name="NameLabel">
+                        <Text val="@Trig/HeroSelection/CustomDiff/ArmorFlat"/>
+                        <Tooltip val="@Trig/HeroSelection/CustomDiff/ArmorFlatTooltip"/>
+                    </Frame>
+                </Frame>
+                <Frame type="Frame" name="ArmorPercent" template="SSF_HeroSelection/GameModeCustomSettingTemplate">
+                    <Anchor side="Top" relative="$parent/AnchorRow2" pos="Min" offset="0"/>
+                    <Anchor side="Left" relative="$parent/AnchorCol3" pos="Min" offset="0"/>
+
+                    <Frame type="Label" name="NameLabel">
+                        <Text val="@Trig/HeroSelection/CustomDiff/ArmorPercent"/>
+                        <Tooltip val="@Trig/HeroSelection/CustomDiff/ArmorPercentTooltip"/>
+                    </Frame>
+                </Frame>
+
+                <Frame type="Frame" name="RegenFlat" template="SSF_HeroSelection/GameModeCustomSettingTemplate">
+                    <Anchor side="Top" relative="$parent/AnchorRow3" pos="Min" offset="0"/>
+                    <Anchor side="Left" relative="$parent/AnchorCol1" pos="Min" offset="0"/>
+
+                    <Frame type="Label" name="NameLabel">
+                        <Text val="@Trig/HeroSelection/CustomDiff/RegenFlat"/>
+                        <Tooltip val="@Trig/HeroSelection/CustomDiff/RegenFlatTooltip"/>
+                    </Frame>
+                </Frame>
+                <Frame type="Frame" name="RegenPercent" template="SSF_HeroSelection/GameModeCustomSettingTemplate">
+                    <Anchor side="Top" relative="$parent/AnchorRow3" pos="Min" offset="0"/>
+                    <Anchor side="Left" relative="$parent/AnchorCol2" pos="Min" offset="0"/>
+
+                    <Frame type="Label" name="NameLabel">
+                        <Text val="@Trig/HeroSelection/CustomDiff/RegenPercent"/>
+                        <Tooltip val="@Trig/HeroSelection/CustomDiff/RegenPercentTooltip"/>
+                    </Frame>
+                </Frame>
+                <Frame type="Frame" name="Movementspeed" template="SSF_HeroSelection/GameModeCustomSettingTemplate">
+                    <Anchor side="Top" relative="$parent/AnchorRow3" pos="Min" offset="0"/>
+                    <Anchor side="Left" relative="$parent/AnchorCol3" pos="Min" offset="0"/>
+
+                    <Frame type="Label" name="NameLabel">
+                        <Text val="@Trig/HeroSelection/CustomDiff/Movementspeed"/>
+                        <Tooltip val="@Trig/HeroSelection/CustomDiff/MovementspeedTooltip"/>
+                    </Frame>
+                </Frame>
+
+                <Frame type="Frame" name="SpawnMultiplier" template="SSF_HeroSelection/GameModeCustomSettingTemplate">
+                    <Anchor side="Top" relative="$parent/AnchorRow4" pos="Min" offset="0"/>
+                    <Anchor side="Left" relative="$parent/AnchorCol1" pos="Min" offset="0"/>
+
+                    <Frame type="Label" name="NameLabel">
+                        <Text val="@Trig/HeroSelection/CustomDiff/SpawnMultiplier"/>
+                        <Tooltip val="@Trig/HeroSelection/CustomDiff/SpawnMultiplierTooltip"/>
+                    </Frame>
+                </Frame>
+                <Frame type="Frame" name="BiomassMultiplier" template="SSF_HeroSelection/GameModeCustomSettingTemplate">
+                    <Anchor side="Top" relative="$parent/AnchorRow4" pos="Min" offset="0"/>
+                    <Anchor side="Left" relative="$parent/AnchorCol2" pos="Min" offset="0"/>
+
+                    <Frame type="Label" name="NameLabel">
+                        <Text val="@Trig/HeroSelection/CustomDiff/BiomassMultiplier"/>
+                        <Tooltip val="@Trig/HeroSelection/CustomDiff/BiomassMultiplierTooltip"/>
+                    </Frame>
+                </Frame>
+                <Frame type="Frame" name="ExpMultiplier" template="SSF_HeroSelection/GameModeCustomSettingTemplate">
+                    <Anchor side="Top" relative="$parent/AnchorRow4" pos="Min" offset="0"/>
+                    <Anchor side="Left" relative="$parent/AnchorCol3" pos="Min" offset="0"/>
+
+                    <Frame type="Label" name="NameLabel">
+                        <Text val="@Trig/HeroSelection/CustomDiff/ExpMultiplier"/>
+                        <Tooltip val="@Trig/HeroSelection/CustomDiff/ExpMultiplierTooltip"/>
+                    </Frame>
+                </Frame>
+
+                <Frame type="Frame" name="BossAbilities" template="SSF_HeroSelection/GameModeCustomSettingTemplate">
+                    <Anchor side="Top" relative="$parent/AnchorRow5" pos="Min" offset="0"/>
+                    <Anchor side="Left" relative="$parent/AnchorCol1" pos="Min" offset="0"/>
+
+                    <Frame type="Label" name="NameLabel">
+                        <Text val="@Trig/HeroSelection/CustomDiff/BossAbilities"/>
+                        <Tooltip val="@Trig/HeroSelection/CustomDiff/BossAbilitiesTooltip"/>
+                    </Frame>
+                </Frame>
+                <Frame type="Frame" name="Upgrades" template="SSF_HeroSelection/GameModeCustomSettingTemplate">
+                    <Anchor side="Top" relative="$parent/AnchorRow5" pos="Min" offset="0"/>
+                    <Anchor side="Left" relative="$parent/AnchorCol2" pos="Min" offset="0"/>
+
+                    <Frame type="Label" name="NameLabel">
+                        <Text val="@Trig/HeroSelection/CustomDiff/Upgrades"/>
+                        <Tooltip val="@Trig/HeroSelection/CustomDiff/UpgradesTooltip"/>
+                    </Frame>
+                </Frame>
+                <Frame type="Frame" name="Lifes" template="SSF_HeroSelection/GameModeCustomSettingTemplate">
+                    <Anchor side="Top" relative="$parent/AnchorRow5" pos="Min" offset="0"/>
+                    <Anchor side="Left" relative="$parent/AnchorCol3" pos="Min" offset="0"/>
+
+                    <Frame type="Label" name="NameLabel">
+                        <Text val="@Trig/HeroSelection/CustomDiff/Lifes"/>
+                        <Tooltip val="@Trig/HeroSelection/CustomDiff/LifesTooltip"/>
+                    </Frame>
+                </Frame>
+
+                <Frame type="Frame" name="StartBiomass" template="SSF_HeroSelection/GameModeCustomSettingTemplate">
+                    <Anchor side="Top" relative="$parent/AnchorRow6" pos="Min" offset="0"/>
+                    <Anchor side="Left" relative="$parent/AnchorCol2" pos="Min" offset="0"/>
+
+                    <Frame type="Label" name="NameLabel">
+                        <Text val="@Trig/HeroSelection/CustomDiff/StartBiomass"/>
+                        <Tooltip val="@Trig/HeroSelection/CustomDiff/StartBiomassTooltip"/>
+                    </Frame>
+                </Frame>
+                <Frame type="Frame" name="StartExp" template="SSF_HeroSelection/GameModeCustomSettingTemplate">
+                    <Anchor side="Top" relative="$parent/AnchorRow6" pos="Min" offset="0"/>
+                    <Anchor side="Left" relative="$parent/AnchorCol1" pos="Min" offset="0"/>
+
+                    <Frame type="Label" name="NameLabel">
+                        <Text val="@Trig/HeroSelection/CustomDiff/StartExp"/>
+                        <Tooltip val="@Trig/HeroSelection/CustomDiff/StartExpTooltip"/>
+                    </Frame>
+                </Frame>
+                <Frame type="Frame" name="StartMutation" template="SSF_HeroSelection/GameModeCustomSettingTemplate">
+                    <Anchor side="Top" relative="$parent/AnchorRow6" pos="Min" offset="0"/>
+                    <Anchor side="Left" relative="$parent/AnchorCol3" pos="Min" offset="0"/>
+
+                    <Frame type="Label" name="NameLabel">
+                        <Text val="@Trig/HeroSelection/CustomDiff/StartMutation"/>
+                        <Tooltip val="@Trig/HeroSelection/CustomDiff/StartMutationTooltip"/>
+                    </Frame>
+                </Frame>
+
+                <Frame type="Frame" name="SkipToP1">
+                    <Anchor side="Top" relative="$parent/AnchorRow7" pos="Min" offset="0"/>
+                    <Anchor side="Left" relative="$parent/AnchorCol1" pos="Min" offset="0"/>
+                    <Width val="#GameModeCustomSettingWidth"/>
+                    <Height val="#GameModeCustomSettingHeight"/>
+            
+                    <Frame type="Label" name="NameLabel" template="SSF_Templates/LabelTemplate">
+                        <Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+                        <Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+                        <Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
+                        <Anchor side="Right" relative="$parent" pos="Min" offset="#GameModeCustomSettingLabelWidth"/>
+                        <Style val="aaDialogItemStyleRightMiddle"/>
+                        <AcceptsMouse val="True"/>
+                        
+                        <Text val="@Trig/HeroSelection/CustomDiff/SkipToP1"/>
+                        <Tooltip val="@Trig/HeroSelection/CustomDiff/SkipToP1Tooltip"/>
+                    </Frame>
+                    <Frame type="CheckBox" name="CheckBox" template="SSF_Templates/CheckBoxTemplate">
+                        <Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+                        <Anchor side="Left" relative="$parent/NameLabel" pos="Max" offset="#GameModeCustomSettingEditBoxGap"/>
+                        <Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
+                        <Anchor side="Right" relative="$parent/NameLabel" pos="Max" offset="44"/>
+
+                        <Height val="#GameModeCustomSettingHeight"/>
+                        <Width val="50"/>
+                        <Enabled val="False"/>
+                    </Frame>
+                </Frame>
+
+                <Frame type="Button" name="DiffPreset0" template="SSF_HeroSelection/GameModeCustomPresetTemplate">
+                    <Anchor side="Left" relative="$parent/AnchorCol1" pos="Min" offset="40"/>
+                    <Anchor side="Bottom" relative="$parent" pos="Max" offset="#BorderNegative"/>
+                    <Text val="@Trig/Generic/DiffNameShortColored/0"/>
+                </Frame>
+                <Frame type="Button" name="DiffPreset1" template="SSF_HeroSelection/GameModeCustomPresetTemplate">
+                    <Text val="@Trig/Generic/DiffNameShortColored/1"/>
+                </Frame>
+                <Frame type="Button" name="DiffPreset2" template="SSF_HeroSelection/GameModeCustomPresetTemplate">
+                    <Text val="@Trig/Generic/DiffNameShortColored/2"/>
+                </Frame>
+                <Frame type="Button" name="DiffPreset3" template="SSF_HeroSelection/GameModeCustomPresetTemplate">
+                    <Text val="@Trig/Generic/DiffNameShortColored/3"/>
+                </Frame>
+                <Frame type="Button" name="DiffPreset4" template="SSF_HeroSelection/GameModeCustomPresetTemplate">
+                    <Text val="@Trig/Generic/DiffNameShortColored/4"/>
+                </Frame>
+                <Frame type="Button" name="DiffPreset5" template="SSF_HeroSelection/GameModeCustomPresetTemplate">
+                    <Text val="@Trig/Generic/DiffNameShortColored/5"/>
+                </Frame>
+
+
+            </Frame>
+
+
+            <StateGroup name="Visible">
+                <DefaultState val="False"/>
+                <State name="False">
+                    <Action type="SendEvent" frame="$SSF_Playerboard/ExpandButton" event="ForceHide"/>
+                </State>
+                <State name="True">
+                    <When type="Property" frame="$this" operator="Equal" Visible="True"/>
+                    <Action type="SetAnchor" frame="$GameUI_ChatBar" side="Bottom" relative="$parent" pos="Max" offset="-5"/>
+                    <Action type="SetAnchor" frame="$GameUI_ChatBar/$parent/ChatDisplay" side="Bottom" relative="$GameUI_ChatBar" pos="Min" offset="-10"/>
+                    <Action type="SetAnchor" frame="$SSF_CustomUI/MenuOpener" side="Bottom" relative="$parent" pos="Max" offset="-6"/>
+                    <Action type="SendEvent" frame="$SSF_Playerboard/ExpandButton" event="ForceShow"/>
+                </State>
+            </StateGroup>
+        </Frame>
+    </Frame>
+
+</Desc>

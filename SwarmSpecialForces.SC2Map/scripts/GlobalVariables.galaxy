@@ -1,0 +1,236 @@
+// global consts
+const int gv_MaxAmountPlayers = 6;
+const int gv_MaxAmountDifficulties = 6;
+const int gv_MaxAmountParts = 3;
+const int gv_MaxAmountHeroes = 5;
+
+const int gv_GameTimeMax = 32768;
+
+const int gv_BasePlayer = 7;
+const int gv_EnemyPlayer = 14;
+const int gv_CollectiblePlayerEnemyAllied = 13;
+const int gv_CollectiblePlayerEnemyNeutral = 12;
+
+const int gv_Options_ControlGroup_Amount = 5;
+
+const fixed gv_Player_MaxExp = 96383.0;
+
+const int gv_Enemy_Boss_MaxCountAbility = 12;
+const int gv_Enemy_Boss_MaxCountBosses = 3;
+const int gv_AmountBosses = 14;
+
+// funcref blueprints
+bool blueprint_BossAbility_ExtraConditions(unitgroup ug, unit boss);
+typedef funcref<blueprint_BossAbility_ExtraConditions> Blueprint_BossAbility_ExtraConditions;
+
+// structs
+struct PlayerStruct {
+    //general
+    bool activeFlag;
+    bool spectatingFlag;
+    bank bankfile;
+    unit heroUnit;
+    unit overlord;
+
+    //not stored data
+    int lifes;
+    bool allowDanceCommand;
+    fixed spellPowerPercent;
+    fixed expBonusAdd;
+    fixed expBonusMult;
+    fixed biomassBonusAdd;
+    fixed biomassBonusMult;
+    fixed[gv_MaxAmountParts] startExp;
+    fixed[gv_MaxAmountParts] startBiomass;
+    fixed[gv_MaxAmountParts] startMutations;
+    fixed acvScore;
+    text acvScoreRank;
+    text acvScore_TextCustom;
+    bool acvScore_Custom;
+    bool acvScoreRank_Custom;
+    bool cyberneticUpgradesOnScientistCollection;
+    int heroUnlocked;               //data stored as bitflag
+    int upgrade_Dmg;
+    int upgrade_Armor;
+    int upgrade_Splash;
+    int upgrade_Atkspd;
+    int upgrade_Regen;
+
+    //save flags
+    bool saveFlag_Any;
+    bool saveFlag_Heavy;
+    bool saveFlag_Options;
+
+    //options
+    bool[gv_Options_ControlGroup_Amount] options_ControlGroup_Flag;
+    int[gv_Options_ControlGroup_Amount] options_ControlGroup_Group;
+    int[gv_MaxAmountHeroes] options_HeroSelection_HeroListIndex;
+    bool options_HeroSelection_Flag;
+    int options_HeroSelection_Hero;
+    bool options_SpeedrunsDetails_Flag;
+    bool options_HeroPanelVisible;
+    bool options_HivePanelVisible;
+    int options_InitialUnitSelection;
+
+    //bank stored data
+    int points;
+    int[gv_MaxAmountParts] wins;
+    int kills;
+    int scientists;
+    int essences;
+    int psiOrbs;
+    int moopyHats;
+    int [gv_MaxAmountParts][gv_MaxAmountDifficulties][gv_MaxAmountPlayers] speedrunsTime; //part x diff x (playerCount-1)
+    int flawless;       // bitflags
+    int[4] bossKills;   // bitflags 0: P0, 1: P1, 2+3: P2
+    bool tutorialCompleted;
+    int archivedAcv;    // saved as a bitflag
+};
+
+struct Hive_Upgrades {
+    fixed aura_Dmg;
+    fixed aura_Armor;
+    fixed aura_Energyreg;
+    fixed aura_Atkspd;
+    fixed aura_Lifereg;
+    fixed aura_Timescale;
+    fixed life;
+    fixed armor;
+    fixed lifereg;
+};
+
+struct bossAbility{
+    string abil;
+    int targetingType; //uses enum c_Enemy_BossFight_AbilityTypeTarget
+    fixed globalCooldown;
+    fixed selfCooldown;
+    fixed currentCooldown;
+    fixed castTime;
+    int charges; // -1 = infinite, 0 = no uses left
+    int minAmountTargets;
+    int bossIndex; //defaults to 0, so no need to change in Single Unit Boss Fights
+    unitfilter targetFilter;
+    int targetFilterController;
+    int allowedBossStates; //bitflag, at least one of these states must be active
+    int disallowedBossStates; //bitflag, no state can be active
+    int requiredBossAbilityLevel; //0 = easy, 5= hardcore
+    bool usesExtraConditions;
+    Blueprint_BossAbility_ExtraConditions extraConditions; // extra conditions for this ability to be valid to cast, does not apply to the target selected
+};
+
+struct BossFightData{
+    int amountBosses;
+    int remainingBosses;
+    unit [gv_Enemy_Boss_MaxCountBosses] boss;
+    int  [gv_Enemy_Boss_MaxCountBosses] bossState;
+    point[gv_Enemy_Boss_MaxCountBosses] bossIdlePoint;
+    fixed[gv_Enemy_Boss_MaxCountBosses] bossCastingTime;
+
+    region arena;
+
+    fixed abilityGlobalCooldown;
+    int amountAbility;
+    bossAbility[gv_Enemy_Boss_MaxCountAbility] ability;
+};
+
+// globals
+bool gv_BankSavingEnabled   = true;     // controls if the game is supposed to save any data to the bank
+bool gv_TestingMode         = false;    // controls if the debug menu shows up
+bool gv_GameActive          = false;    // TODO ???
+
+int gv_GameMode;                        // stores the selected game variant from the lobby, or if tutorial has been selected
+bool gv_ValidGame = true;               // controls if progress is enabled in a custom difficulty game
+
+PlayerStruct[gv_MaxAmountPlayers + 1] gv_PlayerStats;
+
+playergroup gv_ActivePG;                // pg of active players
+playergroup gv_StartingPG;              // pg of spectating players, does not contain players left
+playergroup gv_SpectatingPG;            // pg of all players at start
+int gv_PlayerAmount;                    // amount of active players
+int gv_PlayerAmountStart;               // amount of players at start of the game
+playergroup gv_NewPlayers;              // pg of players in their first game to show an additional dialog
+
+fixed gv_UpgradeCount;                  // amount of available upgrades for players
+
+int gv_Difficulty;                      // selected difficulty, in custom diff it represent the reward diff
+
+unit gv_BaseHive;
+int gv_BaseHiveLevel = 0;                               // hive level increases with part transitions if alive
+Hive_Upgrades[gv_MaxAmountParts] gv_Hive_Upgrades;      // storage for achievements for later parts
+trigger gv_Hive_Dies_Trigger;
+trigger gv_Hive_AnyKill_Trigger;
+bool gv_Hive_FlawlessFlag = true;                       // keeps track of the flawless achievement
+point gv_Hive_Position;
+
+int gv_Part_ActivePart = c_Part_None;                   // current active part
+region gv_Part_BaseRegion;
+region gv_Part_EnemyRegion;
+region gv_Part_BoundsRegion;
+point gv_Part_AttackPoint;
+point gv_Part_AttackWaypoint;
+region gv_Part_AttackWaypointRemoverRegion;
+revealer[gv_MaxAmountPlayers+1] gv_Part_BaseRevealer;
+point[gv_MaxAmountPlayers+1] gv_Part_PlayerSpawnPoints;
+int gv_Part_AmountObjectivesMax;                        // max boss amount in the current part
+int gv_Part_AmountObjectivesDefeated;                   // already killed bosses in the current part
+unitgroup gv_Part_ActiveSpawners;
+unitgroup gv_Part_AllStructures;                        // for spawn limit protection
+const int gv_Part_Areas_Amount = 16;
+bool[gv_Part_Areas_Amount] gv_Part_Areas_Open;
+unitgroup[gv_Part_Areas_Amount] gv_Part_Areas_Spawners;
+unit[gv_AmountBosses] gv_Bosses;
+unit gv_Observer_Unit;
+bool gv_Observer_AliveFlag = true;
+unit gv_NydusWorm_Unit;
+bool gv_NydusWorm_AliveFlag = true;
+unit gv_Atlantis_PylonColossus;
+int gv_Enemy_SpawnAmount;
+
+timer gv_SpawnTimer;
+timer gv_IdleTimer;
+
+int gv_Difficulty_Points;
+fixed gv_Difficulty_ExpMult;
+fixed gv_Difficulty_BiomassMult;
+fixed gv_Difficulty_SpawnMult;
+int gv_Difficulty_ScientistsAmount;
+int gv_Difficulty_EssenceAmount;
+bool gv_Difficulty_PsiOrbSpawns;
+fixed gv_Difficulty_UpgradeCountFactor;
+
+const int gv_Enemy_TypeMultiplier_Amount = 7;
+
+fixed[gv_Enemy_TypeMultiplier_Amount] gv_Enemy_TypeMultiplier_Biomass;      // multipliers based on enemy types defined in the kill reward userdata
+fixed[gv_Enemy_TypeMultiplier_Amount] gv_Enemy_TypeMultiplier_Exp;
+
+// achievement variables
+const int gv_Acv_Grind_AmountAchievements = 10;
+const int gv_Acv_Split_AmountAchievements = 17;
+const int gv_Acv_OneTime_AmountAchievements = 2;
+int[gv_MaxAmountPlayers+1][gv_Acv_Grind_AmountAchievements] gv_Acv_Grind_Frames;
+int[gv_MaxAmountPlayers+1][gv_Acv_OneTime_AmountAchievements] gv_Acv_OneTime_Frames;
+int[gv_MaxAmountPlayers+1][gv_Acv_Split_AmountAchievements] gv_Acv_Split_Frames;
+int[gv_MaxAmountPlayers+1][gv_MaxAmountParts][gv_MaxAmountDifficulties][2] gv_Acv_Speedruns_Frames;
+string[gv_Acv_Grind_AmountAchievements] gv_Acv_Grind_StringIdentifier;
+string[gv_Acv_OneTime_AmountAchievements] gv_Acv_OneTime_StringIdentifier;
+string[gv_Acv_Split_AmountAchievements] gv_Acv_Split_StringIdentifier;
+
+string[gv_MaxAmountHeroes] gv_Hero_UnitTypes;
+
+int gv_UI_MasterFrame;                  // stores the frame in which all SSF custom ui is defined in layout
+int gv_HeroSelection_MainFrame;
+
+void blueprint_Enemy_BossFight_Init(structref<BossFightData> data);
+typedef funcref<blueprint_Enemy_BossFight_Init> Blueprint_Enemy_BossFight_InitFunc;
+void blueprint_Enemy_BossFight_Addition(structref<BossFightData> data);
+typedef funcref<blueprint_Enemy_BossFight_Addition> Blueprint_Enemy_BossFight_AdditionFunc;
+
+bool gv_Enemy_BossFight_Handler_UpdateFlag;
+int gv_Enemy_BossFight_Handler_UpdateID;
+Blueprint_Enemy_BossFight_InitFunc gv_Enemy_BossFight_Handler_UpdateFunction;
+bool gv_Enemy_BossFight_Handler_AdditionFlag;
+Blueprint_Enemy_BossFight_AdditionFunc gv_Enemy_BossFight_Handler_Addition;
+
+int gv_Enemy_BossFight_Handler_FightID_Param;
+Blueprint_Enemy_BossFight_InitFunc gv_Enemy_BossFight_Handler_InitFunc;
+trigger gv_Enemy_BossFight_Handler_Trigger;

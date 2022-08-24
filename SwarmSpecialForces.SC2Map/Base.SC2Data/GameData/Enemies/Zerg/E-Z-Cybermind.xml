@@ -1,0 +1,1177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CEffectCreatePersistent id="BuryThem@ClusterOffsets">
+        <EditorCategories value=""/>
+        <WhichLocation Value="CasterPoint"/>
+        <OffsetVectorStartLocation Value="CasterPoint"/>
+        <PeriodCount value="45"/>
+        <PeriodicEffectArray value="BuryThem@ClusterDelay"/>
+        <PeriodicOffsetArray value="3,0,0"/>
+        <PeriodicOffsetArray value="6,0,0"/>
+        <PeriodicOffsetArray value="9,0,0"/>
+        <PeriodicOffsetArray value="12,0,0"/>
+        <PeriodicOffsetArray value="15,0,0"/>
+        <PeriodicOffsetArray value="18,0,0"/>
+        <PeriodicOffsetArray value="21,0,0"/>
+        <PeriodicOffsetArray value="24,0,0"/>
+        <PeriodicOffsetArray value="27,0,0"/>
+        <PeriodicOffsetArray value="4.5,2.598,0"/>
+        <PeriodicOffsetArray value="7.5,2.598,0"/>
+        <PeriodicOffsetArray value="10.5,2.598,0"/>
+        <PeriodicOffsetArray value="13.5,2.598,0"/>
+        <PeriodicOffsetArray value="16.5,2.598,0"/>
+        <PeriodicOffsetArray value="19.5,2.598,0"/>
+        <PeriodicOffsetArray value="22.5,2.598,0"/>
+        <PeriodicOffsetArray value="25.5,2.598,0"/>
+        <PeriodicOffsetArray value="6,5.196,0"/>
+        <PeriodicOffsetArray value="9,5.196,0"/>
+        <PeriodicOffsetArray value="12,5.196,0"/>
+        <PeriodicOffsetArray value="15,5.196,0"/>
+        <PeriodicOffsetArray value="18,5.196,0"/>
+        <PeriodicOffsetArray value="21,5.196,0"/>
+        <PeriodicOffsetArray value="24,5.196,0"/>
+        <PeriodicOffsetArray value="7.5,7.794,0"/>
+        <PeriodicOffsetArray value="10.5,7.794,0"/>
+        <PeriodicOffsetArray value="13.5,7.794,0"/>
+        <PeriodicOffsetArray value="16.5,7.794,0"/>
+        <PeriodicOffsetArray value="19.5,7.794,0"/>
+        <PeriodicOffsetArray value="22.5,7.794,0"/>
+        <PeriodicOffsetArray value="9,10.392,0"/>
+        <PeriodicOffsetArray value="12,10.392,0"/>
+        <PeriodicOffsetArray value="15,10.392,0"/>
+        <PeriodicOffsetArray value="18,10.392,0"/>
+        <PeriodicOffsetArray value="21,10.392,0"/>
+        <PeriodicOffsetArray value="10.5,12.99,0"/>
+        <PeriodicOffsetArray value="13.5,12.99,0"/>
+        <PeriodicOffsetArray value="16.5,12.99,0"/>
+        <PeriodicOffsetArray value="19.5,12.99,0"/>
+        <PeriodicOffsetArray value="12,15.588,0"/>
+        <PeriodicOffsetArray value="15,15.588,0"/>
+        <PeriodicOffsetArray value="18,15.588,0"/>
+        <PeriodicOffsetArray value="13.5,18.186,0"/>
+        <PeriodicOffsetArray value="16.5,18.186,0"/>
+        <PeriodicOffsetArray value="15,20.784,0"/>
+        <PeriodicPeriodArray value="0"/>
+    </CEffectCreatePersistent>
+    <CEffectCreatePersistent id="BuryThem@ClusterDelay">
+        <EditorCategories value=""/>
+        <ExpireDelay value="2"/>
+        <ExpireEffect value="BuryThem@ClusterSearch"/>
+        <ValidatorArray value="BuryThem@CheckForTargets"/>
+    </CEffectCreatePersistent>
+    <CEffectEnumArea id="BuryThem@ClusterSearch">
+        <EditorCategories value=""/>
+        <AreaArray Radius="1.5" Effect="BuryThem@Dmg"/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,RawResource,HarvestableResource,Missile,Item,Hidden,Invulnerable"/>
+    </CEffectEnumArea>
+    <CEffectDamage id="BuryThem@Dmg">
+        <EditorCategories value=""/>
+        <Amount value="4000"/>
+        <ValidatorArray value="noMarkers"/>
+    </CEffectDamage>
+    <CEffectSet id="BuryThem@InitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="BuryThem@AlreadyCastingNoWeapons"/>
+        <EffectArray value="BuryThem@TriangleOffsets"/>
+    </CEffectSet>
+    <CEffectCreatePersistent id="BuryThem@TriangleOffsets">
+        <EditorCategories value=""/>
+        <WhichLocation Value="CasterPoint"/>
+        <OffsetVectorStartLocation Value="CasterPoint"/>
+        <OffsetVectorEndLocation Value="CasterPoint"/>
+        <PeriodCount value="6"/>
+        <PeriodicEffectArray value="BuryThem@ClusterOffsets"/>
+        <PeriodicOffsetArray value="1,0,0"/>
+        <PeriodicOffsetArray value="0.5,0.866,0"/>
+        <PeriodicOffsetArray value="-0.5,0.866,0"/>
+        <PeriodicOffsetArray value="-1,0,0"/>
+        <PeriodicOffsetArray value="0.5,-0.866,0"/>
+        <PeriodicOffsetArray value="-0.5,-0.866,0"/>
+        <PeriodicPeriodArray value="0"/>
+        <Marker>
+            <MatchFlags index="Id" value="1"/>
+        </Marker>
+    </CEffectCreatePersistent>
+    <CEffectApplyBehavior id="BuryThem@AlreadyCastingNoWeapons" parent="AlreadyCastingNoWeapons"/>
+    <CEffectSet id="UnstableTeleport@Cleanup">
+        <EditorCategories value=""/>
+    </CEffectSet>
+    <CEffectSet id="UnstableTeleport@InitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="UnstableTeleport@AlreadyCastingNoWeapons"/>
+        <EffectArray value="UnstableTeleport@Timer"/>
+    </CEffectSet>
+    <CEffectCreatePersistent id="UnstableTeleport@Timer">
+        <EditorCategories value=""/>
+        <WhichLocation Value="CasterUnit"/>
+        <FinalEffect value="UnstableTeleport@Cleanup"/>
+        <PeriodCount value="360"/>
+        <PeriodicValidator value="CasterNotDead"/>
+        <PeriodicEffectArray value="EmptySet"/>
+        <PeriodicPeriodArray value="0.25"/>
+    </CEffectCreatePersistent>
+    <CEffectApplyBehavior id="UnstableTeleport@AlreadyCastingNoWeapons" parent="AlreadyCastingNoWeapons"/>
+    <CEffectDamage id="UnstableTeleport@Dmg">
+        <EditorCategories value=""/>
+        <VitalFractionMax index="Life" value="0.1"/>
+    </CEffectDamage>
+    <CEffectRandomPointInCircle id="PushAndPull@RandomAngle">
+        <EditorCategories value=""/>
+        <Effect value="PushAndPull@AreaContoller"/>
+        <Radius value="4"/>
+        <RestrictToCircumference value="1"/>
+    </CEffectRandomPointInCircle>
+    <CEffectCreatePersistent id="PushAndPull@PushForceController">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetUnit"/>
+        <PeriodCount value="4"/>
+        <PeriodicEffectArray value="PushAndPull@PushForce"/>
+        <PeriodicPeriodArray value="0.0625"/>
+    </CEffectCreatePersistent>
+    <CEffectCreatePersistent id="PushAndPull@PullForceController">
+        <EditorCategories value=""/>
+        <PeriodCount value="4"/>
+        <PeriodicEffectArray value="PushAndPull@PullForce"/>
+        <PeriodicPeriodArray value="0.0625"/>
+        <WhichLocation Value="TargetUnit"/>
+    </CEffectCreatePersistent>
+    <CEffectCreatePersistent id="PushAndPull@AreaContoller">
+        <EditorCategories value=""/>
+        <WhichLocation Value="CasterUnit"/>
+        <PeriodCount value="8"/>
+        <PeriodicEffectArray value="PushAndPull@PullPersistent"/>
+        <PeriodicEffectArray value="PushAndPull@PushPersistent"/>
+        <PeriodicOffsetArray value="0.25,0,0"/>
+        <PeriodicOffsetArray value="0,0.25,0"/>
+        <PeriodicOffsetArray value="-0.25,0,0"/>
+        <PeriodicOffsetArray value="0,-0.25,0"/>
+        <PeriodicOffsetArray value="0.25,0.25,0"/>
+        <PeriodicOffsetArray value="-0.25,0.25,0"/>
+        <PeriodicOffsetArray value="-0.25,-0.25,0"/>
+        <PeriodicOffsetArray value="0.25,-0.25,0"/>
+        <PeriodicPeriodArray value="0"/>
+        <PeriodicPeriodArray value="0"/>
+        <PeriodicPeriodArray value="0"/>
+        <PeriodicPeriodArray value="0"/>
+        <PeriodicPeriodArray value="3.1"/>
+        <PeriodicPeriodArray value="0"/>
+        <PeriodicPeriodArray value="0"/>
+        <PeriodicPeriodArray value="0"/>
+        <PeriodicValidator value="CasterNotDead"/>
+    </CEffectCreatePersistent>
+    <CEffectDamage id="PushAndPull@Dmg">
+        <EditorCategories value=""/>
+        <Amount value="2500"/>
+    </CEffectDamage>
+    <CEffectSet id="PushAndPull@InitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="PushAndPull@AlreadyCastingNoWeapons"/>
+        <EffectArray value="PushAndPull@RandomAngle"/>
+    </CEffectSet>
+    <CEffectApplyBehavior id="PushAndPull@MinimumSpeed">
+        <EditorCategories value=""/>
+    </CEffectApplyBehavior>
+    <CEffectApplyForce id="PushAndPull@PullForce">
+        <EditorCategories value=""/>
+        <Amount value="-1"/>
+    </CEffectApplyForce>
+    <CEffectSet id="PushAndPull@PullImpactSet">
+        <EditorCategories value=""/>
+        <EffectArray value="PushAndPull@Dmg"/>
+        <EffectArray value="PushAndPull@MinimumSpeed"/>
+        <EffectArray value="PushAndPull@PullForceController"/>
+    </CEffectSet>
+    <CEffectCreatePersistent id="PushAndPull@PullPersistent">
+        <EditorCategories value=""/>
+        <PeriodCount value="1"/>
+        <PeriodicEffectArray value="PushAndPull@PullSearch"/>
+        <PeriodicPeriodArray value="3"/>
+        <PeriodicValidator value="CasterNotDead"/>
+    </CEffectCreatePersistent>
+    <CEffectEnumArea id="PushAndPull@PullSearch">
+        <EditorCategories value=""/>
+        <LaunchLocation Value="TargetPoint"/>
+        <AreaArray>
+            <Arc value="45"/>
+            <Radius value="30"/>
+            <FacingAdjustment value="180"/>
+            <Effect value="PushAndPull@PullImpactSet"/>
+        </AreaArray>
+        <SearchFilters value="-;Player,Ally,Neutral,RawResource,HarvestableResource,Missile,Item,Dead,Hidden,Invulnerable"/>
+        <SearchFlags index="OffsetAreaByAngle" value="0"/>
+        <ImpactLocation Value="CasterPoint"/>
+    </CEffectEnumArea>
+    <CEffectApplyForce id="PushAndPull@PushForce">
+        <EditorCategories value=""/>
+        <Amount value="1"/>
+    </CEffectApplyForce>
+    <CEffectSet id="PushAndPull@PushImpactSet">
+        <EditorCategories value=""/>
+        <EffectArray value="PushAndPull@Dmg"/>
+        <EffectArray value="PushAndPull@MinimumSpeed"/>
+        <EffectArray value="PushAndPull@PushForceController"/>
+    </CEffectSet>
+    <CEffectEnumArea id="PushAndPull@PushSearch">
+        <EditorCategories value=""/>
+        <LaunchLocation Value="TargetPoint"/>
+        <AreaArray>
+            <Arc value="45"/>
+            <Radius value="30"/>
+            <FacingAdjustment value="180"/>
+            <Effect value="PushAndPull@PushImpactSet"/>
+        </AreaArray>
+        <SearchFilters value="-;Player,Ally,Neutral,RawResource,HarvestableResource,Missile,Item,Dead,Hidden,Invulnerable"/>
+        <SearchFlags index="OffsetAreaByAngle" value="0"/>
+        <ImpactLocation Value="CasterPoint"/>
+    </CEffectEnumArea>
+    <CEffectCreatePersistent id="PushAndPull@PushPersistent">
+        <EditorCategories value=""/>
+        <PeriodCount value="1"/>
+        <PeriodicEffectArray value="PushAndPull@PushSearch"/>
+        <PeriodicPeriodArray value="3"/>
+        <PeriodicValidator value="CasterNotDead"/>
+    </CEffectCreatePersistent>
+    <CEffectApplyBehavior id="PushAndPull@AlreadyCastingNoWeapons" parent="AlreadyCastingNoWeapons"/>
+    <CEffectApplyBehavior id="CybermindShield@DeathResponse">
+        <EditorCategories value=""/>
+    </CEffectApplyBehavior>
+    <CEffectSet id="CybermindShield@GeneratorSpawnSet">
+        <EditorCategories value=""/>
+        <EffectArray value="CybermindShield@TrackerAddTarget"/>
+        <EffectArray value="CybermindShield@DeathResponse"/>
+    </CEffectSet>
+    <CEffectCreatePersistent id="CybermindShield@GeneratorExplosionDelay">
+        <EditorCategories value=""/>
+        <WhichLocation Value="SourcePoint"/>
+        <ExpireDelay value="3"/>
+        <ExpireEffect value="CybermindShield@GeneratorExplosionSearch"/>
+    </CEffectCreatePersistent>
+    <CEffectDamage id="CybermindShield@GeneratorExplosionDmg">
+        <ValidatorArray value="CybermindShield@GeneratorExplosion"/>
+        <EditorCategories value=""/>
+        <Amount value="5000"/>
+    </CEffectDamage>
+    <CEffectEnumArea id="CybermindShield@GeneratorExplosionSearch">
+        <EditorCategories value=""/>
+        <LaunchLocation Value="SourcePoint"/>
+        <ImpactLocation Value="SourcePoint"/>
+        <SearchFilters value="-;Player,Ally,Neutral,Missile,Item,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="8" Effect="CybermindShield@GeneratorExplosionDmg"/>
+    </CEffectEnumArea>
+    <CEffectAddTrackedUnit id="CybermindShield@TrackerAddTarget">
+        <EditorCategories value=""/>
+        <BehaviorLink value="CybermindShield@Tracker"/>
+        <TrackedUnit Value="Target"/>
+    </CEffectAddTrackedUnit>
+    <CEffectDamage id="BombardThem@Dmg">
+        <EditorCategories value=""/>
+        <Amount value="2500"/>
+    </CEffectDamage>
+    <CEffectEnumArea id="BombardThem@ImpactSearch">
+        <EditorCategories value=""/>
+        <SearchFilters value="-;Player,Ally,Neutral,RawResource,HarvestableResource,Missile,Item,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="2" Effect="BombardThem@Dmg"/>
+    </CEffectEnumArea>
+    <CEffectSet id="BombardThem@ImpactSet">
+        <EditorCategories value=""/>
+        <EffectArray value="BombardThem@ImpactSearch"/>
+    </CEffectSet>
+    <CEffectSet id="BombardThem@InitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="BombardThem@AlreadyCastingNoWeapons"/>
+        <EffectArray value="BombardThem@SearchTargets"/>
+    </CEffectSet>
+    <CEffectLaunchMissile id="BombardThem@Missile">
+        <EditorCategories value=""/>
+        <ImpactLocation Value="TargetPoint"/>
+        <ImpactEffect value="BombardThem@ImpactSet"/>
+        <AmmoUnit value="BombardThem@Missile"/>
+    </CEffectLaunchMissile>
+    <CEffectEnumArea id="BombardThem@SearchTargets">
+        <EditorCategories value=""/>
+        <SearchFilters value="-;Player,Ally,Neutral,Worker,RawResource,HarvestableResource,Missile,Item,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="27" Effect="BombardThem@Missile"/>
+    </CEffectEnumArea>
+    <CEffectApplyBehavior id="BombardThem@AlreadyCastingNoWeapons" parent="AlreadyCastingNoWeapons"/>
+    <CEffectEnumTrackedUnits id="MechaOvermindOverseerKillGet">
+        <EditorCategories value=""/>
+        <BehaviorLink value="MechaOvermindWeaponOverseerTracker"/>
+        <Effect value="KillTargetDeathNormal"/>
+    </CEffectEnumTrackedUnits>
+    <CEffectDamage id="MechaOvermindWeaponDmg" parent="DU_WEAP">
+        <EditorCategories value=""/>
+        <Amount value="3000"/>
+        <AttributeFactor index="Armored" value="0.35"/>
+    </CEffectDamage>
+    <CEffectAddTrackedUnit id="MechaOvermindWeaponOverseerAddTracking">
+        <EditorCategories value=""/>
+        <BehaviorLink value="MechaOvermindWeaponOverseerTracker"/>
+        <TrackedUnit Value="Target"/>
+    </CEffectAddTrackedUnit>
+    <CEffectCreateUnit id="MechaOvermindWeaponOverseerCreate">
+        <EditorCategories value=""/>
+        <SpawnEffect value="MechaOvermindWeaponOverseerAddTracking"/>
+        <SpawnUnit value="MechaOverseer"/>
+    </CEffectCreateUnit>
+    <CEffectApplyBehavior id="MechaOvermindWeaponOverseerRangeTracking">
+        <EditorCategories value=""/>
+    </CEffectApplyBehavior>
+    <CEffectIssueOrder id="MechaOvermindWeaponOverseerReturn">
+        <EditorCategories value=""/>
+        <Abil value="move"/>
+        <Target Value="CasterUnit"/>
+    </CEffectIssueOrder>
+    <CEffectSet id="MechaOvermindWeaponSet">
+        <EditorCategories value=""/>
+        <EffectArray value="MechaOvermindWeaponOverseerIssueOrder"/>
+        <EffectArray value="MechaOvermindWeaponOverseerRangeTracking"/>
+        <EffectArray value="MechaOvermindWeaponLaunchMissile"/>
+    </CEffectSet>
+    <CEffectEnumArea id="MechaOvermindWeaponDmgSearch">
+        <EditorCategories value=""/>
+        <SearchFilters value="Visible;Player,Ally,Neutral,Missile,Item,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="1.75" Effect="MechaOvermindWeaponDmg"/>
+    </CEffectEnumArea>
+    <CEffectLaunchMissile id="MechaOvermindWeaponLaunchMissile">
+        <EditorCategories value=""/>
+        <ImpactEffect value="MechaOvermindWeaponDmgSearch"/>
+        <AmmoUnit value="MechaOvermindWeaponMissile"/>
+    </CEffectLaunchMissile>
+    <CEffectEnumTrackedUnits id="MechaOvermindWeaponOverseerGet">
+        <EditorCategories value=""/>
+        <BehaviorLink value="MechaOvermindWeaponOverseerTracker"/>
+        <Effect value="MechaOvermindWeaponSet"/>
+    </CEffectEnumTrackedUnits>
+    <CEffectIssueOrder id="MechaOvermindWeaponOverseerIssueOrder">
+        <EditorCategories value=""/>
+        <Abil value="move"/>
+        <Target Effect="MechaOvermindWeaponOverseerGet" Value="TargetUnit"/>
+    </CEffectIssueOrder>
+    <CAbilEffectInstant id="BuryThem">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="BuryThem@InitialSet"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="BuryThem"/>
+    </CAbilEffectInstant>
+    <CAbilEffectInstant id="UnstableTeleport">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="UnstableTeleport@InitialSet"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="UnstableTeleport"/>
+    </CAbilEffectInstant>
+    <CAbilEffectInstant id="PushAndPull">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="PushAndPull@InitialSet"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="PushAndPull"/>
+    </CAbilEffectInstant>
+    <CAbilEffectInstant id="BombardThem">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="BombardThem@InitialSet"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="BombardThem"/>
+    </CAbilEffectInstant>
+    <CValidatorLocationEnumArea id="BuryThem@CheckForTargets">
+        <AreaArray Radius="3.5"/>
+        <LaunchLocation Value="TargetPoint"/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,RawResource,HarvestableResource,Missile,Item,Hidden,Invulnerable"/>
+    </CValidatorLocationEnumArea>
+    <CValidatorUnitType id="CybermindShield@Generator">
+        <Value value="CybermindShield@Generator"/>
+    </CValidatorUnitType>
+    <CValidatorCombine id="CybermindShield@GeneratorExplosion">
+        <Type value="And"/>
+        <CombineArray value="TargetNotAcrossCliffFromSource"/>
+    </CValidatorCombine>
+    <CValidatorLocationEnumArea id="CybermindShield@NotWithin10Generator">
+        <AreaArray Radius="10" Validator="CybermindShield@Generator"/>
+        <Compare value="Eq"/>
+        <SearchFilters value="-;Dead"/>
+    </CValidatorLocationEnumArea>
+    <CValidatorCompareTrackedUnitsCount id="CybermindShield@Stage0TrackerCount">
+        <Value value="5"/>
+        <BehaviorLink value="CybermindShield@Tracker"/>
+        <TrackedUnitFilters value="-;Dead"/>
+    </CValidatorCompareTrackedUnitsCount>
+    <CValidatorCompareTrackedUnitsCount id="CybermindShield@Stage1TrackerCount">
+        <Value value="4"/>
+        <BehaviorLink value="CybermindShield@Tracker"/>
+        <TrackedUnitFilters value="-;Dead"/>
+    </CValidatorCompareTrackedUnitsCount>
+    <CValidatorCompareTrackedUnitsCount id="CybermindShield@Stage2TrackerCount">
+        <Value value="3"/>
+        <BehaviorLink value="CybermindShield@Tracker"/>
+        <TrackedUnitFilters value="-;Dead"/>
+    </CValidatorCompareTrackedUnitsCount>
+    <CValidatorCompareTrackedUnitsCount id="CybermindShield@Stage3TrackerCount">
+        <Value value="2"/>
+        <BehaviorLink value="CybermindShield@Tracker"/>
+        <TrackedUnitFilters value="-;Dead"/>
+    </CValidatorCompareTrackedUnitsCount>
+    <CValidatorCompareTrackedUnitsCount id="CybermindShield@Stage4TrackerCount">
+        <Value value="1"/>
+        <BehaviorLink value="CybermindShield@Tracker"/>
+        <TrackedUnitFilters value="-;Dead"/>
+    </CValidatorCompareTrackedUnitsCount>
+    <CValidatorUnitFilters id="MechaOvermindWeaponOriginTargetNotDead">
+        <WhichUnit Effect="MechaOvermindWeaponOverseerGet"/>
+        <Filters value="-;Dead"/>
+    </CValidatorUnitFilters>
+    <CButton id="BuryThem" parent="EnemyBossAbilityButton"/>
+    <CButton id="UnstableTeleport">
+        <Icon value="Assets\Textures\btn-ability-alarak-massteleport.dds"/>
+    </CButton>
+    <CButton id="PushAndPull">
+        <Icon value="Assets\Textures\btn-ability-alarak-massteleport.dds"/>
+    </CButton>
+    <CButton id="BombardThem">
+        <Icon value="Assets\Textures\btn-ability-alarak-massteleport.dds"/>
+    </CButton>
+    <CActorDoodad id="CybermindDeathDebris">
+        <EditorCategories value=""/>
+    </CActorDoodad>
+    <CActorModel id="BuryThem@FallingRocks" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On Terms="Effect.BuryThem@ClusterSearch.Start" Send="Create"/>
+    </CActorModel>
+    <CActorSplat id="BuryThem@Splat">
+        <VisibleTo index="All" value="1"/>
+        <EditorCategories value=""/>
+        <On Terms="Effect.BuryThem@ClusterDelay.Start" Send="Create"/>
+        <On Terms="ActorCreation" Send="AnimBracketStart BSD Birth Stand Death"/>
+        <On Terms="Effect.BuryThem@ClusterDelay.Stop" Send="Destroy"/>
+    </CActorSplat>
+    <CActorModel id="UnstableTeleport@TpStart" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On Terms="Behavior.UnstableTeleport@RecentlyTeleported.Create" Send="Create"/>
+        <Model value="UnstableTeleport@Dmg"/>
+    </CActorModel>
+    <CActorModel id="UnstableTeleport@TeleporterBirth" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+    </CActorModel>
+    <CActorModel id="UnstableTeleport@Dmg" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On Terms="Effect.UnstableTeleport@Dmg.Start" Send="Create"/>
+    </CActorModel>
+    <CActorUnit id="UnstableTeleport@TeleporterBlue" parent="GenericUnitStandard" unitName="UnstableTeleport@TeleporterBlue">
+        <On Terms="ActorCreation" Send="Create UnstableTeleport@TeleporterBirth"/>
+    </CActorUnit>
+    <CActorUnit id="UnstableTeleport@TeleporterRed" parent="GenericUnitStandard" unitName="UnstableTeleport@TeleporterRed">
+        <On Terms="ActorCreation" Send="Create UnstableTeleport@TeleporterBirth"/>
+    </CActorUnit>
+    <CActorUnit id="UnstableTeleport@TeleporterGreen" parent="GenericUnitStandard" unitName="UnstableTeleport@TeleporterGreen">
+        <On Terms="ActorCreation" Send="Create UnstableTeleport@TeleporterBirth"/>
+    </CActorUnit>
+    <CActorSiteOpLocalOffset id="PushAndPull@PushOffset">
+        <EditorCategories value=""/>
+        <LocalOffset value="0.000000,-1.000000,2.000000"/>
+    </CActorSiteOpLocalOffset>
+    <CActorSiteOpLocalOffset id="PushAndPull@PullOffset">
+        <EditorCategories value=""/>
+        <LocalOffset value="0.000000,38.000000,2.000000"/>
+    </CActorSiteOpLocalOffset>
+    <CActorModel id="PushAndPull@Push" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On Terms="Effect.PushAndPull@PushSearch.Start; At Effect" Send="Create"/>
+        <Host Scope="Effect"/>
+        <HostSiteOps Ops="SOpTargetPoint SOpForwardCasterPoint PushAndPull@PushOffset SOpRotateDownwards2"/>
+        <Model value="PushAndPull@Force"/>
+    </CActorModel>
+    <!-- Pull animation isnt actually correct, because i couldnt manage to have it facing the correct diretction.
+         Now it just moves them over to the opposite direction which happen to be the same pulling effect. -->
+    <CActorModel id="PushAndPull@Pull" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <Model value="PushAndPull@Force"/>
+        <On Terms="Effect.PushAndPull@PullSearch.Start; At Effect" Send="Create"/>
+        <Host Scope="Effect"/>
+        <HostSiteOps Ops="SOpTargetPoint SOpForwardCasterPointInverted PushAndPull@PullOffset SOpRotateDownwardsBackwards"/>
+    </CActorModel>
+    <CActorModel id="PushAndPull@PullArea" parent="ModelAddition">
+        <EditorCategories value=""/>
+        <On Terms="Effect.PushAndPull@PullPersistent.Start" Send="Create"/>
+        <On Terms="Effect.PushAndPull@PullPersistent.Stop" Send="Destroy"/>
+        <On Terms="ActorCreation" Send="SetTintColor 255,128,0"/>
+        <Host Subject="_Unit" Scope="Caster"/>
+        <HostSiteOps Ops="SOpAttachOrigin SOpForwardTargetPoint"/>
+        <Model value="PushAndPull@Area"/>
+        <ModelFlags index="AutomateGlobalLoops" value="1"/>
+    </CActorModel>
+    <CActorModel id="PushAndPull@PushArea" parent="ModelAddition">
+        <EditorCategories value=""/>
+        <On Terms="Effect.PushAndPull@PushPersistent.Start" Send="Create"/>
+        <On Terms="Effect.PushAndPull@PushPersistent.Stop" Send="Destroy"/>
+        <On Terms="ActorCreation" Send="SetTintColor 0,255,255"/>
+        <Host Subject="_Unit" Scope="Caster"/>
+        <HostSiteOps Ops="SOpAttachOrigin SOpForwardTargetPoint"/>
+        <Model value="PushAndPull@Area"/>
+        <ModelFlags index="AutomateGlobalLoops" value="1"/>
+    </CActorModel>
+    <CActorModel id="CybermindShield@Stun" parent="ModelAddition">
+        <EditorCategories value=""/>
+        <On Terms="Behavior.CybermindShield@Stun.On" Send="Create"/>
+        <On Terms="Behavior.CybermindShield@Stun.Off" Send="AnimBracketStop BSD"/>
+        <HostSiteOps Ops="SOpHigherBy1"/>
+    </CActorModel>
+    <CActorModel id="CybermindShield@GeneratorExplosion" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On Terms="Effect.CybermindShield@GeneratorExplosionSearch.Start" Send="Create"/>
+    </CActorModel>
+    <CActorModel id="CybermindShield@GeneratorExplosionChargeUp" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On Terms="Effect.CybermindShield@GeneratorExplosionDelay.Start" Send="Create"/>
+        <Scale value="2.000000"/>
+    </CActorModel>
+    <CActorModel id="CybermindShield@GeneratorExplosionSafeZone" parent="ModelAddition">
+        <EditorCategories value=""/>
+        <On Terms="UnitBirth.CybermindShield@Generator" Send="Create"/>
+        <Scale value="1.600000,1.600000,1.000000"/>
+    </CActorModel>
+    <CActorUnit id="CybermindShield@Generator" parent="GenericUnitStandard" unitName="CybermindShield@Generator">
+        <EditorCategories value=""/>
+        <DeathArray index="Normal" ModelLink="CybermindShield@GeneratorDeath"/>
+        <HighlightTooltip value="Unit/Name/Bogus"/>
+    </CActorUnit>
+    <CActorModel id="CybermindShield@ShieldStage0" parent="ModelAddition">
+        <EditorCategories value=""/>
+        <On Terms="Behavior.CybermindShield@Stage0.On" Send="Create"/>
+        <On Terms="Behavior.CybermindShield@Stage0.On" Send="SetTintColor 255,0,255"/>
+        <On Terms="Behavior.CybermindShield@Stage1.On" Send="SetTintColor 255,0,0"/>
+        <On Terms="Behavior.CybermindShield@Stage2.On" Send="SetTintColor 255,128,0"/>
+        <On Terms="Behavior.CybermindShield@Stage3.On" Send="SetTintColor 255,255,0"/>
+        <On Terms="Behavior.CybermindShield@Stage4.On" Send="SetTintColor 0,255,0"/>
+        <On Terms="Behavior.CybermindShield@Stage4.Off" Send="AnimBracketStop BSD"/>
+        <HostSiteOps Ops="SOpHigherBy1"/>
+        <Model value="CybermindShield@Shield"/>
+    </CActorModel>
+    <CActorModel id="BombardThem@Impact" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On Terms="Effect.BombardThem@ImpactSearch.Start" Send="Create"/>
+    </CActorModel>
+    <CActorModel id="BombardThem@MarkedArea" parent="ModelAnimationStyleContinuous">
+        <EditorCategories value=""/>
+        <On Terms="Effect.BombardThem@Missile.Start" Send="Create"/>
+        <On Terms="Effect.BombardThem@ImpactSearch.Start" Send="AnimBracketStop BSD"/>
+        <HostSiteOps Ops="SOpTargetPoint" HoldPosition="1"/>
+    </CActorModel>
+    <CActorMissile id="BombardThem@Missile" parent="GenericAttackMissile" unitName="BombardThem@Missile">
+        <EditorCategories value=""/>
+    </CActorMissile>
+    <CActorUnit id="MechaOvermind" parent="GenericUnitStandard" unitName="MechaOvermind">
+        <Model value="Cybermind"/>
+        <BuildModel value="Overmind"/>
+        <DeathArray index="Normal" ModelLink="CybermindDeath"/>
+        <PlacementModel value="Overmind"/>
+        <PortraitModel value="Hatchery_Mecha_Portrait"/>
+        <BarOffset value="65"/>
+        <BarWidth value="135"/>
+        <LifeArmorIcon value="Assets\Textures\btn-armor-zerg-building.dds"/>
+        <FogVisibility value="Dimmed"/>
+        <CustomUnitStatusFrame value="SSF_UnitStatus/BossStatus"/>
+        <MinimapIcon value="Assets\Icons\btn-unit-zerg-overmind-mecha-collection.dds"/>
+        <MinimapIconScale value="0.300000"/>
+        <MinimapIconBackground value="Assets\MinimapBackground.dds"/>
+        <MinimapIconBackgroundScale value="1.100000"/>
+        <MinimapIconBackgroundTintColor value="255,255,0,0"/>
+        <UnitFlags index="SuppressDefaultStatusBar" value="1"/>
+        <Wireframe>
+            <Image value="Assets\Wireframes\Mecha\wireframe-zerg-overmind-mecha.dds"/>
+        </Wireframe>
+    </CActorUnit>
+    <CActorMissile id="MechaOvermindWeaponMissile" parent="GenericAttackMissile" unitName="MechaOvermindWeaponMissile">
+        <EditorCategories value=""/>
+    </CActorMissile>
+    <CActorAction id="MechaOvermindWeaponMissileAction" parent="GenericAttack" effectImpact="MechaOvermindWeaponDmgSearch" effectLaunch="MechaOvermindWeaponLaunchMissile">
+        <EditorCategories value=""/>
+        <ImpactSiteOps Ops="SOpShadow"/>
+        <ImpactMap index="None" Model="MechaOvermindWeaponMissileImpact" Sound="VikingFighter_AttackImpact"/>
+        <Missile value="MechaOvermindWeaponMissile"/>
+        <ShieldFlashType value="None"/>
+    </CActorAction>
+    <CActorUnit id="MechaOverseer" parent="GenericUnitStandard" unitName="MechaOverseer">
+        <Aliases value="_UnitLarge"/>
+        <Macros value="PhysicsDeathsSwarmAir"/>
+        <Macros value="PhysicsDeathsVoidAir"/>
+        <On Terms="AbilMorph.*.Finish; MorphTo MechaOverseer" Send="Create"/>
+        <On Terms="AbilMorph.*.Start; MorphFrom MechaOverseer" Send="Destroy"/>
+        <On Terms="AbilMorph.MorphToOverseer.Finish" Send="$Birth 0 0.000000 -1.000000 0.000000"/>
+        <On Terms="UnitBirth.OverseerSiegeMode" Send="Create"/>
+        <On Terms="UnitBirth.OverseerSiegeMode" Send="Create OverseerOversightEyeStalkAddition"/>
+        <On Terms="AbilMorph.*.Start; MorphTo OverseerSiegeMode" Send="Create OverseerOversightEyeStalkAddition"/>
+        <On Terms="AbilMorph.*.Start; MorphFrom OverseerSiegeMode" Target="OverseerOversightEyeStalkAddition" Send="AnimBracketStop BSD"/>
+        <On Terms="UnitHeightUpdate.*.Land" Send="Create Overseer_Land"/>
+        <On Terms="Abil.SpawnChangeling.SourceCastStart" Send="$Spell"/>
+        <On Terms="Abil.SpawnChangelingTarget.SourceCastStart" Send="$Spell"/>
+        <On Terms="Abil.Contaminate.SourceCastStart" Send="$Spell"/>
+        <On Terms="UnitDeathCustomize; ValidateUnit HaveVoidShade" Send="DeathCustomize Shadow"/>
+        <On Terms="UnitDeathCustomize; ValidateUnit HaveTerrazineShadow" Send="DeathCustomize Shadow"/>
+        <Model value="Overseer_Mecha"/>
+        <ModelFlags index="OutlineEmitter" value="1"/>
+        <BuildModel value="Overseer"/>
+        <DeathArray index="Normal" ModelLink="Overseer_Mecha_Death" SoundLink="Overseer_Death_Splat"/>
+        <DeathActorModel value="UnitDeathModelWithDeathMotionFlier"/>
+        <PhysicsMatchKeysOrdered value="BasicAir,Basic"/>
+        <PlacementModel value="Overseer"/>
+        <PortraitModel value="Overseer_Mecha_Portrait"/>
+        <BarOffset value="70"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-Zerg-Overseer.dds"/>
+        </GroupIcon>
+        <HeroIcon value="Assets\Textures\btn-unit-zerg-overseer.dds"/>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-zerg-flyercarapace-level0.dds"/>
+        <NameOffset value="70"/>
+        <SelectAbilCmd value="FungalGrowth,Execute"/>
+        <ShieldArmorIcon value="Assets\Textures\btn-upgrade-zerg-swarmfrenzy.dds"/>
+        <SoundArray index="Ready" value="Overseer_Ready"/>
+        <SoundArray index="What" value="Overseer_What"/>
+        <SoundArray index="Yes" value="Overseer_Yes"/>
+        <SoundArray index="Pissed" value="Overseer_Pissed"/>
+        <StatusColors index="Shields">
+            <ColorArray index="0" value="255,0,128,0"/>
+        </StatusColors>
+        <UnitFlags index="StandAnimBirthVariation" value="0"/>
+        <UnitFlags index="SuppressDefaultStatusBar" value="1"/>
+        <UnitIcon value="Assets\Textures\btn-unit-zerg-overseer.dds"/>
+        <VitalColors index="Shields">
+            <ColorArray value="255,0,128,0"/>
+        </VitalColors>
+        <VitalNames index="Shields" value="Vital/ZergShields"/>
+        <Wireframe>
+            <Image value="Assets\Textures\Wireframe-Zerg-Overseer.dds"/>
+        </Wireframe>
+        <WireframeShieldColor value="255,0,128,0"/>
+    </CActorUnit>
+    <CModel id="Cybermind" parent="ImportedModel">
+        <ScaleMax value="0.900000,0.900000,0.900000"/>
+        <ScaleMin value="0.900000,0.900000,0.900000"/>
+    </CModel>
+    <CModel id="CybermindDeath" parent="UnitDeath">
+        <Model value="Assets\Effects\Terran\TerranLargeUnitDeath\TerranLargeUnitDeath.m3"/>
+        <EditorCategories value=""/>
+        <ScaleMax value="2.000000,2.000000,2.000000"/>
+        <ScaleMin value="2.000000,2.000000,2.000000"/>
+    </CModel>
+    <CModel id="CybermindDeathDebris">
+        <Model value="Assets\Doodads\UmojanLabDebris\UmojanLabDebris.m3"/>
+        <ScaleMax value="1.500000,1.500000,1.500000"/>
+        <ScaleMin value="1.500000,1.500000,1.500000"/>
+        <VariationCount value="5"/>
+    </CModel>
+    <CModel id="BuryThem@FallingRocks">
+        <Model value="Assets\Effects\Zerg\ZerusFallingRock\ZerusFallingRock.m3"/>
+        <ScaleMax value="0.750000,0.750000,1.000000"/>
+        <ScaleMin value="0.750000,0.750000,1.000000"/>
+    </CModel>
+    <CModel id="BuryThem@Splat">
+        <Model value="Assets\UI\ZergAOECursorEx2\ZergAOECursorEx2.m3"/>
+        <ScaleMax value="0.330000,0.330000,0.330000"/>
+        <ScaleMin value="0.330000,0.330000,0.330000"/>
+    </CModel>
+    <CModel id="UnstableTeleport@TpStart">
+        <Model value="Assets\Effects\Terran\PlasmaRifle_Missile_Impact\PlasmaRifle_Missile_Impact.m3"/>
+        <Lighting value="UnstableTeleport@Dmg"/>
+    </CModel>
+    <CModel id="UnstableTeleport@TeleporterBirth">
+        <Model value="Assets\Effects\Terran\Nova_PulseGrenade\Nova_PulseGrenade.m3"/>
+    </CModel>
+    <CModel id="UnstableTeleport@Dmg">
+        <Model value="Assets\Effects\Terran\PlasmaBurst_Missile_Impact\PlasmaBurst_Missile_Impact.m3"/>
+    </CModel>
+    <CModel id="UnstableTeleport@TeleporterBlue">
+        <Model value="Assets\Effects\Terran\NovaEx3_RespawnBase\NovaEx3_RespawnBase.m3"/>
+        <Lighting value="UnstableTeleport@TeleporterRed"/>
+        <ScaleMax value="1.750000,1.750000,1.750000"/>
+        <ScaleMin value="1.750000,1.750000,1.750000"/>
+    </CModel>
+    <CModel id="UnstableTeleport@TeleporterRed">
+        <Model value="Assets\Models\Pads\Red_Pad.m3"/>
+        <ScaleMax value="1.750000,1.750000,1.750000"/>
+        <ScaleMin value="1.750000,1.750000,1.750000"/>
+    </CModel>
+    <CModel id="UnstableTeleport@TeleporterGreen">
+        <Model value="Assets\Models\Pads\Green_Pad.m3"/>
+        <ScaleMax value="1.750000,1.750000,1.750000"/>
+        <ScaleMin value="1.750000,1.750000,1.750000"/>
+    </CModel>
+    <CModel id="PushAndPull@Force">
+        <Model value="Assets\Effects\Zerg\HybridEnergyDrainImpact\HybridEnergyDrainImpact.m3"/>
+        <ScaleMax value="6.000000,6.000000,12.000000"/>
+        <ScaleMin value="5.000000,5.000000,12.000000"/>
+        <AnimSpeed value="2.000000"/>
+    </CModel>
+    <CModel id="PushAndPull@Area">
+        <Model value="Assets\Models\Nova_ShotGunCone_White\Nova_ShotGunCone_White.m3"/>
+        <ScaleMax value="3.000000,5.000000,5.000000"/>
+        <ScaleMin value="3.000000,5.000000,5.000000"/>
+    </CModel>
+    <CModel id="CybermindShield@Stun">
+        <Model value="Assets\Effects\Neutral\Stun_Void\Stun_Void.m3"/>
+        <ScaleMax value="3.000000,3.000000,3.000000"/>
+        <ScaleMin value="3.000000,3.000000,3.000000"/>
+    </CModel>
+    <CModel id="CybermindShield@GeneratorExplosionChargeUp">
+        <Model value="Assets\Effects\Zerg\KerriganApocalypseChannel\KerriganApocalypseChannel.m3"/>
+    </CModel>
+    <CModel id="CybermindShield@GeneratorExplosion">
+        <Model value="Assets\Effects\Zerg\KerriganApocalypseExplosion\KerriganApocalypseExplosion.m3"/>
+        <AnimSpeed value="2.000000"/>
+    </CModel>
+    <CModel id="CybermindShield@GeneratorExplosionSafeZone">
+        <Model value="Assets\Effects\Protoss\XelNagaShieldDome\XelNagaShieldDome.m3"/>
+    </CModel>
+    <CModel id="CybermindShield@Generator">
+        <Model value="Assets\Buildings\Terran\UmojanLabGenerator\UmojanLabGenerator.m3"/>
+    </CModel>
+    <CModel id="CybermindShield@GeneratorDeath" parent="UnitDeath">
+        <Model value="Assets\Buildings\Terran\UmojanLabGeneratorDeath\UmojanLabGeneratorDeath.m3"/>
+        <EditorCategories value=""/>
+    </CModel>
+    <CModel id="CybermindShield@Shield">
+        <Model value="Assets\Effects\Protoss\MineralShield\MineralShield.m3"/>
+        <ScaleMax value="5.000000,5.000000,5.000000"/>
+        <ScaleMin value="5.000000,5.000000,5.000000"/>
+    </CModel>
+    <CModel id="BombardThem@Impact">
+        <Model value="Assets\Effects\Terran\EMPImpact\EMPImpact.m3"/>
+        <ScaleMax value="2.000000,2.000000,2.000000"/>
+        <ScaleMin value="2.000000,2.000000,2.000000"/>
+    </CModel>
+    <CModel id="BombardThem@MarkedArea">
+        <Model value="Assets\UI\BossTargetCursorSplat\BossTargetCursorSplat.m3"/>
+        <ScaleMax value="3.000000,3.000000,3.000000"/>
+        <ScaleMin value="3.000000,3.000000,3.000000"/>
+    </CModel>
+    <CModel id="BombardThem@Missile">
+        <Model value="Assets\Effects\Terran\EMPMissile\EMPMissile.m3"/>
+    </CModel>
+    <CModel id="MechaOvermindWeaponMissile">
+        <Model value="Assets\COOP\Stetmann\Effects\Hydralisk_Stetmann_COOP_MissilePowerUpgrade\Hydralisk_Stetmann_COOP_MissilePowerUpgrade.m3"/>
+    </CModel>
+    <CModel id="MechaOvermindWeaponMissileImpact">
+        <Model value="Assets\Effects\Terran\GoliathAirMissileImpact\GoliathAirMissileImpact.m3"/>
+    </CModel>
+    <CWeaponLegacy id="MechaOvermindWeapon">
+        <EditorCategories value=""/>
+        <Icon value="Assets\Textures\btn-ability-stetmann-hydraliskmissilepoweron.dds"/>
+        <DisplayEffect value="MechaOvermindWeaponDmg"/>
+        <Range value="13"/>
+        <Arc value="360"/>
+        <Period value="1.25"/>
+        <Effect value="MechaOvermindWeaponOverseerGet"/>
+        <TargetFilters value="Visible;Self,Worker,Missile,Item,Dead,Hidden,Invulnerable"/>
+    </CWeaponLegacy>
+    <CMoverMissile id="BombardThem@Missile">
+        <MotionPhases>
+            <Driver value="Ballistic"/>
+            <Gravity value="30"/>
+            <ThrowBandYaw value="-360,-360,-360,-360"/>
+            <ThrowBandPitch value="-360,-360,-360,-360"/>
+            <FlightTime value="2"/>
+        </MotionPhases>
+    </CMoverMissile>
+    <CMoverMissile id="MechaOvermindWeaponMissileMover" parent="MissileDefault">
+        <MotionPhases index="0">
+            <Driver value="Ballistic"/>
+            <Acceleration value="3200"/>
+            <Speed value="40"/>
+            <MinSpeed value="40"/>
+            <MaxSpeed value="40"/>
+            <Gravity value="200"/>
+            <Clearance value="4"/>
+            <ClearanceLookahead value="10"/>
+            <ClearanceAcceleration value="1024"/>
+            <Outro value="1"/>
+            <Timeout value="1"/>
+            <ThrowBandYaw value="-360,-360,-360,-360"/>
+            <ThrowBandPitch value="-360,-360,-360,-360"/>
+            <YawPitchRoll value="0"/>
+            <Overlays/>
+            <Overlays/>
+        </MotionPhases>
+        <MotionPhases index="1">
+            <Driver value="Guidance"/>
+            <Acceleration value="3200"/>
+            <MaxSpeed value="25"/>
+            <ClearanceAcceleration value="75"/>
+            <Outro value="-1"/>
+            <ThrowBandYaw value="-360,-360,-360,-360"/>
+            <ThrowBandPitch value="-360,-360,-360,-360"/>
+            <YawPitchRoll value="719.2968"/>
+        </MotionPhases>
+        <MotionPhases YawPitchRoll="MAX"/>
+    </CMoverMissile>
+    <CDataCollectionAbil id="BuryThem">
+        <EditorCategories value=""/>
+        <DataRecord Entry="Abil,BuryThem"/>
+        <DataRecord Entry="Actor,BuryThem@Splat"/>
+        <DataRecord Entry="Actor,BuryThem@FallingRocks"/>
+        <DataRecord Entry="Button,BuryThem"/>
+        <DataRecord Entry="Effect,BuryThem@InitialSet"/>
+        <DataRecord Entry="Effect,BuryThem@AlreadyCastingNoWeapons"/>
+        <DataRecord Entry="Effect,BuryThem@ClusterSearch"/>
+        <DataRecord Entry="Effect,BuryThem@TriangleOffsets"/>
+        <DataRecord Entry="Effect,BuryThem@Dmg"/>
+        <DataRecord Entry="Effect,BuryThem@ClusterOffsets"/>
+        <DataRecord Entry="Effect,BuryThem@ClusterDelay"/>
+        <DataRecord Entry="Model,BuryThem@Splat"/>
+        <DataRecord Entry="Model,BuryThem@FallingRocks"/>
+        <DataRecord Entry="Validator,BuryThem@CheckForTargets"/>
+    </CDataCollectionAbil>
+    <CDataCollectionAbil id="PushAndPull">
+        <EditorCategories value=""/>
+        <DataRecord Entry="Abil,PushAndPull"/>
+        <DataRecord Entry="Actor,PushAndPull@PushOffset"/>
+        <DataRecord Entry="Actor,PushAndPull@PullOffset"/>
+        <DataRecord Entry="Actor,PushAndPull@Push"/>
+        <DataRecord Entry="Actor,PushAndPull@Pull"/>
+        <DataRecord Entry="Actor,PushAndPull@PullArea"/>
+        <DataRecord Entry="Actor,PushAndPull@PushArea"/>
+        <DataRecord Entry="Behavior,PushAndPull@MinimumSpeed"/>
+        <DataRecord Entry="Button,PushAndPull"/>
+        <DataRecord Entry="Effect,PushAndPull@RandomAngle"/>
+        <DataRecord Entry="Effect,PushAndPull@AreaContoller"/>
+        <DataRecord Entry="Effect,PushAndPull@PushForceController"/>
+        <DataRecord Entry="Effect,PushAndPull@PushForce"/>
+        <DataRecord Entry="Effect,PushAndPull@PullForceController"/>
+        <DataRecord Entry="Effect,PushAndPull@PullForce"/>
+        <DataRecord Entry="Effect,PushAndPull@PullPersistent"/>
+        <DataRecord Entry="Effect,PushAndPull@PushPersistent"/>
+        <DataRecord Entry="Effect,PushAndPull@Dmg"/>
+        <DataRecord Entry="Effect,PushAndPull@InitialSet"/>
+        <DataRecord Entry="Effect,PushAndPull@AlreadyCastingNoWeapons"/>
+        <DataRecord Entry="Effect,PushAndPull@MinimumSpeed"/>
+        <DataRecord Entry="Effect,PushAndPull@PullImpactSet"/>
+        <DataRecord Entry="Effect,PushAndPull@PullSearch"/>
+        <DataRecord Entry="Effect,PushAndPull@PushImpactSet"/>
+        <DataRecord Entry="Effect,PushAndPull@PushSearch"/>
+        <DataRecord Entry="Model,PushAndPull@Force"/>
+        <DataRecord Entry="Model,PushAndPull@Area"/>
+    </CDataCollectionAbil>
+    <CDataCollectionAbil id="CybermindShield">
+        <EditorCategories value=""/>
+        <DataRecord Entry="Actor,CybermindShield@ShieldStage0"/>
+        <DataRecord Entry="Actor,CybermindShield@ShieldStage1"/>
+        <DataRecord Entry="Actor,CybermindShield@ShieldStage2"/>
+        <DataRecord Entry="Actor,CybermindShield@ShieldStage3"/>
+        <DataRecord Entry="Actor,CybermindShield@ShieldStage4"/>
+        <DataRecord Entry="Actor,CybermindShield@Generator"/>
+        <DataRecord Entry="Behavior,CybermindShield@Tracker"/>
+        <DataRecord Entry="Behavior,CybermindShield@Stage0"/>
+        <DataRecord Entry="Behavior,CybermindShield@Stage1"/>
+        <DataRecord Entry="Behavior,CybermindShield@Stage2"/>
+        <DataRecord Entry="Behavior,CybermindShield@Stage3"/>
+        <DataRecord Entry="Behavior,CybermindShield@Stage4"/>
+        <DataRecord Entry="Effect,CybermindShield@TrackerAddTarget"/>
+        <DataRecord Entry="Model,CybermindShield@Shield"/>
+        <DataRecord Entry="Model,CybermindShield@Generator"/>
+        <DataRecord Entry="Model,CybermindShield@GeneratorDeath"/>
+        <DataRecord Entry="Unit,CybermindShield@Generator"/>
+        <DataRecord Entry="Validator,CybermindShield@Stage0TrackerCount"/>
+        <DataRecord Entry="Validator,CybermindShield@Stage1TrackerCount"/>
+        <DataRecord Entry="Validator,CybermindShield@Stage2TrackerCount"/>
+        <DataRecord Entry="Validator,CybermindShield@Stage3TrackerCount"/>
+        <DataRecord Entry="Validator,CybermindShield@Stage1Vitality"/>
+        <DataRecord Entry="Validator,CybermindShield@Stage4TrackerCount"/>
+        <DataRecord Entry="Validator,CybermindShield@Stage2Vitality"/>
+        <DataRecord Entry="Validator,CybermindShield@Stage3Vitality"/>
+        <DataRecord Entry="Validator,CybermindShield@Stage0Vitality"/>
+        <DataRecord Entry="Validator,CybermindShield@Stage4Vitality"/>
+        <DataRecord Entry="Actor,CybermindShield@Stun"/>
+        <DataRecord Entry="Actor,CybermindShield@GeneratorExplosion"/>
+        <DataRecord Entry="Actor,CybermindShield@GeneratorExplosionChargeUp"/>
+        <DataRecord Entry="Actor,CybermindShield@GeneratorExplosionSafeZone"/>
+        <DataRecord Entry="Behavior,CybermindShield@DeathResponse"/>
+        <DataRecord Entry="Behavior,CybermindShield@Stage0"/>
+        <DataRecord Entry="Behavior,CybermindShield@Stage1"/>
+        <DataRecord Entry="Behavior,CybermindShield@Stage2"/>
+        <DataRecord Entry="Behavior,CybermindShield@Stage3"/>
+        <DataRecord Entry="Behavior,CybermindShield@Stage4"/>
+        <DataRecord Entry="Behavior,CybermindShield@Stun"/>
+        <DataRecord Entry="Effect,CybermindShield@DeathResponse"/>
+        <DataRecord Entry="Effect,CybermindShield@GeneratorSpawnSet"/>
+        <DataRecord Entry="Effect,CybermindShield@GeneratorExplosionDelay"/>
+        <DataRecord Entry="Effect,CybermindShield@GeneratorExplosionSearch"/>
+        <DataRecord Entry="Effect,CybermindShield@GeneratorExplosionDmg"/>
+        <DataRecord Entry="Model,CybermindShield@Stun"/>
+        <DataRecord Entry="Model,CybermindShield@GeneratorExplosion"/>
+        <DataRecord Entry="Model,CybermindShield@GeneratorExplosionChargeUp"/>
+        <DataRecord Entry="Model,CybermindShield@GeneratorExplosionSafeZone"/>
+        <DataRecord Entry="Validator,CybermindShield@GeneratorExplosion"/>
+        <DataRecord Entry="Validator,CybermindShield@Generator"/>
+        <DataRecord Entry="Validator,CybermindShield@NotWithin10Generator"/>
+        <DataRecord Entry="Behavior,CybermindShield@Stage0"/>
+        <DataRecord Entry="Behavior,CybermindShield@Stage1"/>
+        <DataRecord Entry="Behavior,CybermindShield@Stage2"/>
+        <DataRecord Entry="Behavior,CybermindShield@Stage3"/>
+        <DataRecord Entry="Behavior,CybermindShield@Stage4"/>
+        <DataRecord Entry="Behavior,CybermindShield@Stun"/>
+    </CDataCollectionAbil>
+    <CDataCollectionAbil id="BombardThem">
+        <EditorCategories value=""/>
+        <DataRecord Entry="Abil,BombardThem"/>
+        <DataRecord Entry="Actor,BombardThem@Missile"/>
+        <DataRecord Entry="Actor,BombardThem@Impact"/>
+        <DataRecord Entry="Actor,BombardThem@MarkedArea"/>
+        <DataRecord Entry="Button,BombardThem"/>
+        <DataRecord Entry="Effect,BombardThem@InitialSet"/>
+        <DataRecord Entry="Effect,BombardThem@AlreadyCastingNoWeapons"/>
+        <DataRecord Entry="Effect,BombardThem@SearchTargets"/>
+        <DataRecord Entry="Effect,BombardThem@Dmg"/>
+        <DataRecord Entry="Effect,BombardThem@ImpactSet"/>
+        <DataRecord Entry="Effect,BombardThem@ImpactSearch"/>
+        <DataRecord Entry="Effect,BombardThem@Missile"/>
+        <DataRecord Entry="Model,BombardThem@Missile"/>
+        <DataRecord Entry="Model,BombardThem@Impact"/>
+        <DataRecord Entry="Model,BombardThem@MarkedArea"/>
+        <DataRecord Entry="Mover,BombardThem@Missile"/>
+        <DataRecord Entry="Unit,BombardThem@Missile"/>
+    </CDataCollectionAbil>
+    <CDataCollectionAbil id="UnstableTeleport">
+        <EditorCategories value=""/>
+        <DataRecord Entry="Abil,UnstableTeleport"/>
+        <DataRecord Entry="Actor,UnstableTeleport@Dmg"/>
+        <DataRecord Entry="Actor,UnstableTeleport@TeleporterBlue"/>
+        <DataRecord Entry="Actor,UnstableTeleport@TeleporterRed"/>
+        <DataRecord Entry="Actor,UnstableTeleport@TeleporterGreen"/>
+        <DataRecord Entry="Actor,UnstableTeleport@TeleporterBirth"/>
+        <DataRecord Entry="Behavior,UnstableTeleport@RecentlyTeleported"/>
+        <DataRecord Entry="Button,UnstableTeleport"/>
+        <DataRecord Entry="Effect,UnstableTeleport@Dmg"/>
+        <DataRecord Entry="Effect,UnstableTeleport@InitialSet"/>
+        <DataRecord Entry="Effect,UnstableTeleport@AlreadyCastingNoWeapons"/>
+        <DataRecord Entry="Effect,UnstableTeleport@Timer"/>
+        <DataRecord Entry="Effect,UnstableTeleport@Cleanup"/>
+        <DataRecord Entry="Model,UnstableTeleport@Dmg"/>
+        <DataRecord Entry="Model,UnstableTeleport@TeleporterBlue"/>
+        <DataRecord Entry="Model,UnstableTeleport@TeleporterRed"/>
+        <DataRecord Entry="Model,UnstableTeleport@TeleporterGreen"/>
+        <DataRecord Entry="Model,UnstableTeleport@TeleporterBirth"/>
+        <DataRecord Entry="Unit,UnstableTeleport@TeleporterBlue"/>
+        <DataRecord Entry="Unit,UnstableTeleport@TeleporterGreen"/>
+        <DataRecord Entry="Unit,UnstableTeleport@TeleporterRed"/>
+        <DataRecord Entry="Actor,UnstableTeleport@TpStart"/>
+        <DataRecord Entry="Behavior,UnstableTeleport@RecentlyTeleported"/>
+        <DataRecord Entry="Model,UnstableTeleport@TpStart"/>
+        <DataRecord Entry="Unit,UnstableTeleport@TeleporterBlue"/>
+        <DataRecord Entry="Unit,UnstableTeleport@TeleporterGreen"/>
+        <DataRecord Entry="Unit,UnstableTeleport@TeleporterRed"/>
+    </CDataCollectionAbil>
+    <CUnit id="UnstableTeleport@TeleporterBlue" parent="GenericEnemyUnit">
+        <FlagArray index="Unselectable" value="1"/>
+        <FlagArray index="Untargetable" value="1"/>
+        <FlagArray index="Invulnerable" value="1"/>
+        <Collide index="Ground" value="0"/>
+        <Collide index="ForceField" value="0"/>
+        <Collide index="Locust" value="0"/>
+        <Collide index="Small" value="0"/>
+        <Speed value="0"/>
+        <AbilArray index="1" removed="1"/>
+        <AbilArray index="2" removed="1"/>
+        <InnerRadius value="0"/>
+    </CUnit>
+    <CUnit id="UnstableTeleport@TeleporterGreen" parent="UnstableTeleport@TeleporterBlue">
+        <Name value="Unit/Name/UnstableTeleport@TeleporterGreen"/>
+    </CUnit>
+    <CUnit id="UnstableTeleport@TeleporterRed" parent="UnstableTeleport@TeleporterBlue">
+        <Name value="Unit/Name/UnstableTeleport@TeleporterRed"/>
+    </CUnit>
+    <CUnit id="CybermindShield@Generator" parent="GenericEnemyTower">
+        <Race value="Zerg"/>
+        <FlagArray index="Turnable" value="1"/>
+    </CUnit>
+    <CUnit id="BombardThem@Missile" parent="MISSILE">
+        <Race value="Zerg"/>
+        <Mover value="BombardThem@Missile"/>
+        <EditorCategories value=""/>
+    </CUnit>
+    <CUnit id="MechaOvermindWeaponMissile" parent="MISSILE">
+        <Mover value="MechaOvermindWeaponMissileMover"/>
+    </CUnit>
+    <CUnit id="MechaOvermind" parent="GenericEnemyUnit">
+        <Facing value="26.565"/>
+        <Race value="Zerg"/>
+        <FlagArray index="Turnable" value="0"/>
+        <FlagArray index="Movable" value="0"/>
+        <FlagArray index="PreventDefeat" value="1"/>
+        <FlagArray index="PenaltyRevealed" value="1"/>
+        <FlagArray index="TownAlert" value="1"/>
+        <FlagArray index="NoPortraitTalk" value="1"/>
+        <FlagArray index="ArmorDisabledWhileConstructing" value="1"/>
+        <FlagArray index="ArmySelect" value="0"/>
+        <FogVisibility value="Dimmed"/>
+        <PlaneArray index="Air" value="1"/>
+        <Collide index="Burrow" value="1"/>
+        <Collide index="Structure" value="1"/>
+        <Collide index="ForceField" value="0"/>
+        <Collide index="Locust" value="0"/>
+        <Attributes index="Biological" value="1"/>
+        <Attributes index="Structure" value="1"/>
+        <LifeStart value="75000"/>
+        <LifeMax value="75000"/>
+        <LifeRegenRate value="1400"/>
+        <LifeArmorName value="Unit/LifeArmorName/MechaZergArmor"/>
+        <Speed value="0"/>
+        <Acceleration value="0"/>
+        <Sight value="30"/>
+        <CostCategory value="None"/>
+        <BehaviorArray Link="Detector20"/>
+        <BehaviorArray Link="MechaOvermindWeaponOverseerTracker"/>
+        <BehaviorArray Link="CybermindShield@Tracker"/>
+        <BehaviorArray Link="CybermindShield@Stage0"/>
+        <BehaviorArray Link="CybermindShield@Stage1"/>
+        <BehaviorArray Link="CybermindShield@Stage2"/>
+        <BehaviorArray Link="CybermindShield@Stage3"/>
+        <BehaviorArray Link="CybermindShield@Stage4"/>
+        <BehaviorArray Link="BossesP2Armor"/>
+        <WeaponArray Link="MechaOvermindWeapon"/>
+        <EffectArray index="Create" value="MechaOvermindWeaponOverseerCreate"/>
+        <EffectArray index="Death" value="MechaOvermindOverseerKillGet"/>
+        <Radius value="3"/>
+        <InnerRadius value="0"/>
+        <SubgroupPriority value="2"/>
+        <MinimapRadius value="1.5"/>
+        <VisionHeight value="4"/>
+        <AbilArray Link="BombardThem"/>
+        <AbilArray Link="PushAndPull"/>
+        <AbilArray Link="UnstableTeleport"/>
+        <AbilArray Link="BuryThem"/>
+        <CardLayouts index="0">
+            <LayoutButtons Face="BombardThem" Type="AbilCmd" AbilCmd="BombardThem,Execute" Row="2" Column="0"/>
+            <LayoutButtons Face="PushAndPull" Type="AbilCmd" AbilCmd="PushAndPull,Execute" Row="2" Column="1"/>
+            <LayoutButtons Face="UnstableTeleport" Type="AbilCmd" AbilCmd="UnstableTeleport,Execute" Row="2" Column="2"/>
+            <LayoutButtons Face="BuryThem" Type="AbilCmd" AbilCmd="BuryThem,Execute" Row="2" Column="3"/>
+        </CardLayouts>
+        <LifeArmorTip value="Unit/P2Bosses/ArmorTooltip"/>
+    </CUnit>
+    <CUnit id="MechaOverseer" parent="GenericEnemyUnit">
+        <Facing value="45"/>
+        <Race value="Zerg"/>
+        <Mob value="Multiplayer"/>
+        <FlagArray index="Unselectable" value="1"/>
+        <FlagArray index="Untargetable" value="1"/>
+        <FlagArray index="UseLineOfSight" value="0"/>
+        <FlagArray index="Invulnerable" value="1"/>
+        <FlagArray index="AISupport" value="1"/>
+        <FlagArray index="ArmySelect" value="0"/>
+        <PlaneArray index="Ground" value="0"/>
+        <Collide index="Ground" value="0"/>
+        <Collide index="ForceField" value="0"/>
+        <Collide index="Locust" value="0"/>
+        <Collide index="Small" value="0"/>
+        <Response value="Flee"/>
+        <Attributes index="Light" value="1"/>
+        <Attributes index="Mechanical" value="1"/>
+        <Attributes index="Summoned" value="1"/>
+        <LifeArmorName value="Unit/LifeArmorName/ZergAirArmor"/>
+        <Mover value="Fly"/>
+        <Speed value="15"/>
+        <Acceleration value="80"/>
+        <LateralAcceleration value="46.0625"/>
+        <StationaryTurningRate value="999.8437"/>
+        <TurningRate value="999.8437"/>
+        <Sight value="11"/>
+        <Height value="3.75"/>
+        <VisionHeight value="4"/>
+        <Food value="8"/>
+        <AbilArray index="1" Link="move"/>
+        <AbilArray index="2" removed="1"/>
+        <Radius value="0"/>
+        <SeparationRadius value="0.75"/>
+        <InnerRadius value="0"/>
+        <MinimapRadius value="1"/>
+        <BehaviorArray index="0" removed="1"/>
+        <BehaviorArray index="1" removed="1"/>
+        <BehaviorArray index="2" removed="1"/>
+        <BehaviorArray index="3" removed="1"/>
+        <BehaviorArray index="4" removed="1"/>
+        <BehaviorArray index="5" removed="1"/>
+        <BehaviorArray index="6" removed="1"/>
+    </CUnit>
+    <CBehaviorBuff id="UnstableTeleport@RecentlyTeleported">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="0.25"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="PushAndPull@MinimumSpeed">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="0.25"/>
+        <Modification MoveSpeedMinimum="15"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="CybermindShield@Stun">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="10"/>
+        <Modification>
+            <StateFlags index="Stun" value="1"/>
+        </Modification>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="CybermindShield@DeathResponse">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <FinalEffect value="CybermindShield@GeneratorExplosionDelay"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="CybermindShield@Stage0">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DisableValidatorArray value="CybermindShield@Stage0TrackerCount"/>
+        <DisableValidatorArray value="CybermindShield@Stage0Vitality"/>
+        <Modification>
+            <StateFlags index="Invulnerable" value="1"/>
+        </Modification>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="CybermindShield@Stage1">
+        <DisableValidatorArray value="CybermindShield@Stage1TrackerCount"/>
+        <Modification>
+            <DamageTakenFraction index="Spell" value="-0.95"/>
+            <DamageTakenFraction index="Melee" value="-0.95"/>
+            <DamageTakenFraction index="Ranged" value="-0.95"/>
+            <DamageTakenFraction index="Splash" value="-0.95"/>
+            <DamageTakenFraction index="NoProc" value="-0.95"/>
+        </Modification>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="CybermindShield@Stage2">
+        <DisableValidatorArray value="CybermindShield@Stage2TrackerCount"/>
+        <Modification>
+            <DamageTakenFraction index="Spell" value="-0.9"/>
+            <DamageTakenFraction index="Melee" value="-0.9"/>
+            <DamageTakenFraction index="Ranged" value="-0.9"/>
+            <DamageTakenFraction index="Splash" value="-0.9"/>
+            <DamageTakenFraction index="NoProc" value="-0.9"/>
+        </Modification>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="CybermindShield@Stage3">
+        <DisableValidatorArray value="CybermindShield@Stage3TrackerCount"/>
+        <Modification>
+            <DamageTakenFraction index="Spell" value="-0.8"/>
+            <DamageTakenFraction index="Melee" value="-0.8"/>
+            <DamageTakenFraction index="Ranged" value="-0.8"/>
+            <DamageTakenFraction index="Splash" value="-0.8"/>
+            <DamageTakenFraction index="NoProc" value="-0.8"/>
+        </Modification>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="CybermindShield@Stage4">
+        <DisableValidatorArray value="CybermindShield@Stage4TrackerCount"/>
+        <Modification>
+            <DamageTakenFraction index="Spell" value="-0.65"/>
+            <DamageTakenFraction index="Melee" value="-0.65"/>
+            <DamageTakenFraction index="Ranged" value="-0.65"/>
+            <DamageTakenFraction index="Splash" value="-0.65"/>
+            <DamageTakenFraction index="NoProc" value="-0.65"/>
+        </Modification>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorUnitTracker id="CybermindShield@Tracker">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorUnitTracker>
+    <CBehaviorBuff id="MechaOvermindWeaponOverseerRangeTracking">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <RemoveValidatorArray value="TargetUnitToSourceUnitLE14"/>
+        <RemoveValidatorArray value="MechaOvermindWeaponOriginTargetNotDead"/>
+        <FinalEffect value="MechaOvermindWeaponOverseerReturn"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorUnitTracker id="MechaOvermindWeaponOverseerTracker">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorUnitTracker>
+</Catalog>

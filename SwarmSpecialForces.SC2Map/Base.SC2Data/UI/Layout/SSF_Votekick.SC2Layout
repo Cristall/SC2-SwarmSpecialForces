@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Desc>
+	<Constant name="VotekickButtonHeight" val="50"/>
+	<Constant name="VotekickGaps" val="2"/>
+	<Frame type="Button" name="VotekickPlayerButtonTemplate" template="SSF_Templates/ButtonTemplate">
+		<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+		<Anchor side="Left" relative="$parent" pos="Min" offset="#Border"/>
+		<Anchor side="Right" relative="$parent" pos="Max" offset="#BorderNegative"/>
+		<Height val="#VotekickButtonHeight"/>
+	</Frame>
+	
+	<Frame type="Frame" name="VotekickTemplate">
+		<Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+		<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+		<Width val="340"/>
+		<Height val="500"/>
+		<Visible val="false"/>
+		<Frame type="Image" name="BackgroundImage" template="SSF_Templates/BackgroundImageTemplate"></Frame>
+		<Frame type="Button" name="CloseButton" template="SSF_Templates/CloseButtonTemplate"></Frame>
+
+		<Frame type="Label" name="HeaderLabel" template="SSF_Templates/LabelTemplate">
+			<Anchor side="Left" relative="$parent" pos="Min" offset="#Border"/>
+			<Anchor side="Right" relative="$parent" pos="Max" offset="#BorderNegative"/>
+			<Anchor side="Top" relative="$parent" pos="Min" offset="#Border"/>
+			<Height val="50"/>
+			<Text val="@Trig/Votekick/Label"/>
+			<Style val="aaDialogItemStyleLeftBottom"/>
+		</Frame>
+		<Animation name="Close">
+			<Event event="Close" action="Reset,Play" frame="$this"/>
+			<Controller type="Event" end="Pause" frame="CloseButton">
+				<Key type="Event" time="0.0" event="OnClick"/>
+			</Controller>
+		</Animation>
+		<!-- player buttons are added via triggers using the above template -->
+	</Frame>
+
+
+</Desc>

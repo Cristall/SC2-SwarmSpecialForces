@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Desc>
+    <!-- plan: single line for diff & button 
+         animation that pushes it from top to bottom, out of the top line
+         best to have a background which is of the same type as the single line
+    -->
+<!-- consts -->
+    <Constant name="PlayerboardTitleHeight" val="60"/>
+    <Constant name="PlayerboardPlayerRowHeight" val="30"/>
+    <Constant name="PlayerboardWidth" val="300"/>
+    <Constant name="PlayerboardBorder" val="10"/>
+    <Constant name="PlayerboardBorderNegative" val="-10"/>
+    <Constant name="PlayerboardBackgroundImage" val="Assets\Icons\PlayerPanel_Background.dds"/>
+    <Constant name="PlayerboardExpandArrow" val="Assets\Textures\sc2_ui_userprofile_ladderlist_icon_downarrow.dds"/>
+<!-- local templates -->
+
+    <Frame type="Frame" name="PlayerboardPlayerRow">
+        <Anchor side="Top" relative="$sibling-1" pos="Max" offset="0"/>
+        <!-- <Anchor side="Bottom" relative="$sibling+1" pos="Min" offset="2"/> -->
+        <Anchor side="Left" relative="$parent" pos="Min" offset="5"/>
+        <Anchor side="Right" relative="$parent" pos="Max" offset="-5"/>
+        <Height val="#PlayerboardPlayerRowHeight"/>
+        <Visible val="False"/>
+
+        <Frame type="Label" name="PlayerName">
+            <Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+            <Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
+            <Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+            <Anchor side="Right" relative="$parent" pos="0.7" offset="-1"/>
+
+            <Style val="aaDialogItemStyleCentered"/>
+        </Frame>
+
+        <Frame type="Label" name="Score">
+            <Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+            <Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
+            <Anchor side="Left" relative="$parent/PlayerName" pos="Max" offset="1"/>
+            <Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+
+            <Style val="aaDialogItemStyleCentered"/>
+        </Frame>
+
+        <StateGroup name="CollapseIfHidden">
+            <DefaultState val="Shown"/>
+            <State name="Hidden">
+                <When type="Property" frame="$this" operator="Equal" Visible="False"/>
+                <Action type="SetAnchor" frame="$this" side="Top" relative="$sibling-1" pos="Min" offset="0"/>
+            </State>
+            <State name="Shown"></State>
+        </StateGroup>
+    </Frame>
+
+<!-- actual frame -->
+
+    <Frame type="Frame" name="GameUI/UIContainer/FullscreenUpperContainer" file="GameUI">
+        <Frame type="Frame" name="SSF_Playerboard">
+            <Anchor side="Top" relative="$parent/ResourcePanel/ResourceFrame/ResourceIcon0" pos="Max" offset="2"/>
+            <Anchor side="Bottom" relative="PlayerList" pos="Max" offset="0"/>
+            <Anchor side="Left" relative="$SSF_HeroPanel" pos="Min" offset="0"/>
+            <Anchor side="Right" relative="$SSF_HeroPanel" pos="Max" offset="0"/>
+            <Handle val="SSF_Playerboard"/>
+            <RenderPriority val="510"/>
+
+            <!-- container for header row + player rows, player rows are filled by script-->
+            <Frame type="Frame" name="PlayerList">
+                <Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+                <Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+                <Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+                <Anchor side="Bottom" relative="Player6" pos="Max" offset="7"/>
+                <Visible val="false"/>
+
+                <Frame type="Image" name="BackgroundImage">
+                    <Anchor side="Top" relative="$parent/$parent/Title" pos="Min" offset="0"/>
+                    <Anchor side="Bottom" relative="$parent" pos="Max" offset="2"/>
+                    <Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+                    <Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+
+                    <Texture val="#PlayerboardBackgroundImage"/>
+                    <TextureType val="NineSlice"/>
+                </Frame>
+
+                <!-- Player0 is used as HEADER, naming is only done so sibling-1 will recognise it -->
+                <Frame type="Frame" name="Player0" template="SSF_Playerboard/PlayerboardPlayerRow">
+                    <Anchor side="Top" relative="$parent/$parent/Title" pos="Max" offset="-6"/>
+                    <Visible val="true"/>
+
+                    <Frame type="Label" name="Score">
+                        <Text val="@Trig/Playerboard/ScoreLabel"/>
+                        <Color val="255,255,0"/>
+                    </Frame>
+                    <Frame type="Label" name="PlayerName">
+                        <Text val="@Trig/Playerboard/PlayerLabel"/>
+                        <Color val="255,255,0"/>
+                    </Frame>
+
+                    <StateGroup name="CollapseIfHidden">
+                        <DefaultState val="Shown"/>
+                        <State name="Hidden">
+                            <When type="Property" frame="$this" operator="Equal" Visible="False"/>
+                            <Action type="SetAnchor" frame="$this" side="Top" relative="$parent/$parent/Title" pos="Max" offset="2"/>
+                        </State>
+                    </StateGroup>
+                </Frame>
+                <Frame type="Frame" name="Player1" template="SSF_Playerboard/PlayerboardPlayerRow"/>
+                <Frame type="Frame" name="Player2" template="SSF_Playerboard/PlayerboardPlayerRow"/>
+                <Frame type="Frame" name="Player3" template="SSF_Playerboard/PlayerboardPlayerRow"/>
+                <Frame type="Frame" name="Player4" template="SSF_Playerboard/PlayerboardPlayerRow"/>
+                <Frame type="Frame" name="Player5" template="SSF_Playerboard/PlayerboardPlayerRow"/>
+                <Frame type="Frame" name="Player6" template="SSF_Playerboard/PlayerboardPlayerRow"/>
+            </Frame>
+
+            <Frame type="Image" name="TitleBackground">
+                <Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+                <Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+                <Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+                <Anchor side="Bottom" relative="$parent/Title" pos="Max" offset="0"/>
+                <Texture val="#PlayerboardBackgroundImage"/>
+                <TextureType val="NineSlice"/>
+            </Frame>
+
+            <Frame type="Label" name="Title">
+                <Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+                <Anchor side="Right" relative="$parent/ExpandButton/Image" pos="Min" offset="0"/>
+                <Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+                <Height val="#PlayerboardTitleHeight"/>
+
+                <Style val="aaDialogItemStyleCentered"/>
+            </Frame>
+
+            <Frame type="Button" name="ExpandButton">
+                <Anchor side="Left" relative="$parent/TitleBackground" pos="Min" offset="15"/>
+                <Anchor side="Right" relative="$parent/TitleBackground" pos="Max" offset="-15"/>
+                <Anchor side="Top" relative="$parent/TitleBackground" pos="Mid" offset="0"/>
+                <Anchor side="Bottom" relative="$parent/TitleBackground" pos="Mid" offset="0"/>
+                <Height val="32"/>
+
+                <Frame type="Image" name="Image">
+                    <Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+                    <Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+                    <Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
+                    <Color val="255,128,0"/>
+                    <Width val="32"/>
+                    <Texture val="#PlayerboardExpandArrow"/>
+                    <Rotation val="0"/>
+                </Frame>
+
+
+                <Animation name="Expand">
+                    <Event event="OnClick" action="ToggleDirection, Play" frame="$this"/>
+                    <Event event="ForceHide" action="DirectionReverse, Play" frame="$this"/>
+                    <Event event="ForceShow" action="DirectionForward, Play" frame="$this"/>
+                    <Controller type="Rotation" end="Pause" frame="Image" relative="false">
+                        <Key type="Curve" time="0.0" value="0"/>
+                        <Key type="Curve" time="0.125" value="180"/>
+                    </Controller>
+                    <Controller type="Visibility" end="Pause" frame="$parent/PlayerList">
+                        <Key type="Bool" time="0.0" value="false"/>
+                        <Key type="Bool" time="0.001" value="true"/>
+                    </Controller>
+                </Animation>
+            </Frame>
+
+            <!-- used to have a top anchor for the popups (that are part of SSF_Menu) dependent on the expand state -->
+            <Frame type="Frame" name="PopupAnchor">
+                <Anchor side="Bottom" relative="$parent/Title" pos="Max" offset="0"/>
+                <Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+                <Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+                <Anchor side="Top" relative="$this" pos="Max" offset="0"/>
+
+                <StateGroup name="PlayerListShown">
+                    <DefaultState val="Hidden"/>
+                    <State name="Shown">
+                        <When type="Property" frame="$parent/PlayerList" operator="Equal" Visible="True"/>
+                        <Action type="SetAnchor" frame="$this" side="Bottom" relative="$parent/PlayerList" pos="Max" offset="0"/>
+                    </State>
+                    <State name="Hidden"></State>
+                </StateGroup>
+            </Frame>
+        </Frame>
+    </Frame>
+</Desc>

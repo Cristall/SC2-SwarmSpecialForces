@@ -1,0 +1,966 @@
+
+// blueprints and funcref arrays
+static const int acv_Reward_FunctionsCount = 46;
+void Acv_Reward_Template(int player, fixed amount_fixed);
+text Acv_UI_Template(fixed amount);
+funcref<Acv_Reward_Template>[acv_Reward_FunctionsCount] Acv_Reward_Functions;
+funcref<Acv_UI_Template>[acv_Reward_FunctionsCount] Acv_UI_Functions;
+
+struct Acv_UI_Return_Struct {
+    text rewards;
+    string image;
+};
+
+static const string acv_UI_Tooltip_ReqCompletedImage = "<img path=\"Assets\\Icons\\acv_requirement_icon_check.tga\" alignment=\"absolutemiddle\" width=\"20\" height=\"20\"/>";
+static const string acv_UI_Tooltip_ReqLockedImage = "<img path=\"Assets\\Icons\\acv_requirement_icon_box.tga\" alignment=\"absolutemiddle\" width=\"20\" height=\"20\"/>";
+static const string acv_UI_Tooltip_ReqLockedImageColored = "<img path=\"Assets\\Icons\\acv_requirement_icon_box.tga\" alignment=\"absolutemiddle\" width=\"20\" height=\"20\" color=\"ff8000\"/>";
+static const color acv_UI_ColorGrey = Color(70,70,70);
+
+// getter and setter
+int Acv_Grind_GetCounterFromIdentifier (int playerID, int ident){
+    if (ident == c_AcvIdentifier_Points) { return gv_PlayerStats[playerID].points;}
+    else if (ident == c_AcvIdentifier_WinsP0){ return gv_PlayerStats[playerID].wins[c_Part_Terran];}
+    else if (ident == c_AcvIdentifier_WinsP1){ return gv_PlayerStats[playerID].wins[c_Part_Protoss];}
+    else if (ident == c_AcvIdentifier_WinsP2){ return gv_PlayerStats[playerID].wins[c_Part_Zerg];}
+    else if (ident == c_AcvIdentifier_Kills){ return gv_PlayerStats[playerID].kills;}
+    else if (ident == c_AcvIdentifier_Scientists){ return gv_PlayerStats[playerID].scientists;}
+    else if (ident == c_AcvIdentifier_Essences){ return gv_PlayerStats[playerID].essences;}
+    else if (ident == c_AcvIdentifier_PsiOrbs){ return gv_PlayerStats[playerID].psiOrbs;}
+    else if (ident == c_AcvIdentifier_Score){ return FixedToInt(gv_PlayerStats[playerID].acvScore);}
+    else if (ident == c_AcvIdentifier_MoopyHats){ return gv_PlayerStats[playerID].moopyHats;}
+    else {
+        Debug_ShowMessage("Acv_Grind_GetFromIdentifier: Error, unknown identifier: "+IntToString(ident));
+        return 0;
+    }
+}
+void Acv_Grind_AddCounterFromIdentifier (int playerID, int ident, int value){
+    if (ident == c_AcvIdentifier_Points) { gv_PlayerStats[playerID].points += value;}
+    else if (ident == c_AcvIdentifier_WinsP0){ gv_PlayerStats[playerID].wins[c_Part_Terran] += value;}
+    else if (ident == c_AcvIdentifier_WinsP1){ gv_PlayerStats[playerID].wins[c_Part_Protoss] += value;}
+    else if (ident == c_AcvIdentifier_WinsP2){ gv_PlayerStats[playerID].wins[c_Part_Zerg] += value;}
+    else if (ident == c_AcvIdentifier_Kills){ gv_PlayerStats[playerID].kills += value;}
+    else if (ident == c_AcvIdentifier_Scientists){ gv_PlayerStats[playerID].scientists += value;}
+    else if (ident == c_AcvIdentifier_Essences){ gv_PlayerStats[playerID].essences += value;}
+    else if (ident == c_AcvIdentifier_PsiOrbs){ gv_PlayerStats[playerID].psiOrbs += value;}
+    else if (ident == c_AcvIdentifier_Score){ gv_PlayerStats[playerID].acvScore += IntToFixed(value);}
+    else if (ident == c_AcvIdentifier_MoopyHats){ gv_PlayerStats[playerID].moopyHats += value;}
+    else{
+        Debug_ShowMessage("Acv_Grind_AddCounterFromIdentifier: Error, unknown identifier: "+IntToString(ident));
+    }
+}
+
+bool Acv_OneTime_GetFlagFromIdentifier(int playerID, int ident){
+         if( ident == c_AcvIdentifier_Tutorial) { return gv_PlayerStats[playerID].tutorialCompleted;}
+    else if( ident == c_AcvIdentifier_Trophy)   { return true;}
+    else { 
+        Debug_ShowMessage("Acv_OneTime_GetFromIdentifier: Error, unknown identifier: "+IntToString(ident));
+        return false;
+    }
+}
+void Acv_OneTime_SetFlagFromIdentifier(int playerID, int ident, bool state){
+        if( ident == c_AcvIdentifier_FlawlessP0) { gv_PlayerStats[playerID].tutorialCompleted = state;}
+    else { 
+        Debug_ShowMessage("Acv_OneTime_SetFlagFromIdentifier: Error, unknown identifier: "+IntToString(ident));
+    }
+}
+int BossToBossKillsArrayIndex(int boss){
+    if (boss >= c_Bosses_TFlamer && boss <= c_Bosses_TFortress){ return 0;}
+    if (boss >= c_Bosses_PMadness && boss <= c_Bosses_PThunder){ return 1;}
+    if (boss >= c_Bosses_ZRaynor && boss <= c_Bosses_ZCybermind){ return 2;}
+    if (boss >= c_Bosses_ZGary && boss <= c_Bosses_ZMoopy){ return 3;}
+    return -1;
+}
+int BossToBossKillsOffset(int boss, int diff){
+         if (boss == c_Bosses_TFlamer   ){ return diff + gv_MaxAmountDifficulties * 0; }
+    else if (boss == c_Bosses_THammer   ){ return diff + gv_MaxAmountDifficulties * 1; }
+    else if (boss == c_Bosses_TFortress ){ return diff + gv_MaxAmountDifficulties * 2; }
+    else if (boss == c_Bosses_PMadness  ){ return diff + gv_MaxAmountDifficulties * 0; }
+    else if (boss == c_Bosses_PAtlantis ){ return diff + gv_MaxAmountDifficulties * 1; }
+    else if (boss == c_Bosses_PLightning){ return diff + gv_MaxAmountDifficulties * 2; }
+    else if (boss == c_Bosses_PThunder  ){ return diff + gv_MaxAmountDifficulties * 3; }
+    else if (boss == c_Bosses_ZRaynor   ){ return diff + gv_MaxAmountDifficulties * 0; }
+    else if (boss == c_Bosses_ZKerrigan ){ return diff + gv_MaxAmountDifficulties * 1; }
+    else if (boss == c_Bosses_ZArtanis  ){ return diff + gv_MaxAmountDifficulties * 2; }
+    else if (boss == c_Bosses_ZCybermind){ return diff + gv_MaxAmountDifficulties * 3; }
+    else if (boss == c_Bosses_ZGary     ){ return diff + gv_MaxAmountDifficulties * 0; }
+    else if (boss == c_Bosses_ZStetmann ){ return diff + gv_MaxAmountDifficulties * 1; }
+    else if (boss == c_Bosses_ZMoopy    ){ return diff + gv_MaxAmountDifficulties * 2; }
+    return -1;
+}
+bool Acv_Split_GetFlagFromIdentifier(int playerID, int ident, int diff){
+         if( ident == c_AcvIdentifier_FlawlessP0)      { return (gv_PlayerStats[playerID].flawless & 1 << (diff + gv_MaxAmountDifficulties * c_Part_Terran ))>0;}
+    else if( ident == c_AcvIdentifier_FlawlessP1)      { return (gv_PlayerStats[playerID].flawless & 1 << (diff + gv_MaxAmountDifficulties * c_Part_Protoss))>0;}
+    else if( ident == c_AcvIdentifier_FlawlessP2)      { return (gv_PlayerStats[playerID].flawless & 1 << (diff + gv_MaxAmountDifficulties * c_Part_Zerg   ))>0;}
+    else if( ident == c_AcvIdentifier_BossT_Flamer)    { return (gv_PlayerStats[playerID].bossKills[BossToBossKillsArrayIndex(c_Bosses_TFlamer   )] & 1 << (BossToBossKillsOffset(c_Bosses_TFlamer   , diff)))>0;}
+    else if( ident == c_AcvIdentifier_BossT_Hammer)    { return (gv_PlayerStats[playerID].bossKills[BossToBossKillsArrayIndex(c_Bosses_THammer   )] & 1 << (BossToBossKillsOffset(c_Bosses_THammer   , diff)))>0;}
+    else if( ident == c_AcvIdentifier_BossT_Fortress)  { return (gv_PlayerStats[playerID].bossKills[BossToBossKillsArrayIndex(c_Bosses_TFortress )] & 1 << (BossToBossKillsOffset(c_Bosses_TFortress , diff)))>0;}
+    else if( ident == c_AcvIdentifier_BossP_Madness)   { return (gv_PlayerStats[playerID].bossKills[BossToBossKillsArrayIndex(c_Bosses_PMadness  )] & 1 << (BossToBossKillsOffset(c_Bosses_PMadness  , diff)))>0;}
+    else if( ident == c_AcvIdentifier_BossP_Atlantis)  { return (gv_PlayerStats[playerID].bossKills[BossToBossKillsArrayIndex(c_Bosses_PAtlantis )] & 1 << (BossToBossKillsOffset(c_Bosses_PAtlantis , diff)))>0;}
+    else if( ident == c_AcvIdentifier_BossP_Lightning) { return (gv_PlayerStats[playerID].bossKills[BossToBossKillsArrayIndex(c_Bosses_PLightning)] & 1 << (BossToBossKillsOffset(c_Bosses_PLightning, diff)))>0;}
+    else if( ident == c_AcvIdentifier_BossP_Thunder)   { return (gv_PlayerStats[playerID].bossKills[BossToBossKillsArrayIndex(c_Bosses_PThunder  )] & 1 << (BossToBossKillsOffset(c_Bosses_PThunder  , diff)))>0;}
+    else if( ident == c_AcvIdentifier_BossZ_Raynor)    { return (gv_PlayerStats[playerID].bossKills[BossToBossKillsArrayIndex(c_Bosses_ZRaynor   )] & 1 << (BossToBossKillsOffset(c_Bosses_ZRaynor   , diff)))>0;}
+    else if( ident == c_AcvIdentifier_BossZ_Kerrigan)  { return (gv_PlayerStats[playerID].bossKills[BossToBossKillsArrayIndex(c_Bosses_ZKerrigan )] & 1 << (BossToBossKillsOffset(c_Bosses_ZKerrigan , diff)))>0;}
+    else if( ident == c_AcvIdentifier_BossZ_Artanis)   { return (gv_PlayerStats[playerID].bossKills[BossToBossKillsArrayIndex(c_Bosses_ZArtanis  )] & 1 << (BossToBossKillsOffset(c_Bosses_ZArtanis  , diff)))>0;}
+    else if( ident == c_AcvIdentifier_BossZ_Cybermind) { return (gv_PlayerStats[playerID].bossKills[BossToBossKillsArrayIndex(c_Bosses_ZCybermind)] & 1 << (BossToBossKillsOffset(c_Bosses_ZCybermind, diff)))>0;}
+    else if( ident == c_AcvIdentifier_BossZ_Gary)      { return (gv_PlayerStats[playerID].bossKills[BossToBossKillsArrayIndex(c_Bosses_ZGary     )] & 1 << (BossToBossKillsOffset(c_Bosses_ZGary     , diff)))>0;}
+    else if( ident == c_AcvIdentifier_BossZ_Stetmann)  { return (gv_PlayerStats[playerID].bossKills[BossToBossKillsArrayIndex(c_Bosses_ZStetmann )] & 1 << (BossToBossKillsOffset(c_Bosses_ZStetmann , diff)))>0;}
+    else if( ident == c_AcvIdentifier_BossZ_Moopy)     { return (gv_PlayerStats[playerID].bossKills[BossToBossKillsArrayIndex(c_Bosses_ZMoopy    )] & 1 << (BossToBossKillsOffset(c_Bosses_ZMoopy    , diff)))>0;}
+    else { 
+        Debug_ShowMessage("Acv_Split_GetFromIdentifier: Error, unknown identifier: "+IntToString(ident));
+        return false;
+    }
+}
+void Acv_Split_SetFlagFromIdentifier(int playerID, int ident, int diff, bool state){
+    bool currentState = Acv_Split_GetFlagFromIdentifier(playerID, ident, diff);
+    if (state == currentState) { return; }
+    // if state is different, then XOR the corresponding bit will always be correct
+         if( ident == c_AcvIdentifier_FlawlessP0)      { gv_PlayerStats[playerID].flawless ^= 1 << (diff + gv_MaxAmountDifficulties * c_Part_Terran );}
+    else if( ident == c_AcvIdentifier_FlawlessP1)      { gv_PlayerStats[playerID].flawless ^= 1 << (diff + gv_MaxAmountDifficulties * c_Part_Protoss);}
+    else if( ident == c_AcvIdentifier_FlawlessP2)      { gv_PlayerStats[playerID].flawless ^= 1 << (diff + gv_MaxAmountDifficulties * c_Part_Zerg   );}
+    else if( ident == c_AcvIdentifier_BossT_Flamer)    { gv_PlayerStats[playerID].bossKills[BossToBossKillsArrayIndex(c_Bosses_TFlamer   )] ^= 1 << (BossToBossKillsOffset(c_Bosses_TFlamer   , diff));}
+    else if( ident == c_AcvIdentifier_BossT_Hammer)    { gv_PlayerStats[playerID].bossKills[BossToBossKillsArrayIndex(c_Bosses_THammer   )] ^= 1 << (BossToBossKillsOffset(c_Bosses_THammer   , diff));}
+    else if( ident == c_AcvIdentifier_BossT_Fortress)  { gv_PlayerStats[playerID].bossKills[BossToBossKillsArrayIndex(c_Bosses_TFortress )] ^= 1 << (BossToBossKillsOffset(c_Bosses_TFortress , diff));}
+    else if( ident == c_AcvIdentifier_BossP_Madness)   { gv_PlayerStats[playerID].bossKills[BossToBossKillsArrayIndex(c_Bosses_PMadness  )] ^= 1 << (BossToBossKillsOffset(c_Bosses_PMadness  , diff));}
+    else if( ident == c_AcvIdentifier_BossP_Atlantis)  { gv_PlayerStats[playerID].bossKills[BossToBossKillsArrayIndex(c_Bosses_PAtlantis )] ^= 1 << (BossToBossKillsOffset(c_Bosses_PAtlantis , diff));}
+    else if( ident == c_AcvIdentifier_BossP_Lightning) { gv_PlayerStats[playerID].bossKills[BossToBossKillsArrayIndex(c_Bosses_PLightning)] ^= 1 << (BossToBossKillsOffset(c_Bosses_PLightning, diff));}
+    else if( ident == c_AcvIdentifier_BossP_Thunder)   { gv_PlayerStats[playerID].bossKills[BossToBossKillsArrayIndex(c_Bosses_PThunder  )] ^= 1 << (BossToBossKillsOffset(c_Bosses_PThunder  , diff));}
+    else if( ident == c_AcvIdentifier_BossZ_Raynor)    { gv_PlayerStats[playerID].bossKills[BossToBossKillsArrayIndex(c_Bosses_ZRaynor   )] ^= 1 << (BossToBossKillsOffset(c_Bosses_ZRaynor   , diff));}
+    else if( ident == c_AcvIdentifier_BossZ_Kerrigan)  { gv_PlayerStats[playerID].bossKills[BossToBossKillsArrayIndex(c_Bosses_ZKerrigan )] ^= 1 << (BossToBossKillsOffset(c_Bosses_ZKerrigan , diff));}
+    else if( ident == c_AcvIdentifier_BossZ_Artanis)   { gv_PlayerStats[playerID].bossKills[BossToBossKillsArrayIndex(c_Bosses_ZArtanis  )] ^= 1 << (BossToBossKillsOffset(c_Bosses_ZArtanis  , diff));}
+    else if( ident == c_AcvIdentifier_BossZ_Cybermind) { gv_PlayerStats[playerID].bossKills[BossToBossKillsArrayIndex(c_Bosses_ZCybermind)] ^= 1 << (BossToBossKillsOffset(c_Bosses_ZCybermind, diff));}
+    else if( ident == c_AcvIdentifier_BossZ_Gary)      { gv_PlayerStats[playerID].bossKills[BossToBossKillsArrayIndex(c_Bosses_ZGary     )] ^= 1 << (BossToBossKillsOffset(c_Bosses_ZGary     , diff));}
+    else if( ident == c_AcvIdentifier_BossZ_Stetmann)  { gv_PlayerStats[playerID].bossKills[BossToBossKillsArrayIndex(c_Bosses_ZStetmann )] ^= 1 << (BossToBossKillsOffset(c_Bosses_ZStetmann , diff));}
+    else if( ident == c_AcvIdentifier_BossZ_Moopy)     { gv_PlayerStats[playerID].bossKills[BossToBossKillsArrayIndex(c_Bosses_ZMoopy    )] ^= 1 << (BossToBossKillsOffset(c_Bosses_ZMoopy    , diff));}
+    else { 
+        Debug_ShowMessage("Acv_Split_SetFlagFromIdentifier: Error, unknown identifier: "+IntToString(ident));
+    }
+}
+
+int Acv_FrameFromTypeAndIdentifier(int playerID, int acvType, int acvIdentifier){
+    int val = 0;
+    if(acvType > 2 || acvType < 0) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaError, StringToText("Acv_FrameFromTypeAndIdentifier: !(0 <= acvType <= 2)"));
+        return c_invalidDialogControlId;
+    }
+    if(acvIdentifier < 0){
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaError, StringToText("Acv_FrameFromTypeAndIdentifier: acvIdentifier < 0 "));
+        return c_invalidDialogControlId;
+    }
+    if (acvType == c_AcvType_Grind) {
+        if(acvIdentifier > gv_Acv_Grind_AmountAchievements){
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaError, StringToText("Acv_FrameFromTypeAndIdentifier: acvIdentifier > acv_Grind_AmountAchievements "));
+            return c_invalidDialogControlId;
+        }
+        else {
+            return gv_Acv_Grind_Frames[playerID][acvIdentifier];
+        }
+    }
+    else if (acvType == c_AcvType_OneTime) {
+        if(acvIdentifier > gv_Acv_OneTime_AmountAchievements){
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaError, StringToText("Acv_FrameFromTypeAndIdentifier: acvIdentifier > acv_OneTime_AmountAchievements "));
+            return c_invalidDialogControlId;
+        }
+        else {
+            return gv_Acv_OneTime_Frames[playerID][acvIdentifier];
+        }
+    }
+    else if (acvType == c_AcvType_Split) {
+        if(acvIdentifier > gv_Acv_Split_AmountAchievements){
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaError, StringToText("Acv_FrameFromTypeAndIdentifier: acvIdentifier > acv_Split_AmountAchievements "));
+            return c_invalidDialogControlId;
+        }
+        else {
+            return gv_Acv_Split_Frames[playerID][acvIdentifier];
+        }
+    }
+    return c_invalidDialogControlId;
+}
+int Acv_FrameFromPartAndDifficulty(int playerID, int part, int diff, bool smallTeamSize){
+    if( part < 0 || part >= gv_MaxAmountParts || diff < 0 || diff >= gv_MaxAmountDifficulties){
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaError, StringToText("Acv_FrameFromPartAndDifficulty: invalid part or diff input"));
+        return c_invalidDialogControlId;
+    }
+    return gv_Acv_Speedruns_Frames[playerID][part][diff][BoolToInt(smallTeamSize)];
+}
+
+void Acv_RewardUI_InitFunctionRef(){
+    int maxRewardEntrys = UserDataFieldCount("AcvRewards");
+    int i;
+    string type;
+
+    if(acv_Reward_FunctionsCount != maxRewardEntrys+1){
+        //error message, if const does not match reward list
+        //indexing starts at 1 so they have to be equal to function properly
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaError,
+            StringToText("Acv_Reward_InitFunctionRef: acv_RewardUI_FunctionsCount=")
+            +IntToText(acv_Reward_FunctionsCount)
+            +StringToText(" but is supposed to be ")
+            +IntToText(maxRewardEntrys+1));
+        return;
+    }
+    for (i = 1; i <= maxRewardEntrys; i += 1) {
+        type = UserDataField("AcvRewards", i);
+
+             if(type == "AcvScore")             { Acv_Reward_Functions[i] = Acv_Reward_AcvScore;                Acv_UI_Functions[i] = Acv_UI_AcvScore; }
+        else if(type == "Dmg")                  { Acv_Reward_Functions[i] = Acv_Reward_Dmg;                     Acv_UI_Functions[i] = Acv_UI_Dmg; }
+        else if(type == "Armor")                { Acv_Reward_Functions[i] = Acv_Reward_Armor;                   Acv_UI_Functions[i] = Acv_UI_Armor; }
+        else if(type == "Life")                 { Acv_Reward_Functions[i] = Acv_Reward_Life;                    Acv_UI_Functions[i] = Acv_UI_Life; }
+        else if(type == "LifeReg")              { Acv_Reward_Functions[i] = Acv_Reward_LifeRegen;               Acv_UI_Functions[i] = Acv_UI_LifeRegen; }
+        else if(type == "Energy")               { Acv_Reward_Functions[i] = Acv_Reward_Energy;                  Acv_UI_Functions[i] = Acv_UI_Energy; }
+        else if(type == "EnergyReg")            { Acv_Reward_Functions[i] = Acv_Reward_EnergyRegen;             Acv_UI_Functions[i] = Acv_UI_EnergyRegen; }
+        else if(type == "MovementSpeed")        { Acv_Reward_Functions[i] = Acv_Reward_MovementSpeed;           Acv_UI_Functions[i] = Acv_UI_MovementSpeed; }
+        else if(type == "AttackSpeed")          { Acv_Reward_Functions[i] = Acv_Reward_AttackSpeed;             Acv_UI_Functions[i] = Acv_UI_AttackSpeed; }
+        else if(type == "OverlordSpeed")        { Acv_Reward_Functions[i] = Acv_Reward_OverlordSpeed;           Acv_UI_Functions[i] = Acv_UI_OverlordSpeed; }
+        else if(type == "BiomassP0")            { Acv_Reward_Functions[i] = Acv_Reward_StartBiomassP0;          Acv_UI_Functions[i] = Acv_UI_StartBiomassP0; }
+        else if(type == "BiomassP1")            { Acv_Reward_Functions[i] = Acv_Reward_StartBiomassP1;          Acv_UI_Functions[i] = Acv_UI_StartBiomassP1; }
+        else if(type == "BiomassP2")            { Acv_Reward_Functions[i] = Acv_Reward_StartBiomassP2;          Acv_UI_Functions[i] = Acv_UI_StartBiomassP2; }
+        else if(type == "MutationsP0")          { Acv_Reward_Functions[i] = Acv_Reward_StartMutationsP0;        Acv_UI_Functions[i] = Acv_UI_StartMutationsP0; }
+        else if(type == "MutationsP1")          { Acv_Reward_Functions[i] = Acv_Reward_StartMutationsP1;        Acv_UI_Functions[i] = Acv_UI_StartMutationsP1; }
+        else if(type == "MutationsP2")          { Acv_Reward_Functions[i] = Acv_Reward_StartMutationsP2;        Acv_UI_Functions[i] = Acv_UI_StartMutationsP2; }
+        else if(type == "BiomassPerKill")       { Acv_Reward_Functions[i] = Acv_Reward_BiomassPerKill;          Acv_UI_Functions[i] = Acv_UI_BiomassPerKill; }
+        else if(type == "ExpP0")                { Acv_Reward_Functions[i] = Acv_Reward_StartExpP0;              Acv_UI_Functions[i] = Acv_UI_StartExpP0; }
+        else if(type == "ExpP1")                { Acv_Reward_Functions[i] = Acv_Reward_StartExpP1;              Acv_UI_Functions[i] = Acv_UI_StartExpP1; }
+        else if(type == "ExpP2")                { Acv_Reward_Functions[i] = Acv_Reward_StartExpP2;              Acv_UI_Functions[i] = Acv_UI_StartExpP2; }
+        else if(type == "ExpPerKill")           { Acv_Reward_Functions[i] = Acv_Reward_ExpPerKill;              Acv_UI_Functions[i] = Acv_UI_ExpPerKill; }
+        else if(type == "HiveAuraArmorP0")      { Acv_Reward_Functions[i] = Acv_Reward_HiveAuraArmorP0;         Acv_UI_Functions[i] = Acv_UI_HiveAuraArmorP0; }
+        else if(type == "HiveAuraLifeRegP0")    { Acv_Reward_Functions[i] = Acv_Reward_HiveAuraLifeRegenP0;     Acv_UI_Functions[i] = Acv_UI_HiveAuraLifeRegenP0; }
+        else if(type == "HiveAuraEnergyRegP0")  { Acv_Reward_Functions[i] = Acv_Reward_HiveAuraEnergyRegenP0;   Acv_UI_Functions[i] = Acv_UI_HiveAuraEnergyRegenP0; }
+        else if(type == "HiveAuraAttackSpeedP0"){ Acv_Reward_Functions[i] = Acv_Reward_HiveAuraAttackSpeedP0;   Acv_UI_Functions[i] = Acv_UI_HiveAuraAttackSpeedP0; }
+        else if(type == "HiveAuraTimeScaleP0")  { Acv_Reward_Functions[i] = Acv_Reward_HiveAuraTimeScaleP0;     Acv_UI_Functions[i] = Acv_UI_HiveAuraTimeScaleP0; }
+        else if(type == "HiveAuraDmgP0")        { Acv_Reward_Functions[i] = Acv_Reward_HiveAuraDmgP0;           Acv_UI_Functions[i] = Acv_UI_HiveAuraDmgP0; }
+        else if(type == "HiveAuraArmorP1")      { Acv_Reward_Functions[i] = Acv_Reward_HiveAuraArmorP1;         Acv_UI_Functions[i] = Acv_UI_HiveAuraArmorP1; }
+        else if(type == "HiveAuraLifeRegP1")    { Acv_Reward_Functions[i] = Acv_Reward_HiveAuraLifeRegenP1;     Acv_UI_Functions[i] = Acv_UI_HiveAuraLifeRegenP1; }
+        else if(type == "HiveAuraEnergyRegP1")  { Acv_Reward_Functions[i] = Acv_Reward_HiveAuraEnergyRegenP1;   Acv_UI_Functions[i] = Acv_UI_HiveAuraEnergyRegenP1; }
+        else if(type == "HiveAuraAttackSpeedP1"){ Acv_Reward_Functions[i] = Acv_Reward_HiveAuraAttackSpeedP1;   Acv_UI_Functions[i] = Acv_UI_HiveAuraAttackSpeedP1; }
+        else if(type == "HiveAuraTimeScaleP1")  { Acv_Reward_Functions[i] = Acv_Reward_HiveAuraTimeScaleP1;     Acv_UI_Functions[i] = Acv_UI_HiveAuraTimeScaleP1; }
+        else if(type == "HiveAuraDmgP1")        { Acv_Reward_Functions[i] = Acv_Reward_HiveAuraDmgP1;           Acv_UI_Functions[i] = Acv_UI_HiveAuraDmgP1; }
+        else if(type == "HiveAuraArmorP2")      { Acv_Reward_Functions[i] = Acv_Reward_HiveAuraArmorP2;         Acv_UI_Functions[i] = Acv_UI_HiveAuraArmorP2; }
+        else if(type == "HiveAuraLifeRegP2")    { Acv_Reward_Functions[i] = Acv_Reward_HiveAuraLifeRegenP2;     Acv_UI_Functions[i] = Acv_UI_HiveAuraLifeRegenP2; }
+        else if(type == "HiveAuraEnergyRegP2")  { Acv_Reward_Functions[i] = Acv_Reward_HiveAuraEnergyRegenP2;   Acv_UI_Functions[i] = Acv_UI_HiveAuraEnergyRegenP2; }
+        else if(type == "HiveAuraAttackSpeedP2"){ Acv_Reward_Functions[i] = Acv_Reward_HiveAuraAttackSpeedP2;   Acv_UI_Functions[i] = Acv_UI_HiveAuraAttackSpeedP2; }
+        else if(type == "HiveAuraTimeScaleP2")  { Acv_Reward_Functions[i] = Acv_Reward_HiveAuraTimeScaleP2;     Acv_UI_Functions[i] = Acv_UI_HiveAuraTimeScaleP2; }
+        else if(type == "HiveAuraDmgP2")        { Acv_Reward_Functions[i] = Acv_Reward_HiveAuraDmgP2;           Acv_UI_Functions[i] = Acv_UI_HiveAuraDmgP2; }
+        else if(type == "Spellpower")           { Acv_Reward_Functions[i] = Acv_Reward_Spellpower;              Acv_UI_Functions[i] = Acv_UI_Spellpower; }
+        else if(type == "CyberneticDmg")        { Acv_Reward_Functions[i] = Acv_Reward_CyberneticsDmg;          Acv_UI_Functions[i] = Acv_UI_CyberneticsDmg; }
+        else if(type == "CyberneticLife")       { Acv_Reward_Functions[i] = Acv_Reward_CyberneticsLife;         Acv_UI_Functions[i] = Acv_UI_CyberneticsLife; }
+        else if(type == "VisionRange")          { Acv_Reward_Functions[i] = Acv_Reward_VisionRange;             Acv_UI_Functions[i] = Acv_UI_VisionRange; }
+        else if(type == "Special")              { } //do nothing, Special gets parsed differently
+        else if(type == "Icon")                 { } //do nothing, Icon will be directly checked in the UI-caller-function
+        else { UIDisplayMessage(PlayerGroupAll(), c_messageAreaError, StringToText("Acv_RewardUI_InitFunctionRef: Unknown type="+type)); }
+    }
+}
+// reward/ui template caller
+
+text Acv_UI_ParseSpecialRewards(int player, string reward){
+    text returnText;
+    int tmpInt = 1;
+    string currentWord = StringWord(reward, tmpInt);
+    string substring;
+    int substringPosition;
+    int paramInt;
+    bool rewardFound = false;
+    while(currentWord != ""){
+        rewardFound = false;
+        //HeroUnlocks
+        substringPosition = StringFind(currentWord, "Hero", false);
+        if(substringPosition >= 0){
+            rewardFound = true;
+            substring = StringSub(currentWord, 5, StringLength(currentWord));
+            if(Utility_IsNumber(substring)){
+                paramInt = StringToInt(substring);
+                returnText += Acv_UI_HeroUnlock(paramInt);
+            }
+            else{ Debug_ShowMessage("Unknown Hero UI=" + substring);}
+        }
+        //DiffUnlocks
+        substringPosition = StringFind(currentWord, "Diff", false);
+        if(substringPosition >= 0){
+            rewardFound = true;
+            substring = StringSub(currentWord, 5, StringLength(currentWord));
+            if(Utility_IsNumber(substring)){
+                paramInt = StringToInt(substring);
+                returnText += Acv_UI_DiffUnlock(paramInt);
+            }
+            else{ Debug_ShowMessage("Unknown Diff UI=" + substring);}
+        }
+        //Cybernetics
+        substringPosition = StringFind(currentWord, "Cybernetic", false);
+        if(substringPosition >= 0){
+            rewardFound = true;
+            substring = StringSub(currentWord, 11, StringLength(currentWord));
+            if(substring == "1")                { returnText += StringExternal("Trig/Acv/UI/LurkerUnlock");}
+            else if(substring == "2")           { returnText += StringExternal("Trig/Acv/UI/RunlingUnlock");}
+            else if(substring == "3")           { returnText += StringExternal("Trig/Acv/UI/LifeBankUnlock");}
+            else if(substring == "Restore")     { returnText += StringExternal("Trig/Acv/UI/CyberneticsRestore");}
+            else if(substring == "Upgrade")     { returnText += StringExternal("Trig/Acv/UI/CyberneticsUpgrade");}
+            else { Debug_ShowMessage("Unknown Cybernetic UI=" + substring);}
+        }
+        //Ability
+        substringPosition = StringFind(currentWord, "Abil", false);
+        if(substringPosition >= 0){
+            rewardFound = true;
+            substring = StringSub(currentWord, 5, StringLength(currentWord));
+                 if(substring == "GlueStream")      { returnText += Acv_UI_AbilUnlock(StringExternal("Button/Name/GlueStream"),      UnitTypeGetName(gv_Hero_UnitTypes[0]));}
+            else if(substring == "Banemine")        { returnText += Acv_UI_AbilUnlock(StringExternal("Button/Name/Banemine"),        UnitTypeGetName(gv_Hero_UnitTypes[1]));}
+            else if(substring == "Headbutt")        { returnText += Acv_UI_AbilUnlock(StringExternal("Button/Name/Headbutt"),        UnitTypeGetName(gv_Hero_UnitTypes[2]));}
+            else if(substring == "CorrosiveSpikes") { returnText += Acv_UI_AbilUnlock(StringExternal("Button/Name/CorrosiveSpikes"), UnitTypeGetName(gv_Hero_UnitTypes[3]));}
+            else if(substring == "Frenzy")          { returnText += Acv_UI_AbilUnlock(StringExternal("Button/Name/Frenzy@Frenzy"),   UnitTypeGetName(gv_Hero_UnitTypes[4]));}
+            else if(substring == "Tackle")          { returnText += Acv_UI_AbilUnlock(StringExternal("Button/Name/Tackle"),          UnitTypeGetName(gv_Hero_UnitTypes[0]));}
+            else if(substring == "KillStreak")      { returnText += Acv_UI_AbilUnlock(StringExternal("Button/Name/KillStreak"),      UnitTypeGetName(gv_Hero_UnitTypes[1]));}
+            else if(substring == "Decoy")           { returnText += Acv_UI_AbilUnlock(StringExternal("Button/Name/Decoy"),           UnitTypeGetName(gv_Hero_UnitTypes[2]));}
+            else if(substring == "Focus")           { returnText += Acv_UI_AbilUnlock(StringExternal("Button/Name/Focus"),           UnitTypeGetName(gv_Hero_UnitTypes[3]));}
+            else if(substring == "EnergyTransfer")  { returnText += Acv_UI_AbilUnlock(StringExternal("Button/Name/EnergyTransfer"),  UnitTypeGetName(gv_Hero_UnitTypes[4]));}
+            else if(substring == "UltimateBeing")   { returnText += Acv_UI_AbilUnlock(StringExternal("Button/Name/UltimateBeing"),   UnitTypeGetName(gv_Hero_UnitTypes[0]));}
+            else if(substring == "TheySeeMeRolling"){ returnText += Acv_UI_AbilUnlock(StringExternal("Button/Name/TheySeeMeRolling"),UnitTypeGetName(gv_Hero_UnitTypes[1]));}
+            else if(substring == "AbsorbExplosion") { returnText += Acv_UI_AbilUnlock(StringExternal("Button/Name/AbsorbExplosion"), UnitTypeGetName(gv_Hero_UnitTypes[2]));}
+            else if(substring == "CorrosiveBurst")  { returnText += Acv_UI_AbilUnlock(StringExternal("Button/Name/CorrosiveBurst"),  UnitTypeGetName(gv_Hero_UnitTypes[3]));}
+            else if(substring == "RespawnEgg")      { returnText += Acv_UI_AbilUnlock(StringExternal("Button/Name/RespawnEgg"),      UnitTypeGetName(gv_Hero_UnitTypes[4]));}
+            else { Debug_ShowMessage("Unknown Abil UI=" + substring);}
+        }
+        //Cheater
+        if(currentWord == "Cheater"){
+            rewardFound = true;
+            returnText += StringToText("This is impossible without cheats or hacks!")+Acv_UI_Newline();
+        }
+        //P0D5Small (Terran Hardcore teamsize 3)
+        if(currentWord == "P0D5Small"){
+            rewardFound = true;
+            returnText += StringExternal("Trig/Acv/Speedruns/P0D5Small/Reward")+Acv_UI_Newline();
+        }
+        // Score
+        if(currentWord == "Rank"){
+            rewardFound = true;
+            returnText += Acv_UI_Newline() + Utility_TextExpressionReplacement("Trig/Acv/Score/Reward", TextWithColor(gv_PlayerStats[player].acvScoreRank, Color(0,255,0)));
+        }
+        
+
+        if(rewardFound == false){
+            Debug_ShowMessage("Unknown Special UI: "+currentWord);
+        }
+
+        tmpInt = tmpInt +1;
+        currentWord = StringWord(reward, tmpInt);
+    }
+    return returnText;
+}
+
+void Acv_Reward_ParseSpecialRewards(int player, string reward){
+    int tmpInt = 1;
+    string currentWord = StringWord(reward, tmpInt);
+    string substring;
+    int substringPosition;
+    int paramInt;
+    bool rewardFound = false;
+
+    while(currentWord != ""){
+        rewardFound = false;
+        //HeroUnlocks
+        substringPosition = StringFind(currentWord, "Hero", false);
+        if(substringPosition >= 0){
+            rewardFound = true;
+            substring = StringSub(currentWord, 5, StringLength(currentWord));
+            if(Utility_IsNumber(substring)){
+                paramInt = StringToInt(substring);
+                HeroSelection_UnlockHero(player, paramInt);
+            }
+            else{ UIDisplayMessage(gv_ActivePG, c_messageAreaDebug, StringToText("Unknown Hero reward=" + substring));}
+        }
+        //DiffUnlocks
+        substringPosition = StringFind(currentWord, "Diff", false);
+        if(substringPosition >= 0){
+            rewardFound = true;
+            substring = StringSub(currentWord, 5, StringLength(currentWord));
+            if(Utility_IsNumber(substring)){
+                paramInt = StringToInt(substring);
+                HeroSelection_UnlockDiff(player, paramInt);
+            }
+            else{ UIDisplayMessage(gv_ActivePG, c_messageAreaDebug, StringToText("Unknown Diff reward=" + substring));}
+        }
+        //Cybernetics
+        substringPosition = StringFind(currentWord, "Cybernetic", false);
+        if(substringPosition >= 0){
+            rewardFound = true;
+            substring = StringSub(currentWord, 11, StringLength(currentWord));
+            if(substring == "1")                { Acv_Reward_CyberneticsLevel(player); }
+            else if(substring == "2")           { Acv_Reward_CyberneticsLevel(player); }
+            else if(substring == "3")           { Acv_Reward_CyberneticsLevel(player); }
+            else if(substring == "Restore")     { TechTreeUpgradeAddLevel(player, "CyberneticLurkerChargeRestoreUnlock", 1);TechTreeUpgradeAddLevel(player, "CyberneticRunlingChargeRestoreUnlock", 1);}
+            else if(substring == "Upgrade")     { gv_PlayerStats[player].cyberneticUpgradesOnScientistCollection = true;}
+            else                                { UIDisplayMessage(gv_ActivePG, c_messageAreaDebug, StringToText("Unknown Cybernetic reward=" + substring));}
+        }
+        //Ability
+        substringPosition = StringFind(currentWord, "Abil", false);
+        if(substringPosition >= 0){
+            rewardFound = true;
+            substring = StringSub(currentWord, 5, StringLength(currentWord));
+            if(CatalogEntryIsValid(c_gameCatalogDataCollection, substring)){TechTreeUpgradeAddLevel(player, substring + "@Unlock", 1);}
+            else { UIDisplayMessage(gv_ActivePG, c_messageAreaDebug, StringToText("Unknown Abil reward=" + substring));}
+        }
+        //Cheater
+        if(currentWord == "Cheater"){
+            rewardFound = true;
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, (StringToText("Cheater: ") + Utility_PlayerNameWithPlayerColor(player)));
+        }
+        //P0D5Small (Terran Hardcore teamsize 3)
+        if(currentWord == "P0D5Small"){
+            rewardFound = true;
+            gv_PlayerStats[player].allowDanceCommand = true;
+        }
+        // Score
+        if(currentWord =="Rank"){
+            // do nothing, only for UI
+            rewardFound = true;
+        }
+
+
+        if(rewardFound == false){
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Unknown Special reward: "+currentWord) );
+        }
+
+        tmpInt = tmpInt +1;
+        currentWord = StringWord(reward, tmpInt);
+    }
+}
+
+void Acv_UI_ResetDataTable(){
+    string type;
+    int i;
+    for (i = 1; i < acv_Reward_FunctionsCount; i += 1) {
+        type = UserDataField("AcvRewards", i);
+        if(type == "Special"){
+            DataTableSetText(true, type, StringToText(""));
+            continue;
+        }
+        else if(type == "Icon"){
+            DataTableSetString(true, type, "");
+            continue;
+        }
+        
+        if(UserDataFieldType("AcvRewards", type) == c_userTypeFixed){
+            DataTableSetFixed(true, type, 0.0);
+        }
+    }
+}
+
+// grabs rewards from the UserData (User Types in data module) and stores them into DataTables
+// this is required because different stages of the same acv can give the same reward and i want these to be shown as a single line
+// acvIdentifier must be of the form: "unique-acv-string" + IntToString(stage)
+// if there are no stages (one time acv) then the number will be omitted
+// special rewards are parsed in Acv_UI_ParseSpecialRewards()
+void Acv_UI_GetFromUserDataAndStoreInDataTable(int player, string acvIdentifier){
+    string type;
+    fixed value_fixed;
+    int i;
+    string icon;
+    if(libNtve_gf_UserDataInstanceGetIndex("AcvRewards", acvIdentifier) < 0){
+        Debug_ShowMessage("No Instance in AcvRewards with name " +acvIdentifier);
+        return;
+    }
+    for (i = 1; i < acv_Reward_FunctionsCount; i += 1) {
+        type = UserDataField("AcvRewards", i);
+        if(type != "Special" && type != "Icon"){
+            value_fixed = UserDataGetFixed("AcvRewards", acvIdentifier, type, 1);
+            if(value_fixed != 0.0){
+                DataTableSetFixed(true, type, value_fixed + DataTableGetFixed(true, type));
+            }
+        }
+        else if (type == "Special"){
+            DataTableSetText(true, type, DataTableGetText(true, type) + Acv_UI_ParseSpecialRewards(player, UserDataGetString("AcvRewards", acvIdentifier, type, 1)));
+        }
+        else if (type == "Icon"){
+            icon = UserDataGetImagePath("AcvRewards", acvIdentifier, type, 1);
+            if(icon != ""){
+                DataTableSetString(true, type, icon);
+            }
+        }
+    }
+}
+
+// reads special reward texts first, then all possible accumulative rewards and prints non-zero values them (always in the same order)
+void Acv_UI_GetFromDataTable(int player, structref<Acv_UI_Return_Struct> returnInfo){
+    string type;
+    fixed value_fixed;
+    int i;
+    returnInfo.rewards += DataTableGetText(true, "Special");
+    for (i = 1; i < acv_Reward_FunctionsCount; i += 1) {
+        type = UserDataField("AcvRewards", i);
+        if(type != "Special" && type !="Icon"){
+            value_fixed = DataTableGetFixed(true, type);
+            if(value_fixed != 0.0){
+                returnInfo.rewards += Acv_UI_Functions[i](value_fixed);
+            }
+        }
+    }
+    returnInfo.image = DataTableGetString(true, "Icon");
+    Acv_UI_ResetDataTable();
+}
+
+// grabs rewards from the UserData (User Types in data module) and calls the corresponding function
+// acvIdentifier must be of the form: "unique-acv-string" + IntToString(stage)
+// if there are no stages (one time acv) then the number will be omitted
+// special rewards are parsed in Acv_Reward_ParseSpecialRewards()
+void Acv_Reward_GetFromUserData(int player, string acvIdentifier){
+    string type;
+    fixed value_fixed;
+    int value_int;
+    int maxRewardEntrys = UserDataFieldCount("AcvRewards");
+    int i;
+    for (i = 0; i < maxRewardEntrys; i += 1) {
+        type = UserDataField("AcvRewards", i);
+        if(type != "Special" && type != "Icon"){
+            // assumes that everything stored is of type Fixed
+            value_fixed = UserDataGetFixed("AcvRewards", acvIdentifier, type, 1);
+            if(value_fixed != 0.0) {
+                Acv_Reward_Functions[i](player, value_fixed);
+            }
+        }
+        else if (type == "Special"){
+            Acv_Reward_ParseSpecialRewards(player, UserDataGetString("AcvRewards", acvIdentifier, type, 1));
+        }
+    }
+}
+
+void Acv_HiveUpgradeFromStorage(int part){
+    Acv_Reward_HiveAuraArmorP0(0,gv_Hive_Upgrades[part].aura_Armor);
+    Acv_Reward_HiveAuraDmgP0(0,gv_Hive_Upgrades[part].aura_Dmg);
+    Acv_Reward_HiveAuraEnergyRegenP0(0,gv_Hive_Upgrades[part].aura_Energyreg);
+    Acv_Reward_HiveAuraLifeRegenP0(0,gv_Hive_Upgrades[part].aura_Lifereg);
+    Acv_Reward_HiveAuraAttackSpeedP0(0,gv_Hive_Upgrades[part].aura_Atkspd);
+    Acv_Reward_HiveAuraTimeScaleP0(0,gv_Hive_Upgrades[part].aura_Timescale);
+    Acv_Reward_HiveArmor(0,gv_Hive_Upgrades[part].armor);
+    Acv_Reward_HiveLife(0,gv_Hive_Upgrades[part].life);
+    Acv_Reward_HiveLiferegen(0,gv_Hive_Upgrades[part].lifereg);
+}
+
+// Grind
+void Acv_Grind_UI(int playerID, int acvIdentifier, bool notification){
+    int frame = gv_Acv_Grind_Frames[playerID][acvIdentifier];
+    string strIdentifier = gv_Acv_Grind_StringIdentifier[acvIdentifier];
+    int currentStage = UserDataGetInt("AcvReqGrind", strIdentifier, "PlayerStage", playerID);
+    int maxStage = UserDataGetInt("AcvReqGrind", strIdentifier, "MaxStage", 1);
+    int tmpInt;
+    int tmpReq;
+    text tooltip;
+    text title;
+    Acv_UI_Return_Struct acvInfos;
+
+    for (tmpInt = 1; tmpInt <= currentStage; tmpInt += 1) {
+        Acv_UI_GetFromUserDataAndStoreInDataTable(playerID, gv_Acv_Grind_StringIdentifier[acvIdentifier]+IntToString(tmpInt));
+        DialogControlSetVisible(frame, PlayerGroupAll(),true);
+    }
+    Acv_UI_GetFromDataTable(playerID,acvInfos);
+    
+    //sets border and image
+    DialogControlSendAnimationEvent(frame, PlayerGroupAll(), "Stage"+ IntToString(currentStage));
+    if(acvInfos.image != ""){
+        libNtve_gf_SetDialogItemImage(DialogControlHookup(frame, c_triggerControlTypeImage, "Icon"), acvInfos.image, PlayerGroupAll());
+    }
+
+    //create title out of name, current stage and max stage
+    title = TextWithColor( StringExternal("Trig/Acv/"+strIdentifier+"/Name"), UserDataGetColor("AcvReqGrind", strIdentifier, "Color", 1));
+    if(currentStage >0){
+        title += TextWithColor(StringToText(" ") + Acv_UI_IntToRomanNumberText(currentStage)+StringToText("/")+Acv_UI_IntToRomanNumberText(maxStage),UserDataGetColor("AcvReqGrind", strIdentifier, "Color", 1));
+    }
+    tooltip = title;
+    tooltip += StringToText("<n/>") + acvInfos.rewards + StringToText("<n/>");
+
+    //list of requirements for the stages
+    for(tmpInt = 0; tmpInt < maxStage; tmpInt+=1){
+        tmpReq = UserDataGetInt("AcvReqGrind", strIdentifier, "StageReq", tmpInt+1);
+            
+        //already completed stages
+        if(tmpInt < currentStage){
+            tooltip += StringToText("<n/>");
+            tooltip += StringToText(acv_UI_Tooltip_ReqCompletedImage);
+            tooltip += TextWithColor(Utility_TextExpressionReplacement("Trig/Acv/"+strIdentifier+"/Requirement", IntToText(tmpReq)), acv_UI_ColorGrey);
+        }
+        //currently active stage
+        else if( tmpInt == currentStage){
+            tooltip += StringToText("<n/>");
+            tooltip += StringToText(acv_UI_Tooltip_ReqLockedImageColored);
+            tooltip += Utility_TextExpressionReplacement("Trig/Acv/"+strIdentifier+"/Requirement", TextWithColor(IntToText(tmpReq), UserDataGetColor("AcvReqGrind", strIdentifier, "Color", 1)));
+        }
+        //locked stages, maybe hide completely
+        // else{
+        //     tooltip += StringToText("<n/>");
+        //     tooltip += TextWithColor(StringToText(acv_UI_Tooltip_ReqLockedImage), acv_UI_ColorGrey);
+        //     tooltip += TextWithColor(Utility_TextExpressionReplacement("Trig/Acv/"+strIdentifier+"/Requirement", IntToText(tmpReq)), acv_UI_ColorGrey);
+        // }
+    }
+    libNtve_gf_SetDialogItemTooltip(frame, tooltip, PlayerGroupAll());
+    if(gv_Part_ActivePart != c_Part_None && notification){
+        Popup_CreateFromAcvTypeAndIdentifier(playerID, c_AcvType_Grind, acvIdentifier, title, tooltip, acvInfos.image);
+    }
+}
+void Acv_Grind_Check(int playerID, int acvIdentifier){
+    string strIdentifier = gv_Acv_Grind_StringIdentifier[acvIdentifier];
+    int maxStage = UserDataGetInt("AcvReqGrind", strIdentifier, "MaxStage", 1);
+    int currentStage = UserDataGetInt("AcvReqGrind", strIdentifier, "PlayerStage", playerID);
+    int counter = Acv_Grind_GetCounterFromIdentifier(playerID, acvIdentifier);
+    int nextStageRequirement;
+    int tmpStage;
+    bool newStageFlag;
+
+    for( tmpStage = 0; tmpStage < maxStage; tmpStage += 1){
+        nextStageRequirement = UserDataGetInt("AcvReqGrind", strIdentifier, "StageReq", currentStage+1);
+        if (counter >= nextStageRequirement && currentStage <= tmpStage){
+            currentStage +=1;
+            UserDataSetInt("AcvReqGrind", strIdentifier, "PlayerStage", playerID, currentStage);
+            Acv_Reward_GetFromUserData(playerID, gv_Acv_Grind_StringIdentifier[acvIdentifier] + IntToString(currentStage));
+            newStageFlag= true;
+        }
+    }
+    if(acvIdentifier == c_AcvIdentifier_Score){
+        PlayerBoard_UpdatePlayer(playerID);
+    }
+    if(gv_Part_ActivePart == c_Part_None || newStageFlag){
+        Acv_Grind_UI(playerID,acvIdentifier, gv_Part_ActivePart != c_Part_None);
+    }
+}
+void Acv_Grind_UnlockAdd(int playerID, int acvIdentifier, int value){
+    if(!gv_ValidGame){ return; }
+    Acv_Grind_AddCounterFromIdentifier(playerID, acvIdentifier, value);
+    Acv_Grind_Check(playerID,acvIdentifier);
+    if(acvIdentifier != c_AcvIdentifier_Kills){
+        Bank_Save_RequestSave(playerID);
+    }
+}
+
+// OneTime
+void Acv_OneTime_UI(int playerID, int acvIdentifier, bool notification){
+    int frame = gv_Acv_OneTime_Frames[playerID][acvIdentifier];
+    string strIdentifier = gv_Acv_OneTime_StringIdentifier[acvIdentifier];
+    bool state = Acv_OneTime_GetFlagFromIdentifier(playerID, acvIdentifier);
+    int stateInt = BoolToInt(state);
+    text tooltip;
+    text title;
+    Acv_UI_Return_Struct acvInfos;
+
+    if(acvIdentifier == c_AcvIdentifier_Trophy){
+        // intersect stuff for the trophy acv
+        title = TextWithColor( StringExternal("Trig/Acv/"+strIdentifier+"/Name"), UserDataGetColor("AcvReqOneTime", strIdentifier, "Color", 1));
+        state = gv_PlayerStats[playerID].archivedAcv > 0; // any trophy achieved
+        if(!state) {return;}
+        Acv_UI_GetFromUserDataAndStoreInDataTable(playerID, gv_Acv_OneTime_StringIdentifier[acvIdentifier]);
+        Acv_UI_GetFromDataTable(playerID,acvInfos);
+        DialogControlSendAnimationEvent(frame, PlayerGroupAll(), "Stage"+ IntToString(stateInt));
+        if(acvInfos.image != ""){
+            libNtve_gf_SetDialogItemImage(DialogControlHookup(frame, c_triggerControlTypeImage, "Icon"), acvInfos.image, PlayerGroupAll());
+        }
+
+        DialogControlSetVisible(frame, PlayerGroupAll(),true);
+        tooltip = title;
+        tooltip += StringToText("<n/>") + StringExternal("Trig/Acv/"+strIdentifier+"/Reward");
+
+        // 
+        if ((gv_PlayerStats[playerID].archivedAcv & c_ArchivedAcv_P0D4DuoFtl) > 0){
+            tooltip += StringToText("<n/>") + StringExternal("Trig/Acv/"+strIdentifier+"/P0D4DuoFtl");
+        }
+        if ((gv_PlayerStats[playerID].archivedAcv & c_ArchivedAcv_P0D5Duo) > 0){
+            tooltip += StringToText("<n/>") + StringExternal("Trig/Acv/"+strIdentifier+"/P0D5Duo");
+        }
+        if ((gv_PlayerStats[playerID].archivedAcv & c_ArchivedAcv_P1D2SoloFtl) > 0){
+            tooltip += StringToText("<n/>") + StringExternal("Trig/Acv/"+strIdentifier+"/P1D2SoloFtl");
+        }
+        if ((gv_PlayerStats[playerID].archivedAcv & c_ArchivedAcv_P1D3DuoFtl) > 0){
+            tooltip += StringToText("<n/>") + StringExternal("Trig/Acv/"+strIdentifier+"/P1D3DuoFtl");
+        }
+        if ((gv_PlayerStats[playerID].archivedAcv & c_ArchivedAcv_P1D4TrioFtl) > 0){
+            tooltip += StringToText("<n/>") + StringExternal("Trig/Acv/"+strIdentifier+"/P1D4TrioFtl");
+        }
+        if ((gv_PlayerStats[playerID].archivedAcv & c_ArchivedAcv_P1D5Team) > 0){
+            tooltip += StringToText("<n/>") + StringExternal("Trig/Acv/"+strIdentifier+"/P1D5Team");
+        }
+        libNtve_gf_SetDialogItemTooltip(frame, tooltip, PlayerGroupAll());
+        // trophy never requires a popup
+        return;
+    }
+
+    if(state){
+        Acv_UI_GetFromUserDataAndStoreInDataTable(playerID, gv_Acv_OneTime_StringIdentifier[acvIdentifier]);
+        Acv_UI_GetFromDataTable(playerID,acvInfos);
+    }
+
+    DialogControlSendAnimationEvent(frame, PlayerGroupAll(), "Stage"+ IntToString(stateInt));
+    if(acvInfos.image != ""){
+        libNtve_gf_SetDialogItemImage(DialogControlHookup(frame, c_triggerControlTypeImage, "Icon"), acvInfos.image, PlayerGroupAll());
+    }
+
+    title = TextWithColor( StringExternal("Trig/Acv/"+strIdentifier+"/Name"), UserDataGetColor("AcvReqOneTime", strIdentifier, "Color", 1));
+    tooltip += title;
+    tooltip += StringToText("<n/>") + acvInfos.rewards+StringToText("<n/><n/>");
+
+    if(state){
+        tooltip += StringToText(acv_UI_Tooltip_ReqCompletedImage)+TextWithColor(StringExternal("Trig/Acv/"+strIdentifier+"/Requirement"), acv_UI_ColorGrey);
+    }
+    else{
+        tooltip += StringToText(acv_UI_Tooltip_ReqLockedImageColored)+StringExternal("Trig/Acv/"+strIdentifier+"/Requirement");
+    }
+    libNtve_gf_SetDialogItemTooltip(frame, tooltip, PlayerGroupAll());
+    if(notification){
+        Popup_CreateFromAcvTypeAndIdentifier(playerID, c_AcvType_OneTime, acvIdentifier, title, tooltip, acvInfos.image);
+    }
+}
+void Acv_OneTime_Check(int playerID, int acvIdentifier){
+    if (Acv_OneTime_GetFlagFromIdentifier(playerID, acvIdentifier)){
+        Acv_Reward_GetFromUserData(playerID, gv_Acv_OneTime_StringIdentifier[acvIdentifier]);
+    }
+    Acv_OneTime_UI(playerID, acvIdentifier, false);
+}
+void Acv_OneTime_Unlock(int playerID, int acvIdentifier){
+    if(!gv_ValidGame){ return; }
+    if(!Acv_OneTime_GetFlagFromIdentifier(playerID, acvIdentifier)){
+        Acv_OneTime_SetFlagFromIdentifier(playerID, acvIdentifier, true);
+        Acv_Reward_GetFromUserData(playerID, gv_Acv_OneTime_StringIdentifier[acvIdentifier]);
+        Acv_OneTime_UI(playerID, acvIdentifier, true);
+
+        Bank_Save_RequestSave(playerID);
+        gv_PlayerStats[playerID].saveFlag_Heavy = true;
+    }
+}
+
+// Split
+void Acv_Split_UI(int playerID, int acvIdentifier, bool notification){
+    int frame = gv_Acv_Split_Frames[playerID][acvIdentifier];
+    string strIdentifier = gv_Acv_Split_StringIdentifier[acvIdentifier];
+    const int size = gv_MaxAmountDifficulties; //set this according to the size of the array, currently all of those are of lenght difficulty
+    bool state;
+    bool allStagesCompleted = true;
+    int tmpInt;
+    text tooltip;
+    text title;
+    bool anyStageCompleted = false;
+    Acv_UI_Return_Struct acvInfos;
+
+    title = TextWithColor( StringExternal("Trig/Acv/"+strIdentifier+"/Name"), UserDataGetColor("AcvReqSplit", strIdentifier, "Color", 1));
+    tooltip = title;
+    //checks unlocked stages and colorized border
+    for(tmpInt = 0; tmpInt<size; tmpInt+=1){
+        state = Acv_Split_GetFlagFromIdentifier(playerID, acvIdentifier, tmpInt);
+        if(state){
+            DialogControlSendAnimationEvent(frame, PlayerGroupAll(), "Unlock"+IntToString(tmpInt));
+            Acv_UI_GetFromUserDataAndStoreInDataTable(playerID, gv_Acv_Split_StringIdentifier[acvIdentifier]+IntToString(tmpInt));
+            anyStageCompleted = true;
+        }
+        else{
+            allStagesCompleted = false;
+        }
+    }
+    Acv_UI_GetFromDataTable(playerID,acvInfos);
+
+    if(acvInfos.image != ""){
+        libNtve_gf_SetDialogItemImage(DialogControlHookup(frame, c_triggerControlTypeImage, "Icon"), acvInfos.image, PlayerGroupAll());
+    }
+
+    tooltip += StringToText("<n/>") + acvInfos.rewards +StringToText("<n/><n/>");
+
+    if(anyStageCompleted){
+        DialogControlSetVisible(frame, PlayerGroupAll(),true);
+    }
+
+    if(allStagesCompleted){
+        tooltip += TextWithColor(StringExternal("Trig/Acv/"+strIdentifier+"/Requirement"),acv_UI_ColorGrey);
+    }
+    else {
+        tooltip += StringExternal("Trig/Acv/"+strIdentifier+"/Requirement");
+    }
+    for(tmpInt = 0; tmpInt<size; tmpInt+=1){
+        state = Acv_Split_GetFlagFromIdentifier(playerID, acvIdentifier, tmpInt);
+            tooltip += StringToText("<n/>");
+        if(state){
+            tooltip += StringToText(acv_UI_Tooltip_ReqCompletedImage);
+            tooltip += TextWithColor(Utility_DiffName(tmpInt), Color(70,70,70));
+        }
+        else{
+            tooltip += StringToText(acv_UI_Tooltip_ReqLockedImageColored);
+            tooltip += Utility_DiffNameColored(tmpInt);
+        }
+    }
+
+    libNtve_gf_SetDialogItemTooltip(frame, tooltip, PlayerGroupAll());
+    if(notification){
+        Popup_CreateFromAcvTypeAndIdentifier(playerID, c_AcvType_Split, acvIdentifier, title, tooltip, acvInfos.image);
+    }
+}
+void Acv_Split_Check(int playerID, int acvIdentifier){
+    int tmpDiff;
+    for( tmpDiff = 0; tmpDiff <= gv_MaxAmountDifficulties-1 ; tmpDiff += 1){
+        if( Acv_Split_GetFlagFromIdentifier(playerID,acvIdentifier,tmpDiff)){
+            Acv_Reward_GetFromUserData(playerID,gv_Acv_Split_StringIdentifier[acvIdentifier]+IntToString(tmpDiff));
+        }
+    }
+    Acv_Split_UI(playerID, acvIdentifier, false);
+}
+void Acv_Split_Unlock(int playerID, int acvIdentifier, int diff){
+    if(!gv_ValidGame){ return; }
+    if(!Acv_Split_GetFlagFromIdentifier(playerID, acvIdentifier, diff)){
+        Acv_Split_SetFlagFromIdentifier(playerID, acvIdentifier, diff, true);
+        Acv_Reward_GetFromUserData(playerID,gv_Acv_Split_StringIdentifier[acvIdentifier]+IntToString(diff));
+        Acv_Split_UI(playerID, acvIdentifier,true);
+        Bank_Save_RequestSave(playerID);
+
+        gv_PlayerStats[playerID].saveFlag_Heavy = true;
+    }
+}
+
+// Speedruns
+text Acv_Speedruns_UI_RequirementFormat(int speedyID, text time){
+    return Acv_UI_IntToSpeedyText(speedyID)+StringToText(": ")+Utility_TextExpressionReplacement("Trig/Acv/Speedruns/Requirement/Speedy",time);
+}
+void Acv_Speedruns_UI(int playerID, int part, int diff, bool smallTeamSize, bool notification){
+    int frame = gv_Acv_Speedruns_Frames[playerID][part][diff][BoolToInt(smallTeamSize)];
+    string strIdentifier = "P"+IntToString(part)+"D"+IntToString(diff);
+    int currentStage;
+    int allowedTeamSize = 6;
+    int tmpInt;
+    int tmpReq;
+    text tooltip;
+    text title;
+    color coloring;
+    string teamOrSmall = "Team";
+    Acv_UI_Return_Struct acvInfos;
+
+    //prepare vars if small team size
+    if(smallTeamSize) {
+        allowedTeamSize = UserDataGetInt("AcvReqSpeedruns", strIdentifier, "TeamSizeMaxForSmall", 1);
+        teamOrSmall = "Small";
+    }
+    currentStage = UserDataGetInt("AcvReqSpeedruns", strIdentifier, "Player" + teamOrSmall + "Stage", playerID);
+
+    for (tmpInt = 1; tmpInt <= currentStage; tmpInt += 1) {
+        Acv_UI_GetFromUserDataAndStoreInDataTable(playerID, strIdentifier + teamOrSmall + IntToString(tmpInt));
+        DialogControlSetVisible(frame, PlayerGroupAll(),true);
+    }
+    Acv_UI_GetFromDataTable(playerID,acvInfos);
+
+    DialogControlSendAnimationEvent(frame, PlayerGroupAll(), "Stage"+ IntToString(currentStage));
+    if(acvInfos.image != ""){
+        libNtve_gf_SetDialogItemImage(DialogControlHookup(frame, c_triggerControlTypeImage, "Icon"), acvInfos.image, PlayerGroupAll());
+    }
+    coloring = Utility_DiffColor(diff);
+
+    //create title out of Diff name, part, possibly small team size and current stage
+    title = Utility_DiffNameColored(diff);
+    title += TextWithColor(StringExternal("Trig/Acv/Speedruns/P"+IntToString(part)+"Suffix"), coloring);
+    if(smallTeamSize){
+        title += TextWithColor(StringToText(" ")+ StringExternal("Trig/Generic/TeamSize/" + IntToString(allowedTeamSize)) , coloring);
+    }
+    title += TextWithColor(StringToText(" ")+  Acv_UI_IntToSpeedyText(currentStage-1), coloring);
+
+    tooltip = title;
+    //fill rewards
+    tooltip += StringToText("<n/>") + acvInfos.rewards + StringToText("<n/><n/>");
+
+    //Requirements - start with beating the diff
+    if(currentStage == 0){
+        tooltip += StringToText(acv_UI_Tooltip_ReqLockedImageColored);
+        tooltip += Utility_TextExpressionReplacement("Trig/Acv/Speedruns/Requirement/TeamSize"+IntToString(allowedTeamSize), TextWithColor(Utility_DiffName(diff),coloring));
+    }
+    else{
+        tooltip += StringToText(acv_UI_Tooltip_ReqCompletedImage);
+        tooltip += TextWithColor(Utility_TextExpressionReplacement("Trig/Acv/Speedruns/Requirement/TeamSize"+IntToString(allowedTeamSize), Utility_DiffName(diff)),acv_UI_ColorGrey);
+    }
+    //requirements for speedy ftl (possibly more stages)
+    for(tmpInt = 1; tmpInt <= 2; tmpInt+=1){
+        tmpReq = UserDataGetInt("AcvReqSpeedruns", strIdentifier, teamOrSmall, tmpInt);
+        //if there is no next stage, just ignore it (for some hc stuff or if more stages are added)
+        if(tmpReq != 0){
+            if(currentStage > tmpInt){
+                //completed stage
+                tooltip += StringToText("<n/>");
+                tooltip += StringToText(acv_UI_Tooltip_ReqCompletedImage);
+                tooltip += TextWithColor( Acv_Speedruns_UI_RequirementFormat(tmpInt, Utility_TimeFormat(tmpReq)), acv_UI_ColorGrey );
+            }
+            else if(currentStage == tmpInt ){
+                //currently active stage
+                tooltip += StringToText("<n/>");
+                tooltip += StringToText(acv_UI_Tooltip_ReqLockedImageColored);
+                tooltip += Acv_Speedruns_UI_RequirementFormat(tmpInt, TextWithColor(Utility_TimeFormat(tmpReq),coloring));
+            }
+            else{
+                //locked but inactive stage
+                tooltip += StringToText("<n/>");
+                tooltip += StringToText(acv_UI_Tooltip_ReqLockedImage);
+                tooltip += TextWithColor( Acv_Speedruns_UI_RequirementFormat(tmpInt, Utility_TimeFormat(tmpReq)), acv_UI_ColorGrey );
+            }
+        }
+    }
+    libNtve_gf_SetDialogItemTooltip(frame, tooltip, PlayerGroupAll());
+    if(notification){
+        Popup_CreateFromPartAndDiff(playerID, part, diff, smallTeamSize, title, tooltip, acvInfos.image);
+    }
+}
+void Acv_Speedruns_Check(int playerID, int part, int diff, bool smallTeamSize){
+    string strIdentifier = "P"+IntToString(part)+"D"+IntToString(diff);
+    int currentStage;
+    int nextStageRequirement;
+    int allowedTeamSize = 6;
+    int tmpStage;
+    string teamOrSmall = "Team";
+    bool notifcation;
+
+    if(smallTeamSize) {
+        allowedTeamSize = UserDataGetInt("AcvReqSpeedruns", strIdentifier, "TeamSizeMaxForSmall", 1);
+        teamOrSmall = "Small";
+    }
+    currentStage = UserDataGetInt("AcvReqSpeedruns", strIdentifier, "Player" + teamOrSmall + "Stage", playerID);
+
+    if(gv_PlayerStats[playerID].speedrunsTime[part][diff][allowedTeamSize-1] != 0){
+
+        for( tmpStage= 0; tmpStage <= 2; tmpStage += 1){
+            if(tmpStage > 0) {
+                nextStageRequirement = UserDataGetInt("AcvReqSpeedruns", strIdentifier, teamOrSmall , tmpStage);
+            }
+            else{
+                nextStageRequirement = gv_GameTimeMax;
+            }
+
+            if( gv_PlayerStats[playerID].speedrunsTime[part][diff][allowedTeamSize-1] <= nextStageRequirement && currentStage <= tmpStage){
+
+                currentStage +=1;
+                UserDataSetInt("AcvReqSpeedruns", strIdentifier, "Player" + teamOrSmall + "Stage" , playerID, currentStage);
+                Acv_Reward_GetFromUserData(playerID, strIdentifier + teamOrSmall + IntToString(currentStage));
+                // acv_Speedruns_RewardFunctions[part][diff][BoolToInt(smallTeamSize)](playerID, currentStage);
+
+                if(gv_Part_ActivePart != c_Part_None){
+                    notifcation = true;
+                    // UIDisplayMessage(PlayerGroupSingle(playerID), c_messageAreaSubtitle, StringExternal("Trig/AcvUnlock/D" + IntToString(diff)));
+                    // AcvInterface_SendNotification(playerID, Acv_FrameFromPartAndDifficulty(playerID, part,diff,smallTeamSize));
+                }
+            }
+        }
+    }
+    Acv_Speedruns_UI(playerID, part, diff, smallTeamSize, notifcation);
+}
+
+void Acv_InitAllAcv(){
+    int tmpInt;
+    int tmpInt2;
+    int tmpPlayer;
+
+    tmpPlayer = -1;
+    while (true) {
+        tmpPlayer = PlayerGroupNextPlayer(gv_ActivePG, tmpPlayer);
+        if(tmpPlayer < 0) { break; }
+        
+        for( tmpInt = 0; tmpInt< gv_Acv_Grind_AmountAchievements; tmpInt+=1){
+            Acv_Grind_Check(tmpPlayer, tmpInt);
+        }
+        
+        for( tmpInt = 0; tmpInt< gv_Acv_OneTime_AmountAchievements; tmpInt+=1){
+            Acv_OneTime_Check(tmpPlayer, tmpInt);
+        }
+        
+        for( tmpInt = 0; tmpInt< gv_Acv_Split_AmountAchievements; tmpInt+=1){
+            Acv_Split_Check(tmpPlayer, tmpInt);
+        }
+
+        for( tmpInt = 0; tmpInt< gv_MaxAmountParts; tmpInt+=1){
+            for( tmpInt2 = 0; tmpInt2< gv_MaxAmountDifficulties; tmpInt2+=1){
+                Acv_Speedruns_Check(tmpPlayer, tmpInt, tmpInt2, false);
+                Acv_Speedruns_Check(tmpPlayer, tmpInt, tmpInt2, true);
+            }
+        }
+    }
+}
+

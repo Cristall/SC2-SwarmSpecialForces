@@ -1,0 +1,1147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CKineticRotate id="OverchargedGun@DummyRotateKinetic">
+        <Cycles value="1"/>
+        <Duration value="7.5"/>
+        <Yaw value="90"/>
+    </CKineticRotate>
+    <CKineticRotate id="OverchargedGun@DummyRotateKinetic3" parent="OverchargedGun@DummyRotateKinetic">
+        <Name value="Kinetic/Name/OverchargedGun@DummyRotateKinetic3"/>
+        <Yaw value="149.9963"/>
+    </CKineticRotate>
+    <CKineticRotate id="OverchargedGun@DummyRotateKinetic4" parent="OverchargedGun@DummyRotateKinetic">
+        <Name value="Kinetic/Name/OverchargedGun@DummyRotateKinetic4"/>
+        <Yaw value="199.995"/>
+    </CKineticRotate>
+    <CKineticRotate id="OverchargedGun@DummyRotateKinetic5" parent="OverchargedGun@DummyRotateKinetic">
+        <Name value="Kinetic/Name/OverchargedGun@DummyRotateKinetic5"/>
+        <Yaw value="249.994"/>
+    </CKineticRotate>
+    <CKineticRotate id="OverchargedGun@DummyRotateKinetic2" parent="OverchargedGun@DummyRotateKinetic">
+        <Name value="Kinetic/Name/OverchargedGun@DummyRotateKinetic2"/>
+        <Yaw value="119.9926"/>
+    </CKineticRotate>
+    <CEffectApplyBehavior id="TakeCover@FakeMineExtraDmg">
+        <ValidatorArray index="0" value="TakeCover@NotRealMine"/>
+        <EditorCategories value=""/>
+    </CEffectApplyBehavior>
+    <CEffectSet id="EatThis@VehicleDeath">
+        <EditorCategories value=""/>
+    </CEffectSet>
+    <CEffectDamage id="EatThis@VehicleWeaponDmg" parent="DU_WEAP">
+        <EditorCategories value=""/>
+        <Amount value="2500"/>
+    </CEffectDamage>
+    <CEffectCreatePersistent id="EatThis@Delay">
+        <EditorCategories value=""/>
+        <InitialEffect value="EatThis@Vehicle"/>
+        <WhichLocation Value="CasterUnit"/>
+    </CEffectCreatePersistent>
+    <CEffectCreatePersistent id="EatThis@HealDelay">
+        <EditorCategories value=""/>
+        <PeriodCount value="2"/>
+        <PeriodicValidator value="EatThis@VehicleActive"/>
+        <PeriodicEffectArray value="EatThis@Healer"/>
+        <PeriodicPeriodArray value="10"/>
+        <WhichLocation Value="CasterUnit"/>
+    </CEffectCreatePersistent>
+    <CEffectCreateHealer id="EatThis@Healer">
+        <EditorCategories value=""/>
+        <ImpactUnit Value="Caster"/>
+        <Flags index="Channeled" value="0"/>
+        <PeriodicValidator value="EatThis@VehicleActive"/>
+        <RechargeVitalFraction value="0.0312"/>
+    </CEffectCreateHealer>
+    <CEffectSet id="EatThis@InitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="EatThis@AlreadyCastingNoWeapons"/>
+        <EffectArray value="EatThis@Delay"/>
+    </CEffectSet>
+    <CEffectApplyBehavior id="EatThis@Vehicle">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="EatThis@AlreadyCastingNoWeapons" parent="AlreadyCastingNoWeapons"/>
+    <CEffectCreatePersistent id="TakeCover@FakeMineDelayedSuicide">
+        <EditorCategories value=""/>
+        <ExpireDelay value="0.25"/>
+        <ExpireEffect value="Suicide"/>
+    </CEffectCreatePersistent>
+    <CEffectApplyBehavior id="TakeCover@InvulnerableSouce">
+        <ValidatorArray index="0" value="TakeCover@InvulnerableTargetFilters"/>
+        <EditorCategories value=""/>
+        <WhichUnit Value="Source"/>
+        <Behavior value="Invulnerable"/>
+    </CEffectApplyBehavior>
+    <CEffectDamage id="TakeCover@FakeMineExplodeDummyDmg">
+        <EditorCategories value=""/>
+    </CEffectDamage>
+    <CEffectSet id="TakeCover@FakeMineExplodeSet">
+        <EditorCategories value=""/>
+        <EffectArray value="TakeCover@InvulnerableSouce"/>
+        <EffectArray value="TakeCover@FakeMineExplodeDummyDmg"/>
+        <EffectArray value="TakeCover@FakeMineExplodeSearch"/>
+        <EffectArray value="TakeCover@RocksRandomPoint"/>
+        <EffectArray value="TakeCover@FakeMineDelayedSuicide"/>
+    </CEffectSet>
+    <CEffectApplyBehavior id="TakeCover@Invulnerable">
+        <EditorCategories value=""/>
+        <Behavior value="Invulnerable"/>
+    </CEffectApplyBehavior>
+    <CEffectRemoveBehavior id="TakeCover@InvulnerableRemove">
+        <EditorCategories value=""/>
+        <BehaviorLink value="Invulnerable"/>
+    </CEffectRemoveBehavior>
+    <CEffectSet id="TakeCover@LMEndSet">
+        <EditorCategories value=""/>
+        <EffectArray value="TakeCover@MineAddToTracker"/>
+        <EffectArray value="TakeCover@RealMine"/>
+        <EffectArray value="TakeCover@FakeMine"/>
+        <EffectArray value="TakeCover@FakeMineExtraDmg"/>
+        <EffectArray value="TakeCover@InvulnerableRemove"/>
+    </CEffectSet>
+    <CEffectCreatePersistent id="TakeCover@MineLMEndRef">
+        <EditorCategories value=""/>
+        <WhichLocation Effect="TakeCover@LMPosition" Value="TargetUnit"/>
+        <InitialEffect value="TakeCover@LMEndSet"/>
+    </CEffectCreatePersistent>
+    <CEffectCreateUnit id="TakeCover@RocksCreate">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetPoint"/>
+        <SpawnUnit value="TakeCover@Rocks"/>
+    </CEffectCreateUnit>
+    <CEffectRandomPointInCircle id="TakeCover@RocksRandomPoint">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetPoint"/>
+        <Effect value="TakeCover@RocksCreate"/>
+        <Radius value="1.5"/>
+    </CEffectRandomPointInCircle>
+    <CEffectEnumArea id="TakeCover@FakeMineExplodeSearch">
+        <EditorCategories value=""/>
+        <SearchFilters value="-;Player,Ally,Neutral,RawResource,HarvestableResource,Missile,Hidden,Invulnerable"/>
+        <AreaArray Radius="1.5" Effect="TakeCover@FakeMineExplodeDmg"/>
+    </CEffectEnumArea>
+    <CEffectDamage id="TakeCover@FakeMineExplodeDmg">
+        <EditorCategories value=""/>
+        <Amount value="1500"/>
+    </CEffectDamage>
+    <CEffectCreatePersistent id="TakeCover@LMPosition">
+        <EditorCategories value=""/>
+        <WhichLocation Value="CasterUnit"/>
+        <OffsetVectorStartLocation Value="CasterUnit"/>
+        <OffsetVectorEndLocation Value="TargetUnit"/>
+        <InitialEffect value="TakeCover@MineLM"/>
+        <InitialOffset value="0,-5,0"/>
+    </CEffectCreatePersistent>
+    <CEffectEnumArea id="TakeCover@RealMineExpireExplodeSearch">
+        <EditorCategories value=""/>
+        <SearchFilters value="-;Player,Ally,Neutral,RawResource,HarvestableResource,Missile,Item,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="5" Effect="TakeCover@RealMineExpireExplodeDmg"/>
+    </CEffectEnumArea>
+    <CEffectSet id="TakeCover@RealMineExpireExplodeSet">
+        <EditorCategories value=""/>
+        <EffectArray value="TakeCover@RealMineExpireExplodeSearch"/>
+        <EffectArray value="Suicide"/>
+        <EffectArray value="TakeCover@RocksRandomPoint"/>
+        <EffectArray value="TakeCover@RocksRandomPoint"/>
+    </CEffectSet>
+    <CEffectDamage id="TakeCover@RealMineExpireExplodeDmg">
+        <EditorCategories value=""/>
+        <Amount value="10000"/>
+    </CEffectDamage>
+    <CEffectApplyBehavior id="TakeCover@Tracker">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="TakeCover@FakeMine">
+        <ValidatorArray index="0" value="TakeCover@NotRealMine"/>
+        <EditorCategories value=""/>
+    </CEffectApplyBehavior>
+    <CEffectSet id="TakeCover@InitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="TakeCover@Tracker"/>
+        <EffectArray value="TakeCover@AlreadyCastingNoWeapons"/>
+        <EffectArray value="TakeCover@MineCreateCP"/>
+    </CEffectSet>
+    <CEffectAddTrackedUnit id="TakeCover@MineAddToTracker">
+        <EditorCategories value=""/>
+        <BehaviorLink value="TakeCover@Tracker"/>
+        <TrackedUnit Value="Target"/>
+    </CEffectAddTrackedUnit>
+    <CEffectCreateUnit id="TakeCover@MineCreate">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetPoint"/>
+        <SpawnEffect value="TakeCover@MineCreateSet"/>
+        <SpawnUnit value="TakeCover@Mine"/>
+    </CEffectCreateUnit>
+    <CEffectCreatePersistent id="TakeCover@MineCreateCP">
+        <EditorCategories value=""/>
+        <WhichLocation Value="CasterUnit"/>
+        <PeriodCount value="5"/>
+        <PeriodicEffectArray value="TakeCover@MineCreate"/>
+        <PeriodicPeriodArray value="0"/>
+        <OffsetVectorStartLocation Value="CasterUnit"/>
+        <OffsetVectorEndLocation Value="CasterUnit"/>
+        <PeriodicOffsetArray value="0.62,2,0"/>
+        <PeriodicOffsetArray value="-1.6,1.2,0"/>
+        <PeriodicOffsetArray value="0.6,-2,0"/>
+        <PeriodicOffsetArray value="-1.6,-1.6,0"/>
+        <PeriodicOffsetArray value="2,0,0"/>
+        <Flags index="RandomOffset" value="1"/>
+        <OffsetRandMode value="Shuffle"/>
+    </CEffectCreatePersistent>
+    <CEffectSet id="TakeCover@MineCreateSet">
+        <EditorCategories value=""/>
+        <EffectArray value="TakeCover@LMPosition"/>
+        <EffectArray value="TakeCover@Invulnerable"/>
+    </CEffectSet>
+    <CEffectLaunchMissile id="TakeCover@MineLM">
+        <EditorCategories value=""/>
+        <LaunchLocation Effect="TakeCover@LMPosition" Value="TargetUnit"/>
+        <ImpactLocation Value="TargetPoint"/>
+        <Movers Link="TakeCover@MineLM" IfRangeLTE="500"/>
+        <DeathType value="Unknown"/>
+        <ImpactEffect value="TakeCover@MineLMEndRef"/>
+    </CEffectLaunchMissile>
+    <CEffectApplyBehavior id="TakeCover@RealMine">
+        <ValidatorArray index="0" value="TakeCover@OnlyOneRealMine"/>
+        <EditorCategories value=""/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="TakeCover@AlreadyCastingNoWeapons" parent="AlreadyCastingNoWeapons"/>
+    <CEffectModifyUnit id="YouBetterGetMoving@DummyFacing">
+        <EditorCategories value=""/>
+        <ImpactUnit Value="Caster"/>
+        <FacingLocation Value="TargetPoint"/>
+        <FacingType value="LookAt"/>
+    </CEffectModifyUnit>
+    <CEffectCreateUnit id="YouBetterGetMoving@DummyCreate">
+        <EditorCategories value=""/>
+        <WhichLocation Effect="YouBetterGetMoving@EndPoint" Value="TargetPoint"/>
+        <SpawnEffect value="YouBetterGetMoving@DummyIssueOrder"/>
+        <SpawnUnit value="YouBetterGetMoving@Dummy"/>
+    </CEffectCreateUnit>
+    <CEffectIssueOrder id="YouBetterGetMoving@DummyIssueOrder">
+        <EditorCategories value=""/>
+        <Abil value="YouBetterGetMoving@DummyCast"/>
+        <Target Effect="YouBetterGetMoving@FinalController" Value="TargetPoint"/>
+    </CEffectIssueOrder>
+    <CEffectCreatePersistent id="YouBetterGetMoving@DummyTargeting">
+        <EditorCategories value=""/>
+        <ExpireDelay value="5"/>
+        <ExpireEffect value="Suicide"/>
+    </CEffectCreatePersistent>
+    <CEffectSet id="YouBetterGetMoving@DummyTargetingSet">
+        <EditorCategories value=""/>
+        <EffectArray value="YouBetterGetMoving@DummyFacing"/>
+        <EffectArray value="YouBetterGetMoving@DummyTargeting"/>
+        <TargetLocationType value="Point"/>
+    </CEffectSet>
+    <CEffectCreatePersistent id="YouBetterGetMoving@FinalController">
+        <EditorCategories value=""/>
+        <OffsetVectorStartLocation Value="TargetPoint"/>
+        <OffsetVectorEndLocation Effect="YouBetterGetMoving@InitialSet"/>
+        <InitialEffect value="YouBetterGetMoving@DummyCreate"/>
+        <PeriodCount value="1"/>
+        <PeriodicEffectArray value="YouBetterGetMoving@LM"/>
+        <PeriodicPeriodArray value="2"/>
+    </CEffectCreatePersistent>
+    <CEffectRandomPointInCircle id="YouBetterGetMoving@RandomStartDirection">
+        <EditorCategories value=""/>
+        <Effect value="YouBetterGetMoving@EndPoint"/>
+        <Radius value="15"/>
+        <RestrictToCircumference value="1"/>
+        <WhichLocation Value="TargetUnit"/>
+    </CEffectRandomPointInCircle>
+    <CEffectDamage id="YouBetterGetMoving@Dmg">
+        <EditorCategories value=""/>
+        <Amount value="6000"/>
+    </CEffectDamage>
+    <CEffectCreatePersistent id="YouBetterGetMoving@EndPoint">
+        <EditorCategories value=""/>
+        <OffsetVectorStartLocation Value="TargetPoint"/>
+        <OffsetVectorEndLocation Effect="YouBetterGetMoving@InitialSet"/>
+        <InitialEffect value="YouBetterGetMoving@FinalController"/>
+        <InitialOffset value="0,-30,0"/>
+    </CEffectCreatePersistent>
+    <CEffectSet id="YouBetterGetMoving@InitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="YouBetterGetMoving@AlreadyCastingNoWeapons"/>
+        <EffectArray value="YouBetterGetMoving@RandomStartDirection"/>
+    </CEffectSet>
+    <CEffectLaunchMissile id="YouBetterGetMoving@LM">
+        <EditorCategories value=""/>
+        <LaunchLocation Effect="YouBetterGetMoving@EndPoint" Value="TargetPoint"/>
+        <ImpactLocation Value="TargetPoint"/>
+        <SearchEffect value="YouBetterGetMoving@Search"/>
+        <SearchFlags index="DynamicSearchArea" value="1"/>
+        <AmmoUnit value="YouBetterGetMoving@Missile"/>
+    </CEffectLaunchMissile>
+    <CEffectEnumArea id="YouBetterGetMoving@Search">
+        <EditorCategories value=""/>
+        <SearchFilters value="-;Player,Ally,Neutral,RawResource,HarvestableResource,Missile,Item,Dead,Hidden,Invulnerable"/>
+        <AreaArray RectangleWidth="2" Effect="YouBetterGetMoving@Dmg"/>
+    </CEffectEnumArea>
+    <CEffectApplyBehavior id="YouBetterGetMoving@AlreadyCastingNoWeapons" parent="AlreadyCastingNoWeapons"/>
+    <CEffectSet id="FireInTheHole@LMSet">
+        <EditorCategories value=""/>
+        <EffectArray value="FireInTheHole@LM"/>
+        <EffectArray value="FireInTheHole@TurnCaster"/>
+    </CEffectSet>
+    <CEffectCreatePersistent id="FireInTheHole@LMController">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetUnit"/>
+        <PeriodCount value="5"/>
+        <PeriodicEffectArray value="FireInTheHole@WaitPersistent"/>
+        <PeriodicPeriodArray value="0.33"/>
+        <InitialDelay value="0.75"/>
+        <ExpireDelay value="1"/>
+    </CEffectCreatePersistent>
+    <CEffectModifyUnit id="FireInTheHole@TurnCaster">
+        <EditorCategories value=""/>
+        <ImpactUnit Value="Caster"/>
+        <FacingLocation Value="TargetPoint"/>
+        <FacingType value="LookAt"/>
+    </CEffectModifyUnit>
+    <CEffectDamage id="FireInTheHole@Dmg">
+        <EditorCategories value=""/>
+        <Amount value="2000"/>
+    </CEffectDamage>
+    <CEffectSet id="FireInTheHole@InitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="FireInTheHole@AlreadyCastingNoWeapons"/>
+        <EffectArray value="FireInTheHole@LMController"/>
+    </CEffectSet>
+    <CEffectLaunchMissile id="FireInTheHole@LM">
+        <EditorCategories value=""/>
+        <ImpactEffect value="FireInTheHole@Search"/>
+        <ImpactLocation Value="TargetPoint"/>
+        <AmmoUnit value="FireInTheHole@Missile"/>
+    </CEffectLaunchMissile>
+    <CEffectEnumArea id="FireInTheHole@Search">
+        <EditorCategories value=""/>
+        <AreaArray Radius="2" Effect="FireInTheHole@Dmg"/>
+        <UnCreep value="1"/>
+        <SearchFilters value="-;Player,Ally,Neutral,RawResource,HarvestableResource,Missile,Dead,Hidden,Invulnerable"/>
+    </CEffectEnumArea>
+    <CEffectCreatePersistent id="FireInTheHole@WaitPersistent">
+        <EditorCategories value=""/>
+        <ExpireDelay value="0.35"/>
+        <PeriodCount value="1"/>
+        <PeriodicEffectArray value="FireInTheHole@LM"/>
+        <PeriodicPeriodArray value="0.35"/>
+    </CEffectCreatePersistent>
+    <CEffectApplyBehavior id="FireInTheHole@AlreadyCastingNoWeapons" parent="AlreadyCastingNoWeapons">
+        <Duration value="5"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyKinetic id="OverchargedGun@DummyRotateKinetic2">
+        <EditorCategories value=""/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="OverchargedGun@DummyRotateKinetic3">
+        <EditorCategories value=""/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="OverchargedGun@DummyRotateKinetic4">
+        <EditorCategories value=""/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="OverchargedGun@DummyRotateKinetic5">
+        <EditorCategories value=""/>
+    </CEffectApplyKinetic>
+    <CEffectDamage id="OverchargedGun@Dmg">
+        <EditorCategories value=""/>
+        <Amount value="500"/>
+    </CEffectDamage>
+    <CEffectEnumArea id="OverchargedGun@DmgSearch">
+        <EditorCategories value=""/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,RawResource,HarvestableResource,Missile,Item,Dead,Hidden,Invulnerable"/>
+        <AreaArray RectangleWidth="1" RectangleHeight="10.5" Effect="OverchargedGun@Dmg"/>
+    </CEffectEnumArea>
+    <CEffectCreateUnit id="OverchargedGun@DummyCreate">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetPoint"/>
+        <SpawnEffect value="OverchargedGun@DummyPersistent"/>
+        <SpawnUnit value="DummyNoMovingNoTurningHeight16"/>
+    </CEffectCreateUnit>
+    <CEffectCreatePersistent id="OverchargedGun@DummyCreateOffset">
+        <EditorCategories value=""/>
+        <WhichLocation Value="CasterUnit"/>
+        <InitialEffect value="OverchargedGun@DummyCreate"/>
+        <InitialOffset value="0,-10,0"/>
+    </CEffectCreatePersistent>
+    <CEffectCreatePersistent id="OverchargedGun@DummyKineticPersistent">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetUnit"/>
+        <InitialDelay value="0.175"/>
+        <PeriodCount value="5"/>
+        <PeriodicValidator value="CasterNotDead"/>
+        <PeriodicEffectArray value="OverchargedGun@DummyRotateKinetic"/>
+        <PeriodicEffectArray value="OverchargedGun@DummyRotateKinetic2"/>
+        <PeriodicEffectArray value="OverchargedGun@DummyRotateKinetic3"/>
+        <PeriodicEffectArray value="OverchargedGun@DummyRotateKinetic4"/>
+        <PeriodicEffectArray value="OverchargedGun@DummyRotateKinetic5"/>
+        <PeriodicPeriodArray value="0.175"/>
+        <InitialEffect value="DummyDirectionPointerPermanent"/>
+    </CEffectCreatePersistent>
+    <CEffectCreatePersistent id="OverchargedGun@DummyPersistent">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetUnit"/>
+        <OffsetVectorStartLocation Value="CasterUnit"/>
+        <OffsetVectorEndLocation Value="TargetUnit"/>
+        <InitialEffect value="OverchargedGun@DummyKineticPersistent"/>
+        <FinalEffect value="KillRemove"/>
+        <PeriodCount value="120"/>
+        <PeriodicValidator value="CasterNotDead"/>
+        <PeriodicEffectArray value="OverchargedGun@DmgSearch"/>
+        <PeriodicOffsetArray value="0,5,0"/>
+        <PeriodicPeriodArray value="0.05"/>
+        <InitialDelay value="0.7"/>
+        <ExpireEffect value="DummyDirectionPointerPermanentCancel"/>
+    </CEffectCreatePersistent>
+    <CEffectApplyKinetic id="OverchargedGun@DummyRotateKinetic">
+        <EditorCategories value=""/>
+    </CEffectApplyKinetic>
+    <CEffectSet id="OverchargedGun@InitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="OverchargedGun@AlreadyCastingNoWeapons"/>
+        <EffectArray value="OverchargedGun@DummyCreateOffset"/>
+        <TargetLocationType value="UnitOrPoint"/>
+    </CEffectSet>
+    <CEffectApplyBehavior id="OverchargedGun@AlreadyCastingNoWeapons" parent="AlreadyCastingNoWeapons">
+        <Duration value="7.15"/>
+    </CEffectApplyBehavior>
+    <CEffectDamage id="MechaRaynorWeaponDmg" parent="DU_WEAP">
+        <EditorCategories value="Race:Terran"/>
+        <Kind value="Ranged"/>
+        <Amount value="1750"/>
+        <AttributeFactor index="Armored" value="0.35"/>
+    </CEffectDamage>
+    <CAbilEffectInstant id="EatThis">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="EatThis@InitialSet"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="EatThis"/>
+    </CAbilEffectInstant>
+    <CAbilEffectInstant id="TakeCover">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="TakeCover@InitialSet"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="TakeCover"/>
+    </CAbilEffectInstant>
+    <CAbilEffectTarget id="YouBetterGetMoving">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="YouBetterGetMoving@InitialSet"/>
+        <Range value="6"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="YouBetterGetMoving"/>
+    </CAbilEffectTarget>
+    <CAbilEffectTarget id="YouBetterGetMoving@DummyCast">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="YouBetterGetMoving@DummyTargetingSet"/>
+        <Flags index="ChannelingMinimum" value="0"/>
+        <Flags index="RequireTargetVision" value="0"/>
+        <Range value="500"/>
+        <Arc value="360"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="YouBetterGetMoving"/>
+    </CAbilEffectTarget>
+    <CAbilEffectTarget id="FireInTheHole">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="FireInTheHole@InitialSet"/>
+        <Flags index="BestUnit" value="0"/>
+        <Range value="7"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="FireInTheHole"/>
+    </CAbilEffectTarget>
+    <CAbilEffectTarget id="OverchargedGun">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="OverchargedGun@InitialSet"/>
+        <Range value="8"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="OverchargedGun"/>
+    </CAbilEffectTarget>
+    <CValidatorUnitCompareBehaviorCount id="EatThis@VehicleActive">
+        <Behavior value="EatThis@Vehicle"/>
+        <Compare value="GT"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorUnitCompareBehaviorCount id="TakeCover@NotRealMine">
+        <Behavior value="TakeCover@RealMine"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorCompareTrackedUnitsCount id="TakeCover@OnlyOneRealMine">
+        <Value value="1"/>
+        <BehaviorLink value="TakeCover@Tracker"/>
+    </CValidatorCompareTrackedUnitsCount>
+    <CButton id="EatThis">
+        <Icon value="Assets\Textures\btn-ability-alarak-massteleport.dds"/>
+    </CButton>
+    <CButton id="TakeCover">
+        <Icon value="Assets\Textures\btn-ability-alarak-massteleport.dds"/>
+    </CButton>
+    <CButton id="YouBetterGetMoving">
+        <Icon value="Assets\Textures\btn-ability-alarak-massteleport.dds"/>
+    </CButton>
+    <CButton id="FireInTheHole">
+        <Icon value="Assets\Textures\btn-ability-hornerhan-hellion-slowbomb.dds"/>
+    </CButton>
+    <CButton id="OverchargedGun" parent="EnemyBossAbilityButton"/>
+    <CActorEventMacro id="EatThis@Vehicle">
+        <EditorCategories value=""/>
+    </CActorEventMacro>
+    <CActorAction id="EatThis@VehicleAttack" parent="GenericAttack" effectAttack="EatThis@VehicleWeaponDmg">
+        <EditorCategories value=""/>
+        <LaunchAssets Model="OdinGroundAttackLaunch"/>
+        <ImpactMap index="None" Model="OdinGroundAttackImpact"/>
+        <LaunchAttachQuery Methods="CustomA 0"/>
+    </CActorAction>
+    <CActorModelMaterial id="EatThis@HealGlaze" parent="BehaviorGlaze" buff="EatThis@HealerDummy">
+        <EditorCategories value=""/>
+        <On index="4" Terms="ActorCreation" Send="ModelMaterialApplyTo _Unit"/>
+        <On index="5" Terms="Effect.EatThis@Healer.Start; At Caster" Send="Create"/>
+        <On index="6" Terms="Effect.EatThis@Healer.Stop" Send="AnimBracketStop BSD"/>
+    </CActorModelMaterial>
+    <CActorModel id="EatThis@Replacement" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <!--<On index="0" Terms="ActorCreation" Send="AnimBracketStart BSD Birth IGNORE IGNORE ContentPlayOnce"/>-->
+    </CActorModel>
+    <CActorModel id="EatThis@VehicleDeath" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On Terms="Effect.EatThis@VehicleDeath.Start" Send="Create"/>
+        <HostSiteOps Ops="SOpCasterPoint" HoldPosition="1"/>
+    </CActorModel>
+    <CActorAction id="TakeCover@FakeMineExplodeBeamAction" parent="GenericAttack" effectAttack="TakeCover@FakeMineExplodeDummyDmg">
+        <EditorCategories value=""/>
+        <LaunchAttachQuery Methods="Overhead 0"/>
+        <Beam value="TakeCover@FakeMineExplodeBeam"/>
+        <ShieldFlashType value="None"/>
+    </CActorAction>
+    <CActorUnit id="TakeCover@Rocks" parent="GenericUnitStandard" unitName="TakeCover@Rocks">
+        <FogVisibility value="Dimmed"/>
+        <EditorCategories value=""/>
+        <On Terms="ActorCreation" Send="SetTintColor {255,255,255 2.000000}"/>
+        <Scale value="0.660000"/>
+        <HighlightTooltip value="Unit/Name/Bogus"/>
+        <Wireframe>
+            <Image value="Assets\Textures\Wireframe-General-Destructiblerocks-6x6.dds"/>
+        </Wireframe>
+        <DeathArray index="Normal" ModelLink="TakeCover@RealMineExplode"/>
+    </CActorUnit>
+    <CActorBeamSimple id="TakeCover@FakeMineExplodeBeam" parent="BeamSimpleAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <HostLaunch Subject="_Unit" Scope="Caster"/>
+        <HostLaunchSiteOps Ops="SOpAttachCenter"/>
+        <HostImpact Subject="_Unit" Scope="Target"/>
+        <VisibleTo index="All" value="1"/>
+        <Supporter Subject="_Unit" Scope="Caster"/>
+        <Host Subject="_Unit" Scope="Caster"/>
+        <Scale value="2.000000"/>
+    </CActorBeamSimple>
+    <CActorSimple id="TakeCover@FakeMineDEBUG">
+        <EditorCategories value=""/>
+        <!--<On Terms="Effect.TakeCover@FakeMine.Start; At Target" Send="Create"/>-->
+        <On Terms="ActorCreation" Target="_Unit" Send="SetTintColor 255,0,0"/>
+        <On Terms="Behavior.TakeCover@FakeMine.Destroy" Send="Destroy"/>
+    </CActorSimple>
+    <CActorModel id="TakeCover@FakeMineExplode" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On Terms="Effect.TakeCover@FakeMineExplodeSearch.Start" Send="Create"/>
+        <Terms value="ValidateCreationEffect AlwaysFalse"/>
+        <Scale value="0.750000,0.750000,1.000000"/>
+    </CActorModel>
+    <CActorUnit id="TakeCover@Mine" parent="GenericUnitStandard" unitName="TakeCover@Mine">
+        <EditorCategories value=""/>
+        <On Terms="ActorCreation" Send="AnimBracketStart Abil1 Stand,Work,Start Stand,Work Stand,Work,End"/>
+        <DeathArray index="Normal" ModelLink="TakeCover@MineDeath"/>
+    </CActorUnit>
+    <CActorModel id="TakeCover@RealMineExplode" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On Terms="Effect.TakeCover@RealMineExpireExplodeSearch.Start" Send="Create"/>
+        <Scale value="1.750000"/>
+    </CActorModel>
+    <CActorModel id="YouBetterGetMoving@Explosion" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On Terms="Effect.YouBetterGetMoving@Search.Start" Send="Create"/>
+    </CActorModel>
+    <CActorSite id="YouBetterGetMoving@GuideDirection">
+        <EditorCategories value=""/>
+        <On Terms="Effect.YouBetterGetMoving@DummyTargetingSet.Start; At Effect" Send="Create"/>
+        <On Terms="Effect.YouBetterGetMoving@DummyTargeting.Stop" Send="Destroy"/>
+    </CActorSite>
+    <CActorUnit id="YouBetterGetMoving@Dummy" parent="GenericUnitStandard" unitName="YouBetterGetMoving@Dummy">
+        <EditorCategories value=""/>
+        <Model value="Invisible"/>
+        <HighlightTooltip value="Unit/Name/Bogus"/>
+        <UnitFlags index="SuppressDefaultStatusBar" value="1"/>
+    </CActorUnit>
+    <CActorMissile id="YouBetterGetMoving@Missile" parent="GenericAttackMissile" unitName="YouBetterGetMoving@Missile">
+        <EditorCategories value=""/>
+        <Model value="Invisible"/>
+    </CActorMissile>
+    <CActorQuad id="YouBetterGetMoving@Guide" parent="ZergGuideVisualQuadDown">
+        <Filter index="All" value="1"/>
+        <EditorCategories value=""/>
+        <On index="0" Terms="Abil.Guide" Send="Create"/>
+        <On Terms="Effect.YouBetterGetMoving@DummyTargeting.Start" Send="Create"/>
+        <On Terms="Effect.YouBetterGetMoving@DummyTargeting.Stop" Send="Destroy"/>
+        <LaunchActor value="TerranGuideVisualQuadLaunch"/>
+        <CenterActor value="TerranGuideVisualQuadCenter"/>
+        <ImpactActor value="TerranGuideVisualQuadImpact"/>
+        <Height value="30.000000"/>
+        <Width value="2.500000"/>
+        <HostImpact Subject="YouBetterGetMoving@GuideDirection"/>
+    </CActorQuad>
+    <CActorModel id="FireInTheHole@MissileImpact" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On Terms="Effect.FireInTheHole@Search.Start" Send="Create"/>
+        <HostSiteOps Ops="SOpShadow"/>
+        <Scale value="0.750000"/>
+    </CActorModel>
+    <CActorModel id="FireInTheHole@MarkerCone" parent="ModelAnimationStyleOneShot">
+        <On Terms="Effect.FireInTheHole@LMController.Start; At Target" Send="Create"/>
+        <On Terms="Effect.FireInTheHole@LMController.Stop" Send="Destroy"/>
+        <On Terms="ActorCreation" Send="SetTintColor 255,0,0"/>
+        <On Terms="ActorCreation" Send="SetOpacity 0.500000"/>
+        <HostSiteOps Ops="SOpAttachOverhead SOpPrimalSunkenColonyAttackTargetUICylinder SOpPrimalSunkenColonyAttackTargetUICone SOpPrimalSunkenColonyAttackTargetUIConeOffset"/>
+        <VisibleTo index="All" value="1"/>
+    </CActorModel>
+    <CActorModel id="FireInTheHole@MarkerCylinder" parent="ModelAnimationStyleOneShot">
+        <On Terms="Effect.FireInTheHole@LMController.Start; At Target" Send="Create"/>
+        <On Terms="Effect.FireInTheHole@LMController.Stop" Send="Destroy"/>
+        <On Terms="ActorCreation" Send="SetTintColor 255,0,0"/>
+        <On Terms="ActorCreation" Send="SetOpacity 0.500000"/>
+        <HostSiteOps Ops="SOpAttachOverhead SOpPrimalSunkenColonyAttackTargetUICylinder SOpPrimalSunkenColonyAttackTargetUICylinder"/>
+        <VisibleTo index="All" value="1"/>
+    </CActorModel>
+    <CActorAction id="FireInTheHole@Action" parent="GenericAttack" effectImpact="FireInTheHole@ImpactSet" effectLaunch="FireInTheHole@LM">
+        <EditorCategories value=""/>
+        <Missile value="FireInTheHole@Missile"/>
+    </CActorAction>
+    <CActorMissile id="FireInTheHole@Missile" parent="GenericAttackMissile" unitName="FireInTheHole@Missile">
+        <EditorCategories value=""/>
+    </CActorMissile>
+    <CActorModel id="MechaRaynorDeathModel">
+        <Aliases value="_Main"/>
+        <Aliases value="_Unit"/>
+        <Aliases value="_DeathModel"/>
+        <Inherits index="BaseModelScale" value="1"/>
+        <Inherits index="CastShadows" value="1"/>
+        <Inherits index="CreepEngulfment" value="1"/>
+        <Inherits index="Scale" value="1"/>
+        <Inherits index="TeamColor" value="1"/>
+        <Inherits index="TintColor" value="1"/>
+        <Inherits index="Visibility" value="1"/>
+        <AcceptedHostedPropTransfers index="TimeScale" value="0"/>
+        <On Terms="ActorDestruction" Send="Create TerranExplode"/>
+        <On Terms="ActorCreation" Send="RefClear ::Host"/>
+        <On Terms="ActorCreation" Send="SetTintColor 255,255,255 0.600000"/>
+        <On Terms="ActorCreation" Target="ModelPretargetGround" Send="Destroy"/>
+        <On Terms="ActorCreation" Target="GroundPreSelection" Send="Destroy"/>
+        <On Terms="Signal.*.ClearDeathModel" Send="Destroy"/>
+        <On Terms="ActorOrphan; !AnimPlaying Death" Send="Destroy"/>
+        <Host Subject="::Creator"/>
+        <Model value="UnitDeathModel"/>
+        <ModelFlags index="SuppressMissingAttachErrors" value="1"/>
+        <ModelFlags index="UpdateVisibility" value="0"/>
+        <ModelFlags index="UseSyncSeed" value="1"/>
+        <EventDataSound Name="NydusCanalThud" Actor="UnitSound" Sound="NydusWorm_DeathThud"/>
+        <EventDataSound Name="ZergExplosionSlime" Actor="UnitSound" Sound="Zerg_ExplosionSlime"/>
+        <EventDataSound Name="ZergPreExplosionSmall" Actor="UnitSound" Sound="Zerg_PreExplosionSmall"/>
+        <EventDataSound Name="ZergExplosionTiny" Actor="UnitSound" Sound="Zerg_ExplosionTiny"/>
+        <EventDataSound Name="ZergExplosionSmall" Actor="UnitSound" Sound="Zerg_ExplosionSmall"/>
+        <EventDataSound Name="ZergExplosionMedium" Actor="UnitSound" Sound="Zerg_ExplosionMedium"/>
+        <EventDataSound Name="ZergExplosionLarge" Actor="UnitSound" Sound="Zerg_ExplosionLarge"/>
+        <EventDataSound Name="ProtossPreExplosionSmall" Actor="UnitSound" Sound="Protoss_PreExplosionSmall"/>
+        <EventDataSound Name="ProtossExplosionSmall" Actor="UnitSound" Sound="Protoss_ExplosionSmall"/>
+        <EventDataSound Name="ProtossExplosionMedium" Actor="UnitSound" Sound="Protoss_ExplosionMedium"/>
+        <EventDataSound Name="ProtossExplosionLarge" Actor="UnitSound" Sound="Protoss_ExplosionLarge"/>
+        <EventDataSound Name="TerranPreExplosionSmall" Actor="UnitSound" Sound="Terran_PreExplosionSmall"/>
+        <EventDataSound Name="TerranExplosionSmall" Actor="UnitSound" Sound="Terran_ExplosionSmall"/>
+        <EventDataSound Name="TerranExplosionMedium" Actor="UnitSound" Sound="Terran_ExplosionMedium"/>
+        <EventDataSound Name="TerranExplosionLarge" Actor="UnitSound" Sound="Terran_ExplosionLarge"/>
+    </CActorModel>
+    <CActorBeamSimple id="OverchargedGun@Beam" parent="BeamSimpleAnimationStyleContinuous">
+        <Flags index="SuppressSaveLoad" value="1"/>
+        <EditorCategories value=""/>
+        <On Terms="Effect.OverchargedGun@DummyPersistent.Start" Send="Create"/>
+        <On Terms="Effect.OverchargedGun@DummyPersistent.Stop" Send="Destroy"/>
+        <On Terms="ActorCreation" Send="SetOpacity"/>
+        <On Terms="ActorCreation" Send="TimerSet 0.750000 Visibility"/>
+        <On Terms="TimerExpired; TimerName Visibility" Send="SetOpacity 1.000000 0.750000"/>
+        <HostLaunch Subject="_Unit" Scope="Caster"/>
+        <HostLaunchSiteOps Ops="SOpAttachWeapon"/>
+        <HostImpact Subject="_Unit" Scope="Target"/>
+        <HostImpactSiteOps Ops="SOpShadow SOpOffsetHigherBy0p5 SOpOffsetHigherBy0p5 SOpOffsetHigherBy0p5"/>
+    </CActorBeamSimple>
+    <CActorModel id="OverchargedGun@Charging" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On index="0" Terms="ActorCreation" Send="AnimBracketStart BSD Birth Stand Death ContentPlayOnce 1.000000 AsTimeScale"/>
+        <On Terms="Effect.OverchargedGun@DummyPersistent.Start; At Caster" Send="Create"/>
+        <HostSiteOps Ops="SOpAttachWeapon"/>
+        <Host Subject="_Unit" Scope="Caster"/>
+    </CActorModel>
+    <CActorUnit id="MechaRaynor" parent="GenericUnitStandard" unitName="MechaRaynor">
+        <Aliases value="_UnitSmall"/>
+        <Macros value="BossDeactivated"/>
+        <FogVisibility value="Dimmed"/>
+        <On Terms="Abil.OverchargedGun.SourceChannelStart" Send="AnimBracketStart Abil1 {} Attack"/>
+        <On Terms="Effect.OverchargedGun@DummyPersistent.Stop" Send="AnimBracketStop Abil1"/>
+        <On Terms="Abil.FireInTheHole.SourceChannelStart" Send="AnimBracketStart Abil2 Stand,Work,Start Stand,Work Stand,Work,End"/>
+        <On Terms="Effect.FireInTheHole@LM.Launch" Send="AnimPlay LM Spell"/>
+        <On Terms="AnimDone; AnimName LM" Send="AnimBracketStop Abil2"/>
+        <On Terms="Behavior.EatThis@Vehicle.Create" Send="ModelSwapStackPush"/>
+        <On Terms="Behavior.EatThis@Vehicle.Create" Send="ModelSwap EatThis@Vehicle"/>
+        <On Terms="Behavior.EatThis@Vehicle.Destroy" Send="ModelSwapStackPop"/>
+        <On Terms="Behavior.EatThis@Vehicle.On" Send="$Birth"/>
+        <On Terms="Abil.TakeCover.SourceChannelStart" Send="AnimBracketStart Abil1 Stand,Right Stand,Left Stand,Right ContentPlayOnce"/>
+        <On Terms="Abil.YouBetterGetMoving.SourceChannelStart" Send="AnimBracketStart Powered Stand,Unpowered,Start Stand,Unpowered Stand,Unpowered,End ClosingFull"/>
+        <On Terms="Effect.YouBetterGetMoving@FinalController.Stop" Send="AnimBracketStop Powered"/>
+        <Model value="Umojan_Marine"/>
+        <DeathArray index="Normal" AnimProps="Stand,Unpowered,Start" ModelLink="Umojan_Marine" SoundLink="Raynor_Explode"/>
+        <DeathActorModel value="MechaRaynorDeathModel"/>
+        <PortraitModel value="Umojan_Marine_Portrait"/>
+        <StandAnimTurnTime value="5"/>
+        <WalkAnimMoveSpeed value="2.25"/>
+        <BarOffset value="60"/>
+        <BarWidth value="50"/>
+        <CustomUnitStatusFrame value="SSF_UnitStatus/BossStatus_Raynor"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-Terran-Marine-Raynor.dds"/>
+        </GroupIcon>
+        <HeroIcon value="Assets\Textures\ui-heroicon-raynor.dds"/>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-terran-infantryarmorlevel0.dds"/>
+        <MinimapIcon value="Assets\Icons\btn-unit-umojan-marine.dds"/>
+        <MinimapIconScale value="0.300000"/>
+        <MinimapIconBackground value="Assets\MinimapBackground.dds"/>
+        <MinimapIconBackgroundScale value="1.100000"/>
+        <MinimapIconBackgroundTintColor value="255,255,0,0"/>
+        <UnitFlags index="SuppressDefaultStatusBar" value="1"/>
+        <UnitIcon value="Assets\Textures\BTN-Unit-Terran-MarineRaynor.dds"/>
+        <Wireframe>
+            <Image value="Assets\Wireframes\umojan-marine\Wireframe-umojan-Marine.dds"/>
+        </Wireframe>
+    </CActorUnit>
+    <CActorAction id="MechaRaynorWeaponAction" parent="GenericAttack" effectAttack="MechaRaynorWeaponDmg">
+        <LaunchAttachQuery Methods="Weapon 0"/>
+        <LaunchAssets Model="RaynorAttackLaunch" Sound="RaynorAttackLaunch2"/>
+        <ImpactMap index="None" Model="RaynorAttackImpact2" Sound="Raynor_AttackImpact"/>
+    </CActorAction>
+    <CModel id="EatThis@HealGlaze">
+        <Model value="Assets\Effects\Glaze\SOA_Reconstruction_Beam_Glaze\SOA_Reconstruction_Beam_Glaze.m3"/>
+    </CModel>
+    <CModel id="EatThis@Replacement">
+        <Model value="Assets\COOP\Tychus\Units\Odin_Heavens_COOP\Odin_Heavens_COOP.m3"/>
+    </CModel>
+    <CModel id="EatThis@Vehicle">
+        <Model value="Assets\COOP\Tychus\Units\Odin_Heavens_COOP\Odin_Heavens_COOP.m3"/>
+        <ScaleMax value="0.600000,0.600000,0.600000"/>
+        <ScaleMin value="0.600000,0.600000,0.600000"/>
+        <AttachProps Id="Ref_Weapon 05">
+            <Keys index="CustomA" value="0"/>
+        </AttachProps>
+        <AttachProps Id="Ref_Weapon 06">
+            <Keys index="CustomA" value="0"/>
+        </AttachProps>
+        <AttachProps Id="Ref_Weapon 07">
+            <Keys index="CustomA" value="0"/>
+        </AttachProps>
+        <AttachProps Id="Ref_Weapon 08">
+            <Keys index="CustomA" value="0"/>
+        </AttachProps>
+    </CModel>
+    <CModel id="EatThis@VehicleDeath">
+        <Model value="Assets\COOP\Tychus\Units\Odin_Heavens_COOP_Death\Odin_Heavens_COOP_Death.m3"/>
+        <ScaleMax value="0.600000,0.600000,0.600000"/>
+        <ScaleMin value="0.600000,0.600000,0.600000"/>
+    </CModel>
+    <CModel id="TakeCover@MineDeath">
+        <Model value="Assets\Doodads\TerranDoodadExplosion\TerranDoodadExplosion.m3"/>
+    </CModel>
+    <CModel id="TakeCover@Rocks">
+        <Model value="Assets\Doodads\DestructibleDebris6x6\DestructibleDebris6x6.m3"/>
+        <Radius value="0.750000"/>
+        <SelectionRadius value="1.000000"/>
+        <ShadowRadius value="0.750000"/>
+    </CModel>
+    <CModel id="TakeCover@FakeMineExplodeBeam">
+        <Model value="Assets\Effects\Protoss\Xelnaga_Construct_Beam\Xelnaga_Construct_Beam.m3"/>
+    </CModel>
+    <CModel id="TakeCover@Mine">
+        <Model value="Assets\Units\Terran\NukePack\NukePack.m3"/>
+    </CModel>
+    <CModel id="TakeCover@RealMineExplode">
+        <Model value="Assets\Effects\Protoss\Xelnaga_Construct_EntropicBlast_Explosion\Xelnaga_Construct_EntropicBlast_Explosion.m3"/>
+    </CModel>
+    <CModel id="TakeCover@FakeMineExplode" parent="TakeCover@RealMineExplode">
+        <Lighting value="TakeCover@FakeMineExplode"/>
+    </CModel>
+    <CModel id="YouBetterGetMoving@Explosion">
+        <Model value="Assets\Effects\Terran\Xanthos_Missile_Impact\Xanthos_Missile_Impact.m3"/>
+    </CModel>
+    <CModel id="FireInTheHole@MarkerCone" Race="Neutral">
+        <Model value="Assets\Doodads\Shapes\ShapeCone\ShapeCone.m3"/>
+        <EditorCategories value="Race:Zerg"/>
+        <Priority value="16"/>
+        <ScaleMax value="1.200000,1.200000,1.200000"/>
+        <ScaleMin value="1.200000,1.200000,1.200000"/>
+    </CModel>
+    <CModel id="FireInTheHole@MarkerCylinder" Race="Neutral">
+        <Model value="Assets\Doodads\Shapes\ShapeCylinder\ShapeCylinder.m3"/>
+        <EditorCategories value="Race:Zerg"/>
+        <Priority value="16"/>
+        <ScaleMax value="0.550000,0.550000,0.550000"/>
+        <ScaleMin value="0.550000,0.550000,0.550000"/>
+    </CModel>
+    <CModel id="FireInTheHole@Missile">
+        <Model value="Assets\Effects\Terran\Nova_FlashGrenade_Missile\Nova_FlashGrenade_Missile.m3"/>
+    </CModel>
+    <CModel id="FireInTheHole@MissileImpact">
+        <Model value="Assets\Effects\Terran\Nova_FlashGrenade\Nova_FlashGrenade.m3"/>
+    </CModel>
+    <CModel id="OverchargedGun@Beam">
+        <Model value="Assets\Effects\Protoss\MegaLith_Beam\MegaLith_Beam.m3"/>
+    </CModel>
+    <CModel id="OverchargedGun@Charging">
+        <Model value="Assets\Effects\Terran\Xanthos_Beam_Chargeup\Xanthos_Beam_Chargeup.m3"/>
+    </CModel>
+    <CModel id="Umojan_Marine" parent="ImportedModel">
+        <ScaleMax value="2.250000,2.250000,2.250000"/>
+        <ScaleMin value="2.250000,2.250000,2.250000"/>
+    </CModel>
+    <CModel id="Umojan_Marine_Portrait" parent="Portrait">
+        <Model value="Assets\Models\Umojan_Marine\Umojan_Marine_Portrait.m3"/>
+        <EditorCategories value=""/>
+    </CModel>
+    <CWeaponLegacy id="EatThis@VehicleWeapon">
+        <EditorCategories value=""/>
+        <Icon value="Assets\Textures\btn-upgrade-tychus-weapons-level5.dds"/>
+        <DisplayEffect value="EatThis@VehicleWeaponDmg"/>
+        <Effect value="EatThis@VehicleWeaponDmg"/>
+        <DamagePoint value="0.8"/>
+        <TargetFilters value="Visible;Self,Missile,Item,Hidden,Invulnerable"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="MechaRaynorWeapon">
+        <EditorCategories value=""/>
+        <Icon value="Assets\Textures\btn-upgrade-terran-infantryweaponslevel0.dds"/>
+        <DisplayEffect value="MechaRaynorWeaponDmg"/>
+        <TargetFilters value="Visible;Self,Worker,Missile,Item,Dead,Hidden,Invulnerable"/>
+        <Range value="6"/>
+        <Period value="0.6"/>
+        <DamagePoint value="0.05"/>
+        <Effect value="MechaRaynorWeaponDmg"/>
+    </CWeaponLegacy>
+    <CMoverMissile id="TakeCover@MineLM" parent="MissileDefault"/>
+    <CMoverMissile id="FireInTheHole@MissileMover" parent="MissileDefault">
+        <MotionPhases index="0">
+            <Driver value="Guidance"/>
+            <Acceleration value="3200"/>
+            <MaxSpeed value="12"/>
+            <ClearanceAcceleration value="75"/>
+            <Outro value="-1"/>
+            <ThrowBandYaw value="-360,-360,-360,-360"/>
+            <ThrowBandPitch value="-360,-360,-360,-360"/>
+            <YawPitchRoll value="719.2968"/>
+        </MotionPhases>
+    </CMoverMissile>
+    <CDataCollectionAbil id="EatThis">
+        <EditorCategories value=""/>
+        <DataRecord Entry="Abil,EatThis"/>
+        <DataRecord Entry="Actor,EatThis@Replacement"/>
+        <DataRecord Entry="Actor,EatThis@Vehicle"/>
+        <DataRecord Entry="Actor,EatThis@VehicleDeath"/>
+        <DataRecord Entry="Actor,EatThis@HealGlaze"/>
+        <DataRecord Entry="Actor,EatThis@VehicleAttack"/>
+        <DataRecord Entry="Behavior,EatThis@Vehicle"/>
+        <DataRecord Entry="Button,EatThis"/>
+        <DataRecord Entry="Effect,EatThis@InitialSet"/>
+        <DataRecord Entry="Effect,EatThis@AlreadyCastingNoWeapons"/>
+        <DataRecord Entry="Effect,EatThis@Delay"/>
+        <DataRecord Entry="Effect,EatThis@Vehicle"/>
+        <DataRecord Entry="Effect,EatThis@HealDelay"/>
+        <DataRecord Entry="Effect,EatThis@Healer"/>
+        <DataRecord Entry="Effect,EatThis@VehicleWeaponDmg"/>
+        <DataRecord Entry="Effect,EatThis@VehicleDeath"/>
+        <DataRecord Entry="Model,EatThis@Vehicle"/>
+        <DataRecord Entry="Model,EatThis@Replacement"/>
+        <DataRecord Entry="Model,EatThis@VehicleDeath"/>
+        <DataRecord Entry="Model,EatThis@HealGlaze"/>
+        <DataRecord Entry="Validator,EatThis@VehicleActive"/>
+        <DataRecord Entry="Weapon,EatThis@VehicleWeapon"/>
+    </CDataCollectionAbil>
+    <CDataCollectionAbil id="TakeCover">
+        <EditorCategories value=""/>
+        <DataRecord Entry="Abil,TakeCover"/>
+        <DataRecord Entry="Actor,TakeCover@FakeMineDEBUG"/>
+        <DataRecord Entry="Actor,TakeCover@FakeMineExplode"/>
+        <DataRecord Entry="Actor,TakeCover@Mine"/>
+        <DataRecord Entry="Actor,TakeCover@RealMineExplode"/>
+        <DataRecord Entry="Actor,TakeCover@FakeMineExplodeBeam"/>
+        <DataRecord Entry="Actor,TakeCover@Rocks"/>
+        <DataRecord Entry="Actor,TakeCover@FakeMineExplodeBeamAction"/>
+        <DataRecord Entry="Behavior,TakeCover@Tracker"/>
+        <DataRecord Entry="Behavior,TakeCover@FakeMine"/>
+        <DataRecord Entry="Behavior,TakeCover@RealMine"/>
+        <DataRecord Entry="Behavior,TakeCover@RocksFalling"/>
+        <DataRecord Entry="Button,TakeCover"/>
+        <DataRecord Entry="Effect,TakeCover@FakeMineExplodeDmg"/>
+        <DataRecord Entry="Effect,TakeCover@LMPosition"/>
+        <DataRecord Entry="Effect,TakeCover@MineLM"/>
+        <DataRecord Entry="Effect,TakeCover@RealMineExpireExplodeSearch"/>
+        <DataRecord Entry="Effect,TakeCover@RealMineExpireExplodeDmg"/>
+        <DataRecord Entry="Effect,TakeCover@RealMineExpireExplodeSet"/>
+        <DataRecord Entry="Effect,TakeCover@Tracker"/>
+        <DataRecord Entry="Effect,TakeCover@FakeMine"/>
+        <DataRecord Entry="Effect,TakeCover@InitialSet"/>
+        <DataRecord Entry="Effect,TakeCover@AlreadyCastingNoWeapons"/>
+        <DataRecord Entry="Effect,TakeCover@MineCreateCP"/>
+        <DataRecord Entry="Effect,TakeCover@MineAddToTracker"/>
+        <DataRecord Entry="Effect,TakeCover@MineCreate"/>
+        <DataRecord Entry="Effect,TakeCover@MineCreateSet"/>
+        <DataRecord Entry="Effect,TakeCover@RealMine"/>
+        <DataRecord Entry="Effect,TakeCover@RocksRandomPoint"/>
+        <DataRecord Entry="Effect,TakeCover@RocksCreate"/>
+        <DataRecord Entry="Effect,TakeCover@FakeMineExplodeSet"/>
+        <DataRecord Entry="Effect,TakeCover@FakeMineExplodeSearch"/>
+        <DataRecord Entry="Effect,TakeCover@LMEndSet"/>
+        <DataRecord Entry="Effect,TakeCover@Invulnerable"/>
+        <DataRecord Entry="Effect,TakeCover@InvulnerableRemove"/>
+        <DataRecord Entry="Effect,TakeCover@MineLMEndRef"/>
+        <DataRecord Entry="Effect,TakeCover@FakeMineExplodeDummyDmg"/>
+        <DataRecord Entry="Effect,TakeCover@FakeMineDelayedSuicide"/>
+        <DataRecord Entry="Effect,TakeCover@InvulnerableSouce"/>
+        <DataRecord Entry="Model,TakeCover@FakeMineExplode"/>
+        <DataRecord Entry="Model,TakeCover@Mine"/>
+        <DataRecord Entry="Model,TakeCover@RealMineExplode"/>
+        <DataRecord Entry="Model,TakeCover@FakeMineExplodeBeam"/>
+        <DataRecord Entry="Model,TakeCover@Rocks"/>
+        <DataRecord Entry="Model,TakeCover@MineDeath"/>
+        <DataRecord Entry="Mover,TakeCover@MineLM"/>
+        <DataRecord Entry="Unit,TakeCover@Mine"/>
+        <DataRecord Entry="Unit,TakeCover@Rocks"/>
+        <DataRecord Entry="Validator,TakeCover@NotRealMine"/>
+        <DataRecord Entry="Validator,TakeCover@OnlyOneRealMine"/>
+        <DataRecord Entry="Behavior,TakeCover@FakeMineExtraDmg"/>
+        <DataRecord Entry="Effect,TakeCover@FakeMineExtraDmg"/>
+        <DataRecord Entry="Behavior,TakeCover@RocksFalling"/>
+    </CDataCollectionAbil>
+    <CDataCollectionAbil id="FireInTheHole">
+        <EditorCategories value=""/>
+        <DataRecord Entry="Abil,FireInTheHole"/>
+        <DataRecord Entry="Effect,FireInTheHole@Debuff"/>
+        <DataRecord Entry="Effect,FireInTheHole@Dmg"/>
+        <DataRecord Entry="Effect,FireInTheHole@InitialSet"/>
+        <DataRecord Entry="Effect,FireInTheHole@AlreadyCastingNoWeapons"/>
+        <DataRecord Entry="Effect,FireInTheHole@WaitPersistent"/>
+        <DataRecord Entry="Effect,FireInTheHole@LM"/>
+        <DataRecord Entry="Effect,FireInTheHole@Search"/>
+        <DataRecord Entry="Actor,FireInTheHole@Missile"/>
+        <DataRecord Entry="Actor,FireInTheHole@Action"/>
+        <DataRecord Entry="Button,FireInTheHole"/>
+        <DataRecord Entry="Model,FireInTheHole@Missile"/>
+        <DataRecord Entry="Model,FireInTheHole@MissileImpact"/>
+        <DataRecord Entry="Unit,FireInTheHole@Missile"/>
+        <DataRecord Entry="Actor,FireInTheHole@MissileImpact"/>
+        <DataRecord Entry="Actor,FireInTheHole@MarkerCone"/>
+        <DataRecord Entry="Actor,FireInTheHole@MarkerCylinder"/>
+        <DataRecord Entry="Effect,FireInTheHole@LMSet"/>
+        <DataRecord Entry="Effect,FireInTheHole@TurnCaster"/>
+        <DataRecord Entry="Effect,FireInTheHole@LMController"/>
+        <DataRecord Entry="Model,FireInTheHole@MarkerCone"/>
+        <DataRecord Entry="Model,FireInTheHole@MarkerCylinder"/>
+        <DataRecord Entry="Mover,FireInTheHole@MissileMover"/>
+    </CDataCollectionAbil>
+    <CDataCollectionAbil id="OverchargedGun">
+        <EditorCategories value=""/>
+        <DataRecord Entry="Abil,OverchargedGun"/>
+        <DataRecord Entry="Actor,OverchargedGun@Beam"/>
+        <DataRecord Entry="Actor,OverchargedGun@Charging"/>
+        <DataRecord Entry="Button,OverchargedGun"/>
+        <DataRecord Entry="Effect,OverchargedGun@DummyRotateKinetic2"/>
+        <DataRecord Entry="Effect,OverchargedGun@DummyRotateKinetic3"/>
+        <DataRecord Entry="Effect,OverchargedGun@DummyRotateKinetic4"/>
+        <DataRecord Entry="Effect,OverchargedGun@DummyRotateKinetic5"/>
+        <DataRecord Entry="Effect,OverchargedGun@Dmg"/>
+        <DataRecord Entry="Effect,OverchargedGun@DmgSearch"/>
+        <DataRecord Entry="Effect,OverchargedGun@DummyCreate"/>
+        <DataRecord Entry="Effect,OverchargedGun@DummyPersistent"/>
+        <DataRecord Entry="Effect,OverchargedGun@DummyCreateOffset"/>
+        <DataRecord Entry="Effect,OverchargedGun@DummyKineticPersistent"/>
+        <DataRecord Entry="Effect,OverchargedGun@DummyRotateKinetic"/>
+        <DataRecord Entry="Effect,OverchargedGun@InitialSet"/>
+        <DataRecord Entry="Effect,OverchargedGun@AlreadyCastingNoWeapons"/>
+        <DataRecord Entry="Kinetic,OverchargedGun@DummyRotateKinetic"/>
+        <DataRecord Entry="Kinetic,OverchargedGun@DummyRotateKinetic3"/>
+        <DataRecord Entry="Kinetic,OverchargedGun@DummyRotateKinetic4"/>
+        <DataRecord Entry="Kinetic,OverchargedGun@DummyRotateKinetic5"/>
+        <DataRecord Entry="Kinetic,OverchargedGun@DummyRotateKinetic2"/>
+        <DataRecord Entry="Model,OverchargedGun@Beam"/>
+        <DataRecord Entry="Model,OverchargedGun@Charging"/>
+    </CDataCollectionAbil>
+    <CDataCollectionAbil id="YouBetterGetMoving">
+        <EditorCategories value=""/>
+        <DataRecord Entry="Abil,YouBetterGetMoving"/>
+        <DataRecord Entry="Abil,YouBetterGetMoving@DummyCast"/>
+        <DataRecord Entry="Actor,YouBetterGetMoving@Missile"/>
+        <DataRecord Entry="Actor,YouBetterGetMoving@Guide"/>
+        <DataRecord Entry="Actor,YouBetterGetMoving@Dummy"/>
+        <DataRecord Entry="Actor,YouBetterGetMoving@GuideDirection"/>
+        <DataRecord Entry="Actor,YouBetterGetMoving@Explosion"/>
+        <DataRecord Entry="Button,YouBetterGetMoving"/>
+        <DataRecord Entry="Effect,YouBetterGetMoving@InitialSet"/>
+        <DataRecord Entry="Effect,YouBetterGetMoving@AlreadyCastingNoWeapons"/>
+        <DataRecord Entry="Effect,YouBetterGetMoving@LM"/>
+        <DataRecord Entry="Effect,YouBetterGetMoving@Search"/>
+        <DataRecord Entry="Effect,YouBetterGetMoving@Dmg"/>
+        <DataRecord Entry="Effect,YouBetterGetMoving@EndPoint"/>
+        <DataRecord Entry="Effect,YouBetterGetMoving@RandomStartDirection"/>
+        <DataRecord Entry="Effect,YouBetterGetMoving@DummyIssueOrder"/>
+        <DataRecord Entry="Effect,YouBetterGetMoving@DummyTargeting"/>
+        <DataRecord Entry="Effect,YouBetterGetMoving@DummyCreate"/>
+        <DataRecord Entry="Effect,YouBetterGetMoving@FinalController"/>
+        <DataRecord Entry="Effect,YouBetterGetMoving@DummyTargetingSet"/>
+        <DataRecord Entry="Effect,YouBetterGetMoving@DummyFacing"/>
+        <DataRecord Entry="Model,YouBetterGetMoving@Explosion"/>
+        <DataRecord Entry="Unit,YouBetterGetMoving@Missile"/>
+        <DataRecord Entry="Unit,YouBetterGetMoving@Dummy"/>
+    </CDataCollectionAbil>
+    <CUnit id="TakeCover@Rocks" parent="GenericEnemyUnit">
+        <Race value="Zerg"/>
+        <FlagArray index="UseLineOfSight" value="0"/>
+        <FlagArray index="ArmySelect" value="0"/>
+        <FogVisibility value="Dimmed"/>
+        <Collide index="Ground" value="0"/>
+        <Collide index="ForceField" value="0"/>
+        <Attributes index="Armored" value="1"/>
+        <Attributes index="Summoned" value="1"/>
+        <LifeStart value="1500"/>
+        <LifeMax value="1500"/>
+        <Speed value="0"/>
+        <Acceleration value="0"/>
+        <Sight value="0"/>
+        <CostCategory value="None"/>
+        <AttackTargetPriority value="0"/>
+        <AbilArray index="0" removed="1"/>
+        <AbilArray index="1" removed="1"/>
+        <AbilArray index="2" removed="1"/>
+        <BehaviorArray Link="TakeCover@RocksFalling"/>
+        <CardLayouts index="0" removed="1"/>
+        <InnerRadius value="0"/>
+        <Radius value="1.5"/>
+    </CUnit>
+    <CUnit id="TakeCover@Mine" parent="GenericEnemyUnit">
+        <Race value="Zerg"/>
+        <AbilArray index="1" removed="1"/>
+        <AbilArray index="2" removed="1"/>
+        <CardLayouts index="0">
+            <LayoutButtons index="0" Face="Stop" Type="AbilCmd" AbilCmd="stop,Stop" Row="0" Column="1"/>
+            <LayoutButtons index="1" removed="1"/>
+            <LayoutButtons index="2" removed="1"/>
+            <LayoutButtons index="3" removed="1"/>
+            <LayoutButtons index="4" removed="1"/>
+        </CardLayouts>
+        <InnerRadius value="0"/>
+        <DeathTime value="0.5"/>
+        <LifeStart value="5000"/>
+        <LifeMax value="5000"/>
+    </CUnit>
+    <CUnit id="YouBetterGetMoving@Dummy">
+        <Race value="Zerg"/>
+        <FlagArray index="NoDraw" value="1"/>
+        <FlagArray index="Invulnerable" value="1"/>
+        <AbilArray Link="YouBetterGetMoving@DummyCast"/>
+        <EditorCategories value=""/>
+        <Mover value="Fly"/>
+    </CUnit>
+    <CUnit id="YouBetterGetMoving@Missile" parent="MISSILE">
+        <Race value="Zerg"/>
+        <EditorCategories value=""/>
+    </CUnit>
+    <CUnit id="FireInTheHole@Missile" parent="MISSILE">
+        <Race value="Zerg"/>
+        <EditorCategories value=""/>
+        <Mover value="FireInTheHole@MissileMover"/>
+    </CUnit>
+    <CUnit id="MechaRaynor" parent="GenericEnemyUnit">
+        <Race value="Zerg"/>
+        <Attributes index="Light" value="1"/>
+        <Attributes index="Mechanical" value="1"/>
+        <Attributes index="Heroic" value="1"/>
+        <LifeStart value="25000"/>
+        <LifeMax value="25000"/>
+        <LifeArmorName value="Unit/LifeArmorName/StoryHeroes"/>
+        <Sight value="15"/>
+        <RepairTime value="20"/>
+        <InnerRadius value="0"/>
+        <WeaponArray Link="MechaRaynorWeapon"/>
+        <AbilArray Link="DummyDirectionPointerPermanent"/>
+        <AbilArray Link="OverchargedGun"/>
+        <AbilArray Link="FireInTheHole"/>
+        <AbilArray Link="YouBetterGetMoving"/>
+        <AbilArray Link="TakeCover"/>
+        <AbilArray Link="EatThis"/>
+        <CardLayouts index="0">
+            <LayoutButtons Face="OverchargedGun" Type="AbilCmd" AbilCmd="OverchargedGun,Execute" Row="2" Column="0"/>
+            <LayoutButtons Face="FireInTheHole" Type="AbilCmd" AbilCmd="FireInTheHole,Execute" Row="2" Column="1"/>
+            <LayoutButtons Face="YouBetterGetMoving" Type="AbilCmd" AbilCmd="YouBetterGetMoving,Execute" Row="2" Column="2"/>
+            <LayoutButtons Face="TakeCover" Type="AbilCmd" AbilCmd="TakeCover,Execute" Row="2" Column="3"/>
+            <LayoutButtons Face="EatThis" Type="AbilCmd" AbilCmd="EatThis,Execute" Row="2" Column="4"/>
+        </CardLayouts>
+        <FogVisibility value="Dimmed"/>
+        <VisionHeight value="4"/>
+        <BehaviorArray Link="Detector10"/>
+        <BehaviorArray Link="BossesP2Armor"/>
+        <LifeArmorTip value="Unit/P2Bosses/ArmorTooltip"/>
+    </CUnit>
+    <CBehaviorBuff id="TakeCover@FakeMineExtraDmg">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DisplayDuration index="Self" value="1"/>
+        <DisplayDuration index="Ally" value="1"/>
+        <DisplayDuration index="Neutral" value="1"/>
+        <DisplayDuration index="Enemy" value="1"/>
+        <Duration value="15"/>
+        <ExpireEffect value="Suicide"/>
+        <DamageResponse ModifyFraction="2">
+            <Kind index="NoProc" value="0"/>
+            <Chance value="1"/>
+        </DamageResponse>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="EatThis@Vehicle">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <RemoveValidatorArray value="ShieldGZero"/>
+        <InitialEffect value="EatThis@HealDelay"/>
+        <Modification>
+            <VitalMaxArray index="Shields" value="5000"/>
+            <WeaponArray Link="EatThis@VehicleWeapon"/>
+            <WeaponDisableArray value="MechaRaynorWeapon"/>
+        </Modification>
+        <FinalEffect value="EatThis@VehicleDeath"/>
+        <Duration value="45"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="TakeCover@RocksFalling">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="0.0625"/>
+        <Modification Height="8">
+            <HeightTime index="Stop" value="0.4"/>
+        </Modification>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="TakeCover@FakeMine">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="15"/>
+        <ExpireEffect value="Suicide"/>
+        <DamageResponse Fatal="1" Handled="TakeCover@FakeMineExplodeSet" ModifyFraction="0">
+            <Kind index="NoProc" value="0"/>
+            <Chance value="1"/>
+        </DamageResponse>
+        <DisplayDuration index="Self" value="1"/>
+        <DisplayDuration index="Ally" value="1"/>
+        <DisplayDuration index="Neutral" value="1"/>
+        <DisplayDuration index="Enemy" value="1"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="TakeCover@RealMine">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="15"/>
+        <ExpireEffect value="TakeCover@RealMineExpireExplodeSet"/>
+        <DisplayDuration index="Self" value="1"/>
+        <DisplayDuration index="Ally" value="1"/>
+        <DisplayDuration index="Neutral" value="1"/>
+        <DisplayDuration index="Enemy" value="1"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorUnitTracker id="TakeCover@Tracker">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorUnitTracker>
+</Catalog>

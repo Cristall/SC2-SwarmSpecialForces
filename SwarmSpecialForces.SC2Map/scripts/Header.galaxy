@@ -1,0 +1,54 @@
+//header file to declare functions
+
+void HeroSelection_UnlockHero(int playerID, int heroID);
+void HeroSelection_SelectHero (int playerID, int heroID);
+void HeroSelection_UnlockDiff(int playerID, int diff);
+text Acv_UI_TimeFormat (int time);
+int Acv_FrameFromTypeAndIdentifier(int playerID, int acvType, int acvIdentifier);
+int Acv_FrameFromPartAndDifficulty(int playerID, int part, int diff, bool smallTeamSize);
+void HeroSelection_Player_ShowcaseSetRank (int playerID);
+void HeroSelection_PlayerLeavesHandling(int playerID);
+void Player_PartWin_UpdateAcv();
+void Player_GainPoints();
+void Part_InitVariables();
+unit PartProtoss_Lightning_GetUnit();
+unit PartProtoss_Thunder_GetUnit();
+void Acv_Grind_Check(int playerID, int acvIdentifier);
+void Player_AddExp(int playerID, fixed amount);
+void Bank_Save_ForcedAll (int playerID);
+void Bank_Save_RequestSave(int playerID);
+void Player_KillReward(string unitType, point unitPosition);
+void Hive_Upgrade ();
+void Player_IncreaseUpgradeCount (fixed increaseBase);
+void Collectibles_PsiOrbs_Init();
+void MapInit_NotTutorial();
+void PartTerran_AreaJunker_Second_Open();
+void PartTerran_AreaJunker_Third_Open();
+void PartTerran_AreaBlackOps_Second_Open();
+void PartTerran_AreaBlackOps_Third_Open();
+void PartProtoss_AreaMech_Second_Open();
+void PartProtoss_AreaPsi_Second_Open();
+void PartProtoss_AreaPsi_Third_Open();
+void Popup_CreateFromAcvTypeAndIdentifier(int playerID, int acvType, int acvIdentifier, text titleColored, text tooltip, string image);
+void Popup_CreateFromPartAndDiff(int playerID, int part, int diff, bool smallTeamSize, text titleColored, text tooltip, string image);
+void Player_Revive_ReleaseHero(int player, point position);
+void Debug_ShowMessage(string input);
+void Player_HeroDied(int player);
+void PartTerran_TriggerCreate();
+void PartProtoss_TriggerCreate();
+void PartZerg_TriggerCreate();
+void PartZerg_MoopyDoor_Open();
+bool PartZerg_MoopyAllDoorsOpen();
+void Observer_Init();
+void PartZerg_Moopy_SecretActivated_Init();
+void PartZerg_Moopy_SecretEnable(int part, int secretIdentifier);
+void NydusWorm_EntranceCreate();
+void Collectibles_InitPart();
+void Collectibles_MoopyHat_DropHat(unit moopy);
+void PlayerBoard_UpdatePlayer(int playerID);
+void Hive_Transition();
+bool PartZerg_MoopyDoor_Requirement();
+void Part_PartFinished();
+
+// debug overrides
+void Debug_Override_FirstPart();

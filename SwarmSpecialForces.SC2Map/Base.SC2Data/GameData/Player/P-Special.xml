@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CEffectApplyBehavior id="SecretDmgResponseMakeInvulnerable">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Behavior value="SecretDmgResponseInvulnerable"/>
+    </CEffectApplyBehavior>
+    <CEffectSet id="SecretDmgResponseSet">
+        <EditorCategories value=""/>
+        <EffectArray value="SecretDmgResponseMakeInvulnerable"/>
+        <EffectArray value="SecretDmgResponseCancelOrder"/>
+    </CEffectSet>
+    <CEffectSet id="SecretActivationCorrect">
+        <EditorCategories value=""/>
+    </CEffectSet>
+    <CEffectSet id="SecretActivationWrong">
+        <EditorCategories value=""/>
+    </CEffectSet>
+    <CEffectCancelOrder id="SecretDmgResponseCancelOrder">
+        <EditorCategories value=""/>
+        <AbilCmd value="attack,Execute"/>
+    </CEffectCancelOrder>
+    <CActorModel id="SecretActivationCorrect" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On index="0" Terms="ActorCreation" Send="AnimBracketStart BSD IGNORE IGNORE Death ContentPlayOnce 2.000000 AsTimeScaleAbsolute"/>
+        <On Terms="Effect.SecretActivationCorrect.Start" Send="Create"/>
+        <HostSiteOps Ops="SOpOffsetHigherBy0p5"/>
+    </CActorModel>
+    <CActorModel id="SecretActivationWrong" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On index="0" Terms="ActorCreation" Send="AnimBracketStart BSD Birth Stand Death ContentPlayOnce 2.000000 AsTimeScaleAbsolute"/>
+        <On Terms="Effect.SecretActivationWrong.Start" Send="Create"/>
+    </CActorModel>
+    <CActorUnit id="Secret_Isatis" parent="GenericUnitStandard" unitName="Secret_Isatis">
+        <EditorCategories value=""/>
+        <HighlightTooltip value="Unit/Name/Bogus"/>
+        <UnitFlags index="SuppressDefaultStatusBar" value="1"/>
+        <MinimapIconScale value="0.000000"/>
+    </CActorUnit>
+    <CActorUnit id="Secret_BlackDevil" parent="GenericUnitStandard" unitName="Secret_BlackDevil">
+        <EditorCategories value=""/>
+        <HighlightTooltip value="Unit/Name/Bogus"/>
+        <Baselines index="Stand" AnimProps="Stand,00"/>
+        <UnitFlags index="SuppressDefaultStatusBar" value="1"/>
+        <MinimapIconScale value="0.000000"/>
+    </CActorUnit>
+    <CActorUnit id="Secret_skywalker" parent="GenericUnitStandard" unitName="Secret_skywalker">
+        <EditorCategories value=""/>
+        <HighlightTooltip value="Unit/Name/Bogus"/>
+        <UnitFlags index="SuppressDefaultStatusBar" value="1"/>
+        <MinimapIconScale value="0.000000"/>
+    </CActorUnit>
+    <CActorUnit id="Secret_SweetLimes" parent="GenericUnitStandard" unitName="Secret_SweetLimes">
+        <EditorCategories value=""/>
+        <On Terms="ActorCreation" Send="SetTintColor {255,255,255 2.000000}"/>
+        <HighlightTooltip value="Unit/Name/Bogus"/>
+        <UnitFlags index="SuppressDefaultStatusBar" value="1"/>
+        <MinimapIconScale value="0.000000"/>
+    </CActorUnit>
+    <CActorUnit id="Secret_muhdiekuh" parent="GenericUnitStandard" unitName="Secret_muhdiekuh">
+        <EditorCategories value=""/>
+        <HighlightTooltip value="Unit/Name/Bogus"/>
+        <UnitFlags index="SuppressDefaultStatusBar" value="1"/>
+        <MinimapIconScale value="0.000000"/>
+    </CActorUnit>
+    <CActorUnit id="Secret_Jan" parent="GenericUnitStandard" unitName="Secret_Jan">
+        <EditorCategories value=""/>
+        <HighlightTooltip value="Unit/Name/Bogus"/>
+        <UnitFlags index="SuppressDefaultStatusBar" value="1"/>
+        <MinimapIconScale value="0.000000"/>
+    </CActorUnit>
+    <CModel id="SecretActivationCorrect">
+        <Model value="Assets\Models\war3_goldbottemissile\war3_goldbottlemissile.m3"/>
+    </CModel>
+    <CModel id="SecretActivationWrong">
+        <Model value="Assets\Models\war3_deathcoilspecialart\war3_deathcoilspecialart.m3"/>
+        <Lighting value="SecretActivationCorrect"/>
+    </CModel>
+    <CModel id="Secret_Jan">
+        <Model value="Assets\Models\Gravestone_Hydralisk\Tombstone_Hydralisk.m3"/>
+        <ScaleMax value="0.800000,0.800000,0.800000"/>
+        <ScaleMin value="0.800000,0.800000,0.800000"/>
+        <SelectionRadius value="0.000000"/>
+    </CModel>
+    <CModel id="Secret_muhdiekuh">
+        <Model value="Assets\Units\Critters\Cow\Cow.m3"/>
+        <Lighting value="Secret_Jan"/>
+        <ScaleMax value="0.800000,0.800000,0.800000"/>
+        <ScaleMin value="0.800000,0.800000,0.800000"/>
+        <SelectionRadius value="0.000000"/>
+    </CModel>
+    <CModel id="Secret_Isatis">
+        <Lighting value="Secret_Jan"/>
+        <Model value="Assets\Units\Terran\DominionTrainEngineFast\DominionTrainEngineFast.m3"/>
+        <ScaleMax value="0.250000,0.250000,0.250000"/>
+        <ScaleMin value="0.250000,0.250000,0.250000"/>
+        <SelectionRadius value="0.000000"/>
+    </CModel>
+    <CModel id="Secret_BlackDevil">
+        <Lighting value="Secret_Jan"/>
+        <Model value="Assets\Units\Zerg\SpaceDiablo\SpaceDiablo.m3"/>
+        <ScaleMax value="0.330000,0.330000,0.330000"/>
+        <ScaleMin value="0.330000,0.330000,0.330000"/>
+        <SelectionRadius value="0.000000"/>
+    </CModel>
+    <CModel id="Secret_skywalker">
+        <Lighting value="Secret_Jan"/>
+        <Model value="Assets\Units\Neutral\CandyJar\CandyJar.m3"/>
+        <ScaleMax value="0.800000,0.800000,0.800000"/>
+        <ScaleMin value="0.800000,0.800000,0.800000"/>
+        <SelectionRadius value="0.000000"/>
+    </CModel>
+    <CModel id="Secret_SweetLimes">
+        <Lighting value="Secret_Jan"/>
+        <Model value="Assets\Doodads\Shakuras_Stone_Temple_Rubble\Shakuras_Stone_Temple_Rubble_01.m3"/>
+        <ScaleMax value="0.300000,0.300000,0.400000"/>
+        <ScaleMin value="0.600000,0.600000,0.600000"/>
+        <SelectionRadius value="0.000000"/>
+    </CModel>
+    <CUnit default="1" id="GenericSecret">
+        <Race value="Zerg"/>
+        <BehaviorArray Link="Taunt@Untauntable"/>
+        <BehaviorArray Link="SecretDmgReponse"/>
+        <BehaviorArray Link="SecretInvulnerable"/>
+        <Radius value="0.125"/>
+        <EditorCategories value=""/>
+        <PlaneArray index="Ground" value="1"/>
+        <PlaneArray index="Air" value="1"/>
+        <LifeStart value="10000"/>
+        <LifeMax value="10000"/>
+        <MinimapRadius value="0"/>
+    </CUnit>
+    <CUnit id="Secret_BlackDevil" parent="GenericSecret">
+        <Facing value="45"/>
+    </CUnit>
+    <CUnit id="Secret_Isatis" parent="GenericSecret">
+        <Facing value="315"/>
+    </CUnit>
+    <CUnit id="Secret_Jan" parent="GenericSecret">
+        <Facing value="90"/>
+    </CUnit>
+    <CUnit id="Secret_SweetLimes" parent="GenericSecret"/>
+    <CUnit id="Secret_muhdiekuh" parent="GenericSecret">
+        <Facing value="315"/>
+    </CUnit>
+    <CUnit id="Secret_skywalker" parent="GenericSecret"/>
+    <CBehaviorBuff id="SecretInvulnerable">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification>
+            <StateFlags index="Invulnerable" value="1"/>
+            <StateFlags index="Untargetable" value="1"/>
+        </Modification>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="SecretDmgResponseInvulnerable">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="1"/>
+        <Modification>
+            <StateFlags index="Invulnerable" value="1"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="SecretDmgReponse">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification>
+            <StateFlags index="CannotDie" value="1"/>
+        </Modification>
+        <DamageResponse Handled="SecretDmgResponseSet" ModifyFraction="0">
+            <Chance value="1"/>
+        </DamageResponse>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+</Catalog>

@@ -1,0 +1,210 @@
+static int options_HeroSelection_Checkbox;
+static int options_HeroSelection_Pulldown;
+static int[gv_Options_ControlGroup_Amount] options_ControlGroup_Checkbox;
+static int[gv_Options_ControlGroup_Amount] options_ControlGroup_Pulldown;
+static int options_SpeedrunsDetails_Checkbox;
+static int options_HeroPanelVisible_Checkbox;
+static int options_HivePanelVisible_Checkbox;
+static int options_InitialUnitSelection_Pulldown;
+
+
+static int Options_ControlGroups_GetCheckboxID (int dialogItem) {
+    int i;
+    for ( i = 0; i <= gv_Options_ControlGroup_Amount - 1 ; i += 1 ) {
+        if (dialogItem == options_ControlGroup_Checkbox[i]) {
+            return i;
+        }
+    }
+    return -1;
+}
+static int Options_ControlGroups_GetPulldownID (int dialogItem) {
+    int i;
+    for (i = 0; i <= gv_Options_ControlGroup_Amount - 1 ; i += 1) {
+        if (dialogItem == options_ControlGroup_Pulldown[i]) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+bool Options_HeroSelection_CheckboxHandler (bool testConds, bool runActions) {
+    int player = EventPlayer();
+    gv_PlayerStats[player].options_HeroSelection_Flag = libNtve_gf_DialogItemIsChecked(EventDialogControl(), player);
+    gv_PlayerStats[player].saveFlag_Options = true;
+    return true;
+}
+
+bool Options_HeroSelection_PulldownHandler (bool testConds, bool runActions) {
+    int player = EventPlayer();
+    int listIndex = DialogControlGetSelectedItem(EventDialogControl(), EventPlayer());
+    gv_PlayerStats[player].options_HeroSelection_Hero = gv_PlayerStats[player].options_HeroSelection_HeroListIndex[listIndex -1];
+    DialogControlSelectItem(options_HeroSelection_Pulldown, PlayerGroupSingle(player), listIndex);
+    gv_PlayerStats[player].saveFlag_Options = true;
+    return true;
+}
+
+void Options_HeroSelection_SelectItem(int playerID, int heroID){
+    gv_PlayerStats[playerID].options_HeroSelection_Hero = heroID;
+    if(!gv_PlayerStats[playerID].options_HeroSelection_Flag){
+        gv_PlayerStats[playerID].options_HeroSelection_Flag = true;
+        libNtve_gf_SetDialogItemChecked( options_HeroSelection_Checkbox, true, PlayerGroupSingle(playerID));
+    }
+    DialogControlSelectItem(options_HeroSelection_Pulldown, PlayerGroupSingle(playerID), heroID + 1);
+    gv_PlayerStats[playerID].saveFlag_Options = true;
+}
+
+void Options_HeroSelection_AddItem(int playerID, int heroID){
+    DialogControlAddItem(options_HeroSelection_Pulldown, PlayerGroupSingle(playerID), UnitTypeGetName(gv_Hero_UnitTypes[heroID]));
+    gv_PlayerStats[playerID].options_HeroSelection_HeroListIndex[DialogControlGetItemCount(options_HeroSelection_Pulldown, playerID)-1] = heroID;
+}
+
+bool Options_ControlGroups_CheckboxHandler (bool testConds, bool runActions) {
+    int player = EventPlayer();
+    int id = Options_ControlGroups_GetCheckboxID(EventDialogControl());
+    gv_PlayerStats[player].options_ControlGroup_Flag[id] = libNtve_gf_DialogItemIsChecked(EventDialogControl(), player);
+    gv_PlayerStats[player].saveFlag_Options = true;
+    return true;
+}
+
+bool Options_ControlGroups_PulldownHandler (bool testConds, bool runActions) {
+    int player = EventPlayer();
+    int id = Options_ControlGroups_GetPulldownID(EventDialogControl());
+    int listIndex = DialogControlGetSelectedItem(EventDialogControl(), EventPlayer());
+    gv_PlayerStats[player].options_ControlGroup_Group[id] = listIndex % 10;
+    DialogControlSelectItem(options_ControlGroup_Pulldown[id], PlayerGroupSingle(player), listIndex);
+    gv_PlayerStats[player].saveFlag_Options = true;
+    return true;
+}
+
+bool Options_SpeedrunsDetails_CheckboxHandler (bool textConds, bool runActions){
+    int player = EventPlayer();
+    gv_PlayerStats[player].options_SpeedrunsDetails_Flag = libNtve_gf_DialogItemIsChecked(EventDialogControl(), player);
+    gv_PlayerStats[player].saveFlag_Options = true;
+    return true;
+}
+
+bool Options_HeroPanelView_CheckboxHandler (bool textConds, bool runActions){
+    int player = EventPlayer();
+    gv_PlayerStats[player].options_HeroPanelVisible = libNtve_gf_DialogItemIsChecked(EventDialogControl(), player);
+    gv_PlayerStats[player].saveFlag_Options = true;
+    return true;
+}
+
+bool Options_HivePanelView_CheckboxHandler (bool textConds, bool runActions){
+    int player = EventPlayer();
+    gv_PlayerStats[player].options_HivePanelVisible = libNtve_gf_DialogItemIsChecked(EventDialogControl(), player);
+    gv_PlayerStats[player].saveFlag_Options = true;
+    return true;
+}
+
+bool Options_InitialUnitSelection_PulldownHandler (bool testConds, bool runActions) {
+    int player = EventPlayer();
+    int listIndex = DialogControlGetSelectedItem(EventDialogControl(), EventPlayer());
+    gv_PlayerStats[player].options_InitialUnitSelection = listIndex;
+    DialogControlSelectItem(options_InitialUnitSelection_Pulldown, PlayerGroupSingle(player), listIndex);
+    gv_PlayerStats[player].saveFlag_Options = true;
+    return true;
+}
+
+// set options pulldowns and checkboxes based on the loaded bank data
+void Options_SetOptions (int playerID) {
+    int i;
+    int pulldownListSize = DialogControlGetItemCount(options_HeroSelection_Pulldown, playerID);
+    playergroup playerPG = PlayerGroupSingle(playerID);
+
+    for (i = 0; i < pulldownListSize; i += 1) {
+        if (gv_PlayerStats[playerID].options_HeroSelection_HeroListIndex[i] == gv_PlayerStats[playerID].options_HeroSelection_Hero) {
+            DialogControlSelectItem(options_HeroSelection_Pulldown, playerPG, i+1);
+            break;
+        }
+    }
+    if (i >= pulldownListSize) {
+        // default back to 0 in case no valid index could be found
+        DialogControlSelectItem(options_HeroSelection_Pulldown, playerPG, 1);
+        gv_PlayerStats[playerID].options_HeroSelection_Hero = 0;
+    }
+
+    // select hero based on loaded value
+    if (gv_PlayerStats[playerID].options_HeroSelection_Flag) {
+        if (Utility_CheckHeroUnlocked(playerID, gv_PlayerStats[playerID].options_HeroSelection_Hero)) {
+            HeroSelection_SelectHero(playerID, gv_PlayerStats[playerID].options_HeroSelection_Hero);
+        }
+        else {
+            UIDisplayMessage(playerPG, c_messageAreaChat, StringExternal("Trig/Options/AutoHeroSelection/LockedHero"));
+            HeroSelection_SelectHero(playerID, 0);
+        }
+    }
+    
+    libNtve_gf_SetDialogItemChecked(options_HeroSelection_Checkbox, gv_PlayerStats[playerID].options_HeroSelection_Flag, playerPG);
+    libNtve_gf_SetDialogItemChecked(options_SpeedrunsDetails_Checkbox, gv_PlayerStats[playerID].options_SpeedrunsDetails_Flag, playerPG);
+    libNtve_gf_SetDialogItemChecked(options_HeroPanelVisible_Checkbox, gv_PlayerStats[playerID].options_HeroPanelVisible, playerPG);
+    libNtve_gf_SetDialogItemChecked(options_HivePanelVisible_Checkbox, gv_PlayerStats[playerID].options_HivePanelVisible, playerPG);
+    DialogControlSelectItem(options_InitialUnitSelection_Pulldown, playerPG, gv_PlayerStats[playerID].options_InitialUnitSelection);
+    for (i = 0; i < gv_Options_ControlGroup_Amount; i += 1) {
+        DialogControlSelectItem(options_ControlGroup_Pulldown[i], playerPG, gv_PlayerStats[playerID].options_ControlGroup_Group[i]);
+        libNtve_gf_SetDialogItemChecked(options_ControlGroup_Checkbox[i], gv_PlayerStats[playerID].options_ControlGroup_Flag[i], playerPG);
+    }
+}
+
+void Options_Init(){
+    int currentMainFrame = DialogControlHookup(gv_UI_MasterFrame, c_triggerControlTypePanel, "Options");
+    int i;
+    int j;
+    trigger pulldownHandler;
+    trigger checkboxHandler;
+    
+    options_HeroSelection_Pulldown = DialogControlHookup(currentMainFrame, c_triggerControlTypePulldown, "AutoHeroSelectionPulldown");
+    options_HeroSelection_Checkbox = DialogControlHookup(currentMainFrame, c_triggerControlTypeCheckBox, "AutoHeroSelectionCheckbox");
+
+    TriggerAddEventDialogControl(TriggerCreate("Options_HeroSelection_PulldownHandler"), c_playerAny, options_HeroSelection_Pulldown, c_triggerControlEventTypeSelectionChanged);
+    TriggerAddEventDialogControl(TriggerCreate("Options_HeroSelection_CheckboxHandler"), c_playerAny, options_HeroSelection_Checkbox, c_triggerControlEventTypeChecked);
+
+    options_ControlGroup_Checkbox[0] = DialogControlHookup(currentMainFrame, c_triggerControlTypeCheckBox, "Hero/Checkbox");
+    options_ControlGroup_Pulldown[0] = DialogControlHookup(currentMainFrame, c_triggerControlTypePulldown, "Hero/Pulldown");
+    options_ControlGroup_Checkbox[1] = DialogControlHookup(currentMainFrame, c_triggerControlTypeCheckBox, "Overlord/Checkbox");
+    options_ControlGroup_Pulldown[1] = DialogControlHookup(currentMainFrame, c_triggerControlTypePulldown, "Overlord/Pulldown");
+    options_ControlGroup_Checkbox[2] = DialogControlHookup(currentMainFrame, c_triggerControlTypeCheckBox, "Lurker/Checkbox");
+    options_ControlGroup_Pulldown[2] = DialogControlHookup(currentMainFrame, c_triggerControlTypePulldown, "Lurker/Pulldown");
+    options_ControlGroup_Checkbox[3] = DialogControlHookup(currentMainFrame, c_triggerControlTypeCheckBox, "Runling/Checkbox");
+    options_ControlGroup_Pulldown[3] = DialogControlHookup(currentMainFrame, c_triggerControlTypePulldown, "Runling/Pulldown");
+    options_ControlGroup_Checkbox[4] = DialogControlHookup(currentMainFrame, c_triggerControlTypeCheckBox, "LifeBank/Checkbox");
+    options_ControlGroup_Pulldown[4] = DialogControlHookup(currentMainFrame, c_triggerControlTypePulldown, "LifeBank/Pulldown");
+    for (i = 1; i <= 10 ; i += 1) {
+        for (j = 0; j < gv_Options_ControlGroup_Amount; j += 1) {
+            DialogControlAddItem(options_ControlGroup_Pulldown[j], PlayerGroupAll(), IntToText(i));
+        }
+    }
+
+    pulldownHandler = TriggerCreate("Options_ControlGroups_PulldownHandler");
+    checkboxHandler = TriggerCreate("Options_ControlGroups_CheckboxHandler");
+    for( i = 0; i < gv_Options_ControlGroup_Amount; i +=1){
+        TriggerAddEventDialogControl(pulldownHandler, c_playerAny, options_ControlGroup_Pulldown[i], c_triggerControlEventTypeSelectionChanged);
+        TriggerAddEventDialogControl(checkboxHandler, c_playerAny, options_ControlGroup_Checkbox[i], c_triggerControlEventTypeChecked);
+    }
+
+    for (i = 1; i <= PlayerGroupCount(gv_StartingPG); i += 1) {
+        j = PlayerGroupPlayer(gv_StartingPG, i);
+
+        gv_PlayerStats[j].options_ControlGroup_Group[0] = 1;
+        gv_PlayerStats[j].options_ControlGroup_Group[1] = 2;
+        gv_PlayerStats[j].options_ControlGroup_Group[2] = 3;
+        gv_PlayerStats[j].options_ControlGroup_Group[3] = 3;
+        gv_PlayerStats[j].options_ControlGroup_Group[4] = 3;
+    }
+
+    options_SpeedrunsDetails_Checkbox = DialogControlHookup(currentMainFrame, c_triggerControlTypeCheckBox, "SpeedrunsDetailsCheckbox");
+    TriggerAddEventDialogControl(TriggerCreate("Options_SpeedrunsDetails_CheckboxHandler"), c_playerAny, options_SpeedrunsDetails_Checkbox, c_triggerControlEventTypeChecked);
+
+    options_HeroPanelVisible_Checkbox = DialogControlHookup(currentMainFrame, c_triggerControlTypeCheckBox, "HeroPanelShowCheckbox");
+    TriggerAddEventDialogControl(TriggerCreate("Options_HeroPanelView_CheckboxHandler"), c_playerAny, options_HeroPanelVisible_Checkbox, c_triggerControlEventTypeChecked);
+    options_HivePanelVisible_Checkbox = DialogControlHookup(currentMainFrame, c_triggerControlTypeCheckBox, "HivePanelShowCheckbox");
+    TriggerAddEventDialogControl(TriggerCreate("Options_HivePanelView_CheckboxHandler"), c_playerAny, options_HivePanelVisible_Checkbox, c_triggerControlEventTypeChecked);
+
+    options_InitialUnitSelection_Pulldown = DialogControlHookup(currentMainFrame, c_triggerControlTypePulldown, "InitialUnitSelectionPulldown");
+    // Ordering: None, Hero, Overlord, Both. check Enums.galaxy c_InitialHeroSelection_None
+    DialogControlAddItem(options_InitialUnitSelection_Pulldown, PlayerGroupAll(), StringExternal("Trig/Options/InitialUnitSelection/None"));
+    DialogControlAddItem(options_InitialUnitSelection_Pulldown, PlayerGroupAll(), StringExternal("Trig/Options/InitialUnitSelection/Hero"));
+    DialogControlAddItem(options_InitialUnitSelection_Pulldown, PlayerGroupAll(), StringExternal("Trig/Options/InitialUnitSelection/Overlord"));
+    DialogControlAddItem(options_InitialUnitSelection_Pulldown, PlayerGroupAll(), StringExternal("Trig/Options/InitialUnitSelection/Both"));
+    TriggerAddEventDialogControl(TriggerCreate("Options_InitialUnitSelection_PulldownHandler"), c_playerAny, options_InitialUnitSelection_Pulldown, c_triggerControlEventTypeSelectionChanged);
+}

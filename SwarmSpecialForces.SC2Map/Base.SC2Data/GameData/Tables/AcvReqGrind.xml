@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CUser id="AcvReqGrind">
+        <Fields Id="MaxStage" Type="Int" EditorColumn="1"/>
+        <Fields Id="StageReq" Type="Int" Count="11" EditorColumn="2"/>
+        <Fields Id="PlayerStage" Type="Int" Count="6">
+            <Flags index="Modifiable" value="1"/>
+        </Fields>
+        <Fields Id="Color" Type="Color"/>
+        <Instances Id="[Default]">
+            <Color Color="255,255,255,255">
+                <Field Id="Color"/>
+            </Color>
+        </Instances>
+        <Instances Id="Points">
+            <Int Int="4">
+                <Field Id="MaxStage"/>
+            </Int>
+            <Int Int="30">
+                <Field Id="StageReq"/>
+            </Int>
+            <Int Int="100">
+                <Field Id="StageReq" Index="1"/>
+            </Int>
+            <Int Int="250">
+                <Field Id="StageReq" Index="2"/>
+            </Int>
+            <Int Int="500">
+                <Field Id="StageReq" Index="3"/>
+            </Int>
+            <Color Color="255,255,255,0">
+                <Field Id="Color"/>
+            </Color>
+        </Instances>
+        <Instances Id="WinsP0">
+            <Int Int="6">
+                <Field Id="MaxStage"/>
+            </Int>
+            <Int Int="10">
+                <Field Id="StageReq"/>
+            </Int>
+            <Int Int="25">
+                <Field Id="StageReq" Index="1"/>
+            </Int>
+            <Int Int="50">
+                <Field Id="StageReq" Index="2"/>
+            </Int>
+            <Int Int="100">
+                <Field Id="StageReq" Index="3"/>
+            </Int>
+            <Int Int="200">
+                <Field Id="StageReq" Index="4"/>
+            </Int>
+            <Int Int="300">
+                <Field Id="StageReq" Index="5"/>
+            </Int>
+            <Color Color="255,70,70,255">
+                <Field Id="Color"/>
+            </Color>
+        </Instances>
+        <Instances Id="WinsP1">
+            <Int Int="6">
+                <Field Id="MaxStage"/>
+            </Int>
+            <Int Int="7">
+                <Field Id="StageReq"/>
+            </Int>
+            <Int Int="15">
+                <Field Id="StageReq" Index="1"/>
+            </Int>
+            <Int Int="35">
+                <Field Id="StageReq" Index="2"/>
+            </Int>
+            <Int Int="75">
+                <Field Id="StageReq" Index="3"/>
+            </Int>
+            <Int Int="125">
+                <Field Id="StageReq" Index="4"/>
+            </Int>
+            <Int Int="200">
+                <Field Id="StageReq" Index="5"/>
+            </Int>
+            <Color Color="255,70,70,255">
+                <Field Id="Color"/>
+            </Color>
+        </Instances>
+        <Instances Id="WinsP2">
+            <Int Int="6">
+                <Field Id="MaxStage"/>
+            </Int>
+            <Int Int="3">
+                <Field Id="StageReq"/>
+            </Int>
+            <Int Int="8">
+                <Field Id="StageReq" Index="1"/>
+            </Int>
+            <Int Int="20">
+                <Field Id="StageReq" Index="2"/>
+            </Int>
+            <Int Int="45">
+                <Field Id="StageReq" Index="3"/>
+            </Int>
+            <Int Int="75">
+                <Field Id="StageReq" Index="4"/>
+            </Int>
+            <Int Int="125">
+                <Field Id="StageReq" Index="5"/>
+            </Int>
+            <Color Color="255,70,70,255">
+                <Field Id="Color"/>
+            </Color>
+        </Instances>
+        <Instances Id="Kills">
+            <Int Int="6">
+                <Field Id="MaxStage"/>
+            </Int>
+            <Int Int="1000">
+                <Field Id="StageReq"/>
+            </Int>
+            <Int Int="10000">
+                <Field Id="StageReq" Index="1"/>
+            </Int>
+            <Int Int="40000">
+                <Field Id="StageReq" Index="2"/>
+            </Int>
+            <Int Int="75000">
+                <Field Id="StageReq" Index="3"/>
+            </Int>
+            <Int Int="150000">
+                <Field Id="StageReq" Index="4"/>
+            </Int>
+            <Int Int="350000">
+                <Field Id="StageReq" Index="5"/>
+            </Int>
+            <Color Color="255,255,0,0">
+                <Field Id="Color"/>
+            </Color>
+        </Instances>
+        <Instances Id="Scientists">
+            <Int Int="5">
+                <Field Id="MaxStage"/>
+            </Int>
+            <Int Int="10">
+                <Field Id="StageReq"/>
+            </Int>
+            <Int Int="30">
+                <Field Id="StageReq" Index="1"/>
+            </Int>
+            <Int Int="75">
+                <Field Id="StageReq" Index="2"/>
+            </Int>
+            <Int Int="150">
+                <Field Id="StageReq" Index="3"/>
+            </Int>
+            <Int Int="200">
+                <Field Id="StageReq" Index="4"/>
+            </Int>
+            <Color Color="255,128,0,255">
+                <Field Id="Color"/>
+            </Color>
+        </Instances>
+        <Instances Id="Essences">
+            <Int Int="5">
+                <Field Id="MaxStage"/>
+            </Int>
+            <Int Int="5">
+                <Field Id="StageReq"/>
+            </Int>
+            <Int Int="15">
+                <Field Id="StageReq" Index="1"/>
+            </Int>
+            <Int Int="40">
+                <Field Id="StageReq" Index="2"/>
+            </Int>
+            <Int Int="100">
+                <Field Id="StageReq" Index="3"/>
+            </Int>
+            <Int Int="200">
+                <Field Id="StageReq" Index="4"/>
+            </Int>
+            <Color Color="255,255,255,0">
+                <Field Id="Color"/>
+            </Color>
+        </Instances>
+        <Instances Id="PsiOrbs">
+            <Int Int="5">
+                <Field Id="MaxStage"/>
+            </Int>
+            <Int Int="3">
+                <Field Id="StageReq"/>
+            </Int>
+            <Int Int="7">
+                <Field Id="StageReq" Index="1"/>
+            </Int>
+            <Int Int="12">
+                <Field Id="StageReq" Index="2"/>
+            </Int>
+            <Int Int="25">
+                <Field Id="StageReq" Index="3"/>
+            </Int>
+            <Int Int="40">
+                <Field Id="StageReq" Index="4"/>
+            </Int>
+            <Color Color="255,0,255,255">
+                <Field Id="Color"/>
+            </Color>
+        </Instances>
+        <Instances Id="Score">
+            <Int Int="11">
+                <Field Id="MaxStage"/>
+            </Int>
+            <Int Int="75">
+                <Field Id="StageReq"/>
+            </Int>
+            <Int Int="150">
+                <Field Id="StageReq" Index="1"/>
+            </Int>
+            <Int Int="300">
+                <Field Id="StageReq" Index="2"/>
+            </Int>
+            <Int Int="450">
+                <Field Id="StageReq" Index="3"/>
+            </Int>
+            <Int Int="600">
+                <Field Id="StageReq" Index="4"/>
+            </Int>
+            <Int Int="800">
+                <Field Id="StageReq" Index="5"/>
+            </Int>
+            <Int Int="1000">
+                <Field Id="StageReq" Index="6"/>
+            </Int>
+            <Int Int="1250">
+                <Field Id="StageReq" Index="7"/>
+            </Int>
+            <Int Int="1500">
+                <Field Id="StageReq" Index="8"/>
+            </Int>
+            <Int Int="1750">
+                <Field Id="StageReq" Index="9"/>
+            </Int>
+            <Int Int="2000">
+                <Field Id="StageReq" Index="10"/>
+            </Int>
+            <Color Color="255,0,255,0">
+                <Field Id="Color"/>
+            </Color>
+        </Instances>
+        <Instances Id="MoopyHats">
+            <Int Int="5">
+                <Field Id="MaxStage"/>
+            </Int>
+            <Int Int="2">
+                <Field Id="StageReq"/>
+            </Int>
+            <Int Int="5">
+                <Field Id="StageReq" Index="1"/>
+            </Int>
+            <Int Int="10">
+                <Field Id="StageReq" Index="2"/>
+            </Int>
+            <Int Int="15">
+                <Field Id="StageReq" Index="3"/>
+            </Int>
+            <Int Int="25">
+                <Field Id="StageReq" Index="4"/>
+            </Int>
+            <Color Color="255,0,255,0">
+                <Field Id="Color"/>
+            </Color>
+        </Instances>
+    </CUser>
+</Catalog>

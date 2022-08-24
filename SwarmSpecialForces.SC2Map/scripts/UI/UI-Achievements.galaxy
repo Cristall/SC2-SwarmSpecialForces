@@ -1,0 +1,111 @@
+static int acv_MainFrame;
+
+static void AcvInterface_InitAcvArrays(){
+    //Grind
+    gv_Acv_Grind_StringIdentifier[c_AcvIdentifier_Points] = "Points";
+    gv_Acv_Grind_StringIdentifier[c_AcvIdentifier_WinsP0] = "WinsP0";
+    gv_Acv_Grind_StringIdentifier[c_AcvIdentifier_WinsP1] = "WinsP1";
+    gv_Acv_Grind_StringIdentifier[c_AcvIdentifier_WinsP2] = "WinsP2";
+    gv_Acv_Grind_StringIdentifier[c_AcvIdentifier_Kills] = "Kills";
+    gv_Acv_Grind_StringIdentifier[c_AcvIdentifier_Scientists] = "Scientists";
+    gv_Acv_Grind_StringIdentifier[c_AcvIdentifier_Essences] = "Essences";
+    gv_Acv_Grind_StringIdentifier[c_AcvIdentifier_PsiOrbs] = "PsiOrbs";
+    gv_Acv_Grind_StringIdentifier[c_AcvIdentifier_Score] = "Score";
+    gv_Acv_Grind_StringIdentifier[c_AcvIdentifier_MoopyHats] = "MoopyHats";
+
+    //Split
+    gv_Acv_Split_StringIdentifier[c_AcvIdentifier_FlawlessP0] = "FlawlessP0";
+    gv_Acv_Split_StringIdentifier[c_AcvIdentifier_FlawlessP1] = "FlawlessP1";
+    gv_Acv_Split_StringIdentifier[c_AcvIdentifier_FlawlessP2] = "FlawlessP2";
+    gv_Acv_Split_StringIdentifier[c_AcvIdentifier_BossT_Flamer] = "Flamer";
+    gv_Acv_Split_StringIdentifier[c_AcvIdentifier_BossT_Hammer] = "Hammer";
+    gv_Acv_Split_StringIdentifier[c_AcvIdentifier_BossT_Fortress] = "Fortress";
+    gv_Acv_Split_StringIdentifier[c_AcvIdentifier_BossP_Madness] = "Madness";
+    gv_Acv_Split_StringIdentifier[c_AcvIdentifier_BossP_Atlantis] = "Atlantis";
+    gv_Acv_Split_StringIdentifier[c_AcvIdentifier_BossP_Lightning] = "Lightning";
+    gv_Acv_Split_StringIdentifier[c_AcvIdentifier_BossP_Thunder] = "Thunder";
+    gv_Acv_Split_StringIdentifier[c_AcvIdentifier_BossZ_Artanis] = "Artanis";
+    gv_Acv_Split_StringIdentifier[c_AcvIdentifier_BossZ_Raynor] = "Raynor";
+    gv_Acv_Split_StringIdentifier[c_AcvIdentifier_BossZ_Kerrigan] = "Kerrigan";
+    gv_Acv_Split_StringIdentifier[c_AcvIdentifier_BossZ_Cybermind] = "Cybermind";
+    gv_Acv_Split_StringIdentifier[c_AcvIdentifier_BossZ_Gary] = "Gary";
+    gv_Acv_Split_StringIdentifier[c_AcvIdentifier_BossZ_Stetmann] = "Stetmann";
+    gv_Acv_Split_StringIdentifier[c_AcvIdentifier_BossZ_Moopy] = "KingMoopy";
+
+    //OneTime
+    gv_Acv_OneTime_StringIdentifier[c_AcvIdentifier_Tutorial] = "Tutorial";
+    gv_Acv_OneTime_StringIdentifier[c_AcvIdentifier_Trophy] = "Trophy";
+
+}
+
+void AcvInterface_Init(){
+    int tmpInt;
+    int tmpInt_2;
+    int tmpInt_3;
+    int tmpPlayer;
+    int currentMainFrame;
+
+    acv_MainFrame = DialogControlHookup(gv_UI_MasterFrame, c_triggerControlTypePanel, "Achievements");
+    currentMainFrame = DialogControlHookup(acv_MainFrame, c_triggerControlTypePulldown, "PlayerPulldown");
+
+    //hookup + setup of pulldown and next buttons handler frames
+    tmpInt = 0;
+    tmpPlayer = -1;
+    while (true) {
+        tmpPlayer = PlayerGroupNextPlayer(gv_ActivePG, tmpPlayer);
+        if (tmpPlayer < 0) { break; }
+        tmpInt += 1;
+        DialogControlAddItem(currentMainFrame, PlayerGroupAll(), Utility_PlayerNameWithPlayerColor(tmpPlayer));
+
+        DialogControlSetVisible(DialogControlHookup(acv_MainFrame, c_triggerControlTypePanel, "PulldownHandler/Index" + IntToString(tmpInt) + "/Player" + IntToString(tmpPlayer)), PlayerGroupAll(), true);
+        if (tmpInt != 1) {
+            DialogControlSetVisible(DialogControlHookup(acv_MainFrame, c_triggerControlTypePanel, "PrevPlayerHandler/Index" + IntToString(tmpInt) + "/Player" + IntToString(tmpInt_2)), PlayerGroupAll(), true);
+            DialogControlSetVisible(DialogControlHookup(acv_MainFrame, c_triggerControlTypePanel, "NextPlayerHandler/Index" + IntToString(tmpInt_3) + "/Player" + IntToString(tmpPlayer)), PlayerGroupAll(), true);
+        }
+        DialogControlSetVisible(DialogControlHookup(acv_MainFrame, c_triggerControlTypePanel, "ScrollableFrame/ContainerFrame/Player" + IntToString(tmpPlayer) + "/IndexHandler/Index" + IntToString(tmpInt)), PlayerGroupAll(), true);
+        tmpInt_2 = tmpPlayer;   //saves last player
+        tmpInt_3 = tmpInt;      //saves last index
+    }
+    DialogControlSetVisible(DialogControlHookup(acv_MainFrame, c_triggerControlTypePanel, "NextPlayerHandler/Index" + IntToString(tmpInt_3) + "/Player" + IntToString(PlayerGroupPlayer(gv_ActivePG, 1))), PlayerGroupAll(), true);
+    DialogControlSetVisible(DialogControlHookup(acv_MainFrame, c_triggerControlTypePanel, "PrevPlayerHandler/Index" + IntToString(1) + "/Player" + IntToString(PlayerGroupPlayer(gv_ActivePG, tmpInt_3))), PlayerGroupAll(), true);
+    
+    tmpInt = 0;
+    tmpPlayer = -1;
+    while (true) {
+        tmpPlayer = PlayerGroupNextPlayer(gv_ActivePG, tmpPlayer);
+        if (tmpPlayer < 0) { break; }
+        tmpInt += 1;
+        DialogControlSelectItem(currentMainFrame, PlayerGroupSingle(tmpPlayer), tmpInt);
+    }
+    if (gv_PlayerAmountStart == 1) {
+        DialogControlSetAnimationState(acv_MainFrame, PlayerGroupAll(), "Solo", "True");
+        libNtve_gf_SetDialogItemText(DialogControlHookup(acv_MainFrame, c_triggerControlTypeLabel, "PlayerLabel"), Utility_PlayerNameWithPlayerColor(PlayerGroupPlayer(gv_ActivePG, 1)), PlayerGroupAll());
+    }
+
+    //hookup individual acv frames
+    AcvInterface_InitAcvArrays();
+    
+    tmpPlayer = -1; 
+    while (true) {
+        tmpPlayer = PlayerGroupNextPlayer(gv_ActivePG, tmpPlayer);
+        if (tmpPlayer < 0) { break; }
+
+        for(tmpInt = 0; tmpInt < gv_Acv_Grind_AmountAchievements; tmpInt+=1){
+            gv_Acv_Grind_Frames[tmpPlayer][tmpInt] = DialogControlHookup(acv_MainFrame, c_triggerControlTypePanel, "ScrollableFrame/ContainerFrame/Player"+IntToString(tmpPlayer)+"/" + gv_Acv_Grind_StringIdentifier[tmpInt]);
+        }
+        for(tmpInt = 0; tmpInt < gv_Acv_Split_AmountAchievements; tmpInt+=1){
+            gv_Acv_Split_Frames[tmpPlayer][tmpInt] = DialogControlHookup(acv_MainFrame, c_triggerControlTypePanel, "ScrollableFrame/ContainerFrame/Player"+IntToString(tmpPlayer)+"/" + gv_Acv_Split_StringIdentifier[tmpInt]);
+        }
+        for(tmpInt = 0; tmpInt < gv_Acv_OneTime_AmountAchievements; tmpInt+=1){
+            gv_Acv_OneTime_Frames[tmpPlayer][tmpInt] = DialogControlHookup(acv_MainFrame, c_triggerControlTypePanel, "ScrollableFrame/ContainerFrame/Player"+IntToString(tmpPlayer)+"/" + gv_Acv_OneTime_StringIdentifier[tmpInt]);
+        }
+
+        for(tmpInt=0; tmpInt<gv_MaxAmountParts; tmpInt+=1){
+            for(tmpInt_2= 0; tmpInt_2 <gv_MaxAmountDifficulties; tmpInt_2+=1){
+                
+                gv_Acv_Speedruns_Frames[tmpPlayer][tmpInt][tmpInt_2][0] = DialogControlHookup(acv_MainFrame, c_triggerControlTypePanel, "ScrollableFrame/ContainerFrame/Player"+IntToString(tmpPlayer)+"/SpeedrunP"+IntToString(tmpInt)+"D"+IntToString(tmpInt_2));
+                gv_Acv_Speedruns_Frames[tmpPlayer][tmpInt][tmpInt_2][1] = DialogControlHookup(acv_MainFrame, c_triggerControlTypePanel, "ScrollableFrame/ContainerFrame/Player"+IntToString(tmpPlayer)+"/SpeedrunP"+IntToString(tmpInt)+"D"+IntToString(tmpInt_2)+"Small");
+            }
+        }
+    }
+}

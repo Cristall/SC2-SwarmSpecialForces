@@ -1,0 +1,2667 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CEffectEnumTrackedUnits id="FinalWillSearchProbesTracker">
+        <EditorCategories value=""/>
+        <BehaviorLink value="TrackerProbe"/>
+        <Effect value="FinalWillProbeExplodeDelay"/>
+    </CEffectEnumTrackedUnits>
+    <CEffectDamage id="LongLifeBeamDummyEffect">
+        <EditorCategories value=""/>
+        <Maximum value="0"/>
+    </CEffectDamage>
+    <CEffectCreatePersistent id="LongLifePrecursorPersistentProbe">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetUnit"/>
+        <InitialEffect value="MakePrecursor"/>
+        <ExpireEffect value="RemovePrecursor"/>
+        <FinalEffect value="TrackerAddProbe"/>
+        <PeriodCount value="1"/>
+        <PeriodicEffectArray value="KillsToCaster"/>
+        <PeriodicPeriodArray value="1.25"/>
+    </CEffectCreatePersistent>
+    <CEffectEnumTrackedUnits id="MassHealSearchProbe">
+        <EditorCategories value=""/>
+        <BehaviorLink value="TrackerProbe"/>
+        <Effect value="MassHealValidTargetSet"/>
+        <TrackedUnitFilters value="-;Dead,Hidden"/>
+    </CEffectEnumTrackedUnits>
+    <CEffectEnumTrackedUnits id="MassHealSearchCombatUnit">
+        <EditorCategories value=""/>
+        <BehaviorLink value="TrackerCombatUnits"/>
+        <Effect value="MassHealValidTargetSet"/>
+        <TrackedUnitFilters value="-;Dead,Hidden"/>
+    </CEffectEnumTrackedUnits>
+    <CEffectEnumTrackedUnits id="MassHealSearchActiveSpawner">
+        <EditorCategories value=""/>
+        <BehaviorLink value="TrackerActiveSpawner"/>
+        <Effect value="MassHealValidTargetSet"/>
+        <TrackedUnitFilters value="-;Dead,Hidden"/>
+    </CEffectEnumTrackedUnits>
+    <CEffectRemoveTrackedUnit id="TrackerActiveSpawnerRemove">
+        <EditorCategories value=""/>
+        <BehaviorLink value="TrackerActiveSpawner"/>
+        <TrackedUnit Value="Source"/>
+    </CEffectRemoveTrackedUnit>
+    <CEffectRemoveTrackedUnit id="TrackerCombatUnitRemove">
+        <EditorCategories value=""/>
+        <BehaviorLink value="TrackerCombatUnits"/>
+        <TrackedUnit Value="Source"/>
+    </CEffectRemoveTrackedUnit>
+    <CEffectAddTrackedUnit id="TrackerAddCombatUnit">
+        <EditorCategories value=""/>
+        <BehaviorLink value="TrackerCombatUnits"/>
+        <TrackedUnit Value="Target"/>
+    </CEffectAddTrackedUnit>
+    <CEffectDamage id="AdeptTalonWeaponDmg" parent="DU_WEAP">
+        <EditorCategories value="Race:Protoss"/>
+        <Kind value="Ranged"/>
+        <Amount value="600"/>
+    </CEffectDamage>
+    <CEffectApplyBehavior id="AngelwingChargeBuff">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+    </CEffectApplyBehavior>
+    <CEffectRemoveBehavior id="AngelwingChargeBuffRemove">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <BehaviorLink value="AngelwingChargeBuff"/>
+    </CEffectRemoveBehavior>
+    <CEffectDamage id="AngelwingChargeDmg">
+        <ValidatorArray value="noMarkers"/>
+        <EditorCategories value=""/>
+        <Amount value="600"/>
+    </CEffectDamage>
+    <CEffectIssueOrder id="AngelwingChargeIssueMove">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Abil value="move"/>
+        <Player Value="Caster"/>
+        <Target Value="TargetPoint"/>
+    </CEffectIssueOrder>
+    <CEffectCreatePersistent id="AngelwingChargePersistent">
+        <EditorCategories value=""/>
+        <WhichLocation Value="CasterUnit"/>
+        <InitialDelay value="0.75"/>
+        <InitialEffect value="AngelwingChargeStartSet"/>
+        <InitialOffset value="0,-7.5,0"/>
+        <FinalEffect value="AngelwingChargeBuffRemove"/>
+        <PeriodCount value="9"/>
+        <PeriodicEffectArray value="AngelwingChargeSearch"/>
+        <PeriodicPeriodArray value="0.09"/>
+    </CEffectCreatePersistent>
+    <CEffectEnumArea id="AngelwingChargeSearch">
+        <EditorCategories value=""/>
+        <Marker>
+            <MatchFlags index="Id" value="1"/>
+        </Marker>
+        <ImpactLocation Value="CasterUnit"/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Item,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="0.75" Effect="AngelwingChargeDmg"/>
+    </CEffectEnumArea>
+    <CEffectSet id="AngelwingChargeStartSet">
+        <EditorCategories value=""/>
+        <EffectArray value="AngelwingChargeBuff"/>
+        <EffectArray value="AngelwingChargeIssueMove"/>
+    </CEffectSet>
+    <CEffectDamage id="CrystalwingShowerDmg">
+        <EditorCategories value=""/>
+        <Amount value="1000"/>
+        <AreaArray Radius="0.45" Fraction="1"/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Item,Dead,Hidden,Invulnerable"/>
+    </CEffectDamage>
+    <CEffectLaunchMissile id="CrystalwingShowerMissile">
+        <EditorCategories value=""/>
+        <LaunchLocation Value="TargetPoint"/>
+        <ImpactLocation Value="TargetPoint"/>
+        <LaunchOffset value="0,1,20"/>
+        <ImpactEffect value="CrystalwingShowerDmg"/>
+        <AmmoUnit value="HighTemplarCrystalwingTalonMissile"/>
+        <Movers Link="CrystalwingShowerMover" IfRangeLTE="500"/>
+    </CEffectLaunchMissile>
+    <CEffectCreatePersistent id="CrystalwingShowerPersistent">
+        <EditorCategories value=""/>
+        <Flags index="Channeled" value="1"/>
+        <PeriodCount value="10"/>
+        <PeriodicEffectArray value="CrystalwingShowerWave"/>
+        <PeriodicPeriodArray value="0.35"/>
+        <ExpireDelay value="0.75"/>
+    </CEffectCreatePersistent>
+    <CEffectCreatePersistent id="CrystalwingShowerWave">
+        <EditorCategories value=""/>
+        <Flags index="RandomOffset" value="1"/>
+        <PeriodCount value="6"/>
+        <PeriodicEffectArray value="CrystalwingShowerMissile"/>
+        <PeriodicOffsetArray value="0,-1,0"/>
+        <PeriodicOffsetArray value="-1,0,0"/>
+        <PeriodicOffsetArray value="1,0,0"/>
+        <PeriodicOffsetArray value="0,1,0"/>
+        <PeriodicOffsetArray value="0.4,0.4,0"/>
+        <PeriodicOffsetArray value="-0.4,0.4,0"/>
+        <PeriodicOffsetArray value="-0.4,-0.4,0"/>
+        <PeriodicOffsetArray value="0.4,-0.4,0"/>
+        <PeriodicOffsetArray value="0,0,0"/>
+        <PeriodicOffsetArray value="1.75,0,0"/>
+        <PeriodicOffsetArray value="-1.75,0,0"/>
+        <PeriodicOffsetArray value="0,1.75,0"/>
+        <PeriodicOffsetArray value="0,-1.75,0"/>
+        <PeriodicOffsetArray value="0.7,0.7,0"/>
+        <PeriodicOffsetArray value="-0.7,0.7,0"/>
+        <PeriodicOffsetArray value="-0.7,-0.7,0"/>
+        <PeriodicOffsetArray value="0.7,-0.7,0"/>
+        <PeriodicPeriodArray value="0"/>
+    </CEffectCreatePersistent>
+    <CEffectDamage id="FinalWillMadnessExplode">
+        <EditorCategories value=""/>
+        <ImpactLocation Value="SourcePoint"/>
+        <Amount value="4000"/>
+        <AreaArray Radius="4" Fraction="1"/>
+        <SearchFilters value="-;Player,Ally,Neutral,Missile,Item,Dead,Hidden"/>
+    </CEffectDamage>
+    <CEffectCreatePersistent id="FinalWillMadnessExplodeDelay">
+        <EditorCategories value=""/>
+        <WhichLocation Value="SourcePoint"/>
+        <InitialDelay value="2"/>
+        <InitialEffect value="FinalWillMadnessExplode"/>
+    </CEffectCreatePersistent>
+    <CEffectDamage id="FinalWillProbeExplode">
+        <EditorCategories value=""/>
+        <Amount value="1250"/>
+        <AreaArray Radius="2"/>
+        <SearchFilters value="-;Player,Ally,Neutral,Missile,Item,Dead,Hidden"/>
+        <ImpactLocation Value="SourceUnit"/>
+    </CEffectDamage>
+    <CEffectApplyBehavior id="FinalWillProbeExplodeDelay">
+        <ValidatorArray index="0" removed="1"/>
+        <EditorCategories value=""/>
+    </CEffectApplyBehavior>
+    <CEffectSet id="FinalWillSet">
+        <EditorCategories value=""/>
+        <EffectArray value="FinalWillSearchProbesTracker"/>
+        <EffectArray value="FinalWillMadnessExplodeDelay"/>
+        <TargetLocationType value="Point"/>
+    </CEffectSet>
+    <CEffectDamage id="HighTemplarCrystalwingTalonWeaponDmg" parent="DU_WEAP">
+        <EditorCategories value="Race:Protoss"/>
+        <Kind value="Ranged"/>
+        <Amount value="500"/>
+    </CEffectDamage>
+    <CEffectDamage id="HighTemplarTalonWeaponDmg" parent="DU_WEAP">
+        <EditorCategories value="Race:Protoss"/>
+        <Kind value="Ranged"/>
+        <Amount value="450"/>
+    </CEffectDamage>
+    <CEffectLaunchMissile id="HighTemplarCrystalwingTalonWeaponLaunchMissile">
+        <EditorCategories value="Race:Protoss"/>
+        <ImpactEffect value="HighTemplarCrystalwingTalonWeaponDmg"/>
+        <AmmoUnit value="HighTemplarCrystalwingTalonMissile"/>
+    </CEffectLaunchMissile>
+    <CEffectLaunchMissile id="HighTemplarTalonWeaponLaunchMissile">
+        <EditorCategories value="Race:Protoss"/>
+        <ImpactEffect value="HighTemplarTalonWeaponDmg"/>
+        <AmmoUnit value="HighTemplarTalonMissile"/>
+    </CEffectLaunchMissile>
+    <CEffectDamage id="InterceptorTalonWeaponDmg" parent="DU_WEAP">
+        <EditorCategories value="Race:Protoss"/>
+        <Kind value="Ranged"/>
+        <Amount value="225"/>
+    </CEffectDamage>
+    <CEffectDamage id="ImmortalTalonWeaponDmg" parent="DU_WEAP">
+        <EditorCategories value="Race:Protoss"/>
+        <Kind value="Ranged"/>
+        <Amount value="250"/>
+    </CEffectDamage>
+    <CEffectApplyBehavior id="LongLifeAlreadyCasting" parent="AlreadyCasting">
+        <Duration value="8.5"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="LongLifeAlreadyCastingNoWeapons" parent="AlreadyCastingNoWeapons">
+        <Duration value="4.25"/>
+    </CEffectApplyBehavior>
+    <CEffectCreatePersistent id="LongLifeDelay">
+        <EditorCategories value=""/>
+        <InitialDelay value="0.7"/>
+        <WhichLocation Value="TargetUnit"/>
+        <PeriodCount value="1"/>
+        <PeriodicValidator value="CasterNotDead"/>
+        <PeriodicEffectArray value="LongLifeTargetSet"/>
+        <PeriodicPeriodArray value="0"/>
+        <InitialEffect value="LongLifeBeamDummyEffect"/>
+    </CEffectCreatePersistent>
+    <CEffectSet id="LongLifeInitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="LongLifeAlreadyCasting"/>
+        <EffectArray value="LongLifeAlreadyCastingNoWeapons"/>
+        <EffectArray value="LongLifeSearchSpawner"/>
+        <TargetLocationType value="Point"/>
+    </CEffectSet>
+    <CEffectCreatePersistent id="LongLifePrecursorPersistentCombatUnit">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetUnit"/>
+        <InitialEffect value="MakePrecursor"/>
+        <ExpireEffect value="RemovePrecursor"/>
+        <FinalEffect value="TrackerAddCombatUnit"/>
+        <PeriodCount value="1"/>
+        <PeriodicEffectArray value="KillsToCaster"/>
+        <PeriodicPeriodArray value="1.25"/>
+    </CEffectCreatePersistent>
+    <CEffectCreateUnit id="LongLifeProbeSpawn">
+        <EditorCategories value=""/>
+        <SpawnUnit value="ProbeTalon"/>
+        <SpawnCount value="2"/>
+        <SpawnEffect value="LongLifePrecursorPersistentProbe"/>
+    </CEffectCreateUnit>
+    <CEffectEnumTrackedUnits id="LongLifeSearchSpawner">
+        <EditorCategories value=""/>
+        <BehaviorLink value="TrackerActiveSpawner"/>
+        <Effect value="LongLifeDelay"/>
+        <TrackedUnitFilters value="-;Dead,Hidden"/>
+    </CEffectEnumTrackedUnits>
+    <CEffectSet id="LongLifeTargetSet">
+        <ValidatorArray value="MadnessStructureOn"/>
+        <EditorCategories value=""/>
+        <EffectArray value="LongLifeProbeSpawn"/>
+        <EffectArray value="LongLifeSwitch"/>
+    </CEffectSet>
+    <CEffectApplyBehavior id="MadnessStructureTurnOffApply">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Source"/>
+        <Behavior value="MadnessStructureOff"/>
+    </CEffectApplyBehavior>
+    <CEffectModifyUnit id="MadnessStructureTurnOffHeal">
+        <EditorCategories value=""/>
+        <ImpactUnit Value="Source"/>
+        <VitalArray index="Life">
+            <ChangeFraction value="1"/>
+        </VitalArray>
+        <VitalArray index="Shields">
+            <ChangeFraction value="1"/>
+        </VitalArray>
+    </CEffectModifyUnit>
+    <CEffectRemoveBehavior id="MadnessStructureTurnOffRemoveOn">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Source"/>
+        <BehaviorLink value="MadnessStructureOn"/>
+    </CEffectRemoveBehavior>
+    <CEffectSet id="MadnessStructureTurnOffSet">
+        <EditorCategories value=""/>
+        <EffectArray value="MadnessStructureTurnOffTriggerHandle"/>
+        <EffectArray value="MadnessStructureTurnOffApply"/>
+        <EffectArray value="MadnessStructureTurnOffOverboostRemove"/>
+        <EffectArray value="MadnessStructureTurnOffHeal"/>
+        <EffectArray value="MadnessStructureTurnOffRemoveOn"/>
+        <EffectArray value="TrackerActiveSpawnerRemove"/>
+        <EffectArray value="TrackerCombatUnitRemove"/>
+    </CEffectSet>
+    <CEffectIssueOrder id="MadnessStructureTurnOffTriggerHandle">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Source"/>
+        <Abil value="MadnessStructureTurnOffTriggerHandle"/>
+        <Player Value="Source"/>
+    </CEffectIssueOrder>
+    <CEffectApplyBehavior id="MassHealAlreadyCasting" parent="AlreadyCasting"/>
+    <CEffectApplyBehavior id="MassHealAlreadyCastingNoWeapons" parent="AlreadyCastingNoWeapons"/>
+    <CEffectApplyBehavior id="MassHealBuff">
+        <EditorCategories value=""/>
+    </CEffectApplyBehavior>
+    <CEffectModifyUnit id="MassHealHeal">
+        <EditorCategories value=""/>
+        <VitalArray index="Shields">
+            <ChangeFraction value="0.065"/>
+        </VitalArray>
+    </CEffectModifyUnit>
+    <CEffectSet id="MassHealInitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="MassHealAlreadyCasting"/>
+        <EffectArray value="MassHealAlreadyCastingNoWeapons"/>
+        <EffectArray value="MassHealSearchActiveSpawner"/>
+        <EffectArray value="MassHealSearchCombatUnit"/>
+        <EffectArray value="MassHealSearchProbe"/>
+        <TargetLocationType value="Point"/>
+    </CEffectSet>
+    <CEffectCreatePersistent id="MassHealPersistent">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetUnit"/>
+        <PeriodCount value="10"/>
+        <PeriodicEffectArray value="MassHealSmallHeal"/>
+        <PeriodicPeriodArray value="0.175"/>
+    </CEffectCreatePersistent>
+    <CEffectEnumArea id="MassHealSearch">
+        <EditorCategories value=""/>
+        <SearchFilters value="-;Ally,Neutral,Enemy,Missile,Item,Dead,Hidden"/>
+        <AreaArray Radius="25" Effect="MassHealValidTargetSet"/>
+    </CEffectEnumArea>
+    <CEffectModifyUnit id="MassHealSmallHeal">
+        <EditorCategories value=""/>
+        <VitalArray index="Shields">
+            <ChangeFraction value="0.0034"/>
+        </VitalArray>
+    </CEffectModifyUnit>
+    <CEffectSet id="MassHealValidTargetSet">
+        <EditorCategories value=""/>
+        <EffectArray value="MassHealHeal"/>
+        <EffectArray value="MassHealBuff"/>
+    </CEffectSet>
+    <CEffectCreateHealer id="ProbeHeal">
+        <ValidatorArray value="MarkersLE3"/>
+        <ValidatorArray value="MadnessStructureNotOff"/>
+        <Marker>
+            <MatchFlags index="Link" value="1"/>
+        </Marker>
+        <RechargeVital value="Shields"/>
+        <RechargeVitalRate value="17.5"/>
+        <PeriodicValidator value="MadnessStructureNotOff"/>
+    </CEffectCreateHealer>
+    <CEffectCreateHealer id="MadnessHealer">
+        <ValidatorArray value="MarkersLE3"/>
+        <ValidatorArray value="MadnessStructureNotOff"/>
+        <Marker Link="Effect/ProbeHeal">
+            <MatchFlags index="Link" value="1"/>
+        </Marker>
+        <RechargeVital value="Shields"/>
+        <RechargeVitalRate value="20"/>
+        <PeriodicValidator value="MadnessStructureNotOff"/>
+    </CEffectCreateHealer>
+    <CEffectApplyBehavior id="ProbeHealCheckBuff">
+        <EditorCategories value=""/>
+    </CEffectApplyBehavior>
+    <CEffectDamage id="SentryTalonWeaponDmg" parent="DU_WEAP">
+        <EditorCategories value="Race:Protoss"/>
+        <Kind value="Ranged"/>
+        <Amount value="250"/>
+        <AreaArray Radius="0.75" Fraction="1"/>
+        <SearchFilters value="Visible;Self,Player,Ally,Neutral,Item,Dead,Hidden,Invulnerable"/>
+    </CEffectDamage>
+    <CEffectLaunchMissile id="SentryTalonWeaponMissile">
+        <EditorCategories value=""/>
+        <ImpactEffect value="SentryTalonWeaponDmg"/>
+        <AmmoUnit value="SentryTalonWeaponMissile"/>
+        <ImpactLocation Value="TargetPoint"/>
+    </CEffectLaunchMissile>
+    <CEffectCreateUnit id="SpawnerWarpInDefensive1">
+        <EditorCategories value=""/>
+        <SpawnEffect value="SpawnerWarpInSpawnSet"/>
+        <SpawnUnit value="ZealotTalon"/>
+    </CEffectCreateUnit>
+    <CEffectCreateUnit id="LongLifeDefensive2">
+        <EditorCategories value=""/>
+        <SpawnEffect value="LongLifePrecursorPersistentCombatUnit"/>
+        <SpawnUnit value="SentryTalon"/>
+    </CEffectCreateUnit>
+    <CEffectCreateUnit id="SpawnerWarpInDefensive2">
+        <EditorCategories value=""/>
+        <SpawnEffect value="SpawnerWarpInSpawnSet"/>
+        <SpawnUnit value="SentryTalon"/>
+    </CEffectCreateUnit>
+    <CEffectCreateUnit id="LongLifeDefensive1">
+        <EditorCategories value=""/>
+        <SpawnEffect value="LongLifePrecursorPersistentCombatUnit"/>
+        <SpawnUnit value="ZealotTalon"/>
+    </CEffectCreateUnit>
+    <CEffectCreateUnit id="SpawnerWarpInOffensive1">
+        <EditorCategories value=""/>
+        <SpawnEffect value="SpawnerWarpInSpawnSet"/>
+        <SpawnUnit value="ImmortalTalon"/>
+    </CEffectCreateUnit>
+    <CEffectCreateUnit id="LongLifeOffensive1">
+        <EditorCategories value=""/>
+        <SpawnEffect value="LongLifePrecursorPersistentCombatUnit"/>
+        <SpawnUnit value="ImmortalTalon"/>
+    </CEffectCreateUnit>
+    <CEffectCreateUnit id="LongLifeOffensive2">
+        <EditorCategories value=""/>
+        <SpawnEffect value="LongLifePrecursorPersistentCombatUnit"/>
+        <SpawnUnit value="StalkerTalon"/>
+    </CEffectCreateUnit>
+    <CEffectSet id="SpawnerWarpInSpawnSet">
+        <EditorCategories value=""/>
+        <EffectArray value="SpawnerWarpInTimedLife"/>
+        <EffectArray value="TrackerGetMadnessPointer"/>
+    </CEffectSet>
+    <CEffectCreateUnit id="SpawnerWarpInSupport1">
+        <EditorCategories value=""/>
+        <SpawnEffect value="SpawnerWarpInSpawnSet"/>
+        <SpawnUnit value="InterceptorTalon"/>
+    </CEffectCreateUnit>
+    <CEffectCreateUnit id="SpawnerWarpInOffensive2">
+        <EditorCategories value=""/>
+        <SpawnEffect value="SpawnerWarpInSpawnSet"/>
+        <SpawnUnit value="StalkerTalon"/>
+    </CEffectCreateUnit>
+    <CEffectCreateUnit id="LongLifeSupport1">
+        <EditorCategories value=""/>
+        <SpawnEffect value="LongLifePrecursorPersistentCombatUnit"/>
+        <SpawnUnit value="InterceptorTalon"/>
+    </CEffectCreateUnit>
+    <CEffectSwitch id="SpawnerWarpInSwitch">
+        <EditorCategories value=""/>
+        <CaseArray Validator="SpawnerWarpInDefensive1" Effect="SpawnerWarpInDefensive1"/>
+        <CaseArray Validator="SpawnerWarpInDefensive2" Effect="SpawnerWarpInDefensive2"/>
+        <CaseArray Validator="SpawnerWarpInOffensive1" Effect="SpawnerWarpInOffensive1"/>
+        <CaseArray Validator="SpawnerWarpInOffensive2" Effect="SpawnerWarpInOffensive2"/>
+        <CaseArray Validator="SpawnerWarpInSupport1" Effect="SpawnerWarpInSupport1"/>
+    </CEffectSwitch>
+    <CEffectSwitch id="LongLifeSwitch">
+        <EditorCategories value=""/>
+        <CaseArray Validator="SpawnerWarpInDefensive1" Effect="LongLifeDefensive1"/>
+        <CaseArray Validator="SpawnerWarpInDefensive2" Effect="LongLifeDefensive2"/>
+        <CaseArray Validator="SpawnerWarpInOffensive1" Effect="LongLifeOffensive1"/>
+        <CaseArray Validator="SpawnerWarpInOffensive2" Effect="LongLifeOffensive2"/>
+        <CaseArray Validator="SpawnerWarpInSupport1" Effect="LongLifeSupport1"/>
+    </CEffectSwitch>
+    <CEffectApplyBehavior id="SpawnerWarpInTimedLife">
+        <EditorCategories value=""/>
+    </CEffectApplyBehavior>
+    <CEffectDamage id="StalkerTalonWeaponDmg" parent="DU_WEAP_MISSILE">
+        <EditorCategories value="Race:Protoss"/>
+        <Amount value="250"/>
+    </CEffectDamage>
+    <CEffectApplyBehavior id="StructureTurnOnApplyOn">
+        <EditorCategories value=""/>
+        <Behavior value="MadnessStructureOn"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="StructureTurnOnOverboost">
+        <EditorCategories value=""/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="StructureTurnOnOverboostHeal">
+        <EditorCategories value=""/>
+    </CEffectApplyBehavior>
+    <CEffectRemoveBehavior id="MadnessStructureTurnOffOverboostRemove">
+        <EditorCategories value=""/>
+        <BehaviorLink value="StructureTurnOnOverboost"/>
+        <WhichUnit Value="Source"/>
+    </CEffectRemoveBehavior>
+    <CEffectSet id="StructureTurnOnOverboostSet">
+        <EditorCategories value=""/>
+        <EffectArray value="StructureTurnOnOverboost"/>
+        <EffectArray value="StructureTurnOnOverboostHeal"/>
+    </CEffectSet>
+    <CEffectRemoveBehavior id="StructureTurnOnRemoveOff">
+        <EditorCategories value=""/>
+        <BehaviorLink value="MadnessStructureOff"/>
+    </CEffectRemoveBehavior>
+    <CEffectSet id="StructureTurnOnSet">
+        <EditorCategories value=""/>
+        <EffectArray value="StructureTurnOnRemoveOff"/>
+        <EffectArray value="StructureTurnOnApplyOn"/>
+        <EffectArray value="TrackerStructureSwitch"/>
+        <EffectArray value="TrackerMadness"/>
+    </CEffectSet>
+    <CEffectSwitch id="StructureTurnOnSwitch">
+        <EditorCategories value=""/>
+        <CaseArray Validator="MadnessStructureOn" Effect="StructureTurnOnOverboostSet"/>
+        <CaseDefault value="StructureTurnOnSet"/>
+    </CEffectSwitch>
+    <CEffectDamage id="MadnessWeaponDmg" parent="DU_WEAP">
+        <EditorCategories value="Race:Protoss"/>
+        <Amount value="1400"/>
+        <Kind value="Ranged"/>
+        <AttributeFactor index="Armored" value="0.25"/>
+    </CEffectDamage>
+    <CEffectApplyBehavior id="TickTockAuraApply">
+        <EditorCategories value=""/>
+        <Behavior value="TickTockBuff"/>
+    </CEffectApplyBehavior>
+    <CEffectEnumArea id="TickTockAuraSearch">
+        <EditorCategories value=""/>
+        <ImpactLocation Value="SourceUnit"/>
+        <SearchFilters value="-;Neutral,Enemy,Missile,Item,Dead,Hidden"/>
+        <AreaArray Radius="7" Effect="TickTockAuraApply"/>
+    </CEffectEnumArea>
+    <CEffectAddTrackedUnit id="TrackerAddCombatUnitViaPointer">
+        <EditorCategories value=""/>
+        <BehaviorLink value="TrackerCombatUnits"/>
+        <TrackerUnit Value="Target"/>
+        <TrackedUnit Effect="TrackerGetMadnessPointer" Value="Target"/>
+    </CEffectAddTrackedUnit>
+    <CEffectAddTrackedUnit id="TrackerAddProbe">
+        <EditorCategories value=""/>
+        <BehaviorLink value="TrackerProbe"/>
+        <TrackedUnit Value="Target"/>
+    </CEffectAddTrackedUnit>
+    <CEffectAddTrackedUnit id="TrackerAddSpawner">
+        <EditorCategories value=""/>
+        <BehaviorLink value="TrackerActiveSpawner"/>
+        <TrackedUnit Value="Target"/>
+    </CEffectAddTrackedUnit>
+    <CEffectEnumTrackedUnits id="TrackerGetMadnessPointer">
+        <EditorCategories value=""/>
+        <BehaviorLink value="TrackerMadness"/>
+        <Effect value="TrackerAddCombatUnitViaPointer"/>
+    </CEffectEnumTrackedUnits>
+    <CEffectAddTrackedUnit id="TrackerMadness">
+        <EditorCategories value=""/>
+        <BehaviorLink value="TrackerMadness"/>
+        <TrackerUnit Value="Target"/>
+    </CEffectAddTrackedUnit>
+    <CEffectSwitch id="TrackerStructureSwitch">
+        <EditorCategories value=""/>
+        <CaseArray Validator="LongLifeTargetList" Effect="TrackerAddSpawner"/>
+        <CaseDefault value="TrackerAddCombatUnit"/>
+    </CEffectSwitch>
+    <CEffectApplyBehavior id="TurbochargeAlreadyCasting" parent="AlreadyCasting"/>
+    <CEffectApplyBehavior id="TurbochargeAlreadyCastingNoWeapons" parent="AlreadyCastingNoWeapons"/>
+    <CEffectApplyBehavior id="TurbochargeApply">
+        <EditorCategories value=""/>
+        <Behavior value="Turbocharged"/>
+    </CEffectApplyBehavior>
+    <CEffectSet id="TurbochargeInitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="TurbochargeAlreadyCasting"/>
+        <EffectArray value="TurbochargeAlreadyCastingNoWeapons"/>
+        <EffectArray value="TurbochargeSearchActiveSpawner"/>
+        <EffectArray value="TurbochargeSearchCombatUnit"/>
+        <EffectArray value="TurbochargeSearchProbe"/>
+        <TargetLocationType value="Point"/>
+    </CEffectSet>
+    <CEffectEnumArea id="TurbochargeSearch">
+        <EditorCategories value=""/>
+        <SearchFilters value="-;Self,Neutral,Enemy,Missile,Item,Dead,Hidden"/>
+        <AreaArray Radius="25" Effect="TurbochargeApply"/>
+    </CEffectEnumArea>
+    <CEffectEnumTrackedUnits id="TurbochargeSearchProbe">
+        <EditorCategories value=""/>
+        <BehaviorLink value="TrackerProbe"/>
+        <Effect value="TurbochargeApply"/>
+        <TrackedUnitFilters value="-;Dead,Hidden"/>
+    </CEffectEnumTrackedUnits>
+    <CEffectEnumTrackedUnits id="TurbochargeSearchCombatUnit">
+        <EditorCategories value=""/>
+        <BehaviorLink value="TrackerCombatUnits"/>
+        <Effect value="TurbochargeApply"/>
+        <TrackedUnitFilters value="-;Dead,Hidden"/>
+    </CEffectEnumTrackedUnits>
+    <CEffectEnumTrackedUnits id="TurbochargeSearchActiveSpawner">
+        <EditorCategories value=""/>
+        <BehaviorLink value="TrackerActiveSpawner"/>
+        <Effect value="TurbochargeApply"/>
+        <TrackedUnitFilters value="-;Dead,Hidden"/>
+    </CEffectEnumTrackedUnits>
+    <CEffectDamage id="ZealotTalonWeaponDmg" parent="DU_WEAP">
+        <ValidatorArray value="NotHidden"/>
+        <EditorCategories value="Race:Protoss"/>
+        <Amount value="250"/>
+    </CEffectDamage>
+    <CEffectCreatePersistent id="ZealotTalonWeaponPersistent">
+        <EditorCategories value="Race:Protoss"/>
+        <WhichLocation Value="TargetUnit"/>
+        <TimeScaleSource Value="Caster"/>
+        <Flags index="Channeled" value="1"/>
+        <PeriodCount value="2"/>
+        <PeriodicEffectArray value="ZealotTalonWeaponDmg"/>
+        <PeriodicPeriodArray value="0"/>
+        <PeriodicPeriodArray value="0.1"/>
+    </CEffectCreatePersistent>
+    <CAbilEffectTarget id="AngelwingCharge">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="AngelwingChargePersistent"/>
+        <Flags index="AutoCast" value="1"/>
+        <Flags index="AutoCastOn" value="1"/>
+        <Cost>
+            <Cooldown TimeStart="3" TimeUse="20"/>
+        </Cost>
+        <Range value="7"/>
+        <AutoCastFilters value="Visible;Self,Player,Ally,Neutral,Worker,Missile,Item,Dead,Hidden,Invulnerable,Summoned"/>
+        <AutoCastRange value="7"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="AngelwingCharge"/>
+        <CastOutroTime value="1"/>
+        <AutoCastValidatorArray value="BossAbilityRequirementLvl2"/>
+    </CAbilEffectTarget>
+    <CAbilEffectTarget id="CrystalwingShower">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="CrystalwingShowerPersistent"/>
+        <Flags index="AutoCast" value="1"/>
+        <Flags index="AutoCastOn" value="1"/>
+        <Range value="6"/>
+        <AutoCastFilters value="Visible;Self,Player,Ally,Neutral,Worker,Missile,Item,Dead,Hidden,Invulnerable,Summoned"/>
+        <AutoCastRange value="6"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="CrystalwingShower"/>
+        <Cost>
+            <Cooldown TimeStart="3" TimeUse="20"/>
+        </Cost>
+        <FinishTime value="3"/>
+        <AutoCastValidatorArray value="BossAbilityRequirementLvl2"/>
+    </CAbilEffectTarget>
+    <CAbilEffectInstant id="LongLife">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="LongLifeInitialSet"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="LongLife"/>
+        <Flags index="AutoCast" value="1"/>
+        <Flags index="AutoCastOn" value="1"/>
+        <AutoCastAcquireLevel value="Defensive"/>
+        <AutoCastFilters value="Visible;-"/>
+        <AutoCastRange value="15"/>
+        <AutoCastValidatorArray value="MadnessAtLeast2SpawnersActive"/>
+        <AutoCastValidatorArray value="NotAlreadyCasting"/>
+        <AutoCastValidatorArray value="EnemyWithin20"/>
+        <Cost>
+            <Cooldown TimeStart="10" TimeUse="20"/>
+        </Cost>
+    </CAbilEffectInstant>
+    <CAbilEffectTarget id="MadnessHealer">
+        <Alignment value="Positive"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Flags index="AutoCast" value="1"/>
+        <Flags index="AutoCastOn" value="1"/>
+        <TargetFilters value="Visible;Self,Enemy,Missile,Item,Stasis,UnderConstruction,Dead,Hidden"/>
+        <Range value="7"/>
+        <RangeSlop value="2"/>
+        <Arc value="360"/>
+        <ArcSlop value="360"/>
+        <AutoCastAcquireLevel value="Defensive"/>
+        <AutoCastFilters value="-;Neutral,Enemy"/>
+        <AutoCastRange value="7"/>
+        <AutoCastValidatorArray value="MarkersLE2"/>
+        <Marker Link="Abil/ProbeHeal"/>
+        <InheritAttackPriorityArray index="Prep" value="1"/>
+        <InheritAttackPriorityArray index="Cast" value="1"/>
+        <InheritAttackPriorityArray index="Channel" value="1"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="ProbeHeal"/>
+    </CAbilEffectTarget>
+    <CAbilEffectInstant id="MadnessStructureTurnOffTriggerHandle">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" removed="1"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="MadnessStructureTriggerHandle"/>
+    </CAbilEffectInstant>
+    <CAbilEffectInstant id="MassHeal">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="MassHealInitialSet"/>
+        <Cost>
+            <Cooldown TimeStart="2" TimeUse="15"/>
+        </Cost>
+        <CmdButtonArray index="Execute" DefaultButtonFace="MassHeal"/>
+        <Flags index="AutoCast" value="1"/>
+        <Flags index="AutoCastOn" value="1"/>
+        <AutoCastAcquireLevel value="Defensive"/>
+        <AutoCastRange value="13"/>
+        <AutoCastValidatorArray value="NotAlreadyCasting"/>
+        <AutoCastValidatorArray value="MassHealEnoughTargets"/>
+        <AutoCastValidatorArray value="EnemyWithin20"/>
+    </CAbilEffectInstant>
+    <CAbilEffectTarget id="ProbeHeal">
+        <Alignment value="Positive"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Flags index="AutoCast" value="1"/>
+        <Flags index="AutoCastOffOwnerLeave" value="1"/>
+        <Flags index="AutoCastOn" value="1"/>
+        <Flags index="BestUnit" value="0"/>
+        <Flags index="ReExecutable" value="1"/>
+        <Flags index="Smart" value="1"/>
+        <Flags index="PassengerAcquirePassengers" value="1"/>
+        <TargetFilters value="Visible;Self,Enemy,Missile,Item,Stasis,UnderConstruction,Dead,Hidden"/>
+        <Range value="1"/>
+        <RangeSlop value="0.2"/>
+        <AutoCastAcquireLevel value="Defensive"/>
+        <AutoCastFilters value="-;Neutral,Enemy"/>
+        <AutoCastRange value="5"/>
+        <AutoCastValidatorArray value="MarkersLE2"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="ProbeHeal">
+            <Flags index="ToSelection" value="1"/>
+        </CmdButtonArray>
+    </CAbilEffectTarget>
+    <CAbilEffectTarget id="StructureTurnOn">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="StructureTurnOnSwitch"/>
+        <Flags index="Transient" value="1"/>
+        <Range value="50"/>
+        <Arc value="360"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="StructureTurnOn"/>
+    </CAbilEffectTarget>
+    <CAbilEffectInstant id="Turbocharge">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="TurbochargeInitialSet"/>
+        <Flags index="AutoCast" value="1"/>
+        <Flags index="AutoCastOn" value="1"/>
+        <AutoCastAcquireLevel value="Defensive"/>
+        <AutoCastRange value="15"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="Turbocharge"/>
+        <Cost>
+            <Cooldown TimeStart="7" TimeUse="25"/>
+        </Cost>
+        <AutoCastValidatorArray value="NotAlreadyCasting"/>
+        <AutoCastValidatorArray value="TurbochargeEnoughTargets"/>
+        <AutoCastValidatorArray value="EnemyWithin20"/>
+    </CAbilEffectInstant>
+    <CAbilEffectInstant id="SpawnerWarpIn">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="SpawnerWarpInSwitch"/>
+        <Flags index="AutoCast" value="1"/>
+        <Flags index="AutoCastOn" value="1"/>
+        <Cost>
+            <Charge Link="Abil/WarpIn"/>
+            <Cooldown Link="Abil/WarpIn" TimeStart="6" TimeUse="7"/>
+        </Cost>
+        <Arc value="360"/>
+        <AutoCastAcquireLevel value="Defensive"/>
+        <AutoCastRange value="500"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="SpawnerWarpIn"/>
+    </CAbilEffectInstant>
+    <CActorModel id="CrystalwingShowerSplat" parent="ModelAnimationStyleContinuous">
+        <EditorCategories value=""/>
+        <On Terms="Effect.CrystalwingShowerPersistent.Start" Send="Create"/>
+        <On Terms="Effect.CrystalwingShowerPersistent.Stop" Send="Destroy"/>
+        <On Terms="ActorCreation" Send="SetTintColor 255,0,255"/>
+        <ModelFlags index="AutomateGlobalLoops" value="1"/>
+        <VisibleTo index="All" value="1"/>
+        <FogVisibility value="Visible"/>
+    </CActorModel>
+    <CActorUnit id="AdeptTalon" parent="GenericUnitStandard" unitName="AdeptTalon">
+        <Aliases value="_UnitSmall"/>
+        <Macros value="PhysicsDeathsSwarmGround"/>
+        <Macros value="PhysicsDeathsVoidGround"/>
+        <Macros value="TerrainSquibAnimations"/>
+        <On Terms="UnitHeightUpdate.*.Land" Send="Create Adept_Land"/>
+        <On Terms="UnitHeightUpdate.*.Land" Send="Create Templar_LandSweetener"/>
+        <On Terms="TimerExpired; TimerName Color" Send="SetTeamColor 128,255,128 255,0,128"/>
+        <On Terms="ActorCreation" Send="TimerSet 0.000000 Color"/>
+        <On Terms="Abil.AngelwingCharge.SourceChannelStart" Send="AnimBracketStart AbilityUse Cover,Start Cover Cover,End"/>
+        <On Terms="Behavior.AngelwingChargeBuff.Off" Send="AnimBracketStop AbilityUse"/>
+        <On Terms="Abil.AngelwingCharge.SourceChannelStart" Send="AnimBaselineStop"/>
+        <On Terms="AnimBracketStop; AnimName AbilityUse" Send="AnimBaselineStart"/>
+        <Model value="Talon_Kahlani"/>
+        <Scale value="0.900000"/>
+        <AnimBlendTime value="0.200000"/>
+        <ModelFlags index="OutlineEmitter" value="1"/>
+        <BuildModel value="AdeptWarpIn"/>
+        <DeathArray index="Normal" ModelLink="Adept_Taldarim_Collection_Death" SoundLink="Adept_DeathFX"/>
+        <PlacementModel value="AdeptPlacement"/>
+        <PlacementSound value="Protoss_BuildingPlacementSmall"/>
+        <PortraitModel value="Talon_Kahlani_Portrait"/>
+        <TerrainSquibs>
+            <MovementDistance value="0.150000,0.150000"/>
+            <IdlePeriod value="0.100000,0.250000"/>
+            <RangeUp value="0.600000"/>
+            <RangeDown value="0.600000"/>
+            <AttachQuery Methods="AMFilterCenter"/>
+            <Visuals TerrainPhysicsMaterial="Water" ActorModel="TerrainSquibHarnessContinuous" ModelLink="WaterRippleMedium"/>
+        </TerrainSquibs>
+        <WalkAnimMoveSpeed value="2.5"/>
+        <BarOffset value="60"/>
+        <BarWidth value="54"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\wireframe-collection-adept-collectoredition.dds"/>
+        </GroupIcon>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-protoss-groundarmorlevel0.dds"/>
+        <SoundArray index="Ready" value="Adept_Ready"/>
+        <SoundArray index="Help" value="Adept_Help"/>
+        <SoundArray index="What" value="Adept_What"/>
+        <SoundArray index="Yes" value="Adept_Yes"/>
+        <SoundArray index="Attack" value="Adept_Attack"/>
+        <SoundArray index="Pissed" value="Adept_Pissed"/>
+        <UnitIcon value="Assets\Textures\btn-unit-collection-adept-collectoredition.dds"/>
+        <Wireframe>
+            <Image value="Assets\Wireframes\Talon_Kahlani\wireframe-protoss-talon-kahlani.dds"/>
+        </Wireframe>
+        <WireframeShield>
+            <Image value="Assets\Wireframes\Talon_Kahlani\wireframe-protoss-talon-kahlani-shield01.dds"/>
+            <Image value="Assets\Wireframes\Talon_Kahlani\wireframe-protoss-talon-kahlani-shield02.dds"/>
+            <Image value="Assets\Wireframes\Talon_Kahlani\wireframe-protoss-talon-kahlani-shield03.dds"/>
+        </WireframeShield>
+    </CActorUnit>
+    <CActorAction id="AdeptTalonAttack" parent="GenericAttack" effectAttack="AdeptTalonWeaponDmg">
+        <EditorCategories value=""/>
+    </CActorAction>
+    <CActorQuad id="AngelwingChargeQuad" parent="GuideVisualQuadDown">
+        <Filter index="All" value="1"/>
+        <EditorCategories value=""/>
+        <On index="0" Terms="Abil.Guide" Send="Create"/>
+        <On Terms="Effect.AngelwingChargePersistent.Start" Send="Create"/>
+        <On Terms="ActorCreation" Send="TimerSet 1.500000 KillDelay"/>
+        <On Terms="TimerExpired; TimerName KillDelay" Send="Destroy"/>
+        <LaunchActor value="ZergGuideVisualQuadLaunch"/>
+        <CenterActor value="ZergGuideVisualQuadCenter"/>
+        <ImpactActor value="ZergGuideVisualQuadImpact"/>
+        <Height value="7.500000"/>
+        <Width value="1.500000"/>
+        <HostImpactSiteOps Ops="SOpTargetPointStationary"/>
+        <VisibleTo index="All" value="1"/>
+        <FogVisibility value="Visible"/>
+    </CActorQuad>
+    <CActorAction id="CrystalwingShowerAction" parent="GenericAttack" effectImpact="CrystalwingShowerDmg" effectLaunch="CrystalwingShowerMissile">
+        <EditorCategories value=""/>
+        <LaunchSiteOps Ops="SOpTargetPointStationary CrystalwingShowerOffset"/>
+        <Missile value="HighTemplarCrystalwingTalonAttackMissile"/>
+        <FogVisibility value="Visible"/>
+    </CActorAction>
+    <CActorModel id="CrystalwingShowerImpact" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On Terms="Effect.CrystalwingShowerDmg.Start" Send="Create"/>
+        <On Terms="ActorCreation" Send="SetTintColor 255,0,255"/>
+        <FogVisibility value="Visible"/>
+    </CActorModel>
+    <CActorModel id="FinalWillMadnessExplodeDelay" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On index="0" Terms="ActorCreation" Send="AnimBracketStart BSD Birth Stand,Gather Death"/>
+        <On Terms="Effect.FinalWillMadnessExplodeDelay.Start" Send="Create"/>
+        <On Terms="Effect.FinalWillMadnessExplodeDelay.Stop" Send="Destroy"/>
+        <On Terms="ActorCreation" Send="SetTintColor 255,0,0 2.000000"/>
+        <Model value="EvilProbe"/>
+    </CActorModel>
+    <CActorModel id="FinalWillMadnessExplosion" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On Terms="Effect.FinalWillMadnessExplode.Start" Send="Create"/>
+        <Model value="FinalWillExplode"/>
+        <Scale value="2.000000"/>
+    </CActorModel>
+    <CActorModel id="FinalWillProbeExplosion" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On Terms="Effect.FinalWillProbeExplode.Start" Send="Create"/>
+        <Model value="FinalWillExplode"/>
+    </CActorModel>
+    <CActorUnit id="HighTemplarCrystalwingTalon" parent="GenericUnitStandard" unitName="HighTemplarCrystalwingTalon">
+        <Aliases value="_UnitSmall"/>
+        <Macros value="PhysicsDeathsSwarmGround"/>
+        <Macros value="PhysicsDeathsVoidGround"/>
+        <On index="0" Send="Create SoundEmitter HighTemplar_Ambience"/>
+        <On Terms="TimerExpired; TimerName Color" Send="SetTeamColor 128,255,128 255,0,128"/>
+        <On Terms="ActorCreation" Send="TimerSet 0.000000 Color"/>
+        <On Terms="Abil.CrystalwingShower.SourceChannelStart" Send="AnimBracketStart AbilityUse Attack Attack Attack"/>
+        <On Terms="Abil.CrystalwingShower.SourceFinishStop" Send="AnimBracketStop AbilityUse"/>
+        <Model value="Talon_Crystalwing"/>
+        <AnimBlendTime value="0.450000"/>
+        <ModelFlags index="OutlineEmitter" value="1"/>
+        <BuildModel value="HighTemplarWarpIn"/>
+        <DeathArray index="Normal" ModelLink="ProtossSmallUnitDeath" SoundLink="HighTemplar_DeathFX" VoiceLink="HighTemplarDeathVoice"/>
+        <PlacementModel value="HighTemplarPlacement"/>
+        <PlacementSound value="Protoss_BuildingPlacementSmall"/>
+        <PortraitModel value="Talon_Crystalwing_Portrait"/>
+        <WalkAnimMoveSpeed value="2.25"/>
+        <BarOffset value="90"/>
+        <BarWidth value="54"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-Protoss-HighTemplar.dds"/>
+        </GroupIcon>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-protoss-groundarmorlevel0.dds"/>
+        <SoundArray index="Birth" value="HighTemplar_Birth"/>
+        <SoundArray index="Ready" value="HighTemplarVoid_Ready"/>
+        <SoundArray index="Help" value="HighTemplarVoid_Help"/>
+        <SoundArray index="What" value="HighTemplarVoid_What"/>
+        <SoundArray index="Yes" value="HighTemplarVoid_Yes"/>
+        <SoundArray index="Attack" value="HighTemplarVoid_Attack"/>
+        <SoundArray index="Pissed" value="HighTemplarVoid_Pissed"/>
+        <SoundArray index="Movement" value="HighTemplar_Movement"/>
+        <SoundArray index="Turning" value="HighTemplar_Turning"/>
+        <SoundArray index="Board" value="HighTemplar_Board"/>
+        <SoundArray index="Click" value="HighTemplar_Click"/>
+        <SoundArray index="ClickError" value="HighTemplar_ClickError"/>
+        <SoundArray index="Highlight" value="HighTemplar_Highlight"/>
+        <UnitIcon value="Assets\Textures\btn-unit-protoss-hightemplar.dds"/>
+        <Wireframe>
+            <Image value="Assets\Wireframes\Talon_Crystalwing\wireframe-protoss-talon-Crystalwing.dds"/>
+        </Wireframe>
+        <WireframeShield>
+            <Image value="Assets\Wireframes\Talon_Crystalwing\wireframe-protoss-talon-Crystalwing-shield01.dds"/>
+            <Image value="Assets\Wireframes\Talon_Crystalwing\wireframe-protoss-talon-Crystalwing-shield02.dds"/>
+            <Image value="Assets\Wireframes\Talon_Crystalwing\wireframe-protoss-talon-Crystalwing-shield03.dds"/>
+        </WireframeShield>
+    </CActorUnit>
+    <CActorUnit id="HighTemplarTalon" parent="GenericUnitStandard" unitName="HighTemplarTalon">
+        <Aliases value="_UnitSmall"/>
+        <Macros value="PhysicsDeathsSwarmGround"/>
+        <Macros value="PhysicsDeathsVoidGround"/>
+        <On index="0" Send="Create SoundEmitter HighTemplar_Ambience"/>
+        <On Terms="TimerExpired; TimerName Color" Send="SetTeamColor 128,255,128 255,0,128"/>
+        <On Terms="ActorCreation" Send="TimerSet 0.000000 Color"/>
+        <Model value="Talon_Nokryss"/>
+        <AnimBlendTime value="0.450000"/>
+        <ModelFlags index="OutlineEmitter" value="1"/>
+        <EventDataFootprint index="0" Actor="UnitFootprint" Model="HighTemplarFootprint"/>
+        <BuildModel value="HighTemplarWarpIn"/>
+        <DeathArray index="Normal" ModelLink="ProtossSmallUnitDeath" SoundLink="HighTemplar_DeathFX" VoiceLink="HighTemplarDeathVoice"/>
+        <PlacementModel value="HighTemplarPlacement"/>
+        <PlacementSound value="Protoss_BuildingPlacementSmall"/>
+        <PortraitModel value="Talon_Nokryss_Portrait"/>
+        <WalkAnimMoveSpeed value="2.25"/>
+        <BarOffset value="70"/>
+        <BarWidth value="54"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-Protoss-HighTemplar.dds"/>
+        </GroupIcon>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-protoss-groundarmorlevel0.dds"/>
+        <SoundArray index="Birth" value="HighTemplar_Birth"/>
+        <SoundArray index="Ready" value="HighTemplarVoid_Ready"/>
+        <SoundArray index="Help" value="HighTemplarVoid_Help"/>
+        <SoundArray index="What" value="HighTemplarVoid_What"/>
+        <SoundArray index="Yes" value="HighTemplarVoid_Yes"/>
+        <SoundArray index="Attack" value="HighTemplarVoid_Attack"/>
+        <SoundArray index="Pissed" value="HighTemplarVoid_Pissed"/>
+        <SoundArray index="Movement" value="HighTemplar_Movement"/>
+        <SoundArray index="Turning" value="HighTemplar_Turning"/>
+        <SoundArray index="Board" value="HighTemplar_Board"/>
+        <SoundArray index="Click" value="HighTemplar_Click"/>
+        <SoundArray index="ClickError" value="HighTemplar_ClickError"/>
+        <SoundArray index="Highlight" value="HighTemplar_Highlight"/>
+        <UnitIcon value="Assets\Textures\btn-unit-protoss-hightemplar.dds"/>
+        <Wireframe>
+            <Image value="Assets\Wireframes\Talon_nokryss\wireframe-protoss-talon-nokryss.dds"/>
+        </Wireframe>
+        <WireframeShield>
+            <Image value="Assets\Wireframes\Talon_nokryss\wireframe-protoss-talon-nokryss-shield01.dds"/>
+            <Image value="Assets\Wireframes\Talon_nokryss\wireframe-protoss-talon-nokryss-shield02.dds"/>
+            <Image value="Assets\Wireframes\Talon_nokryss\wireframe-protoss-talon-nokryss-shield03.dds"/>
+        </WireframeShield>
+    </CActorUnit>
+    <CActorAction id="HighTemplarCrystalwingTalonAttack" parent="GenericAttack" effectImpact="HighTemplarCrystalwingTalonWeaponDmg" effectLaunch="HighTemplarCrystalwingTalonWeaponLaunchMissile">
+        <LaunchSiteOps Ops="SOpAttachCenter SOpMoveByDot15"/>
+        <LaunchAssets Sound="Ascendant_Launch"/>
+        <ImpactMap index="None" Model="HighTemplarAttackImpact" Sound="Ascendant_Impact"/>
+        <ImpactPhysics Name="HighTemplarPsiBlastImpact" MatchKeys="Basic" Physics="HighTemplarPsiBlastDeathImpactForce"/>
+    </CActorAction>
+    <CActorAction id="HighTemplarTalonAttack" parent="GenericAttack" effectImpact="HighTemplarTalonWeaponDmg" effectLaunch="HighTemplarTalonWeaponLaunchMissile">
+        <LaunchSiteOps Ops="SOpAttachCenter SOpMoveByDot15"/>
+        <LaunchAssets Sound="Ascendant_Launch"/>
+        <ImpactMap index="None" Model="HighTemplarAttackImpact" Sound="Ascendant_Impact"/>
+        <ImpactPhysics Name="HighTemplarPsiBlastImpact" MatchKeys="Basic" Physics="HighTemplarPsiBlastDeathImpactForce"/>
+    </CActorAction>
+    <CActorMissile id="HighTemplarCrystalwingTalonAttackMissile" parent="GenericAttackMissile" unitName="HighTemplarCrystalwingTalonMissile"/>
+    <CActorMissile id="HighTemplarTalonAttackMissile" parent="GenericAttackMissile" unitName="HighTemplarTalonMissile"/>
+    <CActorUnit id="InterceptorTalon" parent="GenericUnitStandard" unitName="InterceptorTalon">
+        <Aliases value="_UnitSmall"/>
+        <Macros value="PhysicsDeathsSwarmAir"/>
+        <Macros value="PhysicsDeathsVoidAir"/>
+        <On Terms="UnitHeightUpdate.*.Land" Send="Create Adept_Land"/>
+        <On Terms="UnitHeightUpdate.*.Land" Send="Create Templar_LandSweetener"/>
+        <On Terms="TimerExpired; TimerName Color" Send="SetTeamColor 128,255,128 255,0,128"/>
+        <On Terms="ActorCreation" Send="TimerSet 0.000000 Color"/>
+        <Model value="Talon_Pacifier"/>
+        <Scale value="0.900000"/>
+        <AnimBlendTime value="0.200000"/>
+        <ModelFlags index="OutlineEmitter" value="1"/>
+        <BuildModel value="AdeptWarpIn"/>
+        <DeathArray index="Normal" ModelLink="Adept_Taldarim_Collection_Death" SoundLink="Adept_DeathFX"/>
+        <PhysicsMatchKeysOrdered value="BasicAir,Basic"/>
+        <PlacementModel value="AdeptPlacement"/>
+        <PlacementSound value="Protoss_BuildingPlacementSmall"/>
+        <PortraitModel value="Talon_Pacifier_Portrait"/>
+        <TerrainSquibs>
+            <MovementDistance value="0.150000,0.150000"/>
+            <IdlePeriod value="0.100000,0.250000"/>
+            <RangeUp value="0.600000"/>
+            <RangeDown value="0.600000"/>
+            <AttachQuery Methods="AMFilterCenter"/>
+            <Visuals TerrainPhysicsMaterial="Water" ActorModel="TerrainSquibHarnessContinuous" ModelLink="WaterRippleMedium"/>
+        </TerrainSquibs>
+        <WalkAnimMoveSpeed value="2.5"/>
+        <BarOffset value="60"/>
+        <BarWidth value="42"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\wireframe-collection-adept-collectoredition.dds"/>
+        </GroupIcon>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-protoss-groundarmorlevel0.dds"/>
+        <SoundArray index="Ready" value="Adept_Ready"/>
+        <SoundArray index="Help" value="Adept_Help"/>
+        <SoundArray index="What" value="Adept_What"/>
+        <SoundArray index="Yes" value="Adept_Yes"/>
+        <SoundArray index="Attack" value="Adept_Attack"/>
+        <SoundArray index="Pissed" value="Adept_Pissed"/>
+        <UnitIcon value="Assets\Textures\btn-unit-collection-adept-collectoredition.dds"/>
+        <Wireframe>
+            <Image value="Assets\Wireframes\Talon_pacifier\wireframe-protoss-talon-pacifier.dds"/>
+        </Wireframe>
+        <WireframeShield>
+            <Image value="Assets\Wireframes\Talon_Pacifier\wireframe-protoss-talon-pacifier-shields01.dds"/>
+            <Image value="Assets\Wireframes\Talon_pacifier\wireframe-protoss-talon-pacifier-shields02.dds"/>
+            <Image value="Assets\Wireframes\Talon_pacifier\wireframe-protoss-talon-pacifier-shields03.dds"/>
+        </WireframeShield>
+    </CActorUnit>
+    <CActorUnit id="ImmortalTalon" parent="GenericUnitStandard" unitName="ImmortalTalon">
+        <Aliases value="_UnitLarge"/>
+        <Macros value="TerrainSquibAnimations"/>
+        <Macros value="PhysicsDeathsSwarmGround"/>
+        <Macros value="PhysicsDeathsVoidGround"/>
+        <On index="0" Send="Create SoundEmitter Immortal_Ambience"/>
+        <On index="65" Terms="WeaponStart.*.AttackStart; WeaponTargetElevation GE 20.000000" Send="AnimBracketStart Attack Attack,Superior"/>
+        <On index="66" Terms="WeaponStart.*.AttackStart; WeaponTargetElevation LE -20.000000" Send="AnimBracketStart Attack Attack,Inferior"/>
+        <On index="67" Terms="WeaponStart.*.AttackStart" Send="AnimBracketStart Attack Attack"/>
+        <On index="68" Terms="WeaponStop.*.AttackStop" Send="AnimBracketStop Attack"/>
+        <On Terms="TimerExpired; TimerName Color" Send="SetTeamColor 128,255,128 255,0,128"/>
+        <On Terms="ActorCreation" Send="TimerSet 0.000000 Color"/>
+        <Model value="Talon_CrusadorRoyal"/>
+        <Scale value="0.850000"/>
+        <ModelFlags index="OutlineEmitter" value="1"/>
+        <EventDataFootprint index="0" Actor="UnitFootprint" Model="ImmortalFootprint"/>
+        <BuildModel value="ImmortalWarpIn"/>
+        <DeathArray index="Normal" ModelLink="Immortal_Taldarim_Collection_Death" SoundLink="ImmortalDeath" VoiceLink="ImmortalDeathVoice"/>
+        <PlacementModel value="ImmortalPlacement"/>
+        <PlacementSound value="Protoss_BuildingPlacementSmall"/>
+        <PortraitModel value="Talon_CrusadorRoyal_Portrait"/>
+        <TerrainSquibs>
+            <MovementDistance value="0.150000,0.150000"/>
+            <IdlePeriod value="0.100000,0.250000"/>
+            <RangeUp value="0.600000"/>
+            <RangeDown value="1.000000"/>
+            <AttachQuery Methods="AMFilterCenter"/>
+            <Visuals TerrainPhysicsMaterial="Water" ActorModel="TerrainSquibHarnessContinuous" ModelLink="WaterRippleImmortal"/>
+        </TerrainSquibs>
+        <WalkAnimMoveSpeed value="1.25"/>
+        <BarOffset value="80"/>
+        <BarWidth value="90"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-Protoss-Immortal.dds"/>
+        </GroupIcon>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-protoss-groundarmorlevel0.dds"/>
+        <SoundArray index="Birth" value="Immortal_Birth"/>
+        <SoundArray index="Ready" value="Immortal_Ready"/>
+        <SoundArray index="Help" value="Immortal_Help"/>
+        <SoundArray index="What" value="Immortal_What"/>
+        <SoundArray index="Yes" value="ImmortalVoid_Yes"/>
+        <SoundArray index="Attack" value="Immortal_Attack"/>
+        <SoundArray index="Pissed" value="ImmortalVoid_Pissed"/>
+        <SoundArray index="Movement" value="Immortal_Movement"/>
+        <SoundArray index="Turning" value="Immortal_Turning"/>
+        <SoundArray index="Board" value="Immortal_Board"/>
+        <SoundArray index="Click" value="Immortal_Click"/>
+        <SoundArray index="ClickError" value="Immortal_ClickError"/>
+        <SoundArray index="Highlight" value="Immortal_Highlight"/>
+        <UnitIcon value="Assets\Textures\BTN-Unit-Protoss-Immortal.dds"/>
+        <Wireframe>
+            <Image value="Assets\Wireframes\Talon_CrusadorRoyal\wireframe-protoss-talon-crusader-royal.dds"/>
+        </Wireframe>
+        <WireframeShield>
+            <Image value="Assets\Wireframes\Talon_CrusadorRoyal\wireframe-protoss-talon-crusader-royal-shield01.dds"/>
+            <Image value="Assets\Wireframes\Talon_CrusadorRoyal\wireframe-protoss-talon-crusader-royal-shield02.dds"/>
+            <Image value="Assets\Wireframes\Talon_CrusadorRoyal\wireframe-protoss-talon-crusader-royal-shield03.dds"/>
+        </WireframeShield>
+    </CActorUnit>
+    <CActorAction id="ImmortalTalonAttack" parent="GenericAttack" effectAttack="ImmortalTalonWeaponDmg">
+        <LaunchAttachQuery Methods="AMFilterWeaponLeft"/>
+        <LaunchAssets Model="ImmortalAttackLaunch" Sound="Immortal_AttackLaunch"/>
+        <ContainerAssets Model="PhaseDisruptorsBunkerAttackLaunch" Sound="PhaseDisruptorsBunkerAttackLaunch"/>
+        <Beam value="ImmortalAttackBeam"/>
+        <Missile value="ImmortalAttackMissile"/>
+        <ImpactMap index="None" Model="ImmortalAttackImpact" Sound="Immortal_AttackImpact" ModelReaction="ImmortalAttackImpactReaction"/>
+        <ImpactMap index="Shield" Sound="ImmortalAttackImpactShield" ModelReaction="ImmortalAttackImpactReactionShield"/>
+        <ImpactPhysics Name="PhaseDisrupterImpact" MatchKeys="Basic" Physics="ImmortalAttackDeathForce"/>
+        <DamageMap index="None" Model="ImmortalAttackDamage" Sound="ImmortalAttackDamage" ModelReaction="ImmortalAttackDamageReaction"/>
+        <DamageMap index="Shield" Sound="ImmortalAttackDamageShield" ModelReaction="ImmortalAttackDamageReactionShield"/>
+    </CActorAction>
+    <CActorAction id="InterceptorTalonAttack" parent="GenericAttack" effectAttack="InterceptorTalonWeaponDmg">
+        <EditorCategories value=""/>
+        <Beam value="InterceptorTalonBeam"/>
+    </CActorAction>
+    <CActorBeamSimple id="InterceptorTalonBeam" parent="BeamSimpleAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <Model value="StalkerTalonWeaponBeam"/>
+    </CActorBeamSimple>
+    <CActorBeamSimple id="LongLifeCastBeam" parent="GenericAttackBeam">
+        <EditorCategories value=""/>
+        <On Terms="ActorCreation" Send="SetTintColor 255,0,255"/>
+        <HostLaunch Subject="_Unit" Scope="Caster"/>
+        <HostLaunchSiteOps Ops="SOpAttachOverhead"/>
+        <HostImpact Subject="_Unit" Scope="Target"/>
+        <HostImpactSiteOps Ops="SOpAttachCenter"/>
+        <VisibleTo index="All" value="1"/>
+        <FogVisibility value="Visible"/>
+    </CActorBeamSimple>
+    <CActorAction id="LongLifeCastBeamAction" parent="GenericAttack" effectAttack="LongLifeBeamDummyEffect">
+        <EditorCategories value=""/>
+        <Beam value="LongLifeCastBeam"/>
+    </CActorAction>
+    <CActorModel id="LongLifeSpawn" parent="ModelAnimationStyleOneShot">
+        <AcceptedHostedPropTransfers index="CloakEffect" value="0"/>
+        <AcceptedHostedPropTransfers index="Visibility" value="0"/>
+        <EditorCategories value=""/>
+        <On Terms="ActorCreation" Send="SetTintColor 128,0,255"/>
+        <On Terms="Effect.LongLifePrecursorPersistentCombatUnit.Start" Send="Create"/>
+        <On Terms="Effect.LongLifePrecursorPersistentProbe.Start" Send="Create"/>
+        <VisibleTo index="All" value="1"/>
+        <FogVisibility value="Visible"/>
+    </CActorModel>
+    <CActorSimple id="FinalWillProbeTint">
+        <Aliases value="_AngryTinter"/>
+        <On Terms="Behavior.FinalWillProbeExplodeDelay.On" Send="Create"/>
+        <On Terms="ActorCreation" Target="_Unit" Send="SetTintColor 255,0,0 2.000000 OneShot SeekerTarget"/>
+    </CActorSimple>
+    <CActorBeamSimple id="MadnessHealerBeam" parent="BeamSimpleAnimationStyleContinuous">
+        <EditorCategories value=""/>
+        <On Terms="Effect.MadnessHealer.TargetStart" Send="Create"/>
+        <On Terms="Effect.MadnessHealer.TargetStop" Send="Destroy"/>
+        <On Terms="ActorCreation" Send="SetTintColor 255,0,255"/>
+        <HostLaunch Subject="_Unit" Scope="Caster" Actor="Find"/>
+        <HostLaunchSiteOps Ops="SOpAttachTarget2"/>
+        <HostImpact Subject="_Unit" Scope="Target" Actor="Find"/>
+        <HostImpactSiteOps Ops="SOpAttachCenter"/>
+        <HostForProps Subject="_Unit" Scope="Caster" Actor="Find"/>
+        <Host Subject="_Unit" Scope="Caster" Actor="Find"/>
+        <ModelFlags index="AutomateGlobalLoops" value="1"/>
+        <VisibleTo index="All" value="1"/>
+        <FogVisibility value="Visible"/>
+    </CActorBeamSimple>
+    <CActorUnit id="MadnessSpawnerSupport" parent="GenericUnitBase" unitName="MadnessSpawnerSupport">
+        <Aliases value="_CreepEngulfable"/>
+        <Aliases value="_UnitLarge"/>
+        <Macros value="BuildingFlattenTerrainMacro"/>
+        <EditorCategories value=""/>
+        <On Terms="TimerExpired; TimerName Color" Send="SetTeamColor 128,255,128 255,0,128"/>
+        <On Terms="ActorCreation" Send="TimerSet 0.000000 Color"/>
+        <On Terms="TimerExpired; TimerName Color" Send="AnimBracketStart Unpowered Stand,Unpowered,Start Stand,Unpowered Stand,Unpowered,End"/>
+        <On Terms="Behavior.MadnessStructureOn.On" Send="AnimBracketStop Unpowered"/>
+        <On Terms="AnimBracketStop; AnimName Unpowered" Send="AnimBracketStart Powered Stand,Work,Start Stand,Work Stand,Work,End"/>
+        <On Terms="Behavior.MadnessStructureOff.On" Send="AnimBracketStop Powered"/>
+        <On Terms="AnimBracketStop; AnimName Powered" Send="AnimBracketStart Unpowered Stand,Unpowered,Start Stand,Unpowered Stand,Unpowered,End"/>
+        <On Terms="Behavior.MadnessStructureOff.On" Send="SetShowStatusBar"/>
+        <On Terms="Behavior.MadnessStructureOff.Off" Send="SetShowStatusBar 1"/>
+        <Model value="SpawnerSupport1"/>
+        <AnimBlendTime value="0.750000"/>
+        <ModelFlags index="OutlineOccluder" value="1"/>
+        <CreepHeightClass value="Medium"/>
+        <CreepRateGrow value="Grow"/>
+        <CreepRateShrink value="Shrink"/>
+        <BuildModel value="SpawnerSupport1"/>
+        <DeathArray index="Normal" ModelLink="ProtossBuildingDeath"/>
+        <PlacementModel value="SpawnerSupport1"/>
+        <PortraitModel value="ProtossPortraitTalon"/>
+        <BarWidth value="135"/>
+        <LifeArmorIcon value="Assets\Textures\btn-armor-protoss-buildingplating.dds"/>
+        <Wireframe>
+            <Image value="Assets\Wireframes\Talon_stargate\Wireframe-protoss-talon-stargate.dds"/>
+        </Wireframe>
+        <WireframeShield>
+            <Image value="Assets\Wireframes\Talon_stargate\Wireframe-protoss-talon-stargate-shield1.dds"/>
+            <Image value="Assets\Wireframes\Talon_stargate\Wireframe-protoss-talon-stargate-shield2.dds"/>
+            <Image value="Assets\Wireframes\Talon_stargate\Wireframe-protoss-talon-stargate-shield3.dds"/>
+        </WireframeShield>
+    </CActorUnit>
+    <CActorModel id="MassHealCast" parent="ModelAnimationStyleContinuous">
+        <Inherits index="Scale" value="1"/>
+        <EditorCategories value=""/>
+        <On Terms="Effect.MassHealInitialSet.Start" Send="Create"/>
+        <On Terms="ActorCreation" Send="TimerSet 4.000000 KillDelay"/>
+        <On Terms="TimerExpired; TimerName KillDelay" Send="Destroy"/>
+        <On Terms="ActorCreation" Send="SetTintColor 255,0,255"/>
+        <Host Subject="_Unit" Scope="Caster"/>
+        <HostSiteOps Ops="SOpAttachCenter"/>
+        <FogVisibility value="Visible"/>
+    </CActorModel>
+    <CActorModel id="MassHealImpact" parent="ModelAddition">
+        <EditorCategories value=""/>
+        <On Terms="Behavior.MassHealBuff.On" Send="Create"/>
+        <On Terms="Behavior.MassHealBuff.Off" Send="AnimBracketStop BSD"/>
+        <HostSiteOps Ops="SOpAttachOverhead"/>
+    </CActorModel>
+    <CActorUnit id="ProbeTalon" parent="GenericUnitStandard" unitName="ProbeTalon">
+        <Aliases value="_UnitSmall"/>
+        <Macros value="PhysicsDeathsSwarmGround"/>
+        <Macros value="PhysicsDeathsVoidGround"/>
+        <On index="0" Send="Create SoundEmitter Probe_Ambience"/>
+        <On Terms="Abil.ProbeHeal.SourceChannelStart" Send="AnimPlay Work Work PlayForever"/>
+        <On Terms="Abil.ProbeHeal.SourceChannelStop" Send="AnimClear Work"/>
+        <On Terms="TimerExpired; TimerName Color" Send="SetTeamColor 128,255,128 255,0,128"/>
+        <On Terms="ActorCreation" Send="TimerSet 0.000000 Color"/>
+        <Model value="Talon_Probe"/>
+        <AnimBlendTime value="0.250000"/>
+        <ModelFlags index="OutlineEmitter" value="1"/>
+        <EventDataFootprint index="0" Actor="UnitFootprint" Model="ProbeFootprint"/>
+        <BuildModel value="ProtossGenericWarpInOut"/>
+        <DeathArray index="Normal" ModelLink="ProbeDeath" SoundLink="Probe_Explode" VoiceLink="ProbeDeathVoice"/>
+        <DeathCustoms ModelLink="HallucinationDeath" SoundLink="Sentry_HallucinationDeathSmall" Name="Hallucination"/>
+        <DeathCustoms ModelLink="DarkProbeDeath" Name="DarkProtoss"/>
+        <DeathCustoms ModelLink="ProbeDeathRagdoll" Name="RagdollBasic">
+            <BodySquibs Name="Basic" Model="ProtossTinyRobotSquibDeathRagdoll"/>
+        </DeathCustoms>
+        <DeathCustoms Name="RagdollUltraUnburrow" InheritsFrom="RagdollBasic"/>
+        <DeathCustoms ActorModel="SpineCrawlerHurlDeathRagdoll" ModelLink="ProbeDeathRagdoll" Name="RagdollSpineCrawlerHurl">
+            <BodySquibs Name="Basic" Model="ProtossTinyRobotSquibDeathRagdoll"/>
+        </DeathCustoms>
+        <DeathCustoms Name="RagdollOverkillDPRH" InheritsFrom="RagdollBasic"/>
+        <DeathCustoms Name="RagdollOverkillDOI" InheritsFrom="RagdollBasic"/>
+        <DeathCustoms Name="RagdollMidair" InheritsFrom="RagdollBasic"/>
+        <PlacementModel value="Talon_Probe"/>
+        <PortraitModel value="Talon_Probe_Portrait"/>
+        <BarOffset value="40"/>
+        <BarWidth value="42"/>
+        <ErrorArray Error="MustTargetUnit" Sound="Alert_ProtossPlaceOnVespeneGeyser"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-Protoss-Probe.dds"/>
+        </GroupIcon>
+        <HeroIcon value="Assets\Textures\btn-unit-protoss-probe.dds"/>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-protoss-groundarmorlevel0.dds"/>
+        <SoundArray index="Birth" value="Probe_Birth"/>
+        <SoundArray index="Ready" value="Probe_Ready"/>
+        <SoundArray index="Help" value="Alert_ProtossEconomyUnderAttack"/>
+        <SoundArray index="What" value="Probe_What"/>
+        <SoundArray index="Yes" value="Probe_Yes"/>
+        <SoundArray index="Attack" value="Probe_Attack"/>
+        <SoundArray index="Pissed" value="Probe_Pissed"/>
+        <SoundArray index="Movement" value="Probe_Movement"/>
+        <SoundArray index="Turning" value="Probe_Turning"/>
+        <SoundArray index="Board" value="Probe_Board"/>
+        <SoundArray index="Click" value="Probe_Click"/>
+        <SoundArray index="ClickError" value="Probe_ClickError"/>
+        <SoundArray index="Highlight" value="Probe_Highlight"/>
+        <UnitIcon value="Assets\Textures\btn-unit-protoss-probe.dds"/>
+        <Wireframe>
+            <Image value="Assets\Wireframes\Talon_Probe\wireframe-protoss-talon-worker.dds"/>
+        </Wireframe>
+        <WireframeShield>
+            <Image value="Assets\Wireframes\Talon_Probe\wireframe-protoss-talon-worker-shield1.dds"/>
+            <Image value="Assets\Wireframes\Talon_Probe\wireframe-protoss-talon-worker-shield2.dds"/>
+            <Image value="Assets\Wireframes\Talon_Probe\wireframe-protoss-talon-worker-shield3.dds"/>
+        </WireframeShield>
+    </CActorUnit>
+    <CActorSimple id="MadnessEnrageTint">
+        <Aliases value="_AngryTinter"/>
+        <On Terms="Behavior.MadnessEnrage.On" Send="Create"/>
+        <On Terms="ActorCreation" Target="_Unit" Send="SetTintColor 255,50,50 0.500000 OneShot SeekerTarget"/>
+        <On Terms="Behavior.MadnessEnrage.Off" Target="_Unit" Send="ClearTintColor 0.500000 SeekerTarget"/>
+        <On Terms="Behavior.MadnessEnrage.Off" Send="Destroy"/>
+    </CActorSimple>
+    <CActorDoodad id="StructureMadnessCrystalThrone">
+        <Macros value="DeadAnimationMacro"/>
+        <Macros value="BuildingFlattenTerrainMacro"/>
+        <EditorCategories value=""/>
+        <On Terms="ActorCreation" Send="SetTeamColor 128,255,128 128,0,255"/>
+        <Model value="MadnessThrone2"/>
+        <Footprint value="Footprint3x3Contour"/>
+    </CActorDoodad>
+    <CActorModel id="MadnessStructureOverboost" parent="ModelAddition">
+        <EditorCategories value=""/>
+        <On Terms="Behavior.StructureTurnOnOverboost.On" Send="Create"/>
+        <On Terms="Behavior.StructureTurnOnOverboost.Off" Send="Destroy"/>
+        <HostSiteOps Ops="SOpAttachCenter"/>
+        <FogVisibility value="Visible"/>
+    </CActorModel>
+    <CActorBeamSimple id="MadnessTurnOnBeam" parent="GenericAttackBeam">
+        <On Terms="ActorCreation" Send="SetTintColor 128,0,255"/>
+        <On Terms="Effect.StructureTurnOnSwitch.Start" Send="Create"/>
+        <Model value="ProbeAttackBeam"/>
+        <Scale value="2.000000,2.000000,1.000000"/>
+        <HostLaunch Subject="_Unit" Scope="Caster" Actor="Find"/>
+        <HostLaunchSiteOps Ops="SOpAttachOverhead"/>
+        <HostImpact Subject="_Unit" Scope="Target"/>
+        <HostImpactSiteOps Ops="SOpAttachCenter"/>
+        <VisibleTo index="All" value="1"/>
+        <FogVisibility value="Visible"/>
+    </CActorBeamSimple>
+    <CActorUnit id="MadnessSpawnerDefensive1" parent="GenericUnitBase" unitName="MadnessSpawnerDefensive">
+        <Aliases value="_CreepEngulfable"/>
+        <Aliases value="_UnitLarge"/>
+        <Macros value="BuildingFlattenTerrainMacro"/>
+        <EditorCategories value=""/>
+        <On Terms="TimerExpired; TimerName Color" Send="SetTeamColor 128,255,128 255,0,128"/>
+        <On Terms="ActorCreation" Send="TimerSet 0.000000 Color"/>
+        <On Terms="TimerExpired; TimerName Color" Send="AnimBracketStart Unpowered Stand,Unpowered,Start Stand,Unpowered Stand,Unpowered,End"/>
+        <On Terms="Behavior.MadnessStructureOn.On" Send="AnimBracketStop Unpowered"/>
+        <On Terms="AnimBracketStop; AnimName Unpowered" Send="AnimBracketStart Powered Stand,Work,Start Stand,Work Stand,Work,End"/>
+        <On Terms="Behavior.MadnessStructureOff.On" Send="AnimBracketStop Powered"/>
+        <On Terms="AnimBracketStop; AnimName Powered" Send="AnimBracketStart Unpowered Stand,Unpowered,Start Stand,Unpowered Stand,Unpowered,End"/>
+        <On Terms="Behavior.MadnessStructureOff.On" Send="SetShowStatusBar"/>
+        <On Terms="Behavior.MadnessStructureOff.Off" Send="SetShowStatusBar 1"/>
+        <Model value="SpawnerDefensive1"/>
+        <AnimBlendTime value="0.750000"/>
+        <ModelFlags index="OutlineOccluder" value="1"/>
+        <CreepHeightClass value="Medium"/>
+        <CreepRateGrow value="Grow"/>
+        <CreepRateShrink value="Shrink"/>
+        <BuildModel value="SpawnerDefensive1"/>
+        <DeathArray index="Normal" ModelLink="ProtossBuildingDeath"/>
+        <PlacementModel value="SpawnerDefensive1"/>
+        <PortraitModel value="ProtossPortraitTalon"/>
+        <BarWidth value="135"/>
+        <HighlightTooltip value="Unit/Name/MadnessSpawnerDefensive1"/>
+        <LifeArmorIcon value="Assets\Textures\btn-armor-protoss-buildingplating.dds"/>
+        <Wireframe>
+            <Image value="Assets\Wireframes\Talon_Portal\Wireframe-protoss-talon-portal.dds"/>
+        </Wireframe>
+        <WireframeShield>
+            <Image value="Assets\Wireframes\Talon_Portal\Wireframe-protoss-talon-portal-shield1.dds"/>
+            <Image value="Assets\Wireframes\Talon_Portal\Wireframe-protoss-talon-portal-shield2.dds"/>
+            <Image value="Assets\Wireframes\Talon_Portal\Wireframe-protoss-talon-portal-shield3.dds"/>
+        </WireframeShield>
+    </CActorUnit>
+    <CActorUnit id="MadnessSpawnerDefensive2" parent="GenericUnitBase" unitName="MadnessSpawnerDefensive2">
+        <Aliases value="_CreepEngulfable"/>
+        <Aliases value="_UnitLarge"/>
+        <Macros value="BuildingFlattenTerrainMacro"/>
+        <EditorCategories value=""/>
+        <On Terms="TimerExpired; TimerName Color" Send="SetTeamColor 128,255,128 255,0,128"/>
+        <On Terms="ActorCreation" Send="TimerSet 0.000000 Color"/>
+        <On Terms="TimerExpired; TimerName Color" Send="AnimBracketStart Unpowered Stand,Unpowered,Start Stand,Unpowered Stand,Unpowered,End"/>
+        <On Terms="Behavior.MadnessStructureOn.On" Send="AnimBracketStop Unpowered"/>
+        <On Terms="AnimBracketStop; AnimName Unpowered" Send="AnimBracketStart Powered Stand,Work,Start Stand,Work Stand,Work,End"/>
+        <On Terms="Behavior.MadnessStructureOff.On" Send="AnimBracketStop Powered"/>
+        <On Terms="AnimBracketStop; AnimName Powered" Send="AnimBracketStart Unpowered Stand,Unpowered,Start Stand,Unpowered Stand,Unpowered,End"/>
+        <On Terms="Behavior.MadnessStructureOff.On" Send="SetShowStatusBar"/>
+        <On Terms="Behavior.MadnessStructureOff.Off" Send="SetShowStatusBar 1"/>
+        <Model value="SpawnerDefensive2"/>
+        <AnimBlendTime value="0.750000"/>
+        <ModelFlags index="OutlineOccluder" value="1"/>
+        <CreepHeightClass value="Medium"/>
+        <CreepRateGrow value="Grow"/>
+        <CreepRateShrink value="Shrink"/>
+        <BuildModel value="SpawnerDefensive2"/>
+        <DeathArray index="Normal" ModelLink="ProtossBuildingDeath"/>
+        <PlacementModel value="SpawnerDefensive2"/>
+        <PortraitModel value="ProtossPortraitTalon"/>
+        <BarWidth value="135"/>
+        <LifeArmorIcon value="Assets\Textures\btn-armor-protoss-buildingplating.dds"/>
+        <Wireframe>
+            <Image value="Assets\Wireframes\Talon_Shrine\Wireframe-protoss-talon-shrine.dds"/>
+        </Wireframe>
+        <WireframeShield>
+            <Image value="Assets\Wireframes\Talon_Shrine\Wireframe-protoss-talon-shrine-shield1.dds"/>
+            <Image value="Assets\Wireframes\Talon_Shrine\Wireframe-protoss-talon-shrine-shield2.dds"/>
+            <Image value="Assets\Wireframes\Talon_Shrine\Wireframe-protoss-talon-shrine-shield3.dds"/>
+        </WireframeShield>
+    </CActorUnit>
+    <CActorUnit id="MadnessSpawnerOffensive2" parent="GenericUnitBase" unitName="MadnessSpawnerOffensive2">
+        <Aliases value="_CreepEngulfable"/>
+        <Aliases value="_UnitLarge"/>
+        <Macros value="BuildingFlattenTerrainMacro"/>
+        <EditorCategories value=""/>
+        <On Terms="TimerExpired; TimerName Color" Send="SetTeamColor 128,255,128 255,0,128"/>
+        <On Terms="ActorCreation" Send="TimerSet 0.000000 Color"/>
+        <On Terms="TimerExpired; TimerName Color" Send="AnimBracketStart Unpowered Stand,Unpowered,Start Stand,Unpowered Stand,Unpowered,End"/>
+        <On Terms="Behavior.MadnessStructureOn.On" Send="AnimBracketStop Unpowered"/>
+        <On Terms="AnimBracketStop; AnimName Unpowered" Send="AnimBracketStart Powered Stand,Work,Start Stand,Work Stand,Work,End"/>
+        <On Terms="Behavior.MadnessStructureOff.On" Send="AnimBracketStop Powered"/>
+        <On Terms="AnimBracketStop; AnimName Powered" Send="AnimBracketStart Unpowered Stand,Unpowered,Start Stand,Unpowered Stand,Unpowered,End"/>
+        <On Terms="Behavior.MadnessStructureOff.On" Send="SetShowStatusBar"/>
+        <On Terms="Behavior.MadnessStructureOff.Off" Send="SetShowStatusBar 1"/>
+        <Model value="SpawnerOffensive2"/>
+        <AnimBlendTime value="0.750000"/>
+        <ModelFlags index="OutlineOccluder" value="1"/>
+        <CreepHeightClass value="Medium"/>
+        <CreepRateGrow value="Grow"/>
+        <CreepRateShrink value="Shrink"/>
+        <BuildModel value="SpawnerOffensive2"/>
+        <DeathArray index="Normal" ModelLink="ProtossBuildingDeath"/>
+        <PlacementModel value="SpawnerOffensive2"/>
+        <PortraitModel value="ProtossPortraitTalon"/>
+        <BarWidth value="135"/>
+        <LifeArmorIcon value="Assets\Textures\btn-armor-protoss-buildingplating.dds"/>
+        <Wireframe>
+            <Image value="Assets\Wireframes\Talon_roboticsfacility\Wireframe-protoss-talon-roboticsfacility.dds"/>
+        </Wireframe>
+        <WireframeShield>
+            <Image value="Assets\Wireframes\Talon_roboticsfacility\Wireframe-protoss-talon-roboticsfacility-shield1.dds"/>
+            <Image value="Assets\Wireframes\Talon_roboticsfacility\Wireframe-protoss-talon-roboticsfacility-shield2.dds"/>
+            <Image value="Assets\Wireframes\Talon_roboticsfacility\Wireframe-protoss-talon-roboticsfacility-shield3.dds"/>
+        </WireframeShield>
+    </CActorUnit>
+    <CActorUnit id="MadnessSpawnerOffensive" parent="GenericUnitBase" unitName="MadnessSpawnerOffensive">
+        <Aliases value="_CreepEngulfable"/>
+        <Aliases value="_UnitLarge"/>
+        <Macros value="BuildingFlattenTerrainMacro"/>
+        <EditorCategories value=""/>
+        <On Terms="TimerExpired; TimerName Color" Send="SetTeamColor 128,255,128 128,0,255"/>
+        <On Terms="ActorCreation" Send="TimerSet 0.000000 Color"/>
+        <On Terms="TimerExpired; TimerName Color" Send="AnimBracketStart Unpowered Stand,Unpowered,Start Stand,Unpowered Stand,Unpowered,End"/>
+        <On Terms="Behavior.MadnessStructureOn.On" Send="AnimBracketStop Unpowered"/>
+        <On Terms="AnimBracketStop; AnimName Unpowered" Send="AnimBracketStart Powered Stand,Work,Start Stand,Work Stand,Work,End ClosingFull"/>
+        <On Terms="Behavior.MadnessStructureOff.On" Send="AnimBracketStop Powered"/>
+        <On Terms="AnimBracketStop; AnimName Powered" Send="AnimBracketStart Unpowered Stand,Unpowered,Start Stand,Unpowered Stand,Unpowered,End"/>
+        <On Terms="Behavior.MadnessStructureOff.On" Send="SetShowStatusBar"/>
+        <On Terms="Behavior.MadnessStructureOff.Off" Send="SetShowStatusBar 1"/>
+        <Model value="SpawnerOffensive1"/>
+        <AnimBlendTime value="0.750000"/>
+        <ModelFlags index="OutlineOccluder" value="1"/>
+        <CreepHeightClass value="Medium"/>
+        <CreepRateGrow value="Grow"/>
+        <CreepRateShrink value="Shrink"/>
+        <BuildModel value="SpawnerOffensive1"/>
+        <DeathArray index="Normal" ModelLink="ProtossBuildingDeath"/>
+        <PlacementModel value="SpawnerOffensive1"/>
+        <PortraitModel value="ProtossPortraitTalon"/>
+        <BarWidth value="135"/>
+        <LifeArmorIcon value="Assets\Textures\btn-armor-protoss-buildingplating.dds"/>
+        <Wireframe>
+            <Image value="Assets\Wireframes\Talon_roboticsbay\Wireframe-protoss-talon-roboticsbay.dds"/>
+        </Wireframe>
+        <WireframeShield>
+            <Image value="Assets\Wireframes\Talon_roboticsbay\Wireframe-protoss-talon-roboticsbay-shield1.dds"/>
+            <Image value="Assets\Wireframes\Talon_roboticsbay\Wireframe-protoss-talon-roboticsbay-shield2.dds"/>
+            <Image value="Assets\Wireframes\Talon_roboticsbay\Wireframe-protoss-talon-roboticsbay-shield3.dds"/>
+        </WireframeShield>
+    </CActorUnit>
+    <CActorUnit id="MadnessVoidContainment" parent="GenericUnitBase" unitName="MadnessVoidContainment">
+        <Aliases value="_CreepEngulfable"/>
+        <Aliases value="_UnitLarge"/>
+        <Macros value="BuildingFlattenTerrainMacro"/>
+        <EditorCategories value=""/>
+        <On Terms="TimerExpired; TimerName Color" Send="SetTeamColor 128,255,128 255,0,128"/>
+        <On Terms="ActorCreation" Send="TimerSet 0.000000 Color"/>
+        <On Terms="TimerExpired; TimerName Color" Send="AnimBracketStart Unpowered Stand,Unpowered,Start Stand,Unpowered Stand,Unpowered,End"/>
+        <On Terms="Behavior.MadnessStructureOn.On" Send="AnimBracketStop Unpowered"/>
+        <On Terms="AnimBracketStop; AnimName Unpowered" Send="AnimBracketStart Powered Stand,Work,Start Stand,Work Stand,Work,End"/>
+        <On Terms="Behavior.MadnessStructureOff.On" Send="AnimBracketStop Powered"/>
+        <On Terms="AnimBracketStop; AnimName Powered" Send="AnimBracketStart Unpowered Stand,Unpowered,Start Stand,Unpowered Stand,Unpowered,End"/>
+        <On Terms="Behavior.MadnessStructureOff.On" Send="SetShowStatusBar"/>
+        <On Terms="Behavior.MadnessStructureOff.Off" Send="SetShowStatusBar 1"/>
+        <Model value="VoidContainment"/>
+        <AnimBlendTime value="0.750000"/>
+        <ModelFlags index="OutlineOccluder" value="1"/>
+        <CreepHeightClass value="Medium"/>
+        <CreepRateGrow value="Grow"/>
+        <CreepRateShrink value="Shrink"/>
+        <BuildModel value="VoidContainment"/>
+        <DeathArray index="Normal" ModelLink="ProtossBuildingDeath"/>
+        <PlacementModel value="VoidContainment"/>
+        <PortraitModel value="ProtossPortraitTalon"/>
+        <BarWidth value="135"/>
+        <LifeArmorIcon value="Assets\Textures\btn-armor-protoss-buildingplating.dds"/>
+        <Wireframe>
+            <Image value="Assets\Textures\wireframe-protoss-shieldbattery.dds"/>
+        </Wireframe>
+        <WireframeShield>
+            <Image value="Assets\Textures\wireframe-protoss-shieldbattery-shield01.dds"/>
+            <Image value="Assets\Textures\wireframe-protoss-shieldbattery-shield02.dds"/>
+            <Image value="Assets\Textures\wireframe-protoss-shieldbattery-shield03.dds"/>
+        </WireframeShield>
+    </CActorUnit>
+    <CActorSiteOpLocalOffset id="CrystalwingShowerOffset">
+        <LocalOffset value="0.000000,1.000000,20.000000"/>
+    </CActorSiteOpLocalOffset>
+    <CActorUnit id="SentryTalon" parent="GenericUnitStandard" unitName="SentryTalon">
+        <Aliases value="_UnitMedium"/>
+        <Macros value="TerrainSquibAnimations"/>
+        <Macros value="PhysicsDeathsSwarmGround"/>
+        <Macros value="PhysicsDeathsVoidGround"/>
+        <On index="0" Send="Create SoundEmitter Sentry_Ambience"/>
+        <On index="64" Terms="UnitHeightUpdate.*.Land" Send="Create Sentry_Land"/>
+        <On Terms="TimerExpired; TimerName Color" Send="SetTeamColor 128,255,128 255,0,128"/>
+        <On Terms="ActorCreation" Send="TimerSet 0.000000 Color"/>
+        <Model value="Talon_Vindicator"/>
+        <Scale value="0.900000"/>
+        <AnimBlendTime value="0.650000"/>
+        <ModelFlags index="OutlineEmitter" value="1"/>
+        <EventDataFootprint index="0" Actor="UnitFootprint" Model="SentryFootprint"/>
+        <Baselines index="Walk" BlendIn="1.500000" BlendOut="2.000000"/>
+        <BuildModel value="SentryWarpIn"/>
+        <DeathArray index="Normal" ModelLink="Sentry_Taldarim_Collection_Death" SoundLink="Sentry_Explode" VoiceLink="SentryDeathVoice"/>
+        <PlacementModel value="SentryPlacement"/>
+        <PlacementSound value="Protoss_BuildingPlacementSmall"/>
+        <PortraitModel value="Talon_Vindicator_Portrait"/>
+        <TerrainSquibs>
+            <MovementDistance value="0.150000,0.150000"/>
+            <IdlePeriod value="0.100000,0.250000"/>
+            <RangeUp value="0.600000"/>
+            <RangeDown value="0.600000"/>
+            <AttachQuery Methods="AMFilterCenter"/>
+            <Visuals TerrainPhysicsMaterial="Water" ActorModel="TerrainSquibHarnessContinuous" ModelLink="WaterRippleLargeVehicle"/>
+        </TerrainSquibs>
+        <BarOffset value="40"/>
+        <BarWidth value="50"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-Protoss-sentry.dds"/>
+        </GroupIcon>
+        <GroupSoundArray index="What" value="Sentry_GroupWhat"/>
+        <GroupSoundArray index="Yes" value="Sentry_GroupYes"/>
+        <GroupSoundArray index="Attack" value="Sentry_GroupAttack"/>
+        <GroupSoundArray index="Board" value="Sentry_GroupBoard"/>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-protoss-groundarmorlevel0.dds"/>
+        <SoundArray index="Birth" value="Sentry_Birth"/>
+        <SoundArray index="Ready" value="Sentry_Ready"/>
+        <SoundArray index="Help" value="Sentry_Help"/>
+        <SoundArray index="What" value="Sentry_What"/>
+        <SoundArray index="Yes" value="Sentry_Yes"/>
+        <SoundArray index="Attack" value="Sentry_Attack"/>
+        <SoundArray index="Pissed" value="Sentry_Pissed"/>
+        <SoundArray index="Movement" value="Sentry_Movement"/>
+        <SoundArray index="Turning" value="Sentry_Turning"/>
+        <SoundArray index="Board" value="Sentry_Board"/>
+        <SoundArray index="Click" value="Sentry_Click"/>
+        <SoundArray index="ClickError" value="Sentry_ClickError"/>
+        <SoundArray index="Highlight" value="Sentry_Highlight"/>
+        <UnitIcon value="Assets\Textures\btn-unit-protoss-sentry.dds"/>
+        <Wireframe>
+            <Image value="Assets\Wireframes\Talon_vindicator\wireframe-protoss-talon-vindicator.dds"/>
+        </Wireframe>
+        <WireframeShield>
+            <Image value="Assets\Wireframes\Talon_vindicator\wireframe-protoss-talon-vindicator-shield-01.dds"/>
+            <Image value="Assets\Wireframes\Talon_vindicator\wireframe-protoss-talon-vindicator-shield-02.dds"/>
+            <Image value="Assets\Wireframes\Talon_vindicator\wireframe-protoss-talon-vindicator-shield-03.dds"/>
+        </WireframeShield>
+    </CActorUnit>
+    <CActorAction id="SentryTalonAttack" parent="GenericAttack" effectImpact="SentryTalonWeaponDmg" effectLaunch="SentryTalonWeaponMissile">
+        <Missile value="SentryTalonWeaponMissile"/>
+    </CActorAction>
+    <CActorMissile id="SentryTalonWeaponMissile" parent="GenericAttackMissile" unitName="SentryTalonWeaponMissile">
+        <EditorCategories value=""/>
+    </CActorMissile>
+    <CActorUnit id="StalkerTalon" parent="GenericUnitStandard" unitName="StalkerTalon">
+        <Aliases value="_UnitMedium"/>
+        <Macros value="TerrainSquibAnimations"/>
+        <Macros value="PhysicsDeathsSwarmGround"/>
+        <Macros value="PhysicsDeathsVoidGround"/>
+        <On index="0" Send="Create SoundEmitter Stalker_Ambience"/>
+        <On index="65" Terms="WeaponStart.*.AttackStart; WeaponTargetElevation GE 20.000000" Send="AnimBracketStart Attack Attack,Superior"/>
+        <On index="66" Terms="WeaponStart.*.AttackStart; WeaponTargetElevation LE -20.000000" Send="AnimBracketStart Attack Attack,Inferior"/>
+        <On index="67" Terms="WeaponStart.*.AttackStart" Send="AnimBracketStart Attack Attack"/>
+        <On index="68" Terms="WeaponStop.*.AttackStop" Send="AnimBracketStop Attack"/>
+        <On Terms="TimerExpired; TimerName Color" Send="SetTeamColor 128,255,128 255,0,128"/>
+        <On Terms="ActorCreation" Send="TimerSet 0.000000 Color"/>
+        <Model value="Talon_Vaporizer"/>
+        <Scale value="0.900000"/>
+        <ModelFlags index="OutlineEmitter" value="1"/>
+        <EventDataFootprint index="0" Actor="UnitFootprint" Model="StalkerFootprint"/>
+        <BuildModel value="StalkerWarpIn"/>
+        <DeathArray index="Normal" ModelLink="Stalker_Deluxe_Collection_Death" SoundLink="StalkerDeath" VoiceLink="StalkerDeathVoice"/>
+        <DeathActorModel value="UnitDeathModelWithDeathMotionGround"/>
+        <PlacementModel value="StalkerPlacement"/>
+        <PlacementSound value="Protoss_BuildingPlacementSmall"/>
+        <PortraitModel value="Talon_Vaporizer_Portrait"/>
+        <TerrainSquibs>
+            <MovementDistance value="0.150000,0.150000"/>
+            <IdlePeriod value="0.100000,0.250000"/>
+            <RangeUp value="0.600000"/>
+            <RangeDown value="1.000000"/>
+            <AttachQuery Methods="AMFilterCenter"/>
+            <Visuals TerrainPhysicsMaterial="Water" ActorModel="TerrainSquibHarnessContinuous" ModelLink="WaterRippleLarge"/>
+        </TerrainSquibs>
+        <WalkAnimMoveSpeed value="3.1328"/>
+        <BarOffset value="70"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-Protoss-Stalker.dds"/>
+        </GroupIcon>
+        <GroupSoundArray index="What" value="Stalker_GroupWhat"/>
+        <GroupSoundArray index="Yes" value="Stalker_GroupYes"/>
+        <GroupSoundArray index="Attack" value="Stalker_GroupAttack"/>
+        <GroupSoundArray index="Board" value="Stalker_GroupBoard"/>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-protoss-groundarmorlevel0.dds"/>
+        <SoundArray index="Birth" value="Stalker_Birth"/>
+        <SoundArray index="Ready" value="Stalker_Ready"/>
+        <SoundArray index="Help" value="Stalker_Help"/>
+        <SoundArray index="What" value="Stalker_What"/>
+        <SoundArray index="Yes" value="Stalker_Yes"/>
+        <SoundArray index="Attack" value="Stalker_Attack"/>
+        <SoundArray index="Pissed" value="Stalker_Pissed"/>
+        <SoundArray index="Movement" value="Stalker_Movement"/>
+        <SoundArray index="Turning" value="Stalker_Turning"/>
+        <SoundArray index="Board" value="Stalker_Board"/>
+        <SoundArray index="Click" value="Stalker_Click"/>
+        <SoundArray index="ClickError" value="Stalker_ClickError"/>
+        <SoundArray index="Highlight" value="Stalker_Highlight"/>
+        <UnitIcon value="Assets\Textures\btn-unit-protoss-stalker.dds"/>
+        <Wireframe>
+            <Image value="Assets\Wireframes\Talon_vaporizer\wireframe-protoss-talon-vaporizer.dds"/>
+        </Wireframe>
+        <WireframeShield>
+            <Image value="Assets\Wireframes\Talon_vaporizer\wireframe-protoss-talon-vaporizer-shield01.dds"/>
+            <Image value="Assets\Wireframes\Talon_vaporizer\wireframe-protoss-talon-vaporizer-shield02.dds"/>
+            <Image value="Assets\Wireframes\Talon_vaporizer\wireframe-protoss-talon-vaporizer-shield03.dds"/>
+        </WireframeShield>
+    </CActorUnit>
+    <CActorAction id="StalkerTalonWeaponAttack" parent="GenericAttack" effectAttack="StalkerTalonWeaponDmg">
+        <EditorCategories value=""/>
+        <Beam value="StalkerTalonWeaponBeam"/>
+    </CActorAction>
+    <CActorBeamSimple id="StalkerTalonWeaponBeam" parent="BeamSimpleAnimationStyleOneShot">
+        <EditorCategories value=""/>
+    </CActorBeamSimple>
+    <CActorModel id="MadnessSpawning" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On Terms="ActorCreation" Send="SetTintColor 128,0,255"/>
+        <VisibleTo index="All" value="1"/>
+        <FogVisibility value="Visible"/>
+    </CActorModel>
+    <CActorUnit id="MadnessCannon" parent="GenericUnitBase" unitName="MadnessCannon">
+        <Aliases value="_CreepEngulfable"/>
+        <Aliases value="_UnitLarge"/>
+        <Macros value="BuildingFlattenTerrainMacro"/>
+        <EditorCategories value=""/>
+        <On Terms="TimerExpired; TimerName Color" Send="SetTeamColor 128,255,128 255,0,128"/>
+        <On Terms="ActorCreation" Send="TimerSet 0.000000 Color"/>
+        <On Terms="TimerExpired; TimerName Color" Send="AnimBracketStart Unpowered Stand,Unpowered,Start Stand,Unpowered Stand,Unpowered,End"/>
+        <On Terms="Behavior.MadnessStructureOn.On" Send="AnimBracketStop Unpowered"/>
+        <On Terms="Behavior.MadnessStructureOff.On" Send="AnimBracketStart Unpowered Stand,Unpowered,Start Stand,Unpowered Stand,Unpowered,End"/>
+        <On Terms="Behavior.MadnessStructureOff.On" Send="SetShowStatusBar"/>
+        <On Terms="Behavior.MadnessStructureOff.Off" Send="SetShowStatusBar 1"/>
+        <Model value="Cannon"/>
+        <AnimBlendTime value="0.750000"/>
+        <ModelFlags index="OutlineOccluder" value="1"/>
+        <CreepHeightClass value="Medium"/>
+        <CreepRateGrow value="Grow"/>
+        <CreepRateShrink value="Shrink"/>
+        <BuildModel value="Cannon"/>
+        <DeathArray index="Normal" ModelLink="ProtossBuildingDeath"/>
+        <PlacementModel value="Cannon"/>
+        <PortraitModel value="ProtossPortraitTalon"/>
+        <BarWidth value="135"/>
+        <LifeArmorIcon value="Assets\Textures\btn-armor-protoss-buildingplating.dds"/>
+        <Wireframe>
+            <Image value="Assets\Wireframes\Talon_ParticleCannon\Wireframe-protoss-talon-particlecannon.dds"/>
+        </Wireframe>
+        <WireframeShield>
+            <Image value="Assets\Wireframes\Talon_ParticleCannon\Wireframe-protoss-talon-particlecannon-shield01.dds"/>
+            <Image value="Assets\Wireframes\Talon_ParticleCannon\Wireframe-protoss-talon-particlecannon-shield02.dds"/>
+            <Image value="Assets\Wireframes\Talon_ParticleCannon\Wireframe-protoss-talon-particlecannon-shield03.dds"/>
+        </WireframeShield>
+    </CActorUnit>
+    <CActorUnit id="MadnessHealer" parent="GenericUnitBase" unitName="MadnessHealer">
+        <Aliases value="_CreepEngulfable"/>
+        <Aliases value="_UnitLarge"/>
+        <Macros value="BuildingFlattenTerrainMacro"/>
+        <EditorCategories value=""/>
+        <On Terms="TimerExpired; TimerName Color" Send="SetTeamColor 128,255,128 255,0,128"/>
+        <On Terms="ActorCreation" Send="TimerSet 0.000000 Color"/>
+        <On Terms="TimerExpired; TimerName Color" Send="AnimBracketStart Unpowered Stand,Unpowered,Start Stand,Unpowered Stand,Unpowered,End"/>
+        <On Terms="Behavior.MadnessStructureOn.On" Send="AnimBracketStop Unpowered"/>
+        <On Terms="Behavior.MadnessStructureOff.On" Send="AnimBracketStart Unpowered Stand,Unpowered,Start Stand,Unpowered Stand,Unpowered,End"/>
+        <On Terms="Behavior.MadnessStructureOff.On" Send="SetShowStatusBar"/>
+        <On Terms="Behavior.MadnessStructureOff.Off" Send="SetShowStatusBar 1"/>
+        <Model value="Healer"/>
+        <AnimBlendTime value="0.750000"/>
+        <ModelFlags index="OutlineOccluder" value="1"/>
+        <CreepHeightClass value="Medium"/>
+        <CreepRateGrow value="Grow"/>
+        <CreepRateShrink value="Shrink"/>
+        <BuildModel value="Healer"/>
+        <DeathArray index="Normal" ModelLink="ProtossBuildingDeath"/>
+        <PlacementModel value="Healer"/>
+        <PortraitModel value="ProtossPortraitTalon"/>
+        <BarWidth value="135"/>
+        <LifeArmorIcon value="Assets\Textures\btn-armor-protoss-buildingplating.dds"/>
+        <Wireframe>
+            <Image value="Assets\Wireframes\Talon_Obelisk\Wireframe-protoss-talon-obelisk.dds"/>
+        </Wireframe>
+        <WireframeShield>
+            <Image value="Assets\Wireframes\Talon_Obelisk\Wireframe-protoss-talon-obelisk-shield1.dds"/>
+            <Image value="Assets\Wireframes\Talon_Obelisk\Wireframe-protoss-talon-obelisk-shield2.dds"/>
+            <Image value="Assets\Wireframes\Talon_Obelisk\Wireframe-protoss-talon-obelisk-shield3.dds"/>
+        </WireframeShield>
+    </CActorUnit>
+    <CActorModel id="TurbochargeBuff" parent="ModelAddition">
+        <EditorCategories value=""/>
+        <On Terms="Behavior.Turbocharged.On" Send="Create"/>
+        <On Terms="Behavior.Turbocharged.Off" Send="Destroy"/>
+        <On Terms="ActorCreation" Send="SetTintColor 255,0,255"/>
+        <HostSiteOps Ops="SOpAttachCenter"/>
+        <Inherits index="CreepEngulfment" value="0"/>
+        <AcceptedHostedPropTransfers index="CreepEngulfment" value="0"/>
+    </CActorModel>
+    <CActorModel id="TurbochargeCast" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On Terms="Effect.TurbochargeInitialSet.Start" Send="Create"/>
+        <On Terms="ActorCreation" Send="SetTintColor 255,0,255"/>
+        <HostSiteOps Ops="SOpAttachCenter"/>
+        <VisibleTo index="All" value="1"/>
+        <FogVisibility value="Visible"/>
+    </CActorModel>
+    <CActorUnit id="Madness" parent="GenericUnitBase" unitName="Madness">
+        <Aliases value="_UnitSmall"/>
+        <Macros value="CarryAnim"/>
+        <Macros value="BuildAnim"/>
+        <Macros value="MacroWorkerHat"/>
+        <Macros value="CarryTerrazineNodeAnim"/>
+        <Macros value="CarryAnimCampaign"/>
+        <Macros value="PhysicsDeathsSwarmGround"/>
+        <Macros value="PhysicsDeathsVoidGround"/>
+        <On index="0" Send="Create SoundEmitter Probe_Ambience"/>
+        <On Terms="Abil.attack.ReadyStart" Send="AnimGroupApply Ready"/>
+        <On Terms="WeaponStart.*.AttackStart" Send="AnimBracketStart Attack Attack"/>
+        <On Terms="WeaponStart.*.AttackStart; AnimPlaying Birth" Send="AnimClear Birth"/>
+        <On Terms="WeaponStop.*.AttackStop" Send="AnimBracketStop Attack"/>
+        <On Terms="Abil.attack.ReadyStop" Send="AnimGroupRemove Ready"/>
+        <On Terms="UnitHeightUpdate.*.Land" Send="Create Probe_Land"/>
+        <On Terms="ActorCreation" Send="Create MadnessSpawning"/>
+        <On Terms="ActorCreation" Send="TimerSet 0.000000 Color"/>
+        <On Terms="TimerExpired; TimerName Color" Send="SetTeamColor 128,0,255 128,0,255"/>
+        <Model value="EvilProbe"/>
+        <AnimBlendTime value="0.250000"/>
+        <ModelFlags index="OutlineEmitter" value="1"/>
+        <EventDataFootprint index="0" Actor="UnitFootprint" Model="ProbeFootprint"/>
+        <BuildModel value="ProtossGenericWarpInOut"/>
+        <PlacementModel value="Probe"/>
+        <PortraitModel value="Probe_Blizzcon17_Portrait"/>
+        <BarOffset value="40"/>
+        <BarWidth value="42"/>
+        <CustomUnitStatusFrame value="SSF_UnitStatus/BossStatusShielded"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-Protoss-Probe.dds"/>
+        </GroupIcon>
+        <HeroIcon value="Assets\Textures\btn-unit-protoss-probe.dds"/>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-protoss-groundarmorlevel0.dds"/>
+        <MinimapIcon value="Assets\Icons\btn-unit-protoss-blizzcon17-probe-recolor.dds"/>
+        <MinimapIconScale value="0.300000"/>
+        <MinimapIconBackground value="Assets\MinimapBackground.dds"/>
+        <MinimapIconBackgroundScale value="1.100000"/>
+        <MinimapIconBackgroundTintColor value="255,255,0,0"/>
+        <SoundArray index="Birth" value="Probe_Birth"/>
+        <SoundArray index="Ready" value="Probe_Ready"/>
+        <SoundArray index="Help" value="Alert_ProtossEconomyUnderAttack"/>
+        <SoundArray index="What" value="Probe_What"/>
+        <SoundArray index="Yes" value="Probe_Yes"/>
+        <SoundArray index="Attack" value="Probe_Attack"/>
+        <SoundArray index="Pissed" value="Probe_Pissed"/>
+        <SoundArray index="Movement" value="Probe_Movement"/>
+        <SoundArray index="Turning" value="Probe_Turning"/>
+        <SoundArray index="Board" value="Probe_Board"/>
+        <SoundArray index="Click" value="Probe_Click"/>
+        <SoundArray index="ClickError" value="Probe_ClickError"/>
+        <SoundArray index="Highlight" value="Probe_Highlight"/>
+        <UnitFlags index="StandAnimBirthVariation" value="0"/>
+        <UnitFlags index="SuppressDefaultStatusBar" value="1"/>
+        <UnitIcon value="Assets\Textures\btn-unit-protoss-probe.dds"/>
+        <Wireframe>
+            <Image value="Assets\Wireframes\Madness\wireframe-probe-madness.dds"/>
+        </Wireframe>
+        <WireframeShield>
+            <Image value="Assets\Wireframes\Madness\wireframe-probe-madness-shield01.dds"/>
+            <Image value="Assets\Wireframes\Madness\wireframe-probe-madness-shield02.dds"/>
+            <Image value="Assets\Wireframes\Madness\wireframe-probe-madness-shield03.dds"/>
+        </WireframeShield>
+        <FogVisibility value="Dimmed"/>
+    </CActorUnit>
+    <CActorAction id="MadnessAttack" parent="GenericAttack" effectAttack="MadnessWeaponDmg">
+        <ImpactMap index="None" Model="ProbeAttackImpact" Sound="Probe_AttackImpact"/>
+        <ActionFlags index="LaunchForceSite" value="1"/>
+    </CActorAction>
+    <CActorBeamSimple id="MadnessAttackBeam" parent="GenericAttackBeam">
+        <Model value="ProbeAttackBeam"/>
+        <On Terms="ActorCreation" Send="SetTintColor 128,0,255"/>
+        <Scale value="2.000000,2.000000,1.000000"/>
+    </CActorBeamSimple>
+    <CActorUnit id="ZealotTalon" parent="GenericUnitStandard" unitName="ZealotTalon">
+        <Aliases value="_UnitSmall"/>
+        <Macros value="ChargingAnim"/>
+        <Macros value="TerrainSquibAnimations"/>
+        <Macros value="PhysicsDeathsSwarmGround"/>
+        <On index="0" Send="Create SoundEmitter Zealot_Ambience"/>
+        <On Terms="TimerExpired; TimerName Color" Send="SetTeamColor 128,255,128 255,0,128"/>
+        <On Terms="ActorCreation" Send="TimerSet 0.000000 Color"/>
+        <Model value="Talon_Hunter_Forged"/>
+        <ModelFlags index="OutlineEmitter" value="1"/>
+        <EventDataFootprint index="0" Actor="UnitFootprint" Model="ZealotFootprint"/>
+        <BuildModel value="ZealotWarpIn"/>
+        <DeathArray index="Normal" ModelLink="ZealotAiurDeath" SoundLink="Zealot_DeathFX" VoiceLink="ZealotDeathVoice"/>
+        <DeathActorModel value="UnitDeathModelWithDeathMotionGround"/>
+        <PlacementModel value="ZealotPlacement"/>
+        <PlacementSound value="Protoss_BuildingPlacementSmall"/>
+        <PortraitModel value="Talon_Hunter_Forged_Portrait"/>
+        <TerrainSquibs>
+            <MovementDistance value="0.150000,0.150000"/>
+            <IdlePeriod value="0.100000,0.250000"/>
+            <RangeUp value="0.600000"/>
+            <RangeDown value="0.600000"/>
+            <AttachQuery Methods="AMFilterCenter"/>
+            <Visuals TerrainPhysicsMaterial="Water" ActorModel="TerrainSquibHarnessContinuous" ModelLink="WaterRippleMedium"/>
+        </TerrainSquibs>
+        <WalkAnimMoveSpeed value="3"/>
+        <BarOffset value="45"/>
+        <BarWidth value="42"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-Protoss-Zealot.dds"/>
+        </GroupIcon>
+        <GroupSoundArray index="What" value="Zealot_GroupWhat"/>
+        <GroupSoundArray index="Yes" value="Zealot_GroupYes"/>
+        <GroupSoundArray index="Attack" value="Zealot_GroupAttack"/>
+        <GroupSoundArray index="Board" value="Zealot_GroupBoard"/>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-protoss-groundarmorlevel0.dds"/>
+        <SoundArray index="Birth" value="Zealot_Birth"/>
+        <SoundArray index="Ready" value="Zealot_Ready"/>
+        <SoundArray index="Help" value="Zealot_Help"/>
+        <SoundArray index="What" value="ZealotVoid_What"/>
+        <SoundArray index="Yes" value="Zealot_Yes"/>
+        <SoundArray index="Attack" value="Zealot_Attack"/>
+        <SoundArray index="Pissed" value="Zealot_Pissed"/>
+        <SoundArray index="Movement" value="Zealot_Movement"/>
+        <SoundArray index="Turning" value="Zealot_Turning"/>
+        <SoundArray index="Board" value="Zealot_Board"/>
+        <SoundArray index="Click" value="Zealot_Click"/>
+        <SoundArray index="ClickError" value="Zealot_ClickError"/>
+        <SoundArray index="Highlight" value="Zealot_Highlight"/>
+        <UnitIcon value="Assets\Textures\btn-unit-protoss-zealot.dds"/>
+        <Wireframe>
+            <Image value="Assets\Wireframes\Talon_volchron\wireframe-protoss-talon-volchron.dds"/>
+        </Wireframe>
+        <WireframeShield>
+            <Image value="Assets\Wireframes\Talon_volchron\wireframe-protoss-talon-volchron-shield01.dds"/>
+            <Image value="Assets\Wireframes\Talon_volchron\wireframe-protoss-talon-volchron-shield02.dds"/>
+            <Image value="Assets\Wireframes\Talon_volchron\wireframe-protoss-talon-volchron-shield03.dds"/>
+        </WireframeShield>
+    </CActorUnit>
+    <CActorAction id="ZealotTalonAttack" parent="GenericAttack" effectAttack="ZealotTalonWeaponDmg">
+        <LaunchAttachQuery Methods="AMFilterWeaponLeft"/>
+        <LaunchAssets Sound="Zealot_AttackLaunch"/>
+        <ImpactMap index="None" Sound="Zealot_AttackImpact"/>
+        <ImpactPhysics>
+            <Name value="Attack00"/>
+            <MatchKeys value="Basic"/>
+            <AttackAnimProps value="00"/>
+            <Physics value="ZealotAttackDeathForce00"/>
+        </ImpactPhysics>
+        <ImpactPhysics>
+            <Name value="Attack01"/>
+            <MatchKeys value="Basic"/>
+            <AttackAnimProps value="01"/>
+            <Physics value="ZealotAttackDeathForce01"/>
+        </ImpactPhysics>
+        <ImpactPhysics>
+            <Name value="Attack02"/>
+            <MatchKeys value="Basic"/>
+            <AttackAnimProps value="02"/>
+            <Physics value="ZealotAttackDeathForce02"/>
+        </ImpactPhysics>
+        <AcquisitionYawHalfArc value="25.000000"/>
+        <AcquisitionPitchHalfArc value="25.000000"/>
+        <ShieldFlashType value="Header"/>
+    </CActorAction>
+    <CWeaponLegacy id="AdeptTalonWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-groundweaponslevel0.dds"/>
+        <DisplayEffect value="AdeptTalonWeaponDmg"/>
+        <TargetFilters value="Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="0.3"/>
+        <Period value="1.2"/>
+        <Effect value="AdeptTalonWeaponDmg"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="HighTemplarCrystalwingTalonWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-groundweaponslevel0.dds"/>
+        <DisplayEffect value="HighTemplarCrystalwingTalonWeaponDmg"/>
+        <TargetFilters value="Ground,Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="7"/>
+        <Period value="1.3"/>
+        <Effect value="HighTemplarCrystalwingTalonWeaponLaunchMissile"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="HighTemplarTalonWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-groundweaponslevel0.dds"/>
+        <DisplayEffect value="HighTemplarTalonWeaponDmg"/>
+        <TargetFilters value="Ground,Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="7"/>
+        <Period value="1.3"/>
+        <Effect value="HighTemplarTalonWeaponLaunchMissile"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="InterceptorTalonWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-groundweaponslevel0.dds"/>
+        <DisplayEffect value="InterceptorTalonWeaponDmg"/>
+        <TargetFilters value="Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <MinScanRange value="6"/>
+        <Range value="4"/>
+        <Period value="0.75"/>
+        <Effect value="InterceptorTalonWeaponDmg"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="ImmortalTalonWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-groundweaponslevel0.dds"/>
+        <DisplayEffect value="ImmortalTalonWeaponDmg"/>
+        <TargetFilters value="Ground,Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="2.5"/>
+        <Period value="1.2"/>
+        <Effect value="ImmortalTalonWeaponDmg"/>
+        <Name value="Weapon/Name/ImmortalWeapon"/>
+        <DisplayName value="Weapon/Name/ImmortalWeapon"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="SentryTalonWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-groundweaponslevel0.dds"/>
+        <DisplayEffect value="SentryTalonWeaponDmg"/>
+        <TargetFilters value="Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="6"/>
+        <TeleportResetRange value="0"/>
+        <Period value="0.75"/>
+        <Effect value="SentryTalonWeaponMissile"/>
+        <LegacyOptions index="CanRetargetWhileChanneling" value="1"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="StalkerTalonWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-groundweaponslevel0.dds"/>
+        <DisplayEffect value="StalkerTalonWeaponDmg"/>
+        <TargetFilters value="Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="4"/>
+        <Period value="0.9"/>
+        <Effect value="StalkerTalonWeaponDmg"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="MadnessWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-groundweaponslevel0.dds"/>
+        <DisplayEffect value="MadnessWeaponDmg"/>
+        <TargetFilters value="Ground,Visible;Worker,Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="6"/>
+        <Period value="1.5"/>
+        <Effect value="MadnessWeaponDmg"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="ZealotTalonWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Options index="Melee" value="1"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-groundweaponslevel0.dds"/>
+        <DisplayEffect value="ZealotTalonWeaponDmg"/>
+        <DisplayAttackCount value="2"/>
+        <TargetFilters value="Ground,Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="0.1"/>
+        <Period value="0.6"/>
+        <DamagePoint value="0"/>
+        <Effect value="ZealotTalonWeaponPersistent"/>
+        <Name value="Weapon/Name/ZealotWeapon"/>
+        <DisplayName value="Weapon/Name/ZealotWeapon"/>
+    </CWeaponLegacy>
+    <CMoverMissile id="CrystalwingShowerMover">
+        <MotionPhases>
+            <Driver value="Guidance"/>
+            <Acceleration value="3200"/>
+            <MaxSpeed value="17"/>
+            <ClearanceAcceleration value="75"/>
+            <Outro value="-1"/>
+            <ThrowBandYaw value="-360,-360,-360,-360"/>
+            <ThrowBandPitch value="-360,-360,-360,-360"/>
+            <YawPitchRoll value="719.2968"/>
+        </MotionPhases>
+        <MotionPhases YawPitchRoll="MAX"/>
+    </CMoverMissile>
+    <CMoverMissile id="HighTemplarCrystalwingTalonMissile" parent="MissileDefault"/>
+    <CMoverMissile id="HighTemplarTalonMissile" parent="MissileDefault"/>
+    <CMoverMissile id="SentryTalonWeaponMissile">
+        <MotionPhases>
+            <Driver value="Ballistic"/>
+            <Gravity value="3"/>
+            <ThrowBandYaw value="-360,-360,-360,-360"/>
+            <ThrowBandPitch value="-360,-360,-360,-360"/>
+            <FlightTime value="2,-1"/>
+            <Overlays/>
+            <Overlays/>
+        </MotionPhases>
+    </CMoverMissile>
+    <CUnit id="AdeptTalon" parent="GenericEnemyUnit">
+        <Race value="Prot"/>
+        <Mob value="Multiplayer"/>
+        <FlagArray index="PreventDestroy" value="1"/>
+        <Attributes index="Light" value="1"/>
+        <Attributes index="Biological" value="1"/>
+        <Attributes index="Summoned" value="1"/>
+        <LifeStart value="3750"/>
+        <LifeMax value="3750"/>
+        <LifeArmorName value="Unit/LifeArmorName/ProtossArmor"/>
+        <ShieldsStart value="3500"/>
+        <ShieldsMax value="3500"/>
+        <ShieldRegenRate value="28"/>
+        <ShieldArmorName value="Unit/ShieldArmorName/ProtossPlasmaShields"/>
+        <Speed value="4.1992"/>
+        <LateralAcceleration value="46.0625"/>
+        <StationaryTurningRate value="999.8437"/>
+        <TurningRate value="999.8437"/>
+        <Sight value="9"/>
+        <AbilArray Link="AngelwingCharge"/>
+        <BehaviorArray Link="MadnessUnitsWander"/>
+        <WeaponArray Link="AdeptTalonWeapon"/>
+        <CardLayouts>
+            <LayoutButtons Face="AngelwingCharge" Type="AbilCmd" AbilCmd="AngelwingCharge,Execute" Row="2" Column="0"/>
+        </CardLayouts>
+        <Radius value="0.375"/>
+        <InnerRadius value="0.375"/>
+    </CUnit>
+    <CUnit id="HighTemplarTalonMissile" parent="MISSILE_INVULNERABLE"/>
+    <CUnit id="HighTemplarCrystalwingTalon" parent="GenericEnemyUnit">
+        <Race value="Prot"/>
+        <FlagArray index="PreventDestroy" value="1"/>
+        <FlagArray index="AlwaysThreatens" value="1"/>
+        <FlagArray index="AIThreatGround" value="1"/>
+        <FlagArray index="AIThreatAir" value="1"/>
+        <FlagArray index="AISplash" value="1"/>
+        <FlagArray index="AIHighPrioTarget" value="1"/>
+        <FlagArray index="AICaster" value="1"/>
+        <FlagArray index="AIPressForwardDisabled" value="1"/>
+        <Attributes index="Light" value="1"/>
+        <Attributes index="Biological" value="1"/>
+        <Attributes index="Psionic" value="1"/>
+        <Attributes index="Summoned" value="1"/>
+        <LifeStart value="3000"/>
+        <LifeMax value="3000"/>
+        <LifeArmorName value="Unit/LifeArmorName/ProtossArmor"/>
+        <ShieldsStart value="4500"/>
+        <ShieldsMax value="4500"/>
+        <ShieldRegenRate value="42"/>
+        <ShieldArmorName value="Unit/ShieldArmorName/ProtossPlasmaShields"/>
+        <Speed value="2.7968"/>
+        <Sight value="9"/>
+        <AbilArray Link="CrystalwingShower"/>
+        <WeaponArray Link="HighTemplarCrystalwingTalonWeapon"/>
+        <CardLayouts>
+            <LayoutButtons Face="CrystalwingShower" Type="AbilCmd" AbilCmd="CrystalwingShower,Execute" Row="2" Column="0"/>
+        </CardLayouts>
+        <Radius value="0.625"/>
+        <MinimapRadius value="0.375"/>
+        <BehaviorArray Link="MadnessUnitsWander"/>
+    </CUnit>
+    <CUnit id="HighTemplarCrystalwingTalonMissile" parent="MISSILE_INVULNERABLE"/>
+    <CUnit id="HighTemplarTalon" parent="GenericEnemyUnit">
+        <Race value="Prot"/>
+        <Mob value="Multiplayer"/>
+        <FlagArray index="PreventDestroy" value="1"/>
+        <FlagArray index="AlwaysThreatens" value="1"/>
+        <FlagArray index="AIThreatGround" value="1"/>
+        <FlagArray index="AIThreatAir" value="1"/>
+        <FlagArray index="AISplash" value="1"/>
+        <FlagArray index="AIHighPrioTarget" value="1"/>
+        <FlagArray index="AICaster" value="1"/>
+        <FlagArray index="AIPressForwardDisabled" value="1"/>
+        <Attributes index="Light" value="1"/>
+        <Attributes index="Biological" value="1"/>
+        <Attributes index="Psionic" value="1"/>
+        <Attributes index="Summoned" value="1"/>
+        <LifeStart value="2000"/>
+        <LifeMax value="2000"/>
+        <LifeArmorName value="Unit/LifeArmorName/ProtossArmor"/>
+        <ShieldsStart value="7500"/>
+        <ShieldsMax value="7500"/>
+        <ShieldRegenRate value="42"/>
+        <ShieldArmorName value="Unit/ShieldArmorName/ProtossPlasmaShields"/>
+        <Speed value="2.7968"/>
+        <Sight value="9"/>
+        <BehaviorArray Link="MadnessUnitsWander"/>
+        <BehaviorArray Link="TickTockAura"/>
+        <WeaponArray Link="HighTemplarTalonWeapon"/>
+        <Radius value="0.625"/>
+        <MinimapRadius value="0.375"/>
+        <HotkeyAlias value="HighTemplar"/>
+    </CUnit>
+    <CUnit id="InterceptorTalon" parent="GenericEnemyUnit">
+        <Race value="Prot"/>
+        <Mob value="Multiplayer"/>
+        <FlagArray index="PreventDestroy" value="1"/>
+        <Attributes index="Light" value="1"/>
+        <Attributes index="Biological" value="1"/>
+        <Attributes index="Summoned" value="1"/>
+        <LifeStart value="875"/>
+        <LifeMax value="875"/>
+        <LifeArmorName value="Unit/LifeArmorName/ProtossArmor"/>
+        <ShieldsStart value="1000"/>
+        <ShieldsMax value="1000"/>
+        <ShieldRegenRate value="28"/>
+        <ShieldArmorName value="Unit/ShieldArmorName/ProtossPlasmaShields"/>
+        <Speed value="4.1992"/>
+        <LateralAcceleration value="46.0625"/>
+        <StationaryTurningRate value="999.8437"/>
+        <TurningRate value="999.8437"/>
+        <Sight value="9"/>
+        <Height value="0.8"/>
+        <BehaviorArray Link="MadnessUnitsWander"/>
+        <WeaponArray Link="InterceptorTalonWeapon"/>
+        <Radius value="0.375"/>
+        <InnerRadius value="0.375"/>
+    </CUnit>
+    <CUnit id="ImmortalTalon" parent="GenericEnemyUnit">
+        <Race value="Prot"/>
+        <FlagArray index="Turnable" value="0"/>
+        <FlagArray index="PreventDestroy" value="1"/>
+        <Attributes index="Armored" value="1"/>
+        <Attributes index="Mechanical" value="1"/>
+        <Attributes index="Summoned" value="1"/>
+        <LifeStart value="1250"/>
+        <LifeMax value="1250"/>
+        <LifeArmorName value="Unit/LifeArmorName/ProtossArmor"/>
+        <ShieldsStart value="1250"/>
+        <ShieldsMax value="1250"/>
+        <ShieldRegenRate value="42"/>
+        <ShieldArmorName value="Unit/ShieldArmorName/ProtossPlasmaShields"/>
+        <Speed value="2.7968"/>
+        <Sight value="9"/>
+        <BehaviorArray Link="MadnessUnitsWander"/>
+        <WeaponArray Link="ImmortalTalonWeapon" Turret="Immortal"/>
+        <Radius value="0.625"/>
+        <MinimapRadius value="0.625"/>
+        <Name value="Unit/Name/Immortal"/>
+    </CUnit>
+    <CUnit id="MadnessSpawnerDefensive" parent="GenericEnemyUnit">
+        <Facing value="45"/>
+        <Race value="Prot"/>
+        <FlagArray index="Turnable" value="0"/>
+        <FlagArray index="Movable" value="0"/>
+        <FlagArray index="PreventDefeat" value="1"/>
+        <FlagArray index="PreventDestroy" value="1"/>
+        <FlagArray index="PenaltyRevealed" value="1"/>
+        <FlagArray index="TownAlert" value="1"/>
+        <FlagArray index="NoPortraitTalk" value="1"/>
+        <FlagArray index="ArmorDisabledWhileConstructing" value="1"/>
+        <FogVisibility value="Snapshot"/>
+        <Collide index="Burrow" value="1"/>
+        <Collide index="Structure" value="1"/>
+        <Collide index="RoachBurrow" value="1"/>
+        <Attributes index="Armored" value="1"/>
+        <Attributes index="Mechanical" value="1"/>
+        <Attributes index="Summoned" value="1"/>
+        <LifeStart value="5000"/>
+        <LifeMax value="5000"/>
+        <LifeArmorName value="Unit/LifeArmorName/ProtossBuildingPlating"/>
+        <ShieldsStart value="5000"/>
+        <ShieldsMax value="5000"/>
+        <ShieldRegenRate value="70"/>
+        <ShieldArmorName value="Unit/ShieldArmorName/ProtossPlasmaShields"/>
+        <Sight value="9"/>
+        <AttackTargetPriority value="11"/>
+        <AbilArray Link="SpawnerWarpIn"/>
+        <AbilArray Link="MadnessStructureTurnOffTriggerHandle"/>
+        <BehaviorArray Link="MadnessStructureOff"/>
+        <BehaviorArray Link="TrackerMadness"/>
+        <CardLayouts>
+            <LayoutButtons Face="SpawnerWarpIn" Type="AbilCmd" AbilCmd="SpawnerWarpIn,Execute" Row="2" Column="0"/>
+            <LayoutButtons Face="MadnessStructureTriggerHandle" Type="AbilCmd" AbilCmd="MadnessStructureTurnOffTriggerHandle,Execute" Row="2" Column="1"/>
+        </CardLayouts>
+        <Radius value="1.5"/>
+        <Footprint value="Footprint3x3Contour"/>
+        <MinimapRadius value="1.5"/>
+        <EditorCategories value="ObjectType:Structure"/>
+    </CUnit>
+    <CUnit id="MadnessSpawnerDefensive2" parent="GenericEnemyUnit">
+        <Facing value="45"/>
+        <Race value="Prot"/>
+        <FlagArray index="Turnable" value="0"/>
+        <FlagArray index="Movable" value="0"/>
+        <FlagArray index="PreventDefeat" value="1"/>
+        <FlagArray index="PreventDestroy" value="1"/>
+        <FlagArray index="PenaltyRevealed" value="1"/>
+        <FlagArray index="TownAlert" value="1"/>
+        <FlagArray index="NoPortraitTalk" value="1"/>
+        <FlagArray index="ArmorDisabledWhileConstructing" value="1"/>
+        <FogVisibility value="Snapshot"/>
+        <Collide index="Burrow" value="1"/>
+        <Collide index="Structure" value="1"/>
+        <Collide index="RoachBurrow" value="1"/>
+        <Attributes index="Armored" value="1"/>
+        <Attributes index="Mechanical" value="1"/>
+        <Attributes index="Summoned" value="1"/>
+        <LifeStart value="5000"/>
+        <LifeMax value="5000"/>
+        <LifeArmorName value="Unit/LifeArmorName/ProtossBuildingPlating"/>
+        <ShieldsStart value="5000"/>
+        <ShieldsMax value="5000"/>
+        <ShieldRegenRate value="70"/>
+        <ShieldArmorName value="Unit/ShieldArmorName/ProtossPlasmaShields"/>
+        <Sight value="9"/>
+        <AttackTargetPriority value="11"/>
+        <AbilArray Link="SpawnerWarpIn"/>
+        <AbilArray Link="MadnessStructureTurnOffTriggerHandle"/>
+        <BehaviorArray Link="MadnessStructureOff"/>
+        <BehaviorArray Link="TrackerMadness"/>
+        <CardLayouts>
+            <LayoutButtons Face="SpawnerWarpIn" Type="AbilCmd" AbilCmd="SpawnerWarpIn,Execute" Row="2" Column="0"/>
+            <LayoutButtons Face="MadnessStructureTriggerHandle" Type="AbilCmd" AbilCmd="MadnessStructureTurnOffTriggerHandle,Execute" Row="2" Column="1"/>
+        </CardLayouts>
+        <Radius value="1.5"/>
+        <Footprint value="Footprint3x3Diagonal"/>
+        <MinimapRadius value="1.5"/>
+        <EditorCategories value="ObjectType:Structure"/>
+    </CUnit>
+    <CUnit id="MadnessSpawnerOffensive2" parent="GenericEnemyUnit">
+        <Facing value="45"/>
+        <Race value="Prot"/>
+        <FlagArray index="Turnable" value="0"/>
+        <FlagArray index="Movable" value="0"/>
+        <FlagArray index="PreventDefeat" value="1"/>
+        <FlagArray index="PreventDestroy" value="1"/>
+        <FlagArray index="PenaltyRevealed" value="1"/>
+        <FlagArray index="TownAlert" value="1"/>
+        <FlagArray index="NoPortraitTalk" value="1"/>
+        <FlagArray index="ArmorDisabledWhileConstructing" value="1"/>
+        <FogVisibility value="Snapshot"/>
+        <Collide index="Burrow" value="1"/>
+        <Collide index="Structure" value="1"/>
+        <Collide index="RoachBurrow" value="1"/>
+        <Attributes index="Armored" value="1"/>
+        <Attributes index="Mechanical" value="1"/>
+        <Attributes index="Summoned" value="1"/>
+        <LifeStart value="5000"/>
+        <LifeMax value="5000"/>
+        <LifeArmorName value="Unit/LifeArmorName/ProtossBuildingPlating"/>
+        <ShieldsStart value="5000"/>
+        <ShieldsMax value="5000"/>
+        <ShieldRegenRate value="70"/>
+        <ShieldArmorName value="Unit/ShieldArmorName/ProtossPlasmaShields"/>
+        <Sight value="9"/>
+        <AttackTargetPriority value="11"/>
+        <AbilArray Link="SpawnerWarpIn"/>
+        <AbilArray Link="MadnessStructureTurnOffTriggerHandle"/>
+        <BehaviorArray Link="MadnessStructureOff"/>
+        <BehaviorArray Link="TrackerMadness"/>
+        <CardLayouts>
+            <LayoutButtons Face="SpawnerWarpIn" Type="AbilCmd" AbilCmd="SpawnerWarpIn,Execute" Row="2" Column="0"/>
+            <LayoutButtons Face="MadnessStructureTriggerHandle" Type="AbilCmd" AbilCmd="MadnessStructureTurnOffTriggerHandle,Execute" Row="2" Column="1"/>
+        </CardLayouts>
+        <Radius value="1.5"/>
+        <Footprint value="Footprint3x3Contour"/>
+        <MinimapRadius value="1.5"/>
+        <EditorCategories value="ObjectType:Structure"/>
+    </CUnit>
+    <CUnit id="MadnessSpawnerSupport" parent="GenericEnemyUnit">
+        <Facing value="323.9648"/>
+        <Race value="Prot"/>
+        <FlagArray index="Turnable" value="0"/>
+        <FlagArray index="Movable" value="0"/>
+        <FlagArray index="PreventDefeat" value="1"/>
+        <FlagArray index="PreventDestroy" value="1"/>
+        <FlagArray index="PenaltyRevealed" value="1"/>
+        <FlagArray index="TownAlert" value="1"/>
+        <FlagArray index="NoPortraitTalk" value="1"/>
+        <FlagArray index="ArmorDisabledWhileConstructing" value="1"/>
+        <FogVisibility value="Snapshot"/>
+        <Collide index="Burrow" value="1"/>
+        <Collide index="Structure" value="1"/>
+        <Collide index="RoachBurrow" value="1"/>
+        <Attributes index="Armored" value="1"/>
+        <Attributes index="Mechanical" value="1"/>
+        <Attributes index="Summoned" value="1"/>
+        <LifeStart value="5000"/>
+        <LifeMax value="5000"/>
+        <LifeArmorName value="Unit/LifeArmorName/ProtossBuildingPlating"/>
+        <ShieldsStart value="5000"/>
+        <ShieldsMax value="5000"/>
+        <ShieldRegenRate value="70"/>
+        <ShieldArmorName value="Unit/ShieldArmorName/ProtossPlasmaShields"/>
+        <Sight value="9"/>
+        <AttackTargetPriority value="11"/>
+        <AbilArray Link="SpawnerWarpIn"/>
+        <AbilArray Link="MadnessStructureTurnOffTriggerHandle"/>
+        <BehaviorArray Link="MadnessStructureOff"/>
+        <BehaviorArray Link="TrackerMadness"/>
+        <CardLayouts>
+            <LayoutButtons Face="SpawnerWarpIn" Type="AbilCmd" AbilCmd="SpawnerWarpIn,Execute" Row="2" Column="0"/>
+            <LayoutButtons Face="MadnessStructureTriggerHandle" Type="AbilCmd" AbilCmd="MadnessStructureTurnOffTriggerHandle,Execute" Row="2" Column="1"/>
+        </CardLayouts>
+        <Radius value="1.5"/>
+        <Footprint value="Footprint3x3Contour"/>
+        <MinimapRadius value="1.5"/>
+        <EditorCategories value="ObjectType:Structure"/>
+    </CUnit>
+    <CUnit id="MadnessSpawnerOffensive" parent="GenericEnemyUnit">
+        <Facing value="180"/>
+        <Race value="Prot"/>
+        <FlagArray index="Turnable" value="0"/>
+        <FlagArray index="Movable" value="0"/>
+        <FlagArray index="PreventDefeat" value="1"/>
+        <FlagArray index="PreventDestroy" value="1"/>
+        <FlagArray index="PenaltyRevealed" value="1"/>
+        <FlagArray index="TownAlert" value="1"/>
+        <FlagArray index="NoPortraitTalk" value="1"/>
+        <FlagArray index="ArmorDisabledWhileConstructing" value="1"/>
+        <FogVisibility value="Snapshot"/>
+        <Collide index="Burrow" value="1"/>
+        <Collide index="Structure" value="1"/>
+        <Collide index="RoachBurrow" value="1"/>
+        <Attributes index="Armored" value="1"/>
+        <Attributes index="Mechanical" value="1"/>
+        <Attributes index="Summoned" value="1"/>
+        <LifeStart value="5000"/>
+        <LifeMax value="5000"/>
+        <LifeArmorName value="Unit/LifeArmorName/ProtossBuildingPlating"/>
+        <ShieldsStart value="5000"/>
+        <ShieldsMax value="5000"/>
+        <ShieldRegenRate value="70"/>
+        <ShieldArmorName value="Unit/ShieldArmorName/ProtossPlasmaShields"/>
+        <Sight value="9"/>
+        <AttackTargetPriority value="11"/>
+        <AbilArray Link="SpawnerWarpIn"/>
+        <AbilArray Link="MadnessStructureTurnOffTriggerHandle"/>
+        <BehaviorArray Link="MadnessStructureOff"/>
+        <BehaviorArray Link="TrackerMadness"/>
+        <CardLayouts>
+            <LayoutButtons Face="SpawnerWarpIn" Type="AbilCmd" AbilCmd="SpawnerWarpIn,Execute" Row="2" Column="0"/>
+            <LayoutButtons Face="MadnessStructureTriggerHandle" Type="AbilCmd" AbilCmd="MadnessStructureTurnOffTriggerHandle,Execute" Row="2" Column="1"/>
+        </CardLayouts>
+        <Radius value="1.5"/>
+        <Footprint value="Footprint3x3Contour"/>
+        <MinimapRadius value="1.5"/>
+        <EditorCategories value="ObjectType:Structure"/>
+    </CUnit>
+    <CUnit id="MadnessVoidContainment" parent="GenericEnemyTower">
+        <Facing value="45"/>
+        <Race value="Prot"/>
+        <FlagArray index="Movable" value="0"/>
+        <FlagArray index="PreventDefeat" value="1"/>
+        <FlagArray index="PreventDestroy" value="1"/>
+        <FlagArray index="PenaltyRevealed" value="1"/>
+        <FlagArray index="TownAlert" value="1"/>
+        <FlagArray index="NoPortraitTalk" value="1"/>
+        <FlagArray index="ArmorDisabledWhileConstructing" value="1"/>
+        <Attributes index="Summoned" value="1"/>
+        <LifeStart value="3250"/>
+        <LifeMax value="3250"/>
+        <LifeArmorName value="Unit/LifeArmorName/ProtossBuildingPlating"/>
+        <ShieldsStart value="6000"/>
+        <ShieldsMax value="6000"/>
+        <ShieldRegenRate value="70"/>
+        <ShieldArmorName value="Unit/ShieldArmorName/ProtossPlasmaShields"/>
+        <BehaviorArray Link="MadnessStructureOff"/>
+        <Radius value="1"/>
+        <EditorCategories value="ObjectType:Structure"/>
+        <WeaponArray Link="VoidContainmentTalonWeapon"/>
+    </CUnit>
+    <CUnit id="ProbeTalon" parent="GenericEnemyUnit">
+        <Race value="Prot"/>
+        <Mob value="Multiplayer"/>
+        <FlagArray index="PreventDestroy" value="1"/>
+        <Response value="Flee"/>
+        <Attributes index="Light" value="1"/>
+        <Attributes index="Mechanical" value="1"/>
+        <Attributes index="Summoned" value="1"/>
+        <LifeArmorName value="Unit/LifeArmorName/ProtossArmor"/>
+        <ShieldsStart value="1000"/>
+        <ShieldsMax value="1000"/>
+        <ShieldRegenRate value="28"/>
+        <ShieldArmorName value="Unit/ShieldArmorName/ProtossPlasmaShields"/>
+        <Speed value="3.9375"/>
+        <Acceleration value="2.5"/>
+        <LateralAcceleration value="46"/>
+        <StationaryTurningRate value="999.8437"/>
+        <TurningRate value="999.8437"/>
+        <Sight value="8"/>
+        <Food value="-1"/>
+        <AbilArray Link="ProbeHeal"/>
+        <CardLayouts>
+            <LayoutButtons Face="ProbeHeal" Type="AbilCmd" AbilCmd="ProbeHeal,Execute" Row="2" Column="0"/>
+        </CardLayouts>
+        <Radius value="0.375"/>
+        <SeparationRadius value="0.375"/>
+        <InnerRadius value="0.375"/>
+        <CargoSize value="1"/>
+        <MinimapRadius value="0.375"/>
+    </CUnit>
+    <CUnit id="SentryTalon" parent="GenericEnemyUnit">
+        <Race value="Prot"/>
+        <Mob value="Multiplayer"/>
+        <FlagArray index="PreventDestroy" value="1"/>
+        <Attributes index="Light" value="1"/>
+        <Attributes index="Mechanical" value="1"/>
+        <Attributes index="Summoned" value="1"/>
+        <LifeArmorName value="Unit/LifeArmorName/ProtossArmor"/>
+        <ShieldsStart value="1500"/>
+        <ShieldsMax value="1500"/>
+        <ShieldRegenRate value="56"/>
+        <ShieldArmorName value="Unit/ShieldArmorName/ProtossPlasmaShields"/>
+        <Speed value="2.7968"/>
+        <LateralAcceleration value="46"/>
+        <StationaryTurningRate value="999.8437"/>
+        <TurningRate value="999.8437"/>
+        <Sight value="9"/>
+        <RepairTime value="42"/>
+        <BehaviorArray Link="MadnessUnitsWander"/>
+        <WeaponArray Link="SentryTalonWeapon"/>
+        <SeparationRadius value="0.625"/>
+        <InnerRadius value="0.375"/>
+        <MinimapRadius value="0.375"/>
+    </CUnit>
+    <CUnit id="SentryTalonWeaponMissile" parent="MISSILE">
+        <Mover value="SentryTalonWeaponMissile"/>
+    </CUnit>
+    <CUnit id="StalkerTalon" parent="GenericEnemyUnit">
+        <Race value="Prot"/>
+        <FlagArray index="PreventDestroy" value="1"/>
+        <Attributes index="Armored" value="1"/>
+        <Attributes index="Mechanical" value="1"/>
+        <Attributes index="Summoned" value="1"/>
+        <LifeArmorName value="Unit/LifeArmorName/ProtossArmor"/>
+        <ShieldsStart value="1500"/>
+        <ShieldsMax value="1500"/>
+        <ShieldRegenRate value="28"/>
+        <ShieldArmorName value="Unit/ShieldArmorName/ProtossPlasmaShields"/>
+        <Speed value="4.1992"/>
+        <LateralAcceleration value="46"/>
+        <StationaryTurningRate value="999.8437"/>
+        <TurningRate value="999.8437"/>
+        <Sight value="9"/>
+        <BehaviorArray Link="MadnessUnitsWander"/>
+        <WeaponArray Link="StalkerTalonWeapon"/>
+        <Radius value="0.5625"/>
+        <SeparationRadius value="0.625"/>
+        <CargoSize value="2"/>
+        <MinimapRadius value="0.625"/>
+    </CUnit>
+    <CUnit id="Madness" parent="GenericEnemyUnit">
+        <Race value="Prot"/>
+        <Mob value="Multiplayer"/>
+        <FlagArray index="Movable" value="0"/>
+        <FlagArray index="Hero" value="1"/>
+        <FlagArray index="PreventDestroy" value="1"/>
+        <Attributes index="Light" value="1"/>
+        <Attributes index="Mechanical" value="1"/>
+        <Attributes index="Heroic" value="1"/>
+        <LifeStart value="50000"/>
+        <LifeMax value="50000"/>
+        <LifeArmorName value="Unit/LifeArmorName/ProtossArmor"/>
+        <ShieldsStart value="65000"/>
+        <ShieldsMax value="65000"/>
+        <ShieldArmorName value="Unit/ShieldArmorName/ProtossPlasmaShields"/>
+        <LateralAcceleration value="50"/>
+        <StationaryTurningRate value="999.8437"/>
+        <TurningRate value="999.8437"/>
+        <Sight value="15"/>
+        <AIOverideTargetPriority value="10"/>
+        <AbilArray Link="StructureTurnOn"/>
+        <AbilArray Link="MassHeal"/>
+        <AbilArray Link="LongLife"/>
+        <AbilArray Link="Turbocharge"/>
+        <WeaponArray Link="MadnessWeapon"/>
+        <CardLayouts index="0">
+            <LayoutButtons Face="MassHeal" Type="AbilCmd" AbilCmd="MassHeal,Execute" Row="2" Column="0"/>
+            <LayoutButtons Face="StructureTurnOn" Type="AbilCmd" AbilCmd="StructureTurnOn,Execute" Row="1" Column="0"/>
+            <LayoutButtons Face="LongLife" Type="AbilCmd" AbilCmd="LongLife,Execute" Row="2" Column="1"/>
+            <LayoutButtons Face="Turbocharge" Type="AbilCmd" AbilCmd="Turbocharge,Execute" Row="2" Column="2"/>
+        </CardLayouts>
+        <Radius value="1"/>
+        <SeparationRadius value="0"/>
+        <CargoSize value="1"/>
+        <ScoreMake value="50"/>
+        <ScoreKill value="50"/>
+        <MinimapRadius value="0"/>
+        <EditorCategories value="ObjectType:Hero"/>
+        <FogVisibility value="Dimmed"/>
+        <VisionHeight value="4"/>
+        <BehaviorArray Link="Spawning"/>
+        <BehaviorArray Link="FinalWill"/>
+        <BehaviorArray Link="TrackerActiveSpawner"/>
+        <BehaviorArray Link="TrackerCombatUnits"/>
+        <BehaviorArray Link="TrackerProbe"/>
+        <BehaviorArray Link="Detector10"/>
+        <BehaviorArray Link="BossesP1Armor"/>
+        <Mover value="Fly"/>
+        <Height value="1"/>
+        <LifeArmorTip value="Unit/P1Bosses/ArmorTooltip"/>
+    </CUnit>
+    <CUnit id="MadnessCannon" parent="GenericEnemyTower">
+        <Facing value="45"/>
+        <Race value="Prot"/>
+        <FlagArray index="Movable" value="0"/>
+        <FlagArray index="PreventDefeat" value="1"/>
+        <FlagArray index="PreventDestroy" value="1"/>
+        <FlagArray index="PenaltyRevealed" value="1"/>
+        <FlagArray index="TownAlert" value="1"/>
+        <FlagArray index="NoPortraitTalk" value="1"/>
+        <FlagArray index="ArmorDisabledWhileConstructing" value="1"/>
+        <Attributes index="Summoned" value="1"/>
+        <LifeStart value="3750"/>
+        <LifeMax value="3750"/>
+        <LifeArmorName value="Unit/LifeArmorName/ProtossBuildingPlating"/>
+        <ShieldsStart value="6500"/>
+        <ShieldsMax value="6500"/>
+        <ShieldRegenRate value="70"/>
+        <ShieldArmorName value="Unit/ShieldArmorName/ProtossPlasmaShields"/>
+        <BehaviorArray Link="MadnessStructureOff"/>
+        <Radius value="1"/>
+        <EditorCategories value="ObjectType:Structure"/>
+        <WeaponArray Link="PhotonCannonTalonWeapon" Turret="PhotonCannonLR"/>
+    </CUnit>
+    <CUnit id="MadnessHealer" parent="GenericEnemyTower">
+        <Facing value="45"/>
+        <Race value="Prot"/>
+        <FlagArray index="Movable" value="0"/>
+        <FlagArray index="PreventDefeat" value="1"/>
+        <FlagArray index="PreventDestroy" value="1"/>
+        <FlagArray index="PenaltyRevealed" value="1"/>
+        <FlagArray index="TownAlert" value="1"/>
+        <FlagArray index="NoPortraitTalk" value="1"/>
+        <FlagArray index="ArmorDisabledWhileConstructing" value="1"/>
+        <Attributes index="Summoned" value="1"/>
+        <LifeStart value="3750"/>
+        <LifeMax value="3750"/>
+        <LifeArmorName value="Unit/LifeArmorName/ProtossBuildingPlating"/>
+        <ShieldsStart value="6000"/>
+        <ShieldsMax value="6000"/>
+        <ShieldRegenRate value="70"/>
+        <ShieldArmorName value="Unit/ShieldArmorName/ProtossPlasmaShields"/>
+        <BehaviorArray Link="MadnessStructureOff"/>
+        <Radius value="1"/>
+        <EditorCategories value="ObjectType:Structure"/>
+        <AbilArray Link="MadnessStructureTurnOffTriggerHandle"/>
+        <AbilArray Link="MadnessHealer"/>
+        <CardLayouts>
+            <LayoutButtons Face="MadnessStructureTriggerHandle" Type="AbilCmd" AbilCmd="MadnessStructureTurnOffTriggerHandle,Execute" Row="2" Column="1"/>
+            <LayoutButtons Face="ProbeHeal" Type="AbilCmd" AbilCmd="MadnessHealer,Execute" Row="2" Column="0"/>
+        </CardLayouts>
+    </CUnit>
+    <CUnit id="ZealotTalon" parent="GenericEnemyUnit">
+        <Race value="Prot"/>
+        <Mob value="Multiplayer"/>
+        <FlagArray index="PreventDestroy" value="1"/>
+        <Attributes index="Light" value="1"/>
+        <Attributes index="Biological" value="1"/>
+        <Attributes index="Summoned" value="1"/>
+        <LifeStart value="1500"/>
+        <LifeMax value="1500"/>
+        <LifeArmorName value="Unit/LifeArmorName/ProtossArmor"/>
+        <ShieldsStart value="500"/>
+        <ShieldsMax value="500"/>
+        <ShieldRegenRate value="14"/>
+        <ShieldArmorName value="Unit/ShieldArmorName/ProtossPlasmaShields"/>
+        <Speed value="4.8984"/>
+        <LateralAcceleration value="46.0625"/>
+        <StationaryTurningRate value="999.8437"/>
+        <TurningRate value="999.8437"/>
+        <Sight value="9"/>
+        <BehaviorArray Link="MadnessUnitsWander"/>
+        <WeaponArray Link="ZealotTalonWeapon"/>
+        <Radius value="0.4375"/>
+        <SeparationRadius value="0.375"/>
+        <InnerRadius value="0.375"/>
+        <CargoSize value="2"/>
+        <MinimapRadius value="0.375"/>
+        <Name value="Unit/Name/Zealot"/>
+    </CUnit>
+    <CBehaviorUnitTracker id="TrackerActiveSpawner">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorUnitTracker>
+    <CBehaviorUnitTracker id="TrackerMadness">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorUnitTracker>
+    <CBehaviorUnitTracker id="TrackerProbe">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorUnitTracker>
+    <CBehaviorBuff id="AngelwingChargeBuff">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification MoveSpeedMaximum="7" MoveSpeedMinimum="7">
+            <StateFlags index="SuppressCollision" value="1"/>
+            <StateFlags index="Uncommandable" value="1"/>
+            <StateFlags index="Unstoppable" value="1"/>
+        </Modification>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="FinalWillProbeExplodeDelay">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="2"/>
+        <FinalEffect value="Suicide"/>
+        <ExpireEffect value="FinalWillProbeExplode"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="MadnessEnrage">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="10.7143"/>
+        <Modification AttackSpeedMultiplier="1.15">
+            <DamageDealtScaled index="Spell" value="25"/>
+            <DamageDealtScaled index="Melee" value="25"/>
+            <DamageDealtScaled index="Ranged" value="25"/>
+            <DamageDealtScaled index="Splash" value="25"/>
+        </Modification>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="FinalWill">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification>
+            <DeathResponse Chance="1" Effect="FinalWillSet"/>
+        </Modification>
+        <InfoFlags index="Hidden" value="1"/>
+        <DisableValidatorArray value="DifficultyValidatorBrutal2"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="MadnessStructureOff">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification>
+            <StateFlags index="Invulnerable" value="1"/>
+            <StateFlags index="Untargetable" value="1"/>
+            <AbilClassDisableArray index="CAbilAttack" value="1"/>
+            <AbilClassDisableArray index="CAbilBehavior" value="1"/>
+            <AbilClassDisableArray index="CAbilEffectInstant" value="1"/>
+            <AbilClassDisableArray index="CAbilEffectTarget" value="1"/>
+        </Modification>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="MadnessStructureOn">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DamageResponse Fatal="1" Handled="MadnessStructureTurnOffSet" ModifyFraction="0">
+            <Chance value="1"/>
+        </DamageResponse>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorWander id="MadnessUnitsWander">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Range value="4"/>
+        <Delay value="3"/>
+    </CBehaviorWander>
+    <CBehaviorBuff id="MassHealBuff">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="3.6"/>
+        <Period value="0.25"/>
+        <PeriodicEffect value="MassHealSmallHeal"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="SpawnerWarpInTimedLife" parent="TimedLifeDisplayed">
+        <Duration value="30"/>
+        <KillCredit Value="Caster"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="StructureTurnOnOverboost">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <MaxStackCount value="5"/>
+        <Modification TimeScale="1.25"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="TickTockAura">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Period value="0.5"/>
+        <PeriodicEffect value="TickTockAuraSearch"/>
+        <InfoFlags index="Hidden" value="1"/>
+        <DisableValidatorArray value="BossAbilityRequirementLvl2"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="TickTockBuff">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <BuffFlags index="RefreshStack" value="1"/>
+        <MaxStackCount value="8"/>
+        <Duration value="15"/>
+        <Modification AttackSpeedMultiplier="1.01" ShieldArmorBonus="1">
+            <DamageDealtScaled index="Melee" value="1"/>
+            <DamageDealtScaled index="Ranged" value="1"/>
+            <DamageDealtScaled index="Splash" value="1"/>
+            <DamageDealtFraction index="Melee" value="0.01"/>
+            <DamageDealtFraction index="Ranged" value="0.01"/>
+            <DamageDealtFraction index="Splash" value="0.01"/>
+            <LifeArmorBonus value="1"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorUnitTracker id="TrackerCombatUnits">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorUnitTracker>
+    <CBehaviorBuff id="Turbocharged">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <MaxStackCount value="5"/>
+        <Duration value="65"/>
+        <Modification>
+            <AttackSpeedMultiplier value="1.05"/>
+            <LifeArmorMultiplier value="1.03"/>
+            <ShieldArmorBonus value="5"/>
+            <ShieldArmorMultiplier value="1.03"/>
+            <DamageDealtScaled index="Spell" value="3"/>
+            <DamageDealtScaled index="Melee" value="3"/>
+            <DamageDealtScaled index="Ranged" value="3"/>
+            <DamageDealtScaled index="Splash" value="3"/>
+            <DamageDealtFraction index="Spell" value="0.05"/>
+            <DamageDealtFraction index="Melee" value="0.05"/>
+            <DamageDealtFraction index="Ranged" value="0.05"/>
+            <DamageDealtFraction index="Splash" value="0.05"/>
+            <LifeArmorBonus value="5"/>
+            <VitalMaxArray index="Life" value="250"/>
+            <VitalMaxArray index="Shields" value="250"/>
+            <VitalMaxFractionArray index="Life" value="0.05"/>
+            <VitalMaxFractionArray index="Shields" value="0.05"/>
+        </Modification>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+</Catalog>

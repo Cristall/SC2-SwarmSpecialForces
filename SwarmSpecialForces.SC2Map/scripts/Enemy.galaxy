@@ -1,0 +1,592 @@
+// variables
+static const int enemy_SpawnLimit = 400;
+
+// reads data from diff table into variables. also sets certain catalog entries based on diff
+void Difficulty_SetVariables (int diff) {
+    string difficultyBuff = "Difficulty"+IntToString(diff);
+    fixed armorMultiplier;
+    libNtve_gf_SetUpgradeLevelForPlayer(gv_EnemyPlayer, "BossAbilityDifficultyRequirement", diff);
+    gv_Difficulty_Points = UserDataGetInt("DifficultyTable", IntToString(diff), "Points", 1);
+    gv_Difficulty_ExpMult = UserDataGetFixed("DifficultyTable", IntToString(diff), "ExpMult", 1);
+    gv_Difficulty_BiomassMult = UserDataGetFixed("DifficultyTable", IntToString(diff), "BiomassMult", 1);
+    gv_Difficulty_SpawnMult = UserDataGetFixed("DifficultyTable", IntToString(diff), "SpawnMult", 1);
+    gv_Difficulty_ScientistsAmount = UserDataGetInt("DifficultyTable", IntToString(diff), "ScientistsAmount", 1);
+    gv_Difficulty_EssenceAmount = UserDataGetInt("DifficultyTable", IntToString(diff), "EssenceAmount", 1);
+    gv_Difficulty_PsiOrbSpawns = UserDataGetInt("DifficultyTable", IntToString(diff), "PsiOrbSpawn", 1) > 0;
+    gv_Difficulty_UpgradeCountFactor = UserDataGetFixed("DifficultyTable", IntToString(diff), "UpgradeCountFactor", 1);
+    armorMultiplier = libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogBehavior, difficultyBuff, "Modification.LifeArmorMultiplier", c_playerAny);
+    CatalogFieldValueModify(c_gameCatalogBehavior, "VoidContainmentWeaponDebuff", "Modification.VitalRegenArray[2]", gv_EnemyPlayer, FixedToString((1.0 + libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogBehavior, difficultyBuff, "Modification.DamageDealtFraction[0]", c_playerAny)), c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogEffect, "VoidMineWeaponPersistent", "PeriodicEffectRateMultiplier", gv_EnemyPlayer, CatalogFieldValueGet(c_gameCatalogBehavior, difficultyBuff, "Modification.AttackSpeedMultiplier", c_playerAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogEffect, "SentryNerazimWeaponPersistent", "PeriodicEffectRateMultiplier", gv_EnemyPlayer, CatalogFieldValueGet(c_gameCatalogBehavior, difficultyBuff, "Modification.AttackSpeedMultiplier", c_playerAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogEffect, "SentryPurifierWeaponPersistent", "PeriodicEffectRateMultiplier", gv_EnemyPlayer, CatalogFieldValueGet(c_gameCatalogBehavior, difficultyBuff, "Modification.AttackSpeedMultiplier", c_playerAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogBehavior, "EatThis@Vehicle", "Modification.VitalMaxArray[0]", gv_EnemyPlayer, FixedToString(1+libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogBehavior, difficultyBuff, "Modification.VitalMaxFractionArray[0]", c_playerAny),c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogBehavior, "EatThis@Vehicle", "Modification.VitalMaxArray[1]", gv_EnemyPlayer, FixedToString(1+libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogBehavior, difficultyBuff, "Modification.VitalMaxFractionArray[1]", c_playerAny),c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogBehavior, "EatThis@Vehicle", "Modification.VitalMaxArray[2]", gv_EnemyPlayer, FixedToString(1+libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogBehavior, difficultyBuff, "Modification.VitalMaxFractionArray[2]", c_playerAny),c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    Utility_CatalogFieldSetPower(c_gameCatalogBehavior, "BossesP0Armor", "DamageResponse.ModifyFraction", gv_EnemyPlayer, armorMultiplier);
+    Utility_CatalogFieldSetPower(c_gameCatalogBehavior, "BossesP1Armor", "DamageResponse.ModifyFraction", gv_EnemyPlayer, armorMultiplier);
+    Utility_CatalogFieldSetPower(c_gameCatalogBehavior, "BossesP2Armor", "DamageResponse.ModifyFraction", gv_EnemyPlayer, armorMultiplier);
+    Utility_CatalogFieldSetPower(c_gameCatalogBehavior, "KingMoopyArmor", "DamageResponse.ModifyFraction", gv_EnemyPlayer, armorMultiplier);
+}
+
+// boss AI
+
+// apply unit filter and filters for owner of unit
+unitgroup Enemy_BossFight_ApplyFilters(unitgroup unitsInArena, unitfilter targetFilter, int targetFilterController){
+    unitgroup tmpUG;
+    int tmpInt;
+    unit tmpUnit;
+
+    tmpUG = UnitGroupFilter(null, c_playerAny, unitsInArena, targetFilter, -1);
+    tmpInt = UnitGroupCount(tmpUG, c_unitCountAll);
+    for (;; tmpInt -=1){
+        tmpUnit = UnitGroupUnitFromEnd(tmpUG, tmpInt);
+        if(tmpUnit == null){ break; }
+
+        if( targetFilterController == c_BossFightAbilAllianceTarget_Player){
+            if( !PlayerGroupHasPlayer(gv_ActivePG, UnitGetOwner(tmpUnit))){
+                UnitGroupRemove(tmpUG, tmpUnit);
+            }
+        }
+        else if( targetFilterController == c_BossFightAbilAllianceTarget_Enemy){
+            if( UnitGetOwner(tmpUnit) != gv_EnemyPlayer){
+                UnitGroupRemove(tmpUG, tmpUnit);
+            }
+        }
+    }
+    return tmpUG;
+}
+
+// get an ability index to cast, if none found returns -1 otherwise the abilIndex between 0 and maxAbil-1
+int Enemy_BossFight_GetAbilityToCast(structref<BossFightData> bossFightData, int lastAbil, unitgroup unitsInArena){
+    int[gv_Enemy_Boss_MaxCountAbility] permutation;
+    int tmpInt;
+    int randInt;
+    int tmpInt2;
+    int offset = 1;
+    int amountTargets;
+    unitgroup tmpUG;
+    int maxAbil = bossFightData.amountAbility;
+
+    //setups the random ability check order with lastAbil at the end
+    for (tmpInt = 0; tmpInt < maxAbil; tmpInt += 1) {
+        permutation[tmpInt] = tmpInt;
+    }
+    //puts lastAbil into last index to check if last abil was a thing
+    if(lastAbil != -1){
+        permutation[lastAbil] = maxAbil-1;
+        permutation[maxAbil-1] = lastAbil;
+        offset = 2;
+    }
+
+    for (tmpInt = 0; tmpInt < maxAbil-2; tmpInt += 1) {
+        randInt = RandomInt(0,maxAbil-2-tmpInt);
+
+        tmpInt2 = permutation[maxAbil-offset-tmpInt];
+        permutation[maxAbil-offset-tmpInt] = permutation[randInt];
+        permutation[randInt] = tmpInt2;
+    }
+
+    //checks for valid boss state, target filter and possible target owners to determine if ability is valid
+    for (tmpInt = 0; tmpInt < maxAbil; tmpInt += 1) {
+        tmpInt2 = permutation[tmpInt];
+
+        //condition that cause the ability to be skipped / not selected!
+        if( bossFightData.ability[tmpInt2].requiredBossAbilityLevel > Utility_GetBossAbilityLevel()
+            || (bossFightData.bossState[bossFightData.ability[tmpInt2].bossIndex] & bossFightData.ability[tmpInt2].allowedBossStates   ) == 0
+            || (bossFightData.bossState[bossFightData.ability[tmpInt2].bossIndex] & bossFightData.ability[tmpInt2].disallowedBossStates) != 0
+            || bossFightData.bossCastingTime[bossFightData.ability[tmpInt2].bossIndex] > 0
+            || bossFightData.ability[tmpInt2].currentCooldown != 0
+            || bossFightData.ability[tmpInt2].charges == 0){
+            continue;
+        }
+
+        tmpUG = Enemy_BossFight_ApplyFilters(unitsInArena, bossFightData.ability[tmpInt2].targetFilter, bossFightData.ability[tmpInt2].targetFilterController);
+
+        amountTargets = UnitGroupCount(tmpUG, c_unitCountAlive);
+
+        if(amountTargets >= bossFightData.ability[tmpInt2].minAmountTargets){
+            // check if there is an extra condition function that needs to be fufilled. if not, we can use this ability directly.
+            // if yes, then run the function -> if returns true then use ability, else check next ability
+            if(bossFightData.ability[tmpInt2].usesExtraConditions){
+                if(bossFightData.ability[tmpInt2].extraConditions(tmpUG,bossFightData.boss[bossFightData.ability[tmpInt2].bossIndex])){
+                    return tmpInt2;
+                }
+                else{
+                    continue;
+                }
+            }
+            return tmpInt2;
+        }
+    }
+
+    return -1;
+}
+
+// handles the entire boss fight, for additional functions there is the addition function
+bool Enemy_BossFight_Handler (bool testConds, bool runActions){
+
+    int bossFightID = gv_Enemy_BossFight_Handler_FightID_Param;
+    BossFightData bossFightData;
+
+    int abilIndex = -1;
+    unit targetUnit;
+    bool tmpFlag;
+    unitgroup unitsInArena;
+    unitgroup playerUnits;
+    unit tmpUnit;
+    int tmpInt;
+
+    int orderType;
+
+    const fixed loopRepeatTime = 0.25;
+    bool additionFlag = gv_Enemy_BossFight_Handler_AdditionFlag;
+    Blueprint_Enemy_BossFight_AdditionFunc additionFunction;
+
+    bossFightData.abilityGlobalCooldown = 5.25;
+
+    if(!runActions) {return true;}
+
+    if(additionFlag){
+        additionFunction = gv_Enemy_BossFight_Handler_Addition;
+        gv_Enemy_BossFight_Handler_AdditionFlag = false;
+    }
+
+    //calls function to setup boss fight data
+    gv_Enemy_BossFight_Handler_InitFunc(bossFightData);
+
+
+    while(true){
+
+        //checks if fight is still active and update all timers
+        Wait(loopRepeatTime, c_timeGame);
+        if(bossFightData.abilityGlobalCooldown > 0){
+            bossFightData.abilityGlobalCooldown -= loopRepeatTime;
+        }
+        else {
+            bossFightData.abilityGlobalCooldown = 0;
+        }
+        for (tmpInt = 0; tmpInt < bossFightData.amountAbility; tmpInt += 1) {
+            if(bossFightData.ability[tmpInt].currentCooldown > 0){
+                bossFightData.ability[tmpInt].currentCooldown -= loopRepeatTime;
+                if(bossFightData.ability[tmpInt].currentCooldown < 0){
+                    bossFightData.ability[tmpInt].currentCooldown = 0;
+                }
+            }
+        }
+
+        tmpFlag = false;
+        bossFightData.remainingBosses = 0;
+        for (tmpInt = 0; tmpInt < bossFightData.amountBosses; tmpInt += 1) {
+            if((bossFightData.bossState[tmpInt] & c_BossFightState_Alive) > 0){
+                if(UnitIsAlive(bossFightData.boss[tmpInt])){
+                    bossFightData.remainingBosses += 1;
+                    tmpFlag = true;
+                    if(bossFightData.bossCastingTime[tmpInt] > 0){
+                        bossFightData.bossCastingTime[tmpInt] -= loopRepeatTime;
+                        if(bossFightData.bossCastingTime[tmpInt] <= 0){
+                            bossFightData.bossCastingTime[tmpInt] = 0;
+                            bossFightData.bossState[tmpInt] &= ~c_BossFightState_Casting;
+                        }
+                    }
+                }
+                else {
+                    bossFightData.bossState[tmpInt] = 0;
+                }
+            }
+        }
+        if(!tmpFlag){
+            return true;
+        }
+
+        //check if update flag has been raised
+        if(gv_Enemy_BossFight_Handler_UpdateFlag && gv_Enemy_BossFight_Handler_UpdateID == bossFightID){
+            gv_Enemy_BossFight_Handler_UpdateFlag = false;
+            gv_Enemy_BossFight_Handler_UpdateFunction(bossFightData);
+            gv_Enemy_BossFight_Handler_UpdateID = c_BossFightID_Invalid;
+        }
+
+        //run external addition function, if it exist
+        if(additionFlag){
+            additionFunction(bossFightData);
+        }
+
+        //gets player unit in arena (excludes overlords and invulnerable)
+        unitsInArena = UnitGroup(null, c_playerAny, bossFightData.arena, UnitFilter(0, 0, (1 << c_targetFilterMissile) | (1 << c_targetFilterWorker) | (1 << c_targetFilterHover), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0);
+        playerUnits = UnitGroupCopy(unitsInArena);
+        tmpInt = UnitGroupCount(playerUnits, c_unitCountAlive);
+        for (;; tmpInt -=1){
+            tmpUnit = UnitGroupUnitFromEnd(playerUnits, tmpInt);
+            if(tmpUnit == null){ break; }
+
+            if( !PlayerGroupHasPlayer(gv_ActivePG, UnitGetOwner(tmpUnit))
+                || UnitTypeTestFlag(UnitGetType(tmpUnit), c_unitFlagInvulnerable)){
+                UnitGroupRemove(playerUnits, tmpUnit);
+            }
+        }
+
+
+        //handles assignment of new order
+        for (tmpInt = 0; tmpInt < bossFightData.amountBosses; tmpInt += 1) {
+            if((bossFightData.bossState[tmpInt] & c_BossFightState_Alive) == 0){ continue; }
+
+            if( !RegionContainsPoint(bossFightData.arena,UnitGetPosition(bossFightData.boss[tmpInt]))){
+                orderType = c_BossFightOrder_Return;
+            }
+        }
+        if(orderType == c_BossFightOrder_Return){
+            //do nothing here
+        }
+        else if(UnitGroupCount(playerUnits,c_unitCountAlive) == 0){
+            orderType = c_BossFightOrder_Idle;
+        }
+        else if (bossFightData.abilityGlobalCooldown > 0){
+            orderType = c_BossFightOrder_Attack;
+        }
+        else {
+            tmpInt = Enemy_BossFight_GetAbilityToCast(bossFightData, abilIndex, unitsInArena);
+            if(tmpInt != -1){
+                orderType = c_BossFightOrder_Ability;
+                abilIndex = tmpInt;
+            }
+            else{ //dunno if this case can ever happen
+                orderType = c_BossFightOrder_Attack;
+            }
+        }
+
+        //issues new order
+
+        //orders boss to go idle at its origin point/center of arena (madness & fortress have stop command)
+        if(orderType == c_BossFightOrder_Idle){
+            for (tmpInt = 0; tmpInt < bossFightData.amountBosses; tmpInt += 1) {
+                if((bossFightData.bossState[tmpInt] & c_BossFightState_Alive) == 0){  continue; }
+
+                if(!UnitTestState(bossFightData.boss[tmpInt], c_unitStateIdle)){
+                    if(UnitHasBehavior2(bossFightData.boss[tmpInt], "Taunt@Taunted")){
+                        UnitBehaviorRemove(bossFightData.boss[tmpInt], "Taunt@Taunted",1);
+                    }
+                    if(UnitGetType(bossFightData.boss[tmpInt]) == "PlanetaryFortress" || UnitGetType(bossFightData.boss[tmpInt]) == "Madness"){
+                        UnitIssueOrder(bossFightData.boss[tmpInt], Order(AbilityCommand("stop", 0)), c_orderQueueReplace);
+                    }
+                    else{
+                        UnitIssueOrder(bossFightData.boss[tmpInt], OrderTargetingPoint(AbilityCommand("move", 0), bossFightData.bossIdlePoint[tmpInt]), c_orderQueueReplace);
+                    }
+                }
+            }
+        }
+        //checks if boss is already attacking so that in multi boss unit fights (MBUF) not only a single unit can be pulled
+        else if (orderType == c_BossFightOrder_Attack){
+            for (tmpInt = 0; tmpInt < bossFightData.amountBosses; tmpInt += 1) {
+                if((bossFightData.bossState[tmpInt] & c_BossFightState_Alive) == 0
+                    || (bossFightData.bossState[tmpInt] & c_BossFightState_Deactivated) > 0){
+                        continue;
+                    }
+                
+                if(UnitTestState(bossFightData.boss[tmpInt], c_unitStateIdle)){
+                    targetUnit = UnitGroupRandomUnit(playerUnits, c_unitCountAlive);
+                    UnitIssueOrder(bossFightData.boss[tmpInt], OrderTargetingPoint(AbilityCommand("attack", 0), UnitGetPosition(targetUnit)), c_orderQueueReplace);
+                }
+            }
+        }
+        //if boss leaves the region, forces a run back
+        else if (orderType == c_BossFightOrder_Return){
+            for (tmpInt = 0; tmpInt < bossFightData.amountBosses; tmpInt += 1) {
+                if((bossFightData.bossState[tmpInt] & c_BossFightState_Alive) == 0){ continue; }
+                
+                if(UnitHasBehavior2(bossFightData.boss[tmpInt], "Taunt@Taunted")){
+                    UnitBehaviorRemove(bossFightData.boss[tmpInt], "Taunt@Taunted",1);
+                }
+                UnitBehaviorAdd(bossFightData.boss[tmpInt], "BossReturn", bossFightData.boss[tmpInt], 1);
+                UnitIssueOrder(bossFightData.boss[tmpInt], OrderTargetingPoint(AbilityCommand("move", 0), bossFightData.bossIdlePoint[tmpInt]), c_orderQueueReplace);
+            }
+            orderType = c_BossFightOrder_Idle;
+        }
+        //order boss to cast an ability, has to include attack order for other bosses in case of MBUF
+        else if (orderType == c_BossFightOrder_Ability){
+            tmpInt = bossFightData.ability[abilIndex].bossIndex;
+            //cast next ability (abilityType == TRUE means effect target)
+            if(UnitGetCooldown(bossFightData.boss[tmpInt],"Abil/"+bossFightData.ability[abilIndex].abil)){
+                Debug_ShowMessage(bossFightData.ability[abilIndex].abil+" Abil in cooldown");
+            }
+            if(bossFightData.ability[abilIndex].targetingType == c_BossFightAbilTargetType_Unit){
+                unitsInArena = Enemy_BossFight_ApplyFilters(unitsInArena, bossFightData.ability[abilIndex].targetFilter, bossFightData.ability[abilIndex].targetFilterController);
+                targetUnit = UnitGroupRandomUnit(unitsInArena, c_unitCountAlive);
+                UnitIssueOrder(bossFightData.boss[tmpInt], OrderTargetingUnit(AbilityCommand(bossFightData.ability[abilIndex].abil,0), targetUnit), c_orderQueueAddToFront);
+            }
+            else if(bossFightData.ability[abilIndex].targetingType == c_BossFightAbilTargetType_Point){
+                unitsInArena = Enemy_BossFight_ApplyFilters(unitsInArena, bossFightData.ability[abilIndex].targetFilter, bossFightData.ability[abilIndex].targetFilterController);
+                targetUnit = UnitGroupRandomUnit(unitsInArena, c_unitCountAlive);
+                UnitIssueOrder(bossFightData.boss[tmpInt], OrderTargetingPoint(AbilityCommand(bossFightData.ability[abilIndex].abil,0), UnitGetPosition(targetUnit)), c_orderQueueAddToFront);
+            }
+            else if (bossFightData.ability[abilIndex].targetingType == c_BossFightAbilTargetType_None){
+                UnitIssueOrder(bossFightData.boss[tmpInt], Order(AbilityCommand(bossFightData.ability[abilIndex].abil,0)), c_orderQueueAddToFront);
+            }
+            else {
+                //if data is setup properly, this should never happen
+                Debug_ShowMessage("BossFightHandler: ability target type setup incorrectly!");
+            }
+
+            bossFightData.bossState[tmpInt] |= c_BossFightState_Casting;
+            bossFightData.abilityGlobalCooldown = bossFightData.ability[abilIndex].globalCooldown;
+            bossFightData.ability[abilIndex].currentCooldown = bossFightData.ability[abilIndex].selfCooldown;
+            bossFightData.bossCastingTime[bossFightData.ability[abilIndex].bossIndex] = bossFightData.ability[abilIndex].castTime;
+            if(bossFightData.ability[abilIndex].charges > 0){ bossFightData.ability[abilIndex].charges -= 1; }
+        }
+    }
+
+    return true;
+}
+
+// run after boss death to provide points (if game is valid) and checks if part is finished. saves bank at the end
+void Enemy_BossDeath(int killingPlayer, int acvIdentifier, int mutations, point bossPosition){
+    int tmpInt;
+
+    gv_Part_AmountObjectivesDefeated += 1;
+
+    if(gv_ValidGame){
+        Acv_Split_Unlock(killingPlayer, acvIdentifier, gv_Difficulty);
+        Player_GainPoints();
+    }
+
+    //update objective counter, objective and check for part finishing
+    ObjectiveSetName(objective_Bosses, Utility_TextExpressionReplacement2("Trig/Objectives/Main", IntToText(gv_Part_AmountObjectivesDefeated), IntToText(gv_Part_AmountObjectivesMax)));
+    if (gv_Part_AmountObjectivesDefeated == gv_Part_AmountObjectivesMax){
+        ObjectiveSetState(objective_Bosses, c_objectiveStateCompleted);
+        Part_PartFinished();
+    }
+
+    tmpInt = -1;
+    while(true){
+        tmpInt = PlayerGroupNextPlayer(gv_ActivePG, tmpInt);
+        if (tmpInt < 0) {break;}
+
+        PlayerModifyPropertyInt(tmpInt, c_playerPropVespene, c_playerPropOperAdd, mutations);
+    }
+    
+    Utility_DelayedTextTagCreate(StringToText("+") + IntToText(mutations), Color(100.00, 25.10, 0.00), bossPosition, PlayerGroupAll(), 1.5);
+}
+
+// check if next area should be opened
+void Enemy_SpawnerKilled(unit killingUnit, unit destroyedSpawner ){
+    point spawnerPoint = UnitGetPosition(destroyedSpawner);
+    int spawnerType;
+    string revengeUnitType;
+    fixed revengeUnitAmount;
+
+    int tmpInt;
+    
+    if(gv_Part_ActivePart == c_Part_Terran){
+        spawnerType= UserDataGetInt("KillRewards", UnitGetType(destroyedSpawner),"EnemyType", 1);
+        if(spawnerType == c_EnemyType_TJunker){
+            revengeUnitType = "WidowMine2";
+            revengeUnitAmount = 2.0;
+        }
+        else{
+            revengeUnitType = "WidowMine22";
+            revengeUnitAmount = 2.0;
+        }
+
+        if (!gv_Part_Areas_Open[c_Areas_TLeft2] && libNtve_gf_UnitGroupIsDead(gv_Part_Areas_Spawners[c_Areas_TLeft1])){
+            PartTerran_AreaJunker_Second_Open();
+        }
+        if (!gv_Part_Areas_Open[c_Areas_TLeft3] && libNtve_gf_UnitGroupIsDead(gv_Part_Areas_Spawners[c_Areas_TLeft2])){
+            PartTerran_AreaJunker_Third_Open();
+        }
+        if (!gv_Part_Areas_Open[c_Areas_TRight2] && libNtve_gf_UnitGroupIsDead(gv_Part_Areas_Spawners[c_Areas_TRight1])){
+            PartTerran_AreaBlackOps_Second_Open();
+        }
+        if (!gv_Part_Areas_Open[c_Areas_TRight3] && libNtve_gf_UnitGroupIsDead(gv_Part_Areas_Spawners[c_Areas_TRight2])){
+            PartTerran_AreaBlackOps_Third_Open();
+        }
+    }
+    else if (gv_Part_ActivePart == c_Part_Protoss){
+        revengeUnitType = "VoidMine";
+        revengeUnitAmount = 2.0;
+
+        if (!gv_Part_Areas_Open[c_Areas_PBottom2] && libNtve_gf_UnitGroupIsDead(gv_Part_Areas_Spawners[c_Areas_PBottom1])){
+            PartProtoss_AreaMech_Second_Open();
+        }
+        if (!gv_Part_Areas_Open[c_Areas_PTop2] && libNtve_gf_UnitGroupIsDead(gv_Part_Areas_Spawners[c_Areas_PTop1])){
+            PartProtoss_AreaPsi_Second_Open();
+        }
+        if (!gv_Part_Areas_Open[c_Areas_PTop3] && libNtve_gf_UnitGroupIsDead(gv_Part_Areas_Spawners[c_Areas_PTop2])){
+            PartProtoss_AreaPsi_Third_Open();
+        }
+    }
+    else if (gv_Part_ActivePart == c_Part_Zerg){
+        revengeUnitType = "MechaDrone";
+        revengeUnitAmount = 4.0;
+    }
+    gv_Enemy_SpawnAmount += CeilingI(revengeUnitAmount * gv_Difficulty_SpawnMult);
+    libNtve_gf_UnitCreateFacingPoint(CeilingI(revengeUnitAmount * gv_Difficulty_SpawnMult), revengeUnitType, 0, gv_EnemyPlayer, UnitGetPosition(destroyedSpawner), UnitGetPosition(killingUnit));
+    UnitGroupIssueOrder(UnitLastCreatedGroup(), OrderTargetingUnit(AbilityCommand("attack", 0), killingUnit), c_orderQueueReplace);
+
+    tmpInt = -1;
+    while(true){
+        tmpInt = PlayerGroupNextPlayer(gv_ActivePG, tmpInt);
+        if( tmpInt < 0) {break;}
+
+        PlayerModifyPropertyInt(tmpInt, c_playerPropVespene, c_playerPropOperAdd, 1);
+    }
+
+    Utility_DelayedTextTagCreate(StringToText("+1"), Color(100.00, 25.10, 0.00), UnitGetPosition(destroyedSpawner), PlayerGroupAll(), 1.5);
+}
+
+// runs every minute to force enemy units that became idle outside the base area to attack again
+bool Enemy_IdleReset (bool testConds, bool runActions) {
+    unitgroup tmpUG;
+    int tmpInt;
+    unit tmpUnit;
+    string tmpStr;
+
+    tmpUG = UnitGroupIdle(gv_EnemyPlayer, false);
+    tmpInt = UnitGroupCount(tmpUG, c_unitCountAll);
+    for (;; tmpInt -= 1) {
+        tmpUnit = UnitGroupUnitFromEnd(tmpUG, tmpInt);
+        if (tmpUnit == null) { break; }
+        tmpStr = UnitGetType(tmpUnit);
+
+        //filters units in the current part, outside base, non heroic, summoned or structures, and no revenge unit or collectible unit
+        if (libNtve_gf_UnitInRegion(tmpUnit, gv_Part_EnemyRegion)
+            && !libNtve_gf_UnitInRegion(tmpUnit, gv_Part_BaseRegion)
+            && !UnitTypeTestAttribute(tmpStr, c_unitAttributeHeroic)
+            && !UnitTypeTestAttribute(tmpStr, c_unitAttributeStructure)
+            && !UnitTypeTestAttribute(tmpStr, c_unitAttributeSummoned)
+            && tmpStr != "WidowMine2"
+            && tmpStr != "WidowMine22"
+            && tmpStr != "VoidMine"
+            && tmpStr != "MechaDrone"
+            && tmpStr != "TransportPrism"
+            && tmpStr != "TransportEscort"
+            && !UnitHasBehavior2(tmpUnit, "NoKillReward")){
+
+            UnitIssueOrder(tmpUnit, OrderTargetingPoint(AbilityCommand("attack", 0), gv_Part_AttackPoint), c_orderQueueReplace);
+        }
+    }
+    return true;
+}
+
+// response to any enemy unit death, excluded summoned units 
+bool Enemy_Kill (bool testConds, bool runActions) {
+    unit trigUnit = EventUnit();
+    string unitType = UnitGetType(trigUnit);
+
+    if (testConds) {
+        if (!(UnitGetOwner(trigUnit) == gv_EnemyPlayer
+            && !UnitTypeTestFlag(unitType, c_unitFlagMissile)
+            && !UnitTypeTestAttribute(unitType, c_unitAttributeSummoned))
+            && !UnitHasBehavior2(trigUnit, "NoKillReward")) {
+            return false;
+        }
+    }
+
+    if (!(UnitTypeTestAttribute(unitType, c_unitAttributeStructure) || UnitTypeTestAttribute(unitType, c_unitAttributeSummoned))) {
+        gv_Enemy_SpawnAmount -= 1;
+    }
+    else if (unitType == "Bunker" || unitType == "Bunker2") {
+        gv_Enemy_SpawnAmount += 3;
+    }
+    
+    if (PlayerGroupHasPlayer(gv_ActivePG, libNtve_gf_KillingPlayer())) {
+        Acv_Grind_UnlockAdd(libNtve_gf_KillingPlayer(), c_AcvIdentifier_Kills, 1);
+        Player_KillReward(unitType, UnitGetPosition(trigUnit));
+        if(UnitHasBehavior2(trigUnit, "EnemySpawner")){
+            Enemy_SpawnerKilled(libNtve_gf_KillingUnit(), trigUnit);
+        }
+    }
+    return true;
+}
+
+// spawn enemy units at every active spawner and send them on the attack path
+bool Enemy_Spawns (bool testConds, bool runActions){
+    int tmpIntSpawner;
+    unit tmpUnitSpawner;
+    int spawnAmount;
+    string spawnType;
+    unitgroup tmpUG;
+    int tmpIntCreated;
+    unit tmpUnitCreated;
+
+    if(!runActions) {return true;}
+
+    if(gv_Enemy_SpawnAmount < enemy_SpawnLimit){
+
+        for (tmpIntSpawner = 1; tmpIntSpawner <= UnitGroupCount(gv_Part_ActiveSpawners, c_unitCountAlive); tmpIntSpawner += 1) {
+            tmpUnitSpawner = UnitGroupUnit(gv_Part_ActiveSpawners, tmpIntSpawner);
+
+            spawnType = UserDataGetUnit("SpawnTable", UnitGetType(tmpUnitSpawner),"Unit", 1);
+            spawnAmount = CeilingI(gv_Difficulty_SpawnMult * UserDataGetFixed("SpawnTable", UnitGetType(tmpUnitSpawner),"Amount", 1));
+
+            if(spawnType == ""){
+                UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Spawner not listed in UserType SpawnTable!"));
+                continue;
+            }
+
+            gv_Enemy_SpawnAmount += spawnAmount;
+            tmpUG = UnitCreate(spawnAmount, spawnType, 0, gv_EnemyPlayer, UnitGetPosition(tmpUnitSpawner),270);
+
+            //if spawner is in protoss top areas then use waypoint or if in protoss facility then randomize attackmove
+            if(gv_Part_ActivePart == c_Part_Protoss){
+                if(UnitGroupHasUnit(gv_Part_Areas_Spawners[c_Areas_PTop2], tmpUnitSpawner) || UnitGroupHasUnit(gv_Part_Areas_Spawners[c_Areas_PTop3], tmpUnitSpawner)){
+                    tmpIntCreated = UnitGroupCount(gv_Part_ActiveSpawners, c_unitCountAlive);
+
+                    for (tmpIntCreated = 1; tmpIntCreated <= UnitGroupCount(tmpUG, c_unitCountAll); tmpIntCreated += 1) {
+                        tmpUnitCreated = UnitGroupUnit(tmpUG, tmpIntCreated);
+                        UnitBehaviorAddPlayer(tmpUnitCreated, "AttackWaypoint0", gv_EnemyPlayer, 1);
+                        UnitIssueOrder(tmpUnitCreated, OrderTargetingPoint(AbilityCommand("attack", 0), gv_Part_AttackWaypoint), c_orderQueueReplace);
+                    }
+                }
+                else if(UnitGroupHasUnit(gv_Part_Areas_Spawners[c_Areas_PMid1], tmpUnitSpawner)){
+                    tmpIntCreated = UnitGroupCount(gv_Part_ActiveSpawners, c_unitCountAlive);
+                    
+                    for (tmpIntCreated = 1; tmpIntCreated <= UnitGroupCount(tmpUG, c_unitCountAll); tmpIntCreated += 1) {
+                        tmpUnitCreated = UnitGroupUnit(tmpUG, tmpIntCreated);
+                        if(RandomInt(0,1) == 0){
+                            UnitBehaviorAddPlayer(tmpUnitCreated, "AttackWaypoint0", gv_EnemyPlayer, 1);
+                            UnitIssueOrder(tmpUnitCreated, OrderTargetingPoint(AbilityCommand("attack", 0), gv_Part_AttackWaypoint), c_orderQueueReplace);
+                        }
+                        else{
+                            UnitIssueOrder(tmpUnitCreated, OrderTargetingPoint(AbilityCommand("attack", 0), gv_Part_AttackPoint), c_orderQueueReplace);
+                        }
+                    }
+                }
+                else{
+                    UnitGroupIssueOrder(tmpUG, OrderTargetingPoint(AbilityCommand("attack", 0), gv_Part_AttackPoint), c_orderQueueReplace);
+                }
+            }
+            else{
+                UnitGroupIssueOrder(tmpUG, OrderTargetingPoint(AbilityCommand("attack", 0), gv_Part_AttackPoint), c_orderQueueReplace);
+            }
+        }
+
+        //send warning if only few more units can spawn
+        if ((enemy_SpawnLimit * 0.95) <= gv_Enemy_SpawnAmount) {
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, StringExternal("Trig/Enemy/SpawnLimitClose"));
+        }
+    }
+    else {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, StringExternal("Trig/Enemy/SpawnLimitReached"));
+        
+        tmpIntSpawner = UnitGroupCount(gv_Part_AllStructures, c_unitCountAlive);
+        for (;; tmpIntSpawner -= 1) {
+            tmpUnitSpawner = UnitGroupUnitFromEnd(gv_Part_AllStructures, tmpIntSpawner);
+            if (tmpUnitSpawner == null) { break; }
+
+            UnitBehaviorAddPlayer(tmpUnitSpawner, "InvulnerableOverSpawnLimit", gv_EnemyPlayer, 1);
+        }
+    }
+    return true;
+}
+
+
+void Enemy_Generic_TriggerCreate (){
+    gv_SpawnTimer = TimerCreate();
+    gv_IdleTimer = TimerCreate();
+    TimerStart(gv_SpawnTimer, 20.0, true, c_timeGame);
+    TimerStart(gv_IdleTimer, 60.0, true, c_timeGame);
+    TriggerAddEventTimer(TriggerCreate("Enemy_IdleReset"), gv_IdleTimer);
+    TriggerAddEventTimer(TriggerCreate("Enemy_Spawns"), gv_SpawnTimer);
+    TriggerAddEventUnitDied(TriggerCreate("Enemy_Kill"), null);
+
+    gv_Enemy_BossFight_Handler_Trigger = TriggerCreate("Enemy_BossFight_Handler");
+}
+

@@ -1,0 +1,1028 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CEffectDamage id="TwinIbiksCannon">
+        <Amount value="1600"/>
+        <Death value="Normal"/>
+        <AreaArray index="0" Radius="1"/>
+        <AreaArray index="1" Radius="1.75"/>
+        <AreaArray index="2" Radius="2.5" Fraction="0.5"/>
+        <SearchFilters value="Ground;Self,Player,Ally,Neutral,Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <AttributeFactor index="Armored" value="0.15"/>
+    </CEffectDamage>
+    <CEffectApplyBehavior id="BombardmentApplyCastingBuffNoWeapons">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Behavior value="AlreadyCastingNoWeapons"/>
+        <Flags index="UseDuration" value="1"/>
+        <Duration value="4"/>
+    </CEffectApplyBehavior>
+    <CEffectSet id="BombardmentInitalSet">
+        <EditorCategories value=""/>
+        <EffectArray value="BombardmentApplyCastingBuff"/>
+        <EffectArray value="BombardmentSearchPersistent"/>
+        <EffectArray value="BombardmentApplyCastingBuffNoWeapons"/>
+    </CEffectSet>
+    <CEffectSet id="BombardmentTargetImpactSet">
+        <EditorCategories value=""/>
+        <EffectArray value="BombardmentTargetDamage"/>
+        <EffectArray value="BombardmentTargetImpactLine"/>
+        <TargetLocationType value="Point"/>
+    </CEffectSet>
+    <CEffectCreatePersistent id="BombardmentTargetImpactLine">
+        <ValidatorArray value="BossAbilityRequirementLvl5"/>
+        <EditorCategories value=""/>
+        <OffsetVectorStartLocation Value="CasterUnit"/>
+        <PeriodCount value="5"/>
+        <PeriodicEffectArray value="BombardmentTargetDamage"/>
+        <PeriodicOffsetArray value="0,-0.5,0"/>
+        <PeriodicOffsetArray value="0,-1,0"/>
+        <PeriodicOffsetArray value="0,-1.5,0"/>
+        <PeriodicOffsetArray value="0,-2,0"/>
+        <PeriodicOffsetArray value="0,-2.5,0"/>
+        <PeriodicPeriodArray value="0.0625"/>
+    </CEffectCreatePersistent>
+    <CEffectApplyBehavior id="RotatingWallsFortressDeathHandler">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+    </CEffectApplyBehavior>
+    <CEffectEnumArea id="RotatingWallsFortressDeathHandlerSearchTowers">
+        <EditorCategories value=""/>
+        <ImpactLocation Value="CasterUnit"/>
+        <SearchFilters value="Invulnerable;Self,Ally,Neutral,Enemy,Missile,Dead,Hidden"/>
+        <AreaArray Radius="15" Effect="RotatingWallsFortressDeathHandlerTowerKill"/>
+    </CEffectEnumArea>
+    <CEffectSet id="RotatingWallsFortressDeathHandlerSet">
+        <EditorCategories value=""/>
+        <EffectArray value="RotatingWallsFortressDeathHandlerSearchTowers"/>
+        <EffectArray value="RotatingWallsFortressDeathHandlerTowerWallPersistentDestroy"/>
+    </CEffectSet>
+    <CEffectDamage id="RotatingWallsFortressDeathHandlerTowerKill">
+        <ValidatorArray value="RotatingWallsTower"/>
+        <EditorCategories value=""/>
+        <Flags index="Kill" value="1"/>
+        <Flags index="NoKillCredit" value="1"/>
+    </CEffectDamage>
+    <CEffectDestroyPersistent id="RotatingWallsFortressDeathHandlerTowerWallPersistentDestroy">
+        <EditorCategories value=""/>
+        <Effect value="RotatingWallsTowerWallPersistent"/>
+        <Count value="4"/>
+        <Radius value="15"/>
+    </CEffectDestroyPersistent>
+    <CEffectDamage id="GuardianPantherWeaponMainDmg">
+        <EditorCategories value="Race:Terran"/>
+        <ResponseFlags index="Acquire" value="1"/>
+        <ResponseFlags index="Flee" value="1"/>
+        <ArmorReduction value="1"/>
+        <Flags index="Notification" value="1"/>
+        <Kind value="Melee"/>
+        <Amount value="150"/>
+        <SearchFlags index="CallForHelp" value="1"/>
+    </CEffectDamage>
+    <CEffectDamage id="GuardianPantherWeaponAoeDmg" parent="DU_WEAP">
+        <EditorCategories value="Race:Terran"/>
+        <Amount value="150"/>
+    </CEffectDamage>
+    <CEffectEnumArea id="GuardianPantherWeaponAoeSearch">
+        <EditorCategories value="Race:Terran"/>
+        <ImpactLocation Value="SourceUnit"/>
+        <ExcludeArray Value="Target"/>
+        <SearchFilters value="Ground;Self,Player,Ally,Neutral,Structure,Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="0.5" Effect="GuardianPantherWeaponAoeDmg"/>
+        <SearchFlags index="ExtendByUnitRadius" value="1"/>
+    </CEffectEnumArea>
+    <CEffectSet id="GuardianPantherWeaponSet">
+        <EditorCategories value="Race:Terran"/>
+        <EffectArray value="GuardianPantherWeaponMainDmg"/>
+        <EffectArray value="GuardianPantherWeaponAoeSearch"/>
+    </CEffectSet>
+    <CEffectApplyBehavior id="RequestRepairApplyCastingBuff">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Behavior value="AlreadyCasting"/>
+        <Flags index="UseDuration" value="1"/>
+        <Duration value="5.7"/>
+    </CEffectApplyBehavior>
+    <CEffectCreateUnit id="RequestRepairCreateGuardianPanther">
+        <ValidatorArray value="BossAbilityRequirementLvl4"/>
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetPoint"/>
+        <Origin Value="CasterPoint"/>
+        <SpawnOwner Value="Caster"/>
+        <SpawnEffect value="RequestRepairDropBuff"/>
+        <SpawnUnit value="GuardingPanther"/>
+        <SpawnCount value="2"/>
+    </CEffectCreateUnit>
+    <CEffectSet id="RequestRepairInitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="RequestRepairApplyCastingBuff"/>
+        <EffectArray value="RequestRepairSpawnPersistent"/>
+        <TargetLocationType value="Point"/>
+    </CEffectSet>
+    <CEffectSet id="RequestRepairSpawnSet">
+        <EditorCategories value=""/>
+        <EffectArray value="RequestRepairCreateUnit"/>
+        <EffectArray value="RequestRepairCreateGuardianPanther"/>
+        <TargetLocationType value="Point"/>
+    </CEffectSet>
+    <CEffectApplyBehavior id="BombardmentFortressBuff">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+    </CEffectApplyBehavior>
+    <CEffectIssueOrder id="BombardmentTargetAttackDummy">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Abil value="attack"/>
+        <Player Value="Caster"/>
+        <Target Value="TargetUnit"/>
+    </CEffectIssueOrder>
+    <CEffectIssueOrder id="BombardmentCastTarget">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Abil value="BombardmentTarget"/>
+        <Player Value="Caster"/>
+        <Target Value="TargetUnit"/>
+    </CEffectIssueOrder>
+    <CEffectEnumArea id="BombardmentEnemySearch">
+        <EditorCategories value=""/>
+        <LaunchLocation Value="CasterUnit"/>
+        <ImpactLocation Value="CasterUnit"/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Worker,Missile,Stasis,Dead,Hidden,Invulnerable,Summoned"/>
+        <TargetSorts>
+            <SortArray value="TSRandom"/>
+        </TargetSorts>
+        <AreaArray Radius="9" Effect="BombardmentCastTarget"/>
+        <MinCount value="1"/>
+        <MaxCount value="1"/>
+        <SearchFlags index="ExtendByUnitRadius" value="1"/>
+        <SearchFlags index="OffsetAreaByAngle" value="0"/>
+    </CEffectEnumArea>
+    <CEffectCreatePersistent id="BombardmentSearchPersistent">
+        <EditorCategories value=""/>
+        <InitialEffect value="BombardmentFortressBuff"/>
+        <PeriodCount value="6"/>
+        <PeriodicEffectArray value="BombardmentEnemySearch"/>
+        <PeriodicPeriodArray value="0.35"/>
+    </CEffectCreatePersistent>
+    <CEffectCreateUnit id="BombardmentTargetCreateDummy">
+        <EditorCategories value=""/>
+        <CreateFlags index="OffsetByRadius" value="0"/>
+        <CreateFlags index="NormalizeSpawnOffset" value="0"/>
+        <SpawnEffect value="BombardmentTargetAttackDummy"/>
+        <SpawnUnit value="BombardmentTargetDummy"/>
+    </CEffectCreateUnit>
+    <CEffectDamage id="BombardmentTargetDamage">
+        <EditorCategories value=""/>
+        <Amount value="2500"/>
+        <AreaArray Radius="0.5" Fraction="1"/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Stasis,Dead,Hidden,Invulnerable"/>
+    </CEffectDamage>
+    <CEffectLaunchMissile id="BombardmentTargetLeftLaunchMissile">
+        <EditorCategories value=""/>
+        <ImpactLocation Value="TargetPoint"/>
+        <ImpactEffect value="BombardmentTargetImpactSet"/>
+        <AmmoUnit value="BombardmentMissile"/>
+    </CEffectLaunchMissile>
+    <CEffectLaunchMissile id="BombardmentTargetRightLaunchMissile">
+        <EditorCategories value=""/>
+        <ImpactLocation Value="TargetPoint"/>
+        <ImpactEffect value="BombardmentTargetImpactSet"/>
+        <AmmoUnit value="BombardmentMissile"/>
+    </CEffectLaunchMissile>
+    <CEffectSet id="BombardmentTargetLaunchSet">
+        <EditorCategories value=""/>
+        <EffectArray value="BombardmentTargetLeftOffsetPersistent"/>
+        <EffectArray value="BombardmentTargetRightOffsetPersistent"/>
+        <EffectArray value="BombardmentTargetCreateDummy"/>
+        <TargetLocationType value="Point"/>
+    </CEffectSet>
+    <CEffectCreatePersistent id="BombardmentTargetLeftImpactLocation">
+        <EditorCategories value=""/>
+        <PeriodCount value="1"/>
+        <PeriodicPeriodArray value="0.175"/>
+        <PeriodicEffectArray value="BombardmentTargetLeftLaunchMissile"/>
+    </CEffectCreatePersistent>
+    <CEffectCreatePersistent id="BombardmentTargetRightImpactLocation">
+        <EditorCategories value=""/>
+        <PeriodCount value="1"/>
+        <PeriodicPeriodArray value="0.175"/>
+        <PeriodicEffectArray value="BombardmentTargetRightLaunchMissile"/>
+    </CEffectCreatePersistent>
+    <CEffectCreatePersistent id="BombardmentTargetRightOffsetPersistent">
+        <EditorCategories value=""/>
+        <Flags index="RandomOffset" value="1"/>
+        <PeriodCount value="1"/>
+        <PeriodicEffectArray value="BombardmentTargetRightImpactLocation"/>
+        <PeriodicOffsetArray value="0.1,0.7,0"/>
+        <PeriodicOffsetArray value="0.1,-0.7,0"/>
+        <PeriodicOffsetArray value="0.1,0.35,0"/>
+        <PeriodicOffsetArray value="0.1,-0.35,0"/>
+        <PeriodicOffsetArray value="0.25,0.66,0"/>
+        <PeriodicOffsetArray value="0.25,0.33,0"/>
+        <PeriodicOffsetArray value="0.25,-0.66,0"/>
+        <PeriodicOffsetArray value="0.25,-0.33,0"/>
+        <PeriodicOffsetArray value="0.4,0.58,0"/>
+        <PeriodicOffsetArray value="0.4,-0.58,0"/>
+        <PeriodicOffsetArray value="0.4,0.29,0"/>
+        <PeriodicOffsetArray value="0.4,-0.29,0"/>
+        <PeriodicOffsetArray value="0.5,0,0"/>
+        <PeriodicPeriodArray value="0"/>
+    </CEffectCreatePersistent>
+    <CEffectCreatePersistent id="BombardmentTargetLeftOffsetPersistent">
+        <EditorCategories value=""/>
+        <Flags index="RandomOffset" value="1"/>
+        <PeriodCount value="1"/>
+        <PeriodicEffectArray value="BombardmentTargetLeftImpactLocation"/>
+        <PeriodicOffsetArray value="-0.1,0.7,0"/>
+        <PeriodicOffsetArray value="-0.1,-0.7,0"/>
+        <PeriodicOffsetArray value="-0.1,0.35,0"/>
+        <PeriodicOffsetArray value="-0.1,-0.35,0"/>
+        <PeriodicOffsetArray value="-0.25,0.66,0"/>
+        <PeriodicOffsetArray value="-0.25,0.33,0"/>
+        <PeriodicOffsetArray value="-0.25,-0.66,0"/>
+        <PeriodicOffsetArray value="-0.25,-0.33,0"/>
+        <PeriodicOffsetArray value="-0.4,0.58,0"/>
+        <PeriodicOffsetArray value="-0.4,-0.58,0"/>
+        <PeriodicOffsetArray value="-0.4,0.29,0"/>
+        <PeriodicOffsetArray value="-0.4,-0.29,0"/>
+        <PeriodicOffsetArray value="-0.5,0,0"/>
+        <PeriodicPeriodArray value="0"/>
+    </CEffectCreatePersistent>
+    <CEffectDamage id="BombardmentTargetDummyKill">
+        <EditorCategories value=""/>
+        <ImpactLocation Value="SourceUnit"/>
+        <Flags index="Kill" value="1"/>
+        <Flags index="NoKillCredit" value="1"/>
+    </CEffectDamage>
+    <CEffectCreateHealer id="Repair2">
+        <EditorCategories value="Race:Terran"/>
+        <RechargeVitalFraction value="1"/>
+        <TimeFactor value="1"/>
+    </CEffectCreateHealer>
+    <CEffectApplyBehavior id="RequestRepairApplyTimedLife">
+        <EditorCategories value=""/>
+        <Behavior value="RequestRepairMuleTimedLife"/>
+    </CEffectApplyBehavior>
+    <CEffectCreateUnit id="RequestRepairCreateUnit">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetPoint"/>
+        <Origin Value="CasterPoint"/>
+        <SpawnOwner Value="Caster"/>
+        <SpawnEffect value="RequestRepairDropBuff"/>
+        <SpawnUnit value="RepairMULE"/>
+    </CEffectCreateUnit>
+    <CEffectApplyBehavior id="RequestRepairDropBuff">
+        <EditorCategories value=""/>
+    </CEffectApplyBehavior>
+    <CEffectIssueOrder id="RequestRepairIssueOrder">
+        <EditorCategories value=""/>
+        <Abil value="RepairMULERepair"/>
+        <Player Value="Caster"/>
+        <Target Value="SourceUnit"/>
+    </CEffectIssueOrder>
+    <CEffectCreatePersistent id="RequestRepairSpawnPersistent">
+        <EditorCategories value=""/>
+        <WhichLocation Value="CasterPoint"/>
+        <OffsetVectorEndLocation Value="CasterPoint"/>
+        <PeriodCount value="4"/>
+        <PeriodicEffectArray value="RequestRepairSpawnSet"/>
+        <PeriodicOffsetArray value="0,-2.8,0"/>
+        <PeriodicOffsetArray value="0,2.8,0"/>
+        <PeriodicOffsetArray value="2.8,0,0"/>
+        <PeriodicOffsetArray value="-2.8,0,0"/>
+        <PeriodicPeriodArray value="0"/>
+    </CEffectCreatePersistent>
+    <CEffectSet id="RequestRepairDropSet">
+        <EditorCategories value=""/>
+        <EffectArray value="RequestRepairIssueOrder"/>
+        <EffectArray value="RequestRepairApplyTimedLife"/>
+    </CEffectSet>
+    <CEffectApplyBehavior id="BombardmentApplyCastingBuff">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Behavior value="AlreadyCasting"/>
+        <Flags index="UseDuration" value="1"/>
+        <Duration value="7.15"/>
+    </CEffectApplyBehavior>
+    <CEffectEnumArea id="RequestRepairSearchEnemy">
+        <EditorCategories value=""/>
+        <LaunchLocation Value="CasterUnit"/>
+        <SearchFilters value="-;Player,Ally,Neutral,Missile,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="8" Effect="RequestRepairSpawnPersistent"/>
+        <MinCount value="1"/>
+        <SearchFlags index="ExtendByUnitRadius" value="1"/>
+        <MaxCount value="1"/>
+    </CEffectEnumArea>
+    <CEffectApplyBehavior id="RotatingWallsApplyCastingBuff">
+        <EditorCategories value=""/>
+        <Behavior value="AlreadyCasting"/>
+        <Flags index="UseDuration" value="1"/>
+        <Duration value="17.85"/>
+        <WhichUnit Value="Caster"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="RotatingWallsApplyCastingBuffNoWeapons">
+        <EditorCategories value=""/>
+        <Behavior value="AlreadyCastingNoWeapons"/>
+        <Flags index="UseDuration" value="1"/>
+        <Duration value="2.15"/>
+        <WhichUnit Value="Caster"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="RotatingWallsRotationApplyIndexPositive">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Behavior value="RotatingWallsRotationPositive"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="RotatingWallsRotationApplyIndexNegative">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Behavior value="RotatingWallsRotationNegative"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyKinetic id="RotatingWallsApplyRotationKinetic">
+        <ValidatorArray value="RotatingWallsTower"/>
+        <EditorCategories value=""/>
+        <Kinetic value="RotatingWallsRotationSet"/>
+    </CEffectApplyKinetic>
+    <CEffectSet id="RotatingWallsInitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="RotatingWallsApplyCastingBuff"/>
+        <EffectArray value="RotatingWallsApplyCastingBuffNoWeapons"/>
+        <EffectArray value="RotatingWallsTowerSpawnOffsets"/>
+        <EffectArray value="RotatingWallsRotationIndexPersistent"/>
+        <EffectArray value="RotatingWallsFortressDeathHandler"/>
+        <TargetLocationType value="Point"/>
+    </CEffectSet>
+    <CEffectDamage id="RotatingWallsLineDmg">
+        <EditorCategories value=""/>
+        <Amount value="300"/>
+    </CEffectDamage>
+    <CEffectEnumArea id="RotatingWallsLineSearch">
+        <EditorCategories value=""/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Item,Dead,Hidden,Invulnerable"/>
+        <AreaArray RectangleWidth="1" RectangleHeight="9.5" Effect="RotatingWallsLineDmg"/>
+    </CEffectEnumArea>
+    <CEffectCreatePersistent id="RotatingWallsRotationIndexPersistent">
+        <EditorCategories value=""/>
+        <InitialDelay value="1"/>
+        <InitialEffect value="RotatingWallsRotationSet"/>
+        <PeriodCount value="1"/>
+        <PeriodicEffectArray value="RotatingWallsRotationSet"/>
+        <PeriodicPeriodArray value="10"/>
+    </CEffectCreatePersistent>
+    <CEffectSet id="RotatingWallsRotationApplyIndexRandom">
+        <EditorCategories value=""/>
+        <EffectArray value="RotatingWallsRotationApplyIndexPositive"/>
+        <EffectArray value="RotatingWallsRotationApplyIndexNegative"/>
+        <Random value="1"/>
+        <MaxCount value="1"/>
+        <MinCount value="1"/>
+    </CEffectSet>
+    <CEffectEnumArea id="RotatingWallsRotationSearchTowers">
+        <EditorCategories value=""/>
+        <SearchFilters value="Invulnerable;Self,Ally,Neutral,Enemy,Missile,Dead,Hidden"/>
+        <AreaArray Radius="10" Effect="RotatingWallsApplyRotationKinetic"/>
+        <ImpactLocation Value="CasterUnit"/>
+    </CEffectEnumArea>
+    <CEffectSet id="RotatingWallsRotationSet">
+        <EditorCategories value=""/>
+        <EffectArray value="RotatingWallsRotationApplyIndexRandom"/>
+        <EffectArray value="RotatingWallsRotationSearchTowers"/>
+    </CEffectSet>
+    <CEffectApplyBehavior id="RotatingWallsTowerApplyBuff">
+        <EditorCategories value=""/>
+        <Behavior value="RotatingWallsTowerBuff"/>
+    </CEffectApplyBehavior>
+    <CEffectCreatePersistent id="RotatingWallsTowerKillDelay">
+        <EditorCategories value=""/>
+        <InitialDelay value="0.7"/>
+        <InitialEffect value="Suicide"/>
+    </CEffectCreatePersistent>
+    <CEffectCreateUnit id="RotatingWallsTowerSpawn">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetPoint"/>
+        <CreateFlags index="Birth" value="0"/>
+        <CreateFlags index="OffsetByRadius" value="0"/>
+        <CreateFlags index="SetFacing" value="1"/>
+        <CreateFlags index="NormalizeSpawnOffset" value="0"/>
+        <SpawnEffect value="RotatingWallsTowerSpawnSet"/>
+        <SpawnUnit value="RotatingWallsTower"/>
+    </CEffectCreateUnit>
+    <CEffectCreatePersistent id="RotatingWallsTowerSpawnOffsets">
+        <EditorCategories value=""/>
+        <WhichLocation Value="CasterUnit"/>
+        <OffsetVectorStartLocation Value="CasterUnit"/>
+        <OffsetVectorEndLocation Value="CasterUnit"/>
+        <Flags index="OrphanParams" value="1"/>
+        <PeriodCount value="4"/>
+        <PeriodicEffectArray value="RotatingWallsTowerSpawn"/>
+        <PeriodicOffsetArray value="0,9.5,0"/>
+        <PeriodicOffsetArray value="0,-9.5,0"/>
+        <PeriodicOffsetArray value="9.5,0,0"/>
+        <PeriodicOffsetArray value="-9.5,0,0"/>
+        <PeriodicPeriodArray value="0"/>
+    </CEffectCreatePersistent>
+    <CEffectSet id="RotatingWallsTowerSpawnSet">
+        <EditorCategories value=""/>
+        <EffectArray value="RotatingWallsTowerApplyBuff"/>
+        <EffectArray value="RotatingWallsTowerWallDelay"/>
+    </CEffectSet>
+    <CEffectCreatePersistent id="RotatingWallsTowerWallDelay">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetUnit"/>
+        <InitialDelay value="1"/>
+        <InitialEffect value="RotatingWallsTowerWallPersistent"/>
+    </CEffectCreatePersistent>
+    <CEffectCreatePersistent id="RotatingWallsTowerWallPersistent">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetUnit"/>
+        <PeriodCount value="320"/>
+        <PeriodicEffectArray value="RotatingWallsLineSearch"/>
+        <PeriodicPeriodArray value="0.0625"/>
+        <OffsetVectorStartLocation Value="CasterUnit"/>
+        <OffsetVectorEndLocation Value="TargetUnit"/>
+        <PeriodicOffsetArray value="0,4.75,0"/>
+    </CEffectCreatePersistent>
+    <CAbilEffectInstant id="BombardmentStart">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="BombardmentInitalSet"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="Bombardment2"/>
+    </CAbilEffectInstant>
+    <CAbilEffectTarget id="BombardmentTarget">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="BombardmentTargetLaunchSet"/>
+        <Range value="50"/>
+        <Arc value="360"/>
+    </CAbilEffectTarget>
+    <CAbilEffectTarget id="RepairMULERepair">
+        <Alignment value="Positive"/>
+        <AbilSetId value="Repair"/>
+        <EditorCategories value="Race:Terran,AbilityorEffectType:Units"/>
+        <Effect index="0" value="Repair2"/>
+        <Flags index="AutoCast" value="1"/>
+        <Flags index="AutoCastOffOwnerLeave" value="1"/>
+        <Flags index="AutoCastOn" value="1"/>
+        <Flags index="BestUnit" value="0"/>
+        <Flags index="ReExecutable" value="1"/>
+        <Flags index="Smart" value="1"/>
+        <Flags index="PassengerAcquirePassengers" value="1"/>
+        <TargetFilters value="Heroic,Visible;Self,Enemy,Missile,Item,Stasis,UnderConstruction,Dead,Hidden"/>
+        <RangeSlop value="0.2"/>
+        <AutoCastAcquireLevel value="Defensive"/>
+        <AutoCastFilters value="-;Neutral,Enemy"/>
+        <AutoCastRange value="7"/>
+        <Marker Link="Abil/Repair">
+            <MatchFlags index="Link" value="0"/>
+            <MismatchFlags index="Id" value="0"/>
+        </Marker>
+        <UseMarkerArray index="Approach" value="0"/>
+        <UseMarkerArray index="Prep" value="0"/>
+        <UseMarkerArray index="Cast" value="0"/>
+        <UseMarkerArray index="Channel" value="0"/>
+        <InheritAttackPriorityArray index="Prep" value="1"/>
+        <InheritAttackPriorityArray index="Cast" value="1"/>
+        <InheritAttackPriorityArray index="Channel" value="1"/>
+        <AINotifyEffect value="Repair"/>
+        <DefaultError value="RequiresRepairTarget"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="Repair">
+            <Flags index="ToSelection" value="1"/>
+        </CmdButtonArray>
+    </CAbilEffectTarget>
+    <CAbilEffectInstant id="RequestRepair">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="RequestRepairInitialSet"/>
+        <Flags index="Transient" value="1"/>
+        <UninterruptibleArray index="Finish" value="1"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="RequestRepair"/>
+        <AutoCastFilters value="Visible;Self,Player,Ally,Neutral,Worker,Missile,Stasis,Dead,Hidden,Invulnerable"/>
+    </CAbilEffectInstant>
+    <CAbilEffectInstant id="RotatingWalls">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="RotatingWallsInitialSet"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="RotatingWalls"/>
+    </CAbilEffectInstant>
+    <CActorModel id="BombardmentImpact" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On Terms="Effect.BombardmentTargetDamage.Start" Send="Create"/>
+    </CActorModel>
+    <CActorUnit id="GuardianPanther" parent="GenericUnitStandard" unitName="GuardingPanther">
+        <Aliases value="_UnitMedium"/>
+        <Macros value="UnloadDropAnim"/>
+        <Model value="Predator"/>
+        <Scale value="0.700000"/>
+        <Baselines index="Walk" AnimProps="Walk,Fast"/>
+        <BuildModel value="Predator"/>
+        <DeathArray index="Normal" ModelLink="PredatorDeath" SoundLink="Predator_Explode"/>
+        <PlacementModel value="Predator"/>
+        <PortraitModel value="CyberCatPortrait"/>
+        <BarOffset value="50"/>
+        <BarWidth value="102"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-Terran-predator.dds"/>
+        </GroupIcon>
+        <HeroIcon value="Assets\Textures\BTN-Unit-Terran-Predator.dds"/>
+        <HighlightTooltip value="Unit/Name/GuardianPanther"/>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-terran-vehicleplatinglevel0.dds"/>
+        <SoundArray index="Ready" value="Predator_Ready"/>
+        <SoundArray index="What" value="Predator_What"/>
+        <SoundArray index="Yes" value="Predator_Yes"/>
+        <SoundArray index="Attack" value="Predator_Attack"/>
+        <UnitIcon value="Assets\Textures\BTN-Unit-Terran-Predator.dds"/>
+        <Wireframe>
+            <Image value="Assets\Textures\Wireframe-Terran-predator.dds"/>
+        </Wireframe>
+    </CActorUnit>
+    <CActorAction id="GuardianPantherAttack" parent="GenericAttack" effectAttack="GuardianPantherWeaponMainDmg">
+        <LaunchAttachQuery Methods="Weapon"/>
+        <LaunchAssets Sound="Predator_AttackLaunch"/>
+        <ImpactMap index="None" Sound="Predator_AttackImpact"/>
+        <ImpactMap index="Flesh" Model="BloodTargetImpact"/>
+        <ShieldFlashType value="Header"/>
+    </CActorAction>
+    <CActorSound id="GuardianPantherAttackImpactSound" parent="SoundOneShot">
+        <On Terms="Effect.GuardianPantherWeaponAoeDmg.Start" Send="Create"/>
+        <Sound value="RetributionFieldImpactSound"/>
+    </CActorSound>
+    <CActorModel id="GuardianPantherAttackAoELaunch" parent="ModelAnimationStyleOneShot">
+        <Inherits index="BaseModelScale" value="1"/>
+        <Inherits index="Scale" value="1"/>
+        <On Terms="Effect.GuardianPantherWeaponAoeSearch.Start; At Caster" Send="Create"/>
+        <Host Subject="_Selectable"/>
+        <HostSiteOps Ops="SOpAttachCenter"/>
+        <Model value="RetributionFieldLaunch"/>
+    </CActorModel>
+    <CActorBeamSimple id="RotatingWallsBeam1" parent="BeamSimpleAnimationStyleContinuous">
+        <EditorCategories value=""/>
+        <On Terms="Effect.RotatingWallsTowerWallPersistent.Start; At Caster" Send="Create"/>
+        <On Terms="Effect.RotatingWallsTowerWallPersistent.Stop" Send="Destroy"/>
+        <Model value="RotatingWallsBeam"/>
+        <HostLaunch Subject="_Unit" Scope="Caster" Actor="Find"/>
+        <HostLaunchSiteOps Ops="SOpAttachOrigin"/>
+        <HostImpact Subject="_Unit" Scope="Target" Actor="Find"/>
+        <HostImpactSiteOps Ops="SOpAttachOrigin"/>
+    </CActorBeamSimple>
+    <CActorBeamSimple id="RotatingWallsBeam2" parent="BeamSimpleAnimationStyleContinuous">
+        <EditorCategories value=""/>
+        <On Terms="Effect.RotatingWallsTowerWallPersistent.Start; At Caster" Send="Create"/>
+        <On Terms="Effect.RotatingWallsTowerWallPersistent.Stop" Send="Destroy"/>
+        <Model value="RotatingWallsBeam"/>
+        <HostLaunch Subject="_Unit" Scope="Caster" Actor="Find"/>
+        <HostLaunchSiteOps Ops="SOpAttachOrigin RotatingWallsWallSOpOffset0p5Up"/>
+        <HostImpact Subject="_Unit" Scope="Target" Actor="Find"/>
+        <HostImpactSiteOps Ops="SOpAttachOrigin RotatingWallsWallSOpOffset0p5Up"/>
+    </CActorBeamSimple>
+    <CActorBeamSimple id="RotatingWallsBeam3" parent="BeamSimpleAnimationStyleContinuous">
+        <EditorCategories value=""/>
+        <On Terms="Effect.RotatingWallsTowerWallPersistent.Start; At Caster" Send="Create"/>
+        <On Terms="Effect.RotatingWallsTowerWallPersistent.Stop" Send="Destroy"/>
+        <Model value="RotatingWallsBeam"/>
+        <HostLaunch Subject="_Unit" Scope="Caster" Actor="Find"/>
+        <HostLaunchSiteOps Ops="SOpAttachOrigin RotatingWallsWallSOpOffset1Up"/>
+        <HostImpact Subject="_Unit" Scope="Target" Actor="Find"/>
+        <HostImpactSiteOps Ops="SOpAttachOrigin RotatingWallsWallSOpOffset1Up"/>
+    </CActorBeamSimple>
+    <CActorBeamSimple id="RotatingWallsBeam4" parent="BeamSimpleAnimationStyleContinuous">
+        <EditorCategories value=""/>
+        <On Terms="Effect.RotatingWallsTowerWallPersistent.Start; At Caster" Send="Create"/>
+        <On Terms="Effect.RotatingWallsTowerWallPersistent.Stop" Send="Destroy"/>
+        <Model value="RotatingWallsBeam"/>
+        <HostLaunch Subject="_Unit" Scope="Caster" Actor="Find"/>
+        <HostLaunchSiteOps Ops="SOpAttachOrigin RotatingWallsWallSOpOffset1p5Up"/>
+        <HostImpact Subject="_Unit" Scope="Target" Actor="Find"/>
+        <HostImpactSiteOps Ops="SOpAttachOrigin RotatingWallsWallSOpOffset1p5Up"/>
+    </CActorBeamSimple>
+    <CActorBeamSimple id="RotatingWallsBeam5" parent="BeamSimpleAnimationStyleContinuous">
+        <EditorCategories value=""/>
+        <On Terms="Effect.RotatingWallsTowerWallPersistent.Start; At Caster" Send="Create"/>
+        <On Terms="Effect.RotatingWallsTowerWallPersistent.Stop" Send="Destroy"/>
+        <Model value="RotatingWallsBeam"/>
+        <HostLaunch Subject="_Unit" Scope="Caster" Actor="Find"/>
+        <HostLaunchSiteOps Ops="SOpAttachOrigin RotatingWallsWallSOpOffset2Up"/>
+        <HostImpact Subject="_Unit" Scope="Target" Actor="Find"/>
+        <HostImpactSiteOps Ops="SOpAttachOrigin RotatingWallsWallSOpOffset2Up"/>
+    </CActorBeamSimple>
+    <CActorUnit id="RotatingWallsTower" parent="GenericUnitStandard" unitName="RotatingWallsTower">
+        <EditorCategories value=""/>
+        <HighlightTooltip value="Unit/Name/Bogus"/>
+    </CActorUnit>
+    <CActorSiteOpLocalOffset id="RotatingWallsWallSOpOffset1Up">
+        <EditorCategories value=""/>
+        <LocalOffset value="0.000000,0.000000,1.000000"/>
+    </CActorSiteOpLocalOffset>
+    <CActorSiteOpLocalOffset id="RotatingWallsWallSOpOffset1p5Up">
+        <EditorCategories value=""/>
+        <LocalOffset value="0.000000,0.000000,1.500000"/>
+    </CActorSiteOpLocalOffset>
+    <CActorSiteOpLocalOffset id="RotatingWallsWallSOpOffset0p5Up">
+        <EditorCategories value=""/>
+        <LocalOffset value="0.000000,0.000000,0.500000"/>
+    </CActorSiteOpLocalOffset>
+    <CActorSiteOpLocalOffset id="RotatingWallsWallSOpOffset2Up">
+        <EditorCategories value=""/>
+        <LocalOffset value="0.000000,0.000000,2.000000"/>
+    </CActorSiteOpLocalOffset>
+    <CActorAction id="BombardmentMissileLeft" parent="GenericAttack" effectImpact="BombardmentTargetDamage" effectLaunch="BombardmentTargetLeftLaunchMissile">
+        <EditorCategories value=""/>
+        <LaunchAttachQuery Methods="Weapon 0"/>
+        <Missile value="BombardmentMissile"/>
+    </CActorAction>
+    <CActorAction id="BombardmentMissileRight" parent="GenericAttack" effectImpact="BombardmentTargetDamage" effectLaunch="BombardmentTargetRightLaunchMissile">
+        <EditorCategories value=""/>
+        <LaunchAttachQuery Methods="Weapon 1"/>
+        <Missile value="BombardmentMissile"/>
+    </CActorAction>
+    <CActorModel id="BombardmentTarget" parent="ModelAnimationStyleOneShot">
+        <On Terms="Effect.BombardmentTargetLeftImpactLocation.Start" Send="Create"/>
+        <On Terms="ActorCreation" Send="SetScale 1.200000"/>
+        <On Terms="Effect.BombardmentTargetRightImpactLocation.Start" Send="Create"/>
+    </CActorModel>
+    <CActorUnit id="BombardmentTargetDummy" parent="GenericUnitStandard" unitName="BombardmentTargetDummy">
+        <Model value="Larva"/>
+    </CActorUnit>
+    <CActorMissile id="BombardmentMissile" parent="GenericAttackMissile" unitName="BombardmentMissile">
+        <On Terms="ActorDestruction" Send="Create HailstormMissileVolleyDeath"/>
+    </CActorMissile>
+    <CActorUnit id="PlanetaryFortress">
+        <FogVisibility value="Dimmed"/>
+        <CustomUnitStatusFrame value="SSF_UnitStatus/BossStatus"/>
+        <MinimapIcon value="Assets\Textures\btn-building-terran-planetaryfortress.dds"/>
+        <MinimapIconScale value="0.300000"/>
+        <MinimapIconBackground value="Assets\MinimapBackground.dds"/>
+        <MinimapIconBackgroundScale value="1.100000"/>
+        <MinimapIconBackgroundTintColor value="255,255,0,0"/>
+        <UnitFlags index="SuppressDefaultStatusBar" value="1"/>
+    </CActorUnit>
+    <CActorUnit id="RepairMULE" parent="MULE" unitName="RepairMULE">
+        <On index="0" Terms="UnitBirth.RepairMULE"/>
+        <On index="1" Terms="UnitBirth.RepairMULE"/>
+        <On index="2" Terms="UnitRevive.RepairMULE"/>
+        <On index="3" Terms="UnitRevive.RepairMULE"/>
+        <On index="4" Terms="UnitConstruction.RepairMULE.Start"/>
+        <On index="5" Terms="UnitConstruction.RepairMULE.Finish"/>
+        <On index="69" Terms="Abil.RepairMULERepair.SourceChannelStart"/>
+        <On index="70" Terms="Abil.RepairMULERepair.SourceChannelStop"/>
+        <On index="71" Terms="Abil.RepairMULERepair.SourceChannelStart" Send="TimerSet 0.000000,0.300000 Repair"/>
+        <On index="72" Terms="Abil.RepairMULERepair.SourceChannelStop" Send="TimerKill Repair"/>
+        <On index="73" Terms="Abil.RepairMULERepair.SourceChannelStop" Send="AnimClear Repair"/>
+        <On index="74" Terms="AnimDone.*.Complete; AnimName Repair" Send="TimerSet 0.000000,0.300000 Repair"/>
+        <On index="75" Terms="TimerExpired; TimerName Repair" Send="AnimPlay Repair Work NonLooping"/>
+        <On index="76" Terms="TimerExpired; TimerName Repair" Send="Create MULERepairSound"/>
+        <On index="77" Terms="Abil.MULEGather.Start" Send="StatusSet CloakSound 1"/>
+        <On index="78" Terms="Behavior.CarryHarvestableVespeneGeyserGas.Create" Send="StatusSet CloakSound 1"/>
+        <On index="79" Terms="Confirmation.MULE.Start" Send="StatusSet CloakSound 0"/>
+        <On index="80" Terms="Behavior.CloakFieldEffect.Create; IsStatus CloakSound 0" Send="Create Worker_CloakFieldOn"/>
+        <On index="81" Terms="Behavior.CloakFieldEffect.Destroy; IsStatus CloakSound 0" Send="Create Worker_CloakFieldOff"/>
+        <On index="82" Terms="Behavior.Precursor.Off" Send="Create MULEReadySound"/>
+        <On index="83" Terms="Behavior.OracleCloakFieldEffect.Create; IsStatus CloakSound 0" Send="Create Worker_CloakFieldOn"/>
+        <On index="84" Terms="Behavior.OracleCloakFieldEffect.Destroy; IsStatus CloakSound 0" Send="Create Worker_CloakFieldOff"/>
+        <On index="85" Terms="UnitHeightUpdate.*.Land" Send="Create Mule_Land"/>
+        <On index="86" removed="1"/>
+        <On index="87" removed="1"/>
+        <HighlightTooltip value="Unit/Name/RepairMULE"/>
+    </CActorUnit>
+    <CWeaponLegacy id="BombardmentDummyWeapon">
+        <EditorCategories value=""/>
+        <Options index="Disabled" value="1"/>
+        <Options index="Hidden" value="1"/>
+        <DisplayEffect value=""/>
+        <TargetFilters value="Visible,Invulnerable;Ally,Neutral,Enemy"/>
+        <Range value="10"/>
+        <Period value="0.175"/>
+        <Effect value=""/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="RoboticClaws">
+        <EditorCategories value="Race:Terran"/>
+        <Options index="Melee" value="1"/>
+        <Icon value="Assets\Textures\BTN-Upgrade-Terran-VehicleWeaponsLevel0.dds"/>
+        <DisplayEffect value="GuardianPantherWeaponMainDmg"/>
+        <TargetFilters value="Ground,Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="0.1"/>
+        <Period value="1"/>
+        <DamagePoint value="0.15"/>
+        <Effect value="GuardianPantherWeaponSet"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="TwinIbiksCannon">
+        <TargetFilters value="Ground,Visible;Self,Worker,Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <MinScanRange value="6.5"/>
+        <RangeSlop value="2"/>
+    </CWeaponLegacy>
+    <CMoverMissile id="BombardmentMissileMover">
+        <MotionPhases>
+            <Driver value="Guidance"/>
+            <Acceleration value="6"/>
+            <Speed value="1.3984"/>
+            <Outro value="-1"/>
+            <ThrowBandYaw value="-360,-360,-360,-360"/>
+            <ThrowBandPitch value="-360,-360,-360,-360"/>
+            <YawPitchRoll value="719.2968"/>
+            <FlightTime value="3,-1"/>
+            <Overlays Scale="1,0.25"/>
+        </MotionPhases>
+        <MotionOverlays>
+            <Type value="Revolver"/>
+            <Polarity value="Random"/>
+            <Axis value="0,-1,0"/>
+            <Wavelength value="0"/>
+            <WavelengthChangeProbability value="0"/>
+            <RevolverSpeed value="17.2265"/>
+            <RevolverSpeedRange value="17.2265"/>
+            <RevolverMaxSpeed value="71.0156"/>
+            <RevolverMaxSpeedRange value="0"/>
+            <RevolverAccel value="22.5"/>
+            <RevolverAccelRange value="22.5"/>
+        </MotionOverlays>
+    </CMoverMissile>
+    <CUnit id="BombardmentTargetDummy">
+        <FlagArray index="Turnable" value="0"/>
+        <FlagArray index="Movable" value="0"/>
+        <FlagArray index="Uncommandable" value="1"/>
+        <FlagArray index="Unselectable" value="1"/>
+        <FlagArray index="Untargetable" value="1"/>
+        <FlagArray index="Uncursorable" value="1"/>
+        <FlagArray index="NoDraw" value="1"/>
+        <FlagArray index="Undetectable" value="1"/>
+        <FlagArray index="Unradarable" value="1"/>
+        <FlagArray index="KillCredit" value="0"/>
+        <FlagArray index="Invulnerable" value="1"/>
+        <FlagArray index="NoScore" value="1"/>
+        <FlagArray index="NoDeathEvent" value="1"/>
+        <FlagArray index="NoPortraitTalk" value="1"/>
+        <FlagArray index="ShowResources" value="0"/>
+        <FlagArray index="PlayerRevivable" value="0"/>
+        <FlagArray index="CameraFollow" value="0"/>
+        <PlaneArray index="Ground" value="1"/>
+        <Attributes index="Summoned" value="1"/>
+        <Speed value="2.7968"/>
+        <Acceleration value="100"/>
+        <LateralAcceleration value="100"/>
+        <AbilArray Link="stop"/>
+        <AbilArray Link="move"/>
+        <BehaviorArray Link="BombardmentTargetDummyTimedLife"/>
+        <BehaviorArray Link="Taunt@Untauntable"/>
+        <CardLayouts>
+            <LayoutButtons Face="Move" Type="AbilCmd" AbilCmd="move,Move" Row="0" Column="0"/>
+            <LayoutButtons Face="Stop" Type="AbilCmd" AbilCmd="stop,Stop" Row="0" Column="1"/>
+        </CardLayouts>
+        <Radius value="0"/>
+        <SeparationRadius value="0"/>
+        <MinimapRadius value="0"/>
+        <EditorCategories value=""/>
+    </CUnit>
+    <CUnit id="BombardmentMissile" parent="MISSILE">
+        <Mover value="BombardmentMissileMover"/>
+    </CUnit>
+    <CUnit id="PlanetaryFortress">
+        <Mob value="None"/>
+        <FogVisibility value="Dimmed"/>
+        <Attributes index="Armored" value="0"/>
+        <Attributes index="Mechanical" value="0"/>
+        <Attributes index="Massive" value="1"/>
+        <Attributes index="Heroic" value="1"/>
+        <LifeStart value="35000"/>
+        <LifeMax value="35000"/>
+        <LifeArmor value="0"/>
+        <LifeRegenDelay value="5"/>
+        <LifeRegenRate value="140"/>
+        <Sight value="15"/>
+        <VisionHeight value="4"/>
+        <CostResource index="Minerals" value="0"/>
+        <CostResource index="Vespene" value="0"/>
+        <AbilArray index="0" Link="stop"/>
+        <AbilArray index="1" Link="attack"/>
+        <AbilArray index="2" Link="RequestRepair"/>
+        <AbilArray index="3" Link="BombardmentStart"/>
+        <AbilArray index="4" Link="BombardmentTarget"/>
+        <AbilArray index="5" Link="RotatingWalls"/>
+        <AbilArray index="6" removed="1"/>
+        <BehaviorArray index="0" Link="Difficulty0"/>
+        <BehaviorArray index="1" Link="Difficulty1"/>
+        <BehaviorArray index="2" Link="Difficulty2"/>
+        <BehaviorArray Link="Difficulty3"/>
+        <BehaviorArray Link="Difficulty4"/>
+        <BehaviorArray Link="Difficulty5"/>
+        <BehaviorArray Link="DifficultyCustom"/>
+        <BehaviorArray Link="Detector10"/>
+        <BehaviorArray Link="BossesP0Armor"/>
+        <CardLayouts index="0">
+            <LayoutButtons index="0" Face="StopPlanetaryFortress" AbilCmd="stop,Stop" Row="0" Column="3"/>
+            <LayoutButtons index="1" Face="AttackBuildingPFort" AbilCmd="attack,Execute" Row="0" Column="4"/>
+            <LayoutButtons index="2" Face="RequestRepair" AbilCmd="RequestRepair,Execute" Row="2" Column="0"/>
+            <LayoutButtons index="3" Face="Bombardment2" AbilCmd="BombardmentStart,Execute" Row="2" Column="1"/>
+            <LayoutButtons index="4" Face="RotatingWalls" AbilCmd="RotatingWalls,Execute" Column="2"/>
+            <LayoutButtons index="5" removed="1"/>
+            <LayoutButtons index="6" removed="1"/>
+            <LayoutButtons index="7" removed="1"/>
+        </CardLayouts>
+        <ScoreMake value="0"/>
+        <ScoreKill value="0"/>
+        <EditorCategories value=""/>
+        <WeaponArray Link="BombardmentDummyWeapon" Turret="PlanetaryFortress"/>
+        <TechAliasArray index="0" removed="1"/>
+        <GlossaryPriority value="0"/>
+        <GlossaryStrongArray index="0" removed="1"/>
+        <GlossaryStrongArray index="1" removed="1"/>
+        <GlossaryStrongArray index="2" removed="1"/>
+        <GlossaryWeakArray index="0" removed="1"/>
+        <GlossaryWeakArray index="1" removed="1"/>
+        <GlossaryWeakArray index="2" removed="1"/>
+        <GlossaryCategory value=""/>
+        <HotkeyCategory value=""/>
+        <LifeArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </LifeArmorFormula>
+        <ShieldArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </ShieldArmorFormula>
+        <ShieldRegenDelay value="5"/>
+        <LifeArmorTip value="Unit/P0Bosses/ArmorTooltip"/>
+    </CUnit>
+    <CUnit id="GuardingPanther">
+        <Race value="Terr"/>
+        <FlagArray index="PreventDestroy" value="1"/>
+        <FlagArray index="UseLineOfSight" value="1"/>
+        <FlagArray index="ArmySelect" value="1"/>
+        <PlaneArray index="Ground" value="1"/>
+        <Collide index="Ground" value="1"/>
+        <Collide index="ForceField" value="1"/>
+        <Collide index="Locust" value="1"/>
+        <Collide index="Small" value="1"/>
+        <Attributes index="Armored" value="1"/>
+        <Attributes index="Mechanical" value="1"/>
+        <Attributes index="Summoned" value="1"/>
+        <LifeStart value="1000"/>
+        <LifeMax value="1000"/>
+        <LifeArmorName value="Unit/LifeArmorName/TerranVehiclePlating"/>
+        <Speed value="4.1992"/>
+        <Acceleration value="1000"/>
+        <LateralAcceleration value="46"/>
+        <StationaryTurningRate value="1499.9414"/>
+        <TurningRate value="1499.9414"/>
+        <Sight value="10"/>
+        <RepairTime value="33.3332"/>
+        <AttackTargetPriority value="20"/>
+        <AbilArray Link="attack"/>
+        <AbilArray Link="move"/>
+        <AbilArray Link="stop"/>
+        <BehaviorArray Link="Difficulty0"/>
+        <BehaviorArray Link="Difficulty1"/>
+        <BehaviorArray Link="Difficulty2"/>
+        <BehaviorArray Link="Difficulty3"/>
+        <BehaviorArray Link="Difficulty4"/>
+        <BehaviorArray Link="Difficulty5"/>
+        <BehaviorArray Link="DifficultyCustom"/>
+        <WeaponArray Link="RoboticClaws"/>
+        <CardLayouts>
+            <LayoutButtons Face="Move" Type="AbilCmd" AbilCmd="move,Move" Row="0" Column="0"/>
+            <LayoutButtons Face="Stop" Type="AbilCmd" AbilCmd="stop,Stop" Row="0" Column="1"/>
+            <LayoutButtons Face="MoveHoldPosition" Type="AbilCmd" AbilCmd="move,HoldPos" Row="0" Column="2"/>
+            <LayoutButtons Face="MovePatrol" Type="AbilCmd" AbilCmd="move,Patrol" Row="0" Column="3"/>
+            <LayoutButtons Face="Attack" Type="AbilCmd" AbilCmd="attack,Execute" Row="0" Column="4"/>
+            <LayoutButtons Face="AcquireMove" Type="AbilCmd" AbilCmd="move,AcquireMove" Row="0" Column="4"/>
+        </CardLayouts>
+        <Radius value="0.375"/>
+        <SeparationRadius value="0.375"/>
+        <InnerRadius value="0.375"/>
+        <CargoSize value="2"/>
+        <MinimapRadius value="0.375"/>
+        <LifeArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </LifeArmorFormula>
+        <ShieldArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </ShieldArmorFormula>
+        <LifeRegenDelay value="5"/>
+        <ShieldRegenDelay value="5"/>
+    </CUnit>
+    <CUnit id="RepairMULE" parent="MULE">
+        <Name value="Unit/Name/RepairMULE"/>
+        <Description value="Button/Tooltip/RepairMULE"/>
+        <LifeStart value="750"/>
+        <LifeMax value="750"/>
+        <Speed value="4.1992"/>
+        <CostResource index="Minerals" value="0"/>
+        <AbilArray index="2" Link="RepairMULERepair"/>
+        <AbilArray index="3" removed="1"/>
+        <BehaviorArray Link="Difficulty0"/>
+        <BehaviorArray Link="Difficulty1"/>
+        <BehaviorArray Link="Difficulty2"/>
+        <BehaviorArray Link="Difficulty3"/>
+        <BehaviorArray Link="Difficulty4"/>
+        <BehaviorArray Link="Difficulty5"/>
+        <BehaviorArray Link="DifficultyCustom"/>
+        <BehaviorArray Link="Taunt@Untauntable"/>
+        <CardLayouts index="0">
+            <LayoutButtons index="2" Face="Repair" AbilCmd="RepairMULERepair,Execute" Row="2" Column="0"/>
+            <LayoutButtons index="3" removed="1"/>
+            <LayoutButtons index="4" removed="1"/>
+            <LayoutButtons index="5" removed="1"/>
+            <LayoutButtons index="6" removed="1"/>
+            <LayoutButtons index="7" removed="1"/>
+            <LayoutButtons index="8" removed="1"/>
+            <LayoutButtons index="9" removed="1"/>
+        </CardLayouts>
+        <EditorCategories value=""/>
+        <AttackTargetPriority value="0"/>
+        <HotkeyAlias value="RepairMULE"/>
+        <HotkeyCategory value=""/>
+        <DeathRevealRadius value="2"/>
+        <Mob value="None"/>
+        <DefaultAcquireLevel value="Offensive"/>
+        <RepairTime value="10"/>
+        <DamageDealtXP value="0"/>
+        <DamageTakenXP value="0"/>
+        <KillXP value="0"/>
+        <GlossaryCategory value=""/>
+        <GlossaryPriority value="0"/>
+        <Attributes index="Summoned" value="1"/>
+        <LifeArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </LifeArmorFormula>
+        <ShieldArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </ShieldArmorFormula>
+        <LifeRegenDelay value="5"/>
+        <ShieldRegenDelay value="5"/>
+    </CUnit>
+    <CUnit id="RotatingWallsTower">
+        <Race value="Zerg"/>
+        <FlagArray index="Unselectable" value="1"/>
+        <FlagArray index="Untargetable" value="1"/>
+        <FlagArray index="Invulnerable" value="1"/>
+        <FlagArray index="IgnoreTerrainZInit" value="1"/>
+        <FlagArray index="TownStructureWall" value="1"/>
+        <Mover value="FlyLow"/>
+        <Height value="9"/>
+        <EditorCategories value=""/>
+        <BehaviorArray Link="Taunt@Untauntable"/>
+    </CUnit>
+    <CBehaviorBuff id="BombardmentFortressBuff">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="2.15"/>
+        <Modification>
+            <StateFlags index="Uncommandable" value="1"/>
+            <WeaponEnableArray value="BombardmentDummyWeapon"/>
+        </Modification>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="RotatingWallsFortressDeathHandler">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="15.7"/>
+        <DamageResponse Fatal="1" Handled="RotatingWallsFortressDeathHandlerSet">
+            <Chance value="1"/>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="RequestRepairDropBuff">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="2"/>
+        <FinalEffect value="RequestRepairDropSet"/>
+        <Modification>
+            <StateFlags index="Invulnerable" value="1"/>
+            <StateFlags index="Stun" value="1"/>
+            <StateFlags index="NoDraw" value="1"/>
+            <StateFlags index="Uncommandable" value="1"/>
+            <StateFlags index="Unselectable" value="1"/>
+            <StateFlags index="Untargetable" value="1"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="RotatingWallsRotationPositive">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="5"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="RotatingWallsRotationNegative">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="5"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="RotatingWallsTowerBuff">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="22"/>
+        <FinalEffect value="RotatingWallsTowerKillDelay"/>
+        <Modification Height="3">
+            <HeightTime index="Start" value="1"/>
+            <HeightTime index="Stop" value="1"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="BombardmentTargetDummyTimedLife" parent="TimedLifeHidden">
+        <Duration value="3"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="RequestRepairMuleTimedLife" parent="TimedLifeDisplayed">
+        <Duration value="21.5"/>
+    </CBehaviorBuff>
+</Catalog>

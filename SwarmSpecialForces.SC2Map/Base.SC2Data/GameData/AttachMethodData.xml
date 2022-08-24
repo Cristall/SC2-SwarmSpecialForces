@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CAttachMethodFilter id="AMFilterWeaponTest">
+        <Keys Keyword="Weapon" Index="0"/>
+        <Keys Keyword="Weapon" Index="1"/>
+    </CAttachMethodFilter>
+    <CAttachMethodPattern id="AMPatternAtlantisBeam">
+        <Keyword value="Weapon"/>
+        <Base value="::RollingIndex"/>
+        <Driver value="AtlantisLaunchQueryIndexDummy"/>
+    </CAttachMethodPattern>
+</Catalog>

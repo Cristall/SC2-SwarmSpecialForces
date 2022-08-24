@@ -1,0 +1,163 @@
+
+static int votekick_MainFrame;
+static int[gv_MaxAmountPlayers + 1] votekick_KickButtons;
+static bool[gv_MaxAmountPlayers+ 1][gv_MaxAmountPlayers + 1] votekick_Votes;
+static bool[gv_MaxAmountPlayers+ 1] votekick_FirstTimeInitialized;
+static int[gv_MaxAmountPlayers + 1] votekick_VotesCombined;
+static int votekick_VotesRequired;
+static int votekick_MenuOpenButton;
+
+static int Votekick_VotesRequired(int playerAmount){
+    if (playerAmount == 1){ return 1; }
+    else if (playerAmount == 2){ return 2; }
+    else if (playerAmount == 3){ return 2; }
+    else if (playerAmount == 4){ return 3; }
+    else if (playerAmount == 5){ return 3; }
+    else if (playerAmount == 6){ return 4; }
+    else { return 4; }
+}
+
+static int Votekick_GetKickDialogID(int dialogItem) {
+    int tmpInt;
+    for ( tmpInt = 1; tmpInt <= gv_MaxAmountPlayers; tmpInt += 1 ) {
+        if (dialogItem == votekick_KickButtons[tmpInt]) {
+            return tmpInt;
+        }
+    }
+    return -1;
+}
+
+static void Votekick_Reset() {
+    int tmpInt;
+    int i;
+    int tmpPlayer;
+
+    tmpInt = -1;
+    while (true) {
+        tmpInt = PlayerGroupNextPlayer(gv_StartingPG, tmpInt);
+        if (tmpInt < 0) { break; }
+
+        libNtve_gf_SetDialogItemText(votekick_KickButtons[tmpInt], (Utility_PlayerNameWithPlayerColor(tmpInt) + StringToText(" (") + IntToText(votekick_VotesCombined[tmpInt]) + StringToText("/") + IntToText(votekick_VotesRequired) + StringToText(")")), gv_StartingPG);
+        votekick_FirstTimeInitialized[tmpInt] = false;
+
+        votekick_VotesCombined[tmpInt] = 0;
+        for (i = 1; i <= PlayerGroupCount(gv_StartingPG); i += 1) {
+            tmpPlayer = PlayerGroupPlayer(gv_StartingPG, i);
+            votekick_Votes[tmpInt][tmpPlayer] = false;
+        }
+    }
+}
+
+static void Votekick_KickButton_TextUpdate(int playerID){
+    libNtve_gf_SetDialogItemText(votekick_KickButtons[playerID], (Utility_PlayerNameWithPlayerColor(playerID) + StringToText(" (") + IntToText(votekick_VotesCombined[playerID]) + StringToText("/") + IntToText(votekick_VotesRequired) + StringToText(")")), PlayerGroupAll());
+}
+
+bool Votekick_KickButton_Handler (bool testConds, bool runActions){
+    int kickPlayer = Votekick_GetKickDialogID(EventDialogControl());
+    int trigPlayer = EventPlayer();
+    int tmpInt;
+
+    if(testConds){
+        if (!(kickPlayer >= 1)) {return false;}
+    }
+    if(!runActions) {return true;}
+
+    //if prev not voted
+    if(!votekick_Votes[kickPlayer][trigPlayer]){
+        votekick_Votes[kickPlayer][trigPlayer] = true;
+        votekick_VotesCombined[kickPlayer] +=1;
+
+        Votekick_KickButton_TextUpdate(kickPlayer);
+        libNtve_gf_SetDialogItemColor(votekick_KickButtons[kickPlayer], Color(100.00, 0.00, 0.00), PlayerGroupSingle(trigPlayer));
+
+        if(!votekick_FirstTimeInitialized[kickPlayer]) {
+            votekick_FirstTimeInitialized[kickPlayer] = true;
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, Utility_TextExpressionReplacement("Trig/Votekick/Init", Utility_PlayerNameWithPlayerColor(kickPlayer)));
+        }
+
+        if (votekick_VotesCombined[kickPlayer] >= votekick_VotesRequired) {
+            if (Utility_PlayerIsDev(kickPlayer)) {
+                UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, Utility_TextExpressionReplacement("Trig/Votekick/Admin", Utility_PlayerNameWithPlayerColor(kickPlayer)));
+
+                Votekick_Reset();
+            }
+            else {
+                UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, Utility_TextExpressionReplacement("Trig/Votekick/Kick", Utility_PlayerNameWithPlayerColor(kickPlayer)));
+                Bank_Save_ForcedAll(kickPlayer);
+                GameOver(kickPlayer, c_gameOverTie, false, true);
+            }
+        }
+    }
+    //if voting was active
+    else {
+        votekick_Votes[kickPlayer][trigPlayer] = false;
+        votekick_VotesCombined[kickPlayer] -=1;
+
+        Votekick_KickButton_TextUpdate(kickPlayer);
+        libNtve_gf_SetDialogItemColor(votekick_KickButtons[kickPlayer], ColorWithAlpha(0,0,0,0), PlayerGroupSingle(trigPlayer));
+    }
+
+    return true;
+}
+
+void Votekick_MenuOpenButton_Update(){
+    if (PlayerGroupCount(gv_ActivePG) <= 2 && PlayerGroupCount(gv_SpectatingPG) == 0) {
+        // deactivates the votekick menu if no specteting players and leq 2 players.
+        DialogControlSetEnabled(votekick_MenuOpenButton, PlayerGroupAll(), false);
+        libNtve_gf_SetDialogItemTooltip(votekick_MenuOpenButton, StringExternal("Trig/Menu/VotekickRequirement"), PlayerGroupAll());
+        DialogControlSendAnimationEvent(votekick_MainFrame, PlayerGroupAll(), "Close");
+    }
+    else {
+        // activates votekick menu
+        DialogControlSetEnabled(votekick_MenuOpenButton, PlayerGroupAll(), true);
+        libNtve_gf_SetDialogItemTooltip(votekick_MenuOpenButton, StringToText(""), PlayerGroupAll());
+        Votekick_Reset();
+    }
+}
+
+// gets called when player leaves
+void Votekick_PlayerRemoveFinal(int playerID){
+    // removed player cannot vote
+    DialogControlSetEnabled(votekick_KickButtons[playerID], PlayerGroupAll(), false);
+    votekick_VotesRequired = Votekick_VotesRequired(gv_PlayerAmount);
+    Votekick_MenuOpenButton_Update();
+}
+
+// called when player dies or leaves 
+void Votekick_PlayerRemove(int playerID){
+    int i;
+    int tmpPlayer;
+    for (i = 1; i <= PlayerGroupCount(gv_StartingPG); i += 1) {
+        tmpPlayer = PlayerGroupPlayer(gv_StartingPG, i);
+        // other player cannot vote to kick removed player
+        DialogControlSetEnabled(votekick_KickButtons[tmpPlayer], PlayerGroupSingle(playerID), false);
+    }
+    Votekick_MenuOpenButton_Update();
+}
+
+void Votekick_Init(){
+    int x = 40;
+    int y = 92;
+    int tmpPlayer;
+    trigger tmpTrigger;
+
+    votekick_MainFrame = DialogControlHookup(gv_UI_MasterFrame, c_triggerControlTypePanel, "Votekick");
+    votekick_MenuOpenButton = DialogControlHookup(gv_UI_MasterFrame, c_triggerControlTypePanel, "Menu/Votekick");
+
+    tmpPlayer = -1;
+    tmpTrigger = TriggerCreate("Votekick_KickButton_Handler");
+    while (true) {
+        tmpPlayer = PlayerGroupNextPlayer(gv_ActivePG, tmpPlayer);
+        if (tmpPlayer < 0) { break; }
+        votekick_KickButtons[tmpPlayer] = DialogControlCreateInPanelFromTemplate(votekick_MainFrame, c_triggerControlTypeButton, "SSF_Votekick/VotekickPlayerButtonTemplate");
+        TriggerAddEventDialogControl(tmpTrigger, c_playerAny, votekick_KickButtons[tmpPlayer], c_triggerControlEventTypeClick);
+        DialogControlSetPosition(votekick_KickButtons[tmpPlayer], PlayerGroupAll(), c_anchorTopLeft, x, y);
+        libNtve_gf_SetDialogItemText(votekick_KickButtons[tmpPlayer], (Utility_PlayerNameWithPlayerColor(tmpPlayer) + StringToText(" (0/") + IntToText(votekick_VotesRequired) + StringToText(")")), PlayerGroupAll());
+        DialogControlSetEnabled(votekick_KickButtons[tmpPlayer], PlayerGroupSingle(tmpPlayer), false);
+        y += (50 + 2);
+    }
+    y += (40);
+    DialogControlSetSize(votekick_MainFrame, PlayerGroupAll(), 340, y);
+    votekick_VotesRequired = Votekick_VotesRequired(gv_PlayerAmount);
+    Votekick_MenuOpenButton_Update();
+}

@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Regions>
+    <region id="3">
+        <name value="PartTerran"/>
+        <invisible/>
+        <shape type="rect">
+            <quad value="4.1601,1.685,177.34,126.4946"/>
+        </shape>
+    </region>
+    <region id="7">
+        <name value="PartTerran_Boss_Fortress_Tripwire"/>
+        <color value="255,255,128,128"/>
+        <invisible/>
+        <shape type="diamond">
+            <center value="69.7021,59.018"/>
+            <width value="0.7897"/>
+            <height value="7.65"/>
+        </shape>
+    </region>
+    <region id="8">
+        <name value="PartTerran_Boss_Flamer_Tripwire"/>
+        <color value="255,255,128,128"/>
+        <invisible/>
+        <shape type="diamond">
+            <center value="67.4467,18.1547"/>
+            <width value="0.7897"/>
+            <height value="7.65"/>
+        </shape>
+    </region>
+    <region id="9">
+        <name value="PartTerran_Boss_Hammer_Tripwire"/>
+        <color value="255,255,128,128"/>
+        <invisible/>
+        <shape type="diamond">
+            <center value="116.852,21.1611"/>
+            <width value="5.1718"/>
+            <height value="0.98"/>
+        </shape>
+    </region>
+    <region id="10">
+        <name value="PartTerran_Base"/>
+        <invisible/>
+        <shape type="rect">
+            <quad value="89.43,95.694,106.9013,121.777"/>
+        </shape>
+    </region>
+    <region id="11">
+        <name value="PartTerran_Junker_First"/>
+        <color value="255,255,128,64"/>
+        <invisible/>
+        <shape type="diamond">
+            <center value="50.5898,81.0202"/>
+            <width value="25.06"/>
+            <height value="35.8312"/>
+        </shape>
+        <shape type="rect">
+            <quad value="48.325,96.2556,84.8547,117.784"/>
+        </shape>
+    </region>
+    <region id="12">
+        <name value="PartTerran_Junker_Second"/>
+        <color value="255,255,128,64"/>
+        <invisible/>
+        <shape type="circle">
+            <center value="27.2045,109.9714"/>
+            <radius value="20.393"/>
+        </shape>
+    </region>
+    <region id="13">
+        <name value="PartTerran_Junker_Third"/>
+        <color value="255,255,128,64"/>
+        <invisible/>
+        <shape type="rect">
+            <quad value="9.365,8.3627,47.575,73.0825"/>
+        </shape>
+        <shape type="rect">
+            <quad value="41.4201,5.04,71.5197,16.4"/>
+        </shape>
+    </region>
+    <region id="15">
+        <name value="PartTerran_BlackOps_Second"/>
+        <color value="255,0,0,255"/>
+        <invisible/>
+        <shape type="rect">
+            <quad value="115.098,57.2216,152.3576,78.4814"/>
+        </shape>
+    </region>
+    <region id="17">
+        <name value="PartTerran_Mix_First"/>
+        <color value="255,0,255,0"/>
+        <invisible/>
+        <shape type="rect">
+            <quad value="73.8088,33.5942,111.0202,92.7377"/>
+        </shape>
+    </region>
+    <region id="20">
+        <name value="PartTerran_BlackOps_Second_Wall"/>
+        <invisible/>
+        <shape type="rect">
+            <quad value="160.1791,84.318,167.8891,88.0231"/>
+        </shape>
+    </region>
+    <region id="21">
+        <name value="PartTerran_BlackOps_Third_Wall"/>
+        <invisible/>
+        <shape type="rect">
+            <quad value="162.542,68.2045,171.7517,70.4345"/>
+        </shape>
+    </region>
+    <region id="19">
+        <name value="PartTerran_Junker_Third_Wall"/>
+        <color value="255,255,128,64"/>
+        <invisible/>
+        <shape type="diamond">
+            <center value="11.2932,87.557"/>
+            <width value="3.42"/>
+            <height value="10.0397"/>
+        </shape>
+    </region>
+    <region id="22">
+        <name value="PartTerran_Junker_Second_Wall"/>
+        <color value="255,255,128,64"/>
+        <invisible/>
+        <shape type="diamond">
+            <center value="29.4523,85.505"/>
+            <width value="6.3498"/>
+            <height value="3.2998"/>
+        </shape>
+    </region>
+    <region id="14">
+        <name value="PartTerran_BlackOps_First"/>
+        <color value="255,0,0,255"/>
+        <invisible/>
+        <shape type="rect">
+            <quad value="111.121,84.4047,174.321,122.9443"/>
+        </shape>
+    </region>
+    <region id="16">
+        <name value="PartTerran_BlackOps_Third"/>
+        <color value="255,0,0,255"/>
+        <invisible/>
+        <shape type="rect">
+            <quad value="82.3752,3.8706,178.0683,55.009"/>
+        </shape>
+        <shape type="circle">
+            <negative/>
+            <center value="85.22,53.44"/>
+            <radius value="24.285"/>
+        </shape>
+    </region>
+    <region id="2">
+        <name value="PartTerran_Bounds"/>
+        <color value="255,0,255,0"/>
+        <invisible/>
+        <shape type="rect">
+            <quad value="12.302,7.9877,171.712,122.2377"/>
+        </shape>
+    </region>
+    <region id="1">
+        <name value="PartProtoss"/>
+        <invisible/>
+        <shape type="rect">
+            <quad value="2.6425,129.304,174.4973,254.025"/>
+        </shape>
+    </region>
+    <region id="4">
+        <name value="PartProtoss_Bounds"/>
+        <color value="255,0,255,0"/>
+        <invisible/>
+        <shape type="rect">
+            <quad value="9.615,135.8151,164.365,248.072"/>
+        </shape>
+    </region>
+    <region id="5">
+        <name value="PartProtoss_Mech_First"/>
+        <invisible/>
+        <shape type="rect">
+            <quad value="81.4621,133.9174,137.1618,175.8073"/>
+        </shape>
+    </region>
+    <region id="18">
+        <name value="PartProtoss_Mech_Second_Wall"/>
+        <invisible/>
+        <shape type="rect">
+            <quad value="78.4133,150.493,81.2695,158.085"/>
+        </shape>
+    </region>
+    <region id="23">
+        <name value="PartProtoss_Mech_Second"/>
+        <invisible/>
+        <shape type="rect">
+            <quad value="3.1638,131.422,79.4333,177.8417"/>
+        </shape>
+    </region>
+    <region id="24">
+        <name value="PartProtoss_Psi_First"/>
+        <invisible/>
+        <shape type="diamond">
+            <center value="143.1374,194.1821"/>
+            <width value="39.43"/>
+            <height value="62.6098"/>
+        </shape>
+        <shape type="rect">
+            <negative/>
+            <quad value="140.1506,204.7116,164.1003,229.6613"/>
+        </shape>
+    </region>
+    <region id="25">
+        <name value="PartProtoss_Psi_Second"/>
+        <invisible/>
+        <shape type="rect">
+            <quad value="140.9614,205.19,175.341,249.0598"/>
+        </shape>
+        <shape type="rect">
+            <quad value="121.051,237.1623,141.241,249.092"/>
+        </shape>
+        <shape type="circle">
+            <center value="110.19,233.14"/>
+            <radius value="17.4748"/>
+        </shape>
+    </region>
+    <region id="26">
+        <name value="PartProtoss_Psi_Second_Wall"/>
+        <invisible/>
+        <shape type="rect">
+            <quad value="131.477,230.4633,140.137,233.6633"/>
+        </shape>
+    </region>
+    <region id="27">
+        <name value="PartProtoss_Mix_First"/>
+        <invisible/>
+        <shape type="rect">
+            <quad value="-0.5,177.6003,118.5,216.4"/>
+        </shape>
+    </region>
+    <region id="28">
+        <name value="PartProtoss_Base"/>
+        <invisible/>
+        <shape type="diamond">
+            <center value="156.8557,147.479"/>
+            <width value="17.5266"/>
+            <height value="27.8498"/>
+        </shape>
+        <shape type="rect">
+            <negative/>
+            <quad value="150,161.5,156,164.5"/>
+        </shape>
+        <shape type="rect">
+            <negative/>
+            <quad value="140.5,148,143.5,154"/>
+        </shape>
+    </region>
+    <region id="32">
+        <name value="PartProtoss_Psi_Third_Wall"/>
+        <invisible/>
+        <shape type="rect">
+            <quad value="91.3027,216.5327,98.759,222.0483"/>
+        </shape>
+    </region>
+    <region id="33">
+        <name value="PartProtoss_Psi_Third"/>
+        <invisible/>
+        <shape type="rect">
+            <quad value="6.5776,215.673,90.1774,252.2126"/>
+        </shape>
+    </region>
+    <region id="34">
+        <name value="PartProtoss_Boss_Madness_Arena"/>
+        <invisible/>
+        <shape type="circle">
+            <center value="15.2524,162.6005"/>
+            <radius value="14.7048"/>
+        </shape>
+    </region>
+    <region id="30">
+        <name value="Tutorial Attack Wave"/>
+        <invisible/>
+        <shape type="rect">
+            <quad value="92.5986,96.818,103.3283,97.8178"/>
+        </shape>
+    </region>
+    <region id="35">
+        <name value="Tutorial Larva Nearby"/>
+        <invisible/>
+        <shape type="diamond">
+            <center value="95.5053,39.9567"/>
+            <width value="1.7827"/>
+            <height value="8.9877"/>
+        </shape>
+    </region>
+    <region id="36">
+        <name value="Tutorial Scientist Nearby"/>
+        <invisible/>
+        <shape type="diamond">
+            <center value="107.4814,78.2797"/>
+            <width value="2.41"/>
+            <height value="14.8198"/>
+        </shape>
+    </region>
+    <region id="6">
+        <name value="PartTerran_Boss_Hammer_Arena"/>
+        <invisible/>
+        <shape type="circle">
+            <center value="125.3664,14.0175"/>
+            <radius value="10.48"/>
+        </shape>
+        <shape type="diamond">
+            <negative/>
+            <center value="117.3593,22.0151"/>
+            <width value="18.8198"/>
+            <height value="8.8237"/>
+        </shape>
+    </region>
+    <region id="37">
+        <name value="PartTerran_Boss_Fortress_Arena"/>
+        <invisible/>
+        <shape type="circle">
+            <center value="72.1567,44.1625"/>
+            <radius value="10.98"/>
+        </shape>
+    </region>
+    <region id="38">
+        <name value="PartTerran_Boss_Flamer_Arena"/>
+        <invisible/>
+        <shape type="circle">
+            <center value="54.5183,29.4428"/>
+            <radius value="10.48"/>
+        </shape>
+    </region>
+    <region id="39">
+        <name value="PartProtoss_Boss_TagTeam_Arena"/>
+        <invisible/>
+        <shape type="circle">
+            <center value="17.3723,224.3906"/>
+            <radius value="14.0871"/>
+        </shape>
+    </region>
+    <region id="31">
+        <name value="PartProtoss_Boss_Atlantis_Arena"/>
+        <invisible/>
+        <shape type="rect">
+            <quad value="92.2097,179.8417,115.787,213.6711"/>
+        </shape>
+    </region>
+    <region id="29">
+        <name value="PartZerg_Boss_StoryHeroes_Arena"/>
+        <invisible/>
+        <shape type="circle">
+            <center value="224.587,95.8234"/>
+            <radius value="15.5"/>
+        </shape>
+    </region>
+    <region id="40">
+        <name value="PartZerg_Boss_Cybermind_Arena"/>
+        <invisible/>
+        <shape type="circle">
+            <center value="216.7458,157.116"/>
+            <radius value="28"/>
+        </shape>
+    </region>
+    <region id="42">
+        <name value="PartZerg_Boss_Moopy_Arena"/>
+        <invisible/>
+        <shape type="circle">
+            <center value="222.378,234.1296"/>
+            <radius value="12"/>
+        </shape>
+    </region>
+    <region id="43">
+        <name value="PartZerg_Bounds"/>
+        <invisible/>
+        <shape type="rect">
+            <quad value="183.9602,0,255.9997,253.559"/>
+        </shape>
+    </region>
+    <region id="44">
+        <name value="PartZerg_Base"/>
+        <invisible/>
+        <shape type="circle">
+            <center value="232.589,15.497"/>
+            <radius value="10.2841"/>
+        </shape>
+    </region>
+    <region id="45">
+        <name value="PartZerg_Mix_First"/>
+        <invisible/>
+        <shape type="rect">
+            <quad value="196.1418,6.905,254.2795,85.4196"/>
+        </shape>
+    </region>
+    <region id="46">
+        <name value="PartZerg_Mix_Second"/>
+        <invisible/>
+        <shape type="rect">
+            <quad value="187.1228,85.6718,254.4895,134.2666"/>
+        </shape>
+    </region>
+    <region id="47">
+        <name value="PartZerg_Mix_Third"/>
+        <invisible/>
+        <shape type="rect">
+            <quad value="183.7075,181.5437,251.2612,220.2404"/>
+        </shape>
+    </region>
+    <region id="48">
+        <name value="PartZerg_Boss_Stetmann_Arena"/>
+        <invisible/>
+        <shape type="rect">
+            <quad value="203.1672,185.2314,243.167,211.2314"/>
+        </shape>
+    </region>
+    <region id="49">
+        <name value="PartZerg_Mix_Fourth_Wall"/>
+        <invisible/>
+        <shape type="rect">
+            <quad value="237.1738,209.6992,244.4433,212.9687"/>
+        </shape>
+    </region>
+    <region id="50">
+        <name value="PartZerg_Mix_Third_Wall"/>
+        <invisible/>
+        <shape type="diamond">
+            <center value="199.8518,177.279"/>
+            <width value="8.47"/>
+            <height value="4.8698"/>
+        </shape>
+    </region>
+    <region id="51">
+        <name value="PartZerg_Mix_Second_Wall"/>
+        <invisible/>
+        <shape type="rect">
+            <quad value="206.9218,89.1613,210.2314,97.4545"/>
+        </shape>
+    </region>
+    <region id="52">
+        <name value="PartZerg_Moopy_Door2"/>
+        <invisible/>
+        <shape type="diamond">
+            <center value="197.716,118.4147"/>
+            <width value="6.88"/>
+            <height value="4.91"/>
+        </shape>
+    </region>
+    <region id="53">
+        <name value="PartZerg_Moopy_Door1"/>
+        <invisible/>
+        <shape type="rect">
+            <quad value="241.1003,42.7604,245.0197,45.2412"/>
+        </shape>
+    </region>
+    <region id="55">
+        <name value="PartZerg_Boss_Stetmann_Tripwire"/>
+        <invisible/>
+        <shape type="rect">
+            <quad value="201.6193,202.0156,203.474,213.9455"/>
+        </shape>
+    </region>
+    <region id="56">
+        <name value="PartZerg_Boss_Cybermind_Tripwire"/>
+        <invisible/>
+        <shape type="diamond">
+            <center value="242.4855,143.4638"/>
+            <width value="19.7597"/>
+            <height value="3.98"/>
+        </shape>
+    </region>
+    <region id="57">
+        <name value="PartZerg_Boss_StoryHeroes_Tripwire"/>
+        <invisible/>
+        <shape type="diamond">
+            <center value="240.1584,90.1154"/>
+            <width value="13.16"/>
+            <height value="2.8298"/>
+        </shape>
+    </region>
+    <region id="58">
+        <name value="PartZerg_Boss_Moopy_Tripwire"/>
+        <invisible/>
+        <shape type="diamond">
+            <center value="233.108,225.674"/>
+            <width value="16.15"/>
+            <height value="1.5197"/>
+        </shape>
+    </region>
+    <region id="59">
+        <name value="PartZerg_Base_NydusEntry"/>
+        <invisible/>
+        <shape type="rect">
+            <quad value="241.6967,15.2724,243.6665,20.4196"/>
+        </shape>
+    </region>
+    <region id="54">
+        <name value="PartZerg"/>
+        <invisible/>
+        <shape type="rect">
+            <quad value="182.4892,4.6984,254.8544,242.8676"/>
+        </shape>
+    </region>
+</Regions>

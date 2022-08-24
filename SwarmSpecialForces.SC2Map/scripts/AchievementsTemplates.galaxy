@@ -1,0 +1,613 @@
+//UI template functions
+
+text Acv_UI_TextExpressionReplacementI(string textkey, int value, color acvColor){
+    return Utility_TextExpressionReplacement("Trig/Acv/UI/"+textkey, TextWithColor(IntToText(value), acvColor));
+}
+text Acv_UI_TextExpressionReplacementF(string textkey, fixed value, color acvColor){
+    return Utility_TextExpressionReplacement("Trig/Acv/UI/"+textkey, TextWithColor(FixedToText(value, c_fixedPrecisionAny), acvColor));
+}
+
+text Acv_UI_IntToRomanNumberText (int number) {
+    if(number >= 0 && number <= 17){
+        return StringExternal("Trig/Acv/UI/Stage" + IntToString(number));
+    }
+    else {
+        return StringExternal("Trig/Acv/UI/Stage0");
+    }
+    
+}
+text Acv_UI_IntToSpeedyText (int number) {
+    if (number < 0 || number > 2){
+        return StringExternal("Trig/Acv/UI/Speedy0");
+    }
+    else{
+        return StringExternal("Trig/Acv/UI/Speedy"+ IntToString(number));
+    }
+}
+text Acv_UI_Newline () {
+    return StringToText("<n/>");
+}
+text Acv_UI_MaxStage () {
+    return StringExternal("Trig/Acv/UI/MaxStage");
+}
+text Acv_UI_HeroUnlock (int heroID) {
+    return Utility_TextExpressionReplacement("Trig/Acv/UI/HeroUnlock", TextWithColor(UnitTypeGetName(gv_Hero_UnitTypes[heroID]), Color(100.00, 100.00, 100.00)));
+}
+text Acv_UI_AbilUnlock (text ability, text hero) {
+    return Acv_UI_Newline() + Utility_TextExpressionReplacement2("Trig/Acv/UI/AbilUnlock/Mid",TextWithColor(ability, Color(100.00, 50.20, 0.00)), hero);
+}
+text Acv_UI_IntToDiffShort (int diff) {
+    return StringExternal("Trig/Generic/DiffNameShortColored/" + IntToString(diff));
+}
+text Acv_UI_DiffUnlock (int diff) {
+    return StringToText("<n/>")+Utility_TextExpressionReplacement("Trig/Acv/UI/DiffUnlock", Utility_DiffNameColored(diff));
+}
+
+text Acv_UI_AcvScore (fixed amount) {
+    return Acv_UI_TextExpressionReplacementF("Score", amount, Color(100,100,0));
+}
+text Acv_UI_Dmg (fixed amount) {
+    return Acv_UI_TextExpressionReplacementF("Dmg", amount, Color(100,0,0));
+}
+text Acv_UI_Spellpower (fixed amount) {
+    return Acv_UI_TextExpressionReplacementF("Spellpower", amount, Color(0,100,100));
+}
+text Acv_UI_AttackSpeed (fixed amount) {
+    return Acv_UI_TextExpressionReplacementF("Atkspd", amount, Color(100,0,0));
+}
+text Acv_UI_SplashRange (fixed amount) {
+    return Acv_UI_TextExpressionReplacementF("Splash", amount, Color(100,0,0));
+}
+text Acv_UI_Armor (fixed amount) {
+    return Acv_UI_TextExpressionReplacementF("Armor", amount, Color(100,50,0));
+}
+text Acv_UI_Life (fixed amount) {
+    return Acv_UI_TextExpressionReplacementF("Life", amount, Color(0,100,0));
+}
+text Acv_UI_LifeRegen (fixed amount) {
+    return Acv_UI_TextExpressionReplacementF("LifeRegen", amount, Color(0,100,0));
+}
+text Acv_UI_Energy (fixed amount) {
+    return Acv_UI_TextExpressionReplacementF("Energy", amount, Color(71,45,85));
+}
+text Acv_UI_EnergyRegen (fixed amount) {
+    return Acv_UI_TextExpressionReplacementF("EnergyRegen", amount, Color(71,45,85));
+}
+text Acv_UI_MovementSpeed (fixed amount) {
+    return Acv_UI_TextExpressionReplacementF("Speed", amount, Color(0,100,0));
+}
+text Acv_UI_OverlordSpeed (fixed amount) {
+    return Acv_UI_TextExpressionReplacementF("OverlordSpeed", amount, Color(0,100,0));
+}
+text Acv_UI_VisionRange (fixed amount) {
+    return Acv_UI_TextExpressionReplacementF("Vision", amount, Color(100,100,0));
+}
+text Acv_UI_BiomassPerKill (fixed amount) {
+    return Acv_UI_TextExpressionReplacementF("BiomassPerKill", amount, Color(100,50,0));
+}
+text Acv_UI_ExpPerKill (fixed amount) {
+    return Acv_UI_TextExpressionReplacementF("ExpPerKill", amount, Color(100,50,0));
+}
+text Acv_UI_StartExpP0 (fixed amount) {
+    return Acv_UI_TextExpressionReplacementF("StartExpP0", amount, Color(100,50,0));
+}
+text Acv_UI_StartExpP1 (fixed amount) {
+    return Acv_UI_TextExpressionReplacementF("StartExpP1", amount, Color(100,50,0));
+}
+text Acv_UI_StartExpP2 (fixed amount) {
+    return Acv_UI_TextExpressionReplacementF("StartExpP2", amount, Color(100,50,0));
+}
+text Acv_UI_StartBiomassP0 (fixed amount) {
+    return Acv_UI_TextExpressionReplacementF("StartBiomassP0", amount, Color(100,50,0));
+}
+text Acv_UI_StartBiomassP1 (fixed amount) {
+    return Acv_UI_TextExpressionReplacementF("StartBiomassP1", amount, Color(100,50,0));
+}
+text Acv_UI_StartBiomassP2 (fixed amount) {
+    return Acv_UI_TextExpressionReplacementF("StartBiomassP2", amount, Color(100,50,0));
+}
+text Acv_UI_StartMutationsP0 (fixed amount) {
+    return Acv_UI_TextExpressionReplacementF("StartMutationsP0", amount, Color(100,50,0));
+}
+text Acv_UI_StartMutationsP1 (fixed amount) {
+    return Acv_UI_TextExpressionReplacementF("StartMutationsP1", amount, Color(100,50,0));
+}
+text Acv_UI_StartMutationsP2 (fixed amount) {
+    return Acv_UI_TextExpressionReplacementF("StartMutationsP2", amount, Color(100,50,0));
+}
+text Acv_UI_HiveAuraArmorP0 (fixed amount) {
+    return Acv_UI_TextExpressionReplacementF("HiveAuraP0/Armor", 1-Utility_ArmorModifier(amount), Color(100,50,0));
+}
+text Acv_UI_HiveAuraArmorP1 (fixed amount) {
+    return Acv_UI_TextExpressionReplacementF("HiveAuraP1/Armor", 1-Utility_ArmorModifier(amount), Color(100,50,0));
+}
+text Acv_UI_HiveAuraArmorP2 (fixed amount) {
+    return Acv_UI_TextExpressionReplacementF("HiveAuraP2/Armor", 1-Utility_ArmorModifier(amount), Color(100,50,0));
+}
+text Acv_UI_HiveAuraAttackSpeedP0 (fixed amount) {
+    return Acv_UI_TextExpressionReplacementF("HiveAuraP0/Atkspd", amount, Color(100,50,0));
+}
+text Acv_UI_HiveAuraAttackSpeedP1 (fixed amount) {
+    return Acv_UI_TextExpressionReplacementF("HiveAuraP1/Atkspd", amount, Color(100,50,0));
+}
+text Acv_UI_HiveAuraAttackSpeedP2 (fixed amount) {
+    return Acv_UI_TextExpressionReplacementF("HiveAuraP2/Atkspd", amount, Color(100,50,0));
+}
+text Acv_UI_HiveAuraDmgP0 (fixed amount) {
+    return Acv_UI_TextExpressionReplacementF("HiveAuraP0/Dmg", amount, Color(100,50,0));
+}
+text Acv_UI_HiveAuraDmgP1 (fixed amount) {
+    return Acv_UI_TextExpressionReplacementF("HiveAuraP1/Dmg", amount, Color(100,50,0));
+}
+text Acv_UI_HiveAuraDmgP2 (fixed amount) {
+    return Acv_UI_TextExpressionReplacementF("HiveAuraP2/Dmg", amount, Color(100,50,0));
+}
+text Acv_UI_HiveAuraEnergyRegenP0 (fixed amount) {
+    return Acv_UI_TextExpressionReplacementF("HiveAuraP0/EnergyRegen", amount, Color(100,50,0));
+}
+text Acv_UI_HiveAuraEnergyRegenP1 (fixed amount) {
+    return Acv_UI_TextExpressionReplacementF("HiveAuraP1/EnergyRegen", amount, Color(100,50,0));
+}
+text Acv_UI_HiveAuraEnergyRegenP2 (fixed amount) {
+    return Acv_UI_TextExpressionReplacementF("HiveAuraP2/EnergyRegen", amount, Color(100,50,0));
+}
+text Acv_UI_HiveAuraLifeRegenP0 (fixed amount) {
+    return Acv_UI_TextExpressionReplacementF("HiveAuraP0/LifeRegen", amount, Color(100,50,0));
+}
+text Acv_UI_HiveAuraLifeRegenP1 (fixed amount) {
+    return Acv_UI_TextExpressionReplacementF("HiveAuraP1/LifeRegen", amount, Color(100,50,0));
+}
+text Acv_UI_HiveAuraLifeRegenP2 (fixed amount) {
+    return Acv_UI_TextExpressionReplacementF("HiveAuraP2/LifeRegen", amount, Color(100,50,0));
+}
+text Acv_UI_HiveAuraTimeScaleP0 (fixed amount) {
+    return Acv_UI_TextExpressionReplacementF("HiveAuraP0/TimeScale", amount, Color(100,50,0));
+}
+text Acv_UI_HiveAuraTimeScaleP1 (fixed amount) {
+    return Acv_UI_TextExpressionReplacementF("HiveAuraP1/TimeScale", amount, Color(100,50,0));
+}
+text Acv_UI_HiveAuraTimeScaleP2 (fixed amount) {
+    return Acv_UI_TextExpressionReplacementF("HiveAuraP2/TimeScale", amount, Color(100,50,0));
+}
+text Acv_UI_CyberneticsDmg (fixed amount) {
+    return Acv_UI_TextExpressionReplacementF("CyberneticsDmg", amount, Color(100,50,0));
+}
+text Acv_UI_CyberneticsLife (fixed amount) {
+    return Acv_UI_TextExpressionReplacementF("CyberneticsLife", amount, Color(100,50,0));
+}
+
+//reward template functions
+
+void Acv_Reward_Spellpower_UpdateEffects (int playerID) {
+    fixed multiplier = 1.0 + (gv_PlayerStats[playerID].spellPowerPercent / 100.0);
+
+    CatalogFieldValueSet(c_gameCatalogAccumulator, "SpellDmgUpgradeCollector", "Amount", playerID, FixedToString(gv_PlayerStats[playerID].spellPowerPercent, c_fixedPrecisionAny));
+    Utility_CatalogFieldSetPower(c_gameCatalogBehavior, "GlueStream@BuffCaster", "Modification.MoveSpeedMultiplier", playerID, multiplier);
+    Utility_CatalogFieldSetPower(c_gameCatalogBehavior, "GlueStream@Debuff", "Modification.MoveSpeedMultiplier", playerID, multiplier);
+    Utility_CatalogFieldSetPower(c_gameCatalogBehavior, "GlueStream@Buff", "Modification.MoveSpeedMultiplier", playerID, multiplier);
+    CatalogFieldValueSet(c_gameCatalogBehavior, "DefensiveRoar@Caster", "DamageResponse.ModifyFraction", playerID, FixedToString(Utility_ArmorModifier(15*multiplier) , c_fixedPrecisionAny));
+    CatalogFieldValueSet(c_gameCatalogBehavior, "DefensiveRoar@Other", "DamageResponse.ModifyFraction", playerID, FixedToString(Utility_ArmorModifier(10*multiplier), c_fixedPrecisionAny));
+    libNtve_gf_CatalogFieldValueModifyBasedOnDefaultValue(c_gameCatalogBehavior, "Tackle@FriendlyTackleCaster", "Modification.DamageDealtScaled[2]", playerID, multiplier, c_upgradeOperationMultiply);
+    libNtve_gf_CatalogFieldValueModifyBasedOnDefaultValue(c_gameCatalogBehavior, "Tackle@FriendlyTackle", "Modification.DamageDealtScaled[2]", playerID, multiplier, c_upgradeOperationMultiply);
+    CatalogFieldValueSet(c_gameCatalogBehavior, "UltimateBeing@UltimateBuff", "DamageResponse.ModifyFraction", playerID, FixedToString(Utility_ArmorModifier(15*multiplier) , c_fixedPrecisionAny));
+    Utility_CatalogFieldSetPower(c_gameCatalogBehavior, "UltimateBeing@UltimateBuff", "Modification.MoveSpeedMultiplier", playerID, multiplier);
+    libNtve_gf_CatalogFieldValueModifyBasedOnDefaultValue(c_gameCatalogBehavior, "UltimateBeing@UltimateBuff", "Modification.DamageDealtScaled[2]", playerID, multiplier, c_upgradeOperationMultiply);
+    libNtve_gf_CatalogFieldValueModifyBasedOnDefaultValue(c_gameCatalogBehavior, "Focus@BuffStack", "Modification.AdditiveAttackSpeedFactor", playerID, multiplier, c_upgradeOperationMultiply);
+    libNtve_gf_CatalogFieldValueModifyBasedOnDefaultValue(c_gameCatalogAbil, "Taunt@Taunt", "Cost[0].Vital[2]", playerID, multiplier, c_upgradeOperationDivide);
+    libNtve_gf_CatalogFieldValueModifyBasedOnDefaultValue(c_gameCatalogAbil, "Headbutt", "Cost[0].Vital[2]", playerID, multiplier, c_upgradeOperationDivide);
+    libNtve_gf_CatalogFieldValueModifyBasedOnDefaultValue(c_gameCatalogAbil, "Decoy", "Cost[0].Vital[2]", playerID, multiplier, c_upgradeOperationDivide);
+    libNtve_gf_CatalogFieldValueModifyBasedOnDefaultValue(c_gameCatalogEffect, "Heal@PeriodicHeal", "VitalArray[0].Change", playerID, multiplier, c_upgradeOperationMultiply);
+    libNtve_gf_CatalogFieldValueModifyBasedOnDefaultValue(c_gameCatalogEffect, "Heal@InstantHeal", "VitalArray[0].Change", playerID, multiplier, c_upgradeOperationMultiply);
+    Utility_CatalogFieldSetPower(c_gameCatalogBehavior, "Frenzy@Frenzied", "Modification.AttackSpeedMultiplier", playerID, multiplier);
+    Utility_CatalogFieldSetPower(c_gameCatalogBehavior, "Frenzy@Frenzied", "Modification.MoveSpeedMultiplier", playerID, multiplier);
+    libNtve_gf_CatalogFieldValueModifyBasedOnDefaultValue(c_gameCatalogEffect, "EnergyTransfer@CreateHealer", "RechargeVitalRate", playerID, multiplier, c_upgradeOperationMultiply);
+    libNtve_gf_CatalogFieldValueModifyBasedOnDefaultValue(c_gameCatalogBehavior, "KillStreak@BuffStack", "Modification.DamageDealtFraction[0]", playerID, multiplier, c_upgradeOperationMultiply);
+    libNtve_gf_CatalogFieldValueModifyBasedOnDefaultValue(c_gameCatalogBehavior, "KillStreak@BuffStack", "Modification.DamageDealtFraction[1]", playerID, multiplier, c_upgradeOperationMultiply);
+    libNtve_gf_CatalogFieldValueModifyBasedOnDefaultValue(c_gameCatalogBehavior, "KillStreak@BuffStack", "Modification.DamageDealtFraction[2]", playerID, multiplier, c_upgradeOperationMultiply);
+    libNtve_gf_CatalogFieldValueModifyBasedOnDefaultValue(c_gameCatalogBehavior, "KillStreak@BuffStack", "Modification.DamageDealtFraction[3]", playerID, multiplier, c_upgradeOperationMultiply);
+}
+
+void Acv_Reward_Armor (int playerID, fixed amount) {
+    fixed mult_hydra = 0.75;
+    fixed mult_rav = 1.5;
+    fixed mult_queen = 1;
+    fixed mult_bowler = 0.85;
+    fixed mult_runling = 0.5;
+    fixed mult_lurker = 0.7;
+
+    CatalogFieldValueModify(c_gameCatalogUnit, "HeroRoach",       "LifeArmor", playerID, FixedToString(amount, c_fixedPrecisionAny), c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "HeroHydra",       "LifeArmor", playerID, FixedToString((amount * mult_hydra), c_fixedPrecisionAny), c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "HeroRavager",     "LifeArmor", playerID, FixedToString((amount * mult_rav), c_fixedPrecisionAny), c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "HeroSwarmQueen",  "LifeArmor", playerID, FixedToString((amount * mult_queen), c_fixedPrecisionAny), c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "HeroBowler",      "LifeArmor", playerID, FixedToString((amount * mult_bowler), c_fixedPrecisionAny), c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Runling",         "LifeArmor", playerID, FixedToString((amount * mult_runling), c_fixedPrecisionAny), c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "CyberneticLurker","LifeArmor", playerID, FixedToString((amount * mult_lurker), c_fixedPrecisionAny), c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "CyberneticLurkerBurrowed","LifeArmor", playerID, FixedToString((amount * mult_lurker), c_fixedPrecisionAny), c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Decoy",           "LifeArmor", playerID, FixedToString((amount * mult_rav * 0.75), c_fixedPrecisionAny), c_upgradeOperationAdd);
+    
+    Utility_UpdateArmorModifierForUnitType("HeroRoach",        playerID);
+    Utility_UpdateArmorModifierForUnitType("HeroRavager",      playerID);
+    Utility_UpdateArmorModifierForUnitType("HeroHydra",        playerID);
+    Utility_UpdateArmorModifierForUnitType("HeroSwarmQueen",   playerID);
+    Utility_UpdateArmorModifierForUnitType("HeroBowler",       playerID);
+    Utility_UpdateArmorModifierForUnitType("Runling",          playerID);
+    Utility_UpdateArmorModifierForUnitType("CyberneticLurker", playerID);
+    Utility_UpdateArmorModifierForUnitType("Decoy",            playerID);
+}
+void Acv_Reward_AcvScore (int playerID, fixed amount) {
+    gv_PlayerStats[playerID].acvScore += amount;
+    if (gv_Part_ActivePart != c_Part_None) {
+        Acv_Grind_Check(playerID, c_AcvIdentifier_Score);
+    }
+
+}
+void Acv_Reward_Dmg (int playerID, fixed amount) {
+    CatalogFieldValueModify(c_gameCatalogAccumulator, "WeaponDmgUpgradeCollector", "Amount", playerID, FixedToString(amount, c_fixedPrecisionAny), c_upgradeOperationAdd);
+}
+void Acv_Reward_Spellpower (int playerID, fixed amount) {
+    gv_PlayerStats[playerID].spellPowerPercent += amount;
+    if (gv_Part_ActivePart != c_Part_None) {
+        Acv_Reward_Spellpower_UpdateEffects(playerID);
+    }
+
+}
+void Acv_Reward_AttackSpeed (int playerID, fixed amount) {
+    CatalogFieldValueModify(c_gameCatalogWeapon, "HeroRoachWeapon", "Period", playerID, FixedToString(((amount / 100.0) + 1.0), c_fixedPrecisionAny), c_upgradeOperationDivide);
+    CatalogFieldValueModify(c_gameCatalogWeapon, "HeroHydraWeapon", "Period", playerID, FixedToString(((amount / 100.0) + 1.0), c_fixedPrecisionAny), c_upgradeOperationDivide);
+    CatalogFieldValueModify(c_gameCatalogWeapon, "HeroRavagerWeapon", "Period", playerID, FixedToString(((amount / 100.0) + 1.0), c_fixedPrecisionAny), c_upgradeOperationDivide);
+    CatalogFieldValueModify(c_gameCatalogWeapon, "HeroSwarmQueenWeapon", "Period", playerID, FixedToString(((amount / 100.0) + 1.0), c_fixedPrecisionAny), c_upgradeOperationDivide);
+    CatalogFieldValueModify(c_gameCatalogWeapon, "HeroBowlerWeapon", "Period", playerID, FixedToString(((amount / 100.0) + 1.0), c_fixedPrecisionAny), c_upgradeOperationDivide);
+    CatalogFieldValueModify(c_gameCatalogWeapon, "HeroBowlerWeaponAntiAir", "Period", playerID, FixedToString(((amount / 100.0) + 1.0), c_fixedPrecisionAny), c_upgradeOperationDivide);
+}
+void Acv_Reward_Life (int playerID, fixed amount) {
+    fixed mult_hydra = 0.8;
+    fixed mult_rav = 1.6;
+    fixed mult_queen = 1.0;
+    fixed mult_bowler = 1.0;
+
+    CatalogFieldValueModify(c_gameCatalogUnit, "HeroRoach", "LifeMax", playerID, FixedToString(amount, c_fixedPrecisionAny), c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "HeroRoach", "LifeStart", playerID, FixedToString(amount, c_fixedPrecisionAny), c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "HeroHydra", "LifeMax", playerID, FixedToString((amount * mult_hydra), c_fixedPrecisionAny), c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "HeroHydra", "LifeStart", playerID, FixedToString((amount * mult_hydra), c_fixedPrecisionAny), c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "HeroRavager", "LifeMax", playerID, FixedToString((amount * mult_rav), c_fixedPrecisionAny), c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "HeroRavager", "LifeStart", playerID, FixedToString((amount * mult_rav), c_fixedPrecisionAny), c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "HeroSwarmQueen", "LifeMax", playerID, FixedToString((amount * mult_queen), c_fixedPrecisionAny), c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "HeroSwarmQueen", "LifeStart", playerID, FixedToString((amount * mult_queen), c_fixedPrecisionAny), c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "HeroBowler", "LifeMax", playerID, FixedToString((amount * mult_bowler), c_fixedPrecisionAny), c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "HeroBowler", "LifeStart", playerID, FixedToString((amount * mult_bowler), c_fixedPrecisionAny), c_upgradeOperationAdd);
+}
+void Acv_Reward_LifeRegen (int playerID, fixed amount) {
+    CatalogFieldValueModify(c_gameCatalogUnit, "HeroRoach", "LifeRegenRate", playerID, FixedToString(((amount / 100.0) + 1.0), c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogBehavior, "HeroRoachCreepBonusRegen", "Modification.VitalRegenMultiplier[0]", playerID, FixedToString(((amount / 100.0) + 1.0), c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "HeroHydra", "LifeRegenRate", playerID, FixedToString(((amount / 100.0) + 1.0), c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogBehavior, "HeroHydraCreepBonusRegen", "Modification.VitalRegenMultiplier[0]", playerID, FixedToString(((amount / 100.0) + 1.0), c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "HeroRavager", "LifeRegenRate", playerID, FixedToString(((amount / 100.0) + 1.0), c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogBehavior, "HeroRavagerCreepBonusRegen", "Modification.VitalRegenMultiplier[0]", playerID, FixedToString(((amount / 100.0) + 1.0), c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "HeroSwarmQueen", "LifeRegenRate", playerID, FixedToString(((amount / 100.0) + 1.0), c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogBehavior, "HeroSwarmQueenCreepBonusRegen", "Modification.VitalRegenMultiplier[0]", playerID, FixedToString(((amount / 100.0) + 1.0), c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "HeroBowler", "LifeRegenRate", playerID, FixedToString(((amount / 100.0) + 1.0), c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogBehavior, "HeroBowlerCreepBonusRegen", "Modification.VitalRegenMultiplier[0]", playerID, FixedToString(((amount / 100.0) + 1.0), c_fixedPrecisionAny), c_upgradeOperationMultiply);
+}
+void Acv_Reward_Energy (int playerID, fixed amount) {
+    fixed mult_hydra = 1.0;
+    fixed mult_rav = 1.0;
+    fixed mult_queen = 1.0;
+    fixed mult_bowler = 1.0;
+
+    CatalogFieldValueModify(c_gameCatalogUnit, "HeroRoach", "EnergyMax", playerID, FixedToString(amount, c_fixedPrecisionAny), c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "HeroRoach", "EnergyStart", playerID, FixedToString(amount, c_fixedPrecisionAny), c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "HeroHydra", "EnergyMax", playerID, FixedToString((amount * mult_hydra), c_fixedPrecisionAny), c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "HeroHydra", "EnergyStart", playerID, FixedToString((amount * mult_hydra), c_fixedPrecisionAny), c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "HeroRavager", "EnergyMax", playerID, FixedToString((amount * mult_rav), c_fixedPrecisionAny), c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "HeroRavager", "EnergyStart", playerID, FixedToString((amount * mult_rav), c_fixedPrecisionAny), c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "HeroSwarmQueen", "EnergyMax", playerID, FixedToString((amount * mult_queen), c_fixedPrecisionAny), c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "HeroSwarmQueen", "EnergyStart", playerID, FixedToString((amount * mult_queen), c_fixedPrecisionAny), c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "HeroBowler", "EnergyMax", playerID, FixedToString((amount * mult_bowler), c_fixedPrecisionAny), c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "HeroBowler", "EnergyStart", playerID, FixedToString((amount * mult_bowler), c_fixedPrecisionAny), c_upgradeOperationAdd);
+}
+void Acv_Reward_EnergyRegen (int playerID, fixed amount) {
+    CatalogFieldValueModify(c_gameCatalogUnit, "HeroRoach", "EnergyRegenRate", playerID, FixedToString(((amount / 100.0) + 1.0), c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogBehavior, "HeroRoachCreepBonusRegen", "Modification.VitalRegenMultiplier[2]", playerID, FixedToString(((amount / 100.0) + 1.0), c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "HeroHydra", "EnergyRegenRate", playerID, FixedToString(((amount / 100.0) + 1.0), c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogBehavior, "HeroHydraCreepBonusRegen", "Modification.VitalRegenMultiplier[2]", playerID, FixedToString(((amount / 100.0) + 1.0), c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "HeroRavager", "EnergyRegenRate", playerID, FixedToString(((amount / 100.0) + 1.0), c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogBehavior, "HeroRavagerCreepBonusRegen", "Modification.VitalRegenMultiplier[2]", playerID, FixedToString(((amount / 100.0) + 1.0), c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "HeroSwarmQueen", "EnergyRegenRate", playerID, FixedToString(((amount / 100.0) + 1.0), c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogBehavior, "HeroSwarmQueenCreepBonusRegen", "Modification.VitalRegenMultiplier[2]", playerID, FixedToString(((amount / 100.0) + 1.0), c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "HeroBowler", "EnergyRegenRate", playerID, FixedToString(((amount / 100.0) + 1.0), c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogBehavior, "HeroBowlerCreepBonusRegen", "Modification.VitalRegenMultiplier[2]", playerID, FixedToString(((amount / 100.0) + 1.0), c_fixedPrecisionAny), c_upgradeOperationMultiply);
+}
+void Acv_Reward_MovementSpeed (int playerID, fixed amount) {
+    CatalogFieldValueModify(c_gameCatalogUnit, "HeroRoach", "Speed", playerID, FixedToString(amount, c_fixedPrecisionAny), c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "HeroHydra", "Speed", playerID, FixedToString(amount, c_fixedPrecisionAny), c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "HeroRavager", "Speed", playerID, FixedToString(amount, c_fixedPrecisionAny), c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "HeroSwarmQueen", "Speed", playerID, FixedToString(amount, c_fixedPrecisionAny), c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "HeroBowler", "Speed", playerID, FixedToString(amount, c_fixedPrecisionAny), c_upgradeOperationAdd);
+}
+void Acv_Reward_VisionRange (int playerID, fixed amount) {
+    CatalogFieldValueModify(c_gameCatalogUnit, "HeroRoach", "Sight", playerID, FixedToString(amount, c_fixedPrecisionAny), c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "HeroHydra", "Sight", playerID, FixedToString(amount, c_fixedPrecisionAny), c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "HeroRavager", "Sight", playerID, FixedToString(amount, c_fixedPrecisionAny), c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "HeroSwarmQueen", "Sight", playerID, FixedToString(amount, c_fixedPrecisionAny), c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "HeroBowler", "Sight", playerID, FixedToString(amount, c_fixedPrecisionAny), c_upgradeOperationAdd);
+}
+void Acv_Reward_BiomassPerKill (int playerID, fixed amount) {
+    gv_PlayerStats[playerID].biomassBonusAdd += amount;
+}
+void Acv_Reward_ExpPerKill (int playerID, fixed amount) {
+    gv_PlayerStats[playerID].expBonusAdd += amount;
+}
+void Acv_Reward_StartExpP0 (int playerID, fixed amount) {
+    if (gv_Part_ActivePart >= 0) {
+        Player_AddExp(playerID, amount);
+    }
+    else {
+        gv_PlayerStats[playerID].startExp[0] += amount;
+    }
+}
+void Acv_Reward_StartExpP1 (int playerID, fixed amount) {
+    if (gv_Part_ActivePart >= 1) {
+        Player_AddExp(playerID, amount);
+    }
+    else {
+        gv_PlayerStats[playerID].startExp[1] += amount;
+    }
+}
+void Acv_Reward_StartExpP2 (int playerID, fixed amount) {
+    if (gv_Part_ActivePart >= 2) {
+        Player_AddExp(playerID, amount);
+    }
+    else {
+        gv_PlayerStats[playerID].startExp[1] += amount;
+    }
+}
+void Acv_Reward_StartBiomassP0 (int playerID, fixed amount) {
+    PlayerModifyPropertyFixed(playerID, c_playerPropMinerals, c_playerPropOperAdd, amount);
+}
+void Acv_Reward_StartBiomassP1 (int playerID, fixed amount) {
+    if (gv_Part_ActivePart >= 1) {
+        PlayerModifyPropertyFixed(playerID, c_playerPropMinerals, c_playerPropOperAdd, amount);
+    }
+    else {
+        gv_PlayerStats[playerID].startBiomass[1] += amount;
+    }
+}
+void Acv_Reward_StartBiomassP2 (int playerID, fixed amount) {
+    if (gv_Part_ActivePart >= 2) {
+        PlayerModifyPropertyFixed(playerID, c_playerPropMinerals, c_playerPropOperAdd, amount);
+    }
+    else {
+        gv_PlayerStats[playerID].startBiomass[2] += amount;
+    }
+}
+void Acv_Reward_StartMutationsP0 (int playerID, fixed amount) {
+    PlayerModifyPropertyFixed(playerID, c_playerPropVespene, c_playerPropOperAdd, amount);
+}
+void Acv_Reward_StartMutationsP1 (int playerID, fixed amount) {
+    if (gv_Part_ActivePart >= 1) {
+        PlayerModifyPropertyFixed(playerID, c_playerPropVespene, c_playerPropOperAdd, amount);
+    }
+    else {
+        gv_PlayerStats[playerID].startMutations[1] += amount;
+    }
+}
+void Acv_Reward_StartMutationsP2 (int playerID, fixed amount) {
+    if (gv_Part_ActivePart >= 2) {
+        PlayerModifyPropertyFixed(playerID, c_playerPropVespene, c_playerPropOperAdd, amount);
+    }
+    else {
+        gv_PlayerStats[playerID].startMutations[2] += amount;
+    }
+}
+void Acv_Reward_OverlordSpeed (int playerID, fixed amount) {
+    CatalogFieldValueModify(c_gameCatalogUnit, "BaseOverlord", "Speed", playerID, FixedToString(amount, c_fixedPrecisionAny), c_upgradeOperationAdd);
+}
+void Acv_Reward_CyberneticsLevel (int playerID) {
+    TechTreeUpgradeAddLevel(playerID, "UnlockCybernetics", 1);
+}
+void Acv_Reward_CyberneticsDmg (int playerID, fixed amount) {
+    CatalogFieldValueModify(c_gameCatalogAccumulator, "CyberneticWeaponDmgUpgradeCollector", "Amount", playerID, FixedToString(amount, c_fixedPrecisionAny), c_upgradeOperationAdd);
+}
+void Acv_Reward_CyberneticsLife (int playerID, fixed amount) {
+    CatalogFieldValueModify(c_gameCatalogUnit, "CyberneticLurker", "LifeMax", playerID, FixedToString(amount, c_fixedPrecisionAny), c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "CyberneticLurker", "LifeStart", playerID, FixedToString(amount, c_fixedPrecisionAny), c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "CyberneticLurkerBurrowed", "LifeMax", playerID, FixedToString(amount, c_fixedPrecisionAny), c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "CyberneticLurkerBurrowed", "LifeStart", playerID, FixedToString(amount, c_fixedPrecisionAny), c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Runling", "LifeMax", playerID, FixedToString(amount, c_fixedPrecisionAny), c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Runling", "LifeStart", playerID, FixedToString(amount, c_fixedPrecisionAny), c_upgradeOperationAdd);
+}
+void Acv_Reward_HiveArmor (int playerID, fixed amount) {
+    CatalogFieldValueModify(c_gameCatalogBehavior, "Difficulty0Hive", "Modification.LifeArmorBonus", gv_BasePlayer, FixedToString(amount, c_fixedPrecisionAny), c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogBehavior, "Difficulty1Hive", "Modification.LifeArmorBonus", gv_BasePlayer, FixedToString(amount, c_fixedPrecisionAny), c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogBehavior, "Difficulty2Hive", "Modification.LifeArmorBonus", gv_BasePlayer, FixedToString(amount, c_fixedPrecisionAny), c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogBehavior, "Difficulty3Hive", "Modification.LifeArmorBonus", gv_BasePlayer, FixedToString(amount, c_fixedPrecisionAny), c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogBehavior, "Difficulty4Hive", "Modification.LifeArmorBonus", gv_BasePlayer, FixedToString(amount, c_fixedPrecisionAny), c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogBehavior, "Difficulty5Hive", "Modification.LifeArmorBonus", gv_BasePlayer, FixedToString(amount, c_fixedPrecisionAny), c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogBehavior, "DifficultyCustomHive", "Modification.LifeArmorBonus", gv_BasePlayer, FixedToString(amount, c_fixedPrecisionAny), c_upgradeOperationAdd);
+
+    CatalogFieldValueSet(c_gameCatalogBehavior, "Difficulty0Hive", "DamageResponse.ModifyFraction", gv_BasePlayer, FixedToString(Utility_ArmorModifier(libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogBehavior, "Difficulty0Hive", "Modification.LifeArmorBonus", gv_BasePlayer)) , c_fixedPrecisionAny));
+    CatalogFieldValueSet(c_gameCatalogBehavior, "Difficulty1Hive", "DamageResponse.ModifyFraction", gv_BasePlayer, FixedToString(Utility_ArmorModifier(libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogBehavior, "Difficulty1Hive", "Modification.LifeArmorBonus", gv_BasePlayer)) , c_fixedPrecisionAny));
+    CatalogFieldValueSet(c_gameCatalogBehavior, "Difficulty2Hive", "DamageResponse.ModifyFraction", gv_BasePlayer, FixedToString(Utility_ArmorModifier(libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogBehavior, "Difficulty2Hive", "Modification.LifeArmorBonus", gv_BasePlayer)) , c_fixedPrecisionAny));
+    CatalogFieldValueSet(c_gameCatalogBehavior, "Difficulty3Hive", "DamageResponse.ModifyFraction", gv_BasePlayer, FixedToString(Utility_ArmorModifier(libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogBehavior, "Difficulty3Hive", "Modification.LifeArmorBonus", gv_BasePlayer)) , c_fixedPrecisionAny));
+    CatalogFieldValueSet(c_gameCatalogBehavior, "Difficulty4Hive", "DamageResponse.ModifyFraction", gv_BasePlayer, FixedToString(Utility_ArmorModifier(libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogBehavior, "Difficulty4Hive", "Modification.LifeArmorBonus", gv_BasePlayer)) , c_fixedPrecisionAny));
+    CatalogFieldValueSet(c_gameCatalogBehavior, "Difficulty5Hive", "DamageResponse.ModifyFraction", gv_BasePlayer, FixedToString(Utility_ArmorModifier(libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogBehavior, "Difficulty5Hive", "Modification.LifeArmorBonus", gv_BasePlayer)) , c_fixedPrecisionAny));
+    CatalogFieldValueSet(c_gameCatalogBehavior, "DifficultyCustomHive", "DamageResponse.ModifyFraction", gv_BasePlayer, FixedToString(Utility_ArmorModifier(libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogBehavior, "DifficultyCustomHive", "Modification.LifeArmorBonus", gv_BasePlayer)) , c_fixedPrecisionAny));
+}
+void Acv_Reward_HiveLife (int playerID, fixed amount) {
+    CatalogFieldValueModify(c_gameCatalogUnit, "Hive2", "LifeMax", gv_BasePlayer, FixedToString(amount, c_fixedPrecisionAny), c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Hive2", "LifeStart", gv_BasePlayer, FixedToString(amount, c_fixedPrecisionAny), c_upgradeOperationAdd);
+}
+void Acv_Reward_HiveLiferegen (int playerID, fixed amount) {
+    CatalogFieldValueModify(c_gameCatalogBehavior, "Difficulty0Hive", "Modification.Modification.VitalRegenArray[0]", gv_BasePlayer, FixedToString(amount, c_fixedPrecisionAny), c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogBehavior, "Difficulty1Hive", "Modification.Modification.VitalRegenArray[0]", gv_BasePlayer, FixedToString(amount, c_fixedPrecisionAny), c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogBehavior, "Difficulty2Hive", "Modification.Modification.VitalRegenArray[0]", gv_BasePlayer, FixedToString(amount, c_fixedPrecisionAny), c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogBehavior, "Difficulty3Hive", "Modification.Modification.VitalRegenArray[0]", gv_BasePlayer, FixedToString(amount, c_fixedPrecisionAny), c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogBehavior, "Difficulty4Hive", "Modification.Modification.VitalRegenArray[0]", gv_BasePlayer, FixedToString(amount, c_fixedPrecisionAny), c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogBehavior, "Difficulty5Hive", "Modification.Modification.VitalRegenArray[0]", gv_BasePlayer, FixedToString(amount, c_fixedPrecisionAny), c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogBehavior, "DifficultyCustomHive", "Modification.Modification.VitalRegenArray[0]", gv_BasePlayer, FixedToString(amount, c_fixedPrecisionAny), c_upgradeOperationAdd);
+}
+static const fixed respawnEgg_AuraFactor = 0.5;
+void Acv_Reward_HiveAuraArmorP0 (int playerID, fixed amount) {
+    int tmpInt;
+    gv_Hive_Upgrades[0].aura_Armor += amount;
+    CatalogFieldValueSet(c_gameCatalogBehavior, "BaseAura", "DamageResponse.ModifyFraction", gv_BasePlayer, FixedToString(Utility_ArmorModifier(gv_Hive_Upgrades[0].aura_Armor) , c_fixedPrecisionAny));
+    CatalogFieldValueSet(c_gameCatalogBehavior, "RespawnEgg@HiveAura", "DamageResponse.ModifyFraction", gv_BasePlayer, FixedToString(Utility_ArmorModifier(gv_Hive_Upgrades[0].aura_Armor * respawnEgg_AuraFactor) , c_fixedPrecisionAny));
+    
+    for ( tmpInt = 1; tmpInt <= gv_MaxAmountPlayers; tmpInt += 1 ) {
+        CatalogFieldValueSet(c_gameCatalogBehavior, "BaseAura", "DamageResponse.ModifyFraction", tmpInt, FixedToString(Utility_ArmorModifier(gv_Hive_Upgrades[0].aura_Armor) , c_fixedPrecisionAny));
+        CatalogFieldValueSet(c_gameCatalogBehavior, "RespawnEgg@HiveAura", "DamageResponse.ModifyFraction", tmpInt, FixedToString(Utility_ArmorModifier(gv_Hive_Upgrades[0].aura_Armor * respawnEgg_AuraFactor) , c_fixedPrecisionAny));
+    }
+}
+void Acv_Reward_HiveAuraArmorP1 (int playerID, fixed amount){
+    if(gv_BaseHiveLevel >= 1){
+        Acv_Reward_HiveAuraArmorP0(playerID,amount);
+    }
+    else{
+        gv_Hive_Upgrades[1].aura_Armor += amount;
+    }
+}
+void Acv_Reward_HiveAuraArmorP2 (int playerID, fixed amount){
+    if(gv_BaseHiveLevel >= 2){
+        Acv_Reward_HiveAuraArmorP0(playerID,amount);
+    }
+    else{
+        gv_Hive_Upgrades[2].aura_Armor += amount;
+    }
+}
+void Acv_Reward_HiveAuraLifeRegenP0 (int playerID, fixed amount) {
+    int tmpInt;
+    CatalogFieldValueModify(c_gameCatalogBehavior, "BaseAura", "Modification.VitalRegenArray[0]", gv_BasePlayer, FixedToString(amount, c_fixedPrecisionAny), c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogBehavior, "RespawnEgg@HiveAura", "Modification.VitalRegenArray[0]", gv_BasePlayer, FixedToString(amount * respawnEgg_AuraFactor, c_fixedPrecisionAny), c_upgradeOperationAdd);
+    for ( tmpInt = 1 ; tmpInt <= gv_MaxAmountPlayers; tmpInt += 1 ) {
+        CatalogFieldValueModify(c_gameCatalogBehavior, "BaseAura", "Modification.VitalRegenArray[0]", tmpInt, FixedToString(amount, c_fixedPrecisionAny), c_upgradeOperationAdd);
+        CatalogFieldValueModify(c_gameCatalogBehavior, "RespawnEgg@HiveAura", "Modification.VitalRegenArray[0]", tmpInt, FixedToString(amount * respawnEgg_AuraFactor, c_fixedPrecisionAny), c_upgradeOperationAdd);
+    }
+}
+void Acv_Reward_HiveAuraLifeRegenP1 (int playerID, fixed amount){
+    if(gv_BaseHiveLevel >= 1){
+        Acv_Reward_HiveAuraLifeRegenP0(playerID,amount);
+    }
+    else{
+        gv_Hive_Upgrades[1].aura_Lifereg += amount;
+    }
+}
+void Acv_Reward_HiveAuraLifeRegenP2 (int playerID, fixed amount){
+    if(gv_BaseHiveLevel >= 2){
+        Acv_Reward_HiveAuraLifeRegenP0(playerID,amount);
+    }
+    else{
+        gv_Hive_Upgrades[2].aura_Lifereg += amount;
+    }
+}
+void Acv_Reward_HiveAuraEnergyRegenP0 (int playerID, fixed amount) {
+    int tmpInt;
+    CatalogFieldValueModify(c_gameCatalogBehavior, "BaseAura", "Modification.VitalRegenArray[2]", gv_BasePlayer, FixedToString(amount, c_fixedPrecisionAny), c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogBehavior, "RespawnEgg@HiveAura", "Modification.VitalRegenArray[2]", gv_BasePlayer, FixedToString(amount * respawnEgg_AuraFactor, c_fixedPrecisionAny), c_upgradeOperationAdd);
+    for ( tmpInt = 1; tmpInt <= gv_MaxAmountPlayers; tmpInt += 1 ) {
+        CatalogFieldValueModify(c_gameCatalogBehavior, "BaseAura", "Modification.VitalRegenArray[2]", tmpInt, FixedToString(amount, c_fixedPrecisionAny), c_upgradeOperationAdd);
+        CatalogFieldValueModify(c_gameCatalogBehavior, "RespawnEgg@HiveAura", "Modification.VitalRegenArray[2]", tmpInt, FixedToString(amount * respawnEgg_AuraFactor, c_fixedPrecisionAny), c_upgradeOperationAdd);
+    }
+}
+void Acv_Reward_HiveAuraEnergyRegenP1 (int playerID, fixed amount){
+    if(gv_BaseHiveLevel >= 1){
+        Acv_Reward_HiveAuraEnergyRegenP0(playerID,amount);
+    }
+    else{
+        gv_Hive_Upgrades[1].aura_Energyreg += amount;
+    }
+}
+void Acv_Reward_HiveAuraEnergyRegenP2 (int playerID, fixed amount){
+    if(gv_BaseHiveLevel >= 2){
+        Acv_Reward_HiveAuraEnergyRegenP0(playerID,amount);
+    }
+    else{
+        gv_Hive_Upgrades[2].aura_Energyreg += amount;
+    }
+}
+void Acv_Reward_HiveAuraDmgP0 (int playerID, fixed amount) {
+    int tmpInt;
+    CatalogFieldValueModify(c_gameCatalogBehavior, "BaseAura", "Modification.DamageDealtScaled[1]", gv_BasePlayer, FixedToString(amount, c_fixedPrecisionAny), c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogBehavior, "BaseAura", "Modification.DamageDealtScaled[2]", gv_BasePlayer, FixedToString(amount, c_fixedPrecisionAny), c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogBehavior, "RespawnEgg@HiveAura", "Modification.DamageDealtScaled[1]", gv_BasePlayer, FixedToString(amount * respawnEgg_AuraFactor, c_fixedPrecisionAny), c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogBehavior, "RespawnEgg@HiveAura", "Modification.DamageDealtScaled[2]", gv_BasePlayer, FixedToString(amount * respawnEgg_AuraFactor, c_fixedPrecisionAny), c_upgradeOperationAdd);
+    for ( tmpInt= 1 ; tmpInt <= gv_MaxAmountPlayers; tmpInt += 1 ) {
+        CatalogFieldValueModify(c_gameCatalogBehavior, "BaseAura", "Modification.DamageDealtScaled[1]", tmpInt, FixedToString(amount, c_fixedPrecisionAny), c_upgradeOperationAdd);
+        CatalogFieldValueModify(c_gameCatalogBehavior, "BaseAura", "Modification.DamageDealtScaled[2]", tmpInt, FixedToString(amount, c_fixedPrecisionAny), c_upgradeOperationAdd);
+        CatalogFieldValueModify(c_gameCatalogBehavior, "RespawnEgg@HiveAura", "Modification.DamageDealtScaled[1]", tmpInt, FixedToString(amount * respawnEgg_AuraFactor, c_fixedPrecisionAny), c_upgradeOperationAdd);
+        CatalogFieldValueModify(c_gameCatalogBehavior, "RespawnEgg@HiveAura", "Modification.DamageDealtScaled[2]", tmpInt, FixedToString(amount * respawnEgg_AuraFactor, c_fixedPrecisionAny), c_upgradeOperationAdd);
+    }
+}
+void Acv_Reward_HiveAuraDmgP1 (int playerID, fixed amount){
+    if(gv_BaseHiveLevel >= 1){
+        Acv_Reward_HiveAuraDmgP0(playerID,amount);
+    }
+    else{
+        gv_Hive_Upgrades[1].aura_Dmg += amount;
+    }
+}
+void Acv_Reward_HiveAuraDmgP2 (int playerID, fixed amount){
+    if(gv_BaseHiveLevel >= 2){
+        Acv_Reward_HiveAuraDmgP0(playerID,amount);
+    }
+    else{
+        gv_Hive_Upgrades[2].aura_Dmg += amount;
+    }
+}
+void Acv_Reward_HiveAuraAttackSpeedP0 (int playerID, fixed amount) {
+    int tmpInt;
+    CatalogFieldValueModify(c_gameCatalogBehavior, "BaseAura", "Modification.AttackSpeedMultiplier", gv_BasePlayer, FixedToString((amount / 100.0), c_fixedPrecisionAny), c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogBehavior, "RespawnEgg@HiveAura", "Modification.AttackSpeedMultiplier", gv_BasePlayer, FixedToString((amount * respawnEgg_AuraFactor / 100.0), c_fixedPrecisionAny), c_upgradeOperationAdd);
+    for ( tmpInt = 1; tmpInt <= gv_MaxAmountPlayers; tmpInt += 1 ) {
+        CatalogFieldValueModify(c_gameCatalogBehavior, "BaseAura", "Modification.AttackSpeedMultiplier", tmpInt, FixedToString((amount / 100.0), c_fixedPrecisionAny), c_upgradeOperationAdd);
+        CatalogFieldValueModify(c_gameCatalogBehavior, "RespawnEgg@HiveAura", "Modification.AttackSpeedMultiplier", tmpInt, FixedToString((amount * respawnEgg_AuraFactor / 100.0), c_fixedPrecisionAny), c_upgradeOperationAdd);
+    }
+}
+void Acv_Reward_HiveAuraAttackSpeedP1 (int playerID, fixed amount){
+    if(gv_BaseHiveLevel >= 1){
+        Acv_Reward_HiveAuraAttackSpeedP0(playerID,amount);
+    }
+    else{
+        gv_Hive_Upgrades[1].aura_Atkspd    += amount;
+    }
+}
+void Acv_Reward_HiveAuraAttackSpeedP2 (int playerID, fixed amount){
+    if(gv_BaseHiveLevel >= 2){
+        Acv_Reward_HiveAuraAttackSpeedP0(playerID,amount);
+    }
+    else{
+        gv_Hive_Upgrades[2].aura_Atkspd += amount;
+    }
+}
+void Acv_Reward_HiveAuraTimeScaleP0 (int playerID, fixed amount) {
+    int tmpInt;
+    CatalogFieldValueModify(c_gameCatalogBehavior, "BaseAura", "Modification.TimeScale", gv_BasePlayer, FixedToString((amount / 100.0), c_fixedPrecisionAny), c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogBehavior, "RespawnEgg@HiveAura", "Modification.TimeScale", gv_BasePlayer, FixedToString((amount * respawnEgg_AuraFactor / 100.0), c_fixedPrecisionAny), c_upgradeOperationAdd);
+    for ( tmpInt = 1; tmpInt <= gv_MaxAmountPlayers; tmpInt += 1 ) {
+        CatalogFieldValueModify(c_gameCatalogBehavior, "BaseAura", "Modification.TimeScale", tmpInt, FixedToString((amount / 100.0), c_fixedPrecisionAny), c_upgradeOperationAdd);
+        CatalogFieldValueModify(c_gameCatalogBehavior, "RespawnEgg@HiveAura", "Modification.TimeScale", tmpInt, FixedToString((amount * respawnEgg_AuraFactor / 100.0), c_fixedPrecisionAny), c_upgradeOperationAdd);
+    }
+}
+void Acv_Reward_HiveAuraTimeScaleP1 (int playerID, fixed amount){
+    if(gv_BaseHiveLevel >= 1){
+        Acv_Reward_HiveAuraTimeScaleP0(playerID,amount);
+    }
+    else{
+        gv_Hive_Upgrades[1].aura_Timescale += amount;
+    }
+}
+void Acv_Reward_HiveAuraTimeScaleP2 (int playerID, fixed amount){
+    if(gv_BaseHiveLevel >= 2){
+        Acv_Reward_HiveAuraTimeScaleP0(playerID,amount);
+    }
+    else{
+        gv_Hive_Upgrades[2].aura_Timescale += amount;
+    }
+}
+void Acv_Reward_HiveAuraDebuffAtkspd (int playerID, fixed amount) {
+    CatalogFieldValueModify(c_gameCatalogBehavior, "BaseAura2", "Modification.AttackSpeedMultiplier", gv_BasePlayer, FixedToString((amount / 100.0), c_fixedPrecisionAny), c_upgradeOperationSubtract);
+    CatalogFieldValueModify(c_gameCatalogBehavior, "BaseAura2", "Modification.AttackSpeedMultiplier", gv_EnemyPlayer, FixedToString((amount / 100.0), c_fixedPrecisionAny), c_upgradeOperationSubtract);
+}
+void Acv_Reward_HiveAuraEnemyDmg (int playerID, fixed amount) {
+    CatalogFieldValueModify(c_gameCatalogEffect, "BaseAuraPassiveDmg", "Amount", gv_BasePlayer, FixedToString(amount, c_fixedPrecisionAny), c_upgradeOperationAdd);
+}
+

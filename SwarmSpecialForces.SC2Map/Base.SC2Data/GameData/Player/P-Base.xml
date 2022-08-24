@@ -1,0 +1,1594 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CEffectApplyBehavior id="CollectibleMoopyHatCollectingApplyCountdown">
+        <ValidatorArray index="0" value="CollectibleMoopyHatNotAlreadyCollecting"/>
+        <EditorCategories value=""/>
+        <Behavior value="CollectibleMoopyHatCollectingCountdown"/>
+    </CEffectApplyBehavior>
+    <CEffectIssueOrder id="CollectibleMoopyHatCollectingIssueTriggerHandle">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Abil value="CollectibleMoopyHatTriggerHandle"/>
+        <Player Value="Caster"/>
+        <Target Value="SourceUnit"/>
+    </CEffectIssueOrder>
+    <CEffectSet id="ProtossPartTransitionInitialSet">
+        <EditorCategories value=""/>
+        <TargetLocationType value="Point"/>
+    </CEffectSet>
+    <CEffectCancelOrder id="ScientistsStopAttack">
+        <EditorCategories value=""/>
+        <AbilCmd value="attack,Execute"/>
+    </CEffectCancelOrder>
+    <CEffectDamage id="HeroSpellpowerDummy">
+        <EditorCategories value=""/>
+    </CEffectDamage>
+    <CEffectCreateUnit id="SpawnPsiOrb">
+        <EditorCategories value=""/>
+        <SpawnUnit value="PsiOrb"/>
+    </CEffectCreateUnit>
+    <CEffectCreatePersistent id="TransportEscortWeaponDelay">
+        <EditorCategories value="Race:Protoss"/>
+        <WhichLocation Value="TargetUnit"/>
+        <TimeScaleSource Value="Caster"/>
+        <Flags index="Channeled" value="1"/>
+        <PeriodCount value="1"/>
+        <PeriodicEffectArray value="TransportEscortWeaponDmg"/>
+        <PeriodicPeriodArray value="0.2"/>
+    </CEffectCreatePersistent>
+    <CEffectDamage id="TransportEscortWeaponDmg" parent="DU_WEAP">
+        <EditorCategories value="Race:Protoss"/>
+        <Visibility value="Visible"/>
+        <Kind value="Ranged"/>
+        <Amount value="450"/>
+    </CEffectDamage>
+    <CEffectIssueOrder id="PsiOrbCollectingIssueTriggerHandle">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Abil value="PsiOrbTriggerHandle"/>
+        <Player Value="Caster"/>
+        <Target Value="SourceUnit"/>
+    </CEffectIssueOrder>
+    <CEffectApplyBehavior id="PsiOrbCollectingApplyCountdown">
+        <ValidatorArray index="0" value="PsiCollectibleNotAlreadyCollecting"/>
+        <EditorCategories value=""/>
+        <Behavior value="PsiOrbCollectingCountdown"/>
+    </CEffectApplyBehavior>
+    <CEffectSet id="TerranPartTransitionInitialSet">
+        <ValidatorArray value="OverlordTerranPartTransitionAllowed"/>
+        <EditorCategories value=""/>
+        <EffectArray value="TerranPartTransitionSearchOverlords"/>
+        <TargetLocationType value="Point"/>
+    </CEffectSet>
+    <CEffectRemoveBehavior id="TerranPartTransitionRemoveBuff">
+        <ValidatorArray index="0" value="IsBaseOverlord"/>
+        <EditorCategories value=""/>
+        <BehaviorLink value="TerranPartTransitionBuff"/>
+    </CEffectRemoveBehavior>
+    <CEffectEnumArea id="TerranPartTransitionSearchOverlords">
+        <EditorCategories value=""/>
+        <LaunchLocation Value="CasterUnit"/>
+        <ImpactLocation Value="CasterUnit"/>
+        <SearchFilters value="Worker;Neutral,Enemy,Missile,Dead"/>
+        <AreaArray Radius="500" Effect="TerranPartTransitionRemoveBuff"/>
+        <SearchFlags index="OffsetAreaByAngle" value="0"/>
+    </CEffectEnumArea>
+    <CEffectApplyBehavior id="FlyBackHomeApplyEndBuff">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Source"/>
+        <Behavior value="FlyBackHomeEndBuff"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="BaseAuraApplyBehavior">
+        <EditorCategories value=""/>
+        <Behavior value="BaseAura"/>
+        <ValidatorArray index="0" value="TargetIsAllyorPlayer"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="BaseAuraApplyBehavior2">
+        <EditorCategories value=""/>
+        <Behavior value="BaseAura2"/>
+    </CEffectApplyBehavior>
+    <CEffectSet id="BaseAuraEnemySet">
+        <EditorCategories value=""/>
+        <EffectArray value="BaseAuraApplyBehavior2"/>
+        <EffectArray value="BaseAuraPassiveDmg"/>
+        <ValidatorArray value="TargetIsEnemyAndVulnerable"/>
+    </CEffectSet>
+    <CEffectDamage id="BaseAuraPassiveDmg">
+        <EditorCategories value=""/>
+        <Amount value="10"/>
+    </CEffectDamage>
+    <CEffectEnumArea id="BaseAuraSearch">
+        <EditorCategories value=""/>
+        <SearchFilters value="-;RawResource,HarvestableResource,Missile,Item,Dead,Hidden"/>
+        <AreaArray Radius="9" Effect="BaseAuraSet"/>
+        <SearchFlags index="OffsetAreaByAngle" value="0"/>
+    </CEffectEnumArea>
+    <CEffectSet id="BaseAuraSet">
+        <EditorCategories value=""/>
+        <EffectArray value="BaseAuraApplyBehavior"/>
+        <EffectArray value="BaseAuraEnemySet"/>
+    </CEffectSet>
+    <CEffectApplyBehavior id="BaseOverlordDmgApplySlow">
+        <EditorCategories value="Race:Zerg"/>
+        <WhichUnit Value="Source"/>
+        <Behavior value="BaseOverlordDmgSlow"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="BaseOverlordDmgApplyInvulnerable">
+        <ValidatorArray index="0" removed="1"/>
+        <EditorCategories value="Race:Zerg"/>
+        <Marker Link="Effect/BaseOverlordApplySlow"/>
+        <WhichUnit Value="Source"/>
+        <Behavior value="BaseOverlordDmgInvulnerable"/>
+    </CEffectApplyBehavior>
+    <CEffectSet id="BaseOverlordDmgSet">
+        <EditorCategories value="Race:Zerg"/>
+        <EffectArray value="BaseOverlordDmgApplyInvulnerable"/>
+        <EffectArray value="BaseOverlordDmgApplySlow"/>
+    </CEffectSet>
+    <CEffectApplyBehavior id="FlyBackHomeApplyBuff">
+        <EditorCategories value=""/>
+        <Behavior value="FlyBackHomeBuff"/>
+        <ValidatorArray index="0" value="OverlordFlyBackHomeNotTransitioning"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="FlyBackHomeApplyCastBuff">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Behavior value="FlyBackHomeCastBuff"/>
+    </CEffectApplyBehavior>
+    <CEffectSet id="FlyBackHomeInterruptSet">
+        <EditorCategories value=""/>
+        <EffectArray value="FlyBackHomeRemoveCastBuff"/>
+        <EffectArray value="FlyBackHomeIssueStop"/>
+    </CEffectSet>
+    <CEffectCancelOrder id="FlyBackHomeIssueStop">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+    </CEffectCancelOrder>
+    <CEffectRemoveBehavior id="FlyBackHomeRemoveCastBuff">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Source"/>
+        <BehaviorLink value="FlyBackHomeCastBuff"/>
+    </CEffectRemoveBehavior>
+    <CEffectCreateUnit id="LarvaSpawnEssence">
+        <EditorCategories value=""/>
+        <SpawnUnit value="DNAPickup"/>
+    </CEffectCreateUnit>
+    <CEffectApplyBehavior id="ScientistApplyStunned">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Source"/>
+        <Behavior value="ScientistStunned"/>
+    </CEffectApplyBehavior>
+    <CEffectSet id="ScientistsResponseSet">
+        <EditorCategories value=""/>
+        <EffectArray value="ScientistsSetHealthFull"/>
+        <EffectArray value="ScientistsSetHealth1"/>
+        <EffectArray value="ScientistApplyStunned"/>
+        <EffectArray value="ScientistsStopAttack"/>
+    </CEffectSet>
+    <CEffectModifyUnit id="ScientistsSetHealth1">
+        <EditorCategories value=""/>
+        <ImpactUnit Value="Source"/>
+        <VitalArray index="Life">
+            <ChangeFraction value="-0.99"/>
+        </VitalArray>
+    </CEffectModifyUnit>
+    <CEffectModifyUnit id="ScientistsSetHealthFull">
+        <EditorCategories value=""/>
+        <ImpactUnit Value="Source"/>
+        <VitalArray index="Life">
+            <ChangeFraction value="1"/>
+        </VitalArray>
+    </CEffectModifyUnit>
+    <CAbilEffectTarget id="CollectibleMoopyHatCollecting">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="CollectibleMoopyHatCollectingApplyCountdown"/>
+        <Flags index="AutoCast" value="1"/>
+        <Flags index="AutoCastOn" value="1"/>
+        <Flags index="BestUnit" value="0"/>
+        <TargetFilters value="Heroic,Visible;Self,Missile,Item,Stasis,Dead,Hidden"/>
+        <Range value="2"/>
+        <Arc value="360"/>
+        <AutoCastFilters value="Heroic,Visible;Self,Missile,Stasis,Dead,Hidden"/>
+        <AutoCastRange value="2"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="PsiOrbCollect"/>
+    </CAbilEffectTarget>
+    <CAbilEffectTarget id="CollectibleMoopyHatTriggerHandle">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="Suicide"/>
+        <Range value="8"/>
+        <Arc value="360"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="PsiOrbTriggerHandle"/>
+    </CAbilEffectTarget>
+    <CAbilEffectInstant id="ProtossPartTransition">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="ProtossPartTransitionInitialSet"/>
+        <Cost>
+            <Cooldown TimeUse="1"/>
+        </Cost>
+        <InterruptArray index="Cast" value="1"/>
+        <InterruptArray index="Bail" value="1"/>
+        <InterruptCost>
+            <Cooldown TimeUse="3"/>
+        </InterruptCost>
+        <CastIntroTime value="3"/>
+        <ShowProgressArray index="Cast" value="1"/>
+        <ProgressButtonArray index="Cast" value="ProtossPartTransition"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="ProtossPartTransition"/>
+    </CAbilEffectInstant>
+    <CAbilTransport id="BaseOverlordLoadScientists">
+        <EditorCategories value="Race:Zerg,AbilityorEffectType:Units"/>
+        <DataCollection value="OverlordTransport"/>
+        <CmdButtonArray index="Load" DefaultButtonFace="PickupScientists"/>
+        <CmdButtonArray index="UnloadAll">
+            <Flags index="Hidden" value="1"/>
+            <Flags index="ToSelection" value="1"/>
+        </CmdButtonArray>
+        <CmdButtonArray index="UnloadAt" DefaultButtonFace="OverlordTransportUnload"/>
+        <CmdButtonArray index="UnloadUnit">
+            <Flags index="Hidden" value="1"/>
+        </CmdButtonArray>
+        <CmdButtonArray index="LoadAll">
+            <Flags index="Hidden" value="1"/>
+        </CmdButtonArray>
+        <Flags index="CargoDeath" value="1"/>
+        <Flags index="ShowCargoSize" value="0"/>
+        <Flags index="ShowStatus" value="0"/>
+        <MaxCargoCount value="8"/>
+        <MaxCargoSize value="8"/>
+        <TotalCargoSpace value="8"/>
+        <LoadTransportBehavior value="OverlordTransport"/>
+        <TargetFilters value="Visible;Buried,UnderConstruction,Dead,Hidden"/>
+        <LoadValidatorArray value="ScientistsIsStunned"/>
+    </CAbilTransport>
+    <CAbilEffectInstant id="FlyBackHome">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <PrepEffect value="FlyBackHomeApplyCastBuff"/>
+        <Effect index="0" value="FlyBackHomeApplyBuff"/>
+        <Cost>
+            <Cooldown TimeUse="420"/>
+        </Cost>
+        <CastIntroTime value="3"/>
+        <ShowProgressArray index="Cast" value="1"/>
+        <ProgressButtonArray index="Cast" value="FlyBackHome"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="FlyBackHome" Requirements="OverlordFlyBackHome"/>
+    </CAbilEffectInstant>
+    <CAbilEffectTarget id="PsiOrbCollecting">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="PsiOrbCollectingApplyCountdown"/>
+        <Flags index="AutoCast" value="1"/>
+        <Flags index="AutoCastOn" value="1"/>
+        <Flags index="BestUnit" value="0"/>
+        <TargetFilters value="Heroic,Visible;Self,Missile,Item,Stasis,Dead,Hidden"/>
+        <Range value="2"/>
+        <Arc value="360"/>
+        <AutoCastFilters value="Heroic,Visible;Self,Missile,Stasis,Dead,Hidden"/>
+        <AutoCastRange value="2"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="PsiOrbCollect"/>
+    </CAbilEffectTarget>
+    <CAbilEffectTarget id="PsiOrbTriggerHandle">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="Suicide"/>
+        <Range value="8"/>
+        <Arc value="360"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="PsiOrbTriggerHandle"/>
+    </CAbilEffectTarget>
+    <CAbilEffectInstant id="TerranPartTransition">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <PrepEffect value="FlyBackHomeApplyCastBuff"/>
+        <Effect index="0" value="TerranPartTransitionInitialSet"/>
+        <Cost>
+            <Cooldown TimeUse="1"/>
+        </Cost>
+        <InterruptArray index="Cast" value="1"/>
+        <InterruptArray index="Bail" value="1"/>
+        <InterruptCost>
+            <Cooldown TimeUse="3"/>
+        </InterruptCost>
+        <CastIntroTime value="3"/>
+        <ShowProgressArray index="Cast" value="1"/>
+        <ProgressButtonArray index="Cast" value="TerranPartTransition"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="TerranPartTransition" Requirements="TerranPartTransition"/>
+    </CAbilEffectInstant>
+    <CAbilArmMagazine id="TransportPrismEscorts">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Flags index="AutoCreate" value="1"/>
+        <Leash value="3.5"/>
+        <InfoArray index="Ammo1" Time="20" CountStart="6" Distance="2" Manage="Recall" Unit="TransportEscort">
+            <Charge Link="Abil/##id##"/>
+            <Cooldown Link="Abil/##id##"/>
+            <Button DefaultButtonFace="TransportPsirmEscorts">
+                <Flags index="Continuous" value="1"/>
+            </Button>
+            <Flags index="AutoBuild" value="1"/>
+            <Flags index="AutoBuildOn" value="1"/>
+            <Flags index="External" value="1"/>
+        </InfoArray>
+        <ExternalAngle value="59.9963"/>
+        <ExternalAngle value="119.9926"/>
+        <ExternalAngle value="180"/>
+        <ExternalAngle value="0"/>
+        <ExternalAngle value="239.9963"/>
+        <MaxCount value="6"/>
+    </CAbilArmMagazine>
+    <CAbilResearch id="UpgradeResearch">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <InfoArray index="Research1" Upgrade="DmgUpgrade">
+            <Resource index="Minerals" value="30"/>
+            <Charge>
+                <CountMax value="200"/>
+                <CountUse value="-1"/>
+                <Link value="DmgUpgradeCharge"/>
+                <Location value="Player"/>
+            </Charge>
+            <Cooldown TimeUse="0.0625"/>
+            <Button DefaultButtonFace="DmgUpgrade" Requirements="DmgUpgradeHideRequirement"/>
+        </InfoArray>
+        <InfoArray index="Research2" Upgrade="ArmorUpgrade">
+            <Resource index="Minerals" value="30"/>
+            <Charge>
+                <CountMax value="200"/>
+                <CountUse value="-1"/>
+                <Link value="ArmorUpgradeCharge"/>
+                <Location value="Player"/>
+            </Charge>
+            <Cooldown TimeUse="0.0625"/>
+            <Button DefaultButtonFace="ArmorUpgrade" Requirements="ArmorUpgradeHideRequirement"/>
+        </InfoArray>
+        <InfoArray index="Research3" Upgrade="SplashRangeUpgrade">
+            <Resource index="Minerals" value="200"/>
+            <Charge>
+                <CountMax value="200"/>
+                <CountUse value="-1"/>
+                <Link value="SplashRangeUpgradeCharge"/>
+                <Location value="Player"/>
+            </Charge>
+            <Cooldown TimeUse="0.0625"/>
+            <Button DefaultButtonFace="SplashRangeUpgrade" Requirements="SplashRangeUpgradeHideRequirement"/>
+        </InfoArray>
+        <InfoArray index="Research4" Upgrade="RegenerationUpgrade">
+            <Resource index="Minerals" value="300"/>
+            <Resource index="Vespene" value="1"/>
+            <Charge>
+                <CountMax value="2000"/>
+                <CountUse value="-1"/>
+                <Link value="RegenerationUpgradeCharge"/>
+                <Location value="Player"/>
+            </Charge>
+            <Cooldown TimeUse="0.0625"/>
+            <Button DefaultButtonFace="RegenerationUpgrade" Requirements="RegenerationUpgradeHideRequirement"/>
+        </InfoArray>
+        <InfoArray index="Research5" Upgrade="AtkSpdUpgrade">
+            <Resource index="Minerals" value="300"/>
+            <Resource index="Vespene" value="1"/>
+            <Charge>
+                <CountMax value="200"/>
+                <CountUse value="-1"/>
+                <Link value="AtkSpdUpgradeCharge"/>
+                <Location value="Player"/>
+            </Charge>
+            <Cooldown TimeUse="0.0625"/>
+            <Button DefaultButtonFace="AtkSpdUpgrade" Requirements="AtkSpdUpgradeHideRequirement"/>
+        </InfoArray>
+        <Flags index="BestUnit" value="0"/>
+        <Flags index="Transient" value="1"/>
+    </CAbilResearch>
+    <CValidatorUnitCompareBehaviorCount id="CollectibleMoopyHatNotAlreadyCollecting">
+        <ResultFailed value="Error,PsiCollectible/AlreadyCollecting"/>
+        <Behavior value="CollectibleMoopyHatCollectingCountdown"/>
+        <RequireCasterUnit Value="Caster"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorPlayerRequirement id="BaseHiveIsAlive">
+        <Find value="1"/>
+        <Value value="HiveAlive"/>
+    </CValidatorPlayerRequirement>
+    <CRequirement id="AtkSpdUpgradeHideRequirement">
+        <EditorCategories value="TechType:Upgrade"/>
+        <NodeArray index="Use" Link="AndEq281638821CountUpgradeAtkSpdUpgradeQueuedOnly0Eq4037611437CountBehaviorTutorialNotPausedCompleteOnlyAtUnit0"/>
+        <NodeArray index="Show" Link="LTCountUpgradeAtkSpdUpgradeCompleteOnly10"/>
+    </CRequirement>
+    <CRequirement id="HiveAlive">
+        <NodeArray index="Use" Link="Eq2561050864CountUnitHeroDummyHiveDeadCompleteOnly0"/>
+    </CRequirement>
+    <CRequirement id="DmgUpgradeHideRequirement">
+        <EditorCategories value="TechType:Upgrade"/>
+        <NodeArray index="Use" Link="AndEq281638821CountUpgradeDmgUpgradeQueuedOnly0Eq4037611437CountBehaviorTutorialNotPausedCompleteOnlyAtUnit0"/>
+        <NodeArray index="Show" Link="LTCountUpgradeDmgUpgradeCompleteOnlyCountUpgradeUnlockDmgArmorCountCompleteOnly"/>
+    </CRequirement>
+    <CRequirement id="ArmorUpgradeHideRequirement">
+        <EditorCategories value="TechType:Upgrade"/>
+        <NodeArray index="Use" Link="AndEq281638821CountUpgradeArmorUpgradeQueuedOnly0Eq4037611437CountBehaviorTutorialNotPausedCompleteOnlyAtUnit0"/>
+        <NodeArray index="Show" Link="LTCountUpgradeArmorUpgradeCompleteOnlyCountUpgradeUnlockDmgArmorCountCompleteOnly"/>
+    </CRequirement>
+    <CRequirement id="OverlordFlyBackHome">
+        <NodeArray index="Use" Link="AndEq1987477214CountBehaviorBaseOverlordDmgSlowCompleteOnlyAtUnit0Eq2561050864CountUnitHeroDummyHiveDeadCompleteOnly0"/>
+    </CRequirement>
+    <CRequirement id="OverlordNotStunned">
+        <NodeArray index="Use" Link="Eq1851146600CountBehaviorBaseOverlordDmgSlowCompleteOnlyAtUnit0"/>
+    </CRequirement>
+    <CRequirement id="RegenerationUpgradeHideRequirement">
+        <EditorCategories value="TechType:Upgrade"/>
+        <NodeArray index="Use" Link="AndEq281638821CountUpgradeRegenerationUpgradeQueuedOnly0Eq4037611437CountBehaviorTutorialNotPausedCompleteOnlyAtUnit0"/>
+        <NodeArray index="Show" Link="LTCountUpgradeRegenerationUpgradeCompleteOnly10"/>
+    </CRequirement>
+    <CRequirement id="SplashRangeUpgradeHideRequirement">
+        <EditorCategories value="TechType:Upgrade"/>
+        <NodeArray index="Use" Link="AndEq281638821CountUpgradeSplashRangeUpgradeQueuedOnly0Eq4037611437CountBehaviorTutorialNotPausedCompleteOnlyAtUnit0"/>
+        <NodeArray index="Show" Link="LTCountUpgradeSplashRangeUpgradeCompleteOnly10"/>
+    </CRequirement>
+    <CRequirement id="TerranPartTransition">
+        <NodeArray index="Use" Link="Eq1987477214CountBehaviorBaseOverlordDmgSlowCompleteOnlyAtUnit0"/>
+        <NodeArray index="Show" Link="GTCountBehaviorTerranPartTransitionBuffCompleteOnlyAtUnit0"/>
+    </CRequirement>
+    <CActorUnit id="CollectibleMoopyHat" parent="GenericUnitStandard" unitName="CollectibleMoopyHat">
+        <EditorCategories value=""/>
+        <HighlightTooltip value="Unit/Name/Bogus"/>
+        <DeathArray index="Normal" ModelLink="CollectibleMoopyHatDeath"/>
+        <HostSiteOps Ops="SOpOffsetHigherBy066"/>
+    </CActorUnit>
+    <CActorUnit id="TransportEscort" parent="GenericUnitStandard" unitName="TransportEscort">
+        <Aliases value="_UnitLarge"/>
+        <Macros value="GlobalLoopMacro"/>
+        <Macros value="GlobalLoopMacroMore"/>
+        <Macros value="PhysicsDeathsSwarmAir"/>
+        <Macros value="PhysicsDeathsVoidAir"/>
+        <Remove Terms="Abil.OracleRevelation.SourceCastStart" Send="Create Oracle_RevelationCast_Sound"/>
+        <Remove Terms="Abil.OracleRevelation.SourceCastStart" Send="Create Oracle_RevelationCast2_Sound"/>
+        <On index="0" Send="Create SoundEmitter Oracle_Ambience"/>
+        <On index="64" Terms="WeaponStart.*.AttackStart" Send="AnimBracketStart Attack Spell Spell"/>
+        <On index="65" Terms="WeaponStop.*.AttackStop" Send="AnimBracketStop Attack"/>
+        <On index="66" removed="1"/>
+        <On index="67" removed="1"/>
+        <On index="68" removed="1"/>
+        <AnimBlendTime value="0.400000"/>
+        <ModelFlags index="AutomateGlobalLoops" value="0"/>
+        <ModelFlags index="OutlineEmitter" value="1"/>
+        <EventDataFootprint index="0" Actor="UnitFootprint" Model="OracleFootprint"/>
+        <Baselines index="Walk" BlendIn="1.500000" BlendOut="2.000000"/>
+        <BuildModel value="OracleWarpIn"/>
+        <DeathArray index="Normal" ModelLink="Oracle_Golden_Death" SoundLink="Oracle_Explode" VoiceLink="OracleDeathVoice"/>
+        <DeathCustoms ModelLink="OracleDeathWalk" VoiceLink="Oracle_Death" Name="Variation0"/>
+        <DeathCustoms ModelLink="HallucinationDeath" SoundLink="Sentry_HallucinationDeathMedium" Name="Hallucination"/>
+        <DeathCustoms>
+            <ActorModel value="UnitDeathRagdollFlier"/>
+            <ModelLink value="OracleDeathRagdoll"/>
+            <Name value="RagdollBasic"/>
+            <PhysicsMatchKeysOrdered value="BasicAir,Basic"/>
+            <BodySquibs Name="Basic" Model="ProtossTinyRobotSquibDeathRagdoll"/>
+        </DeathCustoms>
+        <DeathCustoms Name="RagdollNuke" InheritsFrom="RagdollBasic">
+            <BodySquibs Name="Fire"/>
+        </DeathCustoms>
+        <DeathCustoms Name="RagdollFire" InheritsFrom="RagdollBasic">
+            <BodySquibs Name="Fire"/>
+        </DeathCustoms>
+        <DeathCustoms Name="RagdollAcid" InheritsFrom="RagdollBasic">
+            <BodySquibs Name="Acid"/>
+        </DeathCustoms>
+        <DeathCustoms Name="RagdollOverkillDPRH" InheritsFrom="RagdollBasic"/>
+        <DeathCustoms Name="RagdollOverkillDOI" InheritsFrom="RagdollBasic"/>
+        <DeathCustoms Name="RagdollMidair" InheritsFrom="RagdollBasic"/>
+        <DeathCustoms ModelLink="OracleDeathMorph" VoiceLink="Oracle_Death" Name="Variation1"/>
+        <DeathCustoms>
+            <ModelLink value="DeathVoidShadowSmall"/>
+            <SoundLink value="ShadowUnit_DeathFX"/>
+            <VoiceLink value="ShadowUnit_DeathVox"/>
+            <Name value="Shadow"/>
+        </DeathCustoms>
+        <DeathCustoms ModelLink="Oracle_Taldarim_Death" Name="DarkProtoss"/>
+        <DeathCustoms ModelLink="Oracle_Taldarim_Death_Walk" Name="Variation2"/>
+        <DeathActorModel value="UnitDeathModelWithDeathMotionFlier"/>
+        <PhysicsMatchKeysOrdered value="BasicAir,Basic"/>
+        <PlacementModel value="Oracle"/>
+        <PortraitModel value="Oracle_Golden_Portrait"/>
+        <BarOffset value="40"/>
+        <BarWidth value="50"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-Protoss-Oracle.dds"/>
+        </GroupIcon>
+        <GroupSoundArray index="What" value="Oracle_GroupWhat"/>
+        <GroupSoundArray index="Yes" value="Oracle_GroupYes"/>
+        <GroupSoundArray index="Attack" value="Oracle_GroupAttack"/>
+        <GroupSoundArray index="Board" value="Oracle_GroupBoard"/>
+        <HeroIcon value="Assets\Textures\btn-unit-protoss-oracle.dds"/>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-protoss-airarmorlevel0.dds"/>
+        <NameOffset value="60"/>
+        <SoundArray index="Birth" value="Oracle_Birth"/>
+        <SoundArray index="Ready" value="Oracle_Ready"/>
+        <SoundArray index="Help" value="Oracle_Help"/>
+        <SoundArray index="What" value="Oracle_What"/>
+        <SoundArray index="Yes" value="Oracle_Yes"/>
+        <SoundArray index="Attack" value="Oracle_Attack"/>
+        <SoundArray index="Pissed" value="Oracle_Pissed"/>
+        <SoundArray index="Movement" value="Oracle_Movement"/>
+        <SoundArray index="Turning" value="Oracle_Turning"/>
+        <SoundArray index="Board" value="Oracle_Board"/>
+        <SoundArray index="Click" value="Oracle_Click"/>
+        <SoundArray index="ClickError" value="Oracle_ClickError"/>
+        <SoundArray index="Highlight" value="Oracle_Highlight"/>
+        <UnitIcon value="Assets\Textures\btn-unit-protoss-oracle.dds"/>
+        <Wireframe>
+            <Image value="Assets\Textures\Wireframe-Protoss-Oracle.dds"/>
+        </Wireframe>
+        <WireframeShield>
+            <Image value="Assets\Textures\Wireframe-Protoss-Oracle-Shield01.dds"/>
+            <Image value="Assets\Textures\Wireframe-Protoss-Oracle-Shield02.dds"/>
+            <Image value="Assets\Textures\Wireframe-Protoss-Oracle-Shield03.dds"/>
+        </WireframeShield>
+    </CActorUnit>
+    <CActorAction id="TransportEscortAttack" parent="GenericAttackBase">
+        <On Terms="Effect.TransportEscortWeaponDelay.Start" Send="Create"/>
+        <On Terms="Effect.TransportEscortWeaponDmg.Start; FromEffectTreeDescendant" Send="ActionDamage"/>
+        <On Terms="Effect.TransportEscortWeaponDelay.Stop" Send="Destroy"/>
+        <ImpactSiteOps Ops="SOpAttachHarness SOpAttachVolumeNoVizEnhance SOpForwardLaunchGuide"/>
+        <AcquisitionYawHalfArc value="10.000000"/>
+        <ActionFlags index="AlignedImpactsAndDamages" value="1"/>
+        <ActionFlags index="ImpactMonitorsTeleports" value="1"/>
+        <ActionFlags index="LaunchForceSite" value="1"/>
+        <Lifetime value="-1.000000"/>
+    </CActorAction>
+    <CActorBeamSimple id="TransportEscortAttackBeam" parent="BeamSimpleAnimationStyleContinuousClosingFull">
+        <Macros value="GlobalLoopMacro"/>
+        <Macros value="ActionTargetTeleportDestroy"/>
+        <On Terms="Effect.TransportEscortWeaponDelay.Stop; At Effect" Send="AnimBracketStop BSD"/>
+        <Model value="RipFieldAttackBeam"/>
+        <Scale value="0.600000"/>
+    </CActorBeamSimple>
+    <CActorUnit id="PsiOrb" parent="GenericUnitStandard" unitName="PsiOrb">
+        <EditorCategories value=""/>
+        <HighlightTooltip value="Unit/PsiCollectible/Tooltip"/>
+        <UnitFlags index="SuppressDefaultStatusBar" value="1"/>
+    </CActorUnit>
+    <CActorModel id="BaseAura" parent="ModelAddition">
+        <EditorCategories value=""/>
+        <On index="0" Terms="ActorCreation" Send="$Stand PlayForever -1.000000 -1.000000 0.200000 AsTimeScale"/>
+        <On index="2" Terms="Behavior.BaseBuffInitial.On" Send="Create"/>
+        <On Terms="Behavior.BaseBuffInitial.Off" Send="Destroy"/>
+        <On Terms="ActorCreation" Send="SetOpacity 0.400000"/>
+        <HostSiteOps Ops="SOpAttachCenter"/>
+        <Model value="OverseerOversightMode"/>
+    </CActorModel>
+    <CActorUnit id="DNAPickup">
+        <On index="69" removed="1"/>
+    </CActorUnit>
+    <CActorUnit id="Hive2" parent="GenericUnitStandard" unitName="Hive2">
+        <Aliases value="_UnitHuge"/>
+        <Macros value="QueueAnim"/>
+        <Macros value="SnowVisualUnitMacroMP"/>
+        <Macros value="MacroTownhallDeco_Zerg"/>
+        <Macros value="ZergHivePlayerDecalMacro"/>
+        <Macros value="ZerglingRespawnAnim"/>
+        <AcceptedHostedPropTransfers index="Decal" value="0"/>
+        <On index="0" Send="Create SoundEmitter Hive_Ambience"/>
+        <On Terms="UnitBirth.Hive2.Normal" Send="Create BuildingTerrainFlatten"/>
+        <On Terms="UnitBirth.Hive2.Suppressed" Send="Create BuildingTerrainFlattenInstant"/>
+        <On Terms="UnitBirth.Hive2.EditorPlaced" Target="_BuildingTerrainFlatten" Send="Create BuildingTerrainFlattenEditor"/>
+        <On Terms="UnitDeath.Hive2" Target="_BuildingTerrainFlatten" Send="Destroy"/>
+        <On Terms="UnitDeathCustomize; ValidateUnit HasZergGenericDeath" Send="DeathCustomize Detached"/>
+        <On Terms="Behavior.BaseHiveLevel1.On" Send="SetWireframe 0 Assets\Textures\wireframe-zerg-hatchery.dds"/>
+        <On Terms="Behavior.BaseHiveLevel2.On" Send="AnimBracketStart MorphA Morph,Start,A Morph,End,A {} ContentPlayOnce"/>
+        <On Terms="AnimDone; AnimName MorphA" Target="_BuildingTerrainFlatten" Send="SetWireframe 0 Assets\Textures\wireframe-zerg-lair.dds"/>
+        <On Terms="AnimDone; AnimName MorphA" Send="AnimGroupApply B"/>
+        <On Terms="Behavior.BaseHiveLevel2.Off" Send="TimerSet 0.125000 RemoveGroupB"/>
+        <On Terms="Behavior.BaseHiveLevel3.On" Send="AnimBracketStart MorphB Morph,Start,B Morph,End,B {} ContentPlayOnce"/>
+        <On Terms="AnimDone; AnimName MorphB" Send="AnimGroupApply C"/>
+        <On Terms="AnimDone; AnimName MorphB" Send="SetWireframe 0 Assets\Textures\wireframe-zerg-hive.dds"/>
+        <On Terms="TimerExpired; TimerName RemoveGroupB" Send="AnimGroupRemove B"/>
+        <On Terms="UnitDeath; ValidateUnit BaseHiveLevel2" Send="DeathCustomize Variation0"/>
+        <On Terms="UnitDeath; ValidateUnit BaseHiveLevel3" Send="DeathCustomize Variation1"/>
+        <Model value="Hive"/>
+        <ModelFlags index="OutlineOccluder" value="1"/>
+        <EventDataFootprint index="0" Actor="UnitFootprint" Model="HiveFootprint"/>
+        <BuildModel value="Hive"/>
+        <DeathArray index="Normal" ModelLink="HatcheryDeath" SoundLink="" VoiceLink="HiveDeathVoice"/>
+        <DeathArray index="UnderConstruction" ModelLink="HiveDeathUnderConstruction" SoundLink="Hive_Explode"/>
+        <DeathCustoms index="0" ModelLink="LairDeath" Name="Variation0"/>
+        <DeathCustoms index="1" ModelLink="HiveDeath" Name="Variation1"/>
+        <DeathCustoms index="2" removed="1"/>
+        <DeathCustoms index="3" removed="1"/>
+        <DeathCustoms index="4" removed="1"/>
+        <PlacementModel value="HivePlacement"/>
+        <PlacementSound value="Zerg_BuildingPlacement"/>
+        <PortraitModel value="HivePortrait"/>
+        <BarOffset value="190"/>
+        <BarWidth value="260"/>
+        <GlossaryAnim value="Stand,C"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-Zerg-Hive.dds"/>
+        </GroupIcon>
+        <GroupSoundArray index="What" value="Hive_GroupWhat"/>
+        <GroupSoundArray index="Yes" value="Hive_GroupYes"/>
+        <GroupSoundArray index="Attack" value="Hive_GroupAttack"/>
+        <GroupSoundArray index="Board" value="Hive_GroupBoard"/>
+        <HeroIcon value="Assets\Textures\btn-building-zerg-hive.dds"/>
+        <LifeArmorIcon value="Assets\Textures\btn-armor-zerg-building.dds"/>
+        <NameOffset value="130"/>
+        <SoundArray index="Birth" value="Hive_Birth"/>
+        <SoundArray index="Ready" value="Hive_Ready"/>
+        <SoundArray index="Help" value="Hive_Help"/>
+        <SoundArray index="What" value="Hive_What"/>
+        <SoundArray index="Yes" value="Hive_Yes"/>
+        <SoundArray index="Attack" value="Hive_Attack"/>
+        <SoundArray index="Pissed" value="Hive_Pissed"/>
+        <SoundArray index="Movement" value="Hive_Movement"/>
+        <SoundArray index="Turning" value="Hive_Turning"/>
+        <SoundArray index="Board" value="Hive_Board"/>
+        <SoundArray index="Construction" value="Zerg_BuildingMorphWhat"/>
+        <SoundArray index="Click" value="Hive_Click"/>
+        <SoundArray index="ClickError" value="Hive_ClickError"/>
+        <SoundArray index="Highlight" value="Hive_Highlight"/>
+        <UnitFlags index="ShowBlobShadow" value="0"/>
+        <UnitFlags index="StandAnimBirthVariation" value="0"/>
+        <UnitIcon value="Assets\Textures\btn-building-zerg-hive.dds"/>
+        <Wireframe>
+            <Image value="Assets\Textures\wireframe-zerg-hatchery.dds"/>
+        </Wireframe>
+    </CActorUnit>
+    <CActorUnit id="Larva2" parent="GenericUnitMorph" unitName="Larva2">
+        <Aliases value="_UnitSmall"/>
+        <Model value="Larva"/>
+        <ModelFlags index="OutlineEmitter" value="1"/>
+        <BuildModel value="Larva"/>
+        <DeathArray index="Normal" ModelLink="LarvaDeath" SoundLink="Larva_Explode"/>
+        <DeathArray index="TrainingComplete" SoundLink="Uni_DeathFXSilentKill"/>
+        <PlacementModel value="Larva"/>
+        <PortraitModel value="LarvaPortrait"/>
+        <WalkAnimMoveSpeed value="0.3984"/>
+        <BarOffset value="5"/>
+        <BarWidth value="30"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-Zerg-Larva.dds"/>
+        </GroupIcon>
+        <HeroIcon value="Assets\Textures\btn-unit-zerg-larva.dds"/>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-zerg-groundcarapace-level0.dds"/>
+        <ShieldArmorIcon value="Assets\Textures\btn-upgrade-zerg-swarmfrenzy.dds"/>
+        <SoundArray index="What" value="Larva_What"/>
+        <SoundArray index="Pissed" value="Larva_Pissed"/>
+        <StatusBarFlags index="Shields" value="0"/>
+        <StatusBarFlags index="Life" value="0"/>
+        <StatusBarFlags index="Energy" value="0"/>
+        <StatusBarFlags index="Cargo" value="0"/>
+        <StatusBarFlags index="Progress" value="0"/>
+        <StatusBarFlags index="Duration" value="0"/>
+        <StatusBarFlags index="Magazine" value="0"/>
+        <StatusBarFlags index="Workers" value="0"/>
+        <StatusBarFlags index="Custom" value="0"/>
+        <StatusColors index="Shields">
+            <ColorArray index="0" value="255,0,128,0"/>
+        </StatusColors>
+        <UnitIcon value="Assets\Textures\btn-unit-zerg-larva.dds"/>
+        <VitalColors index="Shields">
+            <ColorArray value="255,0,128,0"/>
+        </VitalColors>
+        <VitalNames index="Shields" value="Vital/ZergShields"/>
+        <Wireframe>
+            <Image value="Assets\Textures\Wireframe-Zerg-Larva.dds"/>
+        </Wireframe>
+        <WireframeShieldColor value="255,0,128,0"/>
+    </CActorUnit>
+    <CActorRange id="FlyBackHomeRange" parent="RangeAbilHover" abil="FlyBackHome">
+        <EditorCategories value=""/>
+        <Abil Link=""/>
+        <Range value="5.000000"/>
+    </CActorRange>
+    <CActorUnit id="BaseOverlord" parent="GenericUnitStandard" unitName="BaseOverlord">
+        <Aliases value="_UnitLarge"/>
+        <Macros value="PhysicsDeathsSwarmAir"/>
+        <Macros value="PhysicsDeathsVoidAir"/>
+        <EditorCategories value=""/>
+        <On Terms="AbilMorph.*.Finish; MorphTo Overlord" Send="Create"/>
+        <On Terms="AbilMorph.*.Start; MorphFrom Overlord" Send="Destroy"/>
+        <On Terms="Abil.OverlordTransport.TransportUnloadStart" Send="AnimPlay Work Stand,Work PlayForever"/>
+        <On Terms="Abil.OverlordTransport.TransportUnloadStop" Send="AnimClear Work"/>
+        <On Terms="Abil.MorphToOverseer.Start" Target="OverlordGenerateCreepModel" Send="Destroy"/>
+        <On Terms="Abil.MorphToOverseer.Start" Target="OverlordGenerateCreepSound" Send="Destroy"/>
+        <On Terms="Abil.MorphToOverseer.Start" Send="AnimPlay Morph Stand,Morph,Start"/>
+        <On Terms="Behavior.makeCreep2x2Overlord.On" Send="Create OverlordGenerateCreepModel"/>
+        <On Terms="Behavior.makeCreep2x2Overlord.On" Send="Create OverlordGenerateCreepSound"/>
+        <On Terms="Behavior.makeCreep2x2Overlord.Cancel" Target="OverlordGenerateCreepModel" Send="Destroy"/>
+        <On Terms="Behavior.makeCreep2x2Overlord.Cancel" Target="OverlordGenerateCreepSound" Send="Destroy"/>
+        <On Terms="Behavior.makeCreep2x2Overlord.Off" Target="OverlordGenerateCreepModel" Send="Destroy"/>
+        <On Terms="Behavior.makeCreep2x2Overlord.Off" Target="OverlordGenerateCreepSound" Send="Destroy"/>
+        <On Terms="UnitHeightUpdate.*.Land" Send="Create Overlord_Land"/>
+        <On Terms="Abil.SpawnChangelingTarget.SourceCastStart" Send="$Spell"/>
+        <On Terms="ActorCreation; PlayerHasReward OverlordSkin" Send="StatusSet CE 1"/>
+        <On Terms="Upgrade.K5ImprovedOverlords.Add" Send="SetScale 1.250000 1.000000"/>
+        <On Terms="Upgrade.K5ImprovedOverlords.Remove" Send="SetScale 1.000000 1.000000"/>
+        <On Terms="ActorCreation; ValidateUnit HaveK5ImprovedOverlords" Send="SetScale 1.250000"/>
+        <On Terms="UnitDeathCustomize; ValidateUnit HaveVoidShade" Send="DeathCustomize Shadow"/>
+        <On Terms="UnitDeathCustomize; ValidateUnit HaveTerrazineShadow" Send="DeathCustomize Shadow"/>
+        <Model value="Overlord_Mutant"/>
+        <ModelFlags index="OutlineEmitter" value="1"/>
+        <BuildModel value="Overlord_Mutant"/>
+        <DeathArray index="Normal" ModelLink="OverlordDeath" SoundLink=""/>
+        <DeathCustoms>
+            <ActorModel value="OverlordDeathRagdoll"/>
+            <ModelLink value="OverlordDeathRagdoll"/>
+            <Name value="RagdollBasic"/>
+            <PhysicsMatchKeysOrdered value="BasicAir,Basic"/>
+        </DeathCustoms>
+        <DeathCustoms Name="RagdollNuke" InheritsFrom="RagdollBasic">
+            <BodySquibs Name="Fire"/>
+        </DeathCustoms>
+        <DeathCustoms Name="RagdollFire" InheritsFrom="RagdollBasic">
+            <BodySquibs Name="Fire"/>
+        </DeathCustoms>
+        <DeathCustoms Name="RagdollAcid" InheritsFrom="RagdollBasic">
+            <BodySquibs Name="Acid"/>
+        </DeathCustoms>
+        <DeathCustoms Name="RagdollOverkillDPRH" InheritsFrom="RagdollBasic"/>
+        <DeathCustoms Name="RagdollOverkillDOI" InheritsFrom="RagdollBasic"/>
+        <DeathCustoms Name="RagdollMidair" InheritsFrom="RagdollBasic"/>
+        <DeathCustoms>
+            <ModelLink value="DeathVoidShadowLarge"/>
+            <SoundLink value="ShadowUnit_DeathFX"/>
+            <VoiceLink value="ShadowUnit_DeathVox"/>
+            <Name value="Shadow"/>
+        </DeathCustoms>
+        <DeathActorModel value="UnitDeathModelWithDeathMotionFlier"/>
+        <PhysicsMatchKeysOrdered value="BasicAir,Basic"/>
+        <PlacementModel value="Overlord_Mutant"/>
+        <PortraitModel value="Overlord_Mutant_Portrait"/>
+        <BarOffset value="70"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\wireframe-collection-overlord-mutant.dds"/>
+        </GroupIcon>
+        <HeroIcon value="Assets\Textures\btn-unit-collection-overlord-mutant.dds"/>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-zerg-flyercarapace-level0.dds"/>
+        <NameOffset value="70"/>
+        <ShieldArmorIcon value="Assets\Textures\btn-upgrade-zerg-swarmfrenzy.dds"/>
+        <SoundArray index="Ready" value="Overlord_Ready"/>
+        <SoundArray index="What" value="Overlord_What"/>
+        <SoundArray index="Yes" value="Overlord_Yes"/>
+        <SoundArray index="Pissed" value="Overlord_Pissed"/>
+        <StatusColors index="Shields">
+            <ColorArray index="0" value="255,0,128,0"/>
+        </StatusColors>
+        <UnitFlags index="StandAnimBirthVariation" value="0"/>
+        <UnitIcon value="Assets\Textures\btn-unit-collection-overlord-mutant.dds"/>
+        <VitalColors index="Shields">
+            <ColorArray value="255,0,128,0"/>
+        </VitalColors>
+        <VitalNames index="Shields" value="Vital/ZergShields"/>
+        <Wireframe>
+            <Image value="Assets\Textures\wireframe-collection-overlord-mutant.dds"/>
+        </Wireframe>
+        <WireframeShieldColor value="255,0,128,0"/>
+        <StatusBarFlags index="Shields" value="0"/>
+        <StatusBarFlags index="Life" value="0"/>
+        <StatusBarFlags index="Energy" value="0"/>
+        <StatusBarFlags index="Cargo" value="0"/>
+        <StatusBarFlags index="Progress" value="0"/>
+        <StatusBarFlags index="Duration" value="0"/>
+        <StatusBarFlags index="Magazine" value="0"/>
+        <StatusBarFlags index="Workers" value="0"/>
+        <StatusBarFlags index="Custom" value="0"/>
+    </CActorUnit>
+    <CActorUnit id="TransportPrism" parent="WarpPrism" unitName="TransportPrism">
+        <On index="0" Terms="UnitBirth.TransportPrism"/>
+        <On index="1" Terms="UnitBirth.TransportPrism"/>
+        <On index="2" Terms="UnitRevive.TransportPrism"/>
+        <On index="3" Terms="UnitRevive.TransportPrism"/>
+        <On index="4" Terms="UnitConstruction.TransportPrism.Start"/>
+        <On index="5" Terms="UnitConstruction.TransportPrism.Finish"/>
+        <Model value="PsiOrbTransporter"/>
+        <PortraitModel value="WarpPrism_Golden_Portrait"/>
+        <HighlightTooltip value="Unit/Name/TransportPrism"/>
+    </CActorUnit>
+    <CModel id="CollectibleMoopyHat">
+        <Model value="Assets\Units\Test\InvisibleUnit\InvisibleUnit.m3"/>
+    </CModel>
+    <CModel id="CollectibleMoopyHatDeath">
+        <Model value="Assets\Effects\Other\FireWorkEX3\FireWorkEX3.m3"/>
+        <Lighting value="CollectibleMoopyHat"/>
+        <VariationCount value="3"/>
+    </CModel>
+    <CWeaponLegacy id="TransportEscortWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-ability-protoss-oraclepulsarcannonon.dds"/>
+        <DisplayEffect value="TransportEscortWeaponDmg"/>
+        <TargetFilters value="Ground,Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <TeleportResetRange value="0"/>
+        <Period value="1"/>
+        <Effect value="TransportEscortWeaponDelay"/>
+        <LegacyOptions index="CanRetargetWhileChanneling" value="1"/>
+        <LegacyOptions index="NoDeceleration" value="1"/>
+        <AllowedMovement value="Slowing"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="TransportPrismFakeWeapon">
+        <EditorCategories value=""/>
+        <Options index="Hidden" value="1"/>
+        <Range value="6"/>
+        <Arc value="360"/>
+        <Period value="2.15"/>
+        <Effect value=""/>
+    </CWeaponLegacy>
+    <CUnit id="CollectibleMoopyHat">
+        <Race value="Zerg"/>
+        <EditorCategories value=""/>
+        <FlagArray index="Turnable" value="0"/>
+        <FlagArray index="Unselectable" value="1"/>
+        <FlagArray index="Untargetable" value="1"/>
+        <FlagArray index="Invulnerable" value="1"/>
+        <Attributes index="Summoned" value="1"/>
+        <Sight value="5"/>
+        <AbilArray Link="CollectibleMoopyHatCollecting"/>
+        <AbilArray Link="CollectibleMoopyHatTriggerHandle"/>
+        <CardLayouts>
+            <LayoutButtons Face="PsiOrbCollect" Type="AbilCmd" AbilCmd="CollectibleMoopyHatCollecting,Execute" Row="0" Column="0"/>
+            <LayoutButtons Face="PsiOrbTriggerHandle" Type="AbilCmd" AbilCmd="CollectibleMoopyHatTriggerHandle,Execute" Row="0" Column="1"/>
+        </CardLayouts>
+        <LifeArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </LifeArmorFormula>
+        <ShieldArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </ShieldArmorFormula>
+    </CUnit>
+    <CUnit id="TransportEscort">
+        <Race value="Prot"/>
+        <FlagArray index="PreventDestroy" value="1"/>
+        <FlagArray index="UseLineOfSight" value="1"/>
+        <FlagArray index="AlwaysThreatens" value="1"/>
+        <FlagArray index="AIHighPrioTarget" value="1"/>
+        <FlagArray index="AICaster" value="1"/>
+        <FlagArray index="AISupport" value="1"/>
+        <FlagArray index="AIFleeDamageDisabled" value="1"/>
+        <FlagArray index="ArmySelect" value="1"/>
+        <PlaneArray index="Air" value="1"/>
+        <Collide index="Flying" value="1"/>
+        <Attributes index="Light" value="1"/>
+        <Attributes index="Mechanical" value="1"/>
+        <Attributes index="Psionic" value="1"/>
+        <Attributes index="Summoned" value="1"/>
+        <LifeStart value="11000"/>
+        <LifeMax value="11000"/>
+        <LifeArmorName value="Unit/LifeArmorName/ProtossPlating"/>
+        <ShieldsStart value="6500"/>
+        <ShieldsMax value="6500"/>
+        <ShieldRegenDelay value="10"/>
+        <ShieldRegenRate value="28"/>
+        <ShieldArmorName value="Unit/ShieldArmorName/ProtossPlasmaShields"/>
+        <Mover value="Fly"/>
+        <Speed value="5.5976"/>
+        <Acceleration value="3"/>
+        <StationaryTurningRate value="999.8437"/>
+        <Sight value="10"/>
+        <Height value="3.75"/>
+        <VisionHeight value="4"/>
+        <AttackTargetPriority value="20"/>
+        <AbilArray Link="stop"/>
+        <AbilArray Link="move"/>
+        <AbilArray Link="attack"/>
+        <BehaviorArray Link="Difficulty0"/>
+        <BehaviorArray Link="Difficulty1"/>
+        <BehaviorArray Link="Difficulty2"/>
+        <BehaviorArray Link="Difficulty3"/>
+        <BehaviorArray Link="Difficulty4"/>
+        <BehaviorArray Link="Difficulty5"/>
+        <BehaviorArray Link="DifficultyCustom"/>
+        <WeaponArray Link="TransportEscortWeapon"/>
+        <CardLayouts>
+            <LayoutButtons Face="Move" Type="AbilCmd" AbilCmd="move,Move" Row="0" Column="0"/>
+            <LayoutButtons Face="Stop" Type="AbilCmd" AbilCmd="stop,Stop" Row="0" Column="1"/>
+            <LayoutButtons Face="MoveHoldPosition" Type="AbilCmd" AbilCmd="move,HoldPos" Row="0" Column="2"/>
+            <LayoutButtons Face="MovePatrol" Type="AbilCmd" AbilCmd="move,Patrol" Row="0" Column="3"/>
+            <LayoutButtons Face="Attack" Type="AbilCmd" AbilCmd="attack,Execute" Row="0" Column="4"/>
+        </CardLayouts>
+        <Radius value="0.75"/>
+        <SeparationRadius value="0.75"/>
+        <MinimapRadius value="1"/>
+        <KillDisplay value="Always"/>
+        <RankDisplay value="Always"/>
+        <LifeArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </LifeArmorFormula>
+        <ShieldArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </ShieldArmorFormula>
+    </CUnit>
+    <CUnit id="PsiOrb">
+        <Race value="Prot"/>
+        <FlagArray index="Turnable" value="0"/>
+        <FlagArray index="Untooltipable" value="0"/>
+        <FlagArray index="Unselectable" value="1"/>
+        <FlagArray index="Untargetable" value="1"/>
+        <FlagArray index="Invulnerable" value="1"/>
+        <Sight value="5"/>
+        <AbilArray Link="PsiOrbCollecting"/>
+        <AbilArray Link="PsiOrbTriggerHandle"/>
+        <CardLayouts>
+            <LayoutButtons Face="PsiOrbTriggerHandle" Type="AbilCmd" AbilCmd="PsiOrbTriggerHandle,255" Row="1" Column="2"/>
+            <LayoutButtons Face="PsiOrbCollect" Type="AbilCmd" AbilCmd="PsiOrbCollecting,255" Row="2" Column="0"/>
+        </CardLayouts>
+        <EditorCategories value=""/>
+        <Attributes index="Summoned" value="1"/>
+        <LifeArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </LifeArmorFormula>
+        <ShieldArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </ShieldArmorFormula>
+    </CUnit>
+    <CUnit id="BaseOverlord">
+        <DeathRevealRadius value="3"/>
+        <Race value="Zerg"/>
+        <Mob value="Multiplayer"/>
+        <FlagArray index="Worker" value="1"/>
+        <FlagArray index="PreventDestroy" value="1"/>
+        <FlagArray index="UseLineOfSight" value="1"/>
+        <PlaneArray index="Ground" value="1"/>
+        <Collide index="CreepTumor" value="1"/>
+        <Response value="Nothing"/>
+        <LifeStart value="2000"/>
+        <LifeMax value="2000"/>
+        <LifeRegenRate value="140"/>
+        <LifeArmorName value="Unit/LifeArmorName/ZergAirArmor"/>
+        <ShieldArmorName value="Unit/ShieldArmorName/ZergWildMutation"/>
+        <Speed value="2.0976"/>
+        <Acceleration value="3"/>
+        <LateralAcceleration value="46.0625"/>
+        <Sight value="7"/>
+        <Height value="2.25"/>
+        <AttackTargetPriority value="15"/>
+        <DamageDealtXP value="1"/>
+        <DamageTakenXP value="1"/>
+        <KillXP value="20"/>
+        <AbilArray Link="stop"/>
+        <AbilArray Link="move"/>
+        <AbilArray Link="UpgradeResearch"/>
+        <AbilArray Link="BaseOverlordLoadScientists"/>
+        <AbilArray Link="CyberneticTrain"/>
+        <AbilArray Link="FlyBackHome"/>
+        <AbilArray Link="TerranPartTransition"/>
+        <AbilArray Link="CyberneticChargeRestore"/>
+        <BehaviorArray Link="BaseOverlordDmgReact"/>
+        <BehaviorArray Link="BaseOverlordCreepGen"/>
+        <CardLayouts>
+            <LayoutButtons Face="Move" Type="AbilCmd" AbilCmd="move,Move" Row="0" Column="0"/>
+            <LayoutButtons Face="Stop" Type="AbilCmd" AbilCmd="stop,Stop" Row="0" Column="1"/>
+            <LayoutButtons Face="DmgUpgrade" Type="AbilCmd" AbilCmd="UpgradeResearch,Research1" Row="2" Column="0"/>
+            <LayoutButtons Face="ArmorUpgrade" Type="AbilCmd" AbilCmd="UpgradeResearch,Research2" Row="2" Column="1"/>
+            <LayoutButtons Face="SplashRangeUpgrade" Type="AbilCmd" AbilCmd="UpgradeResearch,Research3" Row="2" Column="2"/>
+            <LayoutButtons Face="RegenerationUpgrade" Type="AbilCmd" AbilCmd="UpgradeResearch,Research4" Row="2" Column="3"/>
+            <LayoutButtons Face="AtkSpdUpgrade" Type="AbilCmd" AbilCmd="UpgradeResearch,Research5" Row="2" Column="4"/>
+            <LayoutButtons Face="UpgradeCenter" Type="Passive" Row="1" Column="0"/>
+            <LayoutButtons Face="PickupScientists" Type="AbilCmd" AbilCmd="BaseOverlordLoadScientists,Load" Row="0" Column="4"/>
+            <LayoutButtons>
+                <Face value="CyberneticSubmenu"/>
+                <Type value="Submenu"/>
+                <Requirements value="CyberneticsUnlocked"/>
+                <SubmenuCardId value="BCyb"/>
+                <SubmenuIsSticky value="1"/>
+                <Row value="1"/>
+                <Column value="4"/>
+            </LayoutButtons>
+            <LayoutButtons Face="FlyBackHome" Type="AbilCmd" AbilCmd="FlyBackHome,Execute" Row="1" Column="1"/>
+            <LayoutButtons Face="TerranPartTransition" Type="AbilCmd" AbilCmd="TerranPartTransition,Execute" Row="0" Column="3"/>
+        </CardLayouts>
+        <CardLayouts CardId="BCyb">
+            <LayoutButtons Face="CreateLurker" Type="AbilCmd" AbilCmd="CyberneticTrain,Train1" Row="0" Column="0"/>
+            <LayoutButtons Face="Cancel" Type="CancelSubmenu" Row="2" Column="4"/>
+            <LayoutButtons Face="CreateRunling" Type="AbilCmd" AbilCmd="CyberneticTrain,Train2" Row="0" Column="1"/>
+            <LayoutButtons Face="CyberneticLurkerRestoreCharge" Type="AbilCmd" AbilCmd="CyberneticChargeRestore,Train1" Row="1" Column="0"/>
+            <LayoutButtons Face="CyberneticRunlingRestoreCharge" Type="AbilCmd" AbilCmd="CyberneticChargeRestore,Train2" Row="1" Column="1"/>
+            <LayoutButtons Face="CyberneticLifeBank@CreateLifeBank" Type="AbilCmd" AbilCmd="CyberneticTrain,Train3" Row="0" Column="2"/>
+            <LayoutButtons Face="CyberneticLifeBank@LifeBankRestoreCharge" Type="AbilCmd" AbilCmd="CyberneticChargeRestore,Train3" Row="1" Column="2"/>
+        </CardLayouts>
+        <Radius value="0.25"/>
+        <SeparationRadius value="0.75"/>
+        <InnerRadius value="0.5"/>
+        <ScoreMake value="100"/>
+        <ScoreKill value="100"/>
+        <ScoreResult value="BuildOrder"/>
+        <SubgroupPriority value="10"/>
+        <MinimapRadius value="0.75"/>
+        <EditorCategories value=""/>
+        <TacticalAI value="Overlord"/>
+        <AIEvalFactor value="0"/>
+        <AIEvaluateAlias value="Overlord"/>
+        <GlossaryPriority value="5"/>
+        <HotkeyCategory value="Unit/Category/SSFPlayerUnits"/>
+        <Name value="Unit/Name/Overlord"/>
+        <LifeArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </LifeArmorFormula>
+        <ShieldArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </ShieldArmorFormula>
+    </CUnit>
+    <CUnit id="DNAPickup">
+        <FlagArray index="Unselectable" value="1"/>
+        <EditorCategories value=""/>
+        <Name value="Unit/Name/Essence"/>
+        <LifeArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </LifeArmorFormula>
+        <ShieldArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </ShieldArmorFormula>
+    </CUnit>
+    <CUnit id="Hive2">
+        <DeathRevealRadius value="3"/>
+        <Race value="Zerg"/>
+        <Mob value="Multiplayer"/>
+        <FlagArray index="Turnable" value="0"/>
+        <FlagArray index="PreventReveal" value="1"/>
+        <FlagArray index="PreventDefeat" value="1"/>
+        <FlagArray index="PreventDestroy" value="1"/>
+        <FlagArray index="UseLineOfSight" value="1"/>
+        <FlagArray index="TownAlert" value="1"/>
+        <FlagArray index="NoPortraitTalk" value="1"/>
+        <FlagArray index="TownCamera" value="1"/>
+        <FlagArray index="ArmorDisabledWhileConstructing" value="1"/>
+        <FogVisibility value="Snapshot"/>
+        <PlaneArray index="Ground" value="1"/>
+        <Collide index="Burrow" value="1"/>
+        <Collide index="Ground" value="1"/>
+        <Collide index="Structure" value="1"/>
+        <Collide index="RoachBurrow" value="1"/>
+        <Collide index="ForceField" value="1"/>
+        <Collide index="Locust" value="1"/>
+        <Collide index="Small" value="1"/>
+        <Attributes index="Armored" value="1"/>
+        <Attributes index="Biological" value="1"/>
+        <Attributes index="Structure" value="1"/>
+        <LifeStart value="25000"/>
+        <LifeMax value="25000"/>
+        <LifeArmorName value="Unit/LifeArmorName/ZergBuildingArmor"/>
+        <StationaryTurningRate value="719.4726"/>
+        <Sight value="12"/>
+        <AttackTargetPriority value="11"/>
+        <BehaviorArray Link="CreepGen4x4BaseRadius10"/>
+        <BehaviorArray Link="Difficulty0Hive"/>
+        <BehaviorArray Link="Difficulty1Hive"/>
+        <BehaviorArray Link="Difficulty2Hive"/>
+        <BehaviorArray Link="Difficulty3Hive"/>
+        <BehaviorArray Link="Difficulty4Hive"/>
+        <BehaviorArray Link="Difficulty5Hive"/>
+        <BehaviorArray Link="BaseBuffInitial"/>
+        <BehaviorArray Link="BaseHiveLevel1"/>
+        <BehaviorArray Link="DifficultyCustomHive"/>
+        <Radius value="2"/>
+        <SeparationRadius value="2"/>
+        <Footprint value="Footprint4x4CliffBorderContour"/>
+        <PlacementFootprint value="Footprint4x4CliffBorderContour"/>
+        <MinimapRadius value="2.5"/>
+        <EditorCategories value="ObjectType:Structure"/>
+        <HotkeyAlias value="Hive"/>
+        <HotkeyCategory value="Unit/Category/ZergUnits"/>
+        <KillDisplay value="Always"/>
+        <RankDisplay value="Always"/>
+        <Name value="Unit/Name/Hive"/>
+        <LifeArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </LifeArmorFormula>
+        <ShieldArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </ShieldArmorFormula>
+    </CUnit>
+    <CUnit id="Scientist">
+        <LifeStart value="500"/>
+        <LifeMax value="500"/>
+        <Speed value="2.4492"/>
+        <SpeedMultiplierCreep value="0.75"/>
+        <BehaviorArray Link="ScientistResponse"/>
+        <BehaviorArray Link="CollectibleWander"/>
+        <EditorCategories value=""/>
+        <Sight value="5"/>
+        <FlagArray index="Worker" value="1"/>
+        <LifeArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </LifeArmorFormula>
+        <ShieldArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </ShieldArmorFormula>
+    </CUnit>
+    <CUnit id="Larva2">
+        <Race value="Zerg"/>
+        <FlagArray index="Unselectable" value="1"/>
+        <Collide index="Larva" value="1"/>
+        <Speed value="0.6992"/>
+        <BehaviorArray Link="CloakNotOnCreep"/>
+        <BehaviorArray Link="CollectibleWander"/>
+        <BehaviorArray Link="LarvaSpawnOnDeath"/>
+        <Radius value="0.125"/>
+        <MinimapRadius value="0"/>
+        <EditorCategories value=""/>
+        <AbilArray Link="stop"/>
+        <AbilArray Link="move"/>
+        <CardLayouts>
+            <LayoutButtons Face="Move" Type="AbilCmd" AbilCmd="move,Move" Row="0" Column="0"/>
+            <LayoutButtons Face="Stop" Type="AbilCmd" AbilCmd="stop,Stop" Row="0" Column="1"/>
+        </CardLayouts>
+        <PlaneArray index="Ground" value="1"/>
+        <Acceleration value="100"/>
+        <Sight value="2"/>
+        <Name value="Unit/Name/Larva"/>
+        <LifeArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </LifeArmorFormula>
+        <ShieldArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </ShieldArmorFormula>
+    </CUnit>
+    <CUnit id="TransportPrism">
+        <Race value="Prot"/>
+        <FlagArray index="PreventDestroy" value="1"/>
+        <FlagArray index="UseLineOfSight" value="1"/>
+        <FlagArray index="AISupport" value="1"/>
+        <FlagArray index="ArmySelect" value="1"/>
+        <PlaneArray index="Air" value="1"/>
+        <Collide index="Flying" value="1"/>
+        <Attributes index="Armored" value="1"/>
+        <Attributes index="Mechanical" value="1"/>
+        <Attributes index="Psionic" value="1"/>
+        <Attributes index="Summoned" value="1"/>
+        <LifeStart value="30000"/>
+        <LifeMax value="30000"/>
+        <LifeArmorName value="Unit/LifeArmorName/ProtossPlating"/>
+        <ShieldsStart value="12500"/>
+        <ShieldsMax value="12500"/>
+        <ShieldRegenDelay value="10"/>
+        <ShieldRegenRate value="140"/>
+        <ShieldArmorName value="Unit/ShieldArmorName/ProtossPlasmaShields"/>
+        <Mover value="Fly"/>
+        <Speed value="3.5"/>
+        <Acceleration value="2.125"/>
+        <LateralAcceleration value="57"/>
+        <Sight value="10"/>
+        <Height value="3.75"/>
+        <VisionHeight value="4"/>
+        <AttackTargetPriority value="18"/>
+        <AbilArray Link="stop"/>
+        <AbilArray Link="move"/>
+        <AbilArray Link="TransportPrismEscorts"/>
+        <AbilArray Link="attack"/>
+        <AbilArray Link="HangarQueue5"/>
+        <CardLayouts>
+            <LayoutButtons Face="Move" Type="AbilCmd" AbilCmd="move,Move" Row="0" Column="0"/>
+            <LayoutButtons Face="Stop" Type="AbilCmd" AbilCmd="stop,Stop" Row="0" Column="1"/>
+            <LayoutButtons Face="MoveHoldPosition" Type="AbilCmd" AbilCmd="move,HoldPos" Row="0" Column="2"/>
+            <LayoutButtons Face="MovePatrol" Type="AbilCmd" AbilCmd="move,Patrol" Row="0" Column="3"/>
+            <LayoutButtons Face="TransportPsirmEscorts" Type="AbilCmd" AbilCmd="TransportPrismEscorts,Ammo1" Row="2" Column="0"/>
+            <LayoutButtons Face="Attack" Type="AbilCmd" AbilCmd="attack,Execute" Row="0" Column="4"/>
+        </CardLayouts>
+        <Radius value="1"/>
+        <SeparationRadius value="0.875"/>
+        <MinimapRadius value="1"/>
+        <BehaviorArray Link="Difficulty0"/>
+        <BehaviorArray Link="Difficulty1"/>
+        <BehaviorArray Link="Difficulty2"/>
+        <BehaviorArray Link="Difficulty3"/>
+        <BehaviorArray Link="Difficulty4"/>
+        <BehaviorArray Link="Difficulty5"/>
+        <BehaviorArray Link="DifficultyCustom"/>
+        <BehaviorArray Link="SpawnOrbOnDeath"/>
+        <WeaponArray Link="TransportPrismFakeWeapon"/>
+        <LifeArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </LifeArmorFormula>
+        <ShieldArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </ShieldArmorFormula>
+    </CUnit>
+    <CBehaviorBuff id="CollectibleMoopyHatCollectingCountdown">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DisplayDuration index="Self" value="1"/>
+        <DisplayDuration index="Ally" value="1"/>
+        <DisplayDuration index="Neutral" value="1"/>
+        <DisplayDuration index="Enemy" value="1"/>
+        <RemoveValidatorArray value="SourceCasterInRange2"/>
+        <MaxStackCount value="3"/>
+        <MaxStackCountPerCaster value="1"/>
+        <Duration value="7.15"/>
+        <ExpireEffect value="CollectibleMoopyHatCollectingIssueTriggerHandle"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="DifficultyCustomHive">
+        <Name value="Behavior/Name/DifficultyCustom"/>
+        <InfoIcon value="Assets\Textures\btn-ability-terran-deactivatemine.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DisableValidatorArray value="DifficultyValidatorCustomDiff"/>
+        <Modification>
+            <LifeArmorBonus value="20"/>
+            <VitalRegenArray index="Life" value="70"/>
+        </Modification>
+        <DamageResponse>
+            <Kind index="Spell" value="0"/>
+            <Kind index="NoProc" value="0"/>
+            <Chance value="1"/>
+            <Cost>
+                <Charge Link="Behavior/Difficulty0Hive"/>
+                <Cooldown Link="Behavior/Difficulty0Hive"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="BaseHiveLevel1">
+        <InfoIcon value="Assets\Textures\btn-building-zerg-hatchery.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="BaseHiveLevel2">
+        <InfoIcon value="Assets\Textures\btn-building-zerg-lair.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="BaseHiveLevel3">
+        <InfoIcon value="Assets\Textures\btn-building-zerg-hive.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="SpawnOrbOnDeath">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <FinalEffect value="SpawnPsiOrb"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="TerranPartTransitionBurrow">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="3"/>
+        <Modification MoveSpeedMaximum="0">
+            <StateFlags index="Stun" value="1"/>
+            <AbilClassDisableArray index="CAbilAttack" value="1"/>
+            <AbilClassDisableArray index="CAbilEffectInstant" value="1"/>
+            <AbilClassDisableArray index="CAbilEffectTarget" value="1"/>
+            <AbilClassDisableArray index="CAbilMove" value="1"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="TerranPartTransitionFly" parent="TerranPartTransitionBurrow">
+        <Name value="Behavior/Name/TerranPartTransitionFly"/>
+        <Tooltip value="Behavior/Tooltip/TerranPartTransitionFly"/>
+        <Cost>
+            <Charge Link="Behavior/TerranPartTransitionFly"/>
+            <Cooldown Link="Behavior/TerranPartTransitionFly"/>
+        </Cost>
+        <Modification Height="30" MoveSpeedMaximum="160">
+            <HeightTime index="Start" value="3"/>
+            <HeightTime index="Stop" value="3"/>
+        </Modification>
+        <DamageResponse>
+            <Cost>
+                <Charge Link="Behavior/TerranPartTransitionFly"/>
+                <Cooldown Link="Behavior/TerranPartTransitionFly"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="FlyBackHomeEndBuff">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="2.85"/>
+        <Modification>
+            <StateFlags index="Invulnerable" value="1"/>
+            <StateFlags index="Uncommandable" value="1"/>
+            <StateFlags index="Untargetable" value="1"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="FlyBackHomeAffectedUnitBuff">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="9.5"/>
+        <Modification>
+            <StateFlags index="Invulnerable" value="1"/>
+            <StateFlags index="Stun" value="1"/>
+            <StateFlags index="Uncommandable" value="1"/>
+            <StateFlags index="Untargetable" value="1"/>
+            <AbilClassDisableArray index="CAbilAttack" value="1"/>
+            <AbilClassDisableArray index="CAbilEffectInstant" value="1"/>
+            <AbilClassDisableArray index="CAbilEffectTarget" value="1"/>
+            <AbilClassDisableArray index="CAbilMove" value="1"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="BaseAura">
+        <EditorCategories value="Race:Zerg,AbilityorEffectType:Units"/>
+        <Duration value="0.6"/>
+        <Modification>
+            <VitalRegenArray index="Life" value="20"/>
+        </Modification>
+        <Alignment value="Positive"/>
+        <InfoIcon value="Assets\Textures\btn-building-zerg-hatchery.dds"/>
+        <StackAlias value="BaseAura"/>
+        <StackAliasPriority value="5"/>
+        <DamageResponse ModifyFraction="0.8203">
+            <Kind index="Spell" value="0"/>
+            <Kind index="NoProc" value="0"/>
+            <Chance value="1"/>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="BaseAura2">
+        <Alignment value="Negative"/>
+        <EditorCategories value="Race:Zerg,AbilityorEffectType:Units"/>
+        <Duration value="0.6"/>
+        <Modification MoveSpeedMultiplier="0.75" AttackSpeedMultiplier="0.68">
+            <DamageDealtFraction index="Spell" value="-0.33"/>
+            <DamageDealtFraction index="Melee" value="-0.33"/>
+            <DamageDealtFraction index="Ranged" value="-0.33"/>
+            <DamageDealtFraction index="Splash" value="-0.33"/>
+            <DamageDealtFraction index="NoProc" value="-0.33"/>
+        </Modification>
+        <InfoIcon value="Assets\Textures\btn-building-zerg-hatchery.dds"/>
+        <Name value="Behavior/Name/BaseAura"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="BaseBuffInitial">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Period value="0.5"/>
+        <InitialEffect value="BaseAuraSearch"/>
+        <PeriodicEffect value="BaseAuraSearch"/>
+    </CBehaviorBuff>
+    <CBehaviorCreepSource id="BaseOverlordCreepGen">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Structures"/>
+        <Period value="10"/>
+        <Start value="CreepGen7"/>
+        <Birth value="CreepGen7"/>
+        <Grown value="CreepGen7"/>
+    </CBehaviorCreepSource>
+    <CBehaviorBuff id="BaseOverlordDmgReact">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="Race:Zerg,AbilityorEffectType:Units"/>
+        <DamageResponse>
+            <Handled value="BaseOverlordDmgSet"/>
+            <Minimum value="0"/>
+            <ModifyFraction value="0"/>
+            <DamageValue value="Original"/>
+            <Chance value="1"/>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="BaseOverlordDmgSlow">
+        <Alignment value="Negative"/>
+        <EditorCategories value="Race:Zerg,AbilityorEffectType:Units"/>
+        <Duration value="1"/>
+        <Modification>
+            <MoveSpeedMaximum value="0.0234"/>
+            <MoveSpeedMinimum value="0.0234"/>
+            <AccelerationMultiplier value="0.01"/>
+            <DecelerationMultiplier value="1000"/>
+        </Modification>
+        <InfoIcon value="Assets\Textures\btn-upgrade-protoss-alarak-stunnonheroicenemies.dds"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="BaseOverlordDmgInvulnerable">
+        <Cost>
+            <Charge Link="Behavior/BaseOverlordDmgSlow"/>
+            <Cooldown Link="Behavior/BaseOverlordDmgSlow"/>
+        </Cost>
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="Race:Zerg,AbilityorEffectType:Units"/>
+        <Duration value="1"/>
+        <Modification AttackTargetPriority="-1">
+            <StateFlags index="Invulnerable" value="1"/>
+            <VitalRegenArray index="Life" value="50"/>
+        </Modification>
+        <InfoIcon value="Assets\Textures\btn-upgrade-protoss-alarak-stunnonheroicenemies.dds"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="Difficulty0Hive">
+        <Name value="Behavior/Name/Difficulty0"/>
+        <InfoIcon value="Assets\Textures\btn-ability-terran-deactivatemine.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DisableValidatorArray value="DifficultyValidatorEasy"/>
+        <Modification>
+            <LifeArmorBonus value="15"/>
+            <VitalRegenArray index="Life" value="20"/>
+        </Modification>
+        <DamageResponse>
+            <Kind index="Spell" value="0"/>
+            <Kind index="NoProc" value="0"/>
+            <Chance value="1"/>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="Difficulty1Hive">
+        <Name value="Behavior/Name/Difficulty1"/>
+        <InfoIcon value="Assets\Textures\btn-ability-terran-deactivatemine.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DisableValidatorArray value="DifficultyValidatorNormal"/>
+        <Modification>
+            <LifeArmorBonus value="20"/>
+            <VitalRegenArray index="Life" value="30"/>
+        </Modification>
+        <DamageResponse>
+            <Kind index="Spell" value="0"/>
+            <Kind index="NoProc" value="0"/>
+            <Chance value="1"/>
+            <Cost>
+                <Charge Link="Behavior/Difficulty0Hive"/>
+                <Cooldown Link="Behavior/Difficulty0Hive"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="Difficulty2Hive">
+        <Name value="Behavior/Name/Difficulty2"/>
+        <InfoIcon value="Assets\Textures\btn-ability-terran-deactivatemine.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DisableValidatorArray value="DifficultyValidatorHard"/>
+        <Modification>
+            <LifeArmorBonus value="25"/>
+            <VitalRegenArray index="Life" value="40"/>
+        </Modification>
+        <DamageResponse>
+            <Kind index="Spell" value="0"/>
+            <Kind index="NoProc" value="0"/>
+            <Chance value="1"/>
+            <Cost>
+                <Charge Link="Behavior/Difficulty0Hive"/>
+                <Cooldown Link="Behavior/Difficulty0Hive"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="Difficulty3Hive">
+        <Name value="Behavior/Name/Difficulty3"/>
+        <InfoIcon value="Assets\Textures\btn-ability-terran-deactivatemine.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DisableValidatorArray value="DifficultyValidatorBrutal"/>
+        <Modification>
+            <LifeArmorBonus value="30"/>
+            <VitalRegenArray index="Life" value="50"/>
+        </Modification>
+        <DamageResponse>
+            <Kind index="Spell" value="0"/>
+            <Kind index="NoProc" value="0"/>
+            <Chance value="1"/>
+            <Cost>
+                <Charge Link="Behavior/Difficulty0Hive"/>
+                <Cooldown Link="Behavior/Difficulty0Hive"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="Difficulty4Hive">
+        <Name value="Behavior/Name/Difficulty4"/>
+        <InfoIcon value="Assets\Textures\btn-ability-terran-deactivatemine.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DisableValidatorArray value="DifficultyValidatorInsane"/>
+        <Modification>
+            <LifeArmorBonus value="40"/>
+            <VitalRegenArray index="Life" value="60"/>
+        </Modification>
+        <DamageResponse>
+            <Kind index="Spell" value="0"/>
+            <Kind index="NoProc" value="0"/>
+            <Chance value="1"/>
+            <Cost>
+                <Charge Link="Behavior/Difficulty0Hive"/>
+                <Cooldown Link="Behavior/Difficulty0Hive"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="Difficulty5Hive">
+        <Name value="Behavior/Name/Difficulty5"/>
+        <InfoIcon value="Assets\Textures\btn-ability-terran-deactivatemine.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DisableValidatorArray value="DifficultyValidatorHardcore"/>
+        <Modification>
+            <LifeArmorBonus value="50"/>
+            <VitalRegenArray index="Life" value="70"/>
+        </Modification>
+        <DamageResponse>
+            <Kind index="Spell" value="0"/>
+            <Kind index="NoProc" value="0"/>
+            <Chance value="1"/>
+            <Cost>
+                <Charge Link="Behavior/Difficulty0Hive"/>
+                <Cooldown Link="Behavior/Difficulty0Hive"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="FlyBackHomeCastBuff">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="2.15"/>
+        <DamageResponse Handled="FlyBackHomeInterruptSet" Priority="10">
+            <Chance value="1"/>
+        </DamageResponse>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorWander id="CollectibleWander">
+        <EditorCategories value="Race:Zerg,AbilityorEffectType:Units"/>
+        <Leash value="1"/>
+        <Range value="1"/>
+        <Delay value="2"/>
+    </CBehaviorWander>
+    <CBehaviorBuff id="FlyBackHomeBuff">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="7"/>
+        <Modification Height="40">
+            <StateFlags index="Invulnerable" value="1"/>
+            <StateFlags index="Uncommandable" value="1"/>
+            <StateFlags index="Untargetable" value="1"/>
+            <HeightTime index="Start" value="3"/>
+            <HeightTime index="Stop" value="3"/>
+        </Modification>
+        <FinalEffect value="FlyBackHomeApplyEndBuff"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="PsiOrbCollectingCountdown">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DisplayDuration index="Self" value="1"/>
+        <DisplayDuration index="Ally" value="1"/>
+        <DisplayDuration index="Neutral" value="1"/>
+        <DisplayDuration index="Enemy" value="1"/>
+        <RemoveValidatorArray value="SourceCasterInRange2"/>
+        <MaxStackCount value="3"/>
+        <MaxStackCountPerCaster value="1"/>
+        <Duration value="7.15"/>
+        <ExpireEffect value="PsiOrbCollectingIssueTriggerHandle"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="TerranPartTransitionBuff">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="LarvaSpawnOnDeath">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <FinalEffect value="LarvaSpawnEssence"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="ScientistStunned">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <RemoveValidatorArray value="NotFullLife"/>
+        <Modification>
+            <SightMaximum value="0"/>
+            <MoveSpeedMaximum value="0"/>
+            <MoveSpeedMultiplier value="0.01"/>
+            <AccelerationMultiplier value="0.01"/>
+            <VitalRegenArray index="Life" value="20"/>
+        </Modification>
+        <InfoIcon value="Assets\Textures\btn-upgrade-protoss-alarak-stunnonheroicenemies.dds"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="ScientistResponse">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DamageResponse Fatal="1" Handled="ScientistsResponseSet" ModifyFraction="0">
+            <Chance value="1"/>
+        </DamageResponse>
+    </CBehaviorBuff>
+</Catalog>

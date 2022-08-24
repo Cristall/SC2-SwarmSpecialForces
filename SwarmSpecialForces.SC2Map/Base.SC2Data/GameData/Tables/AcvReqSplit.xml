@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CUser id="AcvReqSplit">
+        <Fields Id="Color" Type="Color" EditorColumn="1"/>
+        <Instances Id="[Default]">
+            <Color Color="255,255,0,0">
+                <Field Id="Color"/>
+            </Color>
+        </Instances>
+        <Instances Id="FlawlessP0">
+            <Color Color="255,255,128,0">
+                <Field Id="Color"/>
+            </Color>
+        </Instances>
+        <Instances Id="FlawlessP1">
+            <Color Color="255,255,128,0">
+                <Field Id="Color"/>
+            </Color>
+        </Instances>
+        <Instances Id="FlawlessP2">
+            <Color Color="255,255,128,0">
+                <Field Id="Color"/>
+            </Color>
+        </Instances>
+        <Instances Id="Flamer"/>
+        <Instances Id="Hammer"/>
+        <Instances Id="Fortress"/>
+        <Instances Id="Madness"/>
+        <Instances Id="Lightning"/>
+        <Instances Id="Thunder"/>
+        <Instances Id="Atlantis"/>
+        <Instances Id="Artanis"/>
+        <Instances Id="Raynor"/>
+        <Instances Id="Kerrigan"/>
+        <Instances Id="Cybermind"/>
+        <Instances Id="Gary"/>
+        <Instances Id="Stetmann"/>
+        <Instances Id="KingMoopy"/>
+    </CUser>
+</Catalog>

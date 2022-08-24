@@ -1,0 +1,1158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CEffectApplyBehavior id="BeamDroneDelayDeath">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Source"/>
+    </CEffectApplyBehavior>
+    <CEffectEnumTrackedUnits id="BeamDroneWeaponFollowUnitGet">
+        <EditorCategories value=""/>
+        <BehaviorLink value="BeamDroneDummyTracker"/>
+        <Effect value="BeamDroneWeaponFollowUnitKill"/>
+    </CEffectEnumTrackedUnits>
+    <CEffectAddTrackedUnit id="BeamDroneWeaponFollowUnitTrackerAdd">
+        <EditorCategories value=""/>
+        <BehaviorLink value="BeamDroneDummyTracker"/>
+        <TrackedUnit Value="Target"/>
+    </CEffectAddTrackedUnit>
+    <CEffectApplyBehavior id="BeamDroneApplyBossDeathResponse">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Behavior value="BeamDroneBossDeathResponse"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="BeamDroneApplyCastingBuff">
+        <EditorCategories value=""/>
+        <Behavior value="AlreadyCasting"/>
+        <Flags index="UseDuration" value="1"/>
+        <Duration value="10"/>
+        <WhichUnit Value="Caster"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="BeamDroneApplyCastingBuffNoWeapons">
+        <EditorCategories value=""/>
+        <Behavior value="AlreadyCastingNoWeapons"/>
+        <Flags index="UseDuration" value="1"/>
+        <Duration value="2.5"/>
+        <WhichUnit Value="Caster"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="BeamDroneApplyKillsToCaster">
+        <EditorCategories value=""/>
+        <Behavior value="KillsToCaster"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="BeamDroneApplyMovementRestriction">
+        <EditorCategories value=""/>
+        <Behavior value="BeamDroneMovementRestriction"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="BeamDroneApplyTimedLife">
+        <EditorCategories value=""/>
+        <Behavior value="BeamDroneTimedLife"/>
+    </CEffectApplyBehavior>
+    <CEffectDamage id="BeamDroneBossDeathResponseDroneKill">
+        <EditorCategories value=""/>
+        <ImpactLocation Effect="BeamDroneUnitSet" Value="TargetUnit"/>
+        <Flags index="Kill" value="1"/>
+        <Flags index="NoKillCredit" value="1"/>
+    </CEffectDamage>
+    <CEffectCreateUnit id="BeamDroneCreateDroneUnit">
+        <EditorCategories value=""/>
+        <SpawnEffect value="BeamDroneUnitSet"/>
+        <SpawnUnit value="BeamDrone"/>
+        <CreateFlags index="OffsetByRadius" value="0"/>
+        <CreateFlags index="NormalizeSpawnOffset" value="0"/>
+    </CEffectCreateUnit>
+    <CEffectIssueOrder id="BeamDroneFollowFlamer">
+        <EditorCategories value=""/>
+        <Abil value="move"/>
+        <Player Value="Caster"/>
+        <Target Value="CasterUnit"/>
+    </CEffectIssueOrder>
+    <CEffectCreatePersistent id="BeamDroneFollowFlamerPersistent">
+        <ValidatorArray value="TargetNotDead"/>
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetUnit"/>
+        <Flags index="PersistUntilDestroyed" value="1"/>
+        <PeriodicEffectArray value="BeamDroneFollowFlamer"/>
+        <PeriodicPeriodArray value="0.0625"/>
+    </CEffectCreatePersistent>
+    <CEffectEnumArea id="BeamDroneWeaponFollowUnitSearch">
+        <EditorCategories value=""/>
+        <ImpactLocation Value="CasterUnit"/>
+        <SearchFilters value="-;Self,Ally,Neutral,Enemy,Missile,Dead"/>
+        <AreaArray Radius="500" Effect="BeamDroneWeaponFollowUnitKill"/>
+    </CEffectEnumArea>
+    <CEffectSet id="BeamDroneInitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="BeamDroneApplyCastingBuff"/>
+        <EffectArray value="BeamDroneApplyCastingBuffNoWeapons"/>
+        <EffectArray value="BeamDroneCreateDroneUnit"/>
+        <TargetLocationType value="Point"/>
+    </CEffectSet>
+    <CEffectApplyBehavior id="BeamDroneWeaponFollowUnitAppyIdentifier">
+        <EditorCategories value=""/>
+        <Behavior value="BeamDroneWeaponFollowUnitIdentifier"/>
+    </CEffectApplyBehavior>
+    <CEffectCreateUnit id="BeamDroneWeaponFollowUnitCreate">
+        <EditorCategories value=""/>
+        <CreateFlags index="OffsetByRadius" value="0"/>
+        <CreateFlags index="NormalizeSpawnOffset" value="0"/>
+        <SpawnEffect value="BeamDroneWeaponFollowUnitCreateSet"/>
+        <SpawnUnit value="BeamDroneWeaponFollowUnit"/>
+    </CEffectCreateUnit>
+    <CEffectDamage id="BeamDroneWeaponDmg">
+        <EditorCategories value=""/>
+        <Amount value="600"/>
+        <ResponseFlags index="Acquire" value="1"/>
+        <ResponseFlags index="Flee" value="1"/>
+        <Flags index="Notification" value="1"/>
+        <Death value="Fire"/>
+    </CEffectDamage>
+    <CEffectCreatePersistent id="BeamDroneWeaponFollowUnitDmgPersistent">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetUnit"/>
+        <Flags index="PersistUntilDestroyed" value="1"/>
+        <InitialDelay value="0.7"/>
+        <PeriodicValidator value="TargetNotDead"/>
+        <PeriodicEffectArray value="BeamDroneWeaponFollowUnitDmgSearch"/>
+        <PeriodicPeriodArray value="0.175"/>
+    </CEffectCreatePersistent>
+    <CEffectCreatePersistent id="BeamDroneWeaponFollowUnitFollowPersistent">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetUnit"/>
+        <Flags index="PersistUntilDestroyed" value="1"/>
+        <InitialDelay value="0.7"/>
+        <PeriodicValidator value="TargetNotDead"/>
+        <PeriodicEffectArray value="BeamDroneWeaponFollowUnitIssueFollow"/>
+        <PeriodicPeriodArray value="0.175"/>
+    </CEffectCreatePersistent>
+    <CEffectEnumArea id="BeamDroneWeaponFollowUnitDmgSearch">
+        <EditorCategories value=""/>
+        <ImpactLocation Value="TargetUnit"/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Item,Stasis,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="0.75" Effect="BeamDroneWeaponDmg"/>
+    </CEffectEnumArea>
+    <CEffectSet id="BeamDroneUnitSet">
+        <EditorCategories value=""/>
+        <EffectArray value="BeamDroneApplyTimedLife"/>
+        <EffectArray value="BeamDroneApplyKillsToCaster"/>
+        <EffectArray value="BeamDroneApplyBossDeathResponse"/>
+        <EffectArray value="BeamDroneFollowFlamerPersistent"/>
+        <EffectArray value="BeamDroneApplyMovementRestriction"/>
+    </CEffectSet>
+    <CEffectCreatePersistent id="BeamDroneWeaponChanneledPersistent">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetUnit"/>
+        <Flags index="Channeled" value="1"/>
+        <Flags index="PersistUntilDestroyed" value="1"/>
+        <InitialDelay value="0.0625"/>
+        <InitialEffect value="BeamDroneWeaponFollowUnitCreate"/>
+        <FinalEffect value="BeamDroneWeaponFollowUnitGet"/>
+        <PeriodicValidator value="BeamDroneWeaponChanneledPersistentValidator"/>
+        <PeriodicPeriodArray value="0.175"/>
+    </CEffectCreatePersistent>
+    <CEffectIssueOrder id="BeamDroneWeaponFollowUnitIssueFollow">
+        <EditorCategories value=""/>
+        <Abil value="move"/>
+        <Player Value="Caster"/>
+        <Target Effect="BeamDroneWeaponChanneledPersistent" Value="TargetUnit"/>
+    </CEffectIssueOrder>
+    <CEffectSet id="BeamDroneWeaponFollowUnitCreateSet">
+        <EditorCategories value=""/>
+        <EffectArray value="BeamDroneWeaponFollowUnitAppyIdentifier"/>
+        <EffectArray value="BeamDroneWeaponFollowUnitFollowPersistent"/>
+        <EffectArray value="BeamDroneWeaponFollowUnitDmgPersistent"/>
+        <EffectArray value="BeamDroneWeaponFollowUnitTrackerAdd"/>
+    </CEffectSet>
+    <CEffectDamage id="BeamDroneWeaponFollowUnitKill">
+        <ValidatorArray value="BeamDroneWeaponFollowUnitIdentifier"/>
+        <EditorCategories value=""/>
+        <ImpactLocation Value="TargetUnit"/>
+        <Flags index="Kill" value="1"/>
+        <Flags index="NoKillCredit" value="1"/>
+    </CEffectDamage>
+    <CEffectApplyBehavior id="FireGrenadeApplyCastingBuff">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Behavior value="AlreadyCasting"/>
+        <Flags index="UseDuration" value="1"/>
+        <Duration value="7.15"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="FireGrenadeApplyCastingBuffNoWeapons">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Behavior value="AlreadyCastingNoWeapons"/>
+        <Flags index="UseDuration" value="1"/>
+        <Duration value="2.5"/>
+    </CEffectApplyBehavior>
+    <CEffectCreatePersistent id="FireGrenadeFireLineDirections">
+        <ValidatorArray value="BossAbilityRequirementLvl4"/>
+        <EditorCategories value=""/>
+        <OffsetVectorStartLocation Value="CasterUnit"/>
+        <PeriodCount value="3"/>
+        <PeriodicEffectArray value="FireGrenadeFireLinePersistent"/>
+        <PeriodicOffsetArray value="-0.433,0.25,0"/>
+        <PeriodicOffsetArray value="0.433,0.25,0"/>
+        <PeriodicOffsetArray value="0,-0.5,0"/>
+        <PeriodicPeriodArray value="0"/>
+    </CEffectCreatePersistent>
+    <CEffectDamage id="FireGrenadeFireLineDmg">
+        <EditorCategories value=""/>
+        <ImpactLocation Value="TargetPoint"/>
+        <Amount value="250"/>
+        <AreaArray Radius="0.5" Fraction="1"/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Item,Stasis,Dead,Hidden,Invulnerable"/>
+    </CEffectDamage>
+    <CEffectCreatePersistent id="FireGrenadeFireLinePersistent">
+        <ValidatorArray value="Pathable"/>
+        <EditorCategories value=""/>
+        <OffsetVectorStartLocation Effect="FireGrenadeDotPersistent" Value="TargetPoint"/>
+        <InitialDelay value="0.125"/>
+        <InitialEffect value="FireGrenadeFireLinePersistent"/>
+        <InitialOffset value="0,-0.5,0"/>
+        <PeriodCount value="16"/>
+        <PeriodicEffectArray value="FireGrenadeFireLineDmg"/>
+        <PeriodicPeriodArray value="0.175"/>
+    </CEffectCreatePersistent>
+    <CEffectApplyBehavior id="FocusedFlameApplyCastingBuffNoWeapons">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Behavior value="AlreadyCastingNoWeapons"/>
+        <Flags index="UseDuration" value="1"/>
+        <Duration value="2.35"/>
+    </CEffectApplyBehavior>
+    <CEffectCreatePersistent id="FocusedFlameExtraLinesOffsets">
+        <ValidatorArray value="BossAbilityRequirementLvl5"/>
+        <EditorCategories value=""/>
+        <WhichLocation Value="CasterUnit"/>
+        <OffsetVectorStartLocation Value="CasterUnit"/>
+        <PeriodCount value="2"/>
+        <PeriodicEffectArray value="FocusedFlameLineSearch"/>
+        <PeriodicOffsetArray value="2.5,-4.33,0"/>
+        <PeriodicOffsetArray value="-2.5,-4.33,0"/>
+        <PeriodicPeriodArray value="0"/>
+    </CEffectCreatePersistent>
+    <CEffectApplyBehavior id="FocusedFlameApplyCastingBuff">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Behavior value="AlreadyCasting"/>
+        <Flags index="UseDuration" value="1"/>
+        <Duration value="7"/>
+    </CEffectApplyBehavior>
+    <CEffectIssueOrder id="FocusedFlameCast">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Abil value="FocusedFlame"/>
+        <CmdFlags index="Preempt" value="1"/>
+        <Player Value="Caster"/>
+        <Target Value="TargetUnit"/>
+    </CEffectIssueOrder>
+    <CEffectDamage id="FocusedFlameDummyKill">
+        <EditorCategories value=""/>
+        <ImpactLocation Value="SourceUnit"/>
+        <Flags index="Kill" value="1"/>
+        <Flags index="NoKillCredit" value="1"/>
+    </CEffectDamage>
+    <CEffectDamage id="FireGrenadeDotDamage">
+        <EditorCategories value=""/>
+        <Amount value="400"/>
+    </CEffectDamage>
+    <CEffectCreatePersistent id="FireGrenadeDotPersistent">
+        <EditorCategories value=""/>
+        <PeriodCount value="40"/>
+        <PeriodicEffectArray value="FireGrenadeDotSearch"/>
+        <PeriodicPeriodArray value="0.175"/>
+        <InitialEffect value="FireGrenadeFireLineDirections"/>
+    </CEffectCreatePersistent>
+    <CEffectEnumArea id="FireGrenadeDotSearch">
+        <EditorCategories value=""/>
+        <AreaArray Radius="3.25" Effect="FireGrenadeDotDamage"/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Dead,Hidden,Invulnerable"/>
+    </CEffectEnumArea>
+    <CEffectDamage id="FireGrenadeImpactDamage">
+        <EditorCategories value=""/>
+        <Amount value="1000"/>
+        <AreaArray Radius="3.25" Fraction="1"/>
+        <ExcludeArray Value="Target"/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Dead,Hidden,Invulnerable"/>
+    </CEffectDamage>
+    <CEffectSet id="FireGrenadeImpactSet">
+        <EditorCategories value=""/>
+        <EffectArray value="FireGrenadeSplatRemovePersistent"/>
+        <EffectArray value="FireGrenadeImpactDamage"/>
+        <EffectArray value="FireGrenadeDotPersistent"/>
+        <TargetLocationType value="Point"/>
+    </CEffectSet>
+    <CEffectLaunchMissile id="FireGrenadeLaunchMissile">
+        <EditorCategories value=""/>
+        <ImpactLocation Value="TargetPoint"/>
+        <ImpactEffect value="FireGrenadeImpactSet"/>
+        <AmmoUnit value="FireGrenadeMissile"/>
+        <Movers Link="FireGrenade"/>
+    </CEffectLaunchMissile>
+    <CEffectSet id="FireGrenadeLaunchSet">
+        <EditorCategories value=""/>
+        <EffectArray value="FireGrenadeApplyCastingBuff"/>
+        <EffectArray value="FireGrenadeApplyCastingBuffNoWeapons"/>
+        <EffectArray value="FireGrenadeSplatPersistent"/>
+        <EffectArray value="FireGrenadeLaunchMissile"/>
+        <TargetLocationType value="Point"/>
+    </CEffectSet>
+    <CEffectCreatePersistent id="FireGrenadeSplatPersistent">
+        <EditorCategories value=""/>
+    </CEffectCreatePersistent>
+    <CEffectDestroyPersistent id="FireGrenadeSplatRemovePersistent">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetPoint"/>
+        <Effect value="FireGrenadeSplatPersistent"/>
+        <Count value="1"/>
+        <Radius value="0.125"/>
+    </CEffectDestroyPersistent>
+    <CEffectCreateUnit id="FocusedFlameCreateTargetDummy">
+        <EditorCategories value=""/>
+        <CreateFlags index="Birth" value="0"/>
+        <CreateFlags index="DropOff" value="0"/>
+        <CreateFlags index="OffsetByRadius" value="0"/>
+        <CreateFlags index="Placement" value="0"/>
+        <CreateFlags index="PlacementIgnoreBlockers" value="1"/>
+        <CreateFlags index="PlacementIgnoreCliffTest" value="1"/>
+        <CreateFlags index="ProvideFood" value="0"/>
+        <CreateFlags index="TechComplete" value="0"/>
+        <CreateFlags index="UseFood" value="0"/>
+        <CreateFlags index="NormalizeSpawnOffset" value="0"/>
+        <SpawnEffect value="FocusedFlameTargetDummySet"/>
+        <SpawnUnit value="FocusedFlameTargetDummy"/>
+    </CEffectCreateUnit>
+    <CEffectCreatePersistent id="FocusedFlameTargetDummyFollowPersistent">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetUnit"/>
+        <OffsetVectorEndLocation Value="TargetUnit"/>
+        <InitialEffect value="FocusedFlameTargetDummyIssueFollow"/>
+        <PeriodCount value="32"/>
+        <PeriodicEffectArray value="FocusedFlameTargetDummyIssueFollow"/>
+        <PeriodicPeriodArray value="0.0625"/>
+    </CEffectCreatePersistent>
+    <CEffectSet id="FocusedFlameInitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="FocusedFlameApplyCastingBuff"/>
+        <EffectArray value="FocusedFlameApplyCastingBuffNoWeapons"/>
+        <EffectArray value="FocusedFlameCreateTargetDummy"/>
+    </CEffectSet>
+    <CEffectDamage id="FocusedFlameLineDmg">
+        <EditorCategories value=""/>
+        <Amount value="5000"/>
+        <Flags index="Notification" value="1"/>
+    </CEffectDamage>
+    <CEffectCreatePersistent id="FocusedFlameLinePersistent">
+        <EditorCategories value=""/>
+        <WhichLocation Value="CasterUnit"/>
+        <OffsetVectorEndLocation Value="TargetUnit"/>
+        <PeriodCount value="2"/>
+        <PeriodicEffectArray value="FocusedFlameLineSearch"/>
+        <PeriodicEffectArray value="FocusedFlameExtraLinesOffsets"/>
+        <PeriodicOffsetArray value="0,-5,0"/>
+        <PeriodicPeriodArray value="0"/>
+    </CEffectCreatePersistent>
+    <CEffectEnumArea id="FocusedFlameLineSearch">
+        <EditorCategories value=""/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Item,Dead,Hidden,Invulnerable"/>
+        <AreaArray RectangleWidth="1.5" RectangleHeight="10" Effect="FocusedFlameLineDmg"/>
+        <SearchFlags index="CallForHelp" value="1"/>
+    </CEffectEnumArea>
+    <CEffectIssueOrder id="FocusedFlameTargetDummyIssueFollow">
+        <EditorCategories value=""/>
+        <Abil value="move"/>
+        <CmdFlags index="Preempt" value="1"/>
+        <Target Effect="FocusedFlameInitialSet" Value="TargetUnit"/>
+    </CEffectIssueOrder>
+    <CEffectSet id="FocusedFlameTargetDummySet">
+        <EditorCategories value=""/>
+        <EffectArray value="FocusedFlameCast"/>
+        <EffectArray value="FocusedFlameTargetDummyFollowPersistent"/>
+    </CEffectSet>
+    <CEffectCreatePersistent id="FocusedFlameTargetPersistent">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetUnit"/>
+        <Flags index="Channeled" value="1"/>
+        <ExpireEffect value="FocusedFlameLinePersistent"/>
+        <PeriodCount value="12"/>
+        <PeriodicPeriodArray value="0.1"/>
+        <FinalEffect value="KillTargetDeathNormal"/>
+    </CEffectCreatePersistent>
+    <CEffectSet id="HellbatWeaponSet">
+        <EditorCategories value="Race:Zerg"/>
+        <EffectArray value="HellbatWeaponDmg"/>
+        <EffectArray value="HellbatWeaponSearch"/>
+    </CEffectSet>
+    <CEffectDamage id="HellbatWeaponDmg">
+        <EditorCategories value="Race:Terran"/>
+        <ResponseFlags index="Acquire" value="1"/>
+        <ResponseFlags index="Flee" value="1"/>
+        <ArmorReduction value="1"/>
+        <Flags index="Notification" value="1"/>
+        <Kind value="Ranged"/>
+        <KindSplash value="Ranged"/>
+        <Amount value="1250"/>
+        <SearchFlags index="CallForHelp" value="1"/>
+        <AttributeFactor index="Armored" value="0.15"/>
+    </CEffectDamage>
+    <CEffectEnumArea id="HellbatWeaponSearch">
+        <EditorCategories value="Race:Terran"/>
+        <ImpactLocation Value="SourceUnit"/>
+        <ExcludeArray Effect="HellbatWeaponSet" Value="Target"/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Dead,Hidden,Invulnerable"/>
+        <AreaArray Arc="79.9694" Radius="6.5" Effect="HellbatWeaponDmg"/>
+        <SearchFlags index="ExtendByUnitRadius" value="1"/>
+    </CEffectEnumArea>
+    <CEffectApplyBehavior id="SeaOfFlamesApplyCastingBuff">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Behavior value="AlreadyCasting"/>
+        <Flags index="UseDuration" value="1"/>
+        <Duration value="3.25"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="SeaOfFlamesApplyCastingBuffNoWeapons">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Behavior value="AlreadyCastingNoWeapons"/>
+        <Flags index="UseDuration" value="1"/>
+        <Duration value="3.25"/>
+    </CEffectApplyBehavior>
+    <CEffectCreateUnit id="SeaOfFlamesCreateDrone">
+        <EditorCategories value=""/>
+        <CreateFlags index="OffsetByRadius" value="0"/>
+        <CreateFlags index="NormalizeSpawnOffset" value="0"/>
+        <SpawnEffect value="SeaOfFlamesDroneSet"/>
+        <SpawnUnit value="SeaOfFlamesDrone"/>
+    </CEffectCreateUnit>
+    <CEffectDamage id="SeaOfFlamesDmg">
+        <EditorCategories value=""/>
+        <Amount value="50"/>
+        <AreaArray Radius="0.9" Fraction="1"/>
+        <ExcludeArray Value="Target"/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Item,Dead,Hidden,Invulnerable"/>
+    </CEffectDamage>
+    <CEffectApplyBehavior id="SeaOfFlamesDroneApplyBuff">
+        <EditorCategories value=""/>
+        <Behavior value="SeaOfFlamesDroneTimedLife"/>
+    </CEffectApplyBehavior>
+    <CEffectSet id="SeaOfFlamesDroneSet">
+        <EditorCategories value=""/>
+        <EffectArray value="SeaOfFlamesDroneApplyBuff"/>
+        <EffectArray value="SeaOfFlamesPersistent"/>
+    </CEffectSet>
+    <CEffectCreatePersistent id="SeaOfFlamesFirePersistent">
+        <EditorCategories value=""/>
+        <InitialEffect value="SeaOfFlamesDmg"/>
+        <PeriodCount value="40"/>
+        <PeriodicEffectArray value="SeaOfFlamesDmg"/>
+        <PeriodicPeriodArray value="0.1787"/>
+    </CEffectCreatePersistent>
+    <CEffectSet id="SeaOfFlamesInitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="SeaOfFlamesApplyCastingBuff"/>
+        <EffectArray value="SeaOfFlamesCreateDrone"/>
+        <EffectArray value="SeaOfFlamesApplyCastingBuffNoWeapons"/>
+        <TargetLocationType value="Point"/>
+    </CEffectSet>
+    <CEffectLaunchMissile id="SeaOfFlamesLaunchMissile">
+        <EditorCategories value=""/>
+        <LaunchLocation Effect="SeaOfFlamesPersistent" Value="TargetUnit"/>
+        <ImpactLocation Value="TargetPoint"/>
+        <ImpactEffect value="SeaOfFlamesFirePersistent"/>
+        <AmmoUnit value="SeaOfFlamesMissile"/>
+    </CEffectLaunchMissile>
+    <CEffectCreatePersistent id="SeaOfFlamesMissileDelay">
+        <ValidatorArray value="Pathable"/>
+        <EditorCategories value=""/>
+        <PeriodCount value="1"/>
+        <PeriodicEffectArray value="SeaOfFlamesLaunchMissile"/>
+        <PeriodicPeriodArray value="0.7143"/>
+    </CEffectCreatePersistent>
+    <CEffectCreatePersistent id="SeaOfFlamesOffsetPersistent">
+        <EditorCategories value=""/>
+        <OffsetVectorStartLocation Effect="SeaOfFlamesPersistent" Value="TargetPoint"/>
+        <Flags index="RandomOffset" value="1"/>
+        <PeriodCount value="1"/>
+        <PeriodicEffectArray value="SeaOfFlamesMissileDelay"/>
+        <PeriodicOffsetArray value="0,2.5,0"/>
+        <PeriodicOffsetArray value="0,1.25,0"/>
+        <PeriodicOffsetArray value="-1.25,1.25,0"/>
+        <PeriodicOffsetArray value="0,0,0"/>
+        <PeriodicOffsetArray value="-1.25,0,0"/>
+        <PeriodicOffsetArray value="1.25,0,0"/>
+        <PeriodicOffsetArray value="0,-1.25,0"/>
+        <PeriodicOffsetArray value="-1.25,-1.25,0"/>
+        <PeriodicOffsetArray value="1.25,-1.25,0"/>
+        <PeriodicOffsetArray value="-2.5,-1.25,0"/>
+        <PeriodicOffsetArray value="0,-2.5,0"/>
+        <PeriodicOffsetArray value="-1.25,-2.5,0"/>
+        <PeriodicOffsetArray value="1.25,-2.5,0"/>
+        <PeriodicOffsetArray value="-2.5,-2.5,0"/>
+        <PeriodicOffsetArray value="2.5,-2.5,0"/>
+        <PeriodicPeriodArray value="0"/>
+    </CEffectCreatePersistent>
+    <CEffectCreatePersistent id="SeaOfFlamesPersistent">
+        <EditorCategories value=""/>
+        <OffsetVectorStartLocation Value="TargetPoint"/>
+        <Flags index="RandomOffset" value="1"/>
+        <InitialDelay value="0.35"/>
+        <PeriodCount value="40"/>
+        <PeriodicEffectArray value="SeaOfFlamesOffsetPersistent"/>
+        <PeriodicOffsetArray value="0,-4.25,0"/>
+        <PeriodicOffsetArray value="0,4.25,0"/>
+        <PeriodicOffsetArray value="4.25,0,0"/>
+        <PeriodicOffsetArray value="-4.25,0,0"/>
+        <PeriodicOffsetArray value="3,3,0"/>
+        <PeriodicOffsetArray value="3,-3,0"/>
+        <PeriodicOffsetArray value="-3,3,0"/>
+        <PeriodicOffsetArray value="-3,-3,0"/>
+        <PeriodicPeriodArray value="0.0446"/>
+    </CEffectCreatePersistent>
+    <CAbilEffectInstant id="BeamDrone">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="BeamDroneInitialSet"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="BeamDrone"/>
+    </CAbilEffectInstant>
+    <CAbilEffectTarget id="FireGrenade">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="FireGrenadeLaunchSet"/>
+        <Range value="7"/>
+        <CastOutroTime value="3"/>
+        <UninterruptibleArray index="Channel" value="1"/>
+        <UninterruptibleArray index="Finish" value="1"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="FireGrenade"/>
+        <FollowRange value="0"/>
+    </CAbilEffectTarget>
+    <CAbilEffectTarget id="FocusedFlame">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="FocusedFlameTargetPersistent"/>
+        <Range value="12"/>
+        <CastOutroTime value="2"/>
+        <FinishTime value="1.25"/>
+    </CAbilEffectTarget>
+    <CAbilEffectTarget id="FocusedFlameStart">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="FocusedFlameInitialSet"/>
+        <Range value="7"/>
+        <RangeSlop value="3"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="FocusedFlame"/>
+        <FollowRange value="0"/>
+    </CAbilEffectTarget>
+    <CAbilEffectInstant id="SeaOfFlames">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="SeaOfFlamesInitialSet"/>
+        <Cost>
+            <Cooldown TimeUse="1"/>
+        </Cost>
+        <AutoCastFilters value="Visible;Self,Player,Ally,Neutral,Worker,Missile,Item,Stasis,Dead,Hidden,Invulnerable,Summoned"/>
+        <AutoCastRange value="6"/>
+        <AutoCastValidatorArray value="BossAbilityRequirementLvl3"/>
+        <AutoCastValidatorArray value="NotAlreadyCasting"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="SeaOfFlames"/>
+        <Flags index="AutoCast" value="1"/>
+        <Flags index="AutoCastOn" value="1"/>
+    </CAbilEffectInstant>
+    <CActorUnit id="BeamDrone" parent="GenericUnitStandard" unitName="BeamDrone">
+        <EditorCategories value=""/>
+        <DeathArray index="Normal" ModelLink="" SoundLink="" VoiceLink=""/>
+        <HighlightTooltip value="Unit/Name/Bogus"/>
+        <FogVisibility value="Dimmed"/>
+    </CActorUnit>
+    <CActorBeamSimple id="BeamDroneWeaponBeam" parent="BeamSimpleAnimationStyleContinuous">
+        <FogVisibility value="Dimmed"/>
+        <EditorCategories value=""/>
+        <On index="0" Terms="ActorCreation" Send="$Birth 0 -1.000000 -1.000000 1.000000 AsDuration"/>
+        <On Terms="Effect.BeamDroneWeaponFollowUnitDmgPersistent.Start" Send="Create"/>
+        <On Terms="Effect.BeamDroneWeaponFollowUnitDmgPersistent.Stop" Send="$Death"/>
+        <On Terms="AnimDone; AnimName Birth" Send="$Stand PlayForever"/>
+        <On Terms="AnimDone; AnimName Death" Send="Destroy"/>
+        <On Terms="ActorCreation" Send="SetOpacity"/>
+        <On Terms="ActorCreation" Send="SetOpacity 1.000000 3.000000"/>
+        <On Terms="ActorCreation" Send="SetScale 4.000000,1.000000,4.000000"/>
+        <HostLaunch Subject="_Unit" Scope="Caster" Actor="Find"/>
+        <HostLaunchSiteOps Ops="SOpAttachOrigin"/>
+        <HostImpact Subject="_Unit" Scope="Target" Actor="Find"/>
+    </CActorBeamSimple>
+    <CActorModel id="BeamDroneWeaponBeamImpact" parent="ModelAnimationStyleContinuous">
+        <Flags index="SuppressSaveLoad" value="1"/>
+        <FogVisibility value="Dimmed"/>
+        <EditorCategories value=""/>
+        <On Terms="ActorCreation" Send="SetScale 1.600000,1.600000,1.000000"/>
+        <On Terms="Effect.BeamDroneWeaponFollowUnitDmgPersistent.Start; At Target" Send="Create"/>
+        <On Terms="ActorCreation" Send="AnimSetPausedAll"/>
+        <On Terms="ActorCreation" Send="TimerSet 1.000000 Delay"/>
+        <On Terms="TimerExpired; TimerName Delay" Send="AnimSetPausedAll 0"/>
+        <On Terms="Effect.BeamDroneWeaponFollowUnitDmgPersistent.Stop" Send="Destroy"/>
+    </CActorModel>
+    <CActorUnit id="BeamDroneWeaponFollowUnit" parent="GenericUnitStandard" unitName="BeamDroneWeaponFollowUnit">
+        <EditorCategories value=""/>
+        <Model value="Larva"/>
+        <HighlightTooltip value="Unit/Name/FocusedFlameTargetDummy"/>
+    </CActorUnit>
+    <CActorModel id="BeamDroneWeaponTargetIndicator" parent="ModelAnimationStyleContinuous">
+        <EditorCategories value=""/>
+        <On index="0" Terms="ActorCreation" Send="AnimBracketStart BSD Birth Stand Death 0 0.250000 AsTimeScale"/>
+        <On Terms="Effect.BeamDroneWeaponChanneledPersistent.Start; At Target" Send="Create"/>
+        <On Terms="Effect.BeamDroneWeaponChanneledPersistent.Stop" Send="Destroy"/>
+    </CActorModel>
+    <CActorModel id="FireGrenadeFireLineDot" parent="ModelAnimationStyleContinuous">
+        <EditorCategories value=""/>
+        <On Terms="Effect.FireGrenadeFireLinePersistent.Start" Send="Create"/>
+        <On Terms="ActorCreation" Send="TimerSet 3.000000 Timer"/>
+        <On Terms="TimerExpired; TimerName Timer" Send="Destroy"/>
+    </CActorModel>
+    <CActorModel id="FocusedFlameLineRotatedPositive" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On Terms="ActorCreation" Send="SetScale 2.500000,1.500000,1.000000"/>
+        <On Terms="Effect.FocusedFlameExtraLinesOffsets.Start; At Caster" Send="Create"/>
+        <Host Subject="_Unit" Scope="Caster" Actor="Find"/>
+        <HostSiteOps Ops="SOpAttachWeapon01 FocusedFlameLineRotate SOpRotationPositive30Deg"/>
+        <Model value="FocusedFireBeam"/>
+    </CActorModel>
+    <CActorModel id="FocusedFlameLineRotatedNegative" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On Terms="ActorCreation" Send="SetScale 2.500000,1.500000,1.000000"/>
+        <On Terms="Effect.FocusedFlameExtraLinesOffsets.Start; At Caster" Send="Create"/>
+        <Host Subject="_Unit" Scope="Caster" Actor="Find"/>
+        <HostSiteOps Ops="SOpAttachWeapon01 FocusedFlameLineRotate SOpRotationNegative30Deg"/>
+        <Model value="FocusedFireBeam"/>
+    </CActorModel>
+    <CActorQuad id="FocusedFlameQuadGuideRotatePositive" parent="ZergGuideVisualQuadDown">
+        <Filter index="All" value="1"/>
+        <EditorCategories value=""/>
+        <On index="0" Terms="Abil.Guide" Send="Create"/>
+        <Host Subject="FocusedFlameQuadGuide"/>
+        <HostSiteOps Ops="SOpRotationPositive30Deg"/>
+        <LaunchActor value="TerranGuideVisualQuadLaunch"/>
+        <CenterActor value="TerranGuideVisualQuadCenter"/>
+        <ImpactActor value="TerranGuideVisualQuadImpact"/>
+        <Height value="9.750000"/>
+        <Width value="1.750000"/>
+    </CActorQuad>
+    <CActorQuad id="FocusedFlameQuadGuideRotateNegative" parent="ZergGuideVisualQuadDown">
+        <Filter index="All" value="1"/>
+        <EditorCategories value=""/>
+        <On index="0" Terms="Abil.Guide" Send="Create"/>
+        <Host Subject="FocusedFlameQuadGuide"/>
+        <HostSiteOps Ops="SOpRotationNegative30Deg"/>
+        <LaunchActor value="TerranGuideVisualQuadLaunch"/>
+        <CenterActor value="TerranGuideVisualQuadCenter"/>
+        <ImpactActor value="TerranGuideVisualQuadImpact"/>
+        <Height value="9.750000"/>
+        <Width value="1.750000"/>
+    </CActorQuad>
+    <CActorModel id="FocusedFlameLine" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On Terms="ActorCreation" Send="SetScale 2.500000,1.500000,1.000000"/>
+        <On Terms="Effect.FocusedFlameLinePersistent.Start; At Caster" Send="Create"/>
+        <Host Subject="_Unit" Scope="Caster" Actor="Find"/>
+        <HostSiteOps Ops="SOpAttachWeapon01 FocusedFlameLineRotate"/>
+        <Model value="FocusedFireBeam"/>
+    </CActorModel>
+    <CActorSiteOpRotationExplicit id="FocusedFlameLineRotate">
+        <EditorCategories value=""/>
+        <HoldPosition value="1"/>
+        <HoldRotation value="1"/>
+        <Forward value="0.000000,-1.000000,-0.125000"/>
+        <Up value="0.000000,0.500000,-1.000000"/>
+        <IsLocal value="1"/>
+    </CActorSiteOpRotationExplicit>
+    <CActorQuad id="FocusedFlameQuadGuide" parent="ZergGuideVisualQuadDown">
+        <Filter index="All" value="1"/>
+        <EditorCategories value=""/>
+        <On index="0" Terms="Abil.Guide" Send="Create"/>
+        <On Terms="Effect.FocusedFlameTargetPersistent.Start" Send="Create"/>
+        <On Terms="Effect.FocusedFlameTargetPersistent.Stop" Send="Destroy"/>
+        <On Terms="ActorCreation; ValidatePlayer BossAbilityRequirementLvl5" Send="Create FocusedFlameQuadGuideRotatePositive"/>
+        <On Terms="ActorDestruction; ValidatePlayer BossAbilityRequirementLvl5" Target="FocusedFlameQuadGuideRotatePositive" Send="Destroy"/>
+        <On Terms="ActorCreation; ValidatePlayer BossAbilityRequirementLvl5" Send="Create FocusedFlameQuadGuideRotateNegative"/>
+        <On Terms="ActorDestruction; ValidatePlayer BossAbilityRequirementLvl5" Target="FocusedFlameQuadGuideRotateNegative" Send="Destroy"/>
+        <LaunchActor value="TerranGuideVisualQuadLaunch"/>
+        <CenterActor value="TerranGuideVisualQuadCenter"/>
+        <ImpactActor value="TerranGuideVisualQuadImpact"/>
+        <Height value="9.750000"/>
+        <Width value="1.750000"/>
+        <HostImpact Subject="_Unit" Scope="Target" Actor="Find"/>
+    </CActorQuad>
+    <CActorUnit id="FocusedFlameTargetDummy" parent="GenericUnitStandard" unitName="FocusedFlameTargetDummy">
+        <Model value="Larva"/>
+    </CActorUnit>
+    <CActorModel id="FocusedFlameDmgEffect" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On index="0" Terms="ActorCreation" Send="AnimBracketStart BSD Birth Stand Death ContentPlayOnce 2.000000 AsDuration"/>
+        <On Terms="Effect.FocusedFlameLineDmg.Start; At Target" Send="Create"/>
+        <Host Subject="_Unit"/>
+        <HostSiteOps Ops="SOpAttachHead"/>
+        <Model value="HellionTankAttackUpgradedFireAddition"/>
+    </CActorModel>
+    <CActorModel id="FireGrenadeDotEffect" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On index="0" Terms="ActorCreation" Send="$Stand PlayForever"/>
+        <On index="1" Terms="ActorOrphan" Send="Destroy"/>
+        <On index="2" Terms="Effect.FireGrenadeDotPersistent.Start" Send="Create"/>
+        <On Terms="Effect.FireGrenadeDotPersistent.Stop" Send="Destroy"/>
+        <On Terms="ActorCreation" Send="SetOpacity 0.750000"/>
+        <Model value="FireGrenadeDotFire"/>
+    </CActorModel>
+    <CActorModel id="FireGrenadeDotDmgEffect" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On index="0" Terms="ActorCreation" Send="AnimBracketStart BSD Birth Stand Death ContentPlayOnce 0.500000 AsDuration"/>
+        <On Terms="Effect.FireGrenadeDotDamage.Start; At Target" Send="Create"/>
+        <Host Subject="_Unit"/>
+        <HostSiteOps Ops="SOpAttachHead"/>
+        <Model value="HellionTankAttackFireAddition"/>
+    </CActorModel>
+    <CActorSplat id="FireGrenadeSplat">
+        <VisibleTo index="All" value="1"/>
+        <EditorCategories value=""/>
+        <On Terms="Effect.FireGrenadeSplatPersistent.Start" Send="Create"/>
+        <On Terms="ActorCreation" Send="$Birth PlayForever"/>
+        <On Terms="Effect.FireGrenadeSplatPersistent.Stop" Send="Destroy"/>
+        <Model value="TerranAOECursorSplat"/>
+        <Scale value="3.500000"/>
+    </CActorSplat>
+    <CActorUnit id="SeaOfFlamesDrone" parent="GenericUnitStandard" unitName="SeaOfFlamesDrone">
+        <EditorCategories value=""/>
+        <Model value="SeaOfFlamesPersistentModel"/>
+        <DeathArray index="Normal" ModelLink="DefensiveMatrixDrone_CovertOps_Collection_Death"/>
+        <HighlightTooltip value="Unit/Name/Bogus"/>
+    </CActorUnit>
+    <CActorModel id="SeaOfFlamesFireDot" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On Terms="Effect.SeaOfFlamesFirePersistent.Start" Send="Create"/>
+        <On Terms="ActorCreation" Send="TimerSet 10.000000 Life"/>
+        <On Terms="TimerExpired; TimerName Life" Send="Destroy"/>
+        <On Terms="ActorCreation" Send="SetOpacity 0.500000"/>
+    </CActorModel>
+    <CActorModel id="SeaOfFlamesImpactSplat" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On index="0" Terms="ActorCreation" Send="AnimBracketStart BSD Birth Stand Death ContentPlayOnce 2.000000 AsTimeScale"/>
+        <On Terms="Effect.SeaOfFlamesMissileDelay.Start" Send="Create"/>
+    </CActorModel>
+    <CActorMissile id="SeaOfFlamesMissile" parent="GenericAttackMissile" unitName="SeaOfFlamesMissile">
+        <EditorCategories value=""/>
+        <On Terms="ActorCreation" Send="SetOpacity 0.500000"/>
+        <Model value="SeaOfFlamesFireDot"/>
+    </CActorMissile>
+    <CActorAction id="SeaOfFlamesMissileAction" parent="GenericAttack" effectImpact="SeaOfFlamesDmg" effectLaunch="SeaOfFlamesLaunchMissile">
+        <EditorCategories value=""/>
+        <Missile value="SeaOfFlamesMissile"/>
+        <ImpactSiteOps Ops=""/>
+        <ImpactPointSiteOps Ops="SOpTargetPointStationary SOpShadow"/>
+    </CActorAction>
+    <CActorUnit id="Hellbat" parent="GenericUnitBase" unitName="HellionTank2">
+        <Aliases value="_UnitMedium"/>
+        <Macros value="UnloadDropAnim"/>
+        <Macros value="TerrainSquibAnimations"/>
+        <Macros value="PhysicsDeathsSwarmGround"/>
+        <Macros value="PhysicsDeathsVoidGround"/>
+        <On Terms="Behavior.HellionTankReady.On" Send="AnimBracketStart CoverA Cover,A,Start Cover,A Cover,A,End"/>
+        <On Terms="Behavior.HellionTankReady.Off" Send="AnimBracketStop CoverA"/>
+        <On Terms="WeaponStart.*.AttackStart" Send="AnimPlay CoverB Cover,B PlayForever"/>
+        <On Terms="WeaponStop.*.AttackStop" Send="AnimClear CoverB"/>
+        <On Terms="UnitMovementUpdate.*.Walk" Send="TimerSet 0.250000 KillBeam"/>
+        <On Terms="Abil.attack.ReadyStop" Send="TimerSet 0.250000 KillBeam"/>
+        <On Terms="TimerExpired; TimerName KillBeam" Target="HellionAttackBeam" Send="Destroy"/>
+        <On Terms="UnitPortrait.*.Configure" Target="::PortraitGameSelf" Send="AnimPlay Visor Morph,Stand PlayForever 0.000000"/>
+        <On Terms="UnitHeightUpdate.*.Land" Send="Create Hellion_Land"/>
+        <On Terms="Abil.FocusedFlame.SourceChannelStart" Send="AnimPlay AbilityStart Cover,Start,A 0 -1.000000 -1.000000 1.000000 AsDuration"/>
+        <On Terms="AnimDone; AnimName AbilityStart" Send="AnimPlay AbilityUse Cover,A"/>
+        <On Terms="Abil.FocusedFlame.SourceFinishStart" Send="AnimPlay AbilityEnd Cover,End,A 0 -1.000000 -1.000000 1.250000 AsDuration"/>
+        <Model value="Hellbat_Junker_Collection"/>
+        <Scale value="1.650000"/>
+        <ModelFlags index="OutlineEmitter" value="1"/>
+        <BuildModel value="Hellbat_Junker_Collection"/>
+        <DeathArray index="Normal" ModelLink="Hellbat_Junker_Collection_Death" SoundLink="Hellion_Explode"/>
+        <DeathCustoms ModelLink="HellionTankDeathRagdoll" Name="RagdollBasic">
+            <BodySquibs Name="Basic" Model="TerranSquibDeathRagdoll"/>
+        </DeathCustoms>
+        <DeathCustoms Name="RagdollSiegeTank" InheritsFrom="RagdollBasic"/>
+        <DeathCustoms Name="RagdollNuke" InheritsFrom="RagdollBasic">
+            <BodySquibs Name="Fire"/>
+        </DeathCustoms>
+        <DeathCustoms Name="RagdollFire" InheritsFrom="RagdollBasic">
+            <BodySquibs Name="Fire"/>
+        </DeathCustoms>
+        <DeathCustoms Name="RagdollAcid" InheritsFrom="RagdollBasic">
+            <BodySquibs Name="Acid"/>
+        </DeathCustoms>
+        <DeathCustoms Name="RagdollBaneling" InheritsFrom="RagdollBasic">
+            <BodySquibs Name="Acid"/>
+        </DeathCustoms>
+        <DeathCustoms Name="RagdollUltraUnburrow" InheritsFrom="RagdollBasic"/>
+        <DeathCustoms Name="RagdollOverkillDPRH" InheritsFrom="RagdollBasic"/>
+        <DeathCustoms Name="RagdollOverkillDOI" InheritsFrom="RagdollBasic"/>
+        <DeathCustoms Name="RagdollMidair" InheritsFrom="RagdollBasic"/>
+        <PlacementModel value="Hellbat_Junker_Collection"/>
+        <PortraitActor value="HellionPortrait"/>
+        <PortraitModel value="Hellion_Junker_Portrait"/>
+        <TerrainSquibs>
+            <MovementDistance value="0.150000,0.150000"/>
+            <IdlePeriod value="0.100000,0.250000"/>
+            <RangeUp value="1.000000"/>
+            <RangeDown value="1.000000"/>
+            <AttachQuery Methods="AMFilterCenter"/>
+            <Visuals TerrainPhysicsMaterial="Water" ActorModel="TerrainSquibHarnessContinuous" ModelLink="WaterRippleLarge"/>
+        </TerrainSquibs>
+        <WalkAnimMoveSpeed value="2.25"/>
+        <BarOffset value="50"/>
+        <CustomUnitStatusFrame value="SSF_UnitStatus/BossStatus"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-Terran-HellionTankEx1.dds"/>
+        </GroupIcon>
+        <HeroIcon value="Assets\Textures\btn-unit-terran-hellionbattlemode.dds"/>
+        <HighlightTooltip value="Unit/Name/Hellbat"/>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-terran-vehicleplatinglevel0.dds"/>
+        <MinimapIcon value="Assets\Textures\btn-unit-collection-hellbat-junker.dds"/>
+        <MinimapIconScale value="0.300000"/>
+        <MinimapIconBackground value="Assets\MinimapBackground.dds"/>
+        <MinimapIconBackgroundScale value="1.100000"/>
+        <MinimapIconBackgroundTintColor value="255,255,0,0"/>
+        <SoundArray index="Ready" value="HellionTank_Ready"/>
+        <SoundArray index="Help" value="HellionTank_Help"/>
+        <SoundArray index="What" value="HellionTank_What"/>
+        <SoundArray index="Yes" value="HellionTank_Yes"/>
+        <SoundArray index="Attack" value="HellionTank_Attack"/>
+        <SoundArray index="Pissed" value="HellionTank_Pissed"/>
+        <SoundArray index="Movement" value="HellionTank_Movement"/>
+        <UnitFlags index="StandAnimBirthVariation" value="0"/>
+        <UnitFlags index="SuppressDefaultStatusBar" value="1"/>
+        <UnitIcon value="Assets\Textures\btn-unit-terran-hellionbattlemode.dds"/>
+        <Wireframe>
+            <Image value="Assets\Textures\Wireframe-Terran-HellionTankEx1.dds"/>
+        </Wireframe>
+    </CActorUnit>
+    <CActorAction id="HellbatWeaponAttack" parent="GenericAttackBase" effectAttack="HellionTank">
+        <On Terms="Effect.HellbatWeaponSet.Start; At Caster" Send="Create"/>
+        <On Terms="Effect.HellbatWeaponSet.Start; At Caster; FromEffectTreeDescendant" Send="ActionDamage"/>
+        <LaunchAttachQuery Methods="AMFilterWeapon01"/>
+        <LaunchAssets Model="HellionTankAttackLaunch" Sound="HellionTank_AttackLaunch"/>
+        <LaunchModel value="HellbatWeaponLaunch"/>
+        <ImpactMap index="None" Sound="Hellion_AttackImpact"/>
+    </CActorAction>
+    <CActorModel id="HellbatWeaponAddFire" parent="ModelAnimationStyleOneShot">
+        <On Terms="Effect.HellbatWeaponDmg.Start; At Target; !ValidateEffect HasHighCapacityBarrels; ValidateUnitType NotStructureTarget" Send="Create"/>
+        <Host Subject="_Unit"/>
+        <HostSiteOps Ops="SOpAttachHead"/>
+        <Model value="HellionTankAttackFireAddition"/>
+    </CActorModel>
+    <CActorModel id="HellbatWeaponAddFireStruct" parent="ModelAnimationStyleOneShot">
+        <On Terms="Effect.HellbatWeaponDmg.Start; At Target; !ValidateEffect HasHighCapacityBarrels; ValidateUnitType IsStructureTarget" Send="Create"/>
+        <Host Subject="_Unit"/>
+        <HostSiteOps Ops="SOpAttachRandomDamage"/>
+        <Model value="HellionTankAttackFireAddition"/>
+    </CActorModel>
+    <CActorModel id="HellbatWeaponLaunch" parent="ModelAnimationStyleOneShot">
+        <Flags index="SuppressCreationErrors" value="1"/>
+        <On Terms="ActorCreation" Send="AnimBracketStart GL_BSD GLbirth GLstand GLdeath"/>
+        <On Terms="ActorCreation" Send="TimerSet 0.750000 Kill"/>
+        <On Terms="TimerExpired; TimerName Kill" Send="AnimBracketStop BSD"/>
+        <On Terms="ActorCreation; ValidateUnit HasHighCapacityBarrels" Send="ModelSwap HellionTankAttackLaunchUpgraded"/>
+        <Model value="HellionTankAttackLaunch"/>
+        <Scale value="2.000000"/>
+    </CActorModel>
+    <CActorMissile id="FireGrenadeMissile" parent="GenericAttackMissile" unitName="FireGrenadeMissile">
+        <Model value="FireGreandeMissile"/>
+        <Scale value="2.000000"/>
+    </CActorMissile>
+    <CWeaponLegacy id="HellbatWeapon">
+        <EditorCategories value="Race:Terran"/>
+        <Icon value="Assets\Textures\btn-upgrade-terran-vehicleweaponslevel0.dds"/>
+        <DisplayEffect value="HellbatWeaponDmg"/>
+        <TargetFilters value="Ground,Visible;Worker,Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <MinScanRange value="7"/>
+        <Range value="6"/>
+        <Period value="1"/>
+        <DamagePoint value="0.04"/>
+        <Backswing value="0.1"/>
+        <Effect value="HellbatWeaponSet"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="BeamDroneWeapon">
+        <EditorCategories value=""/>
+        <Options index="OnlyFireWhileInAttackOrder" value="0"/>
+        <Options index="OnlyFireAtAttackOrderTarget" value="0"/>
+        <Options index="DisplayCooldown" value="1"/>
+        <DisplayEffect value="BeamDroneWeaponDmg"/>
+        <TargetFilters value="Visible;Self,Player,Ally,Neutral,Worker,Missile,Item,Stasis,Dead,Hidden,Invulnerable,Summoned"/>
+        <Range value="8"/>
+        <RangeSlop value="3"/>
+        <Arc value="360"/>
+        <Period value="0.55"/>
+        <DamagePoint value="0.5"/>
+        <Backswing value="0"/>
+        <Effect value="BeamDroneWeaponChanneledPersistent"/>
+        <LegacyOptions index="KeepChanneling" value="1"/>
+        <ReloadDuration value="0.5"/>
+        <AllowedMovement value="Moving"/>
+    </CWeaponLegacy>
+    <CMoverMissile id="FireGrenade">
+        <MotionPhases>
+            <Driver value="Ballistic"/>
+            <Gravity value="28"/>
+            <ThrowBandYaw value="-360,-360,-360,-360"/>
+            <ThrowBandPitch value="-360,-360,-360,-360"/>
+            <FlightTime value="1.75"/>
+        </MotionPhases>
+    </CMoverMissile>
+    <CMoverFlock id="SeaOfFlamesDroneMover">
+        <HeightMap value="Air"/>
+    </CMoverFlock>
+    <CMoverMissile id="SeaOfFlamesFireMissile">
+        <MotionPhases>
+            <Driver value="Guidance"/>
+            <Speed value="3"/>
+            <ThrowBandYaw value="-360,-360,-360,-360"/>
+            <ThrowBandPitch value="-360,-360,-360,-360"/>
+            <Overlays/>
+            <Overlays/>
+        </MotionPhases>
+    </CMoverMissile>
+    <CUnit id="BeamDroneWeaponFollowUnit">
+        <Race value="Zerg"/>
+        <FlagArray index="Uncommandable" value="1"/>
+        <FlagArray index="Unselectable" value="1"/>
+        <FlagArray index="Untargetable" value="1"/>
+        <FlagArray index="Uncursorable" value="1"/>
+        <FlagArray index="NoDraw" value="1"/>
+        <FlagArray index="Undetectable" value="1"/>
+        <FlagArray index="Unradarable" value="1"/>
+        <FlagArray index="KillCredit" value="0"/>
+        <FlagArray index="Invulnerable" value="1"/>
+        <FlagArray index="NoScore" value="1"/>
+        <FlagArray index="NoDeathEvent" value="1"/>
+        <FlagArray index="NoPortraitTalk" value="1"/>
+        <FlagArray index="ShowResources" value="0"/>
+        <FlagArray index="PlayerRevivable" value="0"/>
+        <FlagArray index="CameraFollow" value="0"/>
+        <PlaneArray index="Ground" value="1"/>
+        <Speed value="3.1484"/>
+        <Acceleration value="100"/>
+        <LateralAcceleration value="100"/>
+        <AbilArray Link="stop"/>
+        <AbilArray Link="move"/>
+        <CardLayouts>
+            <LayoutButtons Face="Move" Type="AbilCmd" AbilCmd="move,Move" Row="0" Column="0"/>
+            <LayoutButtons Face="Stop" Type="AbilCmd" AbilCmd="stop,Stop" Row="0" Column="1"/>
+        </CardLayouts>
+        <Radius value="0"/>
+        <SeparationRadius value="0"/>
+        <MinimapRadius value="0"/>
+        <EditorCategories value=""/>
+        <ReviveInfoBase>
+            <Charge Link="FocusedFlameTargetDummy/Revive"/>
+            <Cooldown Link="FocusedFlameTargetDummy/Revive"/>
+        </ReviveInfoBase>
+        <BehaviorArray Link="Taunt@Untauntable"/>
+    </CUnit>
+    <CUnit id="FocusedFlameTargetDummy">
+        <FlagArray index="Uncommandable" value="1"/>
+        <FlagArray index="Unselectable" value="1"/>
+        <FlagArray index="Untargetable" value="1"/>
+        <FlagArray index="Uncursorable" value="1"/>
+        <FlagArray index="NoDraw" value="1"/>
+        <FlagArray index="Undetectable" value="1"/>
+        <FlagArray index="Unradarable" value="1"/>
+        <FlagArray index="KillCredit" value="0"/>
+        <FlagArray index="Invulnerable" value="1"/>
+        <FlagArray index="NoScore" value="1"/>
+        <FlagArray index="NoDeathEvent" value="1"/>
+        <FlagArray index="NoPortraitTalk" value="1"/>
+        <FlagArray index="ShowResources" value="0"/>
+        <FlagArray index="PlayerRevivable" value="0"/>
+        <FlagArray index="CameraFollow" value="0"/>
+        <PlaneArray index="Ground" value="1"/>
+        <Attributes index="Summoned" value="1"/>
+        <Speed value="2.7968"/>
+        <Acceleration value="100"/>
+        <LateralAcceleration value="100"/>
+        <AbilArray Link="stop"/>
+        <AbilArray Link="move"/>
+        <BehaviorArray Link="FocusedFlameDummyTimedLife"/>
+        <BehaviorArray Link="Taunt@Untauntable"/>
+        <CardLayouts>
+            <LayoutButtons Face="Move" Type="AbilCmd" AbilCmd="move,Move" Row="0" Column="0"/>
+            <LayoutButtons Face="Stop" Type="AbilCmd" AbilCmd="stop,Stop" Row="0" Column="1"/>
+        </CardLayouts>
+        <Radius value="0"/>
+        <SeparationRadius value="0"/>
+        <MinimapRadius value="0"/>
+        <EditorCategories value=""/>
+        <Fidget>
+            <ChanceArray index="Anim" value="33"/>
+            <ChanceArray index="Idle" value="33"/>
+            <ChanceArray index="Turn" value="33"/>
+        </Fidget>
+    </CUnit>
+    <CUnit id="HellionTank2" parent="HellionTank">
+        <Name value="Unit/Name/HellionTank2"/>
+        <Description value="Button/Tooltip/HellionTank2"/>
+        <FogVisibility value="Dimmed"/>
+        <Attributes index="Light" value="0"/>
+        <Attributes index="Biological" value="0"/>
+        <Attributes index="Mechanical" value="0"/>
+        <Attributes index="Massive" value="1"/>
+        <Attributes index="Heroic" value="1"/>
+        <LifeStart value="27500"/>
+        <LifeMax value="27500"/>
+        <LifeRegenDelay value="5"/>
+        <LifeRegenRate value="280"/>
+        <Speed value="4.8984"/>
+        <Sight value="15"/>
+        <VisionHeight value="4"/>
+        <AbilArray index="3" Link="FireGrenade"/>
+        <AbilArray Link="FocusedFlameStart"/>
+        <AbilArray Link="FocusedFlame"/>
+        <AbilArray Link="BeamDrone"/>
+        <BehaviorArray Link="Difficulty0"/>
+        <BehaviorArray Link="Difficulty1"/>
+        <BehaviorArray Link="Difficulty2"/>
+        <BehaviorArray Link="Difficulty3"/>
+        <BehaviorArray Link="Difficulty4"/>
+        <BehaviorArray Link="Difficulty5"/>
+        <BehaviorArray Link="DifficultyCustom"/>
+        <BehaviorArray Link="Detector10"/>
+        <BehaviorArray Link="BossesP0Armor"/>
+        <WeaponArray index="0" Link="HellbatWeapon"/>
+        <CardLayouts index="0">
+            <LayoutButtons index="5" Face="FireGrenade" AbilCmd="FireGrenade,Execute"/>
+            <LayoutButtons Face="FocusedFlame" Type="AbilCmd" AbilCmd="FocusedFlameStart,Execute" Row="2" Column="1"/>
+            <LayoutButtons Face="BeamDrone" Type="AbilCmd" AbilCmd="BeamDrone,Execute" Row="2" Column="2"/>
+        </CardLayouts>
+        <Radius value="1"/>
+        <ScoreMake value="0"/>
+        <ScoreKill value="0"/>
+        <EditorCategories value=""/>
+        <CostResource index="Minerals" value="0"/>
+        <TechAliasArray index="0" removed="1"/>
+        <GlossaryPriority value="0"/>
+        <GlossaryStrongArray index="0" removed="1"/>
+        <GlossaryStrongArray index="1" removed="1"/>
+        <GlossaryWeakArray index="0" removed="1"/>
+        <GlossaryWeakArray index="1" removed="1"/>
+        <GlossaryWeakArray index="2" removed="1"/>
+        <GlossaryAlias value=""/>
+        <ScoreResult value=""/>
+        <SubgroupPriority value="0"/>
+        <LeaderAlias value="HellionTank2"/>
+        <HotkeyAlias value="HellionTank2"/>
+        <SelectAlias value="HellionTank2"/>
+        <SubgroupAlias value="HellionTank2"/>
+        <GlossaryCategory value=""/>
+        <HotkeyCategory value=""/>
+        <LifeArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </LifeArmorFormula>
+        <ShieldArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </ShieldArmorFormula>
+        <ShieldRegenDelay value="5"/>
+        <LifeArmorTip value="Unit/P0Bosses/ArmorTooltip"/>
+    </CUnit>
+    <CUnit id="SeaOfFlamesDrone">
+        <Race value="Zerg"/>
+        <FlagArray index="Unselectable" value="1"/>
+        <FlagArray index="Untargetable" value="1"/>
+        <FlagArray index="Uncursorable" value="1"/>
+        <FlagArray index="NoScore" value="1"/>
+        <EditorCategories value=""/>
+    </CUnit>
+    <CUnit id="BeamDrone">
+        <Race value="Zerg"/>
+        <Attributes index="Summoned" value="1"/>
+        <FlagArray index="Turnable" value="0"/>
+        <FlagArray index="Worker" value="1"/>
+        <FlagArray index="Uncommandable" value="1"/>
+        <FlagArray index="Unselectable" value="1"/>
+        <FlagArray index="Untargetable" value="1"/>
+        <FlagArray index="Uncursorable" value="1"/>
+        <FlagArray index="Invulnerable" value="1"/>
+        <FlagArray index="NoScore" value="1"/>
+        <FlagArray index="PlayerRevivable" value="0"/>
+        <BehaviorArray Link="Difficulty0"/>
+        <BehaviorArray Link="Difficulty1"/>
+        <BehaviorArray Link="Difficulty2"/>
+        <BehaviorArray Link="Difficulty3"/>
+        <BehaviorArray Link="Difficulty4"/>
+        <BehaviorArray Link="Difficulty5"/>
+        <BehaviorArray Link="DifficultyCustom"/>
+        <BehaviorArray Link="Taunt@Untauntable"/>
+        <BehaviorArray Link="BeamDroneDummyTracker"/>
+        <EditorCategories value=""/>
+        <FogVisibility value="Dimmed"/>
+        <AbilArray Link="attack"/>
+        <AbilArray Link="stop"/>
+        <AbilArray Link="move"/>
+        <WeaponArray Link="BeamDroneWeapon"/>
+        <CardLayouts>
+            <LayoutButtons Face="Stop" Type="AbilCmd" AbilCmd="stop,Stop" Row="0" Column="1"/>
+            <LayoutButtons Face="Attack" Type="AbilCmd" AbilCmd="attack,Execute" Row="0" Column="4"/>
+            <LayoutButtons Face="Move" Type="AbilCmd" AbilCmd="move,Move" Row="0" Column="0"/>
+        </CardLayouts>
+        <Speed value="1"/>
+        <PlaneArray index="Ground" value="1"/>
+        <Acceleration value="100"/>
+    </CUnit>
+    <CUnit id="SeaOfFlamesMissile" parent="MISSILE"/>
+    <CUnit id="FireGrenadeMissile" parent="MISSILE">
+        <Race value="Terr"/>
+        <Mover value="FireGrenade"/>
+        <HotkeyAlias value="FireGrenadeMissile"/>
+    </CUnit>
+    <CBehaviorBuff id="BeamDroneDelayDeath" parent="TimedLifeHidden">
+        <Duration value="0.7"/>
+        <Modification>
+            <StateFlags index="Stun" value="1"/>
+            <StateFlags index="SuppressAttack" value="1"/>
+            <StateFlags index="SuppressCombat" value="1"/>
+            <WeaponDisableArray value="BeamDroneWeapon"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorUnitTracker id="BeamDroneDummyTracker">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+    </CBehaviorUnitTracker>
+    <CBehaviorBuff id="BeamDroneBossDeathResponse">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <InfoFlags index="Hidden" value="1"/>
+        <DamageResponse Fatal="1" Handled="BeamDroneBossDeathResponseDroneKill">
+            <Chance value="1"/>
+        </DamageResponse>
+        <Duration value="18.5"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="BeamDroneMovementRestriction">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DisableValidatorArray value="BeamDroneAllowMovement"/>
+        <Modification MoveSpeedMaximum="0"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="BeamDroneWeaponFollowUnitIdentifier">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="FocusedFlameFlamerBuff">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="2.15"/>
+        <Modification>
+            <StateFlags index="Uncommandable" value="1"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="SeaOfFlamesDroneTimedLife">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="2.85"/>
+        <FinalEffect value="Suicide"/>
+        <Modification Height="4">
+            <HeightTime index="Start" value="0.5"/>
+            <HeightTime index="Stop" value="10"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="BeamDroneTimedLife" parent="TimedLifeDisplayed">
+        <Duration value="18"/>
+        <Modification Height="4">
+            <HeightTime index="Start" value="0.5"/>
+            <HeightTime index="Stop" value="100"/>
+        </Modification>
+        <ExpireEffect value="BeamDroneDelayDeath"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="FocusedFlameDummyTimedLife" parent="TimedLifeHidden"/>
+</Catalog>

@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Desc>
+    
+<!-- local constants  -->
+
+    <Constant name="Border" val="40"/>
+    <Constant name="BorderNegative" val="-40"/>
+    <Constant name="ButtonHeight" val="50"/>
+
+    <!-- MiniIntroduction -->
+        <Constant name="MiniIntroductionTotalWidth" val="580"/>
+        <Constant name="MiniIntroductionTotalHeight" val="338"/>
+        <Constant name="MiniIntroductionTextHeight" val="200"/>
+
+    <!-- AskTutorial -->
+        <Constant name="AskTutorialTotalWidth" val="450"/>
+        <Constant name="AskTutorialTotalHeight" val="220"/>
+        <Constant name="AskTutorialTextHeight" val="80"/>
+        <Constant name="AskTutorialButtonWidth" val="150"/>
+
+    <!-- Tutorial -->
+        <Constant name="TutorialTotalHeight" val="380"/>
+        <Constant name="TutorialTotalWidth" val="600"/>
+
+
+<!-- actual frame -->
+
+    <Frame type="Frame" name="GameUI/UIContainer/FullscreenUpperContainer" file="GameUI">
+
+        <Frame type="Frame" name="MiniIntroduction">
+            <Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+            <Anchor side="Bottom" relative="$parent" pos="Max" offset="-300"/>
+            <Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+            <Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+            <Height val="#MiniIntroductionTotalHeight"/>
+            <Width val="#MiniIntroductionTotalWidth"/>
+
+            <Visible val="False"/>
+
+            <Frame type="Image" name="BackgroundImage" template="SSF_Templates/BackgroundImageTemplate"></Frame>
+
+            <Animation name="OnShown">
+                <Event event="OnShown" action="Reset,Play" frame="$this"/>
+                <Controller type="Visibility" end="Pause" frame="$SSF_HeroSelection">
+                    <Key type="Bool" time="0.0" value="false"/>
+                </Controller>
+            </Animation>
+
+            <Frame type="Label" name="Label" template="SSF_Templates/LabelTemplate">
+                <Anchor side="Left" relative="$parent" pos="Min" offset="#Border"/>
+                <Anchor side="Right" relative="$parent" pos="Max" offset="#BorderNegative"/>
+                <Anchor side="Top" relative="$parent" pos="Min" offset="#Border"/>
+
+                <Height val="#MiniIntroductionTextHeight"/>
+
+                <Text val="@Trig/Tutorial/MiniIntroduction/Text"/>
+                <Style val="aaDialogItemStyleCentered"/>
+            </Frame>
+
+            <Frame type="Button" name="CloseButton" template="SSF_Templates/ButtonTemplate">
+                <Anchor side="Left" relative="$parent" pos="Min" offset="#Border"/>
+                <Anchor side="Right" relative="$parent" pos="Max" offset="#BorderNegative"/>
+                <Anchor side="Bottom" relative="$parent" pos="Max" offset="#BorderNegative"/>
+                <Width val="200"/>
+
+                <Text val="@Trig/Tutorial/MiniIntroduction/Exit"/>
+
+                <Animation name="Click">
+                    <Event event="OnClick" action="Reset,Play" frame="$this"/>
+                    <Controller type="Visibility" end="Pause" frame="$parent">
+                        <Key type="Bool" time="0.0" value="false"/>
+                    </Controller>
+                </Animation>
+            </Frame>
+
+            <Frame type="Label" name="CounterLabel" template="SSF_Templates/LabelTemplate">
+                <Anchor side="Bottom" relative="$parent" pos="Max" offset="#BorderNegative"/>
+                <Anchor side="Right" relative="$parent" pos="Max" offset="#BorderNegative"/>
+                <Height val="30"/>
+                <Width val="50"/>
+                
+                <Text val="{$SSF_HeroSelection/CounterLabel/@Text}"/>
+                <Visible val="False"/>
+                <Style val="aaDialogItemStyleCentered"/>
+            </Frame>
+        </Frame>
+
+        <Frame type="Frame" name="AskTutorial">
+            <Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+            <Anchor side="Bottom" relative="$parent" pos="Max" offset="-300"/>
+            <Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+            <Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+            <Height val="#AskTutorialTotalHeight"/>
+            <Width val="#AskTutorialTotalWidth"/>
+
+            <Visible val="False"/>
+            <Frame type="Image" name="BackgroundImage" template="SSF_Templates/BackgroundImageTemplate"></Frame>
+
+            <Frame type="Label" name="Label" template="SSF_Templates/LabelTemplate">
+                <Anchor side="Left" relative="$parent" pos="Min" offset="#Border"/>
+                <Anchor side="Right" relative="$parent" pos="Max" offset="#BorderNegative"/>
+                <Anchor side="Top" relative="$parent" pos="Min" offset="#Border"/>
+
+                <Height val="#AskTutorialTextHeight"/>
+
+                <Text val="@Trig/Tutorial/AskTutorial/Text"/>
+                <Style val="aaDialogItemStyleCentered"/>
+            </Frame>
+
+            <Frame type="Button" name="NoButton" template="SSF_Templates/ButtonTemplate">
+                <Anchor side="Left" relative="$parent" pos="Min" offset="#Border"/>
+                <Anchor side="Bottom" relative="$parent" pos="Max" offset="#BorderNegative"/>
+                <Width val="#AskTutorialButtonWidth"/>
+
+                <Text val="@Trig/Tutorial/AskTutorial/No"/>
+
+                <Animation name="Click">
+                    <Event event="OnClick" action="Reset,Play" frame="$this"/>
+                    <Controller type="Visibility" end="Pause" frame="$parent">
+                        <Key type="Bool" time="0.0" value="false"/>
+                    </Controller>
+                </Animation>
+            </Frame>
+            <Frame type="Button" name="YesButton" template="SSF_Templates/ButtonTemplate">
+                <Anchor side="Right" relative="$parent" pos="Max" offset="#BorderNegative"/>
+                <Anchor side="Bottom" relative="$parent" pos="Max" offset="#BorderNegative"/>
+                <Width val="#AskTutorialButtonWidth"/>
+
+                <Text val="@Trig/Tutorial/AskTutorial/Yes"/>
+
+                <Animation name="Click">
+                    <Event event="OnClick" action="Reset,Play" frame="$this"/>
+                    <Controller type="Visibility" end="Pause" frame="$parent">
+                        <Key type="Bool" time="0.0" value="false"/>
+                    </Controller>
+                </Animation>
+            </Frame>
+        </Frame>
+
+        <Frame type="Frame" name="Tutorial">
+            <Anchor side="Top" relative="$parent" pos="Min" offset="50"/>
+            <Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+            <Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+            <Height val="#TutorialTotalHeight"/>
+            <Width val="#TutorialTotalWidth"/>
+
+            <Visible val="False"/>
+            <Frame type="Image" name="BackgroundImage" template="SSF_Templates/BackgroundImageTemplate"></Frame>
+
+            <Animation name="OnShown">
+                <Event event="OnShown" action="Reset,Play" frame="$this"/>
+                <Controller type="Visibility" end="Pause" frame="$this/CloseButton">
+                    <Key type="Bool" time="0.0" value="false"/>
+                    <Key type="Bool" time="1.0" value="true"/>
+                </Controller>
+            </Animation>
+
+            <Frame type="Label" name="Label" template="SSF_Templates/LabelTemplate">
+                <Anchor side="Left" relative="$parent" pos="Min" offset="#Border"/>
+                <Anchor side="Right" relative="$parent" pos="Max" offset="#BorderNegative"/>
+                <Anchor side="Top" relative="$parent" pos="Min" offset="#Border"/>
+                <Anchor side="Bottom" relative="$parent/CloseButton" pos="Min" offset="15"/>
+
+                <Style val="aabTutorialTextLabel"/>
+            </Frame>
+
+            <Frame type="Button" name="CloseButton" template="SSF_Templates/ButtonTemplate">
+                <Anchor side="Left" relative="$parent" pos="Min" offset="#Border"/>
+                <Anchor side="Right" relative="$parent" pos="Max" offset="#BorderNegative"/>
+                <Anchor side="Bottom" relative="$parent" pos="Max" offset="#BorderNegative"/>
+                <Height val="#ButtonHeight"/>
+
+                <Text val="@Trig/Tutorial/Continue"/>
+                <Animation name="Click">
+                    <Event event="OnClick" action="Reset,Play" frame="$this"/>
+                    <Controller type="Visibility" end="Pause" frame="$parent">
+                        <Key type="Bool" time="0.0" value="false"/>
+                    </Controller>
+                </Animation>
+            </Frame>
+        </Frame>
+    </Frame>
+</Desc>

@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Desc>
+	<Constant name="OptionsLabelGap" val="4"/>
+	<Constant name="OptionsCheckboxGap" val="5"/>
+	<Constant name="OptionsRowHeight" val="50"/>
+	<Constant name="OptionsCheckBoxWidth" val="30"/>
+
+	<Frame type="CheckBox" name="OptionsCheckBoxTemplate" template="SSF_Templates/CheckBoxTemplate">
+		<Height val="#OptionsRowHeight"/>
+		<Width val="#OptionsCheckBoxWidth"/>
+	</Frame>
+
+	<Frame type="Frame" name="OptionsControlGroupTemplate">
+		<Anchor side="Left" relative="$parent" pos="Min" offset="#Border"/>
+		<Anchor side="Right" relative="$parent" pos="Max" offset="#BorderNegative"/>
+		<Height val="#OptionsRowHeight"/>
+		<Frame type="Label" name="TypeLabel">
+			<Anchor relative="$parent"/>
+			<Style val="aaDialogItemStyleLeftMiddle"/>
+		</Frame>
+		<Frame type="CheckBox" name="Checkbox" template="SSF_Options/OptionsCheckBoxTemplate">
+			<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+			<Anchor side="Left" relative="$parent" pos="Min" offset="125"/>
+			<Tooltip val="@Trig/Options/AutoControlGroupsTooltip"/>
+		</Frame>
+		<Frame type="Pulldown" name="Pulldown" template="SSF_Templates/PulldownTemplate">
+			<Anchor side="Left" relative="$parent/Checkbox" pos="Max" offset="#OptionsCheckboxGap"/>
+			<Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+			<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+
+			<Width val="75"/>
+			
+			<Frame type="Image" name="PulldownBackground">
+				<Texture val="Assets/Icons/Pulldown_Normal.tga"/>
+			</Frame>
+
+			<Frame type="Image" name="PulldownBackgroundHover">
+				<Texture val="Assets/Icons/Pulldown_Hover.tga"/>
+			</Frame>
+			
+			<Height val="#OptionsRowHeight"/>
+		</Frame>
+	</Frame>
+
+	<Frame type="Frame" name="OptionsTemplate">
+		<Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+		<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+		<Anchor side="Bottom" relative="$this/InitialUnitSelectionLabel" pos="Max" offset="#Border"/>
+		<Width val="345"/>
+		<Visible val="false"/>
+		<Frame type="Image" name="BackgroundImage" template="SSF_Templates/BackgroundImageTemplate"/>
+		<Frame type="Button" name="CloseButton" template="SSF_Templates/CloseButtonTemplate"/>
+		
+		<Frame type="Label" name="AutoHeroSelectionLabel" template="SSF_Templates/LabelTemplate">
+			<Anchor side="Top" relative="$parent" pos="Min" offset="#Border"/>
+			<Anchor side="Left" relative="$parent" pos="Min" offset="#Border"/>
+			<Anchor side="Right" relative="$parent" pos="Max" offset="#BorderNegative"/>
+			<Height val="50"/>
+			<Style val="aaDialogItemStyleLeftBottom"/>
+			<Text val="@Trig/Options/AutoHeroSelection"/>
+		</Frame>
+
+		<Frame type="CheckBox" name="AutoHeroSelectionCheckbox" template="SSF_Options/OptionsCheckBoxTemplate">
+			<Anchor side="Top" relative="$parent/AutoHeroSelectionLabel" pos="Max" offset="#OptionsLabelGap"/>
+			<Anchor side="Left" relative="$parent" pos="Min" offset="#Border"/>
+			<Tooltip val="@Trig/Options/AutoHeroSelectionTooltip"/>
+		</Frame>
+
+		<Frame type="Pulldown" name="AutoHeroSelectionPulldown" template="SSF_Templates/PulldownTemplate">
+			<Width val="165"/>
+			<Anchor side="Left" relative="$parent/AutoHeroSelectionCheckbox" pos="Max" offset="#OptionsCheckboxGap"/>
+			<Anchor side="Right" relative="$parent" pos="Max" offset="#BorderNegative"/>
+			<Anchor side="Top" relative="$parent/AutoHeroSelectionCheckbox" pos="Min" offset="0"/>
+			<Height val="#OptionsRowHeight"/>
+			<Style val="@StandardPulldown_Zerg"/>
+
+		</Frame>
+
+		<Frame type="Label" name="ControlGroupsLabel" template="SSF_Templates/LabelTemplate">
+			<Anchor side="Left" relative="$parent" pos="Min" offset="#Border"/>
+			<Anchor side="Right" relative="$parent" pos="Max" offset="#BorderNegative"/>
+			<Anchor side="Top" relative="$parent/AutoHeroSelectionCheckbox" pos="Max" offset="#OptionsLabelGap"/>
+			<Height val="#OptionsRowHeight"/>
+			<Style val="aaDialogItemStyleLeftBottom"/>
+			<Text val="@Trig/Options/AutoControlGroups"/>
+		</Frame>
+
+		<Frame type="Frame" name="Hero" template="SSF_Options/OptionsControlGroupTemplate">
+			<Anchor side="Top" relative="$parent/ControlGroupsLabel" pos="Max" offset="#OptionsLabelGap"/>
+			<Frame type="Label" name="TypeLabel">
+				<Text val="@Trig/Options/AutoControlGroups/Hero"/>
+			</Frame>
+		</Frame>
+
+		<Frame type="Frame" name="Overlord" template="SSF_Options/OptionsControlGroupTemplate">
+			<Anchor side="Top" relative="$parent/Hero" pos="Max" offset="#OptionsLabelGap"/>
+			<Frame type="Label" name="TypeLabel">
+				<Text val="@Unit/Name/Overlord"/>
+			</Frame>
+		</Frame>
+
+		<Frame type="Frame" name="Lurker" template="SSF_Options/OptionsControlGroupTemplate">
+			<Anchor side="Top" relative="$parent/Overlord" pos="Max" offset="#OptionsLabelGap"/>
+			<Frame type="Label" name="TypeLabel">
+				<Text val="@Unit/Name/Lurker"/>
+			</Frame>
+		</Frame>
+
+		<Frame type="Frame" name="Runling" template="SSF_Options/OptionsControlGroupTemplate">
+			<Anchor side="Top" relative="$parent/Lurker" pos="Max" offset="#OptionsLabelGap"/>
+			<Frame type="Label" name="TypeLabel">
+				<Text val="@Unit/Name/Runling"/>
+			</Frame>
+		</Frame>
+
+		<Frame type="Frame" name="LifeBank" template="SSF_Options/OptionsControlGroupTemplate">
+			<Anchor side="Top" relative="$parent/Runling" pos="Max" offset="#OptionsLabelGap"/>
+			<Frame type="Label" name="TypeLabel">
+				<Text val="@Unit/Name/CyberneticLifeBank"/>
+			</Frame>
+		</Frame>
+
+		<Frame type="Label" name="SpeedrunsDetailsLabel" template="SSF_Templates/LabelTemplate">
+			<Anchor side="Top" relative="$parent/LifeBank" pos="Max" offset="#OptionsLabelGap"/>
+			<Anchor side="Left" relative="$parent/AutoHeroSelectionLabel" pos="Min" offset="0"/>
+			<Anchor side="Right" relative="$parent/SpeedrunsDetailsCheckbox" pos="Min" offset="-5"/>
+			<Height val="#OptionsRowHeight"/>
+			<Style val="aaDialogItemStyleLeftMiddle"/>
+
+			<Text val="@Trig/Options/SpeedrunsDetails"/>
+		</Frame>
+		<Frame type="CheckBox" name="SpeedrunsDetailsCheckbox" template="SSF_Options/OptionsCheckBoxTemplate">
+			<Anchor side="Top" relative="$parent/SpeedrunsDetailsLabel" pos="Min" offset="0"/>
+			<Anchor side="Right" relative="$parent" pos="Max" offset="-43"/>
+
+			<Tooltip val="@Trig/Options/SpeedrunsDetailsTooltip"/>
+		</Frame>
+
+		<Frame type="Label" name="HeroPanelShowLabel" template="SSF_Templates/LabelTemplate">
+			<Anchor side="Top" relative="$parent/SpeedrunsDetailsLabel" pos="Max" offset="#OptionsLabelGap"/>
+			<Anchor side="Left" relative="$parent/AutoHeroSelectionLabel" pos="Min" offset="0"/>
+			<Anchor side="Right" relative="$parent/HeroPanelShowCheckbox" pos="Min" offset="-5"/>
+			<Height val="#OptionsRowHeight"/>
+			<Style val="aaDialogItemStyleLeftMiddle"/>
+
+			<Text val="@Trig/Options/HeroPanelShow"/>
+		</Frame>
+		<Frame type="CheckBox" name="HeroPanelShowCheckbox" template="SSF_Options/OptionsCheckBoxTemplate">
+			<Anchor side="Top" relative="$parent/HeroPanelShowLabel" pos="Min" offset="0"/>
+			<Anchor side="Right" relative="$parent" pos="Max" offset="-43"/>
+			<Checked val="True"/>
+			<Tooltip val="@Trig/Options/HeroPanelShowTooltip"/>
+		</Frame>
+
+		<Frame type="Label" name="HivePanelShowLabel" template="SSF_Templates/LabelTemplate">
+			<Anchor side="Top" relative="$parent/HeroPanelShowLabel" pos="Max" offset="#OptionsLabelGap"/>
+			<Anchor side="Left" relative="$parent/AutoHeroSelectionLabel" pos="Min" offset="0"/>
+			<Anchor side="Right" relative="$parent/HeroPanelShowCheckbox" pos="Min" offset="-5"/>
+			<Height val="#OptionsRowHeight"/>
+			<Style val="aaDialogItemStyleLeftMiddle"/>
+
+			<Text val="@Trig/Options/HivePanelShow"/>
+		</Frame>
+		<Frame type="CheckBox" name="HivePanelShowCheckbox" template="SSF_Options/OptionsCheckBoxTemplate">
+			<Anchor side="Top" relative="$parent/HivePanelShowLabel" pos="Min" offset="0"/>
+			<Anchor side="Right" relative="$parent" pos="Max" offset="-43"/>
+			<Checked val="False"/>
+			<Tooltip val="@Trig/Options/HivePanelShowTooltip"/>
+		</Frame>
+
+		<Frame type="Label" name="InitialUnitSelectionLabel" template="SSF_Templates/LabelTemplate">
+			<Anchor side="Top" relative="$parent/HivePanelShowLabel" pos="Max" offset="#OptionsLabelGap"/>
+			<Anchor side="Left" relative="$parent/AutoHeroSelectionLabel" pos="Min" offset="0"/>
+			<Anchor side="Right" relative="$parent/InitialUnitSelectionPulldown" pos="Min" offset="-5"/>
+			<Height val="#OptionsRowHeight"/>
+			<AcceptsMouseTooltip val="true"/>
+			<Style val="aaDialogItemStyleLeftMiddle"/>
+			<Text val="@Trig/Options/InitialUnitSelection"/>
+			<Tooltip val="@Trig/Options/InitialUnitSelectionTooltip"/>
+		</Frame>
+		<Frame type="Pulldown" name="InitialUnitSelectionPulldown" template="SSF_Templates/PulldownTemplate">
+			<Anchor side="Left" relative="$parent/InitialUnitSelectionLabel" pos="Min" offset="105"/>
+			<Anchor side="Top" relative="$parent/InitialUnitSelectionLabel" pos="Min" offset="0"/>
+			<Anchor side="Right" relative="$parent" pos="Max" offset="#BorderNegative"/>
+			<Height val="#OptionsRowHeight"/>
+			<Style val="@StandardPulldown_Zerg"/>
+			<Frame type="Image" name="PulldownBackground">
+				<Texture val="Assets/Icons/Pulldown_Normal.tga"/>
+			</Frame>
+			<Frame type="Image" name="PulldownBackgroundHover">
+				<Texture val="Assets/Icons/Pulldown_Hover.tga"/>
+			</Frame>
+		</Frame>
+	</Frame>
+</Desc>

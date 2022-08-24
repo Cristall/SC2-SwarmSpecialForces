@@ -1,0 +1,837 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CEffectCreatePersistent id="Infection@Delay">
+        <EditorCategories value=""/>
+        <ExpireDelay value="1.25"/>
+        <ExpireEffect value="Infection@InitialArea"/>
+    </CEffectCreatePersistent>
+    <CEffectAddTrackedUnit id="RoyalConstruction@AddTracking">
+        <EditorCategories value=""/>
+        <BehaviorLink value="RoyalConstruction@Tracking"/>
+        <TrackedUnit Value="Target"/>
+    </CEffectAddTrackedUnit>
+    <CEffectApplyBehavior id="RoyalConstruction@Tracking">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="RoyalConstruction@CasterStun">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+    </CEffectApplyBehavior>
+    <CEffectCreateUnit id="RoyalConstruction@CreateArtanis">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetPoint"/>
+        <SpawnEffect value="RoyalConstruction@CreateSet"/>
+        <SpawnUnit value="MechaArtanis"/>
+    </CEffectCreateUnit>
+    <CEffectCreatePersistent id="RoyalConstruction@CreateLocation">
+        <EditorCategories value=""/>
+        <Flags index="RandomEffect" value="1"/>
+        <PeriodCount value="1"/>
+        <PeriodicEffectArray value="RoyalConstruction@CreateArtanis"/>
+        <PeriodicEffectArray value="RoyalConstruction@CreateRaynor"/>
+        <PeriodicOffsetArray value="0,-2,0"/>
+        <PeriodicPeriodArray value="0"/>
+    </CEffectCreatePersistent>
+    <CEffectCreateUnit id="RoyalConstruction@CreateRaynor">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetPoint"/>
+        <SpawnEffect value="RoyalConstruction@CreateSet"/>
+        <SpawnUnit value="MechaRaynor"/>
+    </CEffectCreateUnit>
+    <CEffectSet id="RoyalConstruction@CreateSet">
+        <EditorCategories value=""/>
+        <EffectArray value="RoyalConstruction@FakeBoss"/>
+        <EffectArray value="SummonState"/>
+        <EffectArray value="RoyalConstruction@AddTracking"/>
+        <EffectArray value="RoyalConstruction@Spawning"/>
+        <EffectArray value="RoyalConstruction@SpawningReducedStartingLife"/>
+        <EffectArray value="RoyalConstruction@SpawningHealer"/>
+        <EffectArray value="RoyalConstruction@CasterStun"/>
+    </CEffectSet>
+    <CEffectApplyBehavior id="RoyalConstruction@FakeBoss">
+        <EditorCategories value=""/>
+    </CEffectApplyBehavior>
+    <CEffectSet id="RoyalConstruction@InitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="RoyalConstruction@AlreadyCastingNoWeapons"/>
+        <EffectArray value="RoyalConstruction@Tracking"/>
+        <EffectArray value="RoyalConstruction@CreateLocation"/>
+    </CEffectSet>
+    <CEffectApplyBehavior id="RoyalConstruction@Spawning">
+        <EditorCategories value=""/>
+    </CEffectApplyBehavior>
+    <CEffectCreateHealer id="RoyalConstruction@SpawningHealer">
+        <EditorCategories value=""/>
+        <Flags index="Channeled" value="0"/>
+        <RechargeVitalFraction value="0.039"/>
+    </CEffectCreateHealer>
+    <CEffectModifyUnit id="RoyalConstruction@SpawningReducedStartingLife">
+        <EditorCategories value=""/>
+        <VitalArray index="Life">
+            <ChangeFraction value="-0.5"/>
+        </VitalArray>
+    </CEffectModifyUnit>
+    <CEffectApplyBehavior id="RoyalConstruction@AlreadyCastingNoWeapons" parent="AlreadyCastingNoWeapons"/>
+    <CEffectApplyBehavior id="Infection@CasterController">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+    </CEffectApplyBehavior>
+    <CEffectDamage id="Infection@InfectedDmg">
+        <EditorCategories value=""/>
+        <Amount value="250">
+            <AccumulatorArray value="Infection@Math"/>
+        </Amount>
+    </CEffectDamage>
+    <CEffectSet id="Infection@InfectedSet">
+        <EditorCategories value=""/>
+        <EffectArray value="Infection@InfectedDmg"/>
+        <EffectArray value="Infection@InfectedSearch"/>
+        <SetSource value="1"/>
+    </CEffectSet>
+    <CEffectApplyBehavior id="Infection@Infected">
+        <EditorCategories value=""/>
+    </CEffectApplyBehavior>
+    <CEffectAddTrackedUnit id="Infection@AddToTracker">
+        <EditorCategories value=""/>
+        <BehaviorLink value="Infection@InfectedTracker"/>
+        <TrackedUnit Value="Target"/>
+    </CEffectAddTrackedUnit>
+    <CEffectSet id="Infection@InfectSet">
+        <EditorCategories value=""/>
+        <EffectArray value="Infection@AddToTracker"/>
+        <EffectArray value="Infection@Infected"/>
+    </CEffectSet>
+    <CEffectEnumArea id="Infection@InfectedSearch">
+        <EditorCategories value=""/>
+        <ImpactLocation Value="SourceUnit"/>
+        <SearchFilters value="-;Player,Ally,Neutral,Worker,RawResource,HarvestableResource,Missile,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="2" Effect="Infection@InfectSet"/>
+        <ExcludeArray Value="Source"/>
+    </CEffectEnumArea>
+    <CEffectApplyBehavior id="Infection@InfectedTracker">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+    </CEffectApplyBehavior>
+    <CEffectRemoveBehavior id="Infection@InfectedTrackerRemove">
+        <EditorCategories value=""/>
+        <BehaviorLink value="Infection@InfectedTracker"/>
+        <WhichUnit Value="Caster"/>
+    </CEffectRemoveBehavior>
+    <CEffectCreatePersistent id="Infection@InitialArea">
+        <EditorCategories value=""/>
+        <PeriodicEffectArray value="Infection@InitialAreaSearch"/>
+        <PeriodicPeriodArray value="0.25"/>
+        <FinalEffect value="Infection@InfectedTrackerRemove"/>
+        <Flags index="PersistUntilDestroyed" value="1"/>
+        <PeriodicValidator value="Infection@CasterControllerOn"/>
+    </CEffectCreatePersistent>
+    <CEffectEnumArea id="Infection@InitialAreaSearch">
+        <EditorCategories value=""/>
+        <SearchFilters value="-;Player,Ally,Neutral,Worker,RawResource,HarvestableResource,Missile,Item,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="3" Effect="Infection@InfectSet"/>
+    </CEffectEnumArea>
+    <CEffectSet id="Infection@InitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="Infection@AlreadyCastingNoWeapons"/>
+        <EffectArray value="Infection@CasterController"/>
+        <EffectArray value="Infection@InfectedTracker"/>
+        <EffectArray value="Infection@Delay"/>
+        <TargetLocationType value="Point"/>
+    </CEffectSet>
+    <CEffectCreatePersistent id="WatchYourStep@CreateTrapDelay">
+        <EditorCategories value=""/>
+        <ExpireDelay value="1.75"/>
+        <ExpireEffect value="WatchYourStep@CreateTrap"/>
+    </CEffectCreatePersistent>
+    <CEffectCreateUnit id="WatchYourStep@CreateTrap">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetPoint"/>
+        <SpawnEffect value="KillsToCaster"/>
+        <SpawnUnit value="WatchYourStep@Trap"/>
+    </CEffectCreateUnit>
+    <CEffectCreatePersistent id="WatchYourStep@CreateTrapController">
+        <EditorCategories value=""/>
+        <PeriodCount value="9"/>
+        <PeriodicEffectArray value="WatchYourStep@CreateTrapRandomPosition"/>
+        <PeriodicPeriodArray value="0"/>
+    </CEffectCreatePersistent>
+    <CEffectRandomPointInCircle id="WatchYourStep@CreateTrapRandomPosition">
+        <EditorCategories value=""/>
+        <Effect value="WatchYourStep@CreateTrapDelay"/>
+        <Radius value="7"/>
+    </CEffectRandomPointInCircle>
+    <CEffectEnumArea id="WatchYourStep@TrapDmgSearch">
+        <EditorCategories value=""/>
+        <LaunchLocation Value="CasterUnit"/>
+        <ImpactLocation Value="CasterUnit"/>
+        <SearchFilters value="-;Player,Ally,Neutral,Worker"/>
+        <AreaArray Radius="1" Effect="WatchYourStep@TrapStunSet"/>
+        <SearchFlags index="ExtendByUnitRadius" value="1"/>
+    </CEffectEnumArea>
+    <CEffectSet id="WatchYourStep@InitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="WatchYourStep@AlreadyCastingNoWeapons"/>
+        <EffectArray value="WatchYourStep@CreateTrapController"/>
+    </CEffectSet>
+    <CEffectSet id="WatchYourStep@TrapActivateSet">
+        <EditorCategories value=""/>
+        <EffectArray value="WatchYourStep@TrapInvisibleRemove"/>
+        <EffectArray value="WatchYourStep@TrapDmgSearch"/>
+    </CEffectSet>
+    <CEffectSet id="WatchYourStep@TrapStunSet">
+        <EditorCategories value=""/>
+        <EffectArray value="WatchYourStep@TrapStun"/>
+        <EffectArray value="WatchYourStep@TrapDmg"/>
+    </CEffectSet>
+    <CEffectDamage id="WatchYourStep@TrapDmg">
+        <EditorCategories value=""/>
+        <Amount value="2500"/>
+    </CEffectDamage>
+    <CEffectApplyBehavior id="WatchYourStep@TrapStun">
+        <EditorCategories value=""/>
+    </CEffectApplyBehavior>
+    <CEffectRemoveBehavior id="WatchYourStep@TrapInvisibleRemove">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <BehaviorLink value="WatchYourStep@TrapInvisible"/>
+    </CEffectRemoveBehavior>
+    <CEffectApplyBehavior id="Infection@AlreadyCastingNoWeapons" parent="AlreadyCastingNoWeapons"/>
+    <CEffectApplyBehavior id="WatchYourStep@AlreadyCastingNoWeapons" parent="AlreadyCastingNoWeapons"/>
+    <CEffectSet id="WingSpikes@InitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="WingSpikes@AlreadyCastingNoWeapons"/>
+        <EffectArray value="WingSpikes@WaitPersistent"/>
+        <TargetLocationType value="UnitOrPoint"/>
+    </CEffectSet>
+    <CEffectApplyBehavior id="WingSpikes@AlreadyCastingNoWeapons" parent="AlreadyCastingNoWeapons"/>
+    <CEffectDamage id="WingSpikes@Dmg">
+        <EditorCategories value=""/>
+        <Amount value="4000"/>
+        <ValidatorArray value="noMarkers"/>
+    </CEffectDamage>
+    <CEffectCreatePersistent id="WingSpikes@ImpactLocations">
+        <EditorCategories value=""/>
+        <PeriodCount value="34"/>
+        <PeriodicEffectArray value="WingSpikes@ImpactSearch"/>
+        <PeriodicOffsetArray value="0,-1,0"/>
+        <PeriodicOffsetArray value="-1,-2,0"/>
+        <PeriodicOffsetArray value="1,-2,0"/>
+        <PeriodicOffsetArray value="0,-2,0"/>
+        <PeriodicOffsetArray value="-1.5,-3,0"/>
+        <PeriodicOffsetArray value="1.5,-3,0"/>
+        <PeriodicOffsetArray value="-0.5,-3,0"/>
+        <PeriodicOffsetArray value="0.5,-3,0"/>
+        <PeriodicOffsetArray value="-2,-4,0"/>
+        <PeriodicOffsetArray value="-1,-4,0"/>
+        <PeriodicOffsetArray value="1,-4,0"/>
+        <PeriodicOffsetArray value="2,-4,0"/>
+        <PeriodicOffsetArray value="0,-4,0"/>
+        <PeriodicOffsetArray value="-2.5,-5,0"/>
+        <PeriodicOffsetArray value="-1.5,-5,0"/>
+        <PeriodicOffsetArray value="-0.5,-5,0"/>
+        <PeriodicOffsetArray value="0.5,-5,0"/>
+        <PeriodicOffsetArray value="1.5,-5,0"/>
+        <PeriodicOffsetArray value="2.5,-5,0"/>
+        <PeriodicOffsetArray value="-3,-6,0"/>
+        <PeriodicOffsetArray value="-2,-6,0"/>
+        <PeriodicOffsetArray value="-1,-6,0"/>
+        <PeriodicOffsetArray value="0,-6,0"/>
+        <PeriodicOffsetArray value="1,-6,0"/>
+        <PeriodicOffsetArray value="2,-6,0"/>
+        <PeriodicOffsetArray value="3,-6,0"/>
+        <PeriodicOffsetArray value="-3.5,-7,0"/>
+        <PeriodicOffsetArray value="-2.5,-7,0"/>
+        <PeriodicOffsetArray value="-1.5,-7,0"/>
+        <PeriodicOffsetArray value="-0.5,-7.1,0"/>
+        <PeriodicOffsetArray value="0.5,-7.1,0"/>
+        <PeriodicOffsetArray value="1.5,-7,0"/>
+        <PeriodicOffsetArray value="2.5,-7,0"/>
+        <PeriodicOffsetArray value="3.5,-7,0"/>
+        <PeriodicPeriodArray value="0"/>
+        <Marker>
+            <MatchFlags index="Id" value="1"/>
+        </Marker>
+        <WhichLocation Value="CasterPoint"/>
+        <InitialDelay value="0.2"/>
+    </CEffectCreatePersistent>
+    <CEffectEnumArea id="WingSpikes@ImpactSearch">
+        <EditorCategories value=""/>
+        <SearchFilters value="-;Player,Ally,Neutral,Missile,Item,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="1" Effect="WingSpikes@Dmg"/>
+    </CEffectEnumArea>
+    <CEffectCreatePersistent id="WingSpikes@WaitPersistent">
+        <EditorCategories value=""/>
+        <ExpireDelay value="1.5"/>
+        <ExpireEffect value="WingSpikes@ImpactLocations"/>
+    </CEffectCreatePersistent>
+    <CEffectCreatePersistent id="Leap@Delay">
+        <EditorCategories value=""/>
+        <InitialDelay value="0.7"/>
+        <FinalEffect value="Leap@LM"/>
+    </CEffectCreatePersistent>
+    <CEffectEnumArea id="Leap@DmgSearch">
+        <EditorCategories value=""/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Item,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="3" Effect="Leap@Dmg"/>
+    </CEffectEnumArea>
+    <CEffectDamage id="Leap@Dmg">
+        <EditorCategories value=""/>
+        <Amount value="7500"/>
+    </CEffectDamage>
+    <CEffectSet id="Leap@InitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="Leap@AlreadyCastingNoWeapons"/>
+        <EffectArray value="Leap@Delay"/>
+        <TargetLocationType value="UnitOrPoint"/>
+    </CEffectSet>
+    <CEffectLaunchMissile id="Leap@LM">
+        <EditorCategories value=""/>
+        <ImpactLocation Value="TargetPoint"/>
+        <ImpactEffect value="Leap@DmgSearch"/>
+        <Flags index="2D" value="1"/>
+        <AmmoUnit value=""/>
+        <Movers Link="Leap" IfRangeLTE="1000"/>
+        <DeathType value="Unknown"/>
+    </CEffectLaunchMissile>
+    <CEffectDamage id="MechaKerriganWeaponDmg" parent="DU_WEAP">
+        <EditorCategories value=""/>
+        <Amount value="2500"/>
+        <ImpactLocation Value="TargetUnit"/>
+        <AttributeFactor index="Armored" value="0.35"/>
+    </CEffectDamage>
+    <CEffectApplyBehavior id="Leap@AlreadyCastingNoWeapons" parent="AlreadyCastingNoWeapons">
+        <Duration value="2.15"/>
+    </CEffectApplyBehavior>
+    <CAbilEffectInstant id="RoyalConstruction">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="RoyalConstruction@InitialSet"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="RoyalConstruction"/>
+    </CAbilEffectInstant>
+    <CAbilEffectTarget id="Infection">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="Infection@InitialSet"/>
+        <Range value="9"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="Infection"/>
+    </CAbilEffectTarget>
+    <CAbilEffectTarget id="WatchYourStep@TrapActivate">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="WatchYourStep@TrapActivateSet"/>
+        <Flags index="AutoCast" value="1"/>
+        <Flags index="AutoCastOn" value="1"/>
+        <Cost>
+            <Cooldown TimeUse="0.0625"/>
+        </Cost>
+        <Range value="1"/>
+        <Arc value="360"/>
+        <AutoCastFilters value="Visible;Player,Ally,Neutral,Worker"/>
+        <AutoCastValidatorArray value="WatchYourStep@TrapAllowed"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="WatchYourStep@TrapActivate"/>
+        <RangeSlop value="0"/>
+        <FollowRange value="0"/>
+    </CAbilEffectTarget>
+    <CAbilEffectInstant id="WatchYourStep">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="WatchYourStep@InitialSet"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="WatchYourStep"/>
+    </CAbilEffectInstant>
+    <CAbilEffectTarget id="WingSpikes">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="WingSpikes" Requirements="WingSpikes@Req"/>
+        <Effect index="0" value="WingSpikes@InitialSet"/>
+        <Range value="7"/>
+    </CAbilEffectTarget>
+    <CAbilEffectTarget id="Leap">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="Leap@InitialSet"/>
+        <Range value="5"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="Leap"/>
+    </CAbilEffectTarget>
+    <CValidatorCompareTrackedUnitsCount id="RoyalConstruction@TrackedUnitNotDead">
+        <Value value="1"/>
+        <BehaviorLink value="RoyalConstruction@Tracking"/>
+        <TrackedUnitFilters value="-;Dead"/>
+    </CValidatorCompareTrackedUnitsCount>
+    <CValidatorUnitCompareBehaviorCount id="Infection@CasterControllerOn">
+        <WhichUnit Value="Caster"/>
+        <Value value="1"/>
+        <Behavior value="Infection@CasterController"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorUnitCompareBehaviorCount id="WatchYourStep@TrapAllowed">
+        <WhichUnit Value="Caster"/>
+        <Value value="1"/>
+        <Behavior value="WatchYourStep@TrapInvisible"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CButton id="RoyalConstruction">
+        <Icon value="Assets\Textures\btn-ability-alarak-massteleport.dds"/>
+    </CButton>
+    <CButton id="Infection">
+        <Icon value="Assets\Textures\btn-ability-alarak-massteleport.dds"/>
+    </CButton>
+    <CButton id="WatchYourStep">
+        <Icon value="Assets\Textures\btn-ability-alarak-massteleport.dds"/>
+    </CButton>
+    <CButton id="WatchYourStep@TrapActivate">
+        <Icon value="Assets\Textures\btn-ability-alarak-massteleport.dds"/>
+    </CButton>
+    <CButton id="WingSpikes">
+        <Icon value="Assets\Textures\btn-ability-alarak-massteleport.dds"/>
+    </CButton>
+    <CButton id="Leap" parent="EnemyBossAbilityButton"/>
+    <CActorModel id="WatchYourStep@TrapHitTestSphere" parent="ModelAddition">
+        <EditorCategories value=""/>
+        <HostSiteOps Ops="SOpMoveUpBy1"/>
+    </CActorModel>
+    <CActorSplat id="Infection@Splat">
+        <VisibleTo index="All" value="1"/>
+        <EditorCategories value=""/>
+        <On Terms="Effect.Infection@Delay.Start" Send="Create"/>
+        <On Terms="Effect.Infection@Delay.Stop" Send="Destroy"/>
+        <On Terms="ActorCreation" Send="$Birth PlayForever"/>
+    </CActorSplat>
+    <CActorModel id="RoyalConstruction@Spawning" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On Terms="Effect.RoyalConstruction@CreateSet.Start" Send="Create"/>
+        <On Terms="Behavior.RoyalConstruction@Spawning.On" Send="Create"/>
+    </CActorModel>
+    <CActorSimple id="RoyalConstruction@FakeBoss">
+        <EditorCategories value=""/>
+        <On Terms="Behavior.RoyalConstruction@FakeBoss.On" Send="Create"/>
+        <On Terms="ActorCreation" Target="::Main" Send="SetScale 0.500000"/>
+    </CActorSimple>
+    <CActorModelMaterial id="RoyalConstruction@SpawningGlaze" parent="BehaviorGlaze" buff="RoyalConstruction@Spawning">
+        <EditorCategories value=""/>
+    </CActorModelMaterial>
+    <CActorModel id="Infection@Infected" parent="ModelAddition">
+        <On Terms="Behavior.Infection@Infected.Create" Send="Create"/>
+        <On Terms="Behavior.Infection@Infected.Destroy" Send="Destroy"/>
+        <EditorCategories value=""/>
+        <HostSiteOps Ops="SOpAttachOverhead"/>
+    </CActorModel>
+    <CActorModel id="Infection@InfectedArea" parent="ModelAnimationStyleContinuous">
+        <EditorCategories value=""/>
+        <On Terms="Effect.Infection@InitialArea.Start" Send="Create"/>
+        <On Terms="Effect.Infection@InitialArea.Stop" Send="Destroy"/>
+        <On Terms="ActorCreation" Send="SetOpacity 0.750000"/>
+    </CActorModel>
+    <CActorModel id="Infection@NewInfected" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On Terms="Effect.Infection@Infected.Start" Send="Create"/>
+    </CActorModel>
+    <CActorSplat id="WatchYourStep@Splat" parent="GenericUnitSplat" unitName="WatchYourStep@Trap">
+        <EditorCategories value=""/>
+        <VisibleTo index="All" value="1"/>
+        <Inherits index="CloakEffect" value="0"/>
+        <Inherits index="Visibility" value="0"/>
+        <AcceptedHostedPropTransfers index="Visibility" value="0"/>
+        <Supporter Subject=""/>
+    </CActorSplat>
+    <CActorUnit id="WatchYourStep@Trap" parent="GenericUnitStandard" unitName="WatchYourStep@Trap">
+        <EditorCategories value=""/>
+        <On Terms="Abil.WatchYourStep@TrapActivate.SourceChannelStart" Send="AnimPlay Attack Attack"/>
+        <On Terms="Abil.WatchYourStep@TrapActivate.SourceChannelStart" Send="TimerSet 0.500000 AnimStop"/>
+        <On Terms="TimerExpired; TimerName AnimStop" Send="AnimSetPaused Attack"/>
+        <On Terms="ActorCreation" Send="SetStatusBarOn"/>
+        <On Terms="TimerExpired; TimerName AnimStop" Send="SetStatusBarOn 1"/>
+        <On Terms="TimerExpired; TimerName AnimStop" Send="Create WatchYourStep@TrapHitTestSphere"/>
+        <HighlightTooltip value="Unit/Name/Bogus"/>
+    </CActorUnit>
+    <CActorSplat id="WatchYourStep@TrapMarker">
+        <VisibleTo index="All" value="1"/>
+        <EditorCategories value=""/>
+        <On Terms="Effect.WatchYourStep@CreateTrapDelay.Start" Send="Create"/>
+        <On Terms="ActorCreation" Send="AnimBracketStart BSD Birth Stand Death"/>
+        <On Terms="Effect.WatchYourStep@CreateTrapDelay.Stop" Send="Destroy"/>
+    </CActorSplat>
+    <CActorModel id="WingSpikes@ImpactSplat" parent="ModelAddition">
+        <EditorCategories value=""/>
+        <On Terms="Effect.WingSpikes@WaitPersistent.Start" Send="Create"/>
+        <On Terms="Effect.WingSpikes@WaitPersistent.Stop" Send="Destroy"/>
+        <Host Subject="_Unit" Scope="Caster"/>
+        <HostSiteOps Ops="SOpAttachOrigin SOpShadow"/>
+        <Model value="WingSpikes@ConeSplat"/>
+        <ModelFlags index="AutomateGlobalLoops" value="1"/>
+    </CActorModel>
+    <CActorModel id="WingSpikes@Spikes" parent="ModelAnimationStyleOneShot">
+        <On index="0" Terms="ActorCreation" Send="AnimBracketStart BSD Attack Stand Death ContentPlayOnce"/>
+        <On Terms="Effect.WingSpikes@ImpactSearch.Start; At Effect" Send="Create"/>
+    </CActorModel>
+    <CActorModel id="Leap@Impact" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On Terms="Effect.Leap@DmgSearch.Start" Send="Create"/>
+    </CActorModel>
+    <CActorSplat id="Leap@ImpactSplat">
+        <VisibleTo index="All" value="1"/>
+        <EditorCategories value=""/>
+        <On Terms="Effect.Leap@Delay.Start" Send="Create"/>
+        <On Terms="Effect.Leap@Delay.Stop" Send="Destroy"/>
+        <On Terms="ActorCreation" Send="$Birth PlayForever"/>
+        <Model value="TerranAOECursorSplat"/>
+        <Scale value="3.000000"/>
+    </CActorSplat>
+    <CActorAction id="MechaKerriganWeaponAction" parent="GenericAttack" effectAttack="MechaKerriganWeaponDmg">
+        <EditorCategories value=""/>
+    </CActorAction>
+    <CActorUnit id="MechaKerrigan" parent="GenericUnitStandard" unitName="MechaKerrigan">
+        <Aliases value="_UnitLarge"/>
+        <Model value="Mecha_Kerrigan"/>
+        <AnimBlendTime value="0.250000"/>
+        <BuildModel value="KerriganChar"/>
+        <PlacementModel value="KerriganChar"/>
+        <PortraitModel value="CommandCenterPortrait"/>
+        <WalkAnimMoveSpeed value="5"/>
+        <BarOffset value="60"/>
+        <BarWidth value="78"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-zerg-kerrigan.dds"/>
+        </GroupIcon>
+        <HighlightTooltip value="Unit/Name/KerriganChar"/>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-zerg-groundcarapace-level0.dds"/>
+        <UnitIcon value="Assets\Textures\btn-unit-zerg-kerrigan.dds"/>
+        <Wireframe>
+            <Image value="Assets\Wireframes\Mecha_Kerrigan\Wireframe-mecha_kerrigan.dds"/>
+        </Wireframe>
+        <On index="65" Terms="WeaponStart.*.AttackStart" Send="AnimBracketStart Attack Attack {} {} 0 1.750000 AsTimeScale"/>
+        <On Terms="Abil.Leap.SourceChannelStart" Send="AnimPlay AbilityStart Spell,A,Start PlayForever"/>
+        <On Terms="Abil.Leap.SourceChannelStart" Send="TimerSet 1.000000 LeapHover"/>
+        <On Terms="Effect.Leap@Delay.Stop" Send="AnimClear AbilityStart"/>
+        <On Terms="Effect.Leap@Delay.Stop" Send="AnimBracketStart AbilityUse Spell,A Spell,A,End {} ContentPlayOnce"/>
+        <On Terms="Effect.WingSpikes@WaitPersistent.Stop" Send="AnimPlay Abil1 Spell,G"/>
+        <On Terms="Abil.WingSpikes.SourceChannelStart" Send="AnimPlay Abil1 Taunt"/>
+        <On Terms="Abil.WatchYourStep.SourceChannelStart" Send="AnimPlay Abil2 Spell,B 0 -1.000000 -1.000000 0.660000 AsTimeScale"/>
+        <On Terms="Abil.Infection.SourceChannelStart" Send="AnimPlay Abil2 Spell,Forward"/>
+        <On Terms="Abil.RoyalConstruction.SourceChannelStart" Send="AnimPlay Powered Stand,Alternate PlayForever 1.500000 1.500000"/>
+        <On Terms="Behavior.RoyalConstruction@CasterStun.Off" Send="AnimClear Powered"/>
+        <FogVisibility value="Dimmed"/>
+        <CustomUnitStatusFrame value="SSF_UnitStatus/BossStatus"/>
+        <MinimapIconScale value="0.300000"/>
+        <MinimapIconBackground value="Assets\MinimapBackground.dds"/>
+        <MinimapIconBackgroundScale value="1.100000"/>
+        <MinimapIconBackgroundTintColor value="255,255,0,0"/>
+        <MinimapIcon value="Assets\Icons\btn-unit-mecha-kerrigan.dds"/>
+        <UnitFlags index="SuppressDefaultStatusBar" value="1"/>
+        <Macros value="BossDeactivated"/>
+    </CActorUnit>
+    <CModel id="WatchYourStep@TrapHitTestSphere">
+        <Model value="Assets\Units\Test\HitTestSphere\HitTestSphere.m3"/>
+        <ScaleMax value="2.000000,2.000000,2.000000"/>
+        <ScaleMin value="2.000000,2.000000,2.000000"/>
+    </CModel>
+    <CModel id="Infection@Splat">
+        <Model value="Assets\UI\SOA_MassRecallCursor\SOA_MassRecallCursor.m3"/>
+        <ScaleMax value="2.200000,2.200000,2.200000"/>
+        <ScaleMin value="2.200000,2.200000,2.200000"/>
+    </CModel>
+    <CModel id="RoyalConstruction@Spawning">
+        <Model value="Assets\Models\FeedbackImpact_Orange\FeedbackImpact_Orange.m3"/>
+        <ScaleMax value="1.500000,1.500000,1.500000"/>
+        <ScaleMin value="1.500000,1.500000,1.500000"/>
+    </CModel>
+    <CModel id="RoyalConstruction@SpawningGlaze">
+        <Model value="Assets\Effects\Glaze\Glaze_Purifier_Zealot_Resurrection_Alarm\Glaze_Purifier_Zealot_Resurrection_Alarm.m3"/>
+    </CModel>
+    <CModel id="Infection@Infected">
+        <Model value="Assets\Effects\Zerg\Dehaka_Coop_IntimidatingRoar_Impact\Dehaka_Coop_IntimidatingRoar_Impact.m3"/>
+    </CModel>
+    <CModel id="Infection@InfectedArea">
+        <Model value="Assets\Effects\Zerg\RazorPlague\RazorPlague.m3"/>
+    </CModel>
+    <CModel id="Infection@NewInfected">
+        <Model value="Assets\Effects\Zerg\TerrorcystInfection\TerrorcystInfection.m3"/>
+    </CModel>
+    <CModel id="WatchYourStep@Splat">
+        <Model value="Assets\Splats\Splat_ZerglingBurrowed\Splat_ZerglingBurrowed_01.m3"/>
+    </CModel>
+    <CModel id="WatchYourStep@Trap">
+        <Model value="Assets\COOP\Stetmann\Effects\Lurker_Stetmann_COOP_SuperSpike\Lurker_Stetmann_COOP_SuperSpike.m3"/>
+    </CModel>
+    <CModel id="WatchYourStep@TrapMarker">
+        <Model value="Assets\UI\Cursors\ProtossCursor_Purifier_Small\ProtossCursor_Purifier_Small.m3"/>
+    </CModel>
+    <CModel id="WingSpikes@ConeSplat">
+        <Model value="Assets\Splats\Nova_ShotGunCone\Nova_ShotGunCone.m3"/>
+        <ScaleMax value="1.600000,1.250000,1.000000"/>
+        <ScaleMin value="1.600000,1.250000,1.000000"/>
+    </CModel>
+    <CModel id="WingSpikes@Spikes">
+        <Model value="Assets\COOP\Stetmann\Effects\Lurker_Stetmann_COOP_SuperSpikeImproved\Lurker_Stetmann_COOP_SuperSpikeImproved.m3"/>
+        <ScaleMax value="0.600000,0.600000,0.600000"/>
+        <ScaleMin value="1.000000,1.500000,1.000000"/>
+    </CModel>
+    <CModel id="Leap@Impact">
+        <Model value="Assets\Effects\Terran\PredatorImpactShockwave\PredatorImpactShockwave.m3"/>
+        <ScaleMax value="2.000000,2.000000,2.000000"/>
+        <ScaleMin value="2.000000,2.000000,2.000000"/>
+    </CModel>
+    <CWeaponLegacy id="MechaKerriganWeapon">
+        <EditorCategories value=""/>
+        <DisplayEffect value="MechaKerriganWeaponDmg"/>
+        <Effect value="MechaKerriganWeaponDmg"/>
+        <Icon value="Assets\Icons\btn-ability-kerrigan-leapingstrike-green.dds"/>
+        <Period value="1"/>
+        <DamagePoint value="0.6"/>
+        <Range value="3"/>
+        <RangeSlop value="3"/>
+        <TargetFilters value="Visible;Self,Worker,Missile,Item,Dead,Hidden,Invulnerable"/>
+    </CWeaponLegacy>
+    <CMoverMissile id="Leap" parent="MissileDefault">
+        <MotionPhases index="0">
+            <Driver value="Guidance"/>
+            <Acceleration value="3200"/>
+            <MaxSpeed value="40"/>
+            <ClearanceAcceleration value="75"/>
+            <ArrivalTestType value="2D"/>
+            <Outro value="-1"/>
+            <ThrowBandYaw value="-360,-360,-360,-360"/>
+            <ThrowBandPitch value="-360,-360,-360,-360"/>
+            <YawPitchRoll value="719.2968"/>
+        </MotionPhases>
+    </CMoverMissile>
+    <CAccumulatorTrackedUnitCount id="Infection@CountInfected">
+        <TrackingBehavior value="Infection@InfectedTracker"/>
+        <TrackedUnitFilters value="-;Worker,RawResource,HarvestableResource,Missile,Dead,Hidden,Invulnerable"/>
+    </CAccumulatorTrackedUnitCount>
+    <CAccumulatorArithmetic id="Infection@Math">
+        <Parameters value="1.4"/>
+        <Parameters value="-1">
+            <AccumulatorArray value="Infection@CountInfected"/>
+        </Parameters>
+        <Operation value="Power"/>
+        <ApplicationRule value="Multiply"/>
+    </CAccumulatorArithmetic>
+    <CDataCollectionAbil id="RoyalConstruction">
+        <EditorCategories value=""/>
+        <DataRecord Entry="Abil,RoyalConstruction"/>
+        <DataRecord Entry="Actor,RoyalConstruction@Spawning"/>
+        <DataRecord Entry="Actor,RoyalConstruction@FakeBoss"/>
+        <DataRecord Entry="Actor,RoyalConstruction@SpawningGlaze"/>
+        <DataRecord Entry="Behavior,RoyalConstruction@CasterStun"/>
+        <DataRecord Entry="Behavior,RoyalConstruction@FakeBoss"/>
+        <DataRecord Entry="Behavior,RoyalConstruction@Spawning"/>
+        <DataRecord Entry="Button,RoyalConstruction"/>
+        <DataRecord Entry="Effect,RoyalConstruction@CasterStun"/>
+        <DataRecord Entry="Effect,RoyalConstruction@CreateArtanis"/>
+        <DataRecord Entry="Effect,RoyalConstruction@CreateSet"/>
+        <DataRecord Entry="Effect,RoyalConstruction@CreateLocation"/>
+        <DataRecord Entry="Effect,RoyalConstruction@CreateRaynor"/>
+        <DataRecord Entry="Effect,RoyalConstruction@FakeBoss"/>
+        <DataRecord Entry="Effect,RoyalConstruction@Spawning"/>
+        <DataRecord Entry="Effect,RoyalConstruction@SpawningReducedStartingLife"/>
+        <DataRecord Entry="Effect,RoyalConstruction@SpawningHealer"/>
+        <DataRecord Entry="Effect,RoyalConstruction@InitialSet"/>
+        <DataRecord Entry="Effect,RoyalConstruction@AlreadyCastingNoWeapons"/>
+        <DataRecord Entry="Model,RoyalConstruction@Spawning"/>
+        <DataRecord Entry="Model,RoyalConstruction@SpawningGlaze"/>
+        <DataRecord Entry="Behavior,RoyalConstruction@Tracking"/>
+        <DataRecord Entry="Effect,RoyalConstruction@AddTracking"/>
+        <DataRecord Entry="Effect,RoyalConstruction@Tracking"/>
+        <DataRecord Entry="Validator,RoyalConstruction@TrackedUnitNotDead"/>
+    </CDataCollectionAbil>
+    <CDataCollectionAbil id="Infection">
+        <EditorCategories value=""/>
+        <DataRecord Entry="Abil,Infection"/>
+        <DataRecord Entry="Actor,Infection@Infected"/>
+        <DataRecord Entry="Actor,Infection@InfectedArea"/>
+        <DataRecord Entry="Actor,Infection@NewInfected"/>
+        <DataRecord Entry="Behavior,Infection@Infected"/>
+        <DataRecord Entry="Behavior,Infection@InfectedTracker"/>
+        <DataRecord Entry="Behavior,Infection@CasterController"/>
+        <DataRecord Entry="Button,Infection"/>
+        <DataRecord Entry="Effect,Infection@InfectedDmg"/>
+        <DataRecord Entry="Effect,Infection@InfectedSet"/>
+        <DataRecord Entry="Effect,Infection@InfectedSearch"/>
+        <DataRecord Entry="Effect,Infection@Infected"/>
+        <DataRecord Entry="Effect,Infection@AddToTracker"/>
+        <DataRecord Entry="Effect,Infection@InfectSet"/>
+        <DataRecord Entry="Effect,Infection@InfectedTracker"/>
+        <DataRecord Entry="Effect,Infection@InfectedTrackerRemove"/>
+        <DataRecord Entry="Effect,Infection@InitialArea"/>
+        <DataRecord Entry="Effect,Infection@InitialAreaSearch"/>
+        <DataRecord Entry="Effect,Infection@InitialSet"/>
+        <DataRecord Entry="Effect,Infection@AlreadyCastingNoWeapons"/>
+        <DataRecord Entry="Effect,Infection@CasterController"/>
+        <DataRecord Entry="Model,Infection@Infected"/>
+        <DataRecord Entry="Model,Infection@InfectedArea"/>
+        <DataRecord Entry="Model,Infection@NewInfected"/>
+        <DataRecord Entry="Validator,Infection@CasterControllerOn"/>
+        <DataRecord Entry="Accumulator,Infection@Math"/>
+        <DataRecord Entry="Accumulator,Infection@CountInfected"/>
+    </CDataCollectionAbil>
+    <CDataCollectionAbil id="Leap">
+        <EditorCategories value=""/>
+        <DataRecord Entry="Abil,Leap"/>
+        <DataRecord Entry="Actor,Leap@Impact"/>
+        <DataRecord Entry="Actor,Leap@ImpactSplat"/>
+        <DataRecord Entry="Button,Leap"/>
+        <DataRecord Entry="Effect,Leap@LM"/>
+        <DataRecord Entry="Effect,Leap@DmgSearch"/>
+        <DataRecord Entry="Effect,Leap@Dmg"/>
+        <DataRecord Entry="Effect,Leap@Delay"/>
+        <DataRecord Entry="Effect,Leap@AlreadyCastingNoWeapons"/>
+        <DataRecord Entry="Effect,Leap@InitialSet"/>
+        <DataRecord Entry="Model,Leap@Impact"/>
+        <DataRecord Entry="Mover,Leap"/>
+    </CDataCollectionAbil>
+    <CDataCollectionAbil id="WatchYourStep">
+        <EditorCategories value=""/>
+        <DataRecord Entry="Abil,WatchYourStep"/>
+        <DataRecord Entry="Abil,WatchYourStep@TrapActivate"/>
+        <DataRecord Entry="Actor,WatchYourStep@Trap"/>
+        <DataRecord Entry="Behavior,WatchYourStep@TrapStun"/>
+        <DataRecord Entry="Behavior,WatchYourStep@TrapInvisible"/>
+        <DataRecord Entry="Button,WatchYourStep"/>
+        <DataRecord Entry="Button,WatchYourStep@TrapActivate"/>
+        <DataRecord Entry="Effect,WatchYourStep@InitialSet"/>
+        <DataRecord Entry="Effect,WatchYourStep@AlreadyCastingNoWeapons"/>
+        <DataRecord Entry="Effect,WatchYourStep@CreateTrap"/>
+        <DataRecord Entry="Effect,WatchYourStep@CreateTrapController"/>
+        <DataRecord Entry="Effect,WatchYourStep@CreateTrapRandomPosition"/>
+        <DataRecord Entry="Effect,WatchYourStep@TrapStun"/>
+        <DataRecord Entry="Effect,WatchYourStep@TrapActivateSet"/>
+        <DataRecord Entry="Effect,WatchYourStep@TrapDmg"/>
+        <DataRecord Entry="Effect,WatchYourStep@TrapInvisibleRemove"/>
+        <DataRecord Entry="Effect,WatchYourStep@TrapStunSet"/>
+        <DataRecord Entry="Effect,WatchYourStep@TrapDmgSearch"/>
+        <DataRecord Entry="Model,WatchYourStep@Trap"/>
+        <DataRecord Entry="Unit,WatchYourStep@Trap"/>
+        <DataRecord Entry="Actor,WatchYourStep@TrapMarker"/>
+        <DataRecord Entry="Actor,WatchYourStep@Splat"/>
+        <DataRecord Entry="Effect,WatchYourStep@CreateTrapDelay"/>
+        <DataRecord Entry="Model,WatchYourStep@TrapMarker"/>
+        <DataRecord Entry="Model,WatchYourStep@Splat"/>
+        <DataRecord Entry="Validator,WatchYourStep@TrapAllowed"/>
+    </CDataCollectionAbil>
+    <CDataCollectionAbil id="WingSpikes">
+        <EditorCategories value=""/>
+        <DataRecord Entry="Abil,WingSpikes"/>
+        <DataRecord Entry="Button,WingSpikes"/>
+        <DataRecord Entry="Actor,WingSpikes@ImpactSplat"/>
+        <DataRecord Entry="Actor,WingSpikes@Spikes"/>
+        <DataRecord Entry="Effect,WingSpikes@InitialSet"/>
+        <DataRecord Entry="Effect,WingSpikes@AlreadyCastingNoWeapons"/>
+        <DataRecord Entry="Effect,WingSpikes@WaitPersistent"/>
+        <DataRecord Entry="Effect,WingSpikes@Dmg"/>
+        <DataRecord Entry="Effect,WingSpikes@ImpactLocations"/>
+        <DataRecord Entry="Effect,WingSpikes@ImpactSearch"/>
+        <DataRecord Entry="Model,WingSpikes@ConeSplat"/>
+        <DataRecord Entry="Model,WingSpikes@Spikes"/>
+    </CDataCollectionAbil>
+    <CUnit id="WatchYourStep@Trap" parent="GenericEnemyUnit">
+        <Race value="Zerg"/>
+        <LifeStart value="3750"/>
+        <LifeMax value="3750"/>
+        <Speed value="0"/>
+        <Sight value="3"/>
+        <AbilArray index="1" Link="WatchYourStep@TrapActivate"/>
+        <AbilArray index="2" removed="1"/>
+        <BehaviorArray Link="WatchYourStep@TrapInvisible"/>
+        <CardLayouts index="0">
+            <LayoutButtons Face="WatchYourStep@TrapActivate" Type="AbilCmd" AbilCmd="WatchYourStep@TrapActivate,Execute" Row="2" Column="0"/>
+        </CardLayouts>
+        <InnerRadius value="0"/>
+        <MinimapRadius value="0"/>
+        <Collide index="Ground" value="0"/>
+        <Collide index="ForceField" value="0"/>
+        <Collide index="Locust" value="0"/>
+        <Collide index="Small" value="0"/>
+        <Attributes index="Summoned" value="1"/>
+    </CUnit>
+    <CUnit id="MechaKerrigan" parent="GenericEnemyUnit">
+        <Race value="Zerg"/>
+        <Attributes index="Mechanical" value="1"/>
+        <Attributes index="Psionic" value="1"/>
+        <Attributes index="Heroic" value="1"/>
+        <LifeStart value="25000"/>
+        <LifeMax value="25000"/>
+        <LifeRegenRate value="28"/>
+        <LifeArmorName value="Unit/LifeArmorName/StoryHeroes"/>
+        <ShieldArmorName value="Unit/ShieldArmorName/ZergWildMutation"/>
+        <Sight value="15"/>
+        <BehaviorArray Link="Detector10"/>
+        <BehaviorArray Link="BossesP2Armor"/>
+        <Radius value="0.375"/>
+        <InnerRadius value="0"/>
+        <SubgroupPriority value="99"/>
+        <RankDisplay value="Never"/>
+        <WeaponArray Link="MechaKerriganWeapon"/>
+        <AbilArray Link="Leap"/>
+        <AbilArray Link="WingSpikes"/>
+        <AbilArray Link="WatchYourStep"/>
+        <AbilArray Link="Infection"/>
+        <AbilArray Link="RoyalConstruction"/>
+        <CardLayouts index="0">
+            <LayoutButtons Face="Leap" Type="AbilCmd" AbilCmd="Leap,Execute" Row="2" Column="0"/>
+            <LayoutButtons Face="WingSpikes" Type="AbilCmd" AbilCmd="WingSpikes,Execute" Row="2" Column="1"/>
+            <LayoutButtons Face="WatchYourStep" Type="AbilCmd" AbilCmd="WatchYourStep,Execute" Row="2" Column="2"/>
+            <LayoutButtons Face="Infection" Type="AbilCmd" AbilCmd="Infection,Execute" Row="2" Column="3"/>
+            <LayoutButtons Face="RoyalConstruction" Type="AbilCmd" AbilCmd="RoyalConstruction,Execute" Row="2" Column="4"/>
+        </CardLayouts>
+        <FogVisibility value="Dimmed"/>
+        <VisionHeight value="4"/>
+        <LifeArmorTip value="Unit/P2Bosses/ArmorTooltip"/>
+    </CUnit>
+    <CBehaviorUnitTracker id="RoyalConstruction@Tracking">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorUnitTracker>
+    <CBehaviorBuff id="RoyalConstruction@FakeBoss">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <RemoveValidatorArray value="CasterNotDead"/>
+        <FinalEffect value="Suicide"/>
+        <Modification WeaponRange="-1">
+            <DamageDealtFraction index="Spell" value="-0.5"/>
+            <DamageDealtFraction index="Melee" value="-0.5"/>
+            <DamageDealtFraction index="Ranged" value="-0.5"/>
+            <DamageDealtFraction index="Splash" value="-0.5"/>
+            <DamageDealtFraction index="NoProc" value="-0.5"/>
+            <VitalMaxArray index="Life" value="-0.5"/>
+            <VitalMaxArray index="Shields" value="-0.5"/>
+            <VitalMaxFractionArray index="Life" value="-0.5"/>
+            <VitalMaxFractionArray index="Shields" value="-0.5"/>
+        </Modification>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="RoyalConstruction@Spawning">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="12.5"/>
+        <Modification>
+            <StateFlags index="Stun" value="1"/>
+        </Modification>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="Infection@CasterController">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="15"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorUnitTracker id="Infection@InfectedTracker">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorUnitTracker>
+    <CBehaviorBuff id="Infection@Infected">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Period value="0.25"/>
+        <PeriodicEffect value="Infection@InfectedSet"/>
+        <RemoveValidatorArray value="Infection@CasterControllerOn"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="RoyalConstruction@CasterStun" parent="RoyalConstruction@Spawning">
+        <Name value="Behavior/Name/RoyalConstruction@CasterStun"/>
+        <RemoveValidatorArray value="RoyalConstruction@TrackedUnitNotDead"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="WatchYourStep@TrapStun">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <RemoveValidatorArray value="CasterNotDead"/>
+        <Modification MoveSpeedMaximum="0"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="WatchYourStep@TrapInvisible">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification>
+            <StateFlags index="Bury" value="1"/>
+            <StateFlags index="Cloak" value="1"/>
+            <StateFlags index="Invulnerable" value="1"/>
+        </Modification>
+        <Duration value="120"/>
+        <ExpireEffect value="Suicide"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+</Catalog>

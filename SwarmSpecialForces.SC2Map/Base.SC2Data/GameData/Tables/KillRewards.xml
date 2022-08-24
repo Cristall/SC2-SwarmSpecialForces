@@ -1,0 +1,1657 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CUser id="KillRewards">
+        <Fields Id="Biomass" Type="Fixed" EditorColumn="2"/>
+        <Fields Id="Exp" Type="Fixed" EditorColumn="3"/>
+        <Fields Id="EnemyType" Type="Int" EditorColumn="1"/>
+        <Instances Id="[Default]"/>
+        <Instances Id="HellionTank2">
+            <Fixed Fixed="500">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="500">
+                <Field Id="Exp"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="Thor">
+            <Fixed Fixed="500">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="500">
+                <Field Id="Exp"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="PlanetaryFortress">
+            <Fixed Fixed="500">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="500">
+                <Field Id="Exp"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="Cyclone2">
+            <Fixed Fixed="4">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="8">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="1">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="Cyclone22">
+            <Fixed Fixed="4">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="8">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="2">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="Ghost2">
+            <Fixed Fixed="8">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="9">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="1">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="Ghost3">
+            <Fixed Fixed="8">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="9">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="2">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="Hellion2">
+            <Fixed Fixed="4">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="6">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="1">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="Hellion22">
+            <Fixed Fixed="4">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="6">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="2">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="Marauder2">
+            <Fixed Fixed="6">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="10">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="1">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="Marauder22">
+            <Fixed Fixed="6">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="10">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="2">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="Marine2">
+            <Fixed Fixed="5">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="7">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="1">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="Marine22">
+            <Fixed Fixed="5">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="7">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="2">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="Reaper2">
+            <Fixed Fixed="5">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="7">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="1">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="Reaper22">
+            <Fixed Fixed="5">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="7">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="2">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="SiegeTank2">
+            <Fixed Fixed="6">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="10">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="1">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="SiegeTank22">
+            <Fixed Fixed="6">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="10">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="2">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="SiegeTankSieged2">
+            <Fixed Fixed="12">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="24">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="1">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="SiegeTankSieged22">
+            <Fixed Fixed="12">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="24">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="2">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="Viking2">
+            <Fixed Fixed="5">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="14">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="1">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="Viking22">
+            <Fixed Fixed="5">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="14">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="2">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="WidowMine2">
+            <Fixed Fixed="20">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="35">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="1">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="WidowMine22">
+            <Fixed Fixed="20">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="35">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="2">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="OrbitalCommand">
+            <Fixed Fixed="40">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="50">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="1">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="OrbitalCommand2">
+            <Fixed Fixed="40">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="50">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="2">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="Barracks">
+            <Fixed Fixed="80">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="50">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="1">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="Barracks2">
+            <Fixed Fixed="80">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="50">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="2">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="EngineeringBay">
+            <Fixed Fixed="80">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="50">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="1">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="EngineeringBay2">
+            <Fixed Fixed="80">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="50">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="2">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="Factory2">
+            <Fixed Fixed="80">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="50">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="2">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="Factory">
+            <Fixed Fixed="80">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="50">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="1">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="FusionCore2">
+            <Fixed Fixed="80">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="50">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="2">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="FusionCore">
+            <Fixed Fixed="80">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="50">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="1">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="GhostAcademy2">
+            <Fixed Fixed="80">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="50">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="2">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="GhostAcademy">
+            <Fixed Fixed="80">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="50">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="1">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="Starport">
+            <Fixed Fixed="80">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="50">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="1">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="Starport2">
+            <Fixed Fixed="80">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="50">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="2">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="Armory2">
+            <Fixed Fixed="80">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="50">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="2">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="Armory">
+            <Fixed Fixed="80">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="50">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="1">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="HERCCompound">
+            <Fixed Fixed="80">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="50">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="1">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="HERCCompound2">
+            <Fixed Fixed="80">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="50">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="2">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="Bunker">
+            <Fixed Fixed="50">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="40">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="1">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="Bunker2">
+            <Fixed Fixed="50">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="40">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="2">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="AutoTurret">
+            <Fixed Fixed="35">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="30">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="1">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="AutoTurret2">
+            <Fixed Fixed="35">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="30">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="2">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="SupplyDepot2">
+            <Fixed Fixed="25">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="15">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="1">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="SupplyDepot22">
+            <Fixed Fixed="25">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="15">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="2">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="SupplyDepotLowered2">
+            <Fixed Fixed="25">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="15">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="1">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="SupplyDepotLowered22">
+            <Fixed Fixed="25">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="15">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="2">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="TransportPrism">
+            <Fixed Fixed="125">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="50">
+                <Field Id="Exp"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="TransportEscort">
+            <Fixed Fixed="50">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="75">
+                <Field Id="Exp"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="VoidMine">
+            <Fixed Fixed="20">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="20">
+                <Field Id="Exp"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="Atlantis">
+            <Fixed Fixed="500">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="500">
+                <Field Id="Exp"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="Madness">
+            <Fixed Fixed="500">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="500">
+                <Field Id="Exp"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="Lightning">
+            <Fixed Fixed="250">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="250">
+                <Field Id="Exp"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="Thunder">
+            <Fixed Fixed="250">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="250">
+                <Field Id="Exp"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="ObeliskStandard">
+            <Fixed Fixed="12">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="12">
+                <Field Id="Exp"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="ObeliskStandardOpen">
+            <Fixed Fixed="12">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="12">
+                <Field Id="Exp"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="MonolithAncient">
+            <Fixed Fixed="25">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="30">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="3">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="MonolithNerazim">
+            <Fixed Fixed="25">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="30">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="4">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="MonolithStandard">
+            <Fixed Fixed="25">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="30">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="3">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="PhotonCannonAncient">
+            <Fixed Fixed="20">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="25">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="3">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="PhotonCannonPurifier">
+            <Fixed Fixed="20">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="25">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="3">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="PhotonCannonStandard">
+            <Fixed Fixed="20">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="25">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="4">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="PhotonCannonTaldarim">
+            <Fixed Fixed="20">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="25">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="4">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="PylonAncient">
+            <Fixed Fixed="15">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="20">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="3">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="PylonJudicator">
+            <Fixed Fixed="15">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="20">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="4">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="PylonNerazim">
+            <Fixed Fixed="15">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="20">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="4">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="PylonPurifier">
+            <Fixed Fixed="15">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="20">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="3">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="PylonStandard">
+            <Fixed Fixed="15">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="20">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="3">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="PylonTaldarim">
+            <Fixed Fixed="15">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="20">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="4">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="VoidContainmentAncient">
+            <Fixed Fixed="30">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="40">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="3">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="VoidContainmentNerazim">
+            <Fixed Fixed="30">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="40">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="4">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="VoidContainmentStandard">
+            <Fixed Fixed="30">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="40">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="3">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="VoidContainmentTaldarim">
+            <Fixed Fixed="30">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="40">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="4">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="DisruptorAncient">
+            <Fixed Fixed="3">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="3">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="3">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="DisruptorStandard">
+            <Fixed Fixed="3">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="3">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="3">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="DarkTemplarAncient">
+            <Fixed Fixed="8">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="7">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="4">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="DarkTemplarTaldarim2">
+            <Fixed Fixed="8">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="7">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="4">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="SentryPurifier2">
+            <Fixed Fixed="2">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="6">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="3">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="SentryNerazim">
+            <Fixed Fixed="2">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="6">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="4">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="AdeptAncient">
+            <Fixed Fixed="5">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="7">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="4">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="AdeptTaldarim">
+            <Fixed Fixed="5">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="7">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="4">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="AdeptShadow">
+            <Fixed Fixed="3">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="5">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="3">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="DragoonPurifier">
+            <Fixed Fixed="2">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="3">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="3">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="DragoonStandard">
+            <Fixed Fixed="2">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="3">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="3">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="ZealotAncient">
+            <Fixed Fixed="5">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="8">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="4">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="ZealotNerazim">
+            <Fixed Fixed="5">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="8">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="4">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="ZealotPurifier2">
+            <Fixed Fixed="5">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="8">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="3">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="ZealotStandard">
+            <Fixed Fixed="5">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="8">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="4">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="ZealotTaldarim">
+            <Fixed Fixed="5">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="8">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="4">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="ColossusAncient">
+            <Fixed Fixed="4">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="5">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="3">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="ColossusPurifier2">
+            <Fixed Fixed="4">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="5">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="3">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="ColossusTaldarim2">
+            <Fixed Fixed="4">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="5">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="4">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="ImmortalAncient">
+            <Fixed Fixed="5">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="7">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="3">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="ImmortalPurifier">
+            <Fixed Fixed="5">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="7">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="3">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="ArchonPurifier">
+            <Fixed Fixed="6">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="6">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="4">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="ArchonAncient">
+            <Fixed Fixed="6">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="6">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="4">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="StalkerPurifier2">
+            <Fixed Fixed="4">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="5">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="3">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="StalkerTaldarim">
+            <Fixed Fixed="4">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="5">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="4">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="CyberneticsCoreAncient">
+            <Fixed Fixed="50">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="35">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="3">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="CyberneticsCoreStandard">
+            <Fixed Fixed="50">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="35">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="3">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="DarkShrineAncient">
+            <Fixed Fixed="50">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="35">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="4">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="DarkShrineTaldarim">
+            <Fixed Fixed="50">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="35">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="3">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="ForgePurifier">
+            <Fixed Fixed="50">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="35">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="4">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="ForgeTaldarim">
+            <Fixed Fixed="50">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="35">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="4">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="GatewayAncient">
+            <Fixed Fixed="50">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="35">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="4">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="GatewayPurifier">
+            <Fixed Fixed="50">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="35">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="3">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="GatewayStandard">
+            <Fixed Fixed="50">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="35">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="3">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="GatewayTaldarim">
+            <Fixed Fixed="50">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="35">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="4">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="NexusAncient">
+            <Fixed Fixed="50">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="35">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="3">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="NexusNerazim">
+            <Fixed Fixed="50">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="35">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="4">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="NexusPurifier">
+            <Fixed Fixed="50">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="35">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="3">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="NexusStandard">
+            <Fixed Fixed="50">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="35">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="4">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="NexusTaldarim">
+            <Fixed Fixed="50">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="35">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="4">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="RoboticsBayAncient">
+            <Fixed Fixed="50">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="35">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="3">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="RoboticsBayPurifier">
+            <Fixed Fixed="50">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="35">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="3">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="RoboticsBayTaldarim">
+            <Fixed Fixed="50">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="35">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="4">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="RoboticsFacilityAncient">
+            <Fixed Fixed="50">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="35">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="3">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="RoboticsFacilityPurifier">
+            <Fixed Fixed="50">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="35">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="3">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="TemplarArchiveStandard">
+            <Fixed Fixed="50">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="35">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="4">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="TemplarArchiveTaldarim">
+            <Fixed Fixed="50">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="35">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="4">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="TwilightCouncilPurifier">
+            <Fixed Fixed="50">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="35">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="3">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="TwilightCouncilTaldarim">
+            <Fixed Fixed="50">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="35">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="4">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="MechaZergling">
+            <Fixed Fixed="3">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="5">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="5">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="MechaBroodling">
+            <Fixed Fixed="2">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="4">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="5">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="MechaLocust">
+            <Fixed Fixed="6">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="9">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="5">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="MechaQueen">
+            <Fixed Fixed="15">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="20">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="5">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="MechaUltralisk">
+            <Fixed Fixed="20">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="25">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="5">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="MechaInfestor">
+            <Fixed Fixed="12">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="20">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="5">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="MechaHydralisk">
+            <Fixed Fixed="10">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="12">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="5">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="MechaRoach">
+            <Fixed Fixed="10">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="12">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="5">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="MechaDrone">
+            <Fixed Fixed="10">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="10">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="5">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="MechaBaneling">
+            <Fixed Fixed="12">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="15">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="5">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="MechaRavager">
+            <Fixed Fixed="9">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="11">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="5">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="MechaLurker">
+            <Fixed Fixed="40">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="40">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="5">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="MechaSpawningPool">
+            <Fixed Fixed="50">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="80">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="5">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="MechaHatchery">
+            <Fixed Fixed="50">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="80">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="5">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="MechaLair">
+            <Fixed Fixed="50">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="80">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="5">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="MechaHive">
+            <Fixed Fixed="50">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="80">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="5">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="MechaEvolutionChamber">
+            <Fixed Fixed="50">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="80">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="5">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="MechaBanelingNest">
+            <Fixed Fixed="50">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="80">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="5">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="MechaHydraliskDen">
+            <Fixed Fixed="50">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="80">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="5">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="MechaRoachWarren">
+            <Fixed Fixed="50">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="80">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="5">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="MechaUltraliskCavern">
+            <Fixed Fixed="50">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="80">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="5">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="MechaInfestationPit">
+            <Fixed Fixed="50">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="80">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="5">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="MechaSpineCrawler">
+            <Fixed Fixed="35">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="50">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="5">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="MechaSporeCrawler">
+            <Fixed Fixed="35">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="50">
+                <Field Id="Exp"/>
+            </Fixed>
+            <Int Int="5">
+                <Field Id="EnemyType"/>
+            </Int>
+        </Instances>
+        <Instances Id="MechaRaynor">
+            <Fixed Fixed="200">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="200">
+                <Field Id="Exp"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="MechaArtanis">
+            <Fixed Fixed="200">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="200">
+                <Field Id="Exp"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="MechaKerrigan">
+            <Fixed Fixed="200">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="200">
+                <Field Id="Exp"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="MechaOvermind">
+            <Fixed Fixed="500">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="500">
+                <Field Id="Exp"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="Gary">
+            <Fixed Fixed="250">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="250">
+                <Field Id="Exp"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="EgonStetmann">
+            <Fixed Fixed="250">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="250">
+                <Field Id="Exp"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="KingMoopy">
+            <Fixed Fixed="500">
+                <Field Id="Biomass"/>
+            </Fixed>
+            <Fixed Fixed="500">
+                <Field Id="Exp"/>
+            </Fixed>
+        </Instances>
+    </CUser>
+</Catalog>

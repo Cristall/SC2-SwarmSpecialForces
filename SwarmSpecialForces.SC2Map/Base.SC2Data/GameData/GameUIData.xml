@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CGameUI id="Dflt">
+        <ResourceArray index="Minerals" Icon="Assets\Textures\btn-upgrade-zerg-abathur-biomass.dds"/>
+        <ResourceArray index="Vespene" Icon="Assets\Textures\btn-upgrade-zerg-enduringcorruption.dds"/>
+    </CGameUI>
+</Catalog>

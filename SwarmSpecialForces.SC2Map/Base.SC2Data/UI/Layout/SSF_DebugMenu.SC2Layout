@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Desc>
+<!-- constants -->
+    <Constant name="Width" val="175"/>
+    <Constant name="Height" val="50"/>
+    <Constant name="Gap" val="5"/>
+<!-- Templates -->
+    <Frame type="Button" name="DebugButtonTemplate" template="SSF_Templates/ButtonTemplate">
+        <Width val="#Width"/>
+        <Height val="#Height"/>
+    </Frame>
+<!-- Actual Frame -->
+<Frame type="Frame" name="GameUI/UIContainer/FullscreenUpperContainer" file="GameUI">
+    <Frame type="Button" name="DebugOpener" template="SSF_Templates/ButtonTemplate">
+        <Anchor side="Bottom" relative="$GameUI/UIContainer/FullscreenUpperContainer/MenuBarConsoleAnchor" pos="Min" offset="-4"/>
+        <Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+        <Width val="150"/>
+        <Height val="50"/>
+
+        <Visible val="False"/>
+
+        <Text val="Debug"/>
+        <Animation name="ShowHideContainer">
+            <Event event="OnClick" action="ToggleDirection, Play" frame="$this"/>
+            <Event event="OnClick" action="ToggleDirection, Play" frame="$parent/DebugContainerFrame/CloseButton"/>
+            <Controller type="Visibility" end="Pause" frame="$parent/DebugContainerFrame">
+                <Key type="Bool" time="0.0" value="true"/>
+                <Key type="Bool" time="0.01" value="false"/>
+            </Controller>
+        </Animation>
+    </Frame>
+
+    <Frame type="Frame" name="DebugContainerFrame">
+        <Anchor side="Bottom" relative="$parent/DebugOpener" pos="Min" offset="-3"/>
+        <Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+        <Height val="575"/>
+        <Width val="975"/>
+
+        <Visible val="False"/>
+
+        <Frame type="Button" name="CloseButton">
+            <Anchor side="Left" relative="$parent" pos="Min" offset="5000"/>
+            <Anchor side="Top" relative="$parent" pos="Min" offset="5000"/>
+            <Height val="1"/>
+            <Width val="1"/>
+            <Shortcut val="Escape"/>
+        </Frame>
+
+        <Frame type="Image" name="BackgroundImage" template="SSF_Templates/BackgroundImageTemplate"></Frame>
+
+        <!-- BankState -->
+
+        <Frame type="EditBox" name="ValueInput" template="TriggerDialogFrame/TriggerControlEditBoxTemplate">
+            <Anchor side="Top" relative="$parent" pos="Min" offset="40"/>
+            <Anchor side="Left" relative="$parent" pos="Min" offset="40"/>
+            <Width val="#Width"/>
+            <Height val="#Height"/>
+        </Frame>
+        <Frame type="Pulldown" name="PartSelection" template="SSF_Templates/PulldownTemplate">
+            <Anchor side="Top" relative="$parent/ValueInput" pos="Min" offset="0"/>
+            <Anchor side="Left" relative="$parent/ValueInput" pos="Max" offset="#Gap"/>
+            <Width val="#Width"/>
+            <Height val="#Height"/>
+        </Frame>
+        <Frame type="Pulldown" name="DiffSelection" template="SSF_Templates/PulldownTemplate">
+            <Anchor side="Top" relative="$parent/PartSelection" pos="Min" offset="0"/>
+            <Anchor side="Left" relative="$parent/PartSelection" pos="Max" offset="#Gap"/>
+            <Width val="#Width"/>
+            <Height val="#Height"/>
+        </Frame>
+        <Frame type="Button" name="TeamGame" template="SSF_DebugMenu/DebugButtonTemplate">
+            <Anchor side="Top" relative="$parent/DiffSelection" pos="Min" offset="0"/>
+            <Anchor side="Left" relative="$parent/DiffSelection" pos="Max" offset="#Gap"/>
+            <Text val="TeamGame"/>
+        </Frame>
+        <Frame type="Button" name="SmallGame" template="SSF_DebugMenu/DebugButtonTemplate">
+            <Anchor side="Top" relative="$parent/TeamGame" pos="Min" offset="0"/>
+            <Anchor side="Left" relative="$parent/TeamGame" pos="Max" offset="#Gap"/>
+            <Text val="SmallGame"/>
+        </Frame>
+        
+        
+        <Frame type="Button" name="BossFlamer" template="SSF_DebugMenu/DebugButtonTemplate">
+            <Anchor side="Top" relative="$parent/ValueInput" pos="Max" offset="#Gap"/>
+            <Anchor side="Left" relative="$parent/ValueInput" pos="Min" offset="0"/>
+            <Text val="Flamer"/>
+        </Frame>
+        <Frame type="Button" name="BossFortress" template="SSF_DebugMenu/DebugButtonTemplate">
+            <Anchor side="Top" relative="$parent/BossFlamer" pos="Min" offset="0"/>
+            <Anchor side="Left" relative="$parent/BossFlamer" pos="Max" offset="#Gap"/>
+            <Text val="Fortress"/>
+        </Frame>
+        <Frame type="Button" name="BossHammer" template="SSF_DebugMenu/DebugButtonTemplate">
+            <Anchor side="Top" relative="$parent/BossFortress" pos="Min" offset="0"/>
+            <Anchor side="Left" relative="$parent/BossFortress" pos="Max" offset="#Gap"/>
+            <Text val="Hammer"/>
+        </Frame>
+        <Frame type="Button" name="FlawlessP0" template="SSF_DebugMenu/DebugButtonTemplate">
+            <Anchor side="Top" relative="$parent/BossHammer" pos="Min" offset="0"/>
+            <Anchor side="Left" relative="$parent/BossHammer" pos="Max" offset="#Gap"/>
+            <Text val="FlawlessP0"/>
+        </Frame>
+        <Frame type="Button" name="Tutorial" template="SSF_DebugMenu/DebugButtonTemplate">
+            <Anchor side="Top" relative="$parent/FlawlessP0" pos="Min" offset="0"/>
+            <Anchor side="Left" relative="$parent/FlawlessP0" pos="Max" offset="#Gap"/>
+            <Text val="Tutorial"/>
+        </Frame>
+
+        <Frame type="Button" name="BossMadness" template="SSF_DebugMenu/DebugButtonTemplate">
+            <Anchor side="Top" relative="$parent/BossFlamer" pos="Max" offset="#Gap"/>
+            <Anchor side="Left" relative="$parent/BossFlamer" pos="Min" offset="0"/>
+            <Text val="Madness"/>
+        </Frame>
+        <Frame type="Button" name="BossLightning" template="SSF_DebugMenu/DebugButtonTemplate">
+            <Anchor side="Top" relative="$parent/BossMadness" pos="Min" offset="0"/>
+            <Anchor side="Left" relative="$parent/BossMadness" pos="Max" offset="#Gap"/>
+            <Text val="Lightning"/>
+        </Frame>
+        <Frame type="Button" name="BossThunder" template="SSF_DebugMenu/DebugButtonTemplate">
+            <Anchor side="Top" relative="$parent/BossLightning" pos="Min" offset="0"/>
+            <Anchor side="Left" relative="$parent/BossLightning" pos="Max" offset="#Gap"/>
+            <Text val="Thunder"/>
+        </Frame>
+        <Frame type="Button" name="BossAtlantis" template="SSF_DebugMenu/DebugButtonTemplate">
+            <Anchor side="Top" relative="$parent/BossThunder" pos="Min" offset="0"/>
+            <Anchor side="Left" relative="$parent/BossThunder" pos="Max" offset="#Gap"/>
+            <Text val="Atlantis"/>
+        </Frame>
+        <Frame type="Button" name="FlawlessP1" template="SSF_DebugMenu/DebugButtonTemplate">
+            <Anchor side="Top" relative="$parent/BossAtlantis" pos="Min" offset="0"/>
+            <Anchor side="Left" relative="$parent/BossAtlantis" pos="Max" offset="#Gap"/>
+            <Text val="FlawlessP1"/>
+        </Frame>
+
+        <Frame type="Button" name="BossRaynor" template="SSF_DebugMenu/DebugButtonTemplate">
+            <Anchor side="Top" relative="$parent/BossMadness" pos="Max" offset="#Gap"/>
+            <Anchor side="Left" relative="$parent/BossMadness" pos="Min" offset="0"/>
+            <Text val="Raynor"/>
+        </Frame>
+        <Frame type="Button" name="BossKerrigan" template="SSF_DebugMenu/DebugButtonTemplate">
+            <Anchor side="Top" relative="$parent/BossRaynor" pos="Min" offset="0"/>
+            <Anchor side="Left" relative="$parent/BossRaynor" pos="Max" offset="#Gap"/>
+            <Text val="Kerri"/>
+        </Frame>
+        <Frame type="Button" name="BossArtanis" template="SSF_DebugMenu/DebugButtonTemplate">
+            <Anchor side="Top" relative="$parent/BossKerrigan" pos="Min" offset="0"/>
+            <Anchor side="Left" relative="$parent/BossKerrigan" pos="Max" offset="#Gap"/>
+            <Text val="Artanis"/>
+        </Frame>
+        <Frame type="Button" name="BossCybermind" template="SSF_DebugMenu/DebugButtonTemplate">
+            <Anchor side="Top" relative="$parent/BossArtanis" pos="Min" offset="0"/>
+            <Anchor side="Left" relative="$parent/BossArtanis" pos="Max" offset="#Gap"/>
+            <Text val="Cybermind"/>
+        </Frame>
+        <Frame type="Button" name="BossGary" template="SSF_DebugMenu/DebugButtonTemplate">
+            <Anchor side="Top" relative="$parent/BossCybermind" pos="Min" offset="0"/>
+            <Anchor side="Left" relative="$parent/BossCybermind" pos="Max" offset="#Gap"/>
+            <Text val="Gary"/>
+        </Frame>
+        
+        <Frame type="Button" name="BossStetmann" template="SSF_DebugMenu/DebugButtonTemplate">
+            <Anchor side="Top" relative="$parent/BossRaynor" pos="Max" offset="#Gap"/>
+            <Anchor side="Left" relative="$parent/BossRaynor" pos="Min" offset="0"/>
+            <Text val="Stetmann"/>
+        </Frame>
+        <Frame type="Button" name="BossMoopy" template="SSF_DebugMenu/DebugButtonTemplate">
+            <Anchor side="Top" relative="$parent/BossStetmann" pos="Min" offset="0"/>
+            <Anchor side="Left" relative="$parent/BossStetmann" pos="Max" offset="#Gap"/>
+            <Text val="Moopy"/>
+        </Frame>
+        <Frame type="Button" name="FlawlessP2" template="SSF_DebugMenu/DebugButtonTemplate">
+            <Anchor side="Top" relative="$parent/BossMoopy" pos="Min" offset="0"/>
+            <Anchor side="Left" relative="$parent/BossMoopy" pos="Max" offset="#Gap"/>
+            <Text val="FlawlessP2"/>
+        </Frame>
+        <Frame type="Button" name="WinsP0" template="SSF_DebugMenu/DebugButtonTemplate">
+            <Anchor side="Top" relative="$parent/FlawlessP2" pos="Min" offset="0"/>
+            <Anchor side="Left" relative="$parent/FlawlessP2" pos="Max" offset="#Gap"/>
+            <Text val="WinsP0"/>
+        </Frame>
+        <Frame type="Button" name="WinsP1" template="SSF_DebugMenu/DebugButtonTemplate">
+            <Anchor side="Top" relative="$parent/WinsP0" pos="Min" offset="0"/>
+            <Anchor side="Left" relative="$parent/WinsP0" pos="Max" offset="#Gap"/>
+            <Text val="WinsP1"/>
+        </Frame>
+
+        <Frame type="Button" name="WinsP2" template="SSF_DebugMenu/DebugButtonTemplate">
+            <Anchor side="Top" relative="$parent/BossStetmann" pos="Max" offset="#Gap"/>
+            <Anchor side="Left" relative="$parent/BossStetmann" pos="Min" offset="0"/>
+            <Text val="WinsP2"/>
+        </Frame>
+        <Frame type="Button" name="Points" template="SSF_DebugMenu/DebugButtonTemplate">
+            <Anchor side="Top" relative="$parent/WinsP2" pos="Min" offset="0"/>
+            <Anchor side="Left" relative="$parent/WinsP2" pos="Max" offset="#Gap"/>
+            <Text val="Points"/>
+        </Frame>
+        <Frame type="Button" name="Kills" template="SSF_DebugMenu/DebugButtonTemplate">
+            <Anchor side="Top" relative="$parent/Points" pos="Min" offset="0"/>
+            <Anchor side="Left" relative="$parent/Points" pos="Max" offset="#Gap"/>
+            <Text val="Kills"/>
+        </Frame>
+        <Frame type="Button" name="Scientists" template="SSF_DebugMenu/DebugButtonTemplate">
+            <Anchor side="Top" relative="$parent/Kills" pos="Min" offset="0"/>
+            <Anchor side="Left" relative="$parent/Kills" pos="Max" offset="#Gap"/>
+            <Text val="Scientists"/>
+        </Frame>
+        <Frame type="Button" name="Essences" template="SSF_DebugMenu/DebugButtonTemplate">
+            <Anchor side="Top" relative="$parent/Scientists" pos="Min" offset="0"/>
+            <Anchor side="Left" relative="$parent/Scientists" pos="Max" offset="#Gap"/>
+            <Text val="Essences"/>
+        </Frame>
+
+        <Frame type="Button" name="PsiOrbs" template="SSF_DebugMenu/DebugButtonTemplate">
+            <Anchor side="Top" relative="$parent/WinsP2" pos="Max" offset="#Gap"/>
+            <Anchor side="Left" relative="$parent/WinsP2" pos="Min" offset="0"/>
+            <Text val="PsiOrbs"/>
+        </Frame>
+        <Frame type="Button" name="MoopyHats" template="SSF_DebugMenu/DebugButtonTemplate">
+            <Anchor side="Top" relative="$parent/PsiOrbs" pos="Min" offset="0"/>
+            <Anchor side="Left" relative="$parent/PsiOrbs" pos="Max" offset="#Gap"/>
+            <Text val="MoopyHats"/>
+        </Frame>
+
+        <!-- GameState -->
+
+        <Frame type="Button" name="Money" template="SSF_DebugMenu/DebugButtonTemplate">
+            <Anchor side="Top" relative="$parent/PsiOrbs" pos="Max" offset="10"/>
+            <Anchor side="Left" relative="$parent/PsiOrbs" pos="Min" offset="0"/>
+            <Text val="Money"/>
+        </Frame>
+        <Frame type="Button" name="Exp" template="SSF_DebugMenu/DebugButtonTemplate">
+            <Anchor side="Top" relative="$parent/Money" pos="Min" offset="0"/>
+            <Anchor side="Left" relative="$parent/Money" pos="Max" offset="#Gap"/>
+            <Text val="Exp"/>
+        </Frame>
+        <Frame type="Button" name="Bounds" template="SSF_DebugMenu/DebugButtonTemplate">
+            <Anchor side="Top" relative="$parent/Exp" pos="Min" offset="0"/>
+            <Anchor side="Left" relative="$parent/Exp" pos="Max" offset="#Gap"/>
+            <Text val="Boundary"/>
+        </Frame>
+        <Frame type="Button" name="Vision" template="SSF_DebugMenu/DebugButtonTemplate">
+            <Anchor side="Top" relative="$parent/Bounds" pos="Min" offset="0"/>
+            <Anchor side="Left" relative="$parent/Bounds" pos="Max" offset="#Gap"/>
+            <Text val="Vision"/>
+        </Frame>
+        <Frame type="Button" name="Pause" template="SSF_DebugMenu/DebugButtonTemplate">
+            <Anchor side="Top" relative="$parent/Vision" pos="Min" offset="0"/>
+            <Anchor side="Left" relative="$parent/Vision" pos="Max" offset="#Gap"/>
+            <Text val="Pause"/>
+        </Frame>
+
+        <Frame type="Pulldown" name="SpawnUnitType" template="SSF_Templates/PulldownTemplate">
+            <Anchor side="Top" relative="$parent/Money" pos="Max" offset="#Gap"/>
+            <Anchor side="Left" relative="$parent/Money" pos="Min" offset="0"/>
+            <Width val="#Width"/>
+            <Height val="#Height"/>
+        </Frame>
+        <Frame type="Button" name="SpawnUnit" template="SSF_DebugMenu/DebugButtonTemplate">
+            <Anchor side="Top" relative="$parent/SpawnUnitType" pos="Min" offset="0"/>
+            <Anchor side="Left" relative="$parent/SpawnUnitType" pos="Max" offset="#Gap"/>
+            <Text val="Spawn"/>
+        </Frame>
+        <Frame type="Button" name="Objectives" template="SSF_DebugMenu/DebugButtonTemplate">
+            <Anchor side="Top" relative="$parent/SpawnUnit" pos="Min" offset="0"/>
+            <Anchor side="Left" relative="$parent/SpawnUnit" pos="Max" offset="#Gap"/>
+            <Text val="Objectives"/>
+        </Frame>
+        <Frame type="Button" name="Invulnerable" template="SSF_DebugMenu/DebugButtonTemplate">
+            <Anchor side="Top" relative="$parent/Objectives" pos="Min" offset="0"/>
+            <Anchor side="Left" relative="$parent/Objectives" pos="Max" offset="#Gap"/>
+            <Text val="Invulnerable"/>
+        </Frame>
+        <Frame type="Button" name="SkipPart" template="SSF_DebugMenu/DebugButtonTemplate">
+            <Anchor side="Top" relative="$parent/Invulnerable" pos="Min" offset="0"/>
+            <Anchor side="Left" relative="$parent/Invulnerable" pos="Max" offset="#Gap"/>
+            <Text val="Skip Part"/>
+        </Frame>
+    </Frame>
+
+
+</Frame>
+
+</Desc>

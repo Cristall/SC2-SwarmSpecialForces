@@ -1,0 +1,84 @@
+
+static const int playerBoard_AmountRanks = 12;
+
+static int playerBoard_Title;
+static int[gv_MaxAmountPlayers + 1] playerBoard_PlayerNameLabel;
+static int[gv_MaxAmountPlayers + 1] playerBoard_PlayerScoreLabel;
+static text[playerBoard_AmountRanks] playerBoard_RankNames;
+
+
+void PlayerBoard_InitRankNames(){
+    int tmpInt;
+    for( tmpInt = 0; tmpInt < playerBoard_AmountRanks; tmpInt+= 1){
+        playerBoard_RankNames[tmpInt] = StringExternal("Trig/Playerboard/Rank"+ IntToString(tmpInt));
+    }
+}
+
+static void PlayerBoard_SetRank(int playerID, text rank){
+    libNtve_gf_SetDialogItemText(playerBoard_PlayerNameLabel[playerID], rank + PlayerName(playerID) , PlayerGroupAll());
+}
+static void PlayerBoard_SetScore(int playerID, fixed score){
+    libNtve_gf_SetDialogItemText(playerBoard_PlayerScoreLabel[playerID], FixedToText(score, -1) , PlayerGroupAll());
+}
+void PlayerBoard_SetCustomRankText(int playerID, text rank){
+    gv_PlayerStats[playerID].acvScoreRank = rank;
+    gv_PlayerStats[playerID].acvScoreRank_Custom = true;
+    PlayerBoard_SetRank(playerID, rank);
+}
+static void PlayerBoard_SetRankFromInt(int playerID, int rankLevel){
+    if(gv_PlayerStats[playerID].acvScoreRank_Custom){ return; }
+    gv_PlayerStats[playerID].acvScoreRank = playerBoard_RankNames[rankLevel];
+    PlayerBoard_SetRank(playerID, gv_PlayerStats[playerID].acvScoreRank);
+}
+static void PlayerBoard_SetScoreFromStoredScore(int playerID){
+    if(gv_PlayerStats[playerID].acvScore_Custom){ return; }
+    PlayerBoard_SetScore(playerID, gv_PlayerStats[playerID].acvScore);
+}
+static void PlayerBoard_SetCustomScore(int playerID, text score){
+    gv_PlayerStats[playerID].acvScore_Custom = true;
+    gv_PlayerStats[playerID].acvScore_TextCustom = score;
+    libNtve_gf_SetDialogItemText(playerBoard_PlayerScoreLabel[playerID], score, PlayerGroupAll());
+}
+
+void PlayerBoard_UpdatePlayer(int playerID){
+    PlayerBoard_SetRankFromInt(playerID, UserDataGetInt("AcvReqGrind", "Score", "PlayerStage", playerID));
+    PlayerBoard_SetScoreFromStoredScore(playerID);
+}
+
+void PlayerBoard_InitRanksForAllPlayers(){
+    int i;
+    int tmpPlayer;
+    for (i = 1; i <= PlayerGroupCount(gv_StartingPG); i += 1) {
+        tmpPlayer = PlayerGroupPlayer(gv_StartingPG, i);
+
+        if(Utility_PlayerIsDev(tmpPlayer)){
+            PlayerBoard_SetCustomRankText(tmpPlayer, StringExternal("Trig/Playerboard/DevRank"));
+            if(Utility_PlayerIsCristall(tmpPlayer)){
+                PlayerBoard_SetCustomScore(tmpPlayer,StringExternal("Trig/Playerboard/DevScore"));
+            }
+        }
+
+        PlayerBoard_UpdatePlayer(tmpPlayer);
+        HeroSelection_Player_ShowcaseSetRank(tmpPlayer);
+    }
+}
+
+void PlayerBoard_SetTitle(text diff){
+    libNtve_gf_SetDialogItemText(playerBoard_Title, diff, PlayerGroupAll());
+}
+
+void PlayerBoard_Init(){
+    int tmpPlayer;
+    int currentMainFrame = DialogControlHookupStandard(c_triggerControlTypePanel, "UIContainer/FullscreenUpperContainer/SSF_Playerboard");
+    playerBoard_Title = DialogControlHookup(currentMainFrame, c_triggerControlTypeLabel, "Title");
+    while (true) {
+        tmpPlayer = PlayerGroupNextPlayer(gv_ActivePG, tmpPlayer);
+        if (tmpPlayer < 0) { break; }
+
+        playerBoard_PlayerNameLabel[tmpPlayer] = DialogControlHookup(currentMainFrame, c_triggerControlTypeLabel, "PlayerList/Player"+IntToString(tmpPlayer)+"/PlayerName");
+        playerBoard_PlayerScoreLabel[tmpPlayer] = DialogControlHookup(currentMainFrame, c_triggerControlTypeLabel, "PlayerList/Player"+IntToString(tmpPlayer)+"/Score");
+        libNtve_gf_SetDialogItemColor(playerBoard_PlayerNameLabel[tmpPlayer], libNtve_gf_ConvertPlayerColorToColor(PlayerGetColorIndex(tmpPlayer, false)), PlayerGroupAll());
+        libNtve_gf_SetDialogItemColor(playerBoard_PlayerScoreLabel[tmpPlayer], libNtve_gf_ConvertPlayerColorToColor(PlayerGetColorIndex(tmpPlayer, false)), PlayerGroupAll());
+        DialogControlSetVisible(DialogControlHookup(currentMainFrame, c_triggerControlTypePanel, "PlayerList/Player"+IntToString(tmpPlayer)), PlayerGroupAll(), true);
+    }
+}

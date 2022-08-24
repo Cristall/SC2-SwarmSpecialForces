@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CCliff id="CybrossCliff0">
+        <CliffMesh value="CliffMade11"/>
+    </CCliff>
+    <CCliff id="StarshipCliff0">
+        <CliffMesh value="CliffMade11"/>
+    </CCliff>
+</Catalog>

@@ -1,0 +1,200 @@
+static trigger collectibles_Essences_Pickup;
+
+//Essences
+static void Collectibles_Essences_InitLarvaSpawnsP0() {
+    const int spawnsMax = 21;
+    point[spawnsMax] spawnPoints;
+    int tmpInt;
+    int tmpIntLoop;
+    for ( tmpIntLoop = 0; tmpIntLoop < spawnsMax ; tmpIntLoop += 1 ) {
+        spawnPoints[tmpIntLoop] = PointFromName("PartTerran_LarvaSpawn" + IntToString(tmpIntLoop));
+    }
+
+    for ( tmpIntLoop = 0; tmpIntLoop < gv_Difficulty_EssenceAmount ; tmpIntLoop += 1 ) {
+        tmpInt = RandomInt(0, (spawnsMax-1 - tmpIntLoop));
+        libNtve_gf_CreateUnitsWithDefaultFacing(1, "Larva2", 0, gv_CollectiblePlayerEnemyNeutral, spawnPoints[tmpInt]);
+        spawnPoints[tmpInt] = spawnPoints[spawnsMax-1 - tmpIntLoop];
+    }
+}
+static void Collectibles_Essences_InitLarvaSpawnsP1() {
+    const int spawnsMax = 10;
+    point[spawnsMax] spawnPoints;
+    int tmpInt;
+    int tmpIntLoop;
+    for ( tmpIntLoop = 0; tmpIntLoop < spawnsMax ; tmpIntLoop += 1 ) {
+        spawnPoints[tmpIntLoop] = PointFromName("PartProtoss_LarvaSpawn" + IntToString(tmpIntLoop));
+    }
+
+    for ( tmpIntLoop = 0; tmpIntLoop < gv_Difficulty_EssenceAmount ; tmpIntLoop += 1 ) {
+        tmpInt = RandomInt(0, (spawnsMax-1 - tmpIntLoop));
+        libNtve_gf_CreateUnitsWithDefaultFacing(1, "Larva2", 0, gv_CollectiblePlayerEnemyNeutral, spawnPoints[tmpInt]);
+        spawnPoints[tmpInt] = spawnPoints[spawnsMax-1 - tmpIntLoop];
+    }
+}
+static void Collectibles_Essences_InitLarvaSpawnsP2() {
+    const int spawnsMax = 10;
+    point[spawnsMax] spawnPoints;
+    int tmpInt;
+    int tmpIntLoop;
+    for ( tmpIntLoop = 0; tmpIntLoop < spawnsMax ; tmpIntLoop += 1 ) {
+        spawnPoints[tmpIntLoop] = PointFromName("PartZerg_LarvaSpawn" + IntToString(tmpIntLoop));
+    }
+
+    for ( tmpIntLoop = 0; tmpIntLoop < gv_Difficulty_EssenceAmount ; tmpIntLoop += 1 ) {
+        tmpInt = RandomInt(0, (spawnsMax-1 - tmpIntLoop));
+        libNtve_gf_CreateUnitsWithDefaultFacing(1, "Larva2", 0, gv_CollectiblePlayerEnemyNeutral, spawnPoints[tmpInt]);
+        spawnPoints[tmpInt] = spawnPoints[spawnsMax-1 - tmpIntLoop];
+    }
+}
+bool Collectibles_Essences_Pickup(bool testConds, bool runActions) {
+    int tmpInt;
+
+    UnitKill(EventUnit());
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, Utility_TextExpressionReplacement("Trig/Essence/Collected", Utility_PlayerNameWithPlayerColor(UnitGetOwner(EventUnitTargetUnit()))));
+    tmpInt = -1;
+    while (true) {
+        tmpInt = PlayerGroupNextPlayer(gv_ActivePG, tmpInt);
+        if (tmpInt < 0) { break; }
+        
+        Acv_Grind_UnlockAdd(tmpInt, c_AcvIdentifier_Essences, 1);
+        Acv_Reward_Spellpower(tmpInt, 5.0 / gv_Difficulty_EssenceAmount);
+    }
+    objective_EssencesFound += 1;
+    ObjectiveSetName(objective_Essences, Utility_TextExpressionReplacement("Trig/Objectives/Essences", IntToText(objective_EssencesFound)));
+    return true;
+}
+
+//Scientists
+static void Collectibles_Scientists_Init() {
+    const int spawnsMax = 5;
+    point[spawnsMax] scientists_Spawns;
+    int tmpIntLoop;
+    int tmpInt;
+    for ( tmpIntLoop = 0; tmpIntLoop < spawnsMax; tmpIntLoop += 1 ) {
+        scientists_Spawns[tmpIntLoop] = PointFromName("PartTerran_ScientistSpawn" + IntToString(tmpIntLoop));
+    }
+    for ( tmpIntLoop = 0; tmpIntLoop < gv_Difficulty_ScientistsAmount; tmpIntLoop += 1 ) {
+        tmpInt = RandomInt(0, (spawnsMax-1 - tmpIntLoop ));
+        libNtve_gf_CreateUnitsWithDefaultFacing(1, "Scientist", 0, gv_CollectiblePlayerEnemyAllied, scientists_Spawns[tmpInt]);
+        scientists_Spawns[tmpInt] = scientists_Spawns[(spawnsMax-1 - tmpIntLoop)];
+    }
+    TriggerAddEventUnitCargo(TriggerCreate("Collectibles_Scientists_OverlordCapture"), null, true);
+}
+bool Collectibles_Scientists_OverlordCapture(bool testConds, bool runActions) {
+    int tmpInt;
+    if (testConds) {
+        if (!((UnitGetType(EventUnitCargo()) == "Scientist"))) {
+            return false;
+        }
+
+        if (!((UnitGetType(EventUnit()) == "BaseOverlord"))) {
+            return false;
+        }
+    }
+    if (!runActions) {
+        return true;
+    }
+
+    UnitRemove(EventUnitCargo());
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, Utility_TextExpressionReplacement("Trig/Scientist/Collected", Utility_PlayerNameWithPlayerColor(UnitGetOwner(EventUnit()))));
+    objective_ScientistsFound += 1;
+    if (gv_Difficulty_ScientistsAmount >= 2) {
+        ObjectiveSetName(objective_Scientists, Utility_TextExpressionReplacement2("Trig/Objectives/Scientist/Two", IntToText(objective_ScientistsFound), IntToText(gv_Difficulty_ScientistsAmount)));
+        if (gv_Difficulty_ScientistsAmount == objective_ScientistsFound) {
+            ObjectiveSetState(objective_Scientists, c_objectiveStateCompleted);
+        }
+    }
+    else {
+        ObjectiveSetState(objective_Scientists, c_objectiveStateCompleted);
+    }
+
+    tmpInt = -1;
+    while (true) {
+        tmpInt = PlayerGroupNextPlayer(gv_ActivePG, tmpInt);
+        if (tmpInt < 0) { break; }
+
+        Acv_Grind_UnlockAdd(tmpInt, c_AcvIdentifier_Scientists, 1);
+
+        if(gv_PlayerStats[tmpInt].cyberneticUpgradesOnScientistCollection){
+            Acv_Reward_CyberneticsDmg(tmpInt, 5);
+            Acv_Reward_CyberneticsLife(tmpInt, 150);
+        }
+    }
+    return true;
+}
+//PsiOrb
+
+// PsiOrb_Init not static, because it needs to be called from PartProtoss.galaxy as a response from boss kill
+void Collectibles_PsiOrbs_Init(){
+    if(gv_Difficulty_PsiOrbSpawns){
+        libNtve_gf_CreateUnitsWithDefaultFacing(1, "TransportPrism", 0, gv_EnemyPlayer, PointFromName("PartProtoss_PsiOrb_TransportSpawn"));
+        TriggerAddEventUnitAbility(TriggerCreate("Collectibles_PsiOrbs_Pickup"), null, AbilityCommand("PsiOrbTriggerHandle", 0), c_abilEffectStageChannel, false);
+    }
+}
+bool Collectibles_PsiOrbs_Pickup (bool testConds, bool runActions) {
+    int tmpInt;
+    if(!PlayerGroupHasPlayer(gv_ActivePG, UnitGetOwner(EventUnitTargetUnit()))){return false;}
+
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, Utility_TextExpressionReplacement("Trig/PsiOrb/Collected", Utility_PlayerNameWithPlayerColor(UnitGetOwner(EventUnitTargetUnit()))));
+    tmpInt = -1;
+    while (true) {
+        tmpInt = PlayerGroupNextPlayer(gv_ActivePG, tmpInt);
+        if (tmpInt < 0) { break; }
+        Acv_Grind_UnlockAdd(tmpInt, c_AcvIdentifier_PsiOrbs, 1);
+        Acv_Reward_Spellpower(tmpInt, 5.0);
+    }
+    objective_PsiOrbFound += 1;
+    ObjectiveSetState(objective_PsiOrbs, c_objectiveStateCompleted);
+    return true;
+}
+
+//Moopy Hat
+static void Collectibles_MoopyHat_Init(){
+    TriggerAddEventUnitAbility(TriggerCreate("Collectibles_MoopyHat_Pickup"), null, AbilityCommand("CollectibleMoopyHatTriggerHandle", 0), c_abilEffectStageChannel, false);
+}
+// DropHat is called from PartZerg.galaxy as a response from moopy kill
+void Collectibles_MoopyHat_DropHat(unit moopy){
+    string hattype;
+    unit collectible;
+    int i;
+
+    i = FixedToInt(UnitGetCustomValue(moopy,0));
+    hattype = "MoopyHat" + IntToString(i);
+
+    UnitCreate(1, "CollectibleMoopyHat", 0, gv_CollectiblePlayerEnemyNeutral, UnitGetPosition(moopy), 0);
+    collectible = UnitLastCreated();
+    UnitBehaviorAdd(collectible, hattype, collectible, 1);
+
+}
+bool Collectibles_MoopyHat_Pickup(bool testConds, bool runActions){
+    int tmpInt;
+    if(!PlayerGroupHasPlayer(gv_ActivePG, UnitGetOwner(EventUnitTargetUnit()))){return false;}
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, Utility_TextExpressionReplacement("Trig/MoopyHats/Collected", Utility_PlayerNameWithPlayerColor(UnitGetOwner(EventUnitTargetUnit()))));
+    tmpInt = -1;
+    while (true) {
+        tmpInt = PlayerGroupNextPlayer(gv_ActivePG, tmpInt);
+        if (tmpInt < 0) { break; }
+        Acv_Grind_UnlockAdd(tmpInt, c_AcvIdentifier_MoopyHats, 1);
+        Acv_Reward_Spellpower(tmpInt, 5.0);
+    }
+    return true;
+}
+
+// central entry point for the different parts
+void Collectibles_InitPart(){
+    if(collectibles_Essences_Pickup == null){
+        collectibles_Essences_Pickup = TriggerCreate("Collectibles_Essences_Pickup");
+        TriggerAddEventUnitAbility(collectibles_Essences_Pickup, null, AbilityCommand("Pickup", 0), c_unitAbilStageExecute, false);
+    }
+    if(gv_Part_ActivePart == c_Part_Terran){
+        Collectibles_Essences_InitLarvaSpawnsP0();
+        Collectibles_Scientists_Init();
+    }
+    else if (gv_Part_ActivePart == c_Part_Protoss){
+        Collectibles_Essences_InitLarvaSpawnsP1();
+    }
+    else if (gv_Part_ActivePart == c_Part_Zerg){
+        Collectibles_Essences_InitLarvaSpawnsP2();
+        Collectibles_MoopyHat_Init();
+    }
+}

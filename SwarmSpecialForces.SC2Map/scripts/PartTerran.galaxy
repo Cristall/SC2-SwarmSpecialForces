@@ -1,0 +1,655 @@
+// areas
+static trigger PartTerran_AreaJunker_Second_DepotKill_Trigger;
+static trigger PartTerran_AreaJunker_Third_DepotKill_Trigger;
+static trigger PartTerran_AreaBlackOps_Second_DepotKill_Trigger;
+static trigger PartTerran_AreaBlackOps_Third_DepotKill_Trigger;
+
+void PartTerran_AreaJunker_Upgrade (fixed multiplier) {
+    CatalogFieldValueModify(c_gameCatalogUnit, "Cyclone2", "LifeMax", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Cyclone2", "LifeStart", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Cyclone2", "LifeArmor", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Cyclone2", "LifeArmorLevel", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Ghost2", "LifeMax", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Ghost2", "LifeStart", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Ghost2", "LifeArmor", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Ghost2", "LifeArmorLevel", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Hellion2", "LifeMax", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Hellion2", "LifeStart", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Hellion2", "LifeArmor", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Hellion2", "LifeArmorLevel", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Marauder2", "LifeMax", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Marauder2", "LifeStart", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Marauder2", "LifeArmor", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Marauder2", "LifeArmorLevel", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Marine2", "LifeMax", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Marine2", "LifeStart", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Marine2", "LifeArmor", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Marine2", "LifeArmorLevel", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Reaper2", "LifeMax", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Reaper2", "LifeStart", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Reaper2", "LifeArmor", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Reaper2", "LifeArmorLevel", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "SiegeTank2", "LifeMax", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "SiegeTank2", "LifeStart", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "SiegeTank2", "LifeArmor", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "SiegeTank2", "LifeArmorLevel", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Viking2", "LifeMax", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Viking2", "LifeStart", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Viking2", "LifeArmor", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Viking2", "LifeArmorLevel", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "WidowMine2", "LifeMax", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "WidowMine2", "LifeStart", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "WidowMine2", "LifeArmor", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "WidowMine2", "LifeArmorLevel", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "SiegeTankSieged2", "LifeMax", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "SiegeTankSieged2", "LifeStart", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "SiegeTankSieged2", "LifeArmor", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "SiegeTankSieged2", "LifeArmorLevel", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Armory", "LifeMax", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Armory", "LifeStart", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Armory", "LifeArmor", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Armory", "LifeArmorLevel", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "AutoTurret", "LifeMax", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "AutoTurret", "LifeStart", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "AutoTurret", "LifeArmor", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "AutoTurret", "LifeArmorLevel", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Barracks", "LifeMax", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Barracks", "LifeStart", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Barracks", "LifeArmor", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Barracks", "LifeArmorLevel", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Bunker", "LifeMax", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Bunker", "LifeStart", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Bunker", "LifeArmor", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Bunker", "LifeArmorLevel", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "EngineeringBay", "LifeMax", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "EngineeringBay", "LifeStart", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "EngineeringBay", "LifeArmor", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "EngineeringBay", "LifeArmorLevel", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Factory", "LifeMax", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Factory", "LifeStart", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Factory", "LifeArmor", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Factory", "LifeArmorLevel", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "FusionCore", "LifeMax", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "FusionCore", "LifeStart", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "FusionCore", "LifeArmor", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "FusionCore", "LifeArmorLevel", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "GhostAcademy", "LifeMax", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "GhostAcademy", "LifeStart", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "GhostAcademy", "LifeArmor", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "GhostAcademy", "LifeArmorLevel", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "OrbitalCommand", "LifeMax", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "OrbitalCommand", "LifeStart", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "OrbitalCommand", "LifeArmor", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "OrbitalCommand", "LifeArmorLevel", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "HERCCompound", "LifeMax", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "HERCCompound", "LifeStart", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "HERCCompound", "LifeArmor", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "HERCCompound", "LifeArmorLevel", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Starport", "LifeMax", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Starport", "LifeStart", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Starport", "LifeArmor", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Starport", "LifeArmorLevel", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "SupplyDepot2", "LifeMax", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "SupplyDepot2", "LifeStart", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "SupplyDepot2", "LifeArmor", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "SupplyDepot2", "LifeArmorLevel", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "SupplyDepotLowered2", "LifeMax", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "SupplyDepotLowered2", "LifeStart", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "SupplyDepotLowered2", "LifeArmor", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "SupplyDepotLowered2", "LifeArmorLevel", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+
+    CatalogFieldValueModify(c_gameCatalogEffect, "CycloneWeaponDmg", "Amount", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogEffect, "GhostWeaponDmg", "Amount", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogEffect, "HellionWeaponDmg", "Amount", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogEffect, "CrucioShockCannonBlast2", "Amount", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogEffect, "MarauderWeaponDmg", "Amount", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogEffect, "MarineWeaponDmg", "Amount", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogEffect, "ReaperWeaponDmg", "Amount", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogEffect, "TankWeaponDmg", "Amount", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogEffect, "VikingWeaponDmg", "Amount", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogEffect, "WidowMineSuicideDmg", "Amount", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogEffect, "AutoTurret", "Amount", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogWeapon, "CycloneWeapon", "Level", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogWeapon, "GhostWeapon", "Level", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogWeapon, "HellionWeapon", "Level", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogWeapon, "MarauderWeapon", "Level", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogWeapon, "MarineWeapon", "Level", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogWeapon, "ReaperWeapon", "Level", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogWeapon, "CrucioShockCannon2", "Level", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogWeapon, "TankWeapon", "Level", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogWeapon, "VikingWeapon", "Level", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogWeapon, "WidowMineWeapon", "Level", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogWeapon, "AutoTurret", "Level", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+}
+void PartTerran_AreaBlackOps_Upgrade (fixed multiplier){
+    CatalogFieldValueModify(c_gameCatalogUnit, "Cyclone22", "LifeMax", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Cyclone22", "LifeStart", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Cyclone22", "LifeArmor", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Cyclone22", "LifeArmorLevel", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Ghost3", "LifeMax", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Ghost3", "LifeStart", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Ghost3", "LifeArmor", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Ghost3", "LifeArmorLevel", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Hellion22", "LifeMax", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Hellion22", "LifeStart", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Hellion22", "LifeArmor", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Hellion22", "LifeArmorLevel", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Marauder22", "LifeMax", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Marauder22", "LifeStart", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Marauder22", "LifeArmor", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Marauder22", "LifeArmorLevel", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Marine22", "LifeMax", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Marine22", "LifeStart", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Marine22", "LifeArmor", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Marine22", "LifeArmorLevel", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Reaper22", "LifeMax", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Reaper22", "LifeStart", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Reaper22", "LifeArmor", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Reaper22", "LifeArmorLevel", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "SiegeTank22", "LifeMax", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "SiegeTank22", "LifeStart", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "SiegeTank22", "LifeArmor", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "SiegeTank22", "LifeArmorLevel", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Viking22", "LifeMax", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Viking22", "LifeStart", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Viking22", "LifeArmor", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Viking22", "LifeArmorLevel", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "WidowMine22", "LifeMax", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "WidowMine22", "LifeStart", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "WidowMine22", "LifeArmor", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "WidowMine22", "LifeArmorLevel", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "SiegeTankSieged22", "LifeMax", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "SiegeTankSieged22", "LifeStart", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "SiegeTankSieged22", "LifeArmor", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "SiegeTankSieged22", "LifeArmorLevel", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Armory2", "LifeMax", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Armory2", "LifeStart", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Armory2", "LifeArmor", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Armory2", "LifeArmorLevel", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "AutoTurret2", "LifeMax", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "AutoTurret2", "LifeStart", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "AutoTurret2", "LifeArmor", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "AutoTurret2", "LifeArmorLevel", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Barracks2", "LifeMax", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Barracks2", "LifeStart", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Barracks2", "LifeArmor", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Barracks2", "LifeArmorLevel", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Bunker2", "LifeMax", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Bunker2", "LifeStart", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Bunker2", "LifeArmor", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Bunker2", "LifeArmorLevel", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "EngineeringBay2", "LifeMax", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "EngineeringBay2", "LifeStart", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "EngineeringBay2", "LifeArmor", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "EngineeringBay2", "LifeArmorLevel", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Factory2", "LifeMax", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Factory2", "LifeStart", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Factory2", "LifeArmor", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Factory2", "LifeArmorLevel", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "FusionCore2", "LifeMax", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "FusionCore2", "LifeStart", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "FusionCore2", "LifeArmor", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "FusionCore2", "LifeArmorLevel", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "GhostAcademy2", "LifeMax", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "GhostAcademy2", "LifeStart", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "GhostAcademy2", "LifeArmor", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "GhostAcademy2", "LifeArmorLevel", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "OrbitalCommand2", "LifeMax", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "OrbitalCommand2", "LifeStart", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "OrbitalCommand2", "LifeArmor", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "OrbitalCommand2", "LifeArmorLevel", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "HERCCompound2", "LifeMax", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "HERCCompound2", "LifeStart", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "HERCCompound2", "LifeArmor", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "HERCCompound2", "LifeArmorLevel", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Starport2", "LifeMax", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Starport2", "LifeStart", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Starport2", "LifeArmor", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "Starport2", "LifeArmorLevel", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "SupplyDepot22", "LifeMax", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "SupplyDepot22", "LifeStart", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "SupplyDepot22", "LifeArmor", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "SupplyDepot22", "LifeArmorLevel", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogUnit, "SupplyDepotLowered22", "LifeMax", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "SupplyDepotLowered22", "LifeStart", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "SupplyDepotLowered22", "LifeArmor", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogUnit, "SupplyDepotLowered22", "LifeArmorLevel", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    
+    CatalogFieldValueModify(c_gameCatalogEffect, "CycloneWeaponDmg2", "Amount", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogEffect, "GhostWeaponDmg2", "Amount", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogEffect, "HellionWeaponDmg2", "Amount", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogEffect, "CrucioShockCannonBlast22", "Amount", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogEffect, "MarauderWeaponDmg2", "Amount", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogEffect, "MarineWeaponDmg2", "Amount", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogEffect, "ReaperWeaponDmg2", "Amount", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogEffect, "TankWeaponDmg2", "Amount", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogEffect, "VikingWeaponDmg2", "Amount", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogEffect, "WidowMineSuicideDmg2", "Amount", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogEffect, "AutoTurretDmg", "Amount", gv_EnemyPlayer, FixedToString(multiplier, c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogWeapon, "CycloneWeapon2", "Level", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogWeapon, "GhostWeapon2", "Level", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogWeapon, "HellionWeapon2", "Level", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogWeapon, "MarauderWeapon2", "Level", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogWeapon, "MarineWeapon2", "Level", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogWeapon, "ReaperWeapon2", "Level", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogWeapon, "CrucioShockCannon22", "Level", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogWeapon, "TankWeapon2", "Level", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogWeapon, "VikingWeapon2", "Level", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogWeapon, "WidowMineWeapon2", "Level", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+    CatalogFieldValueModify(c_gameCatalogWeapon, "AutoTurret2", "Level", gv_EnemyPlayer, "1", c_upgradeOperationAdd);
+}
+
+void PartTerran_AreaJunker_Second_Open(){
+    unit tmpUnit;
+    int tmpInt;
+    unitgroup tmpUG;
+
+    TriggerEnable(PartTerran_AreaJunker_Second_DepotKill_Trigger, false);
+    gv_Part_Areas_Open[c_Areas_TLeft2] = true;
+
+    gv_Enemy_TypeMultiplier_Biomass[c_EnemyType_TJunker] *= 1.15;
+    gv_Enemy_TypeMultiplier_Exp    [c_EnemyType_TJunker] *= 1.15;
+    PartTerran_AreaJunker_Upgrade(1.1);
+
+    Player_IncreaseUpgradeCount(2.0);
+
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, StringExternal("Trig/Enemy/AreaOpen/Junker"));
+    UnitGroupAddUnitGroup(gv_Part_ActiveSpawners, gv_Part_Areas_Spawners[c_Areas_TLeft2]);
+    
+    tmpUG = UnitGroup(null, gv_EnemyPlayer, RegionFromName("PartTerran_Junker_Second_Wall"), UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0);
+    tmpInt = UnitGroupCount(tmpUG, c_unitCountAlive);
+    for (;; tmpInt -=1){
+        tmpUnit = UnitGroupUnitFromEnd(tmpUG, tmpInt);
+        if(tmpUnit == null){ break; }
+        if(UnitGetType(tmpUnit) == "SupplyDepot2"){
+            UnitIssueOrder(tmpUnit, Order(AbilityCommand("SupplyDepotLower2", 0)), c_orderQueueReplace);
+        } 
+    }
+}
+void PartTerran_AreaJunker_Third_Open(){
+    unit tmpUnit;
+    int tmpInt;
+    unitgroup tmpUG;
+
+    TriggerEnable(PartTerran_AreaJunker_Third_DepotKill_Trigger, false);
+    gv_Part_Areas_Open[c_Areas_TLeft3] = true;
+
+    gv_Enemy_TypeMultiplier_Biomass[c_EnemyType_TJunker] *= 1.15;
+    gv_Enemy_TypeMultiplier_Exp    [c_EnemyType_TJunker] *= 1.15;
+    PartTerran_AreaJunker_Upgrade(1.1);
+
+    Player_IncreaseUpgradeCount(3.0);
+
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, StringExternal("Trig/Enemy/AreaOpen/Junker"));
+    UnitGroupAddUnitGroup(gv_Part_ActiveSpawners, gv_Part_Areas_Spawners[c_Areas_TLeft3]);
+    
+    tmpUG = UnitGroup(null, gv_EnemyPlayer, RegionFromName("PartTerran_Junker_Third_Wall"), UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0);
+    tmpInt = UnitGroupCount(tmpUG, c_unitCountAlive);
+    for (;; tmpInt -=1){
+        tmpUnit = UnitGroupUnitFromEnd(tmpUG, tmpInt);
+        if(tmpUnit == null){ break; }
+        if(UnitGetType(tmpUnit) == "SupplyDepot2"){
+            UnitIssueOrder(tmpUnit, Order(AbilityCommand("SupplyDepotLower2", 0)), c_orderQueueReplace);
+        } 
+    }
+}
+void PartTerran_AreaBlackOps_Second_Open(){
+    unit tmpUnit;
+    int tmpInt;
+    unitgroup tmpUG;
+
+    TriggerEnable(PartTerran_AreaBlackOps_Second_DepotKill_Trigger, false);
+    gv_Part_Areas_Open[c_Areas_TRight2] = true;
+
+    gv_Enemy_TypeMultiplier_Biomass[c_EnemyType_TBlackOps] *= 1.15;
+    gv_Enemy_TypeMultiplier_Exp    [c_EnemyType_TBlackOps] *= 1.15;
+    PartTerran_AreaBlackOps_Upgrade(1.1);
+
+    Player_IncreaseUpgradeCount(2.0);
+
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, StringExternal("Trig/Enemy/AreaOpen/BlackOps"));
+    UnitGroupAddUnitGroup(gv_Part_ActiveSpawners, gv_Part_Areas_Spawners[c_Areas_TRight2]);
+    
+    tmpUG = UnitGroup(null, gv_EnemyPlayer, RegionFromName("PartTerran_BlackOps_Second_Wall"), UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0);
+    tmpInt = UnitGroupCount(tmpUG, c_unitCountAlive);
+    for (;; tmpInt -=1){
+        tmpUnit = UnitGroupUnitFromEnd(tmpUG, tmpInt);
+        if(tmpUnit == null){ break; }
+        if(UnitGetType(tmpUnit) == "SupplyDepot22"){
+            UnitIssueOrder(tmpUnit, Order(AbilityCommand("SupplyDepotLower22", 0)), c_orderQueueReplace);
+        } 
+    }
+}
+void PartTerran_AreaBlackOps_Third_Open(){
+    unit tmpUnit;
+    int tmpInt;
+    unitgroup tmpUG;
+
+    TriggerEnable(PartTerran_AreaBlackOps_Third_DepotKill_Trigger, false);
+    gv_Part_Areas_Open[c_Areas_TRight3] = true;
+
+    gv_Enemy_TypeMultiplier_Biomass[c_EnemyType_TBlackOps] *= 1.15;
+    gv_Enemy_TypeMultiplier_Exp    [c_EnemyType_TBlackOps] *= 1.15;
+    PartTerran_AreaBlackOps_Upgrade(1.1);
+
+    Player_IncreaseUpgradeCount(3.0);
+
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, StringExternal("Trig/Enemy/AreaOpen/BlackOps"));
+    UnitGroupAddUnitGroup(gv_Part_ActiveSpawners, gv_Part_Areas_Spawners[c_Areas_TRight3]);
+    
+    tmpUG = UnitGroup(null, gv_EnemyPlayer, RegionFromName("PartTerran_BlackOps_Third_Wall"), UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0);
+    tmpInt = UnitGroupCount(tmpUG, c_unitCountAlive);
+    for (;; tmpInt -=1){
+        tmpUnit = UnitGroupUnitFromEnd(tmpUG, tmpInt);
+        if(tmpUnit == null){ break; }
+        if(UnitGetType(tmpUnit) == "SupplyDepot22"){
+            UnitIssueOrder(tmpUnit, Order(AbilityCommand("SupplyDepotLower22", 0)), c_orderQueueReplace);
+        } 
+    }
+}
+
+bool PartTerran_AreaJunker_Second_DepotKill (bool testConds, bool runActions){
+    if(testConds){
+        if (!(TriggerIsEnabled(TriggerGetCurrent()))) {return false;}
+    }
+    PartTerran_AreaJunker_Second_Open();
+    return true;
+}
+bool PartTerran_AreaJunker_Third_DepotKill (bool testConds, bool runActions){
+    if(testConds){
+        if (!(TriggerIsEnabled(TriggerGetCurrent()))) {return false;}
+    }
+    PartTerran_AreaJunker_Third_Open();
+    return true;
+}
+bool PartTerran_AreaBlackOps_Second_DepotKill (bool testConds, bool runActions){
+    if(testConds){
+        if (!(TriggerIsEnabled(TriggerGetCurrent()))) {return false;}
+    }
+    PartTerran_AreaBlackOps_Second_Open();
+    return true;
+}
+bool PartTerran_AreaBlackOps_Third_DepotKill (bool testConds, bool runActions){
+    if(testConds){
+        if (!(TriggerIsEnabled(TriggerGetCurrent()))) {return false;}
+    }
+    PartTerran_AreaBlackOps_Third_Open();
+    return true;
+}
+
+// bossfights
+bool PartTerran_Fortress_RequestRepairCondition(unitgroup ug, unit boss){
+    return UnitGetPropertyFixed(boss, c_unitPropLifePercent, true) < 75;
+}
+
+void PartTerran_Flamer_Init(structref<BossFightData> data){
+    data.amountBosses = 1;
+    data.boss           [0] = gv_Bosses[c_Bosses_TFlamer];
+    data.bossState      [0] = c_BossFightState_Alive;
+    data.bossIdlePoint  [0] = PointFromName("PartTerran_Boss_Flamer");
+    data.arena = RegionFromName("PartTerran_Boss_Flamer_Arena");
+
+    data.ability[0].abil = "FireGrenade";
+    data.ability[0].targetingType = c_BossFightAbilTargetType_Point;
+    data.ability[0].globalCooldown = 10;
+    data.ability[0].selfCooldown = 20;
+    data.ability[0].charges = -1;
+    data.ability[0].minAmountTargets = 1;
+    data.ability[0].allowedBossStates = c_BossFightState_Alive;
+    data.ability[0].disallowedBossStates = 0;
+    data.ability[0].targetFilter = UnitFilter(0,0,0,(1 << (c_targetFilterInvulnerable - 32)) | (1 << (c_targetFilterSummoned - 32)));
+    data.ability[0].requiredBossAbilityLevel = 1;
+    data.ability[0].targetFilterController = c_BossFightAbilAllianceTarget_Player;
+
+    data.ability[1].abil = "FocusedFlameStart";
+    data.ability[1].targetingType = c_BossFightAbilTargetType_Unit;
+    data.ability[1].globalCooldown = 10;
+    data.ability[1].selfCooldown = 25;
+    data.ability[1].charges = -1;
+    data.ability[1].minAmountTargets = 1;
+    data.ability[1].allowedBossStates = c_BossFightState_Alive;
+    data.ability[1].disallowedBossStates = 0;
+    data.ability[1].targetFilter = UnitFilter(0,0,0,(1 << (c_targetFilterInvulnerable - 32)) | (1 << (c_targetFilterSummoned - 32)));
+    data.ability[1].requiredBossAbilityLevel = 2;
+    data.ability[1].targetFilterController = c_BossFightAbilAllianceTarget_Player;
+
+    data.ability[2].abil = "BeamDrone";
+    data.ability[2].targetingType = c_BossFightAbilTargetType_None;
+    data.ability[2].globalCooldown = 15;
+    data.ability[2].selfCooldown = 40;
+    data.ability[2].charges = -1;
+    data.ability[2].minAmountTargets = 1;
+    data.ability[2].allowedBossStates = c_BossFightState_Alive;
+    data.ability[2].disallowedBossStates = 0;
+    data.ability[2].targetFilter = UnitFilter(0,0,0,(1 << (c_targetFilterInvulnerable - 32)) | (1 << (c_targetFilterSummoned - 32)));
+    data.ability[2].requiredBossAbilityLevel = 3;
+    data.ability[2].targetFilterController = c_BossFightAbilAllianceTarget_Player;
+
+    data.amountAbility = 3;
+}
+void PartTerran_Fortress_Init(structref<BossFightData> data){
+    data.amountBosses = 1;
+    data.boss           [0] = gv_Bosses[c_Bosses_TFortress];
+    data.bossState      [0] = c_BossFightState_Alive;
+    data.bossIdlePoint  [0] = PointFromName("PartTerran_Boss_Fortress");
+    data.arena = RegionFromName("PartTerran_Boss_Fortress_Arena");
+
+    data.ability[0].abil = "RequestRepair";
+    data.ability[0].targetingType = c_BossFightAbilTargetType_None;
+    data.ability[0].globalCooldown = 10;
+    data.ability[0].selfCooldown = 40;
+    data.ability[0].charges = -1;
+    data.ability[0].minAmountTargets = 1;
+    data.ability[0].allowedBossStates = c_BossFightState_Alive;
+    data.ability[0].disallowedBossStates = 0;
+    data.ability[0].targetFilter = UnitFilter(0,0,0,(1 << (c_targetFilterInvulnerable - 32)) | (1 << (c_targetFilterSummoned - 32)));
+    data.ability[0].targetFilterController = c_BossFightAbilAllianceTarget_Player;
+    data.ability[0].requiredBossAbilityLevel = 1;
+    data.ability[0].usesExtraConditions = true;
+    data.ability[0].extraConditions = PartTerran_Fortress_RequestRepairCondition;
+
+    data.ability[1].abil = "BombardmentStart";
+    data.ability[1].targetingType = c_BossFightAbilTargetType_None;
+    data.ability[1].globalCooldown = 16;
+    data.ability[1].selfCooldown = 32.75;
+    data.ability[1].charges = -1;
+    data.ability[1].minAmountTargets = 1;
+    data.ability[1].allowedBossStates = c_BossFightState_Alive;
+    data.ability[1].disallowedBossStates = 0;
+    data.ability[1].targetFilter = UnitFilter(0,0,0,(1 << (c_targetFilterInvulnerable - 32)) | (1 << (c_targetFilterSummoned - 32)));
+    data.ability[1].targetFilterController = c_BossFightAbilAllianceTarget_Player;
+    data.ability[1].requiredBossAbilityLevel = 2;
+
+    data.ability[2].abil = "RotatingWalls";
+    data.ability[2].targetingType = c_BossFightAbilTargetType_None;
+    data.ability[2].globalCooldown = 25;
+    data.ability[2].selfCooldown = 60;
+    data.ability[2].charges = -1;
+    data.ability[2].minAmountTargets = 1;
+    data.ability[2].allowedBossStates = c_BossFightState_Alive;
+    data.ability[2].disallowedBossStates = 0;
+    data.ability[2].targetFilter = UnitFilter(0,0,0,(1 << (c_targetFilterInvulnerable - 32)) | (1 << (c_targetFilterSummoned - 32)));
+    data.ability[2].targetFilterController = c_BossFightAbilAllianceTarget_Player;
+    data.ability[2].requiredBossAbilityLevel = 3;
+
+    data.amountAbility = 3;
+}
+void PartTerran_Hammer_Init(structref<BossFightData> data){
+    data.amountBosses = 1;
+    data.boss           [0] = gv_Bosses[c_Bosses_THammer];
+    data.bossState      [0] = c_BossFightState_Alive;
+    data.bossIdlePoint  [0] = PointFromName("PartTerran_Boss_Hammer");
+    data.arena = RegionFromName("PartTerran_Boss_Hammer_Arena");
+
+    data.ability[0].abil = "RocketLaunch";
+    data.ability[0].targetingType = c_BossFightAbilTargetType_None;
+    data.ability[0].globalCooldown = 9;
+    data.ability[0].selfCooldown = 50;
+    data.ability[0].charges = -1;
+    data.ability[0].minAmountTargets = 1;
+    data.ability[0].allowedBossStates = c_BossFightState_Alive;
+    data.ability[0].disallowedBossStates = 0;
+    data.ability[0].targetFilter = UnitFilter(0,0,0,(1 << (c_targetFilterInvulnerable - 32)) | (1 << (c_targetFilterSummoned - 32)));
+    data.ability[0].targetFilterController = c_BossFightAbilAllianceTarget_Player;
+    data.ability[0].requiredBossAbilityLevel = 1;
+
+    data.ability[1].abil = "Barrage";
+    data.ability[1].targetingType = c_BossFightAbilTargetType_None;
+    data.ability[1].globalCooldown = 16;
+    data.ability[1].selfCooldown = 30;
+    data.ability[1].charges = -1;
+    data.ability[1].minAmountTargets = 1;
+    data.ability[1].allowedBossStates = c_BossFightState_Alive;
+    data.ability[1].disallowedBossStates = 0;
+    data.ability[1].targetFilter = UnitFilter(0,0,0,(1 << (c_targetFilterInvulnerable - 32)) | (1 << (c_targetFilterSummoned - 32)));
+    data.ability[1].targetFilterController = c_BossFightAbilAllianceTarget_Player;
+    data.ability[1].requiredBossAbilityLevel = 2;
+
+    data.ability[2].abil = "SeekerMissile2";
+    data.ability[2].targetingType = c_BossFightAbilTargetType_Unit;
+    data.ability[2].globalCooldown = 10;
+    data.ability[2].selfCooldown = 30;
+    data.ability[2].charges = -1;
+    data.ability[2].minAmountTargets = 1;
+    data.ability[2].allowedBossStates = c_BossFightState_Alive;
+    data.ability[2].disallowedBossStates = 0;
+    data.ability[2].targetFilter = UnitFilter(0,0,0,(1 << (c_targetFilterInvulnerable - 32)) | (1 << (c_targetFilterSummoned - 32)));
+    data.ability[2].targetFilterController = c_BossFightAbilAllianceTarget_Player;
+    data.ability[2].requiredBossAbilityLevel = 3;
+
+    data.amountAbility = 3;
+}
+
+// boss kill
+bool PartTerran_Flamer_Dies (bool testConds, bool runActions){
+    if(!runActions) {return true;}
+    TriggerDestroy(TriggerGetCurrent());
+    Enemy_BossDeath(libNtve_gf_KillingPlayer(), c_AcvIdentifier_BossT_Flamer, 10, UnitGetPosition(EventUnit()));
+    PartZerg_Moopy_SecretEnable(c_Part_Terran, c_MoopySecretIndex_BlackDevil);
+    return true;
+}
+bool PartTerran_Fortress_Dies (bool testConds, bool runActions){
+    if(!runActions) {return true;}
+    TriggerDestroy(TriggerGetCurrent());
+    Enemy_BossDeath(libNtve_gf_KillingPlayer(), c_AcvIdentifier_BossT_Fortress, 10, UnitGetPosition(EventUnit()));
+    PartZerg_Moopy_SecretEnable(c_Part_Terran, c_MoopySecretIndex_SweetLimes);
+    return true;
+}
+bool PartTerran_Hammer_Dies (bool testConds, bool runActions){
+    if(!runActions) {return true;}
+    TriggerDestroy(TriggerGetCurrent());
+    Enemy_BossDeath(libNtve_gf_KillingPlayer(), c_AcvIdentifier_BossT_Hammer, 10, UnitGetPosition(EventUnit()));
+    PartZerg_Moopy_SecretEnable(c_Part_Terran, c_MoopySecretIndex_skywalker);
+    return true;
+}
+
+// bridges
+bool PartTerran_Flamer_Bridge (bool testConds, bool runActions){
+    if(!runActions) {return true;}
+    TriggerDestroy(TriggerGetCurrent());
+    UnitIssueOrder(UnitFromId(115921541), Order(AbilityCommand("ExtendingBridgeNEShort10Out", 0)), c_orderQueueReplace);
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, StringExternal("Trig/Enemy/Bridge/Flamer"));
+    return true;
+}
+bool PartTerran_Fortress_Bridge (bool testConds, bool runActions){
+    if(!runActions) {return true;}
+    TriggerDestroy(TriggerGetCurrent());
+    UnitIssueOrder(UnitFromId(973134657), Order(AbilityCommand("ExtendingBridgeNEWide12Out", 0)), c_orderQueueReplace);
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, StringExternal("Trig/Enemy/Bridge/Fortress"));
+    return true;
+}
+bool PartTerran_Hammer_Bridge (bool testConds, bool runActions){
+    if(!runActions) {return true;}
+    TriggerDestroy(TriggerGetCurrent());
+    UnitIssueOrder(UnitFromId(1946364426), Order(AbilityCommand("ExtendingBridgeNWShort12Out", 0)), c_orderQueueReplace);
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, StringExternal("Trig/Enemy/Bridge/Hammer"));
+    return true;
+}
+
+// boss spawns
+bool PartTerran_Flamer_Spawner (bool testConds, bool runActions) {
+    if (testConds) {
+        if (!PlayerGroupHasPlayer(gv_ActivePG, UnitGetOwner(EventUnit())) || !TriggerIsEnabled(TriggerGetCurrent())) {return false; }
+    }
+    if (!runActions) {return true;}
+
+    TriggerEnable(TriggerGetCurrent(), false);
+    TriggerDestroy(TriggerGetCurrent());
+    UnitCreate(1, "HellionTank2", 0, gv_EnemyPlayer, PointFromName("PartTerran_Boss_Flamer"), 305.0);
+    gv_Bosses[c_Bosses_TFlamer] = UnitLastCreated();
+    TriggerAddEventUnitDied(TriggerCreate("PartTerran_Flamer_Dies"), UnitRefFromUnit(gv_Bosses[c_Bosses_TFlamer]));
+
+    gv_Enemy_BossFight_Handler_FightID_Param = c_BossFightID_Flamer;
+    gv_Enemy_BossFight_Handler_InitFunc = PartTerran_Flamer_Init;
+    TriggerExecute(gv_Enemy_BossFight_Handler_Trigger, false, false);
+
+    return true;
+}
+bool PartTerran_Fortress_Spawner (bool testConds, bool runActions) {
+    if (testConds) {
+        if (!PlayerGroupHasPlayer(gv_ActivePG, UnitGetOwner(EventUnit())) || !TriggerIsEnabled(TriggerGetCurrent())) {return false; }
+    }
+    if (!runActions) {return true;}
+
+    TriggerEnable(TriggerGetCurrent(), false);
+    TriggerDestroy(TriggerGetCurrent());
+    UnitCreate(1, "PlanetaryFortress", 0, gv_EnemyPlayer, PointFromName("PartTerran_Boss_Fortress"), 305.0);
+    gv_Bosses[c_Bosses_TFortress] = UnitLastCreated();
+    TriggerAddEventUnitDied(TriggerCreate("PartTerran_Fortress_Dies"), UnitRefFromUnit(gv_Bosses[c_Bosses_TFortress]));
+
+    gv_Enemy_BossFight_Handler_FightID_Param = c_BossFightID_Fortress;
+    gv_Enemy_BossFight_Handler_InitFunc = PartTerran_Fortress_Init;
+    TriggerExecute(gv_Enemy_BossFight_Handler_Trigger, false, false);
+
+    return true;
+}
+bool PartTerran_Hammer_Spawner (bool testConds, bool runActions) {
+    if (testConds) {
+        if (!PlayerGroupHasPlayer(gv_ActivePG, UnitGetOwner(EventUnit())) || !TriggerIsEnabled(TriggerGetCurrent())) {return false; }
+    }
+    if (!runActions) {return true;}
+
+    TriggerEnable(TriggerGetCurrent(), false);
+    TriggerDestroy(TriggerGetCurrent());
+    UnitCreate(1, "Thor", 0, gv_EnemyPlayer, PointFromName("PartTerran_Boss_Hammer"), 305.0);
+    gv_Bosses[c_Bosses_THammer] = UnitLastCreated();
+    TriggerAddEventUnitDied(TriggerCreate("PartTerran_Hammer_Dies"), UnitRefFromUnit(gv_Bosses[c_Bosses_THammer]));
+    
+    gv_Enemy_BossFight_Handler_FightID_Param = c_BossFightID_Hammer;
+    gv_Enemy_BossFight_Handler_InitFunc = PartTerran_Hammer_Init;
+    TriggerExecute(gv_Enemy_BossFight_Handler_Trigger, false, false);
+
+    return true;
+}
+
+
+void PartTerran_TriggerCreate(){
+    //areas
+    PartTerran_AreaJunker_Second_DepotKill_Trigger = TriggerCreate("PartTerran_AreaJunker_Second_DepotKill");
+    TriggerAddEventUnitDied(PartTerran_AreaJunker_Second_DepotKill_Trigger, UnitRefFromUnit(UnitFromId(1022123575)));
+    TriggerAddEventUnitDied(PartTerran_AreaJunker_Second_DepotKill_Trigger, UnitRefFromUnit(UnitFromId(1630323472)));
+    PartTerran_AreaJunker_Third_DepotKill_Trigger = TriggerCreate("PartTerran_AreaJunker_Third_DepotKill");
+    TriggerAddEventUnitDied(PartTerran_AreaJunker_Third_DepotKill_Trigger, UnitRefFromUnit(UnitFromId(997781902)));
+    TriggerAddEventUnitDied(PartTerran_AreaJunker_Third_DepotKill_Trigger, UnitRefFromUnit(UnitFromId(650347227)));
+    TriggerAddEventUnitDied(PartTerran_AreaJunker_Third_DepotKill_Trigger, UnitRefFromUnit(UnitFromId(1064280768)));
+    PartTerran_AreaBlackOps_Second_DepotKill_Trigger = TriggerCreate("PartTerran_AreaBlackOps_Second_DepotKill");
+    TriggerAddEventUnitDied(PartTerran_AreaBlackOps_Second_DepotKill_Trigger, UnitRefFromUnit(UnitFromId(1202075025)));
+    TriggerAddEventUnitDied(PartTerran_AreaBlackOps_Second_DepotKill_Trigger, UnitRefFromUnit(UnitFromId(1452376089)));
+    TriggerAddEventUnitDied(PartTerran_AreaBlackOps_Second_DepotKill_Trigger, UnitRefFromUnit(UnitFromId(831974724)));
+    PartTerran_AreaBlackOps_Third_DepotKill_Trigger = TriggerCreate("PartTerran_AreaBlackOps_Third_DepotKill");
+    TriggerAddEventUnitDied(PartTerran_AreaBlackOps_Third_DepotKill_Trigger, UnitRefFromUnit(UnitFromId(885477964)));
+    TriggerAddEventUnitDied(PartTerran_AreaBlackOps_Third_DepotKill_Trigger, UnitRefFromUnit(UnitFromId(1431657588)));
+    TriggerAddEventUnitDied(PartTerran_AreaBlackOps_Third_DepotKill_Trigger, UnitRefFromUnit(UnitFromId(1488864233)));
+    TriggerAddEventUnitDied(PartTerran_AreaBlackOps_Third_DepotKill_Trigger, UnitRefFromUnit(UnitFromId(991816375)));
+
+    //boss bridges
+    TriggerAddEventUnitDied(TriggerCreate("PartTerran_Flamer_Bridge"), UnitRefFromUnit(UnitFromId(1907513494)));
+    TriggerAddEventUnitDied(TriggerCreate("PartTerran_Fortress_Bridge"), UnitRefFromUnit(UnitFromId(1799608622)));
+    TriggerAddEventUnitDied(TriggerCreate("PartTerran_Hammer_Bridge"), UnitRefFromUnit(UnitFromId(31112027)));
+
+    //boss tripwires
+    TriggerAddEventUnitRegion(TriggerCreate("PartTerran_Flamer_Spawner"), null, RegionFromName("PartTerran_Boss_Flamer_Tripwire"), true);
+    TriggerAddEventUnitRegion(TriggerCreate("PartTerran_Fortress_Spawner"), null, RegionFromName("PartTerran_Boss_Fortress_Tripwire"), true);
+    TriggerAddEventUnitRegion(TriggerCreate("PartTerran_Hammer_Spawner"), null, RegionFromName("PartTerran_Boss_Hammer_Tripwire"), true);
+
+}

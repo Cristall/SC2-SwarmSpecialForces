@@ -1,0 +1,107 @@
+// upgrades hive stats
+void Hive_Upgrade () {
+    if (gv_BaseHiveLevel == 1) {
+        UnitBehaviorRemove(gv_BaseHive, "BaseHiveLevel1", 1);
+        UnitBehaviorAddPlayer(gv_BaseHive, "BaseHiveLevel2", gv_BasePlayer, 1);
+        gv_Hive_Upgrades[gv_BaseHiveLevel].life += 5000;
+        gv_Hive_Upgrades[gv_BaseHiveLevel].armor += 10;
+        gv_Hive_Upgrades[gv_BaseHiveLevel].lifereg += 10;
+        Acv_HiveUpgradeFromStorage(gv_BaseHiveLevel);
+    }
+    else if (gv_BaseHiveLevel == 2) {
+        UnitBehaviorRemove(gv_BaseHive, "BaseHiveLevel2", 1);
+        UnitBehaviorAddPlayer(gv_BaseHive, "BaseHiveLevel3", gv_BasePlayer, 1);
+        gv_Hive_Upgrades[gv_BaseHiveLevel].life += 10000;
+        gv_Hive_Upgrades[gv_BaseHiveLevel].armor += 10;
+        gv_Hive_Upgrades[gv_BaseHiveLevel].lifereg += 10;
+        Acv_HiveUpgradeFromStorage(gv_BaseHiveLevel);
+    }
+}
+
+// respawns the hive in the next part
+void Hive_Respawn(){
+    int tmpInt;
+    unitgroup tmpUG;
+    unit tmpUnit;
+
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Hive2", 0, gv_BasePlayer, gv_Hive_Position);
+    gv_BaseHive = UnitLastCreated();
+    TriggerEnable(gv_Hive_Dies_Trigger, true);
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, StringExternal("Trig/Enemy/PartTransition/NewHive"));
+    HivePanel_LinkHiveUnit();
+
+    tmpUG = UnitGroup(null, c_playerAny, RegionCircle(PointFromName("DummySpawn"), 3.0), UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32))), 0);
+    tmpInt = UnitGroupCount(tmpUG, c_unitCountAll);
+    for (;; tmpInt -= 1) {
+        tmpUnit = UnitGroupUnitFromEnd(tmpUG, tmpInt);
+        if (tmpUnit == null) { break; }
+
+        if (UnitGetType(tmpUnit) == "HeroDummyHiveDead") {
+            UnitRemove(tmpUnit);
+        }
+    }
+}
+
+void Hive_InitialSpawn(){
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Hive2", 0, gv_BasePlayer, gv_Hive_Position);
+    gv_BaseHive = UnitLastCreated();
+    HivePanel_LinkHiveUnit();
+}
+
+// upgrades the hive if alive, or respawns it
+void Hive_Transition(){
+    if (UnitIsAlive(gv_BaseHive)) {
+        UnitSetPosition(gv_BaseHive, gv_Hive_Position, false);
+        gv_BaseHiveLevel += 1;
+        Hive_Upgrade();
+        libNtve_gf_MakeUnitInvulnerable(gv_BaseHive, false);
+        libNtve_gf_MakeUnitUncommandable(gv_BaseHive, false);
+    }
+    else {
+        Hive_Respawn();
+    }
+    HivePanel_LinkHiveUnit();
+}
+
+void Hive_FlawlessFailed(){
+    gv_Hive_FlawlessFlag = false;
+    TriggerEnable(gv_Hive_AnyKill_Trigger, false);
+    HivePanel_FlawlessFailed();
+}
+
+bool Hive_Dies (bool testConds, bool runActions){
+    int tmpPlayer;
+    TriggerEnable(gv_Hive_Dies_Trigger, false);
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, StringExternal("Trig/HiveDies"));
+    Hive_FlawlessFailed();
+    HivePanel_HiveDied();
+
+    tmpPlayer = -1;
+    while (true) {
+        tmpPlayer = PlayerGroupNextPlayer(gv_ActivePG, tmpPlayer);
+        if(tmpPlayer < 0) { break; }
+
+        PlayerModifyPropertyInt(tmpPlayer, c_playerPropTerrazine, c_playerPropOperSetTo, 1);
+        VisRevealerDestroy(gv_Part_BaseRevealer[tmpPlayer]);
+        libNtve_gf_CreateUnitsWithDefaultFacing(1, "HeroDummyHiveDead", 0, tmpPlayer, PointFromName("DummySpawn"));
+    }
+
+    return true;
+}
+
+bool Hive_AnyKill (bool testConds, bool runActions){
+    if(testConds){
+        if (!(libNtve_gf_KillingUnit() == gv_BaseHive && libNtve_gf_KillingPlayer() == gv_BasePlayer)) {return false;}
+    }
+    if(!runActions) {return true;}
+    
+    Hive_FlawlessFailed();
+    return true;
+}
+
+void Hive_TriggerCreate(){
+    gv_Hive_Dies_Trigger = TriggerCreate("Hive_Dies");
+    TriggerAddEventUnitDied(gv_Hive_Dies_Trigger, UnitRefFromVariable("gv_BaseHive"));
+    gv_Hive_AnyKill_Trigger = TriggerCreate("Hive_AnyKill");
+    TriggerAddEventUnitDied(gv_Hive_AnyKill_Trigger, null);
+}

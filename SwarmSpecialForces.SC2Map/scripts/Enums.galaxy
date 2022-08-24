@@ -1,0 +1,163 @@
+
+// parts
+const int c_Part_None       = -1;
+const int c_Part_Terran     = 0;
+const int c_Part_Protoss    = 1;
+const int c_Part_Zerg       = 2;
+
+// game modes
+const int c_GameMode_Classic    = 0;
+const int c_GameMode_Tutorial   = 1;
+const int c_GameMode_CustomDiff = 2;
+
+// achievement types
+const int c_AcvType_Grind       = 0;
+const int c_AcvType_OneTime     = 1;
+const int c_AcvType_Split       = 2;
+const int c_AcvType_Speedruns   = 3;
+
+// IMPORTANT: make sure stuff based on part are consecutive as you can use the P0 identifier + gv_Part_ActivePart (currently Wins and Flawless!)
+// achievement identifiers for grind
+const int c_AcvIdentifier_Points        = 0;
+const int c_AcvIdentifier_WinsP0        = 1;
+const int c_AcvIdentifier_WinsP1        = 2;
+const int c_AcvIdentifier_WinsP2        = 3;
+const int c_AcvIdentifier_Kills         = 4;
+const int c_AcvIdentifier_Scientists    = 5;
+const int c_AcvIdentifier_Essences      = 6;
+const int c_AcvIdentifier_PsiOrbs       = 7;
+const int c_AcvIdentifier_Score         = 8;
+const int c_AcvIdentifier_MoopyHats     = 9;
+
+// achievement identifiers for one-time
+const int c_AcvIdentifier_Tutorial  = 0;
+const int c_AcvIdentifier_Trophy    = 1;
+
+// achievement identifiers for split
+const int c_AcvIdentifier_FlawlessP0        = 0;
+const int c_AcvIdentifier_FlawlessP1        = 1;
+const int c_AcvIdentifier_FlawlessP2        = 2;
+const int c_AcvIdentifier_BossT_Flamer      = 3;
+const int c_AcvIdentifier_BossT_Hammer      = 4;
+const int c_AcvIdentifier_BossT_Fortress    = 5;
+const int c_AcvIdentifier_BossP_Madness     = 6;
+const int c_AcvIdentifier_BossP_Atlantis    = 7;
+const int c_AcvIdentifier_BossP_Lightning   = 8;
+const int c_AcvIdentifier_BossP_Thunder     = 9;
+const int c_AcvIdentifier_BossZ_Raynor      = 10;
+const int c_AcvIdentifier_BossZ_Kerrigan    = 11;
+const int c_AcvIdentifier_BossZ_Artanis     = 12;
+const int c_AcvIdentifier_BossZ_Cybermind   = 13;
+const int c_AcvIdentifier_BossZ_Gary        = 14;
+const int c_AcvIdentifier_BossZ_Stetmann    = 15;
+const int c_AcvIdentifier_BossZ_Moopy       = 16;
+
+// option for unit selection after hero selection, starts at 1 the same as indexes in a pulldown
+const int c_InitialHeroSelection_None       = 1;
+const int c_InitialHeroSelection_Hero       = 2;
+const int c_InitialHeroSelection_Overlord   = 3;
+const int c_InitialHeroSelection_Both       = 4;
+
+// boss fights ids
+const int c_BossFightID_Invalid     =-1;
+const int c_BossFightID_Flamer      = 0;
+const int c_BossFightID_Fortress    = 1;
+const int c_BossFightID_Hammer      = 2;
+const int c_BossFightID_Madness     = 3;
+const int c_BossFightID_TagTeam     = 4;
+const int c_BossFightID_Atlantis    = 5;
+const int c_BossFightID_StoryHeroes = 6;
+const int c_BossFightID_Cybermind   = 7;
+const int c_BossFightID_Stetmann    = 8;
+const int c_BossFightID_Moopy       = 9;
+
+// boss fights indexes for boss fights with multiple bosses, each individual fight uses index 0, 1 and 2
+const int c_BossFightIndex_Default      = 0;
+const int c_BossFightIndex_Lightning    = 0;
+const int c_BossFightIndex_Thunder      = 1;
+const int c_BossFightIndex_Kerrigan     = 0;
+const int c_BossFightIndex_Artanis      = 1;
+const int c_BossFightIndex_Raynor       = 2;
+const int c_BossFightIndex_Stetmann     = 0;
+const int c_BossFightIndex_Gary         = 1;
+
+// boss fight order types
+const int c_BossFightOrder_Idle      = 0;
+const int c_BossFightOrder_Ability   = 1;
+const int c_BossFightOrder_Attack    = 2;
+const int c_BossFightOrder_Return    = 3;
+
+// states for the boss in a boss fight, act as bitflags to allow multiple states simultaneously
+const int c_BossFightState_Alive           = 1 << 0;
+const int c_BossFightState_Deactivated     = 1 << 1;
+const int c_BossFightState_Casting         = 1 << 2;
+const int c_BossFightState_LastManStanding = 1 << 3;
+
+// valid targets for the ability for boss abilities
+const int c_BossFightAbilAllianceTarget_Player  = 0;    // abilities targeting player controlled units
+const int c_BossFightAbilAllianceTarget_Enemy   = 1;    // abilities targeting units controlled by the enemy player, like madness buffs
+const int c_BossFightAbilAllianceTarget_Both    = 2;    // unused
+
+// ability target types for allow correct orders
+const int c_BossFightAbilTargetType_None  = 0;   // Effect - Instant
+const int c_BossFightAbilTargetType_Unit  = 1;   // Effect - Target with target unit
+const int c_BossFightAbilTargetType_Point = 2;   // Effect - Target with target point
+
+// enemy types referenced in KillRewards (User Data).
+const int c_EnemyType_None      = 0;
+const int c_EnemyType_TJunker   = 1;
+const int c_EnemyType_TBlackOps = 2;
+const int c_EnemyType_PMech     = 3;
+const int c_EnemyType_PPsi      = 4;
+const int c_EnemyType_ZMecha    = 5;
+const int c_EnemyType_ZMoopy    = 6;
+
+// areas
+const int c_Areas_TLeft1    =  0;
+const int c_Areas_TLeft2    =  1;
+const int c_Areas_TLeft3    =  2;
+const int c_Areas_TRight1   =  3;
+const int c_Areas_TRight2   =  4;
+const int c_Areas_TRight3   =  5;
+const int c_Areas_TMid1     =  6;
+const int c_Areas_PBottom1  =  7;
+const int c_Areas_PBottom2  =  8;
+const int c_Areas_PTop1     =  9;
+const int c_Areas_PTop2     = 10;
+const int c_Areas_PTop3     = 11;
+const int c_Areas_PMid1     = 12;
+const int c_Areas_ZMid1     = 13;
+const int c_Areas_ZMid2     = 14;
+const int c_Areas_ZMid3     = 15;
+
+// moopy secrets
+const int c_MoopySecretIndex_SweetLimes = 0;
+const int c_MoopySecretIndex_skywalker  = 1;
+const int c_MoopySecretIndex_BlackDevil = 2;
+const int c_MoopySecretIndex_Jan        = 3;
+const int c_MoopySecretIndex_muhdiekuh  = 4;
+const int c_MoopySecretIndex_Isatis     = 5;
+
+// bosses
+const int c_Bosses_TFlamer      =  0;
+const int c_Bosses_THammer      =  1;
+const int c_Bosses_TFortress    =  2;
+const int c_Bosses_PMadness     =  3;
+const int c_Bosses_PAtlantis    =  4;
+const int c_Bosses_PLightning   =  5;
+const int c_Bosses_PThunder     =  6;
+const int c_Bosses_ZRaynor      =  7;
+const int c_Bosses_ZKerrigan    =  8;
+const int c_Bosses_ZArtanis     =  9;
+const int c_Bosses_ZCybermind   = 10;
+const int c_Bosses_ZGary        = 11;
+const int c_Bosses_ZStetmann    = 12;
+const int c_Bosses_ZMoopy       = 13;
+
+// archived achievements (bitflag index)
+const int c_ArchivedAcv_P0D4DuoFtl          = 1 << 0;
+const int c_ArchivedAcv_P0D5Duo             = 1 << 1;
+const int c_ArchivedAcv_P1D2SoloFtl         = 1 << 2;
+const int c_ArchivedAcv_P1D3DuoFtl          = 1 << 3;
+const int c_ArchivedAcv_P1D4TrioFtl         = 1 << 4;
+const int c_ArchivedAcv_P1D5Team            = 1 << 5;

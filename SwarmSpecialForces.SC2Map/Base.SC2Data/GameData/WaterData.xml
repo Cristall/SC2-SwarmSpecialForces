@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CWater id="Agria">
+        <State index="0" Height="2.500000"/>
+    </CWater>
+    <CWater id="BelShir">
+        <State index="0">
+            <Height value="1.650000"/>
+            <Color value="0.000000,0.231373,0.239216,0.337000"/>
+            <MeshRoughness value="0.537000"/>
+            <TextureRoughness value="0.501000"/>
+        </State>
+    </CWater>
+    <CWater id="BraxisAlpha">
+        <State index="0">
+            <Height value="8.500000"/>
+            <Color value="0.101961,0.286275,0.611765,0.300000"/>
+            <UvRate value="-0.000000,-0.001000,0.000000,0.000000"/>
+            <MeshRoughness value="0.180000"/>
+            <TextureRoughness value="0.101000"/>
+            <ReflectionDistortion value="0.010000"/>
+            <RefractionDistortion value="0.020000"/>
+            <MinReflection value="0.284000"/>
+            <ReflectivityPower value="7.300000"/>
+        </State>
+    </CWater>
+    <CWater id="Tarsonis">
+        <State index="0" Height="10.400000"/>
+    </CWater>
+</Catalog>

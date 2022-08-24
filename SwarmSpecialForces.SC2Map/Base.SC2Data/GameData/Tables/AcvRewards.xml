@@ -1,0 +1,2775 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CUser id="AcvRewards">
+        <Fields Id="Dmg" Type="Fixed"/>
+        <Fields Id="AttackSpeed" Type="Fixed"/>
+        <Fields Id="Armor" Type="Fixed"/>
+        <Fields Id="MovementSpeed" Type="Fixed"/>
+        <Fields Id="Life" Type="Fixed"/>
+        <Fields Id="LifeReg" Type="Fixed"/>
+        <Fields Id="Energy" Type="Fixed"/>
+        <Fields Id="EnergyReg" Type="Fixed"/>
+        <Fields Id="Spellpower" Type="Fixed"/>
+        <Fields Id="BiomassP0" Type="Fixed"/>
+        <Fields Id="BiomassP1" Type="Fixed"/>
+        <Fields Id="BiomassP2" Type="Fixed"/>
+        <Fields Id="MutationsP0" Type="Fixed"/>
+        <Fields Id="MutationsP1" Type="Fixed"/>
+        <Fields Id="MutationsP2" Type="Fixed"/>
+        <Fields Id="BiomassPerKill" Type="Fixed"/>
+        <Fields Id="ExpP0" Type="Fixed"/>
+        <Fields Id="ExpP1" Type="Fixed"/>
+        <Fields Id="ExpP2" Type="Fixed"/>
+        <Fields Id="ExpPerKill" Type="Fixed"/>
+        <Fields Id="OverlordSpeed" Type="Fixed"/>
+        <Fields Id="HiveAuraDmgP0" Type="Fixed"/>
+        <Fields Id="HiveAuraArmorP0" Type="Fixed"/>
+        <Fields Id="HiveAuraLifeRegP0" Type="Fixed"/>
+        <Fields Id="HiveAuraEnergyRegP0" Type="Fixed"/>
+        <Fields Id="HiveAuraAttackSpeedP0" Type="Fixed"/>
+        <Fields Id="HiveAuraTimeScaleP0" Type="Fixed"/>
+        <Fields Id="HiveAuraDmgP1" Type="Fixed"/>
+        <Fields Id="HiveAuraArmorP1" Type="Fixed"/>
+        <Fields Id="HiveAuraLifeRegP1" Type="Fixed"/>
+        <Fields Id="HiveAuraEnergyRegP1" Type="Fixed"/>
+        <Fields Id="HiveAuraAttackSpeedP1" Type="Fixed"/>
+        <Fields Id="HiveAuraTimeScaleP1" Type="Fixed"/>
+        <Fields Id="HiveAuraDmgP2" Type="Fixed"/>
+        <Fields Id="HiveAuraArmorP2" Type="Fixed"/>
+        <Fields Id="HiveAuraLifeRegP2" Type="Fixed"/>
+        <Fields Id="HiveAuraEnergyRegP2" Type="Fixed"/>
+        <Fields Id="HiveAuraAttackSpeedP2" Type="Fixed"/>
+        <Fields Id="HiveAuraTimeScaleP2" Type="Fixed"/>
+        <Fields Id="CyberneticDmg" Type="Fixed"/>
+        <Fields Id="CyberneticLife" Type="Fixed"/>
+        <Fields Id="VisionRange" Type="Fixed"/>
+        <Fields Id="AcvScore" Type="Fixed" EditorColumn="1"/>
+        <Fields Id="Special" Type="String" EditorColumn="3"/>
+        <Fields Id="Icon" Type="Image" EditorColumn="2"/>
+        <Instances Id="[Default]"/>
+        <Instances Id="Points1">
+            <Fixed Fixed="2">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <String String="Hero1">
+                <Field Id="Special"/>
+            </String>
+            <Image Image="Assets\Textures\btn-unit-zerg-mutalisk-broodlord.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Points2">
+            <Fixed Fixed="3">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <String String="Hero2">
+                <Field Id="Special"/>
+            </String>
+            <Image Image="Assets\Textures\btn-unit-collection-bone-ravager.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Points3">
+            <Fixed Fixed="4">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <String String="Hero3">
+                <Field Id="Special"/>
+            </String>
+            <Image Image="Assets\Textures\btn-unit-collection-noxious-hydralisk.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Points4">
+            <Fixed Fixed="6">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <String String="Hero4">
+                <Field Id="Special"/>
+            </String>
+            <Image Image="Assets\Textures\btn-unit-zerg-broodqueen.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="WinsP01">
+            <Fixed Fixed="100">
+                <Field Id="ExpP0"/>
+            </Fixed>
+            <Fixed Fixed="2">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-ability-zerg-towering.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="WinsP02">
+            <Fixed Fixed="50">
+                <Field Id="ExpP0"/>
+            </Fixed>
+            <Fixed Fixed="0.5">
+                <Field Id="ExpPerKill"/>
+            </Fixed>
+            <Fixed Fixed="4">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="WinsP03">
+            <Fixed Fixed="100">
+                <Field Id="ExpP0"/>
+            </Fixed>
+            <Fixed Fixed="0.5">
+                <Field Id="ExpPerKill"/>
+            </Fixed>
+            <Fixed Fixed="6">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="WinsP04">
+            <Fixed Fixed="150">
+                <Field Id="ExpP0"/>
+            </Fixed>
+            <Fixed Fixed="1">
+                <Field Id="ExpPerKill"/>
+            </Fixed>
+            <Fixed Fixed="8">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="WinsP05">
+            <Fixed Fixed="200">
+                <Field Id="ExpP0"/>
+            </Fixed>
+            <Fixed Fixed="8">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="WinsP06">
+            <Fixed Fixed="250">
+                <Field Id="ExpP0"/>
+            </Fixed>
+            <Fixed Fixed="8">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="WinsP11">
+            <Fixed Fixed="200">
+                <Field Id="ExpP1"/>
+            </Fixed>
+            <Fixed Fixed="2">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-unit-protoss-observer-surveillance.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="WinsP12">
+            <Fixed Fixed="500">
+                <Field Id="ExpP1"/>
+            </Fixed>
+            <Fixed Fixed="4">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="WinsP13">
+            <Fixed Fixed="900">
+                <Field Id="ExpP1"/>
+            </Fixed>
+            <Fixed Fixed="6">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="WinsP14">
+            <Fixed Fixed="1400">
+                <Field Id="ExpP1"/>
+            </Fixed>
+            <Fixed Fixed="8">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="WinsP15">
+            <Fixed Fixed="2000">
+                <Field Id="ExpP1"/>
+            </Fixed>
+            <Fixed Fixed="8">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="WinsP16">
+            <Fixed Fixed="2700">
+                <Field Id="ExpP1"/>
+            </Fixed>
+            <Fixed Fixed="8">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="WinsP21">
+            <Fixed Fixed="500">
+                <Field Id="ExpP2"/>
+            </Fixed>
+            <Fixed Fixed="2">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-unit-zerg-nydusdragon.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="WinsP22">
+            <Fixed Fixed="2500">
+                <Field Id="ExpP2"/>
+            </Fixed>
+            <Fixed Fixed="4">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="WinsP23">
+            <Fixed Fixed="4500">
+                <Field Id="ExpP2"/>
+            </Fixed>
+            <Fixed Fixed="6">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="WinsP24">
+            <Fixed Fixed="7000">
+                <Field Id="ExpP2"/>
+            </Fixed>
+            <Fixed Fixed="8">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="WinsP25">
+            <Fixed Fixed="10000">
+                <Field Id="ExpP2"/>
+            </Fixed>
+            <Fixed Fixed="8">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="WinsP26">
+            <Fixed Fixed="14500">
+                <Field Id="ExpP2"/>
+            </Fixed>
+            <Fixed Fixed="8">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="Kills1">
+            <Fixed Fixed="100">
+                <Field Id="BiomassP0"/>
+            </Fixed>
+            <Fixed Fixed="1">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-upgrade-zerg-meleeattacks-level0.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Kills2">
+            <Fixed Fixed="200">
+                <Field Id="BiomassP0"/>
+            </Fixed>
+            <Fixed Fixed="0.5">
+                <Field Id="BiomassPerKill"/>
+            </Fixed>
+            <Fixed Fixed="1">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-upgrade-zerg-meleeattacks-level1.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Kills3">
+            <Fixed Fixed="300">
+                <Field Id="BiomassP0"/>
+            </Fixed>
+            <Fixed Fixed="0.5">
+                <Field Id="BiomassPerKill"/>
+            </Fixed>
+            <Fixed Fixed="2">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-upgrade-zerg-meleeattacks-level2.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Kills4">
+            <Fixed Fixed="400">
+                <Field Id="BiomassP0"/>
+            </Fixed>
+            <Fixed Fixed="0.5">
+                <Field Id="BiomassPerKill"/>
+            </Fixed>
+            <Fixed Fixed="2">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-upgrade-zerg-meleeattacks-level3.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Kills5">
+            <Fixed Fixed="0.5">
+                <Field Id="BiomassPerKill"/>
+            </Fixed>
+            <Fixed Fixed="4">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="Kills6">
+            <Fixed Fixed="1">
+                <Field Id="BiomassPerKill"/>
+            </Fixed>
+            <Fixed Fixed="4">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="Scientists1">
+            <Fixed Fixed="2">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <String String="Cybernetic1">
+                <Field Id="Special"/>
+            </String>
+            <Image Image="Assets\Textures\btn-unit-zerg-lurker-rcz.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Scientists2">
+            <Fixed Fixed="500">
+                <Field Id="CyberneticLife"/>
+            </Fixed>
+            <Fixed Fixed="3">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <String String="Cybernetic2">
+                <Field Id="Special"/>
+            </String>
+            <Image Image="Assets\Textures\btn-unit-zerg-zergling-rcz.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Scientists3">
+            <Fixed Fixed="10">
+                <Field Id="CyberneticDmg"/>
+            </Fixed>
+            <Fixed Fixed="500">
+                <Field Id="CyberneticLife"/>
+            </Fixed>
+            <Fixed Fixed="4">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <String String="Cybernetic3">
+                <Field Id="Special"/>
+            </String>
+            <Image Image="Assets\Textures\btn-building-zerg-sporecrawler-rcz.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Scientists4">
+            <Fixed Fixed="10">
+                <Field Id="CyberneticDmg"/>
+            </Fixed>
+            <Fixed Fixed="500">
+                <Field Id="CyberneticLife"/>
+            </Fixed>
+            <Fixed Fixed="6">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <String String="CyberneticRestore">
+                <Field Id="Special"/>
+            </String>
+        </Instances>
+        <Instances Id="Scientists5">
+            <Fixed Fixed="5">
+                <Field Id="CyberneticDmg"/>
+            </Fixed>
+            <Fixed Fixed="250">
+                <Field Id="CyberneticLife"/>
+            </Fixed>
+            <Fixed Fixed="8">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <String String="CyberneticUpgrade">
+                <Field Id="Special"/>
+            </String>
+        </Instances>
+        <Instances Id="Essences1">
+            <Fixed Fixed="2">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <String String="AbilGlueStream">
+                <Field Id="Special"/>
+            </String>
+            <Image Image="Assets\Textures\btn-progression-zerg-dehaka-15-genemutation.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Essences2">
+            <Fixed Fixed="3">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <String String="AbilBanemine">
+                <Field Id="Special"/>
+            </String>
+        </Instances>
+        <Instances Id="Essences3">
+            <Fixed Fixed="4">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <String String="AbilHeadbutt">
+                <Field Id="Special"/>
+            </String>
+        </Instances>
+        <Instances Id="Essences4">
+            <Fixed Fixed="6">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <String String="AbilCorrosiveSpikes">
+                <Field Id="Special"/>
+            </String>
+        </Instances>
+        <Instances Id="Essences5">
+            <Fixed Fixed="8">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <String String="AbilFrenzy">
+                <Field Id="Special"/>
+            </String>
+        </Instances>
+        <Instances Id="PsiOrbs1">
+            <Fixed Fixed="2">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <String String="AbilTackle">
+                <Field Id="Special"/>
+            </String>
+            <Image Image="Assets\Textures\btn-ability-protoss-oracle-stasiscalibration.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="PsiOrbs2">
+            <Fixed Fixed="3">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <String String="AbilKillStreak">
+                <Field Id="Special"/>
+            </String>
+        </Instances>
+        <Instances Id="PsiOrbs3">
+            <Fixed Fixed="4">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <String String="AbilDecoy">
+                <Field Id="Special"/>
+            </String>
+        </Instances>
+        <Instances Id="PsiOrbs4">
+            <Fixed Fixed="6">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <String String="AbilFocus">
+                <Field Id="Special"/>
+            </String>
+        </Instances>
+        <Instances Id="PsiOrbs5">
+            <Fixed Fixed="8">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <String String="AbilEnergyTransfer">
+                <Field Id="Special"/>
+            </String>
+        </Instances>
+        <Instances Id="MoopyHats1">
+            <Fixed Fixed="2">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <String String="AbilUltimateBeing">
+                <Field Id="Special"/>
+            </String>
+            <Image Image="Assets\Icons\btn-moopyhats.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="MoopyHats2">
+            <Fixed Fixed="3">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <String String="AbilTheySeeMeRolling">
+                <Field Id="Special"/>
+            </String>
+        </Instances>
+        <Instances Id="MoopyHats3">
+            <Fixed Fixed="4">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <String String="AbilAbsorbExplosion">
+                <Field Id="Special"/>
+            </String>
+        </Instances>
+        <Instances Id="MoopyHats4">
+            <Fixed Fixed="6">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <String String="AbilCorrosiveBurst">
+                <Field Id="Special"/>
+            </String>
+        </Instances>
+        <Instances Id="MoopyHats5">
+            <Fixed Fixed="8">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <String String="AbilRespawnEgg">
+                <Field Id="Special"/>
+            </String>
+        </Instances>
+        <Instances Id="Score0">
+            <Image Image="Assets\Textures\btn-unit-zerg-larvalqueen.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Score1">
+            <String String="Rank">
+                <Field Id="Special"/>
+            </String>
+            <Image Image="Assets\Textures\btn-unit-zerg-feederling.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Score2">
+            <Image Image="Assets\Icons\btn-unit-zerg-broodling.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Score3">
+            <Image Image="Assets\Textures\btn-unit-collection-drone-remastered.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Score4">
+            <Image Image="Assets\Textures\btn-unit-zerg-locust.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Score5">
+            <Image Image="Assets\Textures\btn-unit-zerg-zergling.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Score6">
+            <Image Image="Assets\Textures\btn-unit-zerg-roachlings.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Score7">
+            <Image Image="Assets\Textures\btn-unit-zerg-ultralisk-remastered.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Score8">
+            <Image Image="Assets\Textures\btn-unit-collection-webby-mutalisk.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Score9">
+            <Image Image="Assets\Textures\btn-unit-collection-primal-corruptor.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Score10">
+            <Image Image="Assets\Textures\btn-unit-collection-aquatic-broodlord.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Score11">
+            <Image Image="Assets\Textures\btn-zerg-unit-unlockviper.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="FlawlessP00">
+            <Fixed Fixed="2.5">
+                <Field Id="HiveAuraArmorP0"/>
+            </Fixed>
+            <Fixed Fixed="1">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-building-zerg-hatchery.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="FlawlessP01">
+            <Fixed Fixed="0.125">
+                <Field Id="HiveAuraEnergyRegP0"/>
+            </Fixed>
+            <Fixed Fixed="1">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-building-zerg-hatchery.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="FlawlessP02">
+            <Fixed Fixed="2.5">
+                <Field Id="HiveAuraAttackSpeedP0"/>
+            </Fixed>
+            <Fixed Fixed="2">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-building-zerg-hatchery.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="FlawlessP03">
+            <Fixed Fixed="14">
+                <Field Id="HiveAuraLifeRegP0"/>
+            </Fixed>
+            <Fixed Fixed="3">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-building-zerg-hatchery.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="FlawlessP04">
+            <Fixed Fixed="25">
+                <Field Id="HiveAuraDmgP0"/>
+            </Fixed>
+            <Fixed Fixed="6">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-building-zerg-hatchery.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="FlawlessP05">
+            <Fixed Fixed="1">
+                <Field Id="HiveAuraTimeScaleP0"/>
+            </Fixed>
+            <Fixed Fixed="14">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-building-zerg-hatchery.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="FlawlessP10">
+            <Fixed Fixed="0.5">
+                <Field Id="HiveAuraArmorP1"/>
+            </Fixed>
+            <Fixed Fixed="1">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-building-zerg-lair.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="FlawlessP11">
+            <Fixed Fixed="0.0625">
+                <Field Id="HiveAuraEnergyRegP1"/>
+            </Fixed>
+            <Fixed Fixed="2">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-building-zerg-lair.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="FlawlessP12">
+            <Fixed Fixed="1.25">
+                <Field Id="HiveAuraAttackSpeedP1"/>
+            </Fixed>
+            <Fixed Fixed="3">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-building-zerg-lair.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="FlawlessP13">
+            <Fixed Fixed="7">
+                <Field Id="HiveAuraLifeRegP1"/>
+            </Fixed>
+            <Fixed Fixed="4">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-building-zerg-lair.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="FlawlessP14">
+            <Fixed Fixed="12.5">
+                <Field Id="HiveAuraDmgP1"/>
+            </Fixed>
+            <Fixed Fixed="8">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-building-zerg-lair.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="FlawlessP15">
+            <Fixed Fixed="0.5">
+                <Field Id="HiveAuraTimeScaleP1"/>
+            </Fixed>
+            <Fixed Fixed="20">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-building-zerg-lair.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="FlawlessP20">
+            <Fixed Fixed="0.5">
+                <Field Id="HiveAuraArmorP2"/>
+            </Fixed>
+            <Fixed Fixed="2">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-building-zerg-hive.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="FlawlessP21">
+            <Fixed Fixed="0.0625">
+                <Field Id="HiveAuraEnergyRegP2"/>
+            </Fixed>
+            <Fixed Fixed="3">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-building-zerg-hive.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="FlawlessP22">
+            <Fixed Fixed="1.25">
+                <Field Id="HiveAuraAttackSpeedP2"/>
+            </Fixed>
+            <Fixed Fixed="4">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-building-zerg-hive.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="FlawlessP23">
+            <Fixed Fixed="7">
+                <Field Id="HiveAuraLifeRegP2"/>
+            </Fixed>
+            <Fixed Fixed="5">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-building-zerg-hive.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="FlawlessP24">
+            <Fixed Fixed="12.5">
+                <Field Id="HiveAuraDmgP2"/>
+            </Fixed>
+            <Fixed Fixed="10">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-building-zerg-hive.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="FlawlessP25">
+            <Fixed Fixed="0.5">
+                <Field Id="HiveAuraTimeScaleP2"/>
+            </Fixed>
+            <Fixed Fixed="25">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-building-zerg-hive.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Flamer0">
+            <Fixed Fixed="5">
+                <Field Id="Energy"/>
+            </Fixed>
+            <Fixed Fixed="1">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-unit-collection-hellbat-junker.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Flamer1">
+            <Fixed Fixed="1">
+                <Field Id="Spellpower"/>
+            </Fixed>
+            <Fixed Fixed="1">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-unit-collection-hellbat-junker.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Flamer2">
+            <Fixed Fixed="10">
+                <Field Id="Energy"/>
+            </Fixed>
+            <Fixed Fixed="2">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-unit-collection-hellbat-junker.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Flamer3">
+            <Fixed Fixed="2">
+                <Field Id="Spellpower"/>
+            </Fixed>
+            <Fixed Fixed="3">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-unit-collection-hellbat-junker.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Flamer4">
+            <Fixed Fixed="15">
+                <Field Id="Energy"/>
+            </Fixed>
+            <Fixed Fixed="5">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-unit-collection-hellbat-junker.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Flamer5">
+            <Fixed Fixed="10">
+                <Field Id="EnergyReg"/>
+            </Fixed>
+            <Fixed Fixed="10">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-unit-collection-hellbat-junker.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Fortress0">
+            <Fixed Fixed="0.25">
+                <Field Id="Armor"/>
+            </Fixed>
+            <Fixed Fixed="1">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-research-zerg-planetaryfortress.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Fortress1">
+            <Fixed Fixed="20">
+                <Field Id="Life"/>
+            </Fixed>
+            <Fixed Fixed="1">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-research-zerg-planetaryfortress.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Fortress2">
+            <Fixed Fixed="0.5">
+                <Field Id="Armor"/>
+            </Fixed>
+            <Fixed Fixed="2">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-research-zerg-planetaryfortress.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Fortress3">
+            <Fixed Fixed="40">
+                <Field Id="Life"/>
+            </Fixed>
+            <Fixed Fixed="3">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-research-zerg-planetaryfortress.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Fortress4">
+            <Fixed Fixed="1.75">
+                <Field Id="Armor"/>
+            </Fixed>
+            <Fixed Fixed="5">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-research-zerg-planetaryfortress.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Fortress5">
+            <Fixed Fixed="10">
+                <Field Id="LifeReg"/>
+            </Fixed>
+            <Fixed Fixed="10">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-research-zerg-planetaryfortress.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Hammer0">
+            <Fixed Fixed="1.25">
+                <Field Id="Dmg"/>
+            </Fixed>
+            <Fixed Fixed="1">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-unit-collection-thor-covertops.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Hammer1">
+            <Fixed Fixed="1">
+                <Field Id="AttackSpeed"/>
+            </Fixed>
+            <Fixed Fixed="1">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-unit-collection-thor-covertops.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Hammer2">
+            <Fixed Fixed="2.5">
+                <Field Id="Dmg"/>
+            </Fixed>
+            <Fixed Fixed="2">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-unit-collection-thor-covertops.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Hammer3">
+            <Fixed Fixed="2">
+                <Field Id="AttackSpeed"/>
+            </Fixed>
+            <Fixed Fixed="3">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-unit-collection-thor-covertops.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Hammer4">
+            <Fixed Fixed="6.25">
+                <Field Id="Dmg"/>
+            </Fixed>
+            <Fixed Fixed="5">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-unit-collection-thor-covertops.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Hammer5">
+            <Fixed Fixed="3">
+                <Field Id="AttackSpeed"/>
+            </Fixed>
+            <Fixed Fixed="10">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-unit-collection-thor-covertops.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Madness0">
+            <Fixed Fixed="0.25">
+                <Field Id="Armor"/>
+            </Fixed>
+            <Fixed Fixed="1">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Icons\btn-unit-protoss-blizzcon17-probe-recolor.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Madness1">
+            <Fixed Fixed="20">
+                <Field Id="Life"/>
+            </Fixed>
+            <Fixed Fixed="1">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Icons\btn-unit-protoss-blizzcon17-probe-recolor.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Madness2">
+            <Fixed Fixed="0.5">
+                <Field Id="Armor"/>
+            </Fixed>
+            <Fixed Fixed="2">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Icons\btn-unit-protoss-blizzcon17-probe-recolor.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Madness3">
+            <Fixed Fixed="40">
+                <Field Id="Life"/>
+            </Fixed>
+            <Fixed Fixed="3">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Icons\btn-unit-protoss-blizzcon17-probe-recolor.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Madness4">
+            <Fixed Fixed="1.75">
+                <Field Id="Armor"/>
+            </Fixed>
+            <Fixed Fixed="5">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Icons\btn-unit-protoss-blizzcon17-probe-recolor.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Madness5">
+            <Fixed Fixed="10">
+                <Field Id="LifeReg"/>
+            </Fixed>
+            <Fixed Fixed="10">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Icons\btn-unit-protoss-blizzcon17-probe-recolor.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Lightning0">
+            <Fixed Fixed="5">
+                <Field Id="Energy"/>
+            </Fixed>
+            <Fixed Fixed="1">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Icons\btn-unit-malash.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Lightning1">
+            <Fixed Fixed="1">
+                <Field Id="Spellpower"/>
+            </Fixed>
+            <Fixed Fixed="1">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Icons\btn-unit-malash.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Lightning2">
+            <Fixed Fixed="10">
+                <Field Id="Energy"/>
+            </Fixed>
+            <Fixed Fixed="2">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Icons\btn-unit-malash.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Lightning3">
+            <Fixed Fixed="2">
+                <Field Id="Spellpower"/>
+            </Fixed>
+            <Fixed Fixed="3">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Icons\btn-unit-malash.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Lightning4">
+            <Fixed Fixed="15">
+                <Field Id="Energy"/>
+            </Fixed>
+            <Fixed Fixed="5">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Icons\btn-unit-malash.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Lightning5">
+            <Fixed Fixed="5">
+                <Field Id="EnergyReg"/>
+            </Fixed>
+            <Fixed Fixed="10">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Icons\btn-unit-malash.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Thunder0">
+            <Fixed Fixed="5">
+                <Field Id="Energy"/>
+            </Fixed>
+            <Fixed Fixed="1">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Icons\btn-unit-jinara.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Thunder1">
+            <Fixed Fixed="1">
+                <Field Id="Spellpower"/>
+            </Fixed>
+            <Fixed Fixed="1">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Icons\btn-unit-jinara.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Thunder2">
+            <Fixed Fixed="10">
+                <Field Id="Energy"/>
+            </Fixed>
+            <Fixed Fixed="2">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Icons\btn-unit-jinara.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Thunder3">
+            <Fixed Fixed="2">
+                <Field Id="Spellpower"/>
+            </Fixed>
+            <Fixed Fixed="3">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Icons\btn-unit-jinara.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Thunder4">
+            <Fixed Fixed="15">
+                <Field Id="Energy"/>
+            </Fixed>
+            <Fixed Fixed="5">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Icons\btn-unit-jinara.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Thunder5">
+            <Fixed Fixed="5">
+                <Field Id="EnergyReg"/>
+            </Fixed>
+            <Fixed Fixed="10">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Icons\btn-unit-jinara.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Atlantis0">
+            <Fixed Fixed="1.25">
+                <Field Id="Dmg"/>
+            </Fixed>
+            <Fixed Fixed="1">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-unit-protoss-alarak-taldarim-mothership.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Atlantis1">
+            <Fixed Fixed="1">
+                <Field Id="AttackSpeed"/>
+            </Fixed>
+            <Fixed Fixed="1">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-unit-protoss-alarak-taldarim-mothership.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Atlantis2">
+            <Fixed Fixed="2.5">
+                <Field Id="Dmg"/>
+            </Fixed>
+            <Fixed Fixed="2">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-unit-protoss-alarak-taldarim-mothership.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Atlantis3">
+            <Fixed Fixed="2">
+                <Field Id="AttackSpeed"/>
+            </Fixed>
+            <Fixed Fixed="3">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-unit-protoss-alarak-taldarim-mothership.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Atlantis4">
+            <Fixed Fixed="6.25">
+                <Field Id="Dmg"/>
+            </Fixed>
+            <Fixed Fixed="5">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-unit-protoss-alarak-taldarim-mothership.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Atlantis5">
+            <Fixed Fixed="3">
+                <Field Id="AttackSpeed"/>
+            </Fixed>
+            <Fixed Fixed="10">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-unit-protoss-alarak-taldarim-mothership.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Artanis0">
+            <Fixed Fixed="5">
+                <Field Id="Energy"/>
+            </Fixed>
+            <Fixed Fixed="1">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Icons\btn-unit-hero-artanispurifier.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Artanis1">
+            <Fixed Fixed="1">
+                <Field Id="Spellpower"/>
+            </Fixed>
+            <Fixed Fixed="1">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Icons\btn-unit-hero-artanispurifier.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Artanis2">
+            <Fixed Fixed="10">
+                <Field Id="Energy"/>
+            </Fixed>
+            <Fixed Fixed="1">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Icons\btn-unit-hero-artanispurifier.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Artanis3">
+            <Fixed Fixed="1">
+                <Field Id="Spellpower"/>
+            </Fixed>
+            <Fixed Fixed="2">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Icons\btn-unit-hero-artanispurifier.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Artanis4">
+            <Fixed Fixed="15">
+                <Field Id="Energy"/>
+            </Fixed>
+            <Fixed Fixed="2">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Icons\btn-unit-hero-artanispurifier.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Artanis5">
+            <Fixed Fixed="2">
+                <Field Id="EnergyReg"/>
+            </Fixed>
+            <Fixed Fixed="3">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Icons\btn-unit-hero-artanispurifier.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Raynor0">
+            <Fixed Fixed="5">
+                <Field Id="Energy"/>
+            </Fixed>
+            <Fixed Fixed="1">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Icons\btn-unit-umojan-marine.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Raynor1">
+            <Fixed Fixed="1">
+                <Field Id="Spellpower"/>
+            </Fixed>
+            <Fixed Fixed="1">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Icons\btn-unit-umojan-marine.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Raynor2">
+            <Fixed Fixed="10">
+                <Field Id="Energy"/>
+            </Fixed>
+            <Fixed Fixed="1">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Icons\btn-unit-umojan-marine.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Raynor3">
+            <Fixed Fixed="1">
+                <Field Id="Spellpower"/>
+            </Fixed>
+            <Fixed Fixed="2">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Icons\btn-unit-umojan-marine.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Raynor4">
+            <Fixed Fixed="15">
+                <Field Id="Energy"/>
+            </Fixed>
+            <Fixed Fixed="2">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Icons\btn-unit-umojan-marine.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Raynor5">
+            <Fixed Fixed="2">
+                <Field Id="EnergyReg"/>
+            </Fixed>
+            <Fixed Fixed="3">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Icons\btn-unit-umojan-marine.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Kerrigan0">
+            <Fixed Fixed="5">
+                <Field Id="Energy"/>
+            </Fixed>
+            <Fixed Fixed="1">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Icons\btn-unit-mecha-kerrigan.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Kerrigan1">
+            <Fixed Fixed="1">
+                <Field Id="Spellpower"/>
+            </Fixed>
+            <Fixed Fixed="1">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Icons\btn-unit-mecha-kerrigan.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Kerrigan2">
+            <Fixed Fixed="10">
+                <Field Id="Energy"/>
+            </Fixed>
+            <Fixed Fixed="1">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Icons\btn-unit-mecha-kerrigan.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Kerrigan3">
+            <Fixed Fixed="1">
+                <Field Id="Spellpower"/>
+            </Fixed>
+            <Fixed Fixed="2">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Icons\btn-unit-mecha-kerrigan.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Kerrigan4">
+            <Fixed Fixed="15">
+                <Field Id="Energy"/>
+            </Fixed>
+            <Fixed Fixed="2">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Icons\btn-unit-mecha-kerrigan.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Kerrigan5">
+            <Fixed Fixed="2">
+                <Field Id="EnergyReg"/>
+            </Fixed>
+            <Fixed Fixed="3">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Icons\btn-unit-mecha-kerrigan.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Cybermind0">
+            <Fixed Fixed="0.25">
+                <Field Id="Armor"/>
+            </Fixed>
+            <Fixed Fixed="1">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Icons\btn-unit-zerg-overmind-mecha-collection.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Cybermind1">
+            <Fixed Fixed="20">
+                <Field Id="Life"/>
+            </Fixed>
+            <Fixed Fixed="1">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Icons\btn-unit-zerg-overmind-mecha-collection.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Cybermind2">
+            <Fixed Fixed="0.5">
+                <Field Id="Armor"/>
+            </Fixed>
+            <Fixed Fixed="2">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Icons\btn-unit-zerg-overmind-mecha-collection.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Cybermind3">
+            <Fixed Fixed="40">
+                <Field Id="Life"/>
+            </Fixed>
+            <Fixed Fixed="3">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Icons\btn-unit-zerg-overmind-mecha-collection.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Cybermind4">
+            <Fixed Fixed="1.75">
+                <Field Id="Armor"/>
+            </Fixed>
+            <Fixed Fixed="5">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Icons\btn-unit-zerg-overmind-mecha-collection.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Cybermind5">
+            <Fixed Fixed="10">
+                <Field Id="LifeReg"/>
+            </Fixed>
+            <Fixed Fixed="10">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Icons\btn-unit-zerg-overmind-mecha-collection.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Gary0">
+            <Fixed Fixed="1.25">
+                <Field Id="Dmg"/>
+            </Fixed>
+            <Fixed Fixed="1">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-unit-stetmann-supergary.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Gary1">
+            <Fixed Fixed="1">
+                <Field Id="AttackSpeed"/>
+            </Fixed>
+            <Fixed Fixed="1">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-unit-stetmann-supergary.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Gary2">
+            <Fixed Fixed="2.5">
+                <Field Id="Dmg"/>
+            </Fixed>
+            <Fixed Fixed="1">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-unit-stetmann-supergary.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Gary3">
+            <Fixed Fixed="2">
+                <Field Id="AttackSpeed"/>
+            </Fixed>
+            <Fixed Fixed="2">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-unit-stetmann-supergary.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Gary4">
+            <Fixed Fixed="6.25">
+                <Field Id="Dmg"/>
+            </Fixed>
+            <Fixed Fixed="3">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-unit-stetmann-supergary.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Gary5">
+            <Fixed Fixed="3">
+                <Field Id="AttackSpeed"/>
+            </Fixed>
+            <Fixed Fixed="5">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-unit-stetmann-supergary.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Stetmann0">
+            <Fixed Fixed="5">
+                <Field Id="Energy"/>
+            </Fixed>
+            <Fixed Fixed="1">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Icons\btn-unit-egonstetmann.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Stetmann1">
+            <Fixed Fixed="1">
+                <Field Id="Spellpower"/>
+            </Fixed>
+            <Fixed Fixed="1">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Icons\btn-unit-egonstetmann.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Stetmann2">
+            <Fixed Fixed="10">
+                <Field Id="Energy"/>
+            </Fixed>
+            <Fixed Fixed="1">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Icons\btn-unit-egonstetmann.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Stetmann3">
+            <Fixed Fixed="2">
+                <Field Id="Spellpower"/>
+            </Fixed>
+            <Fixed Fixed="2">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Icons\btn-unit-egonstetmann.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Stetmann4">
+            <Fixed Fixed="15">
+                <Field Id="Energy"/>
+            </Fixed>
+            <Fixed Fixed="3">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Icons\btn-unit-egonstetmann.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Stetmann5">
+            <Fixed Fixed="3">
+                <Field Id="EnergyReg"/>
+            </Fixed>
+            <Fixed Fixed="5">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Icons\btn-unit-egonstetmann.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="KingMoopy0">
+            <Fixed Fixed="1">
+                <Field Id="Dmg"/>
+            </Fixed>
+            <Fixed Fixed="1">
+                <Field Id="Spellpower"/>
+            </Fixed>
+            <Fixed Fixed="1">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Icons\btn-unit-KingMoopy.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="KingMoopy1">
+            <Fixed Fixed="1">
+                <Field Id="AttackSpeed"/>
+            </Fixed>
+            <Fixed Fixed="0.125">
+                <Field Id="OverlordSpeed"/>
+            </Fixed>
+            <Fixed Fixed="1">
+                <Field Id="VisionRange"/>
+            </Fixed>
+            <Fixed Fixed="2">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Icons\btn-unit-KingMoopy.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="KingMoopy2">
+            <Fixed Fixed="2">
+                <Field Id="Dmg"/>
+            </Fixed>
+            <Fixed Fixed="2">
+                <Field Id="Spellpower"/>
+            </Fixed>
+            <Fixed Fixed="4">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Icons\btn-unit-KingMoopy.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="KingMoopy3">
+            <Fixed Fixed="2">
+                <Field Id="AttackSpeed"/>
+            </Fixed>
+            <Fixed Fixed="0.125">
+                <Field Id="MovementSpeed"/>
+            </Fixed>
+            <Fixed Fixed="1">
+                <Field Id="MutationsP0"/>
+            </Fixed>
+            <Fixed Fixed="6">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Icons\btn-unit-KingMoopy.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="KingMoopy4">
+            <Fixed Fixed="5">
+                <Field Id="Dmg"/>
+            </Fixed>
+            <Fixed Fixed="3">
+                <Field Id="Spellpower"/>
+            </Fixed>
+            <Fixed Fixed="5">
+                <Field Id="MutationsP1"/>
+            </Fixed>
+            <Fixed Fixed="10">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Icons\btn-unit-KingMoopy.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="KingMoopy5">
+            <Fixed Fixed="3">
+                <Field Id="AttackSpeed"/>
+            </Fixed>
+            <Fixed Fixed="0.5">
+                <Field Id="Armor"/>
+            </Fixed>
+            <Fixed Fixed="5">
+                <Field Id="LifeReg"/>
+            </Fixed>
+            <Fixed Fixed="20">
+                <Field Id="MutationsP2"/>
+            </Fixed>
+            <Fixed Fixed="20">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Icons\btn-unit-KingMoopy.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Tutorial">
+            <Fixed Fixed="500">
+                <Field Id="Life"/>
+            </Fixed>
+            <Fixed Fixed="5">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-ability-kerrigan-revive.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="Trophy">
+            <Image Image="Assets\Icons\war3_btncheese.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="P0D0Team1">
+            <Fixed Fixed="200">
+                <Field Id="BiomassP0"/>
+            </Fixed>
+            <Fixed Fixed="1">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <String String="Diff1">
+                <Field Id="Special"/>
+            </String>
+            <Image Image="Assets\Textures\btn-unit-collection-marine-junker.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="P0D0Team2">
+            <Fixed Fixed="0.125">
+                <Field Id="MovementSpeed"/>
+            </Fixed>
+            <Fixed Fixed="2">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P0D0Team3">
+            <Fixed Fixed="1">
+                <Field Id="AttackSpeed"/>
+            </Fixed>
+            <Fixed Fixed="100">
+                <Field Id="BiomassP0"/>
+            </Fixed>
+            <Fixed Fixed="4">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P0D1Team1">
+            <Fixed Fixed="400">
+                <Field Id="BiomassP0"/>
+            </Fixed>
+            <Fixed Fixed="2">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <String String="Diff2">
+                <Field Id="Special"/>
+            </String>
+            <Image Image="Assets\Textures\btn-unit-collection-marauder-junker.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="P0D1Team2">
+            <Fixed Fixed="0.125">
+                <Field Id="OverlordSpeed"/>
+            </Fixed>
+            <Fixed Fixed="3">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P0D1Team3">
+            <Fixed Fixed="1">
+                <Field Id="AttackSpeed"/>
+            </Fixed>
+            <Fixed Fixed="200">
+                <Field Id="BiomassP0"/>
+            </Fixed>
+            <Fixed Fixed="5">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P0D2Team1">
+            <Fixed Fixed="600">
+                <Field Id="BiomassP0"/>
+            </Fixed>
+            <Fixed Fixed="3">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <String String="Diff3">
+                <Field Id="Special"/>
+            </String>
+            <Image Image="Assets\Textures\btn-unit-collection-reaper-junker.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="P0D2Team2">
+            <Fixed Fixed="0.125">
+                <Field Id="MovementSpeed"/>
+            </Fixed>
+            <Fixed Fixed="5">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P0D2Team3">
+            <Fixed Fixed="1">
+                <Field Id="AttackSpeed"/>
+            </Fixed>
+            <Fixed Fixed="300">
+                <Field Id="BiomassP0"/>
+            </Fixed>
+            <Fixed Fixed="8">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P0D3Team1">
+            <Fixed Fixed="800">
+                <Field Id="BiomassP0"/>
+            </Fixed>
+            <Fixed Fixed="4">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <String String="Diff4">
+                <Field Id="Special"/>
+            </String>
+            <Image Image="Assets\Textures\btn-unit-collection-hellion-junker.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="P0D3Team2">
+            <Fixed Fixed="0.125">
+                <Field Id="OverlordSpeed"/>
+            </Fixed>
+            <Fixed Fixed="6">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P0D3Team3">
+            <Fixed Fixed="2">
+                <Field Id="AttackSpeed"/>
+            </Fixed>
+            <Fixed Fixed="400">
+                <Field Id="BiomassP0"/>
+            </Fixed>
+            <Fixed Fixed="10">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P0D4Team1">
+            <Fixed Fixed="1000">
+                <Field Id="BiomassP0"/>
+            </Fixed>
+            <Fixed Fixed="8">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <String String="Diff5">
+                <Field Id="Special"/>
+            </String>
+            <Image Image="Assets\Textures\btn-unit-collection-tank-junker.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="P0D4Team2">
+            <Fixed Fixed="0.125">
+                <Field Id="MovementSpeed"/>
+            </Fixed>
+            <Fixed Fixed="10">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P0D4Team3">
+            <Fixed Fixed="3">
+                <Field Id="AttackSpeed"/>
+            </Fixed>
+            <Fixed Fixed="500">
+                <Field Id="BiomassP0"/>
+            </Fixed>
+            <Fixed Fixed="18">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P0D5Team1">
+            <Fixed Fixed="2000">
+                <Field Id="BiomassP0"/>
+            </Fixed>
+            <Fixed Fixed="22">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-unit-collection-vikingassault-junker.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="P0D5Team2">
+            <Fixed Fixed="0.25">
+                <Field Id="MovementSpeed"/>
+            </Fixed>
+            <Fixed Fixed="30">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P0D5Team3">
+            <Fixed Fixed="5">
+                <Field Id="AttackSpeed"/>
+            </Fixed>
+            <Fixed Fixed="1000">
+                <Field Id="BiomassP0"/>
+            </Fixed>
+            <Fixed Fixed="60">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P0D0Small1">
+            <Fixed Fixed="2.5">
+                <Field Id="Dmg"/>
+            </Fixed>
+            <Fixed Fixed="200">
+                <Field Id="BiomassP0"/>
+            </Fixed>
+            <Fixed Fixed="4">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-unit-collection-marine-covertops.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="P0D0Small2">
+            <Fixed Fixed="1">
+                <Field Id="AttackSpeed"/>
+            </Fixed>
+            <Fixed Fixed="6">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P0D0Small3">
+            <Fixed Fixed="10">
+                <Field Id="Life"/>
+            </Fixed>
+            <Fixed Fixed="2">
+                <Field Id="LifeReg"/>
+            </Fixed>
+            <Fixed Fixed="10">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P0D1Small1">
+            <Fixed Fixed="0.5">
+                <Field Id="Armor"/>
+            </Fixed>
+            <Fixed Fixed="400">
+                <Field Id="BiomassP0"/>
+            </Fixed>
+            <Fixed Fixed="5">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-unit-collection-marauder-covertops.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="P0D1Small2">
+            <Fixed Fixed="0.125">
+                <Field Id="OverlordSpeed"/>
+            </Fixed>
+            <Fixed Fixed="7">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P0D1Small3">
+            <Fixed Fixed="10">
+                <Field Id="Energy"/>
+            </Fixed>
+            <Fixed Fixed="2">
+                <Field Id="EnergyReg"/>
+            </Fixed>
+            <Fixed Fixed="12">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P0D2Small1">
+            <Fixed Fixed="5">
+                <Field Id="Dmg"/>
+            </Fixed>
+            <Fixed Fixed="600">
+                <Field Id="BiomassP0"/>
+            </Fixed>
+            <Fixed Fixed="7">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-unit-collection-ghost-covertops.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="P0D2Small2">
+            <Fixed Fixed="1">
+                <Field Id="AttackSpeed"/>
+            </Fixed>
+            <Fixed Fixed="9">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P0D2Small3">
+            <Fixed Fixed="25">
+                <Field Id="Life"/>
+            </Fixed>
+            <Fixed Fixed="5">
+                <Field Id="LifeReg"/>
+            </Fixed>
+            <Fixed Fixed="16">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P0D3Small1">
+            <Fixed Fixed="1">
+                <Field Id="Armor"/>
+            </Fixed>
+            <Fixed Fixed="800">
+                <Field Id="BiomassP0"/>
+            </Fixed>
+            <Fixed Fixed="8">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-unit-collection-hellion-covertops.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="P0D3Small2">
+            <Fixed Fixed="0.125">
+                <Field Id="OverlordSpeed"/>
+            </Fixed>
+            <Fixed Fixed="12">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P0D3Small3">
+            <Fixed Fixed="25">
+                <Field Id="Energy"/>
+            </Fixed>
+            <Fixed Fixed="5">
+                <Field Id="EnergyReg"/>
+            </Fixed>
+            <Fixed Fixed="20">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P0D4Small1">
+            <Fixed Fixed="5">
+                <Field Id="Dmg"/>
+            </Fixed>
+            <Fixed Fixed="1">
+                <Field Id="Armor"/>
+            </Fixed>
+            <Fixed Fixed="1000">
+                <Field Id="BiomassP0"/>
+            </Fixed>
+            <Fixed Fixed="10">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-unit-collection-siegetank-covertops.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="P0D4Small2">
+            <Fixed Fixed="2">
+                <Field Id="AttackSpeed"/>
+            </Fixed>
+            <Fixed Fixed="14">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P0D4Small3">
+            <Fixed Fixed="25">
+                <Field Id="Life"/>
+            </Fixed>
+            <Fixed Fixed="5">
+                <Field Id="LifeReg"/>
+            </Fixed>
+            <Fixed Fixed="25">
+                <Field Id="Energy"/>
+            </Fixed>
+            <Fixed Fixed="5">
+                <Field Id="EnergyReg"/>
+            </Fixed>
+            <Fixed Fixed="20">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P0D5Small1">
+            <Fixed Fixed="70">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <String String="P0D5Small">
+                <Field Id="Special"/>
+            </String>
+            <Image Image="Assets\Textures\btn-unit-collection-vikingassault-covertops.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="P0D5Small2"/>
+        <Instances Id="P0D5Small3"/>
+        <Instances Id="P1D0Team1">
+            <Fixed Fixed="400">
+                <Field Id="BiomassP1"/>
+            </Fixed>
+            <Fixed Fixed="3">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-unit-protoss-zealot-aiur.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="P1D0Team2">
+            <Fixed Fixed="0.125">
+                <Field Id="MovementSpeed"/>
+            </Fixed>
+            <Fixed Fixed="4">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P1D0Team3">
+            <Fixed Fixed="1">
+                <Field Id="AttackSpeed"/>
+            </Fixed>
+            <Fixed Fixed="7">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P1D1Team1">
+            <Fixed Fixed="800">
+                <Field Id="BiomassP1"/>
+            </Fixed>
+            <Fixed Fixed="3">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-unit-protoss-stalker-purifier.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="P1D1Team2">
+            <Fixed Fixed="0.125">
+                <Field Id="OverlordSpeed"/>
+            </Fixed>
+            <Fixed Fixed="4">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P1D1Team3">
+            <Fixed Fixed="1">
+                <Field Id="AttackSpeed"/>
+            </Fixed>
+            <Fixed Fixed="7">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P1D2Team1">
+            <Fixed Fixed="1200">
+                <Field Id="BiomassP1"/>
+            </Fixed>
+            <Fixed Fixed="4">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-unit-protoss-dragoon-purifier.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="P1D2Team2">
+            <Fixed Fixed="0.125">
+                <Field Id="MovementSpeed"/>
+            </Fixed>
+            <Fixed Fixed="7">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P1D2Team3">
+            <Fixed Fixed="1">
+                <Field Id="AttackSpeed"/>
+            </Fixed>
+            <Fixed Fixed="11">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P1D3Team1">
+            <Fixed Fixed="1600">
+                <Field Id="BiomassP1"/>
+            </Fixed>
+            <Fixed Fixed="5">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-unit-protoss-archon-ihanrii.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="P1D3Team2">
+            <Fixed Fixed="0.125">
+                <Field Id="OverlordSpeed"/>
+            </Fixed>
+            <Fixed Fixed="8">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P1D3Team3">
+            <Fixed Fixed="2">
+                <Field Id="AttackSpeed"/>
+            </Fixed>
+            <Fixed Fixed="13">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P1D4Team1">
+            <Fixed Fixed="2000">
+                <Field Id="BiomassP1"/>
+            </Fixed>
+            <Fixed Fixed="12">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-unit-protoss-zeratuldisruptor.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="P1D4Team2">
+            <Fixed Fixed="0.125">
+                <Field Id="MovementSpeed"/>
+            </Fixed>
+            <Fixed Fixed="16">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P1D4Team3">
+            <Fixed Fixed="3">
+                <Field Id="AttackSpeed"/>
+            </Fixed>
+            <Fixed Fixed="28">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P1D5Team1">
+            <Fixed Fixed="4000">
+                <Field Id="BiomassP1"/>
+            </Fixed>
+            <Fixed Fixed="30">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-unit-protoss-alarak-taldarim-colossus.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="P1D5Team2"/>
+        <Instances Id="P1D5Team3"/>
+        <Instances Id="P1D0Small1">
+            <Fixed Fixed="2.5">
+                <Field Id="Dmg"/>
+            </Fixed>
+            <Fixed Fixed="6">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-unit-protoss-zealot-ihanrii.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="P1D0Small2">
+            <Fixed Fixed="1">
+                <Field Id="AttackSpeed"/>
+            </Fixed>
+            <Fixed Fixed="8">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P1D0Small3">
+            <Fixed Fixed="10">
+                <Field Id="Life"/>
+            </Fixed>
+            <Fixed Fixed="2">
+                <Field Id="LifeReg"/>
+            </Fixed>
+            <Fixed Fixed="12">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P1D1Small1">
+            <Fixed Fixed="0.5">
+                <Field Id="Armor"/>
+            </Fixed>
+            <Fixed Fixed="7">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-unit-protoss-adept-taldarim.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="P1D1Small2">
+            <Fixed Fixed="0.125">
+                <Field Id="OverlordSpeed"/>
+            </Fixed>
+            <Fixed Fixed="9">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P1D1Small3">
+            <Fixed Fixed="10">
+                <Field Id="Energy"/>
+            </Fixed>
+            <Fixed Fixed="2">
+                <Field Id="EnergyReg"/>
+            </Fixed>
+            <Fixed Fixed="14">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P1D2Small1">
+            <Fixed Fixed="5">
+                <Field Id="Dmg"/>
+            </Fixed>
+            <Fixed Fixed="10">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-unit-protoss-sentry-purifier.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="P1D2Small2">
+            <Fixed Fixed="1">
+                <Field Id="AttackSpeed"/>
+            </Fixed>
+            <Fixed Fixed="12">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P1D2Small3">
+            <Fixed Fixed="25">
+                <Field Id="Life"/>
+            </Fixed>
+            <Fixed Fixed="5">
+                <Field Id="LifeReg"/>
+            </Fixed>
+            <Fixed Fixed="19">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P1D3Small1">
+            <Fixed Fixed="1">
+                <Field Id="Armor"/>
+            </Fixed>
+            <Fixed Fixed="12">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-unit-protoss-immortal-ihanrii.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="P1D3Small2">
+            <Fixed Fixed="0.125">
+                <Field Id="OverlordSpeed"/>
+            </Fixed>
+            <Fixed Fixed="18">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P1D3Small3">
+            <Fixed Fixed="25">
+                <Field Id="Energy"/>
+            </Fixed>
+            <Fixed Fixed="5">
+                <Field Id="EnergyReg"/>
+            </Fixed>
+            <Fixed Fixed="30">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P1D4Small1">
+            <Fixed Fixed="5">
+                <Field Id="Dmg"/>
+            </Fixed>
+            <Fixed Fixed="1">
+                <Field Id="Armor"/>
+            </Fixed>
+            <Fixed Fixed="14">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-unit-protoss-alarak-taldarim-darktemplar.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="P1D4Small2">
+            <Fixed Fixed="2">
+                <Field Id="AttackSpeed"/>
+            </Fixed>
+            <Fixed Fixed="20">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P1D4Small3">
+            <Fixed Fixed="25">
+                <Field Id="Life"/>
+            </Fixed>
+            <Fixed Fixed="5">
+                <Field Id="LifeReg"/>
+            </Fixed>
+            <Fixed Fixed="25">
+                <Field Id="Energy"/>
+            </Fixed>
+            <Fixed Fixed="5">
+                <Field Id="EnergyReg"/>
+            </Fixed>
+            <Fixed Fixed="30">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P1D5Small1">
+            <String String="Cheater">
+                <Field Id="Special"/>
+            </String>
+            <Image Image="Assets\Textures\btn-ability-zeratul-darkarchon-maelstrom.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="P1D5Small2"/>
+        <Instances Id="P1D5Small3"/>
+        <Instances Id="P2D0Team1">
+            <Fixed Fixed="400">
+                <Field Id="BiomassP2"/>
+            </Fixed>
+            <Fixed Fixed="3">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-unit-collection-symbiote-mecha.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="P2D0Team2">
+            <Fixed Fixed="0.125">
+                <Field Id="MovementSpeed"/>
+            </Fixed>
+            <Fixed Fixed="4">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P2D0Team3">
+            <Fixed Fixed="1">
+                <Field Id="AttackSpeed"/>
+            </Fixed>
+            <Fixed Fixed="7">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P2D1Team1">
+            <Fixed Fixed="800">
+                <Field Id="BiomassP2"/>
+            </Fixed>
+            <Fixed Fixed="4">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-unit-collection-zergling-mecha.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="P2D1Team2">
+            <Fixed Fixed="0.125">
+                <Field Id="OverlordSpeed"/>
+            </Fixed>
+            <Fixed Fixed="5">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P2D1Team3">
+            <Fixed Fixed="1">
+                <Field Id="AttackSpeed"/>
+            </Fixed>
+            <Fixed Fixed="9">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P2D2Team1">
+            <Fixed Fixed="1200">
+                <Field Id="BiomassP2"/>
+            </Fixed>
+            <Fixed Fixed="5">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-unit-collection-hydralisk-mecha.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="P2D2Team2">
+            <Fixed Fixed="0.125">
+                <Field Id="MovementSpeed"/>
+            </Fixed>
+            <Fixed Fixed="9">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P2D2Team3">
+            <Fixed Fixed="1">
+                <Field Id="AttackSpeed"/>
+            </Fixed>
+            <Fixed Fixed="15">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P2D3Team1">
+            <Fixed Fixed="1600">
+                <Field Id="BiomassP2"/>
+            </Fixed>
+            <Fixed Fixed="8">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-unit-collection-queen-mecha.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="P2D3Team2">
+            <Fixed Fixed="0.125">
+                <Field Id="OverlordSpeed"/>
+            </Fixed>
+            <Fixed Fixed="12">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P2D3Team3">
+            <Fixed Fixed="2">
+                <Field Id="AttackSpeed"/>
+            </Fixed>
+            <Fixed Fixed="20">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P2D4Team1">
+            <Fixed Fixed="2000">
+                <Field Id="BiomassP2"/>
+            </Fixed>
+            <Fixed Fixed="12">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-unit-collection-infestor-mecha.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="P2D4Team2">
+            <Fixed Fixed="0.125">
+                <Field Id="MovementSpeed"/>
+            </Fixed>
+            <Fixed Fixed="20">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P2D4Team3">
+            <Fixed Fixed="3">
+                <Field Id="AttackSpeed"/>
+            </Fixed>
+            <Fixed Fixed="35">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P2D5Team1">
+            <Fixed Fixed="4000">
+                <Field Id="BiomassP2"/>
+            </Fixed>
+            <Fixed Fixed="55">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-unit-collection-drone-mecha.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="P2D5Team2"/>
+        <Instances Id="P2D5Team3"/>
+        <Instances Id="P2D0Small1">
+            <Fixed Fixed="2.5">
+                <Field Id="Dmg"/>
+            </Fixed>
+            <Fixed Fixed="6">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-unit-collection-creeperhostspawn-mecha.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="P2D0Small2">
+            <Fixed Fixed="1">
+                <Field Id="AttackSpeed"/>
+            </Fixed>
+            <Fixed Fixed="8">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P2D0Small3">
+            <Fixed Fixed="10">
+                <Field Id="Life"/>
+            </Fixed>
+            <Fixed Fixed="2">
+                <Field Id="LifeReg"/>
+            </Fixed>
+            <Fixed Fixed="12">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P2D1Small1">
+            <Fixed Fixed="0.5">
+                <Field Id="Armor"/>
+            </Fixed>
+            <Fixed Fixed="7">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-unit-collection-roach-mecha.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="P2D1Small2">
+            <Fixed Fixed="0.125">
+                <Field Id="OverlordSpeed"/>
+            </Fixed>
+            <Fixed Fixed="9">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P2D1Small3">
+            <Fixed Fixed="10">
+                <Field Id="Energy"/>
+            </Fixed>
+            <Fixed Fixed="2">
+                <Field Id="EnergyReg"/>
+            </Fixed>
+            <Fixed Fixed="14">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P2D2Small1">
+            <Fixed Fixed="5">
+                <Field Id="Dmg"/>
+            </Fixed>
+            <Fixed Fixed="12">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-unit-collection-ravager-mecha.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="P2D2Small2">
+            <Fixed Fixed="1">
+                <Field Id="AttackSpeed"/>
+            </Fixed>
+            <Fixed Fixed="18">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P2D2Small3">
+            <Fixed Fixed="25">
+                <Field Id="Life"/>
+            </Fixed>
+            <Fixed Fixed="5">
+                <Field Id="LifeReg"/>
+            </Fixed>
+            <Fixed Fixed="29">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P2D3Small1">
+            <Fixed Fixed="1">
+                <Field Id="Armor"/>
+            </Fixed>
+            <Fixed Fixed="20">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-unit-collection-lurker-mecha.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="P2D3Small2">
+            <Fixed Fixed="0.125">
+                <Field Id="OverlordSpeed"/>
+            </Fixed>
+            <Fixed Fixed="35">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P2D3Small3">
+            <Fixed Fixed="25">
+                <Field Id="Energy"/>
+            </Fixed>
+            <Fixed Fixed="5">
+                <Field Id="EnergyReg"/>
+            </Fixed>
+            <Fixed Fixed="50">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P2D4Small1">
+            <Fixed Fixed="5">
+                <Field Id="Dmg"/>
+            </Fixed>
+            <Fixed Fixed="1">
+                <Field Id="Armor"/>
+            </Fixed>
+            <Fixed Fixed="25">
+                <Field Id="AcvScore"/>
+            </Fixed>
+            <Image Image="Assets\Textures\btn-unit-collection-ultralisk-mecha.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="P2D4Small2">
+            <Fixed Fixed="2">
+                <Field Id="AttackSpeed"/>
+            </Fixed>
+            <Fixed Fixed="40">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P2D4Small3">
+            <Fixed Fixed="25">
+                <Field Id="Life"/>
+            </Fixed>
+            <Fixed Fixed="5">
+                <Field Id="LifeReg"/>
+            </Fixed>
+            <Fixed Fixed="25">
+                <Field Id="Energy"/>
+            </Fixed>
+            <Fixed Fixed="5">
+                <Field Id="EnergyReg"/>
+            </Fixed>
+            <Fixed Fixed="55">
+                <Field Id="AcvScore"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="P2D5Small1">
+            <String String="Cheater">
+                <Field Id="Special"/>
+            </String>
+            <Image Image="Assets\Textures\btn-unit-collection-broodlord-mecha.dds">
+                <Field Id="Icon"/>
+            </Image>
+        </Instances>
+        <Instances Id="P2D5Small2"/>
+        <Instances Id="P2D5Small3"/>
+    </CUser>
+</Catalog>

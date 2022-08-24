@@ -1,0 +1,76 @@
+static int speedrun_MainFrame;
+
+static void Speedruns_UpdateTimeTeam (int part, int diff, int playerID) {
+    int time = gv_PlayerStats[playerID].speedrunsTime[part][diff][5];
+    if (diff < gv_MaxAmountDifficulties && time != 0) {
+        ;
+        libNtve_gf_SetDialogItemText(DialogControlHookup(speedrun_MainFrame, c_triggerControlTypeLabel, "Part" + IntToString(part) + "/Diff" + IntToString(diff) + "/Player" + IntToString(playerID) + "/TeamTime"), Utility_TimeFormat(time), PlayerGroupAll());
+    }
+}
+
+static void Speedruns_UpdateTimeSmall (int part, int diff, int playerID) {
+    int teamSizeMaxForSmall = UserDataGetInt("AcvReqDiffSpeedrun", "P"+IntToString(part)+"D"+IntToString(diff), "TeamSizeMaxForSmall", 1);
+    int time = gv_PlayerStats[playerID].speedrunsTime[part][diff][teamSizeMaxForSmall];
+    if (diff < gv_MaxAmountDifficulties && time != 0) {
+        libNtve_gf_SetDialogItemText(DialogControlHookup(speedrun_MainFrame, c_triggerControlTypeLabel, "Part" + IntToString(part) + "/Diff" + IntToString(diff) + "/Player" + IntToString(playerID) + "/SmallTime"), Utility_TimeFormat(time), PlayerGroupAll());
+    }
+}
+
+void Speedruns_UpdateTime (int playerID, int part, int diff, int playerCount) {
+    int time = gv_PlayerStats[playerID].speedrunsTime[part][diff][playerCount-1];
+    if (diff < gv_MaxAmountDifficulties && time != 0) {
+        libNtve_gf_SetDialogItemText(DialogControlHookup(speedrun_MainFrame, c_triggerControlTypeLabel, "Part" + IntToString(part) + "/Diff" + IntToString(diff) + "/Player" + IntToString(playerID) + "/TimeLabelPlayerCount"+ IntToString(playerCount)), Utility_TimeFormat(time), PlayerGroupAll());
+    }
+}
+
+void Speedruns_UpdateTimeAllForAllPlayers () {
+    int part;
+    int diff;
+    int playerCount;
+    int playerID;
+    
+    for ( part = 0; part < gv_MaxAmountParts ; part += 1 ) {
+        for ( diff = 0; diff < gv_MaxAmountDifficulties ; diff += 1 ) {
+
+            playerID = -1;
+            while (true) {
+                playerID = PlayerGroupNextPlayer(gv_StartingPG, playerID);
+                if (playerID < 0) { break; }
+
+                for ( playerCount = 1; playerCount <= gv_MaxAmountPlayers ; playerCount += 1 ) {
+                    Speedruns_UpdateTime(playerID, part, diff, playerCount);
+                }
+            }
+        }
+    }
+}
+
+void Speedruns_Init(){
+    int tmpInt;
+    int tmpInt_2;
+    int tmpInt_3;
+    int tmpPlayer;
+    int currentMainFrame;
+    speedrun_MainFrame = DialogControlHookup(gv_UI_MasterFrame, c_triggerControlTypePanel, "Speedruns");
+
+    for ( tmpInt = 0; tmpInt < gv_MaxAmountParts ; tmpInt += 1 ) {
+        for ( tmpInt_2 = 0; tmpInt_2 < gv_MaxAmountDifficulties ; tmpInt_2 += 1 ) {
+
+            tmpInt_3 = UserDataGetInt("AcvReqSpeedruns", "P"+IntToString(tmpInt)+"D"+IntToString(tmpInt_2), "TeamSizeMaxForSmall", 1);
+            DialogControlSetVisible(DialogControlHookup(speedrun_MainFrame, c_triggerControlTypeLabel, "Part" + IntToString(tmpInt) + "/Diff" + IntToString(tmpInt_2) + "/Player0/TimeLabelPlayerCount" + IntToString(tmpInt_3)), PlayerGroupAll(), true);
+            libNtve_gf_SetDialogItemColor(DialogControlLastCreated(), Color(100,100,100), PlayerGroupAll());
+
+            tmpPlayer = -1;
+            while (true) {
+                tmpPlayer = PlayerGroupNextPlayer(gv_ActivePG, tmpPlayer);
+                if (tmpPlayer < 0) { break; }
+
+                currentMainFrame = DialogControlHookup(speedrun_MainFrame, c_triggerControlTypePanel, ("Part" + IntToString(tmpInt) + "/Diff" + IntToString(tmpInt_2) + "/Player" + IntToString(tmpPlayer)));
+                DialogControlSetVisible(currentMainFrame, PlayerGroupAll(), true);
+                libNtve_gf_SetDialogItemText(DialogControlHookup(currentMainFrame, c_triggerControlTypeLabel, "PlayerName"), Utility_PlayerNameWithPlayerColor(tmpPlayer), PlayerGroupAll());
+                DialogControlSetVisible(DialogControlHookup(currentMainFrame, c_triggerControlTypeLabel, "TimeLabelPlayerCount" + IntToString(tmpInt_3)), PlayerGroupAll(), true);
+                libNtve_gf_SetDialogItemColor(DialogControlLastCreated(), Color(100,100,100), PlayerGroupAll());
+            }
+        }
+    }
+}

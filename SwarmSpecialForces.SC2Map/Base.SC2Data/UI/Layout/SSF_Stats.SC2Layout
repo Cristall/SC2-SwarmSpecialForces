@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Desc>
+    <Constant name="StatsTextRowHeight" val="28"/>
+	<Constant name="StatsTextRowGap" val="0"/>
+	<Constant name="StatsTextRowSpacing" val="2"/>
+
+	<Frame type="Label" name="StatsBeforeAnchorLabelTemplate" template="SSF_Templates/LabelTemplate">
+		<Anchor side="Left" relative="$parent/AnchorFrame" pos="Min" offset="0"/>
+		<Anchor side="Right" relative="$parent/AnchorFrame" pos="Max" offset="0"/>
+		<Height val="#StatsTextRowHeight"/>
+		<Style val="aaDialogItemStyleRightMiddle"/>
+	</Frame>
+
+	<Frame type="Label" name="StatsAfterAnchorLabelTemplate" template="SSF_Templates/LabelTemplate">
+		<Anchor side="Left" relative="$parent/AnchorFrame" pos="Max" offset="#StatsTextRowSpacing"/>
+		<Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+		<Height val="#StatsTextRowHeight"/>
+		<Style val="aaDialogItemStyleLeftMiddle"/>
+	</Frame>
+
+	<!-- Creates player frames via trigger for each player and sets their position-->
+	<Frame type="Frame" name="StatsPlayerTemplate">
+		<Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+		<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+		<Anchor side="Bottom" relative="MoopyHatsLabel" pos="Max" offset="#StatsTextRowGap"/>
+		<Width val="300"/>
+		<!-- <Height val="224"/> -->
+
+		<Frame type="Frame" name="AnchorFrame">
+			<Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+			<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+			<Width val="150"/>
+		</Frame>
+
+		<Frame type="Label" name="PlayerName" template="SSF_Templates/LabelTemplate">
+			<Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+			<Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+			<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+			<Height val="#StatsTextRowHeight"/>
+			<Style val="aaDialogItemStyleCentered"/>
+		</Frame>
+
+		<Frame type="Label" name="PointsLabel" template="SSF_Stats/StatsBeforeAnchorLabelTemplate">
+			<Anchor side="Top" relative="$parent/PlayerName" pos="Max" offset="#StatsTextRowGap"/>
+			<Text val="@Trig/Stats/Points"/>
+		</Frame>
+		<Frame type="Label" name="Points" template="SSF_Stats/StatsAfterAnchorLabelTemplate">
+			<Anchor side="Top" relative="$parent/PointsLabel" pos="Min" offset="0"/>
+		</Frame>
+
+		<Frame type="Label" name="KillsLabel" template="SSF_Stats/StatsBeforeAnchorLabelTemplate">
+			<Anchor side="Top" relative="$parent/PointsLabel" pos="Max" offset="#StatsTextRowGap"/>
+			<Text val="@Trig/Stats/Kills"/>
+		</Frame>
+		<Frame type="Label" name="Kills" template="SSF_Stats/StatsAfterAnchorLabelTemplate">
+			<Anchor side="Top" relative="$parent/KillsLabel" pos="Min" offset="0"/>
+		</Frame>
+		
+		<Frame type="Label" name="WinsP0Label" template="SSF_Stats/StatsBeforeAnchorLabelTemplate">
+			<Anchor side="Top" relative="$parent/KillsLabel" pos="Max" offset="#StatsTextRowGap"/>
+			<Text val="@Trig/Stats/WinsP0"/>
+		</Frame>
+		<Frame type="Label" name="WinsP0" template="SSF_Stats/StatsAfterAnchorLabelTemplate">
+			<Anchor side="Top" relative="$parent/WinsP0Label" pos="Min" offset="0"/>
+		</Frame>
+		
+		<Frame type="Label" name="WinsP1Label" template="SSF_Stats/StatsBeforeAnchorLabelTemplate">
+			<Anchor side="Top" relative="$parent/WinsP0Label" pos="Max" offset="#StatsTextRowGap"/>
+			<Text val="@Trig/Stats/WinsP1"/>
+		</Frame>
+		<Frame type="Label" name="WinsP1" template="SSF_Stats/StatsAfterAnchorLabelTemplate">
+			<Anchor side="Top" relative="$parent/WinsP1Label" pos="Min" offset="0"/>
+		</Frame>
+		
+		<Frame type="Label" name="WinsP2Label" template="SSF_Stats/StatsBeforeAnchorLabelTemplate">
+			<Anchor side="Top" relative="$parent/WinsP1Label" pos="Max" offset="#StatsTextRowGap"/>
+			<Text val="@Trig/Stats/WinsP2"/>
+		</Frame>
+		<Frame type="Label" name="WinsP2" template="SSF_Stats/StatsAfterAnchorLabelTemplate">
+			<Anchor side="Top" relative="$parent/WinsP2Label" pos="Min" offset="0"/>
+		</Frame>
+
+		<Frame type="Label" name="ScientistsLabel" template="SSF_Stats/StatsBeforeAnchorLabelTemplate">
+			<Anchor side="Top" relative="$parent/WinsP2Label" pos="Max" offset="#StatsTextRowGap"/>
+			<Text val="@Trig/Stats/Scientists"/>
+		</Frame>
+		<Frame type="Label" name="Scientists" template="SSF_Stats/StatsAfterAnchorLabelTemplate">
+			<Anchor side="Top" relative="$parent/ScientistsLabel" pos="Min" offset="0"/>
+		</Frame>
+		
+		<Frame type="Label" name="EssencesLabel" template="SSF_Stats/StatsBeforeAnchorLabelTemplate">
+			<Anchor side="Top" relative="$parent/ScientistsLabel" pos="Max" offset="#StatsTextRowGap"/>
+			<Text val="@Trig/Stats/Essences"/>
+		</Frame>
+		<Frame type="Label" name="Essences" template="SSF_Stats/StatsAfterAnchorLabelTemplate">
+			<Anchor side="Top" relative="$parent/EssencesLabel" pos="Min" offset="0"/>
+		</Frame>
+		
+		<Frame type="Label" name="PsiOrbsLabel" template="SSF_Stats/StatsBeforeAnchorLabelTemplate">
+			<Anchor side="Top" relative="$parent/EssencesLabel" pos="Max" offset="#StatsTextRowGap"/>
+			<Text val="@Trig/Stats/PsiOrbs"/>
+		</Frame>
+		<Frame type="Label" name="PsiOrbs" template="SSF_Stats/StatsAfterAnchorLabelTemplate">
+			<Anchor side="Top" relative="$parent/PsiOrbsLabel" pos="Min" offset="0"/>
+		</Frame>
+
+		<Frame type="Label" name="MoopyHatsLabel" template="SSF_Stats/StatsBeforeAnchorLabelTemplate">
+			<Anchor side="Top" relative="$parent/PsiOrbsLabel" pos="Max" offset="#StatsTextRowGap"/>
+			<Text val="@Trig/Stats/MoopyHats"/>
+		</Frame>
+		<Frame type="Label" name="MoopyHats" template="SSF_Stats/StatsAfterAnchorLabelTemplate">
+			<Anchor side="Top" relative="$parent/MoopyHatsLabel" pos="Min" offset="0"/>
+		</Frame>
+	</Frame>
+
+	<!-- Container frame for stats to use stategroups for visibility and close button-->
+	<Frame type="Frame" name="StatsTemplate">
+		<Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+		<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+		<Width val="500"/>
+		<Height val="500"/>
+		<Frame type="Image" name="BackgroundImage" template="SSF_Templates/BackgroundImageTemplate"></Frame>
+		<Frame type="Button" name="CloseButton" template="SSF_Templates/CloseButtonTemplate"></Frame>
+		<Visible val="false"/>
+	</Frame>
+
+
+</Desc>

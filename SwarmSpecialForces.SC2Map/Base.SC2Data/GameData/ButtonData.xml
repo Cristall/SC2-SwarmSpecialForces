@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CButton id="HeroAbilityParent">
+        <Icon value="Assets\Textures\btn-ability-alarak-massteleport.dds"/>
+    </CButton>
+    <CButton id="LongLife">
+        <Icon value="Assets\Textures\btn-ability-hornerhan-hellion-slowbomb.dds"/>
+        <HotkeyAlias value="SpawnerWarpIn"/>
+    </CButton>
+    <CButton id="Phase2">
+        <Icon value="Assets\Textures\btn-ability-hornerhan-hellion-slowbomb.dds"/>
+    </CButton>
+    <CButton id="LaserLance">
+        <Icon value="Assets\Textures\btn-ability-hornerhan-hellion-slowbomb.dds"/>
+        <HotkeyAlias value="Phase2"/>
+    </CButton>
+    <CButton id="StasisBubble">
+        <Icon value="Assets\Textures\btn-ability-hornerhan-hellion-slowbomb.dds"/>
+    </CButton>
+    <CButton id="Bomber">
+        <Icon value="Assets\Textures\btn-ability-hornerhan-hellion-slowbomb.dds"/>
+    </CButton>
+    <CButton id="Portal">
+        <Icon value="Assets\Textures\btn-ability-hornerhan-hellion-slowbomb.dds"/>
+        <HotkeyAlias value="StasisBubble"/>
+    </CButton>
+    <CButton id="ProtossPartTransition">
+        <Icon value="Assets\Textures\btn-upgrade-vorazun-enterwormhole.dds"/>
+        <AlertIcon value="Assets\Textures\btn-upgrade-vorazun-enterwormhole.dds"/>
+    </CButton>
+    <CButton id="VoidSummon">
+        <Icon value="Assets\Textures\btn-ability-hornerhan-hellion-slowbomb.dds"/>
+        <HotkeyAlias value="StasisBubble"/>
+    </CButton>
+    <CButton id="Turbocharge">
+        <Icon value="Assets\Textures\btn-ability-hornerhan-hellion-slowbomb.dds"/>
+        <HotkeyAlias value="SpawnerWarpIn"/>
+    </CButton>
+    <CButton id="MadnessStructureTriggerHandle">
+        <Icon value="Assets\Textures\btn-ability-hornerhan-hellion-slowbomb.dds"/>
+    </CButton>
+    <CButton id="MassHeal">
+        <Icon value="Assets\Textures\btn-ability-hornerhan-hellion-slowbomb.dds"/>
+        <HotkeyAlias value="MadnessStructureTriggerHandle"/>
+    </CButton>
+    <CButton id="SpawnerWarpIn">
+        <Icon value="Assets\Textures\btn-ability-hornerhan-hellion-slowbomb.dds"/>
+        <HotkeyAlias value="MadnessStructureTriggerHandle"/>
+    </CButton>
+    <CButton id="ProbeHeal">
+        <Icon value="Assets\Textures\btn-ability-terran-repair.dds"/>
+        <AlertIcon value="Assets\Textures\btn-ability-terran-repair.dds"/>
+        <EditorCategories value="Race:Terran"/>
+        <TintRacially value="1"/>
+        <Universal value="1"/>
+    </CButton>
+    <CButton id="Tornado">
+        <Icon value="Assets\Textures\btn-ability-hornerhan-hellion-slowbomb.dds"/>
+    </CButton>
+    <CButton id="CrystalwingShower">
+        <Icon value="Assets\Textures\btn-ability-hornerhan-hellion-slowbomb.dds"/>
+        <HotkeyAlias value="SpawnerWarpIn"/>
+    </CButton>
+    <CButton id="AtkSpdUpgrade">
+        <Icon value="Assets\Textures\btn-upgrade-zerg-hotsgroovedspines.dds"/>
+        <AlertIcon value="Assets\Textures\btn-upgrade-zerg-hotsgroovedspines.dds"/>
+    </CButton>
+    <CButton id="CrossedBeams">
+        <Icon value="Assets\Textures\btn-ability-hornerhan-hellion-slowbomb.dds"/>
+    </CButton>
+    <CButton id="StructureTurnOn">
+        <Icon value="Assets\Textures\btn-ability-hornerhan-hellion-slowbomb.dds"/>
+        <HotkeyAlias value="SpawnerWarpIn"/>
+    </CButton>
+    <CButton id="AngelwingCharge">
+        <Icon value="Assets\Textures\btn-ability-hornerhan-hellion-slowbomb.dds"/>
+        <HotkeyAlias value="SpawnerWarpIn"/>
+    </CButton>
+    <CButton id="ThunderElementals">
+        <Icon value="Assets\Textures\btn-ability-hornerhan-hellion-slowbomb.dds"/>
+    </CButton>
+    <CButton id="Shout">
+        <Icon value="Assets\Textures\btn-ability-hornerhan-hellion-slowbomb.dds"/>
+    </CButton>
+    <CButton id="ObserverStationary">
+        <Icon value="Assets\Textures\btn-upgrade-zerg-enduringcorruption.dds"/>
+    </CButton>
+    <CButton id="PsiOrbTriggerHandle">
+        <Icon value="Assets\Textures\btn-upgrade-zerg-enduringcorruption.dds"/>
+    </CButton>
+    <CButton id="ReaperExplosives">
+        <Icon value="Assets\Textures\btn-upgrade-terran-kd8chargeex3.dds"/>
+    </CButton>
+    <CButton id="RotatingWalls">
+        <Icon value="Assets\Textures\btn-ability-hornerhan-hellion-slowbomb.dds"/>
+    </CButton>
+    <CButton id="Bombardment2">
+        <Icon value="Assets\Textures\btn-ability-hornerhan-hellion-slowbomb.dds"/>
+    </CButton>
+    <CButton id="BridgeExtend2">
+        <Icon value="Assets\Textures\btn-missing-kaeo.dds"/>
+        <EditorCategories value="Race:Neutral"/>
+    </CButton>
+    <CButton id="BridgeRetract2">
+        <Icon value="Assets\Textures\btn-missing-kaeo.dds"/>
+        <EditorCategories value="Race:Neutral"/>
+    </CButton>
+    <CButton id="Dummy">
+        <Icon value="Assets\Textures\btn-upgrade-zerg-enduringcorruption.dds"/>
+    </CButton>
+    <CButton id="FireGrenade">
+        <Icon value="Assets\Textures\btn-ability-hornerhan-hellion-slowbomb.dds"/>
+    </CButton>
+    <CButton id="BeamDrone">
+        <Icon value="Assets\Textures\btn-ability-hornerhan-hellion-slowbomb.dds"/>
+    </CButton>
+    <CButton id="SeekerMissile">
+        <Icon value="Assets\Textures\btn-ability-hornerhan-hellion-slowbomb.dds"/>
+    </CButton>
+    <CButton id="SeaOfFlames">
+        <Icon value="Assets\Textures\btn-ability-hornerhan-hellion-slowbomb.dds"/>
+    </CButton>
+    <CButton id="FlyBackHome">
+        <Icon value="Assets\Textures\btn-ability-neutral-ursadonleap.dds"/>
+        <AlertIcon value="Assets\Textures\btn-ability-neutral-ursadonleap.dds"/>
+    </CButton>
+    <CButton id="Lower2">
+        <Icon value="Assets\Textures\btn-building-terran-supplydepotlowered.dds"/>
+        <AlertIcon value="Assets\Textures\btn-building-terran-supplydepotlowered.dds"/>
+        <EditorCategories value="Race:Terran"/>
+    </CButton>
+    <CButton id="Lower22">
+        <Icon value="Assets\Textures\btn-building-terran-supplydepotlowered.dds"/>
+        <AlertIcon value="Assets\Textures\btn-building-terran-supplydepotlowered.dds"/>
+        <EditorCategories value="Race:Terran"/>
+    </CButton>
+    <CButton id="Raise2">
+        <Icon value="Assets\Textures\btn-building-terran-supplydepot.dds"/>
+        <AlertIcon value="Assets\Textures\btn-building-terran-supplydepot.dds"/>
+        <EditorCategories value="Race:Terran"/>
+    </CButton>
+    <CButton id="Raise22">
+        <Icon value="Assets\Textures\btn-building-terran-supplydepot.dds"/>
+        <AlertIcon value="Assets\Textures\btn-building-terran-supplydepot.dds"/>
+        <EditorCategories value="Race:Terran"/>
+    </CButton>
+    <CButton id="RocketLaunch">
+        <Icon value="Assets\Textures\btn-ability-hornerhan-hellion-slowbomb.dds"/>
+    </CButton>
+    <CButton id="PickupScientists">
+        <Icon value="Assets\Textures\wireframe-terran-scientist00.dds"/>
+        <AlertIcon value="Assets\Textures\wireframe-terran-scientist00.dds"/>
+        <TintRacially value="1"/>
+        <HotkeyAlias value="BunkerLoad"/>
+        <Universal value="1"/>
+    </CButton>
+    <CButton id="RequestRepair">
+        <Icon value="Assets\Textures\btn-ability-hornerhan-hellion-slowbomb.dds"/>
+    </CButton>
+    <CButton id="Barrage">
+        <Icon value="Assets\Textures\btn-ability-hornerhan-hellion-slowbomb.dds"/>
+    </CButton>
+    <CButton id="FocusedFlame">
+        <Icon value="Assets\Textures\btn-ability-hornerhan-hellion-slowbomb.dds"/>
+    </CButton>
+    <CButton id="CoronaWaves">
+        <Icon value="Assets\Textures\btn-ability-hornerhan-hellion-slowbomb.dds"/>
+    </CButton>
+    <CButton id="Storm">
+        <Icon value="Assets\Textures\btn-ability-hornerhan-hellion-slowbomb.dds"/>
+    </CButton>
+    <CButton id="SplashRangeUpgrade">
+        <Icon value="Assets\Textures\btn-upgrade-zagara-scourgesplashdamage.dds"/>
+        <AlertIcon value="Assets\Textures\btn-upgrade-zagara-scourgesplashdamage.dds"/>
+    </CButton>
+    <CButton id="RegenerationUpgrade">
+        <Icon value="Assets\Textures\btn-upgrade-zerg-tissueassimilation.dds"/>
+        <AlertIcon value="Assets\Textures\btn-upgrade-zerg-tissueassimilation.dds"/>
+    </CButton>
+    <CButton id="DmgUpgrade">
+        <Icon value="Assets\Textures\btn-upgrade-zerg-missileattacks-level3.dds"/>
+        <AlertIcon value="Assets\Textures\btn-upgrade-zerg-missileattacks-level3.dds"/>
+    </CButton>
+    <CButton id="ArmorUpgrade">
+        <Icon value="Assets\Textures\btn-upgrade-zerg-groundcarapace-level3.dds"/>
+        <AlertIcon value="Assets\Textures\btn-upgrade-zerg-groundcarapace-level3.dds"/>
+    </CButton>
+    <CButton id="Kamikaze">
+        <Icon value="Assets\Textures\btn-ability-hornerhan-hellion-slowbomb.dds"/>
+        <HotkeyAlias value="StasisBubble"/>
+    </CButton>
+    <CButton id="ZapTrap">
+        <Icon value="Assets\Textures\btn-ability-hornerhan-hellion-slowbomb.dds"/>
+    </CButton>
+    <CButton id="TESTButton">
+        <Icon value="Assets\Textures\btn-upgrade-zerg-enduringcorruption.dds"/>
+        <Tooltip value="Card/Name/BaseOverlord/BCyb"/>
+    </CButton>
+    <CButton id="PsiOrbCollect">
+        <Icon value="Assets\Textures\btn-upgrade-zerg-enduringcorruption.dds"/>
+    </CButton>
+    <CButton id="AdeptShadow">
+        <Icon value="Assets\Textures\btn-upgrade-zerg-enduringcorruption.dds"/>
+    </CButton>
+    <CButton id="TransportPsirmEscorts">
+        <Icon value="Assets\Textures\btn-upgrade-zerg-enduringcorruption.dds"/>
+    </CButton>
+    <CButton id="TerranPartTransition">
+        <Icon value="Assets\Textures\btn-upgrade-vorazun-enterwormhole.dds"/>
+        <AlertIcon value="Assets\Textures\btn-upgrade-vorazun-enterwormhole.dds"/>
+    </CButton>
+    <CButton id="UpgradeCenter">
+        <Icon value="Assets\Textures\btn-unit-collection-overlord-mutant.dds"/>
+    </CButton>
+    <CButton id="HandOfLightning">
+        <Icon value="Assets\Textures\btn-ability-hornerhan-hellion-slowbomb.dds"/>
+    </CButton>
+    <CButton id="PureEnergy">
+        <Icon value="Assets\Textures\btn-ability-hornerhan-hellion-slowbomb.dds"/>
+    </CButton>
+    <CButton id="LightningElementals">
+        <Icon value="Assets\Textures\btn-ability-hornerhan-hellion-slowbomb.dds"/>
+    </CButton>
+</Catalog>

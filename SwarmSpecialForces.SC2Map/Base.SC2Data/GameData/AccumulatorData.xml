@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CAccumulatorConstant id="Const0"/>
+    <CAccumulatorArithmetic id="HeroSpellDmgMultiplier">
+        <Parameters value="1"/>
+        <Parameters value="0.01">
+            <AccumulatorArray value="SpellDmgUpgradeCollector"/>
+        </Parameters>
+        <ApplicationRule value="Multiply"/>
+    </CAccumulatorArithmetic>
+    <CAccumulatorConstant id="SpellDmgUpgradeCollector">
+        <ApplicationRule value="Multiply"/>
+    </CAccumulatorConstant>
+    <CAccumulatorVeterancyLevel id="VeterancyLvlx1">
+        <Amount value="0"/>
+        <PreviousValueFactor value="1"/>
+        <BonusPerLevel value="1"/>
+    </CAccumulatorVeterancyLevel>
+    <CAccumulatorVeterancyLevel id="HeroLevelWeaponDmgBonus">
+        <Amount value="0"/>
+        <PreviousValueFactor value="1"/>
+        <BonusPerLevel value="5"/>
+    </CAccumulatorVeterancyLevel>
+    <CAccumulatorConstant id="WeaponDmgUpgradeCollector"/>
+</Catalog>

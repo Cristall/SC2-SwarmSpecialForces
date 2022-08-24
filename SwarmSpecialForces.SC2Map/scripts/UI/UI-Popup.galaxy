@@ -1,0 +1,240 @@
+static trigger Popup_AllowReuseTimer_Trigger;
+static int Popup_AllowReuseTimer_IDParam;
+static int Popup_AllowReuseTimer_PlayerIDParam;
+
+static const int Popup_Amount = 6;
+static int [Popup_Amount] Popup_Frames;
+static int [Popup_Amount] Popup_DismissButtons;
+static int [Popup_Amount][2] Popup_OpenButtons;
+static int [gv_MaxAmountPlayers+1][Popup_Amount] Popup_InUse;
+static const int Popup_MaxTime = 30; //must be higher than the layout defined value to allow movein and moveout animation
+
+void Popup_Init(){
+    trigger tmpTrigger;
+    int tmpInt;
+    int tmpInt2;
+
+    Popup_AllowReuseTimer_Trigger = TriggerCreate("Popup_AllowReuseTimer");
+    tmpTrigger = TriggerCreate("Popup_CloseButton");
+    for(tmpInt =0; tmpInt<Popup_Amount ; tmpInt+=1){
+        Popup_Frames[tmpInt] = DialogControlHookup(gv_UI_MasterFrame, c_triggerControlTypePanel, "Popup/Popup"+IntToString(tmpInt));
+        Popup_OpenButtons[tmpInt][0] = DialogControlHookup(Popup_Frames[tmpInt], c_triggerControlTypeButton, "OpenAcvButton");
+        Popup_OpenButtons[tmpInt][1] = DialogControlHookup(Popup_Frames[tmpInt], c_triggerControlTypeButton, "OpenSpeedrunsButton");
+        Popup_DismissButtons[tmpInt] = DialogControlHookup(Popup_Frames[tmpInt], c_triggerControlTypeButton, "CloseButton");
+
+        TriggerAddEventDialogControl(tmpTrigger, c_playerAny,Popup_OpenButtons[tmpInt][0], c_triggerControlEventTypeClick );
+        TriggerAddEventDialogControl(tmpTrigger, c_playerAny,Popup_OpenButtons[tmpInt][1], c_triggerControlEventTypeClick );
+        TriggerAddEventDialogControl(tmpTrigger, c_playerAny,Popup_DismissButtons[tmpInt], c_triggerControlEventTypeClick );
+        for(tmpInt2 =1; tmpInt2<=gv_MaxAmountPlayers ; tmpInt2+=1){
+            DialogControlSetVisible(DialogControlHookup(Popup_Frames[tmpInt], c_triggerControlTypePanel, "OpenAcvButton/Player/"+IntToString(tmpInt2)), PlayerGroupSingle(tmpInt2), false);
+        }
+    }
+}
+
+static int Popup_GetButtonId(int frame){
+    int tmpInt;
+    for(tmpInt =0; tmpInt<Popup_Amount ; tmpInt+=1){
+        if( frame == Popup_OpenButtons[tmpInt][0] || frame == Popup_OpenButtons[tmpInt][1] || frame == Popup_DismissButtons[tmpInt]){
+            return tmpInt;
+        }
+    }
+    return -1;
+}
+
+static void Popup_CleanPopup(int playerID, int popupID){
+    playergroup playerPG = PlayerGroupSingle(playerID);
+    Popup_InUse[playerID][popupID] = 0;
+    DialogControlSendAnimationEvent(Popup_Frames[popupID], PlayerGroupSingle(playerID), "Clear");
+    DialogControlSetVisible(DialogControlHookup(Popup_Frames[popupID], c_triggerControlTypePanel, "OpenSpeedrunsButton/Part/0"), playerPG, false);
+    DialogControlSetVisible(DialogControlHookup(Popup_Frames[popupID], c_triggerControlTypePanel, "OpenSpeedrunsButton/Part/1"), playerPG, false);
+    DialogControlSetVisible(DialogControlHookup(Popup_Frames[popupID], c_triggerControlTypePanel, "OpenSpeedrunsButton/Part/2"), playerPG, false);
+    DialogControlSetVisible(DialogControlHookup(Popup_Frames[popupID], c_triggerControlTypePanel, "OpenSpeedrunsButton/Diff/0"), playerPG, false);
+    DialogControlSetVisible(DialogControlHookup(Popup_Frames[popupID], c_triggerControlTypePanel, "OpenSpeedrunsButton/Diff/1"), playerPG, false);
+    DialogControlSetVisible(DialogControlHookup(Popup_Frames[popupID], c_triggerControlTypePanel, "OpenSpeedrunsButton/Diff/2"), playerPG, false);
+    DialogControlSetVisible(DialogControlHookup(Popup_Frames[popupID], c_triggerControlTypePanel, "OpenSpeedrunsButton/Diff/3"), playerPG, false);
+    DialogControlSetVisible(DialogControlHookup(Popup_Frames[popupID], c_triggerControlTypePanel, "OpenSpeedrunsButton/Diff/4"), playerPG, false);
+    DialogControlSetVisible(DialogControlHookup(Popup_Frames[popupID], c_triggerControlTypePanel, "OpenSpeedrunsButton/Diff/5"), playerPG, false);
+    DialogControlSetVisible(DialogControlHookup(Popup_Frames[popupID], c_triggerControlTypePanel, "OpenAcvButton/AcvIconNormal"), playerPG, false);
+    DialogControlSetVisible(DialogControlHookup(Popup_Frames[popupID], c_triggerControlTypePanel, "OpenAcvButton/AcvIconSplit"), playerPG, false);
+    DialogControlSetVisible(Popup_Frames[popupID], playerPG, false);
+}
+
+bool Popup_CloseButton (bool testConds, bool runActions){
+    int trigFrame = EventDialogControl();
+    int trigPlayer = EventPlayer();
+    int popupID = Popup_GetButtonId(trigFrame);
+
+    if(!runActions) {return true;}
+
+    Popup_InUse[trigPlayer][popupID] = 3;
+
+    return true;
+}
+
+bool Popup_AllowReuseTimer (bool testConds, bool runActions){
+    int playerID = Popup_AllowReuseTimer_PlayerIDParam;
+    int popupID = Popup_AllowReuseTimer_IDParam;
+    int tmpInt;
+    if(!runActions) {return true;}
+
+    //check if the popup was closed while waiting (in that case value is -1)
+    while(Popup_InUse[playerID][popupID] > 0){
+        Wait(1, c_timeReal);
+        Popup_InUse[playerID][popupID] -= 1;
+    }
+    Popup_CleanPopup(playerID,popupID);
+
+    return true;
+}
+
+void Popup_CreateFromPartAndDiff(int playerID, int part, int diff, bool smallTeamSize, text titleColored, text tooltip, string image){
+    int popupFrame;
+    int iconFrame;
+    int popupID = -1;
+    int tmpInt;
+    string teamOrSmall = "Team";
+    playergroup playerPG = PlayerGroupSingle(playerID);
+
+    if(smallTeamSize){
+        teamOrSmall="Small";
+    }
+
+    for(tmpInt = 0; tmpInt < Popup_Amount; tmpInt += 1){
+        if(Popup_InUse[playerID][tmpInt] == 0){
+            if (popupID == -1){popupID = tmpInt;}
+        }
+    }
+    if(popupID == -1){
+        UIDisplayMessage(playerPG, c_messageAreaDebug, StringToText("All Popups in use! Create more."));
+        return;
+    }
+
+    popupFrame = Popup_Frames[popupID];
+
+    libNtve_gf_SetDialogItemText(DialogControlHookup(popupFrame, c_triggerControlTypeLabel, "Title"), titleColored, playerPG);
+    DialogControlSetVisible(popupFrame, playerPG, true);
+    DialogControlSendAnimationEvent(popupFrame, playerPG, "SetTypeAcv");
+    
+    iconFrame = DialogControlHookup(popupFrame, c_triggerControlTypePanel, "OpenAcvButton/AcvIconNormal");
+    DialogControlSendAnimationEvent(iconFrame, playerPG, "Stage"+ IntToString(UserDataGetInt("AcvReqSpeedruns", "P"+IntToString(part)+"D"+IntToString(diff), "Player" + teamOrSmall + "Stage", playerID)));
+            
+    DialogControlSetVisible(iconFrame, playerPG, true);
+    libNtve_gf_SetDialogItemTooltip(iconFrame, StringExternal("Trig/Popup/AcvTooltipExtra")+StringToText("<n/><n/>")+tooltip, playerPG);
+
+    if(image != ""){
+        libNtve_gf_SetDialogItemImage(DialogControlHookup(iconFrame, c_triggerControlTypeImage, "Icon"), image, playerPG);
+    }
+    Popup_InUse[playerID][popupID] = Popup_MaxTime;
+
+    Popup_AllowReuseTimer_IDParam = popupID;
+    Popup_AllowReuseTimer_PlayerIDParam = playerID;
+    TriggerExecute( Popup_AllowReuseTimer_Trigger, false, false);
+
+}
+
+void Popup_CreateFromAcvTypeAndIdentifier(int playerID, int acvType, int acvIdentifier, text titleColored, text tooltip, string image){
+    int popupFrame;
+    int iconFrame;
+    int popupID = -1;
+    int tmpInt;
+    playergroup playerPG = PlayerGroupSingle(playerID);
+
+    for(tmpInt = 0; tmpInt < Popup_Amount; tmpInt += 1){
+        if(Popup_InUse[playerID][tmpInt] == 0){
+            if (popupID == -1){popupID = tmpInt;}
+        }
+    }
+    if(popupID == -1){
+        UIDisplayMessage(playerPG, c_messageAreaDebug, StringToText("All Popups in use! Create more."));
+        return;
+    }
+
+    popupFrame = Popup_Frames[popupID];
+
+    DialogControlSendAnimationEvent(popupFrame, playerPG, "SetTypeAcv");
+    DialogControlSetVisible(popupFrame, playerPG, true);
+
+    if(acvType == c_AcvType_Split){
+        iconFrame = DialogControlHookup(popupFrame, c_triggerControlTypePanel, "OpenAcvButton/AcvIconSplit");
+
+        for(tmpInt = 0; tmpInt < gv_MaxAmountDifficulties; tmpInt += 1){
+            if(Acv_Split_GetFlagFromIdentifier(playerID, acvIdentifier, tmpInt)){
+                DialogControlSendAnimationEvent(iconFrame, playerPG, "Unlock"+IntToString(tmpInt));
+            }
+        }
+    }
+    else{
+        iconFrame = DialogControlHookup(popupFrame, c_triggerControlTypePanel, "OpenAcvButton/AcvIconNormal");
+        if(acvType == c_AcvType_Grind){
+            DialogControlSendAnimationEvent(iconFrame, playerPG, "Stage"+ IntToString(UserDataGetInt("AcvReqGrind", gv_Acv_Grind_StringIdentifier[acvIdentifier], "PlayerStage", playerID)));
+        }
+        else if( acvType == c_AcvType_OneTime){
+            DialogControlSendAnimationEvent(iconFrame, playerPG, "Stage"+ IntToString(BoolToInt(Acv_OneTime_GetFlagFromIdentifier(playerID, acvIdentifier))));
+        }
+    }
+    libNtve_gf_SetDialogItemTooltip(iconFrame, StringExternal("Trig/Popup/AcvTooltipExtra")+StringToText("<n/><n/>")+tooltip, playerPG);
+    DialogControlSetVisible(iconFrame, playerPG, true);
+    if(image != ""){
+        libNtve_gf_SetDialogItemImage(DialogControlHookup(iconFrame, c_triggerControlTypeImage, "Icon"), image, playerPG);
+    }
+    
+    libNtve_gf_SetDialogItemText(DialogControlHookup(popupFrame, c_triggerControlTypeLabel, "Title"), titleColored, playerPG);
+
+    Popup_InUse[playerID][popupID] = Popup_MaxTime;
+
+    Popup_AllowReuseTimer_IDParam = popupID;
+    Popup_AllowReuseTimer_PlayerIDParam = playerID;
+    TriggerExecute( Popup_AllowReuseTimer_Trigger, false, false);
+
+}
+
+static void Popup_NewSpeedrunTime(int playerID, int part, int diff, int time, text playerAmountText){
+    int popupFrame;
+    int popupID = -1;
+    int tmpInt;
+    text msg;
+
+    for(tmpInt = 0; tmpInt < Popup_Amount; tmpInt += 1){
+        if(Popup_InUse[playerID][tmpInt] == 0){
+            if (popupID == -1){popupID = tmpInt;}
+        }
+    }
+    if(popupID == -1){
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("All Popups in use! Create more."));
+        return;
+    }
+
+    popupFrame = Popup_Frames[popupID];
+    DialogControlSendAnimationEvent(popupFrame, PlayerGroupSingle(playerID), "SetTypeSpeedruns");
+
+    DialogControlSetVisible(DialogControlHookup(Popup_Frames[popupID], c_triggerControlTypePanel, "OpenSpeedrunsButton/Part/"+ IntToString(part)), PlayerGroupSingle(playerID), true);
+    DialogControlSetVisible(DialogControlHookup(Popup_Frames[popupID], c_triggerControlTypePanel, "OpenSpeedrunsButton/Diff/"+ IntToString(diff)), PlayerGroupSingle(playerID), true);
+
+    msg = TextWithColor(Utility_PartName(part)+ StringToText(" ") + Utility_DiffName(diff) + StringToText(" ")+ playerAmountText, Utility_DiffColor(diff));
+    libNtve_gf_SetDialogItemText(DialogControlHookup(popupFrame, c_triggerControlTypeLabel, "Title"), msg, PlayerGroupSingle(playerID));
+    msg = Utility_TimeFormat(time);
+    libNtve_gf_SetDialogItemText(DialogControlHookup(popupFrame, c_triggerControlTypeLabel, "TimeLabel"), msg, PlayerGroupSingle(playerID));
+
+    DialogControlSetVisible(popupFrame, PlayerGroupSingle(playerID), true);
+    
+    Popup_InUse[playerID][popupID] = Popup_MaxTime;
+    Popup_AllowReuseTimer_IDParam = popupID;
+    Popup_AllowReuseTimer_PlayerIDParam = playerID;
+    TriggerExecute( Popup_AllowReuseTimer_Trigger, false, false);
+}
+
+void Popup_NewSpeedrunTimeSimplified(int playerID, int part, int diff, int time, int playerAmount){
+    Popup_NewSpeedrunTime(playerID,part,diff,time, Utility_TeamSize(playerAmount));
+}
+
+void Popup_NewSpeedrunTimeDetailed(int playerID, int part, int diff, int time, int lowestPlayerAmount, int highestPlayerAmount){
+    text msg;
+
+    if(lowestPlayerAmount < highestPlayerAmount){
+        msg = StringToText("("+ IntToString(lowestPlayerAmount) + " - " +IntToString(highestPlayerAmount) +")");
+    }
+    else {
+        msg = StringToText("("+  IntToString(lowestPlayerAmount) + ")");
+    }
+    Popup_NewSpeedrunTime(playerID,part,diff,time, msg);
+}

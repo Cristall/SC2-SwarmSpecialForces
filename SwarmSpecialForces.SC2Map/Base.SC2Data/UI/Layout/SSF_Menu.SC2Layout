@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Desc>
+
+<!-- Perma Menu Open button-->
+	<Constant name="MenuOpenerHeight" val="82"/>
+	<Constant name="MenuOpenerWidth" val="250"/>
+
+	<Frame type="Frame" name="MenuOpenerTemplate">
+		<Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+		<Anchor side="Bottom" relative="$GameUI/UIContainer/ConsoleUIContainer/IdleButton" pos="Min" offset="10"/>
+
+		<Width val="#MenuOpenerWidth"/>
+		<Height val="#MenuOpenerHeight"/>
+
+		<Frame type="Image" name="BackgroundImage" template="SSF_Templates/BackgroundImageTemplate"></Frame>
+		
+		<Frame type="Button" name="OpenButton" template="SSF_Templates/ButtonTemplate">
+			<Anchor side="Left" relative="$parent" pos="Min" offset="25"/>
+			<Anchor side="Right" relative="$parent" pos="Max" offset="-25"/>
+			<Anchor side="Top" relative="$parent" pos="Min" offset="16"/>
+			<Height val="50"/>
+
+
+			<Text val="@Trig/MenuOpener/Text"/>
+			<Animation name="ShowMenu">
+				<Event event="OnClick" action="Reset,Play" frame="$this"/>
+				<Controller type="Visibility" end="Pause" frame="$parent/$parent/Menu">
+					<Key type="Bool" time="0.0" value="true"/>
+				</Controller>
+			</Animation>
+		</Frame>
+		<Frame type="Button" name="CloseButton" template="SSF_Templates/ButtonTemplate">
+			<Anchor side="Left" relative="$parent" pos="Min" offset="25"/>
+			<Anchor side="Right" relative="$parent" pos="Max" offset="-25"/>
+			<Anchor side="Top" relative="$parent" pos="Min" offset="16"/>
+			<Height val="50"/>
+
+			<Text val="@Trig/MenuOpener/Text"/>
+			<Animation name="HideMenu">
+				<Event event="OnClick" action="Reset,Play" frame="$this"/>
+				<Controller type="Visibility" end="Pause" frame="$parent/$parent/Menu">
+					<Key type="Bool" time="0.0" value="false"/>
+				</Controller>
+			</Animation>
+		</Frame>
+	</Frame>
+
+<!-- Menu -->
+	<Constant name="MenuHeight" val="342"/>
+	<Constant name="MenuWidth" val="250"/>
+	<Constant name="MenuButtonHeight" val="50"/>
+	<Constant name="MenuButtonGap" val="2"/>
+	<Constant name="CopyText" val="Discord link"/>
+	<Constant name="CopyLink" val="https://discord.gg/KwxNAJ2"/>
+
+	<Frame type="Frame" name="MenuTemplate">
+
+		<Anchor side="Bottom" relative="$parent/MenuOpener" pos="Min" offset="-2"/>
+		<Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+		<Height val="#MenuHeight"/>
+		<Width val="#MenuWidth"/>
+
+		<Visible val="false"/>
+
+		<StateGroup name="Visiblity">
+			<DefaultState val="Hidden"/>
+			<State name="Hidden">
+				<When type="Property" frame="$this" operator="Equal" Visible="false"/>
+				<Action type="SetProperty" frame="$parent/MenuOpener/CloseButton" Visible="false"/>
+				<Action type="SetProperty" frame="$parent/MenuOpener/OpenButton" Visible="true"/>
+			</State>
+			<State name="Shown">
+				<When type="Property" frame="$this" operator="Equal" Visible="true"/>
+				<Action type="SetProperty" frame="$parent/MenuOpener/CloseButton" Visible="true"/>
+				<Action type="SetProperty" frame="$parent/MenuOpener/OpenButton" Visible="false"/>
+				<Action type="SendEvent" frame="$this" event="CloseEverything"/>
+			</State>
+		</StateGroup>
+
+		<Animation name="CloseEverything">
+			<Event event="CloseEverything" action="Reset,Play" frame="$this"/>
+			<Controller type="Visibility" end="Pause" frame="$parent/Stats">
+				<Key type="Bool" time="0.0" value="false"/>
+			</Controller>
+			<Controller type="Visibility" end="Pause" frame="$parent/Achievements">
+				<Key type="Bool" time="0.0" value="false"/>
+			</Controller>
+			<Controller type="Visibility" end="Pause" frame="$parent/Speedruns">
+				<Key type="Bool" time="0.0" value="false"/>
+			</Controller>
+			<Controller type="Visibility" end="Pause" frame="$parent/Votekick">
+				<Key type="Bool" time="0.0" value="false"/>
+			</Controller>
+			<Controller type="Visibility" end="Pause" frame="$parent/Options">
+				<Key type="Bool" time="0.0" value="false"/>
+			</Controller>
+		</Animation>
+
+		<Frame type="Button" name="HiddenCloseButton" template="SSF_Templates/CloseButtonTemplate">
+			<Anchor side="Right" relative="$parent" pos="Max" offset="2000"/>
+		</Frame>
+
+		<Frame type="Image" name="BackgroundImage" template="SSF_Templates/BackgroundImageTemplate"></Frame>
+
+		<Frame type="Button" name="Stats" template="SSF_Templates/ButtonTemplate">
+			<Anchor side="Left" relative="$parent" pos="Min" offset="25"/>
+			<Anchor side="Right" relative="$parent" pos="Max" offset="-25"/>
+			<Anchor side="Top" relative="$parent" pos="Min" offset="16"/>
+			<Height val="#MenuButtonHeight"/>
+			<Text val="@Trig/Menu/Stats"/>
+			
+			<Animation name="Click">
+				<Event event="OnClick" action="Reset,Play" frame="$this"/>
+				<Controller type="Visibility" end="Pause" frame="$parent">
+					<Key type="Bool" time="0.0" value="false"/>
+				</Controller>
+				<Controller type="Visibility" end="Pause" frame="$parent/$parent/Stats">
+					<Key type="Bool" time="0.0" value="true"/>
+				</Controller>
+			</Animation>
+		</Frame>
+		<Frame type="Button" name="Achievements" template="SSF_Templates/ButtonTemplate">
+			<Anchor side="Left" relative="$parent/Stats" pos="Min" offset="0"/>
+			<Anchor side="Right" relative="$parent/Stats" pos="Max" offset="0"/>
+			<Anchor side="Top" relative="$parent/Stats" pos="Max" offset="#MenuButtonGap"/>
+			<Height val="#MenuButtonHeight"/>
+			<Text val="@Trig/Menu/Achievements"/>
+			<Animation name="Click">
+				<Event event="OnClick" action="Reset,Play" frame="$this"/>
+				<Controller type="Visibility" end="Pause" frame="$parent">
+					<Key type="Bool" time="0.0" value="false"/>
+				</Controller>
+				<Controller type="Visibility" end="Pause" frame="$parent/$parent/Achievements">
+					<Key type="Bool" time="0.0" value="true"/>
+				</Controller>
+			</Animation>
+		</Frame>
+		<Frame type="Button" name="Speedruns" template="SSF_Templates/ButtonTemplate">
+			<Anchor side="Left" relative="$parent/Stats" pos="Min" offset="0"/>
+			<Anchor side="Right" relative="$parent/Stats" pos="Max" offset="0"/>
+			<Anchor side="Top" relative="$parent/Achievements" pos="Max" offset="#MenuButtonGap"/>
+			<Height val="#MenuButtonHeight"/>
+			<Text val="@Trig/Menu/Speedruns"/>
+			
+			<Animation name="Click">
+				<Event event="OnClick" action="Reset,Play" frame="$this"/>
+				<Controller type="Visibility" end="Pause" frame="$parent">
+					<Key type="Bool" time="0.0" value="false"/>
+				</Controller>
+				<Controller type="Visibility" end="Pause" frame="$parent/$parent/Speedruns">
+					<Key type="Bool" time="0.0" value="true"/>
+				</Controller>
+			</Animation>
+		</Frame>
+		<Frame type="Button" name="Votekick" template="SSF_Templates/ButtonTemplate">
+			<Anchor side="Left" relative="$parent/Stats" pos="Min" offset="0"/>
+			<Anchor side="Right" relative="$parent/Stats" pos="Max" offset="0"/>
+			<Anchor side="Top" relative="$parent/Speedruns" pos="Max" offset="#MenuButtonGap"/>
+			<Height val="#MenuButtonHeight"/>
+			<Text val="@Trig/Menu/Votekick"/>
+			
+			<Animation name="Click">
+				<Event event="OnClick" action="Reset,Play" frame="$this"/>
+				<Controller type="Visibility" end="Pause" frame="$parent">
+					<Key type="Bool" time="0.0" value="false"/>
+				</Controller>
+				<Controller type="Visibility" end="Pause" frame="$parent/$parent/Votekick">
+					<Key type="Bool" time="0.0" value="true"/>
+				</Controller>
+			</Animation>
+		</Frame>
+		<Frame type="Button" name="Options" template="SSF_Templates/ButtonTemplate">
+			<Anchor side="Left" relative="$parent/Stats" pos="Min" offset="0"/>
+			<Anchor side="Right" relative="$parent/Stats" pos="Max" offset="0"/>
+			<Anchor side="Top" relative="$parent/Votekick" pos="Max" offset="#MenuButtonGap"/>
+			<Height val="#MenuButtonHeight"/>
+			<Text val="@Trig/Menu/Options"/>
+			
+			<Animation name="Click">
+				<Event event="OnClick" action="Reset,Play" frame="$this"/>
+				<Controller type="Visibility" end="Pause" frame="$parent">
+					<Key type="Bool" time="0.0" value="false"/>
+				</Controller>
+				<Controller type="Visibility" end="Pause" frame="$parent/$parent/Options">
+					<Key type="Bool" time="0.0" value="true"/>
+				</Controller>
+			</Animation>
+		</Frame>
+		<Frame type="CopyClipboardButton" name="DiscordClipboardButton" template="SSF_Templates/ButtonTemplate">
+			<Anchor side="Left" relative="$parent/Stats" pos="Min" offset="0"/>
+			<Anchor side="Right" relative="$parent/Stats" pos="Max" offset="0"/>
+			<Anchor side="Top" relative="$parent/Options" pos="Max" offset="#MenuButtonGap"/>
+			<Height val="#MenuButtonHeight"/>
+
+			<ClipboardText val="#CopyLink"/>
+			<Text val="#CopyText"/>
+			
+			<Animation name="Color">
+				<Event event="OnClick" action="Restart,Play" frame="$this"/>
+				<Controller type="Color" end="Reset">
+					<Key type="Curve" time="0" value="255,255,255" in="Fast"/>
+					<Key type="Curve" time="0.1" value="0,255,0" in="Slow"/>
+					<Key type="Curve" time="5" value="0,255,0" in="Slow"/>				
+				</Controller>
+			</Animation>
+		</Frame>
+	</Frame>
+
+<!-- Actual Frame for all frame, pretty much just a compilation of everything -->
+	<Frame type="Frame" name="GameUI/UIContainer/FullscreenUpperContainer" file="GameUI">
+		<Frame type="Frame" name="SSF_CustomUI">
+			<Anchor relative="$parent"/>
+			<Handle val="SSF_CustomUI"/>
+			<Visible val="true"/>
+
+			<Frame type="Frame" name="MenuOpener" template="SSF_Menu/MenuOpenerTemplate"></Frame>
+			<Frame type="Frame" name="Menu" template="SSF_Menu/MenuTemplate"></Frame>
+
+			<Frame type="Frame" name="Stats" template="SSF_Stats/StatsTemplate"></Frame>
+			<Frame type="Frame" name="Achievements" template="SSF_Achievements/AchievementTemplate"></Frame>
+			<Frame type="Frame" name="Speedruns" template="SSF_Speedruns/SpeedrunsTemplate"></Frame>
+			<Frame type="Frame" name="Votekick" template="SSF_Votekick/VotekickTemplate"></Frame>
+			<Frame type="Frame" name="Options" template="SSF_Options/OptionsTemplate"></Frame>
+
+			<Frame type="Frame" name="Popup">
+				<Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
+				<Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+				<Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+				<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+
+				<Frame type="Frame" name="Popup0" template="SSF_Popup/PopupTemplate">
+					<Anchor side="Top" relative="$SSF_Playerboard/PopupAnchor" pos="Max" offset="10"/>
+				</Frame>
+				<Frame type="Frame" name="Popup1" template="SSF_Popup/PopupTemplate"/>
+				<Frame type="Frame" name="Popup2" template="SSF_Popup/PopupTemplate"/>
+				<Frame type="Frame" name="Popup3" template="SSF_Popup/PopupTemplate"/>
+				<Frame type="Frame" name="Popup4" template="SSF_Popup/PopupTemplate"/>
+				<Frame type="Frame" name="Popup5" template="SSF_Popup/PopupTemplate"/>
+			</Frame>
+		</Frame>
+	</Frame>
+</Desc>

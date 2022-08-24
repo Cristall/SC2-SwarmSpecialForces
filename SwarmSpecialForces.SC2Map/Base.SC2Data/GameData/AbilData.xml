@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CAbilMorph id="ExtendingBridgeNEWide12Out">
+        <AbilSetId value=""/>
+    </CAbilMorph>
+    <CAbilMorph id="ExtendingBridgeNWShort12" parent="BridgeRetract"/>
+    <CAbilMorph id="ExtendingBridgeNWShort12Out" parent="BridgeExtend">
+        <AbilSetId value=""/>
+    </CAbilMorph>
+    <CAbilEffectTarget id="HeroAbilityParent">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="HeroAbilityParent" Requirements="HeroAbilityParent@Req"/>
+    </CAbilEffectTarget>
+    <CAbilEffectTarget id="TESTAoESplat">
+        <Alignment value="Negative"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="EmptySet"/>
+        <Cost/>
+        <Range value="4"/>
+        <CastIntroTime value="0.125"/>
+        <CursorEffect value="SeaOfFlamesDmg"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="TESTButton"/>
+    </CAbilEffectTarget>
+    <CAbilEffectTarget id="TestAbility">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="testexplosion"/>
+        <Range value="500"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="TESTButton"/>
+    </CAbilEffectTarget>
+</Catalog>

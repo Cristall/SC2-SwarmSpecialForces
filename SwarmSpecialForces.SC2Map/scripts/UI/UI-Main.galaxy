@@ -1,0 +1,13 @@
+void SSFCustomUI_Init () {
+    gv_UI_MasterFrame = DialogControlHookupStandard(c_triggerControlTypePanel, "UIContainer/FullscreenUpperContainer/SSF_CustomUI");
+    StatsInterface_Init();
+    Votekick_Init();
+    Options_Init();
+    Speedruns_Init();
+    AcvInterface_Init();
+    Popup_Init();
+    HeroPanel_Init();
+    PlayerBoard_Init();
+    CustomDefeatFrame_Init();
+    HivePanel_Init();
+}

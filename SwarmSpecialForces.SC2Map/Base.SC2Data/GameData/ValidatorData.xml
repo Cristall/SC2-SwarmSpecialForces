@@ -1,0 +1,578 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CValidatorUnitType default="1" id="UnitTypeDefault">
+        <Value value="##id##"/>
+    </CValidatorUnitType>
+    <CValidatorUnitType id="AdeptTalon" parent="UnitTypeDefault"/>
+    <CValidatorUnitType id="AtlantisCore" parent="UnitTypeDefault">
+        <WhichUnit Value="Caster"/>
+    </CValidatorUnitType>
+    <CValidatorPlayerRequirement id="BossAbilityRequirementLvl0">
+        <Find value="1"/>
+        <Value value="BossAbilityRequirementLvl0"/>
+    </CValidatorPlayerRequirement>
+    <CValidatorPlayerRequirement id="BossAbilityRequirementLvl1">
+        <Find value="1"/>
+        <Value value="BossAbilityRequirementLvl02"/>
+    </CValidatorPlayerRequirement>
+    <CValidatorPlayerRequirement id="BossAbilityRequirementLvl2">
+        <Find value="1"/>
+        <Value value="BossAbilityRequirementLvl03"/>
+    </CValidatorPlayerRequirement>
+    <CValidatorPlayerRequirement id="BossAbilityRequirementLvl3">
+        <Find value="1"/>
+        <Value value="BossAbilityRequirementLvl04"/>
+    </CValidatorPlayerRequirement>
+    <CValidatorPlayerRequirement id="BossAbilityRequirementLvl4">
+        <Find value="1"/>
+        <Value value="BossAbilityRequirementLvl05"/>
+    </CValidatorPlayerRequirement>
+    <CValidatorPlayerRequirement id="BossAbilityRequirementLvl5">
+        <Find value="1"/>
+        <Value value="BossAbilityRequirementLvl06"/>
+    </CValidatorPlayerRequirement>
+    <CValidatorUnitCompareVital id="CasterLifeGT1Percent" parent="CasterLifePercent">
+        <Compare value="GT"/>
+        <Value value="0.01"/>
+    </CValidatorUnitCompareVital>
+    <CValidatorUnitCompareVital id="TargetLifeLT90Percent" parent="CasterLifePercent">
+        <WhichUnit Value="Target"/>
+        <Compare value="LT"/>
+        <Value value="0.9"/>
+    </CValidatorUnitCompareVital>
+    <CValidatorUnitCompareBehaviorCount id="ChargeNotPushed"/>
+    <CValidatorLocationCompareCliffLevel id="CliffLevelEqualCaster">
+        <WhichLocation Value="TargetUnit"/>
+        <OtherLocation Value="CasterUnit"/>
+    </CValidatorLocationCompareCliffLevel>
+    <CValidatorPlayerCompareResource id="DifficultyValidatorCustomDiff">
+        <Resource value="Custom"/>
+        <Value value="6"/>
+    </CValidatorPlayerCompareResource>
+    <CValidatorLocationEnumArea id="EnemyWithin20">
+        <WhichLocation Value="CasterUnit"/>
+        <AreaArray Radius="20"/>
+        <SearchFlags index="ExtendByUnitRadius" value="1"/>
+        <SearchFlags index="OffsetAreaByAngle" value="0"/>
+        <LaunchLocation Value="CasterUnit"/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Worker,Missile,Item,Dead,Hidden,Invulnerable,Summoned"/>
+    </CValidatorLocationEnumArea>
+    <CValidatorLocationEnumArea id="AtLeast2EnemyWithin8">
+        <WhichLocation Value="CasterUnitOrPoint"/>
+        <AreaArray Radius="8"/>
+        <Count value="1"/>
+        <SearchFlags index="ExtendByUnitRadius" value="1"/>
+        <LaunchLocation Value="CasterUnitOrPoint"/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Worker,Missile,Item,Dead,Hidden,Invulnerable,Summoned"/>
+    </CValidatorLocationEnumArea>
+    <CValidatorCompareTrackedUnitsCount id="Illusion@AllIllusionsDead">
+        <Value value="1"/>
+        <BehaviorLink value="Illusion@Tracker"/>
+        <TrackedUnitFilters value="-;Dead"/>
+    </CValidatorCompareTrackedUnitsCount>
+    <CValidatorUnitCompareBehaviorCount id="NotSilenced">
+        <WhichUnit Value="Caster"/>
+        <Behavior value="Silenced"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorUnitCompareBehaviorCount id="PortalRunning">
+        <WhichUnit Value="Caster"/>
+        <Behavior value="PortalCasterStationary"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorUnitType id="AtlantisNotPhase2">
+        <WhichUnit Value="Caster"/>
+        <Value value="Atlantis"/>
+    </CValidatorUnitType>
+    <CValidatorUnitType id="Bomber" parent="UnitTypeDefault"/>
+    <CValidatorCompareTrackedUnitsCount id="BomberLimit">
+        <Compare value="LT"/>
+        <Value value="5"/>
+        <BehaviorLink value="BomberTracker"/>
+        <TrackedUnitFilters value="-;Dead,Hidden"/>
+    </CValidatorCompareTrackedUnitsCount>
+    <CValidatorLocationEnumArea id="EnemyWithin13">
+        <WhichLocation Value="CasterUnit"/>
+        <AreaArray Radius="13"/>
+        <SearchFlags index="ExtendByUnitRadius" value="1"/>
+        <SearchFlags index="OffsetAreaByAngle" value="0"/>
+        <LaunchLocation Value="CasterUnit"/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Worker,Missile,Item,Dead,Hidden,Invulnerable,Summoned"/>
+    </CValidatorLocationEnumArea>
+    <CValidatorUnitType id="HighTemplarCrystalwingTalon" parent="UnitTypeDefault"/>
+    <CValidatorUnitType id="HighTemplarTalon" parent="UnitTypeDefault"/>
+    <CValidatorUnitType id="InterceptorTalon" parent="UnitTypeDefault"/>
+    <CValidatorUnitType id="ImmortalTalon" parent="UnitTypeDefault"/>
+    <CValidatorCombine id="MadnessActiveSpawner">
+        <Type value="And"/>
+        <CombineArray value="LongLifeTargetList"/>
+        <CombineArray value="MadnessStructureOn"/>
+    </CValidatorCombine>
+    <CValidatorCombine id="MadnessActiveStructure">
+        <Type value="And"/>
+        <CombineArray value="MadnessStructureOn"/>
+        <CombineArray value="MadnessStructureList"/>
+    </CValidatorCombine>
+    <CValidatorCompareTrackedUnitsCount id="MadnessAtLeast2SpawnersActive">
+        <Compare value="GE"/>
+        <Value value="2"/>
+        <BehaviorLink value="TrackerActiveSpawner"/>
+    </CValidatorCompareTrackedUnitsCount>
+    <CValidatorCompareTrackedUnitsCount id="MassHealEnoughTargets">
+        <Compare value="GE"/>
+        <Value value="6"/>
+        <BehaviorLink value="TrackerCombatUnits"/>
+        <TrackedUnitValidatorArray value="ShieldsNotFull"/>
+        <TrackedUnitFilters value="-;Dead"/>
+    </CValidatorCompareTrackedUnitsCount>
+    <CValidatorUnitType id="MadnessSpawnerDefensive" parent="UnitTypeDefault"/>
+    <CValidatorUnitType id="MadnessSpawnerDefensive2" parent="UnitTypeDefault"/>
+    <CValidatorUnitType id="MadnessSpawnerOffensive" parent="UnitTypeDefault"/>
+    <CValidatorUnitType id="MadnessSpawnerOffensive2" parent="UnitTypeDefault"/>
+    <CValidatorUnitType id="MadnessSpawnerSupport" parent="UnitTypeDefault"/>
+    <CValidatorUnitCompareBehaviorCount id="MadnessStructureNotOff">
+        <Behavior value="MadnessStructureOff"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorCombine id="MadnessUnitList">
+        <CombineArray value="AdeptTalon"/>
+        <CombineArray value="HighTemplarCrystalwingTalon"/>
+        <CombineArray value="HighTemplarTalon"/>
+        <CombineArray value="ImmortalTalon"/>
+        <CombineArray value="SentryTalon"/>
+        <CombineArray value="StalkerTalon"/>
+        <CombineArray value="ZealotTalon"/>
+        <CombineArray value="ProbeTalon"/>
+    </CValidatorCombine>
+    <CValidatorCombine id="MadnessUnitList2">
+        <CombineArray value="AdeptTalon"/>
+        <CombineArray value="HighTemplarCrystalwingTalon"/>
+        <CombineArray value="HighTemplarTalon"/>
+        <CombineArray value="ImmortalTalon"/>
+        <CombineArray value="SentryTalon"/>
+        <CombineArray value="StalkerTalon"/>
+        <CombineArray value="ZealotTalon"/>
+    </CValidatorCombine>
+    <CValidatorCombine id="MadnessUnitORActiveStructure">
+        <CombineArray value="MadnessUnitList"/>
+        <CombineArray value="MadnessActiveStructure"/>
+    </CValidatorCombine>
+    <CValidatorCombine id="MadnessUnitORActiveStructure2">
+        <CombineArray value="MadnessUnitList2"/>
+        <CombineArray value="MadnessActiveStructure"/>
+    </CValidatorCombine>
+    <CValidatorUnitType id="MadnessVoidContainment" parent="UnitTypeDefault"/>
+    <CValidatorUnitCompareMarkerCount id="MarkersLE2">
+        <ResultFailed value="AlreadyTargeted"/>
+        <Compare value="LE"/>
+        <Value value="2"/>
+    </CValidatorUnitCompareMarkerCount>
+    <CValidatorCombine id="LongLifeTargetList">
+        <CombineArray value="MadnessSpawnerDefensive"/>
+        <CombineArray value="MadnessSpawnerDefensive2"/>
+        <CombineArray value="MadnessSpawnerOffensive"/>
+        <CombineArray value="MadnessSpawnerOffensive2"/>
+        <CombineArray value="MadnessSpawnerSupport"/>
+    </CValidatorCombine>
+    <CValidatorUnitFilters id="PortalStartTargetNotDead">
+        <WhichUnit Effect="PortalStartInitialSet"/>
+        <Filters value="-;Dead,Hidden"/>
+    </CValidatorUnitFilters>
+    <CValidatorUnitCompareBehaviorCount id="PortalTargetDummy">
+        <Value value="1"/>
+        <Behavior value="PortalModels"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorCombine id="PortalTargetPeriodicValidator">
+        <Type value="And"/>
+        <CombineArray value="CasterNotDead"/>
+        <CombineArray value="AtlantisNotPhase2"/>
+        <CombineArray value="TargetNotDead"/>
+    </CValidatorCombine>
+    <CValidatorUnitType id="SentryTalon" parent="UnitTypeDefault"/>
+    <CValidatorUnitType id="ProbeTalon" parent="UnitTypeDefault"/>
+    <CValidatorUnitType id="StalkerTalon" parent="UnitTypeDefault"/>
+    <CValidatorUnitType id="MadnessCannon" parent="UnitTypeDefault"/>
+    <CValidatorUnitType id="MadnessHealer" parent="UnitTypeDefault"/>
+    <CValidatorCombine id="MadnessStructureList">
+        <CombineArray value="MadnessSpawnerDefensive"/>
+        <CombineArray value="MadnessSpawnerDefensive2"/>
+        <CombineArray value="MadnessSpawnerOffensive"/>
+        <CombineArray value="MadnessSpawnerOffensive2"/>
+        <CombineArray value="MadnessSpawnerSupport"/>
+        <CombineArray value="MadnessCannon"/>
+        <CombineArray value="MadnessHealer"/>
+        <CombineArray value="MadnessVoidContainment"/>
+    </CValidatorCombine>
+    <CValidatorUnitFilters id="TargetIsEnemyAndNotHeroic">
+        <Filters value="-;Player,Ally,Neutral,Heroic"/>
+    </CValidatorUnitFilters>
+    <CValidatorUnitFilters id="TargetIsEnemyAndVulnerable">
+        <Filters value="-;Player,Ally,Neutral,Invulnerable"/>
+    </CValidatorUnitFilters>
+    <CValidatorLocationCrossCliff id="TargetNotAcrossCliffFromSource">
+        <ResultFailed value="Error,Error/CantCrossCliffs"/>
+        <WhichLocation Value="SourceUnitOrPoint"/>
+    </CValidatorLocationCrossCliff>
+    <CValidatorUnitFilters id="TargetNotWorker">
+        <Filters value="-;Worker"/>
+    </CValidatorUnitFilters>
+    <CValidatorUnitFilters id="TornadoKnockbackTargetNotDead">
+        <ResultFailed value="CantTargetDeadUnits"/>
+        <WhichUnit Effect="TornadoImpactPrecursor"/>
+        <Filters value="-;Dead"/>
+    </CValidatorUnitFilters>
+    <CValidatorCompareTrackedUnitsCount id="TurbochargeEnoughTargets">
+        <Compare value="GE"/>
+        <Value value="6"/>
+        <BehaviorLink value="TrackerCombatUnits"/>
+        <TrackedUnitFilters value="-;Dead"/>
+    </CValidatorCompareTrackedUnitsCount>
+    <CValidatorUnitType id="ZealotTalon" parent="UnitTypeDefault"/>
+    <CValidatorUnitCompareBehaviorCount id="HandOfLightningOn">
+        <WhichUnit Value="Caster"/>
+        <Value value="1"/>
+        <Behavior value="HandOfLightning"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorUnitCompareBehaviorCount id="MadnessStructureOn">
+        <Value value="1"/>
+        <Behavior value="MadnessStructureOn"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorCombine id="MadnessEverythingList">
+        <CombineArray value="AdeptTalon"/>
+        <CombineArray value="HighTemplarCrystalwingTalon"/>
+        <CombineArray value="HighTemplarTalon"/>
+        <CombineArray value="ImmortalTalon"/>
+        <CombineArray value="InterceptorTalon"/>
+        <CombineArray value="ProbeTalon"/>
+        <CombineArray value="SentryTalon"/>
+        <CombineArray value="StalkerTalon"/>
+        <CombineArray value="ZealotTalon"/>
+        <CombineArray value="MadnessCannon"/>
+        <CombineArray value="MadnessHealer"/>
+        <CombineArray value="MadnessVoidContainment"/>
+        <CombineArray value="MadnessSpawnerDefensive"/>
+        <CombineArray value="MadnessSpawnerDefensive2"/>
+        <CombineArray value="MadnessSpawnerOffensive"/>
+        <CombineArray value="MadnessSpawnerOffensive2"/>
+        <CombineArray value="MadnessSpawnerSupport"/>
+    </CValidatorCombine>
+    <CValidatorUnitType id="SpawnerWarpInDefensive1">
+        <Value value="MadnessSpawnerDefensive"/>
+    </CValidatorUnitType>
+    <CValidatorUnitType id="SpawnerWarpInDefensive2">
+        <Value value="MadnessSpawnerDefensive2"/>
+    </CValidatorUnitType>
+    <CValidatorUnitType id="SpawnerWarpInOffensive1">
+        <Value value="MadnessSpawnerOffensive"/>
+    </CValidatorUnitType>
+    <CValidatorUnitType id="SpawnerWarpInSupport1">
+        <Value value="MadnessSpawnerSupport"/>
+    </CValidatorUnitType>
+    <CValidatorUnitType id="SpawnerWarpInOffensive2">
+        <Value value="MadnessSpawnerOffensive2"/>
+    </CValidatorUnitType>
+    <CValidatorLocationArc id="TargetBehindCaster">
+        <WhichLocation Value="CasterUnit"/>
+        <Find value="1"/>
+        <Arc value="180"/>
+        <Value Value="TargetUnit"/>
+    </CValidatorLocationArc>
+    <CValidatorLocationCompareCliffLevel id="AlwaysFalse">
+        <WhichLocation Value="SourceUnit"/>
+        <Compare value="LT"/>
+    </CValidatorLocationCompareCliffLevel>
+    <CValidatorCombine id="AnyNotExhausted">
+        <CombineArray value="LightningNotExhausted"/>
+        <CombineArray value="ThunderNotExhausted"/>
+    </CValidatorCombine>
+    <CValidatorUnitCompareBehaviorCount id="BaseHiveLevel2">
+        <WhichUnit Value="Source"/>
+        <Value value="1"/>
+        <Behavior value="BaseHiveLevel2"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorUnitCompareBehaviorCount id="BaseHiveLevel3">
+        <WhichUnit Value="Source"/>
+        <Value value="1"/>
+        <Behavior value="BaseHiveLevel3"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorLocationCompareRange id="BeamDroneAllowMovement">
+        <WhichLocation Value="TargetUnit"/>
+        <Compare value="LE"/>
+        <Range value="1"/>
+    </CValidatorLocationCompareRange>
+    <CValidatorCombine id="BeamDroneWeaponChanneledPersistentValidator">
+        <Type value="And"/>
+        <CombineArray value="BeamDroneWeaponDistanceToTargetCheck"/>
+        <CombineArray value="TargetNotDead"/>
+    </CValidatorCombine>
+    <CValidatorLocationCompareRange id="BeamDroneWeaponDistanceToTargetCheck">
+        <WhichLocation Value="SourceUnit"/>
+        <Compare value="LT"/>
+        <Range value="10"/>
+        <Value Value="TargetUnit"/>
+    </CValidatorLocationCompareRange>
+    <CValidatorUnitCompareBehaviorCount id="BeamDroneWeaponFollowUnitIdentifier">
+        <Value value="1"/>
+        <Behavior value="BeamDroneWeaponFollowUnitIdentifier"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorLocationEnumArea id="EnemyInRangeOf2">
+        <WhichLocation Value="CasterUnitOrPoint"/>
+        <AreaArray Radius="2" Validator="CliffLevelEqualCaster"/>
+        <SearchFlags index="OffsetAreaByAngle" value="0"/>
+        <LaunchLocation Value="CasterUnitOrPoint"/>
+        <SearchFilters value="Visible;Self,Player,Ally,Neutral,Missile,Item,Stasis,Dead,Hidden,Invulnerable"/>
+    </CValidatorLocationEnumArea>
+    <CValidatorLocationEnumArea id="EnemyWithin6">
+        <WhichLocation Value="CasterUnitOrPoint"/>
+        <AreaArray Radius="6"/>
+        <SearchFlags index="ExtendByUnitRadius" value="1"/>
+        <LaunchLocation Value="CasterUnitOrPoint"/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Worker,Missile,Item,Dead,Hidden,Invulnerable,Summoned"/>
+    </CValidatorLocationEnumArea>
+    <CValidatorLocationEnumArea id="EnemyWithin8">
+        <WhichLocation Value="CasterUnitOrPoint"/>
+        <AreaArray Radius="8"/>
+        <SearchFlags index="ExtendByUnitRadius" value="1"/>
+        <LaunchLocation Value="CasterUnitOrPoint"/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Worker,Missile,Item,Dead,Hidden,Invulnerable,Summoned"/>
+    </CValidatorLocationEnumArea>
+    <CValidatorUnitCompareVital id="EnergyLT999Percent">
+        <ResultFailed value="Error,Error/FullEnergy"/>
+        <Compare value="LT"/>
+        <Type value="Fraction"/>
+        <Value value="0.999"/>
+        <Vital value="Energy"/>
+    </CValidatorUnitCompareVital>
+    <CValidatorUnitType id="IsBaseOverlord">
+        <Value value="BaseOverlord"/>
+    </CValidatorUnitType>
+    <CValidatorUnitCompareBehaviorCount id="LightningNotDead">
+        <WhichUnit Value="Caster"/>
+        <Behavior value="TagTeamHandlerThunderDead"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorLocationArc id="CasterBehindTarget">
+        <WhichLocation Value="TargetUnit"/>
+        <Find value="1"/>
+        <Arc value="180"/>
+    </CValidatorLocationArc>
+    <CValidatorLocationArc id="TargetBehindTargetOuter">
+        <WhichLocation Effect="CrossedBeamsTargetInitialDelay" Value="TargetOuterUnit"/>
+        <Find value="1"/>
+        <Arc value="180"/>
+        <Value Value="TargetUnit"/>
+    </CValidatorLocationArc>
+    <CValidatorCombine id="TargetInFrontofCaster">
+        <CombineArray value="TargetBehindCaster"/>
+        <Negate value="1"/>
+    </CValidatorCombine>
+    <CValidatorUnitCompareBehaviorCount id="ThunderNotDead">
+        <WhichUnit Value="Caster"/>
+        <Behavior value="TagTeamHandlerThunderDead"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorUnitCompareBehaviorCount id="LightningNotExhausted">
+        <WhichUnit Value="Caster"/>
+        <Behavior value="TagTeamHandlerLightningExhausted"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorUnitCompareBehaviorCount id="ThunderNotExhausted">
+        <WhichUnit Value="Caster"/>
+        <Behavior value="TagTeamHandlerThunderExhausted"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorUnitType id="LightningUnitType">
+        <Value value="Lightning"/>
+    </CValidatorUnitType>
+    <CValidatorCompareTrackedUnitsCount id="TagTeamHandlerFindThunder">
+        <Value value="1"/>
+        <BehaviorLink value="HandlerThunderTracker"/>
+        <TrackedUnitFilters value="-;Dead"/>
+    </CValidatorCompareTrackedUnitsCount>
+    <CValidatorUnitType id="ThunderUnitType">
+        <Value value="Thunder"/>
+    </CValidatorUnitType>
+    <CValidatorUnitCompareBehaviorCount id="OverlordFlyBackHomeNotTransitioning">
+        <ResultFailed value="Error,FlyBackHome/PartTransition"/>
+        <WhichUnit Value="Caster"/>
+        <Behavior value="TerranPartTransitionBuff"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorUnitCompareBehaviorCount id="OverlordTerranPartTransitionAllowed">
+        <WhichUnit Value="Caster"/>
+        <Value value="1"/>
+        <Behavior value="TerranPartTransitionBuff"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorUnitCompareBehaviorCount id="PsiCollectibleNotAlreadyCollecting">
+        <ResultFailed value="Error,PsiCollectible/AlreadyCollecting"/>
+        <Behavior value="PsiOrbCollectingCountdown"/>
+        <RequireCasterUnit Value="Caster"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorUnitCompareBehaviorCount id="RotatingWallsRotationIndexPositive">
+        <WhichUnit Value="Caster"/>
+        <Value value="1"/>
+        <Behavior value="RotatingWallsRotationPositive"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorUnitCompareBehaviorCount id="RotatingWallsRotationIndexNegative">
+        <WhichUnit Value="Caster"/>
+        <Value value="1"/>
+        <Behavior value="RotatingWallsRotationNegative"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorUnitCompareBehaviorCount id="RotatingWallsTower">
+        <Value value="1"/>
+        <Behavior value="RotatingWallsTowerBuff"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorLocationCompareCliffLevel id="SouceInChasm">
+        <ResultFailed value="MustTargetWalkableLocation"/>
+        <WhichLocation Value="SourceUnit"/>
+    </CValidatorLocationCompareCliffLevel>
+    <CValidatorCombine id="NotAcrossCliffORAcrossCliffAndLowerCliffLevel">
+        <ResultFailed value="Error,Validator/CliffLevelHigher"/>
+        <CombineArray value="TargetNotAcrossCliff"/>
+        <CombineArray value="TargetAcrossCliffAndLowerCliffLevel"/>
+    </CValidatorCombine>
+    <CValidatorLocationCompareRange id="SourceCasterInRange2">
+        <WhichLocation Value="TargetUnit"/>
+        <Compare value="LE"/>
+        <Range value="2"/>
+    </CValidatorLocationCompareRange>
+    <CValidatorLocationCompareCliffLevel id="SourceCliffLevelGreaterThanCasterCliffLevel">
+        <WhichLocation Value="SourceUnit"/>
+        <OtherLocation Value="CasterUnit"/>
+        <Compare value="GT"/>
+    </CValidatorLocationCompareCliffLevel>
+    <CValidatorPlayerRequirement id="HiveAlive">
+        <Find value="1"/>
+        <Value value="HiveAlive"/>
+    </CValidatorPlayerRequirement>
+    <CValidatorPlayerCompareResource id="DifficultyValidatorBrutal2">
+        <Compare value="GE"/>
+        <Resource value="Custom"/>
+        <Value value="3"/>
+    </CValidatorPlayerCompareResource>
+    <CValidatorPlayerCompareResource id="DifficultyValidatorEasy">
+        <Resource value="Custom"/>
+    </CValidatorPlayerCompareResource>
+    <CValidatorPlayerCompareResource id="DifficultyValidatorHard2">
+        <Compare value="GE"/>
+        <Resource value="Custom"/>
+        <Value value="2"/>
+    </CValidatorPlayerCompareResource>
+    <CValidatorPlayerCompareResource id="DifficultyValidatorHardcore2">
+        <Compare value="GE"/>
+        <Resource value="Custom"/>
+        <Value value="5"/>
+    </CValidatorPlayerCompareResource>
+    <CValidatorPlayerCompareResource id="DifficultyValidatorInsane2">
+        <Compare value="GE"/>
+        <Resource value="Custom"/>
+        <Value value="4"/>
+        <WhichPlayer Value="Caster"/>
+    </CValidatorPlayerCompareResource>
+    <CValidatorPlayerCompareResource id="DifficultyValidatorNormal">
+        <Resource value="Custom"/>
+        <Value value="1"/>
+    </CValidatorPlayerCompareResource>
+    <CValidatorPlayerCompareResource id="DifficultyValidatorHard">
+        <Resource value="Custom"/>
+        <Value value="2"/>
+    </CValidatorPlayerCompareResource>
+    <CValidatorPlayerCompareResource id="DifficultyValidatorBrutal">
+        <Resource value="Custom"/>
+        <Value value="3"/>
+    </CValidatorPlayerCompareResource>
+    <CValidatorPlayerCompareResource id="DifficultyValidatorInsane">
+        <Resource value="Custom"/>
+        <Value value="4"/>
+    </CValidatorPlayerCompareResource>
+    <CValidatorPlayerCompareResource id="DifficultyValidatorHardcore">
+        <Resource value="Custom"/>
+        <Value value="5"/>
+    </CValidatorPlayerCompareResource>
+    <CValidatorPlayerCompareResource id="DifficultyValidatorNormal2">
+        <Compare value="GE"/>
+        <Resource value="Custom"/>
+        <Value value="1"/>
+    </CValidatorPlayerCompareResource>
+    <CValidatorPlayerCompareRace id="DifficultyValidatorOwningPlayer">
+        <Compare value="NE"/>
+        <Value value="Zerg"/>
+    </CValidatorPlayerCompareRace>
+    <CValidatorUnitCompareBehaviorCount id="HeroLevel">
+        <WhichUnit Value="Source"/>
+        <Compare value="GT"/>
+        <Value value="1"/>
+        <Behavior value="Levels"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorUnitCompareBehaviorCount id="NotAlreadyCasting">
+        <WhichUnit Value="Caster"/>
+        <Behavior value="AlreadyCasting"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorUnitCompareBehaviorCount id="OverlordNotStunned">
+        <WhichUnit Value="Caster"/>
+        <Behavior value="BaseOverlordDmgSlow"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorUnitCompareBehaviorCount id="ScientistsIsStunned">
+        <ResultFailed value="Error,Error/ScientestIsNotStunned"/>
+        <Value value="1"/>
+        <Behavior value="ScientistStunned"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorCompareTrackedUnitsCount id="TagTeamHandlerFindLightning">
+        <Value value="1"/>
+        <BehaviorLink value="HandlerLightningTracker"/>
+        <TrackedUnitFilters value="-;Dead"/>
+    </CValidatorCompareTrackedUnitsCount>
+    <CValidatorCombine id="TargetAcrossCliff">
+        <CombineArray value="TargetNotAcrossCliff"/>
+        <Negate value="1"/>
+    </CValidatorCombine>
+    <CValidatorCombine id="TargetAcrossCliffAndLowerCliffLevel">
+        <Type value="And"/>
+        <CombineArray value="TargetAcrossCliff"/>
+        <CombineArray value="CliffLevelEqualOrLesser"/>
+    </CValidatorCombine>
+    <CValidatorUnitCompareBehaviorCount id="TornadoNotThrown">
+        <Behavior value="TornadoThrown"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorCombine id="VoidContainmentEnergyDrain">
+        <Type value="And"/>
+        <CombineArray value="TargetEnergyGE14"/>
+        <CombineArray value="TargetEnergyGE3Percent"/>
+    </CValidatorCombine>
+    <CValidatorLocationCompareRange id="TargetLE8Range">
+        <WhichLocation Value="TargetUnit"/>
+        <Compare value="LT"/>
+        <Range value="8"/>
+    </CValidatorLocationCompareRange>
+    <CValidatorLocationCompareRange id="TargetGE8Range">
+        <WhichLocation Effect="FocusedFlameTargetPersistent" Value="TargetUnit"/>
+        <Compare value="GT"/>
+        <Range value="8"/>
+    </CValidatorLocationCompareRange>
+    <CValidatorLocationEnumArea id="EnemyWithinx">
+        <WhichLocation Value="CasterUnit"/>
+        <AreaArray Radius="5"/>
+        <SearchFlags index="ExtendByUnitRadius" value="1"/>
+        <SearchFlags index="OffsetAreaByAngle" value="0"/>
+        <LaunchLocation Value="CasterUnit"/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Worker,Missile,Item,Dead,Hidden,Invulnerable,Summoned"/>
+    </CValidatorLocationEnumArea>
+    <CValidatorUnitCompareVital id="TargetEnergyGE3Percent">
+        <ResultFailed value="NotEnoughEnergy"/>
+        <Compare value="GE"/>
+        <Type value="Fraction"/>
+        <Value value="0.03"/>
+        <Vital value="Energy"/>
+    </CValidatorUnitCompareVital>
+    <CValidatorLocationCompareRange id="TargetUnitToSourceUnitLE7">
+        <Compare value="LE"/>
+        <Range value="7"/>
+        <Value Value="SourceUnit"/>
+    </CValidatorLocationCompareRange>
+    <CValidatorUnitCompareVital id="TargetEnergyGE14">
+        <ResultFailed value="NotEnoughEnergy"/>
+        <Compare value="GE"/>
+        <Value value="14"/>
+        <Vital value="Energy"/>
+    </CValidatorUnitCompareVital>
+    <CValidatorUnitCompareMarkerCount id="MarkersLE3">
+        <ResultFailed value="AlreadyTargeted"/>
+        <Compare value="LE"/>
+        <Value value="3"/>
+    </CValidatorUnitCompareMarkerCount>
+    <CValidatorLocationCompareRange id="TargetUnitToSourceUnitLE14" parent="TargetUnitToSourceUnitLE7">
+        <Range value="14"/>
+    </CValidatorLocationCompareRange>
+</Catalog>

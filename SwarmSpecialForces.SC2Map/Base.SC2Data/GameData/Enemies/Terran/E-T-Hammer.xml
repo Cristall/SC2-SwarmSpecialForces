@@ -1,0 +1,753 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CEffectApplyBehavior id="BarrageApplyCastingBuffNoWeapons" parent="AlreadyCastingNoWeapons">
+        <Duration value="6"/>
+    </CEffectApplyBehavior>
+    <CEffectCreatePersistent id="BarrageDelay">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetUnit"/>
+        <InitialEffect value="BarrageIssueDummyDirection"/>
+        <FinalEffect value="BarrageTargetDummySet"/>
+        <PeriodCount value="1"/>
+        <PeriodicPeriodArray value="1.5"/>
+    </CEffectCreatePersistent>
+    <CEffectIssueOrder id="BarrageIssueDummyDirection">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Abil value="DummyDirectionPointer"/>
+        <Player Value="Caster"/>
+        <Target Value="TargetUnit"/>
+    </CEffectIssueOrder>
+    <CEffectCreateUnit id="BarrageLineCreateRocks">
+        <ValidatorArray value="BossAbilityRequirementLvl5"/>
+        <ValidatorArray value="Pathable"/>
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetPoint"/>
+        <CreateFlags index="Birth" value="0"/>
+        <CreateFlags index="DropOff" value="0"/>
+        <CreateFlags index="OffsetByRadius" value="0"/>
+        <CreateFlags index="Placement" value="0"/>
+        <CreateFlags index="PlacementIgnoreBlockers" value="1"/>
+        <CreateFlags index="ProvideFood" value="0"/>
+        <CreateFlags index="TechComplete" value="0"/>
+        <CreateFlags index="UseFood" value="0"/>
+        <CreateFlags index="NormalizeSpawnOffset" value="0"/>
+        <SpawnUnit value="DestructibleRocks"/>
+    </CEffectCreateUnit>
+    <CEffectSet id="BarrageLineSet">
+        <EditorCategories value=""/>
+        <EffectArray value="BarrageLineDmg"/>
+        <EffectArray value="BarrageLineCreateRocks"/>
+        <TargetLocationType value="Point"/>
+    </CEffectSet>
+    <CEffectApplyBehavior id="RocketLaunchApplyCastingBuff">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Behavior value="AlreadyCasting"/>
+        <Flags index="UseDuration" value="1"/>
+        <Duration value="6.5"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="BarrageApplyHammerBuff">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Behavior value="BarrageHammerBuff"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyKinetic id="BarrageApplyKineticRotation">
+        <EditorCategories value=""/>
+        <Kinetic value="BarrageRotate"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="BarrageApplyKineticRotation2">
+        <EditorCategories value=""/>
+        <Kinetic value="BarrageRotate2"/>
+    </CEffectApplyKinetic>
+    <CEffectCreateUnit id="BarrageCreateTargetUnit">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetPoint"/>
+        <SpawnEffect value="BarrageDelay"/>
+        <SpawnUnit value="BarrageTargetDummy"/>
+        <CreateFlags index="Birth" value="0"/>
+        <CreateFlags index="PlacementIgnoreBlockers" value="1"/>
+        <CreateFlags index="PlacementIgnoreCliffTest" value="1"/>
+        <CreateFlags index="NormalizeSpawnOffset" value="0"/>
+    </CEffectCreateUnit>
+    <CEffectApplyBehavior id="BarrageDummyApplyTimedLife">
+        <EditorCategories value=""/>
+        <Behavior value="BarrageDummyUnitTimedLife"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="BarrageApplyCastingBuff" parent="AlreadyCasting">
+        <Duration value="11.5"/>
+    </CEffectApplyBehavior>
+    <CEffectCreatePersistent id="BarrageDummyUnitPersistent">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetUnit"/>
+        <InitialEffect value="BarrageIssueBarrageLine"/>
+        <PeriodCount value="10"/>
+        <PeriodicEffectArray value="BarrageIssueBarrageLine"/>
+        <PeriodicPeriodArray value="0.35"/>
+    </CEffectCreatePersistent>
+    <CEffectEnumArea id="BarrageInitialSearch">
+        <EditorCategories value=""/>
+        <LaunchLocation Value="CasterUnit"/>
+        <ImpactLocation Value="CasterUnit"/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Worker,Missile,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="6" Effect="BarrageInitialSet"/>
+        <MinCount value="1"/>
+        <MaxCount value="1"/>
+        <SearchFlags index="ExtendByUnitRadius" value="1"/>
+    </CEffectEnumArea>
+    <CEffectSet id="BarrageInitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="BarrageApplyCastingBuff"/>
+        <EffectArray value="BarrageApplyHammerBuff"/>
+        <EffectArray value="BarrageTargetDummyOffset"/>
+        <EffectArray value="BarrageApplyCastingBuffNoWeapons"/>
+        <TargetLocationType value="Point"/>
+    </CEffectSet>
+    <CEffectIssueOrder id="BarrageIssueBarrageLine">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Abil value="BarrageLine"/>
+        <Target Value="TargetUnit"/>
+    </CEffectIssueOrder>
+    <CEffectIssueOrder id="BarrageIssueStop">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Abil value="stop"/>
+        <Player Value="Caster"/>
+    </CEffectIssueOrder>
+    <CEffectDamage id="BarrageKillDummy">
+        <EditorCategories value=""/>
+        <ImpactLocation Value="SourceUnit"/>
+        <Flags index="Kill" value="1"/>
+        <Flags index="NoKillCredit" value="1"/>
+    </CEffectDamage>
+    <CEffectDamage id="BarrageLineDmg">
+        <EditorCategories value=""/>
+        <Amount value="1500"/>
+        <ImpactLocation Value="TargetPoint"/>
+        <AreaArray Radius="0.75" Fraction="1"/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Stasis,Dead,Hidden,Invulnerable"/>
+    </CEffectDamage>
+    <CEffectCreatePersistent id="BarrageLinePersistent">
+        <EditorCategories value=""/>
+        <WhichLocation Value="CasterPoint"/>
+        <OffsetVectorStartLocation Value="CasterPoint"/>
+        <Flags index="RandomOffset" value="1"/>
+        <PeriodCount value="8"/>
+        <PeriodicEffectArray value="BarrageLineSet"/>
+        <PeriodicOffsetArray value="0.25,-1.5,0"/>
+        <PeriodicOffsetArray value="-0.25,-1.5,0"/>
+        <PeriodicOffsetArray value="0,-2,0"/>
+        <PeriodicOffsetArray value="0.5,-2,0"/>
+        <PeriodicOffsetArray value="-0.5,-2,0"/>
+        <PeriodicOffsetArray value="0,-2,0"/>
+        <PeriodicOffsetArray value="0.25,-2.5,0"/>
+        <PeriodicOffsetArray value="-0.25,-2.5,0"/>
+        <PeriodicOffsetArray value="0.75,-2.5,0"/>
+        <PeriodicOffsetArray value="-0.75,-2.5,0"/>
+        <PeriodicOffsetArray value="0.25,-3,0"/>
+        <PeriodicOffsetArray value="-0.25,-3,0"/>
+        <PeriodicOffsetArray value="0.75,-3,0"/>
+        <PeriodicOffsetArray value="-0.75,-3,0"/>
+        <PeriodicOffsetArray value="0,-3.5,0"/>
+        <PeriodicOffsetArray value="0.5,-3.5,0"/>
+        <PeriodicOffsetArray value="-0.5,-3.5,0"/>
+        <PeriodicOffsetArray value="1,-3.5,0"/>
+        <PeriodicOffsetArray value="-1,-3.5,0"/>
+        <PeriodicOffsetArray value="0,-4,0"/>
+        <PeriodicOffsetArray value="0.625,-4,0"/>
+        <PeriodicOffsetArray value="-0.625,-4,0"/>
+        <PeriodicOffsetArray value="1.25,-4,0"/>
+        <PeriodicOffsetArray value="-1.25,-4,0"/>
+        <PeriodicOffsetArray value="0.25,-4.5,0"/>
+        <PeriodicOffsetArray value="-0.25,-4.5,0"/>
+        <PeriodicOffsetArray value="0.75,-4.5,0"/>
+        <PeriodicOffsetArray value="-0.75,-4.5,0"/>
+        <PeriodicOffsetArray value="1.25,-4.5,0"/>
+        <PeriodicOffsetArray value="-1.15,-4.5,0"/>
+        <PeriodicOffsetArray value="0,-5,0"/>
+        <PeriodicOffsetArray value="0.5,-5,0"/>
+        <PeriodicOffsetArray value="-0.5,-5,0"/>
+        <PeriodicOffsetArray value="1,-5,0"/>
+        <PeriodicOffsetArray value="-1,-5,0"/>
+        <PeriodicOffsetArray value="1.5,-5,0"/>
+        <PeriodicOffsetArray value="-1.5,-5,0"/>
+        <PeriodicOffsetArray value="0.25,-5.5,0"/>
+        <PeriodicOffsetArray value="-0.25,-5.5,0"/>
+        <PeriodicOffsetArray value="0.75,-5.5,0"/>
+        <PeriodicOffsetArray value="-0.75,-5.5,0"/>
+        <PeriodicOffsetArray value="1.25,-5.5,0"/>
+        <PeriodicOffsetArray value="-1.25,-5.5,0"/>
+        <PeriodicOffsetArray value="0,-6,0"/>
+        <PeriodicOffsetArray value="0.5,-6,0"/>
+        <PeriodicOffsetArray value="-0.5,-6,0"/>
+        <PeriodicOffsetArray value="1,-6,0"/>
+        <PeriodicOffsetArray value="-1,-6,0"/>
+        <PeriodicOffsetArray value="1.5,-6,0"/>
+        <PeriodicOffsetArray value="-1.5,-6,0"/>
+        <PeriodicOffsetArray value="0,-6.5,0"/>
+        <PeriodicOffsetArray value="-0.5,-6.5,0"/>
+        <PeriodicOffsetArray value="0.5,-6.5,0"/>
+        <PeriodicOffsetArray value="-1,-6.5,0"/>
+        <PeriodicOffsetArray value="1,-6.5,0"/>
+        <PeriodicOffsetArray value="0.25,-7,0"/>
+        <PeriodicOffsetArray value="-0.25,-7,0"/>
+        <PeriodicOffsetArray value="0.75,-7,0"/>
+        <PeriodicOffsetArray value="-0.75,-7,0"/>
+        <PeriodicPeriodArray value="0.0625"/>
+        <OffsetRandMode value="RandomNoRepeat"/>
+    </CEffectCreatePersistent>
+    <CEffectSet id="BarrageRotationRandomDirection">
+        <EditorCategories value=""/>
+        <EffectArray value="BarrageApplyKineticRotation"/>
+        <EffectArray value="BarrageApplyKineticRotation2"/>
+        <Random value="1"/>
+        <MinCount value="1"/>
+        <MaxCount value="1"/>
+    </CEffectSet>
+    <CEffectCreatePersistent id="BarrageTargetDummyOffset">
+        <EditorCategories value=""/>
+        <WhichLocation Value="CasterPoint"/>
+        <InitialEffect value="BarrageCreateTargetUnit"/>
+        <InitialOffset value="0,-5,0"/>
+    </CEffectCreatePersistent>
+    <CEffectSet id="BarrageTargetDummySet">
+        <EditorCategories value=""/>
+        <EffectArray value="BarrageRotationRandomDirection"/>
+        <EffectArray value="BarrageDummyApplyTimedLife"/>
+        <EffectArray value="BarrageDummyUnitPersistent"/>
+    </CEffectSet>
+    <CEffectApplyBehavior id="RocketLaunchApplyCastingBuffNoWeapons">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Behavior value="AlreadyCastingNoWeapons"/>
+        <Flags index="UseDuration" value="1"/>
+        <Duration value="3.75"/>
+    </CEffectApplyBehavior>
+    <CEffectCreatePersistent id="RocketLaunchFirstPersistent">
+        <EditorCategories value=""/>
+        <FinalEffect value="RocketLaunchSecondPersistent"/>
+        <PeriodCount value="1"/>
+        <PeriodicPeriodArray value="1.25"/>
+    </CEffectCreatePersistent>
+    <CEffectDamage id="RocketLaunchImpactDamage">
+        <EditorCategories value=""/>
+        <Amount value="4000"/>
+        <AreaArray Radius="2.5" Fraction="1"/>
+        <ExcludeArray Value="Target"/>
+        <SearchFilters value="Visible;Self,Player,Ally,Neutral,Worker,Missile,Dead,Hidden,Invulnerable"/>
+    </CEffectDamage>
+    <CEffectSet id="RocketLaunchImpactSet">
+        <EditorCategories value=""/>
+        <EffectArray value="RocketLaunchImpactDamage"/>
+        <EffectArray value="RocketLaunchRadioactivePersistent"/>
+        <TargetLocationType value="Point"/>
+    </CEffectSet>
+    <CEffectSet id="RocketLaunchInitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="RocketLaunchApplyCastingBuff"/>
+        <EffectArray value="RocketLaunchSearch"/>
+        <EffectArray value="RocketLaunchApplyCastingBuffNoWeapons"/>
+        <TargetLocationType value="Point"/>
+    </CEffectSet>
+    <CEffectDamage id="RocketLaunchRadioactiveDmg">
+        <EditorCategories value=""/>
+        <Amount value="400"/>
+        <AreaArray Radius="2.5" Fraction="1"/>
+        <SearchFilters value="Visible;Self,Player,Ally,Neutral,Worker,Missile,Dead,Hidden,Invulnerable"/>
+    </CEffectDamage>
+    <CEffectCreatePersistent id="RocketLaunchRadioactivePersistent">
+        <ValidatorArray value="BossAbilityRequirementLvl4"/>
+        <EditorCategories value=""/>
+        <PeriodCount value="28"/>
+        <PeriodicEffectArray value="RocketLaunchRadioactiveDmg"/>
+        <PeriodicPeriodArray value="0.175"/>
+    </CEffectCreatePersistent>
+    <CEffectEnumArea id="RocketLaunchSearch">
+        <EditorCategories value=""/>
+        <SearchFilters value="-;Player,Ally,Neutral,Worker,Missile,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="13" Effect="RocketLaunchFirstPersistent"/>
+        <MinCount value="1"/>
+        <ImpactLocation Value="SourceUnit"/>
+        <SearchFlags index="ExtendByUnitRadius" value="1"/>
+    </CEffectEnumArea>
+    <CEffectCreatePersistent id="RocketLaunchSecondPersistent">
+        <EditorCategories value=""/>
+        <FinalEffect value="RocketLaunchImpactSet"/>
+        <PeriodCount value="1"/>
+        <PeriodicPeriodArray value="1.5"/>
+    </CEffectCreatePersistent>
+    <CEffectApplyBehavior id="SeekerMissileApplyCastingBuff">
+        <EditorCategories value=""/>
+        <Behavior value="AlreadyCasting"/>
+        <Flags index="UseDuration" value="1"/>
+        <Duration value="7.15"/>
+        <WhichUnit Value="Caster"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="SeekerMissileApplyCastingBuffNoWeapons">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Behavior value="AlreadyCastingNoWeapons"/>
+        <Flags index="UseDuration" value="1"/>
+        <Duration value="2"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="SeekerMissileApplyTimedLife">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Source"/>
+        <Behavior value="SeekerMissileTimedLife"/>
+    </CEffectApplyBehavior>
+    <CEffectDamage id="SeekerMissileDmg">
+        <EditorCategories value=""/>
+        <Amount value="4000"/>
+        <AreaArray Radius="2" Fraction="1"/>
+        <ExcludeArray Value="Target"/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Item,Stasis,Dead,Hidden,Invulnerable"/>
+    </CEffectDamage>
+    <CEffectSet id="SeekerMissileInitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="SeekerMissileApplyCastingBuff"/>
+        <EffectArray value="SeekerMissileLaunchMissile2"/>
+        <EffectArray value="SeekerMissileApplyCastingBuffNoWeapons"/>
+    </CEffectSet>
+    <CEffectLaunchMissile id="SeekerMissileLaunchMissile2">
+        <EditorCategories value=""/>
+        <LaunchEffect value="SeekerMissileLaunchSet2"/>
+        <ImpactEffect value="SeekerMissileDmg"/>
+        <AmmoUnit value="SeekerMissile2"/>
+    </CEffectLaunchMissile>
+    <CEffectSet id="SeekerMissileLaunchSet2">
+        <EditorCategories value=""/>
+        <EffectArray value="SeekerMissileApplyTimedLife"/>
+    </CEffectSet>
+    <CEffectCreatePersistent id="ThorsHammer"/>
+    <CEffectDamage id="ThorsHammerDamage">
+        <Amount value="900"/>
+        <Death value="Normal"/>
+        <AttributeFactor index="Armored" value="0.15"/>
+    </CEffectDamage>
+    <CAbilEffectInstant id="Barrage">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="BarrageInitialSearch"/>
+        <CastOutroTime value="2"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="Barrage"/>
+    </CAbilEffectInstant>
+    <CAbilEffectTarget id="BarrageLine">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="BarrageLinePersistent"/>
+        <Range value="500"/>
+        <FollowRange value="0"/>
+    </CAbilEffectTarget>
+    <CAbilEffectInstant id="RocketLaunch">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="RocketLaunchInitialSet"/>
+        <Flags index="ChannelingMinimum" value="0"/>
+        <Flags index="ReApproachable" value="0"/>
+        <Flags index="RequireTargetVision" value="0"/>
+        <CastOutroTime value="3"/>
+        <UninterruptibleArray index="Channel" value="1"/>
+        <UninterruptibleArray index="Finish" value="1"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="RocketLaunch"/>
+    </CAbilEffectInstant>
+    <CAbilEffectTarget id="SeekerMissile2">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="SeekerMissileInitialSet"/>
+        <Range value="7"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="SeekerMissile"/>
+    </CAbilEffectTarget>
+    <CActorUnit id="BarrageDestructibleRocks" parent="GenericUnitStandard" unitName="DestructibleRocks">
+        <FogVisibility value="Dimmed"/>
+        <EditorCategories value=""/>
+        <On Terms="ActorCreation" Send="SetScale 0.200000 0.750000"/>
+        <Model value="BarrageDestructibleRocks"/>
+        <Scale value="0.100000"/>
+        <HighlightTooltip value="Unit/Name/Bogus"/>
+        <Wireframe>
+            <Image value="Assets\Textures\Wireframe-General-Destructiblerocks-6x6.dds"/>
+        </Wireframe>
+    </CActorUnit>
+    <CActorModel id="RocketLaunchImpact" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On index="0" Terms="ActorCreation" Send="$Death 0 -1.000000 -1.000000 1.250000 AsTimeScale"/>
+        <On index="1" Terms="AnimDone; AnimName Death" Send="Destroy"/>
+        <On index="2" Terms="ActorOrphan" Send="Destroy"/>
+        <On Terms="Effect.RocketLaunchImpactDamage.Start" Send="Create"/>
+        <On Terms="ActorCreation" Send="SetScale 0.700000"/>
+        <On Terms="ActorCreation" Send="SetOpacity 0.660000"/>
+        <On Terms="ActorCreation" Send="TextureSelectById RocketLaunchExplode_Normal"/>
+        <On Terms="ActorCreation" Send="TextureSelectById RocketLaunchExplode_Diffuse"/>
+        <Model value="RocketLaunchExplosion"/>
+    </CActorModel>
+    <CActorModel id="RocketLaunchRadioactiveCloud" parent="ModelAnimationStyleContinuous">
+        <EditorCategories value=""/>
+        <On Terms="Effect.RocketLaunchRadioactivePersistent.Start" Send="Create"/>
+        <On Terms="Effect.RocketLaunchRadioactivePersistent.Stop" Send="Destroy"/>
+    </CActorModel>
+    <CActorModel id="SeekerMissileAttackImpact" parent="ModelAnimationStyleOneShot">
+        <On Terms="Effect.SeekerMissileDmg.Start" Send="Create"/>
+    </CActorModel>
+    <CActorModel id="BarrageDmgImpact" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On index="0" Terms="ActorCreation" Send="$Death"/>
+        <On index="1" Terms="AnimDone; AnimName Death" Send="Destroy"/>
+        <On Terms="Effect.BarrageLineDmg.Start" Send="Create"/>
+        <On Terms="ActorCreation" Send="SetScale 0.500000"/>
+        <Model value="BarrageModel"/>
+    </CActorModel>
+    <CActorUnit id="BarrageDummyTarget" parent="GenericUnitStandard" unitName="BarrageTargetDummy">
+        <Model value="Larva"/>
+        <HighlightTooltip value="Unit/Name/BarrageDummyTarget"/>
+    </CActorUnit>
+    <CActorModel id="RocketLaunchDrop" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On index="0" Terms="ActorCreation" Send="$Birth 0 -1.000000 -1.000000 2.100000 AsDuration"/>
+        <On index="1" Terms="AnimDone; AnimName Birth" Send="Destroy"/>
+        <On Terms="Effect.RocketLaunchSecondPersistent.Start" Send="Create"/>
+        <On Terms="ActorCreation" Send="SetScale 0.750000"/>
+        <Model value="GhostNukeDrop"/>
+    </CActorModel>
+    <CActorModel id="RocketLaunchLaunch" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On index="0" Terms="ActorCreation" Send="$Birth 0 -1.000000 -1.000000 3.750000 AsDuration"/>
+        <On index="1" Terms="AnimDone; AnimName Birth" Send="Destroy"/>
+        <On Terms="Abil.RocketLaunch.SourceChannelStart" Send="Create"/>
+        <On Terms="ActorCreation" Send="SetScale 0.750000"/>
+        <Model value="GhostNukeLaunch"/>
+    </CActorModel>
+    <CActorModel id="RocketLaunchSplat" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On index="0" Terms="ActorCreation" Send="$Stand 0 -1.000000 -1.000000 3.750000 AsDuration"/>
+        <On index="1" Terms="AnimDone; AnimName Stand" Send="Destroy"/>
+        <On Terms="Effect.RocketLaunchFirstPersistent.Start" Send="Create"/>
+        <On Terms="ActorCreation" Send="SetScale 1.250000"/>
+        <Model value="GhostNukeIndicator"/>
+    </CActorModel>
+    <CActorMissile id="SeekerMissile" parent="GenericAttackMissile" unitName="SeekerMissile2">
+        <EditorCategories value=""/>
+        <Model value="HunterSeekerWeapon"/>
+        <FogVisibility value="Visible"/>
+        <On Terms="MotionPhaseStart; MotionPhase 1" Send="Create SeekerMissileTrackingBeam"/>
+        <DeathArray index="Normal" ModelLink="HunterSeekerFailDeath"/>
+    </CActorMissile>
+    <CActorAction id="SeekerMissileAttack" parent="GenericAttack" effectImpact="SeekerMissileDmg" effectLaunch="SeekerMissileLaunchMissile2">
+        <EditorCategories value=""/>
+        <Missile value="SeekerMissile"/>
+        <ImpactSiteOps Ops="SOpTargetUnit SOpAttachCenter"/>
+        <ImpactAttachQuery Methods="Origin"/>
+        <ImpactMap index="None" Model="Invisible" Sound="Raven_HunterSeekerAttackImpact" ModelReaction="HunterSeekerAttackImpactReaction"/>
+        <ImpactMap index="Shield" Sound="HunterSeekerAttackImpactShield" ModelReaction="HunterSeekerAttackImpactReactionShield"/>
+        <ImpactPhysics Name="HunterSeekerImpact" MatchKeys="Basic" Physics="HunterSeekerAttackForce"/>
+        <ImpactPhysics Name="HunterSeekerImpactAir" MatchKeys="BasicAir" Physics="HunterSeekerAttackForceAir"/>
+        <ShieldFlashType value="None"/>
+    </CActorAction>
+    <CActorModel id="SeekerMissileImpact" parent="ModelAnimationStyleContinuous">
+        <EditorCategories value=""/>
+    </CActorModel>
+    <CActorBeamSimple id="SeekerMissileTrackingBeam" parent="BeamSimpleAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On index="0" Terms="ActorCreation" Send="AnimBracketStart BSD Birth Stand Death"/>
+        <Model value="HunterSeekerTrackingBeam"/>
+        <HostLaunch Subject="_Missile" Actor="Find"/>
+        <HostLaunchSiteOps Ops="SOpAttachCenter"/>
+        <HostImpactSiteOps Ops="SOpTargetUnit SOpAttachCenter"/>
+        <FogVisibility value="Visible"/>
+    </CActorBeamSimple>
+    <CActorModel id="SeekerMissileTimer" parent="ModelAnimationStyleOneShot">
+        <FogVisibility value="Visible"/>
+        <EditorCategories value=""/>
+        <On index="0" Terms="ActorCreation" Send="AnimBracketStart BSD Birth Stand Death ContentPlayOnce 5.000000 AsDuration"/>
+        <On Terms="ActorCreation" Send="TimerSet 1.500000 InitialWait"/>
+        <On Terms="TimerExpired; TimerName InitialWait" Send="AnimSetPausedAll 0"/>
+        <On Terms="Behavior.SeekerMissileTimedLife.On" Send="Create"/>
+        <On Terms="ActorCreation" Send="AnimSetPausedAll"/>
+    </CActorModel>
+    <CActorUnit id="Thor">
+        <FogVisibility value="Dimmed"/>
+        <On index="64" Terms="Abil.attack.ReadyStart" Send="AnimGroupApply Ready"/>
+        <On index="65" Terms="WeaponStart.ThorsHammer.AttackStart; WeaponTargetElevation GE 20.000000" Send="AnimBracketStart Attack Attack,Superior"/>
+        <On index="66" Terms="WeaponStart.ThorsHammer.AttackStart; WeaponTargetElevation LE -20.000000" Send="AnimBracketStart Attack Attack,Inferior"/>
+        <On index="67" Terms="WeaponStart.ThorsHammer.AttackStart; WeaponTargetDistance LE 1.000000" Send="AnimBracketStart Attack Spell,B"/>
+        <On index="68" Terms="WeaponStart.ThorsHammer.AttackStart" Send="AnimBracketStart Attack Attack"/>
+        <On index="69" Terms="WeaponStop.*.AttackStop" Send="AnimBracketStop Attack"/>
+        <On index="70" Terms="Abil.attack.ReadyStop" Send="AnimGroupRemove Ready"/>
+        <On index="71" Terms="Abil.Barrage.SourceChannelStart" Send="AnimPlay Morph Morph NonLooping"/>
+        <On index="72" Terms="Abil.BarrageLine.SourceCastStart" Send="AnimPlay AbilityUse Spell 0 -1.000000 -1.000000 0.750000 AsDuration"/>
+        <On index="73" Terms="ModelEvent; ModelEventName SquibStartLeft" Send="Create ThorLeftCheerSquib"/>
+        <On index="74" Terms="ModelEvent; ModelEventName SquibStartRight" Send="Create ThorRightCheerSquib"/>
+        <On index="75" Terms="UnitHeightUpdate.*.Land" Send="Create Thor_Land"/>
+        <On index="76" Terms="UnitDeathCustomize; ValidateUnit HaveVoidShade" Send="DeathCustomize Shadow"/>
+        <On index="77" Terms="UnitDeathCustomize; ValidateUnit HaveTerrazineShadow" Send="DeathCustomize Shadow"/>
+        <On index="78" Terms="AnimDone; AnimName Morph" Send="TimerSet 5.000000 BarrageTime"/>
+        <On index="79" Terms="TimerExpired; TimerName BarrageTime" Send="AnimPlay AbilityEnd Morph,End NonLooping"/>
+        <On index="80" Terms="Abil.Barrage.SourceCastStop" Send="AnimPlay Stand Morph,Stand"/>
+        <On index="81" removed="1"/>
+        <On index="82" removed="1"/>
+        <On index="83" removed="1"/>
+        <On index="84" removed="1"/>
+        <On index="85" removed="1"/>
+        <On index="86" removed="1"/>
+        <On index="87" removed="1"/>
+        <On index="88" removed="1"/>
+        <On index="89" removed="1"/>
+        <On index="90" removed="1"/>
+        <On index="91" removed="1"/>
+        <On index="92" removed="1"/>
+        <On index="93" removed="1"/>
+        <On index="94" removed="1"/>
+        <On index="95" removed="1"/>
+        <On index="96" removed="1"/>
+        <On index="97" removed="1"/>
+        <On index="98" removed="1"/>
+        <On index="99" removed="1"/>
+        <On index="100" removed="1"/>
+        <On index="101" removed="1"/>
+        <On index="102" removed="1"/>
+        <On index="103" removed="1"/>
+        <On index="104" removed="1"/>
+        <On index="105" removed="1"/>
+        <On index="106" removed="1"/>
+        <On index="107" removed="1"/>
+        <On index="108" removed="1"/>
+        <On index="109" removed="1"/>
+        <On index="110" removed="1"/>
+        <On index="111" removed="1"/>
+        <On index="112" removed="1"/>
+        <On index="113" removed="1"/>
+        <On index="114" removed="1"/>
+        <On index="115" removed="1"/>
+        <On index="116" removed="1"/>
+        <On index="117" removed="1"/>
+        <On index="118" removed="1"/>
+        <On index="119" removed="1"/>
+        <On index="120" removed="1"/>
+        <On index="121" removed="1"/>
+        <On index="122" removed="1"/>
+        <On index="123" removed="1"/>
+        <On index="124" removed="1"/>
+        <On index="125" removed="1"/>
+        <On index="126" removed="1"/>
+        <On index="127" removed="1"/>
+        <On index="128" removed="1"/>
+        <On index="129" removed="1"/>
+        <On index="130" removed="1"/>
+        <Model value="Thor_CovertOps"/>
+        <BuildModel value="Thor_CovertOps"/>
+        <DeathArray index="Normal" ModelLink="Thor_CovertOps_Collection_Death"/>
+        <DeathCustoms index="6" ModelLink="Thor_CovertOps_DeathRagdoll"/>
+        <PlacementModel value="Thor_CovertOps"/>
+        <PortraitModel value="Thor_CovertOps_Portrait"/>
+        <CustomUnitStatusFrame value="SSF_UnitStatus/BossStatus"/>
+        <MinimapIcon value="Assets\Textures\btn-unit-collection-thor-covertops.dds"/>
+        <MinimapIconScale value="0.300000"/>
+        <MinimapIconBackground value="Assets\MinimapBackground.dds"/>
+        <MinimapIconBackgroundScale value="1.100000"/>
+        <MinimapIconBackgroundTintColor value="255,255,0,0"/>
+        <UnitFlags index="SuppressDefaultStatusBar" value="1"/>
+    </CActorUnit>
+    <CWeaponLegacy id="ThorsHammer">
+        <TargetFilters value="Ground,Visible;Worker,Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <AcquirePrioritization value="ByDistance"/>
+        <MinScanRange value="6.5"/>
+        <Range value="6"/>
+        <RangeSlop value="2.5"/>
+        <Period value="1.5"/>
+        <DamagePoint value="0.4"/>
+        <Backswing value="0.1"/>
+    </CWeaponLegacy>
+    <CMoverMissile id="SeekerMissileMover" parent="HunterSeekerMissile">
+        <MotionPhases index="0">
+            <Speed value="2.7968"/>
+            <MaxSpeed value="2.7968"/>
+            <Clearance value="1"/>
+            <ClearanceIgnoresTargetProximity value="1"/>
+            <Outro value="1"/>
+            <Timeout value="1"/>
+            <ThrowBandYaw value="-360,-360,-360,-360"/>
+            <ThrowBandPitch value="-360,-360,-360,-360"/>
+            <FlightTime value="1"/>
+        </MotionPhases>
+        <MotionPhases index="1">
+            <Driver value="Throw"/>
+            <Acceleration value="0"/>
+            <Speed value="0.0078"/>
+            <MaxSpeed value="0.0078"/>
+            <Clearance value="1"/>
+            <ClearanceAcceleration value="75"/>
+            <ClearanceIgnoresTargetProximity value="1"/>
+            <Outro value="1.5"/>
+            <Timeout value="1.5"/>
+            <ThrowVector value="0,-1,0"/>
+            <ThrowBandYaw value="-360,-360,-360,-360"/>
+            <ThrowBandPitch value="-360,-360,-360,-360"/>
+            <YawPitchRoll value="5759.6484"/>
+            <FlightTime value="1"/>
+        </MotionPhases>
+        <MotionPhases index="2">
+            <MaxSpeed value="5"/>
+            <Outro value="6.5"/>
+            <ThrowBandYaw value="-360,-360,-360,-360"/>
+            <ThrowBandPitch value="-360,-360,-360,-360"/>
+            <YawPitchRoll value="5759.6484"/>
+        </MotionPhases>
+        <MotionPhases index="3">
+            <Acceleration value="4"/>
+            <MaxSpeed value="5"/>
+            <Clearance value="0.5"/>
+            <Outro value="-2.25,-2"/>
+            <ThrowBandYaw value="-360,-360,-360,-360"/>
+            <ThrowBandPitch value="-360,-360,-360,-360"/>
+            <YawPitchRoll value="5759.6484"/>
+        </MotionPhases>
+        <MotionPhases index="4">
+            <Driver value="Guidance"/>
+            <Acceleration value="4"/>
+            <MaxSpeed value="5"/>
+            <Clearance value="0.25"/>
+            <ClearanceLookahead value="3"/>
+            <ThrowBandYaw value="-360,-360,-360,-360"/>
+            <ThrowBandPitch value="-360,-360,-360,-360"/>
+            <YawPitchRoll value="5759.6484"/>
+        </MotionPhases>
+    </CMoverMissile>
+    <CUnit id="DestructibleRocks">
+        <Race value="Terr"/>
+        <FogVisibility value="Dimmed"/>
+        <PlaneArray index="Ground" value="1"/>
+        <LifeStart value="1500"/>
+        <LifeMax value="1500"/>
+        <EditorCategories value=""/>
+        <Collide index="Locust" value="1"/>
+        <Collide index="Small" value="1"/>
+        <Attributes index="Armored" value="1"/>
+        <Attributes index="Summoned" value="1"/>
+        <LifeArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </LifeArmorFormula>
+        <ShieldArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </ShieldArmorFormula>
+        <LifeRegenDelay value="5"/>
+        <ShieldRegenDelay value="5"/>
+    </CUnit>
+    <CUnit id="BarrageTargetDummy">
+        <FlagArray index="Turnable" value="0"/>
+        <FlagArray index="Movable" value="0"/>
+        <FlagArray index="Uncommandable" value="1"/>
+        <FlagArray index="Unselectable" value="1"/>
+        <FlagArray index="Untargetable" value="1"/>
+        <FlagArray index="Uncursorable" value="1"/>
+        <FlagArray index="NoDraw" value="1"/>
+        <FlagArray index="Undetectable" value="1"/>
+        <FlagArray index="Unradarable" value="1"/>
+        <FlagArray index="KillCredit" value="0"/>
+        <FlagArray index="Invulnerable" value="1"/>
+        <FlagArray index="NoDeathEvent" value="1"/>
+        <FlagArray index="NoPortraitTalk" value="1"/>
+        <FlagArray index="ShowResources" value="0"/>
+        <FlagArray index="Unstoppable" value="1"/>
+        <FlagArray index="ClearRallyOnTargetLost" value="0"/>
+        <FlagArray index="PlayerRevivable" value="0"/>
+        <FlagArray index="CameraFollow" value="0"/>
+        <Attributes index="Summoned" value="1"/>
+        <TurningRate value="0"/>
+        <Radius value="0"/>
+        <MinimapRadius value="0"/>
+        <EditorCategories value=""/>
+        <Mover value="Fly"/>
+        <BehaviorArray Link="Taunt@Untauntable"/>
+    </CUnit>
+    <CUnit id="SeekerMissile2" parent="MISSILE">
+        <Mover value="SeekerMissileMover"/>
+    </CUnit>
+    <CUnit id="Thor">
+        <FogVisibility value="Dimmed"/>
+        <Attributes index="Armored" value="0"/>
+        <Attributes index="Mechanical" value="0"/>
+        <Attributes index="Heroic" value="1"/>
+        <LifeStart value="32500"/>
+        <LifeMax value="32500"/>
+        <LifeArmor value="0"/>
+        <LifeRegenDelay value="5"/>
+        <LifeRegenRate value="140"/>
+        <Speed value="3.5"/>
+        <Sight value="15"/>
+        <VisionHeight value="4"/>
+        <AbilArray Link="RocketLaunch"/>
+        <AbilArray Link="Barrage"/>
+        <AbilArray Link="BarrageLine"/>
+        <AbilArray Link="DummyDirectionPointer"/>
+        <AbilArray Link="SeekerMissile2"/>
+        <BehaviorArray Link="Difficulty0"/>
+        <BehaviorArray Link="Difficulty1"/>
+        <BehaviorArray Link="Difficulty2"/>
+        <BehaviorArray Link="Difficulty3"/>
+        <BehaviorArray Link="Difficulty4"/>
+        <BehaviorArray Link="Difficulty5"/>
+        <BehaviorArray Link="DifficultyCustom"/>
+        <BehaviorArray Link="Detector10"/>
+        <BehaviorArray Link="BossesP0Armor"/>
+        <WeaponArray index="0" Link="ThorsHammer"/>
+        <WeaponArray index="1" removed="1"/>
+        <CardLayouts index="0">
+            <LayoutButtons index="5" Face="RocketLaunch" AbilCmd="RocketLaunch,Execute"/>
+            <LayoutButtons index="6" Face="Barrage" AbilCmd="Barrage,Execute" Column="1"/>
+            <LayoutButtons Face="SeekerMissile" Type="AbilCmd" AbilCmd="SeekerMissile2,Execute" Row="2" Column="2"/>
+        </CardLayouts>
+        <ScoreMake value="0"/>
+        <ScoreKill value="0"/>
+        <EditorCategories value=""/>
+        <CostResource index="Minerals" value="0"/>
+        <CostResource index="Vespene" value="0"/>
+        <TechAliasArray index="0" removed="1"/>
+        <GlossaryPriority value="0"/>
+        <GlossaryStrongArray index="0" removed="1"/>
+        <GlossaryStrongArray index="1" removed="1"/>
+        <GlossaryStrongArray index="2" removed="1"/>
+        <GlossaryWeakArray index="0" removed="1"/>
+        <GlossaryWeakArray index="1" removed="1"/>
+        <GlossaryWeakArray index="2" removed="1"/>
+        <GlossaryCategory value=""/>
+        <Collide index="Small" value="0"/>
+        <HotkeyCategory value=""/>
+        <LifeArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </LifeArmorFormula>
+        <ShieldArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </ShieldArmorFormula>
+        <ShieldRegenDelay value="5"/>
+        <LifeArmorTip value="Unit/P0Bosses/ArmorTooltip"/>
+    </CUnit>
+    <CBehaviorBuff id="BarrageHammerBuff">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="5"/>
+        <Period value="0.125"/>
+        <FinalEffect value="BarrageIssueStop"/>
+        <Modification MoveSpeedMaximum="0">
+            <StateFlags index="Uncommandable" value="1"/>
+            <WeaponDisableArray value="ThorsHammer"/>
+        </Modification>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="RocketLaunchHammerBuff">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification>
+            <StateFlags index="Uncommandable" value="1"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="BarrageDummyUnitTimedLife" parent="TimedLifeHidden"/>
+    <CBehaviorBuff id="SeekerMissileTimedLife" parent="TimedLifeHidden">
+        <Duration value="6.5"/>
+    </CBehaviorBuff>
+</Catalog>

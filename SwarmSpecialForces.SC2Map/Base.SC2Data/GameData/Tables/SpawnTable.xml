@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CUser id="SpawnTable">
+        <Fields Id="Amount" Type="Fixed" EditorColumn="2"/>
+        <Fields Id="Unit" Type="Unit" EditorColumn="1"/>
+        <Instances Id="[Default]"/>
+        <Instances Id="Barracks">
+            <Fixed Fixed="3">
+                <Field Id="Amount"/>
+            </Fixed>
+            <Unit Unit="Marine2">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="EngineeringBay">
+            <Fixed Fixed="1">
+                <Field Id="Amount"/>
+            </Fixed>
+            <Unit Unit="Marauder2">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="GhostAcademy">
+            <Fixed Fixed="1">
+                <Field Id="Amount"/>
+            </Fixed>
+            <Unit Unit="Ghost2">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="HERCCompound">
+            <Fixed Fixed="2">
+                <Field Id="Amount"/>
+            </Fixed>
+            <Unit Unit="Reaper2">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="Factory">
+            <Fixed Fixed="2">
+                <Field Id="Amount"/>
+            </Fixed>
+            <Unit Unit="Hellion2">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="FusionCore">
+            <Fixed Fixed="1.25">
+                <Field Id="Amount"/>
+            </Fixed>
+            <Unit Unit="Cyclone2">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="Starport">
+            <Fixed Fixed="2">
+                <Field Id="Amount"/>
+            </Fixed>
+            <Unit Unit="Viking2">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="Armory">
+            <Fixed Fixed="2">
+                <Field Id="Amount"/>
+            </Fixed>
+            <Unit Unit="SiegeTank2">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="Barracks2">
+            <Fixed Fixed="3">
+                <Field Id="Amount"/>
+            </Fixed>
+            <Unit Unit="Marine22">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="EngineeringBay2">
+            <Fixed Fixed="1.5">
+                <Field Id="Amount"/>
+            </Fixed>
+            <Unit Unit="Marauder22">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="GhostAcademy2">
+            <Fixed Fixed="1.2998">
+                <Field Id="Amount"/>
+            </Fixed>
+            <Unit Unit="Ghost3">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="HERCCompound2">
+            <Fixed Fixed="1">
+                <Field Id="Amount"/>
+            </Fixed>
+            <Unit Unit="Reaper22">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="Factory2">
+            <Fixed Fixed="2">
+                <Field Id="Amount"/>
+            </Fixed>
+            <Unit Unit="Hellion22">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="FusionCore2">
+            <Fixed Fixed="1">
+                <Field Id="Amount"/>
+            </Fixed>
+            <Unit Unit="Cyclone22">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="Starport2">
+            <Fixed Fixed="1.5">
+                <Field Id="Amount"/>
+            </Fixed>
+            <Unit Unit="Viking22">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="Armory2">
+            <Fixed Fixed="2">
+                <Field Id="Amount"/>
+            </Fixed>
+            <Unit Unit="SiegeTank22">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="CyberneticsCoreAncient">
+            <Fixed Fixed="0.7998">
+                <Field Id="Amount"/>
+            </Fixed>
+            <Unit Unit="DisruptorAncient">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="CyberneticsCoreStandard">
+            <Fixed Fixed="0.7998">
+                <Field Id="Amount"/>
+            </Fixed>
+            <Unit Unit="DisruptorStandard">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="DarkShrineAncient">
+            <Fixed Fixed="0.9">
+                <Field Id="Amount"/>
+            </Fixed>
+            <Unit Unit="DarkTemplarAncient">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="DarkShrineTaldarim">
+            <Fixed Fixed="0.9">
+                <Field Id="Amount"/>
+            </Fixed>
+            <Unit Unit="DarkTemplarTaldarim2">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="ForgePurifier">
+            <Fixed Fixed="0.5998">
+                <Field Id="Amount"/>
+            </Fixed>
+            <Unit Unit="SentryPurifier2">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="ForgeTaldarim">
+            <Fixed Fixed="0.5998">
+                <Field Id="Amount"/>
+            </Fixed>
+            <Unit Unit="SentryNerazim">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="GatewayAncient">
+            <Fixed Fixed="1">
+                <Field Id="Amount"/>
+            </Fixed>
+            <Unit Unit="AdeptAncient">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="GatewayTaldarim">
+            <Fixed Fixed="1">
+                <Field Id="Amount"/>
+            </Fixed>
+            <Unit Unit="AdeptTaldarim">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="GatewayPurifier">
+            <Fixed Fixed="1">
+                <Field Id="Amount"/>
+            </Fixed>
+            <Unit Unit="DragoonPurifier">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="GatewayStandard">
+            <Fixed Fixed="1">
+                <Field Id="Amount"/>
+            </Fixed>
+            <Unit Unit="DragoonStandard">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="NexusAncient">
+            <Fixed Fixed="1.75">
+                <Field Id="Amount"/>
+            </Fixed>
+            <Unit Unit="ZealotAncient">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="NexusNerazim">
+            <Fixed Fixed="1.75">
+                <Field Id="Amount"/>
+            </Fixed>
+            <Unit Unit="ZealotNerazim">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="NexusPurifier">
+            <Fixed Fixed="1.75">
+                <Field Id="Amount"/>
+            </Fixed>
+            <Unit Unit="ZealotPurifier2">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="NexusStandard">
+            <Fixed Fixed="1.75">
+                <Field Id="Amount"/>
+            </Fixed>
+            <Unit Unit="ZealotStandard">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="NexusTaldarim">
+            <Fixed Fixed="1.75">
+                <Field Id="Amount"/>
+            </Fixed>
+            <Unit Unit="ZealotTaldarim">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="RoboticsBayAncient">
+            <Fixed Fixed="1">
+                <Field Id="Amount"/>
+            </Fixed>
+            <Unit Unit="ColossusAncient">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="RoboticsBayPurifier">
+            <Fixed Fixed="1">
+                <Field Id="Amount"/>
+            </Fixed>
+            <Unit Unit="ColossusPurifier2">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="RoboticsBayTaldarim">
+            <Fixed Fixed="1">
+                <Field Id="Amount"/>
+            </Fixed>
+            <Unit Unit="ColossusTaldarim2">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="RoboticsFacilityAncient">
+            <Fixed Fixed="1.5">
+                <Field Id="Amount"/>
+            </Fixed>
+            <Unit Unit="ImmortalAncient">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="RoboticsFacilityPurifier">
+            <Fixed Fixed="1.5">
+                <Field Id="Amount"/>
+            </Fixed>
+            <Unit Unit="ImmortalPurifier">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="TemplarArchiveStandard">
+            <Fixed Fixed="1">
+                <Field Id="Amount"/>
+            </Fixed>
+            <Unit Unit="ArchonPurifier">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="TemplarArchiveAncient">
+            <Fixed Fixed="1">
+                <Field Id="Amount"/>
+            </Fixed>
+            <Unit Unit="ArchonAncient">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="TwilightCouncilPurifier">
+            <Fixed Fixed="1">
+                <Field Id="Amount"/>
+            </Fixed>
+            <Unit Unit="StalkerPurifier2">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="TwilightCouncilTaldarim">
+            <Fixed Fixed="1">
+                <Field Id="Amount"/>
+            </Fixed>
+            <Unit Unit="StalkerTaldarim">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="MechaSpawningPool">
+            <Fixed Fixed="2">
+                <Field Id="Amount"/>
+            </Fixed>
+            <Unit Unit="MechaZergling">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="MechaInfestationPit">
+            <Fixed Fixed="0.8">
+                <Field Id="Amount"/>
+            </Fixed>
+            <Unit Unit="MechaInfestor">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="MechaEvolutionChamber">
+            <Fixed Fixed="1.25">
+                <Field Id="Amount"/>
+            </Fixed>
+            <Unit Unit="MechaRavager">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="MechaRoachWarren">
+            <Fixed Fixed="1.5">
+                <Field Id="Amount"/>
+            </Fixed>
+            <Unit Unit="MechaRoach">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="MechaHatchery">
+            <Fixed Fixed="3">
+                <Field Id="Amount"/>
+            </Fixed>
+            <Unit Unit="MechaBroodling">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="MechaLair">
+            <Fixed Fixed="2.5">
+                <Field Id="Amount"/>
+            </Fixed>
+            <Unit Unit="MechaLocust">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="MechaHive">
+            <Fixed Fixed="1">
+                <Field Id="Amount"/>
+            </Fixed>
+            <Unit Unit="MechaQueen">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="MechaBanelingNest">
+            <Fixed Fixed="2.5">
+                <Field Id="Amount"/>
+            </Fixed>
+            <Unit Unit="MechaBaneling">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="MechaUltraliskCavern">
+            <Fixed Fixed="0.6">
+                <Field Id="Amount"/>
+            </Fixed>
+            <Unit Unit="MechaUltralisk">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="MechaHydraliskDen">
+            <Fixed Fixed="1.25">
+                <Field Id="Amount"/>
+            </Fixed>
+            <Unit Unit="MechaHydralisk">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+    </CUser>
+</Catalog>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Desc>
+    <Include path="UI/Layout/SSF_LoadingScreen.SC2Layout" requiredtoload="IS_EDITOR"/>
+
+    <Include path="UI/Layout/SSF_Constants.SC2Layout"/>
+    <Include path="UI/Layout/SSF_Templates.SC2Layout"/>
+    <Include path="UI/Layout/SSF_Achievements.SC2Layout"/>
+    <Include path="UI/Layout/SSF_Options.SC2Layout"/>
+    <Include path="UI/Layout/SSF_Popup.SC2Layout"/>
+    <Include path="UI/Layout/SSF_Stats.SC2Layout"/>
+    <Include path="UI/Layout/SSF_Speedruns.SC2Layout"/>
+    <Include path="UI/Layout/SSF_Votekick.SC2Layout"/>
+    <Include path="UI/Layout/SSF_Menu.SC2Layout"/>
+
+    <Include path="UI/Layout/SSF_UnitStatus.SC2Layout"/>
+    <Include path="UI/Layout/SSF_CustomDefeat.SC2Layout"/>
+    <Include path="UI/Layout/SSF_HeroPanel.SC2Layout"/>
+    <Include path="UI/Layout/SSF_HivePanel.SC2Layout"/>
+    <Include path="UI/Layout/SSF_Playerboard.SC2Layout"/>
+
+    <Include path="UI/Layout/SSF_HeroSelection.SC2Layout"/>
+    <Include path="UI/Layout/SSF_Tutorial.SC2Layout"/>
+
+    <Include path="UI/Layout/SSF_DebugMenu.SC2Layout"/>
+</Desc>

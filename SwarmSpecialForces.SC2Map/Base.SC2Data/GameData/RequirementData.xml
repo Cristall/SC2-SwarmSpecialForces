@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CRequirement id="HeroAbilityParent@Req">
+        <NodeArray index="Use" Link="CountUpgradeHeroAbilityParent@UnlockCompleteOnly"/>
+    </CRequirement>
+    <CRequirement id="TutorialNotPaused">
+        <NodeArray index="Use" Link="Eq4037611437CountBehaviorTutorialNotPausedCompleteOnlyAtUnit0"/>
+    </CRequirement>
+</Catalog>

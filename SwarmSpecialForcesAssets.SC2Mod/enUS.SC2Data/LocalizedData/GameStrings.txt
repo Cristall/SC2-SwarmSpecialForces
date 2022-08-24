@@ -1,0 +1,3 @@
+﻿DocInfo/DescLong=Contains assets required for the map Swarm Special Forces
+DocInfo/DescShort=Any
+DocInfo/Name=Swarm Special Forces Assets

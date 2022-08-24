@@ -1,0 +1,870 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CEffectDamage id="CorrosiveBurst@DummyEffect">
+        <EditorCategories value=""/>
+    </CEffectDamage>
+    <CEffectSet id="CorrosiveBurst@ImpactSet">
+        <ValidatorArray value="CorrosiveBurst@TargetHasCorrosiveSpikes"/>
+        <EditorCategories value=""/>
+        <EffectArray value="CorrosiveBurst@DummyEffect"/>
+    </CEffectSet>
+    <CEffectSet id="CorrosiveBurst@InitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="CorrosiveBurst@DisableCorrosiveSpikes"/>
+        <EffectArray value="CorrosiveBurst@Search"/>
+    </CEffectSet>
+    <CEffectRemoveBehavior id="CorrosiveBurst@RemoveCorrosiveSpikes">
+        <EditorCategories value=""/>
+        <BehaviorLink value="CorrosiveSpikes@Dot"/>
+        <RequireCasterUnit Value="Caster"/>
+    </CEffectRemoveBehavior>
+    <CEffectApplyBehavior id="CorrosiveBurst@DisableCorrosiveSpikes">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+    </CEffectApplyBehavior>
+    <CEffectDamage id="CorrosiveBurst@Dmg">
+        <EditorCategories value=""/>
+    </CEffectDamage>
+    <CEffectEnumArea id="CorrosiveBurst@Search">
+        <EditorCategories value=""/>
+        <SearchFilters value="-;Player,Ally,Neutral,Missile,Item,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="15" Effect="CorrosiveBurst@ImpactSet"/>
+    </CEffectEnumArea>
+    <CEffectApplyBehavior id="Focus@AttackModifierApply">
+        <EditorCategories value=""/>
+        <Behavior value="Focus@AttackModifier"/>
+        <WhichUnit Value="Caster"/>
+    </CEffectApplyBehavior>
+    <CEffectRemoveBehavior id="Focus@AttackModifierRemove">
+        <EditorCategories value=""/>
+        <BehaviorLink value="Focus@AttackModifier"/>
+    </CEffectRemoveBehavior>
+    <CEffectSet id="Focus@CleanupSet">
+        <EditorCategories value=""/>
+        <EffectArray value="Focus@AttackModifierRemove"/>
+        <EffectArray value="Focus@BuffStackRemove"/>
+        <EffectArray value="Focus@TargetTrackerRemove"/>
+    </CEffectSet>
+    <CEffectSet id="Focus@InitialSet">
+        <EditorCategories value=""/>
+        <EffectArray value="Focus@TargetTrackerApply"/>
+        <EffectArray value="Focus@AttackModifierApply"/>
+    </CEffectSet>
+    <CEffectSet id="Focus@NewTargetSet">
+        <EditorCategories value=""/>
+        <EffectArray value="Focus@BuffStackRemove"/>
+        <EffectArray value="Focus@TargetTrackerAddTarget"/>
+    </CEffectSet>
+    <CEffectAddTrackedUnit id="Focus@TargetTrackerAddTarget">
+        <EditorCategories value=""/>
+        <BehaviorLink value="Focus@TargetTracker"/>
+        <TrackedUnit Value="Target"/>
+    </CEffectAddTrackedUnit>
+    <CEffectApplyBehavior id="Focus@TargetTrackerApply">
+        <EditorCategories value=""/>
+        <Behavior value="Focus@TargetTracker"/>
+    </CEffectApplyBehavior>
+    <CEffectRemoveBehavior id="Focus@TargetTrackerRemove">
+        <EditorCategories value=""/>
+        <BehaviorLink value="Focus@TargetTracker"/>
+    </CEffectRemoveBehavior>
+    <CEffectLaunchMissile id="HeroHydraWeaponMissile">
+        <EditorCategories value=""/>
+        <ImpactEffect value="HeroHydraWeaponDmg"/>
+        <AmmoUnit value="NeedleSpinesWeapon"/>
+    </CEffectLaunchMissile>
+    <CEffectApplyBehavior id="Focus@BuffStackApply">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Behavior value="Focus@BuffStack"/>
+    </CEffectApplyBehavior>
+    <CEffectRemoveBehavior id="Focus@BuffStackRemove">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <BehaviorLink value="Focus@BuffStack"/>
+    </CEffectRemoveBehavior>
+    <CEffectSwitch id="Focus@TargetCheck">
+        <EditorCategories value=""/>
+        <CaseArray Validator="Focus@TargetIsTracked" Effect="Focus@BuffStackApply"/>
+        <CaseDefault value="Focus@NewTargetSet"/>
+    </CEffectSwitch>
+    <CEffectApplyBehavior id="AcidPit@ApplyDebuff">
+        <EditorCategories value=""/>
+        <Behavior value="AcidPit@Debuff"/>
+    </CEffectApplyBehavior>
+    <CEffectDamage id="AcidPit@Dmg">
+        <EditorCategories value=""/>
+        <ResponseFlags index="Acquire" value="1"/>
+        <ResponseFlags index="Flee" value="1"/>
+        <Flags index="Notification" value="1"/>
+        <Amount value="0">
+            <AccumulatorArray value="AcidPit@DmgScaled"/>
+            <AccumulatorArray value="AcidPit@DmgBase"/>
+            <AccumulatorArray value="HeroSpellDmgMultiplier"/>
+        </Amount>
+        <Death value="Disintegrate"/>
+    </CEffectDamage>
+    <CEffectDamage id="HeroHydraWeaponDmg">
+        <ValidatorArray value="NotInvulnerable"/>
+        <EditorCategories value="Race:Zerg"/>
+        <Marker Link="Effect/NeedleSpinesDamage"/>
+        <ResponseFlags index="Acquire" value="1"/>
+        <ResponseFlags index="Flee" value="1"/>
+        <ArmorReduction value="1"/>
+        <Flags index="Notification" value="1"/>
+        <Flags index="Impact" value="1"/>
+        <Kind value="Ranged"/>
+        <KindSplash value="Ranged"/>
+        <Amount value="0">
+            <AccumulatorArray value="HeroHydraWeaponDmgScaled"/>
+            <AccumulatorArray value="HeroHydraWeaponDmgBase"/>
+        </Amount>
+        <AreaArray Radius="0.375" Fraction="1"/>
+        <ExcludeArray Value="Target"/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Dead,Hidden,Invulnerable"/>
+        <SearchFlags index="CallForHelp" value="1"/>
+        <SearchFlags index="OffsetByUnitRadius" value="1"/>
+        <SearchFlags index="OffsetAreaByAngle" value="1"/>
+    </CEffectDamage>
+    <CEffectCreatePersistent id="AcidPit@Persistent">
+        <EditorCategories value=""/>
+        <WhichLocation Effect="AcidPit@LaunchMissile"/>
+        <PeriodCount value="40"/>
+        <PeriodicEffectArray value="AcidPit@Search"/>
+        <PeriodicPeriodArray value="0.175"/>
+    </CEffectCreatePersistent>
+    <CEffectEnumArea id="AcidPit@Search">
+        <EditorCategories value=""/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="1.75" Effect="AcidPit@Set"/>
+    </CEffectEnumArea>
+    <CEffectDamage id="CorrosiveSpikes@Dmg">
+        <EditorCategories value=""/>
+        <Amount value="0">
+            <AccumulatorArray value="CorrosiveSpikes@DmgScaled"/>
+            <AccumulatorArray value="CorrosiveSpikes@DmgBase"/>
+            <AccumulatorArray value="HeroSpellDmgMultiplier"/>
+        </Amount>
+        <Death value="Disintegrate"/>
+        <ValidatorArray value="NotInvulnerable"/>
+    </CEffectDamage>
+    <CEffectSet id="AcidPit@Set">
+        <EditorCategories value=""/>
+        <EffectArray value="AcidPit@ApplyDebuff"/>
+        <EffectArray value="AcidPit@Dmg"/>
+    </CEffectSet>
+    <CEffectApplyBehavior id="CorrosiveSpikes@DotApply">
+        <EditorCategories value=""/>
+        <Behavior value="CorrosiveSpikes@Dot"/>
+    </CEffectApplyBehavior>
+    <CEffectLaunchMissile id="AcidPit@LaunchMissile">
+        <ValidatorArray index="0" value="Pathable"/>
+        <EditorCategories value=""/>
+        <ImpactLocation Value="TargetPoint"/>
+        <LaunchOffset value="0,0,1"/>
+        <ImpactOffset value="0,0,0.05"/>
+        <ImpactEffect value="AcidPit@Persistent"/>
+        <Flags index="ValidateBenign" value="0"/>
+        <AmmoUnit value="AcidSporesMissile"/>
+    </CEffectLaunchMissile>
+    <CAbilEffectInstant id="CorrosiveBurst">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Flags index="BestUnit" value="1"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="CorrosiveBurst" Requirements="CorrosiveBurst@Req"/>
+        <Effect index="0" value="CorrosiveBurst@InitialSet"/>
+        <Cost>
+            <Vital index="Energy" value="150"/>
+            <Cooldown TimeUse="60"/>
+        </Cost>
+    </CAbilEffectInstant>
+    <CAbilEffectTarget id="AcidPit">
+        <Alignment value="Negative"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="AcidPit@LaunchMissile"/>
+        <Cost>
+            <Vital index="Energy" value="50"/>
+            <Cooldown TimeUse="10"/>
+        </Cost>
+        <Range value="4.25"/>
+        <CastIntroTime value="0.125"/>
+        <CursorEffect value="AcidPit@Search"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="AcidPit"/>
+    </CAbilEffectTarget>
+    <CAbilBehavior id="Focus">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <CmdButtonArray index="On" DefaultButtonFace="Focus" Requirements="Focus@Req"/>
+        <CmdButtonArray index="Off" DefaultButtonFace="Focus@Off">
+            <Flags index="ShowInGlossary" value="1"/>
+        </CmdButtonArray>
+        <Flags index="Toggle" value="1"/>
+        <Flags index="Transient" value="1"/>
+        <BehaviorArray value="Focus@Toggle"/>
+        <Cost/>
+    </CAbilBehavior>
+    <CValidatorUnitCompareBehaviorCount id="CorrosiveBurst@DisableCorrosiveSpikes">
+        <WhichUnit Value="Caster"/>
+        <Behavior value="CorrosiveBurst@DisableCorrosiveSpikes"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorUnitCompareBehaviorCount id="CorrosiveBurst@TargetHasCorrosiveSpikes">
+        <Compare value="GT"/>
+        <Behavior value="CorrosiveSpikes@Dot"/>
+        <RequireCasterUnit Value="Caster"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorUnitCompareBehaviorCount id="Focus@BuffStack12Below">
+        <WhichUnit Value="Caster"/>
+        <Compare value="LT"/>
+        <Value value="12"/>
+        <Behavior value="Focus@BuffStack"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorUnitCompareBehaviorCount id="Focus@BuffStack16Below">
+        <WhichUnit Value="Caster"/>
+        <Compare value="LT"/>
+        <Value value="16"/>
+        <Behavior value="Focus@BuffStack"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorUnitCompareBehaviorCount id="Focus@BuffStack20Below">
+        <WhichUnit Value="Caster"/>
+        <Compare value="LT"/>
+        <Value value="20"/>
+        <Behavior value="Focus@BuffStack"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorUnitCompareBehaviorCount id="Focus@BuffStack4Below">
+        <WhichUnit Value="Caster"/>
+        <Compare value="LT"/>
+        <Value value="4"/>
+        <Behavior value="Focus@BuffStack"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorUnitCompareBehaviorCount id="Focus@BuffStack8Below">
+        <WhichUnit Value="Caster"/>
+        <Compare value="LT"/>
+        <Value value="8"/>
+        <Behavior value="Focus@BuffStack"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorCombine id="Focus@BuffStackVisual1">
+        <Type value="And"/>
+        <CombineArray value="Focus@BuffStack4OrHigher"/>
+        <CombineArray value="Focus@BuffStack8Below"/>
+    </CValidatorCombine>
+    <CValidatorCombine id="Focus@BuffStackVisual2">
+        <Type value="And"/>
+        <CombineArray value="Focus@BuffStack8OrHigher"/>
+        <CombineArray value="Focus@BuffStack12Below"/>
+    </CValidatorCombine>
+    <CValidatorCombine id="Focus@BuffStackVisual3">
+        <Type value="And"/>
+        <CombineArray value="Focus@BuffStack12OrHigher"/>
+        <CombineArray value="Focus@BuffStack16Below"/>
+    </CValidatorCombine>
+    <CValidatorCombine id="Focus@BuffStackVisual4">
+        <Type value="And"/>
+        <CombineArray value="Focus@BuffStack16OrHigher"/>
+        <CombineArray value="Focus@BuffStack20Below"/>
+    </CValidatorCombine>
+    <CValidatorCombine id="Focus@BuffStackVisual5">
+        <Type value="And"/>
+        <CombineArray value="Focus@BuffStack20OrHigher"/>
+    </CValidatorCombine>
+    <CValidatorUnitCompareBehaviorCount id="Focus@BuffStack20OrHigher">
+        <WhichUnit Value="Caster"/>
+        <Compare value="GE"/>
+        <Value value="20"/>
+        <Behavior value="Focus@BuffStack"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorUnitCompareBehaviorCount id="Focus@BuffStack4OrHigher">
+        <WhichUnit Value="Caster"/>
+        <Compare value="GE"/>
+        <Value value="4"/>
+        <Behavior value="Focus@BuffStack"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorUnitCompareBehaviorCount id="Focus@BuffStack12OrHigher">
+        <WhichUnit Value="Caster"/>
+        <Compare value="GE"/>
+        <Value value="12"/>
+        <Behavior value="Focus@BuffStack"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorUnitCompareBehaviorCount id="Focus@BuffStack8OrHigher">
+        <WhichUnit Value="Caster"/>
+        <Compare value="GE"/>
+        <Value value="8"/>
+        <Behavior value="Focus@BuffStack"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorUnitCompareBehaviorCount id="Focus@BuffStack16OrHigher">
+        <WhichUnit Value="Caster"/>
+        <Compare value="GE"/>
+        <Value value="16"/>
+        <Behavior value="Focus@BuffStack"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorIsUnitTracked id="Focus@TargetIsTracked">
+        <BehaviorLink value="Focus@TargetTracker"/>
+        <TrackedUnit Value="Target"/>
+        <Find value="1"/>
+    </CValidatorIsUnitTracked>
+    <CRequirement id="CorrosiveBurst@Req">
+        <NodeArray index="Use" Link="CountUpgradeCorrosiveBurst@UnlockCompleteOnly3209883371"/>
+    </CRequirement>
+    <CRequirement id="Focus@Req">
+        <NodeArray index="Use" Link="Eq2350394728CountUpgradeFocus@UnlockCompleteOnly1"/>
+    </CRequirement>
+    <CRequirement id="CorrosiveSpikes@Req">
+        <NodeArray index="Use" Link="AndEq2278612504CountUpgradeCorrosiveSpikes@UnlockCompleteOnly1Eq1787140249CountBehaviorCorrosiveBurst@DisableCorrosiveSpikesQueuedOrBetterAtUnit0"/>
+    </CRequirement>
+    <CButton id="CorrosiveBurst">
+        <Icon value="Assets\Textures\btn-ability-alarak-massteleport.dds"/>
+    </CButton>
+    <CButton id="AcidPit">
+        <Icon value="Assets\Textures\btn-ability-zerg-dehaka-ravasaur-dissolvingacid.dds"/>
+    </CButton>
+    <CButton id="Focus">
+        <Icon value="Assets\Textures\btn-ability-zerg-overlord-oversight.dds"/>
+    </CButton>
+    <CButton id="Focus@Off">
+        <Icon value="Assets\Textures\btn-ability-zerg-overlord-oversight-off.dds"/>
+        <Hotkey value="Button/Hotkey/Focus"/>
+        <HotkeyAlias value="Focus"/>
+    </CButton>
+    <CButton id="CorrosiveSpikes">
+        <Icon value="Assets\Textures\btn-ability-zerg-poisonnova.dds"/>
+    </CButton>
+    <CRequirementCountUpgrade id="CountUpgradeCorrosiveBurst@UnlockCompleteOnly3209883371">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="CorrosiveBurst@Unlock" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementAnd id="AndEq2278612504CountUpgradeCorrosiveSpikes@UnlockCompleteOnly1Eq1787140249CountBehaviorCorrosiveBurst@DisableCorrosiveSpikesQueuedOrBetterAtUnit0">
+        <OperandArray value="Eq2278612504CountUpgradeCorrosiveSpikes@UnlockCompleteOnly1"/>
+        <OperandArray value="Eq1787140249CountBehaviorCorrosiveBurst@DisableCorrosiveSpikesQueuedOrBetterAtUnit0"/>
+    </CRequirementAnd>
+    <CRequirementCountBehavior id="CountBehaviorCorrosiveBurst@DisableCorrosiveSpikesQueuedOrBetterAtUnit">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="CorrosiveBurst@DisableCorrosiveSpikes" State="QueuedOrBetterAtUnit"/>
+    </CRequirementCountBehavior>
+    <CRequirementEq id="Eq1787140249CountBehaviorCorrosiveBurst@DisableCorrosiveSpikesQueuedOrBetterAtUnit0">
+        <OperandArray index="0" value="CountBehaviorCorrosiveBurst@DisableCorrosiveSpikesQueuedOrBetterAtUnit"/>
+        <OperandArray index="1" value="0"/>
+    </CRequirementEq>
+    <CRequirementCountUpgrade id="CountUpgradeCorrosiveSpikes@UnlockCompleteOnly">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="CorrosiveSpikes@Unlock" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeFocus@UnlockCompleteOnly">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="Focus@Unlock" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementEq id="Eq2278612504CountUpgradeCorrosiveSpikes@UnlockCompleteOnly1">
+        <OperandArray index="0" value="CountUpgradeCorrosiveSpikes@UnlockCompleteOnly"/>
+        <OperandArray index="1" value="1"/>
+    </CRequirementEq>
+    <CRequirementEq id="Eq2350394728CountUpgradeFocus@UnlockCompleteOnly1">
+        <OperandArray index="0" value="CountUpgradeFocus@UnlockCompleteOnly"/>
+        <OperandArray index="1" value="1"/>
+    </CRequirementEq>
+    <CActorModel id="CorrosiveBurst@Explosion" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On index="2" Terms="Effect.CorrosiveBurst@Dmg.Start" Send="Create"/>
+    </CActorModel>
+    <CActorModel id="Focus@BuffStack" parent="ModelAddition">
+        <EditorCategories value=""/>
+        <On Terms="Behavior.Focus@BuffStack.Create" Send="Create"/>
+        <On Terms="BehaviorLevel.Focus@BuffStack.Start; ValidateUnit Focus@BuffStackVisual1" Send="AnimGroupApply A"/>
+        <On Terms="BehaviorLevel.Focus@BuffStack.Start; ValidateUnit Focus@BuffStackVisual2" Send="AnimGroupRemove A"/>
+        <On Terms="BehaviorLevel.Focus@BuffStack.Start; ValidateUnit Focus@BuffStackVisual2" Send="AnimGroupApply B"/>
+        <On Terms="BehaviorLevel.Focus@BuffStack.Start; ValidateUnit Focus@BuffStackVisual3" Send="AnimGroupRemove B"/>
+        <On Terms="BehaviorLevel.Focus@BuffStack.Start; ValidateUnit Focus@BuffStackVisual3" Send="AnimGroupApply C"/>
+        <On Terms="BehaviorLevel.Focus@BuffStack.Start; ValidateUnit Focus@BuffStackVisual4" Send="AnimGroupRemove C"/>
+        <On Terms="BehaviorLevel.Focus@BuffStack.Start; ValidateUnit Focus@BuffStackVisual4" Send="AnimGroupApply D"/>
+        <On Terms="BehaviorLevel.Focus@BuffStack.Start; ValidateUnit Focus@BuffStackVisual5" Send="AnimGroupRemove D"/>
+        <On Terms="BehaviorLevel.Focus@BuffStack.Start; ValidateUnit Focus@BuffStackVisual5" Send="AnimGroupApply E"/>
+        <On Terms="Behavior.Focus@BuffStack.Destroy" Send="Destroy"/>
+        <HostSiteOps Ops="SOpAttachOrigin SOpMoveUpByDot1"/>
+        <Scale value="1.500000"/>
+        <ModelFlags index="AutomateGlobalLoops" value="1"/>
+    </CActorModel>
+    <CActorAction id="AcidPit@Action" parent="GenericAttack" effectImpact="AcidPit@Persistent" effectLaunch="AcidPit@LaunchMissile">
+        <EditorCategories value=""/>
+        <LaunchSiteOps Ops="SOpAttachHead"/>
+        <Missile value="GuardianAttackMissile"/>
+    </CActorAction>
+    <CActorModel id="AcidPit@Dot" parent="ModelAnimationStyleOneShot">
+        <EditorCategories value=""/>
+        <On index="0" Terms="ActorCreation" Send="$Stand"/>
+        <On index="1" Terms="AnimDone" Send="Destroy"/>
+        <On index="2" Terms="ActorOrphan" Send="Destroy"/>
+        <On Terms="Effect.AcidPit@Dmg.Start" Send="Create"/>
+        <Model value="PoisonNovaDotModel"/>
+    </CActorModel>
+    <CActorSplat id="AcidPit@AoeCurserSplat" parent="CursorSplat" abil="AcidPit">
+        <EditorCategories value=""/>
+        <Model value="ZergAOECursorSplat"/>
+    </CActorSplat>
+    <CActorUnit id="HeroHydra" parent="GenericUnitStandard" unitName="HeroHydra">
+        <Aliases value="_UnitMedium"/>
+        <Macros value="PhysicsDeathsVoidGround"/>
+        <EditorCategories value=""/>
+        <On Terms="Abil.AcidPit.SourceChannelStart" Send="AnimPlay AbilityUse Attack 0 -1.000000 -1.000000 0.750000 AsDuration"/>
+        <On Terms="UnitMovementUpdate; AnimPlaying AbilityUse" Send="AnimClear AbilityUse"/>
+        <On Terms="WeaponStart.*.AttackStart; AnimPlaying AbilityUse" Send="AnimClear AbilityUse"/>
+        <On Terms="Behavior.TerranPartTransitionBurrow.On" Send="AnimBracketStart PartTransition Burrow IGNORE Unburrow OpeningPlayForever"/>
+        <On Terms="Behavior.TerranPartTransitionBurrow.Off" Send="AnimBracketStop PartTransition"/>
+        <Model value="Hydralisk_Noxious_Collection"/>
+        <Scale value="1.200000"/>
+        <ModelFlags index="NeedsVolumeMonitoring" value="0"/>
+        <ModelFlags index="OutlineEmitter" value="1"/>
+        <BuildModel value="Hydralisk_Noxious_Collection"/>
+        <DeathArray index="Normal" ModelLink="Hydralisk_Noxious_Collection_Death" SoundLink="Hydralisk_Explode"/>
+        <DeathArray index="Disintegrate" ModelLink="Hydralisk_Noxious_Collection_DeathAcid" SoundLink="Uni_DeathFXAcid"/>
+        <DeathArray index="Fire" ModelLink="Hydralisk_Noxious_Collection_DeathFire" SoundLink="Uni_DeathFXFire"/>
+        <DeathCustoms ModelLink="HallucinationDeath" SoundLink="Spectre_KillerPhantasmDeath" Name="Hallucination"/>
+        <DeathCustoms ModelLink="Hydralisk_Noxious_Collection_DeathRagdoll" Name="RagdollBasic">
+            <BodySquibs Name="FireOnMetal"/>
+            <BodySquibs Name="BloodReduced" IsFallback="1"/>
+        </DeathCustoms>
+        <DeathCustoms Name="RagdollSiegeTank" InheritsFrom="RagdollBasic"/>
+        <DeathCustoms Name="RagdollNuke" InheritsFrom="RagdollBasic">
+            <BodySquibs Name="Fire"/>
+        </DeathCustoms>
+        <DeathCustoms Name="RagdollFire" InheritsFrom="RagdollBasic">
+            <BodySquibs Name="Fire"/>
+        </DeathCustoms>
+        <DeathCustoms Name="RagdollAcid" InheritsFrom="RagdollBasic">
+            <BodySquibs Name="Acid"/>
+        </DeathCustoms>
+        <DeathCustoms Name="RagdollBaneling" InheritsFrom="RagdollBasic">
+            <BodySquibs Name="Acid"/>
+        </DeathCustoms>
+        <DeathCustoms Name="RagdollUltraUnburrow" InheritsFrom="RagdollBasic"/>
+        <DeathCustoms Name="RagdollOverkillDPRH" InheritsFrom="RagdollBasic"/>
+        <DeathCustoms Name="RagdollOverkillDOI" InheritsFrom="RagdollBasic"/>
+        <DeathCustoms Name="RagdollMidair" InheritsFrom="RagdollBasic"/>
+        <DeathCustoms ModelLink="HydraliskDeathFire" Name="Variation16"/>
+        <DeathCustoms>
+            <ModelLink value="DeathVoidShadowMedium"/>
+            <SoundLink value="ShadowUnit_DeathFX"/>
+            <VoiceLink value="ShadowUnit_DeathVox"/>
+            <Name value="Shadow"/>
+        </DeathCustoms>
+        <DeathActorModel value="UnitDeathModelWithDeathMotionGround"/>
+        <PlacementModel value="Hydralisk_Noxious_Collection"/>
+        <PortraitModel value="Hydralisk_Noxious_Collection_Portrait"/>
+        <WalkAnimMoveSpeed value="2.086"/>
+        <BarOffset value="60"/>
+        <BarWidth value="48"/>
+        <CustomUnitStatusFrame value="SSF_UnitStatus/HeroStatus"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\wireframe-collection-noxious-hydralisk.dds"/>
+        </GroupIcon>
+        <HeroIcon value="Assets\Textures\btn-unit-collection-noxious-hydralisk.dds"/>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-zerg-groundcarapace-level0.dds"/>
+        <ShieldArmorIcon value="Assets\Textures\btn-upgrade-zerg-swarmfrenzy.dds"/>
+        <SoundArray index="Ready" value="Hydralisk_Ready"/>
+        <SoundArray index="What" value="Hydralisk_What"/>
+        <SoundArray index="Yes" value="Hydralisk_Yes"/>
+        <SoundArray index="Attack" value="Hydralisk_Attack"/>
+        <SoundArray index="Pissed" value="Hydralisk_Pissed"/>
+        <StatusColors index="Shields">
+            <ColorArray index="0" value="255,0,128,0"/>
+        </StatusColors>
+        <UnitFlags index="SuppressDefaultStatusBar" value="1"/>
+        <UnitIcon value="Assets\Textures\btn-unit-collection-noxious-hydralisk.dds"/>
+        <VitalColors index="Shields">
+            <ColorArray value="255,0,128,0"/>
+        </VitalColors>
+        <VitalNames index="Shields" value="Vital/ZergShields"/>
+        <Wireframe>
+            <Image value="Assets\Textures\wireframe-collection-noxious-hydralisk.dds"/>
+        </Wireframe>
+        <WireframeShieldColor value="255,0,128,0"/>
+    </CActorUnit>
+    <CActorRange id="AcidPit@Range" parent="RangeAbil" abil="AcidPit">
+        <VisibleTo index="Self" value="1"/>
+        <EditorCategories value=""/>
+        <Icon value="Assets\Textures\RadarIcon2.dds"/>
+    </CActorRange>
+    <CActorAction id="HeroHydraAttack" parent="GenericAttack" effectImpact="HeroHydraWeaponDmg" effectLaunch="HeroHydraWeaponMissile">
+        <EditorCategories value=""/>
+        <LaunchSiteOps Ops="SOpAttachHarness SOpForwardImpactGuide"/>
+        <LaunchAttachQuery Methods="AMFilterWeaponSetA0"/>
+        <LaunchAssets Model="HydraliskAttackLaunch" Sound="Hydralisk_GroundAttackLaunch"/>
+        <Beam value="HydraliskAttackBeam"/>
+        <Missile value="HydraliskAttackMissile"/>
+        <ImpactMap index="None" Model="HydraliskAttackImpact" Sound="Hydralisk_AttackImpactRanged" ModelReaction="HydraliskAttackImpactReaction"/>
+        <ImpactMap index="Flesh" ModelReaction="BloodTargetImpact"/>
+        <ImpactMap index="Shield" Sound="HydraliskAttackImpactShield" ModelReaction="HydraliskAttackImpactReactionShield"/>
+        <ImpactPhysics Name="NeedleSpinesImpact" MatchKeys="Basic" Physics="HydraliskAttackDeathForce"/>
+        <DamageMap index="None" Model="HydraliskAttackDamage" Sound="HydraliskAttackDamage" ModelReaction="HydraliskAttackDamageReaction"/>
+        <DamageMap index="Shield" Sound="HydraliskAttackDamageShield" ModelReaction="HydraliskAttackDamageReactionShield"/>
+        <AcquisitionYawHalfArc value="20.000000"/>
+        <AcquisitionPitchHalfArc value="20.000000"/>
+        <AccuracyHalfArc value="25.000000"/>
+    </CActorAction>
+    <CActorModel id="AcidPit@PubbleActor" parent="ModelAnimationStyleOneShot">
+        <On index="0" Terms="ActorCreation" Send="$Birth"/>
+        <On index="1" Terms="Effect.AcidPit@Persistent.Start" Send="Create"/>
+        <On index="2" Terms="AnimDone; AnimName Birth" Send="$Stand PlayForever"/>
+        <On Terms="Effect.AcidPit@Persistent.Stop" Send="$Death"/>
+        <On Terms="AnimDone; AnimName Death" Send="Destroy"/>
+        <On Terms="ActorOrphan" Send="Destroy"/>
+        <Model value="AcidPit@Puddle"/>
+        <Scale value="0.800000"/>
+    </CActorModel>
+    <CActorModel id="CorrosiveSpikes@Dot" parent="ModelAnimationStyleContinuous">
+        <EditorCategories value=""/>
+        <On index="0" Terms="ActorCreation" Send="$Stand PlayForever"/>
+        <On index="2" Terms="Behavior.CorrosiveSpikes@Dot.On" Send="Create"/>
+        <On Terms="Behavior.CorrosiveSpikes@Dot.Off" Send="Destroy"/>
+        <Model value="VileAcidModel"/>
+    </CActorModel>
+    <CModel id="CorrosiveBurst@Explosion">
+        <Model value="Assets\Effects\Zerg\BioPlasmidMissileImpact\BioPlasmidMissileImpact.m3"/>
+    </CModel>
+    <CModel id="Focus@BuffStack">
+        <Model value="Assets\COOP\Kerrigan\Effects\LightningFury_Kerrigan_COOP\LightningFury_Kerrigan_COOP.m3"/>
+    </CModel>
+    <CWeaponLegacy id="HeroHydraWeapon">
+        <EditorCategories value="Race:Zerg"/>
+        <Icon value="Assets\Textures\btn-upgrade-zerg-missileattacks-level0.dds"/>
+        <DisplayEffect value="HeroHydraWeaponDmg"/>
+        <TargetFilters value="Visible;Ally,Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <MinScanRange value="7"/>
+        <Range value="6"/>
+        <Period value="1.5"/>
+        <Effect value="HeroHydraWeaponMissile"/>
+    </CWeaponLegacy>
+    <CAccumulatorArithmetic id="HeroHydraWeaponDmgScaled">
+        <Parameters value="0">
+            <AccumulatorArray value="WeaponDmgUpgradeCollector"/>
+            <AccumulatorArray value="HeroLevelWeaponDmgBonus"/>
+        </Parameters>
+        <Parameters value="0">
+            <AccumulatorArray value="HeroHydraWeaponDmgModifier"/>
+        </Parameters>
+        <Operation value="Multiply"/>
+    </CAccumulatorArithmetic>
+    <CAccumulatorArithmetic id="AcidPit@DmgScaled">
+        <Parameters value="0">
+            <AccumulatorArray value="HeroLevelWeaponDmgBonus"/>
+        </Parameters>
+        <Parameters value="0">
+            <AccumulatorArray value="AcidPit@DmgModifier"/>
+        </Parameters>
+        <Operation value="Multiply"/>
+    </CAccumulatorArithmetic>
+    <CAccumulatorArithmetic id="CorrosiveSpikes@DmgScaled">
+        <Parameters value="0">
+            <AccumulatorArray value="HeroLevelWeaponDmgBonus"/>
+        </Parameters>
+        <Parameters value="0">
+            <AccumulatorArray value="CorrosiveSpikes@DmgModifier"/>
+        </Parameters>
+        <Operation value="Multiply"/>
+    </CAccumulatorArithmetic>
+    <CAccumulatorConstant id="CorrosiveBurst@DmgBase">
+        <Amount value="200"/>
+    </CAccumulatorConstant>
+    <CAccumulatorConstant id="CorrosiveBurst@DmgModifier">
+        <Amount value="1"/>
+    </CAccumulatorConstant>
+    <CAccumulatorConstant id="CorrosiveSpikes@DmgBase">
+        <Amount value="25"/>
+    </CAccumulatorConstant>
+    <CAccumulatorConstant id="CorrosiveSpikes@DmgModifier">
+        <Amount value="0.05"/>
+    </CAccumulatorConstant>
+    <CAccumulatorConstant id="AcidPit@DmgBase">
+        <Amount value="25"/>
+    </CAccumulatorConstant>
+    <CAccumulatorConstant id="AcidPit@DmgModifier">
+        <Amount value="0.05"/>
+    </CAccumulatorConstant>
+    <CAccumulatorConstant id="HeroHydraWeaponDmgModifier">
+        <Amount value="1.2"/>
+    </CAccumulatorConstant>
+    <CAccumulatorConstant id="HeroHydraWeaponDmgBase">
+        <Amount value="120"/>
+    </CAccumulatorConstant>
+    <CDataCollectionAbil id="CorrosiveBurst">
+        <EditorCategories value=""/>
+        <DataRecord Entry="Abil,CorrosiveBurst"/>
+        <DataRecord Entry="Button,CorrosiveBurst"/>
+        <DataRecord Entry="Requirement,CorrosiveBurst@Req"/>
+        <DataRecord Entry="Upgrade,CorrosiveBurst@Unlock"/>
+        <DataRecord Entry="Behavior,CorrosiveBurst@DisableCorrosiveSpikes"/>
+        <DataRecord Entry="Effect,CorrosiveBurst@Search"/>
+        <DataRecord Entry="Effect,CorrosiveBurst@Dmg"/>
+        <DataRecord Entry="Effect,CorrosiveBurst@InitialSet"/>
+        <DataRecord Entry="Effect,CorrosiveBurst@DisableCorrosiveSpikes"/>
+        <DataRecord Entry="Effect,CorrosiveBurst@RemoveCorrosiveSpikes"/>
+        <DataRecord Entry="Effect,CorrosiveBurst@ImpactSet"/>
+        <DataRecord Entry="Validator,CorrosiveBurst@DisableCorrosiveSpikes"/>
+        <DataRecord Entry="Validator,CorrosiveBurst@TargetHasCorrosiveSpikes"/>
+        <DataRecord Entry="Effect,CorrosiveBurst@DummyEffect"/>
+        <DataRecord Entry="Upgrade,CorrosiveBurst@Unlock"/>
+        <DataRecord Entry="Accumulator,CorrosiveBurst@DmgBase"/>
+        <DataRecord Entry="Accumulator,CorrosiveBurst@DmgModifier"/>
+        <DataRecord Entry="Actor,CorrosiveBurst@Explosion"/>
+        <DataRecord Entry="Model,CorrosiveBurst@Explosion"/>
+    </CDataCollectionAbil>
+    <CDataCollectionAbil id="CorrosiveSpikes">
+        <EditorCategories value=""/>
+        <DataRecord Entry="Behavior,CorrosiveSpikes@Dot"/>
+        <DataRecord Entry="Behavior,CorrosiveSpikes@AttackModifier"/>
+        <DataRecord Entry="Effect,CorrosiveSpikes@Dmg"/>
+        <DataRecord Entry="Effect,CorrosiveSpikes@DotApply"/>
+        <DataRecord Entry="Requirement,CorrosiveSpikes@Req"/>
+        <DataRecord Entry="Upgrade,CorrosiveSpikes@Unlock"/>
+        <DataRecord Entry="Actor,CorrosiveSpikes@Dot"/>
+        <DataRecord Entry="Behavior,CorrosiveSpikes@AttackModifier"/>
+        <DataRecord Entry="Button,CorrosiveSpikes"/>
+        <DataRecord Entry="Upgrade,CorrosiveSpikes@Unlock"/>
+        <DataRecord Entry="Accumulator,CorrosiveSpikes@DmgBase"/>
+        <DataRecord Entry="Accumulator,CorrosiveSpikes@DmgModifier"/>
+        <DataRecord Entry="Accumulator,CorrosiveSpikes@DmgScaled"/>
+    </CDataCollectionAbil>
+    <CDataCollectionAbil id="AcidPit">
+        <EditorCategories value=""/>
+        <DataRecord Entry="Abil,AcidPit"/>
+        <DataRecord Entry="Actor,AcidPit@PubbleActor"/>
+        <DataRecord Entry="Actor,AcidPit@Dot"/>
+        <DataRecord Entry="Actor,AcidPit@Action"/>
+        <DataRecord Entry="Actor,AcidPit@Range"/>
+        <DataRecord Entry="Actor,AcidPit@AoeCurserSplat"/>
+        <DataRecord Entry="Behavior,AcidPit@Debuff"/>
+        <DataRecord Entry="Button,AcidPit"/>
+        <DataRecord Entry="Effect,AcidPit@ApplyDebuff"/>
+        <DataRecord Entry="Effect,AcidPit@Dmg"/>
+        <DataRecord Entry="Effect,AcidPit@LaunchMissile"/>
+        <DataRecord Entry="Effect,AcidPit@Persistent"/>
+        <DataRecord Entry="Effect,AcidPit@Search"/>
+        <DataRecord Entry="Effect,AcidPit@Set"/>
+        <DataRecord Entry="Model,AcidPit@Puddle"/>
+        <DataRecord Entry="Accumulator,AcidPit@DmgModifier"/>
+        <DataRecord Entry="Accumulator,AcidPit@DmgBase"/>
+        <DataRecord Entry="Accumulator,AcidPit@DmgScaled"/>
+    </CDataCollectionAbil>
+    <CDataCollectionAbil id="Focus">
+        <EditorCategories value=""/>
+        <DataRecord Entry="Abil,Focus"/>
+        <DataRecord Entry="Behavior,Focus@Toggle"/>
+        <DataRecord Entry="Behavior,Focus@BuffStack"/>
+        <DataRecord Entry="Behavior,Focus@TargetTracker"/>
+        <DataRecord Entry="Behavior,Focus@AttackModifier"/>
+        <DataRecord Entry="Button,Focus"/>
+        <DataRecord Entry="Button,Focus@Off"/>
+        <DataRecord Entry="Effect,Focus@CleanupSet"/>
+        <DataRecord Entry="Effect,Focus@AttackModifierRemove"/>
+        <DataRecord Entry="Effect,Focus@TargetTrackerRemove"/>
+        <DataRecord Entry="Effect,Focus@TargetTrackerApply"/>
+        <DataRecord Entry="Effect,Focus@AttackModifierApply"/>
+        <DataRecord Entry="Effect,Focus@TargetTrackerAddTarget"/>
+        <DataRecord Entry="Effect,Focus@BuffStackApply"/>
+        <DataRecord Entry="Effect,Focus@BuffStackRemove"/>
+        <DataRecord Entry="Effect,Focus@TargetCheck"/>
+        <DataRecord Entry="Effect,Focus@NewTargetSet"/>
+        <DataRecord Entry="Effect,Focus@InitialSet"/>
+        <DataRecord Entry="Requirement,Focus@Req"/>
+        <DataRecord Entry="Upgrade,Focus@Unlock"/>
+        <DataRecord Entry="Validator,Focus@TargetIsTracked"/>
+        <DataRecord Entry="Actor,Focus@BuffStack"/>
+        <DataRecord Entry="Model,Focus@BuffStack"/>
+        <DataRecord Entry="Validator,Focus@BuffStack12Below"/>
+        <DataRecord Entry="Validator,Focus@BuffStack16Below"/>
+        <DataRecord Entry="Validator,Focus@BuffStack20Below"/>
+        <DataRecord Entry="Validator,Focus@BuffStack4Below"/>
+        <DataRecord Entry="Validator,Focus@BuffStack8Below"/>
+        <DataRecord Entry="Validator,Focus@BuffStackVisual1"/>
+        <DataRecord Entry="Validator,Focus@BuffStack4OrHigher"/>
+        <DataRecord Entry="Validator,Focus@BuffStackVisual2"/>
+        <DataRecord Entry="Validator,Focus@BuffStack8OrHigher"/>
+        <DataRecord Entry="Validator,Focus@BuffStackVisual3"/>
+        <DataRecord Entry="Validator,Focus@BuffStack12OrHigher"/>
+        <DataRecord Entry="Validator,Focus@BuffStackVisual4"/>
+        <DataRecord Entry="Validator,Focus@BuffStack16OrHigher"/>
+        <DataRecord Entry="Validator,Focus@BuffStackVisual5"/>
+        <DataRecord Entry="Validator,Focus@BuffStack20OrHigher"/>
+    </CDataCollectionAbil>
+    <CUnit id="HeroHydra">
+        <DeathTime value="-1"/>
+        <DeathRevealRadius value="3"/>
+        <Race value="Zerg"/>
+        <FlagArray index="Hero" value="1"/>
+        <FlagArray index="UseLineOfSight" value="1"/>
+        <FlagArray index="ArmySelect" value="1"/>
+        <PlaneArray index="Ground" value="1"/>
+        <Collide index="Ground" value="1"/>
+        <Collide index="ForceField" value="1"/>
+        <Collide index="Locust" value="1"/>
+        <Collide index="Small" value="1"/>
+        <Attributes index="Light" value="1"/>
+        <Attributes index="Biological" value="1"/>
+        <Attributes index="Heroic" value="1"/>
+        <LifeStart value="2000"/>
+        <LifeMax value="2000"/>
+        <LifeArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </LifeArmorFormula>
+        <LifeRegenRate value="15"/>
+        <LifeArmorName value="Unit/LifeArmorName/ZergGroundArmor"/>
+        <EnergyStart value="50"/>
+        <EnergyMax value="50"/>
+        <EnergyRegenRate value="0.75"/>
+        <ShieldArmorFormula>
+            <NegativeArmorMultiplier value="0"/>
+            <NegativeDamageBase value="0"/>
+            <NegativeDamageUnscaled value="0"/>
+            <PositiveArmorMultiplier value="0"/>
+        </ShieldArmorFormula>
+        <ShieldArmorName value="Unit/ShieldArmorName/ZergWildMutation"/>
+        <Speed value="2.7968"/>
+        <Acceleration value="1000"/>
+        <LateralAcceleration value="46"/>
+        <StationaryTurningRate value="999.8437"/>
+        <TurningRate value="999.8437"/>
+        <Sight value="8.5"/>
+        <CostCategory value="Army"/>
+        <AttackTargetPriority value="20"/>
+        <AbilArray Link="stop"/>
+        <AbilArray Link="attack"/>
+        <AbilArray Link="move"/>
+        <AbilArray Link="AcidPit"/>
+        <AbilArray Link="Focus"/>
+        <AbilArray Link="CorrosiveBurst"/>
+        <AbilArray Link="ShieldColor@ColorChange"/>
+        <BehaviorArray Link="Levels"/>
+        <BehaviorArray Link="HeroHydraAttribute"/>
+        <BehaviorArray Link="HeroHydraCreepBonusRegen"/>
+        <BehaviorArray Link="CorrosiveSpikes@AttackModifier"/>
+        <BehaviorArray Link="HeroHydraArmor"/>
+        <WeaponArray Link="HeroHydraWeapon"/>
+        <CardLayouts>
+            <LayoutButtons Face="Move" Type="AbilCmd" AbilCmd="move,Move" Row="0" Column="0"/>
+            <LayoutButtons Face="Stop" Type="AbilCmd" AbilCmd="stop,Stop" Row="0" Column="1"/>
+            <LayoutButtons Face="MoveHoldPosition" Type="AbilCmd" AbilCmd="move,HoldPos" Row="0" Column="2"/>
+            <LayoutButtons Face="Attack" Type="AbilCmd" AbilCmd="attack,Execute" Row="0" Column="4"/>
+            <LayoutButtons Face="MovePatrol" Type="AbilCmd" AbilCmd="move,Patrol" Row="0" Column="3"/>
+            <LayoutButtons Face="AcidPit" Type="AbilCmd" AbilCmd="AcidPit,Execute" Row="2" Column="0"/>
+            <LayoutButtons>
+                <Face value="CorrosiveSpikes"/>
+                <Type value="Passive"/>
+                <Behavior value="CorrosiveSpikes@AttackModifier"/>
+                <Requirements value="CorrosiveSpikes@Req"/>
+                <Row value="1"/>
+                <Column value="0"/>
+            </LayoutButtons>
+            <LayoutButtons Face="Focus" Type="AbilCmd" AbilCmd="Focus,On" Row="2" Column="1"/>
+            <LayoutButtons Face="Focus@Off" Type="AbilCmd" AbilCmd="Focus,Off" Row="2" Column="1"/>
+            <LayoutButtons Face="CorrosiveBurst" Type="AbilCmd" AbilCmd="CorrosiveBurst,Execute" Row="2" Column="2"/>
+        </CardLayouts>
+        <InnerRadius value="0.5"/>
+        <CargoSize value="1"/>
+        <SubgroupPriority value="50"/>
+        <MinimapRadius value="1"/>
+        <EditorCategories value=""/>
+        <TacticalAI value="Hydralisk"/>
+        <AIEvalFactor value="2"/>
+        <GlossaryPriority value="13"/>
+        <HotkeyCategory value="Unit/Category/SSFPlayerUnits"/>
+        <KillDisplay value="Always"/>
+        <RankDisplay value="Never"/>
+        <AIEvaluateAlias value="Hydralisk"/>
+        <AlliedPushPriority value="20"/>
+        <LifeArmorTip value="Unit/HeroHydra/ArmorTooltip"/>
+    </CUnit>
+    <CBehaviorBuff id="HeroHydraArmor" parent="ArmorBase">
+        <Name value="Behavior/Name/HeroHydraArmor"/>
+        <Tooltip value="Behavior/Tooltip/HeroHydraArmor"/>
+        <Cost>
+            <Charge Link="Behavior/HeroHydraArmor"/>
+            <Cooldown Link="Behavior/HeroHydraArmor"/>
+        </Cost>
+        <DamageResponse>
+            <Cost>
+                <Charge Link="Behavior/HeroHydraArmor"/>
+                <Cooldown Link="Behavior/HeroHydraArmor"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="CorrosiveBurst@DisableCorrosiveSpikes">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="15"/>
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorAttackModifier id="CorrosiveSpikes@AttackModifier">
+        <Requirements value="CorrosiveSpikes@Req"/>
+        <PreImpactEffect value="CorrosiveSpikes@DotApply"/>
+        <TargetFilters value="-;Player,Ally,Neutral,Item,Dead,Hidden,Invulnerable"/>
+    </CBehaviorAttackModifier>
+    <CBehaviorAttackModifier id="Focus@AttackModifier">
+        <TargetFilters value="-;Self,Player,Ally,Neutral,Missile,Dead,Hidden,Invulnerable"/>
+        <PreImpactEffect value="Focus@TargetCheck"/>
+    </CBehaviorAttackModifier>
+    <CBehaviorUnitTracker id="Focus@TargetTracker">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <MaxTrackedUnits value="1"/>
+        <InfoFlags index="Hidden" value="1"/>
+        <UnitAddedAtMaxRule value="ReplaceOldest"/>
+    </CBehaviorUnitTracker>
+    <CBehaviorBuff id="AcidPit@Debuff">
+        <Alignment value="Negative"/>
+        <InfoIcon value="Assets\Textures\btn-ability-zerg-dehaka-ravasaur-dissolvingacid.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="0.22"/>
+        <Modification>
+            <DamageTakenFraction index="Melee" value="0.1"/>
+            <DamageTakenFraction index="Ranged" value="0.1"/>
+            <DamageTakenFraction index="Splash" value="0.1"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="Focus@Toggle">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <RemoveValidatorArray value="hasEnergy"/>
+        <RemoveValidatorArray value="CanSpendEnergy"/>
+        <RemoveValidatorArray value="NotSilenced"/>
+        <InitialEffect value="Focus@InitialSet"/>
+        <FinalEffect value="Focus@CleanupSet"/>
+        <Modification>
+            <VitalRegenArray index="Energy" value="-7"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="Focus@BuffStack">
+        <Alignment value="Positive"/>
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <BuffFlags index="RefreshStack" value="1"/>
+        <MaxStackCount value="20"/>
+        <Duration value="30"/>
+        <Modification>
+            <AdditiveAttackSpeedFactor value="0.025"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="HeroHydraCreepBonusRegen">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DisableValidatorArray value="OnCreep"/>
+        <Modification MoveSpeedMultiplier="1.5">
+            <VitalRegenArray index="Life" value="15"/>
+            <VitalRegenArray index="Energy" value="0.75"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="CorrosiveSpikes@Dot">
+        <Alignment value="Negative"/>
+        <InfoIcon value="Assets\Textures\btn-ability-zerg-poisonnova.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <MaxStackCount value="48"/>
+        <Duration value="2"/>
+        <Period value="0.125"/>
+        <PeriodicEffect value="CorrosiveSpikes@Dmg"/>
+        <MaxStackCountPerCaster value="8"/>
+    </CBehaviorBuff>
+    <CBehaviorAttribute id="HeroHydraAttribute">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification MoveSpeedBonus="0.0781" AttackSpeedMultiplier="1.01">
+            <VitalMaxArray index="Life" value="225"/>
+            <VitalMaxArray index="Energy" value="5"/>
+        </Modification>
+    </CBehaviorAttribute>
+    <CUpgrade id="CorrosiveBurst@Unlock"/>
+    <CUpgrade id="CorrosiveSpikes@Unlock"/>
+    <CUpgrade id="Focus@Unlock"/>
+</Catalog>

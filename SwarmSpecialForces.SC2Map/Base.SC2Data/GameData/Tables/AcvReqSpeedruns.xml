@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CUser id="AcvReqSpeedruns">
+        <Fields Id="Team" Type="Int" Count="2" EditorColumn="1"/>
+        <Fields Id="Small" Type="Int" Count="2" EditorColumn="3"/>
+        <Fields Id="TeamSizeMaxForSmall" Type="Int" EditorColumn="2"/>
+        <Fields Id="PlayerTeamStage" Type="Int" Count="6">
+            <Flags index="Modifiable" value="1"/>
+        </Fields>
+        <Fields Id="PlayerSmallStage" Type="Int" Count="6">
+            <Flags index="Modifiable" value="1"/>
+        </Fields>
+        <Instances Id="[Default]">
+            <Int Int="1">
+                <Field Id="TeamSizeMaxForSmall"/>
+            </Int>
+        </Instances>
+        <Instances Id="P0D0">
+            <Int Int="600">
+                <Field Id="Team"/>
+            </Int>
+            <Int Int="300">
+                <Field Id="Team" Index="1"/>
+            </Int>
+            <Int Int="1200">
+                <Field Id="Small"/>
+            </Int>
+            <Int Int="600">
+                <Field Id="Small" Index="1"/>
+            </Int>
+        </Instances>
+        <Instances Id="P0D1">
+            <Int Int="900">
+                <Field Id="Team"/>
+            </Int>
+            <Int Int="450">
+                <Field Id="Team" Index="1"/>
+            </Int>
+            <Int Int="1800">
+                <Field Id="Small"/>
+            </Int>
+            <Int Int="900">
+                <Field Id="Small" Index="1"/>
+            </Int>
+        </Instances>
+        <Instances Id="P0D2">
+            <Int Int="1200">
+                <Field Id="Team"/>
+            </Int>
+            <Int Int="600">
+                <Field Id="Team" Index="1"/>
+            </Int>
+            <Int Int="2400">
+                <Field Id="Small"/>
+            </Int>
+            <Int Int="1200">
+                <Field Id="Small" Index="1"/>
+            </Int>
+        </Instances>
+        <Instances Id="P0D3">
+            <Int Int="1800">
+                <Field Id="Team"/>
+            </Int>
+            <Int Int="900">
+                <Field Id="Team" Index="1"/>
+            </Int>
+            <Int Int="3000">
+                <Field Id="Small"/>
+            </Int>
+            <Int Int="1800">
+                <Field Id="Small" Index="1"/>
+            </Int>
+        </Instances>
+        <Instances Id="P0D4">
+            <Int Int="2700">
+                <Field Id="Team"/>
+            </Int>
+            <Int Int="1350">
+                <Field Id="Team" Index="1"/>
+            </Int>
+            <Int Int="3600">
+                <Field Id="Small"/>
+            </Int>
+            <Int Int="2400">
+                <Field Id="Small" Index="1"/>
+            </Int>
+            <Int Int="2">
+                <Field Id="TeamSizeMaxForSmall"/>
+            </Int>
+        </Instances>
+        <Instances Id="P0D5">
+            <Int Int="3600">
+                <Field Id="Team"/>
+            </Int>
+            <Int Int="2400">
+                <Field Id="Team" Index="1"/>
+            </Int>
+            <Int Int="2">
+                <Field Id="TeamSizeMaxForSmall"/>
+            </Int>
+        </Instances>
+        <Instances Id="P1D0">
+            <Int Int="900">
+                <Field Id="Team"/>
+            </Int>
+            <Int Int="480">
+                <Field Id="Team" Index="1"/>
+            </Int>
+            <Int Int="1500">
+                <Field Id="Small"/>
+            </Int>
+            <Int Int="900">
+                <Field Id="Small" Index="1"/>
+            </Int>
+        </Instances>
+        <Instances Id="P1D1">
+            <Int Int="1200">
+                <Field Id="Team"/>
+            </Int>
+            <Int Int="600">
+                <Field Id="Team" Index="1"/>
+            </Int>
+            <Int Int="2400">
+                <Field Id="Small"/>
+            </Int>
+            <Int Int="1350">
+                <Field Id="Small" Index="1"/>
+            </Int>
+        </Instances>
+        <Instances Id="P1D2">
+            <Int Int="1800">
+                <Field Id="Team"/>
+            </Int>
+            <Int Int="900">
+                <Field Id="Team" Index="1"/>
+            </Int>
+            <Int Int="3300">
+                <Field Id="Small"/>
+            </Int>
+            <Int Int="1800">
+                <Field Id="Small" Index="1"/>
+            </Int>
+        </Instances>
+        <Instances Id="P1D3">
+            <Int Int="2700">
+                <Field Id="Team"/>
+            </Int>
+            <Int Int="1500">
+                <Field Id="Team" Index="1"/>
+            </Int>
+            <Int Int="3600">
+                <Field Id="Small"/>
+            </Int>
+            <Int Int="2700">
+                <Field Id="Small" Index="1"/>
+            </Int>
+            <Int Int="2">
+                <Field Id="TeamSizeMaxForSmall"/>
+            </Int>
+        </Instances>
+        <Instances Id="P1D4">
+            <Int Int="4200">
+                <Field Id="Team"/>
+            </Int>
+            <Int Int="2400">
+                <Field Id="Team" Index="1"/>
+            </Int>
+            <Int Int="5400">
+                <Field Id="Small"/>
+            </Int>
+            <Int Int="3600">
+                <Field Id="Small" Index="1"/>
+            </Int>
+            <Int Int="3">
+                <Field Id="TeamSizeMaxForSmall"/>
+            </Int>
+        </Instances>
+        <Instances Id="P1D5">
+            <Int Int="3">
+                <Field Id="TeamSizeMaxForSmall"/>
+            </Int>
+        </Instances>
+        <Instances Id="P2D0">
+            <Int Int="1200">
+                <Field Id="Team"/>
+            </Int>
+            <Int Int="600">
+                <Field Id="Team" Index="1"/>
+            </Int>
+            <Int Int="1800">
+                <Field Id="Small"/>
+            </Int>
+            <Int Int="1050">
+                <Field Id="Small" Index="1"/>
+            </Int>
+        </Instances>
+        <Instances Id="P2D1">
+            <Int Int="1500">
+                <Field Id="Team"/>
+            </Int>
+            <Int Int="750">
+                <Field Id="Team" Index="1"/>
+            </Int>
+            <Int Int="2700">
+                <Field Id="Small"/>
+            </Int>
+            <Int Int="1500">
+                <Field Id="Small" Index="1"/>
+            </Int>
+        </Instances>
+        <Instances Id="P2D2">
+            <Int Int="2100">
+                <Field Id="Team"/>
+            </Int>
+            <Int Int="1050">
+                <Field Id="Team" Index="1"/>
+            </Int>
+            <Int Int="3600">
+                <Field Id="Small"/>
+            </Int>
+            <Int Int="2100">
+                <Field Id="Small" Index="1"/>
+            </Int>
+        </Instances>
+        <Instances Id="P2D3">
+            <Int Int="3000">
+                <Field Id="Team"/>
+            </Int>
+            <Int Int="1800">
+                <Field Id="Team" Index="1"/>
+            </Int>
+            <Int Int="4200">
+                <Field Id="Small"/>
+            </Int>
+            <Int Int="3000">
+                <Field Id="Small" Index="1"/>
+            </Int>
+            <Int Int="2">
+                <Field Id="TeamSizeMaxForSmall"/>
+            </Int>
+        </Instances>
+        <Instances Id="P2D4">
+            <Int Int="4200">
+                <Field Id="Team"/>
+            </Int>
+            <Int Int="2700">
+                <Field Id="Team" Index="1"/>
+            </Int>
+            <Int Int="6000">
+                <Field Id="Small"/>
+            </Int>
+            <Int Int="4000">
+                <Field Id="Small" Index="1"/>
+            </Int>
+            <Int Int="3">
+                <Field Id="TeamSizeMaxForSmall"/>
+            </Int>
+        </Instances>
+        <Instances Id="P2D5">
+            <Int Int="3">
+                <Field Id="TeamSizeMaxForSmall"/>
+            </Int>
+        </Instances>
+    </CUser>
+</Catalog>

@@ -1,0 +1,6 @@
+*.orig
+*.temp
+notes/
+Release/
+.vscode/
+Classic/

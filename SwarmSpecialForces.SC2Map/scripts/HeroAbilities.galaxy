@@ -1,0 +1,287 @@
+// respawn egg
+static trigger heroAbility_RespawnEgg_RespawnHandler_Trigger;
+static int heroAbility_RespawnEgg_RespawnHandlerParam_RevivingPlayer;
+fixed HeroAbility_RespawnEgg_RespawnTime(int revivingPlayer, unit egg){
+    fixed unitLife = UnitGetPropertyFixed(gv_PlayerStats[revivingPlayer].heroUnit, c_unitPropLifeMax, true);
+    fixed spellpower = gv_PlayerStats[UnitGetOwner(egg)].spellPowerPercent / 100 + 1;
+    const fixed unitLifeModifier = 0.0025;
+    const fixed baseReviveTime = 10;
+    fixed time = 0;
+
+    //magic math that has not been decided yet:
+    time = baseReviveTime + unitLife * unitLifeModifier;
+    time /= spellpower;
+
+    return time;
+}
+
+unit HeroAbility_RespawnEgg_GetAvailableEgg(){
+    unit tmpUnit = null;
+    bool tmpFlag;
+    int i;
+    unitgroup tmpUG = UnitGroup("RespawnEgg@Egg", c_playerAny, RegionEntireMap(), UnitFilter(0,0,0,0),-1);
+
+    i = UnitGroupCount(tmpUG, c_unitCountAlive);
+    for (;; i -=1){
+        tmpUnit = UnitGroupUnitFromEnd(tmpUG, i);
+        if(tmpUnit == null){ break; }
+
+        if(!UnitHasBehavior(tmpUnit, "RespawnEgg@Reviving")){
+            tmpFlag = true;
+            break;
+        }
+    }
+    if(tmpFlag){
+        return tmpUnit;
+    }
+    return null;
+}
+
+bool HeroAbility_RespawnEgg_RespawnAvailable(){
+    unit tmpUnit = HeroAbility_RespawnEgg_GetAvailableEgg();
+    return (tmpUnit != null);
+}
+
+void HeroAbility_RespawnEgg_RunRespawnHandler(int revivingPlayer){
+    heroAbility_RespawnEgg_RespawnHandlerParam_RevivingPlayer = revivingPlayer;
+
+    if(heroAbility_RespawnEgg_RespawnHandler_Trigger == null){
+        heroAbility_RespawnEgg_RespawnHandler_Trigger = TriggerCreate("HeroAbility_RespawnEgg_RespawnHandler");
+    }
+    TriggerExecute(heroAbility_RespawnEgg_RespawnHandler_Trigger, true, false);
+}
+
+bool HeroAbility_RespawnEgg_RespawnHandler(bool testConds, bool runActions){
+    int revivingPlayer = heroAbility_RespawnEgg_RespawnHandlerParam_RevivingPlayer;
+    unit egg = HeroAbility_RespawnEgg_GetAvailableEgg();
+    unit hero = gv_PlayerStats[revivingPlayer].heroUnit;
+    int eggOwner = UnitGetOwner(egg);
+    fixed time = HeroAbility_RespawnEgg_RespawnTime(revivingPlayer, egg);
+    const fixed loopTime = 0.25;
+    bool revivingPlayerLeaveFlag = false;
+    bool eggDiedFlag = false;
+    point rallyPoint;
+
+    if(UnitTestState(egg, c_unitStateHidden)){
+        ActorSend(libNtve_gf_MainActorofUnit(gv_PlayerStats[eggOwner].heroUnit), "Signal RespawnEggKill");
+        UnitSetPosition(egg, UnitGetPosition(egg), false);
+    }
+
+    //init: activate dummy ability with timer, change egg model
+    UnitSetOwner(egg, revivingPlayer, true);
+    CatalogFieldValueSet(c_gameCatalogAbil, "RespawnEgg@Reviving", "CastIntroTime[0]", revivingPlayer, FixedToString(time, 2));
+    CatalogFieldValueSet(c_gameCatalogButton, "RespawnEgg@Reviving", "Icon", revivingPlayer,
+                         CatalogFieldValueGet(c_gameCatalogActor, UnitGetType(gv_PlayerStats[revivingPlayer].heroUnit), "UnitIcon", c_playerAny));
+    ActorSend(libNtve_gf_MainActorofUnit(egg), "ModelSwap RespawnEgg@Egg" + UnitGetType(gv_PlayerStats[revivingPlayer].heroUnit));
+    ActorSend(libNtve_gf_MainActorofUnit(egg), "Signal ModelSwap");
+    UnitBehaviorAdd(egg, "RespawnEgg@Reviving", egg, 1);
+    UnitIssueOrder(egg, Order(AbilityCommand("RespawnEgg@Reviving", 0)), c_orderQueueReplace);
+
+    CameraPan(revivingPlayer, UnitGetPosition(egg), 1.25, -1, 10.0, true);
+
+    //loop
+    while(time > 0){
+        Wait(loopTime, c_timeGame);
+        time -= loopTime;
+        //checks for revive exceptions
+        if(!gv_PlayerStats[revivingPlayer].activeFlag ){
+            revivingPlayerLeaveFlag = true;
+            break;
+        }
+        else if ( !UnitIsAlive(egg) ){
+            eggDiedFlag = true; 
+            break;
+        }
+    }
+
+    if (eggDiedFlag){
+        Player_HeroDied(revivingPlayer);
+    }
+    else if (revivingPlayerLeaveFlag){
+        if(gv_PlayerStats[eggOwner].activeFlag){
+            //if orig egg owner left/died
+            
+            ActorSend(libNtve_gf_MainActorofUnit(egg), "ModelSwap RespawnEgg@Egg");
+            ActorSend(libNtve_gf_MainActorofUnit(egg), "Signal ModelSwap");
+            UnitSetOwner(egg, eggOwner, true);
+            UnitIssueOrder(egg, Order(AbilityCommand("stop", 0)), c_orderQueueReplace);
+            UnitBehaviorRemove(egg, "RespawnEgg@Reviving", 1);
+        }
+        else{
+            //eggOwner dead/left, so kill egg here explicitly,
+            //because reviving eggs have to be excluded in the kill all unit after leave to allow reuse of eggs 
+            UnitKill(egg);
+        }
+    }
+    else{
+        //actual revive
+        ActorSend(libNtve_gf_MainActorofUnit(egg), "Signal Hatching");
+        UnitSetPropertyFixed(hero, c_unitPropLifePercent, 50.0);
+        Player_Revive_ReleaseHero(revivingPlayer, UnitGetPosition(egg));
+        rallyPoint = UnitRallyPointTargetPoint(egg, 1, 1);
+        if(rallyPoint == null){
+            rallyPoint = UnitGetPosition(egg);
+        }
+        UnitIssueOrder(hero, OrderTargetingPoint(AbilityCommand("attack",0),rallyPoint),c_orderQueueReplace);
+
+        UnitKill(egg);
+    }
+    return true;
+}
+
+// taunt
+bool HeroAbility_Taunt (bool testConds, bool runActions){
+    unitgroup affectedUnits;
+    unit caster = EventUnit();
+    int counter;
+    int tmpInt;
+    unit tmpUnit;
+    string tmpStr;
+
+    if(!runActions) {return true;}
+
+    //find units in range
+    affectedUnits = UnitGroup(null, gv_EnemyPlayer, RegionCircle(UnitGetPosition(EventUnit()), 7.25), UnitFilter(0, 0, (1 << c_targetFilterWorker) | (1 << c_targetFilterMissile) | (1 << c_targetFilterItem), (1 << (c_targetFilterStasis - 32)) | (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0);
+    tmpInt = UnitGroupCount(affectedUnits, c_unitCountAll);
+    for(;;tmpInt -=1){
+        tmpUnit = UnitGroupUnitFromEnd(affectedUnits, tmpInt);
+        if( tmpUnit == null){ break; }
+
+        if(UnitHasBehavior2(tmpUnit, "Taunt@Untauntable")){
+            UnitGroupRemove(affectedUnits, tmpUnit);
+        }
+        else {
+            UnitBehaviorAdd(tmpUnit, "Taunt@Taunted", caster, 1);
+        }
+    }
+
+    //repeat attack command onto the caster. also check if the caster is still the most recent taunt
+    for(counter = 24; counter > 0; counter -=1){
+        tmpInt = UnitGroupCount(affectedUnits, c_unitCountAll);
+        for(;;tmpInt -=1){
+            tmpUnit = UnitGroupUnitFromEnd(affectedUnits, tmpInt);
+            if( tmpUnit == null){ break; }
+
+            //check if still taunted and if taunt debuff still comes from the caster (ie no taunt from another player)
+            if(UnitHasBehavior2(tmpUnit, "Taunt@Taunted") && caster == UnitBehaviorEffectUnit(tmpUnit, "Taunt@Taunted", c_effectUnitCaster, 0)){
+                //ignore bosses who are not allowed to attack due to casting
+                if(!UnitHasBehavior2(tmpUnit, "AlreadyCastingNoWeapons")){
+                    //bunker dont have attack ability but use attackredirect
+                    if(UnitGetType(tmpUnit) == "Bunker2" || UnitGetType(tmpUnit) == "Bunker"){
+                        UnitIssueOrder(tmpUnit, OrderTargetingUnit(AbilityCommand("AttackRedirect", 0), caster), c_orderQueueReplace);
+                    }
+                    else{
+                        UnitIssueOrder(tmpUnit, OrderTargetingUnit(AbilityCommand("attack", 0), caster), c_orderQueueReplace);
+                    }
+                }
+            }
+            //if taunted by another player, from current scope
+            else{
+                UnitGroupRemove(affectedUnits, tmpUnit);
+            }
+        }
+        Wait(0.125, c_timeGame);
+    }
+    Wait(0.0625, c_timeGame);
+
+    //reset attack commands/idle points
+    tmpInt = UnitGroupCount(affectedUnits, c_unitCountAll);
+    for(;;tmpInt -=1){
+        tmpUnit = UnitGroupUnitFromEnd(affectedUnits, tmpInt);
+        if( tmpUnit == null){ break; }
+
+        if(caster == UnitBehaviorEffectUnit(tmpUnit, "Taunt@Taunted", c_effectUnitCaster, 0)){
+            UnitBehaviorRemove(tmpUnit, "Taunt@Taunted", 1);
+            tmpStr = UnitGetType(tmpUnit);
+
+            //special behavior depening on unit attributes:
+            if(UnitTypeTestAttribute(tmpStr, c_unitAttributeSummoned)){
+                UnitIssueOrder(tmpUnit, Order(AbilityCommand("stop", 0)), c_orderQueueReplace);
+            }
+            else if (UnitTypeTestAttribute(tmpStr, c_unitAttributeHeroic)){
+                //each boss has its own return point (or just stop command in case of unmovable bosses)
+                if(tmpStr == "HellionTank2"){
+                    UnitIssueOrder(tmpUnit, OrderTargetingPoint(AbilityCommand("attack", 0), PointFromName("PartTerran_Boss_Flamer")), c_orderQueueReplace);
+                }
+                else if(tmpStr == "PlanetaryFotress"){
+                    UnitIssueOrder(tmpUnit, Order(AbilityCommand("stop", 0)), c_orderQueueReplace);
+                }
+                else if(tmpStr == "Thor"){
+                    UnitIssueOrder(tmpUnit, OrderTargetingPoint(AbilityCommand("attack", 0), PointFromName("PartTerran_Boss_Hammer")), c_orderQueueReplace);
+                }
+                else if(tmpStr == "Atlantis" || tmpStr == "AtlantisCore" || tmpStr == "Illusion@AtlantisCore"){
+                    UnitIssueOrder(tmpUnit, OrderTargetingPoint(AbilityCommand("attack", 0), PointFromName("PartProtoss_Boss_FinalBoss")), c_orderQueueReplace);
+                }
+                else if(tmpStr == "Lightning" ||tmpStr == "Thunder"){
+                    UnitIssueOrder(tmpUnit, OrderTargetingPoint(AbilityCommand("attack", 0), PointFromName("PartProtoss_Boss_TagTeam")), c_orderQueueReplace);
+                }
+                else if(tmpStr == "Madness"){
+                    UnitIssueOrder(tmpUnit, Order(AbilityCommand("stop", 0)), c_orderQueueReplace);
+                }
+            }
+            else {
+                if(UnitHasBehavior2(tmpUnit, "AttackWaypoint0")){
+                    UnitIssueOrder(tmpUnit, OrderTargetingPoint(AbilityCommand("attack", 0), gv_Part_AttackWaypoint), c_orderQueueReplace);
+                }
+                else{
+                    UnitIssueOrder(tmpUnit, OrderTargetingPoint(AbilityCommand("attack", 0), gv_Part_AttackPoint), c_orderQueueReplace);
+                }
+            }
+        }
+    }
+
+    
+    return true;
+}
+
+// decoy
+bool HeroAbility_Decoy (bool testConds, bool runActions){
+    unit caster = EventPlayerEffectUsedUnit(c_effectUnitCaster);
+    unit decoy = EventPlayerEffectUsedUnit(c_effectUnitTarget);
+    const fixed factor = 0.6;
+    if(!runActions) {return true;}
+    UnitSetPropertyFixed(decoy, c_unitPropLifeMax, (factor * UnitGetPropertyFixed(caster, c_unitPropLifeMax, c_unitPropCurrent)));
+    UnitSetPropertyFixed(decoy, c_unitPropLife, (factor * UnitGetPropertyFixed(caster, c_unitPropLife, c_unitPropCurrent)));
+    return true;
+}
+
+// corrosive burst
+bool HeroAbility_CorrosiveBurst_DmgCalculation (bool testConds, bool runActions){
+    const string buff = "CorrosiveSpikes@Dot";
+    const string removeBuffEffect = "CorrosiveBurst@RemoveCorrosiveSpikes";
+    const string dmgEffect = "CorrosiveBurst@Dmg";
+    unit caster = EventPlayerEffectUsedUnit(c_effectUnitCaster);
+    unit target  = EventPlayerEffectUsedUnit(c_effectUnitTarget);
+    int player = UnitGetOwner(caster);
+    int casterLevel = UnitLevel(caster);
+    int stackCountTotal = UnitBehaviorCount(target, buff);
+    fixed baseDmg = libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogAccumulator, "CorrosiveBurst@DmgBase", "Amount", player);
+    fixed baseModifier = libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogAccumulator, "CorrosiveBurst@DmgModifier", "Amount", player);
+    fixed spellpower = 1+ gv_PlayerStats[player].spellPowerPercent / 100;
+    int i;
+    int stackCountCaster;
+    fixed damage;
+
+    for (i = 0; i < stackCountTotal; i += 1) {
+        if( caster == UnitBehaviorEffectUnit(target, buff, c_effectUnitCaster, i)){
+            stackCountCaster += 1;
+        }
+    }
+    if(stackCountCaster == 0){ return false; }
+
+    damage = baseDmg + (casterLevel * baseModifier);
+    damage *= stackCountCaster * stackCountCaster;
+    damage *= spellpower;
+
+    UnitCreateEffectUnit(caster,removeBuffEffect, target);
+    UnitDamage(caster, dmgEffect, target, damage);
+
+    // Debug_ShowMessage("CorrBurst: #Stack=" + IntToString(stackCountCaster) + ", Damage=" + FixedToString(damage, 2));
+    return true;
+}
+
+void HeroAbility_TriggerCreate(){
+    TriggerAddEventUnitAbility(TriggerCreate("HeroAbility_Taunt"), null, AbilityCommand("Taunt@Taunt", 0), c_abilEffectStageChannel, false);
+    TriggerAddEventPlayerEffectUsed(TriggerCreate("HeroAbility_Decoy"), c_playerAny, "Decoy@SpawnSet");
+    TriggerAddEventPlayerEffectUsed(TriggerCreate("HeroAbility_CorrosiveBurst_DmgCalculation"), c_playerAny, "CorrosiveBurst@DummyEffect");
+}

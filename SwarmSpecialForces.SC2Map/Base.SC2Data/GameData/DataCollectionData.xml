@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CDataCollectionAbil id="HeroAbilityParent">
+        <EditorCategories value=""/>
+        <DataRecord Entry="Abil,HeroAbilityParent"/>
+        <DataRecord Entry="Button,HeroAbilityParent"/>
+        <DataRecord Entry="Requirement,HeroAbilityParent@Req"/>
+        <DataRecord Entry="Upgrade,HeroAbilityParent@Unlock"/>
+    </CDataCollectionAbil>
+</Catalog>
