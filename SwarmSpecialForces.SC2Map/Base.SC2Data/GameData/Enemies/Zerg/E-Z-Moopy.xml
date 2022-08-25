@@ -1386,8 +1386,8 @@
         <BehaviorArray Link="MoopyHat2"/>
         <BehaviorArray Link="ShieldColor@TotemTracker"/>
         <BehaviorArray Link="ShieldColor@DummyTracker"/>
-        <BehaviorArray Link="KingMoopyDamageReduction"/>
         <BehaviorArray Link="KingMoopyArmor"/>
+        <BehaviorArray Link="Detector10"/>
         <WeaponArray Link="KingMoopyWeapon"/>
         <LifeArmorName value="Unit/LifeArmorName/Moopy"/>
         <AbilArray Link="WavesOfChaos"/>
@@ -1416,6 +1416,7 @@
         <LifeMax value="25000"/>
         <WeaponArray Link="MoopyChampionWeapon"/>
         <LifeArmorName value="Unit/LifeArmorName/Moopy"/>
+        <BehaviorArray Link="Detector10"/>
     </CUnit>
     <CBehaviorBuff id="KingMoopyArmor" parent="ArmorBase">
         <Name value="Behavior/Name/KingMoopyArmor"/>
