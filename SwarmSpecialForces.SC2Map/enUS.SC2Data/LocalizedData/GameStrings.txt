@@ -2398,7 +2398,7 @@ Trig/Enemy/AreaOpen/Junker=The <c val="FF8000">mercenaries </c>started to attack
 Trig/Enemy/AreaOpen/Mech=The <c val="FF8000">robotic warriors </c>started to attack us from another area with upgraded equipment.<n/>They now provide <c val="FF8000">more biomass and experience</c>.<n/><c val="FF8000">Additional upgrades </c>available for the swarm.
 Trig/Enemy/AreaOpen/Mecha=The <c val="FF8000">fake swarm </c>started to attack us from another area with upgraded equipment.<n/>They now provide <c val="FF8000">more biomass and experience</c>.<n/><c val="FF8000">Additional upgrades </c>available for the swarm.
 Trig/Enemy/AreaOpen/Moopy=You can now attack the <c val="FF8000">hidden mastermind </c><n/>Destroy that fool.
-Trig/Enemy/AreaOpen/MoopyCanBeOpened=You are close to getting the attention of the c val="FF8000">hidden mastermind</c>. Try angering him by killing his champions.
+Trig/Enemy/AreaOpen/MoopyCanBeOpened=You are close to getting the attention of the <c val="FF8000">hidden mastermind</c>. Try angering him by killing his champions.
 Trig/Enemy/AreaOpen/MoopyClosed=The <c val="FF8000">hidden mastermind</c> is uninterested in you.<n/>Try grabbing his attention next time.
 Trig/Enemy/AreaOpen/Psi=The <c val="FF8000">psionic warriors </c>started to attack us from another area with upgraded equipment.<n/>They now provide <c val="FF8000">more biomass and experience</c>.<n/><c val="FF8000">Additional upgrades </c>available for the swarm.
 Trig/Enemy/Bridge/Flamer=The bridge to the Flamer is now open.
