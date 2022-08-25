@@ -860,7 +860,7 @@
             </Image>
         </Instances>
         <Instances Id="Fortress1">
-            <Fixed Fixed="20">
+            <Fixed Fixed="200">
                 <Field Id="Life"/>
             </Fixed>
             <Fixed Fixed="1">
@@ -882,7 +882,7 @@
             </Image>
         </Instances>
         <Instances Id="Fortress3">
-            <Fixed Fixed="40">
+            <Fixed Fixed="400">
                 <Field Id="Life"/>
             </Fixed>
             <Fixed Fixed="3">
@@ -992,7 +992,7 @@
             </Image>
         </Instances>
         <Instances Id="Madness1">
-            <Fixed Fixed="20">
+            <Fixed Fixed="200">
                 <Field Id="Life"/>
             </Fixed>
             <Fixed Fixed="1">
@@ -1014,7 +1014,7 @@
             </Image>
         </Instances>
         <Instances Id="Madness3">
-            <Fixed Fixed="40">
+            <Fixed Fixed="400">
                 <Field Id="Life"/>
             </Fixed>
             <Fixed Fixed="3">
@@ -1454,7 +1454,7 @@
             </Image>
         </Instances>
         <Instances Id="Cybermind1">
-            <Fixed Fixed="20">
+            <Fixed Fixed="200">
                 <Field Id="Life"/>
             </Fixed>
             <Fixed Fixed="1">
@@ -1476,7 +1476,7 @@
             </Image>
         </Instances>
         <Instances Id="Cybermind3">
-            <Fixed Fixed="40">
+            <Fixed Fixed="400">
                 <Field Id="Life"/>
             </Fixed>
             <Fixed Fixed="3">
@@ -1973,7 +1973,7 @@
             </Fixed>
         </Instances>
         <Instances Id="P0D0Small3">
-            <Fixed Fixed="10">
+            <Fixed Fixed="100">
                 <Field Id="Life"/>
             </Fixed>
             <Fixed Fixed="2">
@@ -2039,7 +2039,7 @@
             </Fixed>
         </Instances>
         <Instances Id="P0D2Small3">
-            <Fixed Fixed="25">
+            <Fixed Fixed="250">
                 <Field Id="Life"/>
             </Fixed>
             <Fixed Fixed="5">
@@ -2108,7 +2108,7 @@
             </Fixed>
         </Instances>
         <Instances Id="P0D4Small3">
-            <Fixed Fixed="25">
+            <Fixed Fixed="250">
                 <Field Id="Life"/>
             </Fixed>
             <Fixed Fixed="5">
@@ -2305,7 +2305,7 @@
             </Fixed>
         </Instances>
         <Instances Id="P1D0Small3">
-            <Fixed Fixed="10">
+            <Fixed Fixed="100">
                 <Field Id="Life"/>
             </Fixed>
             <Fixed Fixed="2">
@@ -2365,7 +2365,7 @@
             </Fixed>
         </Instances>
         <Instances Id="P1D2Small3">
-            <Fixed Fixed="25">
+            <Fixed Fixed="250">
                 <Field Id="Life"/>
             </Fixed>
             <Fixed Fixed="5">
@@ -2428,7 +2428,7 @@
             </Fixed>
         </Instances>
         <Instances Id="P1D4Small3">
-            <Fixed Fixed="25">
+            <Fixed Fixed="250">
                 <Field Id="Life"/>
             </Fixed>
             <Fixed Fixed="5">
@@ -2622,7 +2622,7 @@
             </Fixed>
         </Instances>
         <Instances Id="P2D0Small3">
-            <Fixed Fixed="10">
+            <Fixed Fixed="100">
                 <Field Id="Life"/>
             </Fixed>
             <Fixed Fixed="2">
@@ -2682,7 +2682,7 @@
             </Fixed>
         </Instances>
         <Instances Id="P2D2Small3">
-            <Fixed Fixed="25">
+            <Fixed Fixed="250">
                 <Field Id="Life"/>
             </Fixed>
             <Fixed Fixed="5">
@@ -2745,7 +2745,7 @@
             </Fixed>
         </Instances>
         <Instances Id="P2D4Small3">
-            <Fixed Fixed="25">
+            <Fixed Fixed="250">
                 <Field Id="Life"/>
             </Fixed>
             <Fixed Fixed="5">
