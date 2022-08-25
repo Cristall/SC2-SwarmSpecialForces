@@ -1094,6 +1094,7 @@
         <Period value="1"/>
         <Icon value="Assets\Textures\btn-ability-dehaka-thornaura.dds"/>
         <DisplayEffect value="MoopyChampionWeaponDmg"/>
+        <TargetFilters value="Visible;Self,Worker,Missile,Item,Dead,Hidden,Invulnerable"/>
     </CWeaponLegacy>
     <CMoverMissile id="RainbowMeteors@Meteor">
         <MotionPhases>
