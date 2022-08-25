@@ -152,7 +152,7 @@
     </Element>
     <Element Type="Param" Id="0D90A8F8">
         <ParameterDef Type="ParamDef" Id="6B485C71"/>
-        <Value>1-S2-1-356859</Value>
+        <Value>1-S2-1-10360989</Value>
         <ValueType Type="string"/>
     </Element>
     <Element Type="Trigger" Id="E09818F7">
@@ -193,7 +193,7 @@
     </Element>
     <Element Type="Param" Id="BFB3B9C3">
         <ParameterDef Type="ParamDef" Id="170A3CA9"/>
-        <Value>1-S2-1-356859</Value>
+        <Value>1-S2-1-10360989</Value>
         <ValueType Type="string"/>
     </Element>
     <Element Type="FunctionDef" Id="8C87A640">
