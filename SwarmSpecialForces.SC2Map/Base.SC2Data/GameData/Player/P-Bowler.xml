@@ -30,7 +30,7 @@
         <ValidatorArray value="TargetNotAcrossCliff"/>
         <EditorCategories value=""/>
         <EffectArray value="TheySeeMeRolling@Offset1"/>
-        <TargetLocationType value="UnitOrPoint"/>
+        <TargetLocationType value="Point"/>
     </CEffectSet>
     <CEffectCreatePersistent id="TheySeeMeRolling@Offset1">
         <EditorCategories value=""/>
