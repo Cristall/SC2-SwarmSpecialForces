@@ -4412,6 +4412,7 @@ Unit/EditorSuffix/ZealotPurifier2=Purifier
 Unit/EditorSuffix/ZealotStandard=Standard
 Unit/EditorSuffix/ZealotTaldarim=Taldarim
 Unit/EditorSuffix/ZealotTalon=Talon
+Unit/LifeArmorName/None=
 Unit/Name/BarrageTargetDummy=Barrage Target Dummy
 Unit/Name/BeamDroneWeaponFollowUnit=Beam Drone Weapon Follow Unit
 Unit/Name/BombardmentTargetDummy=Bombardment Target Dummy

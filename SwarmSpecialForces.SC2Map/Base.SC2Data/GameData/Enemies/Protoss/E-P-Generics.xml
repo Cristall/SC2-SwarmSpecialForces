@@ -5791,7 +5791,7 @@
         <Sight value="9"/>
         <AbilArray Link="AdeptShadow"/>
         <WeaponArray Link="AdeptTaldarimWeapon"/>
-        <CardLayouts>
+        <CardLayouts index="0">
             <LayoutButtons Face="AdeptShadow" Type="AbilCmd" AbilCmd="AdeptShadow,Execute" Row="2" Column="0"/>
         </CardLayouts>
         <InnerRadius value="0.375"/>
@@ -5816,7 +5816,7 @@
         <TurningRate value="999.8437"/>
         <AbilArray Link="AdeptShadow"/>
         <WeaponArray Link="AdeptAncientWeapon"/>
-        <CardLayouts>
+        <CardLayouts index="0">
             <LayoutButtons Face="AdeptShadow" Type="AbilCmd" AbilCmd="AdeptShadow,Execute" Row="2" Column="0"/>
         </CardLayouts>
         <InnerRadius value="0.25"/>
