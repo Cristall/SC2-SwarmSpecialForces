@@ -85,6 +85,7 @@
             <Value>2.2</Value>
             <Value>2.3</Value>
             <Value>2.4</Value>
+            <Value>2.5</Value>
         </Version>
         <Date>
             <Value>8/24/2020</Value>
@@ -103,6 +104,7 @@
             <Value>8/23/2022</Value>
             <Value>8/23/2022</Value>
             <Value>8/24/2022</Value>
+            <Value>8/25/2022</Value>
         </Date>
         <Notes>
             <Value>12</Value>
@@ -121,6 +123,7 @@
             <Value>141</Value>
             <Value>142,143,144,145,146,147,148,149,150,151,152,153,154</Value>
             <Value>155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171</Value>
+            <Value>172,173,174,175,176,177,178</Value>
         </Notes>
     </PatchNote>
     <Preload>
