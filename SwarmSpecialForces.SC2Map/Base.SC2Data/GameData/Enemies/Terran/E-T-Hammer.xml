@@ -240,7 +240,7 @@
     </CEffectSet>
     <CEffectDamage id="RocketLaunchRadioactiveDmg">
         <EditorCategories value=""/>
-        <Amount value="400"/>
+        <Amount value="300"/>
         <AreaArray Radius="2.5" Fraction="1"/>
         <SearchFilters value="Visible;Self,Player,Ally,Neutral,Worker,Missile,Dead,Hidden,Invulnerable"/>
     </CEffectDamage>
