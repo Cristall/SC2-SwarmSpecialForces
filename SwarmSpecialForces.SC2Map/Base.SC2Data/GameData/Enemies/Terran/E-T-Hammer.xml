@@ -85,19 +85,8 @@
         <PeriodicEffectArray value="BarrageIssueBarrageLine"/>
         <PeriodicPeriodArray value="0.35"/>
     </CEffectCreatePersistent>
-    <CEffectEnumArea id="BarrageInitialSearch">
-        <EditorCategories value=""/>
-        <LaunchLocation Value="CasterUnit"/>
-        <ImpactLocation Value="CasterUnit"/>
-        <SearchFilters value="-;Self,Player,Ally,Neutral,Worker,Missile,Dead,Hidden,Invulnerable"/>
-        <AreaArray Radius="6" Effect="BarrageInitialSet"/>
-        <MinCount value="1"/>
-        <MaxCount value="1"/>
-        <SearchFlags index="ExtendByUnitRadius" value="1"/>
-    </CEffectEnumArea>
     <CEffectSet id="BarrageInitialSet">
         <EditorCategories value=""/>
-        <EffectArray value="BarrageApplyCastingBuff"/>
         <EffectArray value="BarrageApplyHammerBuff"/>
         <EffectArray value="BarrageTargetDummyOffset"/>
         <EffectArray value="BarrageApplyCastingBuffNoWeapons"/>
@@ -245,7 +234,6 @@
     </CEffectSet>
     <CEffectSet id="RocketLaunchInitialSet">
         <EditorCategories value=""/>
-        <EffectArray value="RocketLaunchApplyCastingBuff"/>
         <EffectArray value="RocketLaunchSearch"/>
         <EffectArray value="RocketLaunchApplyCastingBuffNoWeapons"/>
         <TargetLocationType value="Point"/>
@@ -305,7 +293,6 @@
     </CEffectDamage>
     <CEffectSet id="SeekerMissileInitialSet">
         <EditorCategories value=""/>
-        <EffectArray value="SeekerMissileApplyCastingBuff"/>
         <EffectArray value="SeekerMissileLaunchMissile2"/>
         <EffectArray value="SeekerMissileApplyCastingBuffNoWeapons"/>
     </CEffectSet>
@@ -325,12 +312,13 @@
         <Death value="Normal"/>
         <AttributeFactor index="Armored" value="0.15"/>
     </CEffectDamage>
-    <CAbilEffectInstant id="Barrage">
+    <CAbilEffectTarget id="Barrage">
         <EditorCategories value="AbilityorEffectType:Units"/>
-        <Effect index="0" value="BarrageInitialSearch"/>
+        <Effect index="0" value="BarrageInitialSet"/>
         <CastOutroTime value="2"/>
+        <Range value="6"/>
         <CmdButtonArray index="Execute" DefaultButtonFace="Barrage"/>
-    </CAbilEffectInstant>
+    </CAbilEffectTarget>
     <CAbilEffectTarget id="BarrageLine">
         <EditorCategories value="AbilityorEffectType:Units"/>
         <Effect index="0" value="BarrageLinePersistent"/>
@@ -663,6 +651,7 @@
     </CUnit>
     <CUnit id="SeekerMissile2" parent="MISSILE">
         <Mover value="SeekerMissileMover"/>
+        <FlagArray index="Invulnerable" value="1"/>
     </CUnit>
     <CUnit id="Thor">
         <FogVisibility value="Dimmed"/>
