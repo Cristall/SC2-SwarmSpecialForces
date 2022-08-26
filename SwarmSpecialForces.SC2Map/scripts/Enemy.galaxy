@@ -268,6 +268,7 @@ bool Enemy_BossFight_Handler (bool testConds, bool runActions){
                         UnitIssueOrder(bossFightData.boss[tmpInt], Order(AbilityCommand("stop", 0)), c_orderQueueReplace);
                     }
                     else{
+                        UnitBehaviorAdd(bossFightData.boss[tmpInt], "BossReturn", bossFightData.boss[tmpInt], 1);
                         UnitIssueOrder(bossFightData.boss[tmpInt], OrderTargetingPoint(AbilityCommand("move", 0), bossFightData.bossIdlePoint[tmpInt]), c_orderQueueReplace);
                     }
                 }

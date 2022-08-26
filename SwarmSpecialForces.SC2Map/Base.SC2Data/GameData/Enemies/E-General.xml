@@ -189,8 +189,10 @@
     </CBehaviorBuff>
     <CBehaviorBuff id="BossReturn">
         <EditorCategories value="AbilityorEffectType:Units"/>
-        <Duration value="0.2321"/>
-        <Modification MoveSpeedMultiplier="2"/>
+        <Duration value="0.25"/>
+        <Modification MoveSpeedMultiplier="3">
+            <StateFlags index="Invulnerable" value="1"/>
+        </Modification>
     </CBehaviorBuff>
     <CBehaviorBuff id="DifficultyCustom">
         <InfoIcon value="Assets\Textures\btn-ability-terran-deactivatemine.dds"/>
