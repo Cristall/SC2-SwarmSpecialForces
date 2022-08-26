@@ -926,6 +926,7 @@
         <DamagePoint value="0"/>
         <TargetFilters value="Visible;Self,Worker,Missile,Item,Dead,Hidden,Invulnerable"/>
         <Period value="1"/>
+        <AllowedMovement value="Slowing"/>
     </CWeaponLegacy>
     <CMoverMissile id="GaryWeaponMissileMover" parent="MissileDefault">
         <MotionPhases index="0">
