@@ -38,10 +38,8 @@
     </Element>
     <Element Type="Category" Id="D3B6B04B">
         <Item Type="Comment" Id="C437F20B"/>
-        <Item Type="Trigger" Id="251BE25E"/>
         <Item Type="Trigger" Id="9593CE75"/>
         <Item Type="Trigger" Id="E09818F7"/>
-        <Item Type="FunctionDef" Id="8C87A640"/>
         <Item Type="FunctionDef" Id="D7673E0A"/>
         <Item Type="FunctionDef" Id="2DD51507"/>
     </Element>
@@ -53,40 +51,9 @@
             these can be used to restore stats after extracting information from a replay
         </Comment>
     </Element>
-    <Element Type="Trigger" Id="251BE25E">
-        <Disabled/>
-        <Event Type="FunctionCall" Id="3E90F970"/>
-        <Action Type="FunctionCall" Id="96B2122A"/>
-    </Element>
-    <Element Type="FunctionCall" Id="3E90F970">
-        <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000121"/>
-        <Parameter Type="Param" Id="A3836E3A"/>
-        <Parameter Type="Param" Id="F0FF83C4"/>
-        <Parameter Type="Param" Id="B1C93999"/>
-    </Element>
-    <Element Type="Param" Id="A3836E3A">
-        <ParameterDef Type="ParamDef" Library="Ntve" Id="00000191"/>
-        <Preset Type="PresetValue" Library="Ntve" Id="2999701E"/>
-    </Element>
-    <Element Type="Param" Id="F0FF83C4">
-        <ParameterDef Type="ParamDef" Library="Ntve" Id="00000193"/>
-        <Preset Type="PresetValue" Library="Ntve" Id="00000074"/>
-    </Element>
-    <Element Type="Param" Id="B1C93999">
-        <ParameterDef Type="ParamDef" Library="Ntve" Id="00000192"/>
-        <Value>-reset</Value>
-        <ValueType Type="string"/>
-    </Element>
-    <Element Type="FunctionCall" Id="96B2122A">
-        <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000123"/>
-        <ScriptCode>
-            Bank_Reset(EventPlayer());
-        </ScriptCode>
-    </Element>
     <Element Type="Trigger" Id="9593CE75">
         <Disabled/>
         <Event Type="FunctionCall" Id="B043F130"/>
-        <Action Type="Comment" Id="C61C480E"/>
         <Action Type="FunctionCall" Id="8B616F8E"/>
     </Element>
     <Element Type="FunctionCall" Id="B043F130">
@@ -108,36 +75,6 @@
         <Value>-transfersave</Value>
         <ValueType Type="string"/>
     </Element>
-    <Element Type="Comment" Id="C61C480E">
-        <Comment>
-            2-S2-1-1254290 probe (discord mario)
-            2-S2-1-6730321 elvinandritos
-            2-S2-1-8056176 Colvin
-            2-S2-2-1412098 Rogofos/alisa
-            2-S2-2-1014160 happytown
-            2-S2-2-2521935 ebanumbaaa / dismemberment
-            2-S2-1-2601831 atlas
-            2-S2-1-6918426 isatis
-            2-S2-1-1839035 gugle/jan
-            2-S2-1-1876022 BeatMeUp / unknownmadness
-            1-S2-2-1606235 Alex Mark /OwoBadLuck
-            3-S2-2-1763977 Alex Mark /OwoBadLuck
-            1-S2-1-5658847 Enchanting#2250
-            3-S2-1-4313115 Enchanting#2250
-            2-S2-1-4681306 blackdevil, 1-S2-1-5436527
-            2-S2-1-1524149, 1-S2-1-4255941 Mehere
-            2-S2-1-7542316 Karasis
-            2-S2-1-7103339 Yogen
-            1-S2-1-2475190 paarapa
-            1-S2-1-11168517 Quain
-            2-S2-1-243906 CaZo
-            2-S2-1-6987152 VenuskaPL
-            2-S2-1-6925105 RoyalDutch
-            2-S2-1-775759 sanguinario
-            2-S2-1-1524149 mehere
-            2-S2-1-3225695 dasvik
-        </Comment>
-    </Element>
     <Element Type="FunctionCall" Id="8B616F8E">
         <FunctionDef Type="FunctionDef" Id="D7673E0A"/>
         <Parameter Type="Param" Id="A0D8F636"/>
@@ -152,7 +89,7 @@
     </Element>
     <Element Type="Param" Id="0D90A8F8">
         <ParameterDef Type="ParamDef" Id="6B485C71"/>
-        <Value>1-S2-1-10360989</Value>
+        <Value>1-S2-1-11299355</Value>
         <ValueType Type="string"/>
     </Element>
     <Element Type="Trigger" Id="E09818F7">
@@ -193,57 +130,17 @@
     </Element>
     <Element Type="Param" Id="BFB3B9C3">
         <ParameterDef Type="ParamDef" Id="170A3CA9"/>
-        <Value>1-S2-1-10360989</Value>
+        <Value>1-S2-1-11299355</Value>
         <ValueType Type="string"/>
     </Element>
-    <Element Type="FunctionDef" Id="8C87A640">
-        <Disabled/>
-        <FlagAction/>
-        <Parameter Type="ParamDef" Id="53F6B547"/>
-        <Variable Type="Variable" Id="59FC1549"/>
-        <Variable Type="Variable" Id="F72341AA"/>
-        <FunctionCall Type="FunctionCall" Id="6BBA17F3"/>
-    </Element>
-    <Element Type="ParamDef" Id="53F6B547">
-        <ParameterType>
-            <Type Value="int"/>
-        </ParameterType>
-    </Element>
-    <Element Type="Variable" Id="59FC1549">
-        <VariableType>
-            <Type Value="int"/>
-        </VariableType>
-        <Value Type="Param" Id="D9B1E98C"/>
-    </Element>
-    <Element Type="Param" Id="D9B1E98C">
-        <Value>0</Value>
-        <ValueType Type="int"/>
-    </Element>
-    <Element Type="Variable" Id="F72341AA">
-        <VariableType>
-            <Type Value="int"/>
-        </VariableType>
-        <Value Type="Param" Id="940664AA"/>
-    </Element>
-    <Element Type="Param" Id="940664AA">
-        <Value>0</Value>
-        <ValueType Type="int"/>
-    </Element>
-    <Element Type="FunctionCall" Id="6BBA17F3">
-        <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000123"/>
-        <ScriptCode>
-            Bank_Reset(lp_playerID);
-        </ScriptCode>
-    </Element>
     <Element Type="FunctionDef" Id="D7673E0A">
+        <Identifier>Debug_BankTransferSave</Identifier>
         <Disabled/>
         <FlagAction/>
+        <FlagNative/>
+        <FlagNoScriptPrefix/>
         <Parameter Type="ParamDef" Id="58E6E87A"/>
         <Parameter Type="ParamDef" Id="6B485C71"/>
-        <Variable Type="Variable" Id="19E13626"/>
-        <Variable Type="Variable" Id="F77C7937"/>
-        <Variable Type="Variable" Id="8AEA911E"/>
-        <FunctionCall Type="FunctionCall" Id="ED6A6A2E"/>
     </Element>
     <Element Type="ParamDef" Id="58E6E87A">
         <ParameterType>
@@ -256,59 +153,17 @@
             <Type Value="string"/>
         </ParameterType>
     </Element>
-    <Element Type="Variable" Id="19E13626">
-        <VariableType>
-            <Type Value="int"/>
-        </VariableType>
-        <Value Type="Param" Id="ACAF4269"/>
-    </Element>
-    <Element Type="Param" Id="ACAF4269">
-        <Value>0</Value>
-        <ValueType Type="int"/>
-    </Element>
-    <Element Type="Variable" Id="F77C7937">
-        <VariableType>
-            <Type Value="int"/>
-        </VariableType>
-        <Value Type="Param" Id="66AFAF92"/>
-    </Element>
-    <Element Type="Param" Id="66AFAF92">
-        <Value>0</Value>
-        <ValueType Type="int"/>
-    </Element>
-    <Element Type="Variable" Id="8AEA911E">
-        <VariableType>
-            <Type Value="int"/>
-        </VariableType>
-    </Element>
-    <Element Type="FunctionCall" Id="ED6A6A2E">
-        <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000123"/>
-        <ScriptCode>
-            gv_PlayerStats[lp_playerID].saveFlag_Any = true;
-            gv_PlayerStats[lp_playerID].saveFlag_Heavy = true;
-            gv_PlayerStats[lp_playerID].saveFlag_Options = true;
-            Bank_Save(lp_playerID, lp_playerhandle);
-        </ScriptCode>
-    </Element>
     <Element Type="FunctionDef" Id="2DD51507">
+        <Identifier>Debug_BankTransferLoad</Identifier>
         <Disabled/>
         <FlagAction/>
+        <FlagNative/>
+        <FlagNoScriptPrefix/>
         <Parameter Type="ParamDef" Id="B12393F9"/>
         <Parameter Type="ParamDef" Id="170A3CA9"/>
-        <Variable Type="Variable" Id="20B1BD93"/>
-        <FunctionCall Type="Comment" Id="F94FD0CF"/>
-        <FunctionCall Type="FunctionCall" Id="704CBB1C"/>
-        <FunctionCall Type="FunctionCall" Id="DCBF2EE0"/>
-        <FunctionCall Type="FunctionCall" Id="77A7BC6C"/>
-        <FunctionCall Type="FunctionCall" Id="F49C68F8"/>
-        <FunctionCall Type="Comment" Id="2300AE4C"/>
-        <FunctionCall Type="FunctionCall" Id="BFCC25F9"/>
-        <FunctionCall Type="Comment" Id="0019AB99"/>
-        <FunctionCall Type="FunctionCall" Id="41B837CE"/>
-        <FunctionCall Type="FunctionCall" Id="9E76FB1A"/>
-        <FunctionCall Type="FunctionCall" Id="5B49559E"/>
     </Element>
     <Element Type="ParamDef" Id="B12393F9">
+        <Identifier>playerID</Identifier>
         <ParameterType>
             <Type Value="int"/>
         </ParameterType>
@@ -317,287 +172,5 @@
         <ParameterType>
             <Type Value="string"/>
         </ParameterType>
-    </Element>
-    <Element Type="Variable" Id="20B1BD93">
-        <VariableType>
-            <Type Value="bool"/>
-        </VariableType>
-        <Value Type="Param" Id="4355852D"/>
-    </Element>
-    <Element Type="Param" Id="4355852D">
-        <Value>false</Value>
-        <ValueType Type="bool"/>
-    </Element>
-    <Element Type="Comment" Id="F94FD0CF">
-        <Comment>
-            checks and variable overwrite
-        </Comment>
-    </Element>
-    <Element Type="FunctionCall" Id="704CBB1C">
-        <FunctionDef Type="FunctionDef" Library="Ntve" Id="7D278C76"/>
-        <Parameter Type="Param" Id="C53DF52F"/>
-        <Parameter Type="Param" Id="776032C8"/>
-    </Element>
-    <Element Type="Param" Id="C53DF52F">
-        <ParameterDef Type="ParamDef" Library="Ntve" Id="6B3940B7"/>
-        <Value>1</Value>
-        <ValueType Type="int"/>
-    </Element>
-    <Element Type="Param" Id="776032C8">
-        <ParameterDef Type="ParamDef" Library="Ntve" Id="437A2BAF"/>
-        <Value>SwarmSpecialForcesTransfer</Value>
-        <ValueType Type="string"/>
-    </Element>
-    <Element Type="FunctionCall" Id="DCBF2EE0">
-        <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000137"/>
-        <FunctionCall Type="FunctionCall" Id="56E74AE9"/>
-        <FunctionCall Type="FunctionCall" Id="87985C66"/>
-        <FunctionCall Type="FunctionCall" Id="1BD3F94C"/>
-    </Element>
-    <Element Type="FunctionCall" Id="56E74AE9">
-        <FunctionDef Type="FunctionDef" Library="Ntve" Id="0366EE04"/>
-        <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
-        <Parameter Type="Param" Id="A22823A0"/>
-        <Parameter Type="Param" Id="C930F51B"/>
-        <Parameter Type="Param" Id="01A4CBED"/>
-    </Element>
-    <Element Type="Param" Id="A22823A0">
-        <ParameterDef Type="ParamDef" Library="Ntve" Id="0D120C33"/>
-        <FunctionCall Type="FunctionCall" Id="C07CA4D7"/>
-    </Element>
-    <Element Type="FunctionCall" Id="C07CA4D7">
-        <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000192"/>
-    </Element>
-    <Element Type="Param" Id="C930F51B">
-        <ParameterDef Type="ParamDef" Library="Ntve" Id="A4C19F41"/>
-        <Preset Type="PresetValue" Library="Ntve" Id="875889C8"/>
-    </Element>
-    <Element Type="Param" Id="01A4CBED">
-        <ParameterDef Type="ParamDef" Library="Ntve" Id="78A54B52"/>
-        <FunctionCall Type="FunctionCall" Id="8DAA5576"/>
-    </Element>
-    <Element Type="FunctionCall" Id="8DAA5576">
-        <FunctionDef Type="FunctionDef" Library="Ntve" Id="55C79F96"/>
-        <Parameter Type="Param" Id="1B10202F"/>
-    </Element>
-    <Element Type="Param" Id="1B10202F">
-        <ParameterDef Type="ParamDef" Library="Ntve" Id="30693AA2"/>
-        <Value>Error: No Transfer Bankfile exist.</Value>
-        <ValueType Type="string"/>
-    </Element>
-    <Element Type="FunctionCall" Id="87985C66">
-        <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000139"/>
-        <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
-    </Element>
-    <Element Type="FunctionCall" Id="1BD3F94C">
-        <FunctionDef Type="FunctionDef" Library="Ntve" Id="C439C375"/>
-        <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000003"/>
-        <Parameter Type="Param" Id="92A4EDAE"/>
-        <Parameter Type="Param" Id="166C9D29"/>
-        <Parameter Type="Param" Id="1AD3B186"/>
-    </Element>
-    <Element Type="Param" Id="92A4EDAE">
-        <ParameterDef Type="ParamDef" Library="Ntve" Id="ABB380C4"/>
-        <FunctionCall Type="FunctionCall" Id="2F6C38F0"/>
-    </Element>
-    <Element Type="FunctionCall" Id="2F6C38F0">
-        <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000280"/>
-        <Parameter Type="Param" Id="C2186706"/>
-        <Parameter Type="Param" Id="4234DDCB"/>
-    </Element>
-    <Element Type="Param" Id="C2186706">
-        <ParameterDef Type="ParamDef" Library="Ntve" Id="00000505"/>
-        <FunctionCall Type="FunctionCall" Id="15317684"/>
-    </Element>
-    <Element Type="FunctionCall" Id="15317684">
-        <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000053"/>
-    </Element>
-    <Element Type="Param" Id="4234DDCB">
-        <ParameterDef Type="ParamDef" Library="Ntve" Id="00000504"/>
-        <Value>SwarmSpecialForcesTransfer</Value>
-        <ValueType Type="string"/>
-    </Element>
-    <Element Type="Param" Id="166C9D29">
-        <ParameterDef Type="ParamDef" Library="Ntve" Id="51567265"/>
-        <Preset Type="PresetValue" Library="Ntve" Id="1E7A4625"/>
-    </Element>
-    <Element Type="Param" Id="1AD3B186">
-        <ParameterDef Type="ParamDef" Library="Ntve" Id="4A15EC5F"/>
-        <Value>false</Value>
-        <ValueType Type="bool"/>
-    </Element>
-    <Element Type="FunctionCall" Id="77A7BC6C">
-        <FunctionDef Type="FunctionDef" Id="8C87A640"/>
-        <Parameter Type="Param" Id="7D15C7B9"/>
-    </Element>
-    <Element Type="Param" Id="7D15C7B9">
-        <ParameterDef Type="ParamDef" Id="53F6B547"/>
-        <FunctionCall Type="FunctionCall" Id="43DAE8AF"/>
-    </Element>
-    <Element Type="FunctionCall" Id="43DAE8AF">
-        <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000053"/>
-    </Element>
-    <Element Type="FunctionCall" Id="F49C68F8">
-        <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000136"/>
-        <Parameter Type="Param" Id="ABEEE4C2"/>
-        <Parameter Type="Param" Id="1AAE2E59"/>
-    </Element>
-    <Element Type="Param" Id="ABEEE4C2">
-        <ParameterDef Type="ParamDef" Library="Ntve" Id="00000219"/>
-        <CustomType Type="anyvariable"/>
-        <ScriptCode>
-            gv_PlayerStats[EventPlayer()].bankfile
-        </ScriptCode>
-    </Element>
-    <Element Type="Param" Id="1AAE2E59">
-        <ParameterDef Type="ParamDef" Library="Ntve" Id="00000220"/>
-        <CustomType Type="anyvariable"/>
-        <ScriptCode>
-            BankLoad(&quot;SwarmSpecialForcesTransfer&quot;, EventPlayer())
-        </ScriptCode>
-    </Element>
-    <Element Type="Comment" Id="2300AE4C">
-        <Comment>
-            actual load call
-        </Comment>
-    </Element>
-    <Element Type="FunctionCall" Id="BFCC25F9">
-        <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000123"/>
-        <ScriptCode>
-            lv_success = Bank_LoadSwitch_Handler(lp_playerID, lp_handle);
-        </ScriptCode>
-    </Element>
-    <Element Type="Comment" Id="0019AB99">
-        <Comment>
-            cleanup of loading
-        </Comment>
-    </Element>
-    <Element Type="FunctionCall" Id="41B837CE">
-        <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000137"/>
-        <FunctionCall Type="FunctionCall" Id="844EBE39"/>
-        <FunctionCall Type="FunctionCall" Id="693E3D12"/>
-        <FunctionCall Type="FunctionCall" Id="005FFF94"/>
-    </Element>
-    <Element Type="FunctionCall" Id="844EBE39">
-        <FunctionDef Type="FunctionDef" Library="Ntve" Id="0366EE04"/>
-        <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000005"/>
-        <Parameter Type="Param" Id="D3201A65"/>
-        <Parameter Type="Param" Id="3B8D0F05"/>
-        <Parameter Type="Param" Id="D9EE16D8"/>
-    </Element>
-    <Element Type="Param" Id="D3201A65">
-        <ParameterDef Type="ParamDef" Library="Ntve" Id="0D120C33"/>
-        <FunctionCall Type="FunctionCall" Id="31AD8929"/>
-    </Element>
-    <Element Type="FunctionCall" Id="31AD8929">
-        <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000192"/>
-    </Element>
-    <Element Type="Param" Id="3B8D0F05">
-        <ParameterDef Type="ParamDef" Library="Ntve" Id="A4C19F41"/>
-        <Preset Type="PresetValue" Library="Ntve" Id="875889C8"/>
-    </Element>
-    <Element Type="Param" Id="D9EE16D8">
-        <ParameterDef Type="ParamDef" Library="Ntve" Id="78A54B52"/>
-        <FunctionCall Type="FunctionCall" Id="692BB004"/>
-    </Element>
-    <Element Type="FunctionCall" Id="692BB004">
-        <FunctionDef Type="FunctionDef" Library="Ntve" Id="55C79F96"/>
-        <Parameter Type="Param" Id="BF77FF54"/>
-    </Element>
-    <Element Type="Param" Id="BF77FF54">
-        <ParameterDef Type="ParamDef" Library="Ntve" Id="30693AA2"/>
-        <Value>Transfer loading failed</Value>
-        <ValueType Type="string"/>
-    </Element>
-    <Element Type="FunctionCall" Id="693E3D12">
-        <FunctionDef Type="FunctionDef" Library="Ntve" Id="0366EE04"/>
-        <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
-        <Parameter Type="Param" Id="9D6AD93C"/>
-        <Parameter Type="Param" Id="68A3ED14"/>
-        <Parameter Type="Param" Id="E8C4DDA1"/>
-    </Element>
-    <Element Type="Param" Id="9D6AD93C">
-        <ParameterDef Type="ParamDef" Library="Ntve" Id="0D120C33"/>
-        <FunctionCall Type="FunctionCall" Id="398010D4"/>
-    </Element>
-    <Element Type="FunctionCall" Id="398010D4">
-        <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000192"/>
-    </Element>
-    <Element Type="Param" Id="68A3ED14">
-        <ParameterDef Type="ParamDef" Library="Ntve" Id="A4C19F41"/>
-        <Preset Type="PresetValue" Library="Ntve" Id="875889C8"/>
-    </Element>
-    <Element Type="Param" Id="E8C4DDA1">
-        <ParameterDef Type="ParamDef" Library="Ntve" Id="78A54B52"/>
-        <FunctionCall Type="FunctionCall" Id="575B232D"/>
-    </Element>
-    <Element Type="FunctionCall" Id="575B232D">
-        <FunctionDef Type="FunctionDef" Library="Ntve" Id="55C79F96"/>
-        <Parameter Type="Param" Id="F42917C4"/>
-    </Element>
-    <Element Type="Param" Id="F42917C4">
-        <ParameterDef Type="ParamDef" Library="Ntve" Id="30693AA2"/>
-        <Value>Transfer loading success</Value>
-        <ValueType Type="string"/>
-    </Element>
-    <Element Type="FunctionCall" Id="005FFF94">
-        <FunctionDef Type="FunctionDef" Library="Ntve" Id="C439C375"/>
-        <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000003"/>
-        <Parameter Type="Param" Id="DB79946F"/>
-        <Parameter Type="Param" Id="87377313"/>
-        <Parameter Type="Param" Id="2A74FBAF"/>
-    </Element>
-    <Element Type="Param" Id="DB79946F">
-        <ParameterDef Type="ParamDef" Library="Ntve" Id="51567265"/>
-        <Preset Type="PresetValue" Library="Ntve" Id="1E7A4625"/>
-    </Element>
-    <Element Type="Param" Id="87377313">
-        <ParameterDef Type="ParamDef" Library="Ntve" Id="4A15EC5F"/>
-        <Value>true</Value>
-        <ValueType Type="bool"/>
-    </Element>
-    <Element Type="Param" Id="2A74FBAF">
-        <ParameterDef Type="ParamDef" Library="Ntve" Id="ABB380C4"/>
-        <Variable Type="Variable" Id="20B1BD93"/>
-    </Element>
-    <Element Type="FunctionCall" Id="9E76FB1A">
-        <FunctionDef Type="FunctionDef" Library="Ntve" Id="39E54B53"/>
-        <Parameter Type="Param" Id="64999396"/>
-        <Parameter Type="Param" Id="E5CF8AB0"/>
-        <Parameter Type="Param" Id="A8B499D5"/>
-    </Element>
-    <Element Type="Param" Id="64999396">
-        <ParameterDef Type="ParamDef" Library="Ntve" Id="76F97785"/>
-        <FunctionCall Type="FunctionCall" Id="DA5B0301"/>
-    </Element>
-    <Element Type="FunctionCall" Id="DA5B0301">
-        <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000279"/>
-    </Element>
-    <Element Type="Param" Id="E5CF8AB0">
-        <ParameterDef Type="ParamDef" Library="Ntve" Id="C2736E5A"/>
-        <Preset Type="PresetValue" Library="Ntve" Id="1F9B98DB"/>
-    </Element>
-    <Element Type="Param" Id="A8B499D5">
-        <ParameterDef Type="ParamDef" Library="Ntve" Id="6754CCA0"/>
-        <Preset Type="PresetValue" Library="Ntve" Id="00000063"/>
-    </Element>
-    <Element Type="FunctionCall" Id="5B49559E">
-        <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000136"/>
-        <Parameter Type="Param" Id="EDBA2826"/>
-        <Parameter Type="Param" Id="9B00EC8A"/>
-    </Element>
-    <Element Type="Param" Id="EDBA2826">
-        <ParameterDef Type="ParamDef" Library="Ntve" Id="00000219"/>
-        <CustomType Type="anyvariable"/>
-        <ScriptCode>
-            gv_PlayerStats[EventPlayer()].bankfile
-        </ScriptCode>
-    </Element>
-    <Element Type="Param" Id="9B00EC8A">
-        <ParameterDef Type="ParamDef" Library="Ntve" Id="00000220"/>
-        <CustomType Type="anyvariable"/>
-        <ScriptCode>
-            BankLoad(&quot;SwarmSpecialForces&quot;, EventPlayer())
-        </ScriptCode>
     </Element>
 </TriggerData>

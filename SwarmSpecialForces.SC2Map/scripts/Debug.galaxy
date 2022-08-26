@@ -655,6 +655,45 @@ bool Debug_SpeedrunTime(bool testConds, bool runActions){
     return true;
 }
 
+bool Debug_BankTransferLoad(int lp_player, string lp_handle){
+    bool success;
+    if (!BankExists("SwarmSpecialForcesTransfer", lp_player)) {
+        Debug_ShowMessage("BankTransferLoad: Bankfile not found!");
+        return true;
+    }
+    Bank_Reset(lp_player);
+    gv_PlayerStats[EventPlayer()].bankfile = BankLoad("SwarmSpecialForcesTransfer", lp_player);
+    success = Bank_LoadSwitch_Handler(lp_player, lp_handle);
+    if(success){
+        Debug_ShowMessage("Transfer loading success.");
+    }
+    else {
+        Debug_ShowMessage("Transfer loading failed!");    
+    }
+    gv_PlayerStats[EventPlayer()].bankfile = BankLoad("SwarmSpecialForces", lp_player);
+    return true;
+}
+
+void Debug_BankTransferSave(int lp_player, string lp_handle){
+    gv_PlayerStats[lp_player].saveFlag_Any = true;
+    gv_PlayerStats[lp_player].saveFlag_Heavy = true;
+    gv_PlayerStats[lp_player].saveFlag_Options = true;
+    gv_PlayerStats[lp_player].saveFlag_Speedruns = true;
+    Bank_Save(lp_player, lp_handle);
+    
+    return;
+}
+
+bool Debug_BankTransferSaveTrigger(bool testConds, bool runActions){
+    Debug_BankTransferSave(EventPlayer(), "");
+    return true;
+}
+bool Debug_BankTransferLoadTrigger(bool testConds, bool runActions){
+    Debug_BankTransferLoad(EventPlayer(), "");
+    return true;
+}
+
+
 void Debug_Init(){
     int i;
     int tmp_player;
@@ -666,6 +705,9 @@ void Debug_Init(){
         }
         UIDisplayMessage(PlayerGroupAll(), c_messageAreaChat, StringToText("Started game in testing mode!"));
         Debug_InitFrames();
+        // TriggerAddEventChatMessage(TriggerCreate("Debug_BankTransferSaveTrigger"), c_playerAny, "-transfersave", false);
+        // TriggerAddEventChatMessage(TriggerCreate("Debug_BankTransferLoadTrigger"), c_playerAny, "-transferload", false);
+        
         // Debug_Stetmann_Test();
         // HeroSelection_UnlockDiff(1, 2);
         // HeroSelection_UnlockDiff(1, 3);
