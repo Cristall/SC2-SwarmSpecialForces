@@ -123,10 +123,8 @@
     </CEffectCreatePersistent>
     <CEffectSet id="TheySeeMeRolling@TargetSet">
         <EditorCategories value=""/>
-        <EffectArray value="TheySeeMeRolling@EnemyDebuff"/>
         <EffectArray value="TheySeeMeRolling@Dmg"/>
         <EffectArray value="TheySeeMeRolling@KnockbackController"/>
-        <EffectArray value="TheySeeMeRolling@BossCheck"/>
     </CEffectSet>
     <CEffectCreatePersistent id="TheySeeMeRolling@Offset4">
         <EditorCategories value=""/>
@@ -162,12 +160,6 @@
         <EffectArray value="TheySeeMeRolling@IssueMoveOffset4"/>
         <EffectArray value="TheySeeMeRolling@IssueMoveOffset5"/>
     </CEffectSet>
-    <CEffectApplyBehavior id="TheySeeMeRolling@EnemyDebuff">
-        <ValidatorArray index="0" value="NotStructureTarget"/>
-        <ValidatorArray value="TargetIsEnemy"/>
-        <EditorCategories value=""/>
-        <Behavior value="TheySeeMeRolling@Debuff"/>
-    </CEffectApplyBehavior>
     <CEffectApplyForce id="TheySeeMeRolling@Knockback">
         <EditorCategories value=""/>
         <WhichLocation Effect="TheySeeMeRolling@KnockbackController" Value="SourceUnit"/>
@@ -181,28 +173,27 @@
         <EditorCategories value=""/>
         <WhichLocation Value="TargetUnit"/>
         <InitialEffect value="TheySeeMeRolling@KnockbackMinimumSpeed"/>
-        <PeriodCount value="3"/>
+        <PeriodCount value="1"/>
         <PeriodicEffectArray value="TheySeeMeRolling@KnockbackSet"/>
-        <PeriodicPeriodArray value="0"/>
-        <PeriodicPeriodArray value="0.0625"/>
-        <PeriodicPeriodArray value="0.0625"/>
+        <PeriodicPeriodArray value="0.125"/>
     </CEffectCreatePersistent>
     <CEffectApplyBehavior id="TheySeeMeRolling@KnockbackMinimumSpeed">
         <EditorCategories value=""/>
     </CEffectApplyBehavior>
-    <CEffectEnumArea id="TheySeeMeRolling@KnockbackRekursion">
+    <CEffectEnumArea id="TheySeeMeRolling@KnockbackRecursion">
         <EditorCategories value=""/>
+        <DebugTrace value="1"/>
         <LaunchLocation Value="CasterUnit"/>
         <ImpactLocation Value="TargetUnit"/>
+        <ExcludeArray Value="Target"/>
         <SearchFilters value="-;Self,Player,Ally,Neutral,Heroic,Missile,Dead,Hidden"/>
         <AreaArray Arc="90" Radius="0.5" Effect="TheySeeMeRolling@KnockbackController"/>
         <SearchFlags index="ExtendByUnitRadius" value="1"/>
-        <ExcludeArray Value="Target"/>
     </CEffectEnumArea>
     <CEffectSet id="TheySeeMeRolling@KnockbackSet">
         <EditorCategories value=""/>
         <EffectArray value="TheySeeMeRolling@Knockback"/>
-        <EffectArray value="TheySeeMeRolling@KnockbackRekursion"/>
+        <!--<EffectArray value="TheySeeMeRolling@KnockbackRecursion"/>-->
         <SetSource value="1"/>
     </CEffectSet>
     <CEffectEnumArea id="HeroBowlerWeaponCollectibleSearch">
@@ -1040,16 +1031,16 @@
         <Amount value="1"/>
     </CAccumulatorConstant>
     <CAccumulatorConstant id="TheySeeMeRolling@KnockbackDmgBase">
-        <Amount value="125"/>
+        <Amount value="250"/>
     </CAccumulatorConstant>
     <CAccumulatorConstant id="TheySeeMeRolling@ExplodeDmgBase">
-        <Amount value="125"/>
+        <Amount value="500"/>
     </CAccumulatorConstant>
     <CAccumulatorConstant id="TheySeeMeRolling@KnockbackDmgModifier">
-        <Amount value="1"/>
+        <Amount value="2"/>
     </CAccumulatorConstant>
     <CAccumulatorConstant id="TheySeeMeRolling@ExplodeDmgModifier">
-        <Amount value="1"/>
+        <Amount value="4"/>
     </CAccumulatorConstant>
     <CAccumulatorConstant id="HeroBowlerWeaponDmgModifier">
         <Amount value="1.05"/>
@@ -1134,7 +1125,7 @@
         <DataRecord Entry="Effect,TheySeeMeRolling@Dmg"/>
         <DataRecord Entry="Effect,TheySeeMeRolling@KnockbackController"/>
         <DataRecord Entry="Effect,TheySeeMeRolling@Knockback"/>
-        <DataRecord Entry="Effect,TheySeeMeRolling@KnockbackRekursion"/>
+        <DataRecord Entry="Effect,TheySeeMeRolling@KnockbackRecursion"/>
         <DataRecord Entry="Effect,TheySeeMeRolling@KnockbackSet"/>
         <DataRecord Entry="Actor,TheySeeMeRolling@Guide"/>
         <DataRecord Entry="Behavior,TheySeeMeRolling@KnockbackMinimumSpeed"/>
@@ -1380,21 +1371,11 @@
         <PeriodicEffect value="TheySeeMeRolling@ScanSet"/>
         <FinalEffect value="TheySeeMeRolling@FinalExplosionSearch"/>
     </CBehaviorBuff>
-    <CBehaviorBuff id="TheySeeMeRolling@Debuff">
-        <Alignment value="Negative"/>
-        <InfoIcon value="Assets\Textures\btn-upgrade-zerg-centrifugalhooks.dds"/>
-        <EditorCategories value="AbilityorEffectType:Units"/>
-        <BuffFlags index="UpdateDurationWhileDisabled" value="1"/>
-        <Duration value="7.15"/>
-        <Modification>
-            <DamageDealtScaled index="Ranged" value="10"/>
-        </Modification>
-    </CBehaviorBuff>
     <CBehaviorBuff id="TheySeeMeRolling@KnockbackMinimumSpeed">
         <InfoFlags index="Hidden" value="1"/>
         <EditorCategories value="AbilityorEffectType:Units"/>
-        <Duration value="0.1875"/>
-        <Modification MoveSpeedMinimum="10"/>
+        <Duration value="0.125"/>
+        <Modification MoveSpeedMinimum="5"/>
     </CBehaviorBuff>
     <CBehaviorBuff id="KillStreak@BuffStack">
         <Alignment value="Positive"/>
