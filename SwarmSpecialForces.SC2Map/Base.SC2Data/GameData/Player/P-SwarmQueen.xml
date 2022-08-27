@@ -19,7 +19,7 @@
     <CEffectModifyUnit id="RespawnEgg@CooldownActivate">
         <EditorCategories value=""/>
         <LaunchUnit Value="Target"/>
-        <Cost Abil="RespawnEgg,Execute" CooldownOperation="Set" CooldownTimeUse="15">
+        <Cost Abil="RespawnEgg,Execute" CooldownOperation="Set" CooldownTimeUse="45">
             <Player Value="Caster"/>
         </Cost>
     </CEffectModifyUnit>
@@ -259,7 +259,7 @@
         <Range value="8"/>
     </CValidatorLocationCompareRange>
     <CRequirement id="RespawnEgg@CarryReq">
-        <NodeArray index="Show" Link="CountUpgradeRespawnEgg@UnlockCompleteOnly"/>
+        <NodeArray index="Show" Link="CountBehaviorRespawnEgg@NoMoreEggsQueuedOrBetterAtUnit"/>
     </CRequirement>
     <CRequirement id="RespawnEgg@RallyReq">
         <NodeArray index="Use" Link="CountBehaviorRespawnEgg@RevivingQueuedOrBetterAtUnit3227781120"/>
@@ -328,10 +328,6 @@
     <CRequirementNot id="NotCountBehaviorRespawnEgg@NoMoreEggsQueuedOrBetterAtUnit">
         <OperandArray index="0" value="CountBehaviorRespawnEgg@NoMoreEggsQueuedOrBetterAtUnit"/>
     </CRequirementNot>
-    <CRequirementCountUpgrade id="CountUpgradeRespawnEgg@UnlockCompleteOnly">
-        <Flags index="TechTreeCheat" value="0"/>
-        <Count Link="RespawnEgg@Unlock" State="CompleteOnly"/>
-    </CRequirementCountUpgrade>
     <CRequirementCountBehavior id="CountBehaviorEnergyTransfer@ChannelCompleteOnlyAtUnit">
         <Flags index="TechTreeCheat" value="0"/>
         <Count Link="EnergyTransfer@Channel" State="CompleteOnlyAtUnit"/>
