@@ -50,7 +50,8 @@
     <CEffectEnumArea id="RespawnEgg@HiveAuraSearch">
         <EditorCategories value=""/>
         <SearchFilters value="-;Neutral,Enemy,Missile,Item,Dead,Hidden"/>
-        <AreaArray Radius="4.5" Effect="RespawnEgg@HiveAuraApply"/>
+        <AreaArray Radius="4" Effect="RespawnEgg@HiveAuraApply"/>
+        <SearchFlags index="OffsetByUnitRadius" value="1"/>
     </CEffectEnumArea>
     <CEffectApplyBehavior id="RespawnEgg@NoMoreEggs">
         <ValidatorArray index="0" removed="1"/>
@@ -356,6 +357,12 @@
         <OperandArray index="0" value="CountUpgradeFrenzy@UnlockCompleteOnly"/>
         <OperandArray index="1" value="1"/>
     </CRequirementGTE>
+    <CActorRange id="RespawnEgg@AuraRange">
+        <EditorCategories value=""/>
+        <On Terms="SelectionLocalUpdate.RespawnEgg@Egg.Start" Send="Create"/>
+        <On Terms="SelectionLocalUpdate.RespawnEgg@Egg.Stop" Send="Destroy"/>
+        <Range value="4.000000"/>
+    </CActorRange>
     <CActorSiteOpLocalOffset id="RespawnEgg@EggCarriedOffset">
         <EditorCategories value=""/>
         <LocalOffset value="0.000000,0.000000,0.100000"/>
