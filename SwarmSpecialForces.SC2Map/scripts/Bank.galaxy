@@ -3,7 +3,6 @@ const fixed version = 2.01;
 static const int hashSecurityLevel = 4;
 
 static trigger Bank_Save_RequestQueueTrigger;
-static trigger Bank_ManualSaveTrigger;
 
 static bool bank_Save_RequestRunning;
 
@@ -1013,8 +1012,7 @@ void Bank_Init () {
     const string bankfileNameBackup = "SwarmSpecialForcesBackup";
     playergroup playerPG;
 
-    Bank_ManualSaveTrigger = TriggerCreate("Bank_ManualSave");
-    TriggerAddEventChatMessage(Bank_ManualSaveTrigger, c_playerAny, "-save", true);
+    TriggerAddEventChatMessage(TriggerCreate("Bank_ManualSave"), c_playerAny, "-save", true);
 
     Bank_Save_RequestQueueTrigger = TriggerCreate("Bank_Save_RequestSaveQueue");
 
@@ -1091,8 +1089,7 @@ void Bank_Init () {
                 UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, StringExternal("Trig/Bank/NewPlayer"));
             }
             PlayerGroupAdd(gv_NewPlayers, playerID);
-            Bank_ResetStats(playerID);
-            Bank_Save_ForcedAll(playerID);
+            Bank_Reset(playerID);
             backupBankfile = BankLoad(bankfileNameBackup, playerID);
             BankOptionSet(backupBankfile, c_bankOptionSignature, true);
             Bank_Backup(gv_PlayerStats[playerID].bankfile, backupBankfile);
