@@ -148,6 +148,7 @@ bool MapInit_Main(bool testConds, bool runActions){
     Player_TriggerCreate();
     HeroAbility_TriggerCreate();
     Player_Cybernetic_Init();
+    Acv_Reward_HiveArmor(0,0); // inits hive armor
 
     // initialize all the ui, content is filled after bank has been loaded
     SSFCustomUI_Init();
