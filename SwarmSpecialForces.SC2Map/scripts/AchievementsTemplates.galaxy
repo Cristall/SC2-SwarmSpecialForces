@@ -116,13 +116,13 @@ text Acv_UI_StartMutationsP2 (fixed amount) {
     return Acv_UI_TextExpressionReplacementF("StartMutationsP2", amount, Color(100,50,0));
 }
 text Acv_UI_HiveAuraArmorP0 (fixed amount) {
-    return Acv_UI_TextExpressionReplacementF("HiveAuraP0/Armor", 1-Utility_ArmorModifier(amount), Color(100,50,0));
+    return Acv_UI_TextExpressionReplacementF("HiveAuraP0/Armor", (1-Utility_ArmorModifier(amount))*100, Color(100,50,0));
 }
 text Acv_UI_HiveAuraArmorP1 (fixed amount) {
-    return Acv_UI_TextExpressionReplacementF("HiveAuraP1/Armor", 1-Utility_ArmorModifier(amount), Color(100,50,0));
+    return Acv_UI_TextExpressionReplacementF("HiveAuraP1/Armor", (1-Utility_ArmorModifier(amount))*100, Color(100,50,0));
 }
 text Acv_UI_HiveAuraArmorP2 (fixed amount) {
-    return Acv_UI_TextExpressionReplacementF("HiveAuraP2/Armor", 1-Utility_ArmorModifier(amount), Color(100,50,0));
+    return Acv_UI_TextExpressionReplacementF("HiveAuraP2/Armor", (1-Utility_ArmorModifier(amount))*100, Color(100,50,0));
 }
 text Acv_UI_HiveAuraAttackSpeedP0 (fixed amount) {
     return Acv_UI_TextExpressionReplacementF("HiveAuraP0/Atkspd", amount, Color(100,50,0));
