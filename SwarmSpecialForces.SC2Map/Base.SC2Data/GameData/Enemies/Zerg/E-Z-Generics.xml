@@ -2114,7 +2114,7 @@
         <LifeStart value="3000"/>
         <LifeMax value="3000"/>
         <LifeArmorName value="Unit/LifeArmorName/MechaZergArmor"/>
-        <Speed value="4"/>
+        <Speed value="4.5"/>
         <StationaryTurningRate value="999.8437"/>
         <TurningRate value="999.8437"/>
         <Sight value="8"/>
