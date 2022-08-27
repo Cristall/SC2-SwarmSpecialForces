@@ -60,6 +60,7 @@ struct PlayerStruct {
     bool saveFlag_Any;
     bool saveFlag_Heavy;
     bool saveFlag_Options;
+    bool saveFlag_Speedruns;
 
     //options
     bool[gv_Options_ControlGroup_Amount] options_ControlGroup_Flag;

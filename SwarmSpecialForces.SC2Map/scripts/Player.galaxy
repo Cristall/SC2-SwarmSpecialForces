@@ -95,7 +95,7 @@ void Player_PartWin_UpdateAcv(){
                         Popup_NewSpeedrunTimeSimplified(tmpPlayer, gv_Part_ActivePart, gv_Difficulty, currentGameTime, tmpInt+1);
                     }
                 }
-                gv_PlayerStats[tmpPlayer].saveFlag_Heavy = true;
+                gv_PlayerStats[tmpPlayer].saveFlag_Speedruns = true;
                 // no save request here, because points will make a save request anyway
             }
         }
