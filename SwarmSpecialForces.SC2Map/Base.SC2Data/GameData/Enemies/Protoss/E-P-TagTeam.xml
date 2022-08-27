@@ -2226,7 +2226,7 @@
         </CardLayouts>
         <EditorCategories value="ObjectType:Hero"/>
         <FogVisibility value="Dimmed"/>
-        <LifeRegenRate value="210"/>
+        <LifeRegenRate value="140"/>
         <ShieldRegenRate value="280"/>
         <Radius value="1"/>
         <LifeArmorName value="Unit/LifeArmorName/ProtossArmor"/>
@@ -2296,7 +2296,7 @@
         </CardLayouts>
         <EditorCategories value="ObjectType:Hero"/>
         <FogVisibility value="Dimmed"/>
-        <LifeRegenRate value="210"/>
+        <LifeRegenRate value="140"/>
         <ShieldRegenRate value="280"/>
         <Radius value="1"/>
         <LifeArmorName value="Unit/LifeArmorName/ProtossArmor"/>

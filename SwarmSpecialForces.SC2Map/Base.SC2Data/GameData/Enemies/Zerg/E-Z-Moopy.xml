@@ -1407,6 +1407,7 @@
         </CardLayouts>
         <Sight value="30"/>
         <LifeArmorTip value="Unit/KingMoopy/ArmorTooltip"/>
+        <LifeRegenRate value="140"/>
     </CUnit>
     <CUnit id="MoopyChampion" parent="GenericEnemyUnit">
         <Race value="Zerg"/>

@@ -642,7 +642,7 @@
         <Attributes index="Heroic" value="1"/>
         <LifeStart value="25000"/>
         <LifeMax value="25000"/>
-        <LifeRegenRate value="14"/>
+        <LifeRegenRate value="140"/>
         <LifeArmorName value="Unit/LifeArmorName/StoryHeroes"/>
         <ShieldArmorName value="Unit/ShieldArmorName/ProtossPlasmaShields"/>
         <Speed value="4.125"/>

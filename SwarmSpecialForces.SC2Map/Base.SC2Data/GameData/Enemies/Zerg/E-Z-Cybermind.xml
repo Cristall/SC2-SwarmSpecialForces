@@ -1003,7 +1003,7 @@
         <Attributes index="Structure" value="1"/>
         <LifeStart value="75000"/>
         <LifeMax value="75000"/>
-        <LifeRegenRate value="1400"/>
+        <LifeRegenRate value="140"/>
         <LifeArmorName value="Unit/LifeArmorName/MechaZergArmor"/>
         <Speed value="0"/>
         <Acceleration value="0"/>

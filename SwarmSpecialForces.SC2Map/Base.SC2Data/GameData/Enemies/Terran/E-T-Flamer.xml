@@ -992,7 +992,7 @@
         <LifeStart value="27500"/>
         <LifeMax value="27500"/>
         <LifeRegenDelay value="5"/>
-        <LifeRegenRate value="280"/>
+        <LifeRegenRate value="140"/>
         <Speed value="4.8984"/>
         <Sight value="15"/>
         <VisionHeight value="4"/>

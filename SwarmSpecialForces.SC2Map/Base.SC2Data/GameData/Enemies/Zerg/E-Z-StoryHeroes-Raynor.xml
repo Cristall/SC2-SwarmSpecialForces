@@ -1080,6 +1080,7 @@
         <BehaviorArray Link="Detector10"/>
         <BehaviorArray Link="BossesP2Armor"/>
         <LifeArmorTip value="Unit/P2Bosses/ArmorTooltip"/>
+        <LifeRegenRate value="140"/>
     </CUnit>
     <CBehaviorBuff id="TakeCover@FakeMineExtraDmg">
         <EditorCategories value="AbilityorEffectType:Units"/>
