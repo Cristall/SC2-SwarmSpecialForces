@@ -9,7 +9,7 @@
         <EditorCategories value=""/>
         <Behavior value="Silenced"/>
         <Flags index="UseDuration" value="1"/>
-        <Duration value="3.5"/>
+        <Duration value="5"/>
     </CEffectApplyBehavior>
     <CEffectIssueOrder id="NydusWorm@RelocateIssueMove">
         <EditorCategories value=""/>
@@ -2111,11 +2111,10 @@
         <Race value="Zerg"/>
         <Attributes index="Light" value="1"/>
         <Attributes index="Mechanical" value="1"/>
-        <LifeStart value="2500"/>
-        <LifeMax value="2500"/>
+        <LifeStart value="3000"/>
+        <LifeMax value="3000"/>
         <LifeArmorName value="Unit/LifeArmorName/MechaZergArmor"/>
         <Speed value="4"/>
-        <LateralAcceleration value="46.0625"/>
         <StationaryTurningRate value="999.8437"/>
         <TurningRate value="999.8437"/>
         <Sight value="8"/>

@@ -415,7 +415,7 @@ void Enemy_SpawnerKilled(unit killingUnit, unit destroyedSpawner ){
     }
     else if (gv_Part_ActivePart == c_Part_Zerg){
         revengeUnitType = "MechaDrone";
-        revengeUnitAmount = 4.0;
+        revengeUnitAmount = 5.0;
     }
     gv_Enemy_SpawnAmount += CeilingI(revengeUnitAmount * gv_Difficulty_SpawnMult);
     libNtve_gf_UnitCreateFacingPoint(CeilingI(revengeUnitAmount * gv_Difficulty_SpawnMult), revengeUnitType, 0, gv_EnemyPlayer, UnitGetPosition(destroyedSpawner), UnitGetPosition(killingUnit));
