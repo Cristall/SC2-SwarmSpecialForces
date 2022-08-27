@@ -18,9 +18,8 @@
     </CEffectApplyBehavior>
     <CEffectSet id="BombardmentInitalSet">
         <EditorCategories value=""/>
-        <EffectArray value="BombardmentApplyCastingBuff"/>
-        <EffectArray value="BombardmentSearchPersistent"/>
         <EffectArray value="BombardmentApplyCastingBuffNoWeapons"/>
+        <EffectArray value="BombardmentSearchPersistent"/>
     </CEffectSet>
     <CEffectSet id="BombardmentTargetImpactSet">
         <EditorCategories value=""/>
@@ -343,7 +342,6 @@
     </CEffectApplyKinetic>
     <CEffectSet id="RotatingWallsInitialSet">
         <EditorCategories value=""/>
-        <EffectArray value="RotatingWallsApplyCastingBuff"/>
         <EffectArray value="RotatingWallsApplyCastingBuffNoWeapons"/>
         <EffectArray value="RotatingWallsTowerSpawnOffsets"/>
         <EffectArray value="RotatingWallsRotationIndexPersistent"/>

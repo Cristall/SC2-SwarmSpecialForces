@@ -80,7 +80,6 @@
     </CEffectEnumArea>
     <CEffectSet id="BeamDroneInitialSet">
         <EditorCategories value=""/>
-        <EffectArray value="BeamDroneApplyCastingBuff"/>
         <EffectArray value="BeamDroneApplyCastingBuffNoWeapons"/>
         <EffectArray value="BeamDroneCreateDroneUnit"/>
         <TargetLocationType value="Point"/>
@@ -288,7 +287,6 @@
     </CEffectLaunchMissile>
     <CEffectSet id="FireGrenadeLaunchSet">
         <EditorCategories value=""/>
-        <EffectArray value="FireGrenadeApplyCastingBuff"/>
         <EffectArray value="FireGrenadeApplyCastingBuffNoWeapons"/>
         <EffectArray value="FireGrenadeSplatPersistent"/>
         <EffectArray value="FireGrenadeLaunchMissile"/>
@@ -330,7 +328,6 @@
     </CEffectCreatePersistent>
     <CEffectSet id="FocusedFlameInitialSet">
         <EditorCategories value=""/>
-        <EffectArray value="FocusedFlameApplyCastingBuff"/>
         <EffectArray value="FocusedFlameApplyCastingBuffNoWeapons"/>
         <EffectArray value="FocusedFlameCreateTargetDummy"/>
     </CEffectSet>
@@ -446,9 +443,8 @@
     </CEffectCreatePersistent>
     <CEffectSet id="SeaOfFlamesInitialSet">
         <EditorCategories value=""/>
-        <EffectArray value="SeaOfFlamesApplyCastingBuff"/>
-        <EffectArray value="SeaOfFlamesCreateDrone"/>
         <EffectArray value="SeaOfFlamesApplyCastingBuffNoWeapons"/>
+        <EffectArray value="SeaOfFlamesCreateDrone"/>
         <TargetLocationType value="Point"/>
     </CEffectSet>
     <CEffectLaunchMissile id="SeaOfFlamesLaunchMissile">
