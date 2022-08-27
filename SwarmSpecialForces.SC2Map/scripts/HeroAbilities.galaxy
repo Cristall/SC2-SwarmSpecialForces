@@ -62,6 +62,8 @@ bool HeroAbility_RespawnEgg_RespawnHandler(bool testConds, bool runActions){
     bool eggDiedFlag = false;
     point rallyPoint;
 
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaChat, Utility_TextExpressionReplacement2("Trig/RespawnEgg/PlayerSaved", Utility_PlayerNameWithPlayerColor(revivingPlayer), Utility_PlayerNameWithPlayerColor(eggOwner)));
+
     if(UnitTestState(egg, c_unitStateHidden)){
         ActorSend(libNtve_gf_MainActorofUnit(gv_PlayerStats[eggOwner].heroUnit), "Signal RespawnEggKill");
         UnitSetPosition(egg, UnitGetPosition(egg), false);

@@ -2594,6 +2594,7 @@ Trig/Popup/Close=Dismiss notification.
 Trig/Popup/SpeedrunMsg=New Speedrun:
 Trig/Popup/SpeedrunsTooltipExtra=Click to in open achievement panel.
 Trig/PsiOrb/Collected=~VALUE~ collected the psi orb. Your psionic powers grow.
+Trig/RespawnEgg/PlayerSaved=~VALUE~ was saved by ~VALUE2~'s egg.
 Trig/Scientist/Collected=~VALUE~ has captured a scientist for the swarm.
 Trig/Speedruns/EmptyTime=-:--:--
 Trig/Stats/Essences=Essences: 
