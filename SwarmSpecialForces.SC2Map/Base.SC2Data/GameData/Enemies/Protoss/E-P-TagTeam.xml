@@ -2200,8 +2200,8 @@
         <Attributes index="Heroic" value="1"/>
         <LifeStart value="30000"/>
         <LifeMax value="30000"/>
-        <ShieldsStart value="100000"/>
-        <ShieldsMax value="100000"/>
+        <ShieldsStart value="50000"/>
+        <ShieldsMax value="50000"/>
         <ShieldArmorName value="Unit/ShieldArmorName/ProtossPlasmaShields"/>
         <Speed value="4.1992"/>
         <LateralAcceleration value="46.0625"/>
@@ -2227,7 +2227,7 @@
         <EditorCategories value="ObjectType:Hero"/>
         <FogVisibility value="Dimmed"/>
         <LifeRegenRate value="140"/>
-        <ShieldRegenRate value="280"/>
+        <ShieldRegenRate value="140"/>
         <Radius value="1"/>
         <LifeArmorName value="Unit/LifeArmorName/ProtossArmor"/>
         <VisionHeight value="4"/>
@@ -2271,8 +2271,8 @@
         <Attributes index="Heroic" value="1"/>
         <LifeStart value="30000"/>
         <LifeMax value="30000"/>
-        <ShieldsStart value="100000"/>
-        <ShieldsMax value="100000"/>
+        <ShieldsStart value="50000"/>
+        <ShieldsMax value="50000"/>
         <ShieldArmorName value="Unit/ShieldArmorName/ProtossPlasmaShields"/>
         <Speed value="4.1992"/>
         <LateralAcceleration value="46.0625"/>
@@ -2297,7 +2297,7 @@
         <EditorCategories value="ObjectType:Hero"/>
         <FogVisibility value="Dimmed"/>
         <LifeRegenRate value="140"/>
-        <ShieldRegenRate value="280"/>
+        <ShieldRegenRate value="140"/>
         <Radius value="1"/>
         <LifeArmorName value="Unit/LifeArmorName/ProtossArmor"/>
         <VisionHeight value="4"/>

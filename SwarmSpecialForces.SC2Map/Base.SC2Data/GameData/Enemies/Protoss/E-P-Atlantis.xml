@@ -1683,8 +1683,8 @@
         <Attributes index="Mechanical" value="1"/>
         <Attributes index="Summoned" value="1"/>
         <LifeArmorName value="Unit/LifeArmorName/ProtossBuildingPlating"/>
-        <ShieldsStart value="2000"/>
-        <ShieldsMax value="2000"/>
+        <ShieldsStart value="1000"/>
+        <ShieldsMax value="1000"/>
         <ShieldArmorName value="Unit/ShieldArmorName/ProtossPlasmaShields"/>
         <Mover value="Fly"/>
         <Speed value="4.1992"/>
@@ -1811,9 +1811,9 @@
         <LifeMax value="60000"/>
         <LifeRegenRate value="140"/>
         <LifeArmorName value="Unit/LifeArmorName/ProtossBuildingPlating"/>
-        <ShieldsStart value="75000"/>
-        <ShieldsMax value="75000"/>
-        <ShieldRegenRate value="280"/>
+        <ShieldsStart value="37500"/>
+        <ShieldsMax value="37500"/>
+        <ShieldRegenRate value="140"/>
         <ShieldArmorName value="Unit/ShieldArmorName/ProtossPlasmaShields"/>
         <Mover value="Fly"/>
         <Speed value="2.7968"/>
@@ -1869,9 +1869,9 @@
         <LifeStart value="60000"/>
         <LifeMax value="60000"/>
         <LifeArmorName value="Unit/LifeArmorName/ProtossBuildingPlating"/>
-        <ShieldsStart value="75000"/>
-        <ShieldsMax value="75000"/>
-        <ShieldRegenRate value="280"/>
+        <ShieldsStart value="37500"/>
+        <ShieldsMax value="37500"/>
+        <ShieldRegenRate value="140"/>
         <ShieldArmorName value="Unit/ShieldArmorName/ProtossPlasmaShields"/>
         <Speed value="2.7968"/>
         <Acceleration value="20"/>
