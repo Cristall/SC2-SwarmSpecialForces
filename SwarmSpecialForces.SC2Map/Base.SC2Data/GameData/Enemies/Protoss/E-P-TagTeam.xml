@@ -821,7 +821,7 @@
     </CEffectApplyBehavior>
     <CEffectDamage id="ShoutImpactDmg">
         <EditorCategories value=""/>
-        <Amount value="2500"/>
+        <Amount value="1500"/>
     </CEffectDamage>
     <CEffectLaunchMissile id="ShoutImpactKnockback">
         <EditorCategories value=""/>
@@ -879,7 +879,7 @@
             <MatchFlags index="Link" value="1"/>
         </Marker>
         <WhichLocation Value="CasterUnit"/>
-        <InitialDelay value="0.8928"/>
+        <InitialDelay value="1"/>
         <PeriodCount value="6"/>
         <PeriodicEffectArray value="ShoutSearchRange1"/>
         <PeriodicEffectArray value="ShoutSearchRange2"/>
@@ -887,7 +887,7 @@
         <PeriodicEffectArray value="ShoutSearchRange4"/>
         <PeriodicEffectArray value="ShoutSearchRange5"/>
         <PeriodicEffectArray value="ShoutSearchRange6"/>
-        <PeriodicPeriodArray value="0.0893"/>
+        <PeriodicPeriodArray value="0.125"/>
         <PeriodicValidator value="CasterNotDead"/>
     </CEffectCreatePersistent>
     <CEffectEnumArea id="ShoutSearchRange2">
