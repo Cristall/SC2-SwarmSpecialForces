@@ -313,10 +313,9 @@
     </region>
     <region id="37">
         <name value="PartTerran_Boss_Fortress_Arena"/>
-        <invisible/>
         <shape type="circle">
-            <center value="72.1567,44.1625"/>
-            <radius value="10.98"/>
+            <center value="72,43"/>
+            <radius value="11"/>
         </shape>
     </region>
     <region id="38">

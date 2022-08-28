@@ -191,5 +191,6 @@
         <Value>Bank;SwarmSpecialForces</Value>
         <Value>Bank;SwarmSpecialForcesBackup</Value>
         <Value>Bank;SwarmSpecialForcesClassic</Value>
+        <Value>Bank;SwarmSpecialForcesTransfer;1</Value>
     </Preload>
 </DocInfo>

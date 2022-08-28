@@ -1351,6 +1351,7 @@ Actor/Name/ReaperAttack2=Reaper Attack
 Actor/Name/ReaperAttack22=Reaper Attack
 Actor/Name/ReaperExplosives=Reaper Explosives
 Actor/Name/RepairMULE=Repair MULE
+Actor/Name/RespawnEgg@AuraRange=Aura Range
 Actor/Name/RespawnEgg@Egg=Egg
 Actor/Name/RespawnEgg@EggCarried=Egg Carried
 Actor/Name/RespawnEgg@EggCarriedOffset=Egg Carried Offset
