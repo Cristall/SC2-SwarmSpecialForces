@@ -495,7 +495,7 @@ void PartTerran_Hammer_Init(structref<BossFightData> data){
 
     data.ability[1].abil = "Barrage";
     data.ability[1].targetingType = c_BossFightAbilTargetType_Unit;
-    data.ability[1].globalCooldown = 16;
+    data.ability[1].globalCooldown = 12;
     data.ability[1].selfCooldown = 30;
     data.ability[1].charges = -1;
     data.ability[1].minAmountTargets = 1;
