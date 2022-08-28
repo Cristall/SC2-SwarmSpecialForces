@@ -696,8 +696,8 @@
     </CModel>
     <CModel id="PushAndPull@Area">
         <Model value="Assets\Models\Nova_ShotGunCone_White\Nova_ShotGunCone_White.m3"/>
-        <ScaleMax value="3.000000,5.000000,5.000000"/>
-        <ScaleMin value="3.000000,5.000000,5.000000"/>
+        <ScaleMax value="3.300000,5.600000,5.000000"/>
+        <ScaleMin value="3.300000,5.600000,5.000000"/>
     </CModel>
     <CModel id="CybermindShield@Stun">
         <Model value="Assets\Effects\Neutral\Stun_Void\Stun_Void.m3"/>
