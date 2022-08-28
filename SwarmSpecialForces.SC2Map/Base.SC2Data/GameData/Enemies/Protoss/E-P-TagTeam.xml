@@ -266,7 +266,7 @@
         <ValidatorArray value="TargetBehindTargetOuter"/>
         <ValidatorArray value="TargetInFrontofCaster"/>
         <EditorCategories value=""/>
-        <Amount value="800"/>
+        <Amount value="500"/>
     </CEffectDamage>
     <CEffectCreatePersistent id="CrossedBeamsTargetBeamPersistent">
         <EditorCategories value=""/>
@@ -371,7 +371,7 @@
         <ResponseFlags index="Acquire" value="1"/>
         <ResponseFlags index="Flee" value="1"/>
         <Flags index="Notification" value="1"/>
-        <Amount value="1500"/>
+        <Amount value="1000"/>
     </CEffectDamage>
     <CEffectCreatePersistent id="CrossedBeamsTargetImpactPersistent">
         <EditorCategories value=""/>
@@ -879,7 +879,7 @@
             <MatchFlags index="Link" value="1"/>
         </Marker>
         <WhichLocation Value="CasterUnit"/>
-        <InitialDelay value="1"/>
+        <InitialDelay value="1.25"/>
         <PeriodCount value="6"/>
         <PeriodicEffectArray value="ShoutSearchRange1"/>
         <PeriodicEffectArray value="ShoutSearchRange2"/>
@@ -1885,7 +1885,7 @@
         <On Terms="TimerExpired; TimerName Color" Send="SetTeamColor 255,0,0 255,0,0"/>
         <On Terms="ActorCreation" Send="TimerSet 0.000000 Color"/>
         <On Terms="ActorCreation" Send="Create TagTeamSpawning"/>
-        <On Terms="Abil.Shout.SourceChannelStart" Send="AnimPlay AbilityUse Spell 0 -1.000000 -1.000000 1.000000 AsDuration"/>
+        <On Terms="Abil.Shout.SourceChannelStart" Send="AnimPlay AbilityUse Spell 0 -1.000000 -1.000000 1.250000 AsDuration"/>
         <On Terms="ActorCreation" Send="TextureSelectById TagTeamAttackAnimColor"/>
         <On Terms="Signal.*.dance" Send="AnimBracketStart Dance {} Stand,Dance,00"/>
         <On Terms="Signal.*.dance" Send="TimerSet 10.000000 Dance"/>
