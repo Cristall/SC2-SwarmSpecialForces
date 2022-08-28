@@ -673,14 +673,21 @@ void PartProtoss_Atlantis_Init(structref<BossFightData> data){
 }
 void PartProtoss_Atlantis_Update_Phase2(structref<BossFightData> data){
 
-    data.ability[2].abil = "Illusion";
-    data.ability[2].targetingType = c_BossFightAbilTargetType_None;
-    data.ability[2].globalCooldown = 34.5;
-    data.ability[2].selfCooldown = 34.5;
-    data.ability[2].charges = -1;
-    data.ability[2].minAmountTargets = 1;
-    data.ability[2].allowedBossStates = c_BossFightState_Alive;
-    data.ability[2].targetFilter = UnitFilter(0,0,0,(1 << (c_targetFilterInvulnerable - 32)) | (1 << (c_targetFilterSummoned - 32)));
+    data.ability[4].abil = "Illusion";
+    data.ability[4].targetingType = c_BossFightAbilTargetType_None;
+    data.ability[4].globalCooldown = 34.5;
+    data.ability[4].selfCooldown = 34.5;
+    data.ability[4].charges = -1;
+    data.ability[4].minAmountTargets = 1;
+    data.ability[4].allowedBossStates = c_BossFightState_Alive;
+    data.ability[4].targetFilter = UnitFilter(0,0,0,(1 << (c_targetFilterInvulnerable - 32)) | (1 << (c_targetFilterSummoned - 32)));
+    data.ability[4].targetFilterController = c_BossFightAbilAllianceTarget_Player;
+    data.ability[4].requiredBossAbilityLevel = 2;
+
+    // Core cannot cast Portal and LaserLance
+    data.ability[1].charges = 0;
+    data.ability[3].charges = 0;
+    data.amountAbility = 5;
 }
 
 // madness stuff

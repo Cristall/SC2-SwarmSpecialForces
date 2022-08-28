@@ -733,15 +733,6 @@
         <EditorCategories value="AbilityorEffectType:Units"/>
         <Effect index="0" value="Illusion@InitialSet"/>
         <CmdButtonArray index="Execute" DefaultButtonFace="Illusion"/>
-        <Flags index="AutoCast" value="1"/>
-        <Flags index="AutoCastOn" value="1"/>
-        <Cost>
-            <Cooldown TimeStart="10" TimeUse="120"/>
-        </Cost>
-        <AutoCastRange value="7"/>
-        <AutoCastValidatorArray value="NotAlreadyCasting"/>
-        <AutoCastValidatorArray value="EnemyWithin8"/>
-        <AutoCastValidatorArray value="BossAbilityRequirementLvl3"/>
     </CAbilEffectInstant>
     <CAbilEffectTarget id="Kamikaze">
         <EditorCategories value="AbilityorEffectType:Units"/>

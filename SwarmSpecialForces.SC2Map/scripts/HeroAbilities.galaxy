@@ -212,7 +212,7 @@ bool HeroAbility_Taunt (bool testConds, bool runActions){
                     UnitIssueOrder(tmpUnit, OrderTargetingPoint(AbilityCommand("attack", 0), PointFromName("PartTerran_Boss_Hammer")), c_orderQueueReplace);
                 }
                 else if(tmpStr == "Atlantis" || tmpStr == "AtlantisCore" || tmpStr == "Illusion@AtlantisCore"){
-                    UnitIssueOrder(tmpUnit, OrderTargetingPoint(AbilityCommand("attack", 0), PointFromName("PartProtoss_Boss_FinalBoss")), c_orderQueueReplace);
+                    UnitIssueOrder(tmpUnit, OrderTargetingPoint(AbilityCommand("attack", 0), PointFromName("PartProtoss_Boss_Atlantis")), c_orderQueueReplace);
                 }
                 else if(tmpStr == "Lightning" ||tmpStr == "Thunder"){
                     UnitIssueOrder(tmpUnit, OrderTargetingPoint(AbilityCommand("attack", 0), PointFromName("PartProtoss_Boss_TagTeam")), c_orderQueueReplace);
