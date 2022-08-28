@@ -737,8 +737,8 @@
         <Attributes index="Armored" value="1"/>
         <Attributes index="Biological" value="1"/>
         <Attributes index="Mechanical" value="1"/>
-        <LifeStart value="5000"/>
-        <LifeMax value="15000"/>
+        <LifeStart value="3500"/>
+        <LifeMax value="10000"/>
         <LifeArmorFormula>
             <NegativeArmorMultiplier value="0"/>
             <NegativeDamageBase value="0"/>
