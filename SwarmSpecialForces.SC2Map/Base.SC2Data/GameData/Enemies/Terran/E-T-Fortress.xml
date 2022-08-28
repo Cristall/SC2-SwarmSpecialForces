@@ -1016,6 +1016,7 @@
             <HeightTime index="Start" value="1"/>
             <HeightTime index="Stop" value="1"/>
         </Modification>
+        <RemoveValidatorArray value="CasterNotDead"/>
     </CBehaviorBuff>
     <CBehaviorBuff id="BombardmentTargetDummyTimedLife" parent="TimedLifeHidden">
         <Duration value="3"/>
