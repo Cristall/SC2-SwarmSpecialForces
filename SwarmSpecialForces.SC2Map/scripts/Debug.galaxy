@@ -693,6 +693,11 @@ bool Debug_BankTransferLoadTrigger(bool testConds, bool runActions){
     return true;
 }
 
+bool Debug_Camera(bool testConds, bool runActions){
+    CameraSetValue(EventPlayer(), c_cameraValuePitch, 180, 0, 0, 0);
+    CameraSetValue(EventPlayer(), c_cameraValueDistance, 50, 0, 0, 0);
+    return true;
+}
 
 void Debug_Init(){
     int i;
@@ -714,6 +719,7 @@ void Debug_Init(){
         // HeroSelection_UnlockDiff(1, 4);
         // HeroSelection_UnlockDiff(1, 5);
         // TriggerAddEventChatMessage(TriggerCreate("Debug_SpeedrunTime"), c_playerAny, "-speedrun", false);
+        // TriggerAddEventChatMessage(TriggerCreate("Debug_Camera"), c_playerAny, "-camera", false);
         // TriggerAddEventChatMessage(TriggerCreate("Debug_NydusWorms"), c_playerAny, "-worms", false);
         // TriggerAddEventChatMessage(TriggerCreate("Debug_Popup"), c_playerAny, "-popup", false);
         // TriggerAddEventChatMessage(TriggerCreate("Debug_Test"), c_playerAny, "-test", false);
