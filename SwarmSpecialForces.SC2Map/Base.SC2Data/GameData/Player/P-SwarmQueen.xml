@@ -898,6 +898,7 @@
     <CBehaviorBuff id="RespawnEgg@NoMoreEggs">
         <EditorCategories value="AbilityorEffectType:Units"/>
         <InfoFlags index="Hidden" value="1"/>
+        <BehaviorFlags index="Permanent" value="1"/>
     </CBehaviorBuff>
     <CBehaviorBuff id="RespawnEgg@Reviving">
         <EditorCategories value="AbilityorEffectType:Units"/>
