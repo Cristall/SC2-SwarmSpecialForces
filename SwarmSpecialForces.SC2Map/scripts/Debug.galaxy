@@ -707,7 +707,7 @@ void Debug_Init(){
         Debug_InitFrames();
         // TriggerAddEventChatMessage(TriggerCreate("Debug_BankTransferSaveTrigger"), c_playerAny, "-transfersave", false);
         // TriggerAddEventChatMessage(TriggerCreate("Debug_BankTransferLoadTrigger"), c_playerAny, "-transferload", false);
-        
+
         // Debug_Stetmann_Test();
         // HeroSelection_UnlockDiff(1, 2);
         // HeroSelection_UnlockDiff(1, 3);
@@ -739,6 +739,6 @@ void Debug_Init(){
         // libNtve_gf_SetAllianceOneWay(8, 1, libNtve_ge_AllianceSetting_EnemyWithSharedVision);
         // PlayerSetAlliance(1, c_allianceIdControl, 8, true);
         // PlayerSetAlliance(8, c_allianceIdControl, 1, true);
-        // TriggerAddEventUnitDamaged(TriggerCreate("Debug_PrintDmg"),null, c_unitDamageTypeAny, c_unitDamageEither, "AbsorbExplosion@Dmg");
+        // TriggerAddEventUnitDamaged(TriggerCreate("Debug_PrintDmg"),null, c_unitDamageTypeAny, c_unitDamageEither, "CorrosiveSpikes@Dmg");
     }
 }
