@@ -78,9 +78,9 @@ void Tutorial_ShowFrame(){
 
 // tutorial spawns larva and scientist
 void Tutorial_CollectiblesInit () {
-    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Scientist", 0, gv_CollectiblePlayerEnemyAllied, PointFromName("ScientistSpawn3"));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Scientist", 0, gv_CollectiblePlayerEnemyAllied, PointFromName("PartTerran_ScientistSpawn3"));
     tutorial_Scientist = UnitLastCreated();
-    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Larva2", 0, gv_CollectiblePlayerEnemyNeutral, PointFromName("LarvaSpawn12"));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Larva2", 0, gv_CollectiblePlayerEnemyNeutral, PointFromName("PartTerran_LarvaSpawn12"));
     tutorial_Larva = UnitLastCreated();
 }
 
@@ -258,6 +258,7 @@ void Tutorial_Init () {
 
     PlayerBoard_SetTitle(StringExternal("Trig/Acv/Tutorial/Name"));
 
+
     gv_GameMode = c_GameMode_Tutorial;
     tutorial_Player = PlayerGroupPlayer(gv_ActivePG, 1);
     libNtve_gf_CreateUnitsWithDefaultFacing(1, "IndistructibleRocks", 0, 0, PointFromName("Tutorial_Rock_Left"));
@@ -265,7 +266,7 @@ void Tutorial_Init () {
     
     // copy pasta from Part_InitVariables() from Terran case, with a bunch of overrides and shortcuts as there is only one player
     gv_Part_ActivePart = c_Part_Terran;
-    
+
     gv_Part_ActiveSpawners = UnitGroupEmpty();
     gv_Part_AmountObjectivesMax = 3;
 
@@ -292,9 +293,9 @@ void Tutorial_Init () {
 
     CameraSetBounds(gv_StartingPG, gv_Part_BoundsRegion, true);
     gv_Part_BaseRevealer[tutorial_Player] = VisRevealerCreate(tmpInt, gv_Part_BaseRegion);
+    gv_Hive_Position = PointFromName("PartTerran_Hive");
+    Hive_InitialSpawn();
     CameraPan(tutorial_Player, UnitGetPosition(gv_BaseHive), 0.0, -1, 10.0, false);
-    
-
     // copy pasta from HeroSelection_Finish(), spawns hero/overlord and sets difficulty
     UnitRemove(gv_PlayerStats[tutorial_Player].heroUnit);
     libNtve_gf_CreateUnitsWithDefaultFacing(1, gv_Hero_UnitTypes[0], 0, tutorial_Player, PointFromName("PartTerran_HeroSpawn1"));
