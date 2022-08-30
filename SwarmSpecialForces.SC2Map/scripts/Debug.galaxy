@@ -573,9 +573,9 @@ bool Debug_PrintDmg (bool testConds, bool runActions){
 
 
 bool Debug_GetUnitgroupCount(bool testConds, bool runActions){
-    
+    unitgroup selectedUnits = UnitGroupSelected(EventPlayer());
     unitgroup tempUG;
-    tempUG = UnitGetTrackedUnitGroup(gv_Bosses[c_Bosses_ZMoopy], "ShieldColor@DummyTracker");
+    tempUG = UnitGetTrackedUnitGroup(UnitGroupUnit(selectedUnits, 1), "Infection@InfectedTracker");
     Debug_ShowMessage(IntToString(UnitGroupCount(tempUG, c_unitCountAll)));
     
     return true;
@@ -699,6 +699,14 @@ bool Debug_Camera(bool testConds, bool runActions){
     return true;
 }
 
+bool Debug_GameMenuWin(bool testConds, bool runActions){
+    
+    Debug_ShowMessage("Win Button Pressed");
+    UISetGameMenuItemVisible(PlayerGroupAll(), c_gameMenuDialogRestartButton, true);
+    
+    return true;
+}
+
 void Debug_Init(){
     int i;
     int tmp_player;
@@ -712,6 +720,19 @@ void Debug_Init(){
         Debug_InitFrames();
         // TriggerAddEventChatMessage(TriggerCreate("Debug_BankTransferSaveTrigger"), c_playerAny, "-transfersave", false);
         // TriggerAddEventChatMessage(TriggerCreate("Debug_BankTransferLoadTrigger"), c_playerAny, "-transferload", false);
+
+        // for(i = 11; i <= 26; i+=1 ){
+        //     UISetGameMenuItemVisible(PlayerGroupAll(), i, false);
+        // }
+        // UISetGameMenuItemVisible(PlayerGroupAll(), c_gameMenuDialogGenericButton1, true);
+
+        // UISetGameMenuItemText(PlayerGroupAll(), c_gameMenuDialogGenericButton1, StringToText("Win"));
+        // UISetGameMenuItemShortcut(PlayerGroupAll(), c_gameMenuDialogGenericButton1, StringToText("W"));
+
+        // TriggerAddEventGameMenuItemSelected(TriggerCreate("Debug_GameMenuWin"), c_playerAny, c_gameMenuDialogGenericButton1);
+
+
+
 
         // Debug_Stetmann_Test();
         // HeroSelection_UnlockDiff(1, 2);
@@ -745,6 +766,6 @@ void Debug_Init(){
         // libNtve_gf_SetAllianceOneWay(8, 1, libNtve_ge_AllianceSetting_EnemyWithSharedVision);
         // PlayerSetAlliance(1, c_allianceIdControl, 8, true);
         // PlayerSetAlliance(8, c_allianceIdControl, 1, true);
-        // TriggerAddEventUnitDamaged(TriggerCreate("Debug_PrintDmg"),null, c_unitDamageTypeAny, c_unitDamageEither, "CorrosiveSpikes@Dmg");
+        // TriggerAddEventUnitDamaged(TriggerCreate("Debug_PrintDmg"),null, c_unitDamageTypeAny, c_unitDamageEither, "Infection@InfectedDmg");
     }
 }
