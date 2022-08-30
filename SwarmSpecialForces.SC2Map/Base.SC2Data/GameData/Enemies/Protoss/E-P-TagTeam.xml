@@ -1148,7 +1148,7 @@
     <CEffectDamage id="TagTeamWeaponDmg" parent="DU_WEAP">
         <EditorCategories value="Race:Protoss"/>
         <Kind value="Ranged"/>
-        <Amount value="1650"/>
+        <Amount value="1350"/>
         <Death value="Blast"/>
         <AttributeFactor index="Armored" value="0.25"/>
     </CEffectDamage>
@@ -2400,9 +2400,9 @@
     <CBehaviorBuff id="HandsOfSilence">
         <EditorCategories value="AbilityorEffectType:Units"/>
         <Modification>
-            <DamageDealtScaled index="Melee" value="750"/>
-            <DamageDealtScaled index="Ranged" value="750"/>
-            <DamageDealtScaled index="Splash" value="750"/>
+            <DamageDealtScaled index="Melee" value="1050"/>
+            <DamageDealtScaled index="Ranged" value="1050"/>
+            <DamageDealtScaled index="Splash" value="1050"/>
         </Modification>
         <InfoFlags index="Hidden" value="1"/>
     </CBehaviorBuff>
@@ -2418,9 +2418,9 @@
     <CBehaviorBuff id="HandOfLightning">
         <EditorCategories value="AbilityorEffectType:Units"/>
         <Modification>
-            <DamageDealtScaled index="Melee" value="750"/>
-            <DamageDealtScaled index="Ranged" value="750"/>
-            <DamageDealtScaled index="Splash" value="750"/>
+            <DamageDealtScaled index="Melee" value="1050"/>
+            <DamageDealtScaled index="Ranged" value="1050"/>
+            <DamageDealtScaled index="Splash" value="1050"/>
         </Modification>
         <InfoFlags index="Hidden" value="1"/>
     </CBehaviorBuff>
