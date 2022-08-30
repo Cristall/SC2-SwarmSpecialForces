@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Catalog>
+    <CEffectRemoveTrackedUnit id="Infection@RemoveFromTracker">
+        <EditorCategories value=""/>
+        <BehaviorLink value="Infection@InfectedTracker"/>
+        <TrackedUnit Value="Target"/>
+    </CEffectRemoveTrackedUnit>
     <CEffectCreatePersistent id="Infection@Delay">
         <EditorCategories value=""/>
         <ExpireDelay value="1.25"/>
@@ -73,13 +78,9 @@
         </VitalArray>
     </CEffectModifyUnit>
     <CEffectApplyBehavior id="RoyalConstruction@AlreadyCastingNoWeapons" parent="AlreadyCastingNoWeapons"/>
-    <CEffectApplyBehavior id="Infection@CasterController">
-        <EditorCategories value=""/>
-        <WhichUnit Value="Caster"/>
-    </CEffectApplyBehavior>
     <CEffectDamage id="Infection@InfectedDmg">
         <EditorCategories value=""/>
-        <Amount value="250">
+        <Amount value="100">
             <AccumulatorArray value="Infection@Math"/>
         </Amount>
     </CEffectDamage>
@@ -101,6 +102,7 @@
         <EditorCategories value=""/>
         <EffectArray value="Infection@AddToTracker"/>
         <EffectArray value="Infection@Infected"/>
+        <ValidatorArray value="Infection@NotInfected"/>
     </CEffectSet>
     <CEffectEnumArea id="Infection@InfectedSearch">
         <EditorCategories value=""/>
@@ -113,16 +115,10 @@
         <EditorCategories value=""/>
         <WhichUnit Value="Caster"/>
     </CEffectApplyBehavior>
-    <CEffectRemoveBehavior id="Infection@InfectedTrackerRemove">
-        <EditorCategories value=""/>
-        <BehaviorLink value="Infection@InfectedTracker"/>
-        <WhichUnit Value="Caster"/>
-    </CEffectRemoveBehavior>
     <CEffectCreatePersistent id="Infection@InitialArea">
         <EditorCategories value=""/>
         <PeriodicEffectArray value="Infection@InitialAreaSearch"/>
         <PeriodicPeriodArray value="0.25"/>
-        <FinalEffect value="Infection@InfectedTrackerRemove"/>
         <Flags index="PersistUntilDestroyed" value="1"/>
         <PeriodicValidator value="Infection@CasterControllerOn"/>
     </CEffectCreatePersistent>
@@ -134,7 +130,6 @@
     <CEffectSet id="Infection@InitialSet">
         <EditorCategories value=""/>
         <EffectArray value="Infection@AlreadyCastingNoWeapons"/>
-        <EffectArray value="Infection@CasterController"/>
         <EffectArray value="Infection@InfectedTracker"/>
         <EffectArray value="Infection@Delay"/>
         <TargetLocationType value="Point"/>
@@ -347,6 +342,9 @@
         <Range value="5"/>
         <CmdButtonArray index="Execute" DefaultButtonFace="Leap"/>
     </CAbilEffectTarget>
+    <CValidatorUnitCompareBehaviorCount id="Infection@NotInfected">
+        <Behavior value="Infection@Infected"/>
+    </CValidatorUnitCompareBehaviorCount>
     <CValidatorCompareTrackedUnitsCount id="RoyalConstruction@TrackedUnitNotDead">
         <Value value="1"/>
         <BehaviorLink value="RoyalConstruction@Tracking"/>
@@ -407,6 +405,7 @@
         <On Terms="Behavior.Infection@Infected.Destroy" Send="Destroy"/>
         <EditorCategories value=""/>
         <HostSiteOps Ops="SOpAttachOverhead"/>
+        <ModelFlags index="AutomateGlobalLoops" value="1"/>
     </CActorModel>
     <CActorModel id="Infection@InfectedArea" parent="ModelAnimationStyleContinuous">
         <EditorCategories value=""/>
@@ -416,7 +415,8 @@
     </CActorModel>
     <CActorModel id="Infection@NewInfected" parent="ModelAnimationStyleOneShot">
         <EditorCategories value=""/>
-        <On Terms="Effect.Infection@Infected.Start" Send="Create"/>
+        <On Terms="Effect.Infection@Infected.Start; At Effect" Send="Create"/>
+        <HostSiteOps Ops="SOpOffsetHigherBy2"/>
     </CActorModel>
     <CActorSplat id="WatchYourStep@Splat" parent="GenericUnitSplat" unitName="WatchYourStep@Trap">
         <EditorCategories value=""/>
@@ -532,12 +532,16 @@
     </CModel>
     <CModel id="Infection@Infected">
         <Model value="Assets\Effects\Zerg\Dehaka_Coop_IntimidatingRoar_Impact\Dehaka_Coop_IntimidatingRoar_Impact.m3"/>
+        <ScaleMax value="3.000000,3.000000,3.000000"/>
+        <ScaleMin value="3.000000,3.000000,3.000000"/>
     </CModel>
     <CModel id="Infection@InfectedArea">
         <Model value="Assets\Effects\Zerg\RazorPlague\RazorPlague.m3"/>
     </CModel>
     <CModel id="Infection@NewInfected">
         <Model value="Assets\Effects\Zerg\TerrorcystInfection\TerrorcystInfection.m3"/>
+        <ScaleMax value="2.000000,2.000000,2.000000"/>
+        <ScaleMin value="2.000000,2.000000,2.000000"/>
     </CModel>
     <CModel id="WatchYourStep@Splat">
         <Model value="Assets\Splats\Splat_ZerglingBurrowed\Splat_ZerglingBurrowed_01.m3"/>
@@ -592,10 +596,10 @@
         <TrackedUnitFilters value="-;Worker,RawResource,HarvestableResource,Missile,Dead,Hidden,Invulnerable"/>
     </CAccumulatorTrackedUnitCount>
     <CAccumulatorArithmetic id="Infection@Math">
-        <Parameters value="1.4"/>
-        <Parameters value="-1">
+        <Parameters value="0">
             <AccumulatorArray value="Infection@CountInfected"/>
         </Parameters>
+        <Parameters value="1.5"/>
         <Operation value="Power"/>
         <ApplicationRule value="Multiply"/>
     </CAccumulatorArithmetic>
@@ -799,11 +803,6 @@
         </Modification>
         <InfoFlags index="Hidden" value="1"/>
     </CBehaviorBuff>
-    <CBehaviorBuff id="Infection@CasterController">
-        <EditorCategories value="AbilityorEffectType:Units"/>
-        <Duration value="15"/>
-        <InfoFlags index="Hidden" value="1"/>
-    </CBehaviorBuff>
     <CBehaviorUnitTracker id="Infection@InfectedTracker">
         <EditorCategories value="AbilityorEffectType:Units"/>
         <InfoFlags index="Hidden" value="1"/>
@@ -812,7 +811,9 @@
         <EditorCategories value="AbilityorEffectType:Units"/>
         <Period value="0.25"/>
         <PeriodicEffect value="Infection@InfectedSet"/>
-        <RemoveValidatorArray value="Infection@CasterControllerOn"/>
+        <RemoveValidatorArray value="CasterNotDead"/>
+        <Duration value="8"/>
+        <FinalEffect value="Infection@RemoveFromTracker"/>
     </CBehaviorBuff>
     <CBehaviorBuff id="RoyalConstruction@CasterStun" parent="RoyalConstruction@Spawning">
         <Name value="Behavior/Name/RoyalConstruction@CasterStun"/>
