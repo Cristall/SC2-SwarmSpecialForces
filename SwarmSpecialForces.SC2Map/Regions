@@ -398,7 +398,7 @@
         <name value="PartZerg_Mix_Third"/>
         <invisible/>
         <shape type="rect">
-            <quad value="183.7075,181.5437,251.2612,220.2404"/>
+            <quad value="183.7075,182.54,251.2612,239.2397"/>
         </shape>
     </region>
     <region id="48">
