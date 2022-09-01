@@ -1164,7 +1164,7 @@ void Bank_Init () {
 
             UIDisplayMessage(playerPG, c_messageAreaSubtitle, StringExternal("Trig/Bank/NoMainButBackup"));
 
-            gv_PlayerStats[playerID].bankfile = BankLoad("SwarmSpecialForcesBackup", playerID);
+            gv_PlayerStats[playerID].bankfile = BankLoad(bankfileNameBackup, playerID);
             BankOptionSet(gv_PlayerStats[playerID].bankfile, c_bankOptionSignature, true);
 
             if (Bank_LoadSwitch(playerID)) {
@@ -1181,6 +1181,8 @@ void Bank_Init () {
             }
         }
         else{
+            gv_PlayerStats[playerID].bankfile = BankLoad(bankfileName, playerID);
+            BankOptionSet(gv_PlayerStats[playerID].bankfile, c_bankOptionSignature, true);
             // no bankfile found at all -> new player
             if (gv_GameMode != c_GameMode_Tutorial) {
                 UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, StringExternal("Trig/Bank/NewPlayer"));
