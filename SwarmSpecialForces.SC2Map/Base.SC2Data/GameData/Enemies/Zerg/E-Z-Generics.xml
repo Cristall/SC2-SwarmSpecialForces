@@ -1899,7 +1899,7 @@
             <LayoutButtons Face="MovePatrol" Type="AbilCmd" AbilCmd="move,Patrol" Row="0" Column="3"/>
             <LayoutButtons Face="NydusWorm@Relocate" Type="AbilCmd" AbilCmd="NydusWorm@Relocate,Execute" Row="2" Column="0"/>
         </CardLayouts>
-        <Radius value="0.375"/>
+        <Radius value="0.875"/>
         <InnerRadius value="0.375"/>
         <MinimapRadius value="1"/>
         <EditorCategories value=""/>
