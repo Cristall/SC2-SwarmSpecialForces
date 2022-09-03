@@ -1109,11 +1109,6 @@
         <Model value="Assets\Effects\Zerg\UnitStunImpact\UnitStunImpact.m3"/>
         <EditorCategories value="Race:Terran"/>
     </CModel>
-    <CModel id="BurrowedSplat2" parent="Splat">
-        <Model value="Assets\Splats\Splat_ZerglingBurrowed\Splat_ZerglingBurrowed.m3"/>
-        <EditorCategories value="Race:Zerg"/>
-        <VariationCount value="3"/>
-    </CModel>
     <CModel id="CommandCenterDeathJunker" parent="CommandCenterDeathBase">
         <Model value="Assets\Units\Terran\CommandCenter_HornerHan_Coop_Death\CommandCenter_HornerHan_Coop_Death.m3"/>
         <Events>

@@ -3401,7 +3401,6 @@ Model/Name/BombardmentTarget=Bombardment Target
 Model/Name/Bomber=Bomber
 Model/Name/BomberBeam=Bomber Beam
 Model/Name/BurrowChargeStun2=Burrow Charge Stun Copy
-Model/Name/BurrowedSplat2=Burrowed Splat Copy
 Model/Name/BuryThem@FallingRocks=Falling Rocks
 Model/Name/BuryThem@Splat=Splat
 Model/Name/Cannon=Cannon
