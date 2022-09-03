@@ -176,6 +176,7 @@ void Part_TransitionToP1(){
 
         Player_AddExp(tmpPlayer, gv_PlayerStats[tmpPlayer].startExp[c_Part_Protoss]);
         PlayerModifyPropertyFixed(tmpPlayer, c_playerPropMinerals, c_playerPropOperAdd, gv_PlayerStats[tmpPlayer].startBiomass[c_Part_Protoss]);
+        PlayerModifyPropertyFixed(tmpPlayer, c_playerPropVespene, c_playerPropOperAdd, gv_PlayerStats[tmpPlayer].startMutations[c_Part_Protoss]);
 
         tmpUG = UnitGroup(null, tmpPlayer, RegionFromName("PartTerran"), UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32))), 0);
         tmpInt = UnitGroupCount(tmpUG, c_unitCountAll);
@@ -289,6 +290,7 @@ void Part_TransitionToP2(){
 
         Player_AddExp(tmpPlayer, gv_PlayerStats[tmpPlayer].startExp[c_Part_Zerg]);
         PlayerModifyPropertyFixed(tmpPlayer, c_playerPropMinerals, c_playerPropOperAdd, gv_PlayerStats[tmpPlayer].startBiomass[c_Part_Zerg]);
+        PlayerModifyPropertyFixed(tmpPlayer, c_playerPropVespene, c_playerPropOperAdd, gv_PlayerStats[tmpPlayer].startMutations[c_Part_Zerg]);
 
         tmpUG = UnitGroup(null, tmpPlayer, RegionFromName("PartProtoss"), UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32))), 0);
         tmpInt = UnitGroupCount(tmpUG, c_unitCountAll);
