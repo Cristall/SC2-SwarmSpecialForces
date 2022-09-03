@@ -102,6 +102,7 @@ void Player_PartWin_UpdateAcv(){
         if(gv_PlayerStats[tmpPlayer].options_SpeedrunsDetails_Flag && updatedTimeLowest != 0){
             Popup_NewSpeedrunTimeDetailed(tmpPlayer, gv_Part_ActivePart, gv_Difficulty, currentGameTime, updatedTimeLowest, updatedTimeHighest);
         }
+        gv_PlayerStats[tmpPlayer].saveFlag_Heavy = true;
         Acv_Grind_UnlockAdd(tmpPlayer, c_AcvIdentifier_WinsP0 + gv_Part_ActivePart, 1);
     }
 }
