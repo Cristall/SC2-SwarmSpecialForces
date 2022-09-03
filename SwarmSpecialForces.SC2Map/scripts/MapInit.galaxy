@@ -164,7 +164,6 @@ bool MapInit_Main(bool testConds, bool runActions){
     StatsInterface_Update();
     Acv_RewardUI_InitFunctionRef();
     Acv_InitAllAcv();
-    PlayerBoard_InitRanksForAllPlayers();
     // after loading all other achievements, update score (again)
     tmpInt = -1;
     while (true) {
@@ -172,6 +171,7 @@ bool MapInit_Main(bool testConds, bool runActions){
         if(tmpInt < 0) { break; }
         Acv_Grind_Check(tmpInt, c_AcvIdentifier_Score);
     }
+    PlayerBoard_InitRanksForAllPlayers();
 
     // lock game speed to normal
     GameSetSpeedValue(c_gameSpeedNormal);
