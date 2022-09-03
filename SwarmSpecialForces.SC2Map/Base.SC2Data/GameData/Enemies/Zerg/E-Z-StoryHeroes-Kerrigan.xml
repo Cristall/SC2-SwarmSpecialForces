@@ -544,7 +544,7 @@
         <ScaleMin value="2.000000,2.000000,2.000000"/>
     </CModel>
     <CModel id="WatchYourStep@Splat">
-        <Model value="Assets\Splats\Splat_ZerglingBurrowed\Splat_ZerglingBurrowed_01.m3"/>
+        <Model value="Assets\Models\Splat_ZerglingBurrowed_Important\Splat_ZerglingBurrowed_Important.m3"/>
     </CModel>
     <CModel id="WatchYourStep@Trap">
         <Model value="Assets\COOP\Stetmann\Effects\Lurker_Stetmann_COOP_SuperSpike\Lurker_Stetmann_COOP_SuperSpike.m3"/>
