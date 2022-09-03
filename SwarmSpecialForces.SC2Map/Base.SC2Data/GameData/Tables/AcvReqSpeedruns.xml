@@ -165,10 +165,10 @@
             <Int Int="2400">
                 <Field Id="Team" Index="1"/>
             </Int>
-            <Int Int="5400">
+            <Int Int="4800">
                 <Field Id="Small"/>
             </Int>
-            <Int Int="3600">
+            <Int Int="3000">
                 <Field Id="Small" Index="1"/>
             </Int>
             <Int Int="3">
@@ -190,7 +190,7 @@
             <Int Int="1800">
                 <Field Id="Small"/>
             </Int>
-            <Int Int="1050">
+            <Int Int="1110">
                 <Field Id="Small" Index="1"/>
             </Int>
         </Instances>
@@ -204,7 +204,7 @@
             <Int Int="2700">
                 <Field Id="Small"/>
             </Int>
-            <Int Int="1500">
+            <Int Int="1560">
                 <Field Id="Small" Index="1"/>
             </Int>
         </Instances>
@@ -218,7 +218,7 @@
             <Int Int="3600">
                 <Field Id="Small"/>
             </Int>
-            <Int Int="2100">
+            <Int Int="2250">
                 <Field Id="Small" Index="1"/>
             </Int>
         </Instances>
@@ -246,10 +246,10 @@
             <Int Int="2700">
                 <Field Id="Team" Index="1"/>
             </Int>
-            <Int Int="6000">
+            <Int Int="5400">
                 <Field Id="Small"/>
             </Int>
-            <Int Int="4000">
+            <Int Int="3600">
                 <Field Id="Small" Index="1"/>
             </Int>
             <Int Int="3">
