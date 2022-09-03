@@ -225,6 +225,7 @@
             <Vital index="Energy" value="125"/>
             <Cooldown TimeUse="12"/>
         </Cost>
+        <Flags index="BestUnit" value="1"/>
     </CAbilEffectInstant>
     <CAbilEffectInstant id="DamageTransferAura">
         <EditorCategories value="AbilityorEffectType:Units"/>
