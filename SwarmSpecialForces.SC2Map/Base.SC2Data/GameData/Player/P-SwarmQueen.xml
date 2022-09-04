@@ -313,6 +313,11 @@
     <CButton id="Heal@Heal">
         <Icon value="Assets\Textures\btn-ability-zerg-dehaka-healingaura.dds"/>
     </CButton>
+    <CRequirementCountUpgrade id="CountUpgradeRespawnEgg@UnlockCompleteOnly">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Tooltip value="RequirementNode/Tooltip/##id##"/>
+        <Count Link="RespawnEgg@Unlock" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
     <CRequirementGTE id="GTE999272702CountUpgradeRespawnEgg@UnlockCompleteOnly1">
         <OperandArray index="0" value="CountUpgradeRespawnEgg@UnlockCompleteOnly"/>
         <OperandArray index="1" value="1"/>
