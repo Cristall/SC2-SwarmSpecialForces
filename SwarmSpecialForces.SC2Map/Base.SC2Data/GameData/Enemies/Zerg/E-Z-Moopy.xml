@@ -1408,7 +1408,6 @@
         <Sight value="30"/>
         <LifeArmorTip value="Unit/KingMoopy/ArmorTooltip"/>
         <LifeRegenRate value="140"/>
-        <Height value="-0.5"/>
     </CUnit>
     <CUnit id="MoopyChampion" parent="GenericEnemyUnit">
         <Race value="Zerg"/>
