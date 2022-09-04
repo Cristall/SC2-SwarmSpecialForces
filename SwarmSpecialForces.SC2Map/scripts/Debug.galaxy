@@ -384,6 +384,9 @@ bool Debug_Popup (bool testConds, bool runActions){
             tmp_player = PlayerGroupPlayer(gv_StartingPG, i);
             CameraPan(tmp_player, PointFromName("PartZerg_Boss_Gary"), 0.0, -1, 10.0, false);
         }
+        if(UnitGroupCount(UnitGroup("MechaGreaterSpire", gv_CollectiblePlayerEnemyAllied, RegionFromName("PartZerg_Mix_Fourth_Wall"), UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0), c_unitCountAlive) >0){
+            PartZerg_AreaMix_Fourth_Open();
+        }
     }
     bool Debug_SkipPart(bool testConds, bool runActions){
         int player = EventPlayer();
