@@ -756,7 +756,6 @@
         <Radius value="0.375"/>
         <InnerRadius value="0"/>
         <SubgroupPriority value="99"/>
-        <RankDisplay value="Never"/>
         <WeaponArray Link="MechaKerriganWeapon"/>
         <AbilArray Link="Leap"/>
         <AbilArray Link="WingSpikes"/>
