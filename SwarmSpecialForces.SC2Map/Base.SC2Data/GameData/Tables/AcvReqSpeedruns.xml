@@ -72,7 +72,7 @@
             </Int>
         </Instances>
         <Instances Id="P0D4">
-            <Int Int="2700">
+            <Int Int="2400">
                 <Field Id="Team"/>
             </Int>
             <Int Int="1350">
@@ -89,10 +89,10 @@
             </Int>
         </Instances>
         <Instances Id="P0D5">
-            <Int Int="3600">
+            <Int Int="3000">
                 <Field Id="Team"/>
             </Int>
-            <Int Int="2400">
+            <Int Int="1800">
                 <Field Id="Team" Index="1"/>
             </Int>
             <Int Int="2">
