@@ -710,6 +710,62 @@ bool Debug_GameMenuWin(bool testConds, bool runActions){
     return true;
 }
 
+bool Debug_NydusExist(bool testConds, bool runActions){
+    int tmpPlayer;
+    unit nydusworm_exit;
+    unitgroup tmpUG;
+    int tmpInt;
+    unit tmpUnit;
+    
+    UnitCreate(1, "NydusWorm@NydusWormExit", c_unitCreateIgnoreBirth, gv_BasePlayer, PointFromName("PartZerg_AttackPoint"), 180);
+    nydusworm_exit = UnitLastCreated();
+
+    tmpPlayer = -1;
+    while (true) {
+        tmpPlayer = PlayerGroupNextPlayer(gv_ActivePG, tmpPlayer);
+        if (tmpPlayer < 0) { break; }
+
+        Player_AddExp(tmpPlayer, gv_PlayerStats[tmpPlayer].startExp[c_Part_Zerg]);
+        PlayerModifyPropertyFixed(tmpPlayer, c_playerPropMinerals, c_playerPropOperAdd, gv_PlayerStats[tmpPlayer].startBiomass[c_Part_Zerg]);
+        PlayerModifyPropertyFixed(tmpPlayer, c_playerPropVespene, c_playerPropOperAdd, gv_PlayerStats[tmpPlayer].startMutations[c_Part_Zerg]);
+
+        tmpUG = UnitGroup(null, tmpPlayer, RegionFromName("PartZerg"), UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32))), 0);
+        tmpInt = UnitGroupCount(tmpUG, c_unitCountAll);
+        CameraPan(tmpPlayer, PointFromName("PartZerg_AttackPoint"), 0.0, -1, 10.0, false);
+        CameraPan(tmpPlayer, PointFromName("PartZerg_Hive"), 2, -1, 10.0, true);
+        for (;; tmpInt -= 1) {
+            tmpUnit = UnitGroupUnitFromEnd(tmpUG, tmpInt);
+            if (tmpUnit == null) { break; }
+            UnitBehaviorAddPlayer(tmpUnit, "NydusWorm@ThrowCollision", UnitGetOwner(tmpUnit), 1);
+            if(UnitGetType(tmpUnit)== "RespawnEgg@Egg" && UnitTestState(tmpUnit, c_unitStateHidden)){
+                // carried eggs do not get moved
+                continue;
+            }
+            UnitIssueOrder(tmpUnit, Order(AbilityCommand("stop", 0)), c_orderQueueReplace);
+            UnitSetPosition(tmpUnit, PointWithOffset(PointFromName("PartZerg_AttackPoint"),RandomFixed(-5,-4.75),RandomFixed(-0.25,0.25)), false);
+            UnitIssueOrder(nydusworm_exit, OrderTargetingUnit(AbilityCommand("NydusWorm@Throw", 0), tmpUnit), c_orderQueueAddToEnd);
+        }
+    }
+
+    Wait(3.5, c_timeGame);
+
+    //remove all enemy units in protoss part (to reduce performance impact)
+    tmpUG = UnitGroup(null, gv_EnemyPlayer, RegionFromName("PartProtoss"), UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32))), 0);
+    tmpInt = UnitGroupCount(tmpUG, c_unitCountAll);
+    for (;; tmpInt -= 1) {
+        tmpUnit = UnitGroupUnitFromEnd(tmpUG, tmpInt);
+        if (tmpUnit == null) { break; }
+        UnitRemove(tmpUnit);
+    }
+
+    Wait(2,c_timeGame);
+    ActorSend(libNtve_gf_MainActorofUnit(nydusworm_exit), "AnimPlay Abil1 Unburrow");
+    Wait(2,c_timeGame);
+    UnitRemove(nydusworm_exit);
+    
+    return true;
+}
+
 void Debug_Init(){
     int i;
     int tmp_player;
@@ -742,6 +798,7 @@ void Debug_Init(){
         // HeroSelection_UnlockDiff(1, 3);
         // HeroSelection_UnlockDiff(1, 4);
         // HeroSelection_UnlockDiff(1, 5);
+        // TriggerAddEventChatMessage(TriggerCreate("Debug_NydusExist"), c_playerAny, "-nydus", false);
         // TriggerAddEventChatMessage(TriggerCreate("Debug_SpeedrunTime"), c_playerAny, "-speedrun", false);
         // TriggerAddEventChatMessage(TriggerCreate("Debug_Camera"), c_playerAny, "-camera", false);
         // TriggerAddEventChatMessage(TriggerCreate("Debug_NydusWorms"), c_playerAny, "-worms", false);
