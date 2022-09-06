@@ -2442,7 +2442,7 @@
     </CBehaviorBuff>
     <CBehaviorBuff id="NydusWorm@ThrowHide">
         <EditorCategories value="AbilityorEffectType:Units"/>
-        <Modification>
+        <Modification MoveSpeedMaximum="0">
             <StateFlags index="NoDraw" value="1"/>
         </Modification>
         <InfoFlags index="Hidden" value="1"/>
