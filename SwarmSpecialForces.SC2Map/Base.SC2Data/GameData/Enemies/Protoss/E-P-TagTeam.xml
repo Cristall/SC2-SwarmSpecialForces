@@ -2407,13 +2407,14 @@
         <InfoFlags index="Hidden" value="1"/>
     </CBehaviorBuff>
     <CBehaviorBuff id="CoronaWaves">
+        <Alignment value="Negative"/>
+        <InfoIcon value="Assets\Textures\btn-ability-stetmann-infestorbuildinginfestation.dds"/>
         <EditorCategories value="AbilityorEffectType:Units"/>
+        <RemoveValidatorArray value="CasterNotDead"/>
+        <RemoveValidatorArray value="NotHidden"/>
         <Duration value="18"/>
         <Period value="0.5"/>
         <PeriodicEffect value="CoronaWavesPeriodicSearch"/>
-        <InfoIcon value="Assets\Textures\btn-ability-stetmann-infestorbuildinginfestation.dds"/>
-        <Alignment value="Negative"/>
-        <RemoveValidatorArray value="CasterNotDead"/>
     </CBehaviorBuff>
     <CBehaviorBuff id="HandOfLightning">
         <EditorCategories value="AbilityorEffectType:Units"/>
