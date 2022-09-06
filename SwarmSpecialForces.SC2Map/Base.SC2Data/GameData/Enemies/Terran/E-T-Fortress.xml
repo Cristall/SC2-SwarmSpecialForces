@@ -437,6 +437,7 @@
         <OffsetVectorStartLocation Value="CasterUnit"/>
         <OffsetVectorEndLocation Value="TargetUnit"/>
         <PeriodicOffsetArray value="0,4.75,0"/>
+        <PeriodicValidator value="CasterNotDead"/>
     </CEffectCreatePersistent>
     <CAbilEffectInstant id="BombardmentStart">
         <EditorCategories value="AbilityorEffectType:Units"/>
