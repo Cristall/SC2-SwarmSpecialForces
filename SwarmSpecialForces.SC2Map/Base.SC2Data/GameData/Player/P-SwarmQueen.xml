@@ -159,7 +159,7 @@
         <CmdButtonArray index="UnloadAt" DefaultButtonFace="RespawnEgg@DropEgg" Requirements="RespawnEgg@CarryReq"/>
         <Flags index="ShowCargoSize" value="0"/>
         <Flags index="ShowStatus" value="0"/>
-        <MaxUnloadRange value="2"/>
+        <MaxUnloadRange value="0.85"/>
         <LoadValidatorArray value="RespawnEgg@Egg"/>
         <LoadValidatorArray value="RespawnEgg@Reviving"/>
     </CAbilTransport>
@@ -315,7 +315,6 @@
     </CButton>
     <CRequirementCountUpgrade id="CountUpgradeRespawnEgg@UnlockCompleteOnly">
         <Flags index="TechTreeCheat" value="0"/>
-        <Tooltip value="RequirementNode/Tooltip/##id##"/>
         <Count Link="RespawnEgg@Unlock" State="CompleteOnly"/>
     </CRequirementCountUpgrade>
     <CRequirementGTE id="GTE999272702CountUpgradeRespawnEgg@UnlockCompleteOnly1">
@@ -737,7 +736,7 @@
             <PositiveArmorMultiplier value="0"/>
         </ShieldArmorFormula>
         <AttackTargetPriority value="20"/>
-        <InnerRadius value="0.625"/>
+        <InnerRadius value="0.375"/>
         <EditorCategories value=""/>
         <AbilArray Link="RespawnEgg@Reviving"/>
         <AbilArray Link="RespawnEgg@EggSuicide"/>
@@ -753,6 +752,7 @@
         <BehaviorArray Link="RespawnEgg@CasterTracker"/>
         <Sight value="2"/>
         <CargoSize value="1"/>
+        <Radius value="0.375"/>
     </CUnit>
     <CUnit id="HeroSwarmQueen">
         <DeathTime value="-1"/>
