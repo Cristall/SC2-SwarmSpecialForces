@@ -1403,7 +1403,7 @@ void PartZerg_Moopy_InitColor(){
 
     TriggerAddEventUnitRegion(TriggerCreate("PartZerg_Moopy_PlayerEnterArena"), null, RegionFromName("PartZerg"), true);
     for (i = 0; i < partZerg_Moopy_ColorMaxCount; i += 1) {
-        UnitCreate(1, "ShieldColor@Totem", 0, gv_CollectiblePlayerEnemyNeutral, PointWithOffsetPolar(PointFromName("PartZerg_Boss_Moopy"), 8, 90*i+180), 90*i);
+        UnitCreate(1, "ShieldColor@Totem", 0, gv_CollectiblePlayerEnemyNeutral, PointWithOffsetPolar(PointFromName("PartZerg_Boss_Moopy"), 8, 90*i+180+45), 90*i+45);
         // UnitCreate(1, "ShieldColor@Totem", 0, gv_CollectiblePlayerEnemyNeutral, PointFromName("PartZerg_Boss_Moopy_ColorTotem"+IntToString(i)), -90*i);
         partZerg_Moopy_Totems[i] = UnitLastCreated();
         UnitBehaviorAdd(partZerg_Moopy_Totems[i], "ShieldColor@BossColor" + IntToString(i), partZerg_Moopy_Totems[i], 1);
