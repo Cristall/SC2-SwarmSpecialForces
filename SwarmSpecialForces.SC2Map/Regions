@@ -492,7 +492,7 @@
         <name value="PartZerg"/>
         <invisible/>
         <shape type="rect">
-            <quad value="182.4892,4.6984,254.8544,242.8676"/>
+            <quad value="182.4892,3.195,254.8544,248.3647"/>
         </shape>
     </region>
 </Regions>
