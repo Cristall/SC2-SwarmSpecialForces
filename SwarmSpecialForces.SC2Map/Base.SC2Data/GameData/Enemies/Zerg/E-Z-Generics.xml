@@ -2124,7 +2124,6 @@
         <MinimapRadius value="0.375"/>
         <KillDisplay value="Always"/>
         <RankDisplay value="Always"/>
-        <SpeedMultiplierCreep value="0.8"/>
         <Name value="Unit/Name/Drone"/>
         <WeaponArray Link="MechaDroneWeapon"/>
     </CUnit>
