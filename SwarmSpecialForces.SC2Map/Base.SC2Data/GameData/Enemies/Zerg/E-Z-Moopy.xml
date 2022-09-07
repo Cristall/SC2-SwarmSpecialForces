@@ -923,7 +923,7 @@
         <On Terms="Effect.ChargeUp@Channeling.Stop" Send="AnimClear Abil1"/>
         <FogVisibility value="Dimmed"/>
         <BarHeight value="14"/>
-        <CustomUnitStatusFrame value="SSF_UnitStatus/BossStatus"/>
+        <CustomUnitStatusFrame value="SSF_UnitStatus/BossStatusShielded"/>
         <MinimapIcon value="Assets\Icons\btn-unit-kingmoopy.dds"/>
         <MinimapIconScale value="0.300000"/>
         <MinimapIconBackground value="Assets\MinimapBackground.dds"/>
@@ -1063,7 +1063,9 @@
         <ScaleMax value="3.000000,3.000000,3.000000"/>
         <ScaleMin value="3.000000,3.000000,3.000000"/>
     </CModel>
-    <CModel id="Moopy_Reaper" parent="ImportedModel"/>
+    <CModel id="Moopy_Reaper" parent="ImportedModel">
+        <AttachProps Id="Ref_Center" RadiusShield="1.000000"/>
+    </CModel>
     <CModel id="KingMoopyWeaponMissile">
         <Model value="Assets\Effects\Terran\PlasmaRifle_Missile\PlasmaRifle_Missile.m3"/>
         <ScaleMax value="4.000000,4.000000,4.000000"/>
@@ -1381,8 +1383,8 @@
         <Race value="Zerg"/>
         <Attributes index="Biological" value="1"/>
         <Attributes index="Heroic" value="1"/>
-        <LifeStart value="150000"/>
-        <LifeMax value="150000"/>
+        <LifeStart value="90000"/>
+        <LifeMax value="90000"/>
         <BehaviorArray Link="MoopyHat2"/>
         <BehaviorArray Link="ShieldColor@TotemTracker"/>
         <BehaviorArray Link="ShieldColor@DummyTracker"/>
@@ -1408,6 +1410,8 @@
         <Sight value="30"/>
         <LifeArmorTip value="Unit/KingMoopy/ArmorTooltip"/>
         <LifeRegenRate value="140"/>
+        <ShieldsStart value="60000"/>
+        <ShieldsMax value="60000"/>
     </CUnit>
     <CUnit id="MoopyChampion" parent="GenericEnemyUnit">
         <Race value="Zerg"/>

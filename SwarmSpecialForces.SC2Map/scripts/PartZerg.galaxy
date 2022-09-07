@@ -1503,8 +1503,8 @@ void PartZerg_Moopy_Init(structref<BossFightData> data){
     data.amountAbility = 6;
 }
 void PartZerg_Moopy_Addition(structref<BossFightData> data){
-    const fixed phase2LifeThreshold = 60;
-    fixed bossLife = UnitGetPropertyFixed(data.boss[0], c_unitPropLifePercent, true);
+    const fixed phase2ShieldsThreshold = 0;
+    fixed bossShields = UnitGetPropertyFixed(data.boss[0], c_unitPropShields, true);
 
     // phase change
     if(partZerg_Moopy_Phase == -1){
@@ -1529,7 +1529,7 @@ void PartZerg_Moopy_Addition(structref<BossFightData> data){
         UnitBehaviorAdd(data.boss[0], "KingMoopyDamageReduction", data.boss[0], 1);
         
     }
-    else if(partZerg_Moopy_Phase == 1 && bossLife < phase2LifeThreshold){
+    else if(partZerg_Moopy_Phase == 1 && bossShields <= phase2ShieldsThreshold){
         // enable moving, enables different ability set, old ones get deactivated
         data.bossState[0] &= ~c_BossFightState_Deactivated;
         partZerg_Moopy_Phase = 2;
