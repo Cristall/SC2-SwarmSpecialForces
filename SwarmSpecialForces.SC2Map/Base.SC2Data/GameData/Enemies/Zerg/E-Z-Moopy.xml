@@ -794,7 +794,7 @@
     <CActorEventMacro id="ShieldColor@BossColorBuffMacro">
         <EditorCategories value=""/>
         <On Terms="Behavior.ShieldColor@BossColor0.On" Send="SetTintColor 255,0,0"/>
-        <On Terms="Behavior.ShieldColor@BossColor1.On" Send="SetTintColor 255,255,0"/>
+        <On Terms="Behavior.ShieldColor@BossColor1.On" Send="SetTintColor 255,255,255"/>
         <On Terms="Behavior.ShieldColor@BossColor2.On" Send="SetTintColor 0,0,255"/>
         <On Terms="Behavior.ShieldColor@BossColor3.On" Send="SetTintColor 0,255,0"/>
     </CActorEventMacro>
@@ -802,7 +802,7 @@
         <EditorCategories value=""/>
         <On Terms="ActorCreation" Send="TimerSet 0.005000 Color"/>
         <On Terms="TimerExpired; TimerName Color; ValidateCreationEffect ShieldColor@BossColor0" Send="SetTintColor 255,0,0"/>
-        <On Terms="TimerExpired; TimerName Color; ValidateCreationEffect ShieldColor@BossColor1" Send="SetTintColor 255,255,0"/>
+        <On Terms="TimerExpired; TimerName Color; ValidateCreationEffect ShieldColor@BossColor1" Send="SetTintColor 255,255,255"/>
         <On Terms="TimerExpired; TimerName Color; ValidateCreationEffect ShieldColor@BossColor2" Send="SetTintColor 0,0,255"/>
         <On Terms="TimerExpired; TimerName Color; ValidateCreationEffect ShieldColor@BossColor3" Send="SetTintColor 0,255,0"/>
     </CActorEventMacro>
@@ -814,14 +814,14 @@
     <CActorEventMacro id="ShieldColor@BossColorMacro">
         <EditorCategories value=""/>
         <On Terms="ActorCreation; ValidateCreationEffect ShieldColor@BossColor0" Send="SetTintColor 255,0,0"/>
-        <On Terms="ActorCreation; ValidateCreationEffect ShieldColor@BossColor1" Send="SetTintColor 255,255,0"/>
+        <On Terms="ActorCreation; ValidateCreationEffect ShieldColor@BossColor1" Send="SetTintColor 255,255,255"/>
         <On Terms="ActorCreation; ValidateCreationEffect ShieldColor@BossColor2" Send="SetTintColor 0,0,255"/>
         <On Terms="ActorCreation; ValidateCreationEffect ShieldColor@BossColor3" Send="SetTintColor 0,255,0"/>
     </CActorEventMacro>
     <CActorEventMacro id="ShieldColor@BossColorCasterMacro">
         <EditorCategories value=""/>
         <On Terms="ActorCreation; ValidateCreationEffect ShieldColor@BossColorCaster0" Send="SetTintColor 255,0,0"/>
-        <On Terms="ActorCreation; ValidateCreationEffect ShieldColor@BossColorCaster1" Send="SetTintColor 255,255,0"/>
+        <On Terms="ActorCreation; ValidateCreationEffect ShieldColor@BossColorCaster1" Send="SetTintColor 255,255,255"/>
         <On Terms="ActorCreation; ValidateCreationEffect ShieldColor@BossColorCaster2" Send="SetTintColor 0,0,255"/>
         <On Terms="ActorCreation; ValidateCreationEffect ShieldColor@BossColorCaster3" Send="SetTintColor 0,255,0"/>
     </CActorEventMacro>
@@ -859,7 +859,7 @@
         <On Terms="Behavior.ShieldColor@PlayerColor0.On" Send="SetTintColor 255,0,0"/>
         <On Terms="Behavior.ShieldColor@PlayerColor0.Off" Send="Destroy"/>
         <On Terms="Behavior.ShieldColor@PlayerColor1.On" Send="Create"/>
-        <On Terms="Behavior.ShieldColor@PlayerColor1.On" Send="SetTintColor 255,255,0"/>
+        <On Terms="Behavior.ShieldColor@PlayerColor1.On" Send="SetTintColor 255,255,255"/>
         <On Terms="Behavior.ShieldColor@PlayerColor1.Off" Send="Destroy"/>
         <On Terms="Behavior.ShieldColor@PlayerColor2.On" Send="Create"/>
         <On Terms="Behavior.ShieldColor@PlayerColor2.On" Send="SetTintColor 0,0,255"/>
