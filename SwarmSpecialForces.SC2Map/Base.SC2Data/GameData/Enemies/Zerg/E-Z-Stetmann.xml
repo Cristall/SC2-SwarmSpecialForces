@@ -36,22 +36,14 @@
     <CEffectApplyBehavior id="Swap@AlreadyCastingNoWeapons" parent="AlreadyCastingNoWeapons"/>
     <CEffectDamage id="SpinForWin@ImpactDamage">
         <EditorCategories value=""/>
-        <Amount value="500"/>
+        <Amount value="750">
+            <AccumulatorArray value="SpinForWin@DistanceClampedBoth"/>
+        </Amount>
     </CEffectDamage>
-    <CEffectEnumArea id="SpinForWin@ImpactSearch">
-        <EditorCategories value=""/>
-        <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Item,Dead,Hidden,Invulnerable"/>
-        <AreaArray Radius="2.25" Effect="SpinForWin@ImpactDamage"/>
-    </CEffectEnumArea>
     <CEffectSet id="SpinForWin@InitialSet">
         <EditorCategories value=""/>
         <EffectArray value="SpinForWin@AlreadyCastingNoWeapons"/>
         <EffectArray value="SpinForWin@StunAndSpin"/>
-    </CEffectSet>
-    <CEffectSet id="SpinForWin@SearchSet">
-        <EditorCategories value=""/>
-        <EffectArray value="SpinForWin@PullSearch"/>
-        <EffectArray value="SpinForWin@ImpactSearch"/>
     </CEffectSet>
     <CEffectApplyBehavior id="SpinForWin@StunAndSpin">
         <EditorCategories value=""/>
@@ -432,7 +424,7 @@
         <AmmoUnit value="GaryWeaponMissile"/>
         <ImpactEffect value="GaryWeaponDmg"/>
     </CEffectLaunchMissile>
-    <CEffectEnumArea id="SpinForWin@PullSearch">
+    <CEffectEnumArea id="SpinForWin@Search">
         <EditorCategories value=""/>
         <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Item,Dead,Hidden,Invulnerable"/>
         <AreaArray Radius="10" Effect="SpinForWin@PullTeleportController"/>
@@ -453,6 +445,7 @@
         <PeriodCount value="4"/>
         <PeriodicEffectArray value="SpinForWin@PullTeleportOffset"/>
         <PeriodicPeriodArray value="0.0625"/>
+        <InitialEffect value="SpinForWin@ImpactDamage"/>
     </CEffectCreatePersistent>
     <CEffectCreatePersistent id="SpinForWin@PullTeleportOffset">
         <EditorCategories value=""/>
@@ -582,7 +575,7 @@
     </CActorModel>
     <CActorModel id="SpinForWin@Pull" parent="ModelAnimationStyleOneShot">
         <EditorCategories value=""/>
-        <On Terms="Effect.SpinForWin@PullSearch.Start" Send="Create"/>
+        <On Terms="Effect.SpinForWin@Search.Start" Send="Create"/>
         <Scale value="2.400000,2.400000,1.000000"/>
         <HostSiteOps Ops="SOpMoveDownBy1"/>
     </CActorModel>
@@ -1027,6 +1020,31 @@
             <AdaptableParabolaAccels index="Land" value="0"/>
         </MotionPhases>
     </CMoverMissile>
+    <CAccumulatorDistance id="SpinForWin@Distance">
+        <ApplicationRule value="Multiply"/>
+        <EndLocation Value="TargetUnit"/>
+    </CAccumulatorDistance>
+    <!--linear falloff such that 1 is at distance 2 and 0 is at distance 7-->
+    <CAccumulatorArithmetic id="SpinForWin@DistanceLinearFalloff">
+        <Parameters value="1.4"/>
+        <Parameters value="-0.2">
+            <AccumulatorArray value="SpinForWin@Distance"/>
+        </Parameters>
+    </CAccumulatorArithmetic>
+    <CAccumulatorArithmetic id="SpinForWin@DistanceClampedBoth">
+        <ApplicationRule value="Multiply"/>
+        <Parameters value="0">
+            <AccumulatorArray value="SpinForWin@DistanceClampedTop"/>
+        </Parameters>
+        <Parameters value="0"/>
+        <Operation value="Maximum"/>
+    </CAccumulatorArithmetic>
+    <CAccumulatorArithmetic id="SpinForWin@DistanceClampedTop">
+        <Parameters value="0">
+            <AccumulatorArray value="SpinForWin@DistanceLinearFalloff"/>
+        </Parameters>
+        <Operation value="Minimum"/>
+    </CAccumulatorArithmetic>
     <CAccumulatorVitals id="Scrap@DamageFactor">
         <Ratio value="0.01"/>
         <VitalType value="Energy"/>
@@ -1058,7 +1076,7 @@
         <DataRecord Entry="Actor,SpinForWin@SiteOpsRotator"/>
         <DataRecord Entry="Actor,SpinForWin@RotatorDummyModel"/>
         <DataRecord Entry="Behavior,SpinForWin@StunAndSpin"/>
-        <DataRecord Entry="Effect,SpinForWin@PullSearch"/>
+        <DataRecord Entry="Effect,SpinForWin@Search"/>
         <DataRecord Entry="Effect,SpinForWin@PullTeleportController"/>
         <DataRecord Entry="Effect,SpinForWin@PullTeleport"/>
         <DataRecord Entry="Effect,SpinForWin@PullTeleportOffset"/>
@@ -1072,6 +1090,10 @@
         <DataRecord Entry="Effect,SpinForWin@StunAndSpin"/>
         <DataRecord Entry="Actor,SpinForWin@Pull"/>
         <DataRecord Entry="Model,SpinForWin@Pull"/>
+        <DataRecord Entry="Accumulator,SpinForWin@Distance"/>
+        <DataRecord Entry="Accumulator,SpinForWin@DistanceClampedTop"/>
+        <DataRecord Entry="Accumulator,SpinForWin@DistanceClampedBoth"/>
+        <DataRecord Entry="Accumulator,SpinForWin@DistanceLinearFalloff"/>
     </CDataCollectionAbil>
     <CDataCollectionAbil id="StetmannRevenge">
         <EditorCategories value=""/>
@@ -1500,7 +1522,7 @@
         <EditorCategories value="AbilityorEffectType:Units"/>
         <Duration value="10.0625"/>
         <Period value="0.25"/>
-        <PeriodicEffect value="SpinForWin@SearchSet"/>
+        <PeriodicEffect value="SpinForWin@Search"/>
         <Modification>
             <StateFlags index="Stun" value="1"/>
         </Modification>
