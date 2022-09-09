@@ -616,6 +616,9 @@ void Acv_Grind_Check(int playerID, int acvIdentifier){
     if(gv_Part_ActivePart == c_Part_None || newStageFlag){
         Acv_Grind_UI(playerID,acvIdentifier, gv_Part_ActivePart != c_Part_None);
     }
+    if(acvIdentifier == c_AcvIdentifier_Kills && newStageFlag){
+        Bank_Save_RequestSave(playerID);
+    }
 }
 void Acv_Grind_UnlockAdd(int playerID, int acvIdentifier, int value){
     if(!gv_ValidGame){ return; }
