@@ -274,10 +274,11 @@ bool Enemy_BossFight_Handler (bool testConds, bool runActions){
                 }
             }
         }
-        //checks if boss is already attacking so that in multi boss unit fights (MBUF) not only a single unit can be pulled
+        //checks if boss is already attacking so that in multi boss unit fights not only a single unit can be pulled
         else if (orderType == c_BossFightOrder_Attack){
             for (tmpInt = 0; tmpInt < bossFightData.amountBosses; tmpInt += 1) {
                 if((bossFightData.bossState[tmpInt] & c_BossFightState_Alive) == 0
+                    || (bossFightData.bossState[tmpInt] & c_BossFightState_Casting) > 0
                     || (bossFightData.bossState[tmpInt] & c_BossFightState_Deactivated) > 0){
                         continue;
                     }
@@ -291,7 +292,8 @@ bool Enemy_BossFight_Handler (bool testConds, bool runActions){
         //if boss leaves the region, forces a run back
         else if (orderType == c_BossFightOrder_Return){
             for (tmpInt = 0; tmpInt < bossFightData.amountBosses; tmpInt += 1) {
-                if((bossFightData.bossState[tmpInt] & c_BossFightState_Alive) == 0){ continue; }
+                if((bossFightData.bossState[tmpInt] & c_BossFightState_Alive) == 0
+                    || (bossFightData.bossState[tmpInt] & c_BossFightState_Casting) > 0){ continue; }
                 
                 if(UnitHasBehavior2(bossFightData.boss[tmpInt], "Taunt@Taunted")){
                     UnitBehaviorRemove(bossFightData.boss[tmpInt], "Taunt@Taunted",1);
