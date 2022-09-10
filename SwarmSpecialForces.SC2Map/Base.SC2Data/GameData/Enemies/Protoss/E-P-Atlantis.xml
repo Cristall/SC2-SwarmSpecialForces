@@ -1823,6 +1823,7 @@
         <BehaviorArray Link="Detector10"/>
         <BehaviorArray Link="Phase2"/>
         <BehaviorArray Link="BossesP1Armor"/>
+        <BehaviorArray Link="ShieldRegenSupress"/>
         <WeaponArray Link="AtlantisCoreWeapon" Turret="MothershipCoreTurret"/>
         <CardLayouts index="0">
             <LayoutButtons Face="Bomber" Type="AbilCmd" AbilCmd="Bomber,Execute" Row="1" Column="0"/>
@@ -1897,6 +1898,7 @@
         <BehaviorArray Link="Phase2Handler"/>
         <BehaviorArray Link="Detector10"/>
         <BehaviorArray Link="BossesP1Armor"/>
+        <BehaviorArray Link="ShieldRegenSupress"/>
         <FogVisibility value="Dimmed"/>
         <Mover value="Fly"/>
         <LifeArmorTip value="Unit/P1Bosses/ArmorTooltip"/>
@@ -1912,10 +1914,6 @@
         <AbilArray index="6" removed="1"/>
         <AbilArray index="7" removed="1"/>
         <AbilArray index="8" removed="1"/>
-        <BehaviorArray index="7" Link="Detector10"/>
-        <BehaviorArray index="8" Link="Phase2"/>
-        <BehaviorArray index="9" removed="1"/>
-        <BehaviorArray index="10" removed="1"/>
         <WeaponArray index="0" Link="Illusion@AtlantisCoreIllusionWeapon" Turret="MothershipCoreTurret"/>
     </CUnit>
     <CUnit id="VoidSummonPrecursor" parent="VoidMine">

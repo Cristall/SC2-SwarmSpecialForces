@@ -2442,6 +2442,7 @@
         <BehaviorArray Link="TrackerProbe"/>
         <BehaviorArray Link="Detector10"/>
         <BehaviorArray Link="BossesP1Armor"/>
+        <BehaviorArray Link="ShieldRegenSupress"/>
         <Mover value="Fly"/>
         <Height value="1"/>
         <LifeArmorTip value="Unit/P1Bosses/ArmorTooltip"/>

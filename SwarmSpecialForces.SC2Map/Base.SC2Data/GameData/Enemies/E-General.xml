@@ -183,6 +183,14 @@
         <TurningRate value="0"/>
         <Sight value="9"/>
     </CUnit>
+    <CBehaviorBuff id="ShieldRegenSupress">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DisableValidatorArray value="CasterLifeNotFull"/>
+        <Modification>
+            <StateFlags index="SuppressShieldsRegen" value="1"/>
+        </Modification>
+    </CBehaviorBuff>
     <CBehaviorBuff id="NoKillReward">
         <InfoFlags index="Hidden" value="1"/>
         <EditorCategories value="AbilityorEffectType:Units"/>

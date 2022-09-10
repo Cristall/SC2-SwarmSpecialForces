@@ -2216,6 +2216,7 @@
         <BehaviorArray Link="Spawning"/>
         <BehaviorArray Link="Detector10"/>
         <BehaviorArray Link="BossesP1Armor"/>
+        <BehaviorArray Link="ShieldRegenSupress"/>
         <WeaponArray Link="TagTeamWeapon"/>
         <CardLayouts index="0">
             <LayoutButtons Face="ZapTrap" Type="AbilCmd" AbilCmd="ZapTrap,Execute" Row="2" Column="1"/>
@@ -2286,6 +2287,7 @@
         <BehaviorArray Link="Spawning"/>
         <BehaviorArray Link="Detector10"/>
         <BehaviorArray Link="BossesP1Armor"/>
+        <BehaviorArray Link="ShieldRegenSupress"/>
         <WeaponArray Link="TagTeamWeapon"/>
         <CardLayouts index="0">
             <LayoutButtons Face="Shout" Type="AbilCmd" AbilCmd="Shout,Execute" Row="2" Column="0"/>

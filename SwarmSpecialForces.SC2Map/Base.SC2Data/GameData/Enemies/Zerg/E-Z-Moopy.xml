@@ -1390,6 +1390,7 @@
         <BehaviorArray Link="ShieldColor@DummyTracker"/>
         <BehaviorArray Link="KingMoopyArmor"/>
         <BehaviorArray Link="Detector10"/>
+        <BehaviorArray Link="ShieldRegenSupress"/>
         <WeaponArray Link="KingMoopyWeapon"/>
         <LifeArmorName value="Unit/LifeArmorName/Moopy"/>
         <AbilArray Link="WavesOfChaos"/>
@@ -1412,6 +1413,7 @@
         <LifeRegenRate value="140"/>
         <ShieldsStart value="60000"/>
         <ShieldsMax value="60000"/>
+        <ShieldRegenRate value="140"/>
     </CUnit>
     <CUnit id="MoopyChampion" parent="GenericEnemyUnit">
         <Race value="Zerg"/>
