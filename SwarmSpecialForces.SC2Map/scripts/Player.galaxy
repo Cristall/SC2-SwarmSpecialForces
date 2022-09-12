@@ -127,6 +127,9 @@ void Player_RemoveActivePlayer (int playerID) {
         tmpUnit = UnitGroupUnitFromEnd(tmpUG, tmpInt);
         if (tmpUnit == null) { break; }
 
+        if(UnitGetType(tmpUnit) == "CyberneticLifeBank"){
+            GameAddChargeUsed("Abil/CyberneticRestore/LifeBank", -1);
+        }
         if( !UnitHasBehavior(tmpUnit, "RespawnEgg@Reviving")){
             UnitKill(tmpUnit);
         }
