@@ -160,7 +160,7 @@
         <EditorCategories value=""/>
         <LaunchLocation Value="CasterUnit"/>
         <ImpactLocation Value="CasterUnit"/>
-        <SearchFilters value="-;Player,Ally,Neutral,Worker"/>
+        <SearchFilters value="-;Player,Ally,Neutral,Worker,RawResource,HarvestableResource,Missile,Item,Dead,Hidden,Invulnerable"/>
         <AreaArray Radius="1" Effect="WatchYourStep@TrapStunSet"/>
         <SearchFlags index="ExtendByUnitRadius" value="1"/>
     </CEffectEnumArea>
