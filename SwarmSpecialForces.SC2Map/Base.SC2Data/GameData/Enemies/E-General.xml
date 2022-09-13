@@ -367,7 +367,7 @@
     </CBehaviorBuff>
     <CBehaviorBuff id="InvulnerableOverSpawnLimit">
         <EditorCategories value="AbilityorEffectType:Units"/>
-        <Duration value="16"/>
+        <Duration value="20.125"/>
         <Modification>
             <StateFlags index="Invulnerable" value="1"/>
         </Modification>
