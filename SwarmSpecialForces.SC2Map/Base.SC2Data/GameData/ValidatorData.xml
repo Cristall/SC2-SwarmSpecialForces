@@ -385,16 +385,6 @@
     <CValidatorUnitType id="ThunderUnitType">
         <Value value="Thunder"/>
     </CValidatorUnitType>
-    <CValidatorUnitCompareBehaviorCount id="OverlordFlyBackHomeNotTransitioning">
-        <ResultFailed value="Error,FlyBackHome/PartTransition"/>
-        <WhichUnit Value="Caster"/>
-        <Behavior value="TerranPartTransitionBuff"/>
-    </CValidatorUnitCompareBehaviorCount>
-    <CValidatorUnitCompareBehaviorCount id="OverlordTerranPartTransitionAllowed">
-        <WhichUnit Value="Caster"/>
-        <Value value="1"/>
-        <Behavior value="TerranPartTransitionBuff"/>
-    </CValidatorUnitCompareBehaviorCount>
     <CValidatorUnitCompareBehaviorCount id="PsiCollectibleNotAlreadyCollecting">
         <ResultFailed value="Error,PsiCollectible/AlreadyCollecting"/>
         <Behavior value="PsiOrbCollectingCountdown"/>

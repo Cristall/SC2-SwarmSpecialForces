@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Catalog>
+    <CEffectSet id="NydusWorm@ThrowImpactSet">
+        <EditorCategories value=""/>
+        <EffectArray value="NydusWorm@ThrowCollisionRemove"/>
+        <EffectArray value="ProtossPartTransitionRemoveBuff"/>
+    </CEffectSet>
     <CEffectSet id="MechaDroneWeaponSet">
         <EditorCategories value=""/>
         <EffectArray value="MechaDroneWeaponDmg"/>
@@ -113,7 +118,7 @@
         <Movers Link="NydusWorm@Throw" IfRangeLTE="500"/>
         <DeathType value="Unknown"/>
         <ImpactLocation Value="TargetPoint"/>
-        <ImpactEffect value="NydusWorm@ThrowCollisionRemove"/>
+        <ImpactEffect value="NydusWorm@ThrowImpactSet"/>
         <LaunchEffect value="NydusWorm@ThrowHideRemove"/>
     </CEffectLaunchMissile>
     <CEffectApplyBehavior id="NydusWorm@DmgResponseInvulnerable">

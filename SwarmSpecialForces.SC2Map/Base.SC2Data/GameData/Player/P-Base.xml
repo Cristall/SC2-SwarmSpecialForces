@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Catalog>
+    <CEffectRemoveBehavior id="ProtossPartTransitionRemoveBuff">
+        <EditorCategories value=""/>
+        <WhichUnit Effect="NydusWorm@ThrowInitial"/>
+        <BehaviorLink value="ProtossPartTransitionBuff"/>
+    </CEffectRemoveBehavior>
     <CEffectApplyBehavior id="CollectibleMoopyHatCollectingApplyCountdown">
         <ValidatorArray index="0" value="CollectibleMoopyHatNotAlreadyCollecting"/>
         <EditorCategories value=""/>
@@ -12,10 +17,6 @@
         <Player Value="Caster"/>
         <Target Value="SourceUnit"/>
     </CEffectIssueOrder>
-    <CEffectSet id="ProtossPartTransitionInitialSet">
-        <EditorCategories value=""/>
-        <TargetLocationType value="Point"/>
-    </CEffectSet>
     <CEffectCancelOrder id="ScientistsStopAttack">
         <EditorCategories value=""/>
         <AbilCmd value="attack,Execute"/>
@@ -129,6 +130,7 @@
         <EditorCategories value=""/>
         <Behavior value="FlyBackHomeBuff"/>
         <ValidatorArray index="0" value="OverlordFlyBackHomeNotTransitioning"/>
+        <ValidatorArray value="OverlordFlyBackHomeNotTransitioningProtoss"/>
     </CEffectApplyBehavior>
     <CEffectApplyBehavior id="FlyBackHomeApplyCastBuff">
         <EditorCategories value=""/>
@@ -372,6 +374,21 @@
         <Flags index="BestUnit" value="0"/>
         <Flags index="Transient" value="1"/>
     </CAbilResearch>
+    <CValidatorUnitCompareBehaviorCount id="OverlordFlyBackHomeNotTransitioningProtoss">
+        <ResultFailed value="Error,FlyBackHome/PartTransition"/>
+        <WhichUnit Value="Caster"/>
+        <Behavior value="ProtossPartTransitionBuff"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorUnitCompareBehaviorCount id="OverlordFlyBackHomeNotTransitioning">
+        <ResultFailed value="Error,FlyBackHome/PartTransition"/>
+        <WhichUnit Value="Caster"/>
+        <Behavior value="TerranPartTransitionBuff"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorUnitCompareBehaviorCount id="OverlordTerranPartTransitionAllowed">
+        <WhichUnit Value="Caster"/>
+        <Value value="1"/>
+        <Behavior value="TerranPartTransitionBuff"/>
+    </CValidatorUnitCompareBehaviorCount>
     <CValidatorUnitCompareBehaviorCount id="CollectibleMoopyHatNotAlreadyCollecting">
         <ResultFailed value="Error,PsiCollectible/AlreadyCollecting"/>
         <Behavior value="CollectibleMoopyHatCollectingCountdown"/>
@@ -1227,6 +1244,13 @@
             <PositiveArmorMultiplier value="0"/>
         </ShieldArmorFormula>
     </CUnit>
+    <CBehaviorBuff id="ProtossPartTransitionBuff">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification>
+            <AbilLinkDisableArray value="FlyBackHome"/>
+        </Modification>
+    </CBehaviorBuff>
     <CBehaviorBuff id="CollectibleMoopyHatCollectingCountdown">
         <InfoFlags index="Hidden" value="1"/>
         <EditorCategories value="AbilityorEffectType:Units"/>
@@ -1569,6 +1593,9 @@
     <CBehaviorBuff id="TerranPartTransitionBuff">
         <InfoFlags index="Hidden" value="1"/>
         <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification>
+            <AbilLinkDisableArray value="FlyBackHome"/>
+        </Modification>
     </CBehaviorBuff>
     <CBehaviorBuff id="LarvaSpawnOnDeath">
         <EditorCategories value="AbilityorEffectType:Units"/>

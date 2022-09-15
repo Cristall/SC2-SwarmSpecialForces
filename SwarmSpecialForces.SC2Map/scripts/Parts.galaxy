@@ -353,6 +353,8 @@ void NydusWorm_Init(){
     TriggerAddEventUnitDamaged(TriggerCreate("NydusWorm_Killed"), UnitRefFromUnit(gv_NydusWorm_Unit), c_unitDamageTypeAny, c_unitDamageFatal, null);
 }
 void NydusWorm_EntranceCreate(){
+    int i;
+    int tmp_player;
     if(nydusWorm_Unit_Entrance != null){
         Debug_ShowMessage("NydusWorm_EntranceCreate: tried to create multiple entrances!");
         return;
@@ -360,6 +362,10 @@ void NydusWorm_EntranceCreate(){
     libNtve_gf_CreateUnitsWithDefaultFacing(1, "NydusWorm@NydusWormEntrance", c_unitCreateIgnoreBirth, gv_BasePlayer, PointFromName("PartProtoss_Boss_Atlantis"));
     nydusWorm_Unit_Entrance = UnitLastCreated();
     TriggerAddEventUnitAbility(TriggerCreate("Part_TransitionToP2_Ability"), null, AbilityCommand("ProtossPartTransition", 0), c_abilEffectStageChannel, false);
+    for (i = 1; i <= PlayerGroupCount(gv_ActivePG); i += 1) {
+        tmp_player = PlayerGroupPlayer(gv_ActivePG, i);
+        UnitBehaviorAdd(gv_PlayerStats[tmp_player].overlord, "ProtossPartTransitionBuff", gv_PlayerStats[tmp_player].overlord, 1);
+    }
 }
 void NydusWorm_Relocate(){
     int tmpInt;
