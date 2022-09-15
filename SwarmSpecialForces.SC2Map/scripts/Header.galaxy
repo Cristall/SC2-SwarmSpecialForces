@@ -49,6 +49,7 @@ void PlayerBoard_UpdatePlayer(int playerID);
 void Hive_Transition();
 bool PartZerg_MoopyDoor_Requirement();
 void Part_PartFinished();
+void HeroAbility_RespawnEgg_RestoreEggCharge();
 
 // debug overrides
 void Debug_Override_FirstPart();
