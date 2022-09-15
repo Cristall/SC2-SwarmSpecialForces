@@ -125,10 +125,22 @@ bool HeroAbility_RespawnEgg_RespawnHandler(bool testConds, bool runActions){
             rallyPoint = UnitGetPosition(egg);
         }
         UnitIssueOrder(hero, OrderTargetingPoint(AbilityCommand("attack",0),rallyPoint),c_orderQueueReplace);
-
+        UnitBehaviorRemove(gv_PlayerStats[eggOwner].heroUnit, "RespawnEgg@EggAvailable", 1);
         UnitKill(egg);
     }
     return true;
+}
+
+void HeroAbility_RespawnEgg_RestoreEggCharge(){
+    int i;
+    int tmpInt;
+
+    for (i = 1; i <= PlayerGroupCount(gv_ActivePG); i += 1) {
+        tmpInt = PlayerGroupPlayer(gv_ActivePG, i);
+        if(UnitGetType(gv_PlayerStats[tmpInt].heroUnit) == gv_Hero_UnitTypes[4]){
+            UnitBehaviorAdd(gv_PlayerStats[tmpInt].heroUnit, "RespawnEgg@EggAvailable", gv_PlayerStats[tmpInt].heroUnit, 1);
+        }
+    }
 }
 
 // taunt

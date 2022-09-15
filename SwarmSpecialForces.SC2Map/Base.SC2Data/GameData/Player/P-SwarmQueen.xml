@@ -188,7 +188,6 @@
         <Effect index="0" value="RespawnEgg@CreateEgg"/>
         <Cost>
             <Vital index="Energy" value="200"/>
-            <Charge TimeUse="-1"/>
             <Cooldown Link="RespawnEgg" TimeStart="4" TimeUse="15"/>
         </Cost>
         <Placeholder value="RespawnEgg@Egg"/>
@@ -259,6 +258,10 @@
         <Compare value="LE"/>
         <Range value="8"/>
     </CValidatorLocationCompareRange>
+    <CRequirement id="RespawnEgg@BossKillReq">
+        <NodeArray index="Use" Link="02921848502"/>
+        <NodeArray index="Show" Link="NotCountBehaviorRespawnEgg@EggAvailableQueuedOrBetterAtUnit"/>
+    </CRequirement>
     <CRequirement id="RespawnEgg@CarryReq">
         <NodeArray index="Show" Link="CountBehaviorRespawnEgg@NoMoreEggsQueuedOrBetterAtUnit"/>
     </CRequirement>
@@ -270,7 +273,7 @@
     </CRequirement>
     <CRequirement id="RespawnEgg@Req">
         <NodeArray index="Use" Link="GTE999272702CountUpgradeRespawnEgg@UnlockCompleteOnly1"/>
-        <NodeArray index="Show" Link="NotCountBehaviorRespawnEgg@NoMoreEggsQueuedOrBetterAtUnit"/>
+        <NodeArray index="Show" Link="AndCountBehaviorRespawnEgg@EggAvailableQueuedOrBetterAtUnitNotCountBehaviorRespawnEgg@NoMoreEggsQueuedOrBetterAtUnit"/>
     </CRequirement>
     <CRequirement id="EnergyTransfer@Channel">
         <NodeArray index="Show" Link="EqCountBehaviorEnergyTransfer@ChannelCompleteOnlyAtUnit1"/>
@@ -313,6 +316,21 @@
     <CButton id="Heal@Heal">
         <Icon value="Assets\Textures\btn-ability-zerg-dehaka-healingaura.dds"/>
     </CButton>
+    <CRequirementConst id="02921848502"/>
+    <CRequirementAnd id="AndCountBehaviorRespawnEgg@EggAvailableQueuedOrBetterAtUnitNotCountBehaviorRespawnEgg@NoMoreEggsQueuedOrBetterAtUnit">
+        <Tooltip value="RequirementNode/Tooltip/##id##"/>
+        <OperandArray value="CountBehaviorRespawnEgg@EggAvailableQueuedOrBetterAtUnit"/>
+        <OperandArray value="NotCountBehaviorRespawnEgg@NoMoreEggsQueuedOrBetterAtUnit"/>
+    </CRequirementAnd>
+    <CRequirementCountBehavior id="CountBehaviorRespawnEgg@EggAvailableQueuedOrBetterAtUnit">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Tooltip value="RequirementNode/Tooltip/##id##"/>
+        <Count Link="RespawnEgg@EggAvailable" State="QueuedOrBetterAtUnit"/>
+    </CRequirementCountBehavior>
+    <CRequirementNot id="NotCountBehaviorRespawnEgg@EggAvailableQueuedOrBetterAtUnit">
+        <Tooltip value="RequirementNode/Tooltip/##id##"/>
+        <OperandArray index="0" value="CountBehaviorRespawnEgg@EggAvailableQueuedOrBetterAtUnit"/>
+    </CRequirementNot>
     <CRequirementCountUpgrade id="CountUpgradeRespawnEgg@UnlockCompleteOnly">
         <Flags index="TechTreeCheat" value="0"/>
         <Count Link="RespawnEgg@Unlock" State="CompleteOnly"/>
@@ -800,6 +818,7 @@
         <BehaviorArray Link="HeroSwarmQueenAttribute"/>
         <BehaviorArray Link="HeroSwarmQueenCreepBonusRegen"/>
         <BehaviorArray Link="HeroSwarmQueenArmor"/>
+        <BehaviorArray Link="RespawnEgg@EggAvailable"/>
         <WeaponArray Link="HeroSwarmQueenWeapon"/>
         <CardLayouts>
             <LayoutButtons Face="Move" Type="AbilCmd" AbilCmd="move,Move" Row="0" Column="0"/>
@@ -812,7 +831,22 @@
             <LayoutButtons Face="EnergyTransfer" Type="AbilCmd" AbilCmd="EnergyTransfer,Execute" Row="2" Column="2"/>
             <LayoutButtons Face="EnergyTransfer@Cancel" Type="AbilCmd" AbilCmd="EnergyTransfer@Stop,Execute" Row="2" Column="2"/>
             <LayoutButtons Face="RespawnEgg" Type="AbilCmd" AbilCmd="RespawnEgg,Execute" Row="2" Column="3"/>
-            <LayoutButtons Face="RespawnEgg" Type="Passive" Requirements="RespawnEgg@DummyReg" Row="2" Column="3"/>
+            <LayoutButtons>
+                <Face value="RespawnEgg"/>
+                <Type value="Passive"/>
+                <Requirements value="RespawnEgg@BossKillReq"/>
+                <ShowInGlossary value="0"/>
+                <Row value="2"/>
+                <Column value="3"/>
+            </LayoutButtons>
+            <LayoutButtons>
+                <Face value="RespawnEgg"/>
+                <Type value="Passive"/>
+                <Requirements value="RespawnEgg@DummyReg"/>
+                <ShowInGlossary value="0"/>
+                <Row value="2"/>
+                <Column value="3"/>
+            </LayoutButtons>
             <LayoutButtons Face="RespawnEgg@CarryEgg" Type="AbilCmd" AbilCmd="RespawnEgg@Carry,Load" Row="1" Column="3"/>
             <LayoutButtons Face="RespawnEgg@DropEgg" Type="AbilCmd" AbilCmd="RespawnEgg@Carry,UnloadAt" Row="1" Column="3"/>
         </CardLayouts>
@@ -840,6 +874,11 @@
         </ShieldArmorFormula>
         <LifeArmorTip value="Unit/SwarmQueen/ArmorTooltip"/>
     </CUnit>
+    <CBehaviorBuff id="RespawnEgg@EggAvailable">
+        <BehaviorFlags index="Permanent" value="1"/>
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+    </CBehaviorBuff>
     <CBehaviorBuff id="HeroSwarmQueenArmor" parent="ArmorBase">
         <Name value="Behavior/Name/HeroSwarmQueenArmor"/>
         <DamageResponse>

@@ -195,7 +195,7 @@ bool Enemy_BossFight_Handler (bool testConds, bool runActions){
             }
         }
         if(!tmpFlag){
-            return true;
+            break;
         }
 
         //check if update flag has been raised
@@ -335,7 +335,7 @@ bool Enemy_BossFight_Handler (bool testConds, bool runActions){
             if(bossFightData.ability[abilIndex].charges > 0){ bossFightData.ability[abilIndex].charges -= 1; }
         }
     }
-
+    HeroAbility_RespawnEgg_RestoreEggCharge();
     return true;
 }
 

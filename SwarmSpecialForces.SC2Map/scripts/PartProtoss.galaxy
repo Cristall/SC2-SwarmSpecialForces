@@ -1014,6 +1014,7 @@ bool PartProtoss_Madness_Dies (bool testConds, bool runActions){
     PartProtoss_Madness_ClearArena();
 
     PartProtoss_AreaMix_First_Opener();
+    HeroAbility_RespawnEgg_RestoreEggCharge();  //madness does not use boss handler (yet)
     return true;
 }
 
