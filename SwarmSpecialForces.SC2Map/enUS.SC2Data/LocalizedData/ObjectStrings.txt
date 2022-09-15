@@ -4629,7 +4629,6 @@ Validator/Name/HeroLevel=HeroLevelGreaterThan1
 Validator/Name/HighTemplarCrystalwingTalon=HighTemplarCrystalwingTalon
 Validator/Name/HiveAlive=Hive Alive
 Validator/Name/Illusion@AllIllusionsDead=All Illusions Dead
-Validator/Name/Infection@CasterControllerOn=Caster Controller On
 Validator/Name/Infection@NotInfected=Not Infected
 Validator/Name/IsBaseOverlord=Is Base Overlord
 Validator/Name/KillStreak@Req=Req

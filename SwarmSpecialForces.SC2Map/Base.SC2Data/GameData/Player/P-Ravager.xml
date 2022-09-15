@@ -61,6 +61,8 @@
             <AccumulatorArray value="AbsorbExplosion@DmgResponse"/>
         </Amount>
         <SourceKey value="AbsorbExplosion"/>
+        <ValidateMax value="100000"/>
+        <EffectFailure value="AbsorbExplosion@DmgReponseRemove"/>
     </CEffectUserData>
     <CEffectEnumArea id="Headbutt@Search">
         <EditorCategories value=""/>
