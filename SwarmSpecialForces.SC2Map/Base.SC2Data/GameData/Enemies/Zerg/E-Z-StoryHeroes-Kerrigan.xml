@@ -119,8 +119,7 @@
         <EditorCategories value=""/>
         <PeriodicEffectArray value="Infection@InitialAreaSearch"/>
         <PeriodicPeriodArray value="0.25"/>
-        <Flags index="PersistUntilDestroyed" value="1"/>
-        <PeriodicValidator value="Infection@CasterControllerOn"/>
+        <PeriodCount value="60"/>
     </CEffectCreatePersistent>
     <CEffectEnumArea id="Infection@InitialAreaSearch">
         <EditorCategories value=""/>
@@ -350,11 +349,6 @@
         <BehaviorLink value="RoyalConstruction@Tracking"/>
         <TrackedUnitFilters value="-;Dead"/>
     </CValidatorCompareTrackedUnitsCount>
-    <CValidatorUnitCompareBehaviorCount id="Infection@CasterControllerOn">
-        <WhichUnit Value="Caster"/>
-        <Value value="1"/>
-        <Behavior value="Infection@CasterController"/>
-    </CValidatorUnitCompareBehaviorCount>
     <CValidatorUnitCompareBehaviorCount id="WatchYourStep@TrapAllowed">
         <WhichUnit Value="Caster"/>
         <Value value="1"/>
