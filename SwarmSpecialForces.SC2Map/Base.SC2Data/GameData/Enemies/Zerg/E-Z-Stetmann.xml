@@ -1047,7 +1047,7 @@
         <Operation value="Minimum"/>
     </CAccumulatorArithmetic>
     <CAccumulatorVitals id="Scrap@DamageFactor">
-        <Ratio value="0.01"/>
+        <Ratio value="0.005"/>
         <VitalType value="Energy"/>
         <ModificationType value="PerUnit"/>
     </CAccumulatorVitals>
