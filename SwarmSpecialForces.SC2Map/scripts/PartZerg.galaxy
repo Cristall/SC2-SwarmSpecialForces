@@ -1182,8 +1182,8 @@ void PartZerg_Stetmann_Init(structref<BossFightData> data){
     data.ability[1].minAmountTargets = 2;
     data.ability[1].bossIndex = c_BossFightIndex_Stetmann;
     data.ability[1].allowedBossStates = c_BossFightState_Alive | c_BossFightState_Deactivated;
-    data.ability[1].targetFilter = UnitFilter(0,0,0,(1 << (c_targetFilterInvulnerable - 32)));
-    data.ability[1].targetFilterController = c_BossFightAbilAllianceTarget_Enemy;
+    data.ability[1].targetFilter = UnitFilter(0,0,0,(1 << (c_targetFilterInvulnerable - 32)) | (1 << (c_targetFilterSummoned - 32)));
+    data.ability[1].targetFilterController = c_BossFightAbilAllianceTarget_Player;
     data.ability[1].requiredBossAbilityLevel = 0;
     data.ability[1].castTime = 2.5;
 

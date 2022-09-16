@@ -1386,20 +1386,8 @@
         <Response value="Nothing"/>
         <Attributes index="Mechanical" value="1"/>
         <Attributes index="Hover" value="1"/>
-        <LifeStart value="7500"/>
-        <LifeMax value="7500"/>
-        <LifeArmorFormula>
-            <NegativeArmorMultiplier value="-1"/>
-            <NegativeDamageBase value="1"/>
-            <NegativeDamageUnscaled value="1"/>
-            <PositiveArmorMultiplier value="1"/>
-        </LifeArmorFormula>
-        <ShieldArmorFormula>
-            <NegativeArmorMultiplier value="-1"/>
-            <NegativeDamageBase value="1"/>
-            <NegativeDamageUnscaled value="1"/>
-            <PositiveArmorMultiplier value="1"/>
-        </ShieldArmorFormula>
+        <LifeStart value="12500"/>
+        <LifeMax value="12500"/>
         <Speed value="0"/>
         <Acceleration value="0"/>
         <Sight value="0"/>
@@ -1609,6 +1597,7 @@
     <CBehaviorBuff id="Stetellite@Buff">
         <EditorCategories value="AbilityorEffectType:Units"/>
         <Duration value="0.2"/>
+        <Modification AttackSpeedMultiplier="1.25"/>
     </CBehaviorBuff>
     <CBehaviorBuff id="Stetellite@BuffController">
         <EditorCategories value="AbilityorEffectType:Units"/>
