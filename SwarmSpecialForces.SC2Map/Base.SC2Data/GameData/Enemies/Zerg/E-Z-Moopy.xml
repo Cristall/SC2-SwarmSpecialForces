@@ -918,7 +918,7 @@
         <Model value="Moopy_Reaper"/>
         <PortraitModel value="MoopyPortrait"/>
         <HighlightTooltip value="Unit/Name/Bogus"/>
-        <Scale value="4.000000"/>
+        <Scale value="2.000000"/>
         <Wireframe>
             <Image value="Assets\Wireframes\Moopy_Reaper\wireframe-moopy_reaper.dds"/>
         </Wireframe>
