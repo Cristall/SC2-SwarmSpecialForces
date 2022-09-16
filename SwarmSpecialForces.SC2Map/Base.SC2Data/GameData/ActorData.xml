@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Catalog>
+    <CActorShieldImpact default="1">
+        <MaxCountMedium value="4"/>
+        <MaxCountLarge value="4"/>
+    </CActorShieldImpact>
     <CActorSplat default="1" id="GenericImpactSplat">
         <VisibleTo index="All" value="1"/>
         <EditorCategories value=""/>
