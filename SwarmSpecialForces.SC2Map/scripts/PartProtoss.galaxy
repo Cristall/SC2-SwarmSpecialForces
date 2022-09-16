@@ -676,7 +676,7 @@ void PartProtoss_Atlantis_Update_Phase2(structref<BossFightData> data){
     data.ability[4].abil = "Illusion";
     data.ability[4].targetingType = c_BossFightAbilTargetType_None;
     data.ability[4].globalCooldown = 34.5;
-    data.ability[4].selfCooldown = 34.5;
+    data.ability[4].selfCooldown = 75;
     data.ability[4].charges = -1;
     data.ability[4].minAmountTargets = 1;
     data.ability[4].allowedBossStates = c_BossFightState_Alive;
