@@ -248,7 +248,7 @@
     <CEffectEnumArea id="Scrap@SearchForScrap">
         <EditorCategories value=""/>
         <SearchFilters value="Worker;Self,Ally,Neutral,Enemy,Missile,Item,Dead,Hidden"/>
-        <AreaArray Radius="7" Effect="Scrap@SearchForScrapIssueTransfer"/>
+        <AreaArray Radius="7.5" Effect="Scrap@SearchForScrapIssueTransfer"/>
     </CEffectEnumArea>
     <CEffectIssueOrder id="Scrap@SearchForScrapIssueTransfer">
         <ValidatorArray value="Scrap@TargetIsScrap"/>
@@ -914,7 +914,7 @@
         <EditorCategories value=""/>
         <Icon value="Assets\Textures\btn-ability-stetmann-battlecarrierlordmechayamatocannon.dds"/>
         <DisplayEffect value="GaryWeaponDmg"/>
-        <Range value="6"/>
+        <Range value="5.5"/>
         <Effect value="GaryWeaponLM"/>
         <DamagePoint value="0"/>
         <TargetFilters value="Visible;Self,Worker,Missile,Item,Dead,Hidden,Invulnerable"/>
