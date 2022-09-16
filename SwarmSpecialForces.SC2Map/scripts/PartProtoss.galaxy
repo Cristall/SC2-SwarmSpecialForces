@@ -621,7 +621,7 @@ void PartProtoss_Atlantis_Init(structref<BossFightData> data){
     data.ability[0].charges = -1;
     data.ability[0].minAmountTargets = 1;
     data.ability[0].allowedBossStates = c_BossFightState_Alive;
-    data.ability[0].targetFilter = UnitFilter(0,0,0,(1 << (c_targetFilterInvulnerable - 32)) | (1 << (c_targetFilterSummoned - 32)));
+    data.ability[0].targetFilter = UnitFilter(0,0,0,(1 << (c_targetFilterInvulnerable - 32)) | (1 << (c_targetFilterSummoned - 32)) | (1 << (c_targetFilterStasis - 32)));
     data.ability[0].targetFilterController = c_BossFightAbilAllianceTarget_Player;
     data.ability[0].requiredBossAbilityLevel = 0;
 
@@ -632,7 +632,7 @@ void PartProtoss_Atlantis_Init(structref<BossFightData> data){
     data.ability[1].charges = -1;
     data.ability[1].minAmountTargets = 1;
     data.ability[1].allowedBossStates = c_BossFightState_Alive;
-    data.ability[1].targetFilter = UnitFilter(0,0,0,(1 << (c_targetFilterInvulnerable - 32)) | (1 << (c_targetFilterSummoned - 32)));
+    data.ability[1].targetFilter = UnitFilter(0,0,0,(1 << (c_targetFilterInvulnerable - 32)) | (1 << (c_targetFilterSummoned - 32)) | (1 << (c_targetFilterStasis - 32)));
     data.ability[1].targetFilterController = c_BossFightAbilAllianceTarget_Player;
     data.ability[1].requiredBossAbilityLevel = 2;
 
@@ -643,7 +643,7 @@ void PartProtoss_Atlantis_Init(structref<BossFightData> data){
     data.ability[2].charges = -1;
     data.ability[2].minAmountTargets = 1;
     data.ability[2].allowedBossStates = c_BossFightState_Alive;
-    data.ability[2].targetFilter = UnitFilter(0,0,0,(1 << (c_targetFilterInvulnerable - 32)) | (1 << (c_targetFilterSummoned - 32)));
+    data.ability[2].targetFilter = UnitFilter(0,0,0,(1 << (c_targetFilterInvulnerable - 32)) | (1 << (c_targetFilterSummoned - 32)) | (1 << (c_targetFilterStasis - 32)));
     data.ability[2].targetFilterController = c_BossFightAbilAllianceTarget_Player;
     data.ability[2].requiredBossAbilityLevel = 2;
 
@@ -654,7 +654,7 @@ void PartProtoss_Atlantis_Init(structref<BossFightData> data){
     data.ability[3].charges = -1;
     data.ability[3].minAmountTargets = 1;
     data.ability[3].allowedBossStates = c_BossFightState_Alive;
-    data.ability[3].targetFilter = UnitFilter(0,0,0,(1 << (c_targetFilterInvulnerable - 32)) | (1 << (c_targetFilterSummoned - 32)));
+    data.ability[3].targetFilter = UnitFilter(0,0,0,(1 << (c_targetFilterInvulnerable - 32)) | (1 << (c_targetFilterSummoned - 32)) | (1 << (c_targetFilterStasis - 32)));
     data.ability[3].targetFilterController = c_BossFightAbilAllianceTarget_Player;
     data.ability[3].requiredBossAbilityLevel = 3;
     
@@ -680,7 +680,7 @@ void PartProtoss_Atlantis_Update_Phase2(structref<BossFightData> data){
     data.ability[4].charges = -1;
     data.ability[4].minAmountTargets = 1;
     data.ability[4].allowedBossStates = c_BossFightState_Alive;
-    data.ability[4].targetFilter = UnitFilter(0,0,0,(1 << (c_targetFilterInvulnerable - 32)) | (1 << (c_targetFilterSummoned - 32)));
+    data.ability[4].targetFilter = UnitFilter(0,0,0,(1 << (c_targetFilterInvulnerable - 32)) | (1 << (c_targetFilterSummoned - 32)) | (1 << (c_targetFilterStasis - 32)));
     data.ability[4].targetFilterController = c_BossFightAbilAllianceTarget_Player;
     data.ability[4].requiredBossAbilityLevel = 3;
 
