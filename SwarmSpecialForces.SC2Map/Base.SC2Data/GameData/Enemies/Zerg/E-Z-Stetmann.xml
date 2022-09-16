@@ -32,6 +32,7 @@
     </CEffectSet>
     <CEffectCreatePersistent id="Swap@TriggerHookup">
         <EditorCategories value=""/>
+        <ValidatorArray value="CasterNotDead"/>
     </CEffectCreatePersistent>
     <CEffectApplyBehavior id="Swap@AlreadyCastingNoWeapons" parent="AlreadyCastingNoWeapons"/>
     <CEffectDamage id="SpinForWin@ImpactDamage">
