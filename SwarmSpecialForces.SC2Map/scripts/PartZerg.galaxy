@@ -818,6 +818,7 @@ bool PartZerg_Cybermind_UnstableTeleportTrigger(bool testConds, bool runActions)
     }
     if(regionID == 6){
         Debug_ShowMessage("PartZerg_Cybermind_UnstableTeleportTrigger: Error region loop failed");
+        return true;
     }
     if(regionID > 2){
         regionID -= 3;
@@ -983,8 +984,12 @@ void PartZerg_Cybermind_Init(structref<BossFightData> data){
     data.amountAbility = 4;
 }
 
+static int partZerg_Stetmann_SummonVitalCounter;
+static bool partZerg_Stetmann_SummonTriggerActive;
+static trigger partZerg_Stetmann_SummonTrigger;
+
 int PartZerg_Stetmann_SummonMinionsCount(){
-    return 3;
+    return FixedToInt(Ceiling(3 * gv_Difficulty_SpawnMult));
 }
 void PartZerg_Stetmann_CreateCannons(){
     int i;
@@ -1014,8 +1019,8 @@ void PartZerg_Stetmann_SummonMinionsInit(){
         currentPen = PointFromName("PartZerg_Boss_Stetmann_Pen" + IntToString(i));
         partZerg_Stetmann_ZergPens[i] = UnitGroupUnit(UnitGroup("StetmannSummons@Pen", gv_EnemyPlayer, RegionCircle(currentPen, 1), null, 1), 1);
     }
-
-    TriggerAddEventPlayerEffectUsed(TriggerCreate("PartZerg_Stetmann_SummonMinionsAbility"), c_playerAny, "StetmannSummons@InitialSet");
+    partZerg_Stetmann_SummonTrigger = TriggerCreate("PartZerg_Stetmann_SummonMinionsAbility");
+    TriggerExecute(partZerg_Stetmann_SummonTrigger, false, false);
 }
 bool PartZerg_Stetmann_SummonMinionsAbility(bool testConds, bool runActions){
     int i;
@@ -1024,6 +1029,8 @@ bool PartZerg_Stetmann_SummonMinionsAbility(bool testConds, bool runActions){
     unit tmp_unit;
     unitgroup tmp_ug;
 
+    partZerg_Stetmann_SummonTriggerActive = true;
+    partZerg_Stetmann_SummonVitalCounter += 1;
     for (i = 0; i < partZerg_Stetmann_ZergPensCount; i += 1) {
         UnitBehaviorAdd(partZerg_Stetmann_ZergPens[i], "StetmannSummons@PenOpen", partZerg_Stetmann_ZergPens[i], 1);
     }
@@ -1046,7 +1053,7 @@ bool PartZerg_Stetmann_SummonMinionsAbility(bool testConds, bool runActions){
     for (i = 0; i < 3; i += 1) {
         UnitBehaviorRemove(partZerg_Stetmann_ZergPens[i], "StetmannSummons@PenOpen", 1);
     }
-
+    partZerg_Stetmann_SummonTriggerActive = false;
     return true;
 }
 
@@ -1068,9 +1075,9 @@ void PartZerg_Stetmann_ScrapSummon(){
     unitTypes[1] = "StetmannSummons@Railgun";
     unitTypes[2] = "MechaUltralisk";
     unitTypes[3] = "MechaRoach";
-    unitTypesCost[0] = 7;
-    unitTypesCost[1] = 3;
-    unitTypesCost[2] = 2;
+    unitTypesCost[0] = 10;
+    unitTypesCost[1] = 5;
+    unitTypesCost[2] = 3;
     unitTypesCost[3] = 1;
 
     while (remainingScrap > 0){
@@ -1180,21 +1187,34 @@ void PartZerg_Stetmann_Init(structref<BossFightData> data){
     data.ability[1].requiredBossAbilityLevel = 0;
     data.ability[1].castTime = 2.5;
 
-    data.ability[2].abil = "StetmannSummons";
-    data.ability[2].targetingType = c_BossFightAbilTargetType_None;
+    // data.ability[2].abil = "StetmannSummons";
+    // data.ability[2].targetingType = c_BossFightAbilTargetType_None;
+    // data.ability[2].globalCooldown = 15;
+    // data.ability[2].selfCooldown = 30;
+    // data.ability[2].charges = -1;
+    // data.ability[2].minAmountTargets = 1;
+    // data.ability[2].bossIndex = c_BossFightIndex_Stetmann;
+    // data.ability[2].allowedBossStates = c_BossFightState_Alive | c_BossFightState_Deactivated;
+    // data.ability[2].targetFilter = UnitFilter(0,0,0,(1 << (c_targetFilterInvulnerable - 32)) | (1 << (c_targetFilterSummoned - 32)));
+    // data.ability[2].targetFilterController = c_BossFightAbilAllianceTarget_Player;
+    // data.ability[2].requiredBossAbilityLevel = 0;
+    // data.ability[2].castTime = 2.5;
+
+    data.ability[2].abil = "Swap";
+    data.ability[2].targetingType = c_BossFightAbilTargetType_Point;
     data.ability[2].globalCooldown = 15;
     data.ability[2].selfCooldown = 30;
     data.ability[2].charges = -1;
     data.ability[2].minAmountTargets = 1;
-    data.ability[2].bossIndex = c_BossFightIndex_Stetmann;
+    data.ability[2].bossIndex = c_BossFightIndex_Gary;
     data.ability[2].allowedBossStates = c_BossFightState_Alive | c_BossFightState_Deactivated;
     data.ability[2].targetFilter = UnitFilter(0,0,0,(1 << (c_targetFilterInvulnerable - 32)) | (1 << (c_targetFilterSummoned - 32)));
     data.ability[2].targetFilterController = c_BossFightAbilAllianceTarget_Player;
     data.ability[2].requiredBossAbilityLevel = 0;
-    data.ability[2].castTime = 2.5;
+    data.ability[2].castTime = 3.5;
 
-    data.ability[3].abil = "Swap";
-    data.ability[3].targetingType = c_BossFightAbilTargetType_Point;
+    data.ability[3].abil = "SpinForWin";
+    data.ability[3].targetingType = c_BossFightAbilTargetType_None;
     data.ability[3].globalCooldown = 15;
     data.ability[3].selfCooldown = 30;
     data.ability[3].charges = -1;
@@ -1204,27 +1224,28 @@ void PartZerg_Stetmann_Init(structref<BossFightData> data){
     data.ability[3].targetFilter = UnitFilter(0,0,0,(1 << (c_targetFilterInvulnerable - 32)) | (1 << (c_targetFilterSummoned - 32)));
     data.ability[3].targetFilterController = c_BossFightAbilAllianceTarget_Player;
     data.ability[3].requiredBossAbilityLevel = 0;
-    data.ability[3].castTime = 3.5;
+    data.ability[3].castTime = 10.5;
 
-    data.ability[4].abil = "SpinForWin";
-    data.ability[4].targetingType = c_BossFightAbilTargetType_None;
-    data.ability[4].globalCooldown = 15;
-    data.ability[4].selfCooldown = 30;
-    data.ability[4].charges = -1;
-    data.ability[4].minAmountTargets = 1;
-    data.ability[4].bossIndex = c_BossFightIndex_Gary;
-    data.ability[4].allowedBossStates = c_BossFightState_Alive | c_BossFightState_Deactivated;
-    data.ability[4].targetFilter = UnitFilter(0,0,0,(1 << (c_targetFilterInvulnerable - 32)) | (1 << (c_targetFilterSummoned - 32)));
-    data.ability[4].targetFilterController = c_BossFightAbilAllianceTarget_Player;
-    data.ability[4].requiredBossAbilityLevel = 0;
-    data.ability[4].castTime = 10.5;
-
-    data.amountAbility = 5;
+    data.amountAbility = 4;
 }
 void PartZerg_Stetmann_Addition(structref<BossFightData> data){
-    //this function is called by the boss fight handler trigger. all data stored must be in the structref data or in globals. (best use static)
-    if (partZerg_Stetmann_PhaseChange){
+    fixed garyLifeLost;
+    if(UnitIsAlive(gv_Bosses[c_Bosses_ZGary])){
+        // check garya vitals for next summon
+        garyLifeLost = 100-UnitGetPropertyFixed(gv_Bosses[c_Bosses_ZGary], c_unitPropLifePercent, true);
+        if(!partZerg_Stetmann_SummonTriggerActive && garyLifeLost > partZerg_Stetmann_SummonVitalCounter * 5){
+            TriggerExecute(partZerg_Stetmann_SummonTrigger, false, false);
+        }
+    }
+    else{
+        // check stetmanns vitals for next summon
+        garyLifeLost = 100-UnitGetPropertyFixed(gv_Bosses[c_Bosses_ZGary], c_unitPropLifePercent, true);
+        if(!partZerg_Stetmann_SummonTriggerActive && garyLifeLost > (partZerg_Stetmann_SummonVitalCounter - 20) * 10){
+            TriggerExecute(partZerg_Stetmann_SummonTrigger, false, false);
+        }
+    }
 
+    if (partZerg_Stetmann_PhaseChange){
         if((data.bossState[c_BossFightIndex_Stetmann] & c_BossFightState_Casting) == 0){
             partZerg_Stetmann_PhaseChange = false;
 
