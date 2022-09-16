@@ -806,7 +806,8 @@ bool PartZerg_Cybermind_UnstableTeleportTrigger(bool testConds, bool runActions)
     if(!PlayerGroupHasPlayer(gv_ActivePG, UnitGetOwner(tpUnit))
         || UnitTypeTestFlag(UnitGetType(tpUnit), c_unitFlagMissile)
         || UnitHasBehavior2(tpUnit, "UnstableTeleport@RecentlyTeleported")
-        || UnitHasBehavior2(tpUnit, "FakeMissileIdentifier")){
+        || UnitHasBehavior2(tpUnit, "FakeMissileIdentifier")
+        || UnitTestState(tpUnit, c_unitStateHidden)){
         return false;
     }
 
