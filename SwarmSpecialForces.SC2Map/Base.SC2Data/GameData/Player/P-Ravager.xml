@@ -45,7 +45,7 @@
     </CEffectSet>
     <CEffectDamage id="AbsorbExplosion@Dmg">
         <EditorCategories value=""/>
-        <Amount value="0.35">
+        <Amount value="0.3">
             <AccumulatorArray value="AbsorbExplosion@StoredDmg"/>
             <AccumulatorArray value="HeroSpellDmgMultiplier"/>
         </Amount>
