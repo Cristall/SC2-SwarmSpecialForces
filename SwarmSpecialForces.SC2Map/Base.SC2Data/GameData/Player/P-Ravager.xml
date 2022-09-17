@@ -879,12 +879,12 @@
     </CBehaviorBuff>
     <CBehaviorBuff id="Headbutt@Slow">
         <EditorCategories value="AbilityorEffectType:Units"/>
-        <Duration value="6"/>
+        <Duration value="4"/>
         <Modification MoveSpeedMultiplier="0.5" AttackSpeedMultiplier="0.75"/>
     </CBehaviorBuff>
     <CBehaviorBuff id="Headbutt@Stun">
         <EditorCategories value="AbilityorEffectType:Units"/>
-        <Duration value="8"/>
+        <Duration value="6"/>
         <Modification>
             <StateFlags index="Stun" value="1"/>
         </Modification>
