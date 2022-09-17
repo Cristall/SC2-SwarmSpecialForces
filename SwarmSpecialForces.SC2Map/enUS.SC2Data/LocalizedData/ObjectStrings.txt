@@ -3911,7 +3911,6 @@ Requirement/Name/TheySeeMeRolling@Req=Req
 Requirement/Name/TutorialNotPaused=Tutorial Not Paused
 Requirement/Name/UltimateBeing@Req=Req
 RequirementNode/Name/02921848502=0{Requires a new charge from a successful boss fight.}
-RequirementNode/Name/03358450278=0{Only one egg allowed at a time.}
 RequirementNode/Name/20=20
 RequirementNode/Name/25=25
 RequirementNode/Name/3=3
@@ -3924,10 +3923,12 @@ RequirementNode/Name/AndEq281638821CountUpgradeAtkSpdUpgradeQueuedOnly0Eq4037611
 RequirementNode/Name/AndEq281638821CountUpgradeDmgUpgradeQueuedOnly0Eq4037611437CountBehaviorTutorialNotPausedCompleteOnlyAtUnit0=CountUpgrade(DmgUpgrade,QueuedOnly) == {No queue allowed.}0 && CountBehavior(TutorialNotPaused,CompleteOnlyAtUnit) == {Game not paused.}0
 RequirementNode/Name/AndEq281638821CountUpgradeRegenerationUpgradeQueuedOnly0Eq4037611437CountBehaviorTutorialNotPausedCompleteOnlyAtUnit0=CountUpgrade(RegenerationUpgrade,QueuedOnly) == {No queue allowed.}0 && CountBehavior(TutorialNotPaused,CompleteOnlyAtUnit) == {Game not paused.}0
 RequirementNode/Name/AndEq281638821CountUpgradeSplashRangeUpgradeQueuedOnly0Eq4037611437CountBehaviorTutorialNotPausedCompleteOnlyAtUnit0=CountUpgrade(SplashRangeUpgrade,QueuedOnly) == {No queue allowed.}0 && CountBehavior(TutorialNotPaused,CompleteOnlyAtUnit) == {Game not paused.}0
+RequirementNode/Name/AndNot3358450278CountBehaviorRespawnEgg@NoMoreEggsQueuedOrBetterAtUnitCountBehaviorRespawnEgg@EggAvailableQueuedOrBetterAtUnit2921848502=!{Only one egg allowed at a time.}CountBehavior(RespawnEgg@NoMoreEggs,QueuedOrBetterAtUnit) && CountBehavior(RespawnEgg@EggAvailable,QueuedOrBetterAtUnit){Requires a new charge from a successful boss fight.}
 RequirementNode/Name/CountBehaviorBaseOverlordDmgSlowCompleteOnlyAtUnit=CountBehavior(BaseOverlordDmgSlow,CompleteOnlyAtUnit)
 RequirementNode/Name/CountBehaviorCorrosiveBurst@DisableCorrosiveSpikesQueuedOrBetterAtUnit=CountBehavior(CorrosiveBurst@DisableCorrosiveSpikes,QueuedOrBetterAtUnit)
 RequirementNode/Name/CountBehaviorEnergyTransfer@ChannelCompleteOnlyAtUnit=CountBehavior(EnergyTransfer@Channel,CompleteOnlyAtUnit)
 RequirementNode/Name/CountBehaviorRespawnEgg@EggAvailableQueuedOrBetterAtUnit=CountBehavior(RespawnEgg@EggAvailable,QueuedOrBetterAtUnit)
+RequirementNode/Name/CountBehaviorRespawnEgg@EggAvailableQueuedOrBetterAtUnit2921848502=CountBehavior(RespawnEgg@EggAvailable,QueuedOrBetterAtUnit){Requires a new charge from a successful boss fight.}
 RequirementNode/Name/CountBehaviorRespawnEgg@NoMoreEggsQueuedOrBetterAtUnit=CountBehavior(RespawnEgg@NoMoreEggs,QueuedOrBetterAtUnit)
 RequirementNode/Name/CountBehaviorRespawnEgg@RevivingQueuedOrBetterAtUnit3227781120=CountBehavior(RespawnEgg@Reviving,QueuedOrBetterAtUnit){Must be reviving}
 RequirementNode/Name/CountBehaviorTerranPartTransitionBuffCompleteOnlyAtUnit=CountBehavior(TerranPartTransitionBuff,CompleteOnlyAtUnit)
@@ -4016,6 +4017,7 @@ RequirementNode/Name/LTCountUpgradeAtkSpdUpgradeCompleteOnly10=CountUpgrade(AtkS
 RequirementNode/Name/LTCountUpgradeDmgUpgradeCompleteOnlyCountUpgradeUnlockDmgArmorCountCompleteOnly=CountUpgrade(DmgUpgrade,CompleteOnly) < CountUpgrade(UnlockDmgArmorCount,CompleteOnly)
 RequirementNode/Name/LTCountUpgradeRegenerationUpgradeCompleteOnly10=CountUpgrade(RegenerationUpgrade,CompleteOnly) < 10
 RequirementNode/Name/LTCountUpgradeSplashRangeUpgradeCompleteOnly10=CountUpgrade(SplashRangeUpgrade,CompleteOnly) < 10
+RequirementNode/Name/Not3358450278CountBehaviorRespawnEgg@NoMoreEggsQueuedOrBetterAtUnit=!{Only one egg allowed at a time.}CountBehavior(RespawnEgg@NoMoreEggs,QueuedOrBetterAtUnit)
 RequirementNode/Name/NotCountBehaviorRespawnEgg@EggAvailableQueuedOrBetterAtUnit=!CountBehavior(RespawnEgg@EggAvailable,QueuedOrBetterAtUnit)
 RequirementNode/Name/NotCountBehaviorRespawnEgg@NoMoreEggsQueuedOrBetterAtUnit=!CountBehavior(RespawnEgg@NoMoreEggs,QueuedOrBetterAtUnit)
 Sound/EditorPrefix/PylonWeaponMissileImpact=EnemyP Structure

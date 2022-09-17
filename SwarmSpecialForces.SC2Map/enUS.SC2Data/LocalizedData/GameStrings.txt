@@ -2101,7 +2101,7 @@ MapInfo/Player11/Name=Hostile
 MapInfo/Player12/Name=Player 12
 MapInfo/Player13/Name=Hostile
 RequirementNode/Tooltip/02921848502=Requires a new charge from a successful boss fight.
-RequirementNode/Tooltip/03358450278=Only one egg allowed at a time.
+RequirementNode/Tooltip/CountBehaviorRespawnEgg@EggAvailableQueuedOrBetterAtUnit2921848502=Requires a new charge from a successful boss fight.
 RequirementNode/Tooltip/CountBehaviorRespawnEgg@RevivingQueuedOrBetterAtUnit3227781120=Must be reviving
 RequirementNode/Tooltip/CountUpgradeAbsorbExplosion@UnlockCompleteOnly1015183818=Requires Magic Hats Stage III
 RequirementNode/Tooltip/CountUpgradeCorrosiveBurst@UnlockCompleteOnly3209883371=Unlock by Magic Hats stage V
@@ -2135,6 +2135,7 @@ RequirementNode/Tooltip/GTE884099205CountUpgradeTheySeeMeRolling@UnlockCompleteO
 RequirementNode/Tooltip/GTE888989534CountUpgradeHardenedShell@UnlockCompleteOnly1=Requires Essences Stage III
 RequirementNode/Tooltip/GTE888989534CountUpgradeHeadbutt@UnlockCompleteOnly1=Requires Essences Stage III
 RequirementNode/Tooltip/GTE999272702CountUpgradeRespawnEgg@UnlockCompleteOnly1=Unlock by Magic Hats stage IV
+RequirementNode/Tooltip/Not3358450278CountBehaviorRespawnEgg@NoMoreEggsQueuedOrBetterAtUnit=Only one egg allowed at a time.
 Terrain/Name/Part1=Part 1
 Terrain/Name/Part2=Part 2
 Terrain/Name/Part3=Part 3

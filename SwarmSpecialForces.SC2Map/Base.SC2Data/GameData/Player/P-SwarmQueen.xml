@@ -269,7 +269,7 @@
         <NodeArray index="Use" Link="CountBehaviorRespawnEgg@RevivingQueuedOrBetterAtUnit3227781120"/>
     </CRequirement>
     <CRequirement id="RespawnEgg@DummyReg">
-        <NodeArray index="Use" Link="03358450278"/>
+        <NodeArray index="Use" Link="AndNot3358450278CountBehaviorRespawnEgg@NoMoreEggsQueuedOrBetterAtUnitCountBehaviorRespawnEgg@EggAvailableQueuedOrBetterAtUnit2921848502"/>
     </CRequirement>
     <CRequirement id="RespawnEgg@Req">
         <NodeArray index="Use" Link="GTE999272702CountUpgradeRespawnEgg@UnlockCompleteOnly1"/>
@@ -316,19 +316,28 @@
     <CButton id="Heal@Heal">
         <Icon value="Assets\Textures\btn-ability-zerg-dehaka-healingaura.dds"/>
     </CButton>
+    <CRequirementAnd id="AndNot3358450278CountBehaviorRespawnEgg@NoMoreEggsQueuedOrBetterAtUnitCountBehaviorRespawnEgg@EggAvailableQueuedOrBetterAtUnit2921848502">
+        <Tooltip value="RequirementNode/Tooltip/##id##"/>
+        <OperandArray value="Not3358450278CountBehaviorRespawnEgg@NoMoreEggsQueuedOrBetterAtUnit"/>
+        <OperandArray value="CountBehaviorRespawnEgg@EggAvailableQueuedOrBetterAtUnit2921848502"/>
+    </CRequirementAnd>
+    <CRequirementCountBehavior id="CountBehaviorRespawnEgg@EggAvailableQueuedOrBetterAtUnit2921848502">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="RespawnEgg@EggAvailable" State="QueuedOrBetterAtUnit"/>
+    </CRequirementCountBehavior>
+    <CRequirementNot id="Not3358450278CountBehaviorRespawnEgg@NoMoreEggsQueuedOrBetterAtUnit">
+        <OperandArray index="0" value="CountBehaviorRespawnEgg@NoMoreEggsQueuedOrBetterAtUnit"/>
+    </CRequirementNot>
     <CRequirementConst id="02921848502"/>
     <CRequirementAnd id="AndCountBehaviorRespawnEgg@EggAvailableQueuedOrBetterAtUnitNotCountBehaviorRespawnEgg@NoMoreEggsQueuedOrBetterAtUnit">
-        <Tooltip value="RequirementNode/Tooltip/##id##"/>
         <OperandArray value="CountBehaviorRespawnEgg@EggAvailableQueuedOrBetterAtUnit"/>
         <OperandArray value="NotCountBehaviorRespawnEgg@NoMoreEggsQueuedOrBetterAtUnit"/>
     </CRequirementAnd>
     <CRequirementCountBehavior id="CountBehaviorRespawnEgg@EggAvailableQueuedOrBetterAtUnit">
         <Flags index="TechTreeCheat" value="0"/>
-        <Tooltip value="RequirementNode/Tooltip/##id##"/>
         <Count Link="RespawnEgg@EggAvailable" State="QueuedOrBetterAtUnit"/>
     </CRequirementCountBehavior>
     <CRequirementNot id="NotCountBehaviorRespawnEgg@EggAvailableQueuedOrBetterAtUnit">
-        <Tooltip value="RequirementNode/Tooltip/##id##"/>
         <OperandArray index="0" value="CountBehaviorRespawnEgg@EggAvailableQueuedOrBetterAtUnit"/>
     </CRequirementNot>
     <CRequirementCountUpgrade id="CountUpgradeRespawnEgg@UnlockCompleteOnly">
@@ -343,7 +352,6 @@
         <Flags index="TechTreeCheat" value="0"/>
         <Count Link="RespawnEgg@Reviving" State="QueuedOrBetterAtUnit"/>
     </CRequirementCountBehavior>
-    <CRequirementConst id="03358450278"/>
     <CRequirementCountBehavior id="CountBehaviorRespawnEgg@NoMoreEggsQueuedOrBetterAtUnit">
         <Flags index="TechTreeCheat" value="0"/>
         <Count Link="RespawnEgg@NoMoreEggs" State="QueuedOrBetterAtUnit"/>
@@ -731,6 +739,14 @@
         <FlagArray index="UseLineOfSight" value="1"/>
         <FlagArray index="ArmySelect" value="1"/>
         <PlaneArray index="Ground" value="1"/>
+        <BehaviorArray Link="Difficulty0Hive"/>
+        <BehaviorArray Link="Difficulty1Hive"/>
+        <BehaviorArray Link="Difficulty2Hive"/>
+        <BehaviorArray Link="Difficulty3Hive"/>
+        <BehaviorArray Link="Difficulty4Hive"/>
+        <BehaviorArray Link="Difficulty5Hive"/>
+        <BehaviorArray Link="DifficultyCustomHive"/>
+        <BehaviorArray Link="RespawnEgg@CasterTracker"/>
         <Collide index="Ground" value="1"/>
         <Collide index="ForceField" value="1"/>
         <Collide index="Locust" value="1"/>
@@ -739,8 +755,8 @@
         <Attributes index="Biological" value="1"/>
         <Attributes index="Psionic" value="1"/>
         <Attributes index="Summoned" value="1"/>
-        <LifeStart value="1000"/>
-        <LifeMax value="1000"/>
+        <LifeStart value="2500"/>
+        <LifeMax value="2500"/>
         <LifeArmorFormula>
             <NegativeArmorMultiplier value="0"/>
             <NegativeDamageBase value="0"/>
@@ -767,7 +783,6 @@
             <LayoutButtons Face="RespawnEgg@EggSuicide" Type="AbilCmd" AbilCmd="RespawnEgg@EggSuicide,Execute" Row="0" Column="0"/>
             <LayoutButtons Face="Rally" Type="AbilCmd" AbilCmd="RespawnEgg@Rally,Rally1" Row="1" Column="4"/>
         </CardLayouts>
-        <BehaviorArray Link="RespawnEgg@CasterTracker"/>
         <Sight value="2"/>
         <CargoSize value="1"/>
         <Radius value="0.375"/>
@@ -831,14 +846,6 @@
             <LayoutButtons Face="EnergyTransfer" Type="AbilCmd" AbilCmd="EnergyTransfer,Execute" Row="2" Column="2"/>
             <LayoutButtons Face="EnergyTransfer@Cancel" Type="AbilCmd" AbilCmd="EnergyTransfer@Stop,Execute" Row="2" Column="2"/>
             <LayoutButtons Face="RespawnEgg" Type="AbilCmd" AbilCmd="RespawnEgg,Execute" Row="2" Column="3"/>
-            <LayoutButtons>
-                <Face value="RespawnEgg"/>
-                <Type value="Passive"/>
-                <Requirements value="RespawnEgg@BossKillReq"/>
-                <ShowInGlossary value="0"/>
-                <Row value="2"/>
-                <Column value="3"/>
-            </LayoutButtons>
             <LayoutButtons>
                 <Face value="RespawnEgg"/>
                 <Type value="Passive"/>
