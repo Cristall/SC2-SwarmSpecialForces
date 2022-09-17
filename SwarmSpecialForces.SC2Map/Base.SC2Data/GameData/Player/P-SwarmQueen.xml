@@ -234,6 +234,7 @@
     </CAbilEffectTarget>
     <CValidatorUnitType id="RespawnEgg@Egg">
         <Value value="RespawnEgg@Egg"/>
+        <ResultFailed value="Error,Error/RespawnEgg@Egg"/>
     </CValidatorUnitType>
     <CValidatorUnitCompareBehaviorCount id="RespawnEgg@Reviving">
         <Behavior value="RespawnEgg@Reviving"/>

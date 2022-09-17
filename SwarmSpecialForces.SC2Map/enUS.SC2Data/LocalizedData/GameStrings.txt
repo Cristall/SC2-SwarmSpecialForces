@@ -2076,6 +2076,7 @@ Effect/Name/ZealotTaldarimWeaponPersistent=Zealot Taldarim Weapon Persistent
 Effect/Name/ZealotTalonWeaponDmg=Zealot Talon Weapon Dmg
 Effect/Name/ZealotTalonWeaponPersistent=Zealot Talon Weapon Persistent
 Error/CantCrossCliffsCopy=Cannot attack across cliffs or friendly Structures
+Error/RespawnEgg@Egg=Can only carry an egg.
 Error/ScientestIsNotStunned=Scientists must first be stunned by nearly killing them.
 FlyBackHome/PartTransition=Cannot be used while part transitioning.
 Kinetic/Name/BarrageRotate2=Barrage Rotate Counterclockwise
