@@ -45,6 +45,7 @@
     static bool[gv_MaxAmountPlayers+1] debug_InvulnerableState;
 //
 void Debug_ShowMessage(string input){
+    TriggerDebugOutput(1, StringToText(input), false);
     if(gv_TestingMode){
         UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText(input));
     }
@@ -552,7 +553,7 @@ bool Debug_Kill (bool testConds, bool runActions){
     return true;
 }
 bool Debug_Skip (bool testConds, bool runActions){
-    // heroSelection_Timer = 0;
+    HeroSelection_Finish();
     return true;
 }
 bool Debug_Moopy (bool testConds, bool runActions){
@@ -770,10 +771,89 @@ void Debug_Init(){
     int i;
     int tmp_player;
     trigger tmp_trigger;
+
+    // TriggerDebugOutput (int type, text inText, bool includeGameUI);
+    TriggerDebugSetTypeName (1, StringToText("Script: "));
+    TriggerDebugSetTypeColor (1, Color(1,1,0));
+    TriggerDebugEnableType (1, true);
+    TriggerDebugOutputEnable (true);
+    // TriggerDebugSetTypeFile (1, string file);
+    // TriggerDebugSetTypeFilter (1, c_tdFilterFlagObservers, true);
+
     if(gv_TestingMode){
         for (i = 1; i <= PlayerGroupCount(gv_ActivePG); i += 1) {
             tmp_player = PlayerGroupPlayer(gv_ActivePG, i);
             gv_PlayerStats[tmp_player].lifes = 100;
+            //bunch of achievements for AI players
+            if(false)
+            {
+                Acv_Grind_UnlockAdd(tmp_player, c_AcvIdentifier_MoopyHats, 500);
+                Acv_Grind_UnlockAdd(tmp_player, c_AcvIdentifier_Points, 500);
+                Acv_Grind_UnlockAdd(tmp_player, c_AcvIdentifier_WinsP0, 500);
+                Acv_Grind_UnlockAdd(tmp_player, c_AcvIdentifier_WinsP1, 500);
+                Acv_Grind_UnlockAdd(tmp_player, c_AcvIdentifier_WinsP2, 500);
+                Acv_Split_Unlock(tmp_player, c_AcvIdentifier_BossP_Atlantis, 0);
+                Acv_Split_Unlock(tmp_player, c_AcvIdentifier_BossP_Atlantis, 1);
+                Acv_Split_Unlock(tmp_player, c_AcvIdentifier_BossP_Atlantis, 2);
+                Acv_Split_Unlock(tmp_player, c_AcvIdentifier_BossP_Atlantis, 3);
+                Acv_Split_Unlock(tmp_player, c_AcvIdentifier_BossP_Atlantis, 4);
+                Acv_Split_Unlock(tmp_player, c_AcvIdentifier_BossP_Atlantis, 5);
+                Acv_Split_Unlock(tmp_player, c_AcvIdentifier_BossP_Lightning, 0);
+                Acv_Split_Unlock(tmp_player, c_AcvIdentifier_BossP_Lightning, 1);
+                Acv_Split_Unlock(tmp_player, c_AcvIdentifier_BossP_Lightning, 2);
+                Acv_Split_Unlock(tmp_player, c_AcvIdentifier_BossP_Lightning, 3);
+                Acv_Split_Unlock(tmp_player, c_AcvIdentifier_BossP_Lightning, 4);
+                Acv_Split_Unlock(tmp_player, c_AcvIdentifier_BossP_Lightning, 5);
+                Acv_Split_Unlock(tmp_player, c_AcvIdentifier_BossP_Thunder, 0);
+                Acv_Split_Unlock(tmp_player, c_AcvIdentifier_BossP_Thunder, 1);
+                Acv_Split_Unlock(tmp_player, c_AcvIdentifier_BossP_Thunder, 2);
+                Acv_Split_Unlock(tmp_player, c_AcvIdentifier_BossP_Thunder, 3);
+                Acv_Split_Unlock(tmp_player, c_AcvIdentifier_BossP_Thunder, 4);
+                Acv_Split_Unlock(tmp_player, c_AcvIdentifier_BossP_Thunder, 5);
+                Acv_Split_Unlock(tmp_player, c_AcvIdentifier_BossT_Flamer, 0);
+                Acv_Split_Unlock(tmp_player, c_AcvIdentifier_BossT_Flamer, 1);
+                Acv_Split_Unlock(tmp_player, c_AcvIdentifier_BossT_Flamer, 2);
+                Acv_Split_Unlock(tmp_player, c_AcvIdentifier_BossT_Flamer, 3);
+                Acv_Split_Unlock(tmp_player, c_AcvIdentifier_BossT_Flamer, 4);
+                Acv_Split_Unlock(tmp_player, c_AcvIdentifier_BossT_Flamer, 5);
+                Acv_Split_Unlock(tmp_player, c_AcvIdentifier_BossZ_Kerrigan, 0);
+                Acv_Split_Unlock(tmp_player, c_AcvIdentifier_BossZ_Kerrigan, 1);
+                Acv_Split_Unlock(tmp_player, c_AcvIdentifier_BossZ_Kerrigan, 2);
+                Acv_Split_Unlock(tmp_player, c_AcvIdentifier_BossZ_Kerrigan, 3);
+                Acv_Split_Unlock(tmp_player, c_AcvIdentifier_BossZ_Kerrigan, 4);
+                Acv_Split_Unlock(tmp_player, c_AcvIdentifier_BossZ_Kerrigan, 5);
+                Acv_Split_Unlock(tmp_player, c_AcvIdentifier_BossZ_Moopy, 0);
+                Acv_Split_Unlock(tmp_player, c_AcvIdentifier_BossZ_Moopy, 1);
+                Acv_Split_Unlock(tmp_player, c_AcvIdentifier_BossZ_Moopy, 2);
+                Acv_Split_Unlock(tmp_player, c_AcvIdentifier_BossZ_Moopy, 3);
+                Acv_Split_Unlock(tmp_player, c_AcvIdentifier_BossZ_Moopy, 4);
+                Acv_Split_Unlock(tmp_player, c_AcvIdentifier_BossZ_Moopy, 5);
+                Acv_Split_Unlock(tmp_player, c_AcvIdentifier_BossZ_Stetmann, 0);
+                Acv_Split_Unlock(tmp_player, c_AcvIdentifier_BossZ_Stetmann, 1);
+                Acv_Split_Unlock(tmp_player, c_AcvIdentifier_BossZ_Stetmann, 2);
+                Acv_Split_Unlock(tmp_player, c_AcvIdentifier_BossZ_Stetmann, 3);
+                Acv_Split_Unlock(tmp_player, c_AcvIdentifier_BossZ_Stetmann, 4);
+                Acv_Split_Unlock(tmp_player, c_AcvIdentifier_BossZ_Stetmann, 5);
+                Acv_Split_Unlock(tmp_player, c_AcvIdentifier_BossZ_Artanis, 0);
+                Acv_Split_Unlock(tmp_player, c_AcvIdentifier_BossZ_Artanis, 1);
+                Acv_Split_Unlock(tmp_player, c_AcvIdentifier_BossZ_Artanis, 2);
+                Acv_Split_Unlock(tmp_player, c_AcvIdentifier_BossZ_Artanis, 3);
+                Acv_Split_Unlock(tmp_player, c_AcvIdentifier_BossZ_Artanis, 4);
+                Acv_Split_Unlock(tmp_player, c_AcvIdentifier_BossZ_Artanis, 5);
+                Acv_Split_Unlock(tmp_player, c_AcvIdentifier_BossZ_Gary, 0);
+                Acv_Split_Unlock(tmp_player, c_AcvIdentifier_BossZ_Gary, 1);
+                Acv_Split_Unlock(tmp_player, c_AcvIdentifier_BossZ_Gary, 2);
+                Acv_Split_Unlock(tmp_player, c_AcvIdentifier_BossZ_Gary, 3);
+                Acv_Split_Unlock(tmp_player, c_AcvIdentifier_BossZ_Gary, 4);
+                Acv_Split_Unlock(tmp_player, c_AcvIdentifier_BossZ_Gary, 5);
+                Acv_Split_Unlock(tmp_player, c_AcvIdentifier_BossZ_Raynor, 0);
+                Acv_Split_Unlock(tmp_player, c_AcvIdentifier_BossZ_Raynor, 1);
+                Acv_Split_Unlock(tmp_player, c_AcvIdentifier_BossZ_Raynor, 2);
+                Acv_Split_Unlock(tmp_player, c_AcvIdentifier_BossZ_Raynor, 3);
+                Acv_Split_Unlock(tmp_player, c_AcvIdentifier_BossZ_Raynor, 4);
+                Acv_Split_Unlock(tmp_player, c_AcvIdentifier_BossZ_Raynor, 5);
+                HeroSelection_SelectHero(tmp_player, 4);
+            }
         }
         UIDisplayMessage(PlayerGroupAll(), c_messageAreaChat, StringToText("Started game in testing mode!"));
         Debug_InitFrames();
@@ -806,7 +886,7 @@ void Debug_Init(){
         // TriggerAddEventChatMessage(TriggerCreate("Debug_Test"), c_playerAny, "-test", false);
         // TriggerAddEventChatMessage(TriggerCreate("Debug_Kick"), c_playerAny, "-kick", false);
         // TriggerAddEventChatMessage(TriggerCreate("Debug_Kill"), c_playerAny, "-kill", false);
-        // TriggerAddEventChatMessage(TriggerCreate("Debug_Skip"), c_playerAny, "-skip", false);
+        TriggerAddEventChatMessage(TriggerCreate("Debug_Skip"), c_playerAny, "-skip", false);
         // TriggerAddEventChatMessage(TriggerCreate("Debug_MoopyReset"), c_playerAny, "-moopyreset", false);
         // TriggerAddEventChatMessage(TriggerCreate("Debug_UnstableTp"), c_playerAny, "-unstable", false);
 
@@ -826,6 +906,6 @@ void Debug_Init(){
         // libNtve_gf_SetAllianceOneWay(8, 1, libNtve_ge_AllianceSetting_EnemyWithSharedVision);
         // PlayerSetAlliance(1, c_allianceIdControl, 8, true);
         // PlayerSetAlliance(8, c_allianceIdControl, 1, true);
-        // TriggerAddEventUnitDamaged(TriggerCreate("Debug_PrintDmg"),null, c_unitDamageTypeAny, c_unitDamageEither, "Infection@InfectedDmg");
+        // TriggerAddEventUnitDamaged(TriggerCreate("Debug_PrintDmg"),null, c_unitDamageTypeAny, c_unitDamageEither, "SpinForWin@ImpactDamage");
     }
 }
