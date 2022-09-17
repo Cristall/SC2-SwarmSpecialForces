@@ -10,6 +10,13 @@
         <On Terms="ActorCreation" Send="$Birth PlayForever"/>
         <Model value="TerranAOECursorSplat"/>
     </CActorSplat>
+    <CActorModel id="GenericAttackImpactModelGLStand" parent="ModelAnimationStyleOneShotNoOrphan">
+        <Flags index="SuppressCreationErrors" value="1"/>
+        <Inherits index="Visibility" value="1"/>
+        <Model value="GenericAttackModel"/>
+        <ModelFlags index="AllowHitTest" value="0"/>
+        <ModelFlags index="AutomateGlobalLoops" value="1"/>
+    </CActorModel>
     <CActorDoodad id="MechaNydusNetworkDoodad">
         <EditorCategories value=""/>
         <Model value="NydusNetwork_Mecha"/>

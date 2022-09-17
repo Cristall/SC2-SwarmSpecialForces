@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Catalog>
+    <CEffectSet id="SpinForWin@SearchSet">
+        <EditorCategories value=""/>
+        <EffectArray value="SpinForWin@PullSearch"/>
+        <EffectArray value="SpinForWin@ImpactSearch"/>
+    </CEffectSet>
+    <CEffectEnumArea id="SpinForWin@ImpactSearch">
+        <EditorCategories value=""/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Item,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="7" Effect="SpinForWin@ImpactDamage"/>
+    </CEffectEnumArea>
     <CEffectSet id="StetmannSummons@MrKrabsFinalImpactSet">
         <EditorCategories value=""/>
         <EffectArray value="StetmannSummons@MrKrabsFinalDmg"/>
@@ -48,6 +58,7 @@
     </CEffectSet>
     <CEffectApplyBehavior id="SpinForWin@StunAndSpin">
         <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
     </CEffectApplyBehavior>
     <CEffectApplyBehavior id="SpinForWin@AlreadyCastingNoWeapons" parent="AlreadyCastingNoWeapons">
         <Duration value="10.0625"/>
@@ -425,7 +436,7 @@
         <AmmoUnit value="GaryWeaponMissile"/>
         <ImpactEffect value="GaryWeaponDmg"/>
     </CEffectLaunchMissile>
-    <CEffectEnumArea id="SpinForWin@Search">
+    <CEffectEnumArea id="SpinForWin@PullSearch">
         <EditorCategories value=""/>
         <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Item,Dead,Hidden,Invulnerable"/>
         <AreaArray Radius="10" Effect="SpinForWin@PullTeleportController"/>
@@ -446,7 +457,6 @@
         <PeriodCount value="4"/>
         <PeriodicEffectArray value="SpinForWin@PullTeleportOffset"/>
         <PeriodicPeriodArray value="0.0625"/>
-        <InitialEffect value="SpinForWin@ImpactDamage"/>
     </CEffectCreatePersistent>
     <CEffectCreatePersistent id="SpinForWin@PullTeleportOffset">
         <EditorCategories value=""/>
@@ -488,7 +498,7 @@
     <CAbilEffectTarget id="Pinball">
         <EditorCategories value="AbilityorEffectType:Units"/>
         <Effect index="0" value="Pinball@InitialSet"/>
-        <Range value="40"/>
+        <Range value="50"/>
         <CmdButtonArray index="Execute" DefaultButtonFace="Pinball"/>
     </CAbilEffectTarget>
     <CAbilEffectTarget id="Scrap@SearchGary">
@@ -501,7 +511,7 @@
     <CAbilEffectTarget id="Stetellite">
         <EditorCategories value="AbilityorEffectType:Units"/>
         <Effect index="0" value="Stetellite@InitialSet"/>
-        <Range value="15"/>
+        <Range value="50"/>
         <CmdButtonArray index="Execute" DefaultButtonFace="Stetellite"/>
     </CAbilEffectTarget>
     <CValidatorUnitType id="Pinball@Cannon">
@@ -524,6 +534,13 @@
     </CButton>
     <CButton id="Pinball" parent="EnemyBossAbilityButton"/>
     <CButton id="Stetellite" parent="EnemyBossAbilityButton"/>
+    <CActorAction id="SpinForWin@ImpactAction" parent="GenericAttack" effectAttack="SpinForWin@ImpactDamage">
+        <EditorCategories value=""/>
+        <ImpactSiteOps Ops="SOpAttachOverhead SOpRotationRandomDisc"/>
+        <ImpactMap index="None" Model="SpinForWin@Impact"/>
+        <ImpactModel value="GenericAttackImpactModelGLStand"/>
+        <ShieldFlashType value="None"/>
+    </CActorAction>
     <CActorQuad id="Pinball@Line" parent="GuideVisualQuadDown">
         <VisibleTo index="All" value="1"/>
         <EditorCategories value=""/>
@@ -576,7 +593,7 @@
     </CActorModel>
     <CActorModel id="SpinForWin@Pull" parent="ModelAnimationStyleOneShot">
         <EditorCategories value=""/>
-        <On Terms="Effect.SpinForWin@Search.Start" Send="Create"/>
+        <On Terms="Effect.SpinForWin@PullSearch.Start" Send="Create"/>
         <Scale value="2.400000,2.400000,1.000000"/>
         <HostSiteOps Ops="SOpMoveDownBy1"/>
     </CActorModel>
@@ -796,6 +813,12 @@
         <On Terms="TimerExpired; TimerName Spin; HasStatus Spin" Send="TimerSet 0.001000 Spin"/>
         <On Terms="TimerExpired; TimerName Spin" Send="SetRotationFrom SpinForWin@RotatorDummyModel"/>
     </CActorUnit>
+    <CModel id="SpinForWin@Impact">
+        <Model value="Assets\Effects\Neutral\MomentOfSilence_Coop_Impact_Debuff\MomentOfSilence_Coop_Impact_Debuff.m3"/>
+        <ScaleMax value="3.000000,3.000000,2.000000"/>
+        <ScaleMin value="3.000000,3.000000,2.000000"/>
+        <AnimSpeed value="3.000000"/>
+    </CModel>
     <CModel id="Swap@Splat">
         <Model value="Assets\UI\ProtossCursorEx2\ProtossCursorEx2.m3"/>
     </CModel>
@@ -1077,7 +1100,7 @@
         <DataRecord Entry="Actor,SpinForWin@SiteOpsRotator"/>
         <DataRecord Entry="Actor,SpinForWin@RotatorDummyModel"/>
         <DataRecord Entry="Behavior,SpinForWin@StunAndSpin"/>
-        <DataRecord Entry="Effect,SpinForWin@Search"/>
+        <DataRecord Entry="Effect,SpinForWin@PullSearch"/>
         <DataRecord Entry="Effect,SpinForWin@PullTeleportController"/>
         <DataRecord Entry="Effect,SpinForWin@PullTeleport"/>
         <DataRecord Entry="Effect,SpinForWin@PullTeleportOffset"/>
@@ -1511,7 +1534,7 @@
         <EditorCategories value="AbilityorEffectType:Units"/>
         <Duration value="10.0625"/>
         <Period value="0.25"/>
-        <PeriodicEffect value="SpinForWin@Search"/>
+        <PeriodicEffect value="SpinForWin@SearchSet"/>
         <Modification>
             <StateFlags index="Stun" value="1"/>
         </Modification>

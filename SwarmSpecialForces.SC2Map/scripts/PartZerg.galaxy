@@ -989,7 +989,7 @@ static bool partZerg_Stetmann_SummonTriggerActive;
 static trigger partZerg_Stetmann_SummonTrigger;
 
 int PartZerg_Stetmann_SummonMinionsCount(){
-    return FixedToInt(Ceiling(3 * gv_Difficulty_SpawnMult));
+    return FixedToInt(Ceiling(2.5 * gv_Difficulty_SpawnMult));
 }
 void PartZerg_Stetmann_CreateCannons(){
     int i;
