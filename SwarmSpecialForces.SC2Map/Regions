@@ -403,7 +403,6 @@
     </region>
     <region id="48">
         <name value="PartZerg_Boss_Stetmann_Arena"/>
-        <invisible/>
         <shape type="rect">
             <quad value="203.1672,185.2314,243.167,211.2314"/>
         </shape>
