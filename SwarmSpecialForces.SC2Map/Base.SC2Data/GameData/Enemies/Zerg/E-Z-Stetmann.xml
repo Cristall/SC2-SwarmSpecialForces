@@ -390,7 +390,7 @@
     </CEffectApplyBehavior>
     <CEffectEnumArea id="Stetellite@BuffSearch">
         <EditorCategories value=""/>
-        <AreaArray Radius="5" Effect="Stetellite@Buff"/>
+        <AreaArray Radius="6" Effect="Stetellite@Buff"/>
         <SearchFilters value="-;Neutral,Enemy,Hover,Missile,Item,Dead,Hidden,Invulnerable"/>
     </CEffectEnumArea>
     <CEffectCreateUnit id="Stetellite@CreateUnit">
