@@ -1107,8 +1107,8 @@
     <CMoverMissile id="RainbowMeteors@Meteor">
         <MotionPhases>
             <Driver value="Guidance"/>
-            <Acceleration value="3200"/>
-            <Speed value="3"/>
+            <Acceleration value="2"/>
+            <Speed value="1"/>
             <MaxSpeed value="3"/>
             <Clearance value="0.5"/>
             <ClearanceLookahead value="3"/>
