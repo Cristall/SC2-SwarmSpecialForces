@@ -275,6 +275,9 @@
         </Cost>
         <CmdButtonArray index="Execute" DefaultButtonFace="Taunt@Taunt"/>
     </CAbilEffectInstant>
+    <CValidatorUnitType id="Decoy@Decoy" parent="UnitTypeDefault">
+        <Value value="Decoy"/>
+    </CValidatorUnitType>
     <CValidatorEffectTreeUserData id="AbsorbExplosion@DmgCheck">
         <CheckExistence value="0"/>
         <Compare value="GT"/>

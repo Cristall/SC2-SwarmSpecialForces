@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Catalog>
+    <CEffectSwitch id="MechaOvermindWeaponOverseerIssueOrderSwitch">
+        <EditorCategories value=""/>
+        <CaseArray Validator="Decoy@Decoy" Effect="MechaOvermindWeaponOverseerIssueOrderPoint"/>
+        <CaseDefault value="MechaOvermindWeaponOverseerIssueOrder"/>
+    </CEffectSwitch>
+    <CEffectIssueOrder id="MechaOvermindWeaponOverseerIssueOrderPoint">
+        <EditorCategories value=""/>
+        <Abil value="move"/>
+        <Target Effect="MechaOvermindWeaponOverseerGet" Value="TargetPoint"/>
+    </CEffectIssueOrder>
     <CEffectCreatePersistent id="BuryThem@ClusterOffsets">
         <EditorCategories value=""/>
         <WhichLocation Value="CasterPoint"/>
@@ -323,7 +333,7 @@
     </CEffectIssueOrder>
     <CEffectSet id="MechaOvermindWeaponSet">
         <EditorCategories value=""/>
-        <EffectArray value="MechaOvermindWeaponOverseerIssueOrder"/>
+        <EffectArray value="MechaOvermindWeaponOverseerIssueOrderSwitch"/>
         <EffectArray value="MechaOvermindWeaponOverseerRangeTracking"/>
         <EffectArray value="MechaOvermindWeaponLaunchMissile"/>
     </CEffectSet>
