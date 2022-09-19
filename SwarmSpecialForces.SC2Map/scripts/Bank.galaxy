@@ -563,11 +563,6 @@ void Bank_MigrateTo_v2_00(int playerID){
         int tmpInt3;
         const fixed version = 2.0;
 
-
-        if (!BankVerify(gv_PlayerStats[playerID].bankfile)) {
-            return false;
-        }
-
         //light data
             tmpStr = StarcodeDecryptString(BankValueGetAsString(gv_PlayerStats[playerID].bankfile, "stats", "lightData"), (playerHandle + superDuperSecretString));
             if (!StarcodeValidateString(tmpStr, hashSecurityLevel)) {
@@ -645,11 +640,6 @@ void Bank_MigrateTo_v2_00(int playerID){
         int tmpInt2;
         int tmpInt3;
         const fixed version = 2.01;
-
-
-        if (!BankVerify(gv_PlayerStats[playerID].bankfile)) {
-            return false;
-        }
 
         //light data
             tmpStr = StarcodeDecryptString(BankValueGetAsString(gv_PlayerStats[playerID].bankfile, "stats", "lightData"), (playerHandle + superDuperSecretString));
@@ -741,11 +731,6 @@ void Bank_MigrateTo_v2_00(int playerID){
         int tmpInt2;
         int tmpInt3;
         const fixed version = 2.01;
-
-
-        if (!BankVerify(gv_PlayerStats[playerID].bankfile)) {
-            return false;
-        }
 
         //light data
             tmpStr = StarcodeDecryptString(BankValueGetAsString(gv_PlayerStats[playerID].bankfile, "stats", "lightData"), (playerHandle + superDuperSecretString));
