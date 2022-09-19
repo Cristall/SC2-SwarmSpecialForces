@@ -19,7 +19,7 @@
     <CEffectModifyUnit id="RespawnEgg@CooldownActivate">
         <EditorCategories value=""/>
         <LaunchUnit Value="Target"/>
-        <Cost Abil="RespawnEgg,Execute" CooldownOperation="Set" CooldownTimeUse="45">
+        <Cost Abil="RespawnEgg,Execute" CooldownOperation="Set" CooldownTimeUse="20">
             <Player Value="Caster"/>
         </Cost>
     </CEffectModifyUnit>
@@ -188,7 +188,7 @@
         <Effect index="0" value="RespawnEgg@CreateEgg"/>
         <Cost>
             <Vital index="Energy" value="200"/>
-            <Cooldown Link="RespawnEgg" TimeStart="4" TimeUse="15"/>
+            <Cooldown Link="RespawnEgg" TimeStart="4" TimeUse="20"/>
         </Cost>
         <Placeholder value="RespawnEgg@Egg"/>
         <Range value="0"/>
