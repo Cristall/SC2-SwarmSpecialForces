@@ -513,7 +513,7 @@
     <CEffectCreatePersistent id="PortalTargetDelay">
         <EditorCategories value=""/>
         <WhichLocation Value="TargetUnit"/>
-        <InitialDelay value="1"/>
+        <InitialDelay value="1.125"/>
         <InitialEffect value="PortalTargetPersistent"/>
     </CEffectCreatePersistent>
     <CEffectDamage id="PortalTargetDmg">
@@ -2058,7 +2058,7 @@
         <EditorCategories value="AbilityorEffectType:Units"/>
         <Duration value="0.05"/>
         <Modification Height="10">
-            <HeightTime index="Stop" value="1"/>
+            <HeightTime index="Stop" value="0.75"/>
         </Modification>
     </CBehaviorBuff>
     <CBehaviorBuff id="PortalStartDummyHeightEnd">
