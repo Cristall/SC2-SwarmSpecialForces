@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Catalog>
+    <CEffectApplyBehavior id="Taunt@Taunt">
+        <ValidatorArray index="0" value="Taunt@IsTauntable"/>
+        <EditorCategories value=""/>
+        <Behavior value="Taunt@Taunted"/>
+    </CEffectApplyBehavior>
     <CEffectDamage id="AbsorbExplosion@StoreDamageActorDummy">
         <EditorCategories value=""/>
         <ImpactLocation Value="CasterUnit"/>
@@ -203,11 +208,11 @@
         <EditorCategories value=""/>
         <ImpactLocation Value="CasterUnit"/>
         <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Item,Dead,Hidden"/>
-        <AreaArray Radius="6.5"/>
+        <AreaArray Radius="6.5" Effect="Taunt@Taunt"/>
         <MinCount value="1"/>
-        <MaxCount value="1"/>
         <SearchFlags index="ExtendByUnitRadius" value="1"/>
         <SearchFlags index="OffsetByUnitRadius" value="1"/>
+        <DebugTrace value="1"/>
     </CEffectEnumArea>
     <CAbilEffectInstant id="AbsorbExplosion">
         <EditorCategories value="AbilityorEffectType:Units"/>
@@ -275,9 +280,9 @@
         </Cost>
         <CmdButtonArray index="Execute" DefaultButtonFace="Taunt@Taunt"/>
     </CAbilEffectInstant>
-    <CValidatorUnitType id="Decoy@Decoy" parent="UnitTypeDefault">
-        <Value value="Decoy"/>
-    </CValidatorUnitType>
+    <CValidatorUnitCompareBehaviorCount id="Taunt@IsTauntable">
+        <Behavior value="Taunt@Untauntable"/>
+    </CValidatorUnitCompareBehaviorCount>
     <CValidatorEffectTreeUserData id="AbsorbExplosion@DmgCheck">
         <CheckExistence value="0"/>
         <Compare value="GT"/>
@@ -962,7 +967,7 @@
         <Alignment value="Negative"/>
         <InfoIcon value="Assets\Textures\btn-ability-terran-domination.dds"/>
         <EditorCategories value="AbilityorEffectType:Units"/>
-        <Duration value="21.425"/>
+        <Duration value="3"/>
     </CBehaviorBuff>
     <CBehaviorAttribute id="HeroRavagerAttribute">
         <EditorCategories value="AbilityorEffectType:Units"/>

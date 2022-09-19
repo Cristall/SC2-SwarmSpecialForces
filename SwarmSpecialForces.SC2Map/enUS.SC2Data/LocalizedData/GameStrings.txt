@@ -1918,6 +1918,7 @@ Effect/Name/TankWeaponDmg2=TankWeaponDmg Copy
 Effect/Name/Taunt@ApplyTauntBuff=Apply Taunt Buff
 Effect/Name/Taunt@ApplyUntauntable=Apply Untauntable
 Effect/Name/Taunt@Search=Search
+Effect/Name/Taunt@Taunt=Taunt
 Effect/Name/TerranPartTransitionInitialSet=Terran Part Transition Initial Set
 Effect/Name/TerranPartTransitionRemoveBuff=Terran Part Transition Remove Buff
 Effect/Name/TerranPartTransitionSearchOverlords=Terran Part Transition Search Overlords

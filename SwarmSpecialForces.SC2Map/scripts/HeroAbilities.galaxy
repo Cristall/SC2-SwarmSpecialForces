@@ -145,106 +145,51 @@ void HeroAbility_RespawnEgg_RestoreEggCharge(){
 
 // taunt
 bool HeroAbility_Taunt (bool testConds, bool runActions){
-    unitgroup affectedUnits;
-    unit caster = EventUnit();
-    int counter;
-    int tmpInt;
-    unit tmpUnit;
+    unit caster = EventPlayerEffectUsedUnit(c_effectUnitCaster);
+    unit target = EventPlayerEffectUsedUnit(c_effectUnitTarget);
+    fixed duration = libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogBehavior, "Taunt@Taunted", "Duration",UnitGetOwner(caster));
+    const fixed loopTime = 0.125;
     string tmpStr;
 
-    if(!runActions) {return true;}
+    while (duration > 0){
+        if(!UnitHasBehavior2(target, "Taunt@Taunted")
+            || caster != UnitBehaviorEffectUnit(target, "Taunt@Taunted", c_effectUnitCaster, 0)){
+            // taunt buff gone (can happen for bosses) or taunted by another unit -> stop trigger
+            break;
+        }
+        
+        // casting bosses get skipped
+        if(!UnitHasBehavior2(target, "AlreadyCastingNoWeapons")){
+            // bunker dont have attack ability but use attackredirect
+            if(UnitGetType(target) == "Bunker2" || UnitGetType(target) == "Bunker"){
+                UnitIssueOrder(target, OrderTargetingUnit(AbilityCommand("AttackRedirect", 0), caster), c_orderQueueReplace);
+            }
+            else{
+                UnitIssueOrder(target, OrderTargetingUnit(AbilityCommand("attack", 0), caster), c_orderQueueReplace);
+            }
+        }
+        duration -= loopTime;
+        Wait(loopTime, c_timeGame);
+    }
 
-    //find units in range
-    affectedUnits = UnitGroup(null, gv_EnemyPlayer, RegionCircle(UnitGetPosition(EventUnit()), 7.25), UnitFilter(0, 0, (1 << c_targetFilterWorker) | (1 << c_targetFilterMissile) | (1 << c_targetFilterItem), (1 << (c_targetFilterStasis - 32)) | (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0);
-    tmpInt = UnitGroupCount(affectedUnits, c_unitCountAll);
-    for(;;tmpInt -=1){
-        tmpUnit = UnitGroupUnitFromEnd(affectedUnits, tmpInt);
-        if( tmpUnit == null){ break; }
+    // reset attack commands
+    if(!UnitHasBehavior2(target , "Taunt@Taunted")){
+        // if the target still has the taunt buff by this point, then it comes from another source
+        tmpStr = UnitGetType(target);
 
-        if(UnitHasBehavior2(tmpUnit, "Taunt@Untauntable")){
-            UnitGroupRemove(affectedUnits, tmpUnit);
+        // summoned and bosses stop, bosses and move back to their spawnpoint by the handler
+        if(UnitTypeTestAttribute(tmpStr, c_unitAttributeSummoned) || UnitTypeTestAttribute(tmpStr, c_unitAttributeHeroic)){
+            UnitIssueOrder(target, Order(AbilityCommand("stop", 0)), c_orderQueueReplace);
         }
         else {
-            UnitBehaviorAdd(tmpUnit, "Taunt@Taunted", caster, 1);
-        }
-    }
-
-    //repeat attack command onto the caster. also check if the caster is still the most recent taunt
-    for(counter = 24; counter > 0; counter -=1){
-        tmpInt = UnitGroupCount(affectedUnits, c_unitCountAll);
-        for(;;tmpInt -=1){
-            tmpUnit = UnitGroupUnitFromEnd(affectedUnits, tmpInt);
-            if( tmpUnit == null){ break; }
-
-            //check if still taunted and if taunt debuff still comes from the caster (ie no taunt from another player)
-            if(UnitHasBehavior2(tmpUnit, "Taunt@Taunted") && caster == UnitBehaviorEffectUnit(tmpUnit, "Taunt@Taunted", c_effectUnitCaster, 0)){
-                //ignore bosses who are not allowed to attack due to casting
-                if(!UnitHasBehavior2(tmpUnit, "AlreadyCastingNoWeapons")){
-                    //bunker dont have attack ability but use attackredirect
-                    if(UnitGetType(tmpUnit) == "Bunker2" || UnitGetType(tmpUnit) == "Bunker"){
-                        UnitIssueOrder(tmpUnit, OrderTargetingUnit(AbilityCommand("AttackRedirect", 0), caster), c_orderQueueReplace);
-                    }
-                    else{
-                        UnitIssueOrder(tmpUnit, OrderTargetingUnit(AbilityCommand("attack", 0), caster), c_orderQueueReplace);
-                    }
-                }
+            if(UnitHasBehavior2(target, "AttackWaypoint0")){
+                UnitIssueOrder(target, OrderTargetingPoint(AbilityCommand("attack", 0), gv_Part_AttackWaypoint), c_orderQueueReplace);
             }
-            //if taunted by another player, from current scope
             else{
-                UnitGroupRemove(affectedUnits, tmpUnit);
-            }
-        }
-        Wait(0.125, c_timeGame);
-    }
-    Wait(0.0625, c_timeGame);
-
-    //reset attack commands/idle points
-    tmpInt = UnitGroupCount(affectedUnits, c_unitCountAll);
-    for(;;tmpInt -=1){
-        tmpUnit = UnitGroupUnitFromEnd(affectedUnits, tmpInt);
-        if( tmpUnit == null){ break; }
-
-        if(caster == UnitBehaviorEffectUnit(tmpUnit, "Taunt@Taunted", c_effectUnitCaster, 0)){
-            UnitBehaviorRemove(tmpUnit, "Taunt@Taunted", 1);
-            tmpStr = UnitGetType(tmpUnit);
-
-            //special behavior depening on unit attributes:
-            if(UnitTypeTestAttribute(tmpStr, c_unitAttributeSummoned)){
-                UnitIssueOrder(tmpUnit, Order(AbilityCommand("stop", 0)), c_orderQueueReplace);
-            }
-            else if (UnitTypeTestAttribute(tmpStr, c_unitAttributeHeroic)){
-                //each boss has its own return point (or just stop command in case of unmovable bosses)
-                if(tmpStr == "HellionTank2"){
-                    UnitIssueOrder(tmpUnit, OrderTargetingPoint(AbilityCommand("attack", 0), PointFromName("PartTerran_Boss_Flamer")), c_orderQueueReplace);
-                }
-                else if(tmpStr == "PlanetaryFotress"){
-                    UnitIssueOrder(tmpUnit, Order(AbilityCommand("stop", 0)), c_orderQueueReplace);
-                }
-                else if(tmpStr == "Thor"){
-                    UnitIssueOrder(tmpUnit, OrderTargetingPoint(AbilityCommand("attack", 0), PointFromName("PartTerran_Boss_Hammer")), c_orderQueueReplace);
-                }
-                else if(tmpStr == "Atlantis" || tmpStr == "AtlantisCore" || tmpStr == "Illusion@AtlantisCore"){
-                    UnitIssueOrder(tmpUnit, OrderTargetingPoint(AbilityCommand("attack", 0), PointFromName("PartProtoss_Boss_Atlantis")), c_orderQueueReplace);
-                }
-                else if(tmpStr == "Lightning" ||tmpStr == "Thunder"){
-                    UnitIssueOrder(tmpUnit, OrderTargetingPoint(AbilityCommand("attack", 0), PointFromName("PartProtoss_Boss_TagTeam")), c_orderQueueReplace);
-                }
-                else if(tmpStr == "Madness"){
-                    UnitIssueOrder(tmpUnit, Order(AbilityCommand("stop", 0)), c_orderQueueReplace);
-                }
-            }
-            else {
-                if(UnitHasBehavior2(tmpUnit, "AttackWaypoint0")){
-                    UnitIssueOrder(tmpUnit, OrderTargetingPoint(AbilityCommand("attack", 0), gv_Part_AttackWaypoint), c_orderQueueReplace);
-                }
-                else{
-                    UnitIssueOrder(tmpUnit, OrderTargetingPoint(AbilityCommand("attack", 0), gv_Part_AttackPoint), c_orderQueueReplace);
-                }
+                UnitIssueOrder(target, OrderTargetingPoint(AbilityCommand("attack", 0), gv_Part_AttackPoint), c_orderQueueReplace);
             }
         }
     }
-
-    
     return true;
 }
 
@@ -295,7 +240,7 @@ bool HeroAbility_CorrosiveBurst_DmgCalculation (bool testConds, bool runActions)
 }
 
 void HeroAbility_TriggerCreate(){
-    TriggerAddEventUnitAbility(TriggerCreate("HeroAbility_Taunt"), null, AbilityCommand("Taunt@Taunt", 0), c_abilEffectStageChannel, false);
+    TriggerAddEventPlayerEffectUsed(TriggerCreate("HeroAbility_Taunt"), c_playerAny, "Taunt@Taunt");
     TriggerAddEventPlayerEffectUsed(TriggerCreate("HeroAbility_Decoy"), c_playerAny, "Decoy@SpawnSet");
     TriggerAddEventPlayerEffectUsed(TriggerCreate("HeroAbility_CorrosiveBurst_DmgCalculation"), c_playerAny, "CorrosiveBurst@DummyEffect");
 }

@@ -2,7 +2,7 @@
 <Catalog>
     <CEffectSwitch id="MechaOvermindWeaponOverseerIssueOrderSwitch">
         <EditorCategories value=""/>
-        <CaseArray Validator="Decoy@Decoy" Effect="MechaOvermindWeaponOverseerIssueOrderPoint"/>
+        <CaseArray Validator="MechaOvermindWeaponTargetIsDecoy" Effect="MechaOvermindWeaponOverseerIssueOrderPoint"/>
         <CaseDefault value="MechaOvermindWeaponOverseerIssueOrder"/>
     </CEffectSwitch>
     <CEffectIssueOrder id="MechaOvermindWeaponOverseerIssueOrderPoint">
@@ -377,6 +377,10 @@
         <Effect index="0" value="BombardThem@InitialSet"/>
         <CmdButtonArray index="Execute" DefaultButtonFace="BombardThem"/>
     </CAbilEffectInstant>
+    <CValidatorUnitType id="MechaOvermindWeaponTargetIsDecoy" parent="UnitTypeDefault">
+        <WhichUnit Effect="MechaOvermindWeaponOverseerGet"/>
+        <Value value="Decoy"/>
+    </CValidatorUnitType>
     <CValidatorLocationEnumArea id="BuryThem@CheckForTargets">
         <AreaArray Radius="3.5"/>
         <LaunchLocation Value="TargetPoint"/>
@@ -972,6 +976,7 @@
         <Speed value="0"/>
         <AbilArray index="1" removed="1"/>
         <AbilArray index="2" removed="1"/>
+        <BehaviorArray Link="Taunt@Untauntable"/>
         <InnerRadius value="0"/>
     </CUnit>
     <CUnit id="UnstableTeleport@TeleporterGreen" parent="UnstableTeleport@TeleporterBlue">
@@ -1084,7 +1089,7 @@
         <SeparationRadius value="0.75"/>
         <InnerRadius value="0"/>
         <MinimapRadius value="1"/>
-        <BehaviorArray index="0" removed="1"/>
+        <BehaviorArray index="0" Link="Taunt@Untauntable"/>
         <BehaviorArray index="1" removed="1"/>
         <BehaviorArray index="2" removed="1"/>
         <BehaviorArray index="3" removed="1"/>
