@@ -212,7 +212,6 @@
         <MinCount value="1"/>
         <SearchFlags index="ExtendByUnitRadius" value="1"/>
         <SearchFlags index="OffsetByUnitRadius" value="1"/>
-        <DebugTrace value="1"/>
     </CEffectEnumArea>
     <CAbilEffectInstant id="AbsorbExplosion">
         <EditorCategories value="AbilityorEffectType:Units"/>
