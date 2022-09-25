@@ -2445,9 +2445,6 @@
             </Fixed>
         </Instances>
         <Instances Id="P1D5Small1">
-            <String String="Cheater">
-                <Field Id="Special"/>
-            </String>
             <Image Image="Assets\Textures\btn-ability-zeratul-darkarchon-maelstrom.dds">
                 <Field Id="Icon"/>
             </Image>
@@ -2762,9 +2759,6 @@
             </Fixed>
         </Instances>
         <Instances Id="P2D5Small1">
-            <String String="Cheater">
-                <Field Id="Special"/>
-            </String>
             <Image Image="Assets\Textures\btn-unit-collection-broodlord-mecha.dds">
                 <Field Id="Icon"/>
             </Image>
