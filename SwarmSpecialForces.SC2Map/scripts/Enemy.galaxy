@@ -229,7 +229,7 @@ bool Enemy_BossFight_Handler (bool testConds, bool runActions){
         for (tmpInt = 0; tmpInt < bossFightData.amountBosses; tmpInt += 1) {
             if((bossFightData.bossState[tmpInt] & c_BossFightState_Alive) == 0){ continue; }
 
-            if( !RegionContainsPoint(bossFightData.arena,UnitGetPosition(bossFightData.boss[tmpInt]))){
+            if(!RegionContainsPoint(bossFightData.arena,UnitGetPosition(bossFightData.boss[tmpInt]))){
                 orderType = c_BossFightOrder_Return;
             }
         }
@@ -260,7 +260,8 @@ bool Enemy_BossFight_Handler (bool testConds, bool runActions){
             for (tmpInt = 0; tmpInt < bossFightData.amountBosses; tmpInt += 1) {
                 if((bossFightData.bossState[tmpInt] & c_BossFightState_Alive) == 0){  continue; }
 
-                if(!UnitTestState(bossFightData.boss[tmpInt], c_unitStateIdle)){
+                if(!UnitTestState(bossFightData.boss[tmpInt], c_unitStateIdle) ||
+                    !RegionContainsPoint(RegionCircle(bossFightData.bossIdlePoint[tmpInt], 2), UnitGetPosition(bossFightData.boss[tmpInt]))){
                     if(UnitHasBehavior2(bossFightData.boss[tmpInt], "Taunt@Taunted")){
                         UnitBehaviorRemove(bossFightData.boss[tmpInt], "Taunt@Taunted",1);
                     }
