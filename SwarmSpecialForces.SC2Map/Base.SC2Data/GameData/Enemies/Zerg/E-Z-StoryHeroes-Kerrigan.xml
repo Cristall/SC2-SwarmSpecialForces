@@ -805,6 +805,7 @@
         <Period value="0.25"/>
         <PeriodicEffect value="Infection@InfectedSet"/>
         <RemoveValidatorArray value="CasterNotDead"/>
+        <RemoveValidatorArray value="NotHidden"/>
         <Duration value="8"/>
         <FinalEffect value="Infection@RemoveFromTracker"/>
     </CBehaviorBuff>
