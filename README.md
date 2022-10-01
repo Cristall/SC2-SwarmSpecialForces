@@ -1,7 +1,8 @@
 # Swarm Special Forces
 
+A Starcraft 2 arcade map. 
 
-SwarmSpecialForces.SC2Map contains all scripts and data. Assets like custom models and incons are located in SwarmSpecialForcesAssets.SC2Mod.
+SwarmSpecialForces.SC2Map contains all scripts and data. Assets like custom models and icons are located in SwarmSpecialForcesAssets.SC2Mod.
 
 ### Simple install:
 - Download the repository as a ZIP file.
@@ -10,20 +11,16 @@ SwarmSpecialForces.SC2Map contains all scripts and data. Assets like custom mode
 - Once the Starcraft 2 editor opened and loaded the map you can hit Test Document (Ctrl+F9).
 
 ### Advanced install:
-- Close this repository into `Starcraft II/Maps`.
+- Clone this repository into `Starcraft II/Maps`.
 - Create a Junction or Symbolic Link pointing from `Starcraft II/Mods/SwarmSpecialForcesAssets.SC2Mod` to `Starcraft II/Maps/SwarmSpecialForces/SwarmSpecialForcesAssets.SC2Mod`.
-- Start the map using `Startcraft II/Support64/SC2_Switcher.exe -run SwarmSpecialForces/SwarmSpecialForces.SC2Map` or `SC2_Switcher.exe -run "SwarmSpecialForces/SwarmSpecialForces.SC2Map" -displaymode 0 -trigdebug` for debugging.
+- Start the map using `Startcraft II/Support64/SC2_Switcher.exe -run SwarmSpecialForces/SwarmSpecialForces.SC2Map`. for debugging you can add the arguments `-displaymode 0 -trigdebug`.
 
 
-## Tools
+## Useful Tools
+- VSCode extension for galaxy script: https://github.com/Talv/vscode-sc2-galaxy
+- VSCode extension for layout xml: https://github.com/Talv/sc2-layouts
+- XML Schema file for data: https://github.com/Matheus28/sc2dataeditor/blob/master/data/Catalog.xsd
+- CSV to User Data XML python script: https://github.com/Cristall/SC2UserDataConverter
 
-
-### SC2UserDataConverter
-
-
-SwarmSpecialForcesAssets.SC2Mod contains all nessecary outsourced custom assets because assets dont need to be reuploaded each patch (reduced file size for upload from ~40 to 4 mb resulting in 10x faster upload time).
-
-To test the map you need to change the SwarmSpecialForcesAssets dependency to your local copy of it, which should be located inside the Mods folder within your Starcraft 2 install directionary. If you do not change the dependency the game will not load the game/crash upon start.
-
-Spreadsheet for everything:
+## Spreadsheet/Wiki
 https://docs.google.com/spreadsheets/d/1yyu7c10L5TqKTQIRxCbO2EhMih84HBKGQACy9V61J0E/edit#gid=1688450518
