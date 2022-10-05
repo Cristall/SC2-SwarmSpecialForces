@@ -336,6 +336,7 @@
         <EffectArray value="LaserLanceAlreadyCastingNoWeapons"/>
         <EffectArray value="LaserLanceOffsets"/>
         <EffectArray value="LaserLanceCreateQuadDummy"/>
+        <TargetLocationType value="Point"/>
     </CEffectSet>
     <CEffectCreatePersistent id="LaserLanceMissilePersistent">
         <EditorCategories value=""/>
