@@ -137,6 +137,7 @@ bool MapInit_Main(bool testConds, bool runActions){
 
     // important to init playergroups first as they are used everywhere
     MapInit_ActivePlayers();
+    Utility_TriggerCreate();
 
     // general map init stuff
     PlayerBoard_InitRankNames();
