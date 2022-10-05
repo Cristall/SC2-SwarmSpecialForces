@@ -129,9 +129,7 @@ bool MapInit_Main(bool testConds, bool runActions){
         gv_GameMode = c_GameMode_Tutorial;
     }
     else if (tmpStr == "0003") {
-        Debug_ShowMessage("Custom Difficulty is currently disabled.");
-        gv_GameMode = c_GameMode_Classic;
-        // gv_GameMode = c_GameMode_CustomDiff;
+        gv_GameMode = c_GameMode_CustomDiff;
     }
 
     GameSetMissionTimePaused(true);

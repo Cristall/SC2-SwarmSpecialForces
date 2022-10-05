@@ -20,11 +20,11 @@
     <Constant name="DiffButtonGap" val="4"/>
     <Constant name="CounterWidth" val="40"/>
 
-    <Constant name="GameModeCustomSettingWidth" val="433"/>
-    <Constant name="GameModeCustomSettingLabelWidth" val="200"/>
+    <Constant name="GameModeCustomSettingWidth" val="448"/>
+    <Constant name="GameModeCustomSettingLabelWidth" val="220"/>
     <Constant name="GameModeCustomSettingHeight" val="50"/>
     <Constant name="GameModeCustomSettingEditBoxGap" val="4"/>
-    <Constant name="GameModeCustomSettingGap" val="12"/>
+    <Constant name="GameModeCustomSettingGap" val="15"/>
     <Constant name="GameModeCustomSettingAcceptIconSize" val="40"/>
 
     <Constant name="GameModeCustomSettingAcceptedValueIcon" val="Assets/Textures/ui_objectives_checkmark.dds"/>
@@ -175,7 +175,7 @@
         </Frame>
     </Frame>
 
-    <Frame type="Frame" name="GameModeCustomSettingTemplate">
+    <Frame type="Frame" name="GameModeCustomSettingFixedTemplate">
         <Width val="#GameModeCustomSettingWidth"/>
         <Height val="#GameModeCustomSettingHeight"/>
 
@@ -235,6 +235,29 @@
             </State>
         </StateGroup>
 
+    </Frame>
+    <Frame type="Frame" name="GameModeCustomSettingFlagTemplate">
+        <Width val="#GameModeCustomSettingWidth"/>
+        <Height val="#GameModeCustomSettingHeight"/>
+
+        <Frame type="Label" name="NameLabel" template="SSF_Templates/LabelTemplate">
+            <Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+            <Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+            <Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
+            <Anchor side="Right" relative="$parent" pos="Min" offset="#GameModeCustomSettingLabelWidth"/>
+            <Style val="aaDialogItemStyleRightMiddle"/>
+            <AcceptsMouse val="True"/>
+        </Frame>
+        <Frame type="CheckBox" name="CheckBox" template="SSF_Templates/CheckBoxTemplate">
+            <Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+            <Anchor side="Left" relative="$parent/NameLabel" pos="Max" offset="#GameModeCustomSettingEditBoxGap"/>
+            <Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
+            <Anchor side="Right" relative="$parent/NameLabel" pos="Max" offset="44"/>
+
+            <Height val="#GameModeCustomSettingHeight"/>
+            <Width val="50"/>
+            <Enabled val="False"/>
+        </Frame>
     </Frame>
 
     <Frame type="Button" name="GameModeCustomPresetTemplate" template="SSF_Templates/ButtonTemplate">
@@ -539,14 +562,12 @@
                     <State name="True">
                         <When type="AnimationState" frame="$this" operator="Equal" Host="True"/>
                         
-                        <Action type="SetProperty" frame="$this/DmgFlat/Input" Visible="True"/>
-                        <Action type="SetProperty" frame="$this/DmgPercent/Input" Visible="True"/>
+                        <Action type="SetProperty" frame="$this/Damage/Input" Visible="True"/>
+                        <Action type="SetProperty" frame="$this/DamageReduction/Input" Visible="True"/>
                         <Action type="SetProperty" frame="$this/Atkspd/Input" Visible="True"/>
-                        <Action type="SetProperty" frame="$this/ArmorFlat/Input" Visible="True"/>
-                        <Action type="SetProperty" frame="$this/ArmorPercent/Input" Visible="True"/>
+                        <Action type="SetProperty" frame="$this/Armor/Input" Visible="True"/>
                         <Action type="SetProperty" frame="$this/Vitals/Input" Visible="True"/>
-                        <Action type="SetProperty" frame="$this/RegenFlat/Input" Visible="True"/>
-                        <Action type="SetProperty" frame="$this/RegenPercent/Input" Visible="True"/>
+                        <Action type="SetProperty" frame="$this/Regen/Input" Visible="True"/>
                         <Action type="SetProperty" frame="$this/Movementspeed/Input" Visible="True"/>
                         <Action type="SetProperty" frame="$this/SpawnMultiplier/Input" Visible="True"/>
                         <Action type="SetProperty" frame="$this/BiomassMultiplier/Input" Visible="True"/>
@@ -557,7 +578,8 @@
                         <Action type="SetProperty" frame="$this/BossAbilities/Input" Visible="True"/>
                         <Action type="SetProperty" frame="$this/Lifes/Input" Visible="True"/>
                         <Action type="SetProperty" frame="$this/Upgrades/Input" Visible="True"/>
-                        <Action type="SetProperty" frame="$this/SkipToP1/CheckBox" Enabled="True"/>
+                        <Action type="SetProperty" frame="$this/SkipP0/CheckBox" Enabled="True"/>
+                        <Action type="SetProperty" frame="$this/SkipP1/CheckBox" Enabled="True"/>
 
                         <Action type="SetProperty" frame="$this/DiffPreset0" Enabled="True"/>
                         <Action type="SetProperty" frame="$this/DiffPreset1" Enabled="True"/>
@@ -641,21 +663,21 @@
 
                 
                 <Frame type="Frame" name="AnchorCol1">
-                    <Anchor side="Left" relative="$parent/$parent/Hero2" pos="Max" offset="30"/>
+                    <Anchor side="Left" relative="$parent/$parent/Hero2" pos="Max" offset="25"/>
                     <Anchor side="Top" relative="$parent/$parent/ChooseHeroLabel" pos="Min" offset="0"/>
                     <Anchor side="Right" relative="$this" pos="Min" offset="#GameModeCustomSettingWidth"/>
                     <Anchor side="Bottom" relative="$this" pos="Min" offset="0"/>
                     <Visible val="False"/>
                 </Frame>
                 <Frame type="Frame" name="AnchorCol2">
-                    <Anchor side="Left" relative="$sibling-1" pos="Max" offset="35"/>
+                    <Anchor side="Left" relative="$sibling-1" pos="Max" offset="15"/>
                     <Anchor side="Top" relative="$sibling-1" pos="Min" offset="0"/>
                     <Anchor side="Right" relative="$this" pos="Min" offset="#GameModeCustomSettingWidth"/>
                     <Anchor side="Bottom" relative="$this" pos="Min" offset="0"/>
                     <Visible val="False"/>
                 </Frame>
                 <Frame type="Frame" name="AnchorCol3">
-                    <Anchor side="Left" relative="$sibling-1" pos="Max" offset="35"/>
+                    <Anchor side="Left" relative="$sibling-1" pos="Max" offset="15"/>
                     <Anchor side="Top" relative="$sibling-1" pos="Min" offset="0"/>
                     <Anchor side="Right" relative="$this" pos="Min" offset="#GameModeCustomSettingWidth"/>
                     <Anchor side="Bottom" relative="$this" pos="Min" offset="0"/>
@@ -704,43 +726,43 @@
                     <Anchor side="Bottom" relative="$this" pos="Min" offset="#GameModeCustomSettingHeight"/>
                     <Visible val="False"/>
                 </Frame>
-                <Frame type="Frame" name="AnchorRow7">
+                <!-- <Frame type="Frame" name="AnchorRow7">
                     <Anchor side="Left" relative="$sibling-1" pos="Min" offset="0"/>
                     <Anchor side="Top" relative="$sibling-1" pos="Max" offset="#GameModeCustomSettingGap"/>
                     <Anchor side="Right" relative="$this" pos="Min" offset="0"/>
                     <Anchor side="Bottom" relative="$this" pos="Min" offset="#GameModeCustomSettingHeight"/>
                     <Visible val="False"/>
-                </Frame>
+                </Frame> -->
 
-                <Frame type="Frame" name="DmgFlat" template="SSF_HeroSelection/GameModeCustomSettingTemplate">
+                <Frame type="Frame" name="Damage" template="SSF_HeroSelection/GameModeCustomSettingFixedTemplate">
                     <Anchor side="Top" relative="$parent/AnchorRow1" pos="Min" offset="0"/>
                     <Anchor side="Left" relative="$parent/AnchorCol1" pos="Min" offset="0"/>
 
                     <Frame type="Label" name="NameLabel">
-                        <Text val="@Trig/HeroSelection/CustomDiff/DmgFlat"/>
-                        <Tooltip val="@Trig/HeroSelection/CustomDiff/DmgFlatTooltip"/>
+                        <Text val="@Trig/HeroSelection/CustomDiff/Damage"/>
+                        <Tooltip val="@Trig/HeroSelection/CustomDiff/DamageTooltip"/>
                     </Frame>
                 </Frame>
-                <Frame type="Frame" name="DmgPercent" template="SSF_HeroSelection/GameModeCustomSettingTemplate">
+                <Frame type="Frame" name="Atkspd" template="SSF_HeroSelection/GameModeCustomSettingFixedTemplate">
                     <Anchor side="Top" relative="$parent/AnchorRow1" pos="Min" offset="0"/>
                     <Anchor side="Left" relative="$parent/AnchorCol2" pos="Min" offset="0"/>
-
-                    <Frame type="Label" name="NameLabel">
-                        <Text val="@Trig/HeroSelection/CustomDiff/DmgPercent"/>
-                        <Tooltip val="@Trig/HeroSelection/CustomDiff/DmgPercentTooltip"/>
-                    </Frame>
-                </Frame>
-                <Frame type="Frame" name="Atkspd" template="SSF_HeroSelection/GameModeCustomSettingTemplate">
-                    <Anchor side="Top" relative="$parent/AnchorRow1" pos="Min" offset="0"/>
-                    <Anchor side="Left" relative="$parent/AnchorCol3" pos="Min" offset="0"/>
 
                     <Frame type="Label" name="NameLabel">
                         <Text val="@Trig/HeroSelection/CustomDiff/Atkspd"/>
                         <Tooltip val="@Trig/HeroSelection/CustomDiff/AtkspdTooltip"/>
                     </Frame>
                 </Frame>
+                <Frame type="Frame" name="Movementspeed" template="SSF_HeroSelection/GameModeCustomSettingFixedTemplate">
+                    <Anchor side="Top" relative="$parent/AnchorRow1" pos="Min" offset="0"/>
+                    <Anchor side="Left" relative="$parent/AnchorCol3" pos="Min" offset="0"/>
 
-                <Frame type="Frame" name="Vitals" template="SSF_HeroSelection/GameModeCustomSettingTemplate">
+                    <Frame type="Label" name="NameLabel">
+                        <Text val="@Trig/HeroSelection/CustomDiff/Movementspeed"/>
+                        <Tooltip val="@Trig/HeroSelection/CustomDiff/MovementspeedTooltip"/>
+                    </Frame>
+                </Frame>
+                
+                <Frame type="Frame" name="Vitals" template="SSF_HeroSelection/GameModeCustomSettingFixedTemplate">
                     <Anchor side="Top" relative="$parent/AnchorRow2" pos="Min" offset="0"/>
                     <Anchor side="Left" relative="$parent/AnchorCol1" pos="Min" offset="0"/>
 
@@ -749,129 +771,103 @@
                         <Tooltip val="@Trig/HeroSelection/CustomDiff/VitalsTooltip"/>
                     </Frame>
                 </Frame>
-                <Frame type="Frame" name="ArmorFlat" template="SSF_HeroSelection/GameModeCustomSettingTemplate">
+                <Frame type="Frame" name="DamageReduction" template="SSF_HeroSelection/GameModeCustomSettingFixedTemplate">
                     <Anchor side="Top" relative="$parent/AnchorRow2" pos="Min" offset="0"/>
                     <Anchor side="Left" relative="$parent/AnchorCol2" pos="Min" offset="0"/>
 
                     <Frame type="Label" name="NameLabel">
-                        <Text val="@Trig/HeroSelection/CustomDiff/ArmorFlat"/>
-                        <Tooltip val="@Trig/HeroSelection/CustomDiff/ArmorFlatTooltip"/>
+                        <Text val="@Trig/HeroSelection/CustomDiff/DamageReduction"/>
+                        <Tooltip val="@Trig/HeroSelection/CustomDiff/DamageReductionTooltip"/>
                     </Frame>
                 </Frame>
-                <Frame type="Frame" name="ArmorPercent" template="SSF_HeroSelection/GameModeCustomSettingTemplate">
+                <Frame type="Frame" name="Regen" template="SSF_HeroSelection/GameModeCustomSettingFixedTemplate">
                     <Anchor side="Top" relative="$parent/AnchorRow2" pos="Min" offset="0"/>
                     <Anchor side="Left" relative="$parent/AnchorCol3" pos="Min" offset="0"/>
 
                     <Frame type="Label" name="NameLabel">
-                        <Text val="@Trig/HeroSelection/CustomDiff/ArmorPercent"/>
-                        <Tooltip val="@Trig/HeroSelection/CustomDiff/ArmorPercentTooltip"/>
+                        <Text val="@Trig/HeroSelection/CustomDiff/Regen"/>
+                        <Tooltip val="@Trig/HeroSelection/CustomDiff/RegenTooltip"/>
                     </Frame>
                 </Frame>
 
-                <Frame type="Frame" name="RegenFlat" template="SSF_HeroSelection/GameModeCustomSettingTemplate">
+                <Frame type="Frame" name="Armor" template="SSF_HeroSelection/GameModeCustomSettingFixedTemplate">
                     <Anchor side="Top" relative="$parent/AnchorRow3" pos="Min" offset="0"/>
                     <Anchor side="Left" relative="$parent/AnchorCol1" pos="Min" offset="0"/>
 
                     <Frame type="Label" name="NameLabel">
-                        <Text val="@Trig/HeroSelection/CustomDiff/RegenFlat"/>
-                        <Tooltip val="@Trig/HeroSelection/CustomDiff/RegenFlatTooltip"/>
+                        <Text val="@Trig/HeroSelection/CustomDiff/Armor"/>
+                        <Tooltip val="@Trig/HeroSelection/CustomDiff/ArmorTooltip"/>
                     </Frame>
                 </Frame>
-                <Frame type="Frame" name="RegenPercent" template="SSF_HeroSelection/GameModeCustomSettingTemplate">
+                <Frame type="Frame" name="BossAbilities" template="SSF_HeroSelection/GameModeCustomSettingFixedTemplate">
                     <Anchor side="Top" relative="$parent/AnchorRow3" pos="Min" offset="0"/>
                     <Anchor side="Left" relative="$parent/AnchorCol2" pos="Min" offset="0"/>
-
-                    <Frame type="Label" name="NameLabel">
-                        <Text val="@Trig/HeroSelection/CustomDiff/RegenPercent"/>
-                        <Tooltip val="@Trig/HeroSelection/CustomDiff/RegenPercentTooltip"/>
-                    </Frame>
-                </Frame>
-                <Frame type="Frame" name="Movementspeed" template="SSF_HeroSelection/GameModeCustomSettingTemplate">
-                    <Anchor side="Top" relative="$parent/AnchorRow3" pos="Min" offset="0"/>
-                    <Anchor side="Left" relative="$parent/AnchorCol3" pos="Min" offset="0"/>
-
-                    <Frame type="Label" name="NameLabel">
-                        <Text val="@Trig/HeroSelection/CustomDiff/Movementspeed"/>
-                        <Tooltip val="@Trig/HeroSelection/CustomDiff/MovementspeedTooltip"/>
-                    </Frame>
-                </Frame>
-
-                <Frame type="Frame" name="SpawnMultiplier" template="SSF_HeroSelection/GameModeCustomSettingTemplate">
-                    <Anchor side="Top" relative="$parent/AnchorRow4" pos="Min" offset="0"/>
-                    <Anchor side="Left" relative="$parent/AnchorCol1" pos="Min" offset="0"/>
-
-                    <Frame type="Label" name="NameLabel">
-                        <Text val="@Trig/HeroSelection/CustomDiff/SpawnMultiplier"/>
-                        <Tooltip val="@Trig/HeroSelection/CustomDiff/SpawnMultiplierTooltip"/>
-                    </Frame>
-                </Frame>
-                <Frame type="Frame" name="BiomassMultiplier" template="SSF_HeroSelection/GameModeCustomSettingTemplate">
-                    <Anchor side="Top" relative="$parent/AnchorRow4" pos="Min" offset="0"/>
-                    <Anchor side="Left" relative="$parent/AnchorCol2" pos="Min" offset="0"/>
-
-                    <Frame type="Label" name="NameLabel">
-                        <Text val="@Trig/HeroSelection/CustomDiff/BiomassMultiplier"/>
-                        <Tooltip val="@Trig/HeroSelection/CustomDiff/BiomassMultiplierTooltip"/>
-                    </Frame>
-                </Frame>
-                <Frame type="Frame" name="ExpMultiplier" template="SSF_HeroSelection/GameModeCustomSettingTemplate">
-                    <Anchor side="Top" relative="$parent/AnchorRow4" pos="Min" offset="0"/>
-                    <Anchor side="Left" relative="$parent/AnchorCol3" pos="Min" offset="0"/>
-
-                    <Frame type="Label" name="NameLabel">
-                        <Text val="@Trig/HeroSelection/CustomDiff/ExpMultiplier"/>
-                        <Tooltip val="@Trig/HeroSelection/CustomDiff/ExpMultiplierTooltip"/>
-                    </Frame>
-                </Frame>
-
-                <Frame type="Frame" name="BossAbilities" template="SSF_HeroSelection/GameModeCustomSettingTemplate">
-                    <Anchor side="Top" relative="$parent/AnchorRow5" pos="Min" offset="0"/>
-                    <Anchor side="Left" relative="$parent/AnchorCol1" pos="Min" offset="0"/>
 
                     <Frame type="Label" name="NameLabel">
                         <Text val="@Trig/HeroSelection/CustomDiff/BossAbilities"/>
                         <Tooltip val="@Trig/HeroSelection/CustomDiff/BossAbilitiesTooltip"/>
                     </Frame>
                 </Frame>
-                <Frame type="Frame" name="Upgrades" template="SSF_HeroSelection/GameModeCustomSettingTemplate">
-                    <Anchor side="Top" relative="$parent/AnchorRow5" pos="Min" offset="0"/>
-                    <Anchor side="Left" relative="$parent/AnchorCol2" pos="Min" offset="0"/>
+                <Frame type="Frame" name="Upgrades" template="SSF_HeroSelection/GameModeCustomSettingFixedTemplate">
+                    <Anchor side="Top" relative="$parent/AnchorRow3" pos="Min" offset="0"/>
+                    <Anchor side="Left" relative="$parent/AnchorCol3" pos="Min" offset="0"/>
 
                     <Frame type="Label" name="NameLabel">
                         <Text val="@Trig/HeroSelection/CustomDiff/Upgrades"/>
                         <Tooltip val="@Trig/HeroSelection/CustomDiff/UpgradesTooltip"/>
                     </Frame>
                 </Frame>
-                <Frame type="Frame" name="Lifes" template="SSF_HeroSelection/GameModeCustomSettingTemplate">
-                    <Anchor side="Top" relative="$parent/AnchorRow5" pos="Min" offset="0"/>
+
+
+                <Frame type="Frame" name="BiomassMultiplier" template="SSF_HeroSelection/GameModeCustomSettingFixedTemplate">
+                    <Anchor side="Top" relative="$parent/AnchorRow4" pos="Min" offset="0"/>
+                    <Anchor side="Left" relative="$parent/AnchorCol1" pos="Min" offset="0"/>
+
+                    <Frame type="Label" name="NameLabel">
+                        <Text val="@Trig/HeroSelection/CustomDiff/BiomassMultiplier"/>
+                        <Tooltip val="@Trig/HeroSelection/CustomDiff/BiomassMultiplierTooltip"/>
+                    </Frame>
+                </Frame>
+                <Frame type="Frame" name="ExpMultiplier" template="SSF_HeroSelection/GameModeCustomSettingFixedTemplate">
+                    <Anchor side="Top" relative="$parent/AnchorRow4" pos="Min" offset="0"/>
+                    <Anchor side="Left" relative="$parent/AnchorCol2" pos="Min" offset="0"/>
+
+                    <Frame type="Label" name="NameLabel">
+                        <Text val="@Trig/HeroSelection/CustomDiff/ExpMultiplier"/>
+                        <Tooltip val="@Trig/HeroSelection/CustomDiff/ExpMultiplierTooltip"/>
+                    </Frame>
+                </Frame>
+                <Frame type="Frame" name="SpawnMultiplier" template="SSF_HeroSelection/GameModeCustomSettingFixedTemplate">
+                    <Anchor side="Top" relative="$parent/AnchorRow4" pos="Min" offset="0"/>
                     <Anchor side="Left" relative="$parent/AnchorCol3" pos="Min" offset="0"/>
 
                     <Frame type="Label" name="NameLabel">
-                        <Text val="@Trig/HeroSelection/CustomDiff/Lifes"/>
-                        <Tooltip val="@Trig/HeroSelection/CustomDiff/LifesTooltip"/>
+                        <Text val="@Trig/HeroSelection/CustomDiff/SpawnMultiplier"/>
+                        <Tooltip val="@Trig/HeroSelection/CustomDiff/SpawnMultiplierTooltip"/>
                     </Frame>
                 </Frame>
 
-                <Frame type="Frame" name="StartBiomass" template="SSF_HeroSelection/GameModeCustomSettingTemplate">
-                    <Anchor side="Top" relative="$parent/AnchorRow6" pos="Min" offset="0"/>
-                    <Anchor side="Left" relative="$parent/AnchorCol2" pos="Min" offset="0"/>
+
+                <Frame type="Frame" name="StartBiomass" template="SSF_HeroSelection/GameModeCustomSettingFixedTemplate">
+                    <Anchor side="Top" relative="$parent/AnchorRow5" pos="Min" offset="0"/>
+                    <Anchor side="Left" relative="$parent/AnchorCol1" pos="Min" offset="0"/>
 
                     <Frame type="Label" name="NameLabel">
                         <Text val="@Trig/HeroSelection/CustomDiff/StartBiomass"/>
                         <Tooltip val="@Trig/HeroSelection/CustomDiff/StartBiomassTooltip"/>
                     </Frame>
                 </Frame>
-                <Frame type="Frame" name="StartExp" template="SSF_HeroSelection/GameModeCustomSettingTemplate">
-                    <Anchor side="Top" relative="$parent/AnchorRow6" pos="Min" offset="0"/>
-                    <Anchor side="Left" relative="$parent/AnchorCol1" pos="Min" offset="0"/>
+                <Frame type="Frame" name="StartExp" template="SSF_HeroSelection/GameModeCustomSettingFixedTemplate">
+                    <Anchor side="Top" relative="$parent/AnchorRow5" pos="Min" offset="0"/>
+                    <Anchor side="Left" relative="$parent/AnchorCol2" pos="Min" offset="0"/>
 
                     <Frame type="Label" name="NameLabel">
                         <Text val="@Trig/HeroSelection/CustomDiff/StartExp"/>
                         <Tooltip val="@Trig/HeroSelection/CustomDiff/StartExpTooltip"/>
                     </Frame>
                 </Frame>
-                <Frame type="Frame" name="StartMutation" template="SSF_HeroSelection/GameModeCustomSettingTemplate">
-                    <Anchor side="Top" relative="$parent/AnchorRow6" pos="Min" offset="0"/>
+                <Frame type="Frame" name="StartMutation" template="SSF_HeroSelection/GameModeCustomSettingFixedTemplate">
+                    <Anchor side="Top" relative="$parent/AnchorRow5" pos="Min" offset="0"/>
                     <Anchor side="Left" relative="$parent/AnchorCol3" pos="Min" offset="0"/>
 
                     <Frame type="Label" name="NameLabel">
@@ -880,32 +876,32 @@
                     </Frame>
                 </Frame>
 
-                <Frame type="Frame" name="SkipToP1">
-                    <Anchor side="Top" relative="$parent/AnchorRow7" pos="Min" offset="0"/>
+                <Frame type="Frame" name="Lifes" template="SSF_HeroSelection/GameModeCustomSettingFixedTemplate">
+                    <Anchor side="Top" relative="$parent/AnchorRow6" pos="Min" offset="0"/>
                     <Anchor side="Left" relative="$parent/AnchorCol1" pos="Min" offset="0"/>
-                    <Width val="#GameModeCustomSettingWidth"/>
-                    <Height val="#GameModeCustomSettingHeight"/>
-            
-                    <Frame type="Label" name="NameLabel" template="SSF_Templates/LabelTemplate">
-                        <Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
-                        <Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
-                        <Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
-                        <Anchor side="Right" relative="$parent" pos="Min" offset="#GameModeCustomSettingLabelWidth"/>
-                        <Style val="aaDialogItemStyleRightMiddle"/>
-                        <AcceptsMouse val="True"/>
-                        
-                        <Text val="@Trig/HeroSelection/CustomDiff/SkipToP1"/>
-                        <Tooltip val="@Trig/HeroSelection/CustomDiff/SkipToP1Tooltip"/>
-                    </Frame>
-                    <Frame type="CheckBox" name="CheckBox" template="SSF_Templates/CheckBoxTemplate">
-                        <Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
-                        <Anchor side="Left" relative="$parent/NameLabel" pos="Max" offset="#GameModeCustomSettingEditBoxGap"/>
-                        <Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
-                        <Anchor side="Right" relative="$parent/NameLabel" pos="Max" offset="44"/>
 
-                        <Height val="#GameModeCustomSettingHeight"/>
-                        <Width val="50"/>
-                        <Enabled val="False"/>
+                    <Frame type="Label" name="NameLabel">
+                        <Text val="@Trig/HeroSelection/CustomDiff/Lifes"/>
+                        <Tooltip val="@Trig/HeroSelection/CustomDiff/LifesTooltip"/>
+                    </Frame>
+                </Frame>
+
+                <Frame type="Frame" name="SkipP0" template="SSF_HeroSelection/GameModeCustomSettingFlagTemplate">
+                    <Anchor side="Top" relative="$parent/AnchorRow6" pos="Min" offset="0"/>
+                    <Anchor side="Left" relative="$parent/AnchorCol2" pos="Min" offset="0"/>
+            
+                    <Frame type="Label" name="NameLabel">
+                        <Text val="@Trig/HeroSelection/CustomDiff/SkipP0"/>
+                        <Tooltip val="@Trig/HeroSelection/CustomDiff/SkipP0Tooltip"/>
+                    </Frame>
+                </Frame>
+                <Frame type="Frame" name="SkipP1" template="SSF_HeroSelection/GameModeCustomSettingFlagTemplate">
+                    <Anchor side="Top" relative="$parent/AnchorRow6" pos="Min" offset="0"/>
+                    <Anchor side="Left" relative="$parent/AnchorCol3" pos="Min" offset="0"/>
+            
+                    <Frame type="Label" name="NameLabel">
+                        <Text val="@Trig/HeroSelection/CustomDiff/SkipP1"/>
+                        <Tooltip val="@Trig/HeroSelection/CustomDiff/SkipP1Tooltip"/>
                     </Frame>
                 </Frame>
 

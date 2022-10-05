@@ -1,7 +1,7 @@
 // variables
 static const int enemy_SpawnLimit = 400;
 
-// reads data from diff table into variables. also sets certain catalog entries based on diff
+// reads data from diff table into variables. also sets certain catalog entries based on diff, any change has to be copied over to CustomDiff_SetOptions()
 void Difficulty_SetVariables (int diff) {
     string difficultyBuff = "Difficulty"+IntToString(diff);
     fixed armorMultiplier;

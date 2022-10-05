@@ -50,6 +50,7 @@ void Hive_Transition();
 bool PartZerg_MoopyDoor_Requirement();
 void Part_PartFinished();
 void HeroAbility_RespawnEgg_RestoreEggCharge();
+void CustomDiff_SkipP1();
 
 // debug overrides
 void Debug_Override_FirstPart();

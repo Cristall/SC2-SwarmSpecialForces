@@ -206,25 +206,6 @@
         <InfoIcon value="Assets\Textures\btn-ability-terran-deactivatemine.dds"/>
         <EditorCategories value="AbilityorEffectType:Units"/>
         <DisableValidatorArray value="DifficultyValidatorCustomDiff"/>
-        <Modification MoveSpeedMultiplier="1.75" AttackSpeedMultiplier="2">
-            <DamageDealtScaled index="Spell" value="13"/>
-            <DamageDealtScaled index="Melee" value="13"/>
-            <DamageDealtScaled index="Ranged" value="13"/>
-            <DamageDealtScaled index="Splash" value="13"/>
-            <DamageDealtScaled index="NoProc" value="13"/>
-            <DamageDealtFraction index="Spell" value="2"/>
-            <DamageDealtFraction index="Melee" value="2"/>
-            <DamageDealtFraction index="Ranged" value="2"/>
-            <DamageDealtFraction index="Splash" value="2"/>
-            <DamageDealtFraction index="NoProc" value="2"/>
-            <LifeArmorBonus value="15"/>
-            <VitalMaxFractionArray index="Life" value="4"/>
-            <VitalMaxFractionArray index="Shields" value="4"/>
-            <VitalRegenArray index="Life" value="2"/>
-            <VitalRegenArray index="Shields" value="2"/>
-            <VitalRegenMultiplier index="Life" value="1"/>
-            <VitalRegenMultiplier index="Shields" value="1"/>
-        </Modification>
     </CBehaviorBuff>
     <CBehaviorBuff id="AlreadyCasting">
         <InfoFlags index="Hidden" value="1"/>

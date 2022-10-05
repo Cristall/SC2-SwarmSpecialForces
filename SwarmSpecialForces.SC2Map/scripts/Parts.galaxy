@@ -206,6 +206,9 @@ void Part_TransitionToP1(){
     }
     gv_Enemy_SpawnAmount = 0;
     Utility_PauseGame(false);
+
+    // check if custom diff skip protoss is enabled
+    CustomDiff_SkipP1();
 }
 
 bool Part_TransitionToP1_Ability (bool testConds, bool runActions){

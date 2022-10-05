@@ -50,6 +50,10 @@ bool Utility_IsNumber (string input) {
     return true;
 }
 
+bool Utility_IsInt(fixed input){
+    return Round(input) == input;
+}
+
 static int Utility_DelayedTextTagDestroyer_ParamTextTag;
 static trigger Utility_DelayedTextTagDestroyer_Trigger;
 

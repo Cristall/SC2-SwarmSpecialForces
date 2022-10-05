@@ -25,28 +25,22 @@ static trigger HeroSelection_AutoSelection_ButtonHandler_Trigger;
 static trigger HeroSelection_Diff_ButtonHandler_Trigger;
 static trigger HeroSelection_Timer_Handler_Trigger;
 
-static const int maxAmountCustomDiffSettings = 18;
 
-struct HeroSelection_CustomDiff_DiffPreset {
-    fixed[maxAmountCustomDiffSettings] values;
-    bool[1] flags;
-};
-static int[gv_MaxAmountDifficulties] heroSelection_CustomDiff_PresetButtons;
-static int heroSelection_CustomDiff_CustomPresetInputEditBox;
-static int heroSelection_CustomDiff_CustomPresetInputCreateButton;
-static int heroSelection_CustomDiff_CustomPresetInputCopyClipboardButton;
-static int heroSelection_CustomDiff_CustomPresetInputLoadButton;
-static int[maxAmountCustomDiffSettings] heroSelection_CustomDiff_Editboxes;
-static bool[maxAmountCustomDiffSettings] heroSelection_CustomDiff_ValidInput;
-static int heroSelection_CustomDiff_SkipToP1Checkbox;
-static int heroSelection_CustomDiff_Host;
-static playergroup heroSelection_CustomDiff_NotHostPlayerGroup;
-static trigger HeroSelection_CustomDiff_Editbox_Handler_Trigger;
-static trigger heroSelection_CustomDiff_SkipToP1Checkbox_Handler_Trigger;
-static trigger HeroSelection_CustomDiff_DiffPresetHandler_Handler_Trigger;
-static trigger HeroSelection_CustomDiff_CustomPresetInputCreateButton_Handler_Trigger;
-static trigger HeroSelection_CustomDiff_CustomPresetInputEditBox_Handler_Trigger;
-static trigger HeroSelection_CustomDiff_CustomPresetInputLoadButton_Handler_Trigger;
+static int customDiff_Host;
+static int customDiff_CustomPresetInputLoadButton;
+static playergroup customDiff_NotHostPlayerGroup;
+static trigger CustomDiff_Editbox_Handler_Trigger;
+static trigger customDiff_FlagsCheckbox_Handler_Trigger;
+static trigger CustomDiff_DiffPreset_Handler_Trigger;
+static trigger CustomDiff_CustomPresetInputCreateButton_Handler_Trigger;
+static trigger CustomDiff_CustomPresetInputEditBox_Handler_Trigger;
+static trigger CustomDiff_CustomPresetInputLoadButton_Handler_Trigger;
+
+static void CustomDiff_SetOptions();
+static bool CustomDiff_AllInputsValid();
+static void CustomDiff_NewHostAfterLeave(int player);
+static void CustomDiff_Init();
+static void CustomDiff_SkipP0();
 
 // unlocks diff and everything below
 void HeroSelection_UnlockDiff (int playerID, int diff) {
@@ -68,8 +62,21 @@ void HeroSelection_UnlockHero(int playerID, int heroID){
 }
 
 // updates showcase, checks the auto selection button state
+//TODO: bug custom diff ready button gets enabled even if stuff is invalid
 void HeroSelection_SelectHero (int playerID, int heroID) {
-    DialogControlSetEnabled(heroSelection_Ready_Button, PlayerGroupSingle(playerID), true);
+    if(gv_GameMode == c_GameMode_CustomDiff){
+        // host requires all inputs to be valid
+        if((playerID == customDiff_Host && CustomDiff_AllInputsValid())
+            || playerID != customDiff_Host){
+            DialogControlSetEnabled(heroSelection_Ready_Button, PlayerGroupSingle(playerID), true);
+        }
+        // else {
+        //     DialogControlSetEnabled(heroSelection_Ready_Button, PlayerGroupSingle(playerID), false);
+        // }
+    }
+    else{
+        DialogControlSetEnabled(heroSelection_Ready_Button, PlayerGroupSingle(playerID), true);
+    }
     DialogControlSetVisible(heroSelection_AutoSelection_Button, PlayerGroupSingle(playerID), true);
     DialogControlSetAnimationState(heroSelection_Player_Showcase[playerID], PlayerGroupAll(), "Hero", IntToString(heroID + 1));
     if (gv_GameMode == c_GameMode_Classic) {
@@ -95,12 +102,12 @@ static void HeroSelection_Finish_Triggers_Destroy () {
         if (gv_PlayerAmountStart != 1) {TriggerDestroy(HeroSelection_Timer_Handler_Trigger);}
     }
     else if (gv_GameMode == c_GameMode_CustomDiff){
-        TriggerDestroy(HeroSelection_CustomDiff_Editbox_Handler_Trigger);
-        TriggerDestroy(heroSelection_CustomDiff_SkipToP1Checkbox_Handler_Trigger);
-        TriggerDestroy(HeroSelection_CustomDiff_DiffPresetHandler_Handler_Trigger);
-        TriggerDestroy(HeroSelection_CustomDiff_CustomPresetInputCreateButton_Handler_Trigger);
-        TriggerDestroy(HeroSelection_CustomDiff_CustomPresetInputEditBox_Handler_Trigger);
-        TriggerDestroy(HeroSelection_CustomDiff_CustomPresetInputLoadButton_Handler_Trigger);
+        TriggerDestroy(CustomDiff_Editbox_Handler_Trigger);
+        TriggerDestroy(customDiff_FlagsCheckbox_Handler_Trigger);
+        TriggerDestroy(CustomDiff_DiffPreset_Handler_Trigger);
+        TriggerDestroy(CustomDiff_CustomPresetInputCreateButton_Handler_Trigger);
+        TriggerDestroy(CustomDiff_CustomPresetInputEditBox_Handler_Trigger);
+        TriggerDestroy(CustomDiff_CustomPresetInputLoadButton_Handler_Trigger);
     }
 }
 
@@ -151,390 +158,12 @@ static int HeroSelection_GetDiffButtonID (int dialogItem) {
     return -2;
 }
 
-// custom difficulty functions
-static bool HeroSelection_CustomDiff_AllInputsValid () {
-    int tmpInt;
-    for ( tmpInt = 0; tmpInt < maxAmountCustomDiffSettings ; tmpInt += 1 ) {
-        if (heroSelection_CustomDiff_ValidInput[tmpInt] == false) {
-            return false;
-        }
-    }
-    return true;
-}
-static int HeroSelection_CustomDiff_GetEditboxID (int dialogItem) {
-    int tmpInt;
-    tmpInt = 0;
-    for ( tmpInt = 0; tmpInt < maxAmountCustomDiffSettings ; tmpInt += 1 ) {
-        if (dialogItem == heroSelection_CustomDiff_Editboxes[tmpInt]) {
-            return tmpInt;
-        }
-    }
-    return -1;
-}
-static void HeroSelection_CustomDiff_HighlightRewardDiff (int diff) {
-    int tmpInt;
-    if ((diff == -2)) {
-        for (tmpInt = 0 ; tmpInt < gv_MaxAmountDifficulties; tmpInt += 1 ) {
-            libNtve_gf_SetDialogItemColor(heroSelection_CustomDiff_PresetButtons[tmpInt], ColorWithAlpha(0,0,0,0), PlayerGroupAll());
-        }
-    }
-    else {
-        if ((diff == -1)) {
-            for ( tmpInt = 0; tmpInt < gv_MaxAmountDifficulties ; tmpInt += 1 ) {
-                libNtve_gf_SetDialogItemColor(heroSelection_CustomDiff_PresetButtons[tmpInt], Color(100.00, 0.00, 0.00), PlayerGroupAll());
-            }
-        }
-        else {
-            for ( tmpInt = 0;tmpInt < gv_MaxAmountDifficulties ; tmpInt += 1 ) {
-                libNtve_gf_SetDialogItemColor(heroSelection_CustomDiff_PresetButtons[tmpInt], ColorWithAlpha(0,0,0,0), PlayerGroupAll());
-            }
-            libNtve_gf_SetDialogItemColor(heroSelection_CustomDiff_PresetButtons[diff], Color(50.20, 100.00, 50.20), PlayerGroupAll());
-        }
-    }
-}
-// overwrites the structref with values for the difficulty in classic game mode
-static void HeroSelection_CustomDiff_DiffPresetReturn (structref<HeroSelection_CustomDiff_DiffPreset> returnSettings, int diff) {
-
-    string diffBuff = "Difficulty" + IntToString(diff);
-    int tmpInt;
-
-    returnSettings.values[0]  = libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogBehavior, diffBuff, "Modification.DamageDealtScaled[0]" , gv_EnemyPlayer);           //damage flat
-    returnSettings.values[1]  = libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogBehavior, diffBuff, "Modification.DamageDealtFraction[0]" , gv_EnemyPlayer) * 100;   //damage %
-    returnSettings.values[2]  = (libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogBehavior, diffBuff, "Modification.AttackSpeedMultiplier" , gv_EnemyPlayer)-1) *100; //atkspd
-    returnSettings.values[3]  = libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogBehavior, diffBuff, "Modification.VitalMaxFractionArray[Life]" , gv_EnemyPlayer)*100;//vitals %
-    returnSettings.values[4]  = libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogBehavior, diffBuff, "Modification.LifeArmorBonus" , gv_EnemyPlayer);                 //armor flat
-    returnSettings.values[5]  = (libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogBehavior, diffBuff, "Modification.LifeArmorMultiplier" , gv_EnemyPlayer)-1) *100;   //armor %
-    returnSettings.values[6]  = libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogBehavior, diffBuff, "Modification.VitalRegenArray[Life]" , gv_EnemyPlayer);          //regen flat
-    returnSettings.values[7]  = libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogBehavior, diffBuff, "Modification.VitalRegenMultiplier[0]" , gv_EnemyPlayer) *100;   //regen %
-    returnSettings.values[8]  = (libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogBehavior, diffBuff, "Modification.MoveSpeedMultiplier" , gv_EnemyPlayer)-1) *100;   //movespeed
-    returnSettings.values[9]  = (UserDataGetFixed("DifficultyTable", IntToString(diff), "SpawnMult", 1)-1)*100;                                                         //spawn mult
-    returnSettings.values[10] = (UserDataGetFixed("DifficultyTable", IntToString(diff), "BiomassMult", 1)-1)*100;                                                       //biomass mult
-    returnSettings.values[11] = (UserDataGetFixed("DifficultyTable", IntToString(diff), "ExpMult", 1)-1)*100;                                                           //exp mult
-    returnSettings.values[12] = (UserDataGetFixed("DifficultyTable", IntToString(diff), "UpgradeCountFactor", 1)-1)*100;                                                //upgrade count mult
-    returnSettings.values[13] = 0;                                                                                                                                      //start biomass
-    returnSettings.values[14] = 0;                                                                                                                                      //start exp
-    returnSettings.values[15] = IntToFixed(diff);                                                                                                                       //boss ability level
-    returnSettings.values[16] = 0;                                                                                                                                      //start mutations
-    returnSettings.values[17] = 0;                                                                                                                                      //lifes
-    returnSettings.flags[0]   = false;                                                                                                                                  //skip to p2 flag
-}
-static int HeroSelection_CustomDiff_DirectRewardDiff () {
-    fixed[maxAmountCustomDiffSettings] settings;
-    HeroSelection_CustomDiff_DiffPreset thresholds;
-    int tmpInt;
-    int tmpInt2;
-    int thresholdfound;
-    bool tmpbool;
-
-    if (libNtve_gf_DialogItemIsChecked(heroSelection_CustomDiff_SkipToP1Checkbox, heroSelection_CustomDiff_Host)) {
-        return -1;
-    }
-    for ( tmpInt2 = 0; tmpInt2 <= maxAmountCustomDiffSettings ; tmpInt2 += 1 ) {
-        settings[tmpInt2] = StringToFixed(libNtve_gf_DialogItemEditValue(heroSelection_CustomDiff_Editboxes[tmpInt2], heroSelection_CustomDiff_Host));
-    }
-    tmpbool = true;
-    thresholdfound = (gv_MaxAmountDifficulties - 1);
-    for ( tmpInt = 0; tmpInt < maxAmountCustomDiffSettings ; tmpInt += 1 ) {
-        HeroSelection_CustomDiff_DiffPresetReturn(thresholds, tmpInt);
-        for ( tmpInt2 = 0; tmpInt2 <= maxAmountCustomDiffSettings; tmpInt2 += 1 ) {
-            if (!(tmpInt2 == 10 || tmpInt2 == 11 || tmpInt2 == 12 || tmpInt2 == 13 || tmpInt2 == 14)) {
-                if (settings[tmpInt2] < thresholds.values[tmpInt2]) {
-                    tmpbool = false;
-                }
-            }
-            if (tmpInt2 == 10 || tmpInt2 == 11 || tmpInt2 == 13 || tmpInt2 == 14 || tmpInt2 == 16 || tmpInt2 == 17) {
-                if (settings[tmpInt2] > thresholds.values[tmpInt2]) {
-                    tmpbool = false;
-                }
-            }
-        }
-        if (tmpbool == false) {
-            thresholdfound = (tmpInt - 1);
-            break;
-        }
-    }
-    if (thresholdfound >= 0) {
-        HeroSelection_CustomDiff_DiffPresetReturn(thresholds, thresholdfound);
-        if ((settings[12] > thresholds.values[12])) {
-            thresholdfound = -1;
-        }
-    }
-    return thresholdfound;
-}
-
-static void HeroSelection_CustomDiff_AnyChangeUpdater () {
-    if (HeroSelection_CustomDiff_AllInputsValid()) {
-        if ((heroSelection_Player_HeroSelected[heroSelection_CustomDiff_Host] != -1)) {
-            DialogControlSetEnabled(heroSelection_Ready_Button, PlayerGroupSingle(heroSelection_CustomDiff_Host), true);
-            libNtve_gf_SetDialogItemTooltip(heroSelection_Ready_Button, StringToText(""), PlayerGroupSingle(heroSelection_CustomDiff_Host));
-        }
-        else {
-            DialogControlSetEnabled(heroSelection_Ready_Button, PlayerGroupSingle(heroSelection_CustomDiff_Host), false);
-            libNtve_gf_SetDialogItemTooltip(heroSelection_Ready_Button, StringExternal("Trig/HeroSelection/Dialog/ReadyButtonTooltip"), PlayerGroupSingle(heroSelection_CustomDiff_Host));
-        }
-        DialogControlSetEnabled(heroSelection_CustomDiff_CustomPresetInputCreateButton, gv_ActivePG, true);
-        HeroSelection_CustomDiff_HighlightRewardDiff(HeroSelection_CustomDiff_DirectRewardDiff());
-    }
-    else {
-        DialogControlSetEnabled(heroSelection_Ready_Button, PlayerGroupSingle(heroSelection_CustomDiff_Host), false);
-        libNtve_gf_SetDialogItemTooltip(heroSelection_Ready_Button, StringExternal("Trig/HeroSelection/Dialog/ReadyButtonCustomDiffHostTooltip"), PlayerGroupSingle(heroSelection_CustomDiff_Host));
-        DialogControlSetEnabled(heroSelection_CustomDiff_CustomPresetInputCreateButton, gv_ActivePG, false);
-        HeroSelection_CustomDiff_HighlightRewardDiff(-2);
-    }
-}
-
-static int HeroSelection_CustomDiff_GetDiffPresetID (int dialogItem) {
-    int tmpInt;
-    for (tmpInt = 0 ; tmpInt < gv_MaxAmountDifficulties ; tmpInt += 1 ) {
-        if ((dialogItem == heroSelection_CustomDiff_PresetButtons[tmpInt])) {
-            return tmpInt;
-        }
-    }
-    return -1;
-}
-
-// sets the editbox values according to the preset parameter
-static void HeroSelection_CustomDiff_DiffPresetSet (structref<HeroSelection_CustomDiff_DiffPreset> preset) {
-    int tmpInt;
-    for ( tmpInt=0 ; tmpInt <= maxAmountCustomDiffSettings; tmpInt += 1 ) {
-        libNtve_gf_SetDialogItemEditorValue(heroSelection_CustomDiff_Editboxes[tmpInt], FixedToString(preset.values[tmpInt], c_fixedPrecisionAny), PlayerGroupAll());
-    }
-    libNtve_gf_SetDialogItemChecked(heroSelection_CustomDiff_SkipToP1Checkbox, preset.flags[0], PlayerGroupAll());
-}
-
-// opens areas, spawns and kills bosses, kills observer; still uses gf_Junker/Blackops area openers
-static void HeroSelection_CustomDiff_SkipToP1 () {
-    int player = heroSelection_CustomDiff_Host;
-    PartTerran_AreaBlackOps_Second_Open();
-    PartTerran_AreaBlackOps_Third_Open();
-    PartTerran_AreaJunker_Second_Open();
-    PartTerran_AreaJunker_Third_Open();
-
-    TriggerExecute(TriggerFind("PartTerran_Boss_Flamer_Spawner"), false, true);
-    UnitDamage(gv_PlayerStats[player].heroUnit, "KillTargetDeathNormal", gv_Bosses[c_Bosses_TFlamer], 0.0);
-    TriggerExecute(TriggerFind("PartTerran_Boss_Fortress_Spawner"), false, true);
-    UnitDamage(gv_PlayerStats[player].heroUnit, "KillTargetDeathNormal", gv_Bosses[c_Bosses_TFortress], 0.0);
-    TriggerExecute(TriggerFind("PartTerran_Boss_Hammer_Spawner"), false, true);
-    UnitDamage(gv_PlayerStats[player].heroUnit, "KillTargetDeathNormal", gv_Bosses[c_Bosses_THammer], 0.0);
-    UnitKill(gv_Observer_Unit);
-}
-
-// writes editbox values into the custom difficulty buff and the difficulty variables
-static void HeroSelection_CustomDiff_SetOptions () {
-    fixed tmpval;
-    int thresholdfound;
-    int tmpInt;
-
-    tmpval = StringToFixed(libNtve_gf_DialogItemEditValue(heroSelection_CustomDiff_Editboxes[0], heroSelection_CustomDiff_Host));
-    CatalogFieldValueSet(c_gameCatalogBehavior, "DifficultyCustom", "Modification.DamageDealtScaled[" + IntToString(0) + "]", gv_EnemyPlayer, FixedToString(tmpval, c_fixedPrecisionAny));
-    CatalogFieldValueSet(c_gameCatalogBehavior, "DifficultyCustom", "Modification.DamageDealtScaled[" + IntToString(1) + "]", gv_EnemyPlayer, FixedToString(tmpval, c_fixedPrecisionAny));
-    CatalogFieldValueSet(c_gameCatalogBehavior, "DifficultyCustom", "Modification.DamageDealtScaled[" + IntToString(2) + "]", gv_EnemyPlayer, FixedToString(tmpval, c_fixedPrecisionAny));
-    CatalogFieldValueSet(c_gameCatalogBehavior, "DifficultyCustom", "Modification.DamageDealtScaled[" + IntToString(3) + "]", gv_EnemyPlayer, FixedToString(tmpval, c_fixedPrecisionAny));
-    CatalogFieldValueSet(c_gameCatalogBehavior, "DifficultyCustom", "Modification.DamageDealtScaled[" + IntToString(4) + "]", gv_EnemyPlayer, FixedToString(tmpval, c_fixedPrecisionAny));
-    tmpval = StringToFixed(libNtve_gf_DialogItemEditValue(heroSelection_CustomDiff_Editboxes[1], heroSelection_CustomDiff_Host));
-    tmpval = (tmpval / 100.0);
-    CatalogReferenceSet("Behavior,DifficultyCustom,Modification.DamageDealtFraction[Melee]", gv_EnemyPlayer, FixedToString(tmpval, c_fixedPrecisionAny));
-    CatalogReferenceSet("Behavior,DifficultyCustom,Modification.DamageDealtFraction[NoProc]", gv_EnemyPlayer, FixedToString(tmpval, c_fixedPrecisionAny));
-    CatalogReferenceSet("Behavior,DifficultyCustom,Modification.DamageDealtFraction[Ranged]", gv_EnemyPlayer, FixedToString(tmpval, c_fixedPrecisionAny));
-    CatalogReferenceSet("Behavior,DifficultyCustom,Modification.DamageDealtFraction[Spell]", gv_EnemyPlayer, FixedToString(tmpval, c_fixedPrecisionAny));
-    CatalogReferenceSet("Behavior,DifficultyCustom,Modification.DamageDealtFraction[Splash]", gv_EnemyPlayer, FixedToString(tmpval, c_fixedPrecisionAny));
-    tmpval = StringToFixed(libNtve_gf_DialogItemEditValue(heroSelection_CustomDiff_Editboxes[2], heroSelection_CustomDiff_Host));
-    tmpval = (tmpval / 100.0);
-    tmpval = (tmpval + 1.0);
-    CatalogFieldValueSet(c_gameCatalogBehavior, "DifficultyCustom", "Modification.AttackSpeedMultiplier", gv_EnemyPlayer, FixedToString(tmpval, c_fixedPrecisionAny));
-    tmpval = StringToFixed(libNtve_gf_DialogItemEditValue(heroSelection_CustomDiff_Editboxes[3], heroSelection_CustomDiff_Host));
-    tmpval = (tmpval / 100.0);
-    CatalogReferenceSet("Behavior,DifficultyCustom,Modification.VitalMaxFractionArray[Energy]", gv_EnemyPlayer, FixedToString(tmpval, c_fixedPrecisionAny));
-    CatalogReferenceSet("Behavior,DifficultyCustom,Modification.VitalMaxFractionArray[Life]", gv_EnemyPlayer, FixedToString(tmpval, c_fixedPrecisionAny));
-    CatalogReferenceSet("Behavior,DifficultyCustom,Modification.VitalMaxFractionArray[Shields]", gv_EnemyPlayer, FixedToString(tmpval, c_fixedPrecisionAny));
-    tmpval = StringToFixed(libNtve_gf_DialogItemEditValue(heroSelection_CustomDiff_Editboxes[4], heroSelection_CustomDiff_Host));
-    CatalogFieldValueSet(c_gameCatalogBehavior, "DifficultyCustom", "Modification.LifeArmorBonus", gv_EnemyPlayer, FixedToString(tmpval, c_fixedPrecisionAny));
-    CatalogFieldValueSet(c_gameCatalogBehavior, "DifficultyCustom", "Modification.ShieldArmorBonus", gv_EnemyPlayer, FixedToString(tmpval, c_fixedPrecisionAny));
-    tmpval = StringToFixed(libNtve_gf_DialogItemEditValue(heroSelection_CustomDiff_Editboxes[5], heroSelection_CustomDiff_Host));
-    tmpval = (tmpval / 100.0);
-    tmpval = (tmpval + 1.0);
-    CatalogFieldValueSet(c_gameCatalogBehavior, "DifficultyCustom", "Modification.LifeArmorMultiplier", gv_EnemyPlayer, FixedToString(tmpval, c_fixedPrecisionAny));
-    CatalogFieldValueSet(c_gameCatalogBehavior, "DifficultyCustom", "Modification.ShieldArmorMultiplier", gv_EnemyPlayer, FixedToString(tmpval, c_fixedPrecisionAny));
-    tmpval = StringToFixed(libNtve_gf_DialogItemEditValue(heroSelection_CustomDiff_Editboxes[6], heroSelection_CustomDiff_Host));
-    CatalogReferenceSet("Behavior,DifficultyCustom,Modification.VitalRegenArray[Energy]", gv_EnemyPlayer, FixedToString(tmpval, c_fixedPrecisionAny));
-    CatalogReferenceSet("Behavior,DifficultyCustom,Modification.VitalRegenArray[Life]", gv_EnemyPlayer, FixedToString(tmpval, c_fixedPrecisionAny));
-    CatalogReferenceSet("Behavior,DifficultyCustom,Modification.VitalRegenArray[Shields]", gv_EnemyPlayer, FixedToString(tmpval, c_fixedPrecisionAny));
-    tmpval = StringToFixed(libNtve_gf_DialogItemEditValue(heroSelection_CustomDiff_Editboxes[7], heroSelection_CustomDiff_Host));
-    tmpval = (tmpval / 100.0);
-    CatalogFieldValueSet(c_gameCatalogBehavior, "DifficultyCustom", "Modification.VitalRegenMultiplier[" + IntToString(0) + "]", gv_EnemyPlayer, FixedToString(tmpval, c_fixedPrecisionAny));
-    CatalogFieldValueSet(c_gameCatalogBehavior, "DifficultyCustom", "Modification.VitalRegenMultiplier[" + IntToString(1) + "]", gv_EnemyPlayer, FixedToString(tmpval, c_fixedPrecisionAny));
-    CatalogFieldValueSet(c_gameCatalogBehavior, "DifficultyCustom", "Modification.VitalRegenMultiplier[" + IntToString(2) + "]", gv_EnemyPlayer, FixedToString(tmpval, c_fixedPrecisionAny));
-    tmpval = StringToFixed(libNtve_gf_DialogItemEditValue(heroSelection_CustomDiff_Editboxes[8], heroSelection_CustomDiff_Host));
-    tmpval = (tmpval / 100.0);
-    tmpval = (tmpval + 1.0);
-    CatalogFieldValueSet(c_gameCatalogBehavior, "DifficultyCustom", "Modification.MoveSpeedMultiplier", gv_EnemyPlayer, FixedToString(tmpval, c_fixedPrecisionAny));
-    tmpval = StringToFixed(libNtve_gf_DialogItemEditValue(heroSelection_CustomDiff_Editboxes[9], heroSelection_CustomDiff_Host));
-    tmpval = (tmpval / 100.0);
-    tmpval = (tmpval + 1.0);
-    gv_Difficulty_SpawnMult = tmpval;
-    tmpval = StringToFixed(libNtve_gf_DialogItemEditValue(heroSelection_CustomDiff_Editboxes[10], heroSelection_CustomDiff_Host));
-    tmpval = (tmpval / 100.0);
-    tmpval = (tmpval + 1.0);
-    gv_Difficulty_BiomassMult = tmpval;
-    tmpval = StringToFixed(libNtve_gf_DialogItemEditValue(heroSelection_CustomDiff_Editboxes[11], heroSelection_CustomDiff_Host));
-    tmpval = (tmpval / 100.0);
-    tmpval = (tmpval + 1.0);
-    gv_Difficulty_ExpMult = tmpval;
-    tmpval = StringToFixed(libNtve_gf_DialogItemEditValue(heroSelection_CustomDiff_Editboxes[12], heroSelection_CustomDiff_Host));
-    tmpval = (tmpval / 100.0);
-    tmpval = (tmpval + 1.0);
-    gv_Difficulty_UpgradeCountFactor = tmpval;
-    tmpval = StringToFixed(libNtve_gf_DialogItemEditValue(heroSelection_CustomDiff_Editboxes[13], heroSelection_CustomDiff_Host));
-
-    tmpInt = -1;
-    while (true) {
-        tmpInt = PlayerGroupNextPlayer(gv_ActivePG, tmpInt);
-        if (tmpInt < 0) { break; }
-        Acv_Reward_StartBiomassP0(tmpInt, tmpval);
-    }
-    tmpval = StringToFixed(libNtve_gf_DialogItemEditValue(heroSelection_CustomDiff_Editboxes[14], heroSelection_CustomDiff_Host));
-
-    tmpInt = -1;
-    while (true) {
-        tmpInt = PlayerGroupNextPlayer(gv_ActivePG, tmpInt);
-        if (tmpInt < 0) { break; }
-        Acv_Reward_StartExpP0(tmpInt, tmpval);
-    }
-    tmpval = StringToFixed(libNtve_gf_DialogItemEditValue(heroSelection_CustomDiff_Editboxes[15], heroSelection_CustomDiff_Host));
-    libNtve_gf_SetUpgradeLevelForPlayer(gv_EnemyPlayer, "BossAbilityDifficultyRequirement", RoundI(tmpval));
-    tmpval = StringToFixed(libNtve_gf_DialogItemEditValue(heroSelection_CustomDiff_Editboxes[16], heroSelection_CustomDiff_Host));
-
-    tmpInt = -1;
-    while (true) {
-        tmpInt = PlayerGroupNextPlayer(gv_ActivePG, tmpInt);
-        if (tmpInt < 0) { break; }
-        PlayerModifyPropertyFixed(tmpInt, c_playerPropVespene, c_playerPropOperAdd, tmpval);
-    }
-    tmpval = StringToFixed(libNtve_gf_DialogItemEditValue(heroSelection_CustomDiff_Editboxes[17], heroSelection_CustomDiff_Host));
-
-    tmpInt = -1;
-    while (true) {
-        tmpInt = PlayerGroupNextPlayer(gv_ActivePG, tmpInt);
-        if (tmpInt < 0) { break; }
-        gv_PlayerStats[tmpInt].lifes += RoundI(tmpval);
-    }
-    thresholdfound = HeroSelection_CustomDiff_DirectRewardDiff();
-    if (thresholdfound >= 0) {
-
-        gv_Difficulty = thresholdfound;
-        UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, (StringExternal("Trig/HeroSelection/CustomDiff/ApproximatedDiff")+StringExternal("Trig/HeroSelection/Dialog/DiffButton/D" + IntToString(thresholdfound) ) ));
-    }
-    else {
-        gv_Difficulty = gv_MaxAmountDifficulties;
-        UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, StringExternal("Trig/HeroSelection/CustomDiff/ApproximatedDiffNone"));
-    }
-
-    if(thresholdfound == -1){
-        gv_ValidGame = false;
-        gv_Difficulty_Points = 0;
-        gv_Difficulty_ScientistsAmount = 0;
-        gv_Difficulty_EssenceAmount = 0;
-        gv_Difficulty_PsiOrbSpawns = false;
-    }
-    else {
-        gv_Difficulty_Points = UserDataGetInt("DifficultyTable", IntToString(thresholdfound), "Points", 1);
-        gv_Difficulty_ScientistsAmount = UserDataGetInt("DifficultyTable", IntToString(thresholdfound), "ScientistsAmount", 1);
-        gv_Difficulty_EssenceAmount = UserDataGetInt("DifficultyTable", IntToString(thresholdfound), "EssenceAmount", 1);
-        gv_Difficulty_PsiOrbSpawns = UserDataGetInt("DifficultyTable", IntToString(thresholdfound), "PsoOrbSpawn", 1) > 0;
-    }
-    CatalogFieldValueModify(c_gameCatalogBehavior, "VoidContainmentWeaponDebuff", "Modification.VitalRegenArray[" + IntToString(2) + "]", gv_EnemyPlayer, FixedToString((1.0 + libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogBehavior, "DifficultyCustom", "Modification.DamageDealtFraction[" + IntToString(0) + "]", c_playerAny)), c_fixedPrecisionAny), c_upgradeOperationMultiply);
-    CatalogFieldValueModify(c_gameCatalogEffect, "VoidMineWeaponPersistent", "PeriodicEffectRateMultiplier", gv_EnemyPlayer, FixedToString(libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogBehavior, "DifficultyCustom", "Modification.AttackSpeedMultiplier", c_playerAny), c_fixedPrecisionAny), c_upgradeOperationMultiply);
-    CatalogFieldValueModify(c_gameCatalogEffect, "SentryNerazimWeaponPersistent", "PeriodicEffectRateMultiplier", gv_EnemyPlayer, FixedToString(libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogBehavior, "DifficultyCustom", "Modification.AttackSpeedMultiplier", c_playerAny), c_fixedPrecisionAny), c_upgradeOperationMultiply);
-    CatalogFieldValueModify(c_gameCatalogEffect, "SentryPurifierWeaponPersistent", "PeriodicEffectRateMultiplier", gv_EnemyPlayer, FixedToString(libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogBehavior, "DifficultyCustom", "Modification.AttackSpeedMultiplier", c_playerAny), c_fixedPrecisionAny), c_upgradeOperationMultiply);
-    if (libNtve_gf_DialogItemIsChecked(heroSelection_CustomDiff_SkipToP1Checkbox, heroSelection_CustomDiff_Host)) {
-        HeroSelection_CustomDiff_SkipToP1();
-    }
-}
-
-static void HeroSelection_CustomDiff_NewHostAfterLeave (int newhost) {
-    string inputEditboxString;
-
-    inputEditboxString = libNtve_gf_DialogItemEditValue(heroSelection_CustomDiff_CustomPresetInputEditBox, newhost);
-    if ((heroSelection_Player_IsReady[newhost] == true)) {
-        heroSelection_Player_IsReady[newhost] = false;
-        heroSelection_Ready_Counter -= 1;
-        DialogControlSetVisible(heroSelection_Ready_Button, PlayerGroupSingle(newhost), true);
-        DialogControlSetEnabled(heroSelection_Ready_Button, PlayerGroupSingle(newhost), false);
-    }
-    heroSelection_CustomDiff_Host = newhost;
-    PlayerGroupRemove(heroSelection_CustomDiff_NotHostPlayerGroup, heroSelection_CustomDiff_Host);
-    DialogControlSetAnimationState(DialogControlHookup(gv_HeroSelection_MainFrame, c_triggerControlTypePanel, "GameModeCustom"), PlayerGroupSingle(heroSelection_CustomDiff_Host), "Host", "True");
-    libNtve_gf_SetDialogItemEditorValue(heroSelection_CustomDiff_CustomPresetInputEditBox, "", PlayerGroupSingle(newhost));
-    libNtve_gf_SetDialogItemEditorValue(heroSelection_CustomDiff_CustomPresetInputEditBox, inputEditboxString, PlayerGroupSingle(newhost));
-}
-
-static void HeroSelection_CustomDiff_CustomPreset_CreateInput (int player) {
-    string inputString = "";
-    int tmpInt;
-
-    for ( tmpInt = 0; tmpInt < maxAmountCustomDiffSettings; tmpInt += 1 ) {
-        inputString = (inputString + " " + libNtve_gf_DialogItemEditValue(heroSelection_CustomDiff_Editboxes[tmpInt], heroSelection_CustomDiff_Host));
-    }
-
-    if (libNtve_gf_DialogItemIsChecked(heroSelection_CustomDiff_SkipToP1Checkbox, heroSelection_CustomDiff_Host)) {
-        inputString = (inputString + " 1");
-    }
-    else {
-        inputString = (inputString + " 0");
-    }
-    libNtve_gf_SetDialogItemEditorValue(heroSelection_CustomDiff_CustomPresetInputEditBox, inputString, PlayerGroupSingle(player));
-    DialogControlSetEnabled(heroSelection_CustomDiff_CustomPresetInputCopyClipboardButton, PlayerGroupSingle(player), true);
-}
-
-static bool HeroSelection_CustomDiff_CustomPreset_LoadInputAndCheck (structref<HeroSelection_CustomDiff_DiffPreset> preset) {
-    string inputString = libNtve_gf_DialogItemEditValue(heroSelection_CustomDiff_CustomPresetInputEditBox, heroSelection_CustomDiff_Host);
-    int tmpInt;
-    string tmpString = "";
-    bool endFlag = true;
-    
-    for ( tmpInt = 0; tmpInt < maxAmountCustomDiffSettings ; tmpInt += 1 ) {
-        tmpString = StringWord(inputString, (tmpInt + 1));
-        if (Utility_IsNumber(tmpString)) {
-            preset.values[tmpInt] = StringToFixed(tmpString);
-        }
-        else {
-            preset.values[tmpInt] = 0.0;
-            endFlag = false;
-            return false;
-        }
-    }
-    tmpString = StringWord(inputString, (tmpInt + 1));
-    if ((tmpString == "0" || tmpString == "1")) {
-        if (tmpString == "1") {
-            preset.flags[0] = true;
-        }
-        else {
-            preset.flags[0] = false;
-        }
-    }
-    else {
-        endFlag = false;
-        return false;
-    }
-    tmpInt += 1;
-    tmpString = StringWord(inputString, (tmpInt + 1));
-    if (tmpString != "") {
-        endFlag = false;
-        return false;
-    }
-
-    if (endFlag == true) {
-        return true;
-    }
-    else {
-        return false;
-    }
-}
 
 // finalizes choices of hero and difficulty, starts the game.
 void HeroSelection_Finish () {
     int tmpInt;
-    int[gv_MaxAmountDifficulties] diffVotesSum;
+    int i;
+    int[gv_MaxAmountDifficulties+1] diffVotesSum;   //+1 required here for custom diff
     text outputText;
     int totalVotes = 0;
     trigger tmpTrigger;
@@ -547,12 +176,10 @@ void HeroSelection_Finish () {
     DialogControlSetVisible(gv_HeroSelection_MainFrame, PlayerGroupAll(), false);
     tmpTrigger = TriggerCreate("Player_HeroDies");
 
-    tmpInt = -1;
-    while (true) {
-        tmpInt = PlayerGroupNextPlayer(gv_ActivePG, tmpInt);
-        if (tmpInt < 0) { break; }
+    for (i = 1; i <= PlayerGroupCount(PlayerGroupActive()); i += 1) {
+        tmpInt = PlayerGroupPlayer(PlayerGroupActive(), i);
 
-        // create Hero and Overlord
+        // create hero
         if (heroSelection_Player_HeroSelected[tmpInt] == -1) {
             heroSelection_Player_HeroSelected[tmpInt] = 0;
         }
@@ -565,6 +192,7 @@ void HeroSelection_Finish () {
         }
         HeroPanel_SetIcon(tmpInt, heroSelection_Player_HeroSelected[tmpInt]);
         UnitGroupSelect(UnitGroupSelected(tmpInt), tmpInt, false);
+        // create overlord
         libNtve_gf_CreateUnitsWithDefaultFacing(1, "BaseOverlord", 0, tmpInt, gv_Part_PlayerSpawnPoints[tmpInt]);
         if (gv_PlayerStats[tmpInt].options_ControlGroup_Flag[1]) {
             UnitControlGroupAddUnit(tmpInt, gv_PlayerStats[tmpInt].options_ControlGroup_Group[1], UnitLastCreated());
@@ -578,18 +206,14 @@ void HeroSelection_Finish () {
             || gv_PlayerStats[tmpInt].options_InitialUnitSelection == c_InitialHeroSelection_Both){
             UnitSelect(gv_PlayerStats[tmpInt].overlord, tmpInt, true);
         }
-        Acv_Reward_Spellpower_UpdateEffects(tmpInt);
-    }
-    tmpInt = -1;
-    while (true) {
-        tmpInt = PlayerGroupNextPlayer(gv_ActivePG, tmpInt);
-        if (tmpInt < 0) { break; }
 
+        Acv_Reward_Spellpower_UpdateEffects(tmpInt);
+
+        // count votes
         if (heroSelection_Player_DifficultySelected[tmpInt] >= 0) {
             totalVotes += 1;
             diffVotesSum[heroSelection_Player_DifficultySelected[tmpInt]] += 1;
         }
-
     }
     // count diff votes
     if (totalVotes == 0) {
@@ -599,7 +223,8 @@ void HeroSelection_Finish () {
     }
     else {
         gv_Difficulty = 0;
-        for ( tmpInt = 1; tmpInt < gv_MaxAmountDifficulties; tmpInt += 1 ) {
+        // upper limit has to be <= because of custom diff abusing index gv_MaxAmountDifficulties
+        for ( tmpInt = 1; tmpInt <= gv_MaxAmountDifficulties; tmpInt += 1 ) {
             if (diffVotesSum[tmpInt] > diffVotesSum[gv_Difficulty]) {
                 gv_Difficulty = tmpInt;
             }
@@ -616,17 +241,16 @@ void HeroSelection_Finish () {
         UIDisplayMessage(PlayerGroupAll(), c_messageAreaChat, Utility_TextExpressionReplacement("Trig/HeroSelection/DiffToken", outputText));
     }
     
-    tmpInt = -1;
-    while (true) {
-        tmpInt = PlayerGroupNextPlayer(PlayerGroupAll(), tmpInt);
-        if (tmpInt < 0) { break; }
+    for (i = 1; i <= PlayerGroupCount(PlayerGroupAll()); i += 1) {
+        tmpInt = PlayerGroupPlayer(PlayerGroupAll(), i);
+        // PlayerGroupAll is here important such that enemy player gets affected as well
         PlayerModifyPropertyInt(tmpInt, c_playerPropCustom, c_playerPropOperSetTo, gv_Difficulty);
     }
     if (gv_GameMode == c_GameMode_Classic) {
         Difficulty_SetVariables(gv_Difficulty);
     }
     else {
-        HeroSelection_CustomDiff_SetOptions();
+        CustomDiff_SetOptions();
     }
 
     Hive_InitialSpawn();
@@ -641,6 +265,8 @@ void HeroSelection_Finish () {
     UISetMode(PlayerGroupAll(), c_uiModeConsole, 1.0);
     gv_GameActive = true;
     HeroSelection_Finish_Triggers_Create();
+
+    CustomDiff_SkipP0();
 }
 
 // handles player leaving while the hero selection is ongoing
@@ -663,15 +289,9 @@ void HeroSelection_PlayerLeavesHandling(int playerID){
     }
     //checks if leaver would make game start
     if (heroSelection_Ready_Counter == gv_PlayerAmount) {
-
         //custom diff intercept for host leaving with invalid options
-        if (heroSelection_CustomDiff_Host == playerID) {
-            if (HeroSelection_CustomDiff_AllInputsValid()) {
-                HeroSelection_Finish();
-            }
-            else {
-                HeroSelection_CustomDiff_NewHostAfterLeave(PlayerGroupPlayer(gv_ActivePG, 1));
-            }
+        if(customDiff_Host == playerID && !CustomDiff_AllInputsValid()){
+                CustomDiff_NewHostAfterLeave(PlayerGroupPlayer(gv_ActivePG, 1));
         }
         else {
             HeroSelection_Finish();
@@ -679,28 +299,26 @@ void HeroSelection_PlayerLeavesHandling(int playerID){
     }
     else {
         //select new custom diff host (player must be not ready (at least one exists due to above check)) or remove player from not host pg
-        if (heroSelection_CustomDiff_Host == playerID && !heroSelection_Player_IsReady[playerID]) {
+        if (customDiff_Host == playerID && !heroSelection_Player_IsReady[playerID]) {
             tmpInt = -1;
             while (true) {
                 tmpInt = PlayerGroupNextPlayer(gv_ActivePG, tmpInt);
                 if (tmpInt < 0) { break; }
 
                 if (!heroSelection_Player_IsReady[tmpInt]) {
-                    HeroSelection_CustomDiff_NewHostAfterLeave(tmpInt);
+                    CustomDiff_NewHostAfterLeave(tmpInt);
                     break;
                 }
             }
         }
         else {
-            PlayerGroupRemove(heroSelection_CustomDiff_NotHostPlayerGroup, playerID);
+            PlayerGroupRemove(customDiff_NotHostPlayerGroup, playerID);
         }
     }
 }
 
 void HeroSelection_Init () {
     int tmpInt;
-    string[maxAmountCustomDiffSettings] customDiff_LayoutNames;
-    HeroSelection_CustomDiff_DiffPreset customDiff_Settings;
 
     gv_HeroSelection_MainFrame = DialogControlHookupStandard(c_triggerControlTypePanel, "UIContainer/FullscreenUpperContainer/SSF_HeroSelection");
     heroSelection_AutoSelection_Button = DialogControlHookup(gv_HeroSelection_MainFrame, c_triggerControlTypeButton, "AutoSelectionButton");
@@ -757,100 +375,8 @@ void HeroSelection_Init () {
         }
     }
     else if (gv_GameMode == c_GameMode_CustomDiff) {
-        tmpInt = -1;
-        while (true) {
-            tmpInt = PlayerGroupNextPlayer(gv_StartingPG, tmpInt);
-            if (tmpInt < 0) { break; }
-            heroSelection_Player_DifficultySelected[tmpInt] = 6;
-        }
-
-        heroSelection_CustomDiff_Host = PlayerGroupPlayer(gv_ActivePG, 1);
-        heroSelection_CustomDiff_NotHostPlayerGroup = PlayerGroupCopy(gv_ActivePG);
-        PlayerGroupRemove(heroSelection_CustomDiff_NotHostPlayerGroup, heroSelection_CustomDiff_Host);
-        DialogControlHookup(gv_HeroSelection_MainFrame, c_triggerControlTypePanel, "GameModeCustom");
-        DialogControlSetVisible(DialogControlLastCreated(), PlayerGroupAll(), true);
-        DialogControlSetAnimationState(DialogControlLastCreated(), PlayerGroupSingle(heroSelection_CustomDiff_Host), "Host", "True");
-
-        tmpInt = 0;
-        customDiff_LayoutNames[tmpInt] = "DmgFlat";
-        tmpInt += 1;
-        customDiff_LayoutNames[tmpInt] = "DmgPercent";
-        tmpInt += 1;
-        customDiff_LayoutNames[tmpInt] = "Atkspd";
-        tmpInt += 1;
-        customDiff_LayoutNames[tmpInt] = "Vitals";
-        tmpInt += 1;
-        customDiff_LayoutNames[tmpInt] = "ArmorFlat";
-        tmpInt += 1;
-        customDiff_LayoutNames[tmpInt] = "ArmorPercent";
-        tmpInt += 1;
-        customDiff_LayoutNames[tmpInt] = "RegenFlat";
-        tmpInt += 1;
-        customDiff_LayoutNames[tmpInt] = "RegenPercent";
-        tmpInt += 1;
-        customDiff_LayoutNames[tmpInt] = "Movementspeed";
-        tmpInt += 1;
-        customDiff_LayoutNames[tmpInt] = "SpawnMultiplier";
-        tmpInt += 1;
-        customDiff_LayoutNames[tmpInt] = "BiomassMultiplier";
-        tmpInt += 1;
-        customDiff_LayoutNames[tmpInt] = "ExpMultiplier";
-        tmpInt += 1;
-        customDiff_LayoutNames[tmpInt] = "Upgrades";
-        tmpInt += 1;
-        customDiff_LayoutNames[tmpInt] = "StartBiomass";
-        tmpInt += 1;
-        customDiff_LayoutNames[tmpInt] = "StartExp";
-        tmpInt += 1;
-        customDiff_LayoutNames[tmpInt] = "BossAbilities";
-        tmpInt += 1;
-        customDiff_LayoutNames[tmpInt] = "StartMutation";
-        tmpInt += 1;
-        customDiff_LayoutNames[tmpInt] = "Lifes";
-        
-        for ( tmpInt = 0; tmpInt <= maxAmountCustomDiffSettings; tmpInt += 1 ) {
-            heroSelection_CustomDiff_Editboxes[tmpInt] = DialogControlHookup(gv_HeroSelection_MainFrame, c_triggerControlTypeEditBox, "GameModeCustom/" + customDiff_LayoutNames[tmpInt] + "/Input");
-        }
-        
-        heroSelection_CustomDiff_SkipToP1Checkbox = DialogControlHookup(gv_HeroSelection_MainFrame, c_triggerControlTypeCheckBox, "GameModeCustom/SkipToP1/CheckBox");
-        heroSelection_CustomDiff_CustomPresetInputEditBox = DialogControlHookup(gv_HeroSelection_MainFrame, c_triggerControlTypeEditBox, "GameModeCustom/CustomPreset/Input");
-        DialogControlSetEnabled(DialogControlLastCreated(), PlayerGroupSingle(heroSelection_CustomDiff_Host), true);
-        heroSelection_CustomDiff_CustomPresetInputCreateButton = DialogControlHookup(gv_HeroSelection_MainFrame, c_triggerControlTypeButton, "GameModeCustom/CustomPreset/CreateInputButton");
-        heroSelection_CustomDiff_CustomPresetInputCopyClipboardButton = DialogControlHookup(gv_HeroSelection_MainFrame, c_triggerControlTypeButton, "GameModeCustom/CustomPreset/CopyInputButton");
-        heroSelection_CustomDiff_CustomPresetInputLoadButton = DialogControlHookup(gv_HeroSelection_MainFrame, c_triggerControlTypeButton, "GameModeCustom/CustomPreset/LoadInputButton");
-
-        for ( tmpInt = 0; tmpInt < gv_MaxAmountDifficulties; tmpInt += 1 ) {
-            heroSelection_CustomDiff_PresetButtons[tmpInt] = DialogControlHookup(gv_HeroSelection_MainFrame, c_triggerControlTypeButton, "GameModeCustom/DiffPreset" + IntToString(tmpInt));
-            libNtve_gf_SetDialogItemText(heroSelection_CustomDiff_PresetButtons[tmpInt], Utility_DiffNameShortColored(tmpInt), PlayerGroupAll());
-        }
-
-        HeroSelection_CustomDiff_Editbox_Handler_Trigger = TriggerCreate("HeroSelection_CustomDiff_Editbox_Handler");
-        TriggerAddEventDialogControl(HeroSelection_CustomDiff_Editbox_Handler_Trigger, c_playerAny, c_invalidDialogControlId, c_triggerControlEventTypeTextChanged);
-
-        heroSelection_CustomDiff_SkipToP1Checkbox_Handler_Trigger = TriggerCreate("heroSelection_CustomDiff_SkipToP1Checkbox_Handler");
-        TriggerAddEventDialogControl(heroSelection_CustomDiff_SkipToP1Checkbox_Handler_Trigger, c_playerAny, heroSelection_CustomDiff_SkipToP1Checkbox, c_triggerControlEventTypeChecked);
-
-        
-        HeroSelection_CustomDiff_DiffPresetHandler_Handler_Trigger = TriggerCreate("HeroSelection_CustomDiff_DiffPresetHandler_Handler");
-        TriggerAddEventDialogControl(HeroSelection_CustomDiff_DiffPresetHandler_Handler_Trigger, c_playerAny, c_invalidDialogControlId, c_triggerControlEventTypeClick);
-
-        HeroSelection_CustomDiff_CustomPresetInputCreateButton_Handler_Trigger = TriggerCreate("HeroSelection_CustomDiff_CustomPresetInputCreateButton_Handler");
-        TriggerAddEventDialogControl(HeroSelection_CustomDiff_CustomPresetInputCreateButton_Handler_Trigger, c_playerAny, heroSelection_CustomDiff_CustomPresetInputCreateButton, c_triggerControlEventTypeClick);
-
-        HeroSelection_CustomDiff_CustomPresetInputEditBox_Handler_Trigger = TriggerCreate("HeroSelection_CustomDiff_CustomPresetInputEditBox_Handler");
-        TriggerAddEventDialogControl(HeroSelection_CustomDiff_CustomPresetInputEditBox_Handler_Trigger, c_playerAny, heroSelection_CustomDiff_CustomPresetInputEditBox, c_triggerControlEventTypeTextChanged);
-
-        HeroSelection_CustomDiff_CustomPresetInputLoadButton_Handler_Trigger = TriggerCreate("HeroSelection_CustomDiff_CustomPresetInputLoadButton_Handler");
-        TriggerAddEventDialogControl(HeroSelection_CustomDiff_CustomPresetInputLoadButton_Handler_Trigger, c_playerAny, heroSelection_CustomDiff_CustomPresetInputLoadButton, c_triggerControlEventTypeClick);
-
-
-        // TriggerEnable(gt_HeroSelect_CustomDiff_CustomPreset_LoadButton, true);
-        // TriggerEnable(gt_HeroSelect_CustomDiff_CustomPreset_InputChanged, true);
-
-        HeroSelection_CustomDiff_DiffPresetReturn(customDiff_Settings, 0);
-        HeroSelection_CustomDiff_DiffPresetSet(customDiff_Settings);
+        CustomDiff_Init();
     }
-
 }
 
 bool HeroSelection_Hero_ButtonHandler (bool testConds, bool runActions){
@@ -890,10 +416,10 @@ bool HeroSelection_Ready_ButtonHandler (bool testConds, bool runActions){
         DialogControlSetVisible(heroSelection_Difficulty_Button_Any, PlayerGroupSingle(trigPlayer), false);
     }
     // if player was custom diff host, then disable input usage
-    if(trigPlayer == heroSelection_CustomDiff_Host){
+    if(trigPlayer == customDiff_Host){
         DialogControlHookup(gv_HeroSelection_MainFrame, c_triggerControlTypePanel, "GameModeCustom");
-        DialogControlSetAnimationState(DialogControlLastCreated(), PlayerGroupSingle(heroSelection_CustomDiff_Host), "Host", "False");
-        DialogControlSetEnabled(heroSelection_CustomDiff_CustomPresetInputLoadButton, PlayerGroupSingle(heroSelection_CustomDiff_Host), false);
+        DialogControlSetAnimationState(DialogControlLastCreated(), PlayerGroupSingle(customDiff_Host), "Host", "False");
+        DialogControlSetEnabled(customDiff_CustomPresetInputLoadButton, PlayerGroupSingle(customDiff_Host), false);
     }
     return true;
 }
@@ -932,114 +458,679 @@ bool HeroSelection_Timer_Handler(bool testConds, bool runActions){
     return true;
 }
 
-bool HeroSelection_CustomDiff_Editbox_Handler (bool testConds, bool runActions){
-    int trigPlayer = EventPlayer();
-    int editboxID = HeroSelection_CustomDiff_GetEditboxID(EventDialogControl());
-    string input = libNtve_gf_DialogItemEditValue(EventDialogControl(), trigPlayer);
-    fixed value;
 
-    if(testConds){
-        if(! (editboxID >= 0 && trigPlayer == heroSelection_CustomDiff_Host)){ return false;}
-    }
+// -----------------------------
+//          CUSTOM DIFF
+// -----------------------------
 
-    //set other players editboxes to the same value so they see the same
-    libNtve_gf_SetDialogItemEditorValue(heroSelection_CustomDiff_Editboxes[editboxID], input, heroSelection_CustomDiff_NotHostPlayerGroup);
 
-    if(Utility_IsNumber(input)){
-        value = StringToFixed(input);
-        //check for inputs which need to be > -100: these are all except 0,4,6,13,14,15,16,17
-        if( !(editboxID == 0 || editboxID == 4 || editboxID ==  6 || editboxID ==  13 || editboxID ==  14 || editboxID ==  15 || editboxID == 16 || editboxID == 17) ){
-            heroSelection_CustomDiff_ValidInput[editboxID] = (value > -100.0);
-        }
-        //0,4,6 are flat inputs that only need to be numbers
-        else if (editboxID == 0 || editboxID == 4 || editboxID == 6){
-            heroSelection_CustomDiff_ValidInput[editboxID] = true;
-        }
-        //13,14,16 have to be non-negative
-        else if (editboxID == 13 || editboxID == 14 || editboxID == 16){
-            heroSelection_CustomDiff_ValidInput[editboxID] = (value >= 0.0);
-        }
-        //15 needs to be integer and between 0 and MaxDiff-1
-        else if (editboxID == 15){
-            heroSelection_CustomDiff_ValidInput[editboxID] = (value >= 0) && (value < gv_MaxAmountDifficulties) && (value == Round(value));
-        }
-        //17 needs to be integer and non-negative
-        else if (editboxID == 17){
-            heroSelection_CustomDiff_ValidInput[editboxID] = (value >= 0) && (value == Round(value));
-        }
-    }
-    else{
-        heroSelection_CustomDiff_ValidInput[editboxID] = false;
-    }
-    //updates checkmark box next to the editbox
-    DialogControlSetAnimationState(EventDialogControl(), PlayerGroupAll(), "ValidInput", libNtve_gf_ConvertBooleanToString(heroSelection_CustomDiff_ValidInput[editboxID]));
-    HeroSelection_CustomDiff_AnyChangeUpdater();
-    return true;
-}
+// consts
+static const int customDiff_MaxAmountFixed = 16;
+static const int customDiff_MaxAmountFlags = 2;
 
-bool HeroSelection_CustomDiff_SkipToP1Checkbox_Handler (bool testConds, bool runActions){
-    int trigPlayer = EventPlayer();
+static const int customDiff_PresetsInvalidInputs = -2;
+static const int customDiff_PresetsNoRewards = -1;
 
-    if(testConds){
-        if ( ! (trigPlayer == heroSelection_CustomDiff_Host)) {return false;}
-    }
-    if(!runActions){return true;}
 
-    libNtve_gf_SetDialogItemChecked(heroSelection_CustomDiff_SkipToP1Checkbox, libNtve_gf_DialogItemIsChecked(EventDialogControl(), trigPlayer), PlayerGroupAll());
-    HeroSelection_CustomDiff_AnyChangeUpdater();
-    return true;
-}
+//enums
 
-bool HeroSelection_CustomDiff_DiffPreset_Handler (bool testConds, bool runActions){
-    int diff = HeroSelection_CustomDiff_GetDiffPresetID(EventDialogControl());
-    HeroSelection_CustomDiff_DiffPreset preset;
+static const int c_CustomDiffFixed_Damage           = 0;
+static const int c_CustomDiffFixed_AtkSpd           = 1;
+static const int c_CustomDiffFixed_Movespeed        = 2;
+static const int c_CustomDiffFixed_Vitals           = 3;
+static const int c_CustomDiffFixed_DmgReduction     = 4;
+static const int c_CustomDiffFixed_Regen            = 5;
+static const int c_CustomDiffFixed_Armor            = 6;
+static const int c_CustomDiffFixed_BossAbils        = 7;
+static const int c_CustomDiffFixed_Upgrades         = 8;
+static const int c_CustomDiffFixed_BiomassMult      = 9;
+static const int c_CustomDiffFixed_ExpMult          = 10;
+static const int c_CustomDiffFixed_SpawnMult        = 11;
+static const int c_CustomDiffFixed_StartBiomass     = 12;
+static const int c_CustomDiffFixed_StartExp         = 13;
+static const int c_CustomDiffFixed_StartMutations   = 14;
+static const int c_CustomDiffFixed_Lifes            = 15;
 
-    if (testConds){
-        if (! (diff >= 0)){
+static const int c_CustomDiffFlags_SkipP0 = 0;
+static const int c_CustomDiffFlags_SkipP1 = 1;
+
+
+
+
+// variables
+struct CustomDiff_Settings {
+    fixed[customDiff_MaxAmountFixed] values;
+    bool[customDiff_MaxAmountFlags] flags;
+};
+
+static CustomDiff_Settings customDiff_CurrentSettings;
+static CustomDiff_Settings[gv_MaxAmountDifficulties] customDiff_DiffPresetSettings;
+static int[gv_MaxAmountDifficulties] customDiff_PresetButtons;
+static int customDiff_CustomPresetInputEditBox;
+static int customDiff_CustomPresetInputCreateButton;
+static int customDiff_CustomPresetInputCopyClipboardButton;
+static int[customDiff_MaxAmountFixed] customDiff_Editboxes;
+static bool[customDiff_MaxAmountFixed] customDiff_ValidInput;
+static int[customDiff_MaxAmountFlags] customDiff_FlagsCheckboxes;
+
+
+
+
+
+
+// custom difficulty functions
+static bool CustomDiff_AllInputsValid () {
+    int tmpInt;
+    for ( tmpInt = 0; tmpInt < customDiff_MaxAmountFixed ; tmpInt += 1 ) {
+        if (customDiff_ValidInput[tmpInt] == false) {
             return false;
         }
     }
-    if (!runActions){return true;}
-
-    HeroSelection_CustomDiff_DiffPresetReturn(preset, diff);
-    HeroSelection_CustomDiff_DiffPresetSet(preset);
-
     return true;
 }
-
-bool HeroSelection_CustomDiff_CustomPresetInputCreateButton_Handler(bool testConds, bool runActions){
-    if(!runActions){return true;}
-    HeroSelection_CustomDiff_CustomPreset_CreateInput(EventPlayer());
-    return true;
-}
-
-bool HeroSelection_CustomDiff_CustomPresetInputEditBox_Handler(bool testConds, bool runActions){
-    int trigPlayer = EventPlayer();
-    HeroSelection_CustomDiff_DiffPreset preset;
-    bool validInput;
-
-    if(testConds){
-        if (!(trigPlayer == heroSelection_CustomDiff_Host)){return false;}
+static int CustomDiff_GetEditboxID (int dialogItem) {
+    int tmpInt;
+    tmpInt = 0;
+    for ( tmpInt = 0; tmpInt < customDiff_MaxAmountFixed ; tmpInt += 1 ) {
+        if (dialogItem == customDiff_Editboxes[tmpInt]) {
+            return tmpInt;
+        }
     }
-    if (!runActions){return true;}
+    return -1;
+}
+static int CustomDiff_GetCheckboxID (int dialogItem) {
+    int tmpInt;
+    tmpInt = 0;
+    for ( tmpInt = 0; tmpInt < customDiff_MaxAmountFlags ; tmpInt += 1 ) {
+        if (dialogItem == customDiff_FlagsCheckboxes[tmpInt]) {
+            return tmpInt;
+        }
+    }
+    return -1;
+}
+static int CustomDiff_GetDiffPresetID (int dialogItem) {
+    int tmpInt;
+    for (tmpInt = 0 ; tmpInt < gv_MaxAmountDifficulties ; tmpInt += 1 ) {
+        if ((dialogItem == customDiff_PresetButtons[tmpInt])) {
+            return tmpInt;
+        }
+    }
+    return -1;
+}
+static void CustomDiff_HighlightRewardDiff (int diff) {
+    int tmpInt;
+    if (diff == customDiff_PresetsInvalidInputs) {
+        // all preset buttons uncolored
+        for (tmpInt = 0 ; tmpInt < gv_MaxAmountDifficulties; tmpInt += 1 ) {
+            libNtve_gf_SetDialogItemColor(customDiff_PresetButtons[tmpInt], ColorWithAlpha(0,0,0,0), PlayerGroupAll());
+        }
+    }
+    else if (diff == customDiff_PresetsNoRewards) {
+        // all preset buttons colored red
+        for ( tmpInt = 0; tmpInt < gv_MaxAmountDifficulties ; tmpInt += 1 ) {
+            libNtve_gf_SetDialogItemColor(customDiff_PresetButtons[tmpInt], Color(100.00, 0.00, 0.00), PlayerGroupAll());
+        }
+    }
+    else {
+        // preset buttons uncolored, except the reward difficulty
+        for ( tmpInt = 0;tmpInt < gv_MaxAmountDifficulties ; tmpInt += 1 ) {
+            libNtve_gf_SetDialogItemColor(customDiff_PresetButtons[tmpInt], ColorWithAlpha(0,0,0,0), PlayerGroupAll());
+        }
+        libNtve_gf_SetDialogItemColor(customDiff_PresetButtons[diff], Color(50.20, 100.00, 50.20), PlayerGroupAll());
+    }
+    
+}
 
-    validInput = HeroSelection_CustomDiff_CustomPreset_LoadInputAndCheck(preset);
-    DialogControlSetEnabled(heroSelection_CustomDiff_CustomPresetInputLoadButton, PlayerGroupSingle(heroSelection_CustomDiff_Host), validInput);
-    DialogControlSetEnabled(heroSelection_CustomDiff_CustomPresetInputCopyClipboardButton, PlayerGroupSingle(heroSelection_CustomDiff_Host), validInput);
+// overwrites the structref with values for the difficulty in classic game mode
+static void CustomDiff_FillDiffPreset (structref<CustomDiff_Settings> returnSettings, int diff) {
+    string diffBuff = "Difficulty" + IntToString(diff);
+    
+    returnSettings.values[c_CustomDiffFixed_Damage        ] =  libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogBehavior, diffBuff, "Modification.DamageDealtFraction[0]"     , gv_EnemyPlayer)      * 100;
+    returnSettings.values[c_CustomDiffFixed_AtkSpd        ] = (libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogBehavior, diffBuff, "Modification.AttackSpeedMultiplier"      , gv_EnemyPlayer) - 1) * 100;
+    returnSettings.values[c_CustomDiffFixed_Vitals        ] =  libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogBehavior, diffBuff, "Modification.VitalMaxFractionArray[Life]", gv_EnemyPlayer)      * 100;
+    returnSettings.values[c_CustomDiffFixed_Armor         ] = (libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogBehavior, diffBuff, "Modification.LifeArmorMultiplier"        , gv_EnemyPlayer) - 1) * 100;
+    returnSettings.values[c_CustomDiffFixed_DmgReduction  ] = (1 - libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogBehavior, diffBuff, "DamageResponse.ModifyFraction"           , gv_EnemyPlayer)) * 100;
+    returnSettings.values[c_CustomDiffFixed_Regen         ] =  libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogBehavior, diffBuff, "Modification.VitalRegenMultiplier[0]"    , gv_EnemyPlayer)      * 100;
+    returnSettings.values[c_CustomDiffFixed_Movespeed     ] = (libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogBehavior, diffBuff, "Modification.MoveSpeedMultiplier"        , gv_EnemyPlayer) - 1) * 100;
+    returnSettings.values[c_CustomDiffFixed_SpawnMult     ] = (UserDataGetFixed("DifficultyTable", IntToString(diff), "SpawnMult", 1)         - 1) * 100;
+    returnSettings.values[c_CustomDiffFixed_BiomassMult   ] = (UserDataGetFixed("DifficultyTable", IntToString(diff), "BiomassMult", 1)       - 1) * 100;
+    returnSettings.values[c_CustomDiffFixed_ExpMult       ] = (UserDataGetFixed("DifficultyTable", IntToString(diff), "ExpMult", 1)           - 1) * 100;
+    returnSettings.values[c_CustomDiffFixed_Upgrades      ] = (UserDataGetFixed("DifficultyTable", IntToString(diff), "UpgradeCountFactor", 1)- 1) * 100;
+    returnSettings.values[c_CustomDiffFixed_BossAbils     ] = IntToFixed(diff);
+    returnSettings.values[c_CustomDiffFixed_StartBiomass  ] = 0;
+    returnSettings.values[c_CustomDiffFixed_StartExp      ] = 0;
+    returnSettings.values[c_CustomDiffFixed_StartMutations] = 0;
+    returnSettings.values[c_CustomDiffFixed_Lifes         ] = 0;
+    
+    returnSettings.flags[c_CustomDiffFlags_SkipP0] = false;
+    returnSettings.flags[c_CustomDiffFlags_SkipP1] = false;
+}
+static int CustomDiff_RewardDiff () {
+    structref<CustomDiff_Settings> threshold;
+    int i;
+    int diff;
+    int thresholdfound;
+
+    for (i = 0; i < customDiff_MaxAmountFlags; i += 1) {
+        // any enabled flag will result in no rewards
+        if (libNtve_gf_DialogItemIsChecked(customDiff_FlagsCheckboxes[i], customDiff_Host)) {
+            return customDiff_PresetsNoRewards;
+        }
+    }
+
+    thresholdfound = gv_MaxAmountDifficulties - 1;
+    for ( diff = 0; diff < gv_MaxAmountDifficulties ; diff += 1 ) {
+        threshold = customDiff_DiffPresetSettings[diff];
+        
+        for ( i = 0; i < customDiff_MaxAmountFixed; i += 1 ) {
+
+            // values that have to be 0
+            if (i == c_CustomDiffFixed_StartBiomass
+                || i == c_CustomDiffFixed_StartExp
+                || i == c_CustomDiffFixed_StartMutations
+                || i == c_CustomDiffFixed_Lifes)
+            {
+                // these checks could be moved outside the diff loop as they will fail in the first iteration, but for consistency they are left in here
+                if (customDiff_CurrentSettings.values[i] != 0.0){
+                    // Debug_ShowMessage("CustomDiff_RewardDiff: zero check failed at id: " + IntToString(i) + " in diff " + IntToString(diff));
+                    break;
+                }
+            }
+            // increasing values per diff
+            else if (i == c_CustomDiffFixed_Damage
+                || i == c_CustomDiffFixed_AtkSpd
+                || i == c_CustomDiffFixed_Vitals
+                || i == c_CustomDiffFixed_Regen
+                || i == c_CustomDiffFixed_Armor
+                || i == c_CustomDiffFixed_DmgReduction
+                || i == c_CustomDiffFixed_Movespeed
+                || i == c_CustomDiffFixed_SpawnMult
+                || i == c_CustomDiffFixed_BossAbils)
+            {
+                if (customDiff_CurrentSettings.values[i] < threshold.values[i]) {
+                    // Debug_ShowMessage("CustomDiff_RewardDiff: increasing check failed at id: " + IntToString(i) + " in diff " + IntToString(diff));
+                    break;
+                }
+            }
+            // decreasing values per diff
+            else if (i == c_CustomDiffFixed_BiomassMult
+                || i == c_CustomDiffFixed_ExpMult
+                || i == c_CustomDiffFixed_Upgrades)
+            {
+                // upgrades are in theory constant 0, but to allow lower values with rewards its put here
+                if (customDiff_CurrentSettings.values[i] > threshold.values[i]) {
+                    // Debug_ShowMessage("CustomDiff_RewardDiff: decreasing check failed at id: " + IntToString(i) + " in diff " + IntToString(diff));
+                    break;
+                }
+            }
+            else {
+                Debug_ShowMessage("CustomDiff_RewardDiff: unchecked fixed with id: " + IntToString(i));
+            }
+        }
+        if (i < customDiff_MaxAmountFixed) {
+            thresholdfound = diff - 1;
+            break;
+        }
+    }
+
+    return thresholdfound;
+}
+
+static void CustomDiff_AnyChangeUpdater () {
+    if (CustomDiff_AllInputsValid()) {
+        if (heroSelection_Player_HeroSelected[customDiff_Host] != -1) {
+            DialogControlSetEnabled(heroSelection_Ready_Button, PlayerGroupSingle(customDiff_Host), true);
+            libNtve_gf_SetDialogItemTooltip(heroSelection_Ready_Button, StringToText(""), PlayerGroupSingle(customDiff_Host));
+        }
+        else {
+            DialogControlSetEnabled(heroSelection_Ready_Button, PlayerGroupSingle(customDiff_Host), false);
+            libNtve_gf_SetDialogItemTooltip(heroSelection_Ready_Button, StringExternal("Trig/HeroSelection/Dialog/ReadyButtonTooltip"), PlayerGroupSingle(customDiff_Host));
+        }
+        DialogControlSetEnabled(customDiff_CustomPresetInputCreateButton, gv_ActivePG, true);
+        CustomDiff_HighlightRewardDiff(CustomDiff_RewardDiff());
+    }
+    else {
+        DialogControlSetEnabled(heroSelection_Ready_Button, PlayerGroupSingle(customDiff_Host), false);
+        libNtve_gf_SetDialogItemTooltip(heroSelection_Ready_Button, StringExternal("Trig/HeroSelection/Dialog/ReadyButtonCustomDiffHostTooltip"), PlayerGroupSingle(customDiff_Host));
+        DialogControlSetEnabled(customDiff_CustomPresetInputCreateButton, gv_ActivePG, false);
+        CustomDiff_HighlightRewardDiff(customDiff_PresetsInvalidInputs);
+    }
+}
+
+
+// sets the editbox values according to the preset parameter
+static void CustomDiff_LoadPreset (structref<CustomDiff_Settings> preset) {
+    int tmpInt;
+    for ( tmpInt=0 ; tmpInt < customDiff_MaxAmountFixed; tmpInt += 1 ) {
+        libNtve_gf_SetDialogItemEditorValue(customDiff_Editboxes[tmpInt], FixedToString(preset.values[tmpInt], c_fixedPrecisionAny), PlayerGroupAll());
+    }
+    for (tmpInt = 0; tmpInt < customDiff_MaxAmountFlags; tmpInt += 1) {
+        libNtve_gf_SetDialogItemChecked(customDiff_FlagsCheckboxes[tmpInt], preset.flags[tmpInt], PlayerGroupAll());
+    }
+}
+
+// opens areas, spawns and kills bosses, kills observer; still uses gf_Junker/Blackops area openers
+static void CustomDiff_SkipP0 () {
+    int player = customDiff_Host;
+    if(gv_GameMode != c_GameMode_CustomDiff || !customDiff_CurrentSettings.flags[c_CustomDiffFlags_SkipP1]){
+        return;
+    }
+    PartTerran_AreaBlackOps_Second_Open();
+    PartTerran_AreaBlackOps_Third_Open();
+    PartTerran_AreaJunker_Second_Open();
+    PartTerran_AreaJunker_Third_Open();
+
+    TriggerExecute(TriggerFind("PartTerran_Flamer_Spawner"), false, true);
+    TriggerExecute(TriggerFind("PartTerran_Fortress_Spawner"), false, true);
+    TriggerExecute(TriggerFind("PartTerran_Hammer_Spawner"), false, true);
+    UnitKill(gv_Observer_Unit);
+    Wait(0.0625, c_timeGame);
+    UnitDamage(gv_PlayerStats[player].heroUnit, "Kill", gv_Bosses[c_Bosses_TFlamer], 100000);
+    UnitDamage(gv_PlayerStats[player].heroUnit, "Kill", gv_Bosses[c_Bosses_TFortress], 100000);
+    UnitDamage(gv_PlayerStats[player].heroUnit, "Kill", gv_Bosses[c_Bosses_THammer], 100000);
+}
+
+// upon reaching protoss part is executed and checks if it should be executed
+void CustomDiff_SkipP1(){
+    int player = PlayerGroupPlayer(gv_ActivePG, 1); // host might be dead or has left the game, so use first player
+    if(gv_GameMode != c_GameMode_CustomDiff || !customDiff_CurrentSettings.flags[c_CustomDiffFlags_SkipP1]){
+        return;
+    }
+
+    PartProtoss_AreaMech_Second_Open();
+    PartProtoss_AreaPsi_Second_Open();
+    PartProtoss_AreaPsi_Third_Open();
+    
+    UnitDamage(gv_PlayerStats[player].heroUnit, "Kill", UnitFromId(2104120799), 100000);
+    UnitDamage(gv_PlayerStats[player].heroUnit, "Kill", UnitFromId(2009472328), 100000);
+    
+    Wait(0.0625, c_timeGame);
+    UnitDamage(gv_PlayerStats[player].heroUnit, "Kill", gv_Bosses[c_Bosses_PLightning], 100000);
+    UnitDamage(gv_PlayerStats[player].heroUnit, "Kill", gv_Bosses[c_Bosses_PThunder], 100000);
+    UnitDamage(gv_PlayerStats[player].heroUnit, "Kill", gv_Bosses[c_Bosses_PMadness], 100000);
+    
+    Wait(0.0625, c_timeGame);
+    UnitDamage(gv_PlayerStats[player].heroUnit, "Kill", UnitFromId(1461303459), 100000);
+    Wait(0.0625, c_timeGame);
+    UnitDamage(gv_PlayerStats[player].heroUnit, "Kill", gv_Bosses[c_Bosses_PAtlantis], 100000);
+    UnitDamage(gv_PlayerStats[player].heroUnit, "Kill", gv_NydusWorm_Unit, 100000);
+}
+
+// writes editbox values into the custom difficulty buff and the difficulty variables
+static void CustomDiff_SetOptions () {
+    const string difficultyBuff = "DifficultyCustom";
+    fixed tmpval;
+    int thresholdfound;
+    int i;
+    int player;
+    fixed armorMultiplier;
+
+    tmpval = customDiff_CurrentSettings.values[c_CustomDiffFixed_Damage] / 100;
+    CatalogFieldValueSet(c_gameCatalogBehavior, difficultyBuff, "Modification.DamageDealtFraction[Melee]", gv_EnemyPlayer, FixedToString(tmpval, c_fixedPrecisionAny));
+    CatalogFieldValueSet(c_gameCatalogBehavior, difficultyBuff, "Modification.DamageDealtFraction[NoProc]", gv_EnemyPlayer, FixedToString(tmpval, c_fixedPrecisionAny));
+    CatalogFieldValueSet(c_gameCatalogBehavior, difficultyBuff, "Modification.DamageDealtFraction[Ranged]", gv_EnemyPlayer, FixedToString(tmpval, c_fixedPrecisionAny));
+    CatalogFieldValueSet(c_gameCatalogBehavior, difficultyBuff, "Modification.DamageDealtFraction[Splash]", gv_EnemyPlayer, FixedToString(tmpval, c_fixedPrecisionAny));
+    CatalogFieldValueSet(c_gameCatalogBehavior, difficultyBuff, "Modification.DamageDealtFraction[Spell]", gv_EnemyPlayer, FixedToString(tmpval  * 2, c_fixedPrecisionAny));
+
+    tmpval = customDiff_CurrentSettings.values[c_CustomDiffFixed_AtkSpd] / 100 + 1;
+    CatalogFieldValueSet(c_gameCatalogBehavior, difficultyBuff, "Modification.AttackSpeedMultiplier", gv_EnemyPlayer, FixedToString(tmpval, c_fixedPrecisionAny));
+
+    tmpval = customDiff_CurrentSettings.values[c_CustomDiffFixed_Vitals] / 100;
+    CatalogFieldValueSet(c_gameCatalogBehavior, difficultyBuff, "Modification.VitalMaxFractionArray[Energy]", gv_EnemyPlayer, FixedToString(tmpval, c_fixedPrecisionAny));
+    CatalogFieldValueSet(c_gameCatalogBehavior, difficultyBuff, "Modification.VitalMaxFractionArray[Life]", gv_EnemyPlayer, FixedToString(tmpval, c_fixedPrecisionAny));
+    CatalogFieldValueSet(c_gameCatalogBehavior, difficultyBuff, "Modification.VitalMaxFractionArray[Shields]", gv_EnemyPlayer, FixedToString(tmpval, c_fixedPrecisionAny));
+
+    tmpval = customDiff_CurrentSettings.values[c_CustomDiffFixed_Armor] / 100 + 1;
+    CatalogFieldValueSet(c_gameCatalogBehavior, difficultyBuff, "Modification.LifeArmorMultiplier", gv_EnemyPlayer, FixedToString(tmpval, c_fixedPrecisionAny));
+    CatalogFieldValueSet(c_gameCatalogBehavior, difficultyBuff, "Modification.ShieldArmorMultiplier", gv_EnemyPlayer, FixedToString(tmpval, c_fixedPrecisionAny));
+
+    tmpval = customDiff_CurrentSettings.values[c_CustomDiffFixed_Regen] / 100;
+    CatalogFieldValueSet(c_gameCatalogBehavior, difficultyBuff, "Modification.VitalRegenMultiplier[0]", gv_EnemyPlayer, FixedToString(tmpval, c_fixedPrecisionAny));
+    CatalogFieldValueSet(c_gameCatalogBehavior, difficultyBuff, "Modification.VitalRegenMultiplier[1]", gv_EnemyPlayer, FixedToString(tmpval, c_fixedPrecisionAny));
+    CatalogFieldValueSet(c_gameCatalogBehavior, difficultyBuff, "Modification.VitalRegenMultiplier[2]", gv_EnemyPlayer, FixedToString(tmpval, c_fixedPrecisionAny));
+
+    tmpval = customDiff_CurrentSettings.values[c_CustomDiffFixed_Movespeed] / 100 + 1;
+    CatalogFieldValueSet(c_gameCatalogBehavior, difficultyBuff, "Modification.MoveSpeedMultiplier", gv_EnemyPlayer, FixedToString(tmpval, c_fixedPrecisionAny));
+
+    tmpval =  1 - customDiff_CurrentSettings.values[c_CustomDiffFixed_DmgReduction] / 100;
+    CatalogFieldValueSet(c_gameCatalogBehavior, difficultyBuff, "DamageResponse.ModifyFraction", gv_EnemyPlayer, FixedToString(tmpval, c_fixedPrecisionAny));
+
+    gv_Difficulty_SpawnMult = customDiff_CurrentSettings.values[c_CustomDiffFixed_SpawnMult] / 100 + 1;
+    gv_Difficulty_BiomassMult = customDiff_CurrentSettings.values[c_CustomDiffFixed_BiomassMult] / 100 + 1;
+    gv_Difficulty_ExpMult = customDiff_CurrentSettings.values[c_CustomDiffFixed_ExpMult] / 100 + 1;
+    gv_Difficulty_UpgradeCountFactor = customDiff_CurrentSettings.values[c_CustomDiffFixed_Upgrades] / 100 + 1;
+
+    for (i = 1; i <= PlayerGroupCount(gv_ActivePG); i += 1) {
+        player = PlayerGroupPlayer(gv_ActivePG, i);
+
+        Acv_Reward_StartBiomassP0(player, customDiff_CurrentSettings.values[c_CustomDiffFixed_StartBiomass]);
+        Acv_Reward_StartMutationsP0(player, customDiff_CurrentSettings.values[c_CustomDiffFixed_StartMutations]);
+        Acv_Reward_StartExpP0(player, customDiff_CurrentSettings.values[c_CustomDiffFixed_StartExp]);
+        gv_PlayerStats[player].lifes += RoundI(customDiff_CurrentSettings.values[c_CustomDiffFixed_Lifes]);
+    }
+
+    tmpval = customDiff_CurrentSettings.values[c_CustomDiffFixed_BossAbils];
+    libNtve_gf_SetUpgradeLevelForPlayer(gv_EnemyPlayer, "BossAbilityDifficultyRequirement", RoundI(tmpval));
+
+
+    thresholdfound = CustomDiff_RewardDiff();
+
+    if(thresholdfound == customDiff_PresetsNoRewards){
+        gv_Difficulty = gv_MaxAmountDifficulties;
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, StringExternal("Trig/HeroSelection/CustomDiff/ApproximatedDiffNone"));
+
+        gv_ValidGame = false;
+        gv_Difficulty_Points = 0;
+        gv_Difficulty_ScientistsAmount = 0;
+        gv_Difficulty_EssenceAmount = 0;
+        gv_Difficulty_PsiOrbSpawns = false;
+    }
+    else {
+        gv_Difficulty = thresholdfound;
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, Utility_TextExpressionReplacement("Trig/HeroSelection/CustomDiff/ApproximatedDiff", Utility_DiffNameColored(thresholdfound)));
+
+        gv_Difficulty_Points = UserDataGetInt("DifficultyTable", IntToString(thresholdfound), "Points", 1);
+        gv_Difficulty_ScientistsAmount = UserDataGetInt("DifficultyTable", IntToString(thresholdfound), "ScientistsAmount", 1);
+        gv_Difficulty_EssenceAmount = UserDataGetInt("DifficultyTable", IntToString(thresholdfound), "EssenceAmount", 1);
+        gv_Difficulty_PsiOrbSpawns = UserDataGetInt("DifficultyTable", IntToString(thresholdfound), "PsoOrbSpawn", 1) > 0;
+    }
+
+    // compare to Difficulty_SetVariables()
+    armorMultiplier = libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogBehavior, difficultyBuff, "Modification.LifeArmorMultiplier", c_playerAny);
+    CatalogFieldValueModify(c_gameCatalogBehavior, "VoidContainmentWeaponDebuff", "Modification.VitalRegenArray[2]", gv_EnemyPlayer, FixedToString((1.0 + libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogBehavior, difficultyBuff, "Modification.DamageDealtFraction[0]", c_playerAny)), c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogEffect, "VoidMineWeaponPersistent", "PeriodicEffectRateMultiplier", gv_EnemyPlayer, CatalogFieldValueGet(c_gameCatalogBehavior, difficultyBuff, "Modification.AttackSpeedMultiplier", c_playerAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogEffect, "SentryNerazimWeaponPersistent", "PeriodicEffectRateMultiplier", gv_EnemyPlayer, CatalogFieldValueGet(c_gameCatalogBehavior, difficultyBuff, "Modification.AttackSpeedMultiplier", c_playerAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogEffect, "SentryPurifierWeaponPersistent", "PeriodicEffectRateMultiplier", gv_EnemyPlayer, CatalogFieldValueGet(c_gameCatalogBehavior, difficultyBuff, "Modification.AttackSpeedMultiplier", c_playerAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogBehavior, "EatThis@Vehicle", "Modification.VitalMaxArray[0]", gv_EnemyPlayer, FixedToString(1+libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogBehavior, difficultyBuff, "Modification.VitalMaxFractionArray[0]", c_playerAny),c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogBehavior, "EatThis@Vehicle", "Modification.VitalMaxArray[1]", gv_EnemyPlayer, FixedToString(1+libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogBehavior, difficultyBuff, "Modification.VitalMaxFractionArray[1]", c_playerAny),c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    CatalogFieldValueModify(c_gameCatalogBehavior, "EatThis@Vehicle", "Modification.VitalMaxArray[2]", gv_EnemyPlayer, FixedToString(1+libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogBehavior, difficultyBuff, "Modification.VitalMaxFractionArray[2]", c_playerAny),c_fixedPrecisionAny), c_upgradeOperationMultiply);
+    Utility_CatalogFieldSetPower(c_gameCatalogBehavior, "BossesP0Armor", "DamageResponse.ModifyFraction", gv_EnemyPlayer, armorMultiplier);
+    Utility_CatalogFieldSetPower(c_gameCatalogBehavior, "BossesP1Armor", "DamageResponse.ModifyFraction", gv_EnemyPlayer, armorMultiplier);
+    Utility_CatalogFieldSetPower(c_gameCatalogBehavior, "BossesP2Armor", "DamageResponse.ModifyFraction", gv_EnemyPlayer, armorMultiplier);
+    Utility_CatalogFieldSetPower(c_gameCatalogBehavior, "KingMoopyArmor", "DamageResponse.ModifyFraction", gv_EnemyPlayer, armorMultiplier);
+}
+
+static void CustomDiff_NewHostAfterLeave (int newhost) {
+    string inputEditboxString;
+
+    inputEditboxString = libNtve_gf_DialogItemEditValue(customDiff_CustomPresetInputEditBox, newhost);
+    if (heroSelection_Player_IsReady[newhost] == true) {
+        heroSelection_Player_IsReady[newhost] = false;
+        heroSelection_Ready_Counter -= 1;
+        DialogControlSetVisible(heroSelection_Ready_Button, PlayerGroupSingle(newhost), true);
+        DialogControlSetEnabled(heroSelection_Ready_Button, PlayerGroupSingle(newhost), false);
+    }
+    customDiff_Host = newhost;
+    PlayerGroupRemove(customDiff_NotHostPlayerGroup, customDiff_Host);
+    DialogControlSetAnimationState(DialogControlHookup(gv_HeroSelection_MainFrame, c_triggerControlTypePanel, "GameModeCustom"), PlayerGroupSingle(customDiff_Host), "Host", "True");
+    libNtve_gf_SetDialogItemEditorValue(customDiff_CustomPresetInputEditBox, "", PlayerGroupSingle(newhost));
+    libNtve_gf_SetDialogItemEditorValue(customDiff_CustomPresetInputEditBox, inputEditboxString, PlayerGroupSingle(newhost));
+}
+
+static void CustomDiff_CustomPreset_CreateInput (int player) {
+    string inputString = "";
+    int tmpInt;
+
+    for ( tmpInt = 0; tmpInt < customDiff_MaxAmountFixed; tmpInt += 1 ) {
+        inputString += FixedToString(customDiff_CurrentSettings.values[tmpInt], -1) + " ";
+    }
+
+    for ( tmpInt = 0; tmpInt < customDiff_MaxAmountFlags; tmpInt += 1 ) {
+        if (customDiff_CurrentSettings.flags[tmpInt]){
+            inputString += "1 ";
+        }
+        else {
+            inputString += "0 ";
+        }
+    }
+    libNtve_gf_SetDialogItemEditorValue(customDiff_CustomPresetInputEditBox, inputString, PlayerGroupSingle(player));
+    DialogControlSetEnabled(customDiff_CustomPresetInputCopyClipboardButton, PlayerGroupSingle(player), true);
+}
+
+static bool CustomDiff_CustomPreset_LoadInputAndCheck (structref<CustomDiff_Settings> preset) {
+    string inputString = libNtve_gf_DialogItemEditValue(customDiff_CustomPresetInputEditBox, customDiff_Host);
+    int tmpInt;
+    string tmpString = "";
+    
+    for (tmpInt = 0; tmpInt < customDiff_MaxAmountFixed ; tmpInt += 1 ) {
+        tmpString = StringWord(inputString, tmpInt + 1);
+        if (Utility_IsNumber(tmpString)) {
+            preset.values[tmpInt] = StringToFixed(tmpString);
+        }
+        else {
+            Debug_ShowMessage("CustomDiff_CustomPreset: Fixed " + IntToString(tmpInt) + ", incorrect value: " + tmpString);
+            return false;
+        }
+    }
+    for (tmpInt = 0; tmpInt < customDiff_MaxAmountFlags ; tmpInt += 1 ) {
+        tmpString = StringWord(inputString, tmpInt + 1 + customDiff_MaxAmountFixed);
+        if (tmpString == "1") {
+            preset.flags[tmpInt] = true;
+        }
+        else if (tmpString == "0"){
+            preset.flags[tmpInt] = false;
+        }
+        else {
+            Debug_ShowMessage("CustomDiff_CustomPreset: Flags " + IntToString(tmpInt) + ", incorrect value: " + tmpString);
+            return false;
+        }
+    }
+    // check if the string contains too many words
+    tmpString = StringWord(inputString, customDiff_MaxAmountFixed + customDiff_MaxAmountFlags + 1);
+    if (tmpString != "") {
+        Debug_ShowMessage("CustomDiff_CustomPreset: Input has too many words");
+        return false;
+    }
 
     return true;
 }
 
-bool HeroSelection_CustomDiff_CustomPresetInputLoadButton_Handler(bool testConds, bool runActions){
-    HeroSelection_CustomDiff_DiffPreset preset;
 
-    if (!runActions){return true;}
+static void CustomDiff_InitDiffPreset(){
+    int i;
+    for (i = 0; i < gv_MaxAmountDifficulties; i += 1) {
+        CustomDiff_FillDiffPreset(customDiff_DiffPresetSettings[i],i);
+    }
+}
 
-    if(HeroSelection_CustomDiff_CustomPreset_LoadInputAndCheck(preset)){
-        HeroSelection_CustomDiff_DiffPresetSet(preset);
+static void CustomDiff_Init(){
+    int tmpInt;
+    string[customDiff_MaxAmountFixed] customDiff_LayoutNamesFixed;
+    string[customDiff_MaxAmountFlags] customDiff_LayoutNamesFlags;
+    CustomDiff_Settings customDiff_Settings;
+    tmpInt = -1;
+
+    // set selected difficulty for all players
+    while (true) {
+        tmpInt = PlayerGroupNextPlayer(gv_StartingPG, tmpInt);
+        if (tmpInt < 0) { break; }
+        heroSelection_Player_DifficultySelected[tmpInt] = 6;
+    }
+
+    // only host can change settings, defaults to first player
+    customDiff_Host = PlayerGroupPlayer(gv_ActivePG, 1);
+    customDiff_NotHostPlayerGroup = PlayerGroupCopy(gv_ActivePG);
+    PlayerGroupRemove(customDiff_NotHostPlayerGroup, customDiff_Host);
+
+    DialogControlHookup(gv_HeroSelection_MainFrame, c_triggerControlTypePanel, "GameModeCustom");
+    DialogControlSetVisible(DialogControlLastCreated(), PlayerGroupAll(), true);
+    DialogControlSetAnimationState(DialogControlLastCreated(), PlayerGroupSingle(customDiff_Host), "Host", "True");
+
+    // layout frame names for the settings (editboxes / checkboxes)
+    customDiff_LayoutNamesFixed[c_CustomDiffFixed_Damage        ] = "Damage";
+    customDiff_LayoutNamesFixed[c_CustomDiffFixed_AtkSpd        ] = "Atkspd";
+    customDiff_LayoutNamesFixed[c_CustomDiffFixed_Vitals        ] = "Vitals";
+    customDiff_LayoutNamesFixed[c_CustomDiffFixed_Armor         ] = "Armor";
+    customDiff_LayoutNamesFixed[c_CustomDiffFixed_DmgReduction  ] = "DamageReduction";
+    customDiff_LayoutNamesFixed[c_CustomDiffFixed_Regen         ] = "Regen";
+    customDiff_LayoutNamesFixed[c_CustomDiffFixed_Movespeed     ] = "Movementspeed";
+    customDiff_LayoutNamesFixed[c_CustomDiffFixed_SpawnMult     ] = "SpawnMultiplier";
+    customDiff_LayoutNamesFixed[c_CustomDiffFixed_BiomassMult   ] = "BiomassMultiplier";
+    customDiff_LayoutNamesFixed[c_CustomDiffFixed_ExpMult       ] = "ExpMultiplier";
+    customDiff_LayoutNamesFixed[c_CustomDiffFixed_Upgrades      ] = "Upgrades";
+    customDiff_LayoutNamesFixed[c_CustomDiffFixed_StartBiomass  ] = "StartBiomass";
+    customDiff_LayoutNamesFixed[c_CustomDiffFixed_StartExp      ] = "StartExp";
+    customDiff_LayoutNamesFixed[c_CustomDiffFixed_BossAbils     ] = "BossAbilities";
+    customDiff_LayoutNamesFixed[c_CustomDiffFixed_StartMutations] = "StartMutation";
+    customDiff_LayoutNamesFixed[c_CustomDiffFixed_Lifes         ] = "Lifes";
+
+    customDiff_LayoutNamesFlags[c_CustomDiffFlags_SkipP0] = "SkipP0";
+    customDiff_LayoutNamesFlags[c_CustomDiffFlags_SkipP1] = "SkipP1";
+    
+    CustomDiff_Editbox_Handler_Trigger = TriggerCreate("CustomDiff_Editbox_Handler");
+    for ( tmpInt = 0; tmpInt < customDiff_MaxAmountFixed; tmpInt += 1 ) {
+        customDiff_Editboxes[tmpInt] = DialogControlHookup(gv_HeroSelection_MainFrame, c_triggerControlTypeEditBox, "GameModeCustom/" + customDiff_LayoutNamesFixed[tmpInt] + "/Input");
+        TriggerAddEventDialogControl(CustomDiff_Editbox_Handler_Trigger, c_playerAny, customDiff_Editboxes[tmpInt], c_triggerControlEventTypeTextChanged);
+        customDiff_ValidInput[tmpInt] = true;
+    }
+    customDiff_FlagsCheckbox_Handler_Trigger = TriggerCreate("CustomDiff_FlagsCheckbox_Handler");
+    for ( tmpInt = 0; tmpInt < customDiff_MaxAmountFlags; tmpInt += 1 ) {
+        customDiff_FlagsCheckboxes[tmpInt] = DialogControlHookup(gv_HeroSelection_MainFrame, c_triggerControlTypeCheckBox, "GameModeCustom/" + customDiff_LayoutNamesFlags[tmpInt] + "/CheckBox");
+        TriggerAddEventDialogControl(customDiff_FlagsCheckbox_Handler_Trigger, c_playerAny, customDiff_FlagsCheckboxes[tmpInt], c_triggerControlEventTypeChecked);
+    }
+    
+    // preset buttons as well as the custom preset import/export
+    customDiff_CustomPresetInputEditBox = DialogControlHookup(gv_HeroSelection_MainFrame, c_triggerControlTypeEditBox, "GameModeCustom/CustomPreset/Input");
+    DialogControlSetEnabled(DialogControlLastCreated(), PlayerGroupSingle(customDiff_Host), true);
+    customDiff_CustomPresetInputCreateButton = DialogControlHookup(gv_HeroSelection_MainFrame, c_triggerControlTypeButton, "GameModeCustom/CustomPreset/CreateInputButton");
+    customDiff_CustomPresetInputCopyClipboardButton = DialogControlHookup(gv_HeroSelection_MainFrame, c_triggerControlTypeButton, "GameModeCustom/CustomPreset/CopyInputButton");
+    customDiff_CustomPresetInputLoadButton = DialogControlHookup(gv_HeroSelection_MainFrame, c_triggerControlTypeButton, "GameModeCustom/CustomPreset/LoadInputButton");
+
+    CustomDiff_DiffPreset_Handler_Trigger = TriggerCreate("CustomDiff_DiffPreset_Handler");
+    for ( tmpInt = 0; tmpInt < gv_MaxAmountDifficulties; tmpInt += 1 ) {
+        customDiff_PresetButtons[tmpInt] = DialogControlHookup(gv_HeroSelection_MainFrame, c_triggerControlTypeButton, "GameModeCustom/DiffPreset" + IntToString(tmpInt));
+        // libNtve_gf_SetDialogItemText(customDiff_PresetButtons[tmpInt], Utility_DiffNameShortColored(tmpInt), PlayerGroupAll());
+        TriggerAddEventDialogControl(CustomDiff_DiffPreset_Handler_Trigger, c_playerAny, customDiff_PresetButtons[tmpInt], c_triggerControlEventTypeClick);
+    }
+
+    CustomDiff_CustomPresetInputCreateButton_Handler_Trigger = TriggerCreate("CustomDiff_CustomPresetInputCreateButton_Handler");
+    TriggerAddEventDialogControl(CustomDiff_CustomPresetInputCreateButton_Handler_Trigger, c_playerAny, customDiff_CustomPresetInputCreateButton, c_triggerControlEventTypeClick);
+
+    CustomDiff_CustomPresetInputEditBox_Handler_Trigger = TriggerCreate("CustomDiff_CustomPresetInputEditBox_Handler");
+    TriggerAddEventDialogControl(CustomDiff_CustomPresetInputEditBox_Handler_Trigger, c_playerAny, customDiff_CustomPresetInputEditBox, c_triggerControlEventTypeTextChanged);
+
+    CustomDiff_CustomPresetInputLoadButton_Handler_Trigger = TriggerCreate("CustomDiff_CustomPresetInputLoadButton_Handler");
+    TriggerAddEventDialogControl(CustomDiff_CustomPresetInputLoadButton_Handler_Trigger, c_playerAny, customDiff_CustomPresetInputLoadButton, c_triggerControlEventTypeClick);
+
+    CustomDiff_InitDiffPreset();
+    CustomDiff_LoadPreset(customDiff_DiffPresetSettings[0]);
+}
+
+bool CustomDiff_Editbox_Handler (bool testConds, bool runActions){
+    int trigPlayer = EventPlayer();
+    int editboxID = CustomDiff_GetEditboxID(EventDialogControl());
+    string input = libNtve_gf_DialogItemEditValue(EventDialogControl(), trigPlayer);
+    fixed value;
+
+    if(trigPlayer != customDiff_Host) { return false; }
+
+    // set other players editboxes to the same value so they see the same
+    libNtve_gf_SetDialogItemEditorValue(customDiff_Editboxes[editboxID], input, customDiff_NotHostPlayerGroup);
+
+    // input value validation
+    if(Utility_IsNumber(input)){
+        value = StringToFixed(input);
+        // values > -100
+        if (editboxID == c_CustomDiffFixed_Damage
+            || editboxID == c_CustomDiffFixed_AtkSpd
+            || editboxID == c_CustomDiffFixed_Regen
+            || editboxID == c_CustomDiffFixed_Movespeed
+            || editboxID == c_CustomDiffFixed_SpawnMult
+            || editboxID == c_CustomDiffFixed_BiomassMult
+            || editboxID == c_CustomDiffFixed_ExpMult
+            || editboxID == c_CustomDiffFixed_Upgrades) {
+            customDiff_ValidInput[editboxID] = value > -100.0;
+        }
+        // between -100 and 300
+        else if (editboxID == c_CustomDiffFixed_Vitals){
+            customDiff_ValidInput[editboxID] = value > -100.0 && value <= 300;
+        }
+        // non-negative
+        else if (editboxID == c_CustomDiffFixed_StartBiomass
+                || editboxID == c_CustomDiffFixed_StartExp
+                || editboxID == c_CustomDiffFixed_StartMutations){
+            customDiff_ValidInput[editboxID] = value >= 0.0;
+        }
+        // integer between 0 and max amount diffs -1
+        else if (editboxID == c_CustomDiffFixed_BossAbils){
+            customDiff_ValidInput[editboxID] = value >= 0 && value < gv_MaxAmountDifficulties && Utility_IsInt(value);
+        }
+        // non negative integers
+        else if (editboxID == c_CustomDiffFixed_Lifes){
+            customDiff_ValidInput[editboxID] = value >= 0 && Utility_IsInt(value);
+        }
+        // positive, less or equal 1, non zero
+        else if (editboxID  == c_CustomDiffFixed_DmgReduction){
+            customDiff_ValidInput[editboxID] = value >= 0 && value < 100;
+        }
+        else if(editboxID  == c_CustomDiffFixed_Armor){
+            // no validation, supress warning
+            customDiff_ValidInput[editboxID] = true;
+        }
+        else {
+            Debug_ShowMessage("CustomDiff_Editbox: No Validation for ID "+ IntToString(editboxID));
+        }
     }
     else{
-        UIDisplayMessage(PlayerGroupSingle(heroSelection_CustomDiff_Host), c_messageAreaSubtitle, StringToText("Error! Input string is not valid."));
+        customDiff_ValidInput[editboxID] = false;
+    }
+
+    // if value is valid, save it to current settings
+    if(customDiff_ValidInput[editboxID]){
+        customDiff_CurrentSettings.values[editboxID] = value;
+    }
+    //updates checkmark box next to the editbox
+    DialogControlSetAnimationState(EventDialogControl(), PlayerGroupAll(), "ValidInput", libNtve_gf_ConvertBooleanToString(customDiff_ValidInput[editboxID]));
+    CustomDiff_AnyChangeUpdater();
+    return true;
+}
+
+bool CustomDiff_FlagsCheckbox_Handler (bool testConds, bool runActions){
+    int trigPlayer = EventPlayer();
+    int checkboxID = CustomDiff_GetCheckboxID(EventDialogControl());
+
+    if (trigPlayer != customDiff_Host) { return false; }
+    
+    libNtve_gf_SetDialogItemChecked(customDiff_FlagsCheckboxes[checkboxID], libNtve_gf_DialogItemIsChecked(EventDialogControl(), trigPlayer), customDiff_NotHostPlayerGroup);
+    customDiff_CurrentSettings.flags[checkboxID] = libNtve_gf_DialogItemIsChecked(EventDialogControl(), trigPlayer);
+    CustomDiff_AnyChangeUpdater();
+    return true;
+}
+
+bool CustomDiff_DiffPreset_Handler (bool testConds, bool runActions){
+    int diff = CustomDiff_GetDiffPresetID(EventDialogControl());
+    CustomDiff_LoadPreset(customDiff_DiffPresetSettings[diff]);
+    return true;
+}
+
+bool CustomDiff_CustomPresetInputCreateButton_Handler(bool testConds, bool runActions){
+    CustomDiff_CustomPreset_CreateInput(EventPlayer());
+    return true;
+}
+
+bool CustomDiff_CustomPresetInputEditBox_Handler(bool testConds, bool runActions){
+    int trigPlayer = EventPlayer();
+    CustomDiff_Settings preset;
+    bool validInput;
+
+    // only host can use the input box
+    if (trigPlayer != customDiff_Host){return false;}
+    
+    validInput = CustomDiff_CustomPreset_LoadInputAndCheck(preset);
+    DialogControlSetEnabled(customDiff_CustomPresetInputLoadButton, PlayerGroupSingle(customDiff_Host), validInput);
+    DialogControlSetEnabled(customDiff_CustomPresetInputCopyClipboardButton, PlayerGroupSingle(customDiff_Host), validInput);
+
+    return true;
+}
+
+bool CustomDiff_CustomPresetInputLoadButton_Handler(bool testConds, bool runActions){
+    CustomDiff_Settings preset;
+
+    if(CustomDiff_CustomPreset_LoadInputAndCheck(preset)){
+        CustomDiff_LoadPreset(preset);
+    }
+    else{
+        UIDisplayMessage(PlayerGroupSingle(customDiff_Host), c_messageAreaSubtitle, StringToText("Error! Input string is not valid."));
     }
 
     return true;
