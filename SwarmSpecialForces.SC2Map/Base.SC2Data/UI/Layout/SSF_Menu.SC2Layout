@@ -46,7 +46,7 @@
 	</Frame>
 
 <!-- Menu -->
-	<Constant name="MenuHeight" val="342"/>
+	<Constant name="MenuHeight" val="394"/>
 	<Constant name="MenuWidth" val="250"/>
 	<Constant name="MenuButtonHeight" val="50"/>
 	<Constant name="MenuButtonGap" val="2"/>
@@ -195,6 +195,24 @@
 			<ClipboardText val="#CopyLink"/>
 			<Text val="#CopyText"/>
 			
+			<Animation name="Color">
+				<Event event="OnClick" action="Restart,Play" frame="$this"/>
+				<Controller type="Color" end="Reset">
+					<Key type="Curve" time="0" value="255,255,255" in="Fast"/>
+					<Key type="Curve" time="0.1" value="0,255,0" in="Slow"/>
+					<Key type="Curve" time="5" value="0,255,0" in="Slow"/>				
+				</Controller>
+			</Animation>
+		</Frame>
+		<Frame type="Button" name="SaveButton" template="SSF_Templates/ButtonTemplate">
+			<Anchor side="Left" relative="$parent/Stats" pos="Min" offset="0"/>
+			<Anchor side="Right" relative="$parent/Stats" pos="Max" offset="0"/>
+			<Anchor side="Top" relative="$parent/DiscordClipboardButton" pos="Max" offset="#MenuButtonGap"/>
+			<Height val="#MenuButtonHeight"/>
+
+			<Text val="@Trig/Bank/ManualSaveButton"/>
+			<Tooltip val="@Trig/Bank/ManualSaveButtonTooltip"/>
+
 			<Animation name="Color">
 				<Event event="OnClick" action="Restart,Play" frame="$this"/>
 				<Controller type="Color" end="Reset">

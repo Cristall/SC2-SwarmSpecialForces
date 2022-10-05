@@ -1029,9 +1029,20 @@ void Bank_Reset(int playerID){
     Bank_Save_ForcedAll(playerID);
 }
 
+static bool [gv_MaxAmountPlayers + 1] ManualSaveLock;
+
 // forces a full bank save
 bool Bank_ManualSave (bool testConds, bool runActions) {
-    Bank_Save_ForcedAll(EventPlayer());
+    int player = EventPlayer();
+    const fixed lockTime = 2.0;
+    if(ManualSaveLock[player]){
+        Debug_ShowMessage("Bank_ManualSave: Spam Lock On");
+        return false;
+    }
+    ManualSaveLock[player] = true;
+    Bank_Save_ForcedAll(player);
+    Wait(lockTime, c_timeGame);
+    ManualSaveLock[player] = false;
     return true;
 }
 
@@ -1096,7 +1107,7 @@ void Bank_Init () {
     const string bankfileNameBackup = "SwarmSpecialForcesBackup";
     playergroup playerPG;
 
-    TriggerAddEventChatMessage(TriggerCreate("Bank_ManualSave"), c_playerAny, "-save", true);
+    TriggerAddEventChatMessage(TriggerFind("Bank_ManualSave"), c_playerAny, "-save", true);
 
     Bank_Save_RequestQueueTrigger = TriggerCreate("Bank_Save_RequestSaveQueue");
 
