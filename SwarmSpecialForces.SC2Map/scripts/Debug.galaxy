@@ -666,7 +666,7 @@ bool Debug_BankTransferLoad(int lp_player, string lp_handle){
         return true;
     }
     Bank_Reset(lp_player);
-    gv_PlayerStats[EventPlayer()].bankfile = BankLoad("SwarmSpecialForcesTransfer", lp_player);
+    gv_PlayerStats[lp_player].bankfile = BankLoad("SwarmSpecialForcesTransfer", lp_player);
     success = Bank_LoadSwitch_Handler(lp_player, lp_handle);
     if(success){
         Debug_ShowMessage("Transfer loading success.");
@@ -674,7 +674,7 @@ bool Debug_BankTransferLoad(int lp_player, string lp_handle){
     else {
         Debug_ShowMessage("Transfer loading failed!");    
     }
-    gv_PlayerStats[EventPlayer()].bankfile = BankLoad("SwarmSpecialForces", lp_player);
+    gv_PlayerStats[lp_player].bankfile = BankLoad("SwarmSpecialForces", lp_player);
     return true;
 }
 
