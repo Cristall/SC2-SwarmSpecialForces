@@ -388,18 +388,19 @@ void Enemy_SpawnerKilled(unit killingUnit, unit destroyedSpawner ){
             revengeUnitType = "WidowMine22";
             revengeUnitAmount = 2.0;
         }
-
-        if (!gv_Part_Areas_Open[c_Areas_TLeft2] && libNtve_gf_UnitGroupIsDead(gv_Part_Areas_Spawners[c_Areas_TLeft1])){
-            PartTerran_AreaJunker_Second_Open();
-        }
-        if (!gv_Part_Areas_Open[c_Areas_TLeft3] && libNtve_gf_UnitGroupIsDead(gv_Part_Areas_Spawners[c_Areas_TLeft2])){
-            PartTerran_AreaJunker_Third_Open();
-        }
-        if (!gv_Part_Areas_Open[c_Areas_TRight2] && libNtve_gf_UnitGroupIsDead(gv_Part_Areas_Spawners[c_Areas_TRight1])){
-            PartTerran_AreaBlackOps_Second_Open();
-        }
-        if (!gv_Part_Areas_Open[c_Areas_TRight3] && libNtve_gf_UnitGroupIsDead(gv_Part_Areas_Spawners[c_Areas_TRight2])){
-            PartTerran_AreaBlackOps_Third_Open();
+        if (gv_GameMode != c_GameMode_Tutorial){
+            if (!gv_Part_Areas_Open[c_Areas_TLeft2] && libNtve_gf_UnitGroupIsDead(gv_Part_Areas_Spawners[c_Areas_TLeft1])){
+                PartTerran_AreaJunker_Second_Open();
+            }
+            if (!gv_Part_Areas_Open[c_Areas_TLeft3] && libNtve_gf_UnitGroupIsDead(gv_Part_Areas_Spawners[c_Areas_TLeft2])){
+                PartTerran_AreaJunker_Third_Open();
+            }
+            if (!gv_Part_Areas_Open[c_Areas_TRight2] && libNtve_gf_UnitGroupIsDead(gv_Part_Areas_Spawners[c_Areas_TRight1])){
+                PartTerran_AreaBlackOps_Second_Open();
+            }
+            if (!gv_Part_Areas_Open[c_Areas_TRight3] && libNtve_gf_UnitGroupIsDead(gv_Part_Areas_Spawners[c_Areas_TRight2])){
+                PartTerran_AreaBlackOps_Third_Open();
+            }
         }
     }
     else if (gv_Part_ActivePart == c_Part_Protoss){

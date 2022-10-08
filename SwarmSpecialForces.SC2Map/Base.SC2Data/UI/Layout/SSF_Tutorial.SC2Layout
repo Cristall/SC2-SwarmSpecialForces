@@ -80,7 +80,7 @@
                 <Width val="50"/>
                 
                 <Text val="{$SSF_HeroSelection/CounterLabel/@Text}"/>
-                <Visible val="False"/>
+                <Visible val="{$SSF_HeroSelection/CounterLabel/@Visible}"/>
                 <Style val="aaDialogItemStyleCentered"/>
             </Frame>
         </Frame>

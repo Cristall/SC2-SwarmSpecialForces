@@ -188,9 +188,9 @@ void Player_Revive_SaveHero(int player){
     UnitRevive(hero);
     UnitSetPosition(hero, PointFromName("DummySpawn"), false);
     UnitSetState(hero, c_unitStateInvulnerable, true);
-    UnitSetPropertyFixed(hero, c_unitPropLifePercent, 100.0);
-    libNtve_gf_ShowHideUnit(hero, false);
+    UnitSetState(hero, c_unitStateHidden, true);
     UnitSetState(hero, c_unitStateStunned, true);
+    UnitSetPropertyFixed(hero, c_unitPropLifePercent, 100.0);
 }
 
 // moves the hero back into the playable area after the the revive timer runs out
@@ -200,7 +200,7 @@ void Player_Revive_ReleaseHero(int player, point position){
     UnitSetPosition(hero, position, false);
     UnitSetState(hero, c_unitStateInvulnerable, false);
     UnitSetState(hero, c_unitStateStunned, false);
-    libNtve_gf_ShowHideUnit(hero, true);
+    UnitSetState(hero, c_unitStateHidden, false);
 }
 
 // updates everything when a hero dies (for real)
