@@ -2248,7 +2248,7 @@ Trig/Acv/Speedruns/P0D5/Name=Hardcore
 Trig/Acv/Speedruns/P0D5Small/Reward=Congratulations! You proved that this is possible. As a reward you can use -dance to let Lightning and Thunder dance.
 Trig/Acv/Speedruns/P0Suffix= (Terran)
 Trig/Acv/Speedruns/P1Suffix= (Protoss)
-Trig/Acv/Speedruns/P2Suffix= (Zerg)
+Trig/Acv/Speedruns/P2Suffix= (Mecha)
 Trig/Acv/Speedruns/Requirement/Speedy=Finish within ~VALUE~.
 Trig/Acv/Speedruns/Requirement/TeamSize1=Beat the ~VALUE~ difficulty solo.
 Trig/Acv/Speedruns/Requirement/TeamSize2=Beat the ~VALUE~ difficulty duo (max 2 players).
@@ -2347,7 +2347,7 @@ Trig/Acv/WinsP0/Name=Wins (Terran)
 Trig/Acv/WinsP0/Requirement=Obtain ~VALUE~ victories over the terran forces.
 Trig/Acv/WinsP1/Name=Wins (Protoss)
 Trig/Acv/WinsP1/Requirement=Obtain ~VALUE~ victories over the protoss explorers.
-Trig/Acv/WinsP2/Name=Wins (Zerg)
+Trig/Acv/WinsP2/Name=Wins (Mecha)
 Trig/Acv/WinsP2/Requirement=Obtain ~VALUE~ victories over the mecha zergs.
 Trig/AcvUI/Global=Global
 Trig/AcvUI/NextPlayerTooltip=Next player
@@ -2439,7 +2439,7 @@ Trig/Generic/DiffNameShortColored/4=<c val="0000FF">I</c>
 Trig/Generic/DiffNameShortColored/5=<c val="00FFFF">HC</c>
 Trig/Generic/PartName/0=Terran
 Trig/Generic/PartName/1=Protoss
-Trig/Generic/PartName/2=Zerg
+Trig/Generic/PartName/2=Mecha
 Trig/Generic/TeamSize/1=Solo
 Trig/Generic/TeamSize/2=Duo
 Trig/Generic/TeamSize/3=Trio
