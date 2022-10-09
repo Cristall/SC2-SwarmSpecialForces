@@ -400,7 +400,7 @@
     </CValidatorPlayerRequirement>
     <CRequirement id="AtkSpdUpgradeHideRequirement">
         <EditorCategories value="TechType:Upgrade"/>
-        <NodeArray index="Use" Link="AndEq281638821CountUpgradeAtkSpdUpgradeQueuedOnly0Eq4037611437CountBehaviorTutorialNotPausedCompleteOnlyAtUnit0"/>
+        <NodeArray index="Use" Link="Eq281638821CountUpgradeAtkSpdUpgradeQueuedOnly0"/>
         <NodeArray index="Show" Link="LTCountUpgradeAtkSpdUpgradeCompleteOnly10"/>
     </CRequirement>
     <CRequirement id="HiveAlive">
@@ -408,12 +408,12 @@
     </CRequirement>
     <CRequirement id="DmgUpgradeHideRequirement">
         <EditorCategories value="TechType:Upgrade"/>
-        <NodeArray index="Use" Link="AndEq281638821CountUpgradeDmgUpgradeQueuedOnly0Eq4037611437CountBehaviorTutorialNotPausedCompleteOnlyAtUnit0"/>
+        <NodeArray index="Use" Link="Eq281638821CountUpgradeDmgUpgradeQueuedOnly0"/>
         <NodeArray index="Show" Link="LTCountUpgradeDmgUpgradeCompleteOnlyCountUpgradeUnlockDmgArmorCountCompleteOnly"/>
     </CRequirement>
     <CRequirement id="ArmorUpgradeHideRequirement">
         <EditorCategories value="TechType:Upgrade"/>
-        <NodeArray index="Use" Link="AndEq281638821CountUpgradeArmorUpgradeQueuedOnly0Eq4037611437CountBehaviorTutorialNotPausedCompleteOnlyAtUnit0"/>
+        <NodeArray index="Use" Link="Eq281638821CountUpgradeArmorUpgradeQueuedOnly0"/>
         <NodeArray index="Show" Link="LTCountUpgradeArmorUpgradeCompleteOnlyCountUpgradeUnlockDmgArmorCountCompleteOnly"/>
     </CRequirement>
     <CRequirement id="OverlordFlyBackHome">
@@ -424,12 +424,12 @@
     </CRequirement>
     <CRequirement id="RegenerationUpgradeHideRequirement">
         <EditorCategories value="TechType:Upgrade"/>
-        <NodeArray index="Use" Link="AndEq281638821CountUpgradeRegenerationUpgradeQueuedOnly0Eq4037611437CountBehaviorTutorialNotPausedCompleteOnlyAtUnit0"/>
+        <NodeArray index="Use" Link="Eq281638821CountUpgradeRegenerationUpgradeQueuedOnly0"/>
         <NodeArray index="Show" Link="LTCountUpgradeRegenerationUpgradeCompleteOnly10"/>
     </CRequirement>
     <CRequirement id="SplashRangeUpgradeHideRequirement">
         <EditorCategories value="TechType:Upgrade"/>
-        <NodeArray index="Use" Link="AndEq281638821CountUpgradeSplashRangeUpgradeQueuedOnly0Eq4037611437CountBehaviorTutorialNotPausedCompleteOnlyAtUnit0"/>
+        <NodeArray index="Use" Link="Eq281638821CountUpgradeSplashRangeUpgradeQueuedOnly0"/>
         <NodeArray index="Show" Link="LTCountUpgradeSplashRangeUpgradeCompleteOnly10"/>
     </CRequirement>
     <CRequirement id="TerranPartTransition">

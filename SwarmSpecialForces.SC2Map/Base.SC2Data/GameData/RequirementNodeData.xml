@@ -10,26 +10,6 @@
         <OperandArray value="Eq1987477214CountBehaviorBaseOverlordDmgSlowCompleteOnlyAtUnit0"/>
         <OperandArray value="Eq2561050864CountUnitHeroDummyHiveDeadCompleteOnly0"/>
     </CRequirementAnd>
-    <CRequirementAnd id="AndEq281638821CountUpgradeArmorUpgradeQueuedOnly0Eq4037611437CountBehaviorTutorialNotPausedCompleteOnlyAtUnit0">
-        <OperandArray value="Eq281638821CountUpgradeArmorUpgradeQueuedOnly0"/>
-        <OperandArray value="Eq4037611437CountBehaviorTutorialNotPausedCompleteOnlyAtUnit0"/>
-    </CRequirementAnd>
-    <CRequirementAnd id="AndEq281638821CountUpgradeAtkSpdUpgradeQueuedOnly0Eq4037611437CountBehaviorTutorialNotPausedCompleteOnlyAtUnit0">
-        <OperandArray value="Eq281638821CountUpgradeAtkSpdUpgradeQueuedOnly0"/>
-        <OperandArray value="Eq4037611437CountBehaviorTutorialNotPausedCompleteOnlyAtUnit0"/>
-    </CRequirementAnd>
-    <CRequirementAnd id="AndEq281638821CountUpgradeDmgUpgradeQueuedOnly0Eq4037611437CountBehaviorTutorialNotPausedCompleteOnlyAtUnit0">
-        <OperandArray value="Eq281638821CountUpgradeDmgUpgradeQueuedOnly0"/>
-        <OperandArray value="Eq4037611437CountBehaviorTutorialNotPausedCompleteOnlyAtUnit0"/>
-    </CRequirementAnd>
-    <CRequirementAnd id="AndEq281638821CountUpgradeRegenerationUpgradeQueuedOnly0Eq4037611437CountBehaviorTutorialNotPausedCompleteOnlyAtUnit0">
-        <OperandArray value="Eq281638821CountUpgradeRegenerationUpgradeQueuedOnly0"/>
-        <OperandArray value="Eq4037611437CountBehaviorTutorialNotPausedCompleteOnlyAtUnit0"/>
-    </CRequirementAnd>
-    <CRequirementAnd id="AndEq281638821CountUpgradeSplashRangeUpgradeQueuedOnly0Eq4037611437CountBehaviorTutorialNotPausedCompleteOnlyAtUnit0">
-        <OperandArray value="Eq281638821CountUpgradeSplashRangeUpgradeQueuedOnly0"/>
-        <OperandArray value="Eq4037611437CountBehaviorTutorialNotPausedCompleteOnlyAtUnit0"/>
-    </CRequirementAnd>
     <CRequirementCountBehavior id="CountBehaviorBaseOverlordDmgSlowCompleteOnlyAtUnit">
         <Flags index="TechTreeCheat" value="0"/>
         <Count Link="BaseOverlordDmgSlow" State="CompleteOnlyAtUnit"/>
