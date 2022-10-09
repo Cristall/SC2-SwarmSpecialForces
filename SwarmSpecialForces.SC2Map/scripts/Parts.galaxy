@@ -473,6 +473,9 @@ void Part_PartFinished(){
             ObjectiveSetState(objective_NydusWorm, c_objectiveStateActive);
         }
     }
+    else if (gv_Part_ActivePart == c_Part_Zerg){
+        CustomDefeatFrame_WinEnable();
+    }
 
     if(gv_ValidGame && gv_Hive_FlawlessFlag){
         tmpInt= -1;

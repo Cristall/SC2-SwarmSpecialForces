@@ -209,6 +209,7 @@ void Player_HeroDied(int player){
     gv_PlayerStats[player].spectatingFlag = true;
     PlayerGroupAdd(gv_SpectatingPG, player);
     UIDisplayMessage(PlayerGroupAll(), c_messageAreaChat, Utility_TextExpressionReplacement("Trig/PlayerDies", Utility_PlayerNameWithPlayerColor(player)));
+    gv_PlayerStats[player].deathAfterWin = gv_GameWon;
     CustomDefeatFrame_Show(player);
     HeroPanel_HeroDied(player);
     Player_RemoveActivePlayer(player);
@@ -275,10 +276,14 @@ bool Player_HeroDies (bool testConds, bool runActions){
 // handles everything in response to a player leaving, is executed multiple times when player leaves
 bool Player_Left (bool testConds, bool runActions){
     int trigPlayer = EventPlayer();
-    if(!runActions) {return true;}
     
     if (gv_PlayerStats[trigPlayer].acvScoreRank_Custom == false) {
-        PlayerBoard_SetCustomRankText(trigPlayer, StringExternal("Trig/PlayerLeft/Rank"));
+        if (gv_PlayerStats[trigPlayer].deathAfterWin){
+            PlayerBoard_SetCustomRankText(trigPlayer, StringExternal("Trig/PlayerWin/Rank"));
+        }
+        else{
+            PlayerBoard_SetCustomRankText(trigPlayer, StringExternal("Trig/PlayerLeft/Rank"));
+        }
     }
 
     if (PlayerGroupHasPlayer(gv_NewPlayers, trigPlayer)) {

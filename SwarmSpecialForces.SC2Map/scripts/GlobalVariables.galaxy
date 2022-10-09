@@ -55,6 +55,7 @@ struct PlayerStruct {
     int upgrade_Splash;
     int upgrade_Atkspd;
     int upgrade_Regen;
+    bool deathAfterWin;
 
     //save flags
     bool saveFlag_Any;
@@ -138,6 +139,7 @@ struct BossFightData{
 bool gv_BankSavingEnabled   = true;     // controls if the game is supposed to save any data to the bank
 bool gv_TestingMode         = false;    // controls if the debug menu shows up
 bool gv_GameActive          = false;    // TODO ???
+bool gv_GameWon             = false;    // controls if players get a win in the score screen when dying
 
 int gv_GameMode;                        // stores the selected game variant from the lobby, or if tutorial has been selected
 bool gv_ValidGame = true;               // controls if progress is enabled in a custom difficulty game

@@ -11,14 +11,29 @@ bool CustomDefeatFrame_SpectateButton_Handler(bool testConds, bool runActions){
 }
 
 bool CustomDefeatFrame_LeaveButton_Handler(bool testConds, bool runActions){
-    GameOver(EventPlayer(), c_gameOverDefeat, false, true);
-    DialogControlSetVisible(customDefeatFrame_Frame, PlayerGroupSingle(EventPlayer()), false);
-    gv_PlayerStats[EventPlayer()].spectatingFlag = false;
+    int player = EventPlayer();
+    if(gv_PlayerStats[player].deathAfterWin){
+        GameOver(player, c_gameOverVictory, false, true);
+    }
+    else {
+        GameOver(player, c_gameOverDefeat, false, true);
+    }
+    DialogControlSetVisible(customDefeatFrame_Frame, PlayerGroupSingle(player), false);
+    gv_PlayerStats[player].spectatingFlag = false;
     return true;
 }
 
 void CustomDefeatFrame_Show(int playerID){
     DialogControlSetVisible(customDefeatFrame_Frame, PlayerGroupSingle(playerID), true);
+}
+
+// enables the win button in game menu F10 and makes future deaths count as wins
+void CustomDefeatFrame_WinEnable(){
+    gv_GameWon = true;
+    UISetGameMenuItemVisible(PlayerGroupAll(), c_gameMenuDialogGenericButton1, true);
+    UISetGameMenuItemText(PlayerGroupAll(), c_gameMenuDialogGenericButton1, StringExternal("Trig/PlayerWin/Button"));
+    UISetGameMenuItemShortcut(PlayerGroupAll(), c_gameMenuDialogGenericButton1, StringExternal("Trig/PlayerWin/ButtonHotkey"));
+    TriggerAddEventGameMenuItemSelected(TriggerCreate("CustomDefeatFrame_LeaveButton_Handler"), c_playerAny, c_gameMenuDialogGenericButton1);
 }
 
 void CustomDefeatFrame_Init () {
