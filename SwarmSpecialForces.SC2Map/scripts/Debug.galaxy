@@ -783,7 +783,7 @@ void Debug_Init(){
     if(gv_TestingMode){
         for (i = 1; i <= PlayerGroupCount(gv_ActivePG); i += 1) {
             tmp_player = PlayerGroupPlayer(gv_ActivePG, i);
-            gv_PlayerStats[tmp_player].lifes = 100;
+            // gv_PlayerStats[tmp_player].lifes = 100;
             //bunch of achievements for AI players
             if(false)
             {
