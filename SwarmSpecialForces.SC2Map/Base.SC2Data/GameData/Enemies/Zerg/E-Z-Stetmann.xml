@@ -91,37 +91,6 @@
         <InitialDelay value="1"/>
         <InitialEffect value="Pinball@BallMove"/>
     </CEffectCreatePersistent>
-    <CEffectApplyBehavior id="StetmannRevenge@Stun">
-        <EditorCategories value=""/>
-        <WhichUnit Value="Caster"/>
-    </CEffectApplyBehavior>
-    <CEffectRemoveBehavior id="StetmannRevenge@InvulnerableRemove">
-        <EditorCategories value=""/>
-        <WhichUnit Value="Caster"/>
-        <BehaviorLink value="StetmannRevenge@Invulnerable"/>
-    </CEffectRemoveBehavior>
-    <CEffectRemoveBehavior id="StetmannRevenge@StunRemove">
-        <EditorCategories value=""/>
-        <WhichUnit Value="Caster"/>
-        <BehaviorLink value="StetmannRevenge@Stun"/>
-    </CEffectRemoveBehavior>
-    <CEffectCreatePersistent id="StetmannRevenge@TimingController">
-        <EditorCategories value=""/>
-        <PeriodCount value="4"/>
-        <PeriodicEffectArray value="StetmannRevenge@Stun"/>
-        <PeriodicEffectArray value="StetmannRevenge@Teleport"/>
-        <PeriodicEffectArray value="StetmannRevenge@StunRemove"/>
-        <PeriodicEffectArray value="StetmannRevenge@InvulnerableRemove"/>
-        <PeriodicPeriodArray value="0"/>
-        <PeriodicPeriodArray value="0.75"/>
-        <PeriodicPeriodArray value="1.25"/>
-        <PeriodicPeriodArray value="0"/>
-    </CEffectCreatePersistent>
-    <CEffectTeleport id="StetmannRevenge@Teleport">
-        <EditorCategories value=""/>
-        <WhichUnit Value="Caster"/>
-        <TargetLocation Value="TargetPoint"/>
-    </CEffectTeleport>
     <CEffectCreateUnit id="Pinball@CreateBall">
         <EditorCategories value=""/>
         <WhichLocation Value="CasterUnit"/>
@@ -483,12 +452,6 @@
         <Effect index="0" value="StetmannSummons@InitialSet"/>
         <CmdButtonArray index="Execute" DefaultButtonFace="StetmannSummons"/>
     </CAbilEffectInstant>
-    <CAbilEffectTarget id="StetmannRevenge">
-        <EditorCategories value="AbilityorEffectType:Units"/>
-        <Effect index="0" value="StetmannRevenge@TimingController"/>
-        <CmdButtonArray index="Execute" DefaultButtonFace="StetmannRevenge"/>
-        <Range value="500"/>
-    </CAbilEffectTarget>
     <CAbilEffectTarget id="Pinball@Shot">
         <EditorCategories value="AbilityorEffectType:Units"/>
         <Effect index="0" value="Pinball@CreateBallOffset"/>

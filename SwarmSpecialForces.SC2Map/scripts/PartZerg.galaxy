@@ -1250,17 +1250,28 @@ void PartZerg_Stetmann_Addition(structref<BossFightData> data){
             partZerg_Stetmann_PhaseChange = false;
 
             data.bossState[c_BossFightIndex_Stetmann] |= c_BossFightState_Casting;
-            data.bossCastingTime[c_BossFightIndex_Stetmann] = 5;
-            data.abilityGlobalCooldown = 5;
+            data.bossCastingTime[c_BossFightIndex_Stetmann] = 3;
+            data.abilityGlobalCooldown = 3;
             data.bossIdlePoint[c_BossFightIndex_Stetmann] = PointFromName("PartZerg_Boss_Gary");
 
-            UnitIssueOrder(gv_Bosses[c_Bosses_ZStetmann], OrderTargetingPoint(AbilityCommand("StetmannRevenge", 0), data.bossIdlePoint[c_BossFightIndex_Stetmann]), c_orderQueueReplace);
-
+            TriggerExecute(TriggerCreate("PartZerg_Stetmann_Teleport"), false, false);
             PartZerg_Stetmann_ScrapSummon();
         }
     }
 }
 
+bool PartZerg_Stetmann_Teleport(bool testConds, bool runActions){
+    UnitBehaviorAdd(gv_Bosses[c_Bosses_ZStetmann], "StetmannRevenge@Stun", gv_Bosses[c_Bosses_ZStetmann], 1);
+    Wait(0.75, c_timeGame);
+    UnitSetPosition(gv_Bosses[c_Bosses_ZStetmann], PointFromName("PartZerg_Boss_Gary"), true);
+    Wait(1.25, c_timeGame);
+    UnitBehaviorRemove(gv_Bosses[c_Bosses_ZStetmann], "StetmannRevenge@Stun", 1);
+    UnitBehaviorRemove(gv_Bosses[c_Bosses_ZStetmann], "StetmannRevenge@Invulnerable", 1);
+    
+    TriggerDestroy(TriggerGetCurrent());
+    
+    return true;
+}
 
 static int partZerg_Moopy_Phase = -1;
 static bool partZerg_Moopy_Activation = false;
