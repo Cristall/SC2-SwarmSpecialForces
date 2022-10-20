@@ -1030,6 +1030,7 @@
         <Parameters value="0">
             <AccumulatorArray value="SpinForWin@DistanceLinearFalloff"/>
         </Parameters>
+        <Parameters value="1"/>
         <Operation value="Minimum"/>
     </CAccumulatorArithmetic>
     <CAccumulatorVitals id="Scrap@DamageFactor">
