@@ -1108,6 +1108,7 @@
     </CBehaviorBuff>
     <CBehaviorUnitTracker id="BeamDroneDummyTracker">
         <EditorCategories value="AbilityorEffectType:Units"/>
+        <InfoFlags index="Hidden" value="1"/>
     </CBehaviorUnitTracker>
     <CBehaviorBuff id="BeamDroneBossDeathResponse">
         <EditorCategories value="AbilityorEffectType:Units"/>
@@ -1121,6 +1122,7 @@
         <EditorCategories value="AbilityorEffectType:Units"/>
         <DisableValidatorArray value="BeamDroneAllowMovement"/>
         <Modification MoveSpeedMaximum="0"/>
+        <InfoFlags index="Hidden" value="1"/>
     </CBehaviorBuff>
     <CBehaviorBuff id="BeamDroneWeaponFollowUnitIdentifier">
         <InfoFlags index="Hidden" value="1"/>
@@ -1132,6 +1134,7 @@
         <Modification>
             <StateFlags index="Uncommandable" value="1"/>
         </Modification>
+        <InfoFlags index="Hidden" value="1"/>
     </CBehaviorBuff>
     <CBehaviorBuff id="SeaOfFlamesDroneTimedLife">
         <EditorCategories value="AbilityorEffectType:Units"/>
@@ -1141,6 +1144,7 @@
             <HeightTime index="Start" value="0.5"/>
             <HeightTime index="Stop" value="10"/>
         </Modification>
+        <InfoFlags index="Hidden" value="1"/>
     </CBehaviorBuff>
     <CBehaviorBuff id="BeamDroneTimedLife" parent="TimedLifeDisplayed">
         <Duration value="18"/>

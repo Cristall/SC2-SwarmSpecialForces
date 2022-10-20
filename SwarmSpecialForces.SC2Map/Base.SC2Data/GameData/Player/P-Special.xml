@@ -158,6 +158,7 @@
         <Modification>
             <StateFlags index="Invulnerable" value="1"/>
         </Modification>
+        <InfoFlags index="Hidden" value="1"/>
     </CBehaviorBuff>
     <CBehaviorBuff id="SecretDmgReponse">
         <EditorCategories value="AbilityorEffectType:Units"/>

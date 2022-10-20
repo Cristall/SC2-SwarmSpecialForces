@@ -2054,6 +2054,7 @@
         <Duration value="11.75"/>
         <InitialEffect value="PortalStartStartHeight"/>
         <FinalEffect value="PortalStartEndHeight"/>
+        <InfoFlags index="Hidden" value="1"/>
     </CBehaviorBuff>
     <CBehaviorBuff id="PortalStartDummyHeightStart">
         <EditorCategories value="AbilityorEffectType:Units"/>
@@ -2061,6 +2062,7 @@
         <Modification Height="10">
             <HeightTime index="Stop" value="0.75"/>
         </Modification>
+        <InfoFlags index="Hidden" value="1"/>
     </CBehaviorBuff>
     <CBehaviorBuff id="PortalStartDummyHeightEnd">
         <EditorCategories value="AbilityorEffectType:Units"/>
@@ -2069,6 +2071,7 @@
         <Modification Height="10">
             <HeightTime index="Start" value="1"/>
         </Modification>
+        <InfoFlags index="Hidden" value="1"/>
     </CBehaviorBuff>
     <CBehaviorBuff id="Phase2Handler">
         <EditorCategories value="AbilityorEffectType:Units"/>
@@ -2092,6 +2095,7 @@
         </Modification>
         <Alignment value="Negative"/>
         <InfoIcon value="Assets\Textures\btn-ability-protoss-stasisfield.dds"/>
+        <InfoFlags index="Hidden" value="1"/>
     </CBehaviorBuff>
     <CBehaviorBuff id="StasisBubbleTimedLife" parent="TimedLifeDisplayed">
         <Duration value="20"/>

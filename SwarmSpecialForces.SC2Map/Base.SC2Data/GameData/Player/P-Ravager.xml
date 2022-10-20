@@ -938,6 +938,7 @@
             <ExcludeEffectArray value="DamageTransferAura@Dmg"/>
             <Chance value="1"/>
         </DamageResponse>
+        <InfoFlags index="Hidden" value="1"/>
     </CBehaviorBuff>
     <CBehaviorBuff id="HeroRavagerCreepBonusRegen">
         <InfoFlags index="Hidden" value="1"/>

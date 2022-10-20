@@ -1406,6 +1406,7 @@
         <Period value="0.0625"/>
         <PeriodicEffect value="HeroBowlerWeaponMissileScanSet"/>
         <FinalEffect value="HeroBowlerWeaponExplodeSet"/>
+        <InfoFlags index="Hidden" value="1"/>
     </CBehaviorBuff>
     <CBehaviorAttribute id="HeroBowlerAttribute">
         <EditorCategories value="AbilityorEffectType:Units"/>

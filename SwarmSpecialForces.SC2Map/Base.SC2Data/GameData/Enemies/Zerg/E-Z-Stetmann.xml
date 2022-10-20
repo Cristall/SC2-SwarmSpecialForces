@@ -1584,6 +1584,7 @@
         <EditorCategories value="AbilityorEffectType:Units"/>
         <Duration value="0.2"/>
         <Modification AttackSpeedMultiplier="1.25"/>
+        <InfoFlags index="Hidden" value="1"/>
     </CBehaviorBuff>
     <CBehaviorBuff id="Stetellite@BuffController">
         <EditorCategories value="AbilityorEffectType:Units"/>

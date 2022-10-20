@@ -17,7 +17,7 @@
     </Frame>
 
     <Frame type="Button" name="CloseButtonTemplate" template="SSF_Templates/ButtonTemplate">
-        <Text val="@Trig/CloseButton"/>
+        <Text val="X"/>
         <Anchor side="Right" relative="$parent" pos="Max" offset="#BorderNegative"/>
         <Anchor side="Top" relative="$parent" pos="Min" offset="#Border"/>
         <Height val="50"/>

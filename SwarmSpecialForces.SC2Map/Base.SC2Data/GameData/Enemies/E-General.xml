@@ -201,6 +201,7 @@
         <Modification MoveSpeedMultiplier="3">
             <StateFlags index="Invulnerable" value="1"/>
         </Modification>
+        <InfoFlags index="Hidden" value="1"/>
     </CBehaviorBuff>
     <CBehaviorBuff id="DifficultyCustom">
         <InfoIcon value="Assets\Textures\btn-ability-terran-deactivatemine.dds"/>
@@ -362,6 +363,7 @@
             <VitalRegenMultiplier index="Shields" value="-1"/>
             <AbilClassDisableArray index="CAbilAttack" value="1"/>
         </Modification>
+        <InfoFlags index="Hidden" value="1"/>
     </CBehaviorBuff>
     <CBehaviorBuff id="SummonState">
         <EditorCategories value="AbilityorEffectType:Units"/>

@@ -2395,9 +2395,11 @@
     </CUnit>
     <CBehaviorUnitTracker id="HandlerLightningTracker">
         <EditorCategories value="AbilityorEffectType:Units"/>
+        <InfoFlags index="Hidden" value="1"/>
     </CBehaviorUnitTracker>
     <CBehaviorUnitTracker id="HandlerThunderTracker">
         <EditorCategories value="AbilityorEffectType:Units"/>
+        <InfoFlags index="Hidden" value="1"/>
     </CBehaviorUnitTracker>
     <CBehaviorBuff id="HandsOfSilence">
         <EditorCategories value="AbilityorEffectType:Units"/>
@@ -2445,15 +2447,19 @@
     </CBehaviorBuff>
     <CBehaviorBuff id="TagTeamHandlerLightningDead">
         <EditorCategories value="AbilityorEffectType:Units"/>
+        <InfoFlags index="Hidden" value="1"/>
     </CBehaviorBuff>
     <CBehaviorBuff id="TagTeamHandlerThunderDead">
         <EditorCategories value="AbilityorEffectType:Units"/>
+        <InfoFlags index="Hidden" value="1"/>
     </CBehaviorBuff>
     <CBehaviorBuff id="TagTeamHandlerLightningExhausted">
         <EditorCategories value="AbilityorEffectType:Units"/>
+        <InfoFlags index="Hidden" value="1"/>
     </CBehaviorBuff>
     <CBehaviorBuff id="TagTeamHandlerThunderExhausted">
         <EditorCategories value="AbilityorEffectType:Units"/>
+        <InfoFlags index="Hidden" value="1"/>
     </CBehaviorBuff>
     <CBehaviorBuff id="TornadoThrown">
         <EditorCategories value="AbilityorEffectType:Units"/>
@@ -2466,6 +2472,7 @@
         <Period value="1"/>
         <PeriodicEffect value="ZapTrapPeriodicSearch"/>
         <FinalEffect value="Suicide"/>
+        <InfoFlags index="Hidden" value="1"/>
     </CBehaviorBuff>
     <CBehaviorBuff id="LightningElementalsTimedLife" parent="TimedLifeDisplayed">
         <Duration value="25"/>

@@ -1478,7 +1478,6 @@
         <InfoFlags index="Hidden" value="1"/>
     </CBehaviorBuff>
     <CBehaviorAttackModifier id="ChargeUp@ChargeUp">
-        <InfoFlags index="Hidden" value="0"/>
         <PreImpactEffect value="ChargeUp@Dmg"/>
     </CBehaviorAttackModifier>
     <CBehaviorBuff id="ShieldColor@TotemDisabled">

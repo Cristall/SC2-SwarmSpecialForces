@@ -86,7 +86,7 @@
         </Modification>
     </CBehaviorBuff>
     <CBehaviorBuff id="FakeMissileIdentifier">
-        <InfoFlags index="Hidden"/>
+        <InfoFlags index="Hidden" value="1"/>
     </CBehaviorBuff>
     <CBehaviorAttribute id="Unknown3Stats">
         <Cost>

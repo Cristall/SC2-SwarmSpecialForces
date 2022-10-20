@@ -998,6 +998,7 @@
             <StateFlags index="Unselectable" value="1"/>
             <StateFlags index="Untargetable" value="1"/>
         </Modification>
+        <InfoFlags index="Hidden" value="1"/>
     </CBehaviorBuff>
     <CBehaviorBuff id="RotatingWallsRotationPositive">
         <EditorCategories value="AbilityorEffectType:Units"/>
@@ -1018,6 +1019,7 @@
             <HeightTime index="Stop" value="1"/>
         </Modification>
         <RemoveValidatorArray value="CasterNotDead"/>
+        <InfoFlags index="Hidden" value="1"/>
     </CBehaviorBuff>
     <CBehaviorBuff id="BombardmentTargetDummyTimedLife" parent="TimedLifeHidden">
         <Duration value="3"/>

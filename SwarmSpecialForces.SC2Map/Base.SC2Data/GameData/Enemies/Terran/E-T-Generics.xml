@@ -4962,6 +4962,7 @@
     <CBehaviorBuff id="Slow2" parent="Slow">
         <Name value="Behavior/Name/Slow2"/>
         <Tooltip value="Behavior/Tooltip/Slow2"/>
+        <InfoFlags index="Hidden" value="1"/>
     </CBehaviorBuff>
     <CBehaviorBuff id="ReaperExplosivesTimedLife" parent="TimedLifeHidden">
         <Duration value="1.4287"/>

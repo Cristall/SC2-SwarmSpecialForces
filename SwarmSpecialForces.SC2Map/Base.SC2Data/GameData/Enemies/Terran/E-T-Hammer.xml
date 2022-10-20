@@ -734,6 +734,7 @@
         <Modification>
             <StateFlags index="Uncommandable" value="1"/>
         </Modification>
+        <InfoFlags index="Hidden" value="1"/>
     </CBehaviorBuff>
     <CBehaviorBuff id="BarrageDummyUnitTimedLife" parent="TimedLifeHidden"/>
     <CBehaviorBuff id="SeekerMissileTimedLife" parent="TimedLifeHidden">

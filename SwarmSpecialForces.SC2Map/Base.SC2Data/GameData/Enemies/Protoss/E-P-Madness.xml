@@ -2635,6 +2635,7 @@
             <DamageDealtFraction index="Splash" value="0.01"/>
             <LifeArmorBonus value="1"/>
         </Modification>
+        <InfoFlags index="Hidden" value="1"/>
     </CBehaviorBuff>
     <CBehaviorUnitTracker id="TrackerCombatUnits">
         <EditorCategories value="AbilityorEffectType:Units"/>

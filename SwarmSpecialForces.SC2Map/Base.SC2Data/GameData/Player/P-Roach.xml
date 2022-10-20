@@ -1223,6 +1223,7 @@
     <CBehaviorBuff id="ChargePushed">
         <EditorCategories value="AbilityorEffectType:Units"/>
         <Duration value="0.125"/>
+        <InfoFlags index="Hidden" value="1"/>
     </CBehaviorBuff>
     <CBehaviorBuff id="DefensiveRoar@Caster">
         <InfoIcon value="Assets\Textures\btn-ability-zerg-dehaka-superroar.dds"/>
