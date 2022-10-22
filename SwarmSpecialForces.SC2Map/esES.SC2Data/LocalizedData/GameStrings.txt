@@ -405,7 +405,7 @@ RequirementNode/Tooltip/02921848502=Requires a new charge from a successful boss
 RequirementNode/Tooltip/CountBehaviorRespawnEgg@EggAvailableQueuedOrBetterAtUnit2921848502=Requires a new charge from a successful boss fight.
 RequirementNode/Tooltip/CountBehaviorRespawnEgg@RevivingQueuedOrBetterAtUnit3227781120=Must be reviving
 RequirementNode/Tooltip/CountUpgradeAbsorbExplosion@UnlockCompleteOnly1015183818=Requires Magic Hats Stage III
-RequirementNode/Tooltip/CountUpgradeCorrosiveBurst@UnlockCompleteOnly3209883371=Unlock by Magic Hats stage V
+RequirementNode/Tooltip/CountUpgradeCorrosiveBurst@UnlockCompleteOnly3209883371=Unlock by Magic Hats stage IV
 RequirementNode/Tooltip/CountUpgradeDamageTransferAura@UnlockCompleteOnly1671390315=Unlock by Magic Hats stage III
 RequirementNode/Tooltip/CountUpgradeUltimateBeing@UnlockCompleteOnly1302983693=Unlock by Magic Hats stage I
 RequirementNode/Tooltip/Eq1040997399CountUpgradeKillStreak@UnlockCompleteOnly1=Requires Psi Orbs Stage II
@@ -435,7 +435,7 @@ RequirementNode/Tooltip/GTE875380897CountUpgradeTackle@UnlockCompleteOnly1=Requi
 RequirementNode/Tooltip/GTE884099205CountUpgradeTheySeeMeRolling@UnlockCompleteOnly1=Unlock by Magic Hats stage II
 RequirementNode/Tooltip/GTE888989534CountUpgradeHardenedShell@UnlockCompleteOnly1=Requires Essences Stage III
 RequirementNode/Tooltip/GTE888989534CountUpgradeHeadbutt@UnlockCompleteOnly1=Requires Essences Stage III
-RequirementNode/Tooltip/GTE999272702CountUpgradeRespawnEgg@UnlockCompleteOnly1=Unlock by Magic Hats stage IV
+RequirementNode/Tooltip/GTE999272702CountUpgradeRespawnEgg@UnlockCompleteOnly1=Unlock by Magic Hats stage V
 RequirementNode/Tooltip/Not3358450278CountBehaviorRespawnEgg@NoMoreEggsQueuedOrBetterAtUnit=Only one egg allowed at a time.
 Trig/Acv/Artanis/Name=<c val="FF0000">Artanis</c> 
 Trig/Acv/Artanis/Requirement=Depower <c val="FF0000">Artanis</c>'s blades on other difficulties (last hit).
