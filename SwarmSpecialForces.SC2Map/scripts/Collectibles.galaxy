@@ -32,7 +32,7 @@ static void Collectibles_Essences_InitLarvaSpawnsP1() {
     }
 }
 static void Collectibles_Essences_InitLarvaSpawnsP2() {
-    const int spawnsMax = 10;
+    const int spawnsMax = 9;
     point[spawnsMax] spawnPoints;
     int tmpInt;
     int tmpIntLoop;
