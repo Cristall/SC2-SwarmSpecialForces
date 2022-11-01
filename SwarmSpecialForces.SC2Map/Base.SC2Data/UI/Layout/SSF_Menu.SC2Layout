@@ -194,6 +194,7 @@
 
 			<ClipboardText val="#CopyLink"/>
 			<Text val="#CopyText"/>
+			<Tooltip val="@Trig/Menu/DiscordTooltip"/>
 			
 			<Animation name="Color">
 				<Event event="OnClick" action="Restart,Play" frame="$this"/>
