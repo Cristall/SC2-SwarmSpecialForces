@@ -29,7 +29,7 @@
 		<Frame type="Frame" name="AnchorFrame">
 			<Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
 			<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
-			<Width val="150"/>
+			<Width val="165"/>
 		</Frame>
 
 		<Frame type="Label" name="PlayerName" template="SSF_Templates/LabelTemplate">
