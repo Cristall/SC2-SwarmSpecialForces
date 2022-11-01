@@ -765,6 +765,8 @@ Trig/HeroSelection/Hero/Stinger/Unlock=Requires Points Stage III.
 Trig/HeroSelection/Hero/SwarmMother/Long=The Swarm Mother's focus is supporting the swarm.<n/><n/><d ref="Behavior,SwarmQueenStats,Modification.DamageDealtUnscaled[Ranged]-1*100"/>% damage from upgrades and levels<n/>-10% armor from upgrades<n/>+100% energy regeneration
 Trig/HeroSelection/Hero/SwarmMother/Unlock=Requires Points Stage IV.
 Trig/HiveDies=The protection of the hive has been lost. The burrowed zerg are no longer safe.
+Trig/HivePanel/Flawless=Flawless:
+Trig/HivePanel/Kills=Kills:
 Trig/Menu/Achievements=Achievements
 Trig/Menu/DiscordTooltip=Copies Discord invite link to clipboard.<n/>https://discord.gg/KwxNAJ2
 Trig/Menu/Options=Options

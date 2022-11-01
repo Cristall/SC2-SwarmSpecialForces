@@ -120,7 +120,7 @@
                 <Anchor side="Bottom" relative="$parent" pos="Min" offset="5000"/>
                 <Anchor side="Right" relative="$parent" pos="Min" offset="5000"/>
                 <FormatText val="%0% %1%"/>
-                <Replacement val="Kills:" index="0"/>
+                <Replacement val="@Trig/HivePanel/Kills" index="0"/>
                 <Replacement val="{$parent/KillCount/@Text}" index="1"/>
             </Frame>
             <Frame type="Label" name="KillCount">
@@ -139,7 +139,7 @@
                 <Anchor side="Left" relative="$parent/HealthBar" pos="Min" offset="0"/>
                 <Visible val="true"/>
                 <Style val="SSF_HivePanel_ValueLabel_Right"/>
-                <Text val="Flawless: "/>
+                <Text val="@Trig/HivePanel/Flawless"/>
                 <AcceptsMouse val="false"/>
             </Frame>
             <Frame type="Image" name="FlawlessIcon">
