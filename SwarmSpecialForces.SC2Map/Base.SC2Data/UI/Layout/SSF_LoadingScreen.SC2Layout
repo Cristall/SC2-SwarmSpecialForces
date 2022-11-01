@@ -20,9 +20,9 @@
 	<Constant name="CopyButtonPopupText" val="Link copied to clipboard!"/>
 
 	<!-- deDE locale -->
-	<Constant name="BodyTextDE" val="The zerg swarm has been hunted for many years and is nearly extinct. &lt;n/&gt;The local swarm has evolved a new trait to directly absorb the biomass of fallen enemies and convert it into powerful upgrades. &lt;n/&gt;Go and gather as much biomass as you can from the terran outpost surrounding the hive and destroy them in the process. &lt;n/&gt;" />
+	<!-- <Constant name="BodyTextDE" val="The zerg swarm has been hunted for many years and is nearly extinct. &lt;n/&gt;The local swarm has evolved a new trait to directly absorb the biomass of fallen enemies and convert it into powerful upgrades. &lt;n/&gt;Go and gather as much biomass as you can from the terran outpost surrounding the hive and destroy them in the process. &lt;n/&gt;" />
 	<Constant name="HintTextDE" val="Tutorial mode is recommended for new players. It also rewards you with an achievement. &lt;n/&gt;Also checkout the FAQ in the help menu. &lt;n/&gt;If you are interested in the game join our discord."/>
-	<Constant name="CopyButtonPopupTextDE" val="Link copied to clipboard!"/>
+	<Constant name="CopyButtonPopupTextDE" val="Link copied to clipboard!"/> -->
 
 	<Constant name="CopyText" val="Discord link"/>
 	<Constant name="CopyLink" val="https://discord.gg/KwxNAJ2"/>
@@ -178,7 +178,7 @@
 			</Frame>
 		</Frame>
 
-		<StateGroup name="LanguageCheck">
+		<!-- <StateGroup name="LanguageCheck">
 			<DefaultState val="enUS"/>
 
 			<State name="deDE">
@@ -189,7 +189,7 @@
 			</State>
 
 			<State name="enUS"/>
-		</StateGroup>
+		</StateGroup> -->
 
 
 		
