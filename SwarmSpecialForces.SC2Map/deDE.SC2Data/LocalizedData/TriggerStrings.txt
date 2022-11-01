@@ -1,4 +1,4 @@
-﻿Category/Name/62ECECF9=Map init
+Category/Name/62ECECF9=Map init
 Category/Name/D3B6B04B=DEBUG Trigger
 CustomScript/Name/152C8A8F=Bootstrap
 FunctionDef/Name/2DD51507=Debug_BankTransferLoad
