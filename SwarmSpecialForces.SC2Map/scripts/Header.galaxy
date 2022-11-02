@@ -72,7 +72,7 @@ void Player_PartWin_UpdateAcv();
 void Player_GainPoints();
 void Player_KillReward(string unitType, point unitPosition);
 void Player_IncreaseUpgradeCount (fixed increaseBase);
-void Player_HeroDied(int player);
+void Player_HeroDiesSwitch(int player);
 void Player_Revive_ReleaseHero(int player, point position);
 
 // Debug.galaxy

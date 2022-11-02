@@ -97,7 +97,7 @@ bool HeroAbility_RespawnEgg_RespawnHandler(bool testConds, bool runActions){
     }
 
     if (eggDiedFlag){
-        Player_HeroDied(revivingPlayer);
+        Player_HeroDiesSwitch(revivingPlayer);
     }
     else if (revivingPlayerLeaveFlag){
         if(gv_PlayerStats[eggOwner].activeFlag){

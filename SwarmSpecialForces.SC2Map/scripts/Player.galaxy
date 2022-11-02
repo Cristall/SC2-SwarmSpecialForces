@@ -244,32 +244,28 @@ bool Player_CheatUsed (bool testConds, bool runActions){
 }
 
 // control logic what to do when a hero dies
-bool Player_HeroDies (bool testConds, bool runActions){
-    unit trigUnit = EventUnit();
-    int trigPlayer = UnitGetOwner(trigUnit);
-    if(testConds){
-        if (!(gv_PlayerStats[trigPlayer].activeFlag)) {return false;}
-    }
-    if(!runActions) {return true;}
-
+void Player_HeroDiesSwitch(int player){
     if(HeroAbility_RespawnEgg_RespawnAvailable()){
-        Player_Revive_SaveHero(trigPlayer);
-        HeroAbility_RespawnEgg_RunRespawnHandler(trigPlayer);
+        Player_Revive_SaveHero(player);
+        HeroAbility_RespawnEgg_RunRespawnHandler(player);
     }
-    else if(gv_PlayerStats[trigPlayer].lifes > 0){
-        gv_PlayerStats[trigPlayer].lifes -= 1;
-        UIDisplayMessage(PlayerGroupSingle(trigPlayer), c_messageAreaChat, (IntToText(gv_PlayerStats[trigPlayer].lifes) + StringToText(" lives left.")));
-
-        Player_Revive_SaveHero(trigPlayer);
-
+    else if(gv_PlayerStats[player].lifes > 0){
+        gv_PlayerStats[player].lifes -= 1;
+        UIDisplayMessage(PlayerGroupSingle(player), c_messageAreaChat, (IntToText(gv_PlayerStats[player].lifes) + StringToText(" lives left.")));
+        Player_Revive_SaveHero(player);
         Wait(5.0, c_timeGame);
-
-        libNtve_gf_PlayAnimation(libNtve_gf_MainActorofUnit(gv_PlayerStats[trigPlayer].overlord), c_animNameDefault, "Stand Work", 0, c_animTimeDefault);
-        Player_Revive_ReleaseHero(trigPlayer, UnitGetPosition(gv_PlayerStats[trigPlayer].overlord));
+        libNtve_gf_PlayAnimation(libNtve_gf_MainActorofUnit(gv_PlayerStats[player].overlord), c_animNameDefault, "Stand Work", 0, c_animTimeDefault);
+        Player_Revive_ReleaseHero(player, UnitGetPosition(gv_PlayerStats[player].overlord));
     }
     else {
-        Player_HeroDied(trigPlayer);
+        Player_HeroDied(player);
     }
+}
+
+bool Player_HeroDies (bool testConds, bool runActions){
+    int trigPlayer = UnitGetOwner(EventUnit());
+    if (!(gv_PlayerStats[trigPlayer].activeFlag)) {return false;}
+    Player_HeroDiesSwitch(trigPlayer);
     return true;
 }
 
