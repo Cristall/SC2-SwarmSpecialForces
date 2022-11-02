@@ -766,7 +766,7 @@ Trig/HeroSelection/Hero/Spitter/Long=Der Spitter ist insgesamt sehr ausgeglichen
 Trig/HeroSelection/Hero/Spitter/Unlock=Anfänger Held
 Trig/HeroSelection/Hero/Stinger/Long=Der Stinger ist mehr auf die Offensive fokussiert als auf die Defensive.<n/><n/><d ref="(Behavior,HeroHydraAttribute,Modification.VitalMaxArray[Life]/Behavior,HeroRoachAttribute,Modification.VitalMaxArray[Life])-1*100"/>% Leben von Level<n/>+<d ref="Accumulator,HeroHydraWeaponDmgModifier,Amount-1*100"/>% Schaden von Verbesserungen und Level<n/>-20% Rüstung von Verbesserungen<n/>-50% Flächenschadenradius
 Trig/HeroSelection/Hero/Stinger/Unlock=Benötigt Punkte Stufe III.
-Trig/HeroSelection/Hero/SwarmMother/Long=Die Schwarm Mother hat den Fokus auf die Unterstützung des Schwarms gesetzt.<n/><n/><d ref="Accumulator,HeroSwarmQueenWeaponDmgModifier,Amount-1*100"/>% Schaden von Verbesserungen und Level<n/>-10% Rüstung von Verbesserungen<n/>+100% Energieregeneration
+Trig/HeroSelection/Hero/SwarmMother/Long=Die Schwarm Mother hat den Fokus auf die Unterstützung des Schwarms gesetzt.<n/><n/><d ref="Accumulator,HeroSwarmQueenWeaponDmgModifier,Amount-1*100"/>% Schaden von Verbesserungen und Level<n/>+100% Energieregeneration
 Trig/HeroSelection/Hero/SwarmMother/Unlock=Benötigt Punkte Stufe IV.
 Trig/HiveDies=Der Schutz des Schwarmstocks ist verloren. Die eingegrabenen Zerg sind nicht mehr sicher.
 Trig/HivePanel/Flawless=Makellos:

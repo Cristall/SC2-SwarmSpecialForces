@@ -863,13 +863,13 @@ Trig/HeroSelection/DiffNone=沒有玩家投票選擇難度。系統將自動選�
 Trig/HeroSelection/DiffToken=難度:~VALUE~
 Trig/HeroSelection/Hero/Bowler/Long=飛膛是進化的成功例子。它獲得了不斷產生毒爆蟲的能力，並且非常擅長同時對付大量敵人。<n/><n/>+<d ref="Accumulator,HeroBowlerWeaponDmgModifier,Amount-1*100"/>%升級傷害<n/>-15%升級裝甲<n/>+133%濺射範圍<n/>+20%升級後的濺射範圍
 Trig/HeroSelection/Hero/Bowler/Unlock=由積分階段一解鎖。
-Trig/HeroSelection/Hero/Hardskin/Long=劫毀蟲已經進化到能夠防禦一切，但失去了許多進攻能力。<n/><n/>+<d ref="(Behavior,HeroRavagerAttribute,Modification.VitalMaxArray[Life]/Behavior,HeroRoachAttribute,Modification.VitalMaxArray[Life])-1*100"/>％等級生命<n/>-20％升級和等級傷害<n/>-50%濺射範圍<n/>+30%升級裝甲<n/><d ref="(Behavior,HeroHydraAttribute,Modification.MoveSpeedBonus/Behavior,HeroRoachAttribute,Modification.MoveSpeedBonus)-1*100"/>%等級移動速度<n/>+100%生命恢復
+Trig/HeroSelection/Hero/Hardskin/Long=劫毀蟲已經進化到能夠防禦一切，但失去了許多進攻能力。<n/><n/>+<d ref="(Behavior,HeroRavagerAttribute,Modification.VitalMaxArray[Life]/Behavior,HeroRoachAttribute,Modification.VitalMaxArray[Life])-1*100"/>％等級生命<n/><d ref="Accumulator,HeroRavagerWeaponDmgModifier,Amount-1*100"/>％升級和等級傷害<n/>-50%濺射範圍<n/>+30%升級裝甲<n/><d ref="(Behavior,HeroRavagerAttribute,Modification.MoveSpeedBonus/Behavior,HeroRoachAttribute,Modification.MoveSpeedBonus)-1*100"/>%等級移動速度<n/>+100%生命恢復
 Trig/HeroSelection/Hero/Hardskin/Unlock=由積分階段二解鎖。
 Trig/HeroSelection/Hero/Spitter/Long=蟑螂總體上來說是平衡的，每個蟲群的成員都是從他開始的。
 Trig/HeroSelection/Hero/Spitter/Unlock=新手英雄
 Trig/HeroSelection/Hero/Stinger/Long=刺蛇更注重進攻而不是防守。<n/><n/><d ref="(Behavior,HeroHydraAttribute,Modification.VitalMaxArray[Life]/Behavior,HeroRoachAttribute,Modification.VitalMaxArray[Life])-1*100"/>%升級生命<n/>+<d ref="Accumulator,HeroHydraWeaponDmgModifier,Amount-1*100"/>%升級和等級傷害<n/>-25%升級裝甲<n/>-50%濺射範圍
 Trig/HeroSelection/Hero/Stinger/Unlock=由積分階段三解鎖。
-Trig/HeroSelection/Hero/SwarmMother/Long=后蟲的重點是協助蟲群。<n/><n/><d ref="Accumulator,HeroSwarmQueenWeaponDmgModifier,Amount-1*100"/>%升級和等級傷害<n/>-10%升級裝甲<n/>+100%能量再生
+Trig/HeroSelection/Hero/SwarmMother/Long=后蟲的重點是協助蟲群。<n/><n/><d ref="Accumulator,HeroSwarmQueenWeaponDmgModifier,Amount-1*100"/>%升級和等級傷害<n/>+100%能量再生
 Trig/HeroSelection/Hero/SwarmMother/Unlock=由積分階段四解鎖。
 Trig/HiveDies=蟲巢的已經喪失。地洞的蟲族不再安全。
 Trig/HivePanel/Flawless=完美無瑕：
