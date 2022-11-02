@@ -28,7 +28,7 @@
 	<Constant name="CopyLink" val="https://discord.gg/KwxNAJ2"/>
 
 
-	<Constant name="Credits" val="Main Developer&lt;n/&gt;Cristall&lt;n/&gt;&lt;n/&gt;Game Design&lt;n/&gt;Scythe&lt;n/&gt;&lt;n/&gt;&lt;n/&gt; Assets from sc2mapster.com by:&lt;n/&gt;WingedArchon&lt;n/&gt; Alleyvsc2&lt;n/&gt; PurpleMania&lt;n/&gt; Edhriano&lt;n/&gt; Ghostnova&lt;n/&gt; Gumba&lt;n/&gt;&lt;n/&gt;Press F12 ingame for full credits"/>
+	<Constant name="Credits" val="Main Developer&lt;n/&gt;Cristall&lt;n/&gt;&lt;n/&gt;Game Design&lt;n/&gt;Scythe&lt;n/&gt;&lt;n/&gt;Localization&lt;n/&gt;German - Cristall&lt;n/&gt;Chinese - 神楓&lt;n/&gt;&lt;n/&gt; Assets from sc2mapster.com by:&lt;n/&gt;WingedArchon&lt;n/&gt; Alleyvsc2&lt;n/&gt; PurpleMania&lt;n/&gt; Edhriano&lt;n/&gt; Ghostnova&lt;n/&gt; Gumba&lt;n/&gt;&lt;n/&gt;Press F12 ingame for full credits"/>
 
 	<!-- Local Templates -->
 	<Frame type="Frame" name="CopyButtonTemplate">
