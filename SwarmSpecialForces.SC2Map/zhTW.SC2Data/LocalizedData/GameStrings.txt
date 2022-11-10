@@ -309,12 +309,12 @@ Button/Tooltip/UpgradeCenter=這個進化的王蟲幾乎是無敵的，因為它
 Card/Name/BaseOverlord/BCyb=建立傭兵蟲群
 DocInfo/DescLong=殺死敵人，吸收他們的生物質，升級你的英雄，然後消滅他們。<n/>戰勝挑戰，完成成就，變得更加強大。<n/><n/><n/>加入Discord以尋找活躍玩家、提交建議或報告錯誤。
 DocInfo/DescShort=6
-DocInfo/HowToPlayAdvanced00=不要著急！升級很重要！
+DocInfo/HowToPlayAdvanced00=不要著急！攻防升級很重要！
 DocInfo/HowToPlayAdvanced01=在遊戲初期盡量靠近蟲巢。
 DocInfo/HowToPlayAdvanced02=尋找一些你可以完成的成就來取得更多能力。
 DocInfo/HowToPlayBasic00=用殺死敵人後獲得的生物質來升級你的英雄。
 DocInfo/HowToPlayBasic01=摧毀敵人的出生點會獎勵額外​​的升級資源。
-DocInfo/HowToPlayWinning00=殺死所有首領。
+DocInfo/HowToPlayWinning00=擊殺所有首領。
 DocInfo/Name=蟲群特種部隊
 DocInfo/PatchNote001=- atlantis core illusion in brutal or higher only
 DocInfo/PatchNote002=- cyberminds push and pull indicator closer to actual affected area
@@ -548,11 +548,11 @@ Trig/Acv/Essences/Requirement=收集~VALUE~個原質
 Trig/Acv/Flamer/Name=<c val="FF0000">戰狼</c> 
 Trig/Acv/Flamer/Requirement=在各種難度中擊敗<c val="FF0000">戰狼</c>(最後一擊)。
 Trig/Acv/FlawlessP0/Name=<c val="800080">完美無瑕(人族)</c> 
-Trig/Acv/FlawlessP0/Requirement=在<c val="800080">孵化所無擊殺</c>且存在的狀況下擊敗人族。
+Trig/Acv/FlawlessP0/Requirement=在<c val="800080">孵化所無擊殺</c>且存活的狀況下擊敗人族。
 Trig/Acv/FlawlessP1/Name=<c val="800080">完美無瑕(神族)</c> 
-Trig/Acv/FlawlessP1/Requirement=在<c val="800080">蟲穴無擊殺</c>且存在的狀況下擊敗神族。
+Trig/Acv/FlawlessP1/Requirement=在<c val="800080">蟲穴無擊殺</c>且存活的狀況下擊敗神族。
 Trig/Acv/FlawlessP2/Name=<c val="800080">完美無瑕(蟲族)</c> 
-Trig/Acv/FlawlessP2/Requirement=在<c val="800080">蟲巢無擊殺</c>且存在的狀況下擊敗機甲蟲族。
+Trig/Acv/FlawlessP2/Requirement=在<c val="800080">蟲巢無擊殺</c>且存活的狀況下擊敗機甲蟲族。
 Trig/Acv/Fortress/Name=<c val="FF0000">行星要塞</c> 
 Trig/Acv/Fortress/Requirement=在各種難度中擊敗<c val="FF0000">行星要塞</c>(最後一擊)。
 Trig/Acv/Gary/Name=<c val="FF0000">蓋瑞</c> 
@@ -726,7 +726,7 @@ Trig/Bank/NoMainButBackup=未找到主庫文件，但備份存在！試圖恢復
 Trig/Bank/NoMainButBackupSuccess=加載備份成功！覆蓋損壞的主文件。
 Trig/Bosskilled=首領擊敗！(~VALUE~/~VALUE2~) +~VALUE3~<lang rule="plural">積分</lang>。
 Trig/Bosskilled/NydusWormAlive=你感覺到來自地下深處的震動......
-Trig/Bosskilled/NydusWormDead=現在是時候摧毀這些劣質複製品了，把他們消滅掉！
+Trig/Bosskilled/NydusWormDead=現在是時候摧毀這些劣質複製品了，把它們消滅掉！
 Trig/Bosskilled/ObserverAlive=你感覺有一個邪惡的存在正在注視著你......
 Trig/Bosskilled/ObserverDead=該來殺死這些邪惡的神族了，把他們消滅掉！
 Trig/CloseButton=X
@@ -753,7 +753,7 @@ Trig/Enemy/Observer/KillAfterBosses=我們提取了有關神族研究設施的�
 Trig/Enemy/Observer/KillBeforeBosses=我們提取了有關神族研究設施的訊息。在我們殺死了那些微不足道的人族之後，我們將消滅他們。
 Trig/Enemy/PartTransition/NewHive=我們找到一個新的蟲巢了。地洞的蟲群又安全了！
 Trig/Enemy/PartTransition/Upgrades=蟲巢進化了，獲得更多升級！
-Trig/Enemy/SpawnLimitClose=警告！殺死單位以防止達到人數限制！
+Trig/Enemy/SpawnLimitClose=警告！清除敵方單位以防止達到人數限制！
 Trig/Enemy/SpawnLimitReached=已達到敵人數量限制。在清除足夠多的敵人之前，建築是無敵的。
 Trig/Essence/Collected=~VALUE~收集了一個原質。技能增幅增加。
 Trig/Generic/DiffName/0=簡單
@@ -861,15 +861,15 @@ Trig/HeroSelection/Dialog/SelectHeroLabel=選擇英雄：
 Trig/HeroSelection/Diff=難度：
 Trig/HeroSelection/DiffNone=沒有玩家投票選擇難度。系統將自動選擇-簡單。
 Trig/HeroSelection/DiffToken=難度:~VALUE~
-Trig/HeroSelection/Hero/Bowler/Long=飛膛是進化的成功品種。它獲得了不斷產生毒爆蟲的能力，並且非常擅長同時對付大量敵人。<n/><n/>+5%升級傷害<n/>-10%升級裝甲<n/>+133%濺射範圍<n/>+20%升級後的濺射範圍
+Trig/HeroSelection/Hero/Bowler/Long=飛膛是進化的優秀品種。它獲得了不斷產生毒爆蟲的能力，並且非常擅長同時對付大量敵人。<n/><n/>+<d ref="Accumulator,HeroBowlerWeaponDmgModifier,Amount-1*100"/>%攻防和等級傷害<n/>-15%攻防裝甲<n/>+133%濺射範圍<n/>+20%升級的濺射範圍
 Trig/HeroSelection/Hero/Bowler/Unlock=由積分階段一解鎖。
-Trig/HeroSelection/Hero/Hardskin/Long=劫毀蟲已經進化到能夠防禦一切，但失去了許多進攻能力。<n/><n/>+60％等級生命<n/>-20％升級和等級傷害<n/>-50%濺射範圍<n/>+5初始裝甲和+30%升級裝甲<n/>-35%等級移動速度<n/>+100%生命恢復
+Trig/HeroSelection/Hero/Hardskin/Long=劫毀蟲已經進化到能夠防禦一切，但失去了許多進攻能力。<n/><n/>+<d ref="(Behavior,HeroRavagerAttribute,Modification.VitalMaxArray[Life]/Behavior,HeroRoachAttribute,Modification.VitalMaxArray[Life])-1*100"/>%等級生命<n/><d ref="Accumulator,HeroRavagerWeaponDmgModifier,Amount-1*100"/>%攻防和等級傷害<n/>-50%濺射範圍<n/>+50%攻防裝甲<n/><d ref="(Behavior,HeroRavagerAttribute,Modification.MoveSpeedBonus/Behavior,HeroRoachAttribute,Modification.MoveSpeedBonus)-1*100"/>%等級移動速度<n/>+100%生命再生
 Trig/HeroSelection/Hero/Hardskin/Unlock=由積分階段二解鎖。
 Trig/HeroSelection/Hero/Spitter/Long=蟑螂總體上來說是平衡的，每個蟲群的成員進化都是從他開始的。
 Trig/HeroSelection/Hero/Spitter/Unlock=初始英雄
-Trig/HeroSelection/Hero/Stinger/Long=刺蛇更注重進攻而不是防守。<n/><n/>-20%升級生命<n/>+20%升級和等級傷害<n/>-20%升級裝甲<n/>-50%濺射範圍
+Trig/HeroSelection/Hero/Stinger/Long=刺蛇更注重進攻而不是防守。<n/><n/><d ref="(Behavior,HeroHydraAttribute,Modification.VitalMaxArray[Life]/Behavior,HeroRoachAttribute,Modification.VitalMaxArray[Life])-1*100"/>%攻防生命<n/>+<d ref="Accumulator,HeroHydraWeaponDmgModifier,Amount-1*100"/>%攻防和等級傷害<n/>-25%攻防裝甲<n/>-50%濺射範圍
 Trig/HeroSelection/Hero/Stinger/Unlock=由積分階段三解鎖。
-Trig/HeroSelection/Hero/SwarmMother/Long=后蟲的重點是協助與輔助蟲群。<n/><n/><d ref="Behavior,SwarmQueenStats,Modification.DamageDealtUnscaled[Ranged]-1*100"/>%升級和等級傷害<n/>-10%升級裝甲<n/>+100%能量再生
+Trig/HeroSelection/Hero/SwarmMother/Long=后蟲的重點是協助與輔助蟲群。<n/><n/><d ref="Accumulator,HeroSwarmQueenWeaponDmgModifier,Amount-1*100"/>%攻防和等級傷害<n/>+100%能量再生
 Trig/HeroSelection/Hero/SwarmMother/Unlock=由積分階段四解鎖。
 Trig/HiveDies=蟲巢已經喪失。地洞的蟲族不再安全。
 Trig/HivePanel/Flawless=完美無瑕：
@@ -879,7 +879,7 @@ Trig/Menu/DiscordTooltip=將 Discord 邀請鏈結複製到剪貼簿。<n/>https:
 Trig/Menu/Options=選項
 Trig/Menu/Speedruns=速通
 Trig/Menu/Stats=統計數據
-Trig/Menu/Votekick=投票踢除
+Trig/Menu/Votekick=踢除
 Trig/Menu/VotekickRequirement=需要3名活躍玩家或1名旁觀玩家。
 Trig/MenuOpener/Text=選單
 Trig/MoopyHats/Collected=~VALUE~收集了一頂魔法帽。你可以感覺到蟲群吸收了宇宙的能量。
@@ -979,7 +979,7 @@ Trig/Tutorial/ScientistObjective=捕獲科學家。
 Trig/Tutorial/SurvivedWidowMines=摧毀生產建築會給你帶來突變。 <n/>使用突變來提升你的再生和攻擊速度。
 Trig/Tutorial/WelcomeMsg=歡迎來到<c val="FF0000">蟲群特種部隊</c>教程。<n/><n/>我將引導您了解遊戲的基礎知識。
 Trig/Votekick/Admin=無法投票踢除管理員~VALUE~。
-Trig/Votekick/Init=投票踢除~VALUE~。(選單->投票踢除)
+Trig/Votekick/Init=投票踢除~VALUE~。(選單->踢除)
 Trig/Votekick/Kick=~VALUE~被踢了。
 Trig/Votekick/Label=投票踢除:
 Trig/WinP0/Message=GG！你打敗了人族軍隊。
@@ -1026,7 +1026,7 @@ Unit/Name/AdeptShadow=癲狂教士
 Unit/Name/AdeptTalon=癲狂教士
 Unit/Name/Atlantis=聖母艦
 Unit/Name/AtlantisCore=母艦核心
-Unit/Name/AtlantisCoreWeaponMissile=斥候
+Unit/Name/AtlantisCoreWeaponMissile=母艦核心武器
 Unit/Name/Baneling=毒爆蟲
 Unit/Name/Banemine=毒爆陷阱
 Unit/Name/Banemine@Missile=導彈
