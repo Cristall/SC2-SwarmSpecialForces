@@ -293,6 +293,8 @@ void Tutorial_Init () {
     gv_PlayerStats[tutorial_Player].overlord = UnitLastCreated();
     HeroPanel_SetIcon(tutorial_Player, 0);
 
+    Acv_Reward_Spellpower_UpdateEffects(tutorial_Player);
+
     gv_Difficulty = 0;
     PlayerModifyPropertyInt(tutorial_Player, c_playerPropCustom, c_playerPropOperSetTo, gv_Difficulty);
     PlayerModifyPropertyInt(gv_EnemyPlayer, c_playerPropCustom, c_playerPropOperSetTo, gv_Difficulty);
