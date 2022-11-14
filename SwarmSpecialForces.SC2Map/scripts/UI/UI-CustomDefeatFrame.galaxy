@@ -12,14 +12,21 @@ bool CustomDefeatFrame_SpectateButton_Handler(bool testConds, bool runActions){
 
 bool CustomDefeatFrame_LeaveButton_Handler(bool testConds, bool runActions){
     int player = EventPlayer();
+    DialogControlSetVisible(customDefeatFrame_Frame, PlayerGroupSingle(player), false);
+    gv_PlayerStats[player].spectatingFlag = false;
     if(gv_PlayerStats[player].deathAfterWin){
         GameOver(player, c_gameOverVictory, false, true);
     }
     else {
         GameOver(player, c_gameOverDefeat, false, true);
     }
+    return true;
+}
+bool CustomDefeatFrame_WinButton_Handler(bool testConds, bool runActions){
+    int player = EventPlayer();
     DialogControlSetVisible(customDefeatFrame_Frame, PlayerGroupSingle(player), false);
     gv_PlayerStats[player].spectatingFlag = false;
+    GameOver(player, c_gameOverVictory, false, true);
     return true;
 }
 
@@ -33,7 +40,7 @@ void CustomDefeatFrame_WinEnable(){
     UISetGameMenuItemVisible(PlayerGroupAll(), c_gameMenuDialogGenericButton1, true);
     UISetGameMenuItemText(PlayerGroupAll(), c_gameMenuDialogGenericButton1, StringExternal("Trig/PlayerWin/Button"));
     UISetGameMenuItemShortcut(PlayerGroupAll(), c_gameMenuDialogGenericButton1, StringExternal("Trig/PlayerWin/ButtonHotkey"));
-    TriggerAddEventGameMenuItemSelected(TriggerCreate("CustomDefeatFrame_LeaveButton_Handler"), c_playerAny, c_gameMenuDialogGenericButton1);
+    TriggerAddEventGameMenuItemSelected(TriggerCreate("CustomDefeatFrame_WinButton_Handler"), c_playerAny, c_gameMenuDialogGenericButton1);
 }
 
 void CustomDefeatFrame_Init () {
