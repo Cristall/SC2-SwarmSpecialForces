@@ -72,7 +72,7 @@ Behavior/Tooltip/RespawnEgg@HiveAura=While in the safe zone of the egg you gain:
 Behavior/Tooltip/Shocked=You have been electrified which randomily shocks you, dealing damage and stunning you for a brief moment.
 Behavior/Tooltip/Silenced=You are silenced, disabling all channeled abilities and prevents you from using any ability.
 Behavior/Tooltip/Tackle@FriendlyTackle=Increased damage.
-Behavior/Tooltip/UltimateBeing@UltimateBuff=Adds +<d ref="Behavior,UltimateBeing@UltimateBuff,Modification.DamageDealtUnscaled[Ranged]" precision="2"/> damage, +<d ref="Behavior,UltimateBeing@UltimateBuff,Modification.LifeArmorBonus" precision="2"/> armor and +<d ref="Behavior,UltimateBeing@UltimateBuff,Modification.MoveSpeedMultiplier-1*100" precision="2"/>% movement speed.
+Behavior/Tooltip/UltimateBeing@UltimateBuff=Adds +<d ref="Behavior,UltimateBeing@UltimateBuff,Modification.DamageDealtScaled[Ranged]" precision="2"/> damage, +<d ref="Behavior,UltimateBeing@UltimateBuff,Modification.LifeArmorBonus" precision="2"/> armor and +<d ref="Behavior,UltimateBeing@UltimateBuff,Modification.MoveSpeedMultiplier-1*100" precision="2"/>% movement speed.
 Button/Name/AbsorbExplosion=Counter Explosion
 Button/Name/AcidPit=Acid Pit
 Button/Name/ArmorUpgrade=Armor Upgrade
@@ -120,6 +120,7 @@ Button/Name/RespawnEgg@EggSuicide=Egg Suicide
 Button/Name/RespawnEgg@Reviving=Reviving
 Button/Name/Scrap=Scrap: 
 Button/Name/SplashRangeUpgrade=Splash Range Upgrade
+Button/Name/Tackle=Tackle
 Button/Name/Taunt@Taunt=Taunt
 Button/Name/TerranPartTransition=Fly to Protoss
 Button/Name/TheySeeMeRolling=They See Me Rolling
@@ -204,7 +205,7 @@ Button/Tooltip/TerranPartTransition=After extracting the location of the protoss
 Button/Tooltip/TheySeeMeRolling=Throw a big baneling and let it roll over all your enemies. It pushes small enemies out of the way and deals <d ref="$AccumulatedValue:Effect,TheySeeMeRolling@Dmg,Amount$"/> damage at the same time.<n/><n/>Bosses and structures make the baneling explode which deals <d ref="$AccumulatedValue:Effect,TheySeeMeRolling@FinalExplosionDmg,Amount$"/>.<n/><n/>They see me rollin'<n/>They hatin'.
 Button/Tooltip/Thor=Hammer's pilot, Thor, sometimes claims to be a god, but trust me, he just delusional.
 Button/Tooltip/Thunder=She loves her own voice and so she talks all the time. Everybody coming close is silenced by her.
-Button/Tooltip/UltimateBeing=Gathers the power of all other abilities together. For <d ref="Behavior,UltimateBeing@UltimateBuff,Duration" precision="2"/> seconds you get +<d ref="Behavior,UltimateBeing@UltimateBuff,Modification.DamageDealtUnscaled[Ranged]" precision="2"/> damage, +<d ref="Behavior,UltimateBeing@UltimateBuff,DamageResponse.ModifyFraction-1*(-100)" precision="2"/>% damage reduction and +<d ref="Behavior,UltimateBeing@UltimateBuff,Modification.MoveSpeedMultiplier-1*100" precision="2"/>% movement speed.<n/>Your team does not get any benefit.<n/><n/>All Spitter ability cooldowns are shared.
+Button/Tooltip/UltimateBeing=Gathers the power of all other abilities together. For <d ref="Behavior,UltimateBeing@UltimateBuff,Duration" precision="2"/> seconds you get +<d ref="Behavior,UltimateBeing@UltimateBuff,Modification.DamageDealtScaled[Ranged]" precision="2"/> damage, +<d ref="Behavior,UltimateBeing@UltimateBuff,DamageResponse.ModifyFraction-1*(-100)" precision="2"/>% damage reduction and +<d ref="Behavior,UltimateBeing@UltimateBuff,Modification.MoveSpeedMultiplier-1*100" precision="2"/>% movement speed.<n/>Your team does not get any benefit.<n/><n/>All Spitter ability cooldowns are shared.
 Button/Tooltip/UpgradeCenter=This mutated overlord is nearly invincible due to its high regeneration. The only drawback from this mutation is that it cannot move while it regenerates.<n/>Another feature is its ability to continuously spread creep which does not decay.<n/>The swarm also made it possible to convert biomass from killed enemies into upgrades for the heroic zergs on the battlefield.
 Card/Name/BaseOverlord/BCyb=Build Cybernetics
 DocInfo/DescLong=Kill enemies, absorb their biomass, grow stronger and wipe them out.<n/>Beat challenges and become even stronger. Many achievements to complete.<n/><n/><n/>Join the discord to find active player, submit suggestions or report bugs.

@@ -105,8 +105,8 @@ Behavior/Tooltip/Shocked=你被帶電了，它會隨機電擊你，造成傷害�
 Behavior/Tooltip/Silenced=你被沉默，禁用所有引導技能並阻止你使用任何技能。
 Behavior/Tooltip/Slow2=目標的移動速度會在短時間內降低。
 Behavior/Tooltip/Tackle@FriendlyTackle=增加傷害。
-Behavior/Tooltip/UltimateBeing@UltimateBuff=增加<d ref="Behavior,UltimateBeing@UltimateBuff,Modification.DamageDealtUnscaled[Ranged]" precision="2"/>傷害、<d ref="Behavior,UltimateBeing@UltimateBuff,Modification.LifeArmorBonus" precision="2"/>裝甲和<d ref="Behavior,UltimateBeing@UltimateBuff,Modification.MoveSpeedMultiplier-1*100" precision="2"/>%移動速度。
 Button/Name/AbsorbExplosion=反爆炸
+Behavior/Tooltip/UltimateBeing@UltimateBuff=增加<d ref="Behavior,UltimateBeing@UltimateBuff,Modification.DamageDealtScaled[Ranged]" precision="2"/>傷害、<d ref="Behavior,UltimateBeing@UltimateBuff,Modification.LifeArmorBonus" precision="2"/>裝甲和<d ref="Behavior,UltimateBeing@UltimateBuff,Modification.MoveSpeedMultiplier-1*100" precision="2"/>%移動速度。
 Button/Name/AcidPit=酸液
 Button/Name/AidFromAiur=艾爾的援助
 Button/Name/ArmorUpgrade=裝甲升級
@@ -304,10 +304,10 @@ Button/Tooltip/TerranPartTransition=提取出神族設施的位置後，現在�
 Button/Tooltip/TheySeeMeRolling=扔出一個大毒爆，讓它輾過你所有的敵人。它將敵人推開並同時造成<d ref="$AccumulatedValue:Effect,TheySeeMeRolling@Dmg,Amount$"/>傷害。<n/><n/>首領和建築會使毒爆蟲強制爆炸並造成<d ref="$AccumulatedValue:Effect,TheySeeMeRolling@FinalExplosionDmg,Amount$"/>傷害。<n/><n/>當他們看見我在滾動<n/>他們恐懼。
 Button/Tooltip/Thor=雷神的駕駛員有時自稱是神，但相信我，他只是妄想。
 Button/Tooltip/Thunder=她喜歡自己的聲音，所以她一直在說話。每個靠近的人都被她沉默了
-Button/Tooltip/UltimateBeing=將所有其他技能的力量聚集在一起，在<d ref="Behavior,UltimateBeing@UltimateBuff,Duration" precision="2"/>秒內你將增加<d ref="Behavior,UltimateBeing@UltimateBuff,Modification.DamageDealtUnscaled[Ranged]" precision="2"/>傷害，增加<d ref="Behavior,UltimateBeing@UltimateBuff,DamageResponse.ModifyFraction-1*(-100)" precision="2"/>%傷害減免以及增加<d ref="Behavior,UltimateBeing@UltimateBuff,Modification.MoveSpeedMultiplier-1*100" precision="2"/>%移動速度。<n/>你的友軍不會獲得任何效果。<n/><n/>蟑螂的所有技能冷卻時間都是共享的。
 Button/Tooltip/UpgradeCenter=這個進化的王蟲幾乎是無敵的，因為它的超高再生能力。這種進化的唯一缺點是它在再生時不能移動。<n/>另一個特點是它能夠持續傳播不會腐爛的蟲胎。<n/>它還可以將死亡的敵人的生物質轉化成升級戰場上英勇蟲群。
 Card/Name/BaseOverlord/BCyb=建立傭兵蟲群
 DocInfo/DescLong=殺死敵人，吸收他們的生物質，升級你的英雄，然後消滅他們。<n/>戰勝挑戰，完成成就，變得更加強大。<n/><n/><n/>加入Discord以尋找活躍玩家、提交建議或報告錯誤。
+Button/Tooltip/UltimateBeing=將所有其他技能的力量聚集在一起，在<d ref="Behavior,UltimateBeing@UltimateBuff,Duration" precision="2"/>秒內你將增加<d ref="Behavior,UltimateBeing@UltimateBuff,Modification.DamageDealtScaled[Ranged]" precision="2"/>傷害，增加<d ref="Behavior,UltimateBeing@UltimateBuff,DamageResponse.ModifyFraction-1*(-100)" precision="2"/>%傷害減免以及增加<d ref="Behavior,UltimateBeing@UltimateBuff,Modification.MoveSpeedMultiplier-1*100" precision="2"/>%移動速度。<n/>你的友軍不會獲得任何效果。<n/><n/>蟑螂的所有技能冷卻時間都是共享的。
 DocInfo/DescShort=6
 DocInfo/HowToPlayAdvanced00=不要著急！攻防升級很重要！
 DocInfo/HowToPlayAdvanced01=在遊戲初期盡量靠近蟲巢。

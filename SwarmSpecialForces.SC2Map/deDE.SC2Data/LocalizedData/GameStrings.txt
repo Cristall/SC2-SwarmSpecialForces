@@ -72,7 +72,7 @@ Behavior/Tooltip/RespawnEgg@HiveAura=Innerhalb der sicheren Zone des Eis erhäls
 Behavior/Tooltip/Shocked=Du wurdest elektrifiziert und wirst zufällig geschockt, was dir Schaden zufügt und dich kurzzeitig betäubt.
 Behavior/Tooltip/Silenced=Du bist verstummt, sodass alle deine kanalisierten Fähigkeiten stoppen und du keine Fähigkeiten einsetzen kannst.
 Behavior/Tooltip/Tackle@FriendlyTackle=Erhöhter Schaden.
-Behavior/Tooltip/UltimateBeing@UltimateBuff=Erhöht +<d ref="Behavior,UltimateBeing@UltimateBuff,Modification.DamageDealtUnscaled[Ranged]" precision="2"/> Schaden, +<d ref="Behavior,UltimateBeing@UltimateBuff,Modification.LifeArmorBonus" precision="2"/> Rüstung und +<d ref="Behavior,UltimateBeing@UltimateBuff,Modification.MoveSpeedMultiplier-1*100" precision="2"/>% Bewegungsgeschwindigkeit.
+Behavior/Tooltip/UltimateBeing@UltimateBuff=Erhöht +<d ref="Behavior,UltimateBeing@UltimateBuff,Modification.DamageDealtScaled[Ranged]" precision="2"/> Schaden, +<d ref="Behavior,UltimateBeing@UltimateBuff,Modification.LifeArmorBonus" precision="2"/> Rüstung und +<d ref="Behavior,UltimateBeing@UltimateBuff,Modification.MoveSpeedMultiplier-1*100" precision="2"/>% Bewegungsgeschwindigkeit.
 Button/Name/AbsorbExplosion=Konter Explosion
 Button/Name/AcidPit=Säurepfütze
 Button/Name/ArmorUpgrade=Rüstungsverbesserung
@@ -120,6 +120,7 @@ Button/Name/RespawnEgg@EggSuicide=Ei Suizid
 Button/Name/RespawnEgg@Reviving=Wiederbelebung
 Button/Name/Scrap=Schrott: 
 Button/Name/SplashRangeUpgrade=Flächenschadenradiusverbesserung
+Button/Name/Tackle=Tackle
 Button/Name/Taunt@Taunt=Spott
 Button/Name/TerranPartTransition=Zu den Protoss fliegen
 Button/Name/TheySeeMeRolling=They See Me Rolling
@@ -204,7 +205,7 @@ Button/Tooltip/TerranPartTransition=Nachdem extrahieren der Position der Protoss
 Button/Tooltip/TheySeeMeRolling=Wirf einen großen Berstling und lasse ihn über alle Gegner rollen. Er stößt kleine Gegner aus dem Weg und macht dabei  <d ref="$AccumulatedValue:Effect,TheySeeMeRolling@Dmg,Amount$"/> Schaden.<n/><n/>Bosse und Gebäude lassen den Berstling sofort explodieren, was <d ref="$AccumulatedValue:Effect,TheySeeMeRolling@FinalExplosionDmg,Amount$"/> Schaden verursacht.<n/><n/>They see me rollin'<n/>They hatin'.
 Button/Tooltip/Thor=Hammers Pilot, Thor, behauptet manchmal ein Gott zu sein, aber vertrau mir, das sind nur Wahnvorstellungen.
 Button/Tooltip/Thunder=Sie liebt ihre eigene Stimme und spricht die ganze Zeit. Jeder, der ihr zu nahe kommt, wird zum Schweigen gebracht.
-Button/Tooltip/UltimateBeing=Bündelt die Kräfte alle anderen Fähigkeiten. Für <d ref="Behavior,UltimateBeing@UltimateBuff,Duration" precision="2"/> Sekunden erhälst du +<d ref="Behavior,UltimateBeing@UltimateBuff,Modification.DamageDealtUnscaled[Ranged]" precision="2"/> Schaden, +<d ref="Behavior,UltimateBeing@UltimateBuff,DamageResponse.ModifyFraction-1*(-100)" precision="2"/>% Schadensreduktion und +<d ref="Behavior,UltimateBeing@UltimateBuff,Modification.MoveSpeedMultiplier-1*100" precision="2"/>% Bewegungsgeschwindigkeit.<n/>Deine Verbündeten gehen leer aus.<n/><n/>Alle Spitter Fähigkeiten teilen sich die Abklingzeiten.
+Button/Tooltip/UltimateBeing=Bündelt die Kräfte alle anderen Fähigkeiten. Für <d ref="Behavior,UltimateBeing@UltimateBuff,Duration" precision="2"/> Sekunden erhälst du +<d ref="Behavior,UltimateBeing@UltimateBuff,Modification.DamageDealtScaled[Ranged]" precision="2"/> Schaden, +<d ref="Behavior,UltimateBeing@UltimateBuff,DamageResponse.ModifyFraction-1*(-100)" precision="2"/>% Schadensreduktion und +<d ref="Behavior,UltimateBeing@UltimateBuff,Modification.MoveSpeedMultiplier-1*100" precision="2"/>% Bewegungsgeschwindigkeit.<n/>Deine Verbündeten gehen leer aus.<n/><n/>Alle Spitter Fähigkeiten teilen sich die Abklingzeiten.
 Button/Tooltip/UpgradeCenter=Dieser mutierte Overlord ist unbesiegbar wegen seiner hohen Regeneration. Der einzige Nachteil dieser Mutation ist, dass er sich nicht bewegen kann während er sich regeneriert.<n/>Eine andere Besonderheit ist, dass er kontinuierlich Kriecher verbreitet, der nicht verschwindet.<n/>Der Schwarm ist außerdem in der Lage Biomasse von getöteten Gegnern in Verbesserungen für die heroischen Zerg umzuwandeln.
 Card/Name/BaseOverlord/BCyb=Baue Kybernetische Einheiten
 DocInfo/DescLong=Töte Gegner, absorbiere ihre Biomasse, werde stärker and vernichte sie alle.<n/>Überwinde Herausforderungen und werde stärker. Viele Erfolge zum Freischalten.<n/><n/><n/>Trete unserem Discord Server bei für Feedback und Verbesserungsvorschläge.

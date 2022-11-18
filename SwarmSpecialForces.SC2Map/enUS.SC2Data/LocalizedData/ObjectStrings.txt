@@ -2387,7 +2387,6 @@ Button/Name/Stetellite=Stetellite
 Button/Name/StetmannRevenge=Stetmann Revenge
 Button/Name/StetmannSummons=Stetmann Summons
 Button/Name/Swap=Swap
-Button/Name/Tackle=Tackle
 Button/Name/TakeCover=Take Cover
 Button/Name/UnstableTeleport=Unstable Teleport
 Button/Name/WatchYourStep=Watch Your Step
