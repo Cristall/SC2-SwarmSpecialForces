@@ -36,11 +36,17 @@ void CustomDefeatFrame_Show(int playerID){
 
 // enables the win button in game menu F10 and makes future deaths count as wins
 void CustomDefeatFrame_WinEnable(){
+    int winButton;
+    trigger tmpTrigger;
     gv_GameWon = true;
     UISetGameMenuItemVisible(PlayerGroupAll(), c_gameMenuDialogGenericButton1, true);
     UISetGameMenuItemText(PlayerGroupAll(), c_gameMenuDialogGenericButton1, StringExternal("Trig/PlayerWin/Button"));
     UISetGameMenuItemShortcut(PlayerGroupAll(), c_gameMenuDialogGenericButton1, StringExternal("Trig/PlayerWin/ButtonHotkey"));
-    TriggerAddEventGameMenuItemSelected(TriggerCreate("CustomDefeatFrame_WinButton_Handler"), c_playerAny, c_gameMenuDialogGenericButton1);
+    tmpTrigger = TriggerCreate("CustomDefeatFrame_WinButton_Handler");
+    TriggerAddEventGameMenuItemSelected(tmpTrigger, c_playerAny, c_gameMenuDialogGenericButton1);
+    winButton = DialogControlHookup(gv_UI_MasterFrame, c_triggerControlTypeButton, "Menu/WinButton");
+    DialogControlSetVisible(winButton, gv_ActivePG, true);
+    TriggerAddEventDialogControl(tmpTrigger, c_playerAny, winButton, c_triggerControlEventTypeClick);
 }
 
 void CustomDefeatFrame_Init () {
