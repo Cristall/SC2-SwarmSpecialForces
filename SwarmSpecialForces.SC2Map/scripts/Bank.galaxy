@@ -26,11 +26,11 @@ static bool bank_Save_RequestRunning;
 
         if(value >= 0){
             if(length >= 10){
-                BankStorageErrorCheck = true;
-                BankStorageString += "9999999999";
+                BankStorageString += "9987654321";  // first 9 is the digit counter, the other 9 digits are for the actual value
+                UIDisplayMessage(PlayerGroupAll(), c_messageAreaChat, StringToText("Please contact the author to properly fix 1 billion kill bug :D"));
             }
             else{
-                BankStorageString = (BankStorageString + IntToString(length) + string_val);
+                BankStorageString += IntToString(length) + string_val;
             }
         }
         else {
@@ -56,14 +56,10 @@ static bool bank_Save_RequestRunning;
             length = StringToInt(tmpString);
 
             if(length == 0) {
-                BankStorageErrorCheck = true;
                 UIDisplayMessage(PlayerGroupAll(), c_messageAreaError, StringToText("Bank Storage Error! Wrong length (too small)"));
-                return 0;
             }
             else if (length +1 > StringLength(BankStorageString)){
-                BankStorageErrorCheck = true;
                 UIDisplayMessage(PlayerGroupAll(), c_messageAreaError, StringToText("Bank Storage Error! Wrong length (too long)"));
-                return 0;
             }
             else {
                 tmpString = StringSub(BankStorageString, 2, length+1);
@@ -72,35 +68,28 @@ static bool bank_Save_RequestRunning;
             }
         }
         else {
-            BankStorageErrorCheck = true;
             UIDisplayMessage(PlayerGroupAll(), c_messageAreaError, StringToText("Bank Storage Error! Empty String."));
-            return 0;
         }
+        BankStorageErrorCheck = true;
+        return 0;
     }
 
     static bool BankStorageRetrieveBool(){
         string tmpString = "";
-        if ((BankStorageString != "")) {
+        if (BankStorageString != "") {
             tmpString = StringSub(BankStorageString, 1, 1);
             BankStorageString = StringSub(BankStorageString, 2, StringLength(BankStorageString));
-            if ((tmpString == "0")) {
-                return false;
-            }
-            else if ((tmpString == "1")) {
-                return true;
-            }
+            if (tmpString == "0")      { return false; }
+            else if (tmpString == "1") { return true; }
             else {
-                BankStorageErrorCheck = true;
                 UIDisplayMessage(PlayerGroupAll(), c_messageAreaError, StringToText("Bank Storage Error! Expected Bool."));
-                return false;
             }
-        
         }
         else {
-            BankStorageErrorCheck = true;
             UIDisplayMessage(PlayerGroupAll(), c_messageAreaError, StringToText("Bank Storage Error! Empty."));
-            return false;
         }
+        BankStorageErrorCheck = true;
+        return false;
     }
 
     static string BankStorageGetString(){
