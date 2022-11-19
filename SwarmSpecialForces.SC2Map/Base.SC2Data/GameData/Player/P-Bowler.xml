@@ -1031,16 +1031,16 @@
         <Amount value="1"/>
     </CAccumulatorConstant>
     <CAccumulatorConstant id="TheySeeMeRolling@KnockbackDmgBase">
-        <Amount value="250"/>
+        <Amount value="300"/>
     </CAccumulatorConstant>
     <CAccumulatorConstant id="TheySeeMeRolling@ExplodeDmgBase">
-        <Amount value="500"/>
+        <Amount value="600"/>
     </CAccumulatorConstant>
     <CAccumulatorConstant id="TheySeeMeRolling@KnockbackDmgModifier">
-        <Amount value="2"/>
+        <Amount value="2.5"/>
     </CAccumulatorConstant>
     <CAccumulatorConstant id="TheySeeMeRolling@ExplodeDmgModifier">
-        <Amount value="4"/>
+        <Amount value="5"/>
     </CAccumulatorConstant>
     <CAccumulatorConstant id="HeroBowlerWeaponDmgModifier">
         <Amount value="1.05"/>
