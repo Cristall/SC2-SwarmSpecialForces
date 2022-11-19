@@ -85,6 +85,7 @@
             <Value>2.14</Value>
             <Value>2.15</Value>
             <Value>2.16</Value>
+            <Value>2.17</Value>
         </Version>
         <Date>
             <Value>8/22/2022</Value>
@@ -103,6 +104,7 @@
             <Value>10/15/2022</Value>
             <Value>11/11/2022</Value>
             <Value>11/14/2022</Value>
+            <Value>11/19/2022</Value>
         </Date>
         <Notes>
             <Value>125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140</Value>
@@ -121,6 +123,7 @@
             <Value>84,85,86</Value>
             <Value>87,88,89,90,91,92,93,94</Value>
             <Value>95,96,97,98</Value>
+            <Value>99,100,101,102,103,104,105,106,107</Value>
         </Notes>
     </PatchNote>
     <Preload>
