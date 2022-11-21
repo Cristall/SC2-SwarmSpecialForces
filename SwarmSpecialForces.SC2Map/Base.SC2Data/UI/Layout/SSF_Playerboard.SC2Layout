@@ -128,17 +128,17 @@
             </Frame>
 
             <Frame type="Button" name="ExpandButton">
-                <Anchor side="Left" relative="$parent/TitleBackground" pos="Min" offset="15"/>
-                <Anchor side="Right" relative="$parent/TitleBackground" pos="Max" offset="-15"/>
-                <Anchor side="Top" relative="$parent/TitleBackground" pos="Mid" offset="0"/>
-                <Anchor side="Bottom" relative="$parent/TitleBackground" pos="Mid" offset="0"/>
-                <Height val="32"/>
+                <Anchor side="Left" relative="$parent/TitleBackground" pos="Min" offset="5"/>
+                <Anchor side="Right" relative="$parent/TitleBackground" pos="Max" offset="-5"/>
+                <Anchor side="Top" relative="$parent/TitleBackground" pos="Min" offset="5"/>
+                <Anchor side="Bottom" relative="$parent/TitleBackground" pos="Max" offset="-5"/>
 
                 <Frame type="Image" name="Image">
-                    <Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+                    <Anchor side="Right" relative="$parent" pos="Max" offset="-10"/>
                     <Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
                     <Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
                     <Color val="255,128,0"/>
+                    <Height val="32"/>
                     <Width val="32"/>
                     <Texture val="#PlayerboardExpandArrow"/>
                     <Rotation val="0"/>
