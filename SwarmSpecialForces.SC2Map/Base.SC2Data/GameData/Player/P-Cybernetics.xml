@@ -830,7 +830,6 @@
         <HotkeyCategory value="Unit/Category/SSFPlayerUnits"/>
         <KillDisplay value="Always"/>
         <RankDisplay value="Always"/>
-        <SpeedBonusCreep value="3"/>
         <GlossaryPriority value="29"/>
         <Name value="Unit/Name/Lurker"/>
         <LifeArmorFormula>
@@ -846,6 +845,7 @@
             <PositiveArmorMultiplier value="0"/>
         </ShieldArmorFormula>
         <LifeArmorTip value="Unit/CyberneticLurker/ArmorTooltip"/>
+        <SpeedMultiplierCreep value="49"/>
     </CUnit>
     <CUnit id="CyberneticLurkerBurrowed" parent="CyberneticLurker">
         <FlagArray index="Buried" value="1"/>
@@ -857,7 +857,6 @@
         <Collide index="Small" value="0"/>
         <Mover value="Burrowed"/>
         <Speed value="0"/>
-        <SpeedBonusCreep value="0"/>
         <Acceleration value="0"/>
         <LateralAcceleration value="0"/>
         <StationaryTurningRate value="720"/>
@@ -880,6 +879,7 @@
         <SubgroupPriority value="12"/>
         <EquipmentArray index="0" removed="1"/>
         <HotkeyCategory value=""/>
+        <SpeedMultiplierCreep value="1"/>
     </CUnit>
     <CUnit id="Runling">
         <DeathRevealRadius value="3"/>
@@ -901,7 +901,6 @@
         <LifeArmorName value="Unit/LifeArmorName/CyberneticZergArmor"/>
         <ShieldArmorName value="Unit/ShieldArmorName/ZergWildMutation"/>
         <Speed value="2.0976"/>
-        <SpeedBonusCreep value="2.0976"/>
         <Acceleration value="1000"/>
         <LateralAcceleration value="46.0625"/>
         <StationaryTurningRate value="999.8437"/>
@@ -957,6 +956,7 @@
             <PositiveArmorMultiplier value="0"/>
         </ShieldArmorFormula>
         <LifeArmorTip value="Unit/Runling/ArmorTooltip"/>
+        <SpeedMultiplierCreep value="2"/>
     </CUnit>
     <CBehaviorBuff id="CyberneticLurkerArmor" parent="ArmorBase">
         <Name value="Behavior/Name/CyberneticLurkerArmor"/>
