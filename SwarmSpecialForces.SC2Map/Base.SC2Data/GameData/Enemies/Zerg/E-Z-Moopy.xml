@@ -257,6 +257,9 @@
         <PeriodicPeriodArray value="0"/>
         <Flags index="RandomOffset" value="1"/>
         <OffsetRandMode value="Shuffle"/>
+        <Marker>
+            <MatchFlags index="Id" value="1"/>
+        </Marker>
     </CEffectCreatePersistent>
     <CEffectEnumArea id="DanceFloor@AreaSearch">
         <EditorCategories value=""/>
@@ -272,6 +275,7 @@
     </CEffectEnumArea>
     <CEffectDamage id="DanceFloor@Dmg">
         <ValidatorArray value="ShieldColor@ColorCheck"/>
+        <ValidatorArray value="noMarkers"/>
         <EditorCategories value=""/>
         <Amount value="8000"/>
     </CEffectDamage>
