@@ -247,7 +247,7 @@
             <MatchFlags index="Id" value="1"/>
         </Marker>
         <WhichLocation Value="CasterPoint"/>
-        <InitialDelay value="0.2"/>
+        <ValidatorArray value="CasterNotDead"/>
     </CEffectCreatePersistent>
     <CEffectEnumArea id="WingSpikes@ImpactSearch">
         <EditorCategories value=""/>
@@ -256,7 +256,7 @@
     </CEffectEnumArea>
     <CEffectCreatePersistent id="WingSpikes@WaitPersistent">
         <EditorCategories value=""/>
-        <ExpireDelay value="1.5"/>
+        <ExpireDelay value="1.7"/>
         <ExpireEffect value="WingSpikes@ImpactLocations"/>
     </CEffectCreatePersistent>
     <CEffectCreatePersistent id="Leap@Delay">
