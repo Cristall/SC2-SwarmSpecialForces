@@ -3,7 +3,6 @@
 
 <!-- Perma Menu Open button-->
 	<Constant name="MenuOpenerHeight" val="82"/>
-	<Constant name="MenuOpenerWidth" val="250"/>
 
 	<Frame type="Frame" name="MenuOpenerTemplate">
 		<Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
@@ -47,7 +46,6 @@
 
 <!-- Menu -->
 	<Constant name="MenuBorderHeight" val="-16"/>
-	<Constant name="MenuWidth" val="250"/>
 	<Constant name="MenuButtonHeight" val="50"/>
 	<Constant name="MenuButtonGap" val="-2"/>
 	<Constant name="CopyText" val="Discord link"/>

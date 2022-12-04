@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <Desc>
 	<Constant name="OptionsLabelGap" val="4"/>
-	<Constant name="OptionsCheckboxGap" val="5"/>
+	<Constant name="OptionsSectionGap" val="8"/>
+	<Constant name="OptionsCheckboxGap" val="-5"/>
 	<Constant name="OptionsRowHeight" val="50"/>
 	<Constant name="OptionsCheckBoxWidth" val="30"/>
+	<Constant name="OptionsControlGroupIndent" val="10"/>
+	<Constant name="OptionsCheckboxBorderDistance" val="-43"/>
 
 	<Frame type="CheckBox" name="OptionsCheckBoxTemplate" template="SSF_Templates/CheckBoxTemplate">
 		<Height val="#OptionsRowHeight"/>
@@ -15,20 +18,24 @@
 		<Anchor side="Right" relative="$parent" pos="Max" offset="#BorderNegative"/>
 		<Height val="#OptionsRowHeight"/>
 		<Frame type="Label" name="TypeLabel">
-			<Anchor relative="$parent"/>
+			<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+			<Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
+			<Anchor side="Left" relative="$parent" pos="Min" offset="#OptionsControlGroupIndent"/>
+			<Anchor side="Right" relative="$parent/Checkbox" pos="Min" offset="#OptionsCheckboxGap"/>
 			<Style val="aaDialogItemStyleLeftMiddle"/>
 		</Frame>
 		<Frame type="CheckBox" name="Checkbox" template="SSF_Options/OptionsCheckBoxTemplate">
 			<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
-			<Anchor side="Left" relative="$parent" pos="Min" offset="125"/>
+			<Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
+			<Anchor side="Right" relative="$parent/Pulldown" pos="Min" offset="#OptionsCheckboxGap"/>
 			<Tooltip val="@Trig/Options/AutoControlGroupsTooltip"/>
 		</Frame>
 		<Frame type="Pulldown" name="Pulldown" template="SSF_Templates/PulldownTemplate">
-			<Anchor side="Left" relative="$parent/Checkbox" pos="Max" offset="#OptionsCheckboxGap"/>
-			<Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
 			<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+			<Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
+			<Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
 
-			<Width val="75"/>
+			<Width val="100"/>
 			
 			<Frame type="Image" name="PulldownBackground">
 				<Texture val="Assets/Icons/Pulldown_Normal.tga"/>
@@ -46,7 +53,7 @@
 		<Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
 		<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
 		<Anchor side="Bottom" relative="$this/InitialUnitSelectionLabel" pos="Max" offset="#Border"/>
-		<Width val="345"/>
+		<Width val="#OptionsWidth"/>
 		<Visible val="false"/>
 		<Frame type="Image" name="BackgroundImage" template="SSF_Templates/BackgroundImageTemplate"/>
 		<Frame type="Button" name="CloseButton" template="SSF_Templates/CloseButtonTemplate"/>
@@ -68,7 +75,7 @@
 
 		<Frame type="Pulldown" name="AutoHeroSelectionPulldown" template="SSF_Templates/PulldownTemplate">
 			<Width val="165"/>
-			<Anchor side="Left" relative="$parent/AutoHeroSelectionCheckbox" pos="Max" offset="#OptionsCheckboxGap"/>
+			<Anchor side="Left" relative="$parent/AutoHeroSelectionCheckbox" pos="Max" offset="5"/>
 			<Anchor side="Right" relative="$parent" pos="Max" offset="#BorderNegative"/>
 			<Anchor side="Top" relative="$parent/AutoHeroSelectionCheckbox" pos="Min" offset="0"/>
 			<Height val="#OptionsRowHeight"/>
@@ -121,7 +128,7 @@
 		</Frame>
 
 		<Frame type="Label" name="SpeedrunsDetailsLabel" template="SSF_Templates/LabelTemplate">
-			<Anchor side="Top" relative="$parent/LifeBank" pos="Max" offset="#OptionsLabelGap"/>
+			<Anchor side="Top" relative="$parent/LifeBank" pos="Max" offset="#OptionsSectionGap"/>
 			<Anchor side="Left" relative="$parent/AutoHeroSelectionLabel" pos="Min" offset="0"/>
 			<Anchor side="Right" relative="$parent/SpeedrunsDetailsCheckbox" pos="Min" offset="-5"/>
 			<Height val="#OptionsRowHeight"/>
@@ -131,7 +138,7 @@
 		</Frame>
 		<Frame type="CheckBox" name="SpeedrunsDetailsCheckbox" template="SSF_Options/OptionsCheckBoxTemplate">
 			<Anchor side="Top" relative="$parent/SpeedrunsDetailsLabel" pos="Min" offset="0"/>
-			<Anchor side="Right" relative="$parent" pos="Max" offset="-43"/>
+			<Anchor side="Right" relative="$parent" pos="Max" offset="#OptionsCheckboxBorderDistance"/>
 
 			<Tooltip val="@Trig/Options/SpeedrunsDetailsTooltip"/>
 		</Frame>
@@ -147,7 +154,7 @@
 		</Frame>
 		<Frame type="CheckBox" name="HeroPanelShowCheckbox" template="SSF_Options/OptionsCheckBoxTemplate">
 			<Anchor side="Top" relative="$parent/HeroPanelShowLabel" pos="Min" offset="0"/>
-			<Anchor side="Right" relative="$parent" pos="Max" offset="-43"/>
+			<Anchor side="Right" relative="$parent" pos="Max" offset="#OptionsCheckboxBorderDistance"/>
 			<Checked val="True"/>
 			<Tooltip val="@Trig/Options/HeroPanelShowTooltip"/>
 		</Frame>
@@ -163,7 +170,7 @@
 		</Frame>
 		<Frame type="CheckBox" name="HivePanelShowCheckbox" template="SSF_Options/OptionsCheckBoxTemplate">
 			<Anchor side="Top" relative="$parent/HivePanelShowLabel" pos="Min" offset="0"/>
-			<Anchor side="Right" relative="$parent" pos="Max" offset="-43"/>
+			<Anchor side="Right" relative="$parent" pos="Max" offset="#OptionsCheckboxBorderDistance"/>
 			<Checked val="False"/>
 			<Tooltip val="@Trig/Options/HivePanelShowTooltip"/>
 		</Frame>
@@ -179,9 +186,9 @@
 			<Tooltip val="@Trig/Options/InitialUnitSelectionTooltip"/>
 		</Frame>
 		<Frame type="Pulldown" name="InitialUnitSelectionPulldown" template="SSF_Templates/PulldownTemplate">
-			<Anchor side="Left" relative="$parent/InitialUnitSelectionLabel" pos="Min" offset="105"/>
 			<Anchor side="Top" relative="$parent/InitialUnitSelectionLabel" pos="Min" offset="0"/>
 			<Anchor side="Right" relative="$parent" pos="Max" offset="#BorderNegative"/>
+			<Width val="#OptionsInitalSelectionPulldownWidth"/>
 			<Height val="#OptionsRowHeight"/>
 			<Style val="@StandardPulldown_Zerg"/>
 			<Frame type="Image" name="PulldownBackground">

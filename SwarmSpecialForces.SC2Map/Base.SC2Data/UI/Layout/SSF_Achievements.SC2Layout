@@ -325,7 +325,7 @@
 	<Frame type="Button" name="AchievementSetScrollButtonTemplate" template="SSF_Templates/ButtonTemplate">
 		<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
 		<Height val="50"/>
-		<Width val="120"/>
+		<Width val="#AchievementSetScrollButtonWidth"/>
 	</Frame>
 
 	<Frame type="Frame" name="AchievementPulldownHandlerIndexTemplate">

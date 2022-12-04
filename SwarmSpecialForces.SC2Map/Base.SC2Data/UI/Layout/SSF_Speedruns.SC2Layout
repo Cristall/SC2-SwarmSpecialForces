@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <Desc>
 	<Constant name="SpeedrunsPartButtonHeight" val="50"/>
-	<Constant name="SpeedrunsPartButtonWidth" val="120"/>
-	<Constant name="SpeedrunsPartGap" val="15"/>
-
 	<Constant name="SpeedrunsDiffButtonHeight" val="50"/>
-	<Constant name="SpeedrunsDiffButtonWidth" val="150"/>
-	<Constant name="SpeedrunsDiffGap" val="10"/>
-
 	<Constant name="SpeedrunsTextRowHeight" val="#StatsTextRowHeight"/>
 	<Constant name="SpeedrunsTextRowGap" val="2"/>
 	<Constant name="SpeedrunsTextColGap" val="3"/>
 	<Constant name="SpeedrunsTextRowSpacing" val="#StatsTextRowSpacing"/>
-	<Constant name="SpeedrunsLabelWidth" val="130"/>
 
 
 	<Frame type="Label" name="SpeedrunsPlayerTimeLabelTemplate" template="SSF_Templates/LabelTemplate">
@@ -49,7 +42,7 @@
 		<Anchor side="Top" relative="$sibling-1" pos="Min" offset="0"/>
 		<Anchor side="Left" relative="$sibling-1" pos="Max" offset="#SpeedrunsTextColGap"/>
 		<Anchor side="Bottom" relative="$this/TimeLabelPlayerCount1" pos="Max" offset="0"/>
-		<Width val="#SpeedrunsLabelWidth"/>
+		<Width val="#SpeedrunsPlayerWidth"/>
 
 		<Visible val="false"/>
 
@@ -97,7 +90,7 @@
 			<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
 			<Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
 			<Visible val="true"/>
-			<Width val="75"/>
+			<Width val="#SpeedrunsTeamColoumn"/>
 
 			<Frame type="Label" name="TimeLabelPlayerCount6">
 				<Text val="6:"/>

@@ -3,7 +3,6 @@
 	<Constant name="PopupBorder" val="25"/>
 	<Constant name="PopupBorderNegative" val="-25"/>
 	<Constant name="PopupHeight" val="138"/>
-	<Constant name="PopupWidth" val="450"/>
 	<Constant name="PopupGap" val="3"/>
 
 	<Constant name="PopupIntroTime" val="1.0"/>
@@ -17,7 +16,6 @@
 		<Height val="#PopupHeight"/>
 		<Width val="#PopupWidth"/>
 
-
 		<Animation name="OnShown">
 			<Event event="OnShown" action="Reset,Play" frame="$this"/>
 			<Controller type="Event" end="Pause" frame="$this/Countdown">
@@ -28,7 +26,6 @@
 				<Key type="Event" time="0.0" event="MoveIn"/>
 			</Controller>
 		</Animation>
-
 
 		<Animation name="Move">
 			<Event event="MoveIn" action="Reset, DirectionForward, Play" frame="$this"/>

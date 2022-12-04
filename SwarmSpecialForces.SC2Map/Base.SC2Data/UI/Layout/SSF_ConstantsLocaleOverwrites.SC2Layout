@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Desc>
+    <!-- this file does not contain any data.
+        its meant to be used to overwrite constants from SSF_Constants.SC2Layout from within the locale folders.
+        -->
+</Desc>

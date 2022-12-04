@@ -3,6 +3,7 @@
     <Constant name="StatsTextRowHeight" val="28"/>
 	<Constant name="StatsTextRowGap" val="0"/>
 	<Constant name="StatsTextRowSpacing" val="2"/>
+	<Constant name="StatsPlayerWidth" val="300"/>
 
 	<Frame type="Label" name="StatsBeforeAnchorLabelTemplate" template="SSF_Templates/LabelTemplate">
 		<Anchor side="Left" relative="$parent/AnchorFrame" pos="Min" offset="0"/>
@@ -23,13 +24,14 @@
 		<Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
 		<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
 		<Anchor side="Bottom" relative="MoopyHatsLabel" pos="Max" offset="#StatsTextRowGap"/>
-		<Width val="300"/>
+		<Width val="#StatsPlayerWidth"/>
 		<!-- <Height val="224"/> -->
 
 		<Frame type="Frame" name="AnchorFrame">
 			<Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
 			<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
-			<Width val="165"/>
+			<Width val="#StatsAnchorWidth"/>
+			<Visible val="false"/>
 		</Frame>
 
 		<Frame type="Label" name="PlayerName" template="SSF_Templates/LabelTemplate">

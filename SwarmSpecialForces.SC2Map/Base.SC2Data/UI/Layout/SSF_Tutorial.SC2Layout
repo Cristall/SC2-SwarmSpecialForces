@@ -2,27 +2,7 @@
 <Desc>
     
 <!-- local constants  -->
-
-    <Constant name="Border" val="40"/>
-    <Constant name="BorderNegative" val="-40"/>
     <Constant name="ButtonHeight" val="50"/>
-
-    <!-- MiniIntroduction -->
-        <Constant name="MiniIntroductionTotalWidth" val="580"/>
-        <Constant name="MiniIntroductionTotalHeight" val="338"/>
-        <Constant name="MiniIntroductionTextHeight" val="200"/>
-
-    <!-- AskTutorial -->
-        <Constant name="AskTutorialTotalWidth" val="450"/>
-        <Constant name="AskTutorialTotalHeight" val="220"/>
-        <Constant name="AskTutorialTextHeight" val="80"/>
-        <Constant name="AskTutorialButtonWidth" val="150"/>
-
-    <!-- Tutorial -->
-        <Constant name="TutorialTotalHeight" val="380"/>
-        <Constant name="TutorialTotalWidth" val="600"/>
-
-
 <!-- actual frame -->
 
     <Frame type="Frame" name="GameUI/UIContainer/FullscreenUpperContainer" file="GameUI">
@@ -50,6 +30,7 @@
                 <Anchor side="Left" relative="$parent" pos="Min" offset="#Border"/>
                 <Anchor side="Right" relative="$parent" pos="Max" offset="#BorderNegative"/>
                 <Anchor side="Top" relative="$parent" pos="Min" offset="#Border"/>
+                <Anchor side="Bottom" relative="$parent/CloseButton" pos="Min" offset="-5"/>
 
                 <Height val="#MiniIntroductionTextHeight"/>
 
@@ -61,7 +42,7 @@
                 <Anchor side="Left" relative="$parent" pos="Min" offset="#Border"/>
                 <Anchor side="Right" relative="$parent" pos="Max" offset="#BorderNegative"/>
                 <Anchor side="Bottom" relative="$parent" pos="Max" offset="#BorderNegative"/>
-                <Width val="200"/>
+                <Width val="#MiniIntroductionButtonWidth"/>
 
                 <Text val="@Trig/Tutorial/MiniIntroduction/Exit"/>
 
@@ -100,9 +81,6 @@
                 <Anchor side="Left" relative="$parent" pos="Min" offset="#Border"/>
                 <Anchor side="Right" relative="$parent" pos="Max" offset="#BorderNegative"/>
                 <Anchor side="Top" relative="$parent" pos="Min" offset="#Border"/>
-
-                <Height val="#AskTutorialTextHeight"/>
-
                 <Text val="@Trig/Tutorial/AskTutorial/Text"/>
                 <Style val="aaDialogItemStyleCentered"/>
             </Frame>

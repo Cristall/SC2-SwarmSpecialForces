@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <Desc>
 <!-- constants -->
-    <Constant name="Border" val="50"/>
-    <Constant name="BorderNegative" val="-50"/>
+    <Constant name="HeroSelectionBorder" val="50"/>
+    <Constant name="HeroSelectionBorderNegative" val="-50"/>
 
     <Constant name="ShowcasePlayerWidth" val="258"/>
     <Constant name="ShowcasePlayerHeight" val="86"/>
@@ -16,7 +16,6 @@
     <Constant name="HeroButtonGap" val="4"/>
 
     <Constant name="DiffButtonHeight" val="50"/>
-    <Constant name="DiffButtonWidth" val="200"/>
     <Constant name="DiffButtonGap" val="4"/>
     <Constant name="CounterWidth" val="40"/>
 
@@ -50,7 +49,7 @@
 
     <Frame type="Frame" name="ShowcasePlayerTemplate">
         <Anchor side="Left" relative="$sibling-1" pos="Max" offset="10"/>
-        <Anchor side="Top" relative="$parent" pos="Min" offset="#Border"/>
+        <Anchor side="Top" relative="$parent" pos="Min" offset="#HeroSelectionBorder"/>
         <Visible val="False"/>
 
         <Width val="#ShowcasePlayerWidth"/>
@@ -162,7 +161,7 @@
         <Anchor side="Top" relative="$sibling-1" pos="Max" offset="#DiffButtonGap"/>
         <Anchor side="Right" relative="$sibling-1" pos="Max" offset="0"/>
         
-        <Width val="#DiffButtonWidth"/>
+        <Width val="#HeroSelectionDiffButtonWidth"/>
         <Height val="#DiffButtonHeight"/>
 
         <Tooltip val="{TooltipTextFormat/@Text}"/>
@@ -286,7 +285,7 @@
             <Frame type="Image" name="BackgroundImage" template="SSF_Templates/BackgroundImageTemplate"></Frame>
 
             <Frame type="Frame" name="ShowcasePlayer1" template="SSF_HeroSelection/ShowcasePlayerTemplate">
-                <Anchor side="Left" relative="$parent" pos="Min" offset="#Border"/>
+                <Anchor side="Left" relative="$parent" pos="Min" offset="#HeroSelectionBorder"/>
             </Frame>
             <Frame type="Frame" name="ShowcasePlayer2" template="SSF_HeroSelection/ShowcasePlayerTemplate"/>
             <Frame type="Frame" name="ShowcasePlayer3" template="SSF_HeroSelection/ShowcasePlayerTemplate"/>
@@ -296,7 +295,7 @@
 
             <Frame type="Label" name="ChooseHeroLabel">
                 <Anchor side="Top" relative="$parent/ShowcasePlayer1" pos="Max" offset="15"/>
-                <Anchor side="Left" relative="$parent" pos="Min" offset="#Border"/>
+                <Anchor side="Left" relative="$parent" pos="Min" offset="#HeroSelectionBorder"/>
                 <Height val="30"/>
                 <Width val="200"/>
                 <Text val="@Trig/HeroSelection/Dialog/SelectHeroLabel"/>
@@ -305,7 +304,7 @@
 
             <Frame type="Frame" name="Hero1" template="SSF_HeroSelection/HeroButtonFrame">
                 <Anchor side="Top" relative="$parent/ChooseHeroLabel" pos="Max" offset="10"/>
-                <Anchor side="Left" relative="$parent" pos="Min" offset="#Border"/>
+                <Anchor side="Left" relative="$parent" pos="Min" offset="#HeroSelectionBorder"/>
                 
                 <StateGroup name="Unlocked">
                     <DefaultState val="Unlocked"/>
@@ -380,7 +379,7 @@
             </Frame>
 
             <Frame type="Button" name="AutoSelectionButton" template="SSF_Templates/ButtonTemplate">
-                <Anchor side="Bottom" relative="$parent" pos="Max" offset="#BorderNegative"/>
+                <Anchor side="Bottom" relative="$parent" pos="Max" offset="#HeroSelectionBorderNegative"/>
                 <Anchor side="Left" relative="$parent/Hero1" pos="Min" offset="0"/>
                 <Anchor side="Right" relative="$parent/Hero2" pos="Max" offset="0"/>
                 <Height val="#DiffButtonHeight"/>
@@ -389,8 +388,8 @@
                 <Visible val="False"/>
             </Frame>     
             <Frame type="Label" name="CounterLabel">
-                <Anchor side="Bottom" relative="$parent" pos="Max" offset="#BorderNegative"/>
-                <Anchor side="Right" relative="$parent" pos="Max" offset="#BorderNegative"/>
+                <Anchor side="Bottom" relative="$parent" pos="Max" offset="#HeroSelectionBorderNegative"/>
+                <Anchor side="Right" relative="$parent" pos="Max" offset="#HeroSelectionBorderNegative"/>
                 <Width val="#CounterWidth"/>
                 <Height val="#DiffButtonHeight"/>
                 <Style val="aaDialogItemStyleCentered"/>
@@ -406,7 +405,7 @@
 
             </Frame>
             <Frame type="Button" name="ReadyButton" template="SSF_Templates/ButtonTemplate">
-                <Anchor side="Bottom" relative="$parent" pos="Max" offset="#BorderNegative"/>
+                <Anchor side="Bottom" relative="$parent" pos="Max" offset="#HeroSelectionBorderNegative"/>
                 <Anchor side="Left" relative="$parent/GameModeClassic/Diff-1" pos="Min" offset="0"/>
                 <Anchor side="Right" relative="$parent/GameModeClassic/Diff-1" pos="Max" offset="0"/>
                 <Height val="#DiffButtonHeight"/>
@@ -435,7 +434,7 @@
                     <Anchor side="Left" relative="$parent/$parent/Hero2" pos="Max" offset="40"/>
                     <Anchor side="Right" relative="$parent/Diff-1" pos="Min" offset="-40"/>
                     <Anchor side="Top" relative="$parent/$parent/Hero2" pos="Min" offset="0"/>
-                    <Anchor side="Bottom" relative="$parent" pos="Max" offset="#BorderNegative"/>
+                    <Anchor side="Bottom" relative="$parent" pos="Max" offset="#HeroSelectionBorderNegative"/>
 
                     <StateGroup name="Hero">
                         <DefaultState val="None"/>
@@ -491,9 +490,9 @@
 
                 <Frame type="Label" name="DifficultyLabel">
                     <Anchor side="Top" relative="$parent/$parent/ChooseHeroLabel" pos="Min" offset="0"/>
-                    <Anchor side="Right" relative="$parent" pos="Max" offset="#BorderNegative"/>
+                    <Anchor side="Right" relative="$parent" pos="Max" offset="#HeroSelectionBorderNegative"/>
                     <Height val="30"/>
-                    <Width val="#DiffButtonWidth"/>
+                    <Width val="#HeroSelectionDiffButtonWidth"/>
                     <Style val="aaDialogItemStyle"/>
 
                     <Text val="@Trig/HeroSelection/Diff"/>
@@ -501,14 +500,14 @@
 
                 <Frame type="Button" name="Diff-1" template="SSF_HeroSelection/DiffButtonTemplate">
                     <Anchor side="Top" relative="$parent/$parent/Hero1" pos="Min" offset="0"/>
-                    <Anchor side="Right" relative="$parent" pos="Max" offset="#BorderNegative"/>
+                    <Anchor side="Right" relative="$parent" pos="Max" offset="#HeroSelectionBorderNegative"/>
                     <Enabled val="True"/>
                     <Text val="@Trig/HeroSelection/Dialog/DiffButton/Any"/>
                     <Tooltip val="@Trig/HeroSelection/Dialog/DiffButton/AnyTooltip"/>
                 </Frame>
                 <Frame type="Button" name="Diff0" template="SSF_HeroSelection/DiffButtonTemplate">
                     <Anchor side="Top" relative="$parent/Diff-1" pos="Max" offset="#DiffButtonGap"/>
-                    <Anchor side="Right" relative="$parent" pos="Max" offset="#BorderNegative"/>
+                    <Anchor side="Right" relative="$parent" pos="Max" offset="#HeroSelectionBorderNegative"/>
                     <Enabled val="True"/>
                     <Text val="@Trig/HeroSelection/Dialog/DiffButton/D0"/>
                     <Frame type="TextFormatFrame" name="TooltipTextFormat">
@@ -907,7 +906,7 @@
 
                 <Frame type="Button" name="DiffPreset0" template="SSF_HeroSelection/GameModeCustomPresetTemplate">
                     <Anchor side="Left" relative="$parent/AnchorCol1" pos="Min" offset="40"/>
-                    <Anchor side="Bottom" relative="$parent" pos="Max" offset="#BorderNegative"/>
+                    <Anchor side="Bottom" relative="$parent" pos="Max" offset="#HeroSelectionBorderNegative"/>
                     <Text val="@Trig/Generic/DiffNameShortColored/0"/>
                 </Frame>
                 <Frame type="Button" name="DiffPreset1" template="SSF_HeroSelection/GameModeCustomPresetTemplate">

@@ -2,10 +2,8 @@
 <Desc>
 
 <!-- local constants -->
-    <Constant name="TotalWidth" val="530"/>
     <Constant name="TotalHeight" val="220"/>
 
-    <Constant name="ButtonWidth" val="150"/>
     <Constant name="ButtonHeight" val="50"/>
 <!-- actual frame -->
 
@@ -17,7 +15,7 @@
             <Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
             <Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
 
-            <Width val="#TotalWidth"/>
+            <Width val="#CustomDefeatTotalWidth"/>
             <Height val="#TotalHeight"/>
 
             <Visible val="False"/>
@@ -50,7 +48,7 @@
                 <Anchor side="Right" relative="$parent" pos="Max" offset="#BorderNegative"/>
                 
                 <Height val="#ButtonHeight"/>
-                <Width val="#ButtonWidth"/>
+                <Width val="#CustomDefeatButtonWidth"/>
 
                 <Text val="@Trig/CustomDefeat/Leave"/>
                 <Animation name="Hide">
@@ -66,7 +64,7 @@
                 <Anchor side="Left" relative="$parent" pos="Min" offset="#Border"/>
                 
                 <Height val="#ButtonHeight"/>
-                <Width val="#ButtonWidth"/>
+                <Width val="#CustomDefeatButtonWidth"/>
 
                 <Text val="@Trig/CustomDefeat/Spectate"/>
                 <Animation name="Hide">
