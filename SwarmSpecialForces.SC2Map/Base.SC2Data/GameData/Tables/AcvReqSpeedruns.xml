@@ -218,7 +218,7 @@
             <Int Int="3600">
                 <Field Id="Small"/>
             </Int>
-            <Int Int="2250">
+            <Int Int="2400">
                 <Field Id="Small" Index="1"/>
             </Int>
         </Instances>
