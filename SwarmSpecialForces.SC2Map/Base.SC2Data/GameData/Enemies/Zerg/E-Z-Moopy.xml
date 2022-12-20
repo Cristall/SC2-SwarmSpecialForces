@@ -207,7 +207,7 @@
     </CEffectCreatePersistent>
     <CEffectEnumArea id="RainbowMeteors@SearchTarget">
         <EditorCategories value=""/>
-        <SearchFilters value="-;Player,Ally,Neutral,Worker,RawResource,HarvestableResource,Missile,Item,Dead,Hidden,Invulnerable"/>
+        <SearchFilters value="-;Player,Ally,Neutral,Worker,RawResource,HarvestableResource,Missile,Item,Dead,Hidden,Invulnerable,Summoned"/>
         <AreaArray Radius="25" Effect="RainbowMeteors@LaunchMeteor"/>
         <MaxCount value="1"/>
         <TargetSorts>
