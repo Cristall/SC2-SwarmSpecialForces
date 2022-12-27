@@ -776,6 +776,11 @@ bool Debug_Spellpower(bool testConds, bool runActions){
     return true;
 }
 
+bool Debug_Win(bool testConds, bool runActions){
+    CustomDefeatFrame_WinEnable();
+    return true;
+}
+
 void Debug_Init(){
     int i;
     int tmp_player;
@@ -899,6 +904,7 @@ void Debug_Init(){
         // TriggerAddEventChatMessage(TriggerCreate("Debug_MoopyReset"), c_playerAny, "-moopyreset", false);
         // TriggerAddEventChatMessage(TriggerCreate("Debug_UnstableTp"), c_playerAny, "-unstable", false);
         TriggerAddEventChatMessage(TriggerCreate("Debug_Spellpower"), c_playerAny, "-spellpower", false);
+        TriggerAddEventChatMessage(TriggerCreate("Debug_Win"), c_playerAny, "-win", false);
 
         // TriggerAddEventChatMessage(TriggerCreate("Debug_CybermindAddTracking"), c_playerAny, "-gen", false);
         // TriggerAddEventChatMessage(TriggerCreate("Debug_GetUnitgroupCount"), c_playerAny, "-count", false);
