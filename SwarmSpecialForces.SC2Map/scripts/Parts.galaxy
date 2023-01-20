@@ -244,6 +244,9 @@ void Part_TransitionToP2(){
         if (tmpUnit == null) { break; }
         libNtve_gf_MakeUnitInvulnerable(tmpUnit, true);
         libNtve_gf_MakeUnitUncommandable(tmpUnit, true);
+        if(UnitGetType(tmpUnit)== "RespawnEgg@Egg" && UnitTestState(tmpUnit, c_unitStateHidden)){
+            continue;
+        }
         UnitIssueOrder(tmpUnit, Order(AbilityCommand("stop", 0)), c_orderQueueReplace);
     }
     Utility_PauseGame(true);
@@ -259,6 +262,10 @@ void Part_TransitionToP2(){
             if (tmpUnit == null) { break; }
             CameraPan(tmpPlayer, UnitGetPosition(nydusWorm_Unit_Entrance), 0.0, -1, 10.0, false);
 
+            if(UnitGetType(tmpUnit)== "RespawnEgg@Egg" && UnitTestState(tmpUnit, c_unitStateHidden)){
+                // carried egg will not be thrown, so ThrowCollision will not be removed
+                continue;
+            }
             UnitBehaviorAddPlayer(tmpUnit, "NydusWorm@ThrowCollision", UnitGetOwner(tmpUnit), 1);
             if (UnitGetType(tmpUnit) == "CyberneticLurkerBurrowed") {
                 UnitIssueOrder(tmpUnit, Order(AbilityCommand("CyberneticLurkerUnburrow", 0)), c_orderQueueReplace);
