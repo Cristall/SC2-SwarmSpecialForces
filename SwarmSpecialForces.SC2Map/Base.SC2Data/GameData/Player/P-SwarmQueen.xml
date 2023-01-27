@@ -201,7 +201,7 @@
         <Cost>
             <Cooldown TimeUse="15"/>
         </Cost>
-        <TargetFilters value="-;Self,Neutral,Enemy,Worker,Item,Dead,Hidden"/>
+        <TargetFilters value="-;Self,Neutral,Enemy,Worker,Item,Dead,Hidden,Summoned"/>
         <Range value="6"/>
         <CmdButtonArray index="Execute" DefaultButtonFace="EnergyTransfer" Requirements="EnergyTransfer@Req"/>
     </CAbilEffectTarget>
@@ -318,7 +318,6 @@
         <Icon value="Assets\Textures\btn-ability-zerg-dehaka-healingaura.dds"/>
     </CButton>
     <CRequirementAnd id="AndNot3358450278CountBehaviorRespawnEgg@NoMoreEggsQueuedOrBetterAtUnitCountBehaviorRespawnEgg@EggAvailableQueuedOrBetterAtUnit2921848502">
-        <Tooltip value="RequirementNode/Tooltip/##id##"/>
         <OperandArray value="Not3358450278CountBehaviorRespawnEgg@NoMoreEggsQueuedOrBetterAtUnit"/>
         <OperandArray value="CountBehaviorRespawnEgg@EggAvailableQueuedOrBetterAtUnit2921848502"/>
     </CRequirementAnd>
