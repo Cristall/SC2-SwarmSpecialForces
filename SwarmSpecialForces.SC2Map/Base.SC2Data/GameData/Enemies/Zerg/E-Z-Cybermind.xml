@@ -552,6 +552,7 @@
         <On Terms="Behavior.CybermindShield@Stage4.Off" Send="AnimBracketStop BSD"/>
         <HostSiteOps Ops="SOpHigherBy1"/>
         <Model value="CybermindShield@Shield"/>
+        <ModelFlags index="AllowHitTest" value="0"/>
     </CActorModel>
     <CActorModel id="BombardThem@Impact" parent="ModelAnimationStyleOneShot">
         <EditorCategories value=""/>
