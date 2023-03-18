@@ -46,22 +46,6 @@
     <CModel id="CoronaWavesInfect">
         <Model value="Assets\Effects\Protoss\DisruptorBeam\DisruptorBeam.m3"/>
     </CModel>
-    <CModel id="CrossedBeamsBeam">
-        <Model value="Assets\Effects\Zerg\KerriganHybridBeam\KerriganHybridBeam.m3"/>
-        <ScaleMax value="0.500000,0.500000,0.500000"/>
-        <ScaleMin value="0.500000,0.500000,0.500000"/>
-    </CModel>
-    <CModel id="CrossedBeamsExplosion">
-        <Model value="Assets\Effects\Protoss\TempestPlasmaMissileImpact\TempestPlasmaMissileImpact.m3"/>
-        <ScaleMax value="3.000000,3.000000,3.000000"/>
-        <ScaleMin value="3.000000,3.000000,3.000000"/>
-    </CModel>
-    <CModel id="CrossedBeamsImpact">
-        <Model value="Assets\Effects\Protoss\Disintegration_Missile\Disintegration_Missile.m3"/>
-        <AnimSpeed value="2.000000"/>
-        <ScaleMax value="2.500000,2.500000,2.500000"/>
-        <ScaleMin value="2.500000,2.500000,2.500000"/>
-    </CModel>
     <CModel id="CrystalwingShowerImpact">
         <Model value="Assets\Effects\Protoss\DarkStalkerMissileImpact\DarkStalkerMissileImpact.m3"/>
     </CModel>

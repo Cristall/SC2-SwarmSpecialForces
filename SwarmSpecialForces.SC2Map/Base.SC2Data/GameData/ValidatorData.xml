@@ -352,9 +352,8 @@
         <Find value="1"/>
         <Arc value="180"/>
     </CValidatorLocationArc>
-    <CValidatorLocationArc id="TargetBehindTargetOuter">
-        <WhichLocation Effect="CrossedBeamsTargetInitialDelay" Value="TargetOuterUnit"/>
-        <Find value="1"/>
+    <CValidatorLocationArc id="CrossedBeams@TargetInFrontOfDummy">
+        <WhichLocation Effect="CrossedBeams@TargetInitialDelay" Value="TargetOuterUnit"/>
         <Arc value="180"/>
         <Value Value="TargetUnit"/>
     </CValidatorLocationArc>

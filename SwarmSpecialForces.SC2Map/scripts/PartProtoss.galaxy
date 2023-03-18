@@ -540,7 +540,7 @@ void PartProtoss_TagTeam_Init(structref<BossFightData> data){
     data.ability[2].targetFilterController = c_BossFightAbilAllianceTarget_Player;
     data.ability[2].requiredBossAbilityLevel = 3;
 
-    data.ability[3].abil = "CrossedBeamsStart";
+    data.ability[3].abil = "CrossedBeams@Start";
     data.ability[3].targetingType = c_BossFightAbilTargetType_Unit;
     data.ability[3].globalCooldown = 15;
     data.ability[3].selfCooldown = 60;
