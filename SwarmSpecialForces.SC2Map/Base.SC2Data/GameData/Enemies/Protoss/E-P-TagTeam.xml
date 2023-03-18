@@ -30,152 +30,6 @@
         <InitialDelay value="2.15"/>
         <InitialEffect value="CoronaWavesSearch"/>
     </CEffectCreatePersistent>
-    <CEffectEnumTrackedUnits id="HandlerLightningElementalsGet">
-        <EditorCategories value=""/>
-        <BehaviorLink value="HandlerLightningTracker"/>
-        <Effect value="HandlerLightningElementalsIssue"/>
-    </CEffectEnumTrackedUnits>
-    <CEffectIssueOrder id="HandlerLightningElementalsIssue">
-        <EditorCategories value=""/>
-        <Abil value="LightningElementals"/>
-    </CEffectIssueOrder>
-    <CEffectSet id="HandlerLightningElementals">
-        <EditorCategories value=""/>
-        <EffectArray value="TagTeamHandlerLightningCastSet"/>
-        <EffectArray value="HandlerLightningElementalsGet"/>
-    </CEffectSet>
-    <CEffectEnumTrackedUnits id="HandlerLightningHandsOfLightningGet">
-        <EditorCategories value=""/>
-        <BehaviorLink value="HandlerLightningTracker"/>
-        <Effect value="HandlerLightningHandsOfLightningIssue"/>
-    </CEffectEnumTrackedUnits>
-    <CEffectIssueOrder id="HandlerLightningHandsOfLightningIssue">
-        <EditorCategories value=""/>
-        <Abil value="HandOfLightning"/>
-    </CEffectIssueOrder>
-    <CEffectSet id="HandlerLightningHandsOfLightning">
-        <EditorCategories value=""/>
-        <EffectArray value="TagTeamHandlerLightningCastSet"/>
-        <EffectArray value="HandlerLightningHandsOfLightningGet"/>
-    </CEffectSet>
-    <CEffectEnumTrackedUnits id="HandlerLightningPureEnergyGet">
-        <EditorCategories value=""/>
-        <BehaviorLink value="HandlerLightningTracker"/>
-        <Effect value="HandlerLightningPureEnergyIssue"/>
-    </CEffectEnumTrackedUnits>
-    <CEffectIssueOrder id="HandlerLightningPureEnergyIssue">
-        <EditorCategories value=""/>
-        <Abil value="PureEnergy"/>
-    </CEffectIssueOrder>
-    <CEffectSet id="HandlerLightningPureEnergy">
-        <EditorCategories value=""/>
-        <EffectArray value="TagTeamHandlerLightningCastSet"/>
-        <EffectArray value="HandlerLightningPureEnergyGet"/>
-    </CEffectSet>
-    <CEffectEnumTrackedUnits id="HandlerLightningZapTrapGet">
-        <EditorCategories value=""/>
-        <BehaviorLink value="HandlerLightningTracker"/>
-        <Effect value="HandlerLightningZapTrapIssue"/>
-    </CEffectEnumTrackedUnits>
-    <CEffectIssueOrder id="HandlerLightningZapTrapIssue">
-        <EditorCategories value=""/>
-        <Abil value="ZapTrap"/>
-        <Target Effect="HandlerLightningZapTrap" Value="TargetUnitOrPoint"/>
-    </CEffectIssueOrder>
-    <CEffectSet id="HandlerLightningZapTrap">
-        <EditorCategories value=""/>
-        <EffectArray value="TagTeamHandlerLightningCastSet"/>
-        <EffectArray value="HandlerLightningZapTrapGet"/>
-    </CEffectSet>
-    <CEffectEnumTrackedUnits id="HandlerThunderTornadoGet">
-        <EditorCategories value=""/>
-        <BehaviorLink value="HandlerThunderTracker"/>
-        <Effect value="HandlerThunderTornadoIssue"/>
-    </CEffectEnumTrackedUnits>
-    <CEffectIssueOrder id="HandlerThunderTornadoIssue">
-        <EditorCategories value=""/>
-        <Abil value="Tornado"/>
-        <Target Effect="HandlerThunderTornado" Value="TargetUnitOrPoint"/>
-    </CEffectIssueOrder>
-    <CEffectSet id="HandlerThunderTornado">
-        <EditorCategories value=""/>
-        <EffectArray value="TagTeamHandlerThunderCastSet"/>
-        <EffectArray value="HandlerThunderTornadoGet"/>
-    </CEffectSet>
-    <CEffectEnumTrackedUnits id="HandlerThunderCoronaWavesGet">
-        <EditorCategories value=""/>
-        <BehaviorLink value="HandlerThunderTracker"/>
-        <Effect value="HandlerThunderCoronaWavesIssue"/>
-    </CEffectEnumTrackedUnits>
-    <CEffectIssueOrder id="HandlerThunderCoronaWavesIssue">
-        <EditorCategories value=""/>
-        <Abil value="CoronaWaves"/>
-    </CEffectIssueOrder>
-    <CEffectSet id="HandlerThunderCoronaWaves">
-        <EditorCategories value=""/>
-        <EffectArray value="TagTeamHandlerThunderCastSet"/>
-        <EffectArray value="HandlerThunderCoronaWavesGet"/>
-    </CEffectSet>
-    <CEffectEnumTrackedUnits id="HandlerThunderElementalsGet">
-        <EditorCategories value=""/>
-        <BehaviorLink value="HandlerThunderTracker"/>
-        <Effect value="HandlerThunderElementalsIssue"/>
-    </CEffectEnumTrackedUnits>
-    <CEffectIssueOrder id="HandlerThunderElementalsIssue">
-        <EditorCategories value=""/>
-        <Abil value="ThunderElementals"/>
-    </CEffectIssueOrder>
-    <CEffectSet id="HandlerThunderElementals">
-        <EditorCategories value=""/>
-        <EffectArray value="TagTeamHandlerThunderCastSet"/>
-        <EffectArray value="HandlerThunderElementalsGet"/>
-    </CEffectSet>
-    <CEffectEnumTrackedUnits id="HandlerThunderHandsOfSilenceGet">
-        <EditorCategories value=""/>
-        <BehaviorLink value="HandlerThunderTracker"/>
-        <Effect value="HandlerThunderHandsOfSilenceIssue"/>
-    </CEffectEnumTrackedUnits>
-    <CEffectIssueOrder id="HandlerThunderHandsOfSilenceIssue">
-        <EditorCategories value=""/>
-        <Abil value="HandsOfSilence"/>
-    </CEffectIssueOrder>
-    <CEffectSet id="HandlerThunderHandsOfSilence">
-        <EditorCategories value=""/>
-        <EffectArray value="TagTeamHandlerThunderCastSet"/>
-        <EffectArray value="HandlerThunderHandsOfSilenceGet"/>
-    </CEffectSet>
-    <CEffectEnumTrackedUnits id="HandlerThunderShoutGet">
-        <EditorCategories value=""/>
-        <BehaviorLink value="HandlerThunderTracker"/>
-        <Effect value="HandlerThunderShoutIssue"/>
-    </CEffectEnumTrackedUnits>
-    <CEffectIssueOrder id="HandlerThunderShoutIssue">
-        <EditorCategories value=""/>
-        <Abil value="Shout"/>
-    </CEffectIssueOrder>
-    <CEffectSet id="HandlerThunderShout">
-        <EditorCategories value=""/>
-        <EffectArray value="TagTeamHandlerThunderCastSet"/>
-        <EffectArray value="HandlerThunderShoutGet"/>
-    </CEffectSet>
-    <CEffectEnumTrackedUnits id="HandlerLightningGet">
-        <EditorCategories value=""/>
-        <BehaviorLink value="HandlerLightningTracker"/>
-    </CEffectEnumTrackedUnits>
-    <CEffectEnumTrackedUnits id="HandlerThunderGet">
-        <EditorCategories value=""/>
-        <BehaviorLink value="HandlerThunderTracker"/>
-    </CEffectEnumTrackedUnits>
-    <CEffectAddTrackedUnit id="HandlerLightningTrackerAdd">
-        <EditorCategories value=""/>
-        <BehaviorLink value="HandlerLightningTracker"/>
-        <TrackedUnit Value="Target"/>
-    </CEffectAddTrackedUnit>
-    <CEffectAddTrackedUnit id="HandlerThunderTrackerAdd">
-        <EditorCategories value=""/>
-        <BehaviorLink value="HandlerThunderTracker"/>
-        <TrackedUnit Value="Target"/>
-    </CEffectAddTrackedUnit>
     <CEffectCreateUnit id="TornadoImpactPrecursor">
         <EditorCategories value=""/>
         <WhichLocation Value="TargetPoint"/>
@@ -449,11 +303,6 @@
         <EffectArray value="HandOfLightningApply"/>
         <TargetLocationType value="Point"/>
     </CEffectSet>
-    <CEffectApplyBehavior id="LightningDeadApply">
-        <EditorCategories value=""/>
-        <WhichUnit Value="Caster"/>
-        <Behavior value="TagTeamHandlerLightningDead"/>
-    </CEffectApplyBehavior>
     <CEffectDamage id="LightningElementalWeaponDmg" parent="DU_WEAP">
         <EditorCategories value=""/>
         <Amount value="800"/>
@@ -1059,67 +908,6 @@
         <EffectArray value="TagTeamWeaponHandOfLightningShocked"/>
         <EffectArray value="TagTeamWeaponHandsOfSilenceSilenced"/>
     </CEffectSet>
-    <CEffectApplyBehavior id="ThunderDeadApply">
-        <EditorCategories value=""/>
-        <WhichUnit Value="Caster"/>
-        <Behavior value="TagTeamHandlerThunderDead"/>
-    </CEffectApplyBehavior>
-    <CEffectSet id="TagTeamHandlerLightningCastSet">
-        <EditorCategories value=""/>
-        <EffectArray value="TagTeamHandlerLightningExhausted"/>
-        <EffectArray value="TagTeamHandlerThunderExhausted"/>
-        <EffectArray value="TagTeamHandlerLightningExhaustedByThunder"/>
-    </CEffectSet>
-    <CEffectSet id="TagTeamHandlerBothCastSet">
-        <EditorCategories value=""/>
-        <EffectArray value="TagTeamHandlerLightningExhaustedLong"/>
-        <EffectArray value="TagTeamHandlerThunderExhaustedLong"/>
-    </CEffectSet>
-    <CEffectApplyBehavior id="TagTeamHandlerLightningExhaustedLong">
-        <EditorCategories value=""/>
-        <WhichUnit Value="Caster"/>
-        <Behavior value="TagTeamHandlerLightningExhausted"/>
-        <Flags index="UseDuration" value="1"/>
-        <Duration value="15"/>
-    </CEffectApplyBehavior>
-    <CEffectSet id="TagTeamHandlerThunderCastSet">
-        <EditorCategories value=""/>
-        <EffectArray value="TagTeamHandlerLightningExhausted"/>
-        <EffectArray value="TagTeamHandlerThunderExhausted"/>
-        <EffectArray value="TagTeamHandlerThunderExhaustedByLightning"/>
-    </CEffectSet>
-    <CEffectApplyBehavior id="TagTeamHandlerLightningExhausted">
-        <EditorCategories value=""/>
-        <WhichUnit Value="Caster"/>
-        <Flags index="UseDuration" value="1"/>
-        <Duration value="7.15"/>
-    </CEffectApplyBehavior>
-    <CEffectApplyBehavior id="TagTeamHandlerLightningExhaustedByThunder">
-        <ValidatorArray index="0" value="TagTeamHandlerFindThunder"/>
-        <EditorCategories value=""/>
-        <WhichUnit Value="Caster"/>
-        <Behavior value="TagTeamHandlerLightningExhausted"/>
-        <Flags index="UseDuration" value="1"/>
-        <Duration value="15"/>
-    </CEffectApplyBehavior>
-    <CEffectApplyBehavior id="TagTeamHandlerThunderExhausted">
-        <WhichUnit Value="Caster"/>
-        <Flags index="UseDuration" value="1"/>
-        <Duration value="7.1428"/>
-    </CEffectApplyBehavior>
-    <CEffectApplyBehavior id="TagTeamHandlerThunderExhaustedLong">
-        <WhichUnit Value="Caster"/>
-        <Behavior value="TagTeamHandlerThunderExhausted"/>
-        <Flags index="UseDuration" value="1"/>
-        <Duration value="14.2856"/>
-    </CEffectApplyBehavior>
-    <CEffectApplyBehavior id="TagTeamHandlerThunderExhaustedByLightning">
-        <ValidatorArray index="0" value="TagTeamHandlerFindLightning"/>
-        <WhichUnit Value="Caster"/>
-        <Behavior value="TagTeamHandlerThunderExhausted"/>
-        <Flags index="UseDuration" value="1"/>
-        <Duration value="14.2856"/>
-    </CEffectApplyBehavior>
     <CEffectDamage id="TagTeamWeaponDmg" parent="DU_WEAP">
         <EditorCategories value="Race:Protoss"/>
         <Kind value="Ranged"/>
@@ -1317,141 +1105,6 @@
         <Effect index="0" value="HandOfLightningInitialSet"/>
         <CmdButtonArray index="Execute" DefaultButtonFace="HandOfLightning"/>
     </CAbilEffectInstant>
-    <CAbilEffectInstant id="HandlerLightningElementals">
-        <EditorCategories value="AbilityorEffectType:Units"/>
-        <Flags index="AutoCast" value="1"/>
-        <Flags index="AutoCastOn" value="1"/>
-        <AutoCastFilters value="Visible;Self,Player,Ally,Neutral,Worker,Missile,Item,Stasis,Dead,Hidden,Invulnerable,Summoned"/>
-        <AutoCastRange value="13"/>
-        <AutoCastValidatorArray value="LightningNotExhausted"/>
-        <AutoCastValidatorArray value="LightningNotDead"/>
-        <AutoCastValidatorArray value="EnemyWithin8"/>
-        <AutoCastValidatorArray value="BossAbilityRequirementLvl1"/>
-        <CmdButtonArray index="Execute" DefaultButtonFace="LightningElementals"/>
-        <Cost>
-            <Cooldown TimeStart="7" TimeUse="60"/>
-        </Cost>
-    </CAbilEffectInstant>
-    <CAbilEffectInstant id="HandlerLightningHandsOfLightning">
-        <EditorCategories value="AbilityorEffectType:Units"/>
-        <AutoCastFilters value="Visible;Self,Player,Ally,Neutral,Worker,Missile,Item,Stasis,Dead,Hidden,Invulnerable,Summoned"/>
-        <AutoCastRange value="13"/>
-        <AutoCastValidatorArray value="LightningNotExhausted"/>
-        <AutoCastValidatorArray value="LightningNotDead"/>
-        <AutoCastValidatorArray value="EnemyWithin8"/>
-        <AutoCastValidatorArray value="BossAbilityRequirementLvl3"/>
-        <CmdButtonArray index="Execute" DefaultButtonFace="HandOfLightning"/>
-        <Cost>
-            <Cooldown TimeStart="6" TimeUse="45"/>
-        </Cost>
-    </CAbilEffectInstant>
-    <CAbilEffectInstant id="HandlerLightningPureEnergy">
-        <EditorCategories value="AbilityorEffectType:Units"/>
-        <Flags index="AutoCast" value="1"/>
-        <Flags index="AutoCastOn" value="1"/>
-        <AutoCastFilters value="Visible;Self,Player,Ally,Neutral,Worker,Missile,Item,Stasis,Dead,Hidden,Invulnerable,Summoned"/>
-        <AutoCastRange value="13"/>
-        <AutoCastValidatorArray value="LightningNotExhausted"/>
-        <AutoCastValidatorArray value="LightningNotDead"/>
-        <AutoCastValidatorArray value="EnemyWithin8"/>
-        <AutoCastValidatorArray value="BossAbilityRequirementLvl3"/>
-        <CmdButtonArray index="Execute" DefaultButtonFace="PureEnergy"/>
-        <Cost>
-            <Cooldown TimeStart="2" TimeUse="60"/>
-        </Cost>
-    </CAbilEffectInstant>
-    <CAbilEffectTarget id="HandlerLightningZapTrap">
-        <EditorCategories value="AbilityorEffectType:Units"/>
-        <Flags index="AutoCast" value="1"/>
-        <Flags index="AutoCastOn" value="1"/>
-        <Range value="13"/>
-        <Arc value="360"/>
-        <AutoCastFilters value="Visible;Self,Player,Ally,Neutral,Worker,Missile,Item,Stasis,Dead,Hidden,Invulnerable,Summoned"/>
-        <AutoCastRange value="13"/>
-        <AutoCastValidatorArray value="LightningNotExhausted"/>
-        <AutoCastValidatorArray value="LightningNotDead"/>
-        <AutoCastValidatorArray value="BossAbilityRequirementLvl2"/>
-        <CmdButtonArray index="Execute" DefaultButtonFace="ZapTrap"/>
-        <Cost>
-            <Cooldown TimeStart="5" TimeUse="45"/>
-        </Cost>
-    </CAbilEffectTarget>
-    <CAbilEffectInstant id="HandlerThunderCoronaWaves">
-        <EditorCategories value="AbilityorEffectType:Units"/>
-        <Flags index="AutoCast" value="1"/>
-        <Flags index="AutoCastOn" value="1"/>
-        <AutoCastFilters value="Visible;Self,Player,Ally,Neutral,Worker,Missile,Item,Stasis,Dead,Hidden,Invulnerable,Summoned"/>
-        <AutoCastRange value="13"/>
-        <AutoCastValidatorArray value="ThunderNotDead"/>
-        <AutoCastValidatorArray value="ThunderNotExhausted"/>
-        <AutoCastValidatorArray value="AtLeast2EnemyWithin8"/>
-        <AutoCastValidatorArray value="BossAbilityRequirementLvl2"/>
-        <CmdButtonArray index="Execute" DefaultButtonFace="CoronaWaves"/>
-        <Cost>
-            <Cooldown TimeStart="7" TimeUse="45"/>
-        </Cost>
-    </CAbilEffectInstant>
-    <CAbilEffectInstant id="HandlerThunderElementals">
-        <EditorCategories value="AbilityorEffectType:Units"/>
-        <Flags index="AutoCast" value="1"/>
-        <Flags index="AutoCastOn" value="1"/>
-        <AutoCastFilters value="Visible;Self,Player,Ally,Neutral,Worker,Missile,Item,Stasis,Dead,Hidden,Invulnerable,Summoned"/>
-        <AutoCastRange value="13"/>
-        <AutoCastValidatorArray value="ThunderNotDead"/>
-        <AutoCastValidatorArray value="ThunderNotExhausted"/>
-        <AutoCastValidatorArray value="EnemyWithin8"/>
-        <AutoCastValidatorArray value="BossAbilityRequirementLvl1"/>
-        <CmdButtonArray index="Execute" DefaultButtonFace="ThunderElementals"/>
-        <Cost>
-            <Charge Link="Abil/HandlerLightningElementals"/>
-            <Cooldown Link="Abil/HandlerLightningElementals" TimeStart="7" TimeUse="60"/>
-        </Cost>
-    </CAbilEffectInstant>
-    <CAbilEffectInstant id="HandlerThunderHandsOfSilence">
-        <EditorCategories value="AbilityorEffectType:Units"/>
-        <AutoCastFilters value="Visible;Self,Player,Ally,Neutral,Worker,Missile,Item,Stasis,Dead,Hidden,Invulnerable,Summoned"/>
-        <AutoCastRange value="13"/>
-        <AutoCastValidatorArray value="ThunderNotDead"/>
-        <AutoCastValidatorArray value="ThunderNotExhausted"/>
-        <AutoCastValidatorArray value="EnemyWithin8"/>
-        <AutoCastValidatorArray value="BossAbilityRequirementLvl3"/>
-        <CmdButtonArray index="Execute" DefaultButtonFace="HandsOfSilence"/>
-        <Cost>
-            <Charge Link="Abil/HandlerLightningHandsOfLightning"/>
-            <Cooldown Link="Abil/HandlerLightningHandsOfLightning" TimeStart="6" TimeUse="45"/>
-        </Cost>
-    </CAbilEffectInstant>
-    <CAbilEffectInstant id="HandlerThunderShout">
-        <EditorCategories value="AbilityorEffectType:Units"/>
-        <Flags index="AutoCast" value="1"/>
-        <Flags index="AutoCastOn" value="1"/>
-        <AutoCastFilters value="Visible;Self,Player,Ally,Neutral,Worker,Missile,Item,Stasis,Dead,Hidden,Invulnerable,Summoned"/>
-        <AutoCastRange value="13"/>
-        <AutoCastValidatorArray value="ThunderNotDead"/>
-        <AutoCastValidatorArray value="ThunderNotExhausted"/>
-        <AutoCastValidatorArray value="EnemyWithin8"/>
-        <AutoCastValidatorArray value="BossAbilityRequirementLvl3"/>
-        <CmdButtonArray index="Execute" DefaultButtonFace="Shout"/>
-        <Cost>
-            <Cooldown TimeStart="8" TimeUse="55"/>
-        </Cost>
-    </CAbilEffectInstant>
-    <CAbilEffectTarget id="HandlerThunderTornado">
-        <EditorCategories value="AbilityorEffectType:Units"/>
-        <Flags index="AutoCast" value="1"/>
-        <Flags index="AutoCastOn" value="1"/>
-        <Range value="13"/>
-        <Arc value="360"/>
-        <AutoCastFilters value="Visible;Self,Player,Ally,Neutral,Worker,Missile,Item,Stasis,Dead,Hidden,Invulnerable,Summoned"/>
-        <AutoCastRange value="13"/>
-        <AutoCastValidatorArray value="ThunderNotDead"/>
-        <AutoCastValidatorArray value="ThunderNotExhausted"/>
-        <AutoCastValidatorArray value="BossAbilityRequirementLvl4"/>
-        <CmdButtonArray index="Execute" DefaultButtonFace="Tornado"/>
-        <Cost>
-            <Cooldown TimeStart="5" TimeUse="50"/>
-        </Cost>
-    </CAbilEffectTarget>
     <CAbilEffectInstant id="HandsOfSilence">
         <EditorCategories value="AbilityorEffectType:Units"/>
         <Effect index="0" value="HandsOfSilence@InitialSet"/>
@@ -1482,32 +1135,6 @@
         <Effect index="0" value="StormInitialSet"/>
         <CmdButtonArray index="Execute" DefaultButtonFace="Storm"/>
     </CAbilEffectInstant>
-    <CAbilArmMagazine id="TagTeamHandlerMagazineThunder">
-        <EditorCategories value="AbilityorEffectType:Units"/>
-        <Leash value="5"/>
-        <InfoArray index="Ammo1" CountStart="1" Distance="1.25" Manage="Recall" Unit="Thunder">
-            <Charge Link="Abil/##id##"/>
-            <Cooldown Link="Abil/##id##"/>
-            <Flags index="External" value="1"/>
-        </InfoArray>
-        <EffectArray index="Create" value="HandlerThunderTrackerAdd"/>
-        <EffectArray index="Death" value="ThunderDeadApply"/>
-        <ExternalAngle value="0"/>
-        <MaxCount value="2"/>
-    </CAbilArmMagazine>
-    <CAbilArmMagazine id="TagTeamHandlerMagazineLightning">
-        <EditorCategories value="AbilityorEffectType:Units"/>
-        <Leash value="5"/>
-        <InfoArray index="Ammo1" CountStart="1" Distance="1.25" Manage="Recall" Unit="Lightning">
-            <Charge Link="Abil/##id##"/>
-            <Cooldown Link="Abil/##id##"/>
-            <Flags index="External" value="1"/>
-        </InfoArray>
-        <EffectArray index="Create" value="HandlerLightningTrackerAdd"/>
-        <EffectArray index="Death" value="LightningDeadApply"/>
-        <ExternalAngle value="180"/>
-        <MaxCount value="2"/>
-    </CAbilArmMagazine>
     <CAbilEffectTarget id="Tornado">
         <EditorCategories value="AbilityorEffectType:Units"/>
         <Effect index="0" value="TornadoInitialSet"/>
@@ -1877,19 +1504,6 @@
         </WireframeShield>
         <LifeArmorIcon value="Assets\Textures\btn-upgrade-protoss-groundarmorlevel0.dds"/>
         <FogVisibility value="Dimmed"/>
-    </CActorUnit>
-    <CActorUnit id="TagTeamHandler" parent="GenericUnitStandard" unitName="TagTeamHandler">
-        <EditorCategories value=""/>
-        <Model value="Obelisk"/>
-        <CreepHeightClass value="Medium"/>
-        <CreepRateGrow value="Grow"/>
-        <CreepRateShrink value="Shrink"/>
-        <BuildModel value="Obelisk"/>
-        <PlacementModel value="Obelisk"/>
-        <LifeArmorIcon value="Assets\Textures\btn-armor-protoss-buildingplating.dds"/>
-        <Wireframe>
-            <Image value="Assets\Textures\wireframe-protoss-obelisk.dds"/>
-        </Wireframe>
     </CActorUnit>
     <CActorModel id="Tornado" parent="ModelAnimationStyleContinuous">
         <EditorCategories value=""/>
@@ -2287,58 +1901,6 @@
         <Race value="Prot"/>
         <Mover value="HighTemplarWeapon"/>
     </CUnit>
-    <CUnit id="TagTeamHandler">
-        <Facing value="90"/>
-        <Race value="Prot"/>
-        <FlagArray index="Movable" value="0"/>
-        <FlagArray index="Unselectable" value="1"/>
-        <FlagArray index="Untargetable" value="1"/>
-        <FlagArray index="NoDraw" value="1"/>
-        <FlagArray index="Undetectable" value="1"/>
-        <FlagArray index="Invulnerable" value="1"/>
-        <AbilArray Link="TagTeamHandlerMagazineThunder"/>
-        <AbilArray Link="TagTeamHandlerMagazineLightning"/>
-        <AbilArray Link="HandlerLightningElementals"/>
-        <AbilArray Link="HandlerLightningHandsOfLightning"/>
-        <AbilArray Link="HandlerLightningPureEnergy"/>
-        <AbilArray Link="HandlerLightningCrossedBeams"/>
-        <AbilArray Link="HandlerLightningZapTrap"/>
-        <AbilArray Link="HandlerThunderCoronaWaves"/>
-        <AbilArray Link="HandlerThunderElementals"/>
-        <AbilArray Link="HandlerThunderHandsOfSilence"/>
-        <AbilArray Link="HandlerThunderShout"/>
-        <AbilArray Link="HandlerThunderTornado"/>
-        <EditorCategories value="ObjectType:Hero"/>
-        <BehaviorArray Link="HandlerLightningTracker"/>
-        <BehaviorArray Link="HandlerThunderTracker"/>
-        <CardLayouts>
-            <LayoutButtons Face="CoronaWaves" Type="AbilCmd" AbilCmd="HandlerThunderCoronaWaves,Execute" Row="1" Column="0"/>
-            <LayoutButtons Face="HandsOfSilence" Type="AbilCmd" AbilCmd="HandlerThunderHandsOfSilence,Execute" Row="1" Column="1"/>
-            <LayoutButtons Face="Shout" Type="AbilCmd" AbilCmd="HandlerThunderShout,Execute" Row="1" Column="2"/>
-            <LayoutButtons Face="ThunderElementals" Type="AbilCmd" AbilCmd="HandlerThunderElementals,Execute" Row="1" Column="3"/>
-            <LayoutButtons Face="Tornado" Type="AbilCmd" AbilCmd="HandlerThunderTornado,Execute" Row="1" Column="4"/>
-            <LayoutButtons Face="CrossedBeams" Type="AbilCmd" AbilCmd="HandlerLightningCrossedBeams,Execute" Row="2" Column="0"/>
-            <LayoutButtons Face="HandOfLightning" Type="AbilCmd" AbilCmd="HandlerLightningHandsOfLightning,Execute" Row="2" Column="1"/>
-            <LayoutButtons Face="LightningElementals" Type="AbilCmd" AbilCmd="HandlerLightningElementals,Execute" Row="2" Column="2"/>
-            <LayoutButtons Face="PureEnergy" Type="AbilCmd" AbilCmd="HandlerLightningPureEnergy,Execute" Row="2" Column="3"/>
-            <LayoutButtons Face="ZapTrap" Type="AbilCmd" AbilCmd="HandlerLightningZapTrap,Execute" Row="2" Column="4"/>
-        </CardLayouts>
-        <Radius value="0"/>
-        <LifeArmorFormula>
-            <NegativeArmorMultiplier value="0"/>
-            <NegativeDamageBase value="0"/>
-            <NegativeDamageUnscaled value="0"/>
-            <PositiveArmorMultiplier value="0"/>
-        </LifeArmorFormula>
-        <ShieldArmorFormula>
-            <NegativeArmorMultiplier value="0"/>
-            <NegativeDamageBase value="0"/>
-            <NegativeDamageUnscaled value="0"/>
-            <PositiveArmorMultiplier value="0"/>
-        </ShieldArmorFormula>
-        <LifeRegenDelay value="5"/>
-        <ShieldRegenDelay value="5"/>
-    </CUnit>
     <CUnit id="ZapTrapDummyUnit">
         <Race value="Prot"/>
         <FlagArray index="Uncommandable" value="1"/>
@@ -2373,14 +1935,6 @@
     </CUnit>
     <CBehaviorUnitTracker id="CrossedBeams@DummyTracker">
         <EditorCategories value="AbilityorEffectType:Units"/>
-    </CBehaviorUnitTracker>
-    <CBehaviorUnitTracker id="HandlerLightningTracker">
-        <EditorCategories value="AbilityorEffectType:Units"/>
-        <InfoFlags index="Hidden" value="1"/>
-    </CBehaviorUnitTracker>
-    <CBehaviorUnitTracker id="HandlerThunderTracker">
-        <EditorCategories value="AbilityorEffectType:Units"/>
-        <InfoFlags index="Hidden" value="1"/>
     </CBehaviorUnitTracker>
     <CBehaviorBuff id="HandsOfSilence">
         <EditorCategories value="AbilityorEffectType:Units"/>
@@ -2424,22 +1978,6 @@
             <StateFlags index="Stun" value="1"/>
             <StateFlags index="Uncommandable" value="1"/>
         </Modification>
-        <InfoFlags index="Hidden" value="1"/>
-    </CBehaviorBuff>
-    <CBehaviorBuff id="TagTeamHandlerLightningDead">
-        <EditorCategories value="AbilityorEffectType:Units"/>
-        <InfoFlags index="Hidden" value="1"/>
-    </CBehaviorBuff>
-    <CBehaviorBuff id="TagTeamHandlerThunderDead">
-        <EditorCategories value="AbilityorEffectType:Units"/>
-        <InfoFlags index="Hidden" value="1"/>
-    </CBehaviorBuff>
-    <CBehaviorBuff id="TagTeamHandlerLightningExhausted">
-        <EditorCategories value="AbilityorEffectType:Units"/>
-        <InfoFlags index="Hidden" value="1"/>
-    </CBehaviorBuff>
-    <CBehaviorBuff id="TagTeamHandlerThunderExhausted">
-        <EditorCategories value="AbilityorEffectType:Units"/>
         <InfoFlags index="Hidden" value="1"/>
     </CBehaviorBuff>
     <CBehaviorBuff id="TornadoThrown">

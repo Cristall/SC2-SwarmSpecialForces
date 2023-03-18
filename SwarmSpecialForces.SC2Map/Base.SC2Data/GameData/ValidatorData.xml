@@ -278,10 +278,6 @@
         <WhichLocation Value="SourceUnit"/>
         <Compare value="LT"/>
     </CValidatorLocationCompareCliffLevel>
-    <CValidatorCombine id="AnyNotExhausted">
-        <CombineArray value="LightningNotExhausted"/>
-        <CombineArray value="ThunderNotExhausted"/>
-    </CValidatorCombine>
     <CValidatorUnitCompareBehaviorCount id="BaseHiveLevel2">
         <WhichUnit Value="Source"/>
         <Value value="1"/>
@@ -343,10 +339,6 @@
     <CValidatorUnitType id="IsBaseOverlord">
         <Value value="BaseOverlord"/>
     </CValidatorUnitType>
-    <CValidatorUnitCompareBehaviorCount id="LightningNotDead">
-        <WhichUnit Value="Caster"/>
-        <Behavior value="TagTeamHandlerThunderDead"/>
-    </CValidatorUnitCompareBehaviorCount>
     <CValidatorLocationArc id="CasterBehindTarget">
         <WhichLocation Value="TargetUnit"/>
         <Find value="1"/>
@@ -361,26 +353,9 @@
         <CombineArray value="TargetBehindCaster"/>
         <Negate value="1"/>
     </CValidatorCombine>
-    <CValidatorUnitCompareBehaviorCount id="ThunderNotDead">
-        <WhichUnit Value="Caster"/>
-        <Behavior value="TagTeamHandlerThunderDead"/>
-    </CValidatorUnitCompareBehaviorCount>
-    <CValidatorUnitCompareBehaviorCount id="LightningNotExhausted">
-        <WhichUnit Value="Caster"/>
-        <Behavior value="TagTeamHandlerLightningExhausted"/>
-    </CValidatorUnitCompareBehaviorCount>
-    <CValidatorUnitCompareBehaviorCount id="ThunderNotExhausted">
-        <WhichUnit Value="Caster"/>
-        <Behavior value="TagTeamHandlerThunderExhausted"/>
-    </CValidatorUnitCompareBehaviorCount>
     <CValidatorUnitType id="LightningUnitType">
         <Value value="Lightning"/>
     </CValidatorUnitType>
-    <CValidatorCompareTrackedUnitsCount id="TagTeamHandlerFindThunder">
-        <Value value="1"/>
-        <BehaviorLink value="HandlerThunderTracker"/>
-        <TrackedUnitFilters value="-;Dead"/>
-    </CValidatorCompareTrackedUnitsCount>
     <CValidatorUnitType id="ThunderUnitType">
         <Value value="Thunder"/>
     </CValidatorUnitType>
@@ -498,11 +473,6 @@
         <Value value="1"/>
         <Behavior value="ScientistStunned"/>
     </CValidatorUnitCompareBehaviorCount>
-    <CValidatorCompareTrackedUnitsCount id="TagTeamHandlerFindLightning">
-        <Value value="1"/>
-        <BehaviorLink value="HandlerLightningTracker"/>
-        <TrackedUnitFilters value="-;Dead"/>
-    </CValidatorCompareTrackedUnitsCount>
     <CValidatorCombine id="TargetAcrossCliff">
         <CombineArray value="TargetNotAcrossCliff"/>
         <Negate value="1"/>
