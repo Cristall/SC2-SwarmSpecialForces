@@ -183,10 +183,10 @@ bool Enemy_BossFight_Handler (bool testConds, bool runActions){
                     tmpFlag = true;
                     if(bossFightData.bossCastingTime[tmpInt] > 0){
                         bossFightData.bossCastingTime[tmpInt] -= loopRepeatTime;
-                        if(bossFightData.bossCastingTime[tmpInt] <= 0){
-                            bossFightData.bossCastingTime[tmpInt] = 0;
-                            bossFightData.bossState[tmpInt] &= ~c_BossFightState_Casting;
-                        }
+                    }
+                    if(bossFightData.bossCastingTime[tmpInt] <= 0){
+                        bossFightData.bossCastingTime[tmpInt] = 0;
+                        bossFightData.bossState[tmpInt] &= ~c_BossFightState_Casting;
                     }
                 }
                 else {
