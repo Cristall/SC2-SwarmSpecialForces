@@ -19,7 +19,7 @@ unit HeroAbility_RespawnEgg_GetAvailableEgg(){
     unit tmpUnit = null;
     bool tmpFlag;
     int i;
-    unitgroup tmpUG = UnitGroup("RespawnEgg@Egg", c_playerAny, RegionEntireMap(), UnitFilter(0,0,0,0),-1);
+    unitgroup tmpUG = UnitGroup("RespawnEgg@Egg", c_playerAny, RegionEntireMap(), UnitFilter(0,0,0,(1 << (c_targetFilterDead - 32))),-1);
 
     i = UnitGroupCount(tmpUG, c_unitCountAlive);
     for (;; i -=1){
