@@ -1779,6 +1779,7 @@
         </ShieldArmorFormula>
         <LifeRegenDelay value="5"/>
         <ShieldRegenDelay value="5"/>
+        <Attributes index="Summoned" value="1"/>
     </CUnit>
     <CUnit id="AtlantisCore" parent="GenericEnemyUnit">
         <Facing value="45"/>
