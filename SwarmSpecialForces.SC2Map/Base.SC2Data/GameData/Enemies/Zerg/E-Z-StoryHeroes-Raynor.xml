@@ -655,8 +655,8 @@
         <On Terms="Effect.OverchargedGun@DummyPersistent.Start" Send="Create"/>
         <On Terms="Effect.OverchargedGun@DummyPersistent.Stop" Send="Destroy"/>
         <On Terms="ActorCreation" Send="SetOpacity"/>
-        <On Terms="ActorCreation" Send="TimerSet 0.750000 Visibility"/>
-        <On Terms="TimerExpired; TimerName Visibility" Send="SetOpacity 1.000000 0.750000"/>
+        <On Terms="ActorCreation" Send="TimerSet 0.250000 Visibility"/>
+        <On Terms="TimerExpired; TimerName Visibility" Send="SetOpacity 1.000000 0.250000"/>
         <HostLaunch Subject="_Unit" Scope="Caster"/>
         <HostLaunchSiteOps Ops="SOpAttachWeapon"/>
         <HostImpact Subject="_Unit" Scope="Target"/>
@@ -792,6 +792,8 @@
     </CModel>
     <CModel id="OverchargedGun@Charging">
         <Model value="Assets\Effects\Terran\Xanthos_Beam_Chargeup\Xanthos_Beam_Chargeup.m3"/>
+        <ScaleMax value="1.500000,1.500000,1.500000"/>
+        <ScaleMin value="1.500000,1.500000,1.500000"/>
     </CModel>
     <CModel id="Umojan_Marine" parent="ImportedModel">
         <ScaleMax value="2.250000,2.250000,2.250000"/>
