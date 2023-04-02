@@ -1,4 +1,4 @@
-include "scripts/Starcode"
+include "scripts/Lib/Starcode"
 include "scripts/Enums"
 include "scripts/GlobalVariables"
 include "scripts/secrets"
