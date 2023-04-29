@@ -528,16 +528,60 @@ void Debug_Override_FirstPart(){
         // gv_Part_ActivePart = c_Part_Protoss;
         // Player_IncreaseUpgradeCount(10+10);
         
-        // gv_Part_ActivePart = c_Part_Zerg;
-        // Player_IncreaseUpgradeCount(10+10+10+10);
+        gv_Part_ActivePart = c_Part_Zerg;
+        Player_IncreaseUpgradeCount(10+10+10+10);
     }
 }
 
+// void Debug_Test2(string unittype){
+//     int i;
+//     string abil;
+//     unitgroup ug = UnitCreate(1, unittype, 0, 1, Point(5,5), 0);
+//     unit u = UnitGroupUnit(ug,1);
+//     int abilCount = UnitAbilityCount(u);
+//     Debug_ShowMessage(unittype);
+//     Debug_ShowMessage(IntToString(abilCount));
+//     for(i=1; i<=abilCount; i+=1){
+//         abil = UnitAbilityGet(u, i);
+//         Debug_ShowMessage(abil);
+//     }
 
+//     UnitIssueOrder(u, Order(AbilityCommand("Phase2", 0)), c_orderQueueReplace);
+//     Wait(10, c_timeGame);
+
+//     abilCount = UnitAbilityCount(u);
+//     Debug_ShowMessage(UnitGetType(u));
+//     Debug_ShowMessage(IntToString(abilCount));
+//     for(i=1; i<=abilCount; i+=1){
+//         abil = UnitAbilityGet(u, i);
+//         Debug_ShowMessage(abil);
+//     }
+// }
 
 // other testing functionality
 bool Debug_Test (bool testConds, bool runActions){
-    Debug_ShowMessage(IntToString(ValidatorExecute("CasterLifeLT75Percent", gv_PlayerStats[1].heroUnit, gv_PlayerStats[1].heroUnit)));
+    // Debug_ShowMessage(IntToString(ValidatorExecute("CasterLifeLT75Percent", gv_PlayerStats[1].heroUnit, gv_PlayerStats[1].heroUnit)));
+    // playergroup emptygroup = PlayerGroupEmpty();
+    // int play = PlayerGroupPlayer(emptygroup, 1);
+    // Debug_ShowMessage(IntToString(play));
+    // Debug_Test2("Atlantis");
+    // Debug_Test2("AtlantisCore");
+
+    point p = PointFromName("PartProtoss_Boss_TagTeam");
+    int i;
+    unit u;
+    unitgroup ug;
+
+    ug=UnitGroup(null, c_playerAny, RegionCircle(p, 30), UnitFilter(0,0,0,0), -1);
+    for (i = 1; i <= UnitGroupCount(ug, c_unitCountAll); i += 1) {
+        u = UnitGroupUnit(ug, i);
+        UnitRemove(u);
+    }
+
+    UnitCreate(1, "Lightning", 0, gv_EnemyPlayer, p, 0);
+
+    UnitCreate(400, "ZerglingCarbot", 0, 1, p, 0);
+
     return true;
 }
 bool Debug_Kick (bool testConds, bool runActions){
@@ -781,6 +825,15 @@ bool Debug_Win(bool testConds, bool runActions){
     return true;
 }
 
+static int Debug_EffectCounter = 0;
+
+bool Debug_EffectCount(bool testConds, bool runActions){
+    Debug_EffectCounter +=1 ;
+    Debug_ShowMessage(IntToString(Debug_EffectCounter));
+    return true;
+}
+
+
 void Debug_Init(){
     int i;
     int tmp_player;
@@ -913,15 +966,17 @@ void Debug_Init(){
         // TriggerAddEventChatMessage(TriggerCreate("Debug_Stetmann_Test"), c_playerAny, "-stetmann", false);
 
         // tmp_trigger = TriggerCreate("Debug_EffectExecuted");
-        // TriggerAddEventPlayerEffectUsed(tmp_trigger, c_playerAny, "Pinball@GetCannons");
+        // TriggerAddEventPlayerEffectUsed(tmp_trigger, c_playerAny, "SpinForWin@ImpactDamage");
         // TriggerAddEventPlayerEffectUsed(tmp_trigger, c_playerAny, "RainbowMeteors@ImpactSet");
         // TriggerAddEventPlayerEffectUsed(tmp_trigger, c_playerAny, "ChargeUp@Dmg");
         // TriggerAddEventPlayerEffectUsed(tmp_trigger, c_playerAny, "ColorfulBeams@BeamDmg");
+
+        // TriggerAddEventPlayerEffectUsed(TriggerCreate("Debug_EffectCount"), c_playerAny, "CrossedBeams@TargetBeamSet");
 
         // libNtve_gf_SetAllianceOneWay(1, 8, libNtve_ge_AllianceSetting_EnemyWithSharedVision);
         // libNtve_gf_SetAllianceOneWay(8, 1, libNtve_ge_AllianceSetting_EnemyWithSharedVision);
         // PlayerSetAlliance(1, c_allianceIdControl, 8, true);
         // PlayerSetAlliance(8, c_allianceIdControl, 1, true);
-        // TriggerAddEventUnitDamaged(TriggerCreate("Debug_PrintDmg"),null, c_unitDamageTypeAny, c_unitDamageEither, "SpinForWin@ImpactDamage");
+        // TriggerAddEventUnitDamaged(TriggerCreate("Debug_PrintDmg"),null, c_unitDamageTypeAny, c_unitDamageEither, "CrossedBeams@TargetExplodeDmg");
     }
 }

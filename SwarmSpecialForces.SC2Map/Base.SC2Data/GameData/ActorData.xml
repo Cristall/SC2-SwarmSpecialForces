@@ -226,6 +226,11 @@
     </CActorSplat>
     <CActorModel id="TESTimpactlocation" parent="ModelAnimationStyleOneShot">
         <EditorCategories value=""/>
+        <On index="0" Terms="ActorCreation" Send="AnimBracketStart BSD Birth Stand Death ContentPlayOnce 0.200000 AsDuration"/>
         <On Terms="Effect.TESTimpactlocation.Start" Send="Create"/>
+        <Scale value="0.500000"/>
     </CActorModel>
+    <CActorUnit id="ZerglingCarbot">
+        <Scale value="0.250000"/>
+    </CActorUnit>
 </Catalog>

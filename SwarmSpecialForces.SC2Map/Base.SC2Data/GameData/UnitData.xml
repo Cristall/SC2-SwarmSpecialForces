@@ -239,9 +239,19 @@
         <LifeMax value="100000"/>
         <LifeRegenRate value="0"/>
         <Speed value="0"/>
-        <Radius value="0.125"/>
-        <SeparationRadius value="0.125"/>
+        <Radius value="0.5"/>
+        <SeparationRadius value="0.5"/>
         <MinimapRadius value="0.125"/>
         <EditorCategories value=""/>
+        <Collide index="Ground" value="0"/>
+        <Collide index="ForceField" value="0"/>
+        <Collide index="CreepTumor" value="1"/>
+        <Collide index="Locust" value="0"/>
+        <Collide index="Small" value="0"/>
+        <AbilArray index="1" removed="1"/>
+        <AbilArray index="2" removed="1"/>
+        <AbilArray index="3" removed="1"/>
+        <AbilArray index="4" removed="1"/>
+        <InnerRadius value="0.5"/>
     </CUnit>
 </Catalog>
