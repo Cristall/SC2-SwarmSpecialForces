@@ -1000,18 +1000,15 @@
     <CActorModel id="LaserLanceFire" parent="ModelAnimationStyleContinuous">
         <EditorCategories value=""/>
         <On Terms="Effect.LaserLanceSearchPersistent.Start; At Effect" Send="Create"/>
-        <On Terms="ActorCreation" Send="TimerSet 5.000000 KillDelay"/>
+        <On Terms="ActorCreation" Send="TimerSet 2.700000 KillDelay"/>
         <On Terms="TimerExpired; TimerName KillDelay" Send="Destroy"/>
-        <HostSiteOps Ops="SOpForwardCasterPoint SOpRotate90DegClockwise"/>
+        <HostSiteOps Ops="SOpForwardCasterPoint SOpRotate90DegClockwise SOpShadow"/>
         <VisibleTo index="All" value="1"/>
         <FogVisibility value="Visible"/>
     </CActorModel>
     <CActorModel id="LaserLanceFireBuff" parent="ModelAddition">
         <EditorCategories value=""/>
     </CActorModel>
-    <CActorSiteMover id="LaserLanceImpactSite">
-        <EditorCategories value=""/>
-    </CActorSiteMover>
     <CActorSiteOpLocalOffset id="LaserLanceMissileLaunchOffset">
         <EditorCategories value=""/>
         <LocalOffset value="0.000000,0.000000,-5.000000"/>

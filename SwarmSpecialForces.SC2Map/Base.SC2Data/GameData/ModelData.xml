@@ -128,14 +128,14 @@
     </CModel>
     <CModel id="LaserLanceFire">
         <Model value="Assets\Effects\Protoss\Mothership_Taldarim_Thermal_Lance_Beam_Unit_Impact\Mothership_Taldarim_Thermal_Lance_Beam_Unit_Impact.m3"/>
-        <ScaleMax value="5.000000,5.000000,1.500000"/>
-        <ScaleMin value="5.000000,5.000000,1.500000"/>
+        <ScaleMax value="5.500000,5.500000,1.500000"/>
+        <ScaleMin value="5.500000,5.500000,1.500000"/>
         <LowQualityModel value="LaserLanceFireLow"/>
     </CModel>
     <CModel id="LaserLanceFireLow">
         <Model value="Assets\Effects\Terran\TerranBuildingFireLarge\TerranBuildingFireLarge_Low.m3"/>
-        <ScaleMax value="3.000000,3.000000,1.500000"/>
-        <ScaleMin value="3.000000,3.000000,1.500000"/>
+        <ScaleMax value="5.500000,5.500000,1.500000"/>
+        <ScaleMin value="5.500000,5.500000,1.500000"/>
     </CModel>
     <CModel id="LaserLanceFireBuff">
         <Model value="Assets\Effects\Protoss\Mothership_Taldarim_Thermal_Lance_Beam_Unit_Impact\Mothership_Taldarim_Thermal_Lance_Beam_Unit_Impact.m3"/>
