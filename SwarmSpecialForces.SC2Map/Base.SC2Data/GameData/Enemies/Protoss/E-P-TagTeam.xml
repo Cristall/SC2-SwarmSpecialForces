@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Catalog>
+    <CEffectSet id="CrossedBeams@TargetDummyCleanupSet">
+        <EditorCategories value=""/>
+        <EffectArray value="CrossedBeams@TargetBeamPersistentDestroy"/>
+        <EffectArray value="CrossedBeams@TargetCleanupDummy"/>
+    </CEffectSet>
+    <CEffectDestroyPersistent id="CrossedBeams@TargetBeamPersistentDestroy">
+        <EditorCategories value=""/>
+        <Effect value="CrossedBeams@TargetBeamPersistent"/>
+        <Count value="1"/>
+        <Radius value="20"/>
+    </CEffectDestroyPersistent>
     <CEffectAddTrackedUnit id="CrossedBeams@AddDummyTracking">
         <EditorCategories value=""/>
         <BehaviorLink value="CrossedBeams@DummyTracker"/>
@@ -102,8 +113,8 @@
         <EditorCategories value=""/>
         <WhichLocation Value="TargetUnit"/>
         <InitialDelay value="0.6"/>
-        <PeriodCount value="61"/>
-        <PeriodicValidator value="CasterNotDead"/>
+        <PeriodCount value="55"/>
+        <PeriodicValidator value="CasterNotDeadAndTargetNotDead"/>
         <PeriodicEffectArray value="CrossedBeams@TargetBeamSet"/>
         <PeriodicPeriodArray value="0.1"/>
     </CEffectCreatePersistent>
@@ -181,6 +192,7 @@
         <ImpactUnit Effect="CrossedBeams@TargetInitialDelay"/>
         <FacingLocation Value="CasterUnit"/>
         <FacingType value="LookAt"/>
+        <ValidatorArray value="TargetNotDead"/>
     </CEffectModifyUnit>
     <CEffectCreatePersistent id="CrossedBeams@TargetImpactPersistent">
         <EditorCategories value=""/>
@@ -188,7 +200,7 @@
         <Flags index="Channeled" value="1"/>
         <InitialDelay value="1"/>
         <ExpireEffect value="CrossedBeams@TargetExplodeSet"/>
-        <FinalEffect value="CrossedBeams@TargetCleanupDummy"/>
+        <FinalEffect value="CrossedBeams@TargetDummyCleanupSet"/>
         <PeriodCount value="20"/>
         <PeriodicValidator value="CasterNotDead"/>
         <PeriodicEffectArray value="CrossedBeams@TargetImpactSearch"/>
@@ -199,6 +211,7 @@
         <MinDistance value="0"/>
         <SourceLocation Value="TargetUnit"/>
         <TargetLocation Effect="CrossedBeams@TargetFacingDummyCreate" Value="TargetUnit"/>
+        <ValidatorArray value="TargetNotDead"/>
     </CEffectTeleport>
     <CEffectDamage id="CrossedBeams@TargetImpactDmg">
         <EditorCategories value=""/>
@@ -1243,7 +1256,7 @@
         <FogVisibility value="Visible"/>
         <EditorCategories value=""/>
         <On Terms="Effect.CrossedBeams@TargetBeamPersistent.Start" Send="Create"/>
-        <On Terms="Effect.CrossedBeams@TargetBeamPersistent.Stop" Send="Destroy"/>
+        <On Terms="Effect.CrossedBeams@TargetBeamPersistent.Stop" Send="AnimBracketStop BSD"/>
         <Model value="CrossedBeams@Beam"/>
         <HostLaunch Subject="_Unit" Scope="Caster"/>
         <HostLaunchSiteOps Ops="SOpAttachWeaponLeft"/>
@@ -1255,7 +1268,7 @@
         <FogVisibility value="Visible"/>
         <EditorCategories value=""/>
         <On Terms="Effect.CrossedBeams@TargetBeamPersistent.Start" Send="Create"/>
-        <On Terms="Effect.CrossedBeams@TargetBeamPersistent.Stop" Send="Destroy"/>
+        <On Terms="Effect.CrossedBeams@TargetBeamPersistent.Stop" Send="AnimBracketStop BSD"/>
         <Model value="CrossedBeams@Beam"/>
         <HostLaunch Subject="_Unit" Scope="Caster"/>
         <HostLaunchSiteOps Ops="SOpAttachWeaponRight"/>
@@ -1280,7 +1293,7 @@
         <FogVisibility value="Visible"/>
         <EditorCategories value=""/>
         <On Terms="Effect.CrossedBeams@TargetImpactPersistent.Start" Send="Create"/>
-        <On Terms="Effect.CrossedBeams@TargetImpactPersistent.Stop" Send="Destroy"/>
+        <On Terms="Effect.CrossedBeams@TargetImpactPersistent.Stop" Send="AnimBracketStop BSD"/>
         <Host Subject="_Unit" Scope="Target" Effect="CrossedBeams@TargetFacingDummyCreate"/>
         <ModelFlags index="AutomateGlobalLoops" value="1"/>
     </CActorModel>
@@ -1718,6 +1731,48 @@
     </CMoverMissile>
     <CDataCollectionAbil id="CrossedBeams">
         <EditorCategories value=""/>
+        <DataRecord Entry="Abil,CrossedBeams@Target"/>
+        <DataRecord Entry="Abil,CrossedBeams@Start"/>
+        <DataRecord Entry="Actor,CrossedBeams@BeamLeft"/>
+        <DataRecord Entry="Actor,CrossedBeams@BeamRight"/>
+        <DataRecord Entry="Actor,CrossedBeams@Dummy"/>
+        <DataRecord Entry="Actor,CrossedBeams@Explosion"/>
+        <DataRecord Entry="Actor,CrossedBeams@Impact"/>
+        <DataRecord Entry="Behavior,CrossedBeams@DummyTracker"/>
+        <DataRecord Entry="Button,CrossedBeams"/>
+        <DataRecord Entry="Effect,CrossedBeams@TargetInitialDelay"/>
+        <DataRecord Entry="Effect,CrossedBeams@AddDummyTracking"/>
+        <DataRecord Entry="Effect,CrossedBeams@DummyTracker"/>
+        <DataRecord Entry="Effect,CrossedBeams@DummyTrackerRemove"/>
+        <DataRecord Entry="Effect,CrossedBeams@TargetBeamDmg"/>
+        <DataRecord Entry="Effect,CrossedBeams@TargetBeamPersistent"/>
+        <DataRecord Entry="Effect,CrossedBeams@TargetBeamSet"/>
+        <DataRecord Entry="Effect,CrossedBeams@TargetBeamSearch"/>
+        <DataRecord Entry="Effect,CrossedBeams@TargetBeamSearchOffsets"/>
+        <DataRecord Entry="Effect,CrossedBeams@TargetFacingDummyTeleport"/>
+        <DataRecord Entry="Effect,CrossedBeams@TargetFacingDummyFacing"/>
+        <DataRecord Entry="Effect,CrossedBeams@TargetCleanupDummy"/>
+        <DataRecord Entry="Effect,CrossedBeams@TargetExplodeDmg"/>
+        <DataRecord Entry="Effect,CrossedBeams@TargetExplodeSearch"/>
+        <DataRecord Entry="Effect,CrossedBeams@TargetExplodeSet"/>
+        <DataRecord Entry="Effect,CrossedBeams@TargetImpactPersistent"/>
+        <DataRecord Entry="Effect,CrossedBeams@TargetImpactSearch"/>
+        <DataRecord Entry="Effect,CrossedBeams@TargetFacingDummyCreate"/>
+        <DataRecord Entry="Effect,CrossedBeams@TargetImpactDmg"/>
+        <DataRecord Entry="Effect,CrossedBeams@AlreadyCastingNoWeapons"/>
+        <DataRecord Entry="Effect,CrossedBeams@CastCBTAtDummy"/>
+        <DataRecord Entry="Effect,CrossedBeams@DummyFollowPersistent"/>
+        <DataRecord Entry="Effect,CrossedBeams@DummyIssueFollow"/>
+        <DataRecord Entry="Effect,CrossedBeams@InitialSet"/>
+        <DataRecord Entry="Effect,CrossedBeams@CreateDummy"/>
+        <DataRecord Entry="Effect,CrossedBeams@DummySet"/>
+        <DataRecord Entry="Model,CrossedBeams@Beam"/>
+        <DataRecord Entry="Model,CrossedBeams@Explosion"/>
+        <DataRecord Entry="Model,CrossedBeams@Impact"/>
+        <DataRecord Entry="Unit,CrossedBeams@Dummy"/>
+        <DataRecord Entry="Validator,CrossedBeams@TargetInFrontOfDummy"/>
+        <DataRecord Entry="Effect,CrossedBeams@TargetDummyCleanupSet"/>
+        <DataRecord Entry="Effect,CrossedBeams@TargetBeamPersistentDestroy"/>
     </CDataCollectionAbil>
     <CDataCollectionAbil id="HandsOfSilence">
         <EditorCategories value=""/>
