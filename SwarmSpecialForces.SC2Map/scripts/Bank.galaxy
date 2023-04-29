@@ -633,6 +633,7 @@ void Bank_MigrateTo_v2_00(int playerID){
         //light data
             tmpStr = StarcodeDecryptString(BankValueGetAsString(gv_PlayerStats[playerID].bankfile, "stats", "lightData"), (playerHandle + superDuperSecretString));
             if (!StarcodeValidateString(tmpStr, hashSecurityLevel)) {
+                Debug_ShowMessage("BankLoad "+FixedToString(version, -1) + " failed at lightData");
                 return false;
             }
             tmpStr = StarcodeDecompressString(StarcodeRemoveHashfromString(tmpStr, hashSecurityLevel));
@@ -653,6 +654,7 @@ void Bank_MigrateTo_v2_00(int playerID){
             tmpStr = BankValueGetAsString(gv_PlayerStats[playerID].bankfile, "stats", "heavyData");
             tmpStr = StarcodeDecryptString(tmpStr, (playerHandle + superDuperSecretString));
             if (!StarcodeValidateString(tmpStr, hashSecurityLevel)) {
+                Debug_ShowMessage("BankLoad "+FixedToString(version, -1) + " failed at heavyData");
                 return false;
             }
             tmpStr = StarcodeDecompressString(StarcodeRemoveHashfromString(tmpStr, hashSecurityLevel));
@@ -688,6 +690,7 @@ void Bank_MigrateTo_v2_00(int playerID){
                 gv_PlayerStats[playerID].options_ControlGroup_Group[tmpInt] = BankStorageRetrieveInt();
             }
             if (BankStorageCheckError()) {
+                Debug_ShowMessage("BankLoad "+FixedToString(version, -1) + " failed at options");
                 return false;
             }
 
@@ -695,6 +698,7 @@ void Bank_MigrateTo_v2_00(int playerID){
             tmpStr = StarcodeDecryptString(BankValueGetAsString(gv_PlayerStats[playerID].bankfile, "stats", "speedrunsData"), (playerHandle + superDuperSecretString));
             
             if (!StarcodeValidateString(tmpStr, hashSecurityLevel)) {
+                Debug_ShowMessage("BankLoad "+FixedToString(version, -1) + " failed at speedruns");
                 return false;
             }
             tmpStr = StarcodeDecompressString(StarcodeRemoveHashfromString(tmpStr, hashSecurityLevel));
