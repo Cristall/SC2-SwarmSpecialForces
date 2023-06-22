@@ -69,6 +69,7 @@ void Player_PartWin_UpdateAcv(){
     while(true){
         tmpPlayer = PlayerGroupNextPlayer(gv_ActivePG, tmpPlayer);
         if(tmpPlayer <0){break;}
+        updatedTimeLowest = 0;
 
         // only overwrites speedruntimes
         for (tmpInt = gv_PlayerAmountStart-1; tmpInt < gv_MaxAmountPlayers; tmpInt+= 1){
