@@ -210,90 +210,6 @@
         <Behavior value="CorrosiveSpikes@Dot"/>
         <RequireCasterUnit Value="Caster"/>
     </CValidatorUnitCompareBehaviorCount>
-    <CValidatorUnitCompareBehaviorCount id="Focus@BuffStack12Below">
-        <WhichUnit Value="Caster"/>
-        <Compare value="LT"/>
-        <Value value="12"/>
-        <Behavior value="Focus@BuffStack"/>
-    </CValidatorUnitCompareBehaviorCount>
-    <CValidatorUnitCompareBehaviorCount id="Focus@BuffStack16Below">
-        <WhichUnit Value="Caster"/>
-        <Compare value="LT"/>
-        <Value value="16"/>
-        <Behavior value="Focus@BuffStack"/>
-    </CValidatorUnitCompareBehaviorCount>
-    <CValidatorUnitCompareBehaviorCount id="Focus@BuffStack20Below">
-        <WhichUnit Value="Caster"/>
-        <Compare value="LT"/>
-        <Value value="20"/>
-        <Behavior value="Focus@BuffStack"/>
-    </CValidatorUnitCompareBehaviorCount>
-    <CValidatorUnitCompareBehaviorCount id="Focus@BuffStack4Below">
-        <WhichUnit Value="Caster"/>
-        <Compare value="LT"/>
-        <Value value="4"/>
-        <Behavior value="Focus@BuffStack"/>
-    </CValidatorUnitCompareBehaviorCount>
-    <CValidatorUnitCompareBehaviorCount id="Focus@BuffStack8Below">
-        <WhichUnit Value="Caster"/>
-        <Compare value="LT"/>
-        <Value value="8"/>
-        <Behavior value="Focus@BuffStack"/>
-    </CValidatorUnitCompareBehaviorCount>
-    <CValidatorCombine id="Focus@BuffStackVisual1">
-        <Type value="And"/>
-        <CombineArray value="Focus@BuffStack4OrHigher"/>
-        <CombineArray value="Focus@BuffStack8Below"/>
-    </CValidatorCombine>
-    <CValidatorCombine id="Focus@BuffStackVisual2">
-        <Type value="And"/>
-        <CombineArray value="Focus@BuffStack8OrHigher"/>
-        <CombineArray value="Focus@BuffStack12Below"/>
-    </CValidatorCombine>
-    <CValidatorCombine id="Focus@BuffStackVisual3">
-        <Type value="And"/>
-        <CombineArray value="Focus@BuffStack12OrHigher"/>
-        <CombineArray value="Focus@BuffStack16Below"/>
-    </CValidatorCombine>
-    <CValidatorCombine id="Focus@BuffStackVisual4">
-        <Type value="And"/>
-        <CombineArray value="Focus@BuffStack16OrHigher"/>
-        <CombineArray value="Focus@BuffStack20Below"/>
-    </CValidatorCombine>
-    <CValidatorCombine id="Focus@BuffStackVisual5">
-        <Type value="And"/>
-        <CombineArray value="Focus@BuffStack20OrHigher"/>
-    </CValidatorCombine>
-    <CValidatorUnitCompareBehaviorCount id="Focus@BuffStack20OrHigher">
-        <WhichUnit Value="Caster"/>
-        <Compare value="GE"/>
-        <Value value="20"/>
-        <Behavior value="Focus@BuffStack"/>
-    </CValidatorUnitCompareBehaviorCount>
-    <CValidatorUnitCompareBehaviorCount id="Focus@BuffStack4OrHigher">
-        <WhichUnit Value="Caster"/>
-        <Compare value="GE"/>
-        <Value value="4"/>
-        <Behavior value="Focus@BuffStack"/>
-    </CValidatorUnitCompareBehaviorCount>
-    <CValidatorUnitCompareBehaviorCount id="Focus@BuffStack12OrHigher">
-        <WhichUnit Value="Caster"/>
-        <Compare value="GE"/>
-        <Value value="12"/>
-        <Behavior value="Focus@BuffStack"/>
-    </CValidatorUnitCompareBehaviorCount>
-    <CValidatorUnitCompareBehaviorCount id="Focus@BuffStack8OrHigher">
-        <WhichUnit Value="Caster"/>
-        <Compare value="GE"/>
-        <Value value="8"/>
-        <Behavior value="Focus@BuffStack"/>
-    </CValidatorUnitCompareBehaviorCount>
-    <CValidatorUnitCompareBehaviorCount id="Focus@BuffStack16OrHigher">
-        <WhichUnit Value="Caster"/>
-        <Compare value="GE"/>
-        <Value value="16"/>
-        <Behavior value="Focus@BuffStack"/>
-    </CValidatorUnitCompareBehaviorCount>
     <CValidatorIsUnitTracked id="Focus@TargetIsTracked">
         <BehaviorLink value="Focus@TargetTracker"/>
         <TrackedUnit Value="Target"/>
@@ -364,15 +280,15 @@
     <CActorModel id="Focus@BuffStack" parent="ModelAddition">
         <EditorCategories value=""/>
         <On Terms="Behavior.Focus@BuffStack.Create" Send="Create"/>
-        <On Terms="BehaviorLevel.Focus@BuffStack.Start; ValidateUnit Focus@BuffStackVisual1" Send="AnimGroupApply A"/>
-        <On Terms="BehaviorLevel.Focus@BuffStack.Start; ValidateUnit Focus@BuffStackVisual2" Send="AnimGroupRemove A"/>
-        <On Terms="BehaviorLevel.Focus@BuffStack.Start; ValidateUnit Focus@BuffStackVisual2" Send="AnimGroupApply B"/>
-        <On Terms="BehaviorLevel.Focus@BuffStack.Start; ValidateUnit Focus@BuffStackVisual3" Send="AnimGroupRemove B"/>
-        <On Terms="BehaviorLevel.Focus@BuffStack.Start; ValidateUnit Focus@BuffStackVisual3" Send="AnimGroupApply C"/>
-        <On Terms="BehaviorLevel.Focus@BuffStack.Start; ValidateUnit Focus@BuffStackVisual4" Send="AnimGroupRemove C"/>
-        <On Terms="BehaviorLevel.Focus@BuffStack.Start; ValidateUnit Focus@BuffStackVisual4" Send="AnimGroupApply D"/>
-        <On Terms="BehaviorLevel.Focus@BuffStack.Start; ValidateUnit Focus@BuffStackVisual5" Send="AnimGroupRemove D"/>
-        <On Terms="BehaviorLevel.Focus@BuffStack.Start; ValidateUnit Focus@BuffStackVisual5" Send="AnimGroupApply E"/>
+        <On Terms="BehaviorLevel.Focus@BuffStack.Start; Level 4" Send="AnimGroupApply A"/>
+        <On Terms="BehaviorLevel.Focus@BuffStack.Start; Level 8" Send="AnimGroupRemove A"/>
+        <On Terms="BehaviorLevel.Focus@BuffStack.Start; Level 8" Send="AnimGroupApply B"/>
+        <On Terms="BehaviorLevel.Focus@BuffStack.Start; Level 12" Send="AnimGroupRemove B"/>
+        <On Terms="BehaviorLevel.Focus@BuffStack.Start; Level 12" Send="AnimGroupApply C"/>
+        <On Terms="BehaviorLevel.Focus@BuffStack.Start; Level 16" Send="AnimGroupRemove C"/>
+        <On Terms="BehaviorLevel.Focus@BuffStack.Start; Level 16" Send="AnimGroupApply D"/>
+        <On Terms="BehaviorLevel.Focus@BuffStack.Start; Level 20" Send="AnimGroupRemove D"/>
+        <On Terms="BehaviorLevel.Focus@BuffStack.Start; Level 20" Send="AnimGroupApply E"/>
         <On Terms="Behavior.Focus@BuffStack.Destroy" Send="Destroy"/>
         <HostSiteOps Ops="SOpAttachOrigin SOpMoveUpByDot1"/>
         <Scale value="1.500000"/>
@@ -664,21 +580,6 @@
         <DataRecord Entry="Validator,Focus@TargetIsTracked"/>
         <DataRecord Entry="Actor,Focus@BuffStack"/>
         <DataRecord Entry="Model,Focus@BuffStack"/>
-        <DataRecord Entry="Validator,Focus@BuffStack12Below"/>
-        <DataRecord Entry="Validator,Focus@BuffStack16Below"/>
-        <DataRecord Entry="Validator,Focus@BuffStack20Below"/>
-        <DataRecord Entry="Validator,Focus@BuffStack4Below"/>
-        <DataRecord Entry="Validator,Focus@BuffStack8Below"/>
-        <DataRecord Entry="Validator,Focus@BuffStackVisual1"/>
-        <DataRecord Entry="Validator,Focus@BuffStack4OrHigher"/>
-        <DataRecord Entry="Validator,Focus@BuffStackVisual2"/>
-        <DataRecord Entry="Validator,Focus@BuffStack8OrHigher"/>
-        <DataRecord Entry="Validator,Focus@BuffStackVisual3"/>
-        <DataRecord Entry="Validator,Focus@BuffStack12OrHigher"/>
-        <DataRecord Entry="Validator,Focus@BuffStackVisual4"/>
-        <DataRecord Entry="Validator,Focus@BuffStack16OrHigher"/>
-        <DataRecord Entry="Validator,Focus@BuffStackVisual5"/>
-        <DataRecord Entry="Validator,Focus@BuffStack20OrHigher"/>
     </CDataCollectionAbil>
     <CUnit id="HeroHydra">
         <DeathTime value="-1"/>
