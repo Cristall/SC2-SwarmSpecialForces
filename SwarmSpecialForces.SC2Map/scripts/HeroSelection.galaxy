@@ -168,6 +168,11 @@ void HeroSelection_Finish () {
     int totalVotes = 0;
     trigger tmpTrigger;
 
+    if (gv_GameActive){
+        // prevent any accential double calling when ready button is pressed at the same time as timer run out
+        return;
+    }
+
     gv_Part_ActivePart = c_Part_Terran;
     Debug_Override_FirstPart();
     
