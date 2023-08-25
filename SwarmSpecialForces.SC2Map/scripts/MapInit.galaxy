@@ -23,6 +23,7 @@ void MapInit_ActivePlayers(){
             libNtve_gf_SetAlliance(tmpInt, gv_EnemyPlayer, libNtve_ge_AllianceSetting_Enemy);
             libNtve_gf_SetAlliance(tmpInt, gv_BasePlayer, libNtve_ge_AllianceSetting_AllyWithSharedVisionAndControl);
 
+            PlayerOptionOverride(tmpInt, "simplecommandcard", "0");
         }
     }
     gv_PlayerAmount = PlayerGroupCount(gv_ActivePG);
@@ -168,6 +169,8 @@ bool MapInit_Main(bool testConds, bool runActions){
     while (true) {
         tmpInt = PlayerGroupNextPlayer(gv_ActivePG, tmpInt);
         if(tmpInt < 0) { break; }
+
+        Options_SetOptions(tmpInt);
         Acv_Grind_Check(tmpInt, c_AcvIdentifier_Score);
     }
     PlayerBoard_InitRanksForAllPlayers();
@@ -182,9 +185,6 @@ bool MapInit_Main(bool testConds, bool runActions){
         tmpInt = PlayerGroupNextPlayer(gv_ActivePG, tmpInt);
         if(tmpInt < 0) { break; }
         
-        Options_SetOptions(tmpInt);
-
-        PlayerOptionOverride(tmpInt, "simplecommandcard", "0");
         tmpText += (PlayerName(tmpInt) + StringToText(": ") + StringToText(PlayerHandle(tmpInt)) + StringToText("<n/>"));
     }
     tmpText += (StringToText("<n/>v") + FixedToText(version, 2));
