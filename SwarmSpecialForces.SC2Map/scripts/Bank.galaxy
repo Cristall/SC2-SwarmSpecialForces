@@ -27,7 +27,7 @@ static bool bank_Save_RequestRunning;
         if(value >= 0){
             if(length >= 10){
                 BankStorageString += "9987654321";  // first 9 is the digit counter, the other 9 digits are for the actual value
-                UIDisplayMessage(PlayerGroupAll(), c_messageAreaChat, StringToText("Please contact the author to properly fix 1 billion kill bug :D"));
+                UIDisplayMessage(PlayerGroupAll(), c_messageAreaChat, StringToText("Please contact the author to properly fix 1 billion kill issue"));
             }
             else{
                 BankStorageString += IntToString(length) + string_val;
