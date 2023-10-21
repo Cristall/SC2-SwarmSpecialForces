@@ -1,222 +1,321 @@
-﻿Behavior/Name/AcidPit@Debuff=Debuff
-Behavior/Name/BaseAura=Safe Zone
-Behavior/Name/BaseOverlordDmgSlow=Stunned
-Behavior/Name/CoronaWaves=Corona
-Behavior/Name/CorrosiveSpikes@Dot=Corroded
-Behavior/Name/DefensiveRoar@Caster=Defensive Roar
-Behavior/Name/Difficulty0=Easy
-Behavior/Name/Difficulty1=Normal
-Behavior/Name/Difficulty2=Hard
-Behavior/Name/Difficulty3=Brutal
-Behavior/Name/Difficulty4=Insane
-Behavior/Name/Difficulty5=Hardcore
-Behavior/Name/DifficultyCustom=Custom Difficulty
-Behavior/Name/Frenzy@Frenzied=Frenzied
-Behavior/Name/GlueSprayBuff=Oiled
-Behavior/Name/GlueSprayDebuff=Glued
-Behavior/Name/GlueSprayDebuffBoss=Glued
-Behavior/Name/GlueStream@Buff=Glued
-Behavior/Name/HardenedShell=Hardened Shell
-Behavior/Name/Headbutt@Slow=Slow
-Behavior/Name/Headbutt@Stun=Stun
-Behavior/Name/Heal@HoT=Healing
-Behavior/Name/HeroBowlerAttribute=Level Stats
-Behavior/Name/HeroHydraAttribute=Level Stats
-Behavior/Name/HeroRavagerAttribute=Level Stats
-Behavior/Name/HeroRoachAttribute=Level Stats
-Behavior/Name/HeroSwarmQueenAttribute=Level Stats
-Behavior/Name/Infection@Infected=Infected
-Behavior/Name/InvulnerableOverSpawnLimit=Invulnerable
-Behavior/Name/LarvaSpawnOnDeath=LarvaSpawnOnDeath
-Behavior/Name/Levels=Levels
-Behavior/Name/RespawnEgg@HiveAura=Safe Zone
-Behavior/Name/ScientistStunned=Stunned
-Behavior/Name/Shocked=Shocked
-Behavior/Name/Silenced=Silenced
-Behavior/Name/Tackle@FriendlyTackle=Friendly Tackle
-Behavior/Name/Taunt@Taunted=Taunted
-Behavior/Name/UltimateBeing@UltimateBuff=Ultimate Buff
-Behavior/Name/WatchYourStep@TrapStun=Trapped
-Behavior/Tooltip/AcidPit@Debuff=Increased weapon damage taken.
-Behavior/Tooltip/BaseAura=While in the safe zone of the base you gain:<n/>+<d ref="Behavior,BaseAura,DamageResponse.ModifyFraction-1*(-100)" precision="2"/>% damage reduction<n/>+<d ref="Behavior,BaseAura,Modification.VitalRegenArray[Life]" precision="2"/> life regeneration<n/>+<d ref="Behavior,BaseAura,Modification.VitalRegenArray[Energy]" precision="2"/> energy regeneration<n/>+<d ref="Behavior,BaseAura,Modification.DamageDealtScaled[Ranged]" precision="2"/> damage<n/>+<d ref="Behavior,BaseAura,Modification.AttackSpeedMultiplier-1*100" precision="5"/>% attack speed<n/>+<d ref="Behavior,BaseAura,Modification.TimeScale-1*100" precision="2"/>% time scale<n/>[Upgradeable with achievements]
-Behavior/Tooltip/BaseAura2=While in the safe zone of a hive, enemies will be slowed down by <d ref="Behavior,BaseAura2,Modification.AttackSpeedMultiplier-1*(-100)"/>% and their damage is reduced by <d ref="Behavior,BaseAura2,Modification.DamageDealtFraction[Melee]*(-100)" precision="2"/>%. Additionally they will lose <d ref="Effect,BaseAuraPassiveDmg,Amount/Behavior,BaseBuffInitial,Period" precision="3"/> life per second.
-Behavior/Tooltip/BaseOverlordDmgSlow=The Overlord is being attacked and has to focus all his energy to heal. It cannot move until it is no longer being attacked.
-Behavior/Tooltip/CoronaWaves=I heard social distancing is effective!
-Behavior/Tooltip/CorrosiveSpikes@Dot=This unit receives damage over time.
-Behavior/Tooltip/DefensiveRoar@Caster=Armor increased.
-Behavior/Tooltip/Difficulty0=<d ref="Behavior,Difficulty0,Modification.DamageDealtFraction[Melee]*(100)" precision="2"/>% damage<n/><d ref="Behavior,Difficulty0,Modification.AttackSpeedMultiplier-1*(100)"/>% attack speed<n/><d ref="Behavior,Difficulty0,Modification.VitalMaxFractionArray[Life]*(100)" precision="2"/>% life and shields<n/><d ref="Behavior,Difficulty0,Modification.LifeArmorMultiplier*100-100" precision="2"/>% boss armor
-Behavior/Tooltip/Difficulty0Hive=Hive has <d ref="Behavior,Difficulty0Hive,Modification.LifeArmorBonus"/> armor and <d ref="Behavior,Difficulty0Hive,Modification.VitalRegenArray[Life]"/> life regen.
-Behavior/Tooltip/Difficulty1=100% stats for everything
-Behavior/Tooltip/Difficulty1Hive=Hive has <d ref="Behavior,Difficulty1Hive,Modification.LifeArmorBonus"/> armor and <d ref="Behavior,Difficulty1Hive,Modification.VitalRegenArray[Life]"/> life regen.
-Behavior/Tooltip/Difficulty2=+<d ref="Behavior,Difficulty2,Modification.DamageDealtFraction[Melee]*100" precision="2"/>% weapon damage<n/>+<d ref="Behavior,Difficulty2,Modification.DamageDealtFraction[Spell]*100" precision="2"/>% ability damage<n/>+<d ref="Behavior,Difficulty2,Modification.AttackSpeedMultiplier-1*100" precision="2"/>% attack speed<n/>+<d ref="Behavior,Difficulty2,Modification.VitalMaxFractionArray[Life]*100" precision="2"/>% life and shields<n/>+<d ref="Behavior,Difficulty2,Modification.MoveSpeedMultiplier-1*100"/>% movement speed</n>+<d ref="Behavior,Difficulty2,Modification.LifeArmorMultiplier*100-100" precision="2"/>% boss armor
-Behavior/Tooltip/Difficulty2Hive=Hive has <d ref="Behavior,Difficulty2Hive,Modification.LifeArmorBonus"/> armor and <d ref="Behavior,Difficulty2Hive,Modification.VitalRegenArray[Life]"/> life regen.
-Behavior/Tooltip/Difficulty3=+<d ref="Behavior,Difficulty3,Modification.DamageDealtFraction[Melee]*100" precision="2"/>% weapon damage<n/>+<d ref="Behavior,Difficulty3,Modification.DamageDealtFraction[Spell]*100" precision="2"/>% ability damage<n/>+<d ref="Behavior,Difficulty3,Modification.AttackSpeedMultiplier-1*100" precision="2"/>% attack speed<n/>+<d ref="Behavior,Difficulty3,Modification.VitalMaxFractionArray[Life]*100" precision="2"/>% life and shields<n/>+<d ref="Behavior,Difficulty3,Modification.MoveSpeedMultiplier-1*100"/>% movement speed</n>+<d ref="Behavior,Difficulty3,Modification.LifeArmorMultiplier*100-100" precision="2"/>% boss armor
-Behavior/Tooltip/Difficulty3Hive=Hive has <d ref="Behavior,Difficulty3Hive,Modification.LifeArmorBonus"/> armor and <d ref="Behavior,Difficulty3Hive,Modification.VitalRegenArray[Life]"/> life regen.
-Behavior/Tooltip/Difficulty4=+<d ref="Behavior,Difficulty4,Modification.DamageDealtFraction[Melee]*100" precision="2"/>% weapon damage<n/>+<d ref="Behavior,Difficulty4,Modification.DamageDealtFraction[Spell]*100" precision="2"/>% ability damage<n/>+<d ref="Behavior,Difficulty4,Modification.AttackSpeedMultiplier-1*100" precision="2"/>% attack speed<n/>+<d ref="Behavior,Difficulty4,Modification.VitalMaxFractionArray[Life]*100" precision="2"/>% life and shields<n/>+<d ref="Behavior,Difficulty4,Modification.VitalRegenMultiplier[Life]*100"/>% regeneration<n/>+<d ref="Behavior,Difficulty4,Modification.MoveSpeedMultiplier-1*100"/>% movement speed</n>+<d ref="Behavior,Difficulty4,Modification.LifeArmorMultiplier*100-100" precision="2"/>% boss armor
-Behavior/Tooltip/Difficulty4Hive=Hive has <d ref="Behavior,Difficulty4Hive,Modification.LifeArmorBonus"/> armor and <d ref="Behavior,Difficulty4Hive,Modification.VitalRegenArray[Life]"/> life regen.
-Behavior/Tooltip/Difficulty5=+<d ref="Behavior,Difficulty5,Modification.DamageDealtFraction[Melee]*100" precision="2"/>% weapon damage<n/>+<d ref="Behavior,Difficulty5,Modification.DamageDealtFraction[Spell]*100" precision="2"/>% ability damage<n/>+<d ref="Behavior,Difficulty5,Modification.AttackSpeedMultiplier-1*100" precision="2"/>% attack speed<n/>+<d ref="Behavior,Difficulty5,Modification.VitalMaxFractionArray[Life]*100" precision="2"/>% life and shields<n/><d ref="Behavior,Difficulty5,DamageResponse.ModifyFraction*100" precision="2"/>% damage reduction<n/>+<d ref="Behavior,Difficulty5,Modification.VitalRegenMultiplier[Life]*100"/>% regeneration<n/>+<d ref="Behavior,Difficulty5,Modification.MoveSpeedMultiplier-1*100"/>% movement speed</n>+<d ref="Behavior,Difficulty5,Modification.LifeArmorMultiplier*100-100" precision="2"/>% boss armor
-Behavior/Tooltip/Difficulty5Hive=Hive has <d ref="Behavior,Difficulty5Hive,Modification.LifeArmorBonus"/> armor and <d ref="Behavior,Difficulty5Hive,Modification.VitalRegenArray[Life]"/> life regen.
-Behavior/Tooltip/DifficultyCustom=+<d ref="Behavior,DifficultyCustom,Modification.DamageDealtFraction[Melee]*100" precision="2"/>% weapon damage<n/>+<d ref="Behavior,DifficultyCustom,Modification.DamageDealtFraction[Spell]*100" precision="2"/>% ability damage<n/>+<d ref="Behavior,DifficultyCustom,Modification.AttackSpeedMultiplier-1*100" precision="2"/>% attack speed<n/>+<d ref="Behavior,DifficultyCustom,Modification.VitalMaxFractionArray[Life]*100" precision="2"/>% life and shields</n><d ref="Behavior,Difficulty5,DamageResponse.ModifyFraction*100" precision="2"/>% damage reduction<n/>+<d ref="Behavior,DifficultyCustom,Modification.VitalRegenMultiplier[Life]*100"/>% regeneration<n/>+<d ref="Behavior,DifficultyCustom,Modification.MoveSpeedMultiplier-1*100"/>% movement speed</n>+<d ref="Behavior,DifficultyCustom,Modification.LifeArmorMultiplier*100-100" precision="2"/>% boss armor
-Behavior/Tooltip/DifficultyCustomHive=Hive has <d ref="Behavior,DifficultyCustom2,Modification.LifeArmorBonus"/> armor and <d ref="Behavior,DifficultyCustom2,Modification.VitalRegenArray[Life]"/> life regen.
-Behavior/Tooltip/Frenzy@Frenzied=Increased movement speed by <d ref="Behavior,Frienzied,Modification.MoveSpeedMultiplier-1*100"/>% and attack speed by <d ref="Behavior,Frienzied,Modification.AttackSpeedMultiplier-1*100"/>% for <d ref="Behavior,Frienzied,Duration"/> seconds.
-Behavior/Tooltip/GlueStream@Buff=Increased movement speed.
-Behavior/Tooltip/GlueStream@Debuff=Decreased movement speed.
-Behavior/Tooltip/Heal@HoT=This unit is being healed over time.
-Behavior/Tooltip/HeroBowlerAttribute=Bowler will gain per level:<n/>+<d ref="Accumulator,HeroBowlerWeaponDmgModifier,Amount" precision="2"/> damage<n/>+<d ref="(Behavior,HeroBowlerAttribute,Modification.AttackSpeedMultiplier-1)*(100)" precision="3"/>% attack speed<n/>+<d ref="Behavior,HeroBowlerAttribute,Modification.MoveSpeedBonus" precision="3"/> movement speed<n/>+<d ref="Behavior,HeroBowlerAttribute,Modification.VitalMaxArray[Life]" precision="3"/> life<n/>+<d ref="Behavior,HeroBowlerAttribute,Modification.VitalMaxArray[Energy]" precision="3"/> energy<n/>
-Behavior/Tooltip/HeroHydraAttribute=Stinger will gain per level:<n/>+<d ref="Accumulator,HeroHydraWeaponDmgModifier,Amount" precision="2"/> Dmg<n/>+<d ref="(Behavior,HeroHydraAttribute,Modification.AttackSpeedMultiplier-1)*(100)" precision="3"/>% Attack speed<n/>+<d ref="Behavior,HeroHydraAttribute,Modification.MoveSpeedBonus" precision="3"/> Movement speed<n/>+<d ref="Behavior,HeroHydraAttribute,Modification.VitalMaxArray[Life]" precision="3"/> Life<n/>+<d ref="Behavior,HeroHydraAttribute,Modification.VitalMaxArray[Energy]" precision="3"/> Energy<n/>
-Behavior/Tooltip/HeroRavagerAttribute=Hardskin will gain per level:<n/>+<d ref="Accumulator,HeroRavagerWeaponDmgModifier,Amount" precision="2"/> damage<n/>+<d ref="(Behavior,HeroRavagerAttribute,Modification.AttackSpeedMultiplier-1)*(100)" precision="3"/>% attack speed<n/>+<d ref="Behavior,HeroRavagerAttribute,Modification.MoveSpeedBonus" precision="3"/> movement speed<n/>+<d ref="Behavior,HeroRavagerAttribute,Modification.VitalMaxArray[Life]" precision="3"/> life<n/>+<d ref="Behavior,HeroRavagerAttribute,Modification.VitalMaxArray[Energy]" precision="3"/> energy<n/>
-Behavior/Tooltip/HeroRoachAttribute=Spitter will gain per level:<n/>+<d ref="Accumulator,HeroRoachWeaponDmgModifier,Amount" precision="2"/> Dmg<n/>+<d ref="(Behavior,HeroRoachAttribute,Modification.AttackSpeedMultiplier-1)*(100)" precision="3"/>% Attack speed<n/>+<d ref="Behavior,HeroRoachAttribute,Modification.MoveSpeedBonus" precision="3"/> Movement speed<n/>+<d ref="Behavior,HeroRoachAttribute,Modification.VitalMaxArray[Life]" precision="3"/> Life<n/>+<d ref="Behavior,HeroRoachAttribute,Modification.VitalMaxArray[Energy]" precision="3"/> Energy<n/>
-Behavior/Tooltip/HeroSwarmQueenAttribute=Swarm Mother will gain per level:<n/>+<d ref="Accumulator,HeroSwarmQueenWeaponDmgModifier,Amount" precision="2"/> damage<n/>+<d ref="(Behavior,HeroSwarmQueenAttribute,Modification.AttackSpeedMultiplier-1)*(100)" precision="3"/>% attack speed<n/>+<d ref="Behavior,HeroSwarmQueenAttribute,Modification.MoveSpeedBonus" precision="3"/> movement speed<n/>+<d ref="Behavior,HeroSwarmQueenAttribute,Modification.VitalMaxArray[Life]" precision="3"/> life<n/>+<d ref="Behavior,HeroSwarmQueenAttribute,Modification.VitalMaxArray[Energy]" precision="3"/> energy<n/>
-Behavior/Tooltip/InvulnerableOverSpawnLimit=Structures are invulnerable until enough enemies have been killed.
-Behavior/Tooltip/RespawnEgg@HiveAura=While in the safe zone of the egg you gain:<n/>+<d ref="Behavior,RespawnEgg@HiveAura,DamageResponse.ModifyFraction-1*(-100)" precision="2"/>% damage reduction<n/>+<d ref="Behavior,RespawnEgg@HiveAura,Modification.VitalRegenArray[Life]" precision="2"/> life regeneration<n/>+<d ref="Behavior,RespawnEgg@HiveAura,Modification.VitalRegenArray[Energy]" precision="2"/> energy regeneration<n/>+<d ref="Behavior,RespawnEgg@HiveAura,Modification.DamageDealtScaled[Ranged]" precision="2"/> damage<n/>+<d ref="Behavior,RespawnEgg@HiveAura,Modification.AttackSpeedMultiplier-1*100" precision="5"/>% attack speed<n/>+<d ref="Behavior,RespawnEgg@HiveAura,Modification.TimeScale-1*100" precision="2"/>% time scale<n/>[Upgradeable with achievements]
-Behavior/Tooltip/Shocked=You have been electrified which randomily shocks you, dealing damage and stunning you for a brief moment.
-Behavior/Tooltip/Silenced=You are silenced, disabling all channeled abilities and prevents you from using any ability.
-Behavior/Tooltip/Tackle@FriendlyTackle=Increased damage.
-Behavior/Tooltip/UltimateBeing@UltimateBuff=Adds +<d ref="Behavior,UltimateBeing@UltimateBuff,Modification.DamageDealtScaled[Ranged]" precision="2"/> damage, +<d ref="Behavior,UltimateBeing@UltimateBuff,Modification.LifeArmorBonus" precision="2"/> armor and +<d ref="Behavior,UltimateBeing@UltimateBuff,Modification.MoveSpeedMultiplier-1*100" precision="2"/>% movement speed.
-Button/Name/AbsorbExplosion=Counter Explosion
-Button/Name/AcidPit=Acid Pit
-Button/Name/ArmorUpgrade=Armor Upgrade
-Button/Name/AtkSpdUpgrade=Attack Speed Upgrade
-Button/Name/Banemine=Banemine
-Button/Name/Banemine@Explode=Explode
-Button/Name/Charge2=Charge
-Button/Name/ChargeUp=Charge Up
-Button/Name/CorrosiveBurst=Corrosive Burst
-Button/Name/CorrosiveSpikes=Corrosive Spikes
-Button/Name/CreateLurker=Create Lurker
-Button/Name/CreateRunling=Create Runling
-Button/Name/CreepTunnel=Creep Tunnel
-Button/Name/CyberneticLifeBank@CreateLifeBank=Create Life Bank
-Button/Name/CyberneticLifeBank@LifeBankRestoreCharge=Life Bank Restore Charge
-Button/Name/CyberneticLifeBank@LifeTransfer=Life Transfer
-Button/Name/CyberneticLurkerBurrow=Burrow
-Button/Name/CyberneticLurkerBurrowUp=Unburrow
-Button/Name/CyberneticLurkerRestoreCharge=Lurker Restore Charge
-Button/Name/CyberneticRunlingRestoreCharge=Runling Restore Charge
-Button/Name/CyberneticSubmenu=Cybernetic Units
-Button/Name/Decoy=Decoy
-Button/Name/DefensiveRoar=Defensive Roar
-Button/Name/DmgUpgrade=Damage Upgrade
-Button/Name/EnergyTransfer=Energy Transfer
-Button/Name/EnergyTransfer@Cancel=Cancel Energy Transfer
-Button/Name/FlyBackHome=Fly Back Home
-Button/Name/Focus=Focus
-Button/Name/Focus@Off=Cancel Focus
-Button/Name/Frenzy@Frenzy=Frenzy
-Button/Name/GlueSpray=Glue Spray
-Button/Name/GlueStream=Glue Stream
-Button/Name/HardenedShell=Hardened Shell
-Button/Name/Headbutt=Headbutt
-Button/Name/Heal@Heal=Heal
-Button/Name/JumpingBaneling=Jumping Baneling
-Button/Name/KillStreak=Kill Streak
-Button/Name/PickupScientists=Capture Scientist
-Button/Name/ProtossPartTransition=Dig to Mecha
-Button/Name/RegenerationUpgrade=Regeneration Upgrade
-Button/Name/RespawnEgg=Thou Shall Not Fear
-Button/Name/RespawnEgg@CarryEgg=Carry Egg
-Button/Name/RespawnEgg@DropEgg=Drop Egg
-Button/Name/RespawnEgg@EggSuicide=Egg Suicide
-Button/Name/RespawnEgg@Reviving=Reviving
-Button/Name/Scrap=Scrap: 
-Button/Name/SplashRangeUpgrade=Splash Range Upgrade
-Button/Name/Tackle=Tackle
-Button/Name/Taunt@Taunt=Taunt
-Button/Name/TerranPartTransition=Fly to Protoss
-Button/Name/TheySeeMeRolling=They See Me Rolling
-Button/Name/UltimateBeing=Ultimate Being
-Button/Name/UpgradeCenter=Upgrade Center
-Button/Tooltip/AbsorbExplosion=Incoming weapon damage is charging up psionic powers inside the hardskin. After <d ref="Behavior,AbsorbExplosion@DmgResponse,Duration" precision="2"/> seconds the psionic powers are released in a burst dealing <d ref="(Effect,AbsorbExplosion@Dmg,Amount * (Accumulator,SpellDmgUpgradeCollector,Amount/100+1))*100" precision="2"/>% of the total charging damage to all enemies in a radius of <d ref="Effect,AbsorbExplosion@DmgSearch,AreaArray[0].Radius" precision="2"/>.<n/>If no power was charged the remaining cooldown is reduced.<n/>Immediately explodes when the maximal amount of <d ref="Effect,AbsorbExplosion@StoreDamage,ValidateMax"/> damage is stored.
-Button/Tooltip/AcidPit=Throws a ball of concentrated acid to the location creating a puddle which lasts for <d ref="Effect,AcidPit@Persistent,PeriodCount*Effect,AcidPit@Persistent,PeriodicPeriodArray[0]"/> seconds. The acid will deal <d ref="$AccumulatedValue:Effect,AcidPit@Dmg,Amount$/Effect,AcidPit@Persistent,PeriodicPeriodArray[0]" precision="2"/> damage per second to enemy units and increased weapon damage taken by <d ref="Behavior,AcidPit@Debuff,Modification.DamageTakenFraction[Melee]*100"/>%.
-Button/Tooltip/ArmorUpgrade=Increases the armor of your units.
-Button/Tooltip/AtkSpdUpgrade=Increases the attack speed of your units by 10%.
-Button/Tooltip/Atlantis=Atlantis, the lost city, was actually captured by the taldarim and brought here to study. Over the millennia it was upgraded into a flying ring of death.
-Button/Tooltip/AtlantisCore=The core of Atlantis has even more offensive capabilities because all the unimportant areas, like living quarters, are no longer attached to it and such do not drain energy anymore. Power overwhelming!
-Button/Tooltip/Banemine=Throws a baneling towards target location. It burrows and explodes if an enemy gets close dealing <d ref="$AccumulatedValue:Effect,Banemine@ExplosionDmg,Amount$"  precision="2"/> damage.<n/><n/>Automatically explodes after <d ref="Behavior,Banemine@TimedLife,Duration"/> seconds.
-Button/Tooltip/Banemine@Explode=Explode
-Button/Tooltip/BaseOverlord=Enables upgrades for weapon and armor.<n/>Supplies Creep, which increases movement speed, health regen and reveals cloaked units.
-Button/Tooltip/Charge2=Charges towards the target point. The roach pushes enemies away and damages them.<n/>While charging the Spitter has extra <d ref="Behavior,ChargePushBuff,Modification.MoveSpeedMultiplier-1*100"/>% movement speed and <d ref="Behavior,ChargeArmorBuff,Modification.LifeArmorBonus" precision="2"/> + <d ref="Behavior,ChargeArmorBuff,Modification.LifeArmorMultiplier-1*100"/>% armor. The armor buff stays for 3 seconds after the charge has been finished.<n/><c val="FFFF00">Bosses cannot be pushed and cancel the charge.</c>
-Button/Tooltip/CorrosiveBurst=Explodes all corrosive spikes in a range of <d ref="Effect,CorrosiveBurst@Search,AreaArray[0].Radius" presicion="2"/> to immediately deal damage but destroying the spikes in the process.<n/>The spikes explode for <d ref="Accumulator,CorrosiveBurst@DmgBase,Amount + (Accumulator,CorrosiveBurst@DmgModifier,Amount *$RunAccumulators:VeterancyLvlx1$) *(1+(Accumulator,SpellDmgUpgradeCollector,Amount/100))" precision="2"/> damage multiplied by the amount of spikes squared on each target.<n/><n/>Disables the creation of new Corrosive Spikes for <d ref="Behavior,CorrosiveBurst@DisableCorrosiveSpikes,Duration"/> seconds.
-Button/Tooltip/CorrosiveSpikes=Shoot out spikes with corrosive acid which deal <d ref="$AccumulatedValue:Effect,CorrosiveSpikes@Dmg,Amount$ / Behavior,CorrosiveSpikes@Dot,Period" precision="2"/> damage per second. Corrosion stacks <d ref="Behavior,CorrosiveSpikes@Dot,MaxStackCountPerCaster"/> times and holds for <d ref="Behavior,CorrosiveSpikes@Dot,Duration"/> seconds. Splash is not affected.
-Button/Tooltip/CreateLurker=Convert biomass into a cybernetic lurker. Lurkers need to be burrowed to attack and is great at defending the hive. Cannot move off creep.
-Button/Tooltip/CreateRunling=Convert biomass into a cybernetic runling. The runling is an enhanced version of a zergling, just with a laser turret attached to its head. The turret is so heavy that without the support of the creep, the runling is not running at all. Very fragile unit but great at dealing damage behind a Hardskin.
-Button/Tooltip/CreepTunnel=Digs towards target location with creep. Upon unburrowing deals <d ref="$AccumulatedValue:Effect,CreepTunnel@Dmg,Amount$" precision="2"/> damage in an area of <d ref="Effect,CreepTunnel@Search,AreaArray[0].Radius" precision="2"/>. The damage is affected by upgrades and the Spitter's level, but also by enemies armor.
-Button/Tooltip/CyberneticLifeBank=Modified spore crawler to act as a mobile life bank. Looses life when not on creep and only regenerates life near the hive.
-Button/Tooltip/CyberneticLifeBank@CreateLifeBank=Create a spore crawler that can transfer its life to a hero. The Life Bank does not naturally generate life and even loses life when off creep.<n/>The amount of Life Banks created is shared between all players.
-Button/Tooltip/CyberneticLifeBank@LifeBankRestoreCharge=Use Mutations to restore a Life Bank charge.
-Button/Tooltip/CyberneticLifeBank@LifeTransfer=Transfers life of the Life Bank towards the target unit at a rate of <d ref="Effect,CyberneticLifeBank@TransferLifeHealer,RechargeVitalRate" precision="2"/> per second.
-Button/Tooltip/CyberneticLurker=Lurker with cybernetic implants which increase its damage output tremendously but it requires creep to move.<n/><n/>Life regen: <c val="00FF00"><d ref="Unit,CyberneticLurker,LifeRegenRate" precision="2"/><n/></c>Splash range: <c val="fF0000"><d ref="Effect,CyberneticLurkerWeaponSearch,AreaArray[0].Radius" precision="2"/></c><n/>
-Button/Tooltip/CyberneticLurkerBurrow=Buries the Lurker underground. Burrowed Lurkers are unable to move, but are able to attack. They cannot be seen without detection as long as the hive is alive.
-Button/Tooltip/CyberneticLurkerBurrowUp=Returns the unit to the surface.
-Button/Tooltip/CyberneticLurkerRestoreCharge=Use Mutations to restore a Lurker charge.
-Button/Tooltip/CyberneticRunlingRestoreCharge=Use Mutations to restore a Runling charge.
-Button/Tooltip/CyberneticSubmenu=After capturing enough scientists this overlord is now able to convert biomass into cybernetic units.
-Button/Tooltip/DamageTransferAura=Transfers <d ref="Behavior,DamageTransferAura@DmgResponse,DamageResponse.ModifyFraction*100" precision="2"/>% of damage of allied units in a range of <d ref="Effect,DamageTransferAura@Search,AreaArray[0].Radius" precision="2"/> towards the Hardskin. The aura is active for <d ref="Behavior,DamageTransferAura@Aura,Duration" precision="2"/> seconds.
-Button/Tooltip/Decoy=Creates a holographic image that taunts units on creation. Lasts <d ref="Behavior,Decoy@TimedLife,Duration"/> seconds.<n/>The hologram has 60% of your current life and takes <d ref="Behavior,Decoy@TimedLife,Modification.DamageTakenFraction[Spell]*100"/>% additional ability damage.<n/><c val="FFFF00">Bosses do not target the decoy with abilities.</c>
-Button/Tooltip/DefensiveRoar=Reduces incoming damage by <d ref="Behavior,DefensiveRoar@Caster,DamageResponse.ModifyFraction-1*(-100)" precision="2"/>% for yourself and by <d ref="Behavior,DefensiveRoar@Other,DamageResponse.ModifyFraction-1*(-100)" precision="2"/>% for allied units for <d ref="Behavior,DefensiveRoar@Caster,Duration" precision="2"/> seconds.<n/><n/>All Spitter ability cooldowns are shared.
-Button/Tooltip/DmgUpgrade=Increases your units weapon damage
-Button/Tooltip/EgonStetmann=The henius himself. Creates new robots all day.
-Button/Tooltip/EnergyTransfer=Continuously transfers energy towards the target at a rate of <d ref="Effect,EnergyTransfer@CreateHealer,RechargeVitalRate" precision="2"/> per second. While transfering energy your attack speed is reduced by <d ref="Behavior,EnergyTransfer@Channel,Modification.AttackSpeedMultiplier-1*(-100)" precision="2"/>% and movement speed by <d ref="Behavior,EnergyTransfer@Channel,Modification.UnifiedMoveSpeedFactor*(-100)" precision="2"/>%.
-Button/Tooltip/EnergyTransfer@Cancel=Cancel the energy transfer.
-Button/Tooltip/FlyBackHome=The overlord loads up all your units in range of 5 and returns back to the hive. Cancels when being attacked.
-Button/Tooltip/Focus=Activate the Stinger's tunnel view which allows it to attack faster the longer it does not change its target. Increases attack speed by <d ref="Behavior,Focus@BuffStack,Modification.AdditiveAttackSpeedFactor*100" precision="2"/>% with each consecutive attack up to <d ref="Behavior,Focus@BuffStack,MaxStackCount"/> times. Upon changing target or not attacking for <d ref="Behavior,Focus@BuffStack,Duration"/> seconds the stack is removed.<n/><n/>Costs <c val="b472d9"><d ref="Behavior,Focus@Toggle,Modification.VitalRegenArray[Energy]*(-1)"/></c> energy per second.
-Button/Tooltip/Focus@Off=Deactivates the tunnel view to save energy. <n/><n/>Currently <d ref="$BehaviorStackCount:Focus@BuffStack$"/> stacks.
-Button/Tooltip/Frenzy@Frenzy=Increases target units movement speed by <d ref="Behavior,Frenzy@Frenzied,Modification.MoveSpeedMultiplier-1*100" precision="2"/>% and attack speed by <d ref="Behavior,Frenzy@Frenzied,Modification.AttackSpeedMultiplier-1*100"  precision="2"/>% for <d ref="Behavior,Frenzy@Frenzied,Duration"/> seconds.
-Button/Tooltip/Gary=Gary is Stetmanns best friend and as such always gets the best oil.
-Button/Tooltip/GlueSpray=Sprays adhesive liquids in all directions which slows enemy units by <d ref="Behavior,GlueSprayDebuff,Modification.MoveSpeedMultiplier-1*(-100)" precision="2"/>% for <d ref="Behavior,GlueSprayDebuff,Duration" precision="2"/> seconds and friendly unit will gain <d ref="Behavior,GlueSprayBuff,Modification.MoveSpeedMultiplier-1*100"precision="2"/>% increased movement speed.<n/>Effect and duration on bosses is halved.
-Button/Tooltip/GlueStream=Pukes a stream of glue which increases your movement speed by <d ref="Behavior,GlueStream@BuffCaster,Modification.MoveSpeedMultiplier-1*100" precision="2"/>% and <d ref="Behavior,GlueStream@Buff,Modification.MoveSpeedMultiplier-1*100" precision="2"/>% for allies. Enemies inside the stream have their movement speed reduced by <d ref="Behavior,GlueStream@Debuff,Modification.MoveSpeedMultiplier-1*(-100)" precision="2"/>% and receive <d ref="$AccumulatedValue:Effect,GlueStream@Dmg,Amount$" precision="2"/> damage.<n/><n/>All Spitter ability cooldowns are shared.
-Button/Tooltip/GuardingPanther=Small robotic guardian panther delivered to protect the mules.
-Button/Tooltip/HardenedShell=Temporarily increases the Hardskin's carapace. Limits damage taken to <d ref="Behavior,HardenedShell,DamageResponse.ClampMaximum"/> for <d ref="Behavior,HardenedShell,Duration" precision="2"/> seconds.<n/><c val="FFFF00">Spell damage is not affected.</c>
-Button/Tooltip/Headbutt=Stuns enemies in a range of <d ref="Effect,Headbutt@Search,AreaArray[0].Radius" precision="2"/> around the caster for <d ref="Behavior,Headbutt@Stun,Duration" precision="2"/> seconds.<n/>Bosses only get slowed for <d ref="Behavior,Headbutt@Slow,Duration" precision="2"/> seconds.
-Button/Tooltip/Heal@Heal=Heals <d ref="Effect,Heal@InstantHeal,VitalArray[Life].Change"/> life instantly and <d ref="Effect,Heal@PeriodicHeal,VitalArray[Life].Change*Behavior,Heal@HoT,PeriodCount"/> life over <d ref="Behavior,Heal@HoT,PeriodCount*Behavior,Heal@HoT,Period"/> seconds.
-Button/Tooltip/HellionTank2=As a child he was called a flamer but he thought it was a cool name. Silly boy.
-Button/Tooltip/HeroBowler=The Bowler can produce various types of banelings inside his body which makes it very useful against large crouds of enemies.<n/><n/>Life regen: <c val="00FF00"><d ref="Unit,HeroBowler,LifeRegenRate" precision="2"/><n/></c>Energy regen: <c val="b472d9"><d ref="Unit,HeroBowler,EnergyRegenRate" precision="2"/><n/></c>Splash range: <c val="fF0000"><d ref="Effect,HeroBowlerWeaponExplodeSearch,AreaArray[0].Radius" precision="2"/></c><n/>Spellpower: <c val="00ffFF"><d ref="Accumulator,SpellDmgUpgradeCollector,Amount" precision="2"/>%</c>
-Button/Tooltip/HeroHydra=The Stinger has evolved towards the offensive but doing so made the hydralisk loose most of its defensive capabilities.<n/><n/>Life regen: <c val="00FF00"><d ref="Unit,HeroHydra,LifeRegenRate" precision="2"/><n/></c>Energy regen: <c val="b472d9"><d ref="Unit,HeroHydra,EnergyRegenRate" precision="2"/><n/></c>Splash range: <c val="FF0000"><d ref="Effect,HeroHydraWeaponDmg,AreaArray[0].Radius" precision="2"/></c><n/>Spellpower: <c val="00fffF"><d ref="Accumulator,SpellDmgUpgradeCollector,Amount" precision="2"/>%</c>
-Button/Tooltip/HeroRavager=The Hardskin has evolved to defend against any kind of damage. It also has the ability to force enemies around him to focus on him instead of the rest of the swarm.<n/><n/>Life regen: <c val="00FF00"><d ref="Unit,HeroRavager,LifeRegenRate" precision="2"/><n/></c>Energy regen: <c val="b472d9"><d ref="Unit,HeroRavager,EnergyRegenRate" precision="2"/><n/></c>Splash range: <c val="FF0000"><d ref="Effect,HeroRavagerWeaponDmg,AreaArray[0].Radius" precision="2"/></c><n/>Spellpower: <c val="00ffFF"><d ref="Accumulator,SpellDmgUpgradeCollector,Amount" precision="2"/>%</c>
-Button/Tooltip/HeroRoach=The Spitter is a very balanced member of the swarm.<n/><n/>Life regen: <c val="00FF00"><d ref="Unit,HeroRoach,LifeRegenRate" precision="2"/><n/></c>Energy regen: <c val="b472d9"><d ref="Unit,HeroRoach,EnergyRegenRate" precision="2"/><n/></c>Splash range: <c val="FF0000"><d ref="Effect,HeroRoachWeaponDmg,AreaArray[0].Radius" precision="2"/></c><n/>Spellpower: <c val="00ffff"><d ref="Accumulator,SpellDmgUpgradeCollector,Amount" precision="2"/>%</c>
-Button/Tooltip/HeroSwarmQueen=The Swarm Mother is best at helping from the back by healing or improving other heroes.<n/><n/>Life regen: <c val="00FF00"><d ref="Unit,HeroSwarmQueen,LifeRegenRate" precision="2"/><n/></c>Energy regen: <c val="b472d9"><d ref="Unit,HeroSwarmQueen,EnergyRegenRate" precision="2"/><n/></c>Splash range: <c val="FF0000"><d ref="Effect,HeroSwarmQueenWeaponDmg,AreaArray[0].Radius" precision="2"/></n></c>Spellpower: <c val="00ffFF"><d ref="Accumulator,SpellDmgUpgradeCollector,Amount" precision="2"/>%</c>
-Button/Tooltip/Hive2=A zerg hive cluster evolved to provide support to these swarm special forces. While it is alive, it emits a powerful aura and hides burrowed units from the enemies vision.
-Button/Tooltip/JumpingBaneling=Throw a bouncy baneling that explodes up to <d ref="Effect,JumpingBaneling@UserData,SourceFailBackValue"/> times each dealing <d ref="$AccumulatedValue:Effect,JumpingBaneling@Dmg,Amount$"  precision="2"/> damage in a small area.
-Button/Tooltip/KillStreak=Each kill increases weapon damage by <d ref="Behavior,KillStreak@BuffStack,Modification.DamageDealtFraction[Ranged]*100" precision="2"/>% and spell damage by <d ref="Behavior,KillStreak@BuffStack,Modification.DamageDealtFraction[Spell]*100" precision="2"/>% for <d ref="Behavior,KillStreak@BuffStack,Duration"/> seconds. Stacks up to <d ref="Behavior,KillStreak@BuffStack,MaxStackCount"/> times.<n/><n/>Currently <d ref="$BehaviorStackCount:KillStreak@BuffStack$"/> stacks.
-Button/Tooltip/KingMoopy=The hidden mastermind who manipulates from the shadows. First he let Stetmann send out a distress call to get the the terran mercenaries and special forces to deploy a rescue team. At the same time he abducted protoss engineers from the facility which resulted in the their search squad to fight against the swarm. Then he forced Stetmann do engineer mechanical zergs as it seemed those are the strongest but even those could not stop the swarm. Might be related to the creep clogging all the mechanical parts.
-Button/Tooltip/Lightning=His coolness is awefully stunning and has stopped many foes.
-Button/Tooltip/Madness=It was once called Probius, the heroic probe, but people did not realize its full potential and so, after mining these terrazine crystals, it tapped into madness.
-Button/Tooltip/MechaArtanis=A mechanical replication of Artanis. How does Stetmann even know how Artanis looks?
-Button/Tooltip/MechaKerrigan=A mechanical replication of Kerrigan. Stetmann hopes that her image would scare the swarm from attacking further.
-Button/Tooltip/MechaOvermind=A really huge CPU with unnecessary long tentacles that have no function whatsoever. It was designed to calculate the question to the answer 42. With great disappointment to Stetmann it was better at destroying things so it was refurbished and put into the pit to prevent it from smashing Stetmann.
-Button/Tooltip/MechaRaynor=A mechanical replication of Raynor. Stetmann still holds a grudge against Raynor for forgetting him in the lava filled tunnels on Char. Now Stetmann lives in tunnels without lava and is very happy about it.
-Button/Tooltip/PickupScientists=Capture a stunned terran scientist to infect him and let him develop cybernetic enhanced zergs to support you in your fight.
-Button/Tooltip/PlanetaryFortress=Terran engineer thought it would be cool to build a really strong fortress but forgot that it would be useful to move it around. Shit happens, this fortress won't move a millimeter.
-Button/Tooltip/PrismaticHybrids@PrismaticHybrids=Powerful psionic attacker.<n/><n/><c val="ffff8a">Can attack ground and air units.</c>
-Button/Tooltip/ProbeTalon=These probes have been constructed for only one purpose: protect lord Madness.
-Button/Tooltip/ProtossPartTransition=The nydus worm has gathered information about a mechanical swarm in some tunnels below. It will bring us there.<n/><n/><c val="FFFF00">The whole team will be transported to the next part and it is not possible to return to this battlefield.</c>
-Button/Tooltip/RegenerationUpgrade=Increases your units life and energy regeneration by 10%.
-Button/Tooltip/RespawnEgg=Create an egg which allows one player to be saved from death. The saved player will respawn inside the egg after some time with half life. The egg must be placed on creep.<n/>The time to revive depends on the maximum life of the hero that is being revived and your spellpower.<n/>After an egg has been used to revive a player you need to successfully clear a boss fight to spawn another egg.<n/><n/>The egg grows and after <d ref="Behavior,RespawnEgg@HiveAuraDelay,Duration"/> seconds it is fully mature. If the hive is alive then the mature egg will provide a slightly weaker version of the hive aura.
-Button/Tooltip/RespawnEgg@CarryEgg=Pick up your egg and carry it to another location. While the egg is carried, it will not provide the aura, but reviving will still work which will make the egg drop on location.
-Button/Tooltip/RespawnEgg@DropEgg=Drop the egg at target location.
-Button/Tooltip/RespawnEgg@EggSuicide=Kills this egg immediately to allow the creation of a new egg.
-Button/Tooltip/RoachWarren2=<c val="ffff8a">Enables:</c><n/>- Roaches from Larvae
-Button/Tooltip/Runling=A zergling with cybernetic implants and a turret on its head. The turret allows for ranged attacks while moving, but makes the Runling be pretty slow when not on creep.<n/><n/><n/>Life regen: <c val="00FF00"><d ref="Unit,Runling,LifeRegenRate" precision="2"/><n/></c>
-Button/Tooltip/SplashRangeUpgrade=Increases the splash range of your units.
-Button/Tooltip/Starport=Air-unit production facility. <n/><n/><c val="ffff8a">Enables:</c><n/>- Vikings<n/>- Medivacs
-Button/Tooltip/Tackle=Charges towards the direction and pushes enemies out of the way while dealing <d ref="$AccumulatedValue:Effect,Tackle@Dmg,Amount$" precision="2"/> on impact. The Spitter increases its own damage by <d ref="Behavior,Tackle@FriendlyTackleCaster,Modification.DamageDealtScaled[Ranged]" precision="2"/> and tackled allied unit by <d ref="Behavior,Tackle@FriendlyTackle,Modification.DamageDealtScaled[Ranged]" precision="2"/> for <d ref="Behavior,Tackle@FriendlyTackle,Duration" precision="2"/> seconds.<n/><n/>All Spitter ability cooldowns are shared.
-Button/Tooltip/Taunt@Taunt=Taunts nearby enemies to attack the Hardskin for 3 seconds.<n/>Can hold <d ref="Abil,Taunt@Taunt,Cost[0].Charge.CountMax"/> charges.
-Button/Tooltip/TerranPartTransition=After extracting the location of the protoss facility, it is now time to wipe them out.<n/><n/><c val="FFFF00">The whole team will be transported to the next part and it is not possible to return to this battlefield.</c>
-Button/Tooltip/TheySeeMeRolling=Throw a big baneling and let it roll over all your enemies. It pushes small enemies out of the way and deals <d ref="$AccumulatedValue:Effect,TheySeeMeRolling@Dmg,Amount$"/> damage at the same time.<n/><n/>Bosses and structures make the baneling explode which deals <d ref="$AccumulatedValue:Effect,TheySeeMeRolling@FinalExplosionDmg,Amount$"/> damage.<n/><n/>They see me rollin'<n/>They hatin'.
-Button/Tooltip/Thor=Hammer's pilot, Thor, sometimes claims to be a god, but trust me, he just delusional.
-Button/Tooltip/Thunder=She loves her own voice and so she talks all the time. Everybody coming close is silenced by her.
-Button/Tooltip/UltimateBeing=Gathers the power of all other abilities together. For <d ref="Behavior,UltimateBeing@UltimateBuff,Duration" precision="2"/> seconds you get +<d ref="Behavior,UltimateBeing@UltimateBuff,Modification.DamageDealtScaled[Ranged]" precision="2"/> damage, +<d ref="Behavior,UltimateBeing@UltimateBuff,DamageResponse.ModifyFraction-1*(-100)" precision="2"/>% damage reduction and +<d ref="Behavior,UltimateBeing@UltimateBuff,Modification.MoveSpeedMultiplier-1*100" precision="2"/>% movement speed.<n/>Your team does not get any benefit.<n/><n/>All Spitter ability cooldowns are shared.
-Button/Tooltip/UpgradeCenter=This mutated overlord is nearly invincible due to its high regeneration. The only drawback from this mutation is that it cannot move while it regenerates.<n/>Another feature is its ability to continuously spread creep which does not decay.<n/>The swarm also made it possible to convert biomass from killed enemies into upgrades for the heroic zergs on the battlefield.
-Card/Name/BaseOverlord/BCyb=Build Cybernetics
-DocInfo/DescLong=Kill enemies, absorb their biomass, grow stronger and wipe them out.<n/>Beat challenges and become even stronger. Many achievements to complete.<n/><n/><n/>Join the discord to find active player, submit suggestions or report bugs.
+Behavior/Name/AcidPit@Debuff=減益
+Behavior/Name/BaseAura=蟲巢光環
+Behavior/Name/BaseOverlordDmgSlow=暈眩
+Behavior/Name/BeamDroneDummyTracker=攔截機追蹤器
+Behavior/Name/BeamDroneMovementRestriction=攔截機限制移動
+Behavior/Name/BossDeactivated=首領歸位中
+Behavior/Name/BossReturn=首領歸位
+Behavior/Name/ChargePushed=充電推擊
+Behavior/Name/ChargeUp@ChargeUp=充電
+Behavior/Name/CoronaWaves=雷擊
+Behavior/Name/CorrosiveSpikes@Dot=腐蝕
+Behavior/Name/DamageTransferAura@DmgResponse=損害轉移
+Behavior/Name/DefensiveRoar@Caster=防禦咆哮
+Behavior/Name/Difficulty0=簡單
+Behavior/Name/Difficulty1=普通
+Behavior/Name/Difficulty2=困難
+Behavior/Name/Difficulty3=殘酷
+Behavior/Name/Difficulty4=瘋狂
+Behavior/Name/Difficulty5=硬核
+Behavior/Name/DifficultyCustom=自定難度
+Behavior/Name/FocusedFlameFlamerBuff=戰狼專注增益
+Behavior/Name/Frenzy@Frenzied=狂怒
+Behavior/Name/GlueSprayBuff=黏液
+Behavior/Name/GlueSprayDebuff=黏液
+Behavior/Name/GlueSprayDebuffBoss=黏液
+Behavior/Name/GlueStream@Buff=黏液
+Behavior/Name/HandlerLightningTracker=閃電追踪器
+Behavior/Name/HandlerThunderTracker=雷霆追踪器
+Behavior/Name/HardenedShell=硬化外殼
+Behavior/Name/Headbutt@Slow=減緩
+Behavior/Name/Headbutt@Stun=眩暈
+Behavior/Name/Heal@HoT=治療
+Behavior/Name/HeroBowlerAttribute=等級屬性
+Behavior/Name/HeroBowlerWeaponUnitTimedLife=持續時間
+Behavior/Name/HeroBowlerWeaponUnitTimedLife2=持續時間
+Behavior/Name/HeroHydraAttribute=等級屬性
+Behavior/Name/HeroRavagerAttribute=等級屬性
+Behavior/Name/HeroRoachAttribute=等級屬性
+Behavior/Name/HeroSwarmQueenAttribute=等級屬性
+Behavior/Name/Infection@Infected=已感染
+Behavior/Name/InvulnerableOverSpawnLimit=無敵
+Behavior/Name/LarvaSpawnOnDeath=幼蟲死亡時產卵
+Behavior/Name/Levels=等級
+Behavior/Name/LevelsTest=等級測試
+Behavior/Name/PortalModels=強化模式
+Behavior/Name/PortalStartDummyHeightEnd=強化模式結束
+Behavior/Name/PortalStartDummyHeightStart=強化模式啟動
+Behavior/Name/RequestRepairDropBuff=呼叫礦螺增益
+Behavior/Name/RespawnEgg@HiveAura=蟲巢光環(弱)
+Behavior/Name/RocketLaunchHammerBuff=火箭發射增益
+Behavior/Name/RotatingWallsTowerBuff=旋轉塔增益
+Behavior/Name/ScientistStunned=恐懼
+Behavior/Name/SeaOfFlamesDroneTimedLife=持續時間
+Behavior/Name/SecretDmgResponseInvulnerable=祕密無敵
+Behavior/Name/ShieldColor@BossColor02=首領顏色 1
+Behavior/Name/ShieldColor@BossColor12=首領顏色 1
+Behavior/Name/Shocked=眩暈
+Behavior/Name/Silenced=沉默
+Behavior/Name/Slow2=減緩
+Behavior/Name/StasisBubbleStasis=停滯
+Behavior/Name/Stetellite@Buff=增益
+Behavior/Name/Tackle@FriendlyTackle=友軍衝撞
+Behavior/Name/TagTeamHandlerLightningDead=標記型閃電
+Behavior/Name/TagTeamHandlerLightningExhausted=標記型閃電耗盡
+Behavior/Name/TagTeamHandlerThunderDead=標記型雷電
+Behavior/Name/TagTeamHandlerThunderExhausted=標記型雷電耗盡
+Behavior/Name/Taunt@Taunted=嘲諷
+Behavior/Name/TickTockBuff=高階聖堂增益
+Behavior/Name/UltimateBeing@UltimateBuff=終極增益
+Behavior/Name/WatchYourStep@TrapStun=被困
+Behavior/Name/ZapTrapDummyTimedLife=持續時間
+Behavior/Tooltip/AcidPit@Debuff=增加受到的武器傷害。
+Behavior/Tooltip/BaseAura=在基地的光環區域中，您將獲得：<n/>+<d ref="Behavior,BaseAura,DamageResponse.ModifyFraction-1*(-100)" precision="2"/>%傷害減免<n/>+<d ref="Behavior,BaseAura,Modification.VitalRegenArray[Life]" precision="2"/>生命再生<n/>+<d ref="Behavior,BaseAura,Modification.VitalRegenArray[Energy]" precision="2"/>能量再生<n/>+<d ref="Behavior,BaseAura,Modification.DamageDealtScaled[Ranged]" precision="2"/>傷害<n/>+<d ref="Behavior,BaseAura,Modification.AttackSpeedMultiplier-1*100" precision="5"/>%攻擊速度<n/>+<d ref="Behavior,BaseAura,Modification.TimeScale-1*100" precision="2"/>%時間加速<n/>[可在成就升級]
+Behavior/Tooltip/BaseAura2=在蟲巢的光環區域內，敵人移動速度會減少<d ref="Behavior,BaseAura2,Modification.AttackSpeedMultiplier-1*(-100)"/>% 並且他們的傷害會減少<d ref="Behavior,BaseAura2,Modification.DamageDealtFraction[Melee]*(-100)" precision="2"/>%。此外，它們每秒將失去<d ref="Effect,BaseAuraPassiveDmg,Amount/Behavior,BaseBuffInitial,Period" precision="3"/>生命。
+Behavior/Tooltip/BaseOverlordDmgSlow=王蟲受到攻擊，必須集中所有精力來治愈。在不再受到攻擊之前，它無法移動。
+Behavior/Tooltip/CoronaWaves=我聽說保持社交距離很有效！
+Behavior/Tooltip/CorrosiveSpikes@Dot=該單位會隨著時間的推移受到傷害。
+Behavior/Tooltip/DefensiveRoar@Caster=裝甲增加。
+Behavior/Tooltip/Difficulty0=<d ref="Behavior,Difficulty0,Modification.DamageDealtFraction[Melee]*(100)" precision="2"/>%傷害<n/><d ref="Behavior,Difficulty0,Modification.AttackSpeedMultiplier-1*(100)"/>%攻擊速度<n/><d ref="Behavior,Difficulty0,Modification.VitalMaxFractionArray[Life]*(100)" precision="2"/>%生命和護盾<n/><d ref="Behavior,Difficulty0,Modification.LifeArmorMultiplier*100-100" precision="2"/>%首領裝甲
+Behavior/Tooltip/Difficulty0Hive=蟲巢有<d ref="Behavior,Difficulty0Hive,Modification.LifeArmorBonus"/>裝甲和<d ref="Behavior,Difficulty0Hive,Modification.VitalRegenArray[Life]"/>生命恢復。
+Behavior/Tooltip/Difficulty1=100%所有屬性
+Behavior/Tooltip/Difficulty1Hive=蟲巢有<d ref="Behavior,Difficulty1Hive,Modification.LifeArmorBonus"/>裝甲和<d ref="Behavior,Difficulty1Hive,Modification.VitalRegenArray[Life]"/>生命恢復。
+Behavior/Tooltip/Difficulty2=+<d ref="Behavior,Difficulty2,Modification.DamageDealtFraction[Melee]*100" precision="2"/>%傷害<n/>+<d ref="Behavior,Difficulty2,Modification.DamageDealtFraction[Spell]*100" precision="2"/>%技能傷害<n/>+<d ref="Behavior,Difficulty2,Modification.AttackSpeedMultiplier-1*100" precision="2"/>%攻擊速度<n/>+<d ref="Behavior,Difficulty2,Modification.VitalMaxFractionArray[Life]*100" precision="2"/>%生命和護盾<n/>+<d ref="Behavior,Difficulty2,Modification.MoveSpeedMultiplier-1*100"/>%移動速度</n>+<d ref="Behavior,Difficulty2,Modification.LifeArmorMultiplier*100-100" precision="2"/>%首領裝甲
+Behavior/Tooltip/Difficulty2Hive=蟲巢有<d ref="Behavior,Difficulty2Hive,Modification.LifeArmorBonus"/>裝甲和<d ref="Behavior,Difficulty2Hive,Modification.VitalRegenArray[Life]"/>生命恢復。
+Behavior/Tooltip/Difficulty3=+<d ref="Behavior,Difficulty3,Modification.DamageDealtFraction[Melee]*100" precision="2"/>%傷害<n/>+<d ref="Behavior,Difficulty3,Modification.DamageDealtFraction[Spell]*100" precision="2"/>%技能傷害<n/>+<d ref="Behavior,Difficulty3,Modification.AttackSpeedMultiplier-1*100" precision="2"/>%攻擊速度<n/>+<d ref="Behavior,Difficulty3,Modification.VitalMaxFractionArray[Life]*100" precision="2"/>%生命和護盾<n/>+<d ref="Behavior,Difficulty3,Modification.MoveSpeedMultiplier-1*100"/>%移動速度</n>+<d ref="Behavior,Difficulty3,Modification.LifeArmorMultiplier*100-100" precision="2"/>%首領裝甲
+Behavior/Tooltip/Difficulty3Hive=蟲巢有<d ref="Behavior,Difficulty3Hive,Modification.LifeArmorBonus"/>裝甲和<d ref="Behavior,Difficulty3Hive,Modification.VitalRegenArray[Life]"/>生命恢復。
+Behavior/Tooltip/Difficulty4=+<d ref="Behavior,Difficulty4,Modification.DamageDealtFraction[Melee]*100" precision="2"/>%傷害<n/>+<d ref="Behavior,Difficulty4,Modification.DamageDealtFraction[Spell]*100" precision="2"/>%技能傷害<n/>+<d ref="Behavior,Difficulty4,Modification.AttackSpeedMultiplier-1*100" precision="2"/>%攻擊速度<n/>+<d ref="Behavior,Difficulty4,Modification.VitalMaxFractionArray[Life]*100" precision="2"/>%生命和護盾<n/>+<d ref="Behavior,Difficulty4,Modification.VitalRegenMultiplier[Life]*100"/>%再生<n/>+<d ref="Behavior,Difficulty4,Modification.MoveSpeedMultiplier-1*100"/>%移動速度</n>+<d ref="Behavior,Difficulty4,Modification.LifeArmorMultiplier*100-100" precision="2"/>%首領裝甲
+Behavior/Tooltip/Difficulty4Hive=蟲巢有<d ref="Behavior,Difficulty4Hive,Modification.LifeArmorBonus"/>裝甲和<d ref="Behavior,Difficulty4Hive,Modification.VitalRegenArray[Life]"/>生命恢復。
+Behavior/Tooltip/Difficulty5=+<d ref="Behavior,Difficulty5,Modification.DamageDealtFraction[Melee]*100" precision="2"/>%傷害<n/>+<d ref="Behavior,Difficulty5,Modification.DamageDealtFraction[Spell]*100" precision="2"/>%技能傷害<n/>+<d ref="Behavior,Difficulty5,Modification.AttackSpeedMultiplier-1*100" precision="2"/>%攻擊速度<n/>+<d ref="Behavior,Difficulty5,Modification.VitalMaxFractionArray[Life]*100" precision="2"/>%生命和護盾<n/>+<d ref="Behavior,Difficulty5,DamageResponse.ModifyFraction*100" precision="2"/>%傷害減免<n/>+<d ref="Behavior,Difficulty5,Modification.VitalRegenMultiplier[Life]*100"/>%再生<n/>+<d ref="Behavior,Difficulty5,Modification.MoveSpeedMultiplier-1*100"/>%移動速度</n>+<d ref="Behavior,Difficulty5,Modification.LifeArmorMultiplier*100-100" precision="2"/>%首領裝甲
+Behavior/Tooltip/Difficulty5Hive=蟲巢有<d ref="Behavior,Difficulty5Hive,Modification.LifeArmorBonus"/>裝甲和<d ref="Behavior,Difficulty5Hive,Modification.VitalRegenArray[Life]"/>生命恢復。
+Behavior/Tooltip/DifficultyCustom=+<d ref="Behavior,DifficultyCustom,Modification.DamageDealtFraction[Melee]*100" precision="2"/>%傷害<n/>+<d ref="Behavior,DifficultyCustom,Modification.DamageDealtFraction[Spell]*100" precision="2"/>%技能傷害<n/>+<d ref="Behavior,DifficultyCustom,Modification.AttackSpeedMultiplier-1*100" precision="2"/>%攻擊速度<n/>+<d ref="Behavior,DifficultyCustom,Modification.VitalMaxFractionArray[Life]*100" precision="2"/>%生命和護盾</n>+<d ref="Behavior,Difficulty5,DamageResponse.ModifyFraction*100" precision="2"/>%傷害減免<n/>+<d ref="Behavior,DifficultyCustom,Modification.VitalRegenMultiplier[Life]*100"/>%再生<n/>+<d ref="Behavior,DifficultyCustom,Modification.MoveSpeedMultiplier-1*100"/>%移動速度</n>+<d ref="Behavior,DifficultyCustom,Modification.LifeArmorMultiplier*100-100" precision="2"/>%首領裝甲
+Behavior/Tooltip/DifficultyCustomHive=蟲巢有<d ref="Behavior,DifficultyCustom2,Modification.LifeArmorBonus"/>裝甲和<d ref="Behavior,DifficultyCustom2,Modification.VitalRegenArray[Life]"/>生命恢復。
+Behavior/Tooltip/Frenzy@Frenzied=增加移動速度<d ref="Behavior,Frienzied,Modification.MoveSpeedMultiplier-1*100"/>%和攻擊速度<d ref="Behavior,Frienzied,Modification.AttackSpeedMultiplier-1*100"/>%，持續<d ref="Behavior,Frienzied,Duration"/>秒。
+Behavior/Tooltip/GlueStream@Buff=增加移動速度。
+Behavior/Tooltip/GlueStream@Debuff=降低移動速度。
+Behavior/Tooltip/Heal@HoT=這個單位會隨著時間的推移被治愈。
+Behavior/Tooltip/HeroBowlerAttribute=飛螳每級將獲得:<n/>+<d ref="Accumulator,HeroBowlerWeaponDmgModifier,Amount" precision="2"/>傷害<n/>+<d ref="(Behavior,HeroBowlerAttribute,Modification.AttackSpeedMultiplier-1)*(100)" precision="3"/>%攻擊速度<n/>+<d ref="Behavior,HeroBowlerAttribute,Modification.MoveSpeedBonus" precision="3"/>移動速度<n/>+<d ref="Behavior,HeroBowlerAttribute,Modification.VitalMaxArray[Life]" precision="3"/>生命<n/>+<d ref="Behavior,HeroBowlerAttribute,Modification.VitalMaxArray[Energy]" precision="3"/>能量<n/>
+Behavior/Tooltip/HeroHydraAttribute=刺蛇每級將獲得:<n/>+<d ref="Accumulator,HeroHydraWeaponDmgModifier,Amount" precision="2"/>傷害<n/>+<d ref="(Behavior,HeroHydraAttribute,Modification.AttackSpeedMultiplier-1)*(100)" precision="3"/>%攻擊速度<n/>+<d ref="Behavior,HeroHydraAttribute,Modification.MoveSpeedBonus" precision="3"/>移動速度<n/>+<d ref="Behavior,HeroHydraAttribute,Modification.VitalMaxArray[Life]" precision="3"/>生命<n/>+<d ref="Behavior,HeroHydraAttribute,Modification.VitalMaxArray[Energy]" precision="3"/>能量<n/>
+Behavior/Tooltip/HeroRavagerAttribute=劫毀蟲每級將獲得:<n/>+<d ref="Accumulator,HeroRavagerWeaponDmgModifier,Amount" precision="2"/>傷害<n/>+<d ref="(Behavior,HeroRavagerAttribute,Modification.AttackSpeedMultiplier-1)*(100)" precision="3"/>%攻擊速度<n/>+<d ref="Behavior,HeroRavagerAttribute,Modification.MoveSpeedBonus" precision="3"/>移動速度<n/>+<d ref="Behavior,HeroRavagerAttribute,Modification.VitalMaxArray[Life]" precision="3"/>生命<n/>+<d ref="Behavior,HeroRavagerAttribute,Modification.VitalMaxArray[Energy]" precision="3"/>能量<n/>
+Behavior/Tooltip/HeroRoachAttribute=蟑螂每級將獲得:<n/>+<d ref="Accumulator,HeroRoachWeaponDmgModifier,Amount" precision="2"/>傷害<n/>+<d ref="(Behavior,HeroRoachAttribute,Modification.AttackSpeedMultiplier-1)*(100)" precision="3"/>%攻擊速度<n/>+<d ref="Behavior,HeroRoachAttribute,Modification.MoveSpeedBonus" precision="3"/>移動速度<n/>+<d ref="Behavior,HeroRoachAttribute,Modification.VitalMaxArray[Life]" precision="3"/>生命<n/>+<d ref="Behavior,HeroRoachAttribute,Modification.VitalMaxArray[Energy]" precision="3"/>能量<n/>
+Behavior/Tooltip/HeroSwarmQueenAttribute=后蟲每級將獲得:<n/>+<d ref="Accumulator,HeroSwarmQueenWeaponDmgModifier,Amount" precision="2"/>傷害<n/>+<d ref="(Behavior,HeroSwarmQueenAttribute,Modification.AttackSpeedMultiplier-1)*(100)" precision="3"/>%攻擊速度<n/>+<d ref="Behavior,HeroSwarmQueenAttribute,Modification.MoveSpeedBonus" precision="3"/>移動速度<n/>+<d ref="Behavior,HeroSwarmQueenAttribute,Modification.VitalMaxArray[Life]" precision="3"/>生命<n/>+<d ref="Behavior,HeroSwarmQueenAttribute,Modification.VitalMaxArray[Energy]" precision="3"/>能量<n/>
+Behavior/Tooltip/InvulnerableOverSpawnLimit=在清理足夠多的敵人之前，建築是無敵的。
+Behavior/Tooltip/RespawnEgg@HiveAura=在蛋的光環區域內，你會獲得：<n/>+<d ref="Behavior,RespawnEgg@HiveAura,DamageResponse.ModifyFraction-1*(-100)" precision="2"/>%傷害減免<n/>+<d ref="Behavior,RespawnEgg@HiveAura,Modification.VitalRegenArray[Life]" precision="2"/>生命再生<n/>+<d ref="Behavior,RespawnEgg@HiveAura,Modification.VitalRegenArray[Energy]" precision="2"/>能量再生<n/>+<d ref="Behavior,RespawnEgg@HiveAura,Modification.DamageDealtScaled[Ranged]" precision="2"/>傷害<n/>+<d ref="Behavior,RespawnEgg@HiveAura,Modification.AttackSpeedMultiplier-1*100" precision="5"/>%攻擊速度<n/>+<d ref="Behavior,RespawnEgg@HiveAura,Modification.TimeScale-1*100" precision="2"/>%時間加速<n/>[可在成就升級]
+Behavior/Tooltip/Shocked=你被帶電了，它會隨機電擊你，造成傷害並讓你短暫昏迷。
+Behavior/Tooltip/Silenced=你被沉默，禁用所有引導技能並阻止你使用任何技能。
+Behavior/Tooltip/Slow2=目標的移動速度會在短時間內降低。
+Behavior/Tooltip/Tackle@FriendlyTackle=增加傷害。
+Behavior/Tooltip/UltimateBeing@UltimateBuff=增加<d ref="Behavior,UltimateBeing@UltimateBuff,Modification.DamageDealtUnscaled[Ranged]" precision="2"/>傷害、<d ref="Behavior,UltimateBeing@UltimateBuff,Modification.LifeArmorBonus" precision="2"/>裝甲和<d ref="Behavior,UltimateBeing@UltimateBuff,Modification.MoveSpeedMultiplier-1*100" precision="2"/>%移動速度。
+Button/Name/AbsorbExplosion=蓄能衝擊
+Button/Name/AcidPit=酸液
+Button/Name/AidFromAiur=艾爾的援助
+Button/Name/ArmorUpgrade=裝甲升級
+Button/Name/AtkSpdUpgrade=攻擊速度升級
+Button/Name/Banemine=毒爆陷阱
+Button/Name/Banemine@Explode=爆破
+Button/Name/BombardThem=轟炸他們！
+Button/Name/BuryThem=埋葬他們！
+Button/Name/Charge2=充電
+Button/Name/ChargeUp=充電
+Button/Name/CircuitOverload=能量過載
+Button/Name/ColorfulBeams=七彩光束
+Button/Name/CorrosiveBurst=腐蝕爆裂
+Button/Name/CorrosiveSpikes=腐蝕性尖刺
+Button/Name/CreateLurker=生產遁地獸
+Button/Name/CreateRunling=生產異化蟲
+Button/Name/CreepTunnel=鑽地隧道
+Button/Name/CyberneticLifeBank@CreateLifeBank=生產孢子爬行蟲
+Button/Name/CyberneticLifeBank@LifeBankRestoreCharge=復活孢子爬行蟲
+Button/Name/CyberneticLifeBank@LifeTransfer=生命轉移
+Button/Name/CyberneticLurkerBurrow=遁地
+Button/Name/CyberneticLurkerBurrowUp=鑽出
+Button/Name/CyberneticLurkerRestoreCharge=復活遁地獸
+Button/Name/CyberneticRunlingRestoreCharge=復活異化蟲
+Button/Name/CyberneticSubmenu=精銳單位
+Button/Name/DamageTransferAura=傷害轉移光環
+Button/Name/DanceFloor=跳舞
+Button/Name/Decoy=幻象
+Button/Name/DefensiveRoar=防禦咆哮
+Button/Name/DmgUpgrade=傷害升級
+Button/Name/DummyDirectionPointerPermanent=永久性指針
+Button/Name/EatThis=吃這個！
+Button/Name/EnemyBossAbilityButton=敵人首領技能按鈕
+Button/Name/EnergyTransfer=能量轉移
+Button/Name/EnergyTransfer@Cancel=取消能量轉移
+Button/Name/FireInTheHole=火
+Button/Name/FlyBackHome=飛回家
+Button/Name/Focus=專注
+Button/Name/Focus@Off=停止專注
+Button/Name/Frenzy@Frenzy=狂怒
+Button/Name/GlueSpray=黏液
+Button/Name/GlueStream=黏液
+Button/Name/HandsOfSilence=沉默之手
+Button/Name/HardenedShell=硬化外殼
+Button/Name/Headbutt=頭槌
+Button/Name/Heal@Heal=治療
+Button/Name/HeroAbilityParent=英雄技能
+Button/Name/Illusion=幻象
+Button/Name/Infection=感染
+Button/Name/JumpingBaneling=彈跳毒爆蟲
+Button/Name/KillStreak=嗜血
+Button/Name/Leap=飛躍
+Button/Name/NydusWorm@Relocate=搬遷
+Button/Name/NydusWorm@Throw=扔
+Button/Name/OverchargedGun=過載槍
+Button/Name/PickupScientists=捕獲科學家
+Button/Name/Pinball=彈跳球
+Button/Name/PrismaticHybrids=混元體
+Button/Name/ProtossPartTransition=進攻機甲蟲族
+Button/Name/PushAndPull=推和拉
+Button/Name/RainbowMeteors=彩虹流星
+Button/Name/RegenerationUpgrade=再生升級
+Button/Name/RespawnEgg=守護之蛋
+Button/Name/RespawnEgg@CarryEgg=攜帶蛋
+Button/Name/RespawnEgg@DropEgg=放下蛋
+Button/Name/RespawnEgg@EggSuicide=摧毀蛋
+Button/Name/RespawnEgg@Reviving=復活
+Button/Name/RoyalConstruction=皇家建築
+Button/Name/Rush=奔跑
+Button/Name/Scrap=廢料:
+Button/Name/SpearOfStetmann=斯特曼之矛
+Button/Name/Spin=旋轉
+Button/Name/SpinForWin=為了勝利 旋轉！
+Button/Name/SplashRangeUpgrade=濺射範圍升級
+Button/Name/Stetellite=斯特衛星
+Button/Name/StetmannRevenge=斯特曼復仇
+Button/Name/StetmannSummons=斯特曼傳送
+Button/Name/Swap=交換
+Button/Name/Tackle=衝撞
+Button/Name/TakeCover=掩護
+Button/Name/Taunt@Taunt=嘲諷
+Button/Name/TerranPartTransition=飛向神族
+Button/Name/TheySeeMeRolling=讓他們看看我的大毒爆！
+Button/Name/UltimateBeing=終極進化
+Button/Name/UnstableTeleport=不穩定的傳送門
+Button/Name/UpgradeCenter=蟲群升級中心
+Button/Name/WatchYourStep=小心腳步
+Button/Name/WatchYourStep@TrapActivate=陷阱激活
+Button/Name/WavesOfChaos=混亂
+Button/Name/WingSpikes=翼刃
+Button/Name/YouBetterGetMoving=你最好跑起來！
+Button/Tooltip/AbsorbExplosion=將劫毀蟲受到的武器傷害儲能起來。在<d ref="Behavior,AbsorbExplosion@DmgResponse,Duration" precision="2"/>秒後，能量會以爆炸的形式釋放出來，對<d ref="Effect,AbsorbExplosion@DmgSearch,AreaArray[0].Radius" precision="2"/>範圍內的敵人造成總蓄能的<d ref="(Effect,AbsorbExplosion@Dmg,Amount * (Accumulator,SpellDmgUpgradeCollector,Amount/100+1))*100" precision="2"/>%傷害<n/>如果沒有蓄任何能量，將會減少冷卻時間<n/>當<d ref="Effect,AbsorbExplosion@StoreDamage,ValidateMax"/>傷害達到最大值時會立即釋放。
+Button/Tooltip/AcidPit=將一團濃酸扔到該位置，形成一個持續<d ref="Effect,AcidPit@Persistent,PeriodCount*Effect,AcidPit@Persistent,PeriodicPeriodArray[0]"/>秒的水坑。酸液每秒對敵方單位造成<d ref="$AccumulatedValue:Effect,AcidPit@Dmg,Amount$/Effect,AcidPit@Persistent,PeriodicPeriodArray[0]" precision="2"/>傷害並增加<d ref="Behavior,AcidPit@Debuff,Modification.DamageTakenFraction[Melee]*100"/>%受到的武器傷害。
+Button/Tooltip/ArmorUpgrade=增加單位的裝甲。
+Button/Tooltip/AtkSpdUpgrade=使你的單位的攻擊速度提高10%。
+Button/Tooltip/Atlantis=幾千年來，聖母艦被神族們改造成了一台飛行的殺戮機械。
+Button/Tooltip/AtlantisCore=母艦核心擁有更多的殺傷力，因為它捨棄了依附在它身上的城市。
+Button/Tooltip/Banemine=向目標位置投擲毒爆蟲並鑽地。如果敵人靠近它會爆炸，造成<d ref="$AccumulatedValue:Effect,Banemine@ExplosionDmg,Amount$"  precision="2"/>傷害。<n/><n/>會在<d ref="Behavior,Banemine@TimedLife,Duration"/>秒後自動爆炸。
+Button/Tooltip/Banemine@Explode=爆炸。
+Button/Tooltip/BaseOverlord=可以進行武器和裝甲升級。<n/>可以生產蟲胎，讓蟲胎提高移動速度、生命與能量再生速度並顯示隱形單位。
+Button/Tooltip/Charge2=衝向目標點。蟑螂將敵人推開並對其造成傷害。<n/>在衝鋒時，蟑螂有額外的<d ref="Behavior,ChargePushBuff,Modification.MoveSpeedMultiplier-1*100"/>%移動速度和<d ref="Behavior,ChargeArmorBuff ,Modification.LifeArmorBonus"precision="2"/>+<d ref="Behavior,ChargeArmorBuff,Modification.LifeArmorMultiplier-1*100"/>%裝甲。衝撞結束後，增益會持續3秒。<n/><c val="FFFF00">無法衝撞首領且會取消動作。</c>
+Button/Tooltip/CorrosiveBurst=爆破<d ref="Effect,CorrosiveBurst@Search,AreaArray[0].Radius" presicion="2"/>範圍內的所有腐蝕性尖刺並立即造成傷害，在此過程中會破壞尖刺。<n/>對其造成<d ref="Accumulator,CorrosiveBurst@DmgBase,Amount + (Accumulator,CorrosiveBurst@DmgModifier,Amount *$RunAccumulators:VeterancyLvlx1$) *(1+(Accumulator,SpellDmgUpgradeCollector,Amount/100))"precision="2 "/>傷害並乘以目標上的每個尖刺數量的平方。<n/><n/>在<d ref="Behavior,CorrosiveBurst@DisableCorrosiveSpikes,Duration"/>秒內禁用腐蝕性尖刺。
+Button/Tooltip/CorrosiveSpikes=用腐蝕性強酸射出的尖刺，每秒造成<d ref="$AccumulatedValue:Effect,CorrosiveSpikes@Dmg,Amount$ / Behavior,CorrosiveSpikes@Dot,Period"precision="2"/>傷害。可以疊加<d ref="Behavior,CorrosiveSpikes@Dot,MaxStackCountPerCaster"/>次並保持<d ref="Behavior,CorrosiveSpikes@Dot,Duration"/>秒。濺射攻擊不受影響。
+Button/Tooltip/CreateLurker=將生物質轉化為遁地獸。遁地獸需要遁地才能攻擊，並且非常擅長保衛蟲巢。無法離開蟲胎。
+Button/Tooltip/CreateRunling=將生物質轉化為異化蟲。該異化蟲是增強版，在它的頭部安裝了一個激光砲塔。但是砲塔太重了，沒有蟲胎的支援，異化蟲根本就跑不動。他是非常脆弱的單位，擅長在英雄們後面造成傷害。
+Button/Tooltip/CreepTunnel=向目標位置挖掘。挖掘後對<d ref="Effect,CreepTunnel@Search,AreaArray[0].Radius" precision="2"/>範圍造成<d ref="$AccumulatedValue:Effect,CreepTunnel@Dmg,Amount$" precision="2"/>傷害。傷害受升級和等級的影響，也受敵人裝甲的影響。
+Button/Tooltip/CyberneticLifeBank=修改了孢子爬行蟲充當移動的血包。不站在蟲胎上時會失去血量，僅在蟲巢附近時再生生命。
+Button/Tooltip/CyberneticLifeBank@CreateLifeBank=將生物質轉化為孢子爬行蟲，他可以將其生命轉移給英雄。孢子爬行蟲不會自然再生生命，甚至在離開蟲胎時也會失去血量。<n/>孢子爬行蟲數量上限在所有玩家之間共享。
+Button/Tooltip/CyberneticLifeBank@LifeBankRestoreCharge=使用突變來復活孢子爬行蟲。
+Button/Tooltip/CyberneticLifeBank@LifeTransfer=以每秒<d ref="Effect,CyberneticLifeBank@TransferLifeHealer,RechargeVitalRate" precision="2"/>的速率將孢子爬行蟲的生命轉移到目標單位身上。
+Button/Tooltip/CyberneticLurker=遁地獸在遁地後可以獲得極大的傷害輸出，但他非遁地時需要蟲胎才能夠移動。<n/><n/>生命再生:<c val="00FF00"><d ref="Unit,CyberneticLurker,LifeRegenRate" precision="2"/><n/></c>濺射範圍:<c val="fF0000"><d ref="Effect,CyberneticLurkerWeaponSearch,AreaArray[0].Radius" precision="2"/></c><n/>
+Button/Tooltip/CyberneticLurkerBurrow=將遁地獸埋在地下。他將可以攻擊但無法移動。只要蟲巢還活著並在附近，他們就不會被敵人發現。
+Button/Tooltip/CyberneticLurkerBurrowUp=將單位返回到地面。
+Button/Tooltip/CyberneticLurkerRestoreCharge=使用突變復活遁地獸。
+Button/Tooltip/CyberneticRunlingRestoreCharge=使用突變來復活異化蟲。
+Button/Tooltip/CyberneticSubmenu=在捕獲了足夠多的科學家之後，王蟲現在能夠將生物質轉化為精銳單位。
+Button/Tooltip/DamageTransferAura=轉移<d ref="Effect,DamageTransferAura@Search,AreaArray[0].Radius" precision="2"/>範圍內友軍受到的<d ref="Behavior,DamageTransferAura@DmgResponse,DamageResponse.ModifyFraction*100" precision="2"/>%傷害到劫毀蟲身上。此效果持續<d ref="Behavior,DamageTransferAura@Aura,Duration" precision="2"/>秒。
+Button/Tooltip/Decoy=招喚一個幻象，幻象在招喚瞬間會施放嘲諷，幻象將存在<d ref="Behavior,Decoy@TimedLife,Duration"/>秒<n/>此幻象擁有你當前生命的60%並且會受到額外<d ref="Behavior,Decoy@TimedLife,Modification.DamageTakenFraction[Spell]*100"/>%技能傷害。<n/><c val="FFFF00">首領不會以幻象為技能目標</c>
+Button/Tooltip/DefensiveRoar=使你受到的傷害降低<d ref="Behavior,DefensiveRoar@Caster,DamageResponse.ModifyFraction-1*(-100)" precision="2"/>%和使友軍受到的傷害降低<d ref="Behavior,DefensiveRoar@Other,DamageResponse.ModifyFraction-1*(-100)" precision="2"/>%，持續<d ref="Behavior,DefensiveRoar@Caster,Duration" precision="2"/>秒<n/><n/>蟑螂的所有技能冷卻時間都是共享的。
+Button/Tooltip/DmgUpgrade=增加單位的武器傷害。
+Button/Tooltip/EgonStetmann=伊崗.斯特曼，整天改造新的瘋狂機器人。
+Button/Tooltip/EnergyTransfer=以每秒<d ref="Effect,EnergyTransfer@CreateHealer,RechargeVitalRate" precision="2"/>的速率向目標持續轉移能量。在轉移能量時，你的攻擊速度會降低<d ref="Behavior,EnergyTransfer@Channel,Modification.AttackSpeedMultiplier-1*(-100)" precision="2"/>%和降低移動速度<d ref="Behavior,EnergyTransfer@Channel,Modification.UnifiedMoveSpeedFactor*(-100)" precision="2"/>%。
+Button/Tooltip/EnergyTransfer@Cancel=取消能量轉移。
+Button/Tooltip/FlyBackHome=王蟲乘載所有5範圍內你的單位，然後飛回蟲巢。受到攻擊時取消。
+Button/Tooltip/Focus=使刺蛇專心攻擊目標，當不改變攻擊目標的時間越長，攻擊速度就越快，每次攻擊將提高攻擊速度<d ref="Behavior,Focus@BuffStack,Modification.AdditiveAttackSpeedFactor*100" precision="2"/>%，最多累積<d ref="Behavior,Focus@BuffStack,MaxStackCount"/>次。當改變目標或持續<d ref="Behavior,Focus@BuffStack,Duration"/>秒不攻擊將會移除疊層。<n/><n/>每秒消耗<c val="b472d9"><d ref="Behavior,Focus@Toggle,Modification.VitalRegenArray[Energy]*(-1)"/></c>能量。
+Button/Tooltip/Focus@Off=停用專注同時停止能量消耗。<n/><n/>當前累積<d ref="$BehaviorStackCount:Focus@BuffStack$"/>層疊層。
+Button/Tooltip/Frenzy@Frenzy=將目標的移動速度提高<d ref="Behavior,Frenzy@Frenzied,Modification.MoveSpeedMultiplier-1*100" precision="2"/>%和提高攻擊速度<d ref="Behavior,Frenzy@Frenzied,Modification.AttackSpeedMultiplier-1*100"  precision="2"/>%，持續<d ref="Behavior,Frenzy@Frenzied,Duration"/>秒。
+Button/Tooltip/Gary=蓋瑞是斯特曼最好的朋友~因此總是使用最好的機油。
+Button/Tooltip/GlueSpray=向所有方向噴射黏性液體，使敵方單位減速<d ref="Behavior,GlueSprayDebuff,Modification.MoveSpeedMultiplier-1*(-100)" precision="2"/>%，持續<d ref="Behavior,GlueSprayDebuff,Duration" precision="2"/>秒。同時使友方單位提升移動速度<d ref="Behavior,GlueSprayBuff,Modification.MoveSpeedMultiplier-1*100"precision="2"/>%<n/>但效果和持續時間減半。
+Button/Tooltip/GlueStream=向一個方向噴射蟲群液體，增加你的移動速度<d ref="Behavior,GlueStream@BuffCaster,Modification.MoveSpeedMultiplier-1*100" precision="2"/>%和其他友軍的移動速度<d ref="Behavior,GlueStream@Buff,Modification.MoveSpeedMultiplier-1*100" precision="2"/>%。降低敵人的移動速度<d ref="Behavior,GlueStream@Debuff,Modification.MoveSpeedMultiplier-1*(-100)" precision="2"/>%並造成<d ref="$AccumulatedValue:Effect,GlueStream@Dmg,Amount$" precision="2"/>傷害。<n/><n/>蟑螂的所有技能冷卻時間都是共享的。
+Button/Tooltip/GuardingPanther=用於保護礦螺的小型機器狗。
+Button/Tooltip/HardenedShell=暫時增加劫毀蟲的甲殼。將受到的傷害限制在<d ref="Behavior,HardenedShell,DamageResponse.ClampMaximum"/>，<d ref="Behavior,HardenedShell,Duration" precision="2"/>持續秒。<n/><c val="FFFF00 ">技能傷害不受影響。</c>
+Button/Tooltip/Headbutt=使周圍<d ref="Effect,Headbutt@Search,AreaArray[0].Radius" precision="2"/>範圍內的敵人昏迷<d ref="Behavior,Headbutt@Stun,Duration" precision="2"/>秒。<n/>首領只會被減速<d ref="Behavior,Headbutt@Slow,Duration" precision="2"/>秒。
+Button/Tooltip/Heal@Heal=立即治療目標<d ref="Effect,Heal@InstantHeal,VitalArray[Life].Change"/>生命並在後續的<d ref="Behavior,Heal@HoT,PeriodCount*Behavior,Heal@HoT,Period"/>秒內恢復<d ref="Effect,Heal@PeriodicHeal,VitalArray[Life].Change*Behavior,Heal@HoT,PeriodCount"/>生命。
+Button/Tooltip/HellionTank2=近距離的戰鬥單位，專門燒烤蟲群。
+Button/Tooltip/HeroBowler=飛螳可以在他體內產生各式的毒爆蟲，這讓他在對大量敵人的時候非常有用。<n/><n/>生命再生:<c val="00FF00"><d ref="Unit,HeroBowler,LifeRegenRate" precision="2"/><n/></c>能量再生:<c val="b472d9"><d ref="Unit,HeroBowler,EnergyRegenRate" precision="2"/><n/></c>濺射範圍:<c val="fF0000"><d ref="Effect,HeroBowlerWeaponExplodeSearch,AreaArray[0].Radius" precision="2"/></c><n/>技能增幅:<c val="00ffFF"><d ref="Accumulator,SpellDmgUpgradeCollector,Amount" precision="2"/>%</c>
+Button/Tooltip/HeroHydra=刺蛇已經向進攻能力發展，但這樣做使刺蛇失去了大部分的防禦能力。<n/><n/>生命再生:<c val="00FF00"><d ref="Unit,HeroHydra,LifeRegenRate" precision="2"/><n/></c>能量再生:<c val="b472d9"><d ref="Unit,HeroHydra,EnergyRegenRate" precision="2"/><n/></c>濺射範圍:<c val="FF0000"><d ref="Effect,HeroHydraWeaponDmg,AreaArray[0].Radius" precision="2"/></c><n/>技能增幅:<c val="00fffF"><d ref="Accumulator,SpellDmgUpgradeCollector,Amount" precision="2"/>%</c>
+Button/Tooltip/HeroRavager=劫毀蟲已經進化到可以抵禦任何形式的傷害。它還具有強迫周圍的敵人攻擊他的能力。<n/><n/>生命再生:<c val="00FF00"><d ref="Unit,HeroRavager,LifeRegenRate" precision="2"/><n/></c>能量再生:<c val="b472d9"><d ref="Unit,HeroRavager,EnergyRegenRate" precision="2"/><n/></c>濺射範圍:<c val="FF0000"><d ref="Effect,HeroRavagerWeaponDmg,AreaArray[0].Radius" precision="2"/></c><n/>技能增幅:<c val="00ffFF"><d ref="Accumulator,SpellDmgUpgradeCollector,Amount" precision="2"/>%</c>
+Button/Tooltip/HeroRoach=蟑螂是蟲群中能力非常平衡的成員。<n/><n/>生命再生:<c val="00FF00"><d ref="Unit,HeroRoach,LifeRegenRate" precision="2"/><n/></c>能量再生:<c val="b472d9"><d ref="Unit,HeroRoach,EnergyRegenRate" precision="2"/><n/></c>濺射範圍:<c val="FF0000"><d ref="Effect,HeroRoachWeaponDmg,AreaArray[0].Radius" precision="2"/></c><n/>技能增幅:<c val="00ffff"><d ref="Accumulator,SpellDmgUpgradeCollector,Amount" precision="2"/>%</c>
+Button/Tooltip/HeroSwarmQueen=后蟲最擅長治療或使用各種技能來對其他英雄提供幫助。<n/><n/>生命再生:<c val="00FF00"><d ref="Unit,HeroSwarmQueen,LifeRegenRate" precision="2"/><n/></c>能量再生:<c val="b472d9"><d ref="Unit,HeroSwarmQueen,EnergyRegenRate" precision="2"/><n/></c>濺射範圍:<c val="FF0000"><d ref="Effect,HeroSwarmQueenWeaponDmg,AreaArray[0].Radius" precision="2"/></n></c>技能增幅:<c val="00ffFF"><d ref="Accumulator,SpellDmgUpgradeCollector,Amount" precision="2"/>%</c>
+Button/Tooltip/Hive2=一個蟲群的蟲巢來為這些特種部隊提供支援。當它還活著時，它會散發出強大的光環，並在敵人的視野中隱藏遁地獸。
+Button/Tooltip/JumpingBaneling=拋出有彈性的毒爆蟲，每顆會彈跳<d ref="Effect,JumpingBaneling@UserData,SourceFailBackValue"/>次並在小範圍內造成<d ref="$AccumulatedValue:Effect,JumpingBaneling@Dmg,Amount$"  precision="2"/>傷害。
+Button/Tooltip/KillStreak=每次擊殺都會增加<d ref="Behavior,KillStreak@BuffStack,Modification.DamageDealtFraction[Ranged]*100" precision="2"/>%武器傷害和<d ref="Behavior,KillStreak@BuffStack,Modification.DamageDealtFraction[Spell]*100" precision="2"/>%技能傷害，每層持續<d ref="Behavior,KillStreak@BuffStack,Duration"/>秒。最多可堆疊<d ref="Behavior,KillStreak@BuffStack,MaxStackCount"/>層。<n/><n/>當前堆疊<d ref="$BehaviorStackCount:KillStreak@BuffStack$"/>層。
+Button/Tooltip/KingMoopy=從陰影中操縱的隱藏策劃者。首先他讓斯特曼發出求救信號，讓人族僱傭兵和特種部隊部署救援隊。與此同時，他從設施中綁架了神族工程師，導致神族的搜索小隊與蟲群作戰。然後他強迫斯特曼設計機甲蟲族，因為那些看起來是最強大的族群，但即使是那些也無法阻止蟲群。可能與蟲胎堵塞所有機械部件有關。
+Button/Tooltip/Lightning=他的舉止異常冷靜，並擊退了許多敵人。
+Button/Tooltip/Madness=它曾被稱為普羅米修斯，英勇的探測機，但人們並沒有意識到它的潛力，因此，在開採了這些變異礦物後，它陷入了癲狂。
+Button/Tooltip/MechaArtanis=亞坦尼斯的機械複製品。斯特曼怎麼知道亞坦尼斯的長相？
+Button/Tooltip/MechaBaneling=自殺單位。死亡時對小範圍造成傷害。<n/><n/><c val="ffff8a">可以攻擊地面單位。</c>
+Button/Tooltip/MechaBanelingNest=
+Button/Tooltip/MechaBroodling=持續時間短的快速近戰生物。<n/><n/><c val="ffff8a">可以攻擊地面單位。</c>
+Button/Tooltip/MechaDrone=基本工兵單位。可以收穫礦物質和瓦斯汽油。可以變異成建築。<n/><n/><c val="#ColorAttackInfo">可以攻擊地面單位。</c>
+Button/Tooltip/MechaEvolutionChamber=
+Button/Tooltip/MechaGreaterSpire=包含對蟲族空中單位的升級。<n/><n/><c val="ffff8a">啟用：</c><n/>-飛螳
+Button/Tooltip/MechaHatchery=
+Button/Tooltip/MechaHive=
+Button/Tooltip/MechaHydralisk=遠程攻擊者。可以進化為遁地獸。<n/><n/><c val="ffff8a">可以攻擊地面和空中單位。</c>
+Button/Tooltip/MechaHydraliskDenImpaler=可以進化成遁地獸穴。</n></n><c val="ffff8a">啟用：</c><n/>-刺蛇
+Button/Tooltip/MechaInfestationPit=
+Button/Tooltip/MechaInfestor=感染專家。可以使用真菌生長和感染人族的技能。
+Button/Tooltip/MechaKerrigan=凱利根的機械複製品。斯特曼希望她的形象能嚇退蟲群的進攻。
+Button/Tooltip/MechaLair=
+Button/Tooltip/MechaLocust=從百生獸中生成。蝗蟲持續<d ref="Behavior,LocustTimedLife,Duration"/>秒。<n/><n/><c val="#ColorAttackInfo">可以攻擊地面單位。</c>
+Button/Tooltip/MechaNydusWorm=友方地面單位可以使用蠕蟲立即前往玩家擁有的任何其他蠕蟲或蟲殖地網。生成蟲胎來給予附近的蟲族建築。<n/><n/><c val="#ColorAttackInfo">蟲族在蟲胎上移動得更快。</c>
+Button/Tooltip/MechaOvermind=一個非常巨大的超級電腦，帶有不必要的觸手，沒有任何功能。令斯特曼非常失望的是，它更擅長破壞事物，因此對其進行了翻新並放入這個坑中，以防止它砸碎蓋瑞。
+Button/Tooltip/MechaOverseer=配備小型激光瞄準系統的無人機。瞄準系統只能指向下方，因此它必須不斷地飛過敵人的頭頂。
+Button/Tooltip/MechaQueen=支援單位。可以使用孵化蟲胎瘤和快速輸血。<n/><n/><c val="ffff8a">可以攻擊地面和空中單位。</c>
+Button/Tooltip/MechaRavager=遠程火砲。可以使用腐蝕膽汁。<n/><n/><c val="#ColorAttackInfo">可以攻擊地面單位。</c>
+Button/Tooltip/MechaRaynor=雷諾的機械複製品。斯特曼仍然對雷諾懷恨在心，因為雷諾在熔岩隧道中忘記了他。現在，斯特曼生活在沒有熔岩的隧道中，對此感到非常開心。
+Button/Tooltip/MechaRoach=突擊單位。遁地後可以迅速恢復生命。可以變形為劫毀蟲。<n/><n/><c val="ffff8a">可以攻擊地面單位。</c>
+Button/Tooltip/MechaSpawningPool=
+Button/Tooltip/MechaSpineCrawler=對地防禦建築。<n/><n/><c val="ffff8a">可以攻擊地面單位。</c>
+Button/Tooltip/MechaSpire=包含對蟲空中單位的升級。<n/><n/><c val="ffff8a">啟用：</c><n/>-飛螳
+Button/Tooltip/MechaSporeCrawler=對空防禦建築。<n/><n/><c val="ffff8a">可以攻擊空中單位。</c><n/><c val="FFE303">反隱單位</c>
+Button/Tooltip/MechaSwarmHost=攻城單位。在遁地時通過孵化蝗蟲進行攻擊。<n/><n/><c val="#ColorAttackInfo">蝗蟲可以攻擊地面單位。</c>
+Button/Tooltip/MechaUltralisk=重型攻擊單位。具有範圍傷害攻擊。<n/><n/><c val="ffff8a">可以攻擊地面單位。</c>
+Button/Tooltip/MechaUltraliskCavern=
+Button/Tooltip/MechaZergling=快速的近戰生物。可以變形為毒爆蟲。<n/><n/><c val="FFFF8A">可以攻擊地面單位。</c>
+Button/Tooltip/PickupScientists=抓住一個陷入恐懼的人類科學家來感染他，讓他開發強力的精銳蟲群來支援你的戰鬥。
+Button/Tooltip/PlanetaryFortress=人族工程師認為建造一個非常堅固的要塞會很酷，但忘記了可以讓它移動的話會很有用。見鬼，這座要塞甚至不能移動一毫米。
+Button/Tooltip/PrismaticHybrids@PrismaticHybrids=強大的幽能攻擊者。<n/><n/><c val="ffff8a">可以攻擊地面和空中單位。</c>
+Button/Tooltip/ProbeTalon=這些探測器的目的只有一個：保護癲狂首領。
+Button/Tooltip/ProtossPartTransition=蠕蟲在下面的一些隧道中收集了有關機甲蟲群的信息。它將把我們帶到那裡並摧毀它們。<n/><n/><c val="FFFF00">整個團隊將被傳送到下一階段，不能再次回到這個戰場。</c>
+Button/Tooltip/RegenerationUpgrade=使你的單位生命和能量再生提高10%。
+Button/Tooltip/RespawnEgg=孵化一顆蛋，讓一名玩家免於死亡。被拯救的玩家將會在蛋孵化一段時間並重生，蛋必須放置在蟲胎上。<n/>復活時間取決於被復活的英雄的最大生命和你的技能增幅。<n/>當蛋被使用於復活玩家後，你的團隊必須成功擊敗首領以恢復使用次數。<n/><n/>蛋被放置後需要<d ref="Behavior,RespawnEgg@HiveAuraDelay,Duration"/>秒的時間來完全成熟。如果蟲巢還存在，成熟的蛋會提供稍微弱一點的蟲巢光環。
+Button/Tooltip/RespawnEgg@CarryEgg=攜帶你的蛋，把它帶到另一個地方。攜帶蛋時，它不會提供光環，但復活仍然會起作用並會使蛋掉落在原地。
+Button/Tooltip/RespawnEgg@DropEgg=將蛋放在目標位置。
+Button/Tooltip/RespawnEgg@EggSuicide=立即摧毀這個蛋以允許孵化一個新的蛋。
+Button/Tooltip/RoachWarren2=<c val="ffff8a">啟用：</c><n/>-蟑螂
+Button/Tooltip/Runling=帶有雷射砲塔的異化蟲，砲塔可以在移動時進行攻擊，但因為重量使異化蟲不在蟲胎上時會跑很慢。<n/><n/><n/>生命恢復:<c val="00FF00"><d ref="Unit,Runling,LifeRegenRate" precision="2"/><n/></c>
+Button/Tooltip/SplashRangeUpgrade=增加單位的濺射範圍。
+Button/Tooltip/Starport=空中單位生產建築。<n/><n/><c val="ffff8a">啟用：</c><n/>-維京戰機<n/>-醫療艇
+Button/Tooltip/Tackle=向該方向衝鋒備將敵人推開，同時對敵人造成<d ref="$AccumulatedValue:Effect,Tackle@Dmg,Amount$" precision="2"/>傷害。對自身增加<d ref="Behavior,Tackle@FriendlyTackleCaster,Modification.DamageDealtScaled[Ranged]" precision="2"/>傷害並對友軍增加<d ref="Behavior,Tackle@FriendlyTackle,Modification.DamageDealtScaled[Ranged]" precision="2"/>傷害，持續<d ref="Behavior,Tackle@FriendlyTackle,Duration" precision="2"/>秒<n/><n/>蟑螂的所有技能冷卻時間都是共享的。
+Button/Tooltip/Taunt@Taunt=嘲諷附近的敵人攻擊劫毀蟲3秒。<n/>可以儲存<d ref="Abil,Taunt@Taunt,Cost[0].Charge.CountMax"/>次使用次數。
+Button/Tooltip/TerranPartTransition=從觀察者提取出神族的位置後，現在是時候消滅它們了。<n/><n/><c val="FFFF00">整個團隊將被運送到下一階段，不能再次回到這個戰場。</c>
+Button/Tooltip/TheySeeMeRolling=扔出一個大毒爆，讓它輾過你所有的敵人。它將敵人推開並同時造成<d ref="$AccumulatedValue:Effect,TheySeeMeRolling@Dmg,Amount$"/>傷害。<n/><n/>當撞到首領或建築時會使大毒爆強制爆炸並造成<d ref="$AccumulatedValue:Effect,TheySeeMeRolling@FinalExplosionDmg,Amount$"/>傷害。<n/><n/>當他們看見我在滾動...他們恐懼...
+Button/Tooltip/Thor=雷神的駕駛員有時自稱是神，但相信我，他只是妄想。
+Button/Tooltip/Thunder=她喜歡自己的聲音，所以她一直在說話。每個靠近的人都被她沉默了
+Button/Tooltip/UltimateBeing=將所有其他技能的力量聚集在一起，在<d ref="Behavior,UltimateBeing@UltimateBuff,Duration" precision="2"/>秒內你將增加<d ref="Behavior,UltimateBeing@UltimateBuff,Modification.DamageDealtUnscaled[Ranged]" precision="2"/>傷害，增加<d ref="Behavior,UltimateBeing@UltimateBuff,DamageResponse.ModifyFraction-1*(-100)" precision="2"/>%傷害減免以及增加<d ref="Behavior,UltimateBeing@UltimateBuff,Modification.MoveSpeedMultiplier-1*100" precision="2"/>%移動速度。<n/>你的友軍不會獲得任何效果。<n/><n/>蟑螂的所有技能冷卻時間都是共享的。
+Button/Tooltip/UpgradeCenter=這個進化的王蟲幾乎是無敵的，因為它的超高再生能力。這種進化的唯一缺點是它在再生時不能移動。<n/>另一個特點是它能夠持續傳播不會腐爛的蟲胎。<n/>它還可以將死亡的敵人的生物質轉化成升級，增強戰場上英勇蟲群。
+Card/Name/BaseOverlord/BCyb=生產精銳蟲群
+DocInfo/DescLong=操控你的英雄殺死敵人，吸收他們的生物質並強化你的英雄，為了蟲群而戰！<n/><n/>這是一款團隊合作的RPG遊戲，你將扮演著蟲群的精英來摧毀對蟲群造成威脅的敵人，該遊戲重在團隊與挑戰，當你完成成就時可以讓你獲得永久性的強化，從而更容易的挑戰更高的難度。<n/><n/><n/>加入Discord以尋找活躍玩家、提交建議或報告錯誤。<n/>加入後在頻道self-roles點選Asia符號領取身分組，即可在亞服頻道聊天。
 DocInfo/DescShort=6
-DocInfo/HowToPlayAdvanced00=Dont rush! Upgrades are important!
-DocInfo/HowToPlayAdvanced01=Stay close to the hive in the early game.
-DocInfo/HowToPlayAdvanced02=Aim for achievements which improve your hero.
-DocInfo/HowToPlayBasic00=Upgrade your hero with the biomass of killed enemies.
-DocInfo/HowToPlayBasic01=Destroying enemy spawnpoints rewards extra resources for upgrades.
-DocInfo/HowToPlayWinning00=Kill all bosses.
-DocInfo/Name=Swarm Special Forces
+DocInfo/HowToPlayAdvanced00=不要著急！攻防升級很重要！
+DocInfo/HowToPlayAdvanced01=在遊戲初期盡量靠近蟲巢。
+DocInfo/HowToPlayAdvanced02=尋找一些你可以完成的成就來取得更多能力。
+DocInfo/HowToPlayBasic00=用殺死敵人後獲得的生物質來升級你的英雄。
+DocInfo/HowToPlayBasic01=摧毀敵人的出生點會獎勵額外​的突變資源。
+DocInfo/HowToPlayWinning00=擊殺所有首領。
+DocInfo/Name=蟲群特種部隊
 DocInfo/PatchNote001=- atlantis core illusion in brutal or higher only
 DocInfo/PatchNote002=- cyberminds push and pull indicator closer to actual affected area
 DocInfo/PatchNote003=- some typos
@@ -441,161 +540,167 @@ DocInfo/ScreenshotHowToPlay03=A powerful twin boss fight.
 DocInfo/ScreenshotHowToPlay04=Enraged bosses who want to kill you.
 DocInfo/ScreenshotHowToPlay05=Kill the bosses to gain points. Points unlock new heroes.
 DocInfo/Website=http://discord.gg/KwxNAJ2
-Error/CantCrossCliffsCopy=Cannot attack across cliffs or friendly Structures
-Error/RespawnEgg@Egg=Can only carry an egg.
-Error/ScientestIsNotStunned=Scientists must first be stunned by nearly killing them.
-FlyBackHome/PartTransition=Cannot be used while part transitioning.
-RequirementNode/Tooltip/02921848502=Requires a new charge from a successful boss fight.
-RequirementNode/Tooltip/CountBehaviorRespawnEgg@EggAvailableQueuedOrBetterAtUnit2921848502=Requires a new charge from a successful boss fight.
-RequirementNode/Tooltip/CountBehaviorRespawnEgg@RevivingQueuedOrBetterAtUnit3227781120=Must be reviving
-RequirementNode/Tooltip/CountUpgradeAbsorbExplosion@UnlockCompleteOnly1015183818=Requires Magic Hats Stage III
-RequirementNode/Tooltip/CountUpgradeCorrosiveBurst@UnlockCompleteOnly3209883371=Unlock by Magic Hats stage IV
-RequirementNode/Tooltip/CountUpgradeDamageTransferAura@UnlockCompleteOnly1671390315=Unlock by Magic Hats stage III
-RequirementNode/Tooltip/CountUpgradeUltimateBeing@UnlockCompleteOnly1302983693=Unlock by Magic Hats stage I
-RequirementNode/Tooltip/Eq1040997399CountUpgradeKillStreak@UnlockCompleteOnly1=Requires Psi Orbs Stage II
-RequirementNode/Tooltip/Eq1208018857CountUpgradeDecoy@UnlockCompleteOnly1=Requires Psi Orbs Stage III
-RequirementNode/Tooltip/Eq1787140249CountBehaviorCorrosiveBurst@DisableCorrosiveSpikesQueuedOrBetterAtUnit0=Not disabled by Corrosive Burst
-RequirementNode/Tooltip/Eq1851146600CountBehaviorBaseOverlordDmgSlowCompleteOnlyAtUnit0=Overlord must not be stunned.
-RequirementNode/Tooltip/Eq1987477214CountBehaviorBaseOverlordDmgSlowCompleteOnlyAtUnit0=Overlord must not be stunned.
-RequirementNode/Tooltip/Eq2278612504CountUpgradeCorrosiveSpikes@UnlockCompleteOnly1=Requires Essences Stage IV
-RequirementNode/Tooltip/Eq2350394728CountUpgradeFocus@UnlockCompleteOnly1=Requires Psi Orbs Stage IV
-RequirementNode/Tooltip/Eq2514512276CountUpgradeUnlockHeroRoachChargeCompleteOnly1=Requires Essences Stage I
-RequirementNode/Tooltip/Eq2561050864CountUnitHeroDummyHiveDeadCompleteOnly0=Hive has to be alive!
-RequirementNode/Tooltip/Eq281638821CountUpgradeArmorUpgradeQueuedOnly0=No queue allowed.
-RequirementNode/Tooltip/Eq281638821CountUpgradeAtkSpdUpgradeQueuedOnly0=No queue allowed.
-RequirementNode/Tooltip/Eq281638821CountUpgradeDmgUpgradeInProgressOnly0=No queue allowed.
-RequirementNode/Tooltip/Eq281638821CountUpgradeDmgUpgradeQueuedOnly0=No queue allowed.
-RequirementNode/Tooltip/Eq281638821CountUpgradeRegenerationUpgradeQueuedOnly0=No queue allowed.
-RequirementNode/Tooltip/Eq281638821CountUpgradeSplashRangeUpgradeQueuedOnly0=No queue allowed.
-RequirementNode/Tooltip/Eq3411278990CountUpgradeEnergyTransfer@UnlockCompleteOnly1=Requires Psi Orbs Stage V
-RequirementNode/Tooltip/Eq4037611437CountBehaviorTutorialNotPausedCompleteOnlyAtUnit0=Game not paused.
-RequirementNode/Tooltip/Eq428702543CountUpgradeBanemine@UnlockCompleteOnly1=Requires Essences Stage II
-RequirementNode/Tooltip/GTE1136276364CountUpgradeCreepTunnel@UnlockCompleteOnly1=Requires Psi Orbs Stage I
-RequirementNode/Tooltip/GTE2043916139CountUpgradeGlueStream@UnlockCompleteOnly1=Requires Essences Stage I
-RequirementNode/Tooltip/GTE275080916CountUpgradeFrenzy@UnlockCompleteOnly1=Requires Essences Stage V
-RequirementNode/Tooltip/GTE4159062706CountUpgradeUnlockCyberneticsCompleteOnly2=Science Stage II required.
-RequirementNode/Tooltip/GTE612606772CountUpgradeUnlockCyberneticsCompleteOnly3=Science III required.
-RequirementNode/Tooltip/GTE875380897CountUpgradeTackle@UnlockCompleteOnly1=Requires Psi Orbs Stage I
-RequirementNode/Tooltip/GTE884099205CountUpgradeTheySeeMeRolling@UnlockCompleteOnly1=Unlock by Magic Hats stage II
-RequirementNode/Tooltip/GTE888989534CountUpgradeHardenedShell@UnlockCompleteOnly1=Requires Essences Stage III
-RequirementNode/Tooltip/GTE888989534CountUpgradeHeadbutt@UnlockCompleteOnly1=Requires Essences Stage III
-RequirementNode/Tooltip/GTE999272702CountUpgradeRespawnEgg@UnlockCompleteOnly1=Unlock by Magic Hats stage V
-RequirementNode/Tooltip/Not3358450278CountBehaviorRespawnEgg@NoMoreEggsQueuedOrBetterAtUnit=Only one egg allowed at a time.
-Trig/Acv/Artanis/Name=<c val="FF0000">Artanis</c> 
-Trig/Acv/Artanis/Requirement=Depower <c val="FF0000">Artanis</c>'s blades on other difficulties (last hit).
-Trig/Acv/Atlantis/Name=<c val="FF0000">Atlantis</c> 
-Trig/Acv/Atlantis/Requirement=Sink <c val="FF0000">Atlantis</c> on other difficulties (last hit).
-Trig/Acv/Cybermind/Name=<c val="FF0000">Cybermind</c> 
-Trig/Acv/Cybermind/Requirement=Rip the <c val="FF0000">Cybermind</c> into pieces on other difficulties (last hit).
-Trig/Acv/Essences/Name=Essences
-Trig/Acv/Essences/Requirement=Gather ~VALUE~ essences.
-Trig/Acv/Flamer/Name=<c val="FF0000">Flamer</c> 
-Trig/Acv/Flamer/Requirement=Defeat the big <c val="FF0000">Flamer </c>on other difficulties (last hit).
-Trig/Acv/FlawlessP0/Name=<c val="800080">Flawless</c> 
-Trig/Acv/FlawlessP0/Requirement=Defeat the terran enemies with <c val="800080">zero hive kills</c> and it still being alive.
-Trig/Acv/FlawlessP1/Name=<c val="800080">Flawless (Protoss)</c> 
-Trig/Acv/FlawlessP1/Requirement=Defeat the protoss with <c val="800080">zero hive kills</c> and it still being alive in its upgraded form.
-Trig/Acv/FlawlessP2/Name=<c val="800080">Flawless (Mecha)</c> 
-Trig/Acv/FlawlessP2/Requirement=Defeat the mecha zergs with <c val="800080">zero hive kills</c> and it still being alive in its most powerful form.
-Trig/Acv/Fortress/Name=<c val="FF0000">Fortress</c> 
-Trig/Acv/Fortress/Requirement=Burn the immobile <c val="FF0000">Fortress </c>on other difficulties (last hit).
-Trig/Acv/Gary/Name=<c val="FF0000">Gary</c> 
-Trig/Acv/Gary/Requirement=Drain all the oil from <c val="FF0000">Gary </c>on other difficulties (last hit).
-Trig/Acv/Hammer/Name=<c val="FF0000">Hammer</c> 
-Trig/Acv/Hammer/Requirement=Defeat the not so mighty <c val="FF0000">Hammer</c> on other difficulties (last hit).
-Trig/Acv/Kerrigan/Name=<c val="FF0000">Kerrigan</c> 
-Trig/Acv/Kerrigan/Requirement=Trim off <c val="FF0000">Kerrigan</c>'s wings on other difficulties (last hit).
-Trig/Acv/Kills/Name=Revenge
-Trig/Acv/Kills/Requirement=Kill ~VALUE~ enemies.
-Trig/Acv/KingMoopy/Name=<c val="FF0000">King Moopy</c> 
-Trig/Acv/KingMoopy/Requirement=Turn <c val="FF0000">King Moopy </c>to ashes on other difficulties (last hit).
-Trig/Acv/Lightning/Name=<c val="FF0000">Lightning</c> 
-Trig/Acv/Lightning/Requirement=Overshadow <c val="FF0000">Lightning </c>on other difficulties (last hit).
-Trig/Acv/Madness/Name=<c val="FF0000">Madness</c> 
-Trig/Acv/Madness/Requirement=Overcome <c val="FF0000">Madness </c>on other difficulties (last hit).
-Trig/Acv/MoopyHats/Name=Magic Hats
-Trig/Acv/MoopyHats/Requirement=Collect ~VALUE~ magic hats from moopies.
-Trig/Acv/Points/Name=Points
-Trig/Acv/Points/Requirement=Gain ~VALUE~ points.
-Trig/Acv/PsiOrbs/Name=Psi Orbs
-Trig/Acv/PsiOrbs/Requirement=Absorb ~VALUE~ psi orbs.
-Trig/Acv/Raynor/Name=<c val="FF0000">Raynor</c> 
-Trig/Acv/Raynor/Requirement=Block <c val="FF0000">Raynor</c>'s gun on other difficulties (last hit).
-Trig/Acv/Scientists/Name=Science
-Trig/Acv/Scientists/Requirement=Capture ~VALUE~ scientists.
-Trig/Acv/Score/Name=Rank
-Trig/Acv/Score/Requirement=Obtain ~VALUE~ achievement score.
-Trig/Acv/Score/Reward=Your Rank: ~VALUE~
-Trig/Acv/Speedruns/P0D5Small/Reward=Congratulations! You proved that this is possible. As a reward you can use -dance to let Lightning and Thunder dance.
-Trig/Acv/Speedruns/P0Suffix= (Terran)
-Trig/Acv/Speedruns/P1Suffix= (Protoss)
-Trig/Acv/Speedruns/P2Suffix= (Mecha)
-Trig/Acv/Speedruns/Requirement/Speedy=Finish within ~VALUE~.
-Trig/Acv/Speedruns/Requirement/TeamSize1=Beat the ~VALUE~ difficulty solo.
-Trig/Acv/Speedruns/Requirement/TeamSize2=Beat the ~VALUE~ difficulty duo (max 2 players).
-Trig/Acv/Speedruns/Requirement/TeamSize3=Beat the ~VALUE~ difficulty trio (max 3 players).
-Trig/Acv/Speedruns/Requirement/TeamSize6=Beat the ~VALUE~ difficulty.
-Trig/Acv/Stetmann/Name=<c val="FF0000">Stetmann</c> 
-Trig/Acv/Stetmann/Requirement=Release <c val="FF0000">Stetmann </c>from his delusions on other difficulties (last hit).
-Trig/Acv/Thunder/Name=<c val="FF0000">Thunder</c> 
-Trig/Acv/Thunder/Requirement=Mute <c val="FF0000">Thunder </c>on other difficulties (last hit).
-Trig/Acv/Trophy/Name=Trophy
-Trig/Acv/Trophy/P0D4DuoFtl=Terran Insane Duo FTL
-Trig/Acv/Trophy/P0D5Duo=Terran Hardcore Duo
-Trig/Acv/Trophy/P1D2SoloFtl=Protoss Hard Solo FTL
-Trig/Acv/Trophy/P1D3DuoFtl=Protoss Brutal Duo FTL
-Trig/Acv/Trophy/P1D4TrioFtl=Protoss Insane Trio FTL
-Trig/Acv/Trophy/P1D5Team=Protoss Hardcore
-Trig/Acv/Trophy/Reward=You achieved great feats in ancient times. You are rewarded with this beautiful image of cheese. Have fun to achieve these feats again in the future.</n></n>You completed:
-Trig/Acv/Tutorial/Name=Tutorial
-Trig/Acv/Tutorial/Requirement=Finish the tutorial.
-Trig/Acv/UI/AbilUnlock/Mid=~VALUE~ unlocked for ~VALUE2~
-Trig/Acv/UI/Armor=<n/>+~VALUE~ armor
-Trig/Acv/UI/Atkspd=<n/>+~VALUE~% attack speed
-Trig/Acv/UI/BiomassPerKill=<n/>+~VALUE~ biomass per kill
-Trig/Acv/UI/CyberneticsDmg=<n/>+~VALUE~ damage for cybernetic zergs
-Trig/Acv/UI/CyberneticsLife=<n/>+~VALUE~ life for cybernetic zergs
-Trig/Acv/UI/CyberneticsRestore=<n/>Cybernetics recharging enabled
-Trig/Acv/UI/CyberneticsUpgrade=<n/>Captured scientist temporarily upgrade cybernetic units
-Trig/Acv/UI/DiffUnlock=~VALUE~ difficulty unlocked
-Trig/Acv/UI/Dmg=<n/>+~VALUE~ damage
-Trig/Acv/UI/Energy=<n/>+~VALUE~ energy
-Trig/Acv/UI/EnergyRegen=<n/>+~VALUE~% energy regeneration
-Trig/Acv/UI/ExpPerKill=<n/>+~VALUE~ experience per kill
-Trig/Acv/UI/HeroUnlock=<n/>~VALUE~ unlocked
-Trig/Acv/UI/HiveAuraP0/Armor=<n/>+~VALUE~% damage reduction for hive aura
-Trig/Acv/UI/HiveAuraP0/Atkspd=<n/>+~VALUE~% attack speed for hive aura
-Trig/Acv/UI/HiveAuraP0/DebuffAtkspd=<n/>-~VALUE~% attack speed for hive debuff aura
-Trig/Acv/UI/HiveAuraP0/Dmg=<n/>+~VALUE~ damage for hive aura
-Trig/Acv/UI/HiveAuraP0/EnergyRegen=<n/>+~VALUE~ energy regeneration for hive aura
-Trig/Acv/UI/HiveAuraP0/LifeRegen=<n/>+~VALUE~ life regeneration for hive aura
-Trig/Acv/UI/HiveAuraP0/TimeScale=<n/>+~VALUE~% time scale on hive aura
-Trig/Acv/UI/HiveAuraP1/Armor=<n/>+~VALUE~% damage reduction for hive aura after first upgrade
-Trig/Acv/UI/HiveAuraP1/Atkspd=<n/>+~VALUE~% attack speed for hive aura after first upgrade
-Trig/Acv/UI/HiveAuraP1/Dmg=<n/>+~VALUE~ damage for hive aura after first upgrade
-Trig/Acv/UI/HiveAuraP1/EnergyRegen=<n/>+~VALUE~ energy regeneration for hive aura after first upgrade
-Trig/Acv/UI/HiveAuraP1/LifeRegen=<n/>+~VALUE~ life regeneration for hive aura after first upgrade
-Trig/Acv/UI/HiveAuraP1/TimeScale=<n/>+~VALUE~% time scale on hive aura after first upgrade
-Trig/Acv/UI/HiveAuraP2/Armor=<n/>+~VALUE~% damage reduction for hive aura after second upgrade
-Trig/Acv/UI/HiveAuraP2/Atkspd=<n/>+~VALUE~% attack speed for hive aura after second upgrade
-Trig/Acv/UI/HiveAuraP2/Dmg=<n/>+~VALUE~ damage for hive aura after second upgrade
-Trig/Acv/UI/HiveAuraP2/EnergyRegen=<n/>+~VALUE~ energy regeneration for hive aura after second upgrade
-Trig/Acv/UI/HiveAuraP2/LifeRegen=<n/>+~VALUE~ life regeneration for hive aura after second upgrade
-Trig/Acv/UI/HiveAuraP2/TimeScale=<n/>+~VALUE~% time scale on hive aura after second upgrade
-Trig/Acv/UI/Life=<n/>+~VALUE~ life
-Trig/Acv/UI/LifeBankUnlock=<n/><c val="800080">Life Bank </c>unlocked 
-Trig/Acv/UI/LifeRegen=<n/>+~VALUE~% life regeneration
-Trig/Acv/UI/LurkerUnlock=<n/><c val="800080">Lurker </c>unlocked 
-Trig/Acv/UI/MaxStage=<n/><n/>Max level reached.
-Trig/Acv/UI/OverlordSpeed=<n/>+~VALUE~ overlord movement speed
-Trig/Acv/UI/RunlingUnlock=<n/><c val="800080">Runling </c>unlocked 
-Trig/Acv/UI/Score=<n/>+~VALUE~ achievement score
-Trig/Acv/UI/Speed=<n/>+~VALUE~ movement speed
+Error/CantCrossCliffsCopy=不能越過懸崖或友方建築攻擊
+Error/RespawnEgg@Egg=最多只能攜帶一個蛋。
+Error/ScientestIsNotStunned=必須讓科學家承受頻死的恐懼。
+FlyBackHome/PartTransition=關卡完成時不能使用。
+RequirementNode/Tooltip/02921848502=需要成功擊敗首領才能重置使用次數
+RequirementNode/Tooltip/CountBehaviorRespawnEgg@EggAvailableQueuedOrBetterAtUnit2921848502=需要成功擊敗首領才能重置使用次數
+RequirementNode/Tooltip/CountBehaviorRespawnEgg@RevivingQueuedOrBetterAtUnit3227781120=必須完成復活
+RequirementNode/Tooltip/CountUpgradeAbsorbExplosion@UnlockCompleteOnly1015183818=由魔法帽III成就解鎖
+RequirementNode/Tooltip/CountUpgradeCorrosiveBurst@UnlockCompleteOnly3209883371=由魔法帽IV成就解鎖
+RequirementNode/Tooltip/CountUpgradeDamageTransferAura@UnlockCompleteOnly1671390315=由魔法帽III成就解鎖
+RequirementNode/Tooltip/CountUpgradeUltimateBeing@UnlockCompleteOnly1302983693=由魔法帽I成就解鎖
+RequirementNode/Tooltip/Eq1040997399CountUpgradeKillStreak@UnlockCompleteOnly1=由幽能球II成就解鎖
+RequirementNode/Tooltip/Eq1208018857CountUpgradeDecoy@UnlockCompleteOnly1=由幽能球III成就解鎖
+RequirementNode/Tooltip/Eq1787140249CountBehaviorCorrosiveBurst@DisableCorrosiveSpikesQueuedOrBetterAtUnit0=未被腐蝕爆裂禁用
+RequirementNode/Tooltip/Eq1851146600CountBehaviorBaseOverlordDmgSlowCompleteOnlyAtUnit0=王蟲不可被暈眩
+RequirementNode/Tooltip/Eq1987477214CountBehaviorBaseOverlordDmgSlowCompleteOnlyAtUnit0=王蟲不可被暈眩
+RequirementNode/Tooltip/Eq2278612504CountUpgradeCorrosiveSpikes@UnlockCompleteOnly1=由原質IV成就解鎖
+RequirementNode/Tooltip/Eq2350394728CountUpgradeFocus@UnlockCompleteOnly1=由幽能球IV成就解鎖
+RequirementNode/Tooltip/Eq2514512276CountUpgradeUnlockHeroRoachChargeCompleteOnly1==由原質I成就解鎖
+RequirementNode/Tooltip/Eq2561050864CountUnitHeroDummyHiveDeadCompleteOnly0=蟲巢必須活著！
+RequirementNode/Tooltip/Eq281638821CountUpgradeArmorUpgradeQueuedOnly0=不允許隊列。
+RequirementNode/Tooltip/Eq281638821CountUpgradeAtkSpdUpgradeQueuedOnly0=不允許隊列。
+RequirementNode/Tooltip/Eq281638821CountUpgradeDmgUpgradeInProgressOnly0=不允許隊列。
+RequirementNode/Tooltip/Eq281638821CountUpgradeDmgUpgradeQueuedOnly0=不允許隊列。
+RequirementNode/Tooltip/Eq281638821CountUpgradeRegenerationUpgradeQueuedOnly0=不允許隊列。
+RequirementNode/Tooltip/Eq281638821CountUpgradeSplashRangeUpgradeQueuedOnly0=不允許隊列。
+RequirementNode/Tooltip/Eq3411278990CountUpgradeEnergyTransfer@UnlockCompleteOnly1=由幽能球V成就解鎖
+RequirementNode/Tooltip/Eq4037611437CountBehaviorTutorialNotPausedCompleteOnlyAtUnit0=遊戲未暫停
+RequirementNode/Tooltip/Eq428702543CountUpgradeBanemine@UnlockCompleteOnly1=由原質II成就解鎖
+RequirementNode/Tooltip/GTE1136276364CountUpgradeCreepTunnel@UnlockCompleteOnly1=由幽能球I成就解鎖
+RequirementNode/Tooltip/GTE2043916139CountUpgradeGlueStream@UnlockCompleteOnly1=由原質I成就解鎖
+RequirementNode/Tooltip/GTE275080916CountUpgradeFrenzy@UnlockCompleteOnly1=由原質V成就解鎖
+RequirementNode/Tooltip/GTE4159062706CountUpgradeUnlockCyberneticsCompleteOnly2=由生物學II成就解鎖
+RequirementNode/Tooltip/GTE612606772CountUpgradeUnlockCyberneticsCompleteOnly3=由生物學第三階段成就解鎖
+RequirementNode/Tooltip/GTE875380897CountUpgradeTackle@UnlockCompleteOnly1=由幽能球I成就解鎖
+RequirementNode/Tooltip/GTE884099205CountUpgradeTheySeeMeRolling@UnlockCompleteOnly1=由魔法帽II成就解鎖
+RequirementNode/Tooltip/GTE888989534CountUpgradeHardenedShell@UnlockCompleteOnly1=由原質III成就解鎖
+RequirementNode/Tooltip/GTE888989534CountUpgradeHeadbutt@UnlockCompleteOnly1=由原質III成就解鎖
+RequirementNode/Tooltip/GTE999272702CountUpgradeRespawnEgg@UnlockCompleteOnly1=由魔法帽V成就解鎖
+RequirementNode/Tooltip/Not3358450278CountBehaviorRespawnEgg@NoMoreEggsQueuedOrBetterAtUnit=一次只允許一個蛋存在
+Trig/Acv/Artanis/Name=<c val="FF0000">亞坦尼斯</c> 
+Trig/Acv/Artanis/Requirement=在各種難度中擊敗<c val="FF0000">亞坦尼斯</c>(最後一擊)。
+Trig/Acv/Atlantis/Name=<c val="FF0000">聖母艦</c> 
+Trig/Acv/Atlantis/Requirement=在各種難度中擊敗<c val="FF0000">聖母艦</c>(最後一擊)。
+Trig/Acv/Cybermind/Name=<c val="FF0000">機械主宰</c> 
+Trig/Acv/Cybermind/Requirement=在各種難度中擊敗<c val="FF0000">機械主宰</c>(最後一擊)。
+Trig/Acv/Essences/Name=原質
+Trig/Acv/Essences/Requirement=收集~VALUE~個原質
+Trig/Acv/Flamer/Name=<c val="FF0000">戰狼</c> 
+Trig/Acv/Flamer/Requirement=在各種難度中擊敗<c val="FF0000">戰狼</c>(最後一擊)。
+Trig/Acv/FlawlessP0/Name=<c val="800080">完美無瑕(人族)</c> 
+Trig/Acv/FlawlessP0/Requirement=在<c val="800080">孵化所無擊殺</c>且存活的狀況下戰勝人族。
+Trig/Acv/FlawlessP1/Name=<c val="800080">完美無瑕(神族)</c> 
+Trig/Acv/FlawlessP1/Requirement=在<c val="800080">蟲穴無擊殺</c>且存活的狀況下戰勝神族。
+Trig/Acv/FlawlessP2/Name=<c val="800080">完美無瑕(蟲族)</c> 
+Trig/Acv/FlawlessP2/Requirement=在<c val="800080">蟲巢無擊殺</c>且存活的狀況下戰勝機甲蟲族。
+Trig/Acv/Fortress/Name=<c val="FF0000">行星要塞</c> 
+Trig/Acv/Fortress/Requirement=在各種難度中擊敗<c val="FF0000">行星要塞</c>(最後一擊)。
+Trig/Acv/Gary/Name=<c val="FF0000">蓋瑞</c> 
+Trig/Acv/Gary/Requirement=在各種難度中擊敗<c val="FF0000">蓋瑞</c>(最後一擊)。
+Trig/Acv/Hammer/Name=<c val="FF0000">雷神</c> 
+Trig/Acv/Hammer/Requirement=在各種難度中擊敗<c val="FF0000">雷神</c>(最後一擊)。
+Trig/Acv/Kerrigan/Name=<c val="FF0000">凱利根</c> 
+Trig/Acv/Kerrigan/Requirement=在各種難度中擊敗<c val="FF0000">凱利根</c>(最後一擊)。
+Trig/Acv/Kills/Name=復仇
+Trig/Acv/Kills/Requirement=殺死~VALUE~個敵人。
+Trig/Acv/KingMoopy/Name=<c val="FF0000">穆比</c> 
+Trig/Acv/KingMoopy/Requirement=在各種難度中擊敗<c val="FF0000">穆比</c>(最後一擊)。
+Trig/Acv/Lightning/Name=<c val="FF0000">閃電</c> 
+Trig/Acv/Lightning/Requirement=在各種難度中擊敗<c val="FF0000">閃電</c>(最後一擊)。
+Trig/Acv/Madness/Name=<c val="FF0000">普羅米修斯</c> 
+Trig/Acv/Madness/Requirement=在各種難度中擊敗<c val="FF0000">普羅米修斯</c>(最後一擊)。
+Trig/Acv/MoopyHats/Name=魔法帽
+Trig/Acv/MoopyHats/Requirement=從小穆比身上獲得~VALUE~個魔法帽
+Trig/Acv/Points/Name=積分
+Trig/Acv/Points/Requirement=獲得~VALUE~點積分
+Trig/Acv/PsiOrbs/Name=幽能球
+Trig/Acv/PsiOrbs/Requirement=吸收~VALUE~個幽能球
+Trig/Acv/Raynor/Name=<c val="FF0000">雷諾</c> 
+Trig/Acv/Raynor/Requirement=在各種難度中擊敗<c val="FF0000">雷諾</c>(最後一擊)。
+Trig/Acv/Scientists/Name=生物學
+Trig/Acv/Scientists/Requirement=捕獲~VALUE~個科學家
+Trig/Acv/Score/Name=階級
+Trig/Acv/Score/Requirement=獲得~VALUE~點成就分數
+Trig/Acv/Score/Reward=你的階級:~VALUE~
+Trig/Acv/Speedruns/P0D0/Name=簡單
+Trig/Acv/Speedruns/P0D1/Name=普通
+Trig/Acv/Speedruns/P0D2/Name=困難
+Trig/Acv/Speedruns/P0D3/Name=殘酷
+Trig/Acv/Speedruns/P0D4/Name=瘋狂
+Trig/Acv/Speedruns/P0D5/Name=硬核
+Trig/Acv/Speedruns/P0D5Small/Reward=恭喜！你證明了這是可能的。作為獎勵，您可以使用 -dance 讓閃電和雷電跳舞。
+Trig/Acv/Speedruns/P0Suffix=（人族）
+Trig/Acv/Speedruns/P1Suffix= (神族)
+Trig/Acv/Speedruns/P2Suffix= (蟲族)
+Trig/Acv/Speedruns/Requirement/Speedy=在~VALUE~內完成
+Trig/Acv/Speedruns/Requirement/TeamSize1=單人通過~VALUE~難度。
+Trig/Acv/Speedruns/Requirement/TeamSize2=雙人組通過~VALUE~難度(最多兩名玩家)。
+Trig/Acv/Speedruns/Requirement/TeamSize3=三人組通過~VALUE~難度(最多三名玩家)。
+Trig/Acv/Speedruns/Requirement/TeamSize6=通過~VALUE~難度。
+Trig/Acv/Stetmann/Name=<c val="FF0000">斯特曼</c> 
+Trig/Acv/Stetmann/Requirement=在各種難度中擊敗<c val="FF0000">斯特曼</c>(最後一擊)。
+Trig/Acv/Thunder/Name=<c val="FF0000">雷電</c> 
+Trig/Acv/Thunder/Requirement=在各種難度中擊敗<c val="FF0000">雷電</c>(最後一擊)。
+Trig/Acv/Trophy/Name=壯舉
+Trig/Acv/Trophy/P0D4DuoFtl=人族瘋狂二人組超光速
+Trig/Acv/Trophy/P0D5Duo=人族硬核二人組
+Trig/Acv/Trophy/P1D2SoloFtl=神族困難單人超光速
+Trig/Acv/Trophy/P1D3DuoFtl=神族殘酷雙人組超光速
+Trig/Acv/Trophy/P1D4TrioFtl=神族瘋狂三人組超光速
+Trig/Acv/Trophy/P1D5Team=神族硬核
+Trig/Acv/Trophy/Reward=你在以前立下了大功。你會得到這個奶酪形象的獎勵。祝您在未來再次獲得這些壯舉而感到高興。</n></n>您已完成：
+Trig/Acv/Tutorial/Name=啟程
+Trig/Acv/Tutorial/Requirement=完成教學模式。
+Trig/Acv/UI/AbilUnlock/Mid=~VALUE~解鎖於~VALUE2~
+Trig/Acv/UI/Armor=<n/>+~VALUE~裝甲
+Trig/Acv/UI/Atkspd=<n/>+~VALUE~%攻擊速度
+Trig/Acv/UI/BiomassPerKill=<n/>+~VALUE~生物質/每殺
+Trig/Acv/UI/CyberneticsDmg=<n/>+~VALUE~傷害於精銳蟲族
+Trig/Acv/UI/CyberneticsLife=<n/>+~VALUE~生命於精銳蟲族
+Trig/Acv/UI/CyberneticsRestore=<n/>精銳復活已解鎖
+Trig/Acv/UI/CyberneticsUpgrade=<n/>被俘的科學家會暫時強化精銳蟲族
+Trig/Acv/UI/DiffUnlock=~VALUE~難度解鎖
+Trig/Acv/UI/Dmg=<n/>+~VALUE~傷害
+Trig/Acv/UI/Energy=<n/>+~VALUE~能量
+Trig/Acv/UI/EnergyRegen=<n/>+~VALUE~%能量再生
+Trig/Acv/UI/ExpPerKill=<n/>+~VALUE~經驗值/每殺
+Trig/Acv/UI/HeroUnlock=<n/>~VALUE~解鎖
+Trig/Acv/UI/HiveAuraP0/Armor=<n/>+~VALUE~%傷害減免於孵化所光環
+Trig/Acv/UI/HiveAuraP0/Atkspd=<n/>+~VALUE~%攻擊速度於孵化所光環
+Trig/Acv/UI/HiveAuraP0/DebuffAtkspd=<n/>-~VALUE~%攻擊速度於孵化所減益光環
+Trig/Acv/UI/HiveAuraP0/Dmg=<n/>+~VALUE~傷害於孵化所光環
+Trig/Acv/UI/HiveAuraP0/EnergyRegen=<n/>+~VALUE~能量再生於孵化所光環
+Trig/Acv/UI/HiveAuraP0/LifeRegen=<n/>+~VALUE~生命再生於孵化所光環
+Trig/Acv/UI/HiveAuraP0/TimeScale=<n/>+~VALUE~%時間加速於孵化所光環
+Trig/Acv/UI/HiveAuraP1/Armor=<n/>+~VALUE~%傷害減免於蟲穴光環
+Trig/Acv/UI/HiveAuraP1/Atkspd=<n/>+~VALUE~%攻擊速度於蟲穴光環
+Trig/Acv/UI/HiveAuraP1/Dmg=<n/>+~VALUE~傷害於蟲穴光環
+Trig/Acv/UI/HiveAuraP1/EnergyRegen=<n/>+~VALUE~能量再生於蟲穴光環
+Trig/Acv/UI/HiveAuraP1/LifeRegen=<n/>+~VALUE~生命再生於蟲穴光環
+Trig/Acv/UI/HiveAuraP1/TimeScale=<n/>+~VALUE~%時間加速於蟲穴光環
+Trig/Acv/UI/HiveAuraP2/Armor=<n/>+~VALUE~%傷害減免於蟲巢光環
+Trig/Acv/UI/HiveAuraP2/Atkspd=<n/>+~VALUE~%攻擊速度於蟲巢光環
+Trig/Acv/UI/HiveAuraP2/Dmg=<n/>+~VALUE~傷害於蟲巢光環
+Trig/Acv/UI/HiveAuraP2/EnergyRegen=<n/>+~VALUE~能量再生於蟲巢光環
+Trig/Acv/UI/HiveAuraP2/LifeRegen=<n/>+~VALUE~生命再生於蟲巢光環
+Trig/Acv/UI/HiveAuraP2/TimeScale=<n/>+~VALUE~%時間加速於蟲巢光環
+Trig/Acv/UI/Life=<n/>+~VALUE~生命
+Trig/Acv/UI/LifeBankUnlock=<n/><c val="800080">孢子爬行蟲</c>解鎖 
+Trig/Acv/UI/LifeRegen=<n/>+~VALUE~%生命再生
+Trig/Acv/UI/LurkerUnlock=<n/><c val="800080">遁地獸</c>解鎖
+Trig/Acv/UI/MaxStage=<n/><n/>達到最高等級。
+Trig/Acv/UI/OverlordSpeed=<n/>+~VALUE~王蟲移動速度
+Trig/Acv/UI/RunlingUnlock=<n/><c val="800080">異化蟲</c>解鎖 
+Trig/Acv/UI/Score=<n/>+~VALUE~成就分數
+Trig/Acv/UI/Speed=<n/>+~VALUE~移動速度
 Trig/Acv/UI/Speedy0=
-Trig/Acv/UI/Speedy1=Speedy
-Trig/Acv/UI/Speedy2=FTL
-Trig/Acv/UI/Spellpower=<n/>+~VALUE~% spellpower
-Trig/Acv/UI/Splash=<n/>+~VALUE~ splash range
+Trig/Acv/UI/Speedy1=迅速
+Trig/Acv/UI/Speedy2=超光速
+Trig/Acv/UI/Spellpower=<n/>+~VALUE~%技能增幅
+Trig/Acv/UI/Splash=<n/>+~VALUE~濺射範圍
 Trig/Acv/UI/Stage0=
 Trig/Acv/UI/Stage1=I
 Trig/Acv/UI/Stage10=X
@@ -614,97 +719,98 @@ Trig/Acv/UI/Stage6=VI
 Trig/Acv/UI/Stage7=VII
 Trig/Acv/UI/Stage8=VIII
 Trig/Acv/UI/Stage9=IX
-Trig/Acv/UI/StartBiomassP0=<n/>+~VALUE~ starting biomass
-Trig/Acv/UI/StartBiomassP1=<n/>+~VALUE~ biomass when starting to fight protoss
-Trig/Acv/UI/StartBiomassP2=<n/>+~VALUE~ biomass when starting to fight mecha zergs
-Trig/Acv/UI/StartExpP0=<n/>+~VALUE~ starting experience
-Trig/Acv/UI/StartExpP1=<n/>+~VALUE~ experience when starting to fight protoss
-Trig/Acv/UI/StartExpP2=<n/>+~VALUE~ experience when starting to fight mecha zergs
-Trig/Acv/UI/StartMutationsP0=<n/>+~VALUE~ <lang rule="plural">starting mutation,starting mutations</lang>
-Trig/Acv/UI/StartMutationsP1=<n/>+~VALUE~ <lang rule="plural">mutation,mutations</lang> when starting to fight protoss
-Trig/Acv/UI/StartMutationsP2=<n/>+~VALUE~ <lang rule="plural">mutation,mutations</lang> when starting to fight mecha zergs
-Trig/Acv/UI/Vision=<n/>+~VALUE~ vision range
-Trig/Acv/WinsP0/Name=Wins (Terran)
-Trig/Acv/WinsP0/Requirement=Obtain ~VALUE~ victories over the terran forces.
-Trig/Acv/WinsP1/Name=Wins (Protoss)
-Trig/Acv/WinsP1/Requirement=Obtain ~VALUE~ victories over the protoss explorers.
-Trig/Acv/WinsP2/Name=Wins (Mecha)
-Trig/Acv/WinsP2/Requirement=Obtain ~VALUE~ victories over the mecha zergs.
-Trig/AcvUI/Global=Global
-Trig/AcvUI/NextPlayerTooltip=Next player
-Trig/AcvUI/PrevPlayerTooltip=Previous player
-Trig/AcvUnlock/Atlantis=Achievement unlocked. (Atlantis)
-Trig/AcvUnlock/D0=Achievement unlocked. (Easy)
-Trig/AcvUnlock/D1=Achievement unlocked. (Normal)
-Trig/AcvUnlock/D2=Achievement unlocked. (Hard)
-Trig/AcvUnlock/D3=Achievement unlocked. (Brutal)
-Trig/AcvUnlock/D4=Achievement unlocked. (Insane)
-Trig/AcvUnlock/D5=Achievement unlocked. (Hardcore)
-Trig/AcvUnlock/Essences=Achievement unlocked. (Essences)
-Trig/AcvUnlock/Flamer=Achievement unlocked. (Flamer)
-Trig/AcvUnlock/Flawless=Achievement unlocked. (Flawless)
-Trig/AcvUnlock/Fortress=Achievement unlocked. (Fortress)
-Trig/AcvUnlock/Hammer=Achievement unlocked. (Hammer)
-Trig/AcvUnlock/Kills=Achievement unlocked. (Kills)
-Trig/AcvUnlock/Lightning=Achievement unlocked. (Lightning)
-Trig/AcvUnlock/Madness=Achievement unlocked. (Madness)
-Trig/AcvUnlock/Points=Achievement unlocked. (Points)
-Trig/AcvUnlock/PsiOrbs=Achievement unlocked. (Psi Orbs)
-Trig/AcvUnlock/Scientists=Achievement unlocked. (Science)
-Trig/AcvUnlock/Thunder=Achievement unlocked. (Thunder)
-Trig/AcvUnlock/Wins=Achievement unlocked. (Wins)
-Trig/Bank/BackupFail=Loading backup failed! Resetting stats.
-Trig/Bank/BackupSuccess=Loading backup succeeded! Overwriting corrupted main bank.
-Trig/Bank/MainFail=Loading failed! Attempting to load backup.
-Trig/Bank/MainSuccess=Loading successful.
-Trig/Bank/ManualSaveButton=Save
-Trig/Bank/ManualSaveButtonTooltip=Manually save your stats.</n></n>The game will automatically save if you gain any collectible or kill any boss.
-Trig/Bank/NewPlayer=New player detected
-Trig/Bank/NoMainButBackup=Main bank file not found but backup existing! Trying to restore.
-Trig/Bank/NoMainButBackupSuccess=Loading backup succeeded! Overwriting corrupted main bank.
-Trig/Bosskilled=Boss defeated! (~VALUE~/~VALUE2~) +~VALUE3~ <lang rule="plural">Point,Points</lang>.
-Trig/Bosskilled/NydusWormAlive=You feel vibrations from deep below...
-Trig/Bosskilled/NydusWormDead=Now its time to destroy these inferior replicas. Wipe them out!
-Trig/Bosskilled/ObserverAlive=You feel an evil presence watching you...
-Trig/Bosskilled/ObserverDead=Now its the protoss turn to die. Wipe them out!
-Trig/CustomDefeat/Leave=Leave
-Trig/CustomDefeat/Spectate=Spectate
-Trig/CustomDefeat/Text=<c val="FF0000">Your hero died!</c> Be more careful next time.<n/>You can choose to spectate or leave the game.
-Trig/CustomDefeat/TextSolo=<c val="FF0000">Your hero died!</c> Be more careful next time.
-Trig/Enemy/AreaOpen/BlackOps=The <c val="FF8000">special forces </c>started to attack us from another area with upgraded equipment.<n/>They now provide <c val="FF8000">more biomass and experience</c>.<n/><c val="FF8000">Additional upgrades </c>available for the swarm.
-Trig/Enemy/AreaOpen/Facility=The <c val="FF8000">facility </c>is open and produces protoss units to attack us.<n/>They now provide <c val="FF8000">more biomass and experience</c>.<n/><c val="FF8000">Additional upgrades </c>available for the swarm.
-Trig/Enemy/AreaOpen/Junker=The <c val="FF8000">mercenaries </c>started to attack us from another area with upgraded equipment.<n/>They now provide <c val="FF8000">more biomass and experience</c>.<n/><c val="FF8000">Additional upgrades </c>available for the swarm.
-Trig/Enemy/AreaOpen/Mech=The <c val="FF8000">robotic warriors </c>started to attack us from another area with upgraded equipment.<n/>They now provide <c val="FF8000">more biomass and experience</c>.<n/><c val="FF8000">Additional upgrades </c>available for the swarm.
-Trig/Enemy/AreaOpen/Mecha=The <c val="FF8000">fake swarm </c>started to attack us from another area with upgraded equipment.<n/>They now provide <c val="FF8000">more biomass and experience</c>.<n/><c val="FF8000">Additional upgrades </c>available for the swarm.
-Trig/Enemy/AreaOpen/Moopy=You can now attack the <c val="FF8000">hidden mastermind</c>.<n/>Destroy that fool.
-Trig/Enemy/AreaOpen/MoopyCanBeOpened=You are close to getting the attention of the <c val="FF8000">hidden mastermind</c>. Try angering him by killing his champions.
-Trig/Enemy/AreaOpen/MoopyClosed=The <c val="FF8000">hidden mastermind</c> is uninterested in you.<n/>Try grabbing his attention next time.
-Trig/Enemy/AreaOpen/Psi=The <c val="FF8000">psionic warriors </c>started to attack us from another area with upgraded equipment.<n/>They now provide <c val="FF8000">more biomass and experience</c>.<n/><c val="FF8000">Additional upgrades </c>available for the swarm.
-Trig/Enemy/Bridge/Flamer=The bridge to the Flamer is now open.
-Trig/Enemy/Bridge/Fortress=The bridge to the Fortress is now open.
-Trig/Enemy/Bridge/Hammer=The bridge to the Hammer is now open.
-Trig/Enemy/NydusWorm/KillAfterBosses=The nydus worm has found some tunnel filled with mechanical replicas. Use it now.
-Trig/Enemy/NydusWorm/KillBeforeBosses=The nydus worm has found some tunnel filled with mechanical replicas. We will take care of them after this protoss facility is destroyed.
-Trig/Enemy/Observer/Hint=We have sensed something in this area. Quickly check it out before its somewhere else.
-Trig/Enemy/Observer/KillAfterBosses=We have extracted information about the protoss research facility. Wipe them out now!
-Trig/Enemy/Observer/KillBeforeBosses=We have extracted information about the protoss research facility. We will wipe them out after we have finished those puny terrans.
-Trig/Enemy/PartTransition/NewHive=A new hive has been found and burrowed zergs are safe again.
-Trig/Enemy/PartTransition/Upgrades=The swarm evolved to support more upgrades.
-Trig/Enemy/SpawnLimitClose=Warning! Kill units to prevent spawn limit to be reached!
-Trig/Enemy/SpawnLimitReached=Enemy spawn limit reached. Structures are invulnerable until enough enemies are killed.
-Trig/Essence/Collected=~VALUE~ collected an essence. Spellpower increased.
-Trig/Generic/DiffName/0=Easy
-Trig/Generic/DiffName/1=Normal
-Trig/Generic/DiffName/2=Hard
-Trig/Generic/DiffName/3=Brutal
-Trig/Generic/DiffName/4=Insane
-Trig/Generic/DiffName/5=Hardcore
-Trig/Generic/DiffNameColored/0=<c val="00FF00">Easy</c>
-Trig/Generic/DiffNameColored/1=<c val="FFFF00">Normal</c>
-Trig/Generic/DiffNameColored/2=<c val="FF0000">Hard</c>
-Trig/Generic/DiffNameColored/3=<c val="FF8000">Brutal</c>
-Trig/Generic/DiffNameColored/4=<c val="0000FF">Insane</c>
-Trig/Generic/DiffNameColored/5=<c val="00FFFF">Hardcore</c>
+Trig/Acv/UI/StartBiomassP0=<n/>+~VALUE~起始生物質
+Trig/Acv/UI/StartBiomassP1=<n/>+~VALUE~神族階段起始生物質
+Trig/Acv/UI/StartBiomassP2=<n/>+~VALUE~蟲族階段起始生物質
+Trig/Acv/UI/StartExpP0=<n/>+~VALUE~起始經驗值
+Trig/Acv/UI/StartExpP1=<n/>+~VALUE~神族階段起始經驗值
+Trig/Acv/UI/StartExpP2=<n/>+~VALUE~蟲族階段起始經驗值
+Trig/Acv/UI/StartMutationsP0=<n/>+~VALUE~ <lang rule="plural">起始突變</lang>
+Trig/Acv/UI/StartMutationsP1=<n/>+~VALUE~ <lang rule="plural">神族階段起始突變</lang>
+Trig/Acv/UI/StartMutationsP2=<n/>+~VALUE~ <lang rule="plural">蟲族階段起始突變</lang>
+Trig/Acv/UI/Vision=<n/>+~VALUE~視野範圍
+Trig/Acv/WinsP0/Name=獲勝(人族)
+Trig/Acv/WinsP0/Requirement=戰勝人族軍隊~VALUE~次。
+Trig/Acv/WinsP1/Name=獲勝(神族)
+Trig/Acv/WinsP1/Requirement=戰勝神族探險者~VALUE~次。
+Trig/Acv/WinsP2/Name=獲勝(蟲族)
+Trig/Acv/WinsP2/Requirement=戰勝機甲蟲族~VALUE~次。
+Trig/AcvUI/Global=全域
+Trig/AcvUI/NextPlayerTooltip=下一位玩家
+Trig/AcvUI/PrevPlayerTooltip=上一位玩家
+Trig/AcvUnlock/Atlantis=成就完成(聖母艦)
+Trig/AcvUnlock/D0=成就完成(簡單)
+Trig/AcvUnlock/D1=成就完成(普通)
+Trig/AcvUnlock/D2=成就完成(困難)
+Trig/AcvUnlock/D3=成就完成(殘酷)
+Trig/AcvUnlock/D4=成就完成(瘋狂)
+Trig/AcvUnlock/D5=成就完成(硬核)
+Trig/AcvUnlock/Essences=成就完成(原質)
+Trig/AcvUnlock/Flamer=成就完成(戰狼)
+Trig/AcvUnlock/Flawless=成就完成(完美無瑕)
+Trig/AcvUnlock/Fortress=成就完成(行星要塞)
+Trig/AcvUnlock/Hammer=成就完成(雷神)
+Trig/AcvUnlock/Kills=成就完成(復仇)
+Trig/AcvUnlock/Lightning=成就完成(閃電)
+Trig/AcvUnlock/Madness=成就完成(普羅米修斯)
+Trig/AcvUnlock/Points=成就完成(積分)
+Trig/AcvUnlock/PsiOrbs=成就完成(幽能球)
+Trig/AcvUnlock/Scientists=成就完成(生物學)
+Trig/AcvUnlock/Thunder=成就完成(雷電)
+Trig/AcvUnlock/Wins=成就完成(獲勝)
+Trig/Bank/BackupFail=加載備份失敗！重置紀錄。
+Trig/Bank/BackupSuccess=加載備份成功！已覆蓋損壞的主紀錄。
+Trig/Bank/MainFail=加載失敗！正在嘗試加載備份。
+Trig/Bank/MainSuccess=加載成功。
+Trig/Bank/ManualSaveButton=保存
+Trig/Bank/ManualSaveButtonTooltip=手動保存您的紀錄。</n></n>如果您獲得任何收藏品或殺死任何首領，遊戲將自動保存。
+Trig/Bank/NewPlayer=我們有一位新朋友
+Trig/Bank/NoMainButBackup=未找到主紀錄，但備份存在！試圖恢復中...
+Trig/Bank/NoMainButBackupSuccess=加載備份成功！已覆蓋損壞的主紀錄。
+Trig/Bosskilled=首領已擊敗！(~VALUE~/~VALUE2~) +~VALUE3~<lang rule="plural">積分</lang>。
+Trig/Bosskilled/NydusWormAlive=你感覺到來自地下深處的震動......
+Trig/Bosskilled/NydusWormDead=現在是時候摧毀這些劣質仿冒品了，把它們消滅掉！
+Trig/Bosskilled/ObserverAlive=你感覺到有一個邪惡的存在正在注視著你......
+Trig/Bosskilled/ObserverDead=該來殺死這些邪惡的神族了，把他們消滅掉！
+Trig/CloseButton=X
+Trig/CustomDefeat/Leave=離開
+Trig/CustomDefeat/Spectate=觀戰
+Trig/CustomDefeat/Text=<c val="FF0000">你的英雄死了！</c>下次小心點。<n/>你可以選擇觀戰或離開遊戲。
+Trig/CustomDefeat/TextSolo=<c val="FF0000">你的英雄死了！</c>下次小心點。
+Trig/Enemy/AreaOpen/BlackOps=更多<c val="FF8000">特種兵</c>開始從新的地區攻擊我們。<n/>他們現在更強同時也提供<c val="FF8000">更多的生物質和經驗值</c>.<n/>現在你可以使用<c val="FF8000">額外升級</c>。
+Trig/Enemy/AreaOpen/Facility=更多<c val="FF8000">淨化部隊</c>開始從新的地區攻擊我們。<n/>他們現在更強同時也提供<c val="FF8000">更多的生物質和經驗值</c>.<n/>現在你可以使用<c val="FF8000">額外升級</c>。
+Trig/Enemy/AreaOpen/Junker=更多<c val="FF8000">雇傭兵</c>開始從新的地區攻擊我們。<n/>他們現在更強同時也提供<c val="FF8000">更多的生物質和經驗值</c>.<n/>現在你可以使用<c val="FF8000">額外升級</c>。
+Trig/Enemy/AreaOpen/Mech=更多<c val="FF8000">神族士兵</c>開始從新的地區攻擊我們。<n/>他們現在更強同時也提供<c val="FF8000">更多的生物質和經驗值</c>.<n/>現在你可以使用<c val="FF8000">額外升級</c>。
+Trig/Enemy/AreaOpen/Mecha=更多<c val="FF8000">機甲蟲群</c>開始從新的地區攻擊我們。<n/>他們現在更強同時也提供<c val="FF8000">更多的生物質和經驗值</c>.<n/>現在你可以使用<c val="FF8000">額外升級</c>。
+Trig/Enemy/AreaOpen/Moopy=你現在可以攻擊<c val="FF8000">隱藏的主謀</c>。<n/>消滅那個渾蛋！
+Trig/Enemy/AreaOpen/MoopyCanBeOpened=你即將引起<c val="FF8000">隱藏的主謀</c>的注意。嘗試殺死他的小穆比來激怒他。
+Trig/Enemy/AreaOpen/MoopyClosed=<c val="FF8000">隱藏的主謀</c>對你感到無趣。<n/>下次嘗試引起他的注意。
+Trig/Enemy/AreaOpen/Psi=更多<c val="FF8000">神族戰士</c>開始從新的地區攻擊我們。<n/>他們現在更強同時也提供<c val="FF8000">更多的生物質和經驗值</c>.<n/>現在你可以使用<c val="FF8000">額外升級</c>。
+Trig/Enemy/Bridge/Flamer=通往戰狼的橋樑現已打開。
+Trig/Enemy/Bridge/Fortress=通往行星要塞的橋樑現已打開。
+Trig/Enemy/Bridge/Hammer=通往雷神的橋樑現已打開。
+Trig/Enemy/NydusWorm/KillAfterBosses=蠕蟲發現了充滿機械仿冒品的隧道。讓它帶領我們前往。
+Trig/Enemy/NydusWorm/KillBeforeBosses=蠕蟲發現了充滿機械仿冒品的隧道。我們會在神族被摧毀後光顧它們。
+Trig/Enemy/Observer/Hint=我們在這個附近感覺到了一些東西。在它離開之前快速尋找它。
+Trig/Enemy/Observer/KillAfterBosses=我們從這觀察者提取了有關神族的位置訊息。立即前往並將他們消滅！
+Trig/Enemy/Observer/KillBeforeBosses=我們從這觀察者提取了有關神族的位置訊息。在我們殺死了那些微不足道的人族之後，我們將前往並消滅他們。
+Trig/Enemy/PartTransition/NewHive=我們找到一個新的蟲巢了。地洞的蟲群又安全了！
+Trig/Enemy/PartTransition/Upgrades=蟲巢進化了，獲得更多升級！
+Trig/Enemy/SpawnLimitClose=警告！殺死敵方單位以防止達到敵人數量上限！
+Trig/Enemy/SpawnLimitReached=已達到敵人數量限制。在清除足夠多的敵人之前，建築是無敵的。
+Trig/Essence/Collected=~VALUE~為蟲群收集了一個原質。技能效果增加。
+Trig/Generic/DiffName/0=簡單
+Trig/Generic/DiffName/1=普通
+Trig/Generic/DiffName/2=困難
+Trig/Generic/DiffName/3=殘酷
+Trig/Generic/DiffName/4=瘋狂
+Trig/Generic/DiffName/5=硬核
+Trig/Generic/DiffNameColored/0=<c val="00FF00">簡單</c>
+Trig/Generic/DiffNameColored/1=<c val="FFFF00">普通</c>
+Trig/Generic/DiffNameColored/2=<c val="FF0000">困難</c>
+Trig/Generic/DiffNameColored/3=<c val="FF8000">殘酷</c>
+Trig/Generic/DiffNameColored/4=<c val="0000FF">瘋狂</c>
+Trig/Generic/DiffNameColored/5=<c val="00FFFF">硬核</c>
 Trig/Generic/DiffNameShort/0=E
 Trig/Generic/DiffNameShort/1=N
 Trig/Generic/DiffNameShort/2=H
@@ -717,236 +823,236 @@ Trig/Generic/DiffNameShortColored/2=<c val="FF0000">H</c>
 Trig/Generic/DiffNameShortColored/3=<c val="FF8000">B</c>
 Trig/Generic/DiffNameShortColored/4=<c val="0000FF">I</c>
 Trig/Generic/DiffNameShortColored/5=<c val="00FFFF">HC</c>
-Trig/Generic/PartName/0=Terran
-Trig/Generic/PartName/1=Protoss
-Trig/Generic/PartName/2=Mecha
-Trig/Generic/TeamSize/1=Solo
-Trig/Generic/TeamSize/2=Duo
-Trig/Generic/TeamSize/3=Trio
-Trig/Generic/TeamSize/6=Team
-Trig/HelpMenu/FAQ/Content=Q: How to survive?<n/>A: Stay near the hive while you upgrade your armor at the overlord!<n/><n/>Q: How do I get Biomass?<n/>A: Kill any enemy.<n/><n/>Q: How do I get Mutations?<n/>A: Kill enemy spawner. Take care as spawners will spawn widow mines upon death which explode in your face.<n/><n/>Q: How do I kill spawners?<n/>A: Get a lot of damage and armor upgrades. Also bring your overlord for detection and creep. Creep is very powerful as it doubles your regeneration and increases your movement speed.<n/><n/>Q: How do I unlock new heroes?<n/>A: Kill bosses to gain points. If you have enough points you can choose new heroes.<n/><n/>Q: What happens if I cannot kill enemies fast enough?<n/>A: At some point the game will stop spawning new enemies but in return all enemy structures are invulnerable until you killed enough enemies and spawns are enabled again. You will get a warning if you are getting close.<n/><n/>Q: What does achievement X unlock?<n/>A: That differs a lot depending on the achievement. A full list can be found in the discord but you can always check other players achievements and look at the rewards. Generally they boost your overall power level.<n/><n/>Q: How do I find essences?<n/>A: Find cloaked larva (Normal or higher difficulty). You can spot them with a keen eye. Then bring your overlord to decloak it and kill it. Essence can be looted then.<n/><n/>Q: How do I unlock lurkers?<n/>A: Capture scientists. After collecting 10 of them you will be able to build them at your overlord.<n/><n/>Q: How do I reach part 2 (protoss)?<n/>A: After killing all terran bosses you will get a hint. After some time there will be more hints.<n/><n/>Q: How do I get psi orbs?<n/>A: Part 2 exclusive collectible. Also check if it actually shows in the objective list. If it does, search the map before killing Atlantis (last boss).<n/><n/>
-Trig/HelpMenu/FAQ/Title=F A Q
-Trig/HeroSelection/CustomDiff/ApproximatedDiff=Points and collectibles are based on: ~VALUE~
-Trig/HeroSelection/CustomDiff/ApproximatedDiffNone=Could not approximate a difficulty. Points, wins and collectibles will not be rewarded.
-Trig/HeroSelection/CustomDiff/Armor=Boss Armor
-Trig/HeroSelection/CustomDiff/ArmorTooltip=Defines the percentage armor increase for bosses.<n/><n/>Values must be greater than -100.
-Trig/HeroSelection/CustomDiff/Atkspd=Attack speed (%)
-Trig/HeroSelection/CustomDiff/AtkspdTooltip=Defines the percentage attack speed increase for enemies.<n/><n/>Values must be greater than -100.
-Trig/HeroSelection/CustomDiff/BiomassMultiplier=Biomass (%)
-Trig/HeroSelection/CustomDiff/BiomassMultiplierTooltip=Defines the modifier for biomass from kills.<n/><n/>Values must be greater than -100.
-Trig/HeroSelection/CustomDiff/BossAbilities=Boss abilities
-Trig/HeroSelection/CustomDiff/BossAbilitiesTooltip=Enables bosses to use abilities from this difficulty and below.<n/><n/>Values must be intergers from 0 (=Easy) to 5 (=Hardcore).
-Trig/HeroSelection/CustomDiff/CustomPreset/CopyClipboardButton=Copy
-Trig/HeroSelection/CustomDiff/CustomPreset/CopyClipboardButtonTooltip=Copies the created string to clipboard.
-Trig/HeroSelection/CustomDiff/CustomPreset/CreateButton=Create
-Trig/HeroSelection/CustomDiff/CustomPreset/CreateButtonTooltip=Creates a string which stores all inputs.
-Trig/HeroSelection/CustomDiff/CustomPreset/LoadButton=Load
-Trig/HeroSelection/CustomDiff/CustomPreset/LoadButtonTooltip=Loads the values from the input string.
-Trig/HeroSelection/CustomDiff/CustomPreset/LoadButtonTooltipNotHost=Only host can change inputs.
-Trig/HeroSelection/CustomDiff/Damage=Damage (%)
-Trig/HeroSelection/CustomDiff/DamageReduction=Damage Reduction (%)
-Trig/HeroSelection/CustomDiff/DamageReductionTooltip=Defines the percentage damage reduction for enemies.<n/><n/>Values must be greater or equal than 0 and less than 100.
-Trig/HeroSelection/CustomDiff/DamageTooltip=Defines the percentage damage increase for enemies.<n/><n/>Values must be greater than -100.
-Trig/HeroSelection/CustomDiff/ExpMultiplier=Experience (%)
-Trig/HeroSelection/CustomDiff/ExpMultiplierTooltip=Defines the modifier for experience from kills.<n/><n/>Values must be greater than -100.
-Trig/HeroSelection/CustomDiff/InputAccepted=Valid input.
-Trig/HeroSelection/CustomDiff/InputRejected=Invalid input.
-Trig/HeroSelection/CustomDiff/Lifes=Lifes
-Trig/HeroSelection/CustomDiff/LifesTooltip=Defines the amount of lifes for each player.<n/>Any value except 0 will result in an invalidated game with no rewards.<n/><n/>Values must be greater or equal to 0.
-Trig/HeroSelection/CustomDiff/Movementspeed=Movement speed (%)
-Trig/HeroSelection/CustomDiff/MovementspeedTooltip=Defines the percentage movement speed increase for enemies.<n/><n/>Values must be greater than -100.
-Trig/HeroSelection/CustomDiff/Regen=Regen (%)
-Trig/HeroSelection/CustomDiff/RegenTooltip=Defines the percentage regen increase for enemies.<n/><n/>Values must be greater than -100.
-Trig/HeroSelection/CustomDiff/SkipP0=Skip Terran
-Trig/HeroSelection/CustomDiff/SkipP0Tooltip=When enabled the game will immediatly allow you to move to the protoss part.<n/><n/>Enabling this will result in an invalidated game with no rewards.
-Trig/HeroSelection/CustomDiff/SkipP1=Skip Protoss
-Trig/HeroSelection/CustomDiff/SkipP1Tooltip=When enabled the game will immediatly allow you to move to the mecha part upon entering protoss part.<n/><n/>Enabling this will result in an invalidated game with no rewards.
-Trig/HeroSelection/CustomDiff/SpawnMultiplier=Spawn (%)
-Trig/HeroSelection/CustomDiff/SpawnMultiplierTooltip=Defines the modifier for spawn amounts. Actual spawned units are being rounded up.<n/><n/>Values must be greater than -100.
-Trig/HeroSelection/CustomDiff/StartBiomass=Start Biomass
-Trig/HeroSelection/CustomDiff/StartBiomassTooltip=Defines the amount of additional starting biomass for each player.<n/>Any value except 0 will result in an invalidated game with no rewards.<n/><n/>Values must be greater or equal to 0.
-Trig/HeroSelection/CustomDiff/StartExp=Start Experience
-Trig/HeroSelection/CustomDiff/StartExpTooltip=Defines the amount of additional starting experience for each player.<n/>Any value except 0 will result in an invalidated game with no rewards.<n/><n/>Values must be greater or equal to 0.
-Trig/HeroSelection/CustomDiff/StartMutation=Start Mutation
-Trig/HeroSelection/CustomDiff/StartMutationTooltip=Defines the amount of starting mutations for each player.<n/>Any value except 0 will result in an invalidated game with no rewards.<n/><n/>Values must be greater or equal to 0.
-Trig/HeroSelection/CustomDiff/Upgrades=Upgrades (%)
-Trig/HeroSelection/CustomDiff/UpgradesTooltip=Defines the amount of upgrades available. Highest possible upgrade is 100.<n/>Any value higher than 0 will result in an invalidated game with no rewards.<n/><n/>Values must be greater than -100.
-Trig/HeroSelection/CustomDiff/Vitals=Vitals (%)
-Trig/HeroSelection/CustomDiff/VitalsTooltip=Defines the percentage life and shield increase for enemies.<n/><n/>Values must be greater than -100 and less or equal to 300.
-Trig/HeroSelection/Dialog/AutoSelection=Auto Select
-Trig/HeroSelection/Dialog/AutoSelectionTooltip=Saves this hero choice to be automatically picked in your future games. Can be changed in the options menu at any time.
-Trig/HeroSelection/Dialog/DiffButton/Any=<c val="FFFFFF">Any</c>
-Trig/HeroSelection/Dialog/DiffButton/AnyTooltip=Selecting this will make your vote behave the same as not voting for any difficulty at all.
-Trig/HeroSelection/Dialog/DiffButton/Custom=<c val="FFFFFF">Custom</c>
-Trig/HeroSelection/Dialog/DiffButton/D0=<c val="00FF00">Easy</c>
-Trig/HeroSelection/Dialog/DiffButton/D0Tooltip=For new players. Bosses do not use abilities.<n/><n/>Enemy stats:<n/>
-Trig/HeroSelection/Dialog/DiffButton/D1=<c val="FFFF00">Normal</c>
-Trig/HeroSelection/Dialog/DiffButton/D1Tooltip=Still hard to fail. Bosses start using their first ability.<n/><n/>Enemy stats:<n/>
-Trig/HeroSelection/Dialog/DiffButton/D2=<c val="FF0000">Hard</c>
-Trig/HeroSelection/Dialog/DiffButton/D2Tooltip=Second boss ability unlocked. Okay if you look at your hero.<n/><n/>Enemy stats:<n/>
-Trig/HeroSelection/Dialog/DiffButton/D3=<c val="FF8000">Brutal</c>
-Trig/HeroSelection/Dialog/DiffButton/D3Tooltip=Pretty hard. Requires constant care of your hero. Also bosses use their third ability.<n/><n/>Enemy stats:<n/>
-Trig/HeroSelection/Dialog/DiffButton/D4=<c val="0000FF">Insane</c>
-Trig/HeroSelection/Dialog/DiffButton/D4Tooltip=Even 2 seconds of not caring is deadly here. Do not try until you are experienced with the game.<n/><n/>Enemy stats:<n/>
-Trig/HeroSelection/Dialog/DiffButton/D5=<c val="00FFFF">Hardcore</c>
-Trig/HeroSelection/Dialog/DiffButton/D5Tooltip=One missclick and you are dead. Only try this with a full team of experienced players.<n/><n/>Enemy stats:<n/>
-Trig/HeroSelection/Dialog/NoHeroSelected=Not picked yet
-Trig/HeroSelection/Dialog/ReadyButton=<c val="FFFF00">Ready!</c>
-Trig/HeroSelection/Dialog/ReadyButtonCustomDiffHostTooltip=Inputs are not valid!
-Trig/HeroSelection/Dialog/ReadyButtonTooltip=Select a hero first!
-Trig/HeroSelection/Dialog/SelectHeroLabel=Choose a Hero:
-Trig/HeroSelection/Diff=Difficulty:
-Trig/HeroSelection/DiffNone=No player voted for a difficulty. Auto-selecting easy.
-Trig/HeroSelection/DiffToken=Difficulty: ~VALUE~
-Trig/HeroSelection/Hero/Bowler/Long=The Bowler is the prime example of random mutations. It gained the ability to constantly produce banelings and is very good at dealing with lots of enemies at the same time.<n/><n/>+<d ref="Accumulator,HeroBowlerWeaponDmgModifier,Amount-1*100"/>% damage from upgrades and levels<n/>-15% armor from upgrades<n/>+133% splash range<n/>+20% splash range from upgrades
-Trig/HeroSelection/Hero/Bowler/Unlock=Requires Points Stage I.
-Trig/HeroSelection/Hero/Hardskin/Long=The Hardskin has evolved to be able to defend against everything but lost most of its offensive abilities.<n/><n/>+<d ref="(Behavior,HeroRavagerAttribute,Modification.VitalMaxArray[Life]/Behavior,HeroRoachAttribute,Modification.VitalMaxArray[Life])-1*100"/>% life from levels<n/><d ref="Accumulator,HeroRavagerWeaponDmgModifier,Amount-1*100"/>% damage from upgrades and levels<n/>-50% splash range<n/>+50% armor from upgrades<n/><d ref="(Behavior,HeroRavagerAttribute,Modification.MoveSpeedBonus/Behavior,HeroRoachAttribute,Modification.MoveSpeedBonus)-1*100"/>% movement speed from levels<n/>+100% life regeneration
-Trig/HeroSelection/Hero/Hardskin/Unlock=Requires Points Stage II.
-Trig/HeroSelection/Hero/Spitter/Long=The Spitter is overall balanced and every member of the swarm starts as one.
-Trig/HeroSelection/Hero/Spitter/Unlock=Beginner Hero
-Trig/HeroSelection/Hero/Stinger/Long=The Stinger is more focused on the offensive than defense.<n/><n/><d ref="(Behavior,HeroHydraAttribute,Modification.VitalMaxArray[Life]/Behavior,HeroRoachAttribute,Modification.VitalMaxArray[Life])-1*100"/>% life from levels<n/>+<d ref="Accumulator,HeroHydraWeaponDmgModifier,Amount-1*100"/>% damage from upgrades and levels<n/>-25% armor from upgrades<n/>-50% splash range
-Trig/HeroSelection/Hero/Stinger/Unlock=Requires Points Stage III.
-Trig/HeroSelection/Hero/SwarmMother/Long=The Swarm Mother's focus is supporting the swarm.<n/><n/><d ref="Accumulator,HeroSwarmQueenWeaponDmgModifier,Amount-1*100"/>% damage from upgrades and levels<n/>+100% energy regeneration
-Trig/HeroSelection/Hero/SwarmMother/Unlock=Requires Points Stage IV.
-Trig/HiveDies=The protection of the hive has been lost. The burrowed zerg are no longer safe.
-Trig/HivePanel/Flawless=Flawless:
-Trig/HivePanel/Kills=Kills:
-Trig/Menu/Achievements=Achievements
-Trig/Menu/DiscordTooltip=Copies Discord invite link to clipboard.<n/>https://discord.gg/KwxNAJ2
-Trig/Menu/Options=Options
-Trig/Menu/Speedruns=Speedruns
-Trig/Menu/Stats=Stats
-Trig/Menu/Votekick=Votekick
-Trig/Menu/VotekickRequirement=Requires 3 active or 1 spectating player.
-Trig/MenuOpener/Text=Menu
-Trig/MoopyHats/Collected=~VALUE~ collected a hat of power. You can feel the universe flowing through you.
-Trig/Objectives/Essences=Gather Essence (~VALUE~/?)
-Trig/Objectives/Main=Defeat bosses (~VALUE~/~VALUE2~)
-Trig/Objectives/NydusWorm=Nydus Worm found
-Trig/Objectives/Observer=Observer found
-Trig/Objectives/PsiOrb=Find a Psi Orb
-Trig/Objectives/Scientist/One/Init=Capture the scientist
-Trig/Objectives/Scientist/Two=Capture Scientists (~VALUE~/~VALUE2~)
-Trig/Options/AutoControlGroups=Auto control groups
-Trig/Options/AutoControlGroups/Hero=Hero
-Trig/Options/AutoControlGroupsTooltip=Enables auto grouping for this unit type.
-Trig/Options/AutoHeroSelection=Auto hero selection
-Trig/Options/AutoHeroSelection/LockedHero=Auto selected hero is locked. Reset to Spitter.
-Trig/Options/AutoHeroSelectionTooltip=Enables auto hero selection at the beginning of the game.
-Trig/Options/HeroPanelShow=Show Hero panel
-Trig/Options/HeroPanelShowTooltip=Shows the hero panel in the top right corner of the screen instead of the small button above the default game menu button at the right side.
-Trig/Options/HivePanelShow=Show Hive panel
-Trig/Options/HivePanelShowTooltip=Shows the hive panel in the top middle of the screen that shows the current Hive life and kills. Useful if you aim for flawless.
-Trig/Options/InitialUnitSelection=Initial Selection
-Trig/Options/InitialUnitSelection/Both=Both
-Trig/Options/InitialUnitSelection/Hero=Hero
-Trig/Options/InitialUnitSelection/None=None
-Trig/Options/InitialUnitSelection/Overlord=Overlord
-Trig/Options/InitialUnitSelectionTooltip=Defines what unit is automatically selected after the hero selection
-Trig/Options/SpeedrunsDetails=Speedrun details
-Trig/Options/SpeedrunsDetailsTooltip=Shows speedruns for all possible player amounts instead of team and solo/duo/trio.
-Trig/PlayerDies=~VALUE~ has died.
-Trig/PlayerDies/Rank=Dead 
-Trig/PlayerLeft/Rank=Leaver 
-Trig/PlayerWin/Button=<h/>Win
+Trig/Generic/PartName/0=人族
+Trig/Generic/PartName/1=神族
+Trig/Generic/PartName/2=蟲族
+Trig/Generic/TeamSize/1=單人
+Trig/Generic/TeamSize/2=雙人
+Trig/Generic/TeamSize/3=三人
+Trig/Generic/TeamSize/6=多人
+Trig/HelpMenu/FAQ/Content=問：如何生存？<n/>答：在升級裝甲之前留在蟲巢附近！<n/><n/>問：我如何獲得生物質？<n/>答：殺死任何敵人。<n/><n/>問：我如何獲得突變？<n/>答：摧毀敵人的生產建築。小心生產建築被摧毀後會出現寡婦詭雷，這些詭雷會在你的臉上爆炸。<n/><n/>問：我如何摧毀建築？<n/>答：獲得大量的傷害和裝甲升級。還要帶上你的王蟲進行反隱和產生蟲胎。蟲胎非常強大，因為它可以使你的再生加倍並提高你的移動速度。<n/><n/>問：我如何解鎖新英雄？<n/>答：殺死首領以獲得積分。如果你有足夠的積分，你可以選擇新的英雄。<n/><n/>問：如果我不能快速殺光敵人會怎樣？<n/>答：當敵人數量到達一定的數量，敵方將會停止生產單位，在您殺死足夠多的敵人並再次啟用生成之前，所有敵方建築都是無敵的。如果接近數量上限，你會收到警告。<n/><n/>問：成就會解鎖什麼？<n/>答：這取決於成就的不同。完整列表可以在 Discord 中找到，但您可以隨時查看其他玩家的成就並查看獎勵。<n/><n/>問：我如何找到原質？<n/>答：找到隱形的幼蟲（普通或更高難度）。你可以用敏銳的眼光發現它們。然後帶上你的王蟲去揭開它並殺死它。之後你就可以掠奪原質。<n/><n/>問：如何解鎖遁地獸？<n/>答：捕獲科學家。收集10個後，你就可以在你的王蟲那裡生產它們。<n/><n/>問：我如何到達第2部分（神族）？<n/>答：殺死所有人族BOSS後，你會得到一個提示。一段時間後會有更多提示。<n/><n/>問：我如何獲得幽能球？（困難或更高難度）<n/>答：是第2部分的收藏品。您可以在殺死聖母艦（神族的最後一個首領）之後搜索地圖。<n/><n/>
+Trig/HelpMenu/FAQ/Title=常見問題
+Trig/HeroSelection/CustomDiff/ApproximatedDiff=積分與收藏品的數量:~VALUE~
+Trig/HeroSelection/CustomDiff/ApproximatedDiffNone=無法判定一個難度。勝利、積分和收藏品將不會獲得。
+Trig/HeroSelection/CustomDiff/Armor=首領裝甲
+Trig/HeroSelection/CustomDiff/ArmorTooltip=定義首領的裝甲增加百分比。<n/><n/>數值必須大於-100。
+Trig/HeroSelection/CustomDiff/Atkspd=攻擊速度(%)
+Trig/HeroSelection/CustomDiff/AtkspdTooltip=定義敵人的攻擊速度增加百分比。<n/><n/>數值必須大於-100。
+Trig/HeroSelection/CustomDiff/BiomassMultiplier=生物質(%)
+Trig/HeroSelection/CustomDiff/BiomassMultiplierTooltip=定義擊殺敵人獲得的生物質數量。<n/><n/>數值必須大於-100。
+Trig/HeroSelection/CustomDiff/BossAbilities=首領技能
+Trig/HeroSelection/CustomDiff/BossAbilitiesTooltip=使首領能夠使用此難度及以下難度的技能。<n/><n/>數值必須是從0（簡單）到5（硬核）的整數。
+Trig/HeroSelection/CustomDiff/CustomPreset/CopyClipboardButton=複製
+Trig/HeroSelection/CustomDiff/CustomPreset/CopyClipboardButtonTooltip=將創建的字符串複製到剪貼版。
+Trig/HeroSelection/CustomDiff/CustomPreset/CreateButton=創建
+Trig/HeroSelection/CustomDiff/CustomPreset/CreateButtonTooltip=創建一個存儲所有數值的字符串。
+Trig/HeroSelection/CustomDiff/CustomPreset/LoadButton=加載
+Trig/HeroSelection/CustomDiff/CustomPreset/LoadButtonTooltip=從輸入的字符串加載數值。
+Trig/HeroSelection/CustomDiff/CustomPreset/LoadButtonTooltipNotHost=只有房主可以更改輸入。
+Trig/HeroSelection/CustomDiff/Damage=傷害(%)
+Trig/HeroSelection/CustomDiff/DamageReduction=傷害減免(%)
+Trig/HeroSelection/CustomDiff/DamageReductionTooltip=定義敵人的傷害減免百分比。<n/><n/>數值必須大於或等於0且小於100。
+Trig/HeroSelection/CustomDiff/DamageTooltip=定義敵人的傷害增加百分比。<n/><n/>數值必須大於-100。
+Trig/HeroSelection/CustomDiff/ExpMultiplier=經驗值(%)
+Trig/HeroSelection/CustomDiff/ExpMultiplierTooltip=定義擊殺敵人獲得的經驗值數量。<n/><n/>數值必須大於-100。
+Trig/HeroSelection/CustomDiff/InputAccepted=有效輸入。
+Trig/HeroSelection/CustomDiff/InputRejected=無效輸入。
+Trig/HeroSelection/CustomDiff/Lifes=復活
+Trig/HeroSelection/CustomDiff/LifesTooltip=定義每個玩家的復活次數。<n/>除0以外的任何數值都將導致遊戲無效，沒有獎勵。<n/><n/>數值必須大於或等於0。
+Trig/HeroSelection/CustomDiff/Movementspeed=移動速度(%)
+Trig/HeroSelection/CustomDiff/MovementspeedTooltip=定義敵人的移動速度增加百分比。<n/><n/>數值必須大於-100。
+Trig/HeroSelection/CustomDiff/Regen=再生(%)
+Trig/HeroSelection/CustomDiff/RegenTooltip=定義敵人的再生百分比。<n/><n/>數值必須大於-100。
+Trig/HeroSelection/CustomDiff/SkipP0=跳過人族
+Trig/HeroSelection/CustomDiff/SkipP0Tooltip=啟用後，遊戲將立即允許您移動到神族部分。<n/><n/>啟用此功能將導致遊戲無效且沒有獎勵。
+Trig/HeroSelection/CustomDiff/SkipP1=跳過神族
+Trig/HeroSelection/CustomDiff/SkipP1Tooltip=啟用後，遊戲將允許您在進入神族部分時移動到機甲蟲族部分。<n/><n/>啟用此功能將導致遊戲無效，沒有獎勵。
+Trig/HeroSelection/CustomDiff/SpawnMultiplier=生產(%)
+Trig/HeroSelection/CustomDiff/SpawnMultiplierTooltip=定義敵人的生產數量。實際生成的單位會向上取整。<n/><n/>數值必須大於-100。
+Trig/HeroSelection/CustomDiff/StartBiomass=起始生物質
+Trig/HeroSelection/CustomDiff/StartBiomassTooltip=定義每個玩家的額外起始生物質數量。<n/>除0以外的任何數值都將導致遊戲無效，沒有獎勵。<n/><n/>數值必須大於或等於0。
+Trig/HeroSelection/CustomDiff/StartExp=起始經驗值
+Trig/HeroSelection/CustomDiff/StartExpTooltip=定義每個玩家的額外起始經驗值數量。<n/>除0以外的任何數值都將導致遊戲無效，沒有獎勵。<n/><n/>數值必須大於或等於0。
+Trig/HeroSelection/CustomDiff/StartMutation=起始突變
+Trig/HeroSelection/CustomDiff/StartMutationTooltip=定義每個玩家的起始突變數量。<n/>除0以外的任何數值都將導致遊戲無效且沒有獎勵。<n/><n/>數值必須大於或等於0。
+Trig/HeroSelection/CustomDiff/Upgrades=升級(%)
+Trig/HeroSelection/CustomDiff/UpgradesTooltip=定義可用的升級次數。最高可能升級為100。<n/>任何大於0的數值都將導致遊戲無效，沒有獎勵。<n/><n/>值必須大於-100。
+Trig/HeroSelection/CustomDiff/Vitals=生命(%)
+Trig/HeroSelection/CustomDiff/VitalsTooltip=定義敵人的生命和護盾百分比。<n/><n/>數值必須大於-100且小於或等於300。
+Trig/HeroSelection/Dialog/AutoSelection=自動選擇
+Trig/HeroSelection/Dialog/AutoSelectionTooltip=保存此英雄選擇，以便在您未來的遊戲中自動選擇。可以隨時在選單中的選項更改
+Trig/HeroSelection/Dialog/DiffButton/Any=<c val="FFFFFF">任何</c>
+Trig/HeroSelection/Dialog/DiffButton/AnyTooltip=選擇此項將使您的投票與不投票一樣。
+Trig/HeroSelection/Dialog/DiffButton/Custom=<c val="FFFFFF">自定</c>
+Trig/HeroSelection/Dialog/DiffButton/D0=<c val="00FF00">簡單</c>
+Trig/HeroSelection/Dialog/DiffButton/D0Tooltip=適合新玩家。首領不使用技能。<n/><n/>敵人屬性：<n/>
+Trig/HeroSelection/Dialog/DiffButton/D1=<c val="FFFF00">普通</c>
+Trig/HeroSelection/Dialog/DiffButton/D1Tooltip=仍然很難戰敗。<n/>首領開始使用他們的第一個技能。<n/><n/>敵人屬性：<n/>
+Trig/HeroSelection/Dialog/DiffButton/D2=<c val="FF0000">困難</c>
+Trig/HeroSelection/Dialog/DiffButton/D2Tooltip=你需要注意你的英雄。<n/>首領的第二個技能解鎖。<n/><n/>敵人屬性：<n/>
+Trig/HeroSelection/Dialog/DiffButton/D3=<c val="FF8000">殘酷</c>
+Trig/HeroSelection/Dialog/DiffButton/D3Tooltip=有一定的難度。你需要不斷注意你的英雄及首領。<n/>首領也會使用他們的第三個技能。<n/><n/>敵人屬性：<n/>
+Trig/HeroSelection/Dialog/DiffButton/D4=<c val="0000FF">瘋狂</c>
+Trig/HeroSelection/Dialog/DiffButton/D4Tooltip=即使是 2 秒的分心在這裡也是致命的。<n/>在您熟悉遊戲之前不要嘗試。<n/><n/>敵人屬性：<n/>
+Trig/HeroSelection/Dialog/DiffButton/D5=<c val="00FFFF">硬核</c>
+Trig/HeroSelection/Dialog/DiffButton/D5Tooltip=一旦操作失誤，你就死定了！<n/>只能與經驗豐富的完整團隊一起嘗試。<n/><n/>敵人屬性：<n/>
+Trig/HeroSelection/Dialog/NoHeroSelected=尚未選擇
+Trig/HeroSelection/Dialog/ReadyButton=<c val="FFFF00">準備！</c>
+Trig/HeroSelection/Dialog/ReadyButtonCustomDiffHostTooltip=輸入無效！
+Trig/HeroSelection/Dialog/ReadyButtonTooltip=先選英雄！
+Trig/HeroSelection/Dialog/SelectHeroLabel=選擇英雄：
+Trig/HeroSelection/Diff=難度：
+Trig/HeroSelection/DiffNone=沒有玩家投票選擇難度。系統將自動選擇-簡單。
+Trig/HeroSelection/DiffToken=難度:~VALUE~
+Trig/HeroSelection/Hero/Bowler/Long=飛螳是進化的優秀品種。它獲得了不斷產生毒爆蟲的能力，並且非常擅長同時對付大量敵人。<n/><n/>+<d ref="Accumulator,HeroBowlerWeaponDmgModifier,Amount-1*100"/>%攻防和等級傷害<n/>-15%攻防裝甲<n/>+133%濺射範圍<n/>+20%升級的濺射範圍
+Trig/HeroSelection/Hero/Bowler/Unlock=由積分階段一解鎖。
+Trig/HeroSelection/Hero/Hardskin/Long=劫毀蟲已經進化到能夠防禦一切，但失去了許多進攻能力。<n/><n/>+<d ref="(Behavior,HeroRavagerAttribute,Modification.VitalMaxArray[Life]/Behavior,HeroRoachAttribute,Modification.VitalMaxArray[Life])-1*100"/>%等級生命<n/><d ref="Accumulator,HeroRavagerWeaponDmgModifier,Amount-1*100"/>%攻防和等級傷害<n/>-50%濺射範圍<n/>+50%攻防裝甲<n/><d ref="(Behavior,HeroRavagerAttribute,Modification.MoveSpeedBonus/Behavior,HeroRoachAttribute,Modification.MoveSpeedBonus)-1*100"/>%等級移動速度<n/>+100%生命再生
+Trig/HeroSelection/Hero/Hardskin/Unlock=由積分階段二解鎖。
+Trig/HeroSelection/Hero/Spitter/Long=蟑螂總體上來說是平衡的，每個蟲群的成員進化都是從他開始的。
+Trig/HeroSelection/Hero/Spitter/Unlock=初始英雄
+Trig/HeroSelection/Hero/Stinger/Long=刺蛇更注重進攻而不是防守。<n/><n/><d ref="(Behavior,HeroHydraAttribute,Modification.VitalMaxArray[Life]/Behavior,HeroRoachAttribute,Modification.VitalMaxArray[Life])-1*100"/>%攻防生命<n/>+<d ref="Accumulator,HeroHydraWeaponDmgModifier,Amount-1*100"/>%攻防和等級傷害<n/>-25%攻防裝甲<n/>-50%濺射範圍
+Trig/HeroSelection/Hero/Stinger/Unlock=由積分階段三解鎖。
+Trig/HeroSelection/Hero/SwarmMother/Long=后蟲進化成了能夠協助與輔助蟲群的重要角色。<n/><n/><d ref="Accumulator,HeroSwarmQueenWeaponDmgModifier,Amount-1*100"/>%攻防和等級傷害<n/>+100%能量再生
+Trig/HeroSelection/Hero/SwarmMother/Unlock=由積分階段四解鎖。
+Trig/HiveDies=蟲巢已經被摧毀。地洞裡的蟲族不再安全了。
+Trig/HivePanel/Flawless=完美無瑕：
+Trig/HivePanel/Kills=擊殺數：
+Trig/Menu/Achievements=成就
+Trig/Menu/DiscordTooltip=將 Discord 邀請鏈結複製到剪貼簿。<n/>https://discord.gg/KwxNAJ2
+Trig/Menu/Options=選項
+Trig/Menu/Speedruns=速通
+Trig/Menu/Stats=統計數據
+Trig/Menu/Votekick=踢除
+Trig/Menu/VotekickRequirement=需要3名活躍玩家或1名旁觀玩家。
+Trig/MenuOpener/Text=選單
+Trig/MoopyHats/Collected=~VALUE~為蟲群收集了一頂魔法帽。你感覺到蟲群吸收了宇宙的能量。
+Trig/Objectives/Essences=收集原質(~VALUE~/?)
+Trig/Objectives/Main=擊敗首領(~VALUE~/~VALUE2~)
+Trig/Objectives/NydusWorm=發現蠕蟲
+Trig/Objectives/Observer=發現觀察者
+Trig/Objectives/PsiOrb=尋找幽能球
+Trig/Objectives/Scientist/One/Init=捕獲科學家
+Trig/Objectives/Scientist/Two=捕獲科學家(~VALUE~/~VALUE2~)
+Trig/Options/AutoControlGroups=自動編隊
+Trig/Options/AutoControlGroups/Hero=英雄
+Trig/Options/AutoControlGroupsTooltip=啟用此單位類型的自動編隊。
+Trig/Options/AutoHeroSelection=自動英雄選擇
+Trig/Options/AutoHeroSelection/LockedHero=自動選擇的英雄被鎖定。將重置為蟑螂。
+Trig/Options/AutoHeroSelectionTooltip=在遊戲開始時啟用自動英雄選擇。
+Trig/Options/HeroPanelShow=顯示英雄面板
+Trig/Options/HeroPanelShowTooltip=在螢幕右上角顯示英雄面板，而不是默認的右側遊戲選單上方的小按鈕。
+Trig/Options/HivePanelShow=顯示蟲巢面板
+Trig/Options/HivePanelShowTooltip=在螢幕頂部中間顯示蟲巢面板，顯示當前蟲巢的生命和擊殺數。如果您的目標是完美無瑕，這很有用。
+Trig/Options/InitialUnitSelection=初始選擇
+Trig/Options/InitialUnitSelection/Both=英雄和王蟲
+Trig/Options/InitialUnitSelection/Hero=英雄
+Trig/Options/InitialUnitSelection/None=無
+Trig/Options/InitialUnitSelection/Overlord=王蟲
+Trig/Options/InitialUnitSelectionTooltip=設定遊戲開始後自動選取某些單位
+Trig/Options/SpeedrunsDetails=速通詳情
+Trig/Options/SpeedrunsDetailsTooltip=顯示所有玩家數量的通關時間，而不是只有多人和單人/雙人/三人組。
+Trig/PlayerDies=~VALUE~已死亡。
+Trig/PlayerDies/Rank=死亡 
+Trig/PlayerLeft/Rank=離開 
+Trig/PlayerWin/Button=<h/>勝利
 Trig/PlayerWin/ButtonHotkey=W
-Trig/PlayerWin/Rank=Won
-Trig/Playerboard/DevRank=Dev 
+Trig/PlayerWin/Rank=勝利 
+Trig/Playerboard/DevRank=開發者 
 Trig/Playerboard/DevScore=-∞!
-Trig/Playerboard/PlayerLabel=Player
-Trig/Playerboard/Rank0=Larva 
-Trig/Playerboard/Rank1=Feederling 
-Trig/Playerboard/Rank10=Brood Lord 
-Trig/Playerboard/Rank11=Viper 
-Trig/Playerboard/Rank2=Broodling 
-Trig/Playerboard/Rank3=Drone 
-Trig/Playerboard/Rank4=Locust 
-Trig/Playerboard/Rank5=Ling 
-Trig/Playerboard/Rank6=Roachling 
-Trig/Playerboard/Rank7=Pygalisk 
-Trig/Playerboard/Rank8=Mutalisk 
-Trig/Playerboard/Rank9=Corruptor 
-Trig/Playerboard/ScoreLabel=Score
-Trig/Popup/AcvMsg=Achievement unlocked:
-Trig/Popup/AcvTooltipExtra=Click to in open achievement panel.
-Trig/Popup/Close=Dismiss notification.
-Trig/Popup/SpeedrunMsg=New Speedrun:
-Trig/Popup/SpeedrunsTooltipExtra=Click to in open speedruns panel.
-Trig/PsiOrb/Collected=~VALUE~ collected the psi orb. Your psionic powers grow.
-Trig/RespawnEgg/PlayerSaved=~VALUE~ was saved by ~VALUE2~'s egg.
-Trig/Scientist/Collected=~VALUE~ has captured a scientist for the swarm.
+Trig/Playerboard/PlayerLabel=玩家
+Trig/Playerboard/Rank0=幼蟲 
+Trig/Playerboard/Rank1=成蟲 
+Trig/Playerboard/Rank10=寄生王蟲 
+Trig/Playerboard/Rank11=飛蟒 
+Trig/Playerboard/Rank2=寄生蟲 
+Trig/Playerboard/Rank3=工蟲 
+Trig/Playerboard/Rank4=蝗蟲 
+Trig/Playerboard/Rank5=異化蟲 
+Trig/Playerboard/Rank6=蟑螂 
+Trig/Playerboard/Rank7=雷獸 
+Trig/Playerboard/Rank8=飛螳 
+Trig/Playerboard/Rank9=腐化飛蟲 
+Trig/Playerboard/ScoreLabel=分數
+Trig/Popup/AcvMsg=成就完成：
+Trig/Popup/AcvTooltipExtra=點擊以打開成就面板。
+Trig/Popup/Close=關閉通知。
+Trig/Popup/SpeedrunMsg=新速通：
+Trig/Popup/SpeedrunsTooltipExtra=點擊以打開速通面板。
+Trig/PsiOrb/Collected=~VALUE~為蟲群吸收了幽能球。你們的幽能增強。
+Trig/RespawnEgg/PlayerSaved=~VALUE~被~VALUE2~的守護之蛋給拯救了。
+Trig/Scientist/Collected=~VALUE~為蟲群抓獲了一名科學家。
 Trig/Speedruns/EmptyTime=-:--:--
-Trig/Stats/Essences=Essences: 
-Trig/Stats/Kills=Kills: 
-Trig/Stats/MoopyHats=Magic Hats: 
-Trig/Stats/Points=Points: 
-Trig/Stats/PsiOrbs=Psi Orbs: 
-Trig/Stats/Scientists=Scientists: 
-Trig/Stats/WinsP0=Wins Terran: 
-Trig/Stats/WinsP1=Wins Protoss: 
-Trig/Stats/WinsP2=Wins Mecha: 
-Trig/Tutorial/AskTutorial/No=No
-Trig/Tutorial/AskTutorial/Text=You have not played the tutorial yet.<n/>Do you want to play it now?
-Trig/Tutorial/AskTutorial/Yes=Yes
-Trig/Tutorial/BridgeController=After destroying the bridge controller, you now have access to the boss Fortress on the other side of the bridge.
-Trig/Tutorial/Continue=Continue
-Trig/Tutorial/End=With Fortress dead, the tutorial is now finished.<n/>In a classic game there are 2 more bosses.<n/>I suggest playing some public games to get some basic achievements which will help you a lot.<n/>If you have feedback for the game, check out the discord server (link is in the map description or in the ingame menu).<n/>Have fun and thanks for playing the tutorial.
-Trig/Tutorial/EndButton=Finish
-Trig/Tutorial/Essence=For this tutorial I have unlocked your second ability <c val="FF8000">Glue Stream</c>.<n/>Normally you have to gather a total of 5 essences to unlock this.<n/>Note that in a classic game larvae will only spawn in difficulty Normal or higher.
-Trig/Tutorial/FirstAttackWave=The terran enemy will continuously send units to attack you.<n/>By killing them you gain Biomass.
-Trig/Tutorial/FirstPush=While attacking you should always bring your overlord with you.<n/>The creep provides you with double the regeneration, increased movement speed and decloaks ghosts.<n/><n/>If you are too lazy to control your overlord manually, you can let it follow your hero.
-Trig/Tutorial/FirstSpawner=This structure is a spawner.<n/><n/>After killing a spawner, a few Widow Mines will try to attack you by <c val="FF0000">exploding in your face</c>.<n/>With maxed armor they will not deal too much damage in <c val="00FF00">Easy </c>but be aware of them in higher difficulties.
-Trig/Tutorial/Fortress=Up ahead is Fortress. In easy bosses will not use any ability but on higher difficulties these abilities are deadly.
-Trig/Tutorial/Hero=This roach is your hero.<n/><n/><c val="FF0000">If it dies, you lose!</c>
-Trig/Tutorial/HeroDies=Your hero died! Normally you would have lost the game but in this tutorial you are revived at the hive.
-Trig/Tutorial/Hive=The hive supports you with a powerful aura.<n/>It is allowed to die, but the aura is lost then.
-Trig/Tutorial/IssueExplore=The main objective is to kill all enemy bosses.<n/>Explore the area around the hive.
-Trig/Tutorial/Larva=There is a cloaked larva close by. Use creep to decloak it.<n/>Upon death the larva will drop an essence.<n/>Larva spawns are randomized across the map.<n/>If you gathered enough essences you unlock additional abilities for your hero.
-Trig/Tutorial/LarvaObjective=Kill the larva and gather its essence.
-Trig/Tutorial/MainObjective=Kill the terrans.
-Trig/Tutorial/MainObjective2=Kill the boss Fortress.
-Trig/Tutorial/MiniIntroduction/Exit=Got it!
-Trig/Tutorial/MiniIntroduction/Showcase=<c val="00FF00">New</c>
-Trig/Tutorial/MiniIntroduction/Text=Welcome to <c val="FF0000">Swarm Special Forces</c>.<n/>Consider playing the dedicated tutorial mode to learn the game.<n/>There is also a FAQ section in the help menu (F12).<n/><n/><c val="FF0000">TLDR: don't die!</c>
-Trig/Tutorial/MoneySkip=To speed things up, here is some Biomass to upgrade your hero.<n/>Kills also provide experience to level up your hero. Lets add some experience as well.
-Trig/Tutorial/Overlord=This is your overlord.<n/><n/>It cannot die but is stunned when attacked.<n/>You can buy upgrades for your hero here.<n/>It also provides creep.
-Trig/Tutorial/Scientist=There is a terran scientist nearby.<n/>The scientist will be stunned once his life is low.<n/>While stunned you can use your overlord to capture him.<n/>In a classic game the scientist spawns at a randomized location.<n/>Capturing enough scientists allows you to train cybernetic enhanced zergs from your overlord.
-Trig/Tutorial/ScientistCaptured=To show you what types of cybernetic units you can unlock, here are some Runlings for free.
-Trig/Tutorial/ScientistObjective=Capture the scientist.
-Trig/Tutorial/SurvivedWidowMines=Killing spawners will provide you with Mutations. <n/>Use Mutations to upgrade your regeneration and attack speed at your overlord.
-Trig/Tutorial/WelcomeMsg=Welcome to the <c val="FF0000">Swarm Special Forces</c> tutorial.<n/><n/>I will guide you through the basics of the game.
-Trig/Votekick/Admin=Unable to votekick admin ~VALUE~.
-Trig/Votekick/Init=Vote against ~VALUE~ initialized. (Menu -> Votekick)
-Trig/Votekick/Kick=~VALUE~ has been kicked.
-Trig/Votekick/Label=Votekick:
-Trig/WinP0/Message=GG! You defeated the terran army.
-Trig/WinP1/Message=GG! You defeated the protoss army.
-Trig/WinP2/Message=GG! You defeated the mecha swarm.
-UI/AIMinerals_Name=<s val="@@StandardTooltipHeader">Request Biomass</s><n/>
-UI/AIMinerals_Tooltip=Request Biomass from any A.I.
-UI/AIVespene_Name=<s val="@@StandardTooltipHeader">Request Mutations</s><n/>
-UI/Minerals=Biomass
-UI/MineralsCollected=Biomass Collected
-UI/MineralsSpent=Biomass Spent
-UI/PlayerStatResources=Biomass
-UI/ResourceCost0=Biomass: %1
-UI/ResourceCost1=Mutations: %1
-UI/ResourceName0=Biomass
-UI/ResourceName1=Mutations
-UI/TeamColor09=Violet
-UI/TeamColor10=Light Grey
-UI/TeamColor11=Dark Green
-UI/TeamColor12=Brown
-UI/TeamColor13=Light Green
-UI/TeamColor14=Dark Grey
-UI/TeamColor15=Pink
-Unit/Category/SSFPlayerUnits=- Swarm Special Forces -
-Unit/CyberneticLurker/ArmorTooltip=Damage Reduction: <d ref="(1-Behavior,CyberneticLurkerArmor,DamageResponse.ModifyFraction)*100" precision="2"/>%
-Unit/HeroBowler/ArmorTooltip=Damage Reduction: <d ref="(1-Behavior,HeroBowlerArmor,DamageResponse.ModifyFraction)*100" precision="2"/>%
-Unit/HeroHydra/ArmorTooltip=Damage Reduction: <d ref="(1-Behavior,HeroHydraArmor,DamageResponse.ModifyFraction)*100" precision="2"/>%
-Unit/HeroRavager/ArmorTooltip=Damage Reduction: <d ref="(1-Behavior,HeroRavagerArmor,DamageResponse.ModifyFraction)*100" precision="2"/>%
-Unit/HeroRoach/ArmorTooltip=Damage Reduction: <d ref="(1-Behavior,HeroRoachArmor,DamageResponse.ModifyFraction)*100" precision="2"/>%
-Unit/KingMoopy/ArmorTooltip=Damage Reduction: <d ref="(1-Behavior,KingMoopyArmor,DamageResponse.ModifyFraction)*100" precision="2"/>%
+Trig/Stats/Essences=原質: 
+Trig/Stats/Kills=擊殺數: 
+Trig/Stats/MoopyHats=魔法帽: 
+Trig/Stats/Points=積分: 
+Trig/Stats/PsiOrbs=幽能球: 
+Trig/Stats/Scientists=科學家: 
+Trig/Stats/WinsP0=人族獲勝: 
+Trig/Stats/WinsP1=神族獲勝: 
+Trig/Stats/WinsP2=蟲族獲勝: 
+Trig/Tutorial/AskTutorial/No=不
+Trig/Tutorial/AskTutorial/Text=您還沒有玩過教學。<n/>要現在玩嗎？
+Trig/Tutorial/AskTutorial/Yes=好
+Trig/Tutorial/BridgeController=摧毀橋樑控制器後，您現在可以進攻橋樑另一側的行星要塞首領。
+Trig/Tutorial/Continue=繼續
+Trig/Tutorial/End=行星要塞死了，教學到此結束。<n/>一般遊戲中還有2個首領。<n/>建議可以玩一些公開遊戲來獲得一些基礎成就。<n/>如果您對遊戲有任何反饋，請查看 Discord 服務器。<n/>（鏈結在地圖說明或遊戲內菜單中）<n/>祝您玩得開心，感謝您遊玩本教學。
+Trig/Tutorial/EndButton=結束
+Trig/Tutorial/Essence=在本教學中，解鎖了你的第二個技能<c val="FF8000">黏液</c>。<n/>通常你必須收集總共 5 個原質才能解鎖。<n/>請注意，在一般遊戲中，幼蟲只會在普通或更高難度下出現。
+Trig/Tutorial/FirstAttackWave=人族敵人會不斷派出單位攻擊你。<n/>殺死他們可以獲得生物質。
+Trig/Tutorial/FirstPush=推動時，你應該始終帶上你的王蟲。<n/>蟲胎會為你提供雙倍的再生，提高移動速度並偵測隱形。<n/><n/>如果懶得手動控制你的王蟲，你可以讓它跟隨你的英雄。
+Trig/Tutorial/FirstSpawner=這個是一個生產建築。<n/><n/>摧毀一個生產建築後，寡婦詭雷會嘗試<c val="FF0000">在你的臉上爆炸</c>來攻擊你。<n/>在 <c val="00FF00">簡單</c> 中，他們的數量不多，不會造成太大的傷害，但在更高的難度下要注意他們。
+Trig/Tutorial/Fortress=前面是行星要塞。在簡單難度中首領不會使用任何技能，但在更高的難度下，這些技能多元且致命。
+Trig/Tutorial/Hero=這隻蟑螂是你的英雄。<n/><n/><c val="FF0000">如果它死了，你就輸了！</c>
+Trig/Tutorial/HeroDies=你的英雄死了！通常你會輸掉遊戲，但在本教學中你會在蟲巢中復活。
+Trig/Tutorial/Hive=蟲巢會給你強大的增益。<n/>但它可以被敵人摧毀，而且增益會消失。
+Trig/Tutorial/IssueExplore=主要目標是殺死所有敵方首領。<n/>你可以嘗試探索蟲巢周圍的區域。
+Trig/Tutorial/Larva=附近有一隻隱蔽的幼蟲。使用蟲胎將其揭開。<n/>幼蟲死亡後會掉落原質。<n/>幼蟲會在地圖上隨機生成。<n/>如果你收集了足夠多的原質，你可以為你的英雄解鎖額外的技能。
+Trig/Tutorial/LarvaObjective=殺死幼蟲並收集其原質。
+Trig/Tutorial/MainObjective=摧毀人族。
+Trig/Tutorial/MainObjective2=摧毀行星要塞首領。
+Trig/Tutorial/MiniIntroduction/Exit=知道了！
+Trig/Tutorial/MiniIntroduction/Showcase=<c val="00FF00">新玩家</c>
+Trig/Tutorial/MiniIntroduction/Text=歡迎來到<c val="FF0000">蟲群特種部隊</c>。<n/>請考慮一下遊玩教學模式來熟悉遊戲。<n/>說明中還有一個常見問題部分（F12） .<n/><n/><c val="FF0000">重要提醒：別死！只有一條命！</c>
+Trig/Tutorial/MoneySkip=為了加快速度，這裡有一些生物質可以升級你的英雄。<n/>擊殺敵人還可以獲得更多經驗來升級你的英雄。現在讓我們來獲得一些經驗。
+Trig/Tutorial/Overlord=這是你的王蟲。<n/><n/>它不會死，但在受到攻擊時會昏迷。<n/>你可以在這裡為你的英雄購買升級。<n/>它還可以提供蟲胎。
+Trig/Tutorial/Scientist=附近有一個人族的科學家。<n/>當他的生命低落時，科學家會陷入恐懼。<n/>當你擊暈他後，你可以使用你的王蟲來捕捉他。<n/>在一般遊戲中，科學家在隨機位置。<n/>捕獲足夠多的科學家可以讓你從你的王蟲那裡生產精銳蟲族。
+Trig/Tutorial/ScientistCaptured=為了向您展示您可以解鎖哪些類型的精銳單位，這裡有一些免費的異化蟲。
+Trig/Tutorial/ScientistObjective=捕獲科學家。
+Trig/Tutorial/SurvivedWidowMines=摧毀生產建築會給你帶來突變。 <n/>使用突變來提升你的再生和攻擊速度。
+Trig/Tutorial/WelcomeMsg=歡迎來到<c val="FF0000">蟲群特種部隊</c>教學。<n/><n/>我將引導您了解遊戲的基礎知識。
+Trig/Votekick/Admin=無法投票踢除管理員~VALUE~。
+Trig/Votekick/Init=投票踢除~VALUE~。(選單->踢除)
+Trig/Votekick/Kick=~VALUE~被踢了。
+Trig/Votekick/Label=投票踢除:
+Trig/WinP0/Message=GG！你打敗了人族軍隊。
+Trig/WinP1/Message=GG！你打敗了神族軍隊。
+Trig/WinP2/Message=GG！你打敗了機甲蟲群。
+UI/AIMinerals_Name=<s val="@@StandardTooltipHeader">請求生物質</s><n/>
+UI/AIMinerals_Tooltip=向AI請求生物質
+UI/AIVespene_Name=<s val="@@StandardTooltipHeader">請求突變</s><n/>
+UI/Minerals=生物質
+UI/MineralsCollected=收集的生物質
+UI/MineralsSpent=生物質消耗
+UI/PlayerStatResources=生物質
+UI/ResourceCost0=生物質: %1
+UI/ResourceCost1=突變: %1
+UI/ResourceName0=生物質
+UI/ResourceName1=突變
+UI/TeamColor09=紫色
+UI/TeamColor10=淺灰色
+UI/TeamColor11=深綠色
+UI/TeamColor12=棕色
+UI/TeamColor13=淺綠色
+UI/TeamColor14=深灰色
+UI/TeamColor15=粉色
+Unit/Category/SSFPlayerUnits=- 蟲群特種部隊 -
+Unit/CyberneticLurker/ArmorTooltip=傷害減免: <d ref="(1-Behavior,CyberneticLurkerArmor,DamageResponse.ModifyFraction)*100" precision="2"/>%
+Unit/HeroBowler/ArmorTooltip=傷害減免: <d ref="(1-Behavior,HeroBowlerArmor,DamageResponse.ModifyFraction)*100" precision="2"/>%
+Unit/HeroHydra/ArmorTooltip=傷害減免: <d ref="(1-Behavior,HeroHydraArmor,DamageResponse.ModifyFraction)*100" precision="2"/>%
+Unit/HeroRavager/ArmorTooltip=傷害減免: <d ref="(1-Behavior,HeroRavagerArmor,DamageResponse.ModifyFraction)*100" precision="2"/>%
+Unit/HeroRoach/ArmorTooltip=傷害減免: <d ref="(1-Behavior,HeroRoachArmor,DamageResponse.ModifyFraction)*100" precision="2"/>%
+Unit/KingMoopy/ArmorTooltip=傷害減免: <d ref="(1-Behavior,KingMoopyArmor,DamageResponse.ModifyFraction)*100" precision="2"/>%
 Unit/LifeArmorName/CyberneticZergArmor=Synthetically enhanced Carapace
 Unit/LifeArmorName/Elemental=Elemental Armor
 Unit/LifeArmorName/Gary=Pure Steel
@@ -959,131 +1065,179 @@ Unit/LifeArmorName/Stetmann=Lab Coat
 Unit/LifeArmorName/StoryHeroes=Steel
 Unit/LifeArmorName/ZergAirArmor=Strong Carapace
 Unit/LifeArmorName/ZergGroundArmor=Imitated Carapace
-Unit/Name/AdeptShadow=Adept Shadow
-Unit/Name/AdeptTalon=Angelwing
-Unit/Name/Atlantis=Atlantis
-Unit/Name/AtlantisCore=Atlantis Core
-Unit/Name/Baneling=Baneling
-Unit/Name/Banemine=Banemine
-Unit/Name/BeamDrone=Beam Drone
-Unit/Name/Bomber=Bomber
-Unit/Name/CollectibleMoopyHat=Collectible Moopy Hat
-Unit/Name/CybermindShield@Generator=Generator
-Unit/Name/CyberneticLifeBank=Life Bank
-Unit/Name/Decoy=Decoy
-Unit/Name/DestructibleRocks=Destructible Rocks
-Unit/Name/EgonStetmann=Egon Stetmann
-Unit/Name/Essence=Essence
-Unit/Name/Gary=Gary
-Unit/Name/GeneratorStandard=Generator
-Unit/Name/GuardingPanther=Guarding Panther
-Unit/Name/HERCCompound=Reapers Bar
-Unit/Name/HellionTank2=Flamer
-Unit/Name/HeroBowler=Bowler
-Unit/Name/HeroHydra=Stinger
-Unit/Name/HeroRavager=Hardskin
-Unit/Name/HeroRoach=Spitter
-Unit/Name/HeroSwarmQueen=Swarm Mother
-Unit/Name/HighTemplarCrystalwingTalon=Crystalwing
-Unit/Name/HighTemplarTalon=Tick-Tock
-Unit/Name/IndistructibleRocks=Indistructible Rocks
-Unit/Name/Infestor=Infestor
-Unit/Name/InterceptorTalon=Pacifier
-Unit/Name/KingMoopy=King Moopy
-Unit/Name/Lightning=Lightning
-Unit/Name/LightningElemental=Lightning Elemental
-Unit/Name/Madness=Madness
-Unit/Name/MadnessCannon=Madness Cannon
-Unit/Name/MadnessHealer=Madness Healer
-Unit/Name/MadnessSpawnerDefensive=Gateway
-Unit/Name/MadnessSpawnerDefensive2=Shrine
-Unit/Name/MadnessSpawnerOffensive=Robotics Bay
-Unit/Name/MadnessSpawnerOffensive2=Robotics Facility
-Unit/Name/MadnessSpawnerSupport=Stargate
-Unit/Name/MadnessVoidContainment=Madness Void Containment
-Unit/Name/MechaArtanis=Artanis
-Unit/Name/MechaBanelingNest=Baneling Nest
-Unit/Name/MechaBroodling=Broodling
-Unit/Name/MechaDrone=Drone
-Unit/Name/MechaEvolutionChamber=Evolution Chamber
-Unit/Name/MechaGreaterSpire=Greater Spire
-Unit/Name/MechaHatchery=Hatchery
-Unit/Name/MechaHive=Hive
-Unit/Name/MechaHydralisk=Hydralisk
-Unit/Name/MechaHydraliskDen=Hydralisk Den
-Unit/Name/MechaInfestationPit=Infestation Pit
-Unit/Name/MechaInfestor=Infestor
-Unit/Name/MechaKerrigan=Kerrigan
-Unit/Name/MechaLair=Lair
-Unit/Name/MechaLocust=Locust
-Unit/Name/MechaLurkerDen=Lurker Den
-Unit/Name/MechaNydusWorm=Nydus Worm
-Unit/Name/MechaOvermind=Cybermind
-Unit/Name/MechaOverseer=Overseer
-Unit/Name/MechaQueen=Queen
-Unit/Name/MechaRavager=Ravager
-Unit/Name/MechaRaynor=Raynor
-Unit/Name/MechaRoach=Roach
-Unit/Name/MechaRoachWarren=Roach Warren
-Unit/Name/MechaSpawningPool=Spawning Pool
-Unit/Name/MechaSpineCrawler=Spine Crawler
-Unit/Name/MechaSpire=Spire
-Unit/Name/MechaSporeCrawler=Spore Crawler
-Unit/Name/MechaSwarmHost=Swarm Host
-Unit/Name/MechaUltralisk=Ultralisk
-Unit/Name/MechaUltraliskCavern=Ultralisk Cavern
-Unit/Name/MechaZergling=Zergling
-Unit/Name/Monolith=Monolith
-Unit/Name/MoopyChampion=Moopy Champion
-Unit/Name/NydusWorm=Nydus Worm
-Unit/Name/ObeliskStandard=Obelisk
-Unit/Name/OrbitalCommand=Bridge Controller
-Unit/Name/Pinball@Ball=Ball
-Unit/Name/Pinball@Cannon=Cannon
-Unit/Name/PlanetaryFortress=Fortress
-Unit/Name/Precursor=Precursor
-Unit/Name/PrismaticHybrids@PrismaticHybrids=Prismatic Hybrid
-Unit/Name/ProbeTalon=Probe
-Unit/Name/PsiOrb=Psi Orb
-Unit/Name/PylonColossus=Pylon Colossus
-Unit/Name/RepairMULE=Repair MULE
-Unit/Name/RespawnEgg@Egg=Egg
-Unit/Name/Runling=Runling
-Unit/Name/Scrap=Scrap
-Unit/Name/Secret_BlackDevil=Black Devil
-Unit/Name/Secret_Isatis=Isatis
-Unit/Name/Secret_Jan=Jan's Grave
-Unit/Name/Secret_SweetLimes=Pile of Sweet Limes
-Unit/Name/Secret_muhdiekuh=muhdiekuh
-Unit/Name/Secret_skywalker=skywalker
-Unit/Name/SentryTalon=Vindicator
-Unit/Name/ShieldColor@Totem=Totem
-Unit/Name/SiegeTank2=Tank
-Unit/Name/StalkerTalon=Vaporizer
-Unit/Name/StasisBubble=Stasis Bubble
-Unit/Name/Stetellite=Stetellite
-Unit/Name/StetmannSummons@MrKrabs=Mr. Krabs
-Unit/Name/StetmannSummons@Railgun=Railgun
-Unit/Name/Thor=Hammer
-Unit/Name/Thunder=Thunder
-Unit/Name/ThunderElemental=Thunder Elemental
-Unit/Name/TransportEscort=Transport Escort
-Unit/Name/TransportPrism=Transport Prism
-Unit/Name/VoidContainment=Void Containment
-Unit/Name/VoidMine=Void Mine
-Unit/Name/VoidSummonPrecursor=Void Mine
-Unit/Name/WatchYourStep@Trap=Trap
-Unit/P0Bosses/ArmorTooltip=Damage Reduction: <d ref="(1-Behavior,BossesP0Armor,DamageResponse.ModifyFraction)*100" precision="2"/>%
-Unit/P1Bosses/ArmorTooltip=Damage Reduction: <d ref="(1-Behavior,BossesP1Armor,DamageResponse.ModifyFraction)*100" precision="2"/>%
-Unit/P2Bosses/ArmorTooltip=Damage Reduction: <d ref="(1-Behavior,BossesP2Armor,DamageResponse.ModifyFraction)*100" precision="2"/>%
-Unit/PsiCollectible/Tooltip=This Psi Orb can only be absorbed by a powerful zerg.
-Unit/Runling/ArmorTooltip=Damage Reduction: <d ref="(1-Behavior,RunlingArmor,DamageResponse.ModifyFraction)*100" precision="2"/>%
-Unit/ShieldArmorName/ProtossPlasmaShields=Protoss Plasma Shields
-Unit/SwarmQueen/ArmorTooltip=Damage Reduction: <d ref="(1-Behavior,HeroSwarmQueenArmor,DamageResponse.ModifyFraction)*100" precision="2"/>%
-Validator/NotCyberneticLifeBank=Target Not a Life Bank
-Variant001/ModeName=Modern
-Variant002/ModeName=Tutorial
-Variant003/ModeName=Custom Difficulty
+Unit/Name/AdeptShadow=癲狂教士
+Unit/Name/AdeptTalon=癲狂教士
+Unit/Name/Atlantis=聖母艦
+Unit/Name/AtlantisCore=母艦核心
+Unit/Name/AtlantisCoreWeaponMissile=母艦核心武器
+Unit/Name/Baneling=毒爆蟲
+Unit/Name/Banemine=毒爆陷阱
+Unit/Name/Banemine@Missile=導彈
+Unit/Name/BeamDrone=攔截機
+Unit/Name/BombardThem@Missile=導彈
+Unit/Name/BombardmentMissile=轟炸導彈
+Unit/Name/Bomber=攔截機
+Unit/Name/CollectibleMoopyHat=魔法帽
+Unit/Name/CybermindShield@Generator=發電機
+Unit/Name/CyberneticLifeBank=孢子爬行蟲
+Unit/Name/Decoy=幻象
+Unit/Name/DestructibleRocks=岩石
+Unit/Name/EgonStetmann=斯特曼
+Unit/Name/Essence=原質
+Unit/Name/ExtendingBridgeNWShort12=延伸橋 - NW - 高度 12 - 短 - 縮回
+Unit/Name/ExtendingBridgeNWShort12Out=加長橋 - NW - 高度 12 - 短 - 伸長
+Unit/Name/FireGrenadeMissile=火焰榴彈
+Unit/Name/FireInTheHole@Missile=導彈
+Unit/Name/Gary=蓋瑞
+Unit/Name/GaryCommandFast@MarkerMissile=標記導彈
+Unit/Name/GaryWeaponMissile=蓋瑞武器
+Unit/Name/GeneratorStandard=水晶核心
+Unit/Name/GuardingPanther=獵殺者
+Unit/Name/HERCCompound=死神基地
+Unit/Name/HellionTank2=戰狼
+Unit/Name/HeroBowler=飛螳
+Unit/Name/HeroBowlerWeaponUnit=飛螳武器
+Unit/Name/HeroHydra=刺蛇
+Unit/Name/HeroRavager=劫毀蟲
+Unit/Name/HeroRoach=蟑螂
+Unit/Name/HeroSwarmQueen=后蟲
+Unit/Name/HighTemplarCrystalwingTalon=癲狂飛生者
+Unit/Name/HighTemplarCrystalwingTalonMissile=癲狂飛生者武器
+Unit/Name/HighTemplarTalon=癲狂高階聖堂
+Unit/Name/HighTemplarTalonMissile=癲狂高階聖堂武器
+Unit/Name/IndistructibleRocks=堅不可摧的岩石
+Unit/Name/Infestor=感染者
+Unit/Name/InterceptorTalon=癲狂干擾機
+Unit/Name/JumpingBaneling@Missile=導彈
+Unit/Name/KamikazeMissile1=神風導彈 1
+Unit/Name/KamikazeMissile2=神風導彈 2
+Unit/Name/KamikazeMissile3=神風導彈 3
+Unit/Name/KingMoopy=穆比
+Unit/Name/KingMoopyWeaponMissile=穆比武器
+Unit/Name/LaserLanceMissile=激光槍導彈
+Unit/Name/Lightning=閃電
+Unit/Name/LightningElemental=閃電元素
+Unit/Name/Madness=普羅米修斯
+Unit/Name/MadnessCannon=癲狂光子加農砲
+Unit/Name/MadnessHealer=癲狂治療塔
+Unit/Name/MadnessSpawnerDefensive=癲狂傳送門
+Unit/Name/MadnessSpawnerDefensive2=癲狂黑暗聖殿
+Unit/Name/MadnessSpawnerOffensive=癲狂機械研究所
+Unit/Name/MadnessSpawnerOffensive2=癲狂機械製造廠
+Unit/Name/MadnessSpawnerSupport=癲狂星際之門
+Unit/Name/MadnessVoidContainment=癲狂護盾充能器
+Unit/Name/MechaArtanis=亞坦尼斯
+Unit/Name/MechaBanelingNest=毒爆蟲巢
+Unit/Name/MechaBroodling=機甲寄生蟲
+Unit/Name/MechaDrone=機甲工蟲
+Unit/Name/MechaEvolutionChamber=進化室
+Unit/Name/MechaGreaterSpire=大螺旋塔
+Unit/Name/MechaHatchery=孵化所
+Unit/Name/MechaHive=蟲巢
+Unit/Name/MechaHydralisk=機甲刺蛇
+Unit/Name/MechaHydraliskDen=刺蛇獸穴
+Unit/Name/MechaInfestationPit=感染巢
+Unit/Name/MechaInfestor=機甲感染者
+Unit/Name/MechaInfestorMissile=機甲感染者武器
+Unit/Name/MechaKerrigan=凱利根
+Unit/Name/MechaLair=蟲穴
+Unit/Name/MechaLocust=機甲蝗蟲
+Unit/Name/MechaLurkerDen=遁地獸穴
+Unit/Name/MechaNydusWorm=蠕蟲
+Unit/Name/MechaOvermind=機械主宰
+Unit/Name/MechaOvermindWeaponMissile=機械主宰武器
+Unit/Name/MechaOverseer=機甲監察王蟲
+Unit/Name/MechaQueen=機甲后蟲
+Unit/Name/MechaRavager=機甲劫毀蟲
+Unit/Name/MechaRaynor=雷諾
+Unit/Name/MechaRoach=機甲蟑螂
+Unit/Name/MechaRoachWarren=蟑螂繁殖場
+Unit/Name/MechaSpawningPool=孵化池
+Unit/Name/MechaSpineCrawler=機甲孢子爬行蟲
+Unit/Name/MechaSpineCrawlerMissile=機甲孢子爬行蟲武器
+Unit/Name/MechaSpire=螺旋塔
+Unit/Name/MechaSporeCrawler=機甲孢子爬行蟲
+Unit/Name/MechaSwarmHost=機甲百生獸
+Unit/Name/MechaUltralisk=機甲雷獸
+Unit/Name/MechaUltraliskCavern=雷獸洞穴
+Unit/Name/MechaZergling=機甲異化蟲
+Unit/Name/Monolith=凱達林水晶碑
+Unit/Name/MoopyChampion=小穆比
+Unit/Name/NydusWorm=蠕蟲
+Unit/Name/ObeliskStandard=方尖碑
+Unit/Name/OrbitalCommand=橋梁控制室
+Unit/Name/Pinball@Ball=球
+Unit/Name/Pinball@Cannon=光子加農砲
+Unit/Name/PlanetaryFortress=行星要塞
+Unit/Name/Precursor=星導
+Unit/Name/PrismaticHybrids@HybridWeaponMissile=混元體武器
+Unit/Name/PrismaticHybrids@PrismaticHybrids=混元體
+Unit/Name/PrismaticHybrids@PrismaticHybridsestroyer=混元體
+Unit/Name/ProbeTalon=癲狂探測機
+Unit/Name/ProtossDoorN=神族門
+Unit/Name/ProtossDoorNOpen=神族門 開啟
+Unit/Name/PsiOrb=幽能球
+Unit/Name/PylonColossus=巨象
+Unit/Name/PylonWeaponMissile=巨象武器
+Unit/Name/RainbowMeteors@Meteor=流星
+Unit/Name/ReaperExplosives=G-4炸藥
+Unit/Name/RepairMULE=礦螺
+Unit/Name/RespawnEgg@Egg=守護之蛋
+Unit/Name/RotatingWallsTower=旋轉塔
+Unit/Name/Runling=異化蟲
+Unit/Name/Rush@Missile=雷射導彈
+Unit/Name/Scrap=廢料
+Unit/Name/SeaOfFlamesDrone=火焰之海無人機
+Unit/Name/SeaOfFlamesMissile=火焰之海武器
+Unit/Name/Secret_BlackDevil=迪亞布羅
+Unit/Name/Secret_Isatis=湯瑪士
+Unit/Name/Secret_Jan=Jan的墳墓...
+Unit/Name/Secret_SweetLimes=橘子
+Unit/Name/Secret_muhdiekuh=嗯嗯嗯嗯
+Unit/Name/Secret_skywalker=不給糖就搗蛋
+Unit/Name/SeekerMissile2=尋道導彈
+Unit/Name/SentryTalon=癲狂迫擊砲
+Unit/Name/SentryTalonWeaponMissile=哨兵武器
+Unit/Name/ShieldColor@Totem=圖騰
+Unit/Name/SiegeTank2=攻城坦克
+Unit/Name/StalkerTalon=癲狂電磁砲
+Unit/Name/StasisBubble=靜滯立場
+Unit/Name/Stetellite=斯特衛星
+Unit/Name/StetmannSummons@MrKrabs=蟹老闆
+Unit/Name/StetmannSummons@MrKrabsFinalMissile=蟹老闆最後的一擊
+Unit/Name/StetmannSummons@Pen=筆
+Unit/Name/StetmannSummons@Railgun=軌道炮
+Unit/Name/StetmannSummons@RailgunWeaponMissile=軌道炮武器
+Unit/Name/TagTeamWeaponMissile=標記型武器
+Unit/Name/TakeCover@Mine=礦物
+Unit/Name/TakeCover@Rocks=岩石
+Unit/Name/TheySeeMeRolling@Ball=大毒爆
+Unit/Name/Thor=雷神
+Unit/Name/Thunder=雷電
+Unit/Name/ThunderElemental=雷電元素
+Unit/Name/TransportEscort=傳輸棱鏡衛兵
+Unit/Name/TransportPrism=傳輸棱鏡
+Unit/Name/UnstableTeleport@TeleporterBlue=藍色傳送器
+Unit/Name/UnstableTeleport@TeleporterGreen=綠色傳送器
+Unit/Name/UnstableTeleport@TeleporterRed=紅色傳送器
+Unit/Name/VoidContainment=護盾充能器
+Unit/Name/VoidContainmentMissile=護盾充能器武器
+Unit/Name/VoidMine=虛空牢獄
+Unit/Name/VoidSummonPrecursor=虛空牢獄
+Unit/Name/WatchYourStep@Trap=陷阱
+Unit/Name/YouBetterGetMoving@Missile=導彈
+Unit/Name/ZapTrapMissile=電擊陷阱導彈
+Unit/P0Bosses/ArmorTooltip=傷害減免:<d ref="(1-Behavior,BossesP0Armor,DamageResponse.ModifyFraction)*100" precision="2"/>%
+Unit/P1Bosses/ArmorTooltip=傷害減免:<d ref="(1-Behavior,BossesP1Armor,DamageResponse.ModifyFraction)*100" precision="2"/>%
+Unit/P2Bosses/ArmorTooltip=傷害減免:<d ref="(1-Behavior,BossesP2Armor,DamageResponse.ModifyFraction)*100" precision="2"/>%
+Unit/PsiCollectible/Tooltip=這個幽能球只能被強大的蟲群英雄吸收。
+Unit/Runling/ArmorTooltip=傷害減免:<d ref="(1-Behavior,RunlingArmor,DamageResponse.ModifyFraction)*100" precision="2"/>%
+Unit/ShieldArmorName/ProtossPlasmaShields=神族等離子護盾
+Unit/SwarmQueen/ArmorTooltip=傷害減免:<d ref="(1-Behavior,HeroSwarmQueenArmor,DamageResponse.ModifyFraction)*100" precision="2"/>%
+Validator/NotCyberneticLifeBank=目標不是孢子爬行蟲
+Variant001/ModeName=一般
+Variant002/ModeName=教學
+Variant003/ModeName=自定難度
 Weapon/Name/AdeptTalonWeapon=Energy Lance
 Weapon/Name/AdeptWeapon=Glaive Cannon
 Weapon/Name/AidFromAiur@ZealotWeapon=Zealot Weapon
@@ -1167,7 +1321,7 @@ Weapon/Name/WidowMineWeapon=Explode
 Weapon/Name/ZealotWeapon=Psi Blades
 Weapon/Tip/MechaQueenWeapon=
 Weapon/Tip/VoidContainmentWeapon=Drains <d ref="Behavior,VoidContainmentWeaponDebuff,Modification.VitalRegenArray[Energy]*Behavior,VoidContainmentWeaponDebuff,Duration*(-1)" precision="1"/> energy.<n/>If target has low energy, it deals damage instead.
-e_cmdNotEnoughMinerals=Not enough biomass
-e_cmdNotEnoughVespene=Not enough mutations available
-e_cmdTooMuchMinerals=Too much biomass
-e_cmdTooMuchVespene=Too many mutations
+e_cmdNotEnoughMinerals=生物質不足
+e_cmdNotEnoughVespene=沒有足夠的突變可用
+e_cmdTooMuchMinerals=生物質過多
+e_cmdTooMuchVespene=突變過多

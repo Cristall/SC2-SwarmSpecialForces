@@ -3,7 +3,7 @@ Behavior/Name/BaseAura=蟲巢光環
 Behavior/Name/BaseOverlordDmgSlow=暈眩
 Behavior/Name/BeamDroneDummyTracker=攔截機追蹤器
 Behavior/Name/BeamDroneMovementRestriction=攔截機限制移動
-Behavior/Name/BossDeactivated=首領停用
+Behavior/Name/BossDeactivated=首領歸位中
 Behavior/Name/BossReturn=首領歸位
 Behavior/Name/ChargePushed=充電推擊
 Behavior/Name/ChargeUp@ChargeUp=充電
@@ -17,7 +17,7 @@ Behavior/Name/Difficulty2=困難
 Behavior/Name/Difficulty3=殘酷
 Behavior/Name/Difficulty4=瘋狂
 Behavior/Name/Difficulty5=硬核
-Behavior/Name/DifficultyCustom=自定義難度
+Behavior/Name/DifficultyCustom=自定難度
 Behavior/Name/FocusedFlameFlamerBuff=戰狼專注增益
 Behavior/Name/Frenzy@Frenzied=狂怒
 Behavior/Name/GlueSprayBuff=黏液
@@ -49,7 +49,7 @@ Behavior/Name/RequestRepairDropBuff=呼叫礦螺增益
 Behavior/Name/RespawnEgg@HiveAura=蟲巢光環(弱)
 Behavior/Name/RocketLaunchHammerBuff=火箭發射增益
 Behavior/Name/RotatingWallsTowerBuff=旋轉塔增益
-Behavior/Name/ScientistStunned=暈眩
+Behavior/Name/ScientistStunned=恐懼
 Behavior/Name/SeaOfFlamesDroneTimedLife=持續時間
 Behavior/Name/SecretDmgResponseInvulnerable=祕密無敵
 Behavior/Name/ShieldColor@BossColor02=首領顏色 1
@@ -105,7 +105,7 @@ Behavior/Tooltip/Shocked=你被帶電了，它會隨機電擊你，造成傷害�
 Behavior/Tooltip/Silenced=你被沉默，禁用所有引導技能並阻止你使用任何技能。
 Behavior/Tooltip/Slow2=目標的移動速度會在短時間內降低。
 Behavior/Tooltip/Tackle@FriendlyTackle=增加傷害。
-Behavior/Tooltip/UltimateBeing@UltimateBuff=增加<d ref="Behavior,UltimateBeing@UltimateBuff,Modification.DamageDealtScaled[Ranged]" precision="2"/>傷害、<d ref="Behavior,UltimateBeing@UltimateBuff,Modification.LifeArmorBonus" precision="2"/>裝甲和<d ref="Behavior,UltimateBeing@UltimateBuff,Modification.MoveSpeedMultiplier-1*100" precision="2"/>%移動速度。
+Behavior/Tooltip/UltimateBeing@UltimateBuff=增加<d ref="Behavior,UltimateBeing@UltimateBuff,Modification.DamageDealtUnscaled[Ranged]" precision="2"/>傷害、<d ref="Behavior,UltimateBeing@UltimateBuff,Modification.LifeArmorBonus" precision="2"/>裝甲和<d ref="Behavior,UltimateBeing@UltimateBuff,Modification.MoveSpeedMultiplier-1*100" precision="2"/>%移動速度。
 Button/Name/AbsorbExplosion=蓄能衝擊
 Button/Name/AcidPit=酸液
 Button/Name/AidFromAiur=艾爾的援助
@@ -131,7 +131,7 @@ Button/Name/CyberneticLurkerBurrow=遁地
 Button/Name/CyberneticLurkerBurrowUp=鑽出
 Button/Name/CyberneticLurkerRestoreCharge=復活遁地獸
 Button/Name/CyberneticRunlingRestoreCharge=復活異化蟲
-Button/Name/CyberneticSubmenu=傭兵單位
+Button/Name/CyberneticSubmenu=精銳單位
 Button/Name/DamageTransferAura=傷害轉移光環
 Button/Name/DanceFloor=跳舞
 Button/Name/Decoy=幻象
@@ -214,7 +214,7 @@ Button/Tooltip/CreateLurker=將生物質轉化為遁地獸。遁地獸需要遁�
 Button/Tooltip/CreateRunling=將生物質轉化為異化蟲。該異化蟲是增強版，在它的頭部安裝了一個激光砲塔。但是砲塔太重了，沒有蟲胎的支援，異化蟲根本就跑不動。他是非常脆弱的單位，擅長在英雄們後面造成傷害。
 Button/Tooltip/CreepTunnel=向目標位置挖掘。挖掘後對<d ref="Effect,CreepTunnel@Search,AreaArray[0].Radius" precision="2"/>範圍造成<d ref="$AccumulatedValue:Effect,CreepTunnel@Dmg,Amount$" precision="2"/>傷害。傷害受升級和等級的影響，也受敵人裝甲的影響。
 Button/Tooltip/CyberneticLifeBank=修改了孢子爬行蟲充當移動的血包。不站在蟲胎上時會失去血量，僅在蟲巢附近時再生生命。
-Button/Tooltip/CyberneticLifeBank@CreateLifeBank=將生物質轉化為孢子爬行蟲，他可以將其生命轉移給英雄。包子爬行蟲不會自然再生生命，甚至在離開蟲胎時也會失去血量。<n/>孢子爬行蟲數量上限在所有玩家之間共享。
+Button/Tooltip/CyberneticLifeBank@CreateLifeBank=將生物質轉化為孢子爬行蟲，他可以將其生命轉移給英雄。孢子爬行蟲不會自然再生生命，甚至在離開蟲胎時也會失去血量。<n/>孢子爬行蟲數量上限在所有玩家之間共享。
 Button/Tooltip/CyberneticLifeBank@LifeBankRestoreCharge=使用突變來復活孢子爬行蟲。
 Button/Tooltip/CyberneticLifeBank@LifeTransfer=以每秒<d ref="Effect,CyberneticLifeBank@TransferLifeHealer,RechargeVitalRate" precision="2"/>的速率將孢子爬行蟲的生命轉移到目標單位身上。
 Button/Tooltip/CyberneticLurker=遁地獸在遁地後可以獲得極大的傷害輸出，但他非遁地時需要蟲胎才能夠移動。<n/><n/>生命再生:<c val="00FF00"><d ref="Unit,CyberneticLurker,LifeRegenRate" precision="2"/><n/></c>濺射範圍:<c val="fF0000"><d ref="Effect,CyberneticLurkerWeaponSearch,AreaArray[0].Radius" precision="2"/></c><n/>
@@ -222,7 +222,7 @@ Button/Tooltip/CyberneticLurkerBurrow=將遁地獸埋在地下。他將可以攻
 Button/Tooltip/CyberneticLurkerBurrowUp=將單位返回到地面。
 Button/Tooltip/CyberneticLurkerRestoreCharge=使用突變復活遁地獸。
 Button/Tooltip/CyberneticRunlingRestoreCharge=使用突變來復活異化蟲。
-Button/Tooltip/CyberneticSubmenu=在捕獲了足夠多的科學家之後，王蟲現在能夠將生物質轉化為傭兵單位。
+Button/Tooltip/CyberneticSubmenu=在捕獲了足夠多的科學家之後，王蟲現在能夠將生物質轉化為精銳單位。
 Button/Tooltip/DamageTransferAura=轉移<d ref="Effect,DamageTransferAura@Search,AreaArray[0].Radius" precision="2"/>範圍內友軍受到的<d ref="Behavior,DamageTransferAura@DmgResponse,DamageResponse.ModifyFraction*100" precision="2"/>%傷害到劫毀蟲身上。此效果持續<d ref="Behavior,DamageTransferAura@Aura,Duration" precision="2"/>秒。
 Button/Tooltip/Decoy=招喚一個幻象，幻象在招喚瞬間會施放嘲諷，幻象將存在<d ref="Behavior,Decoy@TimedLife,Duration"/>秒<n/>此幻象擁有你當前生命的60%並且會受到額外<d ref="Behavior,Decoy@TimedLife,Modification.DamageTakenFraction[Spell]*100"/>%技能傷害。<n/><c val="FFFF00">首領不會以幻象為技能目標</c>
 Button/Tooltip/DefensiveRoar=使你受到的傷害降低<d ref="Behavior,DefensiveRoar@Caster,DamageResponse.ModifyFraction-1*(-100)" precision="2"/>%和使友軍受到的傷害降低<d ref="Behavior,DefensiveRoar@Other,DamageResponse.ModifyFraction-1*(-100)" precision="2"/>%，持續<d ref="Behavior,DefensiveRoar@Caster,Duration" precision="2"/>秒<n/><n/>蟑螂的所有技能冷卻時間都是共享的。
@@ -284,7 +284,7 @@ Button/Tooltip/MechaSwarmHost=攻城單位。在遁地時通過孵化蝗蟲進�
 Button/Tooltip/MechaUltralisk=重型攻擊單位。具有範圍傷害攻擊。<n/><n/><c val="ffff8a">可以攻擊地面單位。</c>
 Button/Tooltip/MechaUltraliskCavern=
 Button/Tooltip/MechaZergling=快速的近戰生物。可以變形為毒爆蟲。<n/><n/><c val="FFFF8A">可以攻擊地面單位。</c>
-Button/Tooltip/PickupScientists=抓住一個陷入暈眩的人類科學家來感染他，讓他開發強力的傭兵蟲群來支援你的戰鬥。
+Button/Tooltip/PickupScientists=抓住一個陷入恐懼的人類科學家來感染他，讓他開發強力的精銳蟲群來支援你的戰鬥。
 Button/Tooltip/PlanetaryFortress=人族工程師認為建造一個非常堅固的要塞會很酷，但忘記了可以讓它移動的話會很有用。見鬼，這座要塞甚至不能移動一毫米。
 Button/Tooltip/PrismaticHybrids@PrismaticHybrids=強大的幽能攻擊者。<n/><n/><c val="ffff8a">可以攻擊地面和空中單位。</c>
 Button/Tooltip/ProbeTalon=這些探測器的目的只有一個：保護癲狂首領。
@@ -304,10 +304,10 @@ Button/Tooltip/TerranPartTransition=從觀察者提取出神族的位置後，�
 Button/Tooltip/TheySeeMeRolling=扔出一個大毒爆，讓它輾過你所有的敵人。它將敵人推開並同時造成<d ref="$AccumulatedValue:Effect,TheySeeMeRolling@Dmg,Amount$"/>傷害。<n/><n/>當撞到首領或建築時會使大毒爆強制爆炸並造成<d ref="$AccumulatedValue:Effect,TheySeeMeRolling@FinalExplosionDmg,Amount$"/>傷害。<n/><n/>當他們看見我在滾動...他們恐懼...
 Button/Tooltip/Thor=雷神的駕駛員有時自稱是神，但相信我，他只是妄想。
 Button/Tooltip/Thunder=她喜歡自己的聲音，所以她一直在說話。每個靠近的人都被她沉默了
-Button/Tooltip/UltimateBeing=將所有其他技能的力量聚集在一起，在<d ref="Behavior,UltimateBeing@UltimateBuff,Duration" precision="2"/>秒內你將增加<d ref="Behavior,UltimateBeing@UltimateBuff,Modification.DamageDealtScaled[Ranged]" precision="2"/>傷害，增加<d ref="Behavior,UltimateBeing@UltimateBuff,DamageResponse.ModifyFraction-1*(-100)" precision="2"/>%傷害減免以及增加<d ref="Behavior,UltimateBeing@UltimateBuff,Modification.MoveSpeedMultiplier-1*100" precision="2"/>%移動速度。<n/>你的友軍不會獲得任何效果。<n/><n/>蟑螂的所有技能冷卻時間都是共享的。
+Button/Tooltip/UltimateBeing=將所有其他技能的力量聚集在一起，在<d ref="Behavior,UltimateBeing@UltimateBuff,Duration" precision="2"/>秒內你將增加<d ref="Behavior,UltimateBeing@UltimateBuff,Modification.DamageDealtUnscaled[Ranged]" precision="2"/>傷害，增加<d ref="Behavior,UltimateBeing@UltimateBuff,DamageResponse.ModifyFraction-1*(-100)" precision="2"/>%傷害減免以及增加<d ref="Behavior,UltimateBeing@UltimateBuff,Modification.MoveSpeedMultiplier-1*100" precision="2"/>%移動速度。<n/>你的友軍不會獲得任何效果。<n/><n/>蟑螂的所有技能冷卻時間都是共享的。
 Button/Tooltip/UpgradeCenter=這個進化的王蟲幾乎是無敵的，因為它的超高再生能力。這種進化的唯一缺點是它在再生時不能移動。<n/>另一個特點是它能夠持續傳播不會腐爛的蟲胎。<n/>它還可以將死亡的敵人的生物質轉化成升級，增強戰場上英勇蟲群。
-Card/Name/BaseOverlord/BCyb=生產傭兵蟲群
-DocInfo/DescLong=這是一款團隊合作的RPG遊戲。<n/>操控你的英雄殺死敵人，吸收他們的生物質並強化你的英雄，然後為了蟲群而戰！<n/>戰勝挑戰，完成成就，可以讓你變得更加強大。<n/><n/><n/>加入Discord以尋找活躍玩家、提交建議或報告錯誤。
+Card/Name/BaseOverlord/BCyb=生產精銳蟲群
+DocInfo/DescLong=操控你的英雄殺死敵人，吸收他們的生物質並強化你的英雄，為了蟲群而戰！<n/><n/>這是一款團隊合作的RPG遊戲，你將扮演著蟲群的精英來摧毀對蟲群造成威脅的敵人，該遊戲重在團隊與挑戰，當你完成成就時可以讓你獲得永久性的強化，從而更容易的挑戰更高的難度。<n/><n/><n/>加入Discord以尋找活躍玩家、提交建議或報告錯誤。<n/>加入後在頻道self-roles點選Asia符號領取身分組，即可在亞服頻道聊天。
 DocInfo/DescShort=6
 DocInfo/HowToPlayAdvanced00=不要著急！攻防升級很重要！
 DocInfo/HowToPlayAdvanced01=在遊戲初期盡量靠近蟲巢。
@@ -541,24 +541,24 @@ DocInfo/ScreenshotHowToPlay04=Enraged bosses who want to kill you.
 DocInfo/ScreenshotHowToPlay05=Kill the bosses to gain points. Points unlock new heroes.
 DocInfo/Website=http://discord.gg/KwxNAJ2
 Error/CantCrossCliffsCopy=不能越過懸崖或友方建築攻擊
-Error/RespawnEgg@Egg=只能帶一個蛋。
-Error/ScientestIsNotStunned=科學家必須承受頻死的恐懼。
-FlyBackHome/PartTransition=階段完成時不能使用。
+Error/RespawnEgg@Egg=最多只能攜帶一個蛋。
+Error/ScientestIsNotStunned=必須讓科學家承受頻死的恐懼。
+FlyBackHome/PartTransition=關卡完成時不能使用。
 RequirementNode/Tooltip/02921848502=需要成功擊敗首領才能重置使用次數
 RequirementNode/Tooltip/CountBehaviorRespawnEgg@EggAvailableQueuedOrBetterAtUnit2921848502=需要成功擊敗首領才能重置使用次數
 RequirementNode/Tooltip/CountBehaviorRespawnEgg@RevivingQueuedOrBetterAtUnit3227781120=必須完成復活
-RequirementNode/Tooltip/CountUpgradeAbsorbExplosion@UnlockCompleteOnly1015183818=由魔法帽第三階段成就解鎖
-RequirementNode/Tooltip/CountUpgradeCorrosiveBurst@UnlockCompleteOnly3209883371=由魔法帽第四階段成就解鎖
-RequirementNode/Tooltip/CountUpgradeDamageTransferAura@UnlockCompleteOnly1671390315=由魔法帽第三階段成就解鎖
-RequirementNode/Tooltip/CountUpgradeUltimateBeing@UnlockCompleteOnly1302983693=由魔法帽第一階段成就解鎖
-RequirementNode/Tooltip/Eq1040997399CountUpgradeKillStreak@UnlockCompleteOnly1=由幽能球第二階段成就解鎖
-RequirementNode/Tooltip/Eq1208018857CountUpgradeDecoy@UnlockCompleteOnly1=由幽能球第三階段成就解鎖
+RequirementNode/Tooltip/CountUpgradeAbsorbExplosion@UnlockCompleteOnly1015183818=由魔法帽III成就解鎖
+RequirementNode/Tooltip/CountUpgradeCorrosiveBurst@UnlockCompleteOnly3209883371=由魔法帽IV成就解鎖
+RequirementNode/Tooltip/CountUpgradeDamageTransferAura@UnlockCompleteOnly1671390315=由魔法帽III成就解鎖
+RequirementNode/Tooltip/CountUpgradeUltimateBeing@UnlockCompleteOnly1302983693=由魔法帽I成就解鎖
+RequirementNode/Tooltip/Eq1040997399CountUpgradeKillStreak@UnlockCompleteOnly1=由幽能球II成就解鎖
+RequirementNode/Tooltip/Eq1208018857CountUpgradeDecoy@UnlockCompleteOnly1=由幽能球III成就解鎖
 RequirementNode/Tooltip/Eq1787140249CountBehaviorCorrosiveBurst@DisableCorrosiveSpikesQueuedOrBetterAtUnit0=未被腐蝕爆裂禁用
 RequirementNode/Tooltip/Eq1851146600CountBehaviorBaseOverlordDmgSlowCompleteOnlyAtUnit0=王蟲不可被暈眩
 RequirementNode/Tooltip/Eq1987477214CountBehaviorBaseOverlordDmgSlowCompleteOnlyAtUnit0=王蟲不可被暈眩
-RequirementNode/Tooltip/Eq2278612504CountUpgradeCorrosiveSpikes@UnlockCompleteOnly1=由原質第四階段成就解鎖
-RequirementNode/Tooltip/Eq2350394728CountUpgradeFocus@UnlockCompleteOnly1=由幽能球第四階段成就解鎖
-RequirementNode/Tooltip/Eq2514512276CountUpgradeUnlockHeroRoachChargeCompleteOnly1==由原質第一階段成就解鎖
+RequirementNode/Tooltip/Eq2278612504CountUpgradeCorrosiveSpikes@UnlockCompleteOnly1=由原質IV成就解鎖
+RequirementNode/Tooltip/Eq2350394728CountUpgradeFocus@UnlockCompleteOnly1=由幽能球IV成就解鎖
+RequirementNode/Tooltip/Eq2514512276CountUpgradeUnlockHeroRoachChargeCompleteOnly1==由原質I成就解鎖
 RequirementNode/Tooltip/Eq2561050864CountUnitHeroDummyHiveDeadCompleteOnly0=蟲巢必須活著！
 RequirementNode/Tooltip/Eq281638821CountUpgradeArmorUpgradeQueuedOnly0=不允許隊列。
 RequirementNode/Tooltip/Eq281638821CountUpgradeAtkSpdUpgradeQueuedOnly0=不允許隊列。
@@ -566,19 +566,19 @@ RequirementNode/Tooltip/Eq281638821CountUpgradeDmgUpgradeInProgressOnly0=不允�
 RequirementNode/Tooltip/Eq281638821CountUpgradeDmgUpgradeQueuedOnly0=不允許隊列。
 RequirementNode/Tooltip/Eq281638821CountUpgradeRegenerationUpgradeQueuedOnly0=不允許隊列。
 RequirementNode/Tooltip/Eq281638821CountUpgradeSplashRangeUpgradeQueuedOnly0=不允許隊列。
-RequirementNode/Tooltip/Eq3411278990CountUpgradeEnergyTransfer@UnlockCompleteOnly1=由幽能球第五階段成就解鎖
+RequirementNode/Tooltip/Eq3411278990CountUpgradeEnergyTransfer@UnlockCompleteOnly1=由幽能球V成就解鎖
 RequirementNode/Tooltip/Eq4037611437CountBehaviorTutorialNotPausedCompleteOnlyAtUnit0=遊戲未暫停
-RequirementNode/Tooltip/Eq428702543CountUpgradeBanemine@UnlockCompleteOnly1=由原質第二階段成就解鎖
-RequirementNode/Tooltip/GTE1136276364CountUpgradeCreepTunnel@UnlockCompleteOnly1=由幽能球第一階段成就解鎖
-RequirementNode/Tooltip/GTE2043916139CountUpgradeGlueStream@UnlockCompleteOnly1=由原質第一階段成就解鎖
-RequirementNode/Tooltip/GTE275080916CountUpgradeFrenzy@UnlockCompleteOnly1=由原質第五階段成就解鎖
-RequirementNode/Tooltip/GTE4159062706CountUpgradeUnlockCyberneticsCompleteOnly2=由生物學第二階段成就解鎖
+RequirementNode/Tooltip/Eq428702543CountUpgradeBanemine@UnlockCompleteOnly1=由原質II成就解鎖
+RequirementNode/Tooltip/GTE1136276364CountUpgradeCreepTunnel@UnlockCompleteOnly1=由幽能球I成就解鎖
+RequirementNode/Tooltip/GTE2043916139CountUpgradeGlueStream@UnlockCompleteOnly1=由原質I成就解鎖
+RequirementNode/Tooltip/GTE275080916CountUpgradeFrenzy@UnlockCompleteOnly1=由原質V成就解鎖
+RequirementNode/Tooltip/GTE4159062706CountUpgradeUnlockCyberneticsCompleteOnly2=由生物學II成就解鎖
 RequirementNode/Tooltip/GTE612606772CountUpgradeUnlockCyberneticsCompleteOnly3=由生物學第三階段成就解鎖
-RequirementNode/Tooltip/GTE875380897CountUpgradeTackle@UnlockCompleteOnly1=由幽能球第一階段成就解鎖
-RequirementNode/Tooltip/GTE884099205CountUpgradeTheySeeMeRolling@UnlockCompleteOnly1=由魔法帽第二階段成就解鎖
-RequirementNode/Tooltip/GTE888989534CountUpgradeHardenedShell@UnlockCompleteOnly1=由原質第三階段成就解鎖
-RequirementNode/Tooltip/GTE888989534CountUpgradeHeadbutt@UnlockCompleteOnly1=由原質第三階段成就解鎖
-RequirementNode/Tooltip/GTE999272702CountUpgradeRespawnEgg@UnlockCompleteOnly1=由魔法帽第五階段成就解鎖
+RequirementNode/Tooltip/GTE875380897CountUpgradeTackle@UnlockCompleteOnly1=由幽能球I成就解鎖
+RequirementNode/Tooltip/GTE884099205CountUpgradeTheySeeMeRolling@UnlockCompleteOnly1=由魔法帽II成就解鎖
+RequirementNode/Tooltip/GTE888989534CountUpgradeHardenedShell@UnlockCompleteOnly1=由原質III成就解鎖
+RequirementNode/Tooltip/GTE888989534CountUpgradeHeadbutt@UnlockCompleteOnly1=由原質III成就解鎖
+RequirementNode/Tooltip/GTE999272702CountUpgradeRespawnEgg@UnlockCompleteOnly1=由魔法帽V成就解鎖
 RequirementNode/Tooltip/Not3358450278CountBehaviorRespawnEgg@NoMoreEggsQueuedOrBetterAtUnit=一次只允許一個蛋存在
 Trig/Acv/Artanis/Name=<c val="FF0000">亞坦尼斯</c> 
 Trig/Acv/Artanis/Requirement=在各種難度中擊敗<c val="FF0000">亞坦尼斯</c>(最後一擊)。
@@ -645,23 +645,23 @@ Trig/Acv/Stetmann/Requirement=在各種難度中擊敗<c val="FF0000">斯特曼<
 Trig/Acv/Thunder/Name=<c val="FF0000">雷電</c> 
 Trig/Acv/Thunder/Requirement=在各種難度中擊敗<c val="FF0000">雷電</c>(最後一擊)。
 Trig/Acv/Trophy/Name=壯舉
-Trig/Acv/Trophy/P0D4DuoFtl=人族瘋狂二人組光速
+Trig/Acv/Trophy/P0D4DuoFtl=人族瘋狂二人組超光速
 Trig/Acv/Trophy/P0D5Duo=人族硬核二人組
-Trig/Acv/Trophy/P1D2SoloFtl=神族困難單人光速
-Trig/Acv/Trophy/P1D3DuoFtl=神族殘酷雙人組光速
-Trig/Acv/Trophy/P1D4TrioFtl=神族瘋狂三人組光速
+Trig/Acv/Trophy/P1D2SoloFtl=神族困難單人超光速
+Trig/Acv/Trophy/P1D3DuoFtl=神族殘酷雙人組超光速
+Trig/Acv/Trophy/P1D4TrioFtl=神族瘋狂三人組超光速
 Trig/Acv/Trophy/P1D5Team=神族硬核
 Trig/Acv/Trophy/Reward=你在以前立下了大功。你會得到這個奶酪形象的獎勵。祝您在未來再次獲得這些壯舉而感到高興。</n></n>您已完成：
-Trig/Acv/Tutorial/Name=教程
-Trig/Acv/Tutorial/Requirement=完成教程。
+Trig/Acv/Tutorial/Name=啟程
+Trig/Acv/Tutorial/Requirement=完成教學模式。
 Trig/Acv/UI/AbilUnlock/Mid=~VALUE~解鎖於~VALUE2~
 Trig/Acv/UI/Armor=<n/>+~VALUE~裝甲
 Trig/Acv/UI/Atkspd=<n/>+~VALUE~%攻擊速度
 Trig/Acv/UI/BiomassPerKill=<n/>+~VALUE~生物質/每殺
-Trig/Acv/UI/CyberneticsDmg=<n/>+~VALUE~傷害於傭兵蟲族
-Trig/Acv/UI/CyberneticsLife=<n/>+~VALUE~生命於傭兵蟲族
-Trig/Acv/UI/CyberneticsRestore=<n/>傭兵復活已啟用
-Trig/Acv/UI/CyberneticsUpgrade=<n/>被俘的科學家會暫時強化傭兵蟲族
+Trig/Acv/UI/CyberneticsDmg=<n/>+~VALUE~傷害於精銳蟲族
+Trig/Acv/UI/CyberneticsLife=<n/>+~VALUE~生命於精銳蟲族
+Trig/Acv/UI/CyberneticsRestore=<n/>精銳復活已解鎖
+Trig/Acv/UI/CyberneticsUpgrade=<n/>被俘的科學家會暫時強化精銳蟲族
 Trig/Acv/UI/DiffUnlock=~VALUE~難度解鎖
 Trig/Acv/UI/Dmg=<n/>+~VALUE~傷害
 Trig/Acv/UI/Energy=<n/>+~VALUE~能量
@@ -698,7 +698,7 @@ Trig/Acv/UI/Score=<n/>+~VALUE~成就分數
 Trig/Acv/UI/Speed=<n/>+~VALUE~移動速度
 Trig/Acv/UI/Speedy0=
 Trig/Acv/UI/Speedy1=迅速
-Trig/Acv/UI/Speedy2=比光還快
+Trig/Acv/UI/Speedy2=超光速
 Trig/Acv/UI/Spellpower=<n/>+~VALUE~%技能增幅
 Trig/Acv/UI/Splash=<n/>+~VALUE~濺射範圍
 Trig/Acv/UI/Stage0=
@@ -764,7 +764,7 @@ Trig/Bank/MainFail=加載失敗！正在嘗試加載備份。
 Trig/Bank/MainSuccess=加載成功。
 Trig/Bank/ManualSaveButton=保存
 Trig/Bank/ManualSaveButtonTooltip=手動保存您的紀錄。</n></n>如果您獲得任何收藏品或殺死任何首領，遊戲將自動保存。
-Trig/Bank/NewPlayer=檢測到新玩家
+Trig/Bank/NewPlayer=我們有一位新朋友
 Trig/Bank/NoMainButBackup=未找到主紀錄，但備份存在！試圖恢復中...
 Trig/Bank/NoMainButBackupSuccess=加載備份成功！已覆蓋損壞的主紀錄。
 Trig/Bosskilled=首領已擊敗！(~VALUE~/~VALUE2~) +~VALUE3~<lang rule="plural">積分</lang>。
@@ -782,13 +782,13 @@ Trig/Enemy/AreaOpen/Facility=更多<c val="FF8000">淨化部隊</c>開始從新�
 Trig/Enemy/AreaOpen/Junker=更多<c val="FF8000">雇傭兵</c>開始從新的地區攻擊我們。<n/>他們現在更強同時也提供<c val="FF8000">更多的生物質和經驗值</c>.<n/>現在你可以使用<c val="FF8000">額外升級</c>。
 Trig/Enemy/AreaOpen/Mech=更多<c val="FF8000">神族士兵</c>開始從新的地區攻擊我們。<n/>他們現在更強同時也提供<c val="FF8000">更多的生物質和經驗值</c>.<n/>現在你可以使用<c val="FF8000">額外升級</c>。
 Trig/Enemy/AreaOpen/Mecha=更多<c val="FF8000">機甲蟲群</c>開始從新的地區攻擊我們。<n/>他們現在更強同時也提供<c val="FF8000">更多的生物質和經驗值</c>.<n/>現在你可以使用<c val="FF8000">額外升級</c>。
-Trig/Enemy/AreaOpen/Moopy=你現在可以攻擊<c val="FF8000">隱藏的主謀</c>。<n/>消滅那個傻瓜！
+Trig/Enemy/AreaOpen/Moopy=你現在可以攻擊<c val="FF8000">隱藏的主謀</c>。<n/>消滅那個渾蛋！
 Trig/Enemy/AreaOpen/MoopyCanBeOpened=你即將引起<c val="FF8000">隱藏的主謀</c>的注意。嘗試殺死他的小穆比來激怒他。
 Trig/Enemy/AreaOpen/MoopyClosed=<c val="FF8000">隱藏的主謀</c>對你感到無趣。<n/>下次嘗試引起他的注意。
 Trig/Enemy/AreaOpen/Psi=更多<c val="FF8000">神族戰士</c>開始從新的地區攻擊我們。<n/>他們現在更強同時也提供<c val="FF8000">更多的生物質和經驗值</c>.<n/>現在你可以使用<c val="FF8000">額外升級</c>。
-Trig/Enemy/Bridge/Flamer=通往戰狼的橋現已打開。
-Trig/Enemy/Bridge/Fortress=通往行星要塞的橋現已打開。
-Trig/Enemy/Bridge/Hammer=通往雷神的橋現已打開。
+Trig/Enemy/Bridge/Flamer=通往戰狼的橋樑現已打開。
+Trig/Enemy/Bridge/Fortress=通往行星要塞的橋樑現已打開。
+Trig/Enemy/Bridge/Hammer=通往雷神的橋樑現已打開。
 Trig/Enemy/NydusWorm/KillAfterBosses=蠕蟲發現了充滿機械仿冒品的隧道。讓它帶領我們前往。
 Trig/Enemy/NydusWorm/KillBeforeBosses=蠕蟲發現了充滿機械仿冒品的隧道。我們會在神族被摧毀後光顧它們。
 Trig/Enemy/Observer/Hint=我們在這個附近感覺到了一些東西。在它離開之前快速尋找它。
@@ -830,7 +830,7 @@ Trig/Generic/TeamSize/1=單人
 Trig/Generic/TeamSize/2=雙人
 Trig/Generic/TeamSize/3=三人
 Trig/Generic/TeamSize/6=多人
-Trig/HelpMenu/FAQ/Content=問：如何生存？<n/>答：在升級裝甲之前留在蟲巢附近！<n/><n/>問：我如何獲得生物質？<n/>答：殺死任何敵人。<n/><n/>問：我如何獲得突變？<n/>答：摧毀敵人的生產建築。小心生產建築被摧毀後會出現寡婦詭雷，這些詭雷會在你的臉上爆炸。<n/><n/>問：我如何摧毀建築？<n/>答：獲得大量的傷害和裝甲升級。還要帶上你的王蟲進行反隱和產生蟲胎。蟲胎非常強大，因為它可以使你的再生加倍並提高你的移動速度。<n/><n/>問：我如何解鎖新英雄？<n/>答：殺死首領以獲得積分。如果你有足夠的積分，你可以選擇新的英雄。<n/><n/>問：如果我不能快速殺光敵人會怎樣？<n/>答：當敵人數量到達一定的數量，敵方將會停止生產單位，在您殺死足夠多的敵人並再次啟用生成之前，所有敵方建築都是無敵的。如果接近數量上限，你會收到警告。<n/><n/>問：成就會解鎖什麼？<n/>答：這取決於成就的不同。完整列表可以在 Discord 中找到，但您可以隨時查看其他玩家的成就並查看獎勵。<n/><n/>問：我如何找到原質？<n/>答：找到隱形的幼蟲（普通或更高難度）。你可以用敏銳的眼光發現它們。然後帶上你的王蟲去揭開它並殺死它。之後你就可以掠奪原質。<n/><n/>問：如何解鎖遁地獸？<n/>答：捕獲科學家。收集10個後，你就可以在你的王蟲那裡訓練它們。<n/><n/>問：我如何到達第2部分（神族）？<n/>答：殺死所有人族BOSS後，你會得到一個提示。一段時間後會有更多提示。<n/><n/>問：我如何獲得幽能球？（困難或更高難度）<n/>答：是第2部分的收藏品。您可以在殺死聖母艦（神族的最後一個首領）之後搜索地圖。<n/><n/>
+Trig/HelpMenu/FAQ/Content=問：如何生存？<n/>答：在升級裝甲之前留在蟲巢附近！<n/><n/>問：我如何獲得生物質？<n/>答：殺死任何敵人。<n/><n/>問：我如何獲得突變？<n/>答：摧毀敵人的生產建築。小心生產建築被摧毀後會出現寡婦詭雷，這些詭雷會在你的臉上爆炸。<n/><n/>問：我如何摧毀建築？<n/>答：獲得大量的傷害和裝甲升級。還要帶上你的王蟲進行反隱和產生蟲胎。蟲胎非常強大，因為它可以使你的再生加倍並提高你的移動速度。<n/><n/>問：我如何解鎖新英雄？<n/>答：殺死首領以獲得積分。如果你有足夠的積分，你可以選擇新的英雄。<n/><n/>問：如果我不能快速殺光敵人會怎樣？<n/>答：當敵人數量到達一定的數量，敵方將會停止生產單位，在您殺死足夠多的敵人並再次啟用生成之前，所有敵方建築都是無敵的。如果接近數量上限，你會收到警告。<n/><n/>問：成就會解鎖什麼？<n/>答：這取決於成就的不同。完整列表可以在 Discord 中找到，但您可以隨時查看其他玩家的成就並查看獎勵。<n/><n/>問：我如何找到原質？<n/>答：找到隱形的幼蟲（普通或更高難度）。你可以用敏銳的眼光發現它們。然後帶上你的王蟲去揭開它並殺死它。之後你就可以掠奪原質。<n/><n/>問：如何解鎖遁地獸？<n/>答：捕獲科學家。收集10個後，你就可以在你的王蟲那裡生產它們。<n/><n/>問：我如何到達第2部分（神族）？<n/>答：殺死所有人族BOSS後，你會得到一個提示。一段時間後會有更多提示。<n/><n/>問：我如何獲得幽能球？（困難或更高難度）<n/>答：是第2部分的收藏品。您可以在殺死聖母艦（神族的最後一個首領）之後搜索地圖。<n/><n/>
 Trig/HelpMenu/FAQ/Title=常見問題
 Trig/HeroSelection/CustomDiff/ApproximatedDiff=積分與收藏品的數量:~VALUE~
 Trig/HeroSelection/CustomDiff/ApproximatedDiffNone=無法判定一個難度。勝利、積分和收藏品將不會獲得。
@@ -883,7 +883,7 @@ Trig/HeroSelection/Dialog/AutoSelection=自動選擇
 Trig/HeroSelection/Dialog/AutoSelectionTooltip=保存此英雄選擇，以便在您未來的遊戲中自動選擇。可以隨時在選單中的選項更改
 Trig/HeroSelection/Dialog/DiffButton/Any=<c val="FFFFFF">任何</c>
 Trig/HeroSelection/Dialog/DiffButton/AnyTooltip=選擇此項將使您的投票與不投票一樣。
-Trig/HeroSelection/Dialog/DiffButton/Custom=<c val="FFFFFF">自定義</c>
+Trig/HeroSelection/Dialog/DiffButton/Custom=<c val="FFFFFF">自定</c>
 Trig/HeroSelection/Dialog/DiffButton/D0=<c val="00FF00">簡單</c>
 Trig/HeroSelection/Dialog/DiffButton/D0Tooltip=適合新玩家。首領不使用技能。<n/><n/>敵人屬性：<n/>
 Trig/HeroSelection/Dialog/DiffButton/D1=<c val="FFFF00">普通</c>
@@ -914,7 +914,7 @@ Trig/HeroSelection/Hero/Stinger/Long=刺蛇更注重進攻而不是防守。<n/>
 Trig/HeroSelection/Hero/Stinger/Unlock=由積分階段三解鎖。
 Trig/HeroSelection/Hero/SwarmMother/Long=后蟲進化成了能夠協助與輔助蟲群的重要角色。<n/><n/><d ref="Accumulator,HeroSwarmQueenWeaponDmgModifier,Amount-1*100"/>%攻防和等級傷害<n/>+100%能量再生
 Trig/HeroSelection/Hero/SwarmMother/Unlock=由積分階段四解鎖。
-Trig/HiveDies=蟲巢已經喪失。地洞的蟲族不再安全。
+Trig/HiveDies=蟲巢已經被摧毀。地洞裡的蟲族不再安全了。
 Trig/HivePanel/Flawless=完美無瑕：
 Trig/HivePanel/Kills=擊殺數：
 Trig/Menu/Achievements=成就
@@ -979,7 +979,7 @@ Trig/Popup/Close=關閉通知。
 Trig/Popup/SpeedrunMsg=新速通：
 Trig/Popup/SpeedrunsTooltipExtra=點擊以打開速通面板。
 Trig/PsiOrb/Collected=~VALUE~為蟲群吸收了幽能球。你們的幽能增強。
-Trig/RespawnEgg/PlayerSaved=~VALUE~被~VALUE2~的蛋給拯救了。
+Trig/RespawnEgg/PlayerSaved=~VALUE~被~VALUE2~的守護之蛋給拯救了。
 Trig/Scientist/Collected=~VALUE~為蟲群抓獲了一名科學家。
 Trig/Speedruns/EmptyTime=-:--:--
 Trig/Stats/Essences=原質: 
@@ -992,20 +992,20 @@ Trig/Stats/WinsP0=人族獲勝:
 Trig/Stats/WinsP1=神族獲勝: 
 Trig/Stats/WinsP2=蟲族獲勝: 
 Trig/Tutorial/AskTutorial/No=不
-Trig/Tutorial/AskTutorial/Text=您還沒有玩過教程。<n/>要現在玩嗎？
+Trig/Tutorial/AskTutorial/Text=您還沒有玩過教學。<n/>要現在玩嗎？
 Trig/Tutorial/AskTutorial/Yes=好
 Trig/Tutorial/BridgeController=摧毀橋樑控制器後，您現在可以進攻橋樑另一側的行星要塞首領。
 Trig/Tutorial/Continue=繼續
-Trig/Tutorial/End=行星要塞死了，教程到此結束。<n/>一般遊戲中多了2個首領。<n/>建議可以玩一些公開遊戲來獲得一些基礎成就。<n/>如果您對遊戲有任何反饋，請查看 Discord 服務器（鏈結在地圖說明或遊戲內菜單中）。<n/>祝您玩得開心，感謝您遊玩本教程。
+Trig/Tutorial/End=行星要塞死了，教學到此結束。<n/>一般遊戲中還有2個首領。<n/>建議可以玩一些公開遊戲來獲得一些基礎成就。<n/>如果您對遊戲有任何反饋，請查看 Discord 服務器。<n/>（鏈結在地圖說明或遊戲內菜單中）<n/>祝您玩得開心，感謝您遊玩本教學。
 Trig/Tutorial/EndButton=結束
-Trig/Tutorial/Essence=在本教程中，解鎖了你的第二個技能<c val="FF8000">黏液</c>。<n/>通常你必須收集總共 5 個原質才能解鎖。<n/>請注意，在一般遊戲中，幼蟲只會在普通或更高難度下出現。
+Trig/Tutorial/Essence=在本教學中，解鎖了你的第二個技能<c val="FF8000">黏液</c>。<n/>通常你必須收集總共 5 個原質才能解鎖。<n/>請注意，在一般遊戲中，幼蟲只會在普通或更高難度下出現。
 Trig/Tutorial/FirstAttackWave=人族敵人會不斷派出單位攻擊你。<n/>殺死他們可以獲得生物質。
 Trig/Tutorial/FirstPush=推動時，你應該始終帶上你的王蟲。<n/>蟲胎會為你提供雙倍的再生，提高移動速度並偵測隱形。<n/><n/>如果懶得手動控制你的王蟲，你可以讓它跟隨你的英雄。
 Trig/Tutorial/FirstSpawner=這個是一個生產建築。<n/><n/>摧毀一個生產建築後，寡婦詭雷會嘗試<c val="FF0000">在你的臉上爆炸</c>來攻擊你。<n/>在 <c val="00FF00">簡單</c> 中，他們的數量不多，不會造成太大的傷害，但在更高的難度下要注意他們。
-Trig/Tutorial/Fortress=前面是行星要塞。在簡單難度中首領不會使用任何技能，但在更高的難度下，這些技能是致命的。
+Trig/Tutorial/Fortress=前面是行星要塞。在簡單難度中首領不會使用任何技能，但在更高的難度下，這些技能多元且致命。
 Trig/Tutorial/Hero=這隻蟑螂是你的英雄。<n/><n/><c val="FF0000">如果它死了，你就輸了！</c>
-Trig/Tutorial/HeroDies=你的英雄死了！通常你會輸掉遊戲，但在本教程中你會在蟲巢中復活。
-Trig/Tutorial/Hive=蟲巢會給你強大的增益。<n/>但它可以被摧毀，並且增益會消失。
+Trig/Tutorial/HeroDies=你的英雄死了！通常你會輸掉遊戲，但在本教學中你會在蟲巢中復活。
+Trig/Tutorial/Hive=蟲巢會給你強大的增益。<n/>但它可以被敵人摧毀，而且增益會消失。
 Trig/Tutorial/IssueExplore=主要目標是殺死所有敵方首領。<n/>你可以嘗試探索蟲巢周圍的區域。
 Trig/Tutorial/Larva=附近有一隻隱蔽的幼蟲。使用蟲胎將其揭開。<n/>幼蟲死亡後會掉落原質。<n/>幼蟲會在地圖上隨機生成。<n/>如果你收集了足夠多的原質，你可以為你的英雄解鎖額外的技能。
 Trig/Tutorial/LarvaObjective=殺死幼蟲並收集其原質。
@@ -1013,14 +1013,14 @@ Trig/Tutorial/MainObjective=摧毀人族。
 Trig/Tutorial/MainObjective2=摧毀行星要塞首領。
 Trig/Tutorial/MiniIntroduction/Exit=知道了！
 Trig/Tutorial/MiniIntroduction/Showcase=<c val="00FF00">新玩家</c>
-Trig/Tutorial/MiniIntroduction/Text=歡迎來到<c val="FF0000">蟲群特種部隊</c>。<n/>請考慮一下遊玩教程模式來熟悉遊戲。<n/>說明中還有一個常見問題部分（F12） .<n/><n/><c val="FF0000">重要提醒：別死！只有一命！</c>
+Trig/Tutorial/MiniIntroduction/Text=歡迎來到<c val="FF0000">蟲群特種部隊</c>。<n/>請考慮一下遊玩教學模式來熟悉遊戲。<n/>說明中還有一個常見問題部分（F12） .<n/><n/><c val="FF0000">重要提醒：別死！只有一條命！</c>
 Trig/Tutorial/MoneySkip=為了加快速度，這裡有一些生物質可以升級你的英雄。<n/>擊殺敵人還可以獲得更多經驗來升級你的英雄。現在讓我們來獲得一些經驗。
 Trig/Tutorial/Overlord=這是你的王蟲。<n/><n/>它不會死，但在受到攻擊時會昏迷。<n/>你可以在這裡為你的英雄購買升級。<n/>它還可以提供蟲胎。
-Trig/Tutorial/Scientist=附近有一個人族的科學家。<n/>當他的生命低落時，生物學家會被暈眩。<n/>當你擊暈他後，你可以使用你的王蟲來捕捉他。<n/>在一般遊戲中，科學家在隨機位置。<n/>捕獲足夠多的科學家可以讓你從你的王蟲那裡生產傭兵蟲族。
-Trig/Tutorial/ScientistCaptured=為了向您展示您可以解鎖哪些類型的傭兵單位，這裡有一些免費的異化蟲。
+Trig/Tutorial/Scientist=附近有一個人族的科學家。<n/>當他的生命低落時，科學家會陷入恐懼。<n/>當你擊暈他後，你可以使用你的王蟲來捕捉他。<n/>在一般遊戲中，科學家在隨機位置。<n/>捕獲足夠多的科學家可以讓你從你的王蟲那裡生產精銳蟲族。
+Trig/Tutorial/ScientistCaptured=為了向您展示您可以解鎖哪些類型的精銳單位，這裡有一些免費的異化蟲。
 Trig/Tutorial/ScientistObjective=捕獲科學家。
 Trig/Tutorial/SurvivedWidowMines=摧毀生產建築會給你帶來突變。 <n/>使用突變來提升你的再生和攻擊速度。
-Trig/Tutorial/WelcomeMsg=歡迎來到<c val="FF0000">蟲群特種部隊</c>教程。<n/><n/>我將引導您了解遊戲的基礎知識。
+Trig/Tutorial/WelcomeMsg=歡迎來到<c val="FF0000">蟲群特種部隊</c>教學。<n/><n/>我將引導您了解遊戲的基礎知識。
 Trig/Votekick/Admin=無法投票踢除管理員~VALUE~。
 Trig/Votekick/Init=投票踢除~VALUE~。(選單->踢除)
 Trig/Votekick/Kick=~VALUE~被踢了。
@@ -1191,7 +1191,7 @@ Unit/Name/SeaOfFlamesDrone=火焰之海無人機
 Unit/Name/SeaOfFlamesMissile=火焰之海武器
 Unit/Name/Secret_BlackDevil=迪亞布羅
 Unit/Name/Secret_Isatis=湯瑪士
-Unit/Name/Secret_Jan=簡的墳墓
+Unit/Name/Secret_Jan=Jan的墳墓...
 Unit/Name/Secret_SweetLimes=橘子
 Unit/Name/Secret_muhdiekuh=嗯嗯嗯嗯
 Unit/Name/Secret_skywalker=不給糖就搗蛋
@@ -1236,8 +1236,8 @@ Unit/ShieldArmorName/ProtossPlasmaShields=神族等離子護盾
 Unit/SwarmQueen/ArmorTooltip=傷害減免:<d ref="(1-Behavior,HeroSwarmQueenArmor,DamageResponse.ModifyFraction)*100" precision="2"/>%
 Validator/NotCyberneticLifeBank=目標不是孢子爬行蟲
 Variant001/ModeName=一般
-Variant002/ModeName=教程
-Variant003/ModeName=自定義難度
+Variant002/ModeName=教學
+Variant003/ModeName=自定難度
 Weapon/Name/AdeptTalonWeapon=Energy Lance
 Weapon/Name/AdeptWeapon=Glaive Cannon
 Weapon/Name/AidFromAiur@ZealotWeapon=Zealot Weapon
