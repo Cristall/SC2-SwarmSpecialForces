@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <Desc>
 <!-- global constants: used in all layouts -->
-    <Constant name="Border" val="40"/>
-    <Constant name="BorderNegative" val="-40"/>
+    <Constant name="Border" val="35"/>
+    <Constant name="BorderNegative" val="-35"/>
 
 <!-- localization constants: can be overwritten from locale folders -->
     <!-- achievement -->

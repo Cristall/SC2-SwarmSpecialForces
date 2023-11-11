@@ -10,6 +10,7 @@ void SSFCustomUI_Init () {
     PlayerBoard_Init();
     CustomDefeatFrame_Init();
     HivePanel_Init();
+    ReviveUI_Init();
 
     TriggerAddEventDialogControl(TriggerCreate("Bank_ManualSave"), c_playerAny, DialogControlHookup(gv_UI_MasterFrame, c_triggerControlTypeButton, "Menu/SaveButton"), c_triggerControlEventTypeClick);
 }

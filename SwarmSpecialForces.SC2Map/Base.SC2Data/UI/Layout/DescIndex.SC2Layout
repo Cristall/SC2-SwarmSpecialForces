@@ -11,6 +11,7 @@
     <Include path="UI/Layout/SSF_Stats.SC2Layout"/>
     <Include path="UI/Layout/SSF_Speedruns.SC2Layout"/>
     <Include path="UI/Layout/SSF_Votekick.SC2Layout"/>
+    <Include path="UI/Layout/SSF_Revive.SC2Layout"/>
     <Include path="UI/Layout/SSF_Menu.SC2Layout"/>
 
     <Include path="UI/Layout/SSF_UnitStatus.SC2Layout"/>

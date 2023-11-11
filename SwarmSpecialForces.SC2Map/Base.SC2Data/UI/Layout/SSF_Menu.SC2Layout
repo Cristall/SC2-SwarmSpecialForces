@@ -279,6 +279,8 @@
 				<Frame type="Frame" name="Popup4" template="SSF_Popup/PopupTemplate"/>
 				<Frame type="Frame" name="Popup5" template="SSF_Popup/PopupTemplate"/>
 			</Frame>
+
+			<Frame type="Frame" name="Revive" template="SSF_Revive/ReviveContainerTemplate"></Frame>
 		</Frame>
 	</Frame>
 </Desc>
