@@ -142,7 +142,7 @@ Button/Tooltip/CreateLurker=Wandle Biomasse in einen kybernetischen Schleicher u
 Button/Tooltip/CreateRunling=Wandle Biomasse in einen kybernetischen Rennling um. Der Rennling ist eine verbesserte Version des Zerglings, nur mit einem Lasergeschützturm auf dem Kopf. Der Turm so so schwer, dass der Rennling ohne Kriecher gar nicht rennen kann. Sehr fragil aber großartig um Schaden auszuteilen hinter einem Hardskin.
 Button/Tooltip/CreepTunnel=Digs towards target location with creep. Upon unburrowing deals <d ref="$AccumulatedValue:Effect,CreepTunnel@Dmg,Amount$" precision="2"/> damage in an area of <d ref="Effect,CreepTunnel@Search,AreaArray[0].Radius" precision="2"/>. The damage is affected by upgrades and the Spitter's level, but also by enemies armor.
 Button/Tooltip/CyberneticLifeBank=Ein modifizierter Sporenkrabbler der als mobiler Lebenspeicher agiert. Verliert Leben wenn er nicht auf Kriecher ist und regeneriert Leben nur in der nähe des Schwarmstocks.
-Button/Tooltip/CyberneticLifeBank@CreateLifeBank=Erschaffe einen Sporenkrabbler der sein Leben übertragen kann. Der Lebensspeicher regeneriert normalerweise kein Leben und verliert sogar Leben, wenn er sich nicht auf Kriecher befindet.<n/>Die Anzahl der möglichen Lebensspeicher wird von allen Spielern geteilt.
+Button/Tooltip/CyberneticLifeBank@CreateLifeBank=Erschaffe einen Sporenkrabbler der sein Leben übertragen kann. Der Lebensspeicher regeneriert normalerweise kein Leben und verliert sogar Leben, wenn er sich nicht auf Kriecher befindet.<n/>Die maximale Anzahl der möglichen Lebensspeicher ist begrenzt auf die Startspieleranzahl halbiert nach oben gerundet (<d ref="($GalaxyVar:gv_PlayerAmountStart$ + 0.75 ) / 2" precision="0"/>) und wird von allen Spielern geteilt.
 Button/Tooltip/CyberneticLifeBank@LifeBankRestoreCharge=Nutze Mutationen um eine Lebensspeicher-Aufladung zu erhalten.
 Button/Tooltip/CyberneticLifeBank@LifeTransfer=Überträgt Leben des Lebensspeicher zum Ziel mit einer Rate von <d ref="Effect,CyberneticLifeBank@TransferLifeHealer,RechargeVitalRate" precision="2"/> Leben pro Sekunde.
 Button/Tooltip/CyberneticLurker=Kybernetisch verstärker Schleicher. Großartig in der Verteidigung des Schwarmstocks aber kann sich ohne Kriecher nicht fortbewegen.<n/><n/><c val="ffff8a">Kann nur Bodeneinheiten angreifen.<n/>Muss eingegraben sein zum Angreifen.</c>
@@ -881,6 +881,7 @@ Trig/Popup/SpeedrunMsg=Neuer Speedrun:
 Trig/Popup/SpeedrunsTooltipExtra=Anklicken zum Öffnen des Speedrunpanels
 Trig/PsiOrb/Collected=~VALUE~ sammelte eine Psi Kugel. Eure psionische Kräfte wachsen.
 Trig/RespawnEgg/PlayerSaved=~VALUE~ wurde von ~VALUE2~'s Ei gerettet.
+Trig/ReviveUI/TimeRemaining=Wiederbelebung in %0% <lang rule="plural">Sekunde,Sekunden</lang>
 Trig/Scientist/Collected=~VALUE~ hat einen Wissenschaftler für den Schwarm eingefangen.
 Trig/Speedruns/EmptyTime=-:--:--
 Trig/Stats/Essences=Essenzen: 

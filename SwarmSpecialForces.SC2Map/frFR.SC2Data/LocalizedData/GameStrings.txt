@@ -142,7 +142,7 @@ Button/Tooltip/CreateLurker=Convert biomass into a cybernetic lurker. Lurkers ne
 Button/Tooltip/CreateRunling=Convert biomass into a cybernetic runling. The runling is an enhanced version of a zergling, just with a laser turret attached to its head. The turret is so heavy that without the support of the creep, the runling is not running at all. Very fragile unit but great at dealing damage behind a Hardskin.
 Button/Tooltip/CreepTunnel=Digs towards target location with creep. Upon unburrowing deals <d ref="$AccumulatedValue:Effect,CreepTunnel@Dmg,Amount$" precision="2"/> damage in an area of <d ref="Effect,CreepTunnel@Search,AreaArray[0].Radius" precision="2"/>. The damage is affected by upgrades and the Spitter's level, but also by enemies armor.
 Button/Tooltip/CyberneticLifeBank=Modified spore crawler to act as a mobile life bank. Looses life when not on creep and only regenerates life near the hive.
-Button/Tooltip/CyberneticLifeBank@CreateLifeBank=Create a spore crawler that can transfer its life to a hero. The Life Bank does not naturally generate life and even loses life when off creep.<n/>The amount of Life Banks created is shared between all players.
+Button/Tooltip/CyberneticLifeBank@CreateLifeBank=Create a spore crawler that can transfer its life to a hero. The Life Bank does not naturally generate life and even loses life when off creep.<n/>The total amount of Life Banks is capped at starting player count divided by two rounded up (<d ref="($GalaxyVar:gv_PlayerAmountStart$ + 0.75 ) / 2" precision="0"/>) and is shared between all players.
 Button/Tooltip/CyberneticLifeBank@LifeBankRestoreCharge=Use Mutations to restore a Life Bank charge.
 Button/Tooltip/CyberneticLifeBank@LifeTransfer=Transfers life of the Life Bank towards the target unit at a rate of <d ref="Effect,CyberneticLifeBank@TransferLifeHealer,RechargeVitalRate" precision="2"/> per second.
 Button/Tooltip/CyberneticLurker=Lurker with cybernetic implants which increase its damage output tremendously but it requires creep to move.<n/><n/>Life regen: <c val="00FF00"><d ref="Unit,CyberneticLurker,LifeRegenRate" precision="2"/><n/></c>Splash range: <c val="fF0000"><d ref="Effect,CyberneticLurkerWeaponSearch,AreaArray[0].Radius" precision="2"/></c><n/>
@@ -881,6 +881,7 @@ Trig/Popup/SpeedrunMsg=New Speedrun:
 Trig/Popup/SpeedrunsTooltipExtra=Click to in open speedruns panel.
 Trig/PsiOrb/Collected=~VALUE~ collected the psi orb. Your psionic powers grow.
 Trig/RespawnEgg/PlayerSaved=~VALUE~ was saved by ~VALUE2~'s egg.
+Trig/ReviveUI/TimeRemaining=Reviving in %0% <lang rule="plural">second,seconds</lang>
 Trig/Scientist/Collected=~VALUE~ has captured a scientist for the swarm.
 Trig/Speedruns/EmptyTime=-:--:--
 Trig/Stats/Essences=Essences: 
