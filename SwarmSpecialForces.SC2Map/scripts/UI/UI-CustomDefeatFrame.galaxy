@@ -2,6 +2,7 @@
 static int customDefeatFrame_Frame;
 static int customDefeatFrame_SpectateButton;
 static int customDefeatFrame_LeaveButton;
+static int winMenuButton;
 
 
 bool CustomDefeatFrame_SpectateButton_Handler(bool testConds, bool runActions){
@@ -44,9 +45,13 @@ void CustomDefeatFrame_WinEnable(){
     UISetGameMenuItemShortcut(PlayerGroupAll(), c_gameMenuDialogGenericButton1, StringExternal("Trig/PlayerWin/ButtonHotkey"));
     tmpTrigger = TriggerCreate("CustomDefeatFrame_WinButton_Handler");
     TriggerAddEventGameMenuItemSelected(tmpTrigger, c_playerAny, c_gameMenuDialogGenericButton1);
-    winButton = DialogControlHookup(gv_UI_MasterFrame, c_triggerControlTypeButton, "Menu/WinButton");
-    DialogControlSetVisible(winButton, gv_ActivePG, true);
-    TriggerAddEventDialogControl(tmpTrigger, c_playerAny, winButton, c_triggerControlEventTypeClick);
+    winMenuButton = DialogControlHookup(gv_UI_MasterFrame, c_triggerControlTypeButton, "Menu/WinButton");
+    DialogControlSetVisible(winMenuButton, gv_ActivePG, true);
+    TriggerAddEventDialogControl(tmpTrigger, c_playerAny, winMenuButton, c_triggerControlEventTypeClick);
+}
+
+void CustomDefeatFrame_WinButtonNotification(){
+    DialogControlSendAnimationEvent(winMenuButton, gv_ActivePG, "Notification");
 }
 
 void CustomDefeatFrame_Init () {

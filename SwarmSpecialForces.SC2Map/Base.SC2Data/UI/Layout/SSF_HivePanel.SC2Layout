@@ -75,7 +75,8 @@
                     </State>
                     <State name="Green">
                         <When type="Property" frame="Percent" operator="GreaterThan" Result="0.75"/>
-                        <Action type="SetProperty" frame="FillImageContainer/FillImage" LayerColor="0,255,0"/></State>
+                        <Action type="SetProperty" frame="FillImageContainer/FillImage" LayerColor="0,255,0"/>
+                    </State>
                 </StateGroup>
 
                 <Frame type="Frame" name="FillImageContainer">

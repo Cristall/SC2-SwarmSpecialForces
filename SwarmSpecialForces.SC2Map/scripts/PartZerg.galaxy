@@ -1639,6 +1639,7 @@ bool PartZerg_Boss_Stetmann_Dies (bool testConds, bool runActions){
     PartZerg_AreaMix_Fourth_Opener();
     if(!PartZerg_MoopyDoor_Requirement() || !PartZerg_MoopyAllDoorsOpen()){
         UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, StringExternal("Trig/Enemy/AreaOpen/MoopyClosed"));
+        CustomDefeatFrame_WinButtonNotification();
     }
     else if(partZerg_MoopyChampionsKilled < partZerg_MoopyChampionsMax){
         UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, StringExternal("Trig/Enemy/AreaOpen/MoopyCanBeOpened"));
@@ -1653,6 +1654,7 @@ bool PartZerg_Boss_Moopy_Dies (bool testConds, bool runActions){
     TriggerDestroy(TriggerGetCurrent());
     Enemy_BossDeath(libNtve_gf_KillingPlayer(), c_AcvIdentifier_BossZ_Moopy, 10, UnitGetPosition(EventUnit()));
     Collectibles_MoopyHat_DropHat(EventUnit());
+    CustomDefeatFrame_WinButtonNotification();
     return true;
 }
 

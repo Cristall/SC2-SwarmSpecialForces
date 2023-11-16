@@ -1,12 +1,65 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <Desc>
 
+	<Frame type="Image" name="NotificationTemplate">
+		<Anchor side="Top" relative="$parent" pos="Mid" offset="0"/>
+		<Anchor side="Bottom" relative="$parent" pos="Mid" offset="0"/>
+		<Anchor side="Right" relative="$parent" pos="Max" offset="-25"/>
+		<Height val="40"/>
+		<Width val="20"/>
+
+		<Texture val="Assets\Textures\exclamation.dds"/>
+		<Visible val="False"/>
+		<Rotation val="5"/>
+		<AcceptsMouse val="True"/>
+		<RenderPriority val="600"/>
+
+		<Animation name="Stop">
+			<Event event="OnMouseEnter" action="Reset,Play" frame="$this"/>
+			<Controller type="Event" end="Pause" frame="$this">
+				<Key type="Event" time="0.0" event="Stop"/>
+			</Controller>
+		</Animation>
+
+		<Animation name="Show">
+			<Event event="Start" action="Reset,Play" frame="$this"/>
+			<Event event="Stop" action="DirectionReverse,Play" frame="$this"/>
+			<Controller type="Property" end="Pause" frame="$this" property="Visible">
+				<Key type="Property" time="0.0" value="False"/>
+				<Key type="Property" time="0.01" value="True"/>
+			</Controller>
+		</Animation>
+		<Animation name="Blink">
+			<Event event="Start" action="Play" frame="$this"/>
+			<Event event="Stop" action="Reset" frame="$this"/>
+			<Controller type="Dimension" end="PingPong" frame="$this" dimension="Height" relative="False">
+				<Key type="Curve" time="0.0" value="40" inout="Smooth"/>
+				<Key type="Curve" time="2.0" value="50" inout="Smooth"/>
+			</Controller>
+			<Controller type="Dimension" end="PingPong" frame="$this" dimension="Width" relative="False">
+				<Key type="Curve" time="0.0" value="20" inout="Smooth"/>
+				<Key type="Curve" time="2.0" value="25" inout="Smooth"/>
+			</Controller>
+			<Controller type="Rotation" end="PingPong" frame="$this" relative="False">
+				<Key type="Curve" time="0.0" value="2"/>
+				<Key type="Curve" time="4" value="8"/>
+			</Controller>
+			<Controller type="Color" end="PingPong" frame="$this">
+				<Key type="Curve" time="0" value="215,0,0"/>
+				<Key type="Curve" time="2" value="ff0000"/>
+			</Controller>
+		</Animation>
+	</Frame>
+
+	
+
 <!-- Perma Menu Open button-->
 	<Constant name="MenuOpenerHeight" val="82"/>
 
 	<Frame type="Frame" name="MenuOpenerTemplate">
 		<Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
 		<Anchor side="Bottom" relative="$GameUI/UIContainer/ConsoleUIContainer/IdleButton" pos="Min" offset="10"/>
+		<Handle val="SSF_Menu_Opener"/>
 
 		<Width val="#MenuOpenerWidth"/>
 		<Height val="#MenuOpenerHeight"/>
@@ -26,7 +79,12 @@
 				<Controller type="Visibility" end="Pause" frame="$parent/$parent/Menu">
 					<Key type="Bool" time="0.0" value="true"/>
 				</Controller>
+				<Controller type="Event" end="Pause" frame="Notification">
+					<Key type="Event" time="0.0" event="Stop"/>
+				</Controller>
 			</Animation>
+			
+			<Frame type="Image" name="Notification" template="SSF_Menu/NotificationTemplate"/>
 		</Frame>
 		<Frame type="Button" name="CloseButton" template="SSF_Templates/ButtonTemplate">
 			<Anchor side="Left" relative="$parent" pos="Min" offset="25"/>
@@ -245,6 +303,33 @@
 					<Key type="Curve" time="5" value="0,255,0" in="Slow"/>				
 				</Controller>
 			</Animation>
+
+			<StateGroup name="VisibleParent">
+				<DefaultState val="False"/>
+				<State name="True">
+					<!-- frame here is parent, because visibilty property isnt inherited? -->
+					<When type="Property" frame="$parent" operator="Equal" Visible="True"/>
+					<Action type="SetAnimationProperty" frame="$this" animation="ForwardNotificationToMenuOpener" enabled="False"/>
+				</State>
+				<State name="False">
+					<Action type="SetAnimationProperty" frame="$this" animation="ForwardNotificationToMenuOpener" enabled="True"/>
+				</State>
+			</StateGroup>
+
+			<Animation name="ForwardNotificationToMenuOpener">
+				<Event event="Notification" action="Reset,Play" frame="$this"/>
+				<Controller type="Event" end="Pause" frame="$SSF_Menu_Opener/OpenButton/Notification">
+					<Key type="Event" time="0.0" event="Start"/>
+				</Controller>
+			</Animation>
+			<Animation name="NotificationAnim">
+				<Event event="Notification" action="Reset,Play" frame="$this"/>
+				<Controller type="Event" end="Pause" frame="Notification">
+					<Key type="Event" time="0.0" event="Start"/>
+				</Controller>
+			</Animation>
+
+			<Frame type="Image" name="Notification" template="SSF_Menu/NotificationTemplate"/>
 		</Frame>
 	</Frame>
 
