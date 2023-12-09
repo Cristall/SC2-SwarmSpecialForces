@@ -64,7 +64,7 @@ bool HeroAbility_RespawnEgg_RespawnHandler(bool testConds, bool runActions){
 
     UIDisplayMessage(PlayerGroupAll(), c_messageAreaChat, Utility_TextExpressionReplacement2("Trig/RespawnEgg/PlayerSaved", Utility_PlayerNameWithPlayerColor(revivingPlayer), Utility_PlayerNameWithPlayerColor(eggOwner)));
 
-    ReviveUI_Start(revivingPlayer, time, egg, UnitGetType(gv_PlayerStats[revivingPlayer].heroUnit));
+    ReviveUI_Start(revivingPlayer, time, egg);
 
     if(UnitTestState(egg, c_unitStateHidden)){
         ActorSend(libNtve_gf_MainActorofUnit(gv_PlayerStats[eggOwner].heroUnit), "Signal RespawnEggKill");
@@ -86,6 +86,7 @@ bool HeroAbility_RespawnEgg_RespawnHandler(bool testConds, bool runActions){
     //loop
     while(time > 0){
         Wait(loopTime, c_timeGame);
+        ReviveUI_Update(revivingPlayer, time);
         time -= loopTime;
         //checks for revive exceptions
         if(!gv_PlayerStats[revivingPlayer].activeFlag ){

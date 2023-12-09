@@ -2,28 +2,35 @@
 
 
 static int counterFrame;
-static int timeFrame;
+static int timeCurrentFrame;
 static int eggUnitTargetFrame;
 static int eggIconFrame;
+static int timeTotalFrame;
 
 // endregion variables
 
 
 
-void ReviveUI_Start(int player, fixed seconds, unit egg, string unittype) {
+void ReviveUI_Start(int player, fixed seconds, unit egg) {
     playergroup pg = PlayerGroupSingle(player);
     // Layout will multiply the value by the const ReviveSmoothnessFactor (=60) and ignore any decimals of that.
     // so rounding to 2 digits should be enough here
-    DialogControlSetPropertyAsText(timeFrame, c_triggerControlPropertyText, pg, FixedToText(seconds, 2));
+    DialogControlSetPropertyAsText(timeTotalFrame, c_triggerControlPropertyText, pg, FixedToText(seconds, 2));
+    DialogControlSetPropertyAsText(timeCurrentFrame, c_triggerControlPropertyText, pg, FixedToText(seconds, 2));
     DialogControlSendAnimationEvent(counterFrame, pg, "Reset");
-
     libNtve_gf_SetDialogItemUnit(eggUnitTargetFrame, egg, pg);
+}
 
+void ReviveUI_Update(int player, fixed secondsRemaining){
+    playergroup pg = PlayerGroupSingle(player);
+    DialogControlSetPropertyAsText(timeCurrentFrame, c_triggerControlPropertyText, pg, FixedToText(secondsRemaining, 2));
+    DialogControlSendAnimationEvent(counterFrame, pg, "Reset");
 }
 
 void ReviveUI_Init(){
     counterFrame = DialogControlHookup(gv_UI_MasterFrame, c_triggerControlTypeCountdownLabel, "Revive/Countdown");
-    timeFrame = DialogControlHookup(gv_UI_MasterFrame, c_triggerControlTypeLabel, "Revive/Time");
+    timeTotalFrame = DialogControlHookup(gv_UI_MasterFrame, c_triggerControlTypeLabel, "Revive/TimeTotal");
+    timeCurrentFrame = DialogControlHookup(gv_UI_MasterFrame, c_triggerControlTypeLabel, "Revive/TimeCurrent");
     eggUnitTargetFrame = DialogControlHookup(gv_UI_MasterFrame, c_triggerControlTypeUnitTarget, "Revive/EggUnitTargetFrame");
     eggIconFrame = DialogControlHookup(gv_UI_MasterFrame, c_triggerControlTypeImage, "Revive/EggIconImage");
 }

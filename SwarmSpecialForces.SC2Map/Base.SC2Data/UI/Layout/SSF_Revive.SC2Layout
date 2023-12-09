@@ -68,7 +68,7 @@
             <Anchor side="Top" relative="$parent/BarBorderImage" pos="Min" offset="8"/>
             <Anchor side="Bottom" relative="$parent/BarBorderImage" pos="Max" offset="-8"/>
 
-            <MaxValue val="{$parent/Countdown/@StartValue}"/>
+            <MaxValue val="{$parent/TimeTotal/TotalValue/@ResultInt}"/>
             <Value val="{$parent/Countdown/@CurrentValue}"/>
             <MinValue val="0"/>
 
@@ -110,9 +110,9 @@
             <Style val="MonospaceTemplate"/>
 
 			<UseAlternateTime val="true"/>
-            <CountdownTime val="{$parent/Time/CountdownTime/@ResultInt}"/>
-            <StartValue val="{$parent/Time/StartValue/@ResultInt}"/>
-			<TargetValue val="0"/>
+            <CountdownTime val="1000"/> <!-- time it takes to go from start to target value in milliseconds -->
+            <StartValue val="{$parent/TimeCurrent/StartValue/@ResultInt}"/>
+			<TargetValue val="{$parent/TimeCurrent/TargetValue/@ResultInt}"/>
 
             <Animation name="ResetTimerAnim">
                 <Event event="Reset" action="Reset,Play"/>
@@ -122,23 +122,37 @@
                 </Controller>
             </Animation>
 		</Frame>
-        <Frame type="Label" name="Time">
+        
+        <Frame type="Label" name="TimeCurrent">
             <!-- <Visible val="False"/> -->
             <Anchor side="Top" relative="$parent/Countdown" pos="Max" offset="0"/>
             <Anchor side="Left" relative="$parent/Countdown" pos="Min" offset="0"/>
             <Anchor side="Right" relative="$parent/Countdown" pos="Max" offset="0"/>
-            <Anchor side="Bottom" relative="$parent/Countdown" pos="Max" offset="0"/>
+            <Anchor side="Bottom" relative="$parent/Countdown" pos="Max" offset="50"/>
             <Style val="MonospaceTemplate"/>
+            <!-- <Text val="0"/> -->
             
-            <Frame type="MathFrame" name="CountdownTime">
-                <!-- Countdowntime is the time it takes for the countdownlabel to go from startvalue to targetvalue in MILLISECONDS -->
+            <Frame type="MathFrame" name="StartValue">
                 <Anchor relative="$parent"/>
                 <A val="{$parent/@Text}"/>
-                <B val="1000"/>
+                <B val="#ReviveSmoothnessFactor"/>
                 <Operator val="Multiply"/>
             </Frame>
-            <Frame type="MathFrame" name="StartValue">
-                <!-- StartValue multiplied by 10 because it needs to be an int, this allows 1 decimal place -->
+            <Frame type="MathFrame" name="TargetValue">
+                <Anchor relative="$parent"/>
+                <A val="{$parent/StartValue/@ResultInt}"/>
+                <B val="#ReviveSmoothnessFactor"/>
+                <Operator val="Subtract"/>
+            </Frame>
+        </Frame>
+        <Frame type="Label" name="TimeTotal">
+            <Anchor side="Top" relative="$parent/Countdown" pos="Max" offset="0"/>
+            <Anchor side="Left" relative="$parent/Countdown" pos="Min" offset="0"/>
+            <Anchor side="Right" relative="$parent/Countdown" pos="Max" offset="0"/>
+            <Anchor side="Bottom" relative="$parent/Countdown" pos="Max" offset="50"/>
+            <Style val="MonospaceTemplate"/>
+            
+            <Frame type="MathFrame" name="TotalValue">
                 <Anchor relative="$parent"/>
                 <A val="{$parent/@Text}"/>
                 <B val="#ReviveSmoothnessFactor"/>
