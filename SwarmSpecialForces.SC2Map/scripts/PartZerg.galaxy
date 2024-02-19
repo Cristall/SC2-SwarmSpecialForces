@@ -1095,7 +1095,7 @@ void PartZerg_Stetmann_ScrapSummon(){
                     randomPoint = PointFromName("PartZerg_Boss_Gary");
                 }
                 
-                UnitCreate(1, unitTypes[i], 0, gv_EnemyPlayer, randomPoint, 0);
+                UnitCreate(1, unitTypes[i], c_unitCreateIgnorePlacement, gv_EnemyPlayer, randomPoint, 0);
                 UnitBehaviorAdd(UnitLastCreated(), "StetmannSummons@SpawnIn", UnitLastCreated(), 1);
                 UnitIssueOrder(UnitLastCreated(), OrderTargetingPoint(AbilityCommand("attack", 0), RegionRandomPoint(RegionFromName("PartZerg_Boss_Stetmann_Arena"))), c_orderQueueReplace);
             
