@@ -1536,7 +1536,8 @@ void PartZerg_Moopy_Init(structref<BossFightData> data){
     data.amountAbility = 6;
 }
 void PartZerg_Moopy_Addition(structref<BossFightData> data){
-    const fixed phase2ShieldsThreshold = 0.75;
+    // due to rounding error in sc2 shields, unit can have between 0 and 1 shields and still take life damage
+    const fixed phase2ShieldsThreshold = 1.0;
     fixed bossShields = UnitGetPropertyFixed(data.boss[0], c_unitPropShields, true);
 
     // phase change
