@@ -1083,18 +1083,18 @@ void PartZerg_Stetmann_ScrapSummon(){
     while (remainingScrap > 0){
         spawnFlag = false;
         for (i = 0; i < unitTypesCount; i += 1) {
-            if (unitTypesCost[i] < remainingScrap){
+            if (unitTypesCost[i] <= remainingScrap){
                 remainingScrap -= unitTypesCost[i];
                 for (j = 0; j < 5; j+=1){
-                    randomPoint = RegionRandomPoint(arena);
-                    if(PointPathingCliffLevel(randomPoint) == garySpawnHeight){
+                    randomPoint = UnitTypePlacementFromPoint(unitTypes[i], gv_EnemyPlayer, RegionRandomPoint(arena), 16) ;
+                    if(randomPoint != null && PointPathingCliffLevel(randomPoint) == garySpawnHeight){
                         break;
                     }
                 }
                 if (j == 5){
                     randomPoint = PointFromName("PartZerg_Boss_Gary");
                 }
-                
+
                 UnitCreate(1, unitTypes[i], c_unitCreateIgnorePlacement, gv_EnemyPlayer, randomPoint, 0);
                 UnitBehaviorAdd(UnitLastCreated(), "StetmannSummons@SpawnIn", UnitLastCreated(), 1);
                 UnitIssueOrder(UnitLastCreated(), OrderTargetingPoint(AbilityCommand("attack", 0), RegionRandomPoint(RegionFromName("PartZerg_Boss_Stetmann_Arena"))), c_orderQueueReplace);
