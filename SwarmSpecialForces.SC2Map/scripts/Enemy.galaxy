@@ -474,14 +474,12 @@ bool Enemy_IdleReset (bool testConds, bool runActions) {
 bool Enemy_Kill (bool testConds, bool runActions) {
     unit trigUnit = EventUnit();
     string unitType = UnitGetType(trigUnit);
-
-    if (testConds) {
-        if (!(UnitGetOwner(trigUnit) == gv_EnemyPlayer
-            && !UnitTypeTestFlag(unitType, c_unitFlagMissile)
-            && !UnitTypeTestAttribute(unitType, c_unitAttributeSummoned))
-            && !UnitHasBehavior2(trigUnit, "NoKillReward")) {
-            return false;
-        }
+    
+    if (UnitGetOwner(trigUnit) != gv_EnemyPlayer
+        || UnitTypeTestFlag(unitType, c_unitFlagMissile)
+        || UnitTypeTestAttribute(unitType, c_unitAttributeSummoned)
+        || UnitHasBehavior2(trigUnit, "NoKillReward")) {
+        return false;
     }
 
     if (!(UnitTypeTestAttribute(unitType, c_unitAttributeStructure) || UnitTypeTestAttribute(unitType, c_unitAttributeSummoned))) {

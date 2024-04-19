@@ -193,6 +193,7 @@
     </CBehaviorBuff>
     <CBehaviorBuff id="NoKillReward">
         <InfoFlags index="Hidden" value="1"/>
+        <BehaviorFlags index="Permanent" value="1" />
         <EditorCategories value="AbilityorEffectType:Units"/>
     </CBehaviorBuff>
     <CBehaviorBuff id="BossReturn">
