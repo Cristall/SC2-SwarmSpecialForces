@@ -24,7 +24,7 @@
         </GameSpeed>
     </Tutorial>
     <Dependencies>
-        <Value>bnet:Swarm Special Forces Assets/0.0/293073,file:Mods\SwarmSpecialForcesAssets.SC2Mod</Value>
+        <Value>bnet:Swarm Special Forces Assets/0.0/293073,file:Maps\SwarmSpecialForces\SwarmSpecialForcesAssets.SC2Mod</Value>
         <Value>bnet:Void (Campaign)/0.0/999,file:Campaigns/Void.SC2Campaign</Value>
     </Dependencies>
     <Screenshot>

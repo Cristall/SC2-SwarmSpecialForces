@@ -6,13 +6,12 @@ SwarmSpecialForces.SC2Map contains all scripts and data. Assets like custom mode
 
 ### Simple install:
 - Download the repository as a ZIP file.
-- Move `SwarmSpecialForcesAssets.SC2Mod` into `Starcraft II/Mods`.
+- Move the unzipped folder into `Starcraft II/Maps`.
 - Open the map by double clicking on `SwarmSpecialForces.SC2Mod/ComponentList.SC2Components`.
 - Once the Starcraft 2 editor opened and loaded the map you can hit Test Document (Ctrl+F9).
 
 ### Advanced install:
 - Clone this repository into `Starcraft II/Maps`.
-- Create a Junction or Symbolic Link pointing from `Starcraft II/Mods/SwarmSpecialForcesAssets.SC2Mod` to `Starcraft II/Maps/SwarmSpecialForces/SwarmSpecialForcesAssets.SC2Mod`.
 - Start the map using `Startcraft II/Support64/SC2_Switcher.exe -run SwarmSpecialForces/SwarmSpecialForces.SC2Map`. For debugging you can add the arguments `-displaymode 0 -trigdebug`.
 
 
