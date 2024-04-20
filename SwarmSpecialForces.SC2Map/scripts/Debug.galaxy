@@ -533,55 +533,20 @@ void Debug_Override_FirstPart(){
     }
 }
 
-// void Debug_Test2(string unittype){
-//     int i;
-//     string abil;
-//     unitgroup ug = UnitCreate(1, unittype, 0, 1, Point(5,5), 0);
-//     unit u = UnitGroupUnit(ug,1);
-//     int abilCount = UnitAbilityCount(u);
-//     Debug_ShowMessage(unittype);
-//     Debug_ShowMessage(IntToString(abilCount));
-//     for(i=1; i<=abilCount; i+=1){
-//         abil = UnitAbilityGet(u, i);
-//         Debug_ShowMessage(abil);
-//     }
-
-//     UnitIssueOrder(u, Order(AbilityCommand("Phase2", 0)), c_orderQueueReplace);
-//     Wait(10, c_timeGame);
-
-//     abilCount = UnitAbilityCount(u);
-//     Debug_ShowMessage(UnitGetType(u));
-//     Debug_ShowMessage(IntToString(abilCount));
-//     for(i=1; i<=abilCount; i+=1){
-//         abil = UnitAbilityGet(u, i);
-//         Debug_ShowMessage(abil);
-//     }
-// }
-
 // other testing functionality
 bool Debug_Test (bool testConds, bool runActions){
-    // Debug_ShowMessage(IntToString(ValidatorExecute("CasterLifeLT75Percent", gv_PlayerStats[1].heroUnit, gv_PlayerStats[1].heroUnit)));
-    // playergroup emptygroup = PlayerGroupEmpty();
-    // int play = PlayerGroupPlayer(emptygroup, 1);
-    // Debug_ShowMessage(IntToString(play));
-    // Debug_Test2("Atlantis");
-    // Debug_Test2("AtlantisCore");
 
-    point p = PointFromName("PartProtoss_Boss_TagTeam");
-    int i;
-    unit u;
-    unitgroup ug;
+    PartZerg_Stetmann_ScrapSummon();
 
-    ug=UnitGroup(null, c_playerAny, RegionCircle(p, 30), UnitFilter(0,0,0,0), -1);
-    for (i = 1; i <= UnitGroupCount(ug, c_unitCountAll); i += 1) {
-        u = UnitGroupUnit(ug, i);
-        UnitRemove(u);
-    }
-
-    UnitCreate(1, "Lightning", 0, gv_EnemyPlayer, p, 0);
-
-    UnitCreate(400, "ZerglingCarbot", 0, 1, p, 0);
-
+    // fixed time = RandomFixed(10,20);
+    // ReviveUI_Start(EventPlayer(), time, gv_BaseHive);
+    // while (time > 0){
+    //     time -= 0.25;
+    //     Wait(0.25, c_timeGame);
+    //     ReviveUI_Update(EventPlayer(), time);
+    // }
+    // gv_PlayerAmountStart += 1;
+    // CustomDefeatFrame_WinButtonNotification();
     return true;
 }
 bool Debug_Kick (bool testConds, bool runActions){
@@ -654,9 +619,9 @@ bool Debug_EffectExecuted(bool testConds, bool runActions){
     // UnitIssueOrder(EventPlayerEffectUsedUnit(c_effectUnitTarget), OrderTargetingPoint(AbilityCommand("Pinball@Shot", 0), location_target), c_orderQueueReplace);
 
     // UnitCreate(1, "ZerglingCarbot", 0, 14, location_target, 0);
-    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug,StringToText("caster: ") + UnitGetName(EventPlayerEffectUsedUnit(c_effectUnitCaster)));
-    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug,StringToText("source: ") + UnitGetName(EventPlayerEffectUsedUnit(c_effectUnitSource)));
-    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug,StringToText("target: ") + UnitGetName(EventPlayerEffectUsedUnit(c_effectUnitTarget)));
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Caster: ") + UnitGetName(EventPlayerEffectUsedUnit(c_effectUnitCaster)) + StringToText("#") + IntToText(UnitGetTag(EventPlayerEffectUsedUnit(c_effectUnitCaster))));
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Source: ") + UnitGetName(EventPlayerEffectUsedUnit(c_effectUnitSource)) + StringToText("#") + IntToText(UnitGetTag(EventPlayerEffectUsedUnit(c_effectUnitSource))));
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("Target: ") + UnitGetName(EventPlayerEffectUsedUnit(c_effectUnitTarget)) + StringToText("#") + IntToText(UnitGetTag(EventPlayerEffectUsedUnit(c_effectUnitTarget))));
     
     return true;
 }
@@ -953,11 +918,11 @@ void Debug_Init(){
         // TriggerAddEventChatMessage(TriggerCreate("Debug_Test"), c_playerAny, "-test", false);
         // TriggerAddEventChatMessage(TriggerCreate("Debug_Kick"), c_playerAny, "-kick", false);
         // TriggerAddEventChatMessage(TriggerCreate("Debug_Kill"), c_playerAny, "-kill", false);
-        TriggerAddEventChatMessage(TriggerCreate("Debug_Skip"), c_playerAny, "-skip", false);
+        // TriggerAddEventChatMessage(TriggerCreate("Debug_Skip"), c_playerAny, "-skip", false);
         // TriggerAddEventChatMessage(TriggerCreate("Debug_MoopyReset"), c_playerAny, "-moopyreset", false);
         // TriggerAddEventChatMessage(TriggerCreate("Debug_UnstableTp"), c_playerAny, "-unstable", false);
-        TriggerAddEventChatMessage(TriggerCreate("Debug_Spellpower"), c_playerAny, "-spellpower", false);
-        TriggerAddEventChatMessage(TriggerCreate("Debug_Win"), c_playerAny, "-win", false);
+        // TriggerAddEventChatMessage(TriggerCreate("Debug_Spellpower"), c_playerAny, "-spellpower", false);
+        // TriggerAddEventChatMessage(TriggerCreate("Debug_Win"), c_playerAny, "-win", false);
 
         // TriggerAddEventChatMessage(TriggerCreate("Debug_CybermindAddTracking"), c_playerAny, "-gen", false);
         // TriggerAddEventChatMessage(TriggerCreate("Debug_GetUnitgroupCount"), c_playerAny, "-count", false);
