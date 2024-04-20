@@ -1,164 +1,164 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <Desc>
-    <Constant name="ReviveSmoothnessFactor" val="60"/>
+	<Constant name="ReviveSmoothnessFactor" val="60"/>
 
-    <Frame type="Frame" name="ReviveContainerTemplate">
+	<Frame type="Frame" name="ReviveContainerTemplate">
 
-        <Anchor side="Top" relative="$parent" pos="0.25" offset="0"/>
-        <Anchor side="Bottom" relative="EggIconImage" pos="Max" offset="#Border"/>
-        <Anchor side="Left" relative="$parent" pos="Mid" offset="0"/>
-        <Anchor side="Right" relative="$parent" pos="Mid" offset="0"/>
+		<Anchor side="Top" relative="$parent" pos="0.25" offset="0"/>
+		<Anchor side="Bottom" relative="EggIconImage" pos="Max" offset="#Border"/>
+		<Anchor side="Left" relative="$parent" pos="Mid" offset="0"/>
+		<Anchor side="Right" relative="$parent" pos="Mid" offset="0"/>
 
-        <Height val="200"/>
-        <Width val="500"/>
+		<Height val="200"/>
+		<Width val="500"/>
 
-        <Visible val="False"/>
-        <StateGroup name="Visible">
-            <DefaultState val="False"/>
-            <State name="True">
-                <When type="Property" frame="TextFormat/RemainingTime" operator="GreaterThan" ResultCeil="0"/>
-                <Action type="SetProperty" frame="$this" Visible="True"/>
-            </State>
-            <State name="False"></State>
-        </StateGroup>
+		<Visible val="False"/>
+		<StateGroup name="Visible">
+			<DefaultState val="False"/>
+			<State name="True">
+				<When type="Property" frame="TextFormat/RemainingTime" operator="GreaterThan" ResultCeil="0"/>
+				<Action type="SetProperty" frame="$this" Visible="True"/>
+			</State>
+			<State name="False"></State>
+		</StateGroup>
 
-        <Frame type="Image" name="BackgroundImage" template="SSF_Templates/BackgroundImageTemplate"></Frame>
+		<Frame type="Image" name="BackgroundImage" template="SSF_Templates/BackgroundImageTemplate"></Frame>
 
-        <Frame type="TextFormatFrame" name="TextFormat">
-            <Visible val="False"/>
-            <Anchor relative="$parent"/>
-            <FormatText val="@Trig/ReviveUI/TimeRemaining"/>
-            <Replacement val="{RemainingTime/@ResultCeil}"/>
+		<Frame type="TextFormatFrame" name="TextFormat">
+			<Visible val="False"/>
+			<Anchor relative="$parent"/>
+			<FormatText val="@Trig/ReviveUI/TimeRemaining"/>
+			<Replacement val="{RemainingTime/@ResultCeil}"/>
 
-            <Frame type="MathFrame" name="RemainingTime">
-                <Anchor relative="$parent"/>
-                <A val="{$parent/$parent/Countdown/@CurrentValue}"/>
-                <B val="#ReviveSmoothnessFactor"/>
-                <Operator val="Divide"/>
-            </Frame>
-        </Frame>
+			<Frame type="MathFrame" name="RemainingTime">
+				<Anchor relative="$parent"/>
+				<A val="{$parent/$parent/Countdown/@CurrentValue}"/>
+				<B val="#ReviveSmoothnessFactor"/>
+				<Operator val="Divide"/>
+			</Frame>
+		</Frame>
 
-        <Frame type="Image" name="EggIconImage">
-            <Anchor side="Top" relative="$parent" pos="Min" offset="#Border"/>
-            <Anchor side="Left" relative="$parent" pos="Min" offset="#Border"/>
-            <Width val="79"/>
-            <Height val="79"/>
-            <Texture val="Assets\Textures\btn-unit-zerg-egg.dds"/>
-        </Frame>
-        <Frame type="UnitTargetFrame" name="EggUnitTargetFrame">
-            <Anchor side="Top" relative="$parent/EggIconImage" pos="Min" offset="0"/>
-            <Anchor side="Bottom" relative="$parent/EggIconImage" pos="Max" offset="0"/>
-            <Anchor side="Left" relative="$parent/EggIconImage" pos="Min" offset="0"/>
-            <Anchor side="Right" relative="$parent/EggIconImage" pos="Max" offset="0"/>
-            <AllowCursorChanging val="false"/>
-        </Frame>
+		<Frame type="Image" name="EggIconImage">
+			<Anchor side="Top" relative="$parent" pos="Min" offset="#Border"/>
+			<Anchor side="Left" relative="$parent" pos="Min" offset="#Border"/>
+			<Width val="79"/>
+			<Height val="79"/>
+			<Texture val="Assets\Textures\btn-unit-zerg-egg.dds"/>
+		</Frame>
+		<Frame type="UnitTargetFrame" name="EggUnitTargetFrame">
+			<Anchor side="Top" relative="$parent/EggIconImage" pos="Min" offset="0"/>
+			<Anchor side="Bottom" relative="$parent/EggIconImage" pos="Max" offset="0"/>
+			<Anchor side="Left" relative="$parent/EggIconImage" pos="Min" offset="0"/>
+			<Anchor side="Right" relative="$parent/EggIconImage" pos="Max" offset="0"/>
+			<AllowCursorChanging val="false"/>
+		</Frame>
 
-        <Frame type="Label" name="Label" template="SSF_Templates/LabelTemplate">
-            <Anchor side="Left" relative="$parent/BarBorderImage" pos="Min" offset="10"/>
-            <Anchor side="Right" relative="$parent" pos="Max" offset="#BorderNegative"/>
-            <Anchor side="Bottom" relative="$parent" pos="Mid" offset="-5"/>
-            <Style val="aaDialogItemStyleLeftMiddle"/>
+		<Frame type="Label" name="Label" template="SSF_Templates/LabelTemplate">
+			<Anchor side="Left" relative="$parent/BarBorderImage" pos="Min" offset="10"/>
+			<Anchor side="Right" relative="$parent" pos="Max" offset="#BorderNegative"/>
+			<Anchor side="Bottom" relative="$parent" pos="Mid" offset="-5"/>
+			<Style val="aaDialogItemStyleLeftMiddle"/>
 
-            <Text val="{$parent/TextFormat/@Text}"/>
-        </Frame>
+			<Text val="{$parent/TextFormat/@Text}"/>
+		</Frame>
 
-        <Frame type="ProgressBar" name="Bar">
-            <Anchor side="Left" relative="$parent/BarBorderImage" pos="Min" offset="9"/>
-            <Anchor side="Right" relative="$parent/BarBorderImage" pos="Max" offset="-9"/>
-            <Anchor side="Top" relative="$parent/BarBorderImage" pos="Min" offset="8"/>
-            <Anchor side="Bottom" relative="$parent/BarBorderImage" pos="Max" offset="-8"/>
+		<Frame type="ProgressBar" name="Bar">
+			<Anchor side="Left" relative="$parent/BarBorderImage" pos="Min" offset="9"/>
+			<Anchor side="Right" relative="$parent/BarBorderImage" pos="Max" offset="-9"/>
+			<Anchor side="Top" relative="$parent/BarBorderImage" pos="Min" offset="8"/>
+			<Anchor side="Bottom" relative="$parent/BarBorderImage" pos="Max" offset="-8"/>
 
-            <MaxValue val="{$parent/TimeTotal/TotalValue/@ResultInt}"/>
-            <Value val="{$parent/Countdown/@CurrentValue}"/>
-            <MinValue val="0"/>
+			<MaxValue val="{$parent/TimeTotal/TotalValue/@ResultInt}"/>
+			<Value val="{$parent/Countdown/@CurrentValue}"/>
+			<MinValue val="0"/>
 
-            <Horizontal val="True"/>
-            <InvertFill val="True"/>
-            
-            <Frame type="Frame" name="FillImageContainer">
-                <Anchor relative="$parent"/>
-                <AcceptsMouse val="false"/>
-                <Frame type="Image" name="FillImage">
-                    <Anchor relative="$parent"/>
-                    <Texture val="Assets\Textures\ui_ingame_lotv_progressbarfill_zerg.dds"/>
-                    <TextureType val="NineSlice"/>
-                    <ColorAdjustMode val="None" />
-                    <SubpixelRendering val="True"/>
-                    <AcceptsMouse val="false"/>
-                    <Color val="225,225,225"/>
-                </Frame>
-            </Frame>
-        </Frame>
-        <Frame type="Image" name="BarBorderImage">
-            <Anchor side="Left" relative="$parent/EggIconImage" pos="Max" offset="-5"/>
-            <!-- IMPORTANT: DO NOT ANCHOR RIGHT SIDE TO LABEL.
-                label somehow recalculates width (even with fixed anchors) when text changes.
-                because label gets new text whenever the number changes
-                and then for 1 frame the bar will have invalid anchors and fill entirely -->
-            <Anchor side="Right" relative="$parent" pos="Max" offset="#BorderNegative"/>
-            <Anchor side="Top" relative="$parent" pos="Mid" offset="-5"/>
-            <Anchor side="Bottom" relative="$parent/EggIconImage" pos="Max" offset="-5"/>
-            <TextureType val="NineSlice"/>
-            <Texture val="Assets\Textures\ui_ingame_lotv_progressbarframe_zerg.dds"/>
-        </Frame>
+			<Horizontal val="True"/>
+			<InvertFill val="True"/>
+
+			<Frame type="Frame" name="FillImageContainer">
+				<Anchor relative="$parent"/>
+				<AcceptsMouse val="false"/>
+				<Frame type="Image" name="FillImage">
+					<Anchor relative="$parent"/>
+					<Texture val="Assets\Textures\ui_ingame_lotv_progressbarfill_zerg.dds"/>
+					<TextureType val="NineSlice"/>
+					<ColorAdjustMode val="None" />
+					<SubpixelRendering val="True"/>
+					<AcceptsMouse val="false"/>
+					<Color val="225,225,225"/>
+				</Frame>
+			</Frame>
+		</Frame>
+		<Frame type="Image" name="BarBorderImage">
+			<Anchor side="Left" relative="$parent/EggIconImage" pos="Max" offset="-5"/>
+			<!-- IMPORTANT: DO NOT ANCHOR RIGHT SIDE TO LABEL.
+				label somehow recalculates width (even with fixed anchors) when text changes.
+				because label gets new text whenever the number changes
+				and then for 1 frame the bar will have invalid anchors and fill entirely -->
+			<Anchor side="Right" relative="$parent" pos="Max" offset="#BorderNegative"/>
+			<Anchor side="Top" relative="$parent" pos="Mid" offset="-5"/>
+			<Anchor side="Bottom" relative="$parent/EggIconImage" pos="Max" offset="-5"/>
+			<TextureType val="NineSlice"/>
+			<Texture val="Assets\Textures\ui_ingame_lotv_progressbarframe_zerg.dds"/>
+		</Frame>
 
 		<Frame type="CountdownLabel" name="Countdown">
 			<Anchor side="Left" relative="$parent" pos="Min" offset="5000"/>
 			<Anchor side="Top" relative="$parent" pos="Min" offset="5000"/>
-            <Anchor side="Right" relative="$parent" pos="Min" offset="5000"/>
-            <Anchor side="Bottom" relative="$parent" pos="Max" offset="5000"/>
-            <Style val="MonospaceTemplate"/>
+			<Anchor side="Right" relative="$parent" pos="Min" offset="5000"/>
+			<Anchor side="Bottom" relative="$parent" pos="Max" offset="5000"/>
+			<Style val="MonospaceTemplate"/>
 
 			<UseAlternateTime val="true"/>
-            <CountdownTime val="1000"/> <!-- time it takes to go from start to target value in milliseconds -->
-            <StartValue val="{$parent/TimeCurrent/StartValue/@ResultInt}"/>
+			<CountdownTime val="1000"/> <!-- time it takes to go from start to target value in milliseconds -->
+			<StartValue val="{$parent/TimeCurrent/StartValue/@ResultInt}"/>
 			<TargetValue val="{$parent/TimeCurrent/TargetValue/@ResultInt}"/>
 
-            <Animation name="ResetTimerAnim">
-                <Event event="Reset" action="Reset,Play"/>
-    
-                <Controller type="Event" end="Stop">
-                    <Key type="Event" time="0" event="CountdownLabelResetRequest"/>
-                </Controller>
-            </Animation>
+			<Animation name="ResetTimerAnim">
+				<Event event="Reset" action="Reset,Play"/>
+	
+				<Controller type="Event" end="Stop">
+					<Key type="Event" time="0" event="CountdownLabelResetRequest"/>
+				</Controller>
+			</Animation>
 		</Frame>
-        
-        <Frame type="Label" name="TimeCurrent">
-            <!-- <Visible val="False"/> -->
-            <Anchor side="Top" relative="$parent/Countdown" pos="Max" offset="0"/>
-            <Anchor side="Left" relative="$parent/Countdown" pos="Min" offset="0"/>
-            <Anchor side="Right" relative="$parent/Countdown" pos="Max" offset="0"/>
-            <Anchor side="Bottom" relative="$parent/Countdown" pos="Max" offset="50"/>
-            <Style val="MonospaceTemplate"/>
-            <!-- <Text val="0"/> -->
-            
-            <Frame type="MathFrame" name="StartValue">
-                <Anchor relative="$parent"/>
-                <A val="{$parent/@Text}"/>
-                <B val="#ReviveSmoothnessFactor"/>
-                <Operator val="Multiply"/>
-            </Frame>
-            <Frame type="MathFrame" name="TargetValue">
-                <Anchor relative="$parent"/>
-                <A val="{$parent/StartValue/@ResultInt}"/>
-                <B val="#ReviveSmoothnessFactor"/>
-                <Operator val="Subtract"/>
-            </Frame>
-        </Frame>
-        <Frame type="Label" name="TimeTotal">
-            <Anchor side="Top" relative="$parent/Countdown" pos="Max" offset="0"/>
-            <Anchor side="Left" relative="$parent/Countdown" pos="Min" offset="0"/>
-            <Anchor side="Right" relative="$parent/Countdown" pos="Max" offset="0"/>
-            <Anchor side="Bottom" relative="$parent/Countdown" pos="Max" offset="50"/>
-            <Style val="MonospaceTemplate"/>
-            
-            <Frame type="MathFrame" name="TotalValue">
-                <Anchor relative="$parent"/>
-                <A val="{$parent/@Text}"/>
-                <B val="#ReviveSmoothnessFactor"/>
-                <Operator val="Multiply"/>
-            </Frame>
-        </Frame>
-    </Frame>
+
+		<Frame type="Label" name="TimeCurrent">
+			<!-- <Visible val="False"/> -->
+			<Anchor side="Top" relative="$parent/Countdown" pos="Max" offset="0"/>
+			<Anchor side="Left" relative="$parent/Countdown" pos="Min" offset="0"/>
+			<Anchor side="Right" relative="$parent/Countdown" pos="Max" offset="0"/>
+			<Anchor side="Bottom" relative="$parent/Countdown" pos="Max" offset="50"/>
+			<Style val="MonospaceTemplate"/>
+			<!-- <Text val="0"/> -->
+
+			<Frame type="MathFrame" name="StartValue">
+				<Anchor relative="$parent"/>
+				<A val="{$parent/@Text}"/>
+				<B val="#ReviveSmoothnessFactor"/>
+				<Operator val="Multiply"/>
+			</Frame>
+			<Frame type="MathFrame" name="TargetValue">
+				<Anchor relative="$parent"/>
+				<A val="{$parent/StartValue/@ResultInt}"/>
+				<B val="#ReviveSmoothnessFactor"/>
+				<Operator val="Subtract"/>
+			</Frame>
+		</Frame>
+		<Frame type="Label" name="TimeTotal">
+			<Anchor side="Top" relative="$parent/Countdown" pos="Max" offset="0"/>
+			<Anchor side="Left" relative="$parent/Countdown" pos="Min" offset="0"/>
+			<Anchor side="Right" relative="$parent/Countdown" pos="Max" offset="0"/>
+			<Anchor side="Bottom" relative="$parent/Countdown" pos="Max" offset="50"/>
+			<Style val="MonospaceTemplate"/>
+			
+			<Frame type="MathFrame" name="TotalValue">
+				<Anchor relative="$parent"/>
+				<A val="{$parent/@Text}"/>
+				<B val="#ReviveSmoothnessFactor"/>
+				<Operator val="Multiply"/>
+			</Frame>
+		</Frame>
+	</Frame>
 
 </Desc>

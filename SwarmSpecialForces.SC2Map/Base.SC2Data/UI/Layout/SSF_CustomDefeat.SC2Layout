@@ -2,78 +2,78 @@
 <Desc>
 
 <!-- local constants -->
-    <Constant name="TotalHeight" val="220"/>
+	<Constant name="TotalHeight" val="220"/>
 
-    <Constant name="ButtonHeight" val="50"/>
+	<Constant name="ButtonHeight" val="50"/>
 <!-- actual frame -->
 
-    <Frame type="Frame" name="GameUI/UIContainer/FullscreenUpperContainer" file="GameUI">
+	<Frame type="Frame" name="GameUI/UIContainer/FullscreenUpperContainer" file="GameUI">
 
-        <Frame type="Frame" name="SSF_CustomDefeat">
-            <Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
-            <Anchor side="Bottom" relative="$parent" pos="Max" offset="-300"/>
-            <Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
-            <Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+		<Frame type="Frame" name="SSF_CustomDefeat">
+			<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+			<Anchor side="Bottom" relative="$parent" pos="Max" offset="-300"/>
+			<Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+			<Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
 
-            <Width val="#CustomDefeatTotalWidth"/>
-            <Height val="#TotalHeight"/>
+			<Width val="#CustomDefeatTotalWidth"/>
+			<Height val="#TotalHeight"/>
 
-            <Visible val="False"/>
+			<Visible val="False"/>
 
-            <StateGroup name="TeamSize">
-                <DefaultState val="Team"/>
-                <State name="Team"></State>
-                <State name="Solo">
-                    <When type="AnimationState" frame="$this" operator="Equal" TeamSize="1"/>
-                    <Action type="SetProperty" frame="$this/Label" text="@Trig/CustomDefeat/TextSolo"/>
-                    <Action type="SetProperty" frame="$this/SpectateButton" Visible="False"/>
-                </State>
-            </StateGroup>
+			<StateGroup name="TeamSize">
+				<DefaultState val="Team"/>
+				<State name="Team"></State>
+				<State name="Solo">
+					<When type="AnimationState" frame="$this" operator="Equal" TeamSize="1"/>
+					<Action type="SetProperty" frame="$this/Label" text="@Trig/CustomDefeat/TextSolo"/>
+					<Action type="SetProperty" frame="$this/SpectateButton" Visible="False"/>
+				</State>
+			</StateGroup>
 
 
-            <Frame type="Image" name="BackgroundImage" template="SSF_Templates/BackgroundImageTemplate"></Frame>
+			<Frame type="Image" name="BackgroundImage" template="SSF_Templates/BackgroundImageTemplate"></Frame>
 
-            <Frame type="Label" name="Label" template="SSF_Templates/LabelTemplate">
-                <Anchor side="Top" relative="$parent" pos="Min" offset="#Border"/>
-                <Anchor side="Left" relative="$parent" pos="Min" offset="#Border"/>
-                <Anchor side="Right" relative="$parent" pos="Max" offset="#BorderNegative"/>
-                <Height val="80"/>
+			<Frame type="Label" name="Label" template="SSF_Templates/LabelTemplate">
+				<Anchor side="Top" relative="$parent" pos="Min" offset="#Border"/>
+				<Anchor side="Left" relative="$parent" pos="Min" offset="#Border"/>
+				<Anchor side="Right" relative="$parent" pos="Max" offset="#BorderNegative"/>
+				<Height val="80"/>
 
-                <Text val="@Trig/CustomDefeat/Text"/>
-                <Style val="aaDialogItemStyleCentered"/>
-            </Frame>
+				<Text val="@Trig/CustomDefeat/Text"/>
+				<Style val="aaDialogItemStyleCentered"/>
+			</Frame>
 
-            <Frame type="Button" name="LeaveButton" template="SSF_Templates/ButtonTemplate">
-                <Anchor side="Bottom" relative="$parent" pos="Max" offset="#BorderNegative"/>
-                <Anchor side="Right" relative="$parent" pos="Max" offset="#BorderNegative"/>
-                
-                <Height val="#ButtonHeight"/>
-                <Width val="#CustomDefeatButtonWidth"/>
+			<Frame type="Button" name="LeaveButton" template="SSF_Templates/ButtonTemplate">
+				<Anchor side="Bottom" relative="$parent" pos="Max" offset="#BorderNegative"/>
+				<Anchor side="Right" relative="$parent" pos="Max" offset="#BorderNegative"/>
+				
+				<Height val="#ButtonHeight"/>
+				<Width val="#CustomDefeatButtonWidth"/>
 
-                <Text val="@Trig/CustomDefeat/Leave"/>
-                <Animation name="Hide">
-                    <Event event="OnClick" action="Reset,Play" frame="$this"/>
-                    <Controller type="Property" end="Pause" frame="$parent" property="Visible">
-                        <Key type="Property" time="0.0" value="False"/>
-                    </Controller>
-                </Animation>
-            </Frame>
-            
-            <Frame type="Button" name="SpectateButton" template="SSF_Templates/ButtonTemplate">
-                <Anchor side="Bottom" relative="$parent" pos="Max" offset="#BorderNegative"/>
-                <Anchor side="Left" relative="$parent" pos="Min" offset="#Border"/>
-                
-                <Height val="#ButtonHeight"/>
-                <Width val="#CustomDefeatButtonWidth"/>
+				<Text val="@Trig/CustomDefeat/Leave"/>
+				<Animation name="Hide">
+					<Event event="OnClick" action="Reset,Play" frame="$this"/>
+					<Controller type="Property" end="Pause" frame="$parent" property="Visible">
+						<Key type="Property" time="0.0" value="False"/>
+					</Controller>
+				</Animation>
+			</Frame>
+			
+			<Frame type="Button" name="SpectateButton" template="SSF_Templates/ButtonTemplate">
+				<Anchor side="Bottom" relative="$parent" pos="Max" offset="#BorderNegative"/>
+				<Anchor side="Left" relative="$parent" pos="Min" offset="#Border"/>
+				
+				<Height val="#ButtonHeight"/>
+				<Width val="#CustomDefeatButtonWidth"/>
 
-                <Text val="@Trig/CustomDefeat/Spectate"/>
-                <Animation name="Hide">
-                    <Event event="OnClick" action="Reset,Play" frame="$this"/>
-                    <Controller type="Property" end="Pause" frame="$parent" property="Visible">
-                        <Key type="Property" time="0.0" value="False"/>
-                    </Controller>
-                </Animation>
-            </Frame>
-        </Frame>
-    </Frame>
+				<Text val="@Trig/CustomDefeat/Spectate"/>
+				<Animation name="Hide">
+					<Event event="OnClick" action="Reset,Play" frame="$this"/>
+					<Controller type="Property" end="Pause" frame="$parent" property="Visible">
+						<Key type="Property" time="0.0" value="False"/>
+					</Controller>
+				</Animation>
+			</Frame>
+		</Frame>
+	</Frame>
 </Desc>

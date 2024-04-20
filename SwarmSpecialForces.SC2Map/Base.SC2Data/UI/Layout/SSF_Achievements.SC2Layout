@@ -1223,7 +1223,7 @@
 
 
 			<Frame type="ScrollBar" name="ScrollBar">
-				<Anchor side="Top"    relative="$parent" pos="Min" offset="0"/>
+				<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
 				<Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
 				<Anchor side="Left"  relative="$parent/ContainerFrame" pos="Max" offset="#AchievementIconSpacing"/>
 				<Width val="25"/>

@@ -1,64 +1,64 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <Desc>
 <!-- global constants: used in all layouts -->
-    <Constant name="Border" val="35"/>
-    <Constant name="BorderNegative" val="-35"/>
+	<Constant name="Border" val="35"/>
+	<Constant name="BorderNegative" val="-35"/>
 
 <!-- localization constants: can be overwritten from locale folders -->
-    <!-- achievement -->
-    <Constant name="AchievementSetScrollButtonWidth" val="120"/>
+	<!-- achievement -->
+	<Constant name="AchievementSetScrollButtonWidth" val="120"/>
 
 
-    <!-- custom defeat -->
-    <Constant name="CustomDefeatTotalWidth" val="530"/>
-    <Constant name="CustomDefeatButtonWidth" val="150"/>
+	<!-- custom defeat -->
+	<Constant name="CustomDefeatTotalWidth" val="530"/>
+	<Constant name="CustomDefeatButtonWidth" val="150"/>
 
-    <!-- hero -->
+	<!-- hero -->
 
-    <!-- hero selection -->
-    <Constant name="HeroSelectionDiffButtonWidth" val="200"/>
+	<!-- hero selection -->
+	<Constant name="HeroSelectionDiffButtonWidth" val="200"/>
 
-    <!-- hive -->
+	<!-- hive -->
 
-    <!-- menu -->
+	<!-- menu -->
 	<Constant name="MenuOpenerWidth" val="250"/>
 	<Constant name="MenuWidth" val="250"/>
 
-    <!-- options -->
-    <Constant name="OptionsWidth" val="345"/>
+	<!-- options -->
+	<Constant name="OptionsWidth" val="345"/>
 	<Constant name="OptionsInitalSelectionPulldownWidth" val="170"/>
 
-    <!-- playerboard -->
+	<!-- playerboard -->
 
-    <!-- popup -->
+	<!-- popup -->
 	<Constant name="PopupWidth" val="450"/>
 
-    <!-- speedruns -->
+	<!-- speedruns -->
 	<Constant name="SpeedrunsPartButtonWidth" val="120"/>
 	<Constant name="SpeedrunsPartGap" val="15"/>
 	<Constant name="SpeedrunsDiffButtonWidth" val="150"/>
 	<Constant name="SpeedrunsDiffGap" val="10"/>
 	<Constant name="SpeedrunsPlayerWidth" val="130"/>
-    <Constant name="SpeedrunsTeamColoumn" val="75"/>
+	<Constant name="SpeedrunsTeamColoumn" val="75"/>
 
-    <!-- stats -->
-    <Constant name="StatsAnchorWidth" val="165"/>
+	<!-- stats -->
+	<Constant name="StatsAnchorWidth" val="165"/>
 
-    <!-- tutorial -->
-    <Constant name="MiniIntroductionTotalWidth" val="580"/>
-    <Constant name="MiniIntroductionTotalHeight" val="338"/>
-    <Constant name="MiniIntroductionTextHeight" val="200"/>
-    <Constant name="MiniIntroductionButtonWidth" val="200"/>
-    
-    <Constant name="AskTutorialTotalWidth" val="450"/>
-    <Constant name="AskTutorialTotalHeight" val="220"/>
-    <Constant name="AskTutorialButtonWidth" val="150"/>
+	<!-- tutorial -->
+	<Constant name="MiniIntroductionTotalWidth" val="580"/>
+	<Constant name="MiniIntroductionTotalHeight" val="338"/>
+	<Constant name="MiniIntroductionTextHeight" val="200"/>
+	<Constant name="MiniIntroductionButtonWidth" val="200"/>
+	
+	<Constant name="AskTutorialTotalWidth" val="450"/>
+	<Constant name="AskTutorialTotalHeight" val="220"/>
+	<Constant name="AskTutorialButtonWidth" val="150"/>
 
-    <Constant name="TutorialTotalHeight" val="380"/>
-    <Constant name="TutorialTotalWidth" val="600"/>
+	<Constant name="TutorialTotalHeight" val="380"/>
+	<Constant name="TutorialTotalWidth" val="600"/>
 
-    <!-- unit status -->
+	<!-- unit status -->
 
-    <!-- votekick -->
+	<!-- votekick -->
 
 </Desc>

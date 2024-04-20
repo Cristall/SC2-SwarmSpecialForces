@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <Desc>
-    <Constant name="StatsTextRowHeight" val="28"/>
+	<Constant name="StatsTextRowHeight" val="28"/>
 	<Constant name="StatsTextRowGap" val="0"/>
 	<Constant name="StatsTextRowSpacing" val="2"/>
 	<Constant name="StatsPlayerWidth" val="300"/>

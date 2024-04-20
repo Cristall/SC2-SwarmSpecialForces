@@ -1,129 +1,129 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <Desc>
-    <Frame type="Button" name="ButtonTemplate" template="TriggerDialogFrame/TriggerControlButtonTemplate">
-        <Frame type="Label" name="TriggerControlButtonTemplateLabel">
-            
-        </Frame>
-        <Style val="aaDialogItemStyleCentered"/>
-    </Frame>
-    <Frame type="Label" name="LabelTemplate" template="TriggerDialogFrame/TriggerControlLabelTemplate">
-        <Style val="aaDialogItemStyle"/>
-    </Frame>
-    <Frame type="Image" name="BackgroundImageTemplate">
-        <Anchor relative="$parent"/>
-        <Texture val="@UI/TriggerDialogFrameBackground_Zerg" layer="0"/>
-        <TextureType val="Border" layer="0"/>
-        <Tiled val="true" layer="0"/>
-    </Frame>
+	<Frame type="Button" name="ButtonTemplate" template="TriggerDialogFrame/TriggerControlButtonTemplate">
+		<Frame type="Label" name="TriggerControlButtonTemplateLabel">
+			
+		</Frame>
+		<Style val="aaDialogItemStyleCentered"/>
+	</Frame>
+	<Frame type="Label" name="LabelTemplate" template="TriggerDialogFrame/TriggerControlLabelTemplate">
+		<Style val="aaDialogItemStyle"/>
+	</Frame>
+	<Frame type="Image" name="BackgroundImageTemplate">
+		<Anchor relative="$parent"/>
+		<Texture val="@UI/TriggerDialogFrameBackground_Zerg" layer="0"/>
+		<TextureType val="Border" layer="0"/>
+		<Tiled val="true" layer="0"/>
+	</Frame>
 
-    <Frame type="Button" name="CloseButtonTemplate" template="SSF_Templates/ButtonTemplate">
-        <Text val="X"/>
-        <Anchor side="Right" relative="$parent" pos="Max" offset="#BorderNegative"/>
-        <Anchor side="Top" relative="$parent" pos="Min" offset="#Border"/>
-        <Height val="50"/>
-        <Width val="50"/>
+	<Frame type="Button" name="CloseButtonTemplate" template="SSF_Templates/ButtonTemplate">
+		<Text val="X"/>
+		<Anchor side="Right" relative="$parent" pos="Max" offset="#BorderNegative"/>
+		<Anchor side="Top" relative="$parent" pos="Min" offset="#Border"/>
+		<Height val="50"/>
+		<Width val="50"/>
 
-        <Animation name="Hide">
-            <Event event="OnClick" action="Reset,Play" frame="$this"/>
-            <Controller type="Visibility" end="Pause" frame="$parent">
-                <Key type="Bool" time="0.0" value="false"/>
-            </Controller>
-        </Animation>
-        <Shortcut val="Escape"/>
-    </Frame>
+		<Animation name="Hide">
+			<Event event="OnClick" action="Reset,Play" frame="$this"/>
+			<Controller type="Visibility" end="Pause" frame="$parent">
+				<Key type="Bool" time="0.0" value="false"/>
+			</Controller>
+		</Animation>
+		<Shortcut val="Escape"/>
+	</Frame>
 
-    <Frame type="CheckBox" name="CheckBoxTemplate" template="TriggerDialogFrame/TriggerControlCheckBoxTemplate">
-    </Frame>
-    <Frame type="Pulldown" name="PulldownTemplate">
-        <NormalImage val="PulldownBackground"/>
-        <HoverImage val="PulldownBackgroundHover"/>
-        <ArrowImage val="PulldownArrow"/>
-        <ArrowHoverImage val="PulldownArrowHover"/>
-        <ItemContainer val="ItemContainer"/>
-        <Menu val="PulldownMenu"/>
-        <Style val="@@StandardPulldown"/>
-        <HighlightOnHover val="true"/>
-        <MenuShownSound val="@UI_DropdownSelect"/>
-        <MenuHiddenSound val="@UI_DropdownClose"/>
-        
-        <Animation name="HoverTickSound">
-            <Event event="OnMouseEnter" action="Reset,Play"/>
-            <Event event="OnMouseExit" action="Reset, Stop"/>
-            <Controller type="Sound" end="Stop">
-                <Key type="Sound" time="0" sound="@UI_HoverTick"/>
-            </Controller>
-        </Animation>
+	<Frame type="CheckBox" name="CheckBoxTemplate" template="TriggerDialogFrame/TriggerControlCheckBoxTemplate">
+	</Frame>
+	<Frame type="Pulldown" name="PulldownTemplate">
+		<NormalImage val="PulldownBackground"/>
+		<HoverImage val="PulldownBackgroundHover"/>
+		<ArrowImage val="PulldownArrow"/>
+		<ArrowHoverImage val="PulldownArrowHover"/>
+		<ItemContainer val="ItemContainer"/>
+		<Menu val="PulldownMenu"/>
+		<Style val="@@StandardPulldown"/>
+		<HighlightOnHover val="true"/>
+		<MenuShownSound val="@UI_DropdownSelect"/>
+		<MenuHiddenSound val="@UI_DropdownClose"/>
+		
+		<Animation name="HoverTickSound">
+			<Event event="OnMouseEnter" action="Reset,Play"/>
+			<Event event="OnMouseExit" action="Reset, Stop"/>
+			<Controller type="Sound" end="Stop">
+				<Key type="Sound" time="0" sound="@UI_HoverTick"/>
+			</Controller>
+		</Animation>
 
-        <Frame type="Image" name="PulldownBackground" template="StandardTemplates/StandardPulldownBackground">
-            <Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
-            <Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
-            <Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
-            <Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
-            <DesaturateOnDisable val="false"/>
-            <DisabledAlpha val="64"/>
-            <RenderPriority val="510"/>
-        </Frame>
+		<Frame type="Image" name="PulldownBackground" template="StandardTemplates/StandardPulldownBackground">
+			<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+			<Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
+			<Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+			<Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+			<DesaturateOnDisable val="false"/>
+			<DisabledAlpha val="64"/>
+			<RenderPriority val="510"/>
+		</Frame>
 
-        <Frame type="Image" name="PulldownBackgroundHover" template="StandardTemplates/StandardPulldownBackgroundHover">
-            <Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
-            <Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
-            <Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
-            <Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
-            <DesaturateOnDisable val="false"/>
-            <DisabledAlpha val="64"/>
-            <RenderPriority val="510"/>
-        </Frame>
+		<Frame type="Image" name="PulldownBackgroundHover" template="StandardTemplates/StandardPulldownBackgroundHover">
+			<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+			<Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
+			<Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+			<Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+			<DesaturateOnDisable val="false"/>
+			<DisabledAlpha val="64"/>
+			<RenderPriority val="510"/>
+		</Frame>
 
-        <Frame type="Image" name="PulldownArrow" template="StandardTemplates/StandardPulldownArrow">
-            <Anchor side="Top" relative="$parent" pos="Mid" offset="0"/>
-            <Anchor side="Bottom" relative="$parent" pos="Mid" offset="0"/>
-            <Anchor side="Right" relative="$parent" pos="Max" offset="-25"/>
-            <Height val="19"/>
-            <Width val="25"/>
-            <DesaturateOnDisable val="false"/>
-            <DisabledAlpha val="64"/>
-            <RenderPriority val="510"/>
-        </Frame>
+		<Frame type="Image" name="PulldownArrow" template="StandardTemplates/StandardPulldownArrow">
+			<Anchor side="Top" relative="$parent" pos="Mid" offset="0"/>
+			<Anchor side="Bottom" relative="$parent" pos="Mid" offset="0"/>
+			<Anchor side="Right" relative="$parent" pos="Max" offset="-25"/>
+			<Height val="19"/>
+			<Width val="25"/>
+			<DesaturateOnDisable val="false"/>
+			<DisabledAlpha val="64"/>
+			<RenderPriority val="510"/>
+		</Frame>
 
-        <Frame type="Image" name="PulldownArrowHover" template="StandardTemplates/StandardPulldownArrowHover">
-            <Anchor side="Top" relative="$parent" pos="Mid" offset="0"/>
-            <Anchor side="Bottom" relative="$parent" pos="Mid" offset="0"/>
-            <Anchor side="Right" relative="$parent" pos="Max" offset="-25"/>
-            <Height val="19"/>
-            <Width val="25"/>
-            <DesaturateOnDisable val="false"/>
-            <DisabledAlpha val="64"/>
-            <RenderPriority val="510"/>
-        </Frame>
+		<Frame type="Image" name="PulldownArrowHover" template="StandardTemplates/StandardPulldownArrowHover">
+			<Anchor side="Top" relative="$parent" pos="Mid" offset="0"/>
+			<Anchor side="Bottom" relative="$parent" pos="Mid" offset="0"/>
+			<Anchor side="Right" relative="$parent" pos="Max" offset="-25"/>
+			<Height val="19"/>
+			<Width val="25"/>
+			<DesaturateOnDisable val="false"/>
+			<DisabledAlpha val="64"/>
+			<RenderPriority val="510"/>
+		</Frame>
 
-        <Frame type="Frame" name="ItemContainer">
-            <Anchor side="Top" relative="$parent" pos="Min" offset="15"/>
-            <Anchor side="Left" relative="$parent" pos="Min" offset="20"/>
-            <Anchor side="Bottom" relative="$parent" pos="Max" offset="-10"/>
-            <Anchor side="Right" relative="$parent" pos="Max" offset="-40"/>
-            <DescFlags val="Internal"/>
-        </Frame>
+		<Frame type="Frame" name="ItemContainer">
+			<Anchor side="Top" relative="$parent" pos="Min" offset="15"/>
+			<Anchor side="Left" relative="$parent" pos="Min" offset="20"/>
+			<Anchor side="Bottom" relative="$parent" pos="Max" offset="-10"/>
+			<Anchor side="Right" relative="$parent" pos="Max" offset="-40"/>
+			<DescFlags val="Internal"/>
+		</Frame>
 
-        <Frame type="ListBox" name="PulldownMenu" template="StandardTemplates/StandardPulldownMenuTemplate">
-            
-        </Frame>
-    </Frame>
+		<Frame type="ListBox" name="PulldownMenu" template="StandardTemplates/StandardPulldownMenuTemplate">
+			
+		</Frame>
+	</Frame>
 
-    <StateGroup name="DisabledWhilePausedTemplate">
-        <DefaultState val="Enabled"/>
-        <State name="Disabled">
-            <When type="Property" frame="$GameUI/UIContainer/FullscreenLowerContainer/PausePanel" operator="Equal" Visible="True"/>
-            <Action type="SetProperty" frame="$this" Enabled="False"/>
-        </State>
-        <State name="Enabled"></State>
-    </StateGroup>
+	<StateGroup name="DisabledWhilePausedTemplate">
+		<DefaultState val="Enabled"/>
+		<State name="Disabled">
+			<When type="Property" frame="$GameUI/UIContainer/FullscreenLowerContainer/PausePanel" operator="Equal" Visible="True"/>
+			<Action type="SetProperty" frame="$this" Enabled="False"/>
+		</State>
+		<State name="Enabled"></State>
+	</StateGroup>
 
-    <Frame type="Label" name="HotkeyFrameLabelTemplate">
-        <Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
-        <Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
-        <Height val="30"/>
-        <Width val="45"/>
-        <Text val="&lt;k val=&quot;HeroSelect0&quot;/&gt;"/>
-        <Style val="SSF_HotkeyStyle"/>
-    </Frame>
+	<Frame type="Label" name="HotkeyFrameLabelTemplate">
+		<Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
+		<Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+		<Height val="30"/>
+		<Width val="45"/>
+		<Text val="&lt;k val=&quot;HeroSelect0&quot;/&gt;"/>
+		<Style val="SSF_HotkeyStyle"/>
+	</Frame>
 </Desc>

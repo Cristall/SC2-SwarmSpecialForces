@@ -2,289 +2,289 @@
 <Desc>
 
 <!-- local templates -->
-    <Frame type="ProgressBar" name="ProgressBarTemplate">
-        <Width val="225"/>
+	<Frame type="ProgressBar" name="ProgressBarTemplate">
+		<Width val="225"/>
 
-        <Value val="100"/>
-        <MinValue val="0"/>
-        <MaxValue val="100"/>
+		<Value val="100"/>
+		<MinValue val="0"/>
+		<MaxValue val="100"/>
 
-        <AcceptsMouse val="false"/>
-        <Frame type="TextFormatFrame" name="TextFormat">
-            <Anchor relative="$parent"/>
-            <FormatText val="%0% / %1%"/>
-            <Replacement val="{$parent/@Value}" index="0"/>
-            <Replacement val="{$parent/@MaxValue}" index="1"/>
-            <Visible val="false"/>
-            <AcceptsMouse val="false"/>
-        </Frame>
+		<AcceptsMouse val="false"/>
+		<Frame type="TextFormatFrame" name="TextFormat">
+			<Anchor relative="$parent"/>
+			<FormatText val="%0% / %1%"/>
+			<Replacement val="{$parent/@Value}" index="0"/>
+			<Replacement val="{$parent/@MaxValue}" index="1"/>
+			<Visible val="false"/>
+			<AcceptsMouse val="false"/>
+		</Frame>
 
-        <Frame type="Frame" name="FillImageContainer">
-            <Anchor relative="$parent" />
-            <AcceptsMouse val="false"/>
-            <Frame type="Image" name="FillImage">
-                <Anchor relative="$parent"/>
-                <Texture val="Assets\Textures\UI_Kerrigan_HealthBar_Fill.dds"/>
-                <TextureType val="NineSlice"/>
-                <ColorAdjustMode val="None" />
-                <LayerColor val="21,130,255"/>
-                <SubpixelRendering val="True"/>
-                <AcceptsMouse val="false"/>
-                <SubpixelRendering val="true"/>
-            </Frame>
-        </Frame>
-    </Frame>
+		<Frame type="Frame" name="FillImageContainer">
+			<Anchor relative="$parent" />
+			<AcceptsMouse val="false"/>
+			<Frame type="Image" name="FillImage">
+				<Anchor relative="$parent"/>
+				<Texture val="Assets\Textures\UI_Kerrigan_HealthBar_Fill.dds"/>
+				<TextureType val="NineSlice"/>
+				<ColorAdjustMode val="None" />
+				<LayerColor val="21,130,255"/>
+				<SubpixelRendering val="True"/>
+				<AcceptsMouse val="false"/>
+				<SubpixelRendering val="true"/>
+			</Frame>
+		</Frame>
+	</Frame>
 
 <!-- actual frame -->
-    <Frame type="Frame" name="GameUI/UIContainer/FullscreenUpperContainer" file="GameUI">
+	<Frame type="Frame" name="GameUI/UIContainer/FullscreenUpperContainer" file="GameUI">
 
-        <Frame type="Frame" name="SSF_HeroPanel">
-            <Handle val="SSF_HeroPanel"/>
-            <Anchor side="Top" relative="$parent" pos="Min" offset="2"/>
-            <Anchor side="Right" relative="$parent" pos="Max" offset="-2"/>
-            <Width val="327"/>
-            <Height val="112"/>
-
-
-            <Frame type="Image" name="IconBackground">
-                <Anchor side="Top" relative="$parent/IconImage" pos="Min" offset="0"/>
-                <Anchor side="Left" relative="$parent/IconImage" pos="Min" offset="0"/>
-                <Anchor side="Bottom" relative="$parent/IconImage" pos="Max" offset="0"/>
-                <Anchor side="Right" relative="$parent/IconImage" pos="Max" offset="0"/>
-                <Color val="27,16,10"/>
-                <Alpha val="216"/>
-            </Frame>
-            <Frame type="Image" name="BarBackground">
-                <Anchor side="Top" relative="$parent/HealthBar" pos="Min" offset="0"/>
-                <Anchor side="Left" relative="$parent/HealthBar" pos="Min" offset="0"/>
-                <Anchor side="Right" relative="$parent/HealthBar" pos="Max" offset="0"/>
-                <Anchor side="Bottom" relative="$parent/ExpBar" pos="Max" offset="0"/>
-                <Color val="27,16,10"/>
-                <Alpha val="216"/>
-                <AcceptsMouse val="true"/>
-            </Frame>
-
-            <Frame type="Image" name="IconImage">
-                <Anchor side="Top" relative="$parent" pos="Min" offset="10"/>
-                <Anchor side="Right" relative="$parent" pos="Max" offset="-10"/>
-                <Width val="79"/>
-                <Height val="79"/>
-                <Texture val="Assets/Textures/ui_ingame_help_techtree_questionmark.dds"/>
-            </Frame>
-            <Frame type="UnitTargetFrame" name="UnitTargetFrame">
-                <Anchor side="Top" relative="$parent/IconImage" pos="Min" offset="0"/>
-                <Anchor side="Bottom" relative="$parent/IconImage" pos="Max" offset="0"/>
-                <Anchor side="Left" relative="$parent/IconImage" pos="Min" offset="0"/>
-                <Anchor side="Right" relative="$parent/IconImage" pos="Max" offset="0"/>
-                <AllowCursorChanging val="false"/>
-
-                <Frame type="Label" name="HotkeyFrame" template="SSF_Templates/HotkeyFrameLabelTemplate">
-                    <Text val="&lt;k val=&quot;HeroSelect0&quot;/&gt;"/>
-                </Frame>
-            </Frame>
-
-            <Frame type="ProgressBar" name="HealthBar" template="SSF_HeroPanel/ProgressBarTemplate">
-                <Anchor side="Right" relative="$parent/IconImage" pos="Min" offset="-6"/>
-                <Anchor side="Top" relative="$parent/IconImage" pos="Min" offset="1"/>
-                <Height val="23"/>
-                <Frame type="MathFrame" name="Percent">
-                    <Operator val="Divide"/>
-                    <A val="{$parent/@Value}"/>
-                    <B val="{$parent/@MaxValue}"/>
-                </Frame>
-                <StateGroup name="Colorchanger">
-                    <DefaultState val="Green"/>
-                    <State name="Red">
-                        <When type="Property" frame="Percent" operator="LessThanOrEqual" Result="0.25"/>
-                        <Action type="SetProperty" frame="FillImageContainer/FillImage" LayerColor="255,0,0"/>
-                    </State>
-                    <State name="Orange">
-                        <When type="Property" frame="Percent" operator="GreaterThan" Result="0.25"/>
-                        <When type="Property" frame="Percent" operator="LessThanOrEqual" Result="0.50"/>
-                        <Action type="SetProperty" frame="FillImageContainer/FillImage" LayerColor="255,128,0"/>
-                    </State>
-                    <State name="Yellow">
-                        <When type="Property" frame="Percent" operator="GreaterThan" Result="0.50"/>
-                        <When type="Property" frame="Percent" operator="LessThanOrEqual" Result="0.75"/>
-                        <Action type="SetProperty" frame="FillImageContainer/FillImage" LayerColor="255,255,0"/>
-                    </State>
-                    <State name="Green">
-                        <When type="Property" frame="Percent" operator="GreaterThan" Result="0.75"/>
-                        <Action type="SetProperty" frame="FillImageContainer/FillImage" LayerColor="0,255,0"/></State>
-                </StateGroup>
-
-                <Frame type="Frame" name="FillImageContainer">
-                    <Frame type="Image" name="FillImage">
-                        <LayerColor val="42,213,0"/>
-                    </Frame>
-                </Frame>
-            </Frame>
-            <Frame type="ProgressBar" name="EnergyBar" template="SSF_HeroPanel/ProgressBarTemplate">
-                <Anchor side="Left" relative="$parent/HealthBar" pos="Min" offset="0"/>
-                <Anchor side="Top" relative="$parent/HealthBar" pos="Max" offset="5"/>
-                <Height val="11"/>
-
-                <Frame type="Frame" name="FillImageContainer">
-                    <Frame type="Image" name="FillImage">
-                        <LayerColor val="180,114,217"/>
-                    </Frame>
-                </Frame>
-            </Frame>
-            <Frame type="ProgressBar" name="ExpBar" template="SSF_HeroPanel/ProgressBarTemplate">
-                <Anchor side="Left" relative="$parent/EnergyBar" pos="Min" offset="0"/>
-                <Anchor side="Top" relative="$parent/EnergyBar" pos="Max" offset="5"/>
-                <Height val="10"/>
-
-                <Value val="0"/>
-
-                <Frame type="Frame" name="FillImageContainer">
-                    <Frame type="Image" name="FillImage">
-                        <LayerColor val="213,199,0"/>
-                    </Frame>
-                </Frame>
-            </Frame>
-
-            <Frame type="Image" name="FrontImage">
-                <Anchor relative="$parent"/>
-                <Texture val="Assets/Icons/HeroPanel.dds"/>
-                <AcceptsMouse val="false"/>
-            </Frame>
-
-            <Frame type="Label" name="HealthBarValueLabel">
-                <Anchor side="Top" relative="$parent/HealthBar" pos="Mid" offset="0"/>
-                <Anchor side="Bottom" relative="$parent/HealthBar" pos="Mid" offset="0"/>
-                <Anchor side="Left" relative="$parent/HealthBar" pos="Min" offset="0"/>
-                <Anchor side="Right" relative="$parent/HealthBar" pos="Max" offset="0"/>
-                <Height val="24"/>
-                <Style val="SSF_HeroPanel_ValueLabel"/>
-                <Text val="{$parent/HealthBar/TextFormat/@Text}"/>
-                <Visible val="false"/>
-                <AcceptsMouse val="false"/>
-            </Frame>
-            <Frame type="Label" name="EnergyBarValueLabel">
-                <Anchor side="Top" relative="$parent/EnergyBar" pos="Mid" offset="0"/>
-                <Anchor side="Bottom" relative="$parent/EnergyBar" pos="Mid" offset="0"/>
-                <Anchor side="Left" relative="$parent/EnergyBar" pos="Min" offset="0"/>
-                <Anchor side="Right" relative="$parent/EnergyBar" pos="Max" offset="0"/>
-                <Height val="24"/>
-                <Style val="SSF_HeroPanel_ValueLabel"/>
-                <Text val="{$parent/EnergyBar/TextFormat/@Text}"/>
-                <Visible val="false"/>
-                <AcceptsMouse val="false"/>
-            </Frame>
-            <Frame type="Label" name="ExpBarValueLabel">
-                <Anchor side="Top" relative="$parent/ExpBar" pos="Mid" offset="0"/>
-                <Anchor side="Bottom" relative="$parent/ExpBar" pos="Mid" offset="0"/>
-                <Anchor side="Left" relative="$parent/ExpBar" pos="Min" offset="0"/>
-                <Anchor side="Right" relative="$parent/ExpBar" pos="Max" offset="0"/>
-                <Height val="24"/>
-                <Style val="SSF_HeroPanel_ValueLabel"/>
-                <Text val="{$parent/ExpBar/TextFormat/@Text}"/>
-                <Visible val="false"/>
-                <AcceptsMouse val="false"/>
-            </Frame>
-
-            <Frame type="Label" name="LevelLabel">
-                <Anchor side="Left" relative="$parent/IconBackground" pos="Min" offset="2"/>
-                <Anchor side="Bottom" relative="$parent/IconBackground" pos="Max" offset="1"/>
-                <Height val="20"/>
-                <Width val="26"/>
-                <Style val="HeroUnitFrameUnitLevel"/>
-                <AcceptsMouse val="false"/>
-                <Text val="1"/>
-            </Frame>
+		<Frame type="Frame" name="SSF_HeroPanel">
+			<Handle val="SSF_HeroPanel"/>
+			<Anchor side="Top" relative="$parent" pos="Min" offset="2"/>
+			<Anchor side="Right" relative="$parent" pos="Max" offset="-2"/>
+			<Width val="327"/>
+			<Height val="112"/>
 
 
-            <!-- MouseHover makes the bar labels visible -->
-            <AcceptsMouse val="true"/>
-            <Animation name="MouseHover">
-                <Event event="OnMouseEnter" action="DirectionForward,Play" frame="BarBackground"/>
-                <Event event="OnMouseExit" action="DirectionReverse,Play" frame="BarBackground"/>
-                <Controller type="State" end="Pause" frame="$this" stateGroup="MouseHoverState">
-                    <Key type="Identifier" time="0.0" value="False"/>
-                    <Key type="Identifier" time="0.01" value="True"/>
-                </Controller>
-            </Animation>
-    
-            <StateGroup name="MouseHoverState">
-                <DefaultState val="False"/>
-                <State name="True">
-                    <Action type="SetProperty" frame="HealthBarValueLabel" Visible="True"/>
-                    <Action type="SetProperty" frame="EnergyBarValueLabel" Visible="True"/>
-                    <Action type="SetProperty" frame="ExpBarValueLabel" Visible="True"/>
-                </State>
-                <State name="False"></State>
-            </StateGroup>
+			<Frame type="Image" name="IconBackground">
+				<Anchor side="Top" relative="$parent/IconImage" pos="Min" offset="0"/>
+				<Anchor side="Left" relative="$parent/IconImage" pos="Min" offset="0"/>
+				<Anchor side="Bottom" relative="$parent/IconImage" pos="Max" offset="0"/>
+				<Anchor side="Right" relative="$parent/IconImage" pos="Max" offset="0"/>
+				<Color val="27,16,10"/>
+				<Alpha val="216"/>
+			</Frame>
+			<Frame type="Image" name="BarBackground">
+				<Anchor side="Top" relative="$parent/HealthBar" pos="Min" offset="0"/>
+				<Anchor side="Left" relative="$parent/HealthBar" pos="Min" offset="0"/>
+				<Anchor side="Right" relative="$parent/HealthBar" pos="Max" offset="0"/>
+				<Anchor side="Bottom" relative="$parent/ExpBar" pos="Max" offset="0"/>
+				<Color val="27,16,10"/>
+				<Alpha val="216"/>
+				<AcceptsMouse val="true"/>
+			</Frame>
 
-            <Visible val="false"/>
+			<Frame type="Image" name="IconImage">
+				<Anchor side="Top" relative="$parent" pos="Min" offset="10"/>
+				<Anchor side="Right" relative="$parent" pos="Max" offset="-10"/>
+				<Width val="79"/>
+				<Height val="79"/>
+				<Texture val="Assets/Textures/ui_ingame_help_techtree_questionmark.dds"/>
+			</Frame>
+			<Frame type="UnitTargetFrame" name="UnitTargetFrame">
+				<Anchor side="Top" relative="$parent/IconImage" pos="Min" offset="0"/>
+				<Anchor side="Bottom" relative="$parent/IconImage" pos="Max" offset="0"/>
+				<Anchor side="Left" relative="$parent/IconImage" pos="Min" offset="0"/>
+				<Anchor side="Right" relative="$parent/IconImage" pos="Max" offset="0"/>
+				<AllowCursorChanging val="false"/>
 
-            <StateGroup name="SSF_HeroPanel_Shown">
-                <DefaultState val="False"/>
-                <State name="True">
-                    <!-- the option checkbox defaults to Checked="true" so the panel will default to Visible="true" as well -->
-                    <When type="Property" frame="$SSF_CustomUI/Options/HeroPanelShowCheckbox" operator="Equal" Checked="True"/>
+				<Frame type="Label" name="HotkeyFrame" template="SSF_Templates/HotkeyFrameLabelTemplate">
+					<Text val="&lt;k val=&quot;HeroSelect0&quot;/&gt;"/>
+				</Frame>
+			</Frame>
 
-                    <Action type="SetProperty" frame="$this" Visible="True"/>
+			<Frame type="ProgressBar" name="HealthBar" template="SSF_HeroPanel/ProgressBarTemplate">
+				<Anchor side="Right" relative="$parent/IconImage" pos="Min" offset="-6"/>
+				<Anchor side="Top" relative="$parent/IconImage" pos="Min" offset="1"/>
+				<Height val="23"/>
+				<Frame type="MathFrame" name="Percent">
+					<Operator val="Divide"/>
+					<A val="{$parent/@Value}"/>
+					<B val="{$parent/@MaxValue}"/>
+				</Frame>
+				<StateGroup name="Colorchanger">
+					<DefaultState val="Green"/>
+					<State name="Red">
+						<When type="Property" frame="Percent" operator="LessThanOrEqual" Result="0.25"/>
+						<Action type="SetProperty" frame="FillImageContainer/FillImage" LayerColor="255,0,0"/>
+					</State>
+					<State name="Orange">
+						<When type="Property" frame="Percent" operator="GreaterThan" Result="0.25"/>
+						<When type="Property" frame="Percent" operator="LessThanOrEqual" Result="0.50"/>
+						<Action type="SetProperty" frame="FillImageContainer/FillImage" LayerColor="255,128,0"/>
+					</State>
+					<State name="Yellow">
+						<When type="Property" frame="Percent" operator="GreaterThan" Result="0.50"/>
+						<When type="Property" frame="Percent" operator="LessThanOrEqual" Result="0.75"/>
+						<Action type="SetProperty" frame="FillImageContainer/FillImage" LayerColor="255,255,0"/>
+					</State>
+					<State name="Green">
+						<When type="Property" frame="Percent" operator="GreaterThan" Result="0.75"/>
+						<Action type="SetProperty" frame="FillImageContainer/FillImage" LayerColor="0,255,0"/></State>
+				</StateGroup>
 
-                    <Action type="SetAnchor" frame="$parent/ResourcePanel/ResourceFrame/ResourceIcon0" side="Top" relative="$SSF_HeroPanel/ExpBar" pos="Max" offset="9"/>
-                    <Action type="SetAnchor" frame="$parent/AllianceButton" side="Top" relative="$parent" pos="Min" offset="5"/>
-                    <Action type="SetAnchor" frame="$parent/AllianceButton" side="Right" relative="$parent/TeamResourceButton" pos="Min" offset="-5"/>
-                    <Action type="SetAnchor" frame="$parent/TeamResourceButton" side="Right" relative="$SSF_HeroPanel" pos="Min" offset="-5"/>
+				<Frame type="Frame" name="FillImageContainer">
+					<Frame type="Image" name="FillImage">
+						<LayerColor val="42,213,0"/>
+					</Frame>
+				</Frame>
+			</Frame>
+			<Frame type="ProgressBar" name="EnergyBar" template="SSF_HeroPanel/ProgressBarTemplate">
+				<Anchor side="Left" relative="$parent/HealthBar" pos="Min" offset="0"/>
+				<Anchor side="Top" relative="$parent/HealthBar" pos="Max" offset="5"/>
+				<Height val="11"/>
 
-                    <Action type="SetAnchor" frame="$parent/TeamResourcePanel" side="Top" relative="$SSF_HeroPanel" pos="Max" offset="0"/>
+				<Frame type="Frame" name="FillImageContainer">
+					<Frame type="Image" name="FillImage">
+						<LayerColor val="180,114,217"/>
+					</Frame>
+				</Frame>
+			</Frame>
+			<Frame type="ProgressBar" name="ExpBar" template="SSF_HeroPanel/ProgressBarTemplate">
+				<Anchor side="Left" relative="$parent/EnergyBar" pos="Min" offset="0"/>
+				<Anchor side="Top" relative="$parent/EnergyBar" pos="Max" offset="5"/>
+				<Height val="10"/>
 
-                    <!-- moves the basic hero panel (just above the default menu button at the right) off screen; making it visible="false" does not work -->
-                    <Action type="SetAnchor" frame="$parent/HeroPanel" side="Left" relative="$parent" pos="Max" offset="10000"/>
-                    <Action type="SetAnchor" frame="$parent/HeroPanel" side="Right" relative="$parent" pos="Max" offset="10000"/>
-                    <Action type="SetProperty" frame="$parent/HeroPanel" Visible="False"/>
-                    <Action type="SetProperty" frame="$parent/HeroPanel" Enabled="False"/>
-                </State>
-                <State name="False"></State>
-            </StateGroup>
-        </Frame>
+				<Value val="0"/>
 
-        <!-- Changes to default ui frames so they work after showing the hero panel -->
-        <Frame type="Frame" name="ResourcePanel">
-            <Height val="150"/>
-            <Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
-            <Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
-            <Frame type="Frame" name="ResourceFrame">
-                <Height val="150"/>
+				<Frame type="Frame" name="FillImageContainer">
+					<Frame type="Image" name="FillImage">
+						<LayerColor val="213,199,0"/>
+					</Frame>
+				</Frame>
+			</Frame>
 
-                <Frame type="Frame" name="ResourceIcon0">
-                    <Anchor side="Top" relative="$parent/SupplyIcon" pos="Min" offset="0"/>
-                    <Anchor side="Left" relative="$SSF_HeroPanel" pos="Min" offset="10"/>
-                    <Anchor side="Right" relative="$this" pos="Min" offset="32"/>
-                </Frame>
-                <Frame type="Frame" name="ResourceLabel0">
-                    <Anchor side="Top" relative="$parent/ResourceIcon0" pos="Min" offset="0"/>
-                    <Anchor side="Left" relative="$parent/ResourceIcon0" pos="Max" offset="5"/>
-                    <Anchor side="Right" relative="$this" pos="Min" offset="95"/>
-                </Frame>
-                <Frame type="Frame" name="ResourceIcon1">
-                    <Anchor side="Top" relative="$parent/ResourceIcon0" pos="Min" offset="0"/>
-                    <Anchor side="Left" relative="$parent/ResourceLabel0" pos="Max" offset="4"/>
-                    <Anchor side="Right" relative="$this" pos="Min" offset="32"/>
-                </Frame>
-                <Frame type="Frame" name="ResourceLabel1">
-                    <Anchor side="Top" relative="$parent/ResourceIcon0" pos="Min" offset="0"/>
-                    <Anchor side="Left" relative="$parent/ResourceIcon1" pos="Max" offset="4"/>
-                    <Anchor side="Right" relative="$this" pos="Min" offset="95"/>
-                </Frame>
-            </Frame>
-        </Frame>
-        <Frame type="Frame" name="TeamResourceButton">
-            <Anchor side="Top" relative="$parent" pos="Min" offset="5"/>
-            <Anchor side="Right" relative="$SSF_HeroPanel" pos="Max" offset="-5"/>
-        </Frame>
-        <Frame type="Frame" name="AllianceButton">
-            <Anchor side="Top" relative="$parent" pos="Min" offset="5"/>
-            <Anchor side="Right" relative="$parent/TeamResourceButton" pos="Min" offset="-5"/>
-        </Frame>
-        <!-- LogMessagePanel is the container for errors in test mode, puts it on high render priority so it is above the other frames -->
-        <Frame type="Frame" name="LogMessagePanel">
-            <RenderPriority val="1000"/>
-        </Frame>
-    </Frame>    <!-- FullscreenUpperContainer End -->
+			<Frame type="Image" name="FrontImage">
+				<Anchor relative="$parent"/>
+				<Texture val="Assets/Icons/HeroPanel.dds"/>
+				<AcceptsMouse val="false"/>
+			</Frame>
+
+			<Frame type="Label" name="HealthBarValueLabel">
+				<Anchor side="Top" relative="$parent/HealthBar" pos="Mid" offset="0"/>
+				<Anchor side="Bottom" relative="$parent/HealthBar" pos="Mid" offset="0"/>
+				<Anchor side="Left" relative="$parent/HealthBar" pos="Min" offset="0"/>
+				<Anchor side="Right" relative="$parent/HealthBar" pos="Max" offset="0"/>
+				<Height val="24"/>
+				<Style val="SSF_HeroPanel_ValueLabel"/>
+				<Text val="{$parent/HealthBar/TextFormat/@Text}"/>
+				<Visible val="false"/>
+				<AcceptsMouse val="false"/>
+			</Frame>
+			<Frame type="Label" name="EnergyBarValueLabel">
+				<Anchor side="Top" relative="$parent/EnergyBar" pos="Mid" offset="0"/>
+				<Anchor side="Bottom" relative="$parent/EnergyBar" pos="Mid" offset="0"/>
+				<Anchor side="Left" relative="$parent/EnergyBar" pos="Min" offset="0"/>
+				<Anchor side="Right" relative="$parent/EnergyBar" pos="Max" offset="0"/>
+				<Height val="24"/>
+				<Style val="SSF_HeroPanel_ValueLabel"/>
+				<Text val="{$parent/EnergyBar/TextFormat/@Text}"/>
+				<Visible val="false"/>
+				<AcceptsMouse val="false"/>
+			</Frame>
+			<Frame type="Label" name="ExpBarValueLabel">
+				<Anchor side="Top" relative="$parent/ExpBar" pos="Mid" offset="0"/>
+				<Anchor side="Bottom" relative="$parent/ExpBar" pos="Mid" offset="0"/>
+				<Anchor side="Left" relative="$parent/ExpBar" pos="Min" offset="0"/>
+				<Anchor side="Right" relative="$parent/ExpBar" pos="Max" offset="0"/>
+				<Height val="24"/>
+				<Style val="SSF_HeroPanel_ValueLabel"/>
+				<Text val="{$parent/ExpBar/TextFormat/@Text}"/>
+				<Visible val="false"/>
+				<AcceptsMouse val="false"/>
+			</Frame>
+
+			<Frame type="Label" name="LevelLabel">
+				<Anchor side="Left" relative="$parent/IconBackground" pos="Min" offset="2"/>
+				<Anchor side="Bottom" relative="$parent/IconBackground" pos="Max" offset="1"/>
+				<Height val="20"/>
+				<Width val="26"/>
+				<Style val="HeroUnitFrameUnitLevel"/>
+				<AcceptsMouse val="false"/>
+				<Text val="1"/>
+			</Frame>
+
+
+			<!-- MouseHover makes the bar labels visible -->
+			<AcceptsMouse val="true"/>
+			<Animation name="MouseHover">
+				<Event event="OnMouseEnter" action="DirectionForward,Play" frame="BarBackground"/>
+				<Event event="OnMouseExit" action="DirectionReverse,Play" frame="BarBackground"/>
+				<Controller type="State" end="Pause" frame="$this" stateGroup="MouseHoverState">
+					<Key type="Identifier" time="0.0" value="False"/>
+					<Key type="Identifier" time="0.01" value="True"/>
+				</Controller>
+			</Animation>
+	
+			<StateGroup name="MouseHoverState">
+				<DefaultState val="False"/>
+				<State name="True">
+					<Action type="SetProperty" frame="HealthBarValueLabel" Visible="True"/>
+					<Action type="SetProperty" frame="EnergyBarValueLabel" Visible="True"/>
+					<Action type="SetProperty" frame="ExpBarValueLabel" Visible="True"/>
+				</State>
+				<State name="False"></State>
+			</StateGroup>
+
+			<Visible val="false"/>
+
+			<StateGroup name="SSF_HeroPanel_Shown">
+				<DefaultState val="False"/>
+				<State name="True">
+					<!-- the option checkbox defaults to Checked="true" so the panel will default to Visible="true" as well -->
+					<When type="Property" frame="$SSF_CustomUI/Options/HeroPanelShowCheckbox" operator="Equal" Checked="True"/>
+
+					<Action type="SetProperty" frame="$this" Visible="True"/>
+
+					<Action type="SetAnchor" frame="$parent/ResourcePanel/ResourceFrame/ResourceIcon0" side="Top" relative="$SSF_HeroPanel/ExpBar" pos="Max" offset="9"/>
+					<Action type="SetAnchor" frame="$parent/AllianceButton" side="Top" relative="$parent" pos="Min" offset="5"/>
+					<Action type="SetAnchor" frame="$parent/AllianceButton" side="Right" relative="$parent/TeamResourceButton" pos="Min" offset="-5"/>
+					<Action type="SetAnchor" frame="$parent/TeamResourceButton" side="Right" relative="$SSF_HeroPanel" pos="Min" offset="-5"/>
+
+					<Action type="SetAnchor" frame="$parent/TeamResourcePanel" side="Top" relative="$SSF_HeroPanel" pos="Max" offset="0"/>
+
+					<!-- moves the basic hero panel (just above the default menu button at the right) off screen; making it visible="false" does not work -->
+					<Action type="SetAnchor" frame="$parent/HeroPanel" side="Left" relative="$parent" pos="Max" offset="10000"/>
+					<Action type="SetAnchor" frame="$parent/HeroPanel" side="Right" relative="$parent" pos="Max" offset="10000"/>
+					<Action type="SetProperty" frame="$parent/HeroPanel" Visible="False"/>
+					<Action type="SetProperty" frame="$parent/HeroPanel" Enabled="False"/>
+				</State>
+				<State name="False"></State>
+			</StateGroup>
+		</Frame>
+
+		<!-- Changes to default ui frames so they work after showing the hero panel -->
+		<Frame type="Frame" name="ResourcePanel">
+			<Height val="150"/>
+			<Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+			<Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+			<Frame type="Frame" name="ResourceFrame">
+				<Height val="150"/>
+
+				<Frame type="Frame" name="ResourceIcon0">
+					<Anchor side="Top" relative="$parent/SupplyIcon" pos="Min" offset="0"/>
+					<Anchor side="Left" relative="$SSF_HeroPanel" pos="Min" offset="10"/>
+					<Anchor side="Right" relative="$this" pos="Min" offset="32"/>
+				</Frame>
+				<Frame type="Frame" name="ResourceLabel0">
+					<Anchor side="Top" relative="$parent/ResourceIcon0" pos="Min" offset="0"/>
+					<Anchor side="Left" relative="$parent/ResourceIcon0" pos="Max" offset="5"/>
+					<Anchor side="Right" relative="$this" pos="Min" offset="95"/>
+				</Frame>
+				<Frame type="Frame" name="ResourceIcon1">
+					<Anchor side="Top" relative="$parent/ResourceIcon0" pos="Min" offset="0"/>
+					<Anchor side="Left" relative="$parent/ResourceLabel0" pos="Max" offset="4"/>
+					<Anchor side="Right" relative="$this" pos="Min" offset="32"/>
+				</Frame>
+				<Frame type="Frame" name="ResourceLabel1">
+					<Anchor side="Top" relative="$parent/ResourceIcon0" pos="Min" offset="0"/>
+					<Anchor side="Left" relative="$parent/ResourceIcon1" pos="Max" offset="4"/>
+					<Anchor side="Right" relative="$this" pos="Min" offset="95"/>
+				</Frame>
+			</Frame>
+		</Frame>
+		<Frame type="Frame" name="TeamResourceButton">
+			<Anchor side="Top" relative="$parent" pos="Min" offset="5"/>
+			<Anchor side="Right" relative="$SSF_HeroPanel" pos="Max" offset="-5"/>
+		</Frame>
+		<Frame type="Frame" name="AllianceButton">
+			<Anchor side="Top" relative="$parent" pos="Min" offset="5"/>
+			<Anchor side="Right" relative="$parent/TeamResourceButton" pos="Min" offset="-5"/>
+		</Frame>
+		<!-- LogMessagePanel is the container for errors in test mode, puts it on high render priority so it is above the other frames -->
+		<Frame type="Frame" name="LogMessagePanel">
+			<RenderPriority val="1000"/>
+		</Frame>
+	</Frame>	<!-- FullscreenUpperContainer End -->
 
 </Desc>
