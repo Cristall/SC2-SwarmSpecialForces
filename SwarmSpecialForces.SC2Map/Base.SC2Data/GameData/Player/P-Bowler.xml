@@ -274,6 +274,7 @@
         <Target Effect="HeroBowlerWeaponMissileEndPoint" Value="TargetPoint"/>
     </CEffectIssueOrder>
     <CEffectCreatePersistent id="HeroBowlerWeaponMissileOffset1">
+        <ValidatorArray value="TargetNotAcrossCliff"/>
         <EditorCategories value=""/>
         <Marker Link="Effect/BanelingMissileEndPoint"/>
         <WhichLocation Value="CasterUnit"/>
@@ -946,7 +947,6 @@
         <Effect value="HeroBowlerWeaponMissileOffset1"/>
         <AllowedMovement value="Slowing"/>
         <MinScanRange value="7"/>
-        <Options index="Melee" value="1"/>
     </CWeaponLegacy>
     <CMoverMissile id="JumpingBaneling@Mover">
         <MotionPhases>
