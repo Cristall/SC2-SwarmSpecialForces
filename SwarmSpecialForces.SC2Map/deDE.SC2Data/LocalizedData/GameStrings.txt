@@ -455,6 +455,7 @@ DocInfo/PatchNote235=- (experimental!) bowler attacking/right-clicking enemies a
 DocInfo/PatchNote236=- some summoned units do not provide kill rewards anymore
 DocInfo/PatchNote237=- garys death response summons always spawn on the low ground
 DocInfo/PatchNote238=- frenzied buff tooltip values
+DocInfo/PatchNote239=reverted back experimental fix for bowler weapon
 DocInfo/Screenshot01=Kämpfe gegen Bosse mit tödlichen Fähigkeiten.
 DocInfo/Screenshot02=Pass auf oder du stirbst schnell bei Bossen.
 DocInfo/Screenshot03=Zerstöre den terranischen Außenposten.
