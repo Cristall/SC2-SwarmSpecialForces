@@ -195,12 +195,7 @@
     </CEffectSet>
     <CEffectDamage id="MechaUltraliskWeaponDmg" parent="DU_WEAP">
         <EditorCategories value=""/>
-        <ResponseFlags index="Acquire" value="0"/>
-        <ResponseFlags index="Flee" value="0"/>
         <Amount value="500"/>
-        <SearchFlags index="CallForHelp" value="0"/>
-        <SearchFlags index="OffsetByUnitRadius" value="0"/>
-        <SearchFlags index="OffsetAreaByAngle" value="0"/>
     </CEffectDamage>
     <CEffectEnumArea id="MechaUltraliskWeaponSearch">
         <EditorCategories value=""/>
@@ -210,7 +205,7 @@
         <SearchFilters value="Visible;Player,Ally,Neutral,Missile,Dead,Hidden,Invulnerable"/>
         <AreaArray>
             <Arc value="119.9816"/>
-            <Radius value="1.25"/>
+            <Radius value="2.25"/>
             <FacingAdjustment value="180"/>
             <Effect value="MechaUltraliskWeaponDmg"/>
         </AreaArray>
@@ -1565,11 +1560,12 @@
         <Icon value="Assets\Textures\btn-upgrade-stetmann-mechameleeattacks-level0.dds"/>
         <AcquirePrioritization value="ByAngle"/>
         <Range value="0.75"/>
+        <RangeSlop value="0.5"/>
         <Cost>
             <Cooldown Link="Abil/UltraliskWeaponCooldown" Location="Unit" TimeUse="0.86"/>
         </Cost>
         <Period value="1"/>
-        <DamagePoint value="0.3332"/>
+        <DamagePoint value="0.2"/>
         <Effect value="MechaUltraliskWeaponSearch"/>
         <DisplayEffect value="MechaUltraliskWeaponDmg"/>
     </CWeaponLegacy>
