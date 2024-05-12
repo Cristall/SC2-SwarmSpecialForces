@@ -1231,7 +1231,7 @@ void PartZerg_Stetmann_Init(structref<BossFightData> data){
 void PartZerg_Stetmann_Addition(structref<BossFightData> data){
     fixed garyLifeLost;
     if(UnitIsAlive(gv_Bosses[c_Bosses_ZGary])){
-        // check garya vitals for next summon
+        // check garys vitals for next summon
         garyLifeLost = 100-UnitGetPropertyFixed(gv_Bosses[c_Bosses_ZGary], c_unitPropLifePercent, true);
         if(!partZerg_Stetmann_SummonTriggerActive && garyLifeLost > partZerg_Stetmann_SummonVitalCounter * 5){
             TriggerExecute(partZerg_Stetmann_SummonTrigger, false, false);
@@ -1239,8 +1239,8 @@ void PartZerg_Stetmann_Addition(structref<BossFightData> data){
     }
     else{
         // check stetmanns vitals for next summon
-        garyLifeLost = 100-UnitGetPropertyFixed(gv_Bosses[c_Bosses_ZGary], c_unitPropLifePercent, true);
-        if(!partZerg_Stetmann_SummonTriggerActive && garyLifeLost > (partZerg_Stetmann_SummonVitalCounter - 20) * 10){
+        garyLifeLost = 100-UnitGetPropertyFixed(gv_Bosses[c_Bosses_ZStetmann], c_unitPropLifePercent, true);
+        if(!partZerg_Stetmann_SummonTriggerActive && garyLifeLost > (partZerg_Stetmann_SummonVitalCounter - 20) * 5){
             TriggerExecute(partZerg_Stetmann_SummonTrigger, false, false);
         }
     }
