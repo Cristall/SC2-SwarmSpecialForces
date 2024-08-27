@@ -94,12 +94,13 @@ bool HeroAbility_RespawnEgg_RespawnHandler(bool testConds, bool runActions){
             break;
         }
         else if ( !UnitIsAlive(egg) ){
-            eggDiedFlag = true; 
+            eggDiedFlag = true;
             break;
         }
     }
 
     if (eggDiedFlag){
+        ReviveUI_Update(revivingPlayer, 0.0);
         Player_HeroDiesSwitch(revivingPlayer);
     }
     else if (revivingPlayerLeaveFlag){
