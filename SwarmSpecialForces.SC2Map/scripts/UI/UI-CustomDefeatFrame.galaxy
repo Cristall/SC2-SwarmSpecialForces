@@ -40,9 +40,9 @@ void CustomDefeatFrame_WinEnable(){
     int winButton;
     trigger tmpTrigger;
     gv_GameWon = true;
-    UISetGameMenuItemVisible(PlayerGroupAll(), c_gameMenuDialogGenericButton1, true);
-    UISetGameMenuItemText(PlayerGroupAll(), c_gameMenuDialogGenericButton1, StringExternal("Trig/PlayerWin/Button"));
-    UISetGameMenuItemShortcut(PlayerGroupAll(), c_gameMenuDialogGenericButton1, StringExternal("Trig/PlayerWin/ButtonHotkey"));
+    UISetGameMenuItemVisible(gv_ActivePG, c_gameMenuDialogGenericButton1, true);
+    UISetGameMenuItemText(gv_ActivePG, c_gameMenuDialogGenericButton1, StringExternal("Trig/PlayerWin/Button"));
+    UISetGameMenuItemShortcut(gv_ActivePG, c_gameMenuDialogGenericButton1, StringExternal("Trig/PlayerWin/ButtonHotkey"));
     tmpTrigger = TriggerCreate("CustomDefeatFrame_WinButton_Handler");
     TriggerAddEventGameMenuItemSelected(tmpTrigger, c_playerAny, c_gameMenuDialogGenericButton1);
     winMenuButton = DialogControlHookup(gv_UI_MasterFrame, c_triggerControlTypeButton, "Menu/WinButton");
