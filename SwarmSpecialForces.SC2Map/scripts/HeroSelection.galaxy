@@ -148,7 +148,7 @@ static int HeroSelection_GetHeroButtonID (int dialogItem) {
 static int HeroSelection_GetDiffButtonID (int dialogItem) {
     int tmpInt;
     for ( tmpInt = 0; tmpInt < gv_MaxAmountDifficulties ; tmpInt += 1 ) {
-        if ((dialogItem == heroSelection_Difficulty_Button[tmpInt])) {
+        if (dialogItem == heroSelection_Difficulty_Button[tmpInt]) {
             return tmpInt;
         }
     }
@@ -556,7 +556,7 @@ static int CustomDiff_GetCheckboxID (int dialogItem) {
 static int CustomDiff_GetDiffPresetID (int dialogItem) {
     int tmpInt;
     for (tmpInt = 0 ; tmpInt < gv_MaxAmountDifficulties ; tmpInt += 1 ) {
-        if ((dialogItem == customDiff_PresetButtons[tmpInt])) {
+        if (dialogItem == customDiff_PresetButtons[tmpInt]) {
             return tmpInt;
         }
     }
@@ -594,13 +594,13 @@ static void CustomDiff_FillDiffPreset (structref<CustomDiff_Settings> returnSett
     returnSettings.values[c_CustomDiffFixed_AtkSpd        ] = (libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogBehavior, diffBuff, "Modification.AttackSpeedMultiplier"      , gv_EnemyPlayer) - 1) * 100;
     returnSettings.values[c_CustomDiffFixed_Vitals        ] =  libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogBehavior, diffBuff, "Modification.VitalMaxFractionArray[Life]", gv_EnemyPlayer)      * 100;
     returnSettings.values[c_CustomDiffFixed_Armor         ] = (libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogBehavior, diffBuff, "Modification.LifeArmorMultiplier"        , gv_EnemyPlayer) - 1) * 100;
-    returnSettings.values[c_CustomDiffFixed_DmgReduction  ] = (1 - libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogBehavior, diffBuff, "DamageResponse.ModifyFraction"           , gv_EnemyPlayer)) * 100;
+    returnSettings.values[c_CustomDiffFixed_DmgReduction  ] = (1 - libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogBehavior, diffBuff, "DamageResponse.ModifyFraction"       , gv_EnemyPlayer)    ) * 100;
     returnSettings.values[c_CustomDiffFixed_Regen         ] =  libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogBehavior, diffBuff, "Modification.VitalRegenMultiplier[0]"    , gv_EnemyPlayer)      * 100;
     returnSettings.values[c_CustomDiffFixed_Movespeed     ] = (libNtve_gf_CatalogFieldValueGetAsReal(c_gameCatalogBehavior, diffBuff, "Modification.MoveSpeedMultiplier"        , gv_EnemyPlayer) - 1) * 100;
-    returnSettings.values[c_CustomDiffFixed_SpawnMult     ] = (UserDataGetFixed("DifficultyTable", IntToString(diff), "SpawnMult", 1)         - 1) * 100;
-    returnSettings.values[c_CustomDiffFixed_BiomassMult   ] = (UserDataGetFixed("DifficultyTable", IntToString(diff), "BiomassMult", 1)       - 1) * 100;
-    returnSettings.values[c_CustomDiffFixed_ExpMult       ] = (UserDataGetFixed("DifficultyTable", IntToString(diff), "ExpMult", 1)           - 1) * 100;
-    returnSettings.values[c_CustomDiffFixed_Upgrades      ] = (UserDataGetFixed("DifficultyTable", IntToString(diff), "UpgradeCountFactor", 1)- 1) * 100;
+    returnSettings.values[c_CustomDiffFixed_SpawnMult     ] = (UserDataGetFixed("DifficultyTable", IntToString(diff), "SpawnMult", 1)          - 1) * 100;
+    returnSettings.values[c_CustomDiffFixed_BiomassMult   ] = (UserDataGetFixed("DifficultyTable", IntToString(diff), "BiomassMult", 1)        - 1) * 100;
+    returnSettings.values[c_CustomDiffFixed_ExpMult       ] = (UserDataGetFixed("DifficultyTable", IntToString(diff), "ExpMult", 1)            - 1) * 100;
+    returnSettings.values[c_CustomDiffFixed_Upgrades      ] = (UserDataGetFixed("DifficultyTable", IntToString(diff), "UpgradeCountFactor", 1) - 1) * 100;
     returnSettings.values[c_CustomDiffFixed_BossAbils     ] = IntToFixed(diff);
     returnSettings.values[c_CustomDiffFixed_StartBiomass  ] = 0;
     returnSettings.values[c_CustomDiffFixed_StartExp      ] = 0;
@@ -942,7 +942,6 @@ static void CustomDiff_Init(){
     int tmpInt;
     string[customDiff_MaxAmountFixed] customDiff_LayoutNamesFixed;
     string[customDiff_MaxAmountFlags] customDiff_LayoutNamesFlags;
-    CustomDiff_Settings customDiff_Settings;
     tmpInt = -1;
 
     // set selected difficulty for all players

@@ -137,7 +137,6 @@ void Acv_Split_SetFlagFromIdentifier(int playerID, int ident, int diff, bool sta
 }
 
 int Acv_FrameFromTypeAndIdentifier(int playerID, int acvType, int acvIdentifier){
-    int val = 0;
     if(acvType > 2 || acvType < 0) {
         UIDisplayMessage(PlayerGroupAll(), c_messageAreaError, StringToText("Acv_FrameFromTypeAndIdentifier: !(0 <= acvType <= 2)"));
         return c_invalidDialogControlId;
@@ -502,7 +501,6 @@ void Acv_UI_GetFromDataTable(int player, structref<Acv_UI_Return_Struct> returnI
 void Acv_Reward_GetFromUserData(int player, string acvIdentifier){
     string type;
     fixed value_fixed;
-    int value_int;
     int maxRewardEntrys = UserDataFieldCount("AcvRewards");
     int i;
     for (i = 0; i < maxRewardEntrys; i += 1) {

@@ -1,7 +1,6 @@
 // variables
 static int tutorial_Frame;
 static int tutorial_CloseButton;
-static int tutorial_TimerLabel;
 static int tutorial_StartTutorialButton;
 static int tutorial_CurrentStage;
 static int tutorial_TextLabel;
@@ -23,13 +22,12 @@ static const int c_TutorialStage_Hive           = 3;
 static const int c_TutorialStage_Explore        = 4;
 static const int c_TutorialStage_IncomingAttack = 5;
 static const int c_TutorialStage_Scientist      = 6;
-static const int c_TutorialStage_Larva          = 7;
-static const int c_TutorialStage_Bridge         = 8;
-static const int c_TutorialStage_Boss           = 9;
-static const int c_TutorialStage_Push           = 10;
-static const int c_TutorialStage_Finish         = 11;
-static const int c_TutorialStage_None           = 12;
-static const int c_TutorialStage_Death          = 13;
+static const int c_TutorialStage_Bridge         = 7;
+static const int c_TutorialStage_Boss           = 8;
+static const int c_TutorialStage_Push           = 9;
+static const int c_TutorialStage_Finish         = 10;
+static const int c_TutorialStage_None           = 11;
+static const int c_TutorialStage_Death          = 12;
 
 // Mini Introduction - show dialog for first time players
 

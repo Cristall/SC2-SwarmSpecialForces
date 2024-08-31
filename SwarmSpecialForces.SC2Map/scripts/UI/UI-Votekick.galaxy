@@ -1,9 +1,9 @@
 
 static int votekick_MainFrame;
-static int[gv_MaxAmountPlayers + 1] votekick_KickButtons;
-static bool[gv_MaxAmountPlayers+ 1][gv_MaxAmountPlayers + 1] votekick_Votes;
-static bool[gv_MaxAmountPlayers+ 1] votekick_FirstTimeInitialized;
-static int[gv_MaxAmountPlayers + 1] votekick_VotesCombined;
+static int [gv_MaxAmountPlayers + 1] votekick_KickButtons;
+static bool[gv_MaxAmountPlayers + 1][gv_MaxAmountPlayers + 1] votekick_Votes;
+static bool[gv_MaxAmountPlayers + 1] votekick_FirstTimeInitialized;
+static int [gv_MaxAmountPlayers + 1] votekick_VotesCombined;
 static int votekick_VotesRequired;
 static int votekick_MenuOpenButton;
 
@@ -55,12 +55,10 @@ static void Votekick_KickButton_TextUpdate(int playerID){
 bool Votekick_KickButton_Handler (bool testConds, bool runActions){
     int kickPlayer = Votekick_GetKickDialogID(EventDialogControl());
     int trigPlayer = EventPlayer();
-    int tmpInt;
 
     if(testConds){
         if (!(kickPlayer >= 1)) {return false;}
     }
-    if(!runActions) {return true;}
 
     //if prev not voted
     if(!votekick_Votes[kickPlayer][trigPlayer]){

@@ -116,7 +116,7 @@ bool MapInit_Main(bool testConds, bool runActions){
     // Debug_ShowMessage("Testing mode enabled: progress will not be saved!");
 
     // ---------------------------------------------
-    // GAME IS IN PUBLIC TESTING MODE
+    // GAME IS IN PUBLIC TESTING MODE END
     // ---------------------------------------------
 
     libLbty_gf_EnableDisablePingPanel(true, PlayerGroupAll());

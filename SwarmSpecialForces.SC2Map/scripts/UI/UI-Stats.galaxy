@@ -25,7 +25,6 @@ void StatsInterface_Update () {
 }
 
 bool StatsInterface_UpdatePeriodic (bool testConds, bool runActions){
-    if (!runActions){return true;}
     StatsInterface_Update();
     return true;
 }

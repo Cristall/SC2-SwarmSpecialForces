@@ -371,7 +371,6 @@ void Enemy_BossDeath(int killingPlayer, int acvIdentifier, int mutations, point 
 
 // check if next area should be opened
 void Enemy_SpawnerKilled(unit killingUnit, unit destroyedSpawner ){
-    point spawnerPoint = UnitGetPosition(destroyedSpawner);
     int spawnerType;
     string revengeUnitType;
     fixed revengeUnitAmount;
